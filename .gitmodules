@@ -4,3 +4,6 @@
 [submodule "steal"]
 	path = steal
 	url = git@github.com:pinhook/steal.git
+[submodule "phui"]
+	path = phui
+	url = git@github.com:pinhook/phui.git
