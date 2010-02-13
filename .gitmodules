@@ -7,3 +7,6 @@
 [submodule "phui"]
 	path = phui
 	url = git@github.com:pinhook/phui.git
+[submodule "selenium"]
+	path = selenium
+	url = git@github.com:pinhook/selenium.git
