@@ -10,3 +10,6 @@
 [submodule "selenium"]
 	path = selenium
 	url = git@github.com:pinhook/selenium.git
+[submodule "funcunit"]
+	path = funcunit
+	url = git@github.com:pinhook/funcunit.git
