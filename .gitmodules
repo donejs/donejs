@@ -13,3 +13,6 @@
 [submodule "funcunit"]
 	path = funcunit
 	url = git@github.com:pinhook/funcunit.git
+[submodule "documentjs"]
+	path = documentjs
+	url = git@github.com:pinhook/documentjs.git
