@@ -104,14 +104,14 @@ Envjs('apps/generate/index.html', {scriptTypes : {"text/javascript" : true,"text
 if(typeof jQuery == "undefined") throw "jQuery should be here";
 if(typeof jQuery.Controller == "undefined") throw "Controllers should be here";
 if(!doneLoadingCalled) throw "Done loading should be called";
-
+*/
 
 print("==========================  unit ============================")
 clearEverything();
-load('apps/testing/test/run_unit.js')
+load('test/qunit/run.js')
 _wait("window.jQuery.Test.Unit.complete")
 
-
+/*
 print("==========================  functional ============================")
 clearEverything();
 load('apps/testing/test/run_functional.js')
