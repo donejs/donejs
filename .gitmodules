@@ -16,3 +16,6 @@
 [submodule "documentjs"]
 	path = documentjs
 	url = git@github.com:pinhook/documentjs.git
+[submodule "jmvcdoc"]
+	path = jmvcdoc
+	url = git@github.com:pinhook/jmvcdoc
