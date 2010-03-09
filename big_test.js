@@ -1,53 +1,18 @@
 // load('big_test.js');
-
-//first remove 
-clearEverything = function(){
-	for(var n in this){
-		if(n != "clearEverything" && n != "printEverything" && n != "_wait"){
-			//this[n] = null;
-			delete this[n];
-		}
-			
-	}
-};
-_wait = function(name){
-    var checkExists = function(name){
-        var parts = name.split(".");
-        var cur = this;
-        for(var i =0; i < parts.length; i++){
-            if(! cur[parts[i]] ){
-                return false;
-            }else
-                cur = cur[parts[i]];
-        }
-        return true;
-    }
-    while(!checkExists(name)){
-        java.lang.Thread.currentThread().sleep(300);
-    }
-}
-
-printEverything = function(){
-	for(var n in this) print(n);
-};
-
+load('steal/test/helpers.js')
 
 print("==========================  generators =============================")
 print("-- plugin --");
-_args = ['cnu']; load('steal/generate/plugin');clearEverything();
-if(typeof steal != 'undefined') throw 'cant run tests'
-load('steal/rhino/env.rhino.js');
-Envjs('cnu/cnu.html', {scriptTypes : {"text/javascript" : true,"text/envjs" : true}, logLevel: 1});
+_args = ['cnu']; load('steal/generate/plugin');_S.clear();
+_S.open('cnu/cnu.html')
 if(typeof steal == 'undefined') throw "didn't load steal"
-clearEverything();
+_S.clear();
 
 //try 2 levels deep
-_args = ['cnu/widget']; load('steal/generate/plugin');clearEverything();
-if(typeof steal != 'undefined') throw 'cant run tests'
-load('steal/rhino/env.rhino.js');
-Envjs('cnu/widget/widget.html', {scriptTypes : {"text/javascript" : true,"text/envjs" : true}, logLevel: 1});
+_args = ['cnu/widget']; load('steal/generate/plugin');_S.clear();
+_S.open('cnu/widget/widget.html')
 if(typeof steal == 'undefined') throw "didn't load steal"
-clearEverything();
+_S.clear();
 
 
 
@@ -57,16 +22,23 @@ print("-- unit test --");
 _args = ['Truth']; load('jmvc/generate/unit_test');clearEverything();
 print("-- functional test --");
 _args = ['TruthFunctional']; load('jmvc/generate/functional_test');clearEverything();
-print("-- engine --")
-_args = ['generate']; load('jmvc/generate/engine');clearEverything();
 print("-- page --")
 _args = ['generate','gen.html']; load('jmvc/generate/page');clearEverything();
 
 load('jmvc/rhino/env.js');
 Envjs('gen.html', {scriptTypes : {"text/javascript" : true,"text/envjs" : true}});
 if(typeof jQuery.Controller == "undefined") throw "Controllers should be here";
-clearEverything();
+clearEverything();*/
+
+
 print("==========================  compression ============================")
+
+load('steal/compress/test/run.js')
+
+load('jquery/view/test/compression/run.js')
+
+/*
+//test compressing a normal blank page
 
 MVCDontQuit = true;
 load('apps/generate/compress.js');
@@ -105,7 +77,7 @@ if(typeof jQuery == "undefined") throw "jQuery should be here";
 if(typeof jQuery.Controller == "undefined") throw "Controllers should be here";
 if(!doneLoadingCalled) throw "Done loading should be called";
 */
-
+/*
 print("==========================  unit ============================")
 clearEverything();
 load('test/qunit/run.js')
