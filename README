@@ -1,5 +1,6 @@
 TOC:
   A.  How to get (and contribute) to JMVC
+  A.  Getting Started with JMVC
 
 
 A.  How to get (and contribute) JMVC
@@ -23,3 +24,37 @@ A.  How to get (and contribute) JMVC
   
   6.  Make a pull request to your fork.
   
+  
+A. Getting Started with JMVC
+
+  1. Generate app: 
+  			./steal/js steal/generate/app cookbook
+
+  2. Generate scaffold:
+  			./steal/js steal/generate/scaffold Cookbook.Models.Recipe
+
+  3. Include models/controllers in cookbook/cookbook.js:
+			.models('recipe')
+			.controllers('recipe')
+
+  4. Include functional tests in test/funcunit/funcunit.js:
+			.then("recipe_controller_test")
+
+  5. Open callcenter.html in a browser.
+
+  6. Open funcunit.html in a browser (turn off popup blockers).
+
+  7. Run tests with selenium:
+  			./steal/js -selenium
+  			./steal/js cookbook/test/funcunit/run.js
+
+  8. Compress app:
+  			./steal/js cookbook/scripts/compress.js
+
+  9. Turn on production mode in callcenter.html and reload page:
+			src='../steal/steal.js?steal[app]=cookbook&steal[env]=development'
+
+  10. Generate docs:
+  			./steal/js cookbook/scripts/doc.js
+
+  10. Open cookbook/docs.html.
