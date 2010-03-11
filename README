@@ -45,7 +45,6 @@ A. Getting Started with JMVC
   6. Open funcunit.html in a browser (turn off popup blockers).
 
   7. Run tests with selenium:
-  			./steal/js -selenium
   			./steal/js cookbook/test/funcunit/run.js
 
   8. Compress app:
