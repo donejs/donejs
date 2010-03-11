@@ -37,23 +37,35 @@ A. Getting Started with JMVC
 			.models('recipe')
 			.controllers('recipe')
 
-  4. Include functional tests in test/funcunit/funcunit.js:
+  4. See your recipes app:  
+  			Open callcenter.html in a browser.
+
+  5. Include functional tests in test/funcunit/funcunit.js:
 			.then("recipe_controller_test")
 
-  5. Open callcenter.html in a browser.
+  6. Run functional tests in the browser: 
+  			Open funcunit.html in a browser (turn off popup blockers).
 
-  6. Open funcunit.html in a browser (turn off popup blockers).
-
-  7. Run tests with selenium:
+  7. Run functional tests with selenium:
   			./steal/js cookbook/test/funcunit/run.js
 
-  8. Compress app:
+  8. Include unit tests in test/qunit/qunit.js:
+			.then("recipe_test")
+
+  9. Run unit tests in the browser: 
+  			Open qunit.html in a browser.
+
+  10. Run unit tests with Rhino:
+  			./steal/js cookbook/test/funcunit/run.js
+
+  11. Compress app:
   			./steal/js cookbook/scripts/compress.js
 
-  9. Turn on production mode in callcenter.html and reload page:
+  12. Turn on production mode in callcenter.html and reload page:
 			src='../steal/steal.js?steal[app]=cookbook&steal[env]=development'
 
-  10. Generate docs:
+  13. Generate docs:
   			./steal/js cookbook/scripts/doc.js
 
-  10. Open cookbook/docs.html.
+  14. View docs: 
+			Open cookbook/docs.html.
