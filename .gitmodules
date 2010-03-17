@@ -1,21 +1,34 @@
 [submodule "documentjs"]
 	path = documentjs
 	url = git://github.com/pinhook/documentjs.git
+	update = merge
 [submodule "funcunit"]
 	path = funcunit
 	url = git://github.com/pinhook/funcunit.git
+	update = merge
 [submodule "jmvcdoc"]
 	path = jmvcdoc
 	url = git://github.com/pinhook/jmvcdoc.git
+	update = merge
 [submodule "jquery"]
 	path = jquery
 	url = git://github.com/pinhook/javascriptmvc.git
+	update = merge
 [submodule "selenium"]
 	path = selenium
 	url = git://github.com/pinhook/selenium.git
+	update = merge
 [submodule "steal"]
 	path = steal
 	url = git://github.com/pinhook/steal.git
+	update = merge
 [submodule "phui"]
 	path = phui
 	url = git://github.com/pinhook/phui.git
+	update = merge
+[submodule "envjs"]
+	path = envjs
+
+	url = git://github.com/pinhook/env-js.git
+
+	update = merge
