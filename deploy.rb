@@ -11,7 +11,7 @@ AWS::S3::Base.establish_connection!(
 
 def send_files(ftp, path, omit_path)
   Find.find(path) do |file_path|
-    if !file_path.include?(".git") && !file_path.include?(".jar")
+    if !file_path.include?(".git") && !file_path.include?(".jar") && !file_path.include?("deploy.rb")
       remote_path = file_path
       remote_path.slice!(0..1)
       local_path = remote_path.gsub("/","\\")
