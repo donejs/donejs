@@ -3,7 +3,9 @@ load('steal/test/helpers.js')
 
 print("==========================  generators =============================")
 print("-- plugin --");
-_args = ['cnu']; load('steal/generate/plugin');_S.clear();
+load('steal/generate/test/run.js');
+
+/*_args = ['cnu']; load('steal/generate/plugin');_S.clear();
 _S.open('cnu/cnu.html')
 if(typeof steal == 'undefined') throw "didn't load steal"
 _S.clear();
@@ -12,7 +14,7 @@ _S.clear();
 _args = ['cnu/widget']; load('steal/generate/plugin');_S.clear();
 _S.open('cnu/widget/widget.html')
 if(typeof steal == 'undefined') throw "didn't load steal"
-_S.clear();
+_S.clear();*/
 
 
 
@@ -32,10 +34,8 @@ clearEverything();*/
 
 
 print("==========================  compression ============================")
-
-load('steal/compress/test/run.js')
-
-load('jquery/view/test/compression/run.js')
+load('steal/compress/test/run.js');
+load('jquery/view/test/compression/run.js');
 
 /*
 //test compressing a normal blank page
