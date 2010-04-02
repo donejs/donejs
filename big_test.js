@@ -77,11 +77,16 @@ if(typeof jQuery == "undefined") throw "jQuery should be here";
 if(typeof jQuery.Controller == "undefined") throw "Controllers should be here";
 if(!doneLoadingCalled) throw "Done loading should be called";
 */
-/*
+
 print("==========================  unit ============================")
-clearEverything();
+print("-- steal --");
+_S.clear();
+_S.open("steal/test/qunit/qunit.html");
+//_S.wait("window.jQuery.Test.Unit.complete");
+
+/*clearEverything();
 load('test/qunit/run.js')
-_wait("window.jQuery.Test.Unit.complete")
+_wait("window.jQuery.Test.Unit.complete")*/
 
 /*
 print("==========================  functional ============================")
