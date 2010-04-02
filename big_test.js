@@ -80,13 +80,8 @@ if(!doneLoadingCalled) throw "Done loading should be called";
 
 print("==========================  unit ============================")
 print("-- steal --");
-_S.clear();
-_S.open("steal/test/qunit/qunit.html");
-//_S.wait("window.jQuery.Test.Unit.complete");
+load('steal/test/run.js');
 
-/*clearEverything();
-load('test/qunit/run.js')
-_wait("window.jQuery.Test.Unit.complete")*/
 
 /*
 print("==========================  functional ============================")
