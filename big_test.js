@@ -5,19 +5,6 @@ print("==========================  generators =============================")
 print("-- plugin --");
 load('steal/generate/test/run.js');
 
-/*_args = ['cnu']; load('steal/generate/plugin');_S.clear();
-_S.open('cnu/cnu.html')
-if(typeof steal == 'undefined') throw "didn't load steal"
-_S.clear();
-
-//try 2 levels deep
-_args = ['cnu/widget']; load('steal/generate/plugin');_S.clear();
-_S.open('cnu/widget/widget.html')
-if(typeof steal == 'undefined') throw "didn't load steal"
-_S.clear();*/
-
-
-
 /*print("-- controller --");
 _args = ['TodosController']; load('jmvc/generate/controller');clearEverything();
 print("-- unit test --");
@@ -99,45 +86,40 @@ clearEverything();
 print("-- functional --");
 load('apps/generate/test/run_functional.js')
 _wait("window.jQuery.Test.Functional.browsersComplete")
-
+*/
 print("==========================  Getting Started ============================")
-clearEverything(); 
 
-_args = ['cookbook']; load('jmvc/generate/app');clearEverything(); //app
-_args = ['Recipe','JsonRest']; load('jmvc/generate/scaffold'); //clearEverything(); //scaffold
-//_args = ['cookbook','cookbook.html']; load('jmvc/generate/page'); //clearEverything(); //page
-//now we need to include everything
-initContent = readFile('apps/cookbook/init.js').
-    replace("include.models()", "include.models('recipe')").
-    replace("include.controllers()", "include.controllers('recipe')").
-    replace("include.plugins(","include.plugins('model/json_rest',");
-new include.File('apps/cookbook/init.js').save( initContent ) //init
+load('steal/test/helpers.js');
+_S.clear();
 
-funcContent = readFile('apps/cookbook/test/functional.js').
-    replace("include.functionalTests(","include.functionalTests('recipe_controller',");
-new include.File('apps/cookbook/test/functional.js').save( funcContent )
+_args = ['cookbook']; load('steal/generate/app');_S.clear();
+_args = ['Cookbook.Models.Recipe']; load('steal/generate/scaffold');_S.clear();
 
-unitContent = readFile('apps/cookbook/test/unit.js').
-    replace("include.unitTests(","include.unitTests('recipe',");
-new include.File('apps/cookbook/test/unit.js').save( unitContent )
-clearEverything();
+load('steal/file/file.js');
+cookbookContent = readFile('cookbook/cookbook.js').
+    replace(".models()", ".models('recipe')").
+    replace(".controllers()", ".controllers('recipe')");
+new steal.File('cookbook/cookbook.js').save( cookbookContent );
+
+qunitContent = readFile('cookbook/test/qunit/qunit.js').
+    replace(".then(\"tests/basic\")", ".then(\"recipe_test\")");
+new steal.File('cookbook/test/qunit/qunit.js').save( qunitContent );
+
+funcunitContent = readFile('cookbook/test/funcunit/funcunit.js').
+    replace(".then(\"tests/basic\")", ".then(\"recipe_controller_test\")");
+new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent ); 
+
+_S.clear();
 //now see if unit and functional run
 print("-- unit --");
-load('apps/cookbook/test/run_unit.js');
-_wait("window.jQuery.Test.Unit.complete");
-clearEverything();
+_args = ['-unit']; load('cookbook/scripts/test.js');_S.clear();
+
 print("-- functional --");
-load('apps/cookbook/test/run_functional.js')
-_wait("window.jQuery.Test.Functional.browsersComplete")
-
-
+_args = ['-functional']; load('cookbook/scripts/test.js');_S.clear();
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-clearEverything();
-printEverything();
 
-*/
 print("-- cleanup --");
 (function(){
 	var	deleteDir = function(dir){
@@ -155,11 +137,10 @@ print("-- cleanup --");
 	}
 	deleteDir(new java.io.File("cnu"));
     /*deleteDir(new java.io.File("engines/generate"));
-    deleteDir(new java.io.File("views/todos"));
-    deleteDir(new java.io.File("apps/cookbook"));
-    deleteDir(new java.io.File("views/recipe"));
+    deleteDir(new java.io.File("views/todos"));*/
+    deleteDir(new java.io.File("cookbook"));
 
-    var tbd = ['gen.html',
+    /*var tbd = ['gen.html',
                'test/functional/todos_test.js',
                'cookbook.html',
                'controllers/recipe_controller.js',
