@@ -112,10 +112,11 @@ new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent );
 _S.clear();
 //now see if unit and functional run
 print("-- unit --");
-_args = ['-unit']; load('cookbook/scripts/test.js');_S.clear();
+_args = ['-unit']; load('cookbook/scripts/test.js');
 
-print("-- functional --");
-_args = ['-functional']; load('cookbook/scripts/test.js');_S.clear();
+_S.clear();
+//print("-- functional --");
+//_args = ['-functional']; load('cookbook/scripts/test.js');_S.clear();
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
