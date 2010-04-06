@@ -107,18 +107,38 @@ new steal.File('cookbook/test/qunit/qunit.js').save( qunitContent );
 
 funcunitContent = readFile('cookbook/test/funcunit/funcunit.js').
     replace(".then(\"tests/basic\")", ".then(\"recipe_controller_test\")");
-new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent ); 
-
+new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent );
+ 
 _S.clear();
 //now see if unit and functional run
-print("-- unit --");
+print("-- Run unit tests for cookbook --");
 _args = ['-unit']; load('cookbook/scripts/test.js');
 
 _S.sleep(300);
 
+load('steal/file/file.js');
+seleniumSettings = readFile('cookbook/settings.js').
+    replace("quitOnDone: true", "quitOnDone: false");
+new steal.File('cookbook/settings.js').save( seleniumSettings );
+
 _S.clear();
-print("-- functional --");
+print("-- Run functional tests for cookbook --");
 _args = ['-functional']; load('cookbook/scripts/test.js');_S.clear();
+
+_S.sleep(300);
+
+_S.clear();
+print("-- Compress cookbook --");
+load("cookbook/scripts/compress.js")
+
+_S.clear();
+load('steal/file/file.js');
+cookbookPage = readFile('cookbook/cookbook.html').
+    replace("steal[env]=development", "steal[env]=production");
+new steal.File('cookbook/cookbook.html').save( cookbookPage );
+
+print("-- Run functional tests again, this time with cookbook compressed --");
+_args = ['-functional']; load('cookbook/scripts/test.js');
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
