@@ -114,9 +114,11 @@ _S.clear();
 print("-- unit --");
 _args = ['-unit']; load('cookbook/scripts/test.js');
 
+_S.sleep(300);
+
 _S.clear();
-//print("-- functional --");
-//_args = ['-functional']; load('cookbook/scripts/test.js');_S.clear();
+print("-- functional --");
+_args = ['-functional']; load('cookbook/scripts/test.js');_S.clear();
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
