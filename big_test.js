@@ -24,14 +24,7 @@ _wait("window.jQuery.Test.Functional.browsersComplete")
 
 
 print("==========================  Generated Tests ============================")
-clearEverything();
-print("-- unit --");
-load('apps/generate/test/run_unit.js');
-_wait("window.jQuery.Test.Unit.complete");
-clearEverything();
-print("-- functional --");
-load('apps/generate/test/run_functional.js')
-_wait("window.jQuery.Test.Functional.browsersComplete")
+* Included in steal/generate/test/run.js
 */
 print("==========================  Getting Started ============================")
 
@@ -62,6 +55,7 @@ _args = ['-unit']; load('cookbook/scripts/test.js');
 
 _S.sleep(300);
 
+_S.clear();
 load('steal/file/file.js');
 seleniumSettings = readFile('cookbook/settings.js').
     replace("quitOnDone: true", "quitOnDone: false");
