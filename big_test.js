@@ -5,20 +5,6 @@ print("==========================  generators =============================")
 print("-- plugin --");
 load('steal/generate/test/run.js');
 
-/*print("-- controller --");
-_args = ['TodosController']; load('jmvc/generate/controller');clearEverything();
-print("-- unit test --");
-_args = ['Truth']; load('jmvc/generate/unit_test');clearEverything();
-print("-- functional test --");
-_args = ['TruthFunctional']; load('jmvc/generate/functional_test');clearEverything();
-print("-- page --")
-_args = ['generate','gen.html']; load('jmvc/generate/page');clearEverything();
-
-load('jmvc/rhino/env.js');
-Envjs('gen.html', {scriptTypes : {"text/javascript" : true,"text/envjs" : true}});
-if(typeof jQuery.Controller == "undefined") throw "Controllers should be here";
-clearEverything();*/
-
 
 print("==========================  compression ============================")
 load('steal/compress/test/run.js');
