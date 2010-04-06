@@ -24,46 +24,6 @@ print("==========================  compression ============================")
 load('steal/compress/test/run.js');
 load('jquery/view/test/compression/run.js');
 
-/*
-//test compressing a normal blank page
-
-MVCDontQuit = true;
-load('apps/generate/compress.js');
-//test foriegn characters
-
-print("-- Foreign characters --");
-include.setPath("");
-f = new include.fn.init("foreign")
-f.setSrc();
-new include.File('foreignResult.js').save( include.compressString(f.src));
-//check that srcs are equal
-f1 = readFile('foreign.js').replace(/\r/,"");
-f2 = readFile('foreignResult.js');
-if(f1 !=  f2){
-    print(f1+"\n---------------------------\n"+f2)
-    throw "Foreign characters aren't right";
-}
-new java.io.File("foreignResult.js")["delete"]();
-
-//make sure it can run
-print("-- Production integrity --");
-clearEverything();
-//make sure we don't have jQuery
-if(typeof jQuery != "undefined") throw "jQuery should not be here";
-load('jmvc/rhino/env.js');
-doneLoadingCalled = false;
-include = {
-    done : function(total){
-        doneLoadingCalled = true;
-    },
-    env: "production"
-}
-load('jmvc/rhino/env.js');
-Envjs('apps/generate/index.html', {scriptTypes : {"text/javascript" : true,"text/envjs" : true}});
-if(typeof jQuery == "undefined") throw "jQuery should be here";
-if(typeof jQuery.Controller == "undefined") throw "Controllers should be here";
-if(!doneLoadingCalled) throw "Done loading should be called";
-*/
 
 print("==========================  unit ============================")
 print("-- steal --");
