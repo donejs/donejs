@@ -105,8 +105,6 @@ print("-- cleanup --");
 	    return dir['delete']();
 	}
 	deleteDir(new java.io.File("cnu"));
-    /*deleteDir(new java.io.File("engines/generate"));
-    deleteDir(new java.io.File("views/todos"));*/
     deleteDir(new java.io.File("cookbook"));
 
     /*var tbd = ['gen.html',
