@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link type="text/css" href="../../phui/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+	<link type="text/css" href="../style.css" rel="stylesheet" />
+</head>
+<body>
+	<h1 class='extensions'>Extensions</h1>
+    <h2>Events</h2>
+	<h3>Drag Drop</h3>
+	<table>
+		<tr>
+			<td>
+				<div class='drag'>drag</div><div class='drag'>drag</div><div class='drag'>drag</div>
+			</td>
+			<td>
+				<div class='drop'>drop</div><div class='drop'>drop</div><div class='drop'>drop</div>
+			</td>
+			<td>
+				<pre><code class='javascript'>
+$('.drag').live("draginit", function(){})
+$('.drop').live("dropover", function(){
+	$(this).addClass('over')
+}).live("dropout", function(){
+	$(this).removeClass('over')
+})
+				</code></pre>
+			</td>
+		</tr>
+	</table>
+	
+	
+	
+	
+    <script type='text/javascript' src='../../steal/steal.js?ex/extensions/extensions.js'></script>
+</body>
+</html>
