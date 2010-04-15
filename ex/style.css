@@ -7,6 +7,7 @@ h1 {
 	padding: 0px 0px 0px 200px;
 	background-repeat: no-repeat;
 	margin: 0px 0px 40px 0px;
+	font-weight: bold;
 	
 }
 li, p, div, h2, h3 {
@@ -16,7 +17,11 @@ h1.centered {
 	padding: 0px;
 	text-align: center;	
 }
+h2 {
+	font-size: 50px;font-family: "Aller";
+}
 h3 {
+	font-size: 40px;font-family: "Aller Light";
 	clear: both;
 }
 body {
@@ -29,6 +34,9 @@ li {
 pre {
 	font-size: 2em;
 	font-family: Courier New;
+}
+table pre {
+	margin: 0px;
 }
 .class {background-image: url(images/class.png);}
 .controller { background-image: url(images/controller.png);}

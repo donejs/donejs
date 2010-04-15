@@ -7,6 +7,10 @@
 <body>
 	<h1 class='extensions'>Extensions</h1>
     <h2>Events</h2>
+	<h3>Default</h3>
+	
+	<h3>Destroyed</h3>
+	
 	<h3>Drag Drop</h3>
 	<table>
 		<tr>
@@ -17,20 +21,47 @@
 				<div class='drop'>drop</div><div class='drop'>drop</div><div class='drop'>drop</div>
 			</td>
 			<td>
-				<pre><code class='javascript'>
-$('.drag').live("draginit", function(){})
+				<pre><code class='javascript'>$('.drag').live("draginit", function(){})
 $('.drop').live("dropover", function(){
 	$(this).addClass('over')
 }).live("dropout", function(){
 	$(this).removeClass('over')
-})
-				</code></pre>
+})</code></pre>
 			</td>
 		</tr>
 	</table>
+	<h3>History</h3>
+<pre><code class='javascript'>$.Controller.extend("History",{
+   "history.** subscribe" : function(called, data){
+      $("#history_record").prepend("&lt;p>"+called+" "+$.toJSON(data)+"&lt;p>")
+   }
+})</code></pre>
 	
+	<table>
+		<tr>
+			<th>Change History</th>
+			<th>Log</th>
+		</tr>
+		<tr>
+			<td>
+				<a href="#todos/list">#todos/list</a><br/>
+				<a href="#todo/show&id=1">#todo/show&id=1</a><br/>
+				<a href="#thing">#thing</a>
+			</td>
+			<td id='history'><div id='history_record'></div></td>
+		</tr>
+	</table>
+
 	
-	
+	<h3>Hover</h3>
+	<h3>Resize</h3>
+	<h3>Select</h3>
+	<h2>DOM</h2>
+	<h3>Compare</h3>
+	<h3>Dimensions</h3>
+	<h3>Fixtures</h3>
+	<h3>FormParams</h3>
+	<h2>Language</h2>
 	
     <script type='text/javascript' src='../../steal/steal.js?ex/extensions/extensions.js'></script>
 </body>

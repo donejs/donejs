@@ -19,3 +19,13 @@ function(){
 		$(this).removeClass('over')
 	})
 })
+
+
+.plugins('jquery/controller/history','jquery/lang/json').then(function(){
+	$.Controller.extend("History",{
+		"history.** subscribe" : function(called, data){
+			$("#history_record").prepend(called+" "+$.toJSON(data)+"<br/>")
+		}
+	})
+	$("#history").history();
+})
