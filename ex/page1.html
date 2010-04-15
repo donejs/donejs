@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link type="text/css" href="../phui/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js' type='text/javascript'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.js' type='text/javascript'></script>
+    <script type='text/javascript'>
+        $(function(){
+            $("#tabs").tabs();
+            $("#date").datepicker();
+            $("#sortable").sortable();
+        })
+    </script>
+</head>
+<body>
+    <div id='tabs'>
+        <ul>
+            <li><a href="#first">First</a></li>
+            <li><a href="#second">Second</a></li>
+        </ul>
+        <div id='first'>
+            <input id='date' />
+        </div>
+        <div id='second'>
+            <ul id='sortable'><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul>
+        </div>
+    </div>
+    <pre>COMPRESS: steal\js steal\compress.js examples/page1.html -o compressed.js</pre>
+    <a href='page2.html'>Page 2</a>
+    <a href='page3.html'>Page 3</a>
+</body>
+</html>
