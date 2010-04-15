@@ -9,8 +9,18 @@ h1 {
 	margin: 0px 0px 40px 0px;
 	
 }
+li, p, div, h2, h3 {
+	font-family: verdana;
+}
+h1.centered {
+	padding: 0px;
+	text-align: center;	
+}
+h3 {
+	clear: both;
+}
 body {
-	padding: 20px;
+	margin: 20px;
 }
 li {
 	font-size: 2em;
@@ -18,8 +28,57 @@ li {
 
 pre {
 	font-size: 2em;
+	font-family: Courier New;
 }
-.steal {
-	background-image: url(images/steal.png);
-	
+.class {background-image: url(images/class.png);}
+.controller { background-image: url(images/controller.png);}
+.damnit { background-image: url(images/damnit.png);}
+.documentjs { background-image: url(images/documentjs.png);}
+.extensions { background-image: url(images/extensions.png);}
+.funcunit { background-image: url(images/funcunit.png);}
+.generators { background-image: url(images/generator.png);}
+.model { background-image: url(images/model.png);}
+.phui { background-image: url(images/phui.png);}
+.steal { background-image: url(images/steal.png);}
+.update { background-image: url(images/update.png);}
+.view { background-image: url(images/view.png);}
+
+
+
+
+table {
+	width: 100%;
+}
+table.intro td {
+	padding: 0px 0 40px 0px;
+}
+table.intro td a{
+	width: 120px; height: 120px;
+	display: inline-block;
+	background-size: 120px 120px;
+	-moz-background-size: 120px 120px;
+	background-repeat: no-repeat;
+}
+.intro td {
+	text-align: center;
+}
+
+.drag {
+	border: solid 1px red;
+	width: 100px;
+	height: 50px;
+}
+.drop {
+	border: dashed 1px blue;
+	width: 100px;
+	height: 50px;
+}
+.over {
+	background-color: yellow;
+}
+.string {
+	color: gray;
+}
+.keyword {
+	color: #800080;
 }
