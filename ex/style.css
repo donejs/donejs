@@ -1,0 +1,25 @@
+h1 {
+	font-family: Aller;
+	 text-transform: uppercase;
+	 font-size: 100px;
+	 background-size: 120px 120px;
+	-moz-background-size: 120px 120px;
+	padding: 0px 0px 0px 200px;
+	background-repeat: no-repeat;
+	margin: 0px 0px 40px 0px;
+	
+}
+body {
+	padding: 20px;
+}
+li {
+	font-size: 2em;
+}
+
+pre {
+	font-size: 2em;
+}
+.steal {
+	background-image: url(images/steal.png);
+	
+}
