@@ -71,17 +71,17 @@ table.intro td a{
 	text-align: center;
 }
 
-.drag {
+.drag, .hovers {
 	border: solid 1px red;
 	width: 100px;
-	height: 50px;
+	height: 50px;display: inline-block;
 }
-.drop {
+.drop, .toggler {
 	border: dashed 1px blue;
 	width: 100px;
-	height: 50px;
+	height: 50px;display: inline-block;
 }
-.over {
+.over, .hover {
 	background-color: yellow;
 }
 .string {
@@ -89,4 +89,26 @@ table.intro td a{
 }
 .keyword {
 	color: #800080;
+}
+
+.toggle {
+	background-color: yellow;
+}
+.toggler {  }
+#destroyME {
+	width: 200px;
+	height: 100px;
+	background-color: red;
+}
+.blackBorder {
+	height: 100%;
+	width: 100%;
+	background-color: yellow;
+}
+.hasPadding {
+	height: 120px;
+	width: 120px;
+	padding: 40px;
+	border: solid 1px red;
+	background-color: green;
 }
