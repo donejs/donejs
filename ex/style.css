@@ -112,3 +112,8 @@ table.intro td a{
 	border: solid 1px red;
 	background-color: green;
 }
+
+iframe {
+	border: none;
+	width: 100%;
+}
