@@ -19,11 +19,20 @@
 			</ul>
         </div>
 		<div id='use'>
-			 <pre>COMPRESS:
-steal\js steal\compress.js 
-         ex/steal/page2.html</pre>
+			 <div class='ui-tabs ui-widget ui-widget-content ui-corner-all'>
+				 <ul id='tabhere' class='ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all'>
+				 	<li class='ui-state-default ui-corner-top'><a href='#tab1'>Tab1</a></li>
+					<li class='ui-state-default ui-corner-top'><a href='#tab2'>Tab2</a></li>
+				 </ul>
+				 <div id='tab1'>
+				 	Tab content 1
+				 </div>
+				 <div id='tab2'>
+				 	Tab content 2
+				 </div>
+			 </div>
 		</div>
     </div>
-    <script type='text/javascript' src='../../steal/steal.js?ex/steal/myapp.js,production'></script>
+    <script type='text/javascript' src='../../steal/steal.js?ex/controller/controller.js'></script>
 </body>
 </html>

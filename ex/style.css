@@ -90,7 +90,9 @@ table.intro td a{
 .keyword {
 	color: #800080;
 }
-
+.comment {
+	color: #008000;
+}
 .toggle {
 	background-color: yellow;
 }
