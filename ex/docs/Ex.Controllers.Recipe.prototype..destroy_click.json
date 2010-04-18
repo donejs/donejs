@@ -1,0 +1,1 @@
+C({"name": "Ex.Controllers.Recipe.prototype.&#46;destroy click", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"el": {"description": "", "type": "", "optional": false, "order": 0, "name": "el"}}, "comment": "Handle's clicking on a recipe's destroy link.\n     \n"})

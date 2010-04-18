@@ -1,0 +1,1 @@
+C({"name": "steal.static.pageDir", "shortName": "Attribute", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": " The current page's folder's path.\n \n"})

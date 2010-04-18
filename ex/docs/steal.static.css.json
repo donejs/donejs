@@ -1,0 +1,1 @@
+C({"name": "steal.static.css", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"css": {"order": 0, "description": "the css file's name to load, steal will add .css.\n     ", "name": "css", "type": "String", "optional": false}}, "comment": "Includes CSS from the stylesheets directory.\n"})

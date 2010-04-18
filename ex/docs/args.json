@@ -1,0 +1,1 @@
+C({"name": "args", "shortName": "Attribute", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "for(var name in newOptions){\n            this[name] = newOptions[name]\n        }\n"})

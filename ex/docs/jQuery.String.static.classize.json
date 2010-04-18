@@ -1,0 +1,1 @@
+C({"name": "jQuery.String.static.classize", "shortName": "Function", "ret": {"description": "\n     ", "type": "String"}, "params": {"s": {"description": "", "type": "String", "optional": false, "order": 0, "name": "s"}}, "comment": "Like camelize, but the first part is also capitalized\n"})

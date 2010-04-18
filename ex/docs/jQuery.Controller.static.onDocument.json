@@ -1,0 +1,1 @@
+C({"name": "jQuery.Controller.static.onDocument", "shortName": "Attribute", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": " Set to true if you want to automatically attach this element to the documentElement.\n\t\t \n"})

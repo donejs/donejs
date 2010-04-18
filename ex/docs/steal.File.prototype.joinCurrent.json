@@ -1,0 +1,1 @@
+C({"name": "steal.File.prototype.joinCurrent", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Joins the file to the current working directory.\n     \n"})

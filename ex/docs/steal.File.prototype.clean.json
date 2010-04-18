@@ -1,0 +1,1 @@
+C({"name": "steal.File.prototype.clean", "shortName": "Function", "ret": {"description": "\n     ", "type": "String"}, "params": {}, "comment": "Removes hash and params\n"})

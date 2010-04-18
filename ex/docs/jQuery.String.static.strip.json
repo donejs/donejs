@@ -1,0 +1,1 @@
+C({"name": "jQuery.String.static.strip", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"s": {"order": 0, "description": "returns a string with leading and trailing whitespace removed.\n     ", "name": "s", "type": "String", "optional": false}}, "comment": ""})

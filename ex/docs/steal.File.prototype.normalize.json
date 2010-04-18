@@ -1,0 +1,1 @@
+C({"name": "steal.File.prototype.normalize", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "For a given path, a given working directory, and file location, update the path so \n it points to the right location.\n This should probably folded under joinFrom\n     \n"})

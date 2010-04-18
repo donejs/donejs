@@ -1,0 +1,1 @@
+C({"name": "Ex.Controllers.Recipe.prototype.&#46;update click", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"el": {"description": "", "type": "", "optional": false, "order": 0, "name": "el"}}, "comment": "Updates the recipe from the edit values.\n     \n"})

@@ -1,0 +1,1 @@
+C({"name": "steal.File.prototype.dir", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Returns everything before the last /\n     \n"})

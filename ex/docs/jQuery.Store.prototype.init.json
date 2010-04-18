@@ -1,0 +1,1 @@
+C({"name": "jQuery.Store.prototype.init", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"klass": {"description": "\n\t ", "type": "Object", "optional": false, "order": 0, "name": "klass"}}, "comment": ""})

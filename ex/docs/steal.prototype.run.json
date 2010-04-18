@@ -1,0 +1,1 @@
+C({"name": "steal.prototype.run", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Adds a script tag to the dom, loading and running the steal's JavaScript file.\n     \n"})

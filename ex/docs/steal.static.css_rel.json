@@ -1,0 +1,1 @@
+C({"name": "steal.static.css_rel", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"relative": {"order": 0, "description": "URL(s) to stylesheets\n     ", "name": "relative", "type": "String", "optional": false}}, "comment": "Creates css links from the given relative path.\n"})

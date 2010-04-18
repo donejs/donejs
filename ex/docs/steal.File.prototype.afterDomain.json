@@ -1,0 +1,1 @@
+C({"name": "steal.File.prototype.afterDomain", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Returns the part of the path that is after the domain part\n     \n"})

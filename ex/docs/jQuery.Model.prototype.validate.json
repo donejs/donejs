@@ -1,0 +1,1 @@
+C({"name": "jQuery.Model.prototype.validate", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Validates this model instance (usually called by [jQuery.Model.prototype.save|save])\n    \n"})

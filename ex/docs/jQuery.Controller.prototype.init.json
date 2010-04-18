@@ -1,0 +1,1 @@
+C({"name": "jQuery.Controller.prototype.init", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "This function does nothing.  It's here to provide an init for Class to call back.\n\t \n"})

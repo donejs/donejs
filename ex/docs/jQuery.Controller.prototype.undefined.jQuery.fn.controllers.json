@@ -1,0 +1,1 @@
+C({"name": "jQuery.Controller.prototype.undefined.jQuery.fn.controllers", "shortName": "Function", "ret": {"description": "an array of controller instances.\n ", "type": "Array"}, "params": {}, "comment": "Gets all controllers in the jQuery element.\n"})

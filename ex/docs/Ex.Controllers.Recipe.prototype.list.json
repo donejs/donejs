@@ -1,0 +1,1 @@
+C({"name": "Ex.Controllers.Recipe.prototype.list", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"recipes": {"description": "An array of Ex.Models.Recipe objects.\n     ", "type": "Array", "optional": false, "order": 0, "name": "recipes"}}, "comment": "Displays a list of recipes and the submit form.\n"})

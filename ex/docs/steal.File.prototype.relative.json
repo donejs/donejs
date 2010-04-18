@@ -1,0 +1,1 @@
+C({"name": "steal.File.prototype.relative", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Returns true if the file is relative\n     \n"})

@@ -1,0 +1,1 @@
+C({"name": "steal.File.prototype.isCrossDomain", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Is the file on the same domain as our page.\n     \n"})

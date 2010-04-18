@@ -1,0 +1,1 @@
+C({"name": "steal.static.getCurrentFolder", "shortName": "Function", "ret": {"description": "the path of the current directory.\n     ", "type": "String"}, "params": {}, "comment": "Gets the current directory your relative steals will reference.\n"})
