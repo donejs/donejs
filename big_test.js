@@ -41,17 +41,17 @@ cookbookContent = readFile('cookbook/cookbook.js').
 new steal.File('cookbook/cookbook.js').save( cookbookContent );
 
 qunitContent = readFile('cookbook/test/qunit/qunit.js').
-    replace(".then(\"tests/basic\")", ".then(\"recipe_test\")");
+    replace(".then(\"tests/basic\")", ".then(\"tests/recipe_test\")");
 new steal.File('cookbook/test/qunit/qunit.js').save( qunitContent );
 
 funcunitContent = readFile('cookbook/test/funcunit/funcunit.js').
-    replace(".then(\"tests/basic\")", ".then(\"recipe_controller_test\")");
+    replace(".then(\"tests/basic\")", ".then(\"tests/recipe_controller_test\")");
 new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent );
  
 _S.clear();
 //now see if unit and functional run
 print("-- Run unit tests for cookbook --");
-_args = ['-unit']; load('cookbook/scripts/test.js');
+load('cookbook/scripts/qunit.js');
 
 _S.sleep(300);
 
@@ -63,7 +63,7 @@ new steal.File('cookbook/settings.js').save( seleniumSettings );
 
 _S.clear();
 print("-- Run functional tests for cookbook --");
-_args = ['-functional']; load('cookbook/scripts/test.js');_S.clear();
+load('cookbook/scripts/funcunit.js');_S.clear();
 
 _S.sleep(300);
 
@@ -78,7 +78,7 @@ cookbookPage = readFile('cookbook/cookbook.html').
 new steal.File('cookbook/cookbook.html').save( cookbookPage );
 
 print("-- Run functional tests again, this time with cookbook compressed --");
-_args = ['-functional']; load('cookbook/scripts/test.js');
+load('cookbook/scripts/funcunit.js');
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
