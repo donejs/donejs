@@ -62,10 +62,10 @@ seleniumSettings = readFile('cookbook/settings.js').
 new steal.File('cookbook/settings.js').save( seleniumSettings );
 
 _S.clear();
-print("-- Run functional tests for cookbook --");
+/*print("-- Run functional tests for cookbook --");
 load('cookbook/scripts/funcunit.js');_S.clear();
 
-_S.sleep(300);
+_S.sleep(300);*/
 
 _S.clear();
 print("-- Compress cookbook --");
@@ -77,8 +77,8 @@ cookbookPage = readFile('cookbook/cookbook.html').
     replace("steal[env]=development", "steal[env]=production");
 new steal.File('cookbook/cookbook.html').save( cookbookPage );
 
-print("-- Run functional tests again, this time with cookbook compressed --");
-load('cookbook/scripts/funcunit.js');
+/*print("-- Run functional tests again, this time with cookbook compressed --");
+load('cookbook/scripts/funcunit.js');*/
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
