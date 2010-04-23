@@ -12,7 +12,7 @@ load('jquery/view/test/compression/run.js');
 
 
 print("==========================  unit ============================")
-print("-- steal --");
+print("-- steal unit tests --");
 load('steal/test/run.js');
 
 
