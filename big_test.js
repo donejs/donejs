@@ -41,11 +41,11 @@ cookbookContent = readFile('cookbook/cookbook.js').
 new steal.File('cookbook/cookbook.js').save( cookbookContent );
 
 qunitContent = readFile('cookbook/test/qunit/qunit.js').
-    replace(".then(\"tests/basic\")", ".then(\"tests/recipe_test\")");
+    replace(".then(\"basic\")", ".then(\"recipe_test\")");
 new steal.File('cookbook/test/qunit/qunit.js').save( qunitContent );
 
 funcunitContent = readFile('cookbook/test/funcunit/funcunit.js').
-    replace(".then(\"tests/basic\")", ".then(\"tests/recipe_controller_test\")");
+    replace(".then(\"basic\")", ".then(\"recipe_controller_test\")");
 new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent );
  
 _S.clear();
