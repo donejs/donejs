@@ -59,10 +59,10 @@ _S.clear();
 load('steal/file/file.js');
 
 _S.clear();
-/*print("-- Run functional tests for cookbook --");
+print("-- Run functional tests for cookbook --");
 load('cookbook/scripts/funcunit.js');_S.clear();
 
-_S.sleep(300);*/
+_S.sleep(300);
 
 _S.clear();
 print("-- Compress cookbook --");
