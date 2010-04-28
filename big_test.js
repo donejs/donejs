@@ -16,16 +16,6 @@ print("-- steal unit tests --");
 load('steal/test/run.js');
 
 
-/*
-print("==========================  functional ============================")
-clearEverything();
-load('apps/testing/test/run_functional.js')
-_wait("window.jQuery.Test.Functional.browsersComplete")
-
-
-print("==========================  Generated Tests ============================")
-* Included in steal/generate/test/run.js
-*/
 print("==========================  Getting Started ============================")
 
 load('steal/test/helpers.js');
@@ -41,11 +31,11 @@ cookbookContent = readFile('cookbook/cookbook.js').
 new steal.File('cookbook/cookbook.js').save( cookbookContent );
 
 qunitContent = readFile('cookbook/test/qunit/qunit.js').
-    replace(".then(\"basic\")", ".then(\"recipe_test\")");
+    replace(".then(\"basic_test\")", ".then(\"recipe_test\")");
 new steal.File('cookbook/test/qunit/qunit.js').save( qunitContent );
 
 funcunitContent = readFile('cookbook/test/funcunit/funcunit.js').
-    replace(".then(\"basic\")", ".then(\"recipe_controller_test\")");
+    replace(".then(\"basic_test\")", ".then(\"recipe_controller_test\")");
 new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent );
  
 _S.clear();
