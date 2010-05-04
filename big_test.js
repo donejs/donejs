@@ -12,20 +12,10 @@ load('jquery/view/test/compression/run.js');
 
 
 print("==========================  unit ============================")
-print("-- steal --");
+print("-- steal unit tests --");
 load('steal/test/run.js');
 
 
-/*
-print("==========================  functional ============================")
-clearEverything();
-load('apps/testing/test/run_functional.js')
-_wait("window.jQuery.Test.Functional.browsersComplete")
-
-
-print("==========================  Generated Tests ============================")
-* Included in steal/generate/test/run.js
-*/
 print("==========================  Getting Started ============================")
 
 load('steal/test/helpers.js');
@@ -41,11 +31,11 @@ cookbookContent = readFile('cookbook/cookbook.js').
 new steal.File('cookbook/cookbook.js').save( cookbookContent );
 
 qunitContent = readFile('cookbook/test/qunit/qunit.js').
-    replace(".then(\"tests/basic\")", ".then(\"tests/recipe_test\")");
+    replace(".then(\"basic_test\")", ".then(\"recipe_test\")");
 new steal.File('cookbook/test/qunit/qunit.js').save( qunitContent );
 
 funcunitContent = readFile('cookbook/test/funcunit/funcunit.js').
-    replace(".then(\"tests/basic\")", ".then(\"tests/recipe_controller_test\")");
+    replace(".then(\"basic_test\")", ".then(\"recipe_controller_test\")");
 new steal.File('cookbook/test/funcunit/funcunit.js').save( funcunitContent );
  
 _S.clear();
@@ -57,9 +47,6 @@ _S.sleep(300);
 
 _S.clear();
 load('steal/file/file.js');
-seleniumSettings = readFile('cookbook/settings.js').
-    replace("quitOnDone: true", "quitOnDone: false");
-new steal.File('cookbook/settings.js').save( seleniumSettings );
 
 _S.clear();
 print("-- Run functional tests for cookbook --");
@@ -77,8 +64,8 @@ cookbookPage = readFile('cookbook/cookbook.html').
     replace("steal[env]=development", "steal[env]=production");
 new steal.File('cookbook/cookbook.html').save( cookbookPage );
 
-print("-- Run functional tests again, this time with cookbook compressed --");
-load('cookbook/scripts/funcunit.js');
+/*print("-- Run functional tests again, this time with cookbook compressed --");
+load('cookbook/scripts/funcunit.js');*/
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
