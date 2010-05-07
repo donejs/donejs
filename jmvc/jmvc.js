@@ -1,4 +1,6 @@
-steal.plugins('jquery/controller',
+steal.plugin('funcunit').
+then('pages/init').plugins('jquery',
+'jquery/controller',
 'jquery/view','jquery/view/ejs'
 ,'jquery/view/jaml'
 ,'jquery/view/micro',
@@ -7,9 +9,16 @@ steal.plugins('jquery/controller',
 'jquery/event/destroyed',
 'jquery/event/drag',
 'jquery/event/drop',
-'jquery/event/hover')
+'jquery/event/hover',
+'jquery/event/resize',
+'jquery/dom/compare',
+'jquery/dom/closest',
+'jquery/dom/within',
+'jquery/dom/form_params',
+'jquery/dom/dimensions',
+'jquery/dom/fixtures'
+)
 /**
  * @class jQuery.event.special
- * @tag core
  */
 // as fasf sa
