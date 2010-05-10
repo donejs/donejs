@@ -7,7 +7,7 @@
  * maintainability, and convention over configuration.</p>
  *  <a href='http://javascriptmvc.googlecode.com/files/javascriptmvc-2.0.2.zip' id='download'  class='big_button  floatLeft'>
  <span>Download JavaScriptMVC</span>
- <span class='label'>2.0 Production (6.2 MB)</span>
+ <span class='label'>3.0 Alpha 4 (10.2 MB)</span>
  </a>
  <a href='http://cdn.javascriptmvc.com/videos/2_0/2_0_demo.htm' id='video' class='big_button floatLeft'>
      <span>Watch</span>
@@ -17,9 +17,9 @@
  * We've made everything you should be doing as easy as possible.
  * <ul>
  *     <li><b>Maintainability</b> via the [jQuery.Model Model]-[jQuery.View View]-[jQuery.Controller Controller] architecture pattern.</li>
- *     <li>Application <b>Concatination</b> and <b>Compression</b> via [include].</li>
- *     <li><b>Testing</b> via [jQuery.Test Test].</li>
- *     <li><b>Documentation</b> via [include.Doc].</li>
+ *     <li>Application <b>Concatination</b> and <b>Compression</b> via [steal].</li>
+ *     <li><b>Testing</b> via [FuncUnit Test].</li>
+ *     <li><b>Documentation</b> via [DocumentJS].</li>
  *     <li><b>Error Reporting</b> via [http://damnit.jupiterit.com DamnIT].</li>
  *     <li><b>Updates</b> and <b>Dependancy Management</b> via update.</li>
  *     <li><b>Ajax and DOM functionality</b> via [http://jquery.com jQuery].</li>
