@@ -18,4 +18,7 @@ new steal.File("jquery").copyTo("../jmvcdownload/jquery/", ignore)
 new steal.File("../jmvcdownload/steal").mkdir()
 new steal.File("steal").copyTo("../jmvcdownload/steal/", ignore)
 
+new steal.File("js").copyTo("../jmvcdownload/js", [])
+new steal.File("js.bat").copyTo("../jmvcdownload/js.bat", [])
+
 new steal.File("../jmvcdownload").zipDir("javascriptmvc-3.0.0.zip", "..\\jmvcdownload\\")

@@ -5,7 +5,7 @@
  * containing the best ideas in enterprise JavaScript development. 
  * It <span class='highlight'>guides</span> you to successfully completed projects by promoting best practices, 
  * maintainability, and convention over configuration.</p>
- *  <a href='http://javascriptmvc.googlecode.com/files/javascriptmvc-2.0.2.zip' id='download'  class='big_button  floatLeft'>
+ *  <a href='http://github.com/downloads/pinhook/framework/javascriptmvc-3.0.0_alpha4.zip' id='download'  class='big_button  floatLeft'>
  <span>Download JavaScriptMVC</span>
  <span class='label'>3.0 Alpha 4 (10.2 MB)</span>
  </a>
