@@ -9,25 +9,50 @@
      <span>Watch</span>
      <span class='label'>2.0 Video</span>
  </a>  Check out the <a href='http://javascriptmvc.s3.amazonaws.com/videos/2_0/2_0_demo.htm'>
- JavaScriptMVC 2.0</a> video that walks you through much of the getting started guide.
+ JavaScriptMVC 2.0</a> video that walks you through much of the getting started guide.  
+ It's an older treatment, but still touches on JMVC's strong points.
  * <h2 class='spaced'>Basics</h2>
  * Before jumping in, there are some things you should know:
  * <h3>Folder Structure</h3>
- * JMVC logically separates your files with the following folder structure:<br/>
- * <img src='http://wiki.javascriptmvc.com/wiki/images/d/d7/File_structure.png'/>
+ * JMVC logically separates your files with the following folder structure:
+@codestart
+documentjs         -documentation engine
+funcunit           -testing tool
+appname            -your applicatoin
+    \controllers   -organized event handlers
+    \models        -manage data
+    \resources     -helper scripts
+    \test          -test files
+        \funcunit  -funcunit tests
+        \qunit     -qunit tests
+    \views         -html templates
+jquery             -jquery and jQuery plugins (like $.Controller)
+steal              -compression and build
+@codeend
+<div class='whisper'>P.S. Don't worry about creating an 'appname' folder yet.  We'll do that
+in a second.</div>
  * <h3>Plugins</h3>
- * Everything is a plugin.  Just [include.static.plugins include] the ones you need. Plugins load their
- * own dependencies.  
+ * Everything is a plugin.  Just [steal.static.plugins steal] the ones you need. Plugins load their
+ * own dependencies and won't load duplicate files.  
  * @codestart
- * include.plugins('model','view','controller');
+ * steal.plugins('jquery/model',
+ *   'jquery/view',
+ *   'jquery/controller');
  * @codeend
+<div class='whisper'>
+  P.S. <code>steal.plugins('a/b')</code> adds <code>a/b/b.js</code>
+ to your project. 
+  </div>
  * <h3>Environments</h3>
  * There are different environments for each phase of development:
  * <ul>
- *     <li><span class='gray'>Development</span> - optimized for debugging</li>
- *     <li><span class='gray'>Test</span> - loads console and application tests</li>
+ *     <li><span class='gray'>Development</span> - optimized for debugging and rapid development</li>
  *     <li><span class='gray'>Production</span> - loads compressed application file </li>
  * </ul>
+<div class='whisper'>
+  P.S. The 'test' environment has been replaced by [FuncUnit]
+  awesomeness. 
+</div>
  * <h2>Making a Cookbook</h2>
  * Lets get started by [install installing JavaScriptMVC].
  */
@@ -38,138 +63,185 @@
 @page install 2.1. Installing JavaScriptMVC
 
 <h1 class='addFavorite'>Installing JavaScriptMVC</h1>
-<p>[download Download] the latest JavaScriptMVC. Unzip the folder on your file system or web server.  If you are using this on a webserver, put JMVC in a public folder.</p>
-<p>A simple JavaScriptMVC application is running in index.html. You may want to refer to this as a reference.
+<p>
+	[download Download] the latest JavaScriptMVC. 
+	Unzip the folder on your file system or web server.  
+	If you are using this on a webserver, put 
+	unzip in a public folder.  You should have something that
+	looks like:
 </p>
-<h2>Updating JavaScriptMVC</h2>
-Update JavaScriptMVC to the latest/best code.  In a console, type: 
-@codestart text
-C:\workspace\Cookbook>js jmvc\update
+@codestart
+static
+  \documentjs - DocumentJS library
+  \funcunit   - FuncUnit testing library
+  \jquery     - jQuery and MVC plugins
+  \steal      - compression and build system
+  \js.bat     - Windows Rhino shortcut
+  \js         - Mac/Linux Rhino shortcut
 @codeend
+<div class='whisper'>PRO TIP: 
+  Unzip these files as
+  high in your apps folder structure as possible (i.e. don't
+  put them under a javascriptmvc folder in your public directory).
+</div>
+<h2>Installing Java</h2>
+JavaScriptMVC requires Java JRE 1.6 or greater for some of its features 
+such as:
+<ul>
+	<li>Compression (Google Closure)</li>
+	<li>Selenium run FuncUnit tests</li>
+	<li>Easy updating</li>
+	<li>Code Generators</li>
+</ul>
+and this walkthrough uses most of those features.  But, your
+backend (server) can be written in any language. 
+<h2>Updating JavaScriptMVC</h2>
+We are constantly upgrading JMVC.  To get the latest, most
+error free code, in a console, type:
+@codestart text
+C:\workspace\Cookbook>js documentjs\update
+C:\workspace\Cookbook>js funcunit\update
+C:\workspace\Cookbook>js jquery\update
+C:\workspace\Cookbook>js steal\update
+@codeend
+<div class='whisper'>
+	P.S. If you are using linux/mac you
+	want to use <code>./js</code> and change <code>\</code> 
+	to <code>/</code>.
+</div>
 Continue to [creating Creating Cookbook].
  */
 //break ---------------------------------------------------------------------
 
+
+
+
 /*
 @page creating 2.2. Creating Cookbook
 <h1 class='addFavorite'>Creating Cookbook</h1>
-<p>JavaScriptMVC uses generator scripts to assist you in setting up your application's files and folders.
+<p>
+	JavaScriptMVC uses generator scripts to assist you
+	in setting up your application's files and folders.
 </p>
 <h2>Generating an Application</h2>
-<p>To create your application, open a console window and navigate to your public directory. Run:
+<p>To create your application, open a console window and 
+navigate to your public directory. Run:
 </p>
 @codestart text
-C:\workspace\Cookbook>js jmvc\generate\app cookbook
-Generating...
-
-     apps/cookbook
-     apps/cookbook/init.js
-     apps/cookbook/compress.js
-     apps/cookbook/test
-     apps/cookbook/test/unit.js
-     apps/cookbook/test/run_unit.js
-     apps/cookbook/test/functional.js
-     apps/cookbook/test/run_functional.js
-     apps/cookbook/test/selenium_config.js
-     apps/cookbook/docs
-     test/unit/truth_test.js
-     test/functional/truth_functional_test.js
-     cookbook.html
-
-     Make sure to add new files to your application and test file!
+> js steal\generate\app cookbook
 @codeend
 
 <p>This script creates an application folder and files. 
 Here's what each file does:</p>
 <DL>
-    <DT><code>init.js</code>
-    <DD>The application file, which apps use to load plugins and other JavaScript files.
-    <DT><code>compress.js</code>
-    <DD>Compresses your application.
-    <DT><code>unit.js</code>
-    <DD>Loads unit tests.
-    <DT><code>run_unit.js</code>
-    <DD>Runs unit tests in Rhino.
-    <DT><code>functional.js</code>
-    <DD>Loads functional tests.
-    <DT><code>run_functional.js</code>
-    <DD>Runs functional tests in Selenium.
-    <DT><code>selenium_config.js</code>
-    <DD>Configures Selenium options.
-    <DT><code>truth_test.js + truth_functional_test.js</code>
-    <DD>Simple unit and functional tests.
+    <DT><code>cookbook.js</code>
+    <DD>The application file, 
+    	load plugins and other JavaScript files.
     <DT><code>cookbook.html</code>
     <DD>A page that loads your application.
+    
+    <DT><code>funcunit.html</code>
+    <DD>A page that runs your functional tests.
+    
+    <DT><code>funcunit.html</code>
+    <DD>A page that runs your qunit tests.
+    
+    <DT><code>test/</code>
+    <DD>A folder for your qunit and funcunit tests.
+    
+    <DT><code>docs/</code>
+    <DD>A folder for your documentation files.
+    
+    <DT><code>scripts/</code>
+    <DD>Scripts to document and compress your application.
+    
+    
+    <DT><code>controllers/</code>
+    <DD>A folder for code that manages events.
+    <DT><code>models/</code>
+    <DD>A folder code that manages Ajax requests.
+    <DT><code>view/</code>
+    <DD>A folder for client side templates
+    <DT><code>resources/</code>
+    <DD>A folder for 3rd party plugins and scripts.
+    <DT><code>fixtures/</code>
+    <DD>A folder for simulated ajax responses (So you don't have to wait on the slow poke backenders).
+    
 </DL>    
 </p>
-<p>We'll use cookbook.html for our application. But if you need to make another page for your app:
+<p>We'll use cookbook.html for our application. 
+If you need to make another page for your app you can generate it:
 </p>
 @codestart text
-C:\workspace\Cookbook>js jmvc/generate/page cookbook index.html
+> js steal/generate/page cookbook index.html
 Generating ... index.html
 @codeend
+Or you add the steal script to an existing page 
+page followed by <code>?cookbook</code> like:
+@codestart html
+&lt;script type='text/javascript'
+        src='../path/to/steal.js?cookbook'>
+&lt;/script>
+@codeend
 <h2>Scaffolding Recipes</h2>
-<p>The Scaffold Generator creates all the code you need for simple 
-Create-Read-Update-Delete (CRUD) functionality.  For our cookbook app, we want to make recipes. 
+<p>The scaffold generator creates all the code you need for simple 
+Create-Read-Update-Delete (CRUD) functionality.  
+For our cookbook app, we want to make recipes. 
 To scaffold recipes run the following in a console:
 </p>
 @codestart text
-C:\workspace\Cookbook>js jmvc/generate/scaffold Recipe
-Generating...
-
-             controllers
-             controllers/recipe_controller.js
-             views/recipe
-             views/recipe/edit.ejs
-             views/recipe/init.ejs
-             views/recipe/list.ejs
-             views/recipe/show.ejs
-             test/functional/recipe_controller_test.js
-             models
-             models/recipe.js
-             test/fixtures/recipes.get
-             test/unit/recipe_test.js
-
-             Make sure to add new files to your application and test file!
+> js steal/generate/scaffold Cookbook.Models.Recipe
 @codeend
 <p>Here's what each part does:</p>
 <DL>
     <DT><code>recipe_controller.js</code>
-    <DD>RecipeController, like all [jQuery.Controller Controllers], respond to events such as click and manipulate the DOM.
+    <DD>Cookbook.Controllers.Recipe, like all [jQuery.Controller Controllers], respond to events such as click and manipulate the DOM.
     <DT><code>edit.ejs,init.ejs,list.ejs,show.ejs</code>
     <DD>[jQuery.View Views] are JavaScript templates for easily creating HTML.
     <DT><code>recipe_controller_test.js</code>
-    <DD>[jQuery.Test.Functional Tests] the CRUD functionality of the user interface.
+    <DD>[FuncUnit Tests] the CRUD functionality of the user interface.
     <DT><code>recipe.js</code>
-    <DD>The Recipe [jQuery.Model model] performs AJAX requests by manipulating services.
+    <DD>Cookbook.Models.Recipe [jQuery.Model model] performs AJAX requests by manipulating services.
     
     <DT><code>recipes.get</code>
-    <DD>[fixtures Fixtures] simulate AJAX responses.  This fixture responds to GET '/recipes'.
+    <DD>[jQuery.fixture Fixtures] simulate AJAX responses.  This fixture responds to GET '/recipes'.
     <DT><code>recipe_test.js</code>
-    <DD>A [jQuery.Test UnitTest] that tests Recipe model.
+    <DD>A [FuncUnit unit test] that tests Recipe model.
 </DL>
 <h2>Including Scripts</h2>
-<p>After generating the scaffolding files, you must include them in your application.
-Open <b>apps/cookbook/init.js</b> and include your recipe controller and model as follows:</p>
+<p>After generating the scaffolding files, you must steal them in your application file.
+Open <b>apps/cookbook/cookbook.js</b> and steal your recipe controller and model as follows:</p>
 @codestart
-include.plugins('controller','view','dom/fixtures','dom/form_params','model');
-
-include(function(){ //runs after prior includes are loaded
-  include.models(<u><b>'recipe'</b></u>);
-  include.controllers(<u><b>'recipe'</b></u>);
-  include.views();
-});
+steal.plugins('jquery/controller',
+              'jquery/controller/subscribe',
+              'jquery/view/ejs',
+              'jquery/model',
+              'jquery/dom/fixtures',
+              'jquery/dom/form_params')
+     .resources()
+     .models(<u><b>'recipe'</b></u>)
+     .controllers(<u><b>'recipe'</b></u>)
+     .views()
 @codeend
-<p>To add tests to your unit and functional tests, include them in your unit.js 
-and functional.js files.
+<div class='whisper'>P.S. By default the app file loads
+the most common MVC components and a few other useful plugins.
+</div>
+<p>
+	To add tests to your unit and functional tests, 
+	include them in your qunit.js 
+	and funcunit.js files.
 </p>
-<b>apps/cookbook/test/unit.js</b>
+<b>cookbook/test/qunit/qunit.js</b>
 @codestart
-include.unitTests('truth',<u><b>'recipe'</b></u>);
+steal
+  .plugins("funcunit/qunit", "cookbook")
+  .then("cookbook_test",<u><b>"recipe_controller_test"</b></u>)
 @codeend
-<b>apps/cookbook/test/functional.js</b>
+<b>cookbook/test/funcunit/funcunit.js</b>
 @codestart
-include.functionalTests('truth_functional',<u><b>'recipe_controller'</b></u>);
+steal
+ .plugins("funcunit")
+ .then("cookbook_test",<u><b>"recipe_test"</b></u>)
 @codeend
 <h2>Run Cookbook</h2>
 <p>That's it. You've created a simple Cookbook application. Open cookbook.html in a browser. </p>
