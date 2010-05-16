@@ -231,23 +231,50 @@ the most common MVC components and a few other useful plugins.
 	include them in your qunit.js 
 	and funcunit.js files.
 </p>
-<b>cookbook/test/qunit/qunit.js</b>
+<p><b>cookbook/test/qunit/qunit.js</b></p>
 @codestart
 steal
   .plugins("funcunit/qunit", "cookbook")
   .then("cookbook_test",<u><b>"recipe_controller_test"</b></u>)
 @codeend
-<b>cookbook/test/funcunit/funcunit.js</b>
+<div class='whisper'>P.S. qunit.js describes what scripts are loaded into qunit.html</div>
+<p><b>cookbook/test/funcunit/funcunit.js</b></p>
 @codestart
 steal
  .plugins("funcunit")
  .then("cookbook_test",<u><b>"recipe_test"</b></u>)
 @codeend
+<div class='whisper'>P.S. funcunit.js describes what scripts are loaded into funcunit.html</div>
 <h2>Run Cookbook</h2>
 <p>That's it. You've created a simple Cookbook application. Open cookbook.html in a browser. </p>
 <img src='http://wiki.javascriptmvc.com/wiki/images/c/c8/Cookbook.png'/>
 
-<p>Continue to [testing Testing Cookbook].</p>
+<p>Continue to [testing Testing Cookbook] or continue to read how this code works.</p>
+<h2>How it Works</h2>
+The Cookbook application's functionality can be broken into 4 parts:
+<ul>
+	<li>Loading scripts.</li>
+	<li>Get and show recipes and recipe form.</li>
+	<li>Create a recipe.</li>
+	<li>Edit a recipe.</li>
+	<li>Delete a recipe.</li>
+</ul>
+Lets see how this gets mapped to files in our Cookbook app.
+<h3>Loading Scripts</h3>
+In cookbook.html, you'll find a script tag like:
+@codestart
+&lt;script type='text/javascript' 
+        src='../steal/steal.js?cookbook,development'>   
+&lt;/script>
+@codeend
+This does 2 things:
+<ol>
+	<li>Loads the steal script.</li>
+	<li>Tells steal to load the cookbook app (at <code>cookbook/cookbook.js</code>) in development mode.</li>
+</ol>
+When <code>cookbook/cookbook.js</code> runs, it loads a bunch of plugins, then loads the generated 
+controller and model.
+
 */
 //break ----------------------------------------------------------------------
 
