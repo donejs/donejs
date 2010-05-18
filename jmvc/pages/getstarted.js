@@ -256,8 +256,8 @@ The Cookbook application's functionality can be broken into 4 parts:
 	<li>Loading scripts.</li>
 	<li>Get and show recipes and recipe form.</li>
 	<li>Create a recipe.</li>
-	<li>Edit a recipe.</li>
 	<li>Delete a recipe.</li>
+	<li>Edit a recipe.</li>
 </ul>
 Lets see how this gets mapped to files in our Cookbook app.
 <h3>Loading Scripts</h3>
@@ -380,6 +380,76 @@ recipe, it uses <code>closest</code> to find the first parent with className=
   <code>"recipe.destroyed"</code> OpenAjax event.  RecipeController
   listens for this event, then removes the element from the page.
 </p>
+<div class='whisper'>
+PRO TIP: Use OpenAjax events instead of callback functions.  This will help you a lot if
+you have a representation of the same instance in multiple places on the page.  For
+example, if you have 2 todo lists with a shared todo.  If that todo is deleted in one
+place, it will be removed in the other.
+</div>
+<h3>Edit Recipe</h3>
+<p>
+	Edit starts out similar to destroy - RecipeController listens for ".edit click" and gets
+	the recipe instance from <code>model()</code>.  Then RecipeController replaces the 
+	tr's html with the rendered content of the edit template.  
+</p>
+<p>
+	The edit template adds an <b>Update</b> and <b>cancel</b>.  RecipeController 
+	listens for <code>".update click"</code> and <code>".cancel click"</code>.  
+</p>
+<p>
+	When <code>".update click"</code> happens, the model instance is updated
+	with the values in the input elements.  This results in a call to
+	Recipe.update which tries to send a put request to 'recipe/:id', but instead
+	uses fixtures.  
+</p>
+<p>When the request complates, a <code>"recipe.updated"</code> message is published.
+   RecipeController listens for these events, and uses the show template to
+   render the updated content.
+</p>
+<p>
+	When <code>".cancel click"</code> occurs, the tr's content is replaced using the
+	show template.
+</p>
+<h2>Adding isTasty</h2>
+I hate mushrooms.  I'd like to know if a recipe is tasty (it doesn't have mushrooms) and list it in the 
+Recipe's table.  Here's how to do that:
+<h3>Add isTasty to Cookbook.Models.Recipe</h3>
+Add an isTasty method to the prototype object of Recipe model (at the end of recipe.js):
+@codestart
+/* @Prototype *|
+{
+  isTasty : function(){
+    return !/mushroom/.test(this.name+" "+this.description)
+  }
+})
+@codeend
+<h3>Adding an "is tasty" column</h3>
+In <code>cookbook/views/recipe/init.ejs</code> add a <b>th</b> like this:
+@codestart html
+&lt;% for(var attr in Cookbook.Models.Recipe.attributes){%>
+    &lt;% if(attr == 'id') continue;%>
+    &lt;th><%= attr%> &lt;/th>    
+&lt;%}%>
+<u><b>&lt;th>Tasty?&lt;/th></b></u>
+&lt;th>Options&lt;/th>
+@codeend
+In <code>cookbook/views/recipe/show.ejs</code> add a <b>td</b> like this:
+@codestart html
+&lt;%for(var attribute in this.Class.attributes){%>
+    &lt;%if(attribute == 'id') continue;%>
+    &lt;td class='&lt;%= attribute%>'>
+            &lt;%=this[attribute]%>
+    &lt;/td>
+&lt;%}%>
+<u><b>&lt;td>&lt;%= this.isTasty() %>&lt;/td></b></u>
+&lt;td>
+    &lt;a href='javascript: void(0)' class='edit'>edit&lt;/a>
+    &lt;a href='javascript: void(0)' class='destroy'>destroy&lt;/a>
+&lt;/td>
+@codeend
+Reload your page.  You should see the Tasty column.  Add a recipe with mushrooms
+and Tasty? should be false.
+<p>Continue to [testing Testing Cookbook].</p>
 */
 //break ----------------------------------------------------------------------
 
@@ -388,55 +458,186 @@ recipe, it uses <code>closest</code> to find the first parent with className=
 @page testing 2.3. Testing Cookbook
 <h1 class='addFavorite'>Testing Cookbook
 </h1>
-<p>The [jQuery.Test Test] plugin's tiered approach allows testing in the browser, 
-[http://www.mozilla.org/rhino/ Rhino], and with 
+<p>[FuncUnit] tiered approach allows unit and functional testing in the browser, 
+[http://www.mozilla.org/rhino/ Rhino], and 
 [http://seleniumhq.org/ Selenium].
-Don't worry about creating the tests.  When you scaffolded recipe, it created tests for you.
+When you scaffolded recipe, it created tests for you.  This guide will show you how to:
 </p>
-<h2>Testing in the Browser
-</h2>
-<p>In a text editor, open cookbook.html and 
-change the src attribute of the script tag that loads include.js like this:</p>
-@codestart html
-&lt;script type='text/javascript' src='jmvc/include.js?cookbook,<span style="text-decoration:underline"><b>test</b></span>'>&lt;/script>
-@codeend
-<p>Reload cookbook.html in the browser. The JavaScriptMVC Console will load in another window:</p>
-<h3>JavaScriptMVC Console</h3>
-<img src='http://wiki.javascriptmvc.com/wiki/images/b/bd/Unit.png'/>
-<p class='warn'>If you don't see the console appear, turn off your popup blocker!</p>
+<ul>
+	<li>Run unit tests.</li>
+	<li>Run functional tests.</li>
+	<li>Understand the qUnit unit tests.</li>
+	<li>Understand the FuncUnit functional tests.</li>
+	<li>Test isTasty functionality.</li>
+</ul>
 
-<h3>Run Tests</h3>
-<p>To run the tests, click the <b>unit</b> and <b>functional</b> tabs
-and click the play buttons.</p>
-<img src='http://wiki.javascriptmvc.com/wiki/images/d/d8/Functional.png' />
+<h2>Run Unit Tests</h2>
+<p>JavaScriptMVC uses qUnit to test unit functionality (like models and basic plugins).  You can run these
+tests in the browser or Envjs.  </p>
+<p><code>cookbook/test/qunit/qunit.js</code> loads qunit and your unit tests.  Make sure
+you have added <code>recipe_test.js</code> like:</p>
+@codestart
+steal
+  .plugins("funcunit/qunit", "cookbook")
+  .then("cookbook_test",<u><b>'recipe_test'</b></u>)
+@codeend
+<h3>Run Unit Tests in the Browser</h3>
+<p>Open <code>cookbook/qunit.html</code>.  You should see something like:</p>
+<img src='http://wiki.javascriptmvc.com/wiki/images/2/27/Qunit.png'/>
+<h3>Run Unit Tests in Envjs</h3>
+<p>In a command window type:</p>
+@codestart
+> funcunit\envjs cookbook/qunit.html
+@codeend
+This runs qunit.html in a simulated browser environment.  The output should look like:<br/>
+<img src='http://wiki.javascriptmvc.com/wiki/images/2/24/Qunit-envjs.png' width='500px'>
 
-<h2>Testing with Selenium</h2>
-Selenium can automatically run your Functional tests.  
-In another console, start [http://seleniumhq.org/ Selenium] with the
-following command:
-@codestart text
-C:\workspace\Cookbook>js -selenium
+<h2>Run Functional Tests</h2>
+<p>JavaScriptMVC uses FuncUnit to add browser and selenium-based functional 
+testing to qUnit.  You can run tests in the browser or using selenium.</p>
+<p><code>cookbook/test/funcunit/funcunit.js</code> loads funcunit and your functional tests.  
+Make sure you have added <code>recipe_controller_test.js</code> like:</p>
+@codestart
+steal
+ .plugins("funcunit")
+ .then("cookbook_test",<u><b>'recipe_controller_test'</b></u>)
 @codeend
-To run your tests run:
-@codestart text
-C:\workspace\Cookbook>js apps\cookbook\test\run_functional.js
-@codeend
-Selenium will try to open Firefox and Internet Explorer and run all functioanl tests in each.
-You can configure any other browser too. Read more about
- [selenium JMVC and Selenium].
-<p class="tip"><b>Tip:</b> Have these tests run nightly.</p>
 
-<h2>Testing with Rhino</h2>
-<p>[http://www.mozilla.org/rhino/ Rhino] can run your unit tests in the simulated browser environment: 
-[http://github.com/thatcher/env-js/tree/master Env.js].</p>
-To run the tests enter the following on the command line:
-@codestart text
-C:\workspace\Cookbook>js apps\cookbook\test\run_unit.js
+<h3>Run Functional Tests in the Browser</h3>
+<p>Open <code>cookbook/funcunit.html</code>.  You should see something like:</p>
+<img src='http://wiki.javascriptmvc.com/wiki/images/b/b6/Funcunit.png'/>
+<h3>Run Functional Tests in Selenium</h3>
+<p>In a command window type:</p>
+@codestart
+> funcunit\envjs cookbook/funcunit.html
 @codeend
-<p class="tip"><b>Tip:</b> Have this run before allowing check in.</p>
-<h2>More on Testing</h2>
-<p>Read the [jQuery.Test test documentation] to learn more about testing.</p>
-Next, learn how to [compressing Compress Cookbook].
+This should open Firefox and IE if you are using Windows.  The results of the
+test should look like:<br/>
+<img src='http://wiki.javascriptmvc.com/wiki/images/a/a7/Funcunit-envjs.png' width='500px'>
+<div class='whisper'>
+	If Selenium is unable to open your browsers, it's likely you have them in an
+	unusual location.  Read [FuncUnit.static.browsers] for information on how to configure browsers
+	so selenium can find them.
+</div>
+<h2>Understanding qUnit Tests</h2>
+FuncUnit adds very little to qUnit, so the best place to start understanding qUnit is its own
+[http://docs.jquery.com/QUnit documentation].  FuncUnit / JavaScriptMVC just adds a way to:
+<ul>
+	<li>Organize tests</li>
+	<li>Load tests</li>
+	<li>Run and report results in Envjs</li>
+</ul>
+<p>Here's how it works ...</p>
+<ol>
+	<li><code>cookbook/qunit.html</code> loads steal.js and tells it to load:
+		<code>cookbook/test/qunit/qunit.js</code> with the following script tag:
+@codestart
+&lt;script type='text/javascript' 
+       src='../steal/steal.js?steal[app]=cookbook/test/qunit'>
+&lt;/script>
+@codeend
+	</li>
+	<li>In qUnit.js, the qUnit plugin and tests are loaded.</li>
+	<li>In <code>cookbook/test/qunit/cookbook_test.js</code>
+		tests are added to be run by qunit.
+	</li>
+	<li>When the page loads, the tests are run.</li>
+</ol>
+<p>When the page is run in Envjs, qUnit does the same 4 steps, but reports
+the messages on the comamnd line.</p>
+
+<p>As an example of a test, let look at how the findAll test works:</p>
+@codestart
+//creates a test
+test("findAll", function(){
+  //prevents the next test from running
+  stop(2000);
+  
+  //requests recipes
+  Cookbook.Models.Recipe.findAll({}, function(recipes){
+    
+    //makes sure we have something
+    ok(recipes)
+    
+    //makes sure we have at least 1 recipe
+    ok(recipes.length)
+    
+    //makes sure a recipe looks right
+    ok(recipes[0].name)
+    ok(recipes[0].description)
+    
+    //allows the next test to start
+    start()
+  });
+})
+@codeend
+
+
+<h2>Understanding FuncUnit Tests</h2>
+<p>FuncUnit adds to qUnit the ability to open another page, in this case
+<code>cookbook/cookbook.html</code>, perform actions on it, and
+get information from it.</p>
+<p>
+	The <code>cookbook/funcunit.html</code>  page
+	works just like the <code>qunit.html</code> page except the 'funcunit' plugin is loaded which 
+	provides [FuncUnit].  FuncUnit is aliased to "<b>S</b>" to highlight the similarity between its API
+	and jQuery's API.
+</p>
+<p>Let take a quick look at a FuncUnit test:</p>
+@codestart
+test("create recipes", function(){
+    
+  //type Ice in the name field
+  S("[name=name]").type("Ice")
+    
+  //type Cold Water in the description field
+  S("[name=description]").type("Cold Water")
+    
+  //click the submit button
+  S("[type=submit]").click()
+    
+  //wait until the 2nd recipe exists
+  S('.recipe:nth-child(2)').exists()
+  
+  //Gets the text of the first td
+  S('.recipe:nth-child(2) td:first').text(function(text){
+  
+    //checks taht it has ice
+    ok(text.match(/Ice/), "Typed Ice");
+  });
+  
+})
+@codeend
+<p>Wait ... why is getting the text passed a function?</p>
+<p>
+	Functional tests are largely many asynchronous actions 
+	(clicks and keypresses)
+	with relatively few checks/assertions.  
+	FuncUnit's goal is to provide as readable and linear syntax as possible.
+	FuncUnit statements are actually stored and then run asynchronously.  This requires that
+	getting a value from the page happens in a callback function.
+</p>
+<p>For more information on FuncUnit, read its [FuncUnit documentation]</p>
+<h2>Testing isTasty</h2>
+<p>In the [creating Creating Cookbook] section of the Getting Started guide,
+we added an isTasty function to be shown.  Lets see how we could unit test
+that functionality.</p>
+<p>At the end of <code>recipe_test.js</code> we'll add code that 
+creates two recipe instances and checks if they are tasty.
+</p>
+@codestart
+test("isTasty", function(){
+  var Recipe = Cookbook.Models.Recipe,
+      r1 = new Recipe({name: "tea",
+                       description: "leaves and water"}),
+      r2 = new Recipe({name: "mushroom soup",
+                       description: "mushrooms and water"});
+  ok(r1.isTasty(), "tea is tasty")
+  ok(!r2.isTasty(), "mushroom soup is not tasty")
+})
+@codeend
+<p>Next, learn how to [compressing Compress Cookbook].</p>
+
 */
 //break ----------------------------------------------------------------------
 
@@ -451,7 +652,7 @@ Server side compression makes it simple to concatenate and compress your code in
 <p>To compress your application, run the following command from a console:
 </p>
 @codestart
-C:\workspace\Cookbook>js apps\cookbook\compress.js
+C:\workspace\Cookbook>js cookbook\scripts\compress.js
    jmvc/plugins/jquery/init.js
    ...
    WARNING! The Fixture Plugin Is Included!!!!!!
