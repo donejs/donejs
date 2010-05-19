@@ -42,7 +42,7 @@
  *     <li>[http://socialcollider.net/ SocialCollider]</li>
  * </ul>
  */
-steal('getstarted','api','download','learn','why','selenium','follow','contribute','help','generators','dom','event')
+steal('getstarted','api','download','learn','why','selenium','follow','contribute','help','generators')
 
 
 

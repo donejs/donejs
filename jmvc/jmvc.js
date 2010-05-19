@@ -19,7 +19,3 @@ then('pages/init').plugins('jquery',
 'jquery/dom/fixtures',
 'documentjs'
 )
-/**
- * @class jQuery.event.special
- */
-// as fasf sa

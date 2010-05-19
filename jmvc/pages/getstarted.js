@@ -653,26 +653,25 @@ Server side compression makes it simple to concatenate and compress your code in
 </p>
 @codestart
 C:\workspace\Cookbook>js cookbook\scripts\compress.js
-   jmvc/plugins/jquery/init.js
+   steal/steal.js
    ...
-   WARNING! The Fixture Plugin Is Included!!!!!!
+   ignore ../steal/dev/dev.js
    ...
-Compressed to 'apps/cookbook/production.js'.
+Package #0: 'cookbook/production.js'.
 @codeend
-<p>Don't worry about the warning for now.  The application is loading the [fixtures Fixtures]
-plugin.  Remove the 'dom/fixtures' plugin from your application file (init.js) when your app is ready to make
-Ajax requests.</p>
-<p>Verify that production.js was created by checking your <b>'apps/cookbook'</b> folder.</p>
+<p>Verify that production.js was created by checking your <b>'cookbook'</b> folder.</p>
 <h2>Switch to Production Mode</h2>
 <p>Switch to production mode by changing the part of the 
 src tag in cookbook.html that reads "test" to "production" like this:
 </p>
 @codestart html
-&lt;script type='text/javascript' src='jmvc/include.js?cookbook,<span style="text-decoration:underline;"><b>production</b></span>'>&lt;/script>
+&lt;script type='text/javascript' 
+       src='../steal/steal.js?cookbook,<span style="text-decoration:underline;"><b>production</b></span>'>
+&lt;/script>
 @codeend
 <h2>Reload and verify</h2>
 
-<p>Reload your page. Only two JavaScript files will load: include.js and production.js. 
+<p>Reload your page. Only two JavaScript files will load: steal.js and production.js. 
 Not bad considering 28 files are loaded in development mode.</p>
 
 When you're ready, learn how to [documenting Document Cookbook]
@@ -687,6 +686,11 @@ When you're ready, learn how to [documenting Document Cookbook]
 It's often burdensome on developers and becomes a neglected. 
 JavaScriptMVC's integrated documentation makes it easy to document JavaScript.
 </p>
+<h2>Generating Documentation</h2>
+<p>Create the docs by running:</p>
+@codestart
+> js cookbook\scripts\doc.js
+@codeend
 <p>In fact, you've already created documentation!</p>
 <h2>Viewing Documentation
 </h2>

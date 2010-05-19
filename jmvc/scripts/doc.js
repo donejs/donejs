@@ -2,4 +2,4 @@
 //load("jmvc/scripts/doc.js")
 
 _args = ['jmvc/jmvc.html']
-load("documentjs/documentjs.js")
+load("documentjs/document")
