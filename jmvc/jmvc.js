@@ -16,6 +16,6 @@ then('pages/init').plugins('jquery',
 'jquery/dom/within',
 'jquery/dom/form_params',
 'jquery/dom/dimensions',
-'jquery/dom/fixtures',
+'jquery/dom/fixture',
 'documentjs'
 )
