@@ -173,7 +173,7 @@ Here's what each file does:</p>
 If you need to make another page for your app you can generate it:
 </p>
 @codestart text
-> js steal/generate/page cookbook index.html
+> js steal\generate\page index cookbook
 Generating ... index.html
 @codeend
 Or you add the steal script to an existing page 
@@ -190,7 +190,7 @@ For our cookbook app, we want to make recipes.
 To scaffold recipes run the following in a console:
 </p>
 @codestart text
-> js steal/generate/scaffold Cookbook.Models.Recipe
+> js steal\generate\scaffold Cookbook.Models.Recipe
 @codeend
 <p>Here's what each part does:</p>
 <DL>
@@ -210,7 +210,7 @@ To scaffold recipes run the following in a console:
 </DL>
 <h2>Including Scripts</h2>
 <p>After generating the scaffolding files, you must steal them in your application file.
-Open <b>apps/cookbook/cookbook.js</b> and steal your recipe controller and model as follows:</p>
+Open <b>cookbook/cookbook.js</b> and steal your recipe controller and model as follows:</p>
 @codestart
 steal.plugins('jquery/controller',
               'jquery/controller/subscribe',
