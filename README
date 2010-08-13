@@ -47,7 +47,7 @@ A. Getting Started with JMVC
   			Open funcunit.html in a browser (turn off popup blockers).
 
   7. Run functional tests with selenium:
-  			./steal/js cookbook/test/funcunit/run.js
+  			./funcunit/envjs cookbook/funcunit.html
 
   8. Include unit tests in test/qunit/qunit.js:
 			.then("recipe_test")
@@ -56,13 +56,13 @@ A. Getting Started with JMVC
   			Open qunit.html in a browser.
 
   10. Run unit tests with Rhino:
-  			./steal/js cookbook/test/funcunit/run.js
+  			./funcunit/envjs cookbook/qunit.html
 
   11. Compress app:
   			./steal/js cookbook/scripts/compress.js
 
   12. Turn on production mode in callcenter.html and reload page:
-			src='../steal/steal.js?steal[app]=cookbook&steal[env]=development'
+			src='../steal/steal.js?cookbook,development'
 
   13. Generate docs:
   			./steal/js cookbook/scripts/doc.js
