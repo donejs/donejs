@@ -212,12 +212,12 @@ To scaffold recipes run the following in a console:
 <p>After generating the scaffolding files, you must steal them in your application file.
 Open <b>cookbook/cookbook.js</b> and steal your recipe controller and model as follows:</p>
 @codestart
-steal.plugins('jquery/controller',
-              'jquery/controller/subscribe',
-              'jquery/view/ejs',
-              'jquery/model',
-              'jquery/dom/fixtures',
-              'jquery/dom/form_params')
+steal.plugins('jquery/controller','jquery/controller/subscribe',
+			  'jquery/view/ejs',
+			  'jquery/model/store',
+			  'jquery/model',
+			  'jquery/dom/fixture',
+			  'jquery/dom/form_params')
      .resources()
      .models(<u><b>'recipe'</b></u>)
      .controllers(<u><b>'recipe'</b></u>)
@@ -642,7 +642,7 @@ test("isTasty", function(){
 //break ----------------------------------------------------------------------
 
 /*
-@page compressing 2.4. Compressing Cookobook
+@page compressing 2.4. Compressing Cookbook
 <h1 class='addFavorite'>Compressing Cookbook</h1>
 
 <p>There is a large overhead associated with downloading many JavaScript files. 
@@ -687,9 +687,15 @@ It's often burdensome on developers and becomes a neglected.
 JavaScriptMVC's integrated documentation makes it easy to document JavaScript.
 </p>
 <h2>Generating Documentation</h2>
+<p>Before creating the docs, put your app back in development mode:</p>
+@codestart html
+&lt;script type='text/javascript' 
+       src='../steal/steal.js?cookbook,<span style="text-decoration:underline;"><b>development</b></span>'>
+&lt;/script>
+@codeend
 <p>Create the docs by running:</p>
 @codestart
-> js cookbook\scripts\doc.js
+> js cookbook\scripts\docs.js
 @codeend
 <p>In fact, you've already created documentation!</p>
 <h2>Viewing Documentation
@@ -730,14 +736,6 @@ JavaScriptMVC's integrated documentation makes it easy to document JavaScript.
 However, there are some important differences.  Consult the [include.Doc Documentation documentation]
 for more information.
 </p>
-<h2>Generating Documentation
-</h2>
-<p>Just run the compressor script again to generate documentation:
-</p>
-@codestart text
-C:\workspace\Cookbook>js apps\cookbook\compress.js
-@codeend
-
 <h2>Next steps
 </h2>
 
