@@ -1,6 +1,6 @@
 TOC:
   A.  How to get (and contribute) to JMVC
-  A.  Getting Started with JMVC
+  B.  Getting Started with JMVC
 
 
 A.  How to get (and contribute) JMVC
@@ -25,7 +25,7 @@ A.  How to get (and contribute) JMVC
   6.  Make a pull request to your fork.
   
   
-A. Getting Started with JMVC
+B. Getting Started with JMVC
 
   1. Generate app: 
   			./js steal/generate/app cookbook
@@ -62,9 +62,9 @@ A. Getting Started with JMVC
   			./steal/js cookbook/scripts/compress.js
 
   12. Turn on production mode in callcenter.html and reload page:
-			src='../steal/steal.js?cookbook,development'
+			src='../steal/steal.js?cookbook,production'
 
-  13. Generate docs:
+  13. Restore development mode by changing the script tag back, then generate docs:
   			./steal/js cookbook/scripts/doc.js
 
   14. View docs: 
