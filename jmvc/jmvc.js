@@ -1,5 +1,5 @@
 steal
-.plugins('steal/generate','steal/get','steal/compress')
+.plugins('steal/generate','steal/get','steal/build','steal/coffee','steal/less')
 
 .plugin('funcunit').
 then('pages/init').plugins('jquery',
