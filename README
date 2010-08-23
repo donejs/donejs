@@ -59,10 +59,10 @@ B. Getting Started with JMVC
   			./funcunit/envjs cookbook/qunit.html
 
   11. Compress app:
-  			./steal/js cookbook/scripts/compress.js
+  			./steal/js cookbook/scripts/build.js
 
   12. Turn on production mode in callcenter.html and reload page:
-			src='../steal/steal.js?cookbook,production'
+			src='../steal/steal.production.js?cookbook'
 
   13. Restore development mode by changing the script tag back, then generate docs:
   			./steal/js cookbook/scripts/doc.js
