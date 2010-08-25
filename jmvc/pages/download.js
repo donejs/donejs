@@ -46,8 +46,8 @@
  *         <td><img src='http://www.liquidbytes.net/michael.jpg' /> </td>
  *         <td><b>Michael Mayer</b>
  *         <p>Michael loves to bring order to the chaos of Web development. He is specialized
- *         in keeping deadlines and puts his life at risk to successfully complete projects. His
- *         home base is in Berlin, Germany.</p>
+ *         in keeping deadlines and puts his life at risk to successfully complete <a href='http://www.liquidbytes.net'>projects</a>. His
+ *         home base is in <a href='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Zimmermannstr.+37,+Berlin&sll=37.0625,-95.677068&sspn=36.452734,77.958984&ie=UTF8&hq=&hnear=Zimmermannstra%C3%9Fe+37,+Berlin+12163+Berlin,+Germany&z=16&iwloc=A'>Berlin</a>, Germany.</p>
  *         </td>
  *     </tr>
  *     
