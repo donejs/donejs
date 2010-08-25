@@ -43,10 +43,11 @@
  *         </td>
  *     </tr>
  *     <tr>
- *         <td><img src='http://wiki.javascriptmvc.com/wiki/images/f/f3/Michael.png' /> </td>
- *         <td><a href='http://www.nulldevice.de/'><b>Michael Mayer</b></a>
- *             <p>Michael is living in Berlin, Germany. He works as freelance consultant for Zend Technologies and 
- *             loves to bring order to the chaos of Web application development.</p>
+ *         <td><img src='http://www.liquidbytes.net/michael.jpg' /> </td>
+ *         <td><b>Michael Mayer</b>
+ *         <p>Michael loves to bring order to the chaos of Web development. He is specialized
+ *         in keeping deadlines and puts his life at risk to successfully complete projects. His
+ *         home base is in Berlin, Germany.</p>
  *         </td>
  *     </tr>
  *     
