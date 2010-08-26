@@ -8,8 +8,8 @@ A.  How to get (and contribute) JMVC
   1.  Start a new project in git.
   
   2.  Fork ....
-           http://github.com/pinhook/steal     and 
-           http://github.com/pinhook/javascriptmvc
+           http://github.com/jupiterjs/steal     and 
+           http://github.com/jupiterjs/javascriptmvc
   
   3.  Add steal and javascriptmvc as submodules of your project...
            git submodule add git@github.com:_YOU_/steal.git steal
@@ -59,10 +59,10 @@ B. Getting Started with JMVC
   			./funcunit/envjs cookbook/qunit.html
 
   11. Compress app:
-  			./steal/js cookbook/scripts/compress.js
+  			./steal/js cookbook/scripts/build.js
 
   12. Turn on production mode in callcenter.html and reload page:
-			src='../steal/steal.js?cookbook,production'
+			src='../steal/steal.production.js?cookbook'
 
   13. Restore development mode by changing the script tag back, then generate docs:
   			./steal/js cookbook/scripts/doc.js

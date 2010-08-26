@@ -5,7 +5,7 @@
  * <p>You're on your way!  How does it feel to be traveling on the path to happiness?
  * Click the following button to begin your journey.
  * </p>
- * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/pinhook/framework/javascriptmvc-3.0.0_alpha10.zip"><span>Download JavaScriptMVC</span><span class="label">3.0 Alpha 10 (10.3 MB)</span></a>
+ * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/framework/javascriptmvc-3.0.0_alpha10.zip"><span>Download JavaScriptMVC</span><span class="label">3.0 Alpha 10 (10.3 MB)</span></a>
  * <p class='spaced' style="clear: left;">Once your download is complete, meet us at the [getstarted Getting Started Guide].</p>
  * 
  * <h2>Who's us?</h2>
@@ -43,10 +43,11 @@
  *         </td>
  *     </tr>
  *     <tr>
- *         <td><img src='http://wiki.javascriptmvc.com/wiki/images/f/f3/Michael.png' /> </td>
- *         <td><a href='http://www.nulldevice.de/'><b>Michael Mayer</b></a>
- *             <p>Michael is living in Berlin, Germany. He works as freelance consultant for Zend Technologies and 
- *             loves to bring order to the chaos of Web application development.</p>
+ *         <td><img src='http://www.liquidbytes.net/michael.jpg' /> </td>
+ *         <td><b>Michael Mayer</b>
+ *         <p>Michael loves to bring order to the chaos of Web development. He is specialized
+ *         in keeping deadlines and puts his life at risk to successfully complete <a href='http://www.liquidbytes.net'>projects</a>. His
+ *         home base is in <a href='http://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Zimmermannstr.+37,+Berlin&sll=37.0625,-95.677068&sspn=36.452734,77.958984&ie=UTF8&hq=&hnear=Zimmermannstra%C3%9Fe+37,+Berlin+12163+Berlin,+Germany&z=16&iwloc=A'>Berlin</a>, Germany.</p>
  *         </td>
  *     </tr>
  *     
