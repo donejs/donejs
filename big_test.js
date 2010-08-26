@@ -21,8 +21,8 @@ print("==========================  Getting Started ============================"
 load('steal/test/helpers.js');
 _S.clear();
 
-_args = ['cookbook']; load('steal/generate/app');_S.clear();
-_args = ['Cookbook.Models.Recipe']; load('steal/generate/scaffold');_S.clear();
+_args = ['cookbook']; load('jquery/generate/app');_S.clear();
+_args = ['Cookbook.Models.Recipe']; load('jquery/generate/scaffold');_S.clear();
 
 load('steal/file/file.js');
 cookbookContent = readFile('cookbook/cookbook.js').

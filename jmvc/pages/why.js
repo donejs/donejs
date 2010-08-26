@@ -73,11 +73,11 @@ get something working up quickly.  It even makes tests to test the generated cod
 <h3>Code Generators</h3>
 <p>JavaScriptMVC is packed with code generators. Generate application and file stubs via the command line:</p>
 @codestart text
-js jmvc\generate\app email_manager
-js jmvc\generate\controller emails
-js jmvc\generate\model user
-js jmvc\generate\test email
-js jmvc\generate\page email_manager index.html
+js jquery\generate\app email_manager
+js jquery\generate\controller emails
+js jquery\generate\model user
+js jquery\generate\test email
+js jquery\generate\page email_manager index.html
 @codeend
 
 

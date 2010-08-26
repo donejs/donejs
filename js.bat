@@ -16,7 +16,7 @@ if "%1"=="-d" (
 	GOTO END
 )
 if "%1"=="-selenium" (
-	java -jar funcunit\dist\selenium\selenium\selenium-server.jar
+	java -jar funcunit\java\selenium-server.jar
 	GOTO END
 )
 SET CP=funcunit/dist/selenium/selenium/selenium-java-client-driver.jar;steal\rhino\js.jar

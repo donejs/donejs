@@ -128,7 +128,7 @@ Continue to [creating Creating Cookbook].
 navigate to your public directory. Run:
 </p>
 @codestart text
-> js steal\generate\app cookbook
+> js jquery\generate\app cookbook
 @codeend
 
 <p>This script creates an application folder and files. 
@@ -173,7 +173,7 @@ Here's what each file does:</p>
 If you need to make another page for your app you can generate it:
 </p>
 @codestart text
-> js steal\generate\page index cookbook
+> js jquery\generate\page index cookbook
 Generating ... index.html
 @codeend
 Or you add the steal script to an existing page 
@@ -190,7 +190,7 @@ For our cookbook app, we want to make recipes.
 To scaffold recipes run the following in a console:
 </p>
 @codestart text
-> js steal\generate\scaffold Cookbook.Models.Recipe
+> js jquery\generate\scaffold Cookbook.Models.Recipe
 @codeend
 <p>Here's what each part does:</p>
 <DL>
