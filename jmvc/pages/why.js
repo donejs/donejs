@@ -12,8 +12,8 @@ Read how JavaScriptMVC:</p>
     <li>reduces development time</li>
 </ul>
 <div style='color:#96A84A; font: bold 12pt Verdana;'>
-p.s. Jupiter provides affordable JavaScriptMVC and jQuery [http://jupiterit.com/training.html training] and 
-[http://jupiterit.com/support.html support].
+p.s. Jupiter provides affordable JavaScriptMVC and jQuery [http://jupiterit.com/pages/training training] and 
+[http://jupiterit.com/pages/support support].
 </div>
 <br/>
 
