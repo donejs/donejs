@@ -652,7 +652,7 @@ Server side compression makes it simple to concatenate and compress your code in
 <p>To compress your application, run the following command from a console:
 </p>
 @codestart
-C:\workspace\Cookbook>js cookbook\scripts\compress.js
+C:\workspace\Cookbook>js cookbook\scripts\build.js
    steal/steal.js
    ...
    ignore ../steal/dev/dev.js
