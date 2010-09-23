@@ -235,14 +235,14 @@ the most common MVC components and a few other useful plugins.
 @codestart
 steal
   .plugins("funcunit/qunit", "cookbook")
-  .then("cookbook_test",<u><b>"recipe_controller_test"</b></u>)
+  .then("cookbook_test",<u><b>"recipe_test"</b></u>)
 @codeend
 <div class='whisper'>P.S. qunit.js describes what scripts are loaded into qunit.html</div>
 <p><b>cookbook/test/funcunit/funcunit.js</b></p>
 @codestart
 steal
  .plugins("funcunit")
- .then("cookbook_test",<u><b>"recipe_test"</b></u>)
+ .then("cookbook_test",<u><b>"recipe_controller_test"</b></u>)
 @codeend
 <div class='whisper'>P.S. funcunit.js describes what scripts are loaded into funcunit.html</div>
 <h2>Run Cookbook</h2>
