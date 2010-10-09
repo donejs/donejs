@@ -54,7 +54,23 @@
  *  - [http://jupiterit.com Jupiter IT]
  *  - [http://socialcollider.net/ SocialCollider]
  */
-steal('getstarted','api','download','learn','why','selenium','follow','contribute','help','generators','//steal/rhino/docs')
+steal(
+'getstarted',
+'install',
+'creating',
+'documenting',
+'testing',
+'compressing',
+'api',
+'download',
+'learn',
+'why',
+'selenium',
+'follow',
+'contribute',
+'help',
+'generators',
+'//steal/rhino/docs')
 
 
 
