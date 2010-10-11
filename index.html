@@ -2,110 +2,41 @@
             "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 	<head>
-		<title>JavaScriptMVC</title>
-        <link rel="stylesheet" type='text/css' href='documentjs/jmvcdoc/jquery-ui-1.7.2.custom.css' />			
+		<title>JavaScriptMVC</title>		
         <link rel="stylesheet" type='text/css' href='documentjs/jmvcdoc/style.css' />
     	<link rel="shortcut icon" href="documentjs/jmvcdoc/images/favicon.ico" />
-		<style>
-			.ui-menu {
-				margin: 0px; padding: 0px;
-				list-style-image:none;
-				list-style-position:outside;
-				list-style-type:none;
-				position:absolute;
-				z-index:1000;			
-			}
-			.ui-menu-item {
-				float: left;
-				/*padding:0.5em 1em;*/
-				cursor: pointer;
-			}
-			.ui-sub-menu {
-				padding: 5px;	
-				background-color: #2D2E26;			
-			}
-			.ui-sub-menu a:link, 
-			.ui-sub-menu a:visited,
-			.ui-sub-menu a:active {
-				color: #ffffff!important;	
-			}						
-			.ui-sub-menu a:hover {
-				background-color: #dddddd;
-				color: #111111!important;
-			}
-			.ui-sub-menu>li {
-				width: 100%;
-				height: 15px;
-				padding: 5px;
-			}
-			.selected {
-				background-color: #dddddd;
-			}
-			.selected>a:link, 
-			.selected>a:visited,
-			.selected>a:hover,
-			.selected>a:active {
-				color: #111111!important;
-			}			
-		</style>
 	</head>
 	<body scroll="no">
 	    
         <div id='documentation'>
 	        <div id='top'>
-	            <input id='search' type='input' disabled='true'/>
-                <div id='defaults'>
-                    <div style='color:white;float: right;margin-right: 10px; position: relative; top: -3px'>JavaScript<img src='/jmvcdoc/images/logo.png' style="position: relative; top: 5px;left: 2px"/></div>
-					
-		<ul id="menu" class="ui-menu">
-						<li class="ui-menu-item">
-                    		<a href="#&amp;search=&#42;&amp;who=index">Home</a>
-						</li>
-						<li class="ui-menu-item">						
-	                    	<a href="#&amp;search=core">Core</a>
-						</li>
-						<li class="ui-menu-item">						
-	                    	<a href="#favorites">Favorites</a>
-						</li>
-						<li class="ui-menu-item">						
-							<a href="#&who=follow" class="red" title="Follow">Follow</a>
-						</li>
-						<li class="ui-menu-item">						
-							<a href="http://github.com/jupiterjs/framework" class="red" title="Code Repositories">Git</a>
-						</li>
-						<!--li class="ui-menu-item">						
-							<a href="javascript://" class="red" title="Follow">Follow&nbsp;&nbsp;&nbsp;</a>
-							<ul class="ui-menu ui-sub-menu">
-								<li><a href="http://twitter.com/javascriptmvc">Twitter</a></li>
-								<li><a href="http://blog.javascriptmvc.com/">Blog</a></li>
-								<li><a href="http://groups.google.com/group/javascriptmvc">Google Group</a></li>
-							</ul>							
-						</li>
-						<li class="ui-menu-item" class="red">						
-	                    	<a href="http://www.javascriptmvc.com/#&who=contribute" class="red" title="Contribute">Contribute</a>
-						</li>	
-						<li class="ui-menu-item">						
-	                    	<a href="http://www.javascriptmvc.com/#&who=help" class="red" title="Get Help">Get Help</a>
-						</li>	
-						<li class="ui-menu-item">						
-	                    	<a href="http://1-5.javascriptmvc.com/index.html" class="red" title="Old Site">1.5</a>
-						</li>																			
-						<li class="ui-menu-item">						
-                    		<a href="javascript://" class="red" title="Code Repositories">Code Repositories&nbsp;&nbsp;&nbsp;</a>
-							<ul class="ui-menu ui-sub-menu">
-								<li><a href="http://github.com/jupiterjs/framework">Framework 3.0</a></li>
-								<li><a href="http://github.com/jupiterjs/javascriptmvc/">Javascriptmvc 3.0</a></li>
-								<li><a href="http://github.com/jupiterjs/steal">Steal 3.0</a></li>
-								<li><a href="http://github.com/jupiterjs/funcunit">Funcunit 3.0</a></li>
-								<li><a href="http://github.com/jupiterjs/phui">Phui 3.0</a></li>								
-								<li><a href="http://github.com/jupiterjs/documentjs">Documentjs 3.0</a></li>																
-								<li><a href="http://github.com/jupiterjs/jmvcdoc">Jmvcdoc 3.0</a></li>								
-								<li><a href="http://javascriptmvc.googlecode.com/">Javascriptmvc 2.x</a></li>								
-							</ul>								
-						</li-->
-					</ul>
-                    
+	        	<div class="topCorner"><div>&nbsp;</div></div>
+				<div class="content">
+		            <div id="searchRoundCorners">
+		            	<input id='search' type='input' disabled='true'/>
+					</div>
+	                <div id='defaults'>
+						<ul id="menu" class="ui-menu">
+							<li class="ui-menu-item">
+	                    		<a class="menuLink" href="#&amp;search=&#42;&amp;who=index"><span class="menuSpan">Home</span></a>
+							</li>
+							<li class="ui-menu-item">						
+		                    	<a class="menuLink" href="#&amp;search=core"><span class="menuSpan">Core</span></a>
+							</li>
+							<li class="ui-menu-item">						
+		                    	<a class="menuLink" href="#favorites"><span class="menuSpan">Favorites</span></a>
+							</li>
+							<li class="ui-menu-item">						
+								<a class="menuLink" href="#&who=follow" title="Follow"><span class="menuSpan red">Follow</span></a>
+							</li>
+							<li class="ui-menu-item">						
+								<a class="menuLink" href="http://github.com/jupiterjs/framework" title="Code Repositories"><span class="menuSpan red">Code Repositories</span></a>
+							</li>
+						</ul>
+	            	</div>
+	                <div class="logo-text">JavaScript<img src='documentjs/jmvcdoc/images/logo80x30.png' class="logo-image"/></div>
                 </div>
+				<div class="bottomCorner"><div>&nbsp;</div></div>	                
 	        </div>
             
             <div id='bottom'>
