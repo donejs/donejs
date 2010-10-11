@@ -9,6 +9,8 @@ then('pages/init').plugins('jquery',
 ,'jquery/view/micro',
 'jquery/model',
 	'jquery/model/list',
+		'jquery/model/list/cookie',
+		'jquery/model/list/local',
 	'jquery/model/associations',
 	'jquery/model/backup',
 	'jquery/model/validations',
@@ -29,4 +31,5 @@ then('pages/init').plugins('jquery',
 )
 .then(
 "//jquery/model/pages/encapsulate",
-"//jquery/model/pages/typeconversion")
+"//jquery/model/pages/typeconversion",
+"//jquery/model/pages/events")
