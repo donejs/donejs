@@ -4,9 +4,11 @@ steal
 .plugin('funcunit').
 then('pages/init').plugins('jquery',
 'jquery/controller',
-'jquery/view','jquery/view/ejs'
-,'jquery/view/jaml'
-,'jquery/view/micro',
+'jquery/view',
+	'jquery/view/ejs',
+	'jquery/view/jaml',
+	'jquery/view/micro',
+	'jquery/view/tmpl',
 'jquery/model',
 	'jquery/model/list',
 		'jquery/model/list/cookie',
