@@ -64,8 +64,7 @@
  *     <tr>
  *         <td><img src='http://wiki.javascriptmvc.com/wiki/images/7/77/Joe.png' /> </td>
  *         <td> <b><a href="http://www.cultoftheturtle.com/" class="external text" title="http://www.cultoftheturtle.com/" rel="nofollow">Joe Tortuga</a></b>
- * <p>Fixed problems with nested views.
- * </p>
+ * 				<p>Fixed problems with nested views.</p>
  *         </td>
  *     </tr>
  *     <tr>
