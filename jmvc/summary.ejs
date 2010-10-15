@@ -3,8 +3,8 @@
 <html lang="en">
 <head>
 <title>JavaScriptMVC</title>		
-<link rel="stylesheet" type='text/css' href='../documentjs/jmvcdoc/style.css' />
-<link rel="shortcut icon" href="../documentjs/jmvcdoc/images/favicon.ico" />
+<link rel="stylesheet" type='text/css' href='<%= pathToRoot %>/documentjs/jmvcdoc/style.css' />
+<link rel="shortcut icon" href="<%= pathToRoot %>/documentjs/jmvcdoc/images/favicon.ico" />
 </head>
 <body>
 <div id='documentation'>
@@ -43,7 +43,7 @@
 </div>
 <div id='doc_container'>
 <div id='doc'>
-
+<%= this.indexPage ? this.indexPage.real_comment : "Add a page named 'index' to see something here." %>
 </div>
 <div id="disqus_thread"></div>
 </div>
@@ -56,7 +56,7 @@
 DOCS_LOCATION = "docs/" //adds searchData to this
 </script>
 <script type='text/javascript' 
-    src='../steal/steal.js?steal[app]=documentjs/jmvcdoc&steal[env]=production'>   
+    src='<%= pathToRoot %>/steal/steal.js?steal[app]=documentjs/jmvcdoc&steal[env]=production'>   
 </script>
 	</body>
 </html>

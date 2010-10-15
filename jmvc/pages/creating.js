@@ -1,15 +1,18 @@
 /*
 @page creating 2.2. Creating Cookbook
+
 @parent getstarted
-<h1 class='addFavorite'>Creating Cookbook</h1>
-<p>
-	JavaScriptMVC uses generator scripts to assist you
-	in setting up your application's files and folders.
-</p>
-<h2>Generating an Application</h2>
-<p>To create your application, open a console window and 
+
+
+JavaScriptMVC uses [steal.generate generator scripts] to assist you
+in setting up your application's files and folders.
+
+
+## Generating an Application
+
+To create your application, open a console window and 
 navigate to your public directory. Run:
-</p>
+
 @codestart text
 > js jquery\generate\app cookbook
 @codeend
@@ -26,7 +29,7 @@ Here's what each file does:</p>
     <DT><code>funcunit.html</code>
     <DD>A page that runs your functional tests.
     
-    <DT><code>funcunit.html</code>
+    <DT><code>qunit.html</code>
     <DD>A page that runs your qunit tests.
     
     <DT><code>test/</code>
