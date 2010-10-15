@@ -70,6 +70,7 @@ steal(
 'contribute',
 'help',
 'generators',
+'developingwithgit',
 '//steal/rhino/docs')
 
 
