@@ -64,9 +64,6 @@ cookbookPage = readFile('cookbook/cookbook.html').
     replace("steal[env]=development", "steal[env]=production");
 new steal.File('cookbook/cookbook.html').save( cookbookPage );
 
-/*print("-- Run functional tests again, this time with cookbook compressed --");
-load('cookbook/scripts/funcunit.js');*/
-
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 
@@ -87,19 +84,6 @@ print("-- cleanup --");
 	}
 	deleteDir(new java.io.File("cnu"));
     deleteDir(new java.io.File("cookbook"));
-
-    /*var tbd = ['gen.html',
-               'test/functional/todos_test.js',
-               'cookbook.html',
-               'controllers/recipe_controller.js',
-               'models/recipe.js',
-               'test/functional/recipe_controller_test.js',
-               'test/fixtures/recipes.json.get',
-               'test/unit/recipe_test.js'
-               ]
-    for(var i = 0; i< tbd.length; i++){
-        new java.io.File(tbd[i])["delete"]();
-    }*/
     
 })();
 
