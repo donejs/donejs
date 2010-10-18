@@ -138,27 +138,37 @@ steal.plugins(
 the most common MVC components and a few other useful plugins.
 </div>
 
+To add your unit and functional tests, 
+include them in your qunit.js 
+and funcunit.js files.
 
-<p>
-	To add your unit and functional tests, 
-	include them in your qunit.js 
-	and funcunit.js files.
-</p>
-<p><b>cookbook/test/qunit/qunit.js</b></p>
+<b>
+cookbook/test/qunit/qunit.js
+</b>
+
 @codestart
 steal
   .plugins("funcunit/qunit", "cookbook")
   .then("cookbook_test",<u><b>"recipe_test"</b></u>)
 @codeend
-<div class="whisper">P.S. qunit.js describes what scripts are loaded into qunit.html</div>
-<p><b>cookbook/test/funcunit/funcunit.js</b></p>
+
+<div class="whisper">
+P.S. qunit.js describes what scripts are loaded into qunit.html
+</div>
+
+<b>
+cookbook/test/funcunit/funcunit.js
+</b>
+
 @codestart
 steal
  .plugins("funcunit")
  .then("cookbook_test",<u><b>"recipe_controller_test"</b></u>)
 @codeend
-<div class="whisper">P.S. funcunit.js describes what scripts are loaded into funcunit.html</div>
 
+<div class="whisper">
+P.S. funcunit.js describes what scripts are loaded into funcunit.html
+</div>
 
 ## Run Cookbook
 
