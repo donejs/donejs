@@ -94,19 +94,19 @@ To scaffold recipes run the following in a console:
 Here's what each part does:
 
 <DL>
-<DT><code>recipe\_controller.js</code>
+<DT><code>recipe\_controller.js</code></DT>
 <DD>Cookbook.Controllers.Recipe, like all [jQuery.Controller Controllers], 
-	respond to events such as click and manipulate the DOM.
-<DT><code>edit.ejs,init.ejs,list.ejs,show.ejs</code>
-<DD>[jQuery.View Views] are JavaScript templates for easily creating HTML.
-<DT><code>recipe\_controller\_test.js</code>
-<DD>[FuncUnit Tests] the CRUD functionality of the user interface.
-<DT><code>recipe.js</code>
-<DD>Cookbook.Models.Recipe [jQuery.Model model] performs AJAX requests by manipulating services.
-<DT><code>recipes.get</code>
-<DD>[jQuery.fixture Fixtures] simulate AJAX responses.  This fixture responds to GET '/recipes'.
-<DT><code>recipe_test.js</code>
-<DD>A [FuncUnit unit test] that tests Recipe model.
+	respond to events such as click and manipulate the DOM.</DD>
+<DT><code>edit.ejs,init.ejs,list.ejs,show.ejs</code></DT>
+<DD>[jQuery.View Views] are JavaScript templates for easily creating HTML.</DD>
+<DT><code>recipe\_controller\_test.js</code></DT>
+<DD>[FuncUnit Tests] the CRUD functionality of the user interface.</DD>
+<DT><code>recipe.js</code></DT>
+<DD>Cookbook.Models.Recipe [jQuery.Model model] performs AJAX requests by manipulating services.</DD>
+<DT><code>recipes.get</code></DT>
+<DD>[jQuery.fixture Fixtures] simulate AJAX responses.  This fixture responds to GET '/recipes'.</DD>
+<DT><code>recipe_test.js</code></DT>
+<DD>A [FuncUnit unit test] that tests Recipe model.</DD>
 </DL>
 
 
@@ -114,7 +114,7 @@ Here's what each part does:
 
 
 After generating the scaffolding files, you
-must steal them in your application file. Open <b>cookbook/cookbook.js</b> and steal
+must steal them in your application file. Open <b>cookbook/cookbook.js</b> and modify the code to steal
 your recipe controller 
 and model as follows:
   
@@ -134,13 +134,13 @@ steal.plugins(
 	.views();
 @codeend
 
-<div class='whisper'>P.S. By default the app file loads
+<div class="whisper">P.S. By default the app file loads
 the most common MVC components and a few other useful plugins.
 </div>
 
 
 <p>
-	To add tests to your unit and functional tests, 
+	To add your unit and functional tests, 
 	include them in your qunit.js 
 	and funcunit.js files.
 </p>
@@ -150,14 +150,14 @@ steal
   .plugins("funcunit/qunit", "cookbook")
   .then("cookbook_test",<u><b>"recipe_test"</b></u>)
 @codeend
-<div class='whisper'>P.S. qunit.js describes what scripts are loaded into qunit.html</div>
+<div class="whisper">P.S. qunit.js describes what scripts are loaded into qunit.html</div>
 <p><b>cookbook/test/funcunit/funcunit.js</b></p>
 @codestart
 steal
  .plugins("funcunit")
  .then("cookbook_test",<u><b>"recipe_controller_test"</b></u>)
 @codeend
-<div class='whisper'>P.S. funcunit.js describes what scripts are loaded into funcunit.html</div>
+<div class="whisper">P.S. funcunit.js describes what scripts are loaded into funcunit.html</div>
 
 
 ## Run Cookbook
@@ -269,7 +269,7 @@ new instances of Recipe are created with the
 
 <div class='whisper'>
 	P.S. [jQuery.fixture Fixtures] are awesome and help 
-	you develop while the slow-polk backend teams catch up.
+	you develop while the slow-poke backend teams catch up.
 	Once the service is ready you simply have to remove 
 	the fixtures plugin from your application file.
 </div>
