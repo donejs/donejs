@@ -21,4 +21,5 @@ steal.File("steal").copyTo("../jmvcdownload/steal/", ignore)
 steal.File("js").copyTo("../jmvcdownload/js", [])
 steal.File("js.bat").copyTo("../jmvcdownload/js.bat", [])
 
-steal.File("../jmvcdownload").zipDir("javascriptmvc-3.0.0.zip", "..\\jmvcdownload\\")
+//steal.File("../jmvcdownload").zipDir("javascriptmvc-3.0.0.zip", "../jmvcdownload/")
+runCommand("sh", "-c", 'zip -r javascriptmvc-3.0.0.zip documentjs jquery funcunit steal js js.bat -x "*/.git/*"');
