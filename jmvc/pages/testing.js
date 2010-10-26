@@ -64,6 +64,15 @@ test should look like:<br/>
 	unusual location.  Read [FuncUnit.static.browsers] for information on how to configure browsers
 	so selenium can find them.
 </div>
+
+<p>
+If you are having trouble running the tests in Internet Explorer, try disabling the security settings for pages that run from the filesystem.
+to do this, open the preferences for IE and select the "Advanced" tab, and enable the option to "Allow active content to run in files on My Computer."
+</p>
+
+@image jmvc/images/iesecurity.png
+
+
 <h2>Understanding qUnit Tests</h2>
 FuncUnit adds very little to qUnit, so the best place to start understanding qUnit is its own
 [http://docs.jquery.com/QUnit documentation].  FuncUnit / JavaScriptMVC just adds a way to:

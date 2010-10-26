@@ -53,6 +53,8 @@ git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
 @codeend
 
+_Note_: Learn a little more about submodules [here](http://johnleach.co.uk/words/archives/2008/10/12/323/git-submodules-in-n-easy-steps Submodules). 
+
 There are 3 important things to notice:
 
  1. Change <b>_YOU_</b> with your github username.

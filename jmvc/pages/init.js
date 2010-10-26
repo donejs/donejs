@@ -68,6 +68,7 @@ steal(
 'selenium',
 'follow',
 'contribute',
+'getcode',
 'help',
 'generators',
 'developingwithgit',
