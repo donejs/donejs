@@ -14,10 +14,6 @@
 	path = jquery
 	url = git://github.com/jupiterjs/javascriptmvc.git
 	update = merge
-[submodule "selenium"]
-	path = selenium
-	url = git://github.com/jupiterjs/selenium.git
-	update = merge
 [submodule "steal"]
 	path = steal
 	url = git://github.com/jupiterjs/steal.git
