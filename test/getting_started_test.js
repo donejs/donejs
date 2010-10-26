@@ -35,6 +35,11 @@ FuncUnit.load('cookbook/funcunit.html');
 print("-- Compress cookbook --");
 load("cookbook/scripts/build.js")
 
+print("-- Generate docs --");
+_args = ['cookbook/cookbook.html']
+load("documentjs/documentjs.js");
+DocumentJS('cookbook/cookbook.html');
+
 load('steal/rhino/steal.js');
 cookbookPage = readFile('cookbook/cookbook.html').
     replace("steal[env]=development", "steal[env]=production");
@@ -42,5 +47,5 @@ new steal.File('cookbook/cookbook.html').save( cookbookPage );
 
 print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-print("-- cleanup --");
-steal.File("cookbook").removeDir();
+//print("-- cleanup --");
+//steal.File("cookbook").removeDir();
