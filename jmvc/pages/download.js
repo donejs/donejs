@@ -57,21 +57,21 @@
  *     <tr>
  *     <td><img src='http://wiki.javascriptmvc.com/wiki/images/thumb/0/0a/Matt.png/50px-Matt.png' /> </td>
  *     <td> <b><a href="http://www.mattmccray.com/" class="external text" title="http://www.mattmccray.com/" rel="nofollow">M@ McCray</a></b>
- * <p>A sith apprentice who corrected [jQuery.Model.prototype.save] and used the dark side to fix Controller::form_params.
- * </p>
+ * 		A sith apprentice who corrected [jQuery.Model.prototype.save] and used the dark side to fix Controller::form_params.
+ * 
  *     </td>
  *     </tr>
  *     <tr>
  *         <td><img src='http://wiki.javascriptmvc.com/wiki/images/7/77/Joe.png' /> </td>
  *         <td> <b><a href="http://www.cultoftheturtle.com/" class="external text" title="http://www.cultoftheturtle.com/" rel="nofollow">Joe Tortuga</a></b>
- * 				<p>Fixed problems with nested views.</p>
+ * 				Fixed problems with nested views.
  *         </td>
  *     </tr>
  *     <tr>
  *         <td><img src='http://wiki.javascriptmvc.com/wiki/images/8/84/Max.jpg' /> </td>
  *         <td> <b><a href="http://www.maxhwang.com/" class="external text" title="http://www.maxhwang.com/" rel="nofollow">Max C.H. Hwang</a></b>
- * <p>Helped views correctly evaluate Ajax responses.
- * </p>
+ * 			Helped views correctly evaluate Ajax responses.
+ * 
  *         </td>
  *     </tr>
  * </table>

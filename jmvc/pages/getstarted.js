@@ -56,7 +56,7 @@ steal.plugins('jquery/model',
   
 <h3> Environments </h3>
 
-There are different environments for phase of development:
+There are different environments for each phase of development:
 
 <ul>
   <li> <span class='gray'>Development</span> - optimized for debugging and rapid development </li>
