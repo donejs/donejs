@@ -54,7 +54,7 @@ steal
 <h3>Run Functional Tests in Selenium</h3>
 <p>In a command window type:</p>
 @codestart
-> funcunit\envjs cookbook/funcunit.html
+> funcunit\envjs cookbook\funcunit.html
 @codeend
 This should open Firefox and IE if you are using Windows.  The results of the
 test should look like:<br/>
@@ -98,7 +98,7 @@ FuncUnit adds very little to qUnit, so the best place to start understanding qUn
 	<li>When the page loads, the tests are run.</li>
 </ol>
 <p>When the page is run in Envjs, qUnit does the same 4 steps, but reports
-the messages on the comamnd line.</p>
+the messages on the command line.</p>
 
 <p>As an example of a test, let look at how the findAll test works:</p>
 @codestart
