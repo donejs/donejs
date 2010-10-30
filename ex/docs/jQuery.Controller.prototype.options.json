@@ -1,1 +1,0 @@
-C({"name": "jQuery.Controller.prototype.options", "shortName": "Attribute", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": " Options is automatically merged from this.Class.OPTIONS and the 2nd argument\n passed to a controller.\n\t\t \n"})

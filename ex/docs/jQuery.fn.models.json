@@ -1,1 +1,0 @@
-C({"name": "jQuery.fn.models", "shortName": "Function", "ret": {"description": "returns an array of model instances that are represented by the contained elements.\n ", "type": "Array"}, "params": {"model": {"order": 0, "description": "if present only returns models of the provided type.", "name": "model", "type": "jQuery.Model", "optional": false}}, "comment": ""})

@@ -1,1 +1,0 @@
-C({"name": "jQuery.Native.extend", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"class_name": {"description": "", "type": "Object", "optional": false, "order": 0, "name": "class_name"}, "source": {"description": "\n ", "type": "Object", "optional": false, "order": 1, "name": "source"}}, "comment": ""})

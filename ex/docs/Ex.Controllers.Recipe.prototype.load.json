@@ -1,1 +1,0 @@
-C({"name": "Ex.Controllers.Recipe.prototype.load", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "When the page loads, gets all recipes to be displayed.\n     \n"})

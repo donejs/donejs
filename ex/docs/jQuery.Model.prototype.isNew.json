@@ -1,1 +1,0 @@
-C({"name": "jQuery.Model.prototype.isNew", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Returns if the instance is a new object\n     \n"})

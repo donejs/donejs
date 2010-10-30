@@ -1,1 +1,0 @@
-C({"name": "jQuery.View.static.cache", "shortName": "Attribute", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": " Should the views be cached or reloaded from the server. Defaults to true.\n\t \n"})

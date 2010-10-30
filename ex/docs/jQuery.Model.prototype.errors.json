@@ -1,1 +1,0 @@
-C({"name": "jQuery.Model.prototype.errors", "shortName": "Attribute", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": " A hash of errors for this model instance.\n         \n"})

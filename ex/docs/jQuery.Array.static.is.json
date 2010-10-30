@@ -1,1 +1,0 @@
-C({"name": "jQuery.Array.static.is", "shortName": "Function", "ret": {"description": "\n     ", "type": "Boolean"}, "params": {"array": {"description": "a possible array object", "type": "Object", "optional": false, "order": 0, "name": "array"}}, "comment": "Returns if the object is an array\n"})

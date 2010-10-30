@@ -1,1 +1,0 @@
-C({"name": "event", "shortName": "Attribute", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "A number of helper functions used for managing events.\n Many of the ideas behind this code originated from\n Dean Edwards' addEvent library.\n \n"})

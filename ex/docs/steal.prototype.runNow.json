@@ -1,1 +1,0 @@
-C({"name": "steal.prototype.runNow", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Loads the steal code immediately.  This is typically used after DOM has loaded.\n     \n"})
