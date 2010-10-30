@@ -1,4 +1,4 @@
-steal.plugins('jquery', 'phui/tabs').then('scrollTo',
+steal.plugins('jquery', 'mxui/tabs').then('scrollTo',
 	"../../jmvcdoc/resources/highlight",'../../jmvcdoc/resources/languages/javascript','../../jmvcdoc/resources/languages/www',
 function(){
 	 hljs.initHighlighting();
@@ -6,7 +6,7 @@ function(){
 		$("code").each(function(){
 			hljs.highlightBlock(this)
 		})
-		$('.tabs').phui_ui_tabs().parent().hide();
+		$('.tabs').mxui_ui_tabs().parent().hide();
 		$('h3').click(function(){
 			var h3 = $(this)
 			h3.next().show('fast', function(){

@@ -18,9 +18,9 @@
 	path = steal
 	url = git://github.com/jupiterjs/steal.git
 	update = merge
-[submodule "phui"]
-	path = phui
-	url = git://github.com/jupiterjs/phui.git
+[submodule "mxui"]
+	path = mxui
+	url = git://github.com/jupiterjs/mxui.git
 	update = merge
 [submodule "envjs"]
 	path = envjs
