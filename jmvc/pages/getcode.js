@@ -3,13 +3,13 @@
  *
  * ##Downloads
  *
- * You can download JavascriptMVC from [here](http://github.com/jupiterjs/framework/downloads).
+ * You can download JavascriptMVC from [here](http://github.com/jupiterjs/javascriptmvc/downloads).
  * 
  * ##Github Repositories
  * 
- * * [Framework](http://github.com/jupiterjs/framework)
+ * * [Framework](http://github.com/jupiterjs/javascriptmvc)
  *     
- *     * _git clone http://github.com/jupiterjs/framework_
+ *     * _git clone http://github.com/jupiterjs/javascriptmvc_
  *     * _git submodule init_
  *     * _git submodule update_     
  *     * _cd_ into each submodule and do _git checkout_
