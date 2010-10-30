@@ -17,7 +17,7 @@
  *     * git submodule add git@github.com:_YOU_/documentjs.git documentjs
  *     * git submodule add git@github.com:_YOU_/funcunit.git funcunit     
  *        
- *     `*` _Note 1_: Notice javascriptmvc is under the jquery folder
+ *     `*` _Note 1_: Notice jquerymx is under the jquery folder
  *     
  *     `*` _Note 2_: Change YOU with your github username.
  *
@@ -32,7 +32,7 @@
  * Bugs can be submitted to:
  *       
  * * [Steal bugs](http://github.com/jupiterjs/steal/issues)
- * * [JavascriptMVC bugs](http://github.com/jupiterjs/jquerymx/issues)
+ * * [jQueryMX bugs](http://github.com/jupiterjs/jquerymx/issues)
  * * [DocumentJS bugs](http://github.com/jupiterjs/documentjs/issues)
  * * [Funcunit bugs](http://github.com/jupiterjs/funcunit/issues)
  *   
