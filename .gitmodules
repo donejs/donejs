@@ -12,7 +12,7 @@
 	update = merge
 [submodule "jquery"]
 	path = jquery
-	url = git://github.com/jupiterjs/javascriptmvc.git
+	url = git://github.com/jupiterjs/jquerymx.git
 	update = merge
 [submodule "steal"]
 	path = steal
@@ -24,8 +24,5 @@
 	update = merge
 [submodule "envjs"]
 	path = envjs
-
 	url = git://github.com/jupiterjs/env-js.git
-
 	update = merge
-
