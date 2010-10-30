@@ -44,7 +44,7 @@ unzip in a public folder where the server hosts static content.
 JavaScriptMVC is comprised of four sub projects:
 
  - [http://github.com/jupiterjs/steal]
- - [http://github.com/jupiterjs/javascriptmvc]
+ - [http://github.com/jupiterjs/jquerymx]
  - [http://github.com/jupiterjs/documentjs]
  - [http://github.com/jupiterjs/funcunit]
 
@@ -58,7 +58,7 @@ Forking the repos looks like:
 
 @codestart text
 git submodule add git@github.com:_YOU_/steal.git public/steal
-git submodule add git@github.com:_YOU_/javascriptmvc.git public/<b style='font-size: 14px;color: red'>jquery</b>
+git submodule add git@github.com:_YOU_/jquerymx.git public/<b style='font-size: 14px;color: red'>jquery</b>
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
 @codeend

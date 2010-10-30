@@ -22,7 +22,7 @@ If you don't, you might find the following resources helpful:
 JavaScriptMVC is comprised of four sub projects:
 
  - [http://github.com/jupiterjs/steal]
- - [http://github.com/jupiterjs/javascriptmvc]
+ - [http://github.com/jupiterjs/jquerymx]
  - [http://github.com/jupiterjs/documentjs]
  - [http://github.com/jupiterjs/funcunit]
 

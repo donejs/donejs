@@ -7,13 +7,13 @@
  * 
  * * __Fork these projects__
  *     * [http://github.com/jupiterjs/steal](http://github.com/jupiterjs/steal) 
- *     * [http://github.com/jupiterjs/javascriptmvc](http://github.com/jupiterjs/javascriptmvc)
+ *     * [http://github.com/jupiterjs/jquerymx](http://github.com/jupiterjs/jquerymx)
  *     * [http://github.com/jupiterjs/documentjs](http://github.com/jupiterjs/documentjs)
  *     * [http://github.com/jupiterjs/funcunit](http://github.com/jupiterjs/funcunit)
  *
  * * __Add these submodules to your project__
  *     * git submodule add git@github.com:_YOU_/steal.git steal
- *     * git submodule add git@github.com:_YOU_/javascriptmvc.git jquery
+ *     * git submodule add git@github.com:_YOU_/jquerymx.git jquery
  *     * git submodule add git@github.com:_YOU_/documentjs.git documentjs
  *     * git submodule add git@github.com:_YOU_/funcunit.git funcunit     
  *        
@@ -32,7 +32,7 @@
  * Bugs can be submitted to:
  *       
  * * [Steal bugs](http://github.com/jupiterjs/steal/issues)
- * * [JavascriptMVC bugs](http://github.com/jupiterjs/javascriptmvc/issues)
+ * * [JavascriptMVC bugs](http://github.com/jupiterjs/jquerymx/issues)
  * * [DocumentJS bugs](http://github.com/jupiterjs/documentjs/issues)
  * * [Funcunit bugs](http://github.com/jupiterjs/funcunit/issues)
  *   

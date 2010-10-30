@@ -7,7 +7,7 @@
  * 
  * ##Github Repositories
  * 
- * * [Framework](http://github.com/jupiterjs/javascriptmvc)
+ * * [JavaScriptMVC](http://github.com/jupiterjs/javascriptmvc)
  *     
  *     * _git clone http://github.com/jupiterjs/javascriptmvc_
  *     * _git submodule init_
@@ -18,9 +18,9 @@
  * 
  *     * _git clone http://github.com/jupiterjs/steal_
  *  
- * * [JavascriptMVC](http://github.com/jupiterjs/javascriptmvc)
+ * * [jQueryMX](http://github.com/jupiterjs/jquerymx)
  * 
- *     * _git clone http://github.com/jupiterjs/javascriptmvc_
+ *     * _git clone http://github.com/jupiterjs/jquerymx_
  *  
  * * [Funcunit](http://github.com/jupiterjs/funcunit)
  * 
