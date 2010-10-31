@@ -66,11 +66,10 @@ test should look like:<br/>
 </div>
 
 <p>
-If you are having trouble running the tests in Internet Explorer, try disabling the security settings for pages that run from the filesystem.
-to do this, open the preferences for IE and select the "Advanced" tab, and enable the option to "Allow active content to run in files on My Computer."
+If you are having trouble running the tests in Internet Explorer, you need to change a few settings in the browser.  Please see the [FuncUnit FuncUnit documentation] for troubleshooting help.
 </p>
 
-@image jmvc/images/iesecurity.png
+
 
 
 <h2>Understanding qUnit Tests</h2>
