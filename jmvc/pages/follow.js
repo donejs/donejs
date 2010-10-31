@@ -1,6 +1,5 @@
 /**
  * @page follow Follow JavaScriptMVC
- * <h1 class='addFavorite'>Following JavaScriptMVC</h1>
  * <h2>Twitter</h2>
 <a href='http://twitter.com/javascriptmvc' class='floatLeft'>
     <img src='http://wiki.javascriptmvc.com/wiki/images/f/f7/Twitter.png' class='noborder'/>

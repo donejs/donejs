@@ -1,12 +1,16 @@
 /*
  * @page download 1. Download
  * @tag home, contributors
- * <h1>Download JavaScriptMVC</h1>
  * <p>You're on your way!  How does it feel to be traveling on the path to happiness?
  * Click the following button to begin your journey.
  * </p>
  * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/framework/javascriptmvc-3.0.0_alpha12.zip"><span>Download JavaScriptMVC</span><span class="label">3.0 Alpha 10 (10.3 MB)</span></a>
  * <p class='spaced' style="clear: left;">Once your download is complete, meet us at the [getstarted Getting Started Guide].</p>
+ * 
+ * ## Other Downloads
+ * 
+ * Soon we will put all the stand alone downloads here.
+ * 
  * 
  * <h2>Who's us?</h2>
  * <p>We're glad you asked.  Grab a beer with the JavaScriptMVC team:</p>
