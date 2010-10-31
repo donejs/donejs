@@ -1,3 +1,4 @@
 steal
- .apps("funcunit/functional")  //load funcunit
- .then("jquerytest_test")       //load your tests
+ .plugins("funcunit",
+ 	"funcunit/test/funcunit",
+	"mxui/test/funcunit")

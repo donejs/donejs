@@ -1,1 +1,0 @@
-C({"name": "jQuery.Model.static.wrap", "shortName": "Function", "ret": {"description": "an instance of the model\n     ", "type": "Model"}, "params": {"attributes": {"description": "", "type": "Object", "optional": false, "order": 0, "name": "attributes"}}, "comment": "Used to create an existing object from attributes\n"})

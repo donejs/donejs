@@ -1,1 +1,0 @@
-C({"name": "setup", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"oldClass": {"description": "", "type": "Object", "optional": false, "order": 0, "name": "oldClass"}, "options": {"description": "\n     ", "type": "Object", "optional": false, "order": 1, "name": "options"}}, "comment": "Copy and overwrite options from old class\n"})

@@ -12,24 +12,17 @@
 	update = merge
 [submodule "jquery"]
 	path = jquery
-	url = git://github.com/jupiterjs/javascriptmvc.git
-	update = merge
-[submodule "selenium"]
-	path = selenium
-	url = git://github.com/jupiterjs/selenium.git
+	url = git://github.com/jupiterjs/jquerymx.git
 	update = merge
 [submodule "steal"]
 	path = steal
 	url = git://github.com/jupiterjs/steal.git
 	update = merge
-[submodule "phui"]
-	path = phui
-	url = git://github.com/jupiterjs/phui.git
+[submodule "mxui"]
+	path = mxui
+	url = git://github.com/jupiterjs/mxui.git
 	update = merge
 [submodule "envjs"]
 	path = envjs
-
 	url = git://github.com/jupiterjs/env-js.git
-
 	update = merge
-

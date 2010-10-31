@@ -1,1 +1,0 @@
-C({"name": "jQuery.Model.prototype.init", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"attributes": {"description": "a hash of attributes\n     ", "type": "Object", "optional": false, "order": 0, "name": "attributes"}}, "comment": "Creates, but does not save a new instance of this class\n"})

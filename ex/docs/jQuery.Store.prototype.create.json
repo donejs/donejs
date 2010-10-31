@@ -1,1 +1,0 @@
-C({"name": "jQuery.Store.prototype.create", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"obj": {"description": "\n\t ", "type": "Object", "optional": false, "order": 0, "name": "obj"}}, "comment": ""})

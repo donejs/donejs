@@ -1,1 +1,0 @@
-C({"name": "jQuery.View.EJS.prototype.set_options", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"options": {"description": "\n     ", "type": "Object", "optional": false, "order": 0, "name": "options"}}, "comment": "Sets options on this view to be rendered with.\n"})

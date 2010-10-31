@@ -4,7 +4,7 @@
  * <p>You're on your way!  How does it feel to be traveling on the path to happiness?
  * Click the following button to begin your journey.
  * </p>
- * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/framework/javascriptmvc-3.0.0_alpha12.zip"><span>Download JavaScriptMVC</span><span class="label">3.0 Alpha 10 (10.3 MB)</span></a>
+ * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.0.zip"><span>Download JavaScriptMVC</span><span class="label">3.0</span></a>
  * <p class='spaced' style="clear: left;">Once your download is complete, meet us at the [getstarted Getting Started Guide].</p>
  * 
  * ## Other Downloads
@@ -61,21 +61,21 @@
  *     <tr>
  *     <td><img src='http://wiki.javascriptmvc.com/wiki/images/thumb/0/0a/Matt.png/50px-Matt.png' /> </td>
  *     <td> <b><a href="http://www.mattmccray.com/" class="external text" title="http://www.mattmccray.com/" rel="nofollow">M@ McCray</a></b>
- * <p>A sith apprentice who corrected [jQuery.Model.prototype.save] and used the dark side to fix Controller::form_params.
- * </p>
+ * 		A sith apprentice who corrected [jQuery.Model.prototype.save] and used the dark side to fix Controller::form_params.
+ * 
  *     </td>
  *     </tr>
  *     <tr>
  *         <td><img src='http://wiki.javascriptmvc.com/wiki/images/7/77/Joe.png' /> </td>
  *         <td> <b><a href="http://www.cultoftheturtle.com/" class="external text" title="http://www.cultoftheturtle.com/" rel="nofollow">Joe Tortuga</a></b>
- * 				<p>Fixed problems with nested views.</p>
+ * 				Fixed problems with nested views.
  *         </td>
  *     </tr>
  *     <tr>
  *         <td><img src='http://wiki.javascriptmvc.com/wiki/images/8/84/Max.jpg' /> </td>
  *         <td> <b><a href="http://www.maxhwang.com/" class="external text" title="http://www.maxhwang.com/" rel="nofollow">Max C.H. Hwang</a></b>
- * <p>Helped views correctly evaluate Ajax responses.
- * </p>
+ * 			Helped views correctly evaluate Ajax responses.
+ * 
  *         </td>
  *     </tr>
  * </table>

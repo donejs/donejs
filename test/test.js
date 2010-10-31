@@ -1,8 +1,2 @@
-steal.plugins(
-	'steal/test/qunit',
-	'funcunit/synthetic/test/qunit',
-	
-	'jquery/test/qunit'//,
-	
-	//'phui/test/funcunit'
-	)
+steal.plugins(	'test/funcunit',
+ 				'test/qunit')

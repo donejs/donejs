@@ -16,7 +16,7 @@ JavaScriptMVC's integrated documentation makes it easy to document JavaScript.
 @codeend
 <p>Create the docs by running:</p>
 @codestart
-> js cookbook\scripts\docs.js
+> documentjs/doc cookbook/cookbook.html
 @codeend
 <p>In fact, you've already created documentation!</p>
 <h2>Viewing Documentation

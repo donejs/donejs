@@ -1,1 +1,0 @@
-C({"name": "steal.static.setCurrent", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"p": {"description": "the new directory which relative paths reference\n     ", "type": "String", "optional": false, "order": 0, "name": "p"}}, "comment": "Sets the current directory.\n"})

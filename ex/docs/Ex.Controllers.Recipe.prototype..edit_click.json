@@ -1,1 +1,0 @@
-C({"name": "Ex.Controllers.Recipe.prototype.&#46;edit click", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"el": {"description": "The recipe's edit link element.\n     ", "type": "jQuery", "optional": false, "order": 0, "name": "el"}}, "comment": "Creates and places the edit interface.\n"})
