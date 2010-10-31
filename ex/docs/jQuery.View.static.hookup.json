@@ -1,1 +1,0 @@
-C({"name": "jQuery.View.static.hookup", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"cb": {"description": "\n\t ", "type": "Object", "optional": false, "order": 0, "name": "cb"}}, "comment": " Registers a hookup function\n"})

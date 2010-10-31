@@ -1,1 +1,0 @@
-C({"name": "steal.File.prototype.join", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"url": {"description": "\n     ", "type": "Object", "optional": false, "order": 0, "name": "url"}}, "comment": "Joins url onto path\n"})

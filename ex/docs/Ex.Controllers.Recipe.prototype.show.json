@@ -1,1 +1,0 @@
-C({"name": "Ex.Controllers.Recipe.prototype.show", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"recipe": {"description": "", "type": "", "optional": false, "order": 0, "name": "recipe"}}, "comment": "Shows a recipe's information.\n     \n"})

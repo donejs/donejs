@@ -1,1 +1,0 @@
-C({"name": "jQuery.Controller.prototype.undefined.jQuery.fn.controller", "shortName": "Function", "ret": {"description": "the first controller.\n ", "type": "jQuery.Controller"}, "params": {}, "comment": "Gets all controllers in the jQuery element.\n"})

@@ -1,1 +1,0 @@
-C({"name": "Ex.Controllers.Recipe.prototype.&#46;cancel click", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"el": {"description": "The recipe's cancel link element.\n     ", "type": "jQuery", "optional": false, "order": 0, "name": "el"}}, "comment": "Removes the edit interface.\n"})

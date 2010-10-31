@@ -1,1 +1,0 @@
-C({"name": "jQuery.Controller.prototype.destroy", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Destroy unbinds and undelegates all actions on this controller, and prevents any memory leaks.  This is called automatically\n if the element is removed.\n \n\t \n"})

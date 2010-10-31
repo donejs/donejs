@@ -1,1 +1,0 @@
-C({"name": "jQuery.View.EJS.static.process", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"_CONTEXT": {"description": "", "type": "", "optional": false, "order": 0, "name": "_CONTEXT"}, "_VIEW": {"description": "", "type": "", "optional": false, "order": 1, "name": "_VIEW"}}, "comment": "name+'\n"})

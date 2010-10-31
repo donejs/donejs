@@ -1,1 +1,0 @@
-C({"name": "steal.File.prototype.domain", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Returns the domain for the current path.\n Returns null if the domain is a file.\n     \n"})

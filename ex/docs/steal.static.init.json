@@ -1,1 +1,0 @@
-C({"name": "steal.static.init", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {}, "comment": "Starts including files, sets options.\n     \n"})

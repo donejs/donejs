@@ -73,6 +73,7 @@ steal(
 'generators',
 'developingwithgit',
 'folders',
+'repos',
 '//steal/rhino/docs')
 
 

@@ -1,1 +1,0 @@
-C({"name": "steal.static.create_link", "shortName": "Function", "ret": {"type": "undefined", "description": ""}, "params": {"location": {"description": "\n     ", "type": "Object", "optional": false, "order": 0, "name": "location"}}, "comment": "Creates a css link and appends it to head.\n"})
