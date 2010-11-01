@@ -3,7 +3,7 @@ require 'rubygems'
 require 'net/scp'
 
 # create the zip of everything
-system("js scripts/deploy.js")
+system("js.bat scripts/deploy.js")
 
 # ssh connect
 Net::SCP.start("javascriptmvc.com", "root", :keys => File.join("scripts", "key")) do |scp|

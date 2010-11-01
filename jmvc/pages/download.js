@@ -4,7 +4,7 @@
  * <p>You're on your way!  How does it feel to be traveling on the path to happiness?
  * Click the following button to begin your journey.
  * </p>
- * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.0.zip"><span>Download JavaScriptMVC</span><span class="label">3.0</span></a>
+ * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.0.zip"><span>Download JavaScriptMVC</span><span class="label">3.0 Production</span></a>
  * <p class='spaced' style="clear: left;">Once your download is complete, meet us at the [getstarted Getting Started Guide].</p>
  * 
  * ## Other Downloads

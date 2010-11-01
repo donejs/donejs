@@ -8,7 +8,7 @@
  * to successfully completed projects by promoting best practices, 
  * maintainability, and convention over configuration.
  * 
- * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.0.zip"><span>Download JavaScriptMVC</span><span class="label">3.0</span></a>
+ * <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.0.zip"><span>Download JavaScriptMVC</span><span class="label">3.0 Production</span></a>
  * <a href='http://cdn.javascriptmvc.com/videos/2_0/2_0_demo.htm' id='video' class='big_button floatLeft'>
  *  <span>Watch</span>
  *  <span class='label'>2.0 Video</span>
