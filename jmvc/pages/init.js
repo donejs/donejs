@@ -16,8 +16,8 @@
  * 
  * <h2 class='spaced'>What's Inside?</h2>
  * 
- * We make everything you should be doing as 
- * easy as possible.
+ * Everything you should be doing, as
+ * easy as possible:
  * 
  *  - [steal Dependency Management]
  *  - [steal.build Production Builds]
@@ -31,8 +31,7 @@
  *  - [specialevents jQuery Special Events] like drag drop.
  *  - [dom jQuery Extensions] like fixtures.
  *  
- * JavaScriptMVC is feature rich, but everything works standalone.  Use only
- * what you need.
+ * You can use JavaScriptMVC as a complete framework, or download only the parts you need.
  * Read [http://jupiterjs.com/news/javascriptmvc-features JavaScriptMVC's features] for
  * more info.
  * 
@@ -43,16 +42,40 @@
  *  - [learn Learn] the technology
  *  - [api Explore] the api
  * 
- * ## Showcase.
+ * ## What People Are Saying.
  * 
- * Checkout some of the companies using JavaScriptMVC:
+ * > "JavaScriptMVC is the <span class='highlight'>single most important reason</span> why I don't hate
+ * > client side development anymore."
  * 
- *  - [http://www.zend.com Zend]</li>
- *  - [http://www.shoretel.com ShoreTel]
- *  - [http://www.wegener.com/ Wegner]
- *  - [http://www.musicglue.com/ MusicGlue]
- *  - [http://jupiterit.com Jupiter IT]
- *  - [http://socialcollider.net/ SocialCollider]
+ * <cite> Mihael Konjevic, HibreedCMS </cite>
+ * 
+ * > "JavaScriptMVC strike the 
+ * > <span class='highlight'>perfect balance between structure, speed
+ * > and featureset</span> to enable web developers to build large, scalable apps
+ * > in a modular fashion."
+ * 
+ * <cite> Rob Loh, Lyris, Inc. </cite>
+ * 
+ * > "JavaScriptMVC is an 
+ * > <span class='highlight'>elegant solution that has proven indispensable</span> in building
+ * > our most sophisticated applications."
+ * 
+ * <cite>Chris Osborn, Sitelier Inc.</cite>
+ * 
+ * > "Since standardizing on JavaScriptMVC, we've been able to start sharing
+ * > well-tested code between projects, 
+ * > <span class='highlight'>quickly bring new developers up to speed</span>
+ * > and take the complexity out of the packaging, minification, and deployment
+ * > process."
+ * 
+ * <cite> Thomas Reynolds, Second Story</cite>
+ * 
+ * > "Structured Event Delegation? Development, Test, and Production 
+ * > environments?  It even has a build step in its deployment process?
+ * > <span class='highlight'>Are you sure this is a JavaScript application?</span>"
+ * 
+ * <cite> Donnie Hall, eNova Financial</cite>
+ * 
  */
 steal(
 'getstarted',
@@ -74,6 +97,7 @@ steal(
 'developingwithgit',
 'folders',
 'repos',
+//'repositories',
 '//steal/rhino/docs')
 
 

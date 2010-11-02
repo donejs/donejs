@@ -1,7 +1,6 @@
 /*
 @page why 0. Why JavaScriptMVC
 @tag home
-<h1 class='addFavorite'>Why JavaScriptMVC</h1>
 
 So you've read through the list of features and you're still not 
 convinced JavaScriptMVC is right for you.  If you're looking for
@@ -32,9 +31,9 @@ Here's a few things you should be doing:
  - Breaking up code into logically organized files
  - Compressing and concatenating your JavaScript files
  - Using and organizing client side templates
- - Making plugins that clean themselves up are internally organized, and extendable.
+ - Making plugins that clean themselves up, are internally organized, and extendable.
  - Error reporting
-
+ 
 All of these things are hard or impossible to do right with jQuery alone.  
 
 You can add your own automated testing library - 
@@ -73,15 +72,15 @@ Every component includes:
  - thorough documentation
  - demo examples
  - test pages
- - a write-up on JavaScriptMVC's blog.
+ - a write-up on <a href='http://jupiterjs.com/pages/javascriptmvc'>JavaScriptMVC's blog</a>.
 
-We are extremely active on the forums, with essentially
+We are extremely active on the <a href='http://forum.javascriptmvc.com/'>forums</a>, with essentially
 zero unanswered questions.
 
 We've released a number of mini apps that are built the 
 JavaScriptMVC way.
 
-Jupiter Consulting provides JavaScriptMVC training, support,
+<a href='http://jupiterjs.com'>Jupiter Consulting</a> provides JavaScriptMVC training, support,
 and consulting services.
 
 

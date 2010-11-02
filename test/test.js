@@ -1,2 +1,2 @@
-steal.plugins(	'test/funcunit',
- 				'test/qunit')
+steal.plugins(	'test/qunit','test/funcunit'
+ 				)

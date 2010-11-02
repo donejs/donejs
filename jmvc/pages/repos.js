@@ -1,53 +1,118 @@
 /**
-@page repositories Code Repositories
+@page developingjmvc Developing JavaScriptMVC
+
+Awesome, you want to contribute back some code to JavaScriptMVC, or build your own
+download.  This article
+explains how.
 
 JavaScriptMVC is comprised of several projects, each with 
 it's own repository:
 
  - [http://github.com/jupiterjs/steal]
- - [http://github.com/jupiterjs/javascriptmvc]
+ - [http://github.com/jupiterjs/jquerymx]
  - [http://github.com/jupiterjs/documentjs]
  - [http://github.com/jupiterjs/funcunit]
- 
-If you're using git you should read 
-the [developwithgit developing with git] article.
 
-If you want to 
+These are collected in the javascriptmvc repository:
 
- - develop JavaScriptMVC itself
- - build stand alone parts of JavaScriptMVC
- 
-You'll want to clone / pull 
-the [http://github.com/jupiterjs/framework] repository.
+ - [http://github.com/jupiterjs/javascriptmvc]
 
-After pulling framework, you will have to install the submodules:
+Read how to get, test, and build each project in JavaScriptMVC:
+
+## 1.  Get
+
+In Github, fork the repo you want to make changes to.  Then clone
+the javascriptmvc repo and install the submodules like:
 
 @codestart
+git clone git@github.com:jupiterjs/javascriptmvc
+@codeend
+
+Now, open the javascriptmvc folder's .gitmodule file and change the url of the submodule(s)
+you have forked.  For example, you might change:
+
+@codestart
+	url = git://github.com/jupiterjs/jquerymx.git
+@codeend
+to
+@codestart
+	url = git://github.com/justinbmeyer/jquerymx.git
+@codeend
+
+Now run:
+
+
+@codestart
+cd javascriptmvc
 git submodule init
 git submodule update
 @codeend
+Finally, you might need <b>cd</b> into each submodule and 
+run
+@codestart
+git checkout
+@codeend
 
-The following is how you can build and test each part:
+Now make your changes!
 
-## FuncUnit
+## 2. Test
 
-to be filled in shortly
+To test FuncUnit, Steal, and jQueryMX combined open 
+<a href='/test.html'>javascriptmvc/test.html</a> in 
+every supported browser and run:
 
-## The MVC and jQuery Libraries
+@codestart
+./js test/run.js
+@codeend
 
-to be filled in shortly
+To test just the invidual projects, do the following:
 
-## DocumentJS
+#### StealJS
 
-to be filled in shortly
+Open <a href='/steal/test/qunit.html'>/steal/test/qunit.html</a> 
+in a browser.
 
-## StealJS
+Run:
 
-to be filled in shortly
+@codestart
+./js steal/test/run.js
+@codeend
 
-## The Framework as a whole
+#### FuncUnit
 
-to be filled in shortly
+Open <a href='/funcunit/funcunit.html'>/funcunit/funcunit.html</a> 
+and <a href='/funcunit/qunit.html'>/funcunit/qunit.html</a> in every browser.
 
+Run:
+
+@codestart
+funcunit/envjs funcunit/funcunit.html
+@codeend
+
+#### jQueryMX
+
+Open <a href='/jquery/qunit.html'>/jquery/qunit.html</a> 
+in every browser.
+
+Run:
+
+@codestart
+./js jquery/test/run.js
+@codeend
+
+
+## 3. Build
+
+Coming soon, but most projects have a build.js and so does framework.
+
+## 4. Building the Docs
+
+Run:
+@codestart
+js jmvc\scripts\doc.js
+@codeend
+
+If you have problems, you might need to create a <code>jmvc/docs</code> folder.
+Pages like this one are found in <code>jmvc/pages/</code>.
  */
 //break

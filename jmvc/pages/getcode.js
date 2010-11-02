@@ -1,11 +1,15 @@
 /**
- * @page getcode How to Get JavascriptMVC
+ * @page getcode Get JavascriptMVC
  *
- * ##Downloads
- *
- * You can download JavascriptMVC from [here](http://github.com/jupiterjs/javascriptmvc/downloads).
+ * There are 2 ways to get JavaScriptMVC:
  * 
- * ##Github Repositories
+ *   - [Download] it
+ *   - Git it from github.
+ * 
+ * We prefer you use Git.  It's a great way to share changes with us and the community. 
+ * 
+ * 
+ * ## Github Repositories
  * 
  * * [JavaScriptMVC](http://github.com/jupiterjs/javascriptmvc)
  *     
@@ -30,4 +34,5 @@
  * 
  *     * _git clone http://github.com/jupiterjs/documentjs_ 
  * 
+ * For more information on how to develop with Git check out [developwithgit Developing with Git].
  */
