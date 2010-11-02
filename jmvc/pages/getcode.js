@@ -3,7 +3,7 @@
  *
  * There are 2 ways to get JavaScriptMVC:
  * 
- *   - [Download] it
+ *   - [download Download] it
  *   - Git it from github.
  * 
  * We prefer you use Git.  It's a great way to share changes with us and the community. 
