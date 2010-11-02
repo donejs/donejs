@@ -114,5 +114,15 @@ js jmvc\scripts\doc.js
 
 If you have problems, you might need to create a <code>jmvc/docs</code> folder.
 Pages like this one are found in <code>jmvc/pages/</code>.
+
+## 4. Deploying the Docs
+
+Run:
+@codestart
+ruby scripts\deploy.rb
+@codeend
+
+First you need to add our EC2 private key in the scripts folder, named key.  If you want to 
+deploy, talk to Brian to get access to this key.
  */
 //break
