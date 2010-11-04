@@ -96,8 +96,7 @@ steal(
 'generators',
 'developingwithgit',
 'folders',
-'repos',
-//'repositories',
+'developingjmvc',
 '//steal/rhino/docs')
 
 
