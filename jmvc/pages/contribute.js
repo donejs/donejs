@@ -8,7 +8,12 @@
  * 
  * If you want to make contributions to the framework as a whole, read [developingjmvc Developing JavaScriptMVC].
  * 
- * ##Submitting bugs
+ * ##Ideas, Feedback, Problems
+ * 
+ * Know how to make JavaScriptMVC better or you don't like something?
+ * Let us know in one of [JavascriptMVC's Forums](http://forum.javascriptmvc.com/allforums).
+ * 
+ * ##Submitting Bugs
  *   
  * Bugs can be submitted to:
  *       
@@ -17,9 +22,6 @@
  * * [DocumentJS bugs](http://github.com/jupiterjs/documentjs/issues)
  * * [Funcunit bugs](http://github.com/jupiterjs/funcunit/issues)
  *   
- * ##Ideas and Feedback
  * 
- * Know how to make JavaScriptMVC better or you don't like something?
- * Let us know in [JavascriptMVC Forums](http://forum.javascriptmvc.com/#AllForums)   
  *   
  */
