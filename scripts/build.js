@@ -1,3 +1,5 @@
+load('scripts/pull_all.js')
+
 load('steal/rhino/steal.js')
 
 steal.File("../jmvcdownload").removeDir()
