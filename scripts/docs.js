@@ -11,5 +11,5 @@ var file = _args.shift(),
 DocumentJS(file,options);
 
 runCommand("cmd", "/C", "js jmvcdoc/toHTML/convert.js path=jmvc\\docs "+
-	"docsLoc=docs commentsLoc=http://jmvc.disqus.com/embed.js "+
+	"docsLoc=docs commentsLoc=http://jmvcs3.disqus.com/embed.js "+
 	"analyticsAct=UA-2302003-4 analyticsDomain=javascriptmvc.com")

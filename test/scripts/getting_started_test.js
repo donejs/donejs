@@ -1,8 +1,10 @@
-print("==========================  Getting Started ============================")
+print("==========================  jquery/generate/scaffold ============================")
 
 load('steal/rhino/steal.js');
 load('steal/test/test.js');
 
+(function(rhinoSteal){
+	
 _args = ['cookbook']; 
 load('jquery/generate/app');
 _args = ['Cookbook.Models.Recipe']; 
@@ -45,7 +47,10 @@ cookbookPage = readFile('cookbook/cookbook.html').
     replace("steal[env]=development", "steal[env]=production");
 new steal.File('cookbook/cookbook.html').save( cookbookPage );
 
-print("!!!!!!!!!!!!!!!!!!!!!!!!!!  complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+print("== complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
 
 //print("-- cleanup --");
-//steal.File("cookbook").removeDir();
+steal.File("cookbook").removeDir();
+
+})(steal);
+
