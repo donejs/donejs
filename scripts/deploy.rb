@@ -11,7 +11,7 @@ Net::SCP.start("javascriptmvc.com", "root", :keys => File.join("scripts", "key")
     puts "uploading..."
     destination = "/u/apps/javascriptmvc/public/"
     puts scp.upload! "javascriptmvc.zip", destination
-    puts scp.upload! "srchr.zip", destination
+    puts scp.upload! "srchr.zip", destination+"/srchr"
     puts "uploaded"
 end
 
