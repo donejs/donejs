@@ -7,9 +7,9 @@ system("js.bat scripts/deployments/jmvc.js")
 system("js.bat scripts/deployments/srchr.js")
 
 # ssh connect
+destination = "/u/apps/javascriptmvc/public/"
 Net::SCP.start("javascriptmvc.com", "root", :keys => File.join("scripts", "key")) do |scp|
     puts "uploading..."
-    destination = "/u/apps/javascriptmvc/public/"
     puts scp.upload! "javascriptmvc.zip", destination
     puts scp.upload! "srchr.zip", destination+"/srchr"
     puts "uploaded"
