@@ -4,18 +4,16 @@ require 'net/scp'
 
 # create the zip of everything
 system("js.bat scripts/deployments/jmvc.js")
-system("js.bat scripts/deployments/srchr.js")
 
 # ssh connect
 destination = "/u/apps/javascriptmvc/public/"
 Net::SCP.start("javascriptmvc.com", "root", :keys => File.join("scripts", "key")) do |scp|
     puts "uploading..."
     puts scp.upload! "javascriptmvc.zip", destination
-    puts scp.upload! "srchr.zip", destination+"/srchr"
     puts "uploaded"
 end
 
 Net::SSH.start("javascriptmvc.com", "root", :keys => File.join("scripts", "key")) do |ssh|
 	puts ssh.exec!("cd "+destination+" && unzip -o javascriptmvc.zip")
-	puts ssh.exec!("cd "+destination+"/srchr && unzip -o srchr.zip")
+	puts ssh.exec!("cd "+destination+" && ./js steal/getjs srchr")
 end
