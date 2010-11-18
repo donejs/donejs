@@ -48,7 +48,7 @@ to your project like:
 
 @codestart text
 git submodule add git@github.com:<b>_YOU_</b>/steal.git <b>public</b>/steal
-git submodule add git@github.com:_YOU_/javascriptmvc.git public/<b>jquery</b>
+git submodule add git@github.com:_YOU_/jquerymx.git public/<b>jquery</b>
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
 @codeend
