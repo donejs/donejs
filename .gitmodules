@@ -26,3 +26,6 @@
 	path = envjs
 	url = git://github.com/jupiterjs/env-js.git
 	update = merge
+[submodule "mxutil"]
+	path = mxutil
+	url = git://github.com/jupiterjs/mxutil.git
