@@ -7,7 +7,14 @@ Click the following button to begin your journey.
 <a class="big_button floatLeft" id="download" href="http://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.1.zip"><span>Download JavaScriptMVC</span><span class="label">3.0.1 Production</span></a>
 <p class='spaced' style="clear: left;">Once your download is complete, meet us at the [getstarted Getting Started Guide].</p>
 
-Soon we will put all the stand alone downloads here.
+<script type='text/javascript'>
+	// we need this so the iframe loads correctly from index.html and docs/whatever.html
+	if(typeof $ !== "undefined"){
+		$("p.spaced").append('<iframe class="pluginify" scrolling="no" frameborder="0" src="'+
+			steal.root.join('jquery/download/download.html')+
+			'" />');
+	}
+</script>
 
 
 <h2>Who's us?</h2>
@@ -77,6 +84,7 @@ Soon we will put all the stand alone downloads here.
         </td>
     </tr>
 </table>
+
  */
 
 //break
