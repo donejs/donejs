@@ -1,7 +1,7 @@
 steal
 .plugins('steal/generate','steal/get','steal/build','steal/coffee','steal/less','steal/clean')
 
-.plugin('funcunit').
+.plugins('funcunit').
 then('pages/init').plugins('jquery',
 'jquery/controller',
 'jquery/view',

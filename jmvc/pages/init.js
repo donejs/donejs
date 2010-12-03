@@ -147,7 +147,7 @@ $("#panel").outerWidth(500);
 
 </table>
  
-You can use JavaScriptMVC as a complete framework, or download only the parts you need.
+You can use JavaScriptMVC as a complete framework, or [download download] only the parts you need.
 Read [http://jupiterjs.com/news/javascriptmvc-features JavaScriptMVC's features] for
 more info.
 
