@@ -25,7 +25,7 @@
 <p class='spaceabove'>Manage dependencies, build fast pages, etc.  [stealjs Learn more].
 </p>
 <p class='spaced' style="clear: left;"/>
-<a href='http://github.com' class='floatLeft documentjs downloadbutton spaceabove'>
+<a href='https://github.com/downloads/jupiterjs/documentjs/documentjs-1.0.zip' class='floatLeft documentjs downloadbutton spaceabove'>
 	<span>Download DocumentJS</span>
 	<span class='label'>1.0 Production</span>
 </a>
