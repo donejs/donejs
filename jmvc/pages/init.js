@@ -213,6 +213,7 @@ steal(
 'developingwithgit',
 'folders',
 'developingjmvc',
+'rapidstart',
 '//steal/rhino/docs')
 
 

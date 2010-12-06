@@ -3,7 +3,10 @@
 @tag home, get started
 
 This guide introduces the most important aspects of JavaScriptMVC (JMVC) by 
-creating a simple cookbook application.]
+creating a simple cookbook application.  There's also a [rapidstart Rapid Start] if 
+you want a few quick how-tos.  Or for an in depth example, 
+read [http://jupiterjs.com/news/organizing-a-jquery-application Organizing a jQuery Application].
+
 
 ##  The Video
 
