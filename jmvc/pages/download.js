@@ -4,21 +4,21 @@
 <div style='width: 600px'>
 <p class='spaceabove'>The integrated framework.  Everything you need to sling mad $().
 </p>
-<a class="big_button floatLeft spaceabove" id="download" href="http://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.1.zip"><span>Download JavaScriptMVC</span><span class="label">3.0.1 Production</span></a>
+<a class="big_button floatLeft spaceabove" id="download" href="https://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.2.zip"><span>Download JavaScriptMVC</span><span class="label">3.0.2 Production</span></a>
 
 <p class='spaced' style="clear: left;"/>
 <div class='hrule'>
 <span>OR</span>
 </div>
 <p>Download the individual libraries or tools:</p>
-<a href='http://github.com/downloads/jupiterjs/funcunit/funcunit-beta-5.zip' class='floatLeft funcunit downloadbutton spaceabove'>
+<a href='https://github.com/downloads/jupiterjs/funcunit/funcunit-1.0.zip' class='floatLeft funcunit downloadbutton spaceabove'>
 	<span>Download FuncUnit</span>
 	<span class='label'>1.0 Production</span>
 </a>
 <p class='spaceabove'>Web Application Testing.  [FuncUnit Learn more].
 </p>
 <p class='spaced' style="clear: left;"/>
-<a href='http://github.com/downloads/jupiterjs/steal/stealjs-beta-1.zip' class='floatLeft steal downloadbutton spaceabove'>
+<a href='https://github.com/downloads/jupiterjs/steal/stealjs-1.0.zip' class='floatLeft steal downloadbutton spaceabove'>
 	<span>Download StealJS</span>
 	<span class='label'>1.0 Production</span>
 </a>
