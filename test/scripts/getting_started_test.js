@@ -1,6 +1,5 @@
 print("==========================  jquery/generate/scaffold ============================")
 
-load("steal/rhino/utils.js")
 load('steal/rhino/steal.js');
 load('steal/test/test.js');
 

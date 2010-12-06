@@ -13,13 +13,11 @@ load('jquery/view/test/compression/run.js');
 
 
 print("==========================  unit ============================")
-load("steal/rhino/utils.js")
 load('steal/rhino/steal.js');
 load('funcunit/loader.js');
 FuncUnit.load('qunit.html');
 
 print("==========================  functional ============================")
-load("steal/rhino/utils.js")
 load('steal/rhino/steal.js');
 load('funcunit/loader.js');
 FuncUnit.load('funcunit.html');
