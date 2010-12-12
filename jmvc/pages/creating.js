@@ -122,7 +122,8 @@ and model as follows:
 steal.plugins(	
 	'jquery/controller',			
 	'jquery/controller/subscribe',	
-	'jquery/view/ejs',				
+	'jquery/view/ejs',	
+	'jquery/controller/view',			
 	'jquery/model',					
 	'jquery/dom/fixture',			
 	'jquery/dom/form_params')		

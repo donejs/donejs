@@ -20,19 +20,19 @@
  *     
  * * [Steal](http://github.com/jupiterjs/steal) 
  * 
- *     * _git clone http://github.com/jupiterjs/steal_
+ *     * _git clone https://github.com/jupiterjs/steal_
  *  
  * * [jQueryMX](http://github.com/jupiterjs/jquerymx)
  * 
- *     * _git clone http://github.com/jupiterjs/jquerymx_
+ *     * _git clone https://github.com/jupiterjs/jquerymx_ _jquery_
  *  
  * * [Funcunit](http://github.com/jupiterjs/funcunit)
  * 
- *     * _git clone http://github.com/jupiterjs/funcunit_
+ *     * _git clone https://github.com/jupiterjs/funcunit_
  *      
  * * [DocumentJS](http://github.com/jupiterjs/documentjs)
  * 
- *     * _git clone http://github.com/jupiterjs/documentjs_ 
+ *     * _git clone https://github.com/jupiterjs/documentjs_ 
  * 
  * For more information on how to develop with Git check out [developwithgit Developing with Git].
  */

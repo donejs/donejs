@@ -209,7 +209,6 @@ steal(
 'contribute',
 'getcode',
 'help',
-'generators',
 'developingwithgit',
 'folders',
 'developingjmvc',

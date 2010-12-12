@@ -21,6 +21,12 @@ read [http://jupiterjs.com/news/organizing-a-jquery-application Organizing a jQu
 
 Before jumping in, there are some things you should know:
 
+### Purpose
+
+JavaScriptMVC is for client side JavaScript development.  JavaScriptMVC is our way
+of making quality, maintainable applications in the shortest amount of time.
+
+
 ### Folder Structure
 
 JMVC logically separates a basic app into following folder structure:
@@ -42,7 +48,16 @@ steal              - compression and build
 
 <div class='whisper'>P.S. Don't worry about creating an 'appname' folder yet.  We'll do that in a second.</div>
 
-<h3> Plugins </h3>
+### Sub Projects
+
+JavaScriptMVC is comprised of 4 sub projects:
+
+  - [DocumentJS] - A documentation engine
+  - [FuncUnit] - A web testing framework
+  - jQueryMX - jQuery MVC eXtensions.
+  - [stealjs StealJS] - A code manager : dependency management, code cleaning, building, etc.
+
+### Plugins 
 
 Everything is a plugin.  Just [steal.static.plugins steal] the ones you need. 
 Plugins load their own dependencies and won't load duplicate files.  It looks like:
@@ -56,20 +71,15 @@ steal.plugins('jquery/model',
 <div class='whisper'>
   P.S. <code>steal.plugins('a/b')</code> adds <code>a/b/b.js</code>
  to your project. </div>
-  
-<h3> Environments </h3>
 
-There are different environments for each phase of development:
+## License
 
-<ul>
-  <li> <span class='gray'>Development</span> - optimized for debugging and rapid development </li>
-  <li> <span class='gray'>Production</span> - loads compressed application file </li>
-</ul>
+JavaScriptMVC is MIT with the following exceptions:
 
-<div class='whisper'>
-  P.S. The 'test' environment of 2.0 has been replaced by [FuncUnit]
-  awesomeness. 
-</div>
+ - [http://www.mozilla.org/rhino/ Rhino] - JS command line ([http://www.mozilla.org/MPL/ MPL] 1.1)
+ - [http://seleniumhq.org/ Selenium] - Browser Automation ([http://www.apache.org/licenses/LICENSE-2.0 Apache 2])
+
+These exceptions, although permissive licenses themselves, are not linked in your final production build.
 
 ## Making a Cookbook
 
