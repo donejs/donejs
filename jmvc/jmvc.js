@@ -4,6 +4,7 @@ steal
 .plugins('funcunit').
 then('pages/init').plugins('jquery',
 'jquery/controller',
+	'jquery/controller/subscribe',
 'jquery/view',
 	'jquery/view/ejs',
 	'jquery/view/jaml',
@@ -34,6 +35,9 @@ then('pages/init').plugins('jquery',
 .then(
 "//jquery/model/pages/encapsulate",
 "//jquery/model/pages/typeconversion",
-"//jquery/model/pages/events")
+"//jquery/model/pages/events",
+"//jquery/controller/pages/listening",
+"//jquery/controller/pages/plugin",
+"//jquery/controller/pages/document")
 
 
