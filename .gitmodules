@@ -29,3 +29,6 @@
 [submodule "mxutil"]
 	path = mxutil
 	url = git://github.com/jupiterjs/mxutil.git
+[submodule "funcit"]
+	path = funcit
+	url = git@github.com:jupiterjs/funcit
