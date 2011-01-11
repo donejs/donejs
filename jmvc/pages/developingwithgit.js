@@ -14,17 +14,18 @@ Before we get started, we're assuming you:
 If you don't, you might find the following resources helpful:
 
  - [http://git.or.cz/course/svn.html Git - SVN Crash Course]
- - [http://github.com/ Github] - creat an account here
+ - [http://github.com/ Github] - create an account here
  - [http://help.github.com/msysgit-key-setup/ SSH Key Setup]
 
 ## Git -ing JavaScriptMVC
 
-JavaScriptMVC is comprised of four sub projects:
+JavaScriptMVC is comprised of five sub projects:
 
  - [http://github.com/jupiterjs/steal]
  - [http://github.com/jupiterjs/jquerymx]
  - [http://github.com/jupiterjs/documentjs]
  - [http://github.com/jupiterjs/funcunit]
+ - [http://github.com/jupiterjs/syn]
 
 We're going to fork each of these projects and add them as submodules to your
 master git project.
@@ -43,7 +44,7 @@ the <img src='jmvc\images\fork.png' alt='fork'/> button (in the upper right of t
 
 #### Adding a submodule
 
-Now add your forked repositories as submodules 
+Now add the first four forked repositories as submodules 
 to your project like:
 
 @codestart text
@@ -68,6 +69,42 @@ Next, you have to install and update the submodules.  Run:
 @codestart
 git submodule init
 git submodule update
+@codeend
+
+You may also have to change to each directory and checkout the master branch:
+
+@codestart
+cd steal
+git checkout master
+@codeend
+
+#### Installing Syn
+
+Syn is a submodule of the funcunit project.  To add your fork to funcunit, 
+first you have to change the submodule to point to your fork 
+(because it points to the jupiterjs fork).  To do this, open funcunit/.gitmodules.  You'll see:
+
+@codestart text
+[submodule "syn"]
+	path = syn
+	url = git@github.com:jupiterjs/syn.git
+	update = merge
+@codeend
+
+Change the URL to your own fork, like:
+
+@codestart text
+url = git@github.com:_YOU_/syn.git
+@codeend
+
+Now install syn, like the other submodules:
+
+@codestart
+cd funcunit
+git submodule init
+git submodule update
+cd syn
+git checkout master
 @codeend
 
 Finally, you just have to move the 'js' commands out of steal for convienence:
