@@ -29,10 +29,18 @@
  * * [Funcunit](http://github.com/jupiterjs/funcunit)
  * 
  *     * _git clone https://github.com/jupiterjs/funcunit_
+ *     * cd funcunit_
+ *     * _git submodule init_
+ *     * _git submodule update_     
+ *     * _cd syn_ and do _git checkout_
  *      
  * * [DocumentJS](http://github.com/jupiterjs/documentjs)
  * 
  *     * _git clone https://github.com/jupiterjs/documentjs_ 
+ *      
+ * * [Syn](http://github.com/jupiterjs/syn)
+ * 
+ *     * _git clone https://github.com/jupiterjs/syn_ 
  * 
  * For more information on how to develop with Git check out [developwithgit Developing with Git].
  */
