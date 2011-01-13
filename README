@@ -18,8 +18,6 @@ A.  How to get (and contribute) JMVC
            git submodule add git@github.com:_YOU_/jquerymx.git jquery
            git submodule add git@github.com:_YOU_/funcunit.git funcunit
            git submodule add git@github.com:_YOU_/documentjs.git documentjs
-           
-      * Notice javascriptmvc is under the jquery folder
   
   4.  Learn a little more about submodules ...
            http://johnleach.co.uk/words/archives/2008/10/12/323/git-submodules-in-n-easy-steps

@@ -5,7 +5,7 @@ steal
 	.then(function($){
 		steal.less('site')
 	})
-	.plugins('jquery/controller')
+	.plugins('jquery/controller', 'jquery/view/ejs')
 	.then(function($){
 
 jQuery.Controller.extend('Feed',
@@ -99,12 +99,58 @@ Feed.extend('ForumFeed',
 	}
 });
 
-
-
+Feed.extend('BlogFeed',
+/* @Static */
+{
+	loadData : function(data){
+		$('#blog').data("controllers")['blog_feed'].insertBlogFeed(data.news);
+	}
+},
+/* @Prototype */
+{
+	init : function(){
+		var forumUrl = 'http://jupiterjs.com/news/feed/javascriptmvc.json?callback=BlogFeed.loadData';
+		$.ajax({
+			url: forumUrl,
+			dataType: 'script'
+		});
+	},
+	shortenBody: function(body){
+		return body.substring(0, 300);
+	},
+	formatDate : function(date_string){
+		var parts = date_string.split("-"),
+			date = parts[2].split("T")[0];
+		return {
+			date: parseInt(date, 10),
+			month: this.months[parseInt(parts[1], 10)-1],
+			year: parseInt(parts[0], 10)
+		};
+	},
+	insertBlogFeed : function(data){
+		var html = [], d, date, li;
+		for(var i = 0, ii = data.length; i < 6 && i < data.length; i++){
+			date = this.formatDate(data[i].news_item.publish_date);
+			d = {
+				title  : data[i].news_item.title,
+				month  : date.month,
+				date   : date.date,
+				year   : date.year,
+				body   : this.shortenBody(data[i].news_item.body),
+				id	   : data[i].news_item.id
+			}
+			li = $.View("//jmvc/site/views/blog.ejs", d);
+			html.push(li);
+		}
+		if(html.length > 0){
+			this.element.html(html.join(''));
+		}
+	}
+});
 
 $('#twitter-feed').twitter_feed();
 $('#forum-feed').forum_feed();
-
+$('#blog').blog_feed();
 
 // for the builder page
 $(document).ready(function(){

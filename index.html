@@ -1,76 +1,213 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-            "http://www.w3.org/TR/html4/strict.dtd">
-<html lang="en">
-<head>
-<title>JavaScriptMVC</title>		
-<link rel="stylesheet" type='text/css' href='documentjs/jmvcdoc/style.css' />
-<link rel="shortcut icon" href="../documentjs/jmvcdoc/images/favicon.ico" />
-</head>
-<body>
-<div id='documentation'>
-<div id='top'>
-<div class="topCorner">
-	<div class="right"></div>
-	<div class="left"></div>
-</div>
-<div class="content">
-<div id="searchRoundCorners">
-<input id='search' type='input' disabled='true'/>
-</div>
-<div id='defaults'>
-<ul id="menu" class="ui-menu">
-	<li class="ui-menu-item">
-    	<a class="menuLink" href="#&amp;search=core"><span class="menuSpan">Core</span></a>
-	</li>
-	<li class="ui-menu-item">
-    	<a class="menuLink" href="#favorites"><span class="menuSpan">Favorites</span></a>
-	</li>
-	<li class="ui-menu-item">
-		<a class="menuLink" href="#&amp;who=follow" title="Follow"><span class="menuSpan red">Follow</span></a>
-	</li>
-	<li class="ui-menu-item">
-		<a class="menuLink" href="#&amp;who=contribute" title="Contribute"><span class="menuSpan red">Contribute</span></a>
-	</li>							
-	<li class="ui-menu-item">
-		<a class="menuLink" href="#&amp;who=getcode" title="Code"><span class="menuSpan red">Code</span></a>
-	</li>
-</ul>
-</div>
-<div class="logo-text"><a href='http://javascriptmvc.com'>JavaScript<img src='../documentjs/jmvcdoc/images/logo80x30.png' class="logo-image"/></a></div>
-</div>
-<div class="bottomCorner">
-	<div class="right"></div>
-	<div class="left"></div>
-</div>
-</div>
-<div id='bottom'>       
-<div id='left'>
-<a>Loading ... </a>
-</div>
-<div id='doc_container'>
-<div id='doc'>
-
-</div>
-<div id="disqus_thread"></div>
-</div>
-</div>
-</div>
-<div id='low'>
-            <a href="http://jupiterit.com">&copy; Jupiter IT - JavaScriptMVC Training and Support</a>
-		<a class="api_links" href="http://javascriptmvc.com/docs/api.html#&who=api"></a>
-		</div>
-		<script type="text/javascript">
-			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-			GOOGLE_ANALYTICS_TRACKER_ID = "UA-xxxxxxxx-x";
-		</script>
-		<script type='text/javascript'>
-            DOCS_LOCATION = "jmvc/docs/" //adds searchData to this
-            COMMENTS_LOCATION = "http://jmvcs3.disqus.com/embed.js"
-            GOOGLE_ANALYTICS_TRACKER_ID = "UA-2302003-4";
-        </script>
-        <script type='text/javascript' 
-                src='steal/steal.production.js?documentjs/jmvcdoc'>   
-        </script>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>JavaScriptMVC</title>
+	<link rel="stylesheet" type='text/css' href='jmvc/site/production.css' />
+	<link rel="shortcut icon" href="documentjs/jmvcdoc/images/favicon.ico" />
+  </head>
+  <body>
+    <div id='container'>
+      <div id='header'>
+        <a href="index.html" id="logo"><img alt="JavascriptMVC" src="jmvc/images/logo.png" title="JavascriptMVC"/></a>
+        <div id='download-box'>
+          <a href="https://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.4.zip">Download v3.04</a>
+          <a href="builder.html" id="download-builder">or go to the download builder</a>
+        </div>
+      </div>
+      <div id='navigation'>
+        <ul>
+          <li><a class="active" href="index.html">Home</a></li>
+          <li><a href="docs/index.html">Documentation</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="follow.html">Follow &amp; Community</a></li>
+          <li><a href="contribute.html">Contribute</a></li>
+          <li><a href="code.html">Code</a></li>
+        </ul>
+      </div>
+      <div id='content-wrapper'>
+        <div id='content'>
+          <h2>What's Inside?</h2>
+          <p>Everything you should be doing, as easy as possible:</p>
+          <table class="inside">
+          <tbody>
+          <tr class="odd">
+          	<td>
+          		<a href="docs/steal.generate.html">Code Generators</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">.<span class="regexp">/js jquery/g</span>enerate/app myapp</code></pre>
+          	</td>
+          </tr>
+          <tr>
+          	<td>
+          		<a href="docs/steal.html">Dependency Management</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">steal.plugins(<span class="string">'jquery/controller'</span>).then(<span class="function"><span class="keyword">function</span><span class="params">($)</span>{</span> ... });</code></pre>
+          	</td>
+          </tr>
+          <tr class="odd">
+          	<td>
+          		<a href="docs/steal.build.html">Production Builds</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">js myapp/scripts/build.js</code></pre>
+          	</td>
+          </tr>
+          <tr>
+          	<td>
+          		<a href="docs/FuncUnit.html">Testing</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">S.open(<span class="string">"//myapp/myapp.html"</span>);<br />S(<span class="string">"#search"</span>).click().type(<span class="string">"Hello World"</span>);</code></pre>
+          	</td>
+          </tr>
+          <tr class="odd">
+          	<td>
+          		<a href="docs/jQuery.View.html">Client Side Templates</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">$(<span class="string">"#menu"</span>).html(<span class="string">"menu.tmpl"</span>,items);</code></pre>
+          	</td>
+          </tr>
+          <tr>
+          	<td>
+          		<a href="docs/jQuery.Controller.html">jQuery Widget Factory</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">$.Controller(<span class="string">"Tabs"</span>,{ <span class="string">"li click"</span> : <span class="function"><span class="keyword">function</span><span class="params">(el, ev)</span>{</span> ... } });</code></pre>
+          	</td>
+          </tr>
+          <tr class="odd">
+          	<td>
+          		<a href="docs/jQuery.Model.html">Service/Data Modeling</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">$.Model(<span class="string">"Todo"</span>,{ findAll : <span class="string">"/recipes"</span> }, {});<br />Todo.findAll(<span class="function"><span class="keyword">function</span><span class="params">(todos)</span>{</span> ... });</code></pre>
+          	</td>
+          </tr>
+          <tr>
+          	<td>
+          		<a href="docs/DocumentJS.html">Documentation</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">js myapp/scripts/docs.js</code></pre>
+          	</td>
+          </tr>
+          <tr class="odd">
+          	<td>
+          		<a href="docs/steal.clean.html">Code Cleaning and Linting</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">js myapp/scripts/clean.js</code></pre>
+          	</td>
+          </tr>
+          <tr>
+          	<td>
+          		<a href="docs/specialevents.html">jQuery Special Events</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">$(<span class="string">"#items"</span>).delegate(<span class="string">".item"</span>,<span class="string">"draginit"</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>});</code></pre>
+          	</td>
+          </tr>
+          <tr class="odd">
+          	<td>
+          		<a href="docs/dom.html">jQuery Utilities</a>
+          	</td>
+          	<td>
+          		<pre><code class="javascript">$(<span class="string">"#panel"</span>).outerWidth(<span class="number">500</span>);</code></pre>
+          	</td>
+          </tr>
+          </tbody>
+          </table>
+          <p>You can use JavaScriptMVC as a complete framework, or   <a href="builder.html">download</a> only the parts you need. Read <a href="http://jupiterjs.com/news/javascriptmvc-features">JavaScriptMVC's features</a> for more info.</p></p>
+          <h2>The Plan.</h2>
+          <ul>
+            <li><a href="builder.html">Download</a> JavaScriptMVC</li>
+            <li><a href="docs/getstarted.html">Read</a> the Getting Started Guide</li>
+            <li><a href="docs/learn.html">Learn</a> the technology</li>
+            <li><a href="docs/api.html">Explore</a> the api</li>
+          </ul>
+          <h2>What People are saying</h2>
+          <blockquote>
+            <p>"JavaScriptMVC is the <span class="highlight">single most important reason</span> why I don't hate
+            client side development anymore."</p>
+          </blockquote>
+          <p><cite> Mihael Konjevic, HibreedCMS </cite></p>
+          
+          <blockquote>
+            <p>"JavaScriptMVC strike the 
+            <span class="highlight">perfect balance between structure, speed
+            and featureset</span> to enable web developers to build large, scalable apps
+            in a modular fashion."</p>
+          </blockquote>
+          <p><cite> Rob Loh, Lyris, Inc. </cite></p>
+          
+          <blockquote>
+            <p>"JavaScriptMVC is an 
+            <span class="highlight">elegant solution that has proven indispensable</span> in building
+            our most sophisticated applications."</p>
+          </blockquote>
+          <p><cite>Chris Osborn, Sitelier Inc.</cite></p>
+          
+          <blockquote>
+            <p>"Since standardizing on JavaScriptMVC, we've been able to start sharing
+            well-tested code between projects, 
+            <span class="highlight">quickly bring new developers up to speed</span>
+            and take the complexity out of the packaging, minification, and deployment
+            process."</p>
+          </blockquote>
+          <p><cite> Thomas Reynolds, Second Story</cite></p>
+          
+          <blockquote>
+            <p>"Structured Event Delegation? Development, Test, and Production 
+            environments?  It even has a build step in its deployment process?
+            <span class="highlight">Are you sure this is a JavaScript application?</span>"</p>
+          </blockquote>
+          <p><cite> Donnie Hall, eNova Financial</cite></p>
+        </div>
+        <div id='sidebar'>
+          <p class='greenbox' id='what-is-javascriptmvc'><strong>JavaScriptMVC</strong> is an open-source framework containing the best ideas in jQuery development. <br /><br />It guides you to successfully completed projects by promoting best practices, maintainability, and convention over configuration.</p>
+          <div id='twitter-feed-wrapper'>
+            <div id='twitter-feed'></div>
+            <a href="http://www.twitter.com/javascriptmvc" title="Follow @javascriptmvc"><img alt="Follow twitter" src="jmvc/images/follow_twitter.png"/></a>
+          </div>
+        </div>
+        <div class='clear'></div>
+      </div>
+      <div class='greenbox' id='footer'>
+        <div id='who-javascriptmvc'>
+          <h4>Who Should Use JavaScriptMVC?</h4>
+          <p>JavaScriptMVC is designed to enhance jQuery development for medium to large projects.<br />You should care about code quality, performance, and maintainability.</p>
+          <p>If you don't care about these things, or think jQuery is enough for any project, you don't know what you're doing, and you will embarrass the project by using it. Leave now.</p>
+          <p><strong>JavaScriptMVC makes everything you should be doing, as easy as possible! </strong></p>
+          <p>JavaScriptMVC's greatest strength is it's integration. Everything you should be doing is available immediately.</p>
+          <p>Despite the huge amount of features, JavaScriptMVC is easy to learn.</p>
+          <p>Every component includes:</p>
+          <ul>
+            <li>thorough documentation</li>
+            <li>demo examples</li>
+            <li>test pages</li>
+            <li>a write-up on <a href="http://jupiterjs.com/pages/javascriptmvc">JavaScriptMVC's blog</a>.</li>
+          </ul>
+        </div>
+        <div id='forum-feed'>
+          <h4>Fresh on forums</h4>
+          <ul></ul>
+        </div>
+        <div class='clear'></div>
+      </div>
+    </div>
+    <div id='bottom-bar'>
+      <a href="http://jupiterit.com">&copy; Jupiter IT - JavaScriptMVC Training and Support</a>
+    </div>
+	
+    <script type='text/javascript' src='steal/steal.production.js?jmvc/site'></script>
+    
+	<script type="text/javascript">
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		GOOGLE_ANALYTICS_TRACKER_ID = "UA-2302003-4";
+	</script>
+  </body>
 </html>
