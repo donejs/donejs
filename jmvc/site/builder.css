@@ -59,6 +59,7 @@ body {
 	font-size: 16px;
 	text-shadow: 0px 1px white;
 	color: Black;
+	line-height:normal;
 }
 #plugins .download-builder input:hover {
 	color: White;
@@ -85,6 +86,8 @@ body {
 #plugins .section .plugin input{
 	float: left;
 	margin: -1px 10px 0 0;
+	height: 20px;
+	width: 20px;
 }
 #plugins .section .plugin label {
 	display: block;
