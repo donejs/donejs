@@ -21,8 +21,18 @@ jQuery.Controller.extend('Feed',
 		var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 		return text.replace(exp,"<a href='$1'>$1</a>");
 	},
+	// gets passed strings like "Jan"
+	getMonth: function(month_string){
+		for(var i=0; i<this.months.length; i++){
+			if(this.months[i] == month_string){
+				return i;
+			}
+		}
+		return 0;
+	},
 	formatDate : function(date_string){
 		var date = new Date(date_string);
+		"Thu, 13 Jan 2011 11:59:47 -0800"
 		return $.String.sub(this.date_template, {
 			day: this.days[date.getDay()],
 			date: date.getDate(),
@@ -52,8 +62,9 @@ Feed.extend('TwitterFeed',
 		var tweets = [];
 		for(var i = 0, ii = data.length; i < ii; i++){ //Filter out direct replies
 			var tweet = data[i];
+			tweet.date = this.getDate(tweet.created_at)
 			if(tweet.text.charAt(0) != '@' && tweets.length < 6){
-				var formattedDate = this.formatDate(tweet.created_at);
+				var formattedDate = this.formatDate(tweet.date);
 				tweets.push($.String.sub(this.template, {tweet: this.linkify(tweet.text), date: formattedDate}));
 			}
 		}
@@ -62,6 +73,16 @@ Feed.extend('TwitterFeed',
 	linkify : function(text){
 		var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 		return text.replace(exp,"<a href='$1'>$1</a>");
+	},
+	// receives a date like "Thu Jan 13 05:33:12 +0000 2011"
+	getDate : function(date_string){
+		var dateMatch = date_string.match(/\w+\s+(\w+)\s+(\d+).*\s+(\d+)$/),
+			date = new Date(
+				parseInt(dateMatch[3], 10),
+				this.getMonth(dateMatch[1]),
+				parseInt(dateMatch[2], 10)
+			)
+		return date;
 	}
 });
 
@@ -96,6 +117,18 @@ Feed.extend('ForumFeed',
 		if(html.length > 0){
 			this.element.find('ul').html(html.join(''));
 		}
+	},
+	// "Thu, 13 Jan 2011 11:59:47 -0800" - forum
+	// receives a date like "Thu Jan 13 05:33:12 +0000 2011"
+	// receives a date like "Thu, 13 Jan 2011 11:59:47 -0800" - forum
+	getDate : function(date_string){
+		var dateMatch = date_string.match(/\w+\s+(\d+)\s+(\w+)\s+(\d)+/),
+			date = new Date(
+				parseInt(dateMatch[3], 10),
+				this.getMonth(dateMatch[2]),
+				parseInt(dateMatch[1], 10)
+			)
+		return date;
 	}
 });
 
