@@ -115,9 +115,6 @@ Feed.extend('BlogFeed',
 			dataType: 'script'
 		});
 	},
-	shortenBody: function(body){
-		return body.substring(0, 300);
-	},
 	formatDate : function(date_string){
 		var parts = date_string.split("-"),
 			date = parts[2].split("T")[0];
@@ -130,14 +127,14 @@ Feed.extend('BlogFeed',
 	insertBlogFeed : function(data){
 		var html = [], d, date, li;
 		for(var i = 0, ii = data.length; i < 6 && i < data.length; i++){
-			date = this.formatDate(data[i].news_item.publish_date);
+			date = this.formatDate(data[i].publish_date);
 			d = {
-				title  : data[i].news_item.title,
+				title  : data[i].title,
 				month  : date.month,
 				date   : date.date,
 				year   : date.year,
-				body   : this.shortenBody(data[i].news_item.body),
-				id	   : data[i].news_item.id
+				body   : data[i].body,
+				id	   : data[i].id
 			}
 			li = $.View("//jmvc/site/views/blog.ejs", d);
 			html.push(li);
