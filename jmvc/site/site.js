@@ -182,12 +182,4 @@ $('#twitter-feed').twitter_feed();
 $('#forum-feed').forum_feed();
 $('#blog').blog_feed();
 
-// for the builder page
-$(document).ready(function(){
-	if ($("#jquerymx").length) {
-		$("<link href='../../jmvc/site/builder.css' rel='stylesheet' type='text/css' />")
-			.appendTo($("#jquerymx iframe")[0].contentDocument.body);
-	}
-})
-
 });
