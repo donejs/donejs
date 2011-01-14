@@ -74,6 +74,7 @@ body {
 	overflow: auto;
 	padding: 15px;
 	font-size: 11px;
+	height:100%;
 }
 #plugins .section .section-desc {
 	float: left;
@@ -107,7 +108,7 @@ body {
 #plugins .section .plugin .desc {
 	float: left;
 	width: 200px;
-	margin-left: 20px;
+	margin-left: 10px;
 	font-size: 11px;
 }
 #plugins h3 {
