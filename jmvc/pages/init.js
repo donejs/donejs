@@ -1,7 +1,21 @@
 /*
 @page index home
 
-# JavaScriptMVC Documentation
+<div class="top">
+	<div class="topCorner">
+		<div class="right"></div>
+		<div class="left"></div>
+	</div>
+	<div class="content">
+	    <h1>JavaScriptMVC Documentation</h1>
+	</div>
+	<div class="bottomCorner">
+		<div class="right"></div>
+		<div class="left"></div>
+	</div>	
+</div>
+
+# 
 
 ## Getting Started
 

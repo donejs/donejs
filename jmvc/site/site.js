@@ -104,15 +104,19 @@ Feed.extend('ForumFeed',
 		});
 	},
 	insertForumFeed : function(data){
-		var html = [];
+		var html = [], titles = [], title, d;
 		for(var i = 0, ii = data.length; i < 6 && i < data.length; i++){
-			var d = {
-				title  : data[i].title,
-				author : data[i]['dc:creator'],
-				date   : this.formatDate(data[i].pubDate),
-				href   : data[i].link
+			title = data[i].title.replace(/^Re\s\:\s/, "");
+			if($.inArray(title, titles) == -1){
+				titles.push(title);
+				d = {
+					title  : title,
+					author : data[i]['dc:creator'],
+					date   : this.formatDate(data[i].pubDate),
+					href   : data[i].link
+				}
+				html.push($.String.sub(this.template, d));
 			}
-			html.push($.String.sub(this.template, d));
 		}
 		if(html.length > 0){
 			this.element.find('ul').html(html.join(''));
