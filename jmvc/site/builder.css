@@ -8,6 +8,10 @@
 	font-style: normal;
 }
 
+html {
+	overflow:hidden;
+}
+
 body {
 	font-family: "Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;
 }
@@ -74,20 +78,21 @@ body {
 #plugins .section .section-desc {
 	float: left;
 	width: 148px;
-	margin-right: 20px;
 }
 #plugins .section .plugin {
 	float: right;
 	width: 450px;
 	margin: 5px 0;
 	padding-top: 1px;
+	min-height:30px;
 }
 
 #plugins .section .plugin input{
 	float: left;
 	margin: -1px 10px 0 0;
-	height: 20px;
-	width: 20px;
+	height: 19px;
+	width: 19px;
+	padding:0px;
 }
 #plugins .section .plugin label {
 	display: block;
@@ -103,7 +108,6 @@ body {
 	float: left;
 	width: 200px;
 	margin-left: 20px;
-	line-height: 14px;
 	font-size: 11px;
 }
 #plugins h3 {
