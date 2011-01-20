@@ -1,7 +1,7 @@
 /**
  * This test loads every test in JavaScriptMVC
  */
-load('test/getting_started_test.js')
+load('test/scripts/getting_started_test.js')
 
 print("==========================  generators =============================")
 load('steal/generate/test/run.js');

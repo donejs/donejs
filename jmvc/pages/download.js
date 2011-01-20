@@ -4,7 +4,7 @@
 <div style='width: 600px'>
 <p class='spaceabove'>The integrated framework.  Everything you need to sling mad $().
 </p>
-<a class="big_button floatLeft spaceabove" id="download" href="https://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.4.zip"><span>Download JavaScriptMVC</span><span class="label">3.0.4 Production</span></a>
+<a class="big_button floatLeft spaceabove" id="download" href="https://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.5.zip"><span>Download JavaScriptMVC</span><span class="label">3.0.5 Production</span></a>
 
 <p class='spaced' style="clear: left;"/>
 <div class='hrule'>
