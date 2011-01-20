@@ -6,6 +6,7 @@ steal
 		steal.less('site')
 	})
 	.plugins('jquery/controller', 'jquery/view/ejs')
+	.views('//jmvc/site/views/blog.ejs')
 	.then(function($){
 
 jQuery.Controller.extend('Feed',
@@ -162,16 +163,22 @@ Feed.extend('BlogFeed',
 		};
 	},
 	insertBlogFeed : function(data){
-		var html = [], d, date, li;
+		var html = [], d, date, li, url;
 		for(var i = 0, ii = data.length; i < 6 && i < data.length; i++){
 			date = this.formatDate(data[i].publish_date);
+			url = "http://jupiterjs.com/news/"
+					+ data[i].title.toLowerCase()
+						.replace(/[\.\:\-\!]/g, " ")
+						.replace(/\s+$/, "")
+						.split(/\s+/).join("-")
 			d = {
 				title  : data[i].title,
 				month  : date.month,
 				date   : date.date,
 				year   : date.year,
 				body   : data[i].body,
-				id	   : data[i].id
+				id	   : data[i].id,
+				url	   : url
 			}
 			li = $.View("//jmvc/site/views/blog.ejs", d);
 			html.push(li);
