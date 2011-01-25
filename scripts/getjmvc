@@ -1,4 +1,38 @@
 #!/bin/bash
+#
+# Use this script to install JMVC from github or your own fork. If its already installed, 
+# it will get latest for all the submodules.  Assumes your project uses git.
+#
+# Options: 
+#	-u username (default is jupiterjs)
+#	-b branch (default is master)
+#	-s source url (default is https://github.com)
+#	-p install path (default is current directory)
+#
+# Usage:
+#	Default usage.  This will install from https://jupiterjs@github.com/jupiterjs/steal.git
+#		./getjmvc
+#
+#	Use your own forked submodule repositories. This will install from 
+#	https://github.com/jupiterjs/steal.git
+#		./getjmvc -u cengage
+#
+#	Install to your own path.  You can specify the path where the submodules are installed, 
+#	like to public/
+#		./getjmvc -p public/
+#
+#	Install a different branch (used to install the 2.0 branches for steal, jquerymx, and funcunit).
+#		./getjmvc -b 2.0
+#
+#	Install from a different repository (not github) or from ssh instead of http (if you have 
+#	write access).
+#		./getjmvc -s git@github.com
+#		./getjmvc -s http://mygitrepo.com
+#
+# 	Update code.  If you installed somewhere besides the current directory, specify a -p.
+#		./getjmvc
+#		./getjmvc -p public/
+
 
 USERNAME=jupiterjs
 BRANCH=master
@@ -42,26 +76,18 @@ then
 	exit 127
 fi
 
-if [$SRC =~ '\:\/\/' ]
+# if its http, should look like this: https://github.com/jupiterjs/jquerymx.git
+if [[ $SRC =~ :// ]]; then
 	FULLSRC=$SRC/$USERNAME
-	echo "matched $FULLSRC"
-	exit 127
+# else it should look like this: git@github.com:jupiterjs/jquerymx.git
 else
 	FULLSRC=$SRC:$USERNAME
-	echo "not $FULLSRC"
-	exit 127
 fi
 
-#https://github.com/jupiterjs/jquerymx.git
-#git@github.com:jupiterjs/jquerymx.git
-#-s git@github.com
-
-#echo "git submodule add git@$SRC:$USERNAME/steal.git ${INSTALLPATH}steal $BRANCH"
-#exit 127
-git submodule add $SRC:$USERNAME/steal.git ${INSTALLPATH}steal
-git submodule add $SRC:$USERNAME/jquerymx.git ${INSTALLPATH}jquery
-git submodule add $SRC:$USERNAME/documentjs.git ${INSTALLPATH}documentjs
-git submodule add $SRC:$USERNAME/funcunit.git ${INSTALLPATH}funcunit
+git submodule add $FULLSRC/steal.git ${INSTALLPATH}steal
+git submodule add $FULLSRC/jquerymx.git ${INSTALLPATH}jquery
+git submodule add $FULLSRC/documentjs.git ${INSTALLPATH}documentjs
+git submodule add $FULLSRC/funcunit.git ${INSTALLPATH}funcunit
 git submodule init
 git submodule update
 cd ${INSTALLPATH}steal
