@@ -2,7 +2,7 @@
 
 USERNAME=jupiterjs
 BRANCH=master
-SRC=github.com
+SRC=https://github.com
 INSTALLPATH=
  
 while getopts ":u:b:s:p:" opt; do
@@ -41,6 +41,20 @@ then
 	git pull origin master
 	exit 127
 fi
+
+if [$SRC =~ '\:\/\/' ]
+	FULLSRC=$SRC/$USERNAME
+	echo "matched $FULLSRC"
+	exit 127
+else
+	FULLSRC=$SRC:$USERNAME
+	echo "not $FULLSRC"
+	exit 127
+fi
+
+#https://github.com/jupiterjs/jquerymx.git
+#git@github.com:jupiterjs/jquerymx.git
+#-s git@github.com
 
 #echo "git submodule add git@$SRC:$USERNAME/steal.git ${INSTALLPATH}steal $BRANCH"
 #exit 127
