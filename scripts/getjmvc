@@ -1,0 +1,67 @@
+#!/bin/bash
+
+USERNAME=jupiterjs
+BRANCH=master
+SRC=github.com
+INSTALLPATH=
+ 
+while getopts ":u:b:s:p:" opt; do
+  case $opt in
+    u)
+      USERNAME=$OPTARG
+      ;;
+    b)
+      BRANCH=$OPTARG
+      ;;
+    s)
+      SRC=$OPTARG
+      ;;
+    p)
+      INSTALLPATH=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+  esac
+done
+
+# if steal/steal.js exists, refresh everything
+if [ -f ${INSTALLPATH}steal/steal.js ]
+then
+	cd ${INSTALLPATH}steal
+	git pull origin master
+	cd ../jquery
+	git pull origin master
+	cd ../documentjs
+	git pull origin master
+	cd ../funcunit
+	git pull origin master
+	cd syn
+	git pull origin master
+	exit 127
+fi
+
+#echo "git submodule add git@$SRC:$USERNAME/steal.git ${INSTALLPATH}steal $BRANCH"
+#exit 127
+git submodule add $SRC:$USERNAME/steal.git ${INSTALLPATH}steal
+git submodule add $SRC:$USERNAME/jquerymx.git ${INSTALLPATH}jquery
+git submodule add $SRC:$USERNAME/documentjs.git ${INSTALLPATH}documentjs
+git submodule add $SRC:$USERNAME/funcunit.git ${INSTALLPATH}funcunit
+git submodule init
+git submodule update
+cd ${INSTALLPATH}steal
+git checkout $BRANCH
+cd ../jquery
+git checkout $BRANCH
+cd ../documentjs
+git checkout master
+cd ../funcunit
+git checkout $BRANCH
+git submodule init
+git submodule update
+cd syn
+git checkout $BRANCH
+cd ../../
+./steal/js steal/make.js
+chmod 777 js
