@@ -17,7 +17,7 @@ If you don't, you might find the following resources helpful:
  - [http://github.com/ Github] - create an account here
  - [http://help.github.com/msysgit-key-setup/ SSH Key Setup]
 
-## Git -ing JavaScriptMVC
+## Git-ing JavaScriptMVC
 
 JavaScriptMVC is comprised of five sub projects:
 
@@ -41,6 +41,62 @@ the <img src='jmvc\images\fork.png' alt='fork'/> button (in the upper right of t
   employees access to the company forks.  This will keep everyone using the 
   same version.
 </div>
+
+#### Installing with a script
+
+To make the next several steps easier, we've made scripts for [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc Mac] 
+and [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc.bat Windows] users that automate adding your repos and setting them up.
+
+Use this script to install JMVC from github or your own fork. If its already installed, it will get latest for all the submodules.  
+Assumes your project uses git.
+
+##### Options: 
+ - -u username (default is jupiterjs)
+ - -b branch (default is master)
+ - -s source url (default is https://github.com)
+ - -p install path (default is current directory)
+
+##### Usage 
+
+Windows users can ignore the ./ in the path:
+
+Default usage.  This will install from https://jupiterjs@github.com/jupiterjs/steal.git
+@codestart text
+./getjmvc
+@codeend
+
+Use your own forked submodule repositories. This will install from https://github.com/mycompany/steal.git
+@codestart text
+./getjmvc -u mycompany
+@codeend
+
+Install to your own path.  You can specify the path where the submodules are installed, like to public/
+@codestart text
+./getjmvc -p public/
+@codeend
+
+Install a different branch (used to install the 2.0 branches for steal, jquerymx, and funcunit).
+@codestart text
+./getjmvc -b 2.0
+@codeend
+
+Install from a different repository (not github) or from ssh instead of http (if you have write access).
+@codestart text
+./getjmvc -s git@github.com
+./getjmvc -s http://mygitrepo.com
+@codeend
+
+ Update code.  If you installed somewhere besides the current directory, specify a -p.  This will update code in each submodule.
+@codestart text
+./getjmvc
+./getjmvc -p public/
+@codeend
+
+Note: This script installs steal, documentjs, jquerymx, and funcunit, and it downloads syn from whatever is in funcunit/.gitmodules.  
+If you wish to fork your own syn and use that fork, you have to change your funcunit/.gitmodules to point to the right location manually.  
+Check it in and future installs will work fine.
+
+If you just want a certain repo, or you like doing things the hard way, here's how to get each project yourself:
 
 #### Adding a submodule
 
