@@ -38,6 +38,4 @@ then('pages/init').plugins('jquery',
 "//jquery/model/pages/events",
 "//jquery/controller/pages/listening",
 "//jquery/controller/pages/plugin",
-"//jquery/controller/pages/document")
-
-
+"//jquery/controller/pages/document");

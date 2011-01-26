@@ -3,3 +3,5 @@ jmvc/docs/*
 cookbook/*
 docs/*
 scripts/key
+/jmvc/docs
+/jmvc/docs.html
