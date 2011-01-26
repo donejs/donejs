@@ -13,23 +13,20 @@
 #	Default usage.  This will install from https://jupiterjs@github.com/jupiterjs/steal.git
 #		./getjmvc
 #
-#	Use your own forked submodule repositories. This will install from 
-#	https://github.com/jupiterjs/steal.git
-#		./getjmvc -u cengage
+#	Use your own forked submodule repositories. This will install from https://github.com/mycompany/steal.git
+#		./getjmvc -u mycompany
 #
-#	Install to your own path.  You can specify the path where the submodules are installed, 
-#	like to public/
+#	Install to your own path.  You can specify the path where the submodules are installed, like to public/
 #		./getjmvc -p public/
 #
 #	Install a different branch (used to install the 2.0 branches for steal, jquerymx, and funcunit).
 #		./getjmvc -b 2.0
 #
-#	Install from a different repository (not github) or from ssh instead of http (if you have 
-#	write access).
+#	Install from a different repository (not github) or from ssh instead of http (if you have write access).
 #		./getjmvc -s git@github.com
 #		./getjmvc -s http://mygitrepo.com
 #
-# 	Update code.  If you installed somewhere besides the current directory, specify a -p.
+# 	Update code.  If you installed somewhere besides the current directory, specify a -p.  This will update code in each submodule.
 #		./getjmvc
 #		./getjmvc -p public/
 

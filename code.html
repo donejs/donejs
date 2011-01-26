@@ -28,35 +28,45 @@
         <div id='content'>
           <h2>Get JavaScriptMVC</h2>
           <p>There are two ways to get JavaScriptMVC:</p>
-          <ul>
+          <ol>
             <li><a href="https://github.com/downloads/jupiterjs/javascriptmvc/javascriptmvc-3.0.5.zip">Download</a> it</li>
             <li>Git it from GitHub</li>
-          </ul>
+          </ol>
           <p>We prefer you use Git. It's a great way to share changes with us and the community.</p>
-          <h2>GitHub Repositiories</h2>
+          <h2>Installing from Github</h2>
+		  <p>Download the JavaScriptMVC Install script for <a href='https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc'>Mac</a> 
+		  or <a href='https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc.bat'>Windows</a>.</p>
+		  
+		  <p>Put this script where you want to install JavaScriptMVC's submodules (Steal, jQueryMX, FuncUnit, and DocumentJS).</p>
+		  
+		  <p>Type getjmvc in a command promp (or ./getjmvc for Mac users) and it will install each submodule.</p>
+		  
+		  <p>Run it again later to update each submodule.  Script options and more details can be found <a href="docs/developwithgit.html">here</a>.</p>
+		  
+		  <p>If you just want a certain repo, or you like doing things the hard way, here's how to get each project yourself:</p>
           <ul class='github'>
             <li>
               <a href="http://github.com/jupiterjs/javascriptmvc">JavaScriptMVC</a>
-              <code>git clone http://github.com/jupiterjs/javascriptmvc<br />
+              <code>git clone http://github.com/jupiterjs/javascriptmvc.git<br />
               git submodule init<br />
               git submodule update<br />
               cd <span class="normal">into each submodule and do</span> git checkout master</code>
             </li>
             <li>
               <a href="http://github.com/jupiterjs/steal">Steal</a>
-              <code>git clone https://github.com/jupiterjs/steal</code>
+              <code>git clone https://github.com/jupiterjs/steal.git</code>
             </li>
             <li>
               <a href="http://github.com/jupiterjs/jquerymx">jQueryMX</a>
-              <code>git clone https://github.com/jupiterjs/jquerymx jquery</code>
+              <code>git clone https://github.com/jupiterjs/jquerymx.git jquery</code>
             </li>
             <li>
               <a href="http://github.com/jupiterjs/syn">Syn</a>
-              <code>git clone https://github.com/jupiterjs/syn</code>
+              <code>git clone https://github.com/jupiterjs/syn.git</code>
             </li>
             <li>
-              <a href="http://github.com/jupiterjs/funcunit">Funcunit</a>
-              <code>git clone https://github.com/jupiterjs/funcunit<br />
+              <a href="http://github.com/jupiterjs/funcunit">FuncUnit</a>
+              <code>git clone https://github.com/jupiterjs/funcunit.git<br />
               git submodule init<br />
               git submodule update<br />
               cd syn<br />
@@ -64,7 +74,7 @@
             </li>
             <li>
               <a href="http://github.com/jupiterjs/documentjs">DocumentJS</a>
-              <code>git clone https://github.com/jupiterjs/documentjs</code>
+              <code>git clone https://github.com/jupiterjs/documentjs.git</code>
             </li>
           </ul>
           <p>For more information on how to develop with Git check out <a href="docs/developwithgit.html">Developing with Git</a>.</p>
@@ -107,7 +117,7 @@
       <a href="http://jupiterit.com">&copy; Jupiter IT - JavaScriptMVC Training and Support</a>
     </div>
     
-    <script type='text/javascript' src='steal/steal.production.js?jmvc/site'></script>
+    <script type='text/javascript' src='steal/steal.js?jmvc/site'></script>
 	
 	<script type="text/javascript">
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
