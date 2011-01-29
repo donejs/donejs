@@ -34,7 +34,9 @@ master git project.
 
 Assuming you have a github account set up, and are signed in,
 click each of the github links and click 
-the <img src='jmvc\images\fork.png' alt='fork'/> button (in the upper right of the page).
+the fork button (in the upper right of the page).
+
+@image jmvc/images/fork.png
 
 <div class='whisper'>PRO TIP: 
   If you're working for a company, you should create company forks and give 
