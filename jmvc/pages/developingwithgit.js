@@ -14,17 +14,18 @@ Before we get started, we're assuming you:
 If you don't, you might find the following resources helpful:
 
  - [http://git.or.cz/course/svn.html Git - SVN Crash Course]
- - [http://github.com/ Github] - creat an account here
+ - [http://github.com/ Github] - create an account here
  - [http://help.github.com/msysgit-key-setup/ SSH Key Setup]
 
-## Git -ing JavaScriptMVC
+## Git-ing JavaScriptMVC
 
-JavaScriptMVC is comprised of four sub projects:
+JavaScriptMVC is comprised of five sub projects:
 
  - [http://github.com/jupiterjs/steal]
  - [http://github.com/jupiterjs/jquerymx]
  - [http://github.com/jupiterjs/documentjs]
  - [http://github.com/jupiterjs/funcunit]
+ - [http://github.com/jupiterjs/syn]
 
 We're going to fork each of these projects and add them as submodules to your
 master git project.
@@ -33,7 +34,9 @@ master git project.
 
 Assuming you have a github account set up, and are signed in,
 click each of the github links and click 
-the <img src='jmvc\images\fork.png' alt='fork'/> button (in the upper right of the page).
+the fork button (in the upper right of the page).
+
+@image jmvc/images/fork.png
 
 <div class='whisper'>PRO TIP: 
   If you're working for a company, you should create company forks and give 
@@ -41,9 +44,65 @@ the <img src='jmvc\images\fork.png' alt='fork'/> button (in the upper right of t
   same version.
 </div>
 
+#### Installing with a script
+
+To make the next several steps easier, we've made scripts for [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc Mac] 
+and [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc.bat Windows] users that automate adding your repos and setting them up.
+
+Use this script to install JMVC from github or your own fork. If its already installed, it will get latest for all the submodules.  
+Assumes your project uses git.
+
+##### Options: 
+ - -u username (default is jupiterjs)
+ - -b branch (default is master)
+ - -s source url (default is https://github.com)
+ - -p install path (default is current directory)
+
+##### Usage 
+
+Windows users can ignore the ./ in the path:
+
+Default usage.  This will install from https://jupiterjs@github.com/jupiterjs/steal.git
+@codestart text
+./getjmvc
+@codeend
+
+Use your own forked submodule repositories. This will install from https://github.com/mycompany/steal.git
+@codestart text
+./getjmvc -u mycompany
+@codeend
+
+Install to your own path.  You can specify the path where the submodules are installed, like to public/
+@codestart text
+./getjmvc -p public/
+@codeend
+
+Install a different branch (used to install the 2.0 branches for steal, jquerymx, and funcunit).
+@codestart text
+./getjmvc -b 2.0
+@codeend
+
+Install from a different repository (not github) or from ssh instead of http (if you have write access).
+@codestart text
+./getjmvc -s git@github.com
+./getjmvc -s http://mygitrepo.com
+@codeend
+
+ Update code.  If you installed somewhere besides the current directory, specify a -p.  This will update code in each submodule.
+@codestart text
+./getjmvc
+./getjmvc -p public/
+@codeend
+
+Note: This script installs steal, documentjs, jquerymx, and funcunit, and it downloads syn from whatever is in funcunit/.gitmodules.  
+If you wish to fork your own syn and use that fork, you have to change your funcunit/.gitmodules to point to the right location manually.  
+Check it in and future installs will work fine.
+
+If you just want a certain repo, or you like doing things the hard way, here's how to get each project yourself:
+
 #### Adding a submodule
 
-Now add your forked repositories as submodules 
+Now add the first four forked repositories as submodules 
 to your project like:
 
 @codestart text
@@ -68,6 +127,42 @@ Next, you have to install and update the submodules.  Run:
 @codestart
 git submodule init
 git submodule update
+@codeend
+
+You may also have to change to each directory and checkout the master branch:
+
+@codestart
+cd steal
+git checkout master
+@codeend
+
+#### Installing Syn
+
+Syn is a submodule of the funcunit project.  To add your fork to funcunit, 
+first you have to change the submodule to point to your fork 
+(because it points to the jupiterjs fork).  To do this, open funcunit/.gitmodules.  You'll see:
+
+@codestart text
+[submodule "syn"]
+	path = syn
+	url = git@github.com:jupiterjs/syn.git
+	update = merge
+@codeend
+
+Change the URL to your own fork, like:
+
+@codestart text
+url = git@github.com:_YOU_/syn.git
+@codeend
+
+Now install syn, like the other submodules:
+
+@codestart
+cd funcunit
+git submodule init
+git submodule update
+cd syn
+git checkout master
 @codeend
 
 Finally, you just have to move the 'js' commands out of steal for convienence:

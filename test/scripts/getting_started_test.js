@@ -44,7 +44,7 @@ DocumentJS('cookbook/cookbook.html');
 
 load('steal/rhino/steal.js');
 cookbookPage = readFile('cookbook/cookbook.html').
-    replace("steal[env]=development", "steal[env]=production");
+    replace("steal.js", "steal.production.js");
 new steal.File('cookbook/cookbook.html').save( cookbookPage );
 
 print("== complete !!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
