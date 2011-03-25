@@ -5,6 +5,7 @@ steal
 then('pages/init').plugins('jquery',
 'jquery/controller',
 	'jquery/controller/subscribe',
+	'jquery/controller/history',
 'jquery/view',
 	'jquery/view/ejs',
 	'jquery/view/jaml',
