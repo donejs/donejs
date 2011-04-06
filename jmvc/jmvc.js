@@ -39,6 +39,10 @@ then('pages/init').plugins('jquery',
 "//jquery/model/pages/events",
 "//jquery/controller/pages/listening",
 "//jquery/controller/pages/plugin",
-"//jquery/controller/pages/document")
+"//jquery/controller/pages/document",
+"//funcunit/pages/setup.js",
+"//funcunit/pages/writing.js",
+"//funcunit/pages/selenium.js",
+"//funcunit/pages/standalone.js")
 
 
