@@ -43,6 +43,7 @@ then('pages/init').plugins('jquery',
 "//funcunit/pages/setup.js",
 "//funcunit/pages/writing.js",
 "//funcunit/pages/selenium.js",
+"//funcunit/pages/mastering.js",
 "//funcunit/pages/standalone.js",
 "//funcunit/pages/example.js")
 

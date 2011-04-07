@@ -68,7 +68,6 @@ steal(
 'download',
 'learn',
 'why',
-'selenium',
 'help',
 'developingwithgit',
 'folders',
