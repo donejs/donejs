@@ -5,6 +5,7 @@ steal
 then('pages/init').plugins('jquery',
 'jquery/controller',
 	'jquery/controller/subscribe',
+	'jquery/controller/history',
 'jquery/view',
 	'jquery/view/ejs',
 	'jquery/view/jaml',
@@ -17,12 +18,19 @@ then('pages/init').plugins('jquery',
 	'jquery/model/associations',
 	'jquery/model/backup',
 	'jquery/model/validations',
+
 'jquery/event/default',
 'jquery/event/destroyed',
-'jquery/event/drag','jquery/event/drag/limit','jquery/event/drag/scroll',
+'jquery/event/drag',
+	'jquery/event/drag/limit',
+	'jquery/event/drag/scroll',
+	'jquery/event/drag/step',
 'jquery/event/drop',
 'jquery/event/hover',
+'jquery/event/key',
 'jquery/event/resize',
+'jquery/event/swipe',
+
 'jquery/dom/compare',
 'jquery/dom/closest',
 'jquery/dom/within',
@@ -30,6 +38,7 @@ then('pages/init').plugins('jquery',
 'jquery/dom/dimensions',
 'jquery/dom/fixture',
 'jquery/dom/cookie',
+
 'documentjs'
 )
 .then(
