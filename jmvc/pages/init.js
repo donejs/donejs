@@ -37,34 +37,33 @@ If you find a method you keep needing to reference, you can favorite it for quic
 
 JavaScriptMVC is comprised of 4 independent projects:
 
-  - [stealjs Steal] - JavaScript and CSS dependency management and build tools
   - [jQueryMX] - jQuery MVC and DOM extensions
+  - [stealjs StealJS] - JavaScript and CSS dependency management and build tools
   - [FuncUnit] - Functional and Unit Testing framework.
   - [DocumentJS] - Documentation Engine
 
-You can use them together or separately.
+You can use them together or 
+separately (via the [http://javascriptmvc.com/builder.html download builder]).
 
 ## jQueryMX
 
-jQueryMX is a collection of useful jQuery plugins.  You can use 
-the [http://javascriptmvc.com/builder.html download builder] to get Steal-less versions of these plugins.
-
-The following highlights some of jQueryMX's core plugins:
+[jQueryMX] is a collection of mega-useful jQuery plugins. The 
+following highlights some of its core plugins:
 
 ### $.Class
 
-$.Class provides simple prototypal inheritance.  It's used by both $.Controller and $.Model.
+[jQuery.Class $.Class] provides simple prototypal 
+inheritance.  It's used by [jQuery.Controller $.Controller] and 
+[jQuery.Model $.Model].
 
     // create a Monster Class
 	$.Class("Monster",
-	
 	// static methods 
 	{
 	
-	  // keep a list of all monsters
+	  // a list of all monsters
 	  monsters : []
 	},
-	
 	// prototype methods
 	{
 	
@@ -78,17 +77,19 @@ $.Class provides simple prototypal inheritance.  It's used by both $.Controller 
 	  
 	  // a method on monsters
 	  speak : function(){
-	    alert(this.name + " says hello.")
+	    alert(this.name + " says hello.");
 	  }
 	});
 	
 	// create a monster
     var hydra = new Monster("hydra");	
 
+    // call a method on a monster
+	hydra.speak();
 
 ### $.Model
 
-$.Model encapsulates the service and data layer.  The following connects to a JSON REST service
+[jQuery.Model $.Model] encapsulates the service and data layer.  The following connects to a JSON REST service
 and adds a helper to let us know if we can destroy a task:
 
     $.Model("Task",{
@@ -101,7 +102,7 @@ and adds a helper to let us know if we can destroy a task:
       canDestroy : function(){
         return this.acl.indexOf('w') > -1
       }
-    })
+    });
 
 Assuming '/tasks.json' returns a JSON array like:
 
@@ -118,7 +119,8 @@ Assuming '/tasks.json' returns a JSON array like:
       "createdAt": 1303087131164 // April 17 2011
     }]
 
-The following will retrieve all tasks and then destroy tasks that the user is allowed to destroy:
+The following will retrieve all tasks from the server and 
+then destroy tasks that the user is able to destroy:
 
     Task.findAll({}, function(tasks){
       for(var i =0; i < tasks.length; i++){
@@ -129,107 +131,129 @@ The following will retrieve all tasks and then destroy tasks that the user is al
           task.destroy();
         }
       }
-    })
+    });
 
 Model has a number of other useful features such as:
 
-  - Listening to events
-  
-      // listen to name changes on a task
-      task.bind("name", function(ev, newName){
-         alert('task name = '+newName);
-      });
-      
-      //change the task's name
-	  task.attr('name', "laundry");
+<ul>
+  <li><p>Listening to [jquery.model.events events].</p>
+@codestart
+// listen to name changes on a task
+task.bind("name", function(ev, newName){
+   alert('task name = '+newName);
+});
 
-      //listen for Tasks being created:
-	  Task.bind("created", function(newTask){
-	     // create newTask's html and add it to the page
-	  })
+//change the task's name
+task.attr('name', "laundry");
 
-  - Converters
-  
-      $.Model('Task', {
-        convert  : {
-          'date' : function(raw){
-            return new Date(raw)
-          }
-        },
-        attributes : {
-          'createdAt' : 'date' 
-        }
-      })
-      
-      new Task({
-	    createdAt : 1303087131164
-	  }).createdAt.getFullYear() // -> 2011
+//listen for Tasks being created:
+Task.bind("created", function(newTask){
+   // create newTask's html and add it to the page
+});
+@codeend
+</li>
+<li><p>[jquery.model.typeconversion Converting] raw data into more useful objects.</p>
+@codestart
+$.Model('Task', {
+  convert  : {
+    'date' : function(raw){
+      return new Date(raw)
+    }
+  },
+  attributes : {
+    'createdAt' : 'date' 
+  }
+});
 
-  - Lists
-  
-     // define a task list
-     $.Model.List('Task.List',{
-     
-       // add a helper method to a collection of tasks
-       canDestroyAll : function(){
-         return this.grep(function(task){
-           return task.canDestroy();
-         }).length === this.length
-       }
-     });
-     
-     Task.findAll({}, function(tasks){
-     
-       //tasks is a Task.List
-       tasks.canDestroyAll();
-     })
+var task = new Task({ createdAt : 1303087131164});
 
-  - Deferreds
-  
-     // make 2 requests, and do something when they are 
-	 // both complete
-	 
-	 $.when( Task.findAll(), People.findAll() )
-	   .done(function(tasks, people){
-	 
-	 })
+// createdAt is now a date.
+task.createdAt.getFullYear() // -> 2011
+@codeend
+</li>
+<li><p>Methods and utilities on [jQuery.Model.List lists] of instances.</p>
+@codestart
+// define a task list
+$.Model.List('Task.List',{
 
+  // add a helper method to a collection of tasks
+  canDestroyAll : function(){
+    
+    return this.grep(function(task){
+      return task.canDestroy();
+    }).length === this.length
+  }
+});
+
+Task.findAll({}, function(tasks){
+
+  //tasks is a Task.List
+  tasks.canDestroyAll() //-> boolean
+})
+@codeend
+</li>
+<li><p>[http://api.jquery.com/category/deferred-object/ Deferreds]</p>
+@codestart
+// make 2 requests, and do something when they are 
+// both complete
+
+$.when( Task.findAll(), People.findAll() )
+  .done(function(tasks, people){
+
+  // do something cool!
+})
+@codeend
+</li>
+</ul>
+    
 ### $.View
 
-$.View is a template framework.  It allows you to use any template engine in
-the same way.  The following loads a template at "task/views/tasks.ejs", renders
-it with tasks data, and inserts the result in the '#tasks' element.
+[jQuery.View $.View] is a template framework.  It allows 
+you to use different template engines in the same way.  
 
-    $('#tasks').html('task/views/tasks.ejs', Task.findAll() );
+The following requests tasks from the model, then
+loads a template at <code>"task/views/tasks.ejs"</code>, 
+renders it with tasks, and 
+inserts the result in the <code>#tasks</code> element.
 
-The tasks.ejs file might look like:
+    Task.findAll({}, function(tasks){
+      
+      $('#tasks').html('task/views/tasks.ejs', tasks );
+    });
+
+<code>tasks.ejs</code> might look like:
 
     <% $.each(this, function(task){  %>
       <li><%= task.name %></li>
     <% }) %>
 
+$.View understands [http://api.jquery.com/category/deferred-object/ deferreds] so the following does the exact same thing!
+
+     $('#tasks').html('task/views/tasks.ejs', Task.findAll() );
+
 Any template engine can be used with $.View.  JavaScriptMVC comes with:
 
-  - EJS
-  - JAML
-  - MICRO
-  - jQuery.tmpl
+  - [jQuery.EJS]
+  - [Jaml]
+  - [Micro]
+  - [jQuery.tmpl]
 
 ### $.Controller
 
-$.Controller is a jQuery widget factory. The following creates a 'list' plugin
-that writes a message into an element:
+[jQuery.Controller $.Controller] is a jQuery widget factory. The 
+following creates a <code>$.fn.list</code> [jquery.controller.plugin plugin] that writes 
+a message into an element:
 
     $.Controller("List",{
       init : function(){
         this.element.text(this.options.message)
       }
-    })
+    });
 
 	// create the list
 	$('#list').list({message: "Hello World"});
 
-$.Controller lets you define default options:
+$.Controller lets you define [jQuery.Controller.static.defaults default options]:
 
     $.Controller("List",{
       defaults : {
@@ -237,49 +261,51 @@ $.Controller lets you define default options:
       }
     },{
       init : function(){
-        this.element.text(this.options.message)
+        this.element.text(this.options.message);
       }
-    })
+    });
 
     // create's a list that writes "I am list"
 	$('#list').list();
 
 Controller's best feature is that it organizes your event handlers, and 
-makes binding and unbinding event handlers extremely easy. The following writes
-task names in a ul, and alert's the task name when a task is clicked:
+makes [jquery.controller.listening binding and unbinding] event 
+handlers extremely easy. The following listens for clicks on an
+<code>LI</codE> element and alerts the element's text when clicked:
 
     $.Controller("TaskList",{
       init : function(){
         // uses a view to render tasks
-        this.element.html("tasks.ejs", Task.findAll())
+        this.element.html("tasks.ejs", Task.findAll());
       },
       "li click" : function(el){
-        alert( el.text() )
+        alert( el.text() );
       }
-    })
+    });
 
-Controller makes it easy to parameterize event binding.  The following listens for
-tasks being created and inserts them into the list:
+Controller makes it easy to parameterize event binding.  The following 
+listens for tasks being created and inserts them into the list:
 
     $.Controller("TaskList",{
       init : function(){
         // uses a view to render tasks
-        this.element.html("tasks.ejs", Task.findAll())
+        this.element.html("tasks.ejs", Task.findAll());
       },
       "{Task} created" : function(Task, ev, newTask){
-        this.element.append("tasks.ejs",[newTask])
+        this.element.append("tasks.ejs",[newTask]);
       }
-    })
+    });
 
 Finally, this makes it very easy to create widgets that work with any model:
 
-    $.Controller("\List",{
+    $.Controller("List",{
       init : function(){
         // uses a view to render tasks
-        this.element.html(this.options.view, this.options.model.findAll())
+        this.element.html(this.options.view, 
+                          this.options.model.findAll());
       },
       "{model} created" : function(Model, ev, instance){
-        this.element.append(this.options.view,[instance])
+        this.element.append(this.options.view,[instance]);
       }
     });
     
@@ -288,27 +314,34 @@ Finally, this makes it very easy to create widgets that work with any model:
 
 ### Special Events and Dom Extensions
 
-JavaScriptMVC comes packed with jQuery special events like drag-drop and useful DOM extensions. Check them out!
+JavaScriptMVC comes packed with jQuery [specialevents special events]
+(like [jQuery.Drag drag]-[jQuery.Drop drop]) and 
+useful [dom DOM extensions] (like [jQuery.fixture $.fixture]). Check them out!
 
-## Steal
+## StealJS
 
-Steal is a dependency management and build tool system.  To load scripts, first load 
-steal/steal.js in your page and point it to the first JavaScript file you want to load like:
+[stealjs StealJS] is a dependency management and build system.  To 
+load scripts, first load <code>[steal steal/steal.js]</code> in your page and point 
+it to the first JavaScript file you want to load like:
 
     <script type='text/javascript'
             src='../../steal/steal.js?taskmanager/taskmanager.js'>
 
-<b>Note:</b> The path to script.js should be given relative to JavaScriptMVC's root folder.
+<b>Note:</b> The path to script.js should be given relative to 
+JavaScriptMVC's [rootfolder root folder].
 
 ### Loading other scripts
 
-To load other scripts, css, and files, simply 'steal' them relative to the current file. 
+To load other scripts, css, and files, simply 
+'steal' them relative to the current file. 
 
     steal('../list/list','models/task').css('taskmanager')
     
 Typically, once all your dependencies are loaded, you'll want to do 
-something with them.  Pass a function to steal (aliased as <code>.then</code>) to run
-some code once all prior dependencies have completed.  The previous example might look like:
+something with them.  Pass a function to 
+steal (aliased as <code>.[steal.static.then]</code>) to run
+code once all prior dependencies have completed.  <code>taskmanager.js</code> 
+might look like:
 
     steal('../list/list','models/task')
           .css('taskmanager').then(function($){
@@ -323,7 +356,8 @@ You could also write steal('../list/list') like:
     
 Script paths that start with '//' load relative to JMVC's root folder.
 
-Steal encourages you to organize you plugins and apps in a folder structure like:
+Steal encourages you to organize your plugins and apps 
+in a folder structure like:
 
     plugin\
       plugin.js
@@ -365,27 +399,28 @@ a single production build, run:
 
 ### Using the production build
 
-Make your page load the production version of your app, instead of 
-loading <b>steal.js</b>, load steal.<b>production</b>.js like:
+To load the production version of your app, change your page's script tag
+from <b>steal.js</b>, to steal.<b>production</b>.js like:
 
     <script type='text/javascript'
             src='../../steal/steal.production.js?taskmanager/taskmanager.js'>
 
 ## FuncUnit
 
-FuncUnit provides automated unit and 
-functional testing on top of QUnit.  Like every other project, it can be used
-independently or within JavaScriptMVC.  
+[FuncUnit] provides automated unit and 
+functional testing on top of [http://docs.jquery.com/QUnit QUnit].  Like every other project, 
+it can be used independently or within JavaScriptMVC.  
 
 ### Unit Tests
 
-To write a Unit test, create a QUnit page (ex taskmanager/qunit.html) that loads 
+To write a Unit test, create a [http://docs.jquery.com/QUnit QUnit page] 
+(ex <code>taskmanager/qunit.html</code>) that loads 
 steal and your test script like:
 
     <script type='text/javascript'
             src='../../steal/steal.js?taskmanager/taskmanager/test/qunit.js'>
 
-Then steal FuncUnit's qunit plugin, any files you want to test, and write your test:
+Then steal FuncUnit's <code>qunit</code> plugin, any files you want to test, and write your test:
 
     steal.plugins('funcunit/qunit')
          .then('//taskmanager/models/task', function(){
@@ -412,12 +447,13 @@ To run your tests, open the qunit.html page in your favorite browser or with Env
 ### Functional Tests
 
 To write a Functional test, the process is very similar.  Create a 
-QUnit page (ex taskmanager/funcunit.html) that loads a test script like:
+[http://docs.jquery.com/QUnit QUnit page] (ex <code>taskmanager/funcunit.html</code>) that 
+loads a test script like:
 
     <script type='text/javascript'
             src='../../steal/steal.js?taskmanager/taskmanager/test/funcunit.js'>  
 
-Then steal the funcunit plugin and write your test:
+Then steal the <code>funcunit</code> plugin and write your test:
 
     steal.plugins('funcunit')
          .then(function(){
@@ -451,8 +487,10 @@ To run your funcunit test, open the funcunit.html page in your favorite browser 
 
 ## DocumentJS
 
-DocumentJS provides powerful JavaScript documenting capabilities.  
-This whole website is built with it.  Document a 'class-like' object like:
+[DocumentJS] provides powerful JavaScript 
+documenting capabilities.  This whole website is built with it.  
+
+Document a 'class-like' object like:
 
 * @codestart
 * /*
@@ -484,7 +522,7 @@ After you've mastered the basics, here is some reading to continue your mastery:
 
  */
 steal(
-
+'jquerymx',
 'getstarted',
 'install',
 'creating',
