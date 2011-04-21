@@ -18,9 +18,15 @@
 
 ## Getting Started
 
-If you are new to the framework, the [getstarted Getting Started Guide] is the best place to start.  
-There, you'll install JavaScriptMVC, create an app, test, compress, and document it.  
-Or, if you're in a hurry, try the [rapidstart Rapid Start Guide].
+If you are new to the framework, this page followed by 
+the [getstarted Getting Started Guide] is the best place to start.
+
+This page demonstrates many of JavaScriptMVC's most important features.
+
+The [getstarted Getting Started Guide] walks you through 
+creating, testing, minifiying, and documenting an application.
+
+Or, if you're in crazy hurry, try the [rapidstart Rapid Start Guide].
   
 ## How to Use the Docs
 
