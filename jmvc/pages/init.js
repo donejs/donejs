@@ -16,17 +16,13 @@
 </div>
 
 
-## Getting Started
-
-If you are new to the framework, this page followed by 
+Welcome to happy path. This page demonstrates many of JavaScriptMVC's most important 
+features. If you are new to the framework, this page followed by 
 the [getstarted Getting Started Guide] is the best place to start.
 
-This page demonstrates many of JavaScriptMVC's most important features.
-
 The [getstarted Getting Started Guide] walks you through 
-creating, testing, minifiying, and documenting an application.
-
-Or, if you're in crazy hurry, try the [rapidstart Rapid Start Guide].
+creating, testing, minifiying, and documenting an application. Or, if you're in crazy 
+hurry, try the [rapidstart Rapid Start Guide].
   
 ## How to Use the Docs
 
@@ -78,6 +74,8 @@ inheritance.  It's used by [jQuery.Controller $.Controller] and
 	  
 	    // stores a reference to the name
 	    this.name = name;
+	    
+	    // adds this monster to the collection of monsters
 	    this.Class.monsters.push(this);
 	  },
 	  
@@ -153,7 +151,7 @@ task.bind("name", function(ev, newName){
 task.attr('name', "laundry");
 
 //listen for Tasks being created:
-Task.bind("created", function(newTask){
+Task.bind("created", function(ev, newTask){
    // create newTask's html and add it to the page
 });
 @codeend
@@ -222,9 +220,9 @@ loads a template at <code>"task/views/tasks.ejs"</code>,
 renders it with tasks, and 
 inserts the result in the <code>#tasks</code> element.
 
-    Task.findAll({}, function(tasks){
+    Task.findAll( {}, function(tasks){
       
-      $('#tasks').html('task/views/tasks.ejs', tasks );
+      $('#tasks').html( 'task/views/tasks.ejs', tasks );
     });
 
 <code>tasks.ejs</code> might look like:
@@ -235,7 +233,7 @@ inserts the result in the <code>#tasks</code> element.
 
 $.View understands [http://api.jquery.com/category/deferred-object/ deferreds] so the following does the exact same thing!
 
-     $('#tasks').html('task/views/tasks.ejs', Task.findAll() );
+     $('#tasks').html( 'task/views/tasks.ejs', Task.findAll() );
 
 Any template engine can be used with $.View.  JavaScriptMVC comes with:
 
@@ -250,9 +248,9 @@ Any template engine can be used with $.View.  JavaScriptMVC comes with:
 following creates a <code>$.fn.list</code> [jquery.controller.plugin plugin] that writes 
 a message into an element:
 
-    $.Controller("List",{
-      init : function(){
-        this.element.text(this.options.message)
+    $.Controller( "List", {
+      init: function( ) {
+        this.element.text( this.options.message );
       }
     });
 
@@ -261,13 +259,13 @@ a message into an element:
 
 $.Controller lets you define [jQuery.Controller.static.defaults default options]:
 
-    $.Controller("List",{
-      defaults : {
+    $.Controller( "List", {
+      defaults: {
         message : "I am list"
       }
     },{
-      init : function(){
-        this.element.text(this.options.message);
+      init: function( ) {
+        this.element.text( this.options.message );
       }
     });
 
@@ -277,14 +275,14 @@ $.Controller lets you define [jQuery.Controller.static.defaults default options]
 Controller's best feature is that it organizes your event handlers, and 
 makes [jquery.controller.listening binding and unbinding] event 
 handlers extremely easy. The following listens for clicks on an
-<code>LI</codE> element and alerts the element's text when clicked:
+<code>LI</codE> elements and alerts the element's text:
 
-    $.Controller("TaskList",{
-      init : function(){
+    $.Controller( "TaskList", {
+      init: function(){
         // uses a view to render tasks
-        this.element.html("tasks.ejs", Task.findAll());
+        this.element.html( "tasks.ejs", Task.findAll() );
       },
-      "li click" : function(el){
+      "li click": function(el){
         alert( el.text() );
       }
     });
@@ -292,31 +290,31 @@ handlers extremely easy. The following listens for clicks on an
 Controller makes it easy to parameterize event binding.  The following 
 listens for tasks being created and inserts them into the list:
 
-    $.Controller("TaskList",{
-      init : function(){
+    $.Controller( "TaskList", {
+      init: function( ) {
         // uses a view to render tasks
         this.element.html("tasks.ejs", Task.findAll());
       },
-      "{Task} created" : function(Task, ev, newTask){
-        this.element.append("tasks.ejs",[newTask]);
+      "{Task} created": function( Task, ev, newTask ) {
+        this.element.append( "tasks.ejs", [newTask] );
       }
     });
 
 Finally, this makes it very easy to create widgets that work with any model:
 
-    $.Controller("List",{
-      init : function(){
+    $.Controller( "List", {
+      init: function(){
         // uses a view to render tasks
-        this.element.html(this.options.view, 
-                          this.options.model.findAll());
+        this.element.html( this.options.view, 
+                           this.options.model.findAll( ));
       },
-      "{model} created" : function(Model, ev, instance){
-        this.element.append(this.options.view,[instance]);
+      "{model} created": function( Model, ev, instance ){
+        this.element.append( this.options.view, [instance] );
       }
     });
     
-    $("#tasks").list({model: Task, view: 'tasks.ejs'});
-    $("#people").list({model: Person, view: 'people.ejs'});
+    $("#tasks").list({ model: Task, view: 'tasks.ejs' });
+    $("#people").list({model: Person, view: 'people.ejs' });
 
 ### Special Events and Dom Extensions
 
