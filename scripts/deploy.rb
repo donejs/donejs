@@ -17,5 +17,6 @@ Net::SSH.start("javascriptmvc.com", "root", :keys => File.join("scripts", "key")
 	puts ssh.exec!("cd "+destination+" && unzip -o javascriptmvc.zip")
 	puts ssh.exec!("cd "+destination+" && chmod 777 js")
 	puts ssh.exec!("cd "+destination+" && ./js steal/getjs srchr")
+	puts ssh.exec!("cd "+destination+" && ./js steal/getjs todo")
 	puts ssh.exec!("cd "+destination+" && ./js srchr/scripts/build.js")
 end

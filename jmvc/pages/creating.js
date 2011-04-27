@@ -231,7 +231,7 @@ In cookbook.html, you'll find a script tag like:
 
 @codestart
 &lt;script type='text/javascript' 
-        src='../steal/steal.js?cookbook,development'>   
+        src='../steal/steal.js?cookbook'>   
 &lt;/script>
 @codeend
 

@@ -19,17 +19,16 @@ Package #0: 'cookbook/production.js'.
 @codeend
 <p>Verify that production.js was created by checking your <b>'cookbook'</b> folder.</p>
 <h2>Switch to Production Mode</h2>
-<p>Switch to production mode by changing the part of the 
-src tag in cookbook.html that reads "test" to "production" like this:
+<p>Switch to production mode by changing the script tag to include steal.production.js:
 </p>
 @codestart html
 &lt;script type='text/javascript' 
-       src='../steal/steal.js?cookbook,<span style="text-decoration:underline;"><b>production</b></span>'>
+       src='../steal/steal.<span style="text-decoration:underline;"><b>production</b></span>.js?cookbook'>
 &lt;/script>
 @codeend
 <h2>Reload and verify</h2>
 
-<p>Reload your page. Only two JavaScript files will load: steal.js and production.js. 
+<p>Reload your page. Only two JavaScript files will load: steal.production.js and production.js. 
 Not bad considering 28 files are loaded in development mode.</p>
 
 When you're ready, learn how to [documenting Document Cookbook]
