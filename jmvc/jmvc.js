@@ -18,12 +18,19 @@ then('pages/init').plugins('jquery',
 	'jquery/model/associations',
 	'jquery/model/backup',
 	'jquery/model/validations',
+
 'jquery/event/default',
 'jquery/event/destroyed',
-'jquery/event/drag','jquery/event/drag/limit','jquery/event/drag/scroll',
+'jquery/event/drag',
+	'jquery/event/drag/limit',
+	'jquery/event/drag/scroll',
+	'jquery/event/drag/step',
 'jquery/event/drop',
 'jquery/event/hover',
+'jquery/event/key',
 'jquery/event/resize',
+'jquery/event/swipe',
+
 'jquery/dom/compare',
 'jquery/dom/closest',
 'jquery/dom/within',
@@ -31,6 +38,7 @@ then('pages/init').plugins('jquery',
 'jquery/dom/dimensions',
 'jquery/dom/fixture',
 'jquery/dom/cookie',
+
 'documentjs'
 )
 .then(
@@ -39,6 +47,12 @@ then('pages/init').plugins('jquery',
 "//jquery/model/pages/events",
 "//jquery/controller/pages/listening",
 "//jquery/controller/pages/plugin",
-"//jquery/controller/pages/document")
+"//jquery/controller/pages/document",
+"//funcunit/pages/setup.js",
+"//funcunit/pages/writing.js",
+"//funcunit/pages/selenium.js",
+"//funcunit/pages/mastering.js",
+"//funcunit/pages/standalone.js",
+"//funcunit/pages/example.js")
 
 
