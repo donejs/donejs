@@ -28,8 +28,10 @@ then('pages/init').plugins('jquery',
 'jquery/event/drop',
 'jquery/event/hover',
 'jquery/event/key',
+'jquery/event/pause',
 'jquery/event/resize',
 'jquery/event/swipe',
+'jquery/event/selection',
 
 'jquery/dom/compare',
 'jquery/dom/closest',
@@ -38,6 +40,7 @@ then('pages/init').plugins('jquery',
 'jquery/dom/dimensions',
 'jquery/dom/fixture',
 'jquery/dom/cookie',
+'jquery/dom/selection',
 
 'documentjs'
 )

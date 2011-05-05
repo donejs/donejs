@@ -16,7 +16,7 @@
 </div>
 
 
-Welcome to happy path. This page demonstrates many of JavaScriptMVC's most important 
+Welcome to the happy path. This page demonstrates many of JavaScriptMVC's most important 
 features. If you are new to the framework, this page followed by 
 the [getstarted Getting Started Guide] is the best place to start.
 
@@ -108,7 +108,7 @@ and adds a helper to let us know if we can destroy a task:
       }
     });
 
-Assuming '/tasks.json' returns a JSON array like:
+Assuming '/tasks.json' returns a JSON array like ...
 
     [{
       "id"       : 1,
@@ -123,7 +123,7 @@ Assuming '/tasks.json' returns a JSON array like:
       "createdAt": 1303087131164 // April 17 2011
     }]
 
-The following will retrieve all tasks from the server and 
+... the following will retrieve all tasks from the server and 
 then destroy tasks that the user is able to destroy:
 
     Task.findAll({}, function(tasks){
