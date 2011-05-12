@@ -1,0 +1,76 @@
+Version 3.0.6
+
+5/12/2011
+
+JavaScriptMVC
+
+- added getjmvc script
+- added install script for windows
+- added todos to install script
+- added history to docs
+- reorganized funcunit docs
+- added new init page with framework overview
+- added error level support to the js.bat
+- added error level support (-e) for the macs
+
+jQuery MX
+
+- fixing fixtures for jquery 1.4.4 
+- better controller and view docs 
+- fixed bugs with controller inheritance
+- easier creation of fixtures for model
+- support for VERB urls
+- better docs for the CRUD interface 
+- .val method supports views
+- fixed bug with newlines and IE
+- added swipe, swipeleft and swiperight events
+- Model.list upgraded to handle findAll, findOne, limit can limit center of drag 
+- limit and step take center param
+- hover can set leave
+- hover only runs one mouseenter / mouseleave per selector at a time
+- swipe left right added to special for autobinding with controller 
+- added support for HTML5 history api
+- updated drag tests 
+- added docs for key event plugin 
+- improved selection
+- added range plugin
+- drag drop allows adding drops after drag has started 
+- jquery models and fixtures support create, delete, and update model encapsulation
+- jQuery upgraded to 1.5.1
+- ajax converters are renamed wrap -> model and wrapMany -> models
+- added dataType optional param to ajax function in model
+- deferred support for models an views
+- Added 'distance' enhancement to jquerymx to allow mouse distance sensitivity for dragging.  Defaults to 0.
+- added filters to fixtures
+- better warning when templates don't exist
+- implemented tests for validatesInclusionOf, validatesLengthOf, and validatesPresenceOf from model/validations
+- added pause and resume for events
+- added deparam plugin - Takes a string of name value pairs and returns a Object literal that represents those params.
+- resize works better
+- drag doesn't select text anymore
+- added fixes for scaffold
+- "{window} load" works now in controllers
+
+Funcunit
+
+- changes to the repeat api
+- reorganized docs
+- documented confirm and prompt
+- added example
+- added eval
+- fixed bugs with Firefox 4
+- prompts work in selenium with Firefox 4
+- fixed bugs with IE9
+
+DocumentJS
+
+- code cleanup
+
+Syn
+
+- fixed syn to work with Firefox 4
+- IE9 works
+- syn loads in rhino, and documentation can be generated
+- syn works under envjs
+- added tests for special characters (@)
+- syn adjusts scrolling for drag / move positions not in the page
