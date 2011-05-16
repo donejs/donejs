@@ -63,10 +63,6 @@ We are trying to get move public source available, but for now check out:
 
 #### How does JMVC compare to other JS Frameworks?</label>
 
-JavaScriptMVC focuses on building your applications the right way.  It's almost
-exclusively about software engineering.  This is in contrast to other frameworks
-that 
-
 JMVC has the gamut of features to support the most complex JS applications.  
 But it's most important feature, and its most unique, 
 is its event delegation support organized
