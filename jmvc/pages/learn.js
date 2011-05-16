@@ -36,7 +36,7 @@ application, JavaScriptMVC will help.
 #### How does JMVC fit into my project?
 
 JMVC is based around the principles of Service Oriented Architecture (SOA) and
-Thin Servier Architecture (TSA).  This means your server 
+Thin Server Architecture (TSA).  This means your server 
 produces raw (preferably REST) services and never sends data in HTML.
 
 Read a [http://blog.javascriptmvc.com/?p=68 1.5 article]  how it looks
