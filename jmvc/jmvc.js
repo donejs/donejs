@@ -1,5 +1,11 @@
 steal
-.plugins('steal/generate','steal/get','steal/build','steal/coffee','steal/less','steal/clean')
+.plugins('steal/generate',
+	'steal/get',
+	'steal/build',
+	'steal/coffee',
+	'steal/less',
+	'steal/clean',
+	'steal/parse')
 
 .plugins('funcunit').
 then('pages/init').plugins('jquery',
@@ -48,6 +54,7 @@ then('pages/init').plugins('jquery',
 "//jquery/model/pages/encapsulate",
 "//jquery/model/pages/typeconversion",
 "//jquery/model/pages/events",
+"//jquery/model/pages/deferreds",
 "//jquery/controller/pages/listening",
 "//jquery/controller/pages/plugin",
 "//jquery/controller/pages/document",
