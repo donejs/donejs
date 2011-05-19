@@ -36,7 +36,7 @@ application, JavaScriptMVC will help.
 #### How does JMVC fit into my project?
 
 JMVC is based around the principles of Service Oriented Architecture (SOA) and
-Thin Servier Architecture (TSA).  This means your server 
+Thin Server Architecture (TSA).  This means your server 
 produces raw (preferably REST) services and never sends data in HTML.
 
 Read a [http://blog.javascriptmvc.com/?p=68 1.5 article]  how it looks
@@ -62,10 +62,6 @@ We are trying to get move public source available, but for now check out:
 
 
 #### How does JMVC compare to other JS Frameworks?</label>
-
-JavaScriptMVC focuses on building your applications the right way.  It's almost
-exclusively about software engineering.  This is in contrast to other frameworks
-that 
 
 JMVC has the gamut of features to support the most complex JS applications.  
 But it's most important feature, and its most unique, 
