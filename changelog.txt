@@ -9,7 +9,7 @@ JavaScriptMVC
 - Added error level (-e) support to the js.bat (Windows) and ./js (Mac, Linux)
 
 jQuery MX
-- jQuery upgraded to 1.5.1
+- jQuery upgraded to 1.6.1
 - .val method supports Views. EX: $('input').val('view_name', {});
 - Added range plugin
 - Added deparam plugin - Takes a string of name value pairs and returns a Object literal that represents those params.
