@@ -3,7 +3,7 @@
 
 _args = ['jmvc/jmvc.html']
 
-load('steal/rhino/steal.js');
+load('steal/rhino/rhino.js');
 steal.overwrite = true;
 load('documentjs/documentjs.js');
 

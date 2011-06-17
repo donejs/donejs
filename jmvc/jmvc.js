@@ -1,6 +1,11 @@
 steal
-.plugins('steal/generate','steal/get','steal/build','steal/coffee','steal/less','steal/clean')
-
+.plugins('steal/generate',
+	'steal/get',
+	'steal/build',
+	'steal/coffee',
+	'steal/less',
+	'steal/clean')
+.then('//documentjs/documentjs')
 .plugins('funcunit').
 then('pages/init').plugins('jquery',
 'jquery/controller',
@@ -15,7 +20,6 @@ then('pages/init').plugins('jquery',
 	'jquery/model/list',
 		'jquery/model/list/cookie',
 		'jquery/model/list/local',
-	'jquery/model/associations',
 	'jquery/model/backup',
 	'jquery/model/validations',
 'jquery/event/default',
@@ -30,8 +34,7 @@ then('pages/init').plugins('jquery',
 'jquery/dom/form_params',
 'jquery/dom/dimensions',
 'jquery/dom/fixture',
-'jquery/dom/cookie',
-'documentjs'
+'jquery/dom/cookie'
 )
 .then(
 "//jquery/model/pages/encapsulate",
