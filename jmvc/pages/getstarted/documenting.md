@@ -1,6 +1,5 @@
-/*
-@page documenting 2.5. Documenting Cookbook
-@parent getstarted
+@page documenting Documenting Cookbook
+@parent getstarted 4
 <h1 class='addFavorite'>Documenting Cookbook</h1>
 
 <p>Documentation is a critical step in creating maintainable code. 
@@ -63,5 +62,3 @@ for more information.
 <p>In the context of this trivial application, you've been exposed to major tenets of JavaScriptMVC: 
 code separation, testing, compression, and documentation. This is pretty cool! Look at how simply you went from nothing to a compressed, tested, and documented application.
 </p>
-*/
-//break ----------------------------------------------------------------------

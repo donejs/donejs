@@ -1,6 +1,6 @@
-/*
-@page testing 2.3. Testing Cookbook
-@parent getstarted
+@page testing Testing Cookbook
+@parent getstarted 2
+
 <h1 class='addFavorite'>Testing Cookbook
 </h1>
 <p>[FuncUnit] tiered approach allows unit and functional testing in the browser, 
@@ -190,6 +190,3 @@ test("isTasty", function(){
 })
 @codeend
 <p>Next, learn how to [compressing Compress Cookbook].</p>
-
-*/
-//break ----------------------------------------------------------------------

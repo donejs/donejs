@@ -1,6 +1,5 @@
-/*
-@page creating 2.2. Creating Cookbook
-@parent getstarted
+@page creating Creating Cookbook
+@parent getstarted 1
 
 We're going to create a basic cookbook application that
 lets us create, read, update, and delete (CRUD) 
@@ -474,5 +473,3 @@ Tasty column.  Add a recipe with mushrooms
 and Tasty? should be false.
 
 Continue to [testing Testing Cookbook].
-*/
-//break ----------------------------------------------------------------------

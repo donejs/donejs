@@ -41,7 +41,7 @@
 <div class="bottomCorner"><div>&nbsp;</div></div>
 </div>
 <div id='bottom'>       
-<div id='left'>
+<div id='nav'>
 <a>Loading ... </a>
 </div>
 <div id='doc_container'>
@@ -63,9 +63,10 @@
 </script>
 <script type='text/javascript'>
 	DOCS_LOCATION = "docs/" //adds searchData to this
+	JMVCDOC_TIMESTAMP = <%= Math.floor( new Date().getTime() / 5000 ) %>
 </script>
 <script type='text/javascript' 
-    src='<%= pathToRoot %>/steal/steal.production.js?documentjs/jmvcdoc'>   
+    src='<%= pathToRoot %>/steal/steal.js?jmvcdoc'>   
 </script>
 	</body>
 </html>

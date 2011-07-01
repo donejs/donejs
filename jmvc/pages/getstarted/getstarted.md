@@ -1,6 +1,5 @@
-/*
-@page getstarted 2. Get Started
-@tag home, get started
+@page getstarted Getting Started
+@parent index 4
 
 This guide introduces the most important aspects of JavaScriptMVC (JMVC) by 
 creating a simple cookbook application.  There's also a [rapidstart Rapid Start] if 
@@ -84,6 +83,3 @@ These exceptions, although permissive licenses themselves, are not linked in you
 ## Making a Cookbook
 
 Lets get started by [install installing JavaScriptMVC].
-
- */
-//break

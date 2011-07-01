@@ -1,6 +1,5 @@
-/*
-@page install 2.1. Installing JavaScriptMVC
-@parent getstarted
+@page install Installing JavaScriptMVC
+@parent getstarted 0
 
 ## Requirements
 
@@ -106,5 +105,3 @@ C:\workspace\Cookbook>js steal\update
 
 
 Continue to [creating Creating Cookbook].
- */
-//break ---------------------------------------------------------------------

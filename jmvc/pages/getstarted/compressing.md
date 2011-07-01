@@ -1,6 +1,5 @@
-/*
-@page compressing 2.4. Compressing Cookbook
-@parent getstarted
+@page compressing Compressing Cookbook
+@parent getstarted 3
 <h1 class='addFavorite'>Compressing Cookbook</h1>
 
 <p>There is a large overhead associated with downloading many JavaScript files. 
@@ -32,5 +31,3 @@ Package #0: 'cookbook/production.js'.
 Not bad considering 28 files are loaded in development mode.</p>
 
 When you're ready, learn how to [documenting Document Cookbook]
-*/
-//break ----------------------------------------------------------------------

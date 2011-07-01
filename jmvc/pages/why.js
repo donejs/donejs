@@ -1,6 +1,6 @@
 /*
 @page why 0. Why JavaScriptMVC
-@tag home
+
 
 So you've read through the list of features and you're still not 
 convinced JavaScriptMVC is right for you.  If you're looking for

@@ -1,6 +1,6 @@
 /**
 @page download 1. Download
-@tag home
+
 <div style='width: 600px'>
 <p class='spaceabove'>The integrated framework.  Everything you need to sling mad $().
 </p>

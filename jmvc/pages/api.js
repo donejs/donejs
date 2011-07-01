@@ -1,6 +1,6 @@
 /*
  * @page api 4. API
- * @tag home
+
  * <h1 class='addFavorite'>Explore JavaScriptMVC's API</h1>
  * <p>Everything in JavaScriptMVC is listed below.  But before you go reading it,
  * here are some helpful hints:</p>

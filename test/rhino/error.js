@@ -1,0 +1,1 @@
+java.lang.System.exit(1);
