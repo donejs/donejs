@@ -1,14 +1,13 @@
-steal
-.plugins('steal/generate',
+steal('steal/generate',
 	'steal/get',
 	'steal/build',
 	'steal/coffee',
 	'steal/less',
 	'steal/clean',
-	'steal/parse').then('//documentjs/documentjs')
-
-.plugins('funcunit').
-then('pages/init').plugins('jquery',
+	'steal/parse')
+.then('documentjs')
+.then('./pages/init.js')
+.then('jquery',
 'jquery/controller',
 	'jquery/controller/subscribe',
 	'jquery/controller/history',
@@ -47,13 +46,15 @@ then('pages/init').plugins('jquery',
 'jquery/dom/cookie',
 'jquery/dom/selection'
 )
+// funcunit should always be included last because it puts jquery in noconflict mode
+.then('funcunit')
 .then(
-//"//funcunit/pages/setup.js",
-//"//funcunit/pages/writing.js",
-//"//funcunit/pages/selenium.js",
-//"//funcunit/pages/mastering.js",
-//"//funcunit/pages/standalone.js",
-//"//funcunit/pages/example.js"
+"funcunit/pages/setup.js",
+"funcunit/pages/writing.js",
+"funcunit/pages/selenium.js",
+"funcunit/pages/mastering.js",
+"funcunit/pages/standalone.js",
+"funcunit/pages/example.js"
 )
 
 

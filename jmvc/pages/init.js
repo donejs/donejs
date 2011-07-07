@@ -312,15 +312,15 @@ After you've mastered the basics, here is some reading to continue your mastery:
 
  */
 steal(
-'api',
-'download',
-'learn',
-'why',
-'help',
-'developingwithgit',
-'folders',
-'developingjmvc',
-'rapidstart')
+'./api.js',
+'./download.js',
+'./learn.js',
+'./why.js',
+'./help.js',
+'./developingwithgit.js',
+'./folders.js',
+'./developingjmvc.js',
+'./rapidstart.js')
 
 
 
