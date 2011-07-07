@@ -13,7 +13,7 @@ load('jquery/view/test/compression/run.js');
 
 
 print("========================== unit/functional ============================")
-load('steal/rhino/steal.js');
+load('steal/rhino/rhino.js');
 load('funcunit/loader.js');
 FuncUnit.load('test.html');
 

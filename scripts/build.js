@@ -1,4 +1,4 @@
-load('steal/rhino/steal.js')
+load('steal/rhino/rhino.js')
 
 steal.File("../jmvcdownload").removeDir()
 steal.File("jmvcdownload.zip").remove()

@@ -1,4 +1,4 @@
-load('steal/rhino/steal.js')
+load('steal/rhino/rhino.js')
 
 runCommand("cmd", "/C", "js scripts/pull_all.js")
 
