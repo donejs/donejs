@@ -3,18 +3,18 @@
 
 The secret to building large apps is to NEVER build
 large apps.  Break up your applications into small 
-pieces.  Then, assemble those testable, bite-sized pieces 
+pieces.  Then assemble those testable, bite-sized pieces 
 into your big application.
 
 JavaScriptMVC 3.X is built with this pattern in 
 mind. As opposed to a single flat 'scripts' folder, 
-JavaScriptMVC breaks up your application into
+JavaScriptMVC breaks up your app into
 manageable, isolated modules. This tutorial discusses
-the reasons for doing this and how to do it.
+the reasons for doing this and patterns for doing it.
 
 ## Why
 
-Traditionally, JavaScript, CSS and static resources were seen as second-class
+Traditionally JavaScript, CSS and static resources were seen as second-class
 citizens when compared to server code.  JavaScript code was put in a single
 flat 'scripts' folder that looked like:
 
@@ -31,9 +31,9 @@ flat 'scripts' folder that looked like:
       tabs_test.js
       nav_test.js
 
-This worked ok for a limited amount of JavaScript; however; client code
-increasingly represents a larger proportion of an 
-application's codebase.  What works for 10 files does not work for 100.
+This was OK for a limited amount of JavaScript; however; client code
+increasingly represents a larger percentage of an 
+app's codebase.  What works for 10 files does not work for 100.
 
 Complicating matters, an individual JavaScript file might have dependencies on
 non-JavaScript resources.  It's easy to imagine a menu needing 
@@ -46,20 +46,19 @@ hard to know if a particular style rule is needed.
 ### The Fix
 
 JavaScriptMVC gives each resource you author it's own folder.  Typically,
-the folder will hold the resource, the resource's demo page, test page,
+the folder will hold the resource, the its demo page, test page,
 test script, and any other files specific to that resource.
 
 For example, a tabs folder might look like:
 
     \tabs
-      tabs.js
-      tabs.html
-      funcunit.html
-      tabs_test.js
-      tabs.css
+      tabs.js        - the code for a tabs widget 
+      tabs.html      - a demo page
+      funcunit.html  - a test page
+      tabs_test.js   - test code
+      tabs.css       - css for the tab
 
-
-
+The idea is that we can work on <code>tabs.js</code> in complete isolation.
 
 ## How 
 
@@ -69,17 +68,19 @@ throat clearing ...
 > Every app is different. Providing a single folder structure for
 all applications is impossible. However, there are several useful 
 patterns that when understood can keep your
-application under control. JavaScriptMVC is extremely flexible so use your best judgement.  
+application under control. JavaScriptMVC is extremely flexible so use your best judgement!
 
 This guide walks you through starting with a small-ish example app and where you would add
-features over time.
+features over time.  Before the example, it's good to know some JavaScript terminology:
 
 
 ### App and Library Folders
 
-In general, a JavaScriptMVC application is divided into two main folders:
+In general, a JavaScriptMVC application is divided into two root folders:
 
-__App Folder__ - houses code specific to a particular 
+#### Application Folder 
+
+The application (or app) folder houses code specific to a particular 
 application.  The code in this folder is very unlikely to be
 used in other places.  The folder name reflects the name of the application 
 being built.  
