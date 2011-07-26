@@ -285,7 +285,7 @@ in the application folder.  We'll encapsulate it in a controller for each type:
 
 ### Adding leaves to the tree
 
-In the previous example, we moved the code in <code>cms/cms.js</code> into
+In the previous example, we moved most of the code in <code>cms/cms.js</code> into
 an articles, images, and videos plugin.  Each of these plugins should
 work independently from each other, have it's own tests and demo page.
 
@@ -297,7 +297,7 @@ nest plugins within each other.
 
 In this example, after separating out each type into it's own plugin, you might
 want to split the type into edit and grid controls.  The resulting 
-folder structure might look like:
+folder structure would look like:
 
     \cms
       \articles
@@ -333,10 +333,15 @@ folder structure might look like:
       },
       {
         init : function(){
+          // draw the initial html
           this.element.html('//cms/articles/views/init.ejs',{});
+          
+          // create the articles grid
           this.find('.grid').cms_articles_grid();
         },
         "select" : function(el, ev, article){
+          
+          // update the articles edit control
           this.find('.edit').cms_articles_edit({ model: article });
         }
       });
