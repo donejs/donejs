@@ -76,7 +76,8 @@ features over time.  Before the example, it's good to know some JavaScript termi
 
 ### App and Library Folders
 
-In general, a JavaScriptMVC application is divided into two root folders:
+In general, a JavaScriptMVC application is divided into two root folders: an app folder and
+library folder. The app folder code typically 'steals' and configures 'library' code.  
 
 #### Application Folder 
 
@@ -85,21 +86,22 @@ application.  The code in this folder is very unlikely to be
 used in other places.  The folder name reflects the name of the application 
 being built.  
 
-Create an application folder and files with
+Create an application folder structure with:
 
     js jquery\generate\app cms
 
-__Library Folders__ - houses general code that 
+
+#### Library Folders 
+
+A library folder is for general code that 
 can be reused across several applications.  It is the perfect place for 
 reusable controls like a tabs widget.  Typically folder names reflect
 the name of the organization building the controls.  
 
-App folder code typically 'steals' and configures 'library' code.  
-
 ### Resource Types
 
-An application is comprised of various resources.  JavaScriptMVC's code generators make
-creating these resources easy.
+An application is comprised of various resources.  JavaScriptMVC's code generators can 
+be used to create these resources.
 
 __Model__ - A model represents a set of services.  Typically, they exist within an application
 folder's <code>models</code> directory and are used to request data by other controls.
