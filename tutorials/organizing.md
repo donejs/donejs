@@ -123,9 +123,7 @@ Generate a controller like:
 __Plugin__ - A plugin is a low-level reusable module such as a special event or dom extension.
 It does not typically have a visible component.  These should be added to library folders.
 
-@codestart text
-  js jquery\generate\plugin jupiter\range
-@codeend
+    js jquery\generate\plugin jupiter\range
 
 
 ## Example Application
@@ -138,8 +136,8 @@ to be able to edit a selected item of that type.
 
 
 
-If the application's name is __cms__ and it is built by Jupiter, a basic version
-might look like:
+If the application's name is __cms__ and it is built by __Jupiter__, a basic version's
+folder structure might look like:
 
 
     \cms
@@ -157,6 +155,7 @@ This basic version assumes that we can configure the grid and edit widget
 enough to produces the desired functionality. In this case,
 <code>cms/cms.js</code> might look like:
 
+    // load dependencies
     steal('jupiter/tabs',
           'jupiter/grid',
           'jupiter/create',
@@ -164,6 +163,7 @@ enough to produces the desired functionality. In this case,
           './models/video',
           './models/article',function(){
       
+      // add tabs to the page
       $('#tabs').jupiter_tabs();
       
       // Configure the video grid
@@ -210,12 +210,12 @@ the requirements of your application.  For example, you might need to
 add specific functionality around listing and editing videos (such as a thumbnail editor).
 
 This is application specific functionality and belongs 
-in the application folder.  We'll put it in a controller for each type:
+in the application folder.  We'll encapsulate it in a controller for each type:
 
     \cms
-      \articles - functionality in the articles tab
-      \images   - functionality in the images tab
-      \videos   - functionality in the videos tab
+      \articles - the articles tab
+      \images   - the images tab
+      \videos   - the videos tab
       \models  
       \views     
       cms.js
@@ -260,14 +260,23 @@ in the application folder.  We'll put it in a controller for each type:
       },
       {
         init : function(){
+          // draw the html for the tab
           this.element.html('//cms/articles/views/init.ejs',{});
+
+          // configure the grid
           this.find('.grid').jupiter_grid({
 	        model: Cms.Models.Article,
 	        view: "//cms/articles/views/article.ejs"
 	      });
         },
+
+        // when the grid triggers a select event
         "select" : function(el, ev, article){
+
+          // add or update the edit control
           this.find('.edit').jupiter_edit({ model: article })
+
+          // add the thumbnail editor
           	.find('.thumbs').jupiter_thumbnail();
         }
       });
