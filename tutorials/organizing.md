@@ -86,9 +86,7 @@ being built.
 
 Create an application folder and files with
 
-@codestart text
-  js jquery\generate\app cms
-@codeend
+    js jquery\generate\app cms
 
 __Library Folders__ - houses general code that 
 can be reused across several applications.  It is the perfect place for 
@@ -107,9 +105,8 @@ folder's <code>models</code> directory and are used to request data by other con
 
 Generate a model like:
 
-@codestart text
-  js jquery\generate\model cms\models\image
-@codeend
+    js jquery\generate\model cms\models\image
+
 
 __Controller__ - A controller is a widget or code that combines and organizes
 several widgets.  Reusable widgets are added to library folders.  Controllers specific
@@ -117,9 +114,7 @@ to an application should be put in a folder within an application folder.
 
 Generate a controller like:
 
-@codestart text
-  js jquery\generate\controller jupiter\tabs
-@codeend
+    js jquery\generate\controller jupiter\tabs
 
 
 __Plugin__ - A plugin is a low-level reusable module such as a special event or dom extension.
@@ -143,17 +138,17 @@ to be able to edit a selected item of that type.
 If the application's name is __cms__ and it is built by Jupiter, a basic version
 might look like:
 
-@codestart none
-\cms
-  \models    - models for the CMS
-  \views     - views to configure the grid
-  cms.js
-\jupiter
-  \tabs      - a basic tabs widget
-  \edit      - binds a form to edit a model instance
-  \grid      - a configurable grid
-    \views
-@codeend
+
+    \cms
+      \models    - models for the CMS
+      \views     - views to configure the grid
+      cms.js
+    \jupiter
+      \tabs      - a basic tabs widget
+      \edit      - binds a form to edit a model instance
+      \grid      - a configurable grid
+        \views
+
 
 This basic version assumes that we can configure the grid and edit widget
 enough to produces the desired functionality. In this case,
@@ -214,21 +209,19 @@ add specific functionality around listing and editing videos (such as a thumbnai
 This is application specific functionality and belongs 
 in the application folder.  We'll put it in a controller for each type:
 
-@codestart none
-\cms
-  \articles - functionality in the articles tab
-  \images   - functionality in the images tab
-  \videos   - functionality in the videos tab
-  \models  
-  \views     
-  cms.js
-\jupiter
-  \thumbnail
-  \tabs     
-  \edit      
-  \grid      
-    \views
-@codeend
+    \cms
+      \articles - functionality in the articles tab
+      \images   - functionality in the images tab
+      \videos   - functionality in the videos tab
+      \models  
+      \views     
+      cms.js
+    \jupiter
+      \thumbnail
+      \tabs     
+      \edit      
+      \grid      
+        \views
 
 <code>cms/cms.js</code> now looks like:
 
@@ -294,26 +287,25 @@ In this example, after separating out each type into it's own plugin, you might
 want to split the type into edit and grid controls.  The resulting 
 folder structure might look like:
 
-@codestart none
-\cms
-  \articles
-    \grid
-    \edit
-  \images
-    \grid
-    \edit   
-  \videos
-    \grid
-    \edit   
-  \models  
-  \views     
-  cms.js
-\jupiter
-  \thumbnail
-  \tabs     
-  \edit      
-  \grid      
-@codeend
+    \cms
+      \articles
+        \grid
+        \edit
+      \images
+        \grid
+        \edit   
+      \videos
+        \grid
+        \edit   
+      \models  
+      \views     
+      cms.js
+    \jupiter
+      \thumbnail
+      \tabs     
+      \edit      
+      \grid      
+
 
 <code>cms/articles/articles.js</code> might now look like:
 
