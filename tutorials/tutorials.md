@@ -1,16 +1,16 @@
 @page tutorials Tutorials
 @parent index 4
 
-## Installing JavaScriptMVC
+### [installing Installing JavaScriptMVC]
 
-Learning how to install JavaScriptMVC.  This is a pre-requisite 
-for most of the other applications.
+Learn how to install JavaScriptMVC.  This is a prerequisite 
+for most of the other turorials.
 
-## How to Organize Your App
+### [organizing Organizing Your App]
 
 Learning the best way of organizing
 
-## AjaxyTabs
+### AjaxyTabs
 
 Build a simple tabs widget 
 that loads content with ajax.  This walkthrough demonstrates how to make
@@ -22,7 +22,7 @@ Featuring:
   - [steal], [steal.html]
   - [jQuery.fixture fixtures]
   
-## Simple Todo
+### Simple Todo
 
 Build a simple todo list.
 

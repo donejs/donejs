@@ -1,5 +1,4 @@
 @page getstarted Getting Started
-@parent index 4
 
 This guide introduces the most important aspects of JavaScriptMVC (JMVC) by 
 creating a simple cookbook application.  There's also a [rapidstart Rapid Start] if 

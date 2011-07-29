@@ -1,4 +1,4 @@
-@page organizing Organizing Folders And Files
+@page organizing Organizing Your App
 @parent tutorials 1
 
 The secret to building large apps is to NEVER build

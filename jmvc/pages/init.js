@@ -16,8 +16,10 @@
 </div>
 
 
-Welcome to the happy path. This page demonstrates many of JavaScriptMVC's most important 
-features. If you are new to the framework, this page followed by 
+Welcome to the happy path! This page highlights many of JavaScriptMVC's most important 
+features. Read it to get a feel for what is inside and what it can do for you.
+
+If you are new to the framework, this page followed by 
 the [getstarted Getting Started Guide] is the best place to start.
 
 The [getstarted Getting Started Guide] walks you through 
@@ -37,31 +39,35 @@ If you find a method you keep needing to reference, you can favorite it for quic
 
 ## Overview
 
-JavaScriptMVC is comprised of 4 independent projects:
+JavaScriptMVC (JMVC) is a MIT licensed client-side JavaScript framework. It contains
+lots of goodies that help you build a maintainable, error-free application in the shortest
+amount of time.
 
-  - [jquerymx jQueryMX] - jQuery MVC and DOM extensions
-  - [stealjs StealJS] - JavaScript and CSS dependency management and build tools
+These goodies are broken down into four sub-projects:
+
+  - [jquerymx jQueryMX] - jQuery MVC and DOM extensions.
+  - [stealjs StealJS] - JavaScript and CSS dependency management and build tools.
   - [FuncUnit] - Functional and Unit Testing framework.
   - [DocumentJS] - Documentation Engine
 
-You can use them together or 
-separately (via the [http://javascriptmvc.com/builder.html download builder]). This
-page highlights what is in each project.  Click the the project links on the left for 
-a more in-depth overview of each project.
+JavaScriptMVC is extremely modular.  You can use each sub-project together or 
+separately (via the [http://javascriptmvc.com/builder.html download builder]). 
+
+The remainder of this page highlights what is in each project. Click 
+the the project links on the left for a more in-depth overview 
+of each project.
 
 ## jQueryMX
 
-[jquerymx jQueryMX] is a collection of mega-useful jQuery plugins. They provide 
+[jquerymx jQueryMX] is a collection of useful jQuery plugins. They provide 
 functionality missing from jQuery necessary to implement and organize
-large-scale jQuery applications.
+large-scale jQuery applications. The following libraries are part of jQueryMX.
 
 ### $.Class
 
 [jQuery.Class $.Class] provides simple prototypal 
 inheritance.  It's used by [jQuery.Controller $.Controller] and 
-[jQuery.Model $.Model].
-
-	$.Class( NAME , STATIC_PROPS, PROTOTYPE_PROPS );
+[jQuery.Model $.Model] to write object-oriented jQuery.
 
 ### $.Model
 
@@ -70,12 +76,11 @@ inheritance.  It's used by [jQuery.Controller $.Controller] and
   - Create, retrieve, update, and delete data on the server.
   - Convert service data to more useful JS data. EX: "April 18, 2011" to new Date(2011,3,18).
   - Listen to changes in data
-  - Data validation
+  - Validate data
     
 ### $.View
 
-[jQuery.View $.View] is a client-side template framework. It 
-super-powers client-side templating libraries, giving them
+[jQuery.View $.View] super-powers client-side templating libraries, giving them:
 
   - Convenient and uniform syntax
   - Template loading from html elements or external files
@@ -106,7 +111,7 @@ a message into an element:
 
 JavaScriptMVC comes packed with jQuery [specialevents special events]
 (like [jQuery.Drag drag]-[jQuery.Drop drop]) and 
-useful [dom DOM extensions] (like [jQuery.fixture $.fixture]). Check them out!
+useful [dom DOM extensions] (like [jQuery.Range $.Range]). Check them out!
 
 ## StealJS
 
@@ -125,7 +130,7 @@ JavaScriptMVC's [rootfolder root folder].
 To load other scripts, css, and files, simply 
 'steal' them relative to the current file. 
 
-    steal('../list/list','models/task').css('taskmanager')
+    steal('../list/list.js','models/task.js','taskmanager.css')
     
 Typically, once all your dependencies are loaded, you'll want to do 
 something with them.  Pass a function to 
@@ -149,7 +154,7 @@ Script paths that start with '//' load relative to JMVC's root folder.
 Steal encourages you to organize your plugins and apps 
 in a folder structure like:
 
-    plugin\
+    plugins\
       plugin.js
       plugin.html
       plugin_test.js
@@ -164,24 +169,26 @@ in a folder structure like:
       test\
       scripts\
       
-To make creating files and folders like this easy, Steal includes generators that create this structure:
+To make creating files and folders like this easy, Steal has generators 
+that create this structure:
 
-    windows   > js jquery\generate\plugin plugin
+    windows   > js jquery\generate\plugin plugins
     windows   > js jquery\generate\app app
     
     linux/mac > ./js jquery/generate/plugin plugin
     linux/mac > ./js jquery/generate/app app
 
-To make loading files like this easy, steal.plugins loads files named in this way relative to JMVC's root:
+To make loading files like this easy, steal loads files named in this way relative to JMVC's root:
 
-    steal.plugins(
+    steal(
       'list',              // loads //list/list.js
       'jquery/event/drag'  // loads //jquery/event/drag/drag.js
       )
 
 ### Building scripts
 
-If you used the application generator to create an application, to combine and minifiy your scripts into
+If you used the application generator to create an 
+application, to combine and minifiy your scripts into
 a single production build, run:
 
     windows   > js app\scripts\build.js
@@ -198,8 +205,8 @@ from <b>steal.js</b>, to steal.<b>production</b>.js like:
 ## FuncUnit
 
 [FuncUnit] provides automated unit and 
-functional testing on top of [http://docs.jquery.com/QUnit QUnit].  Like every other project, 
-it can be used independently or within JavaScriptMVC.  
+functional testing on top of [http://docs.jquery.com/QUnit QUnit].  It can 
+be used independently or within JavaScriptMVC.  
 
 ### Unit Tests
 
@@ -212,8 +219,9 @@ steal and your test script like:
 
 Then steal FuncUnit's <code>qunit</code> plugin, any files you want to test, and write your test:
 
-    steal.plugins('funcunit/qunit')
-         .then('//taskmanager/models/task', function(){
+    steal('funcunit/qunit',
+          'taskmanager/models/task.js', 
+          function(){
          
          module("Task Model")
          
@@ -245,8 +253,7 @@ loads a test script like:
 
 Then steal the <code>funcunit</code> plugin and write your test:
 
-    steal.plugins('funcunit')
-         .then(function(){
+    steal('funcunit', function(){
          
          module("Task Manager",{
            setup : function(){

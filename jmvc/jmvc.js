@@ -4,7 +4,8 @@ steal('steal/generate',
 	'steal/coffee',
 	'steal/less',
 	'steal/clean',
-	'steal/parse')
+	'steal/parse',
+	'steal/html/crawl')
 .then('documentjs')
 .then('./pages/init.js')
 .then('jquery',
