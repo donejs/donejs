@@ -3,18 +3,18 @@
 
 The secret to building large apps is to NEVER build
 large apps.  Break up your applications into small 
-pieces.  Then, assemble those testable, bite-sized pieces 
+pieces.  Then assemble those testable, bite-sized pieces 
 into your big application.
 
 JavaScriptMVC 3.X is built with this pattern in 
 mind. As opposed to a single flat 'scripts' folder, 
-JavaScriptMVC breaks up your application into
+JavaScriptMVC breaks up your app into
 manageable, isolated modules. This tutorial discusses
-the reasons for doing this and how to do it.
+the reasons for doing this and patterns for doing it.
 
 ## Why
 
-Traditionally, JavaScript, CSS and static resources were seen as second-class
+Traditionally JavaScript, CSS and static resources were seen as second-class
 citizens when compared to server code.  JavaScript code was put in a single
 flat 'scripts' folder that looked like:
 
@@ -31,9 +31,9 @@ flat 'scripts' folder that looked like:
       tabs_test.js
       nav_test.js
 
-This worked ok for a limited amount of JavaScript; however; client code
-increasingly represents a larger proportion of an 
-application's codebase.  What works for 10 files does not work for 100.
+This was OK for a limited amount of JavaScript; however; client code
+increasingly represents a larger percentage of an 
+app's codebase.  What works for 10 files does not work for 100.
 
 Complicating matters, an individual JavaScript file might have dependencies on
 non-JavaScript resources.  It's easy to imagine a menu needing 
@@ -46,20 +46,19 @@ hard to know if a particular style rule is needed.
 ### The Fix
 
 JavaScriptMVC gives each resource you author it's own folder.  Typically,
-the folder will hold the resource, the resource's demo page, test page,
+the folder will hold the resource, the its demo page, test page,
 test script, and any other files specific to that resource.
 
 For example, a tabs folder might look like:
 
     \tabs
-      tabs.js
-      tabs.html
-      funcunit.html
-      tabs_test.js
-      tabs.css
+      tabs.js        - the code for a tabs widget 
+      tabs.html      - a demo page
+      funcunit.html  - a test page
+      tabs_test.js   - test code
+      tabs.css       - css for the tab
 
-
-
+The idea is that we can work on <code>tabs.js</code> in complete isolation.
 
 ## How 
 
@@ -69,36 +68,40 @@ throat clearing ...
 > Every app is different. Providing a single folder structure for
 all applications is impossible. However, there are several useful 
 patterns that when understood can keep your
-application under control. JavaScriptMVC is extremely flexible so use your best judgement.  
+application under control. JavaScriptMVC is extremely flexible so use your best judgement!
 
 This guide walks you through starting with a small-ish example app and where you would add
-features over time.
+features over time.  Before the example, it's good to know some JavaScript terminology:
 
 
 ### App and Library Folders
 
-In general, a JavaScriptMVC application is divided into two main folders:
+In general, a JavaScriptMVC application is divided into two root folders: an app folder and
+library folder. The app folder code typically 'steals' and configures 'library' code.  
 
-__App Folder__ - houses code specific to a particular 
+#### Application Folder 
+
+The application (or app) folder houses code specific to a particular 
 application.  The code in this folder is very unlikely to be
 used in other places.  The folder name reflects the name of the application 
 being built.  
 
-Create an application folder and files with
+Create an application folder structure with:
 
     js jquery\generate\app cms
 
-__Library Folders__ - houses general code that 
+
+#### Library Folders 
+
+A library folder is for general code that 
 can be reused across several applications.  It is the perfect place for 
 reusable controls like a tabs widget.  Typically folder names reflect
 the name of the organization building the controls.  
 
-App folder code typically 'steals' and configures 'library' code.  
-
 ### Resource Types
 
-An application is comprised of various resources.  JavaScriptMVC's code generators make
-creating these resources easy.
+An application is comprised of various resources.  JavaScriptMVC's code generators can 
+be used to create these resources.
 
 __Model__ - A model represents a set of services.  Typically, they exist within an application
 folder's <code>models</code> directory and are used to request data by other controls.
@@ -120,9 +123,7 @@ Generate a controller like:
 __Plugin__ - A plugin is a low-level reusable module such as a special event or dom extension.
 It does not typically have a visible component.  These should be added to library folders.
 
-@codestart text
-  js jquery\generate\plugin jupiter\range
-@codeend
+    js jquery\generate\plugin jupiter\range
 
 
 ## Example Application
@@ -135,8 +136,8 @@ to be able to edit a selected item of that type.
 
 
 
-If the application's name is __cms__ and it is built by Jupiter, a basic version
-might look like:
+If the application's name is __cms__ and it is built by __Jupiter__, a basic version's
+folder structure might look like:
 
 
     \cms
@@ -154,6 +155,7 @@ This basic version assumes that we can configure the grid and edit widget
 enough to produces the desired functionality. In this case,
 <code>cms/cms.js</code> might look like:
 
+    // load dependencies
     steal('jupiter/tabs',
           'jupiter/grid',
           'jupiter/create',
@@ -161,6 +163,7 @@ enough to produces the desired functionality. In this case,
           './models/video',
           './models/article',function(){
       
+      // add tabs to the page
       $('#tabs').jupiter_tabs();
       
       // Configure the video grid
@@ -207,12 +210,12 @@ the requirements of your application.  For example, you might need to
 add specific functionality around listing and editing videos (such as a thumbnail editor).
 
 This is application specific functionality and belongs 
-in the application folder.  We'll put it in a controller for each type:
+in the application folder.  We'll encapsulate it in a controller for each type:
 
     \cms
-      \articles - functionality in the articles tab
-      \images   - functionality in the images tab
-      \videos   - functionality in the videos tab
+      \articles - the articles tab
+      \images   - the images tab
+      \videos   - the videos tab
       \models  
       \views     
       cms.js
@@ -257,14 +260,23 @@ in the application folder.  We'll put it in a controller for each type:
       },
       {
         init : function(){
+          // draw the html for the tab
           this.element.html('//cms/articles/views/init.ejs',{});
+
+          // configure the grid
           this.find('.grid').jupiter_grid({
 	        model: Cms.Models.Article,
 	        view: "//cms/articles/views/article.ejs"
 	      });
         },
+
+        // when the grid triggers a select event
         "select" : function(el, ev, article){
+
+          // add or update the edit control
           this.find('.edit').jupiter_edit({ model: article })
+
+          // add the thumbnail editor
           	.find('.thumbs').jupiter_thumbnail();
         }
       });
@@ -273,7 +285,7 @@ in the application folder.  We'll put it in a controller for each type:
 
 ### Adding leaves to the tree
 
-In the previous example, we moved the code in <code>cms/cms.js</code> into
+In the previous example, we moved most of the code in <code>cms/cms.js</code> into
 an articles, images, and videos plugin.  Each of these plugins should
 work independently from each other, have it's own tests and demo page.
 
@@ -285,7 +297,7 @@ nest plugins within each other.
 
 In this example, after separating out each type into it's own plugin, you might
 want to split the type into edit and grid controls.  The resulting 
-folder structure might look like:
+folder structure would look like:
 
     \cms
       \articles
@@ -321,10 +333,15 @@ folder structure might look like:
       },
       {
         init : function(){
+          // draw the initial html
           this.element.html('//cms/articles/views/init.ejs',{});
+          
+          // create the articles grid
           this.find('.grid').cms_articles_grid();
         },
         "select" : function(el, ev, article){
+          
+          // update the articles edit control
           this.find('.edit').cms_articles_edit({ model: article });
         }
       });
