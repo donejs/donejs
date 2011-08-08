@@ -25,23 +25,12 @@ the [getstarted Getting Started Guide] is the best place to start.
 The [getstarted Getting Started Guide] walks you through 
 creating, testing, minifiying, and documenting an application. Or, if you're in crazy 
 hurry, try the [rapidstart Rapid Start Guide].
-  
-## How to Use the Docs
-
-Click [#&search=core Core] at the top for links to documentation on each core component.
-
-Use the search box at the top left to find the object, class, attribute, function, page or anything else you are looking for. 
-
-After you've typed a search, click up/down/enter to navigate results in the sidebar.
-
-If you find a method you keep needing to reference, you can favorite it for quick access.  On the right of every page title there is a gray star icon. Click it to save that page as a favorite.  Your favorites are listed when you click "Favorites" on the top right navigation.
-
 
 ## Overview
 
 JavaScriptMVC (JMVC) is a MIT licensed client-side JavaScript framework. It contains
-lots of goodies that help you build a maintainable, error-free application in the shortest
-amount of time.
+lots of goodies that help you build a maintainable, error-free 
+application in the shortest amount of time.
 
 These goodies are broken down into four sub-projects:
 
