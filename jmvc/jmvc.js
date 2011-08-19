@@ -5,11 +5,13 @@ steal('steal/generate',
 	'steal/less',
 	'steal/clean',
 	'steal/parse',
-	'steal/html/crawl')
+	'steal/html/crawl'
+)
 .then('documentjs')
 .then('./pages/init.js')
 .then('jquery',
 'jquery/controller',
+'jquery/controller/view',
 	'jquery/controller/subscribe',
 	'jquery/controller/history',
 'jquery/view',
