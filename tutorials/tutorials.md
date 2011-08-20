@@ -6,6 +6,11 @@
 Learn how to install JavaScriptMVC.  This is a prerequisite 
 for most of the other tutorials.
 
+### [mvc The MVC in JavaScriptMVC]
+
+A walkthrough of the MVC parts of JavaScriptMVC.  This is a must read if you want to understand
+how it all fits together.
+
 ### [organizing Organizing Your App]
 
 From a small to large projects, 

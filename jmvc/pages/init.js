@@ -15,32 +15,26 @@
 	</div>	
 </div>
 
+JavaScriptMVC (JMVC) is a MIT licensed client-side JavaScript toolset that helps you 
+build a maintainable, error-free, lightweight 
+application in the shortest amount of time. It packages best-of-bread
+libraries and tools that are guaranteed (and tested) to work together.  It
+supports every browser that jQuery supports.
 
-Welcome to the happy path! This page highlights many of JavaScriptMVC's most important 
-features. Read it to get a feel for what is inside and what it can do for you.
+JMVC's goodies are broken down into four sub-projects:
 
-If you are new to the framework, this page followed by 
-the [getstarted Getting Started Guide] is the best place to start.
-
-The [getstarted Getting Started Guide] walks you through 
-creating, testing, minifiying, and documenting an application. Or, if you're in crazy 
-hurry, try the [rapidstart Rapid Start Guide].
-
-## Overview
-
-JavaScriptMVC (JMVC) is a MIT licensed client-side JavaScript framework. It contains
-lots of goodies that help you build a maintainable, error-free 
-application in the shortest amount of time.
-
-These goodies are broken down into four sub-projects:
-
-  - [jquerymx jQueryMX] - jQuery MVC and DOM extensions.
-  - [stealjs StealJS] - JavaScript and CSS dependency management and build tools.
-  - [FuncUnit] - Functional and Unit Testing framework.
+  - [jquerymx jQueryMX] - jQuery MVC and DOM extensions
+  - [stealjs StealJS] - JavaScript and CSS dependency management and build tools
+  - [FuncUnit] - Functional and Unit Testing framework
   - [DocumentJS] - Documentation Engine
 
-JavaScriptMVC is extremely modular.  You can use each sub-project together or 
-separately (via the [http://javascriptmvc.com/builder.html download builder]). 
+JavaScriptMVC is extremely modular. You can use each sub-project together or 
+separately (via the [http://javascriptmvc.com/builder.html download builder]). This means
+that you can start small, using only [jQuery.Controller $.Controller] and add in parts
+of the framework as necessary. 
+
+If you are new to the framework, this page followed by 
+the [tutorials tutorials and Guides] is the best place to start.
 
 The remainder of this page highlights what is in each project. Click 
 the the project links on the left for a more in-depth overview 
@@ -48,263 +42,56 @@ of each project.
 
 ## jQueryMX
 
-[jquerymx jQueryMX] is a collection of useful jQuery plugins. They provide 
-functionality missing from jQuery necessary to implement and organize
-large-scale jQuery applications. The following libraries are part of jQueryMX.
+[jquerymx jQueryMX] is a collection of useful jQuery libraries that provide 
+the missing functionality necessary to implement and organize
+large-scale jQuery applications. For example, it includes things like:
 
-### $.Class
+  - A [jQuery.Class class] system
+  - Special events like [jQuery.Drag drag]-[jQuery.Drop drop] and [jQuery.event.special.resize resize]
+  - Language helpers like [jQuery.toJSON toJSON] and an [jQuery.Observe observable system]
+  - DOM extensions for things like [jQuery.Range text ranges] and [jQuery.cookie cookies]
+  - Browser history [jQuery.route routing].
+  
+jQueryMX also puts the MVC in JavaScript with $.Model,
+$.View, and $.Controller.  [jQuery.Model Models] connect to your
+server over a RESTful JSON interface.  [jQuery.View Views] are super-charged 
+client side templates.  [jQuery.Controller Controllers] prevent 
+memory leaks with declarative event handling.
 
-[jQuery.Class $.Class] provides simple prototypal 
-inheritance.  It's used by [jQuery.Controller $.Controller] and 
-[jQuery.Model $.Model] to write object-oriented jQuery.
-
-### $.Model
-
-[jQuery.Model $.Model] encapsulates the service and data layer.  It helps you 
-
-  - Create, retrieve, update, and delete data on the server.
-  - Convert service data to more useful JS data. EX: "April 18, 2011" to new Date(2011,3,18).
-  - Listen to changes in data
-  - Validate data
-    
-### $.View
-
-[jQuery.View $.View] super-powers client-side templating libraries, giving them:
-
-  - Convenient and uniform syntax
-  - Template loading from html elements or external files
-  - Synchronous or asynchronous template loading
-  - Template preloading
-  - Caching of processed templates
-  - Bundling of processed templates in production builds
-  - $.Deferred support
-
-### $.Controller
-
-[jQuery.Controller $.Controller] is a jQuery widget factory that specializes in preventing
-memory leaks. 
-
-The following creates a <code>$.fn.list</code> [jquery.controller.plugin plugin] that writes 
-a message into an element:
-
-    $.Controller( "List", {
-      init: function( ) {
-        this.element.text( this.options.message );
-      }
-    });
-
-	// create the list
-	$('#list').list({message: "Hello World"});
-
-### Special Events and Dom Extensions
-
-JavaScriptMVC comes packed with jQuery [specialevents special events]
-(like [jQuery.Drag drag]-[jQuery.Drop drop]) and 
-useful [dom DOM extensions] (like [jQuery.Range $.Range]). Check them out!
+jQueryMX is very lightweight.  It's MVC libraries combined (including their $.Class dependency) are 7kb minified
+and gzipped.  Furthermore, you can use every part of jQueryMX independently of JavaScriptMVC 
+and even independently of other parts of jQueryMX.  For example, you can use $.Controller without $.Model.
 
 ## StealJS
 
-[stealjs StealJS] is a dependency management and build system.  To 
-load scripts, first load <code>[steal steal/steal.js]</code> in your page and point 
-it to the first JavaScript file you want to load like:
+[stealjs StealJS] is a "code manager" that keeps your code beautiful and organized
+while developing and FAST for users in production.  Its collection of command-line and
+browser-based utilities enable you to:
 
-    <script type='text/javascript'
-            src='../../steal/steal.js?taskmanager/taskmanager.js'>
+  - [steal load] JS, CSS, LESS, and CoffeeScript files and build them into a single production file.
+  - [steal.generate generate] an application file/folder structure, complete with test, build and documentation scripts.
+  - [steal.get install] 3rd party dependencies.
+  - [steal.clean clean and JSLint] your code.
+  - make your Ajax app [steal.html crawlable].
+  - log [steal.dev messages] in development that get removed in production builds.
 
-<b>Note:</b> The path to script.js should be given relative to 
-JavaScriptMVC's [rootfolder root folder].
-
-### Loading other scripts
-
-To load other scripts, css, and files, simply 
-'steal' them relative to the current file. 
-
-    steal('../list/list.js','models/task.js','taskmanager.css')
-    
-Typically, once all your dependencies are loaded, you'll want to do 
-something with them.  Pass a function to 
-steal (aliased as <code>.[steal.static.then]</code>) to run
-code once all prior dependencies have completed.  <code>taskmanager.js</code> 
-might look like:
-
-    steal('../list/list','models/task')
-          .css('taskmanager').then(function($){
-    
-      $('#tasks').list({model: Task})      
-    
-    })
-
-You could also write steal('../list/list') like:
-
-    steal('//list/list');
-    
-Script paths that start with '//' load relative to JMVC's root folder.
-
-Steal encourages you to organize your plugins and apps 
-in a folder structure like:
-
-    plugins\
-      plugin.js
-      plugin.html
-      plugin_test.js
-      plugin_test.html
-      views\
-      
-    app\
-      app.js
-      app.html
-      models\
-      views\
-      test\
-      scripts\
-      
-To make creating files and folders like this easy, Steal has generators 
-that create this structure:
-
-    windows   > js jquery\generate\plugin plugins
-    windows   > js jquery\generate\app app
-    
-    linux/mac > ./js jquery/generate/plugin plugin
-    linux/mac > ./js jquery/generate/app app
-
-To make loading files like this easy, steal loads files named in this way relative to JMVC's root:
-
-    steal(
-      'list',              // loads //list/list.js
-      'jquery/event/drag'  // loads //jquery/event/drag/drag.js
-      )
-
-### Building scripts
-
-If you used the application generator to create an 
-application, to combine and minifiy your scripts into
-a single production build, run:
-
-    windows   > js app\scripts\build.js
-    linux/mac > ./js app/scripts/build.js
-
-### Using the production build
-
-To load the production version of your app, change your page's script tag
-from <b>steal.js</b>, to steal.<b>production</b>.js like:
-
-    <script type='text/javascript'
-            src='../../steal/steal.production.js?taskmanager/taskmanager.js'>
+[stealjs StealJS] is a stand-alone tool that can be used without the rest of JavaScriptMVC.
 
 ## FuncUnit
 
-[FuncUnit] provides automated unit and 
-functional testing on top of [http://docs.jquery.com/QUnit QUnit].  It can 
-be used independently or within JavaScriptMVC.  
+[FuncUnit] is a web application testing framework that provides automated unit and 
+functional testing.  Tests are written and debugged in the browser with
+FuncUnit's short, terse, jQuery-like API.  The same tests can be instantly 
+automated, run by Envjs or Selenium.  
 
-### Unit Tests
-
-To write a Unit test, create a [http://docs.jquery.com/QUnit QUnit page] 
-(ex <code>taskmanager/qunit.html</code>) that loads 
-steal and your test script like:
-
-    <script type='text/javascript'
-            src='../../steal/steal.js?taskmanager/taskmanager/test/qunit.js'>
-
-Then steal FuncUnit's <code>qunit</code> plugin, any files you want to test, and write your test:
-
-    steal('funcunit/qunit',
-          'taskmanager/models/task.js', 
-          function(){
-         
-         module("Task Model")
-         
-         test('findAll', function(){
-         
-           stop()
-           Task.findAll({}, function(tasks){
-             ok(tasks.length > 0, "We found at least 1 task");
-             start();
-           });
-           
-         });
-         
-    })
-
-To run your tests, open the qunit.html page in your favorite browser or with Envjs's headless browser like:
-
-    windows   > funcunit\envjs taskmanager\qunit.html
-    linux/mac > ./funcunit/envjs taskmanager/qunit.html
-
-### Functional Tests
-
-To write a Functional test, the process is very similar.  Create a 
-[http://docs.jquery.com/QUnit QUnit page] (ex <code>taskmanager/funcunit.html</code>) that 
-loads a test script like:
-
-    <script type='text/javascript'
-            src='../../steal/steal.js?taskmanager/taskmanager/test/funcunit.js'>  
-
-Then steal the <code>funcunit</code> plugin and write your test:
-
-    steal('funcunit', function(){
-         
-         module("Task Manager",{
-           setup : function(){
-             S.open('//taskmanager/taskmanager.html');
-             
-             //wait for tasks to exist
-			 S('li').exit()
-           }
-         })
-         
-         test('creating a task', function(){
-            
-            // enter a task name and submit the form
-            S('input[name=name]').type('Do the dishes\n');
-            
-            // make sure the new task is present
-			S('li:contains(Do the dishes)').exists(function(){
-			  ok(true, "created a task")
-			});
-         })
-         
-    })
-
-To run your funcunit test, open the funcunit.html page in your favorite browser or with Envjs's headless browser like:
-
-    windows   > funcunit\envjs taskmanager\qunit.html
-    linux/mac > ./funcunit/envjs taskmanager/qunit.html
+FuncUnit also supports extremely accurate [Syn event simulation] on practically every browser and
+system.
 
 ## DocumentJS
 
-[DocumentJS] provides powerful JavaScript 
-documenting capabilities.  This whole website is built with it.  
-
-Document a 'class-like' object like:
-
-* @codestart
-* /*
-*  * @@class Customer
-*  * @@parent crm 
-*  * @@constructor
-*  * Creates a new customer.
-*  * @@param {String} name
-*  *|
-*  var Customer = function(name) {
-*     this.name = name;
-*  }
-* @codeend 
-
-If you used the app generator to create an application, you can document your app like:
-
-    windows   > js app\scripts\doc.js
-    linux/mac > ./js app/scripts/doc.js
-
-## Beyond the basics
-
-After you've mastered the basics, here is some reading to continue your mastery:
-
-  - [learn Learn] - some FAQs about the bigger picture
-  - [http://jupiterjs.com/news/organizing-a-jquery-application Organizing a jQuery Application] - the architecture for assembling an app
-  - [http://jupiterjs.com/news/creating-a-javascriptmvc-slider Creating a JavaScriptMVC Slider] - how to create a widget
-  - [http://jupiterit.com/news/javascriptmvc-features JavaScriptMVC Features] - features list
-  - [http://jupiterjs.com/news/javascriptmvc-3-0-good-to-go JavaScriptMVC 3.0 Good to Go] - what's new in the 3.0 release
+[DocumentJS] provides powerful JavaScript documenting 
+capabilities.  This whole website is built with it! DocumentJS can document practically 
+anything.  It's extensible.  And with Markdown support, it's easy to document your code.
 
  */
 steal(
