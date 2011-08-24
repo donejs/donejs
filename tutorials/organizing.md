@@ -1,5 +1,5 @@
 @page organizing Organizing Your App
-@parent tutorials 1
+@parent tutorials 2
 
 The secret to building large apps is to NEVER build
 large apps.  Break up your applications into small 
