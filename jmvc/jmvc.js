@@ -11,9 +11,8 @@ steal('steal/generate',
 .then('./pages/init.js')
 .then('jquery',
 'jquery/controller',
-'jquery/controller/view',
+	'jquery/controller/view',
 	'jquery/controller/subscribe',
-	'jquery/controller/history',
 'jquery/view',
 	'jquery/view/ejs',
 	'jquery/view/jaml',
@@ -48,9 +47,7 @@ steal('steal/generate',
 'jquery/dom/fixture',
 'jquery/dom/cookie',
 'jquery/dom/selection',
-'jquery/dom/route',
-
-'jquery/lang/deparam'
+'jquery/dom/route'
 )
 // funcunit should always be included last because it puts jquery in noconflict mode
 .then('funcunit')
