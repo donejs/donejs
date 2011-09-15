@@ -51,13 +51,3 @@ steal('steal/generate',
 )
 // funcunit should always be included last because it puts jquery in noconflict mode
 .then('funcunit')
-.then(
-"funcunit/pages/setup.js",
-"funcunit/pages/writing.js",
-"funcunit/pages/selenium.js",
-"funcunit/pages/mastering.js",
-"funcunit/pages/standalone.js",
-"funcunit/pages/example.js"
-)
-
-
