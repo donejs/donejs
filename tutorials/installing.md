@@ -6,7 +6,7 @@
 JavaScriptMVC requires Java JRE 1.6 or greater for:
 
  - Compression (Google Closure)
- - Selenium run FuncUnit tests
+ - Running FuncUnit tests with Selenium
  - Easy updating
  - Code Generators
 

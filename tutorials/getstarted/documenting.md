@@ -1,5 +1,5 @@
 @page documenting Documenting Cookbook
-@parent getstarted 4
+@parent getstarted 3
 <h1 class='addFavorite'>Documenting Cookbook</h1>
 
 <p>Documentation is a critical step in creating maintainable code. 

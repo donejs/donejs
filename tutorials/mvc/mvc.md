@@ -1,5 +1,5 @@
 @page mvc The MVC in JavaScriptMVC
-@parent tutorials 1
+@parent tutorials 2
 
 JavaScriptMVC (JMVC) is an open-source jQuery-based JavaScript framework.  It is nearly a comprehensive (holistic) front-end development framework, packaging utilities for testing, dependency management, documentation, and a host of useful jQuery plugins.  
 

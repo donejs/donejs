@@ -1,5 +1,5 @@
 @page testing Testing Cookbook
-@parent getstarted 2
+@parent getstarted 1
 
 <h1 class='addFavorite'>Testing Cookbook
 </h1>

@@ -1,5 +1,5 @@
 @page compressing Compressing Cookbook
-@parent getstarted 3
+@parent getstarted 2
 <h1 class='addFavorite'>Compressing Cookbook</h1>
 
 <p>There is a large overhead associated with downloading many JavaScript files. 
