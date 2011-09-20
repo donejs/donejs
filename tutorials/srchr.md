@@ -1,4 +1,4 @@
-@page srchr Architecture of Srchr the app
+@page srchr Architecture of the Srchr app
 @parent tutorials 0
 
 # Srchr Application
@@ -18,7 +18,7 @@ Srchr was built the 'JavaScriptMVC' way (i.e. competently). It has a folder/file
 
 Every JavaScript application implements different widgets to show and manipulate data. In JavaScriptMVC every one of these widgets is built as a standalone part that can be reused and tested. These widgets communicate between themselves by triggering events which allows us to build as loosely coupled application as possible. 
 
-Searchr is broken into logically separated components: 
+Srchr is broken into logically separated components: 
 
 * Disabler - Listens for search messages and disables tab buttons. 
 * History - A cookie saved list of items. 
@@ -30,7 +30,7 @@ Searchr is broken into logically separated components:
 @image tutorials/images/app_organization.png
 
 
-Searchr's tab system is implemented with three widgets: tabs, search\_tabs and disabler. Each of these widgets can work completely separate from each other and each is responsible for the part of the functionality:
+Srchr's tab system is implemented with three widgets: tabs, search\_tabs and disabler. Each of these widgets can work completely separate from each other and each is responsible for the part of the functionality:
 
 * search\_tabs widget is responsible for generating the HTML and drawing of tabs on the screen
 * tabs widget adds "tabbing" functionality to the HTML elements. It listens for the click event and triggers the "activate" event. Tab switching is implemented by listening to the "activate" event.
@@ -56,7 +56,7 @@ Steal is smart enough to load resources only once even though multiple widgets m
 
 ## Assembling higher order functionality
 
-After you have developed your widgets in the isolation, they need to be assembled into the application. Searchr is a small application, so most of the assembling is done in the srchr.js file. When you generate the JavaScriptMVC application:
+After you have developed your widgets in the isolation, they need to be assembled into the application. Srchr is a small application, so most of the assembling is done in the srchr.js file. When you generate the JavaScriptMVC application:
 
     ./js jquery/generate/app srchr
 
