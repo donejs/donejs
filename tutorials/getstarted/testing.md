@@ -1,24 +1,33 @@
 @page testing Testing Cookbook
 @parent getstarted 1
 
-<h1 class='addFavorite'>Testing Cookbook
-</h1>
-<p>[FuncUnit] tiered approach allows unit and functional testing in the browser, 
-[http://www.mozilla.org/rhino/ Rhino], and 
-[http://seleniumhq.org/ Selenium].
-When you scaffolded recipe, it created tests for you.  This guide will show you how to:
-</p>
-<ul>
-	<li>Run unit tests.</li>
-	<li>Run functional tests.</li>
-	<li>Understand the qUnit unit tests.</li>
-	<li>Understand the FuncUnit functional tests.</li>
-	<li>Test isTasty functionality.</li>
-</ul>
+JavaScriptMVC puts a tremendous emphasis on 
+testing. It uses [FuncUnit] to provide easy to write functional and
+unit tests that can be run in the browser or automated!
 
-<h2>Run Unit Tests</h2>
-<p>JavaScriptMVC uses qUnit to test unit functionality (like models and basic plugins).  You can run these
-tests in the browser or Envjs.  </p>
+When you scaffolded recipe, it created tests for you.  This guide will show you how to:
+
+- Run unit tests.
+- Run functional tests.
+- Understand the unit tests.
+- Understand the functional tests.
+- Test isTasty functionality.
+
+## Run Unit Tests
+
+FuncUnit uses QUnit unit test things like models and basic plugins.  You can run these
+tests in the browser or Envjs (and now PhantomJS with a little extra work).
+
+### Run Unit Tests in the Browser
+
+Open <code>cookbook/qunit.html</code>.  You should see something like:
+
+<img src='http://wiki.javascriptmvc.com/wiki/images/2/27/Qunit.png'/>
+
+@codestart
+> funcunit\envjs cookbook/qunit.html
+@codeend
+
 <p><code>cookbook/test/qunit/qunit.js</code> loads qunit and your unit tests.  Make sure
 you have added <code>recipe_test.js</code> like:</p>
 @codestart
@@ -27,13 +36,11 @@ steal
   .then("cookbook_test",<u><b>'recipe_test'</b></u>)
 @codeend
 <h3>Run Unit Tests in the Browser</h3>
-<p>Open <code>cookbook/qunit.html</code>.  You should see something like:</p>
-<img src='http://wiki.javascriptmvc.com/wiki/images/2/27/Qunit.png'/>
+<p></p>
+
 <h3>Run Unit Tests in Envjs</h3>
 <p>In a command window type:</p>
-@codestart
-> funcunit\envjs cookbook/qunit.html
-@codeend
+
 This runs qunit.html in a simulated browser environment.  The output should look like:<br/>
 <img src='http://wiki.javascriptmvc.com/wiki/images/2/24/Qunit-envjs.png' width='500px'>
 

@@ -1,9 +1,7 @@
-@page srchr Architecture of the Srchr app
-@parent tutorials 0
+@page srchr Srchr
+@parent examples 0
 
-# Srchr Application
-
-The Srchr app makes searches using multiple services and saves the searches between page loads. It is an example of application organization with JavaScriptMVC. 
+Srchr app makes searches using multiple services and saves the searches between page loads. It is an example of application organization with JavaScriptMVC. 
 
 ## The "JavaScriptMVC" way
 
