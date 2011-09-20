@@ -9,5 +9,5 @@ load('documentjs/documentjs.js');
 
 
 DocumentJS('jmvc/jmvc.html',{
-	markdown : ['jquery','steal','jmvc','tutorials']
+	markdown : ['jquery','steal','jmvc','tutorials','funcunit']
 });
