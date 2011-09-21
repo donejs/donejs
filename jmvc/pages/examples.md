@@ -3,7 +3,7 @@
 
 ## Srchr
 
-## Playermx
+## [Playermx](https://github.com/jupiterjs/javascriptmvc/blob/master/tutorials/playermx.md)
 
 ## Todo
 
