@@ -195,6 +195,7 @@ so it looks like:
 		&lt;title>cookbook&lt;/title>
 	&lt;/head>
 	&lt;body>
+	    <h1>Welcome to JavaScriptMVC 3.2!</h1>
 	    &lt;h1>Recipes&lt;/h1>
 	    &lt;ul id='recipes'>&lt;/ul>
 	    &lt;form id='create' action=''>&lt;/form>
