@@ -8,8 +8,8 @@ unit tests that can be run in the browser or automated!
 When you scaffolded recipe, it created tests for you.  This guide will show you how to:
 
 - Run unit tests.
-- Run functional tests.
 - Understand the unit tests.
+- Run functional tests.
 - Understand the functional tests.
 - Test isTasty functionality.
 
@@ -24,47 +24,96 @@ Open <code>cookbook/qunit.html</code>.  You should see something like:
 
 <img src='http://wiki.javascriptmvc.com/wiki/images/2/27/Qunit.png'/>
 
+We'll see how this works in a second.  First, lets run the unit tests
+in Envjs.
+
+### Run Unit Tests in Envjs
+
+Envjs is a JavaScript-based browser for Rhino.  FuncUnit
+can run your tests in this simulated environment.  
+
+In a command window type:
+
 @codestart
-> funcunit\envjs cookbook/qunit.html
+> funcunit/envjs cookbook/qunit.html
 @codeend
 
-<p><code>cookbook/test/qunit/qunit.js</code> loads qunit and your unit tests.  Make sure
-you have added <code>recipe_test.js</code> like:</p>
-@codestart
-steal
-  .plugins("funcunit/qunit", "cookbook")
-  .then("cookbook_test",<u><b>'recipe_test'</b></u>)
-@codeend
-<h3>Run Unit Tests in the Browser</h3>
-<p></p>
+This runs qunit.html in a simulated 
+browser environment.  The output should look like:
 
-<h3>Run Unit Tests in Envjs</h3>
-<p>In a command window type:</p>
-
-This runs qunit.html in a simulated browser environment.  The output should look like:<br/>
 <img src='http://wiki.javascriptmvc.com/wiki/images/2/24/Qunit-envjs.png' width='500px'>
 
-<h2>Run Functional Tests</h2>
-<p>JavaScriptMVC uses FuncUnit to add browser and selenium-based functional 
-testing to qUnit.  You can run tests in the browser or using selenium.</p>
-<p><code>cookbook/test/funcunit/funcunit.js</code> loads funcunit and your functional tests.  
-Make sure you have added <code>recipe_controller_test.js</code> like:</p>
-@codestart
-steal
- .plugins("funcunit")
- .then("cookbook_test",<u><b>'recipe_controller_test'</b></u>)
-@codeend
+## Understanding the Unit Tests
 
-<h3>Run Functional Tests in the Browser</h3>
-<p>Open <code>cookbook/funcunit.html</code>.  You should see something like:</p>
+FuncUnit uses [http://docs.jquery.com/QUnit QUnit] for assertions and
+organizing them into tests and modules.  The best place to start understanding the
+unit tests is to read through [http://docs.jquery.com/QUnit QUnit's documentation].
+
+__cookbook/qunit.html__ loads [steal] and tells it to load
+<code>cookbook/test/qunit/qunit.js</code> which loads your unit tests:
+
+ - <code>cookbook/test/qunit/cookbook_test.js</code>
+ - <code>cookbook/test/qunit/recipe_test.js</code>
+ 
+These files steal <code>funcunit/qunit</code> then 
+declare tests that get run once 
+all scripts have loaded.
+
+Open __cookbook/test/qunit/recipe_test.js__, 
+and lets see how the __findAll__ test works:
+
+
+    //creates a test
+    test("findAll", function(){
+      //prevents the next test from running
+      stop(2000);
+      
+      //requests recipes
+      Cookbook.Models.Recipe.findAll({}, function(recipes){
+    
+        //makes sure we have something
+        ok(recipes)
+    
+        //makes sure we have at least 1 recipe
+        ok(recipes.length)
+    
+        //makes sure a recipe looks right
+        ok(recipes[0].name)
+        ok(recipes[0].description)
+    
+        //allows the next test to start
+        start()
+      });
+    })
+
+## Run Functional Tests
+
+Functional tests are used to test things 
+that require user interaction like widgets that listen for 
+clicks and key events.
+
+Cookbook's functional tests test the recipe create and recipe lists widgets.
+
+### Run Functional Tests in the Browser
+
+Open <code>cookbook/funcunit.html</code>.  You should see something like:
+
 <img src='http://wiki.javascriptmvc.com/wiki/images/b/b6/Funcunit.png'/>
-<h3>Run Functional Tests in Selenium</h3>
-<p>In a command window type:</p>
+
+### Run Functional Tests in Selenium
+
+[http://seleniumhq.org/ Selenium] can automate launching browsers and is packaged
+with FuncUnit.
+
+In a command window type:
+
 @codestart
 > funcunit\envjs cookbook\funcunit.html
 @codeend
+
 This should open Firefox and IE if you are using Windows.  The results of the
-test should look like:<br/>
+test should look like:
+
 <img src='http://wiki.javascriptmvc.com/wiki/images/a/a7/Funcunit-envjs.png' width='500px'>
 <div class='whisper'>
 	If Selenium is unable to open your browsers, it's likely you have them in an
@@ -72,78 +121,25 @@ test should look like:<br/>
 	so selenium can find them.
 </div>
 
-<p>
-If you are having trouble running the tests in Internet Explorer, you need to change a few settings in the browser.  Please see the [FuncUnit FuncUnit documentation] for troubleshooting help.
-</p>
+
+If you are having trouble running the tests in Internet Explorer, you need to change a 
+few settings in the browser.  Please see the [FuncUnit FuncUnit documentation] for troubleshooting help.
 
 
 
+## Understanding FuncUnit Tests
 
-<h2>Understanding qUnit Tests</h2>
-FuncUnit adds very little to qUnit, so the best place to start understanding qUnit is its own
-[http://docs.jquery.com/QUnit documentation].  FuncUnit / JavaScriptMVC just adds a way to:
-<ul>
-	<li>Organize tests</li>
-	<li>Load tests</li>
-	<li>Run and report results in Envjs</li>
-</ul>
-<p>Here's how it works ...</p>
-<ol>
-	<li><code>cookbook/qunit.html</code> loads steal.js and tells it to load:
-		<code>cookbook/test/qunit/qunit.js</code> with the following script tag:
-@codestart
-&lt;script type='text/javascript' 
-       src='../steal/steal.js?steal[app]=cookbook/test/qunit'>
-&lt;/script>
-@codeend
-	</li>
-	<li>In qUnit.js, the qUnit plugin and tests are loaded.</li>
-	<li>In <code>cookbook/test/qunit/cookbook_test.js</code>
-		tests are added to be run by qunit.
-	</li>
-	<li>When the page loads, the tests are run.</li>
-</ol>
-<p>When the page is run in Envjs, qUnit does the same 4 steps, but reports
-the messages on the command line.</p>
-
-<p>As an example of a test, let look at how the findAll test works:</p>
-@codestart
-//creates a test
-test("findAll", function(){
-  //prevents the next test from running
-  stop(2000);
-  
-  //requests recipes
-  Cookbook.Models.Recipe.findAll({}, function(recipes){
-    
-    //makes sure we have something
-    ok(recipes)
-    
-    //makes sure we have at least 1 recipe
-    ok(recipes.length)
-    
-    //makes sure a recipe looks right
-    ok(recipes[0].name)
-    ok(recipes[0].description)
-    
-    //allows the next test to start
-    start()
-  });
-})
-@codeend
-
-
-<h2>Understanding FuncUnit Tests</h2>
-<p>FuncUnit adds to qUnit the ability to open another page, in this case
+<p>FuncUnit adds to QUnit the ability to open another page, in this case
 <code>cookbook/cookbook.html</code>, perform actions on it, and
 get information from it.</p>
-<p>
-	The <code>cookbook/funcunit.html</code>  page
-	works just like the <code>qunit.html</code> page except the 'funcunit' plugin is loaded which 
-	provides [FuncUnit].  FuncUnit is aliased to "<b>S</b>" to highlight the similarity between its API
-	and jQuery's API.
-</p>
-<p>Let take a quick look at a FuncUnit test:</p>
+
+The <code>cookbook/funcunit.html</code>  page
+works just like <code>qunit.html</code> except the 'funcunit' plugin is loaded which 
+provides [FuncUnit].  FuncUnit is aliased to "<b>S</b>" to highlight the similarity between its API
+and jQuery's API.
+
+Let take a quick look at a FuncUnit test:
+
 @codestart
 test("create recipes", function(){
     
@@ -168,32 +164,12 @@ test("create recipes", function(){
   
 })
 @codeend
-<p>Wait ... why is getting the text passed a function?</p>
-<p>
-	Functional tests are largely many asynchronous actions 
-	(clicks and keypresses)
-	with relatively few checks/assertions.  
-	FuncUnit's goal is to provide as readable and linear syntax as possible.
-	FuncUnit statements are actually stored and then run asynchronously.  This requires that
-	getting a value from the page happens in a callback function.
-</p>
-<p>For more information on FuncUnit, read its [FuncUnit documentation]</p>
-<h2>Testing isTasty</h2>
-<p>In the [creating Creating Cookbook] section of the Getting Started guide,
-we added an isTasty function to be shown.  Lets see how we could unit test
-that functionality.</p>
-<p>At the end of <code>recipe_test.js</code> we'll add code that 
-creates two recipe instances and checks if they are tasty.
-</p>
-@codestart
-test("isTasty", function(){
-  var Recipe = Cookbook.Models.Recipe,
-      r1 = new Recipe({name: "tea",
-                       description: "leaves and water"}),
-      r2 = new Recipe({name: "mushroom soup",
-                       description: "mushrooms and water"});
-  ok(r1.isTasty(), "tea is tasty")
-  ok(!r2.isTasty(), "mushroom soup is not tasty")
-})
-@codeend
-<p>Next, learn how to [compressing Compress Cookbook].</p>
+
+Functional tests are largely many asynchronous actions 
+(clicks and keypresses)
+with relatively few checks/assertions.  
+FuncUnit's goal is to provide as readable and linear syntax as possible.
+FuncUnit statements are actually stored and then run asynchronously.  This requires that
+getting a value from the page happens in a callback function.
+
+For more information on FuncUnit, read its [FuncUnit documentation]
