@@ -1,4 +1,5 @@
-## Introduction
+@page playermx PlayerMX
+@parent examples 1
 
 This article provides a walkthrough and insight into a simple video player application. Utilizing Popcorn.js and built on JMVC 3.2, we'll cover installing and running the application locally, as well as touching some architecture and code design points.  
 

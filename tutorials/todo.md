@@ -1,3 +1,6 @@
+@page todo Todo
+@parent examples 2
+
 ## Introduction
 
 In this guide, we're going to be installing and walking through the simplest [JavaScriptMVC](http://javascriptmvc.com/)
