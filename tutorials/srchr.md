@@ -1,7 +1,6 @@
 @page srchr Srchr
 @parent examples 0
 
-
 Srchr searches multiple services (like Flickr, Upcoming, and Twitter) and saves the results between page requests.  See it in action [here](http://javascriptmvc.com/srchr/). This article covers:
 
 - the ideas behind JavaScriptMVC
