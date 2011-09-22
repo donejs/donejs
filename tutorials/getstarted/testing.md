@@ -35,7 +35,7 @@ can run your tests in this simulated environment.
 In a command window type:
 
 @codestart
-> funcunit/envjs cookbook/qunit.html
+> js funcunit/run envjs cookbook/qunit.html
 @codeend
 
 This runs qunit.html in a simulated 
@@ -108,7 +108,7 @@ with FuncUnit.
 In a command window type:
 
 @codestart
-> funcunit\envjs cookbook\funcunit.html
+> js funcunit\run selenium cookbook\funcunit.html
 @codeend
 
 This should open Firefox and IE if you are using Windows.  The results of the
