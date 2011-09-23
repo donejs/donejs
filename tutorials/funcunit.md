@@ -1,7 +1,8 @@
 @page funcunit.getstarted Get Started with FuncUnit
 @parent tutorials 5
 
-In this guide, we'll go over:
+In this guide, we'll use [FuncUnit] to write functional tests for the jQuery UI 
+autocomplete widget. We'll go over:
 
 * Running a test in browser
 * Writing a test
@@ -57,10 +58,10 @@ To run this test, open <i>funcunit/test/autosuggest/funcunit.html</i> in any bro
 
 Next we'll add a test for selecting a result with the keyboard.  FuncUnit's [apifuncunit API] consists of:
 
-* [s The S Method] - Perform a query in the application window
-* [actions Actions] - Simulate user actions like [FuncUnit.prototype.click click],  [FuncUnit.prototype.type type],  [FuncUnit.prototype.drag drag]
-* [waits Waits] - Wait for a condition in your page to be met.  Fail the test if the condition isn't met before a timeout.
-* [assertions Assertions & getters] - Synchronously check a condition in your page.
+* [funcunit.finding The S Method] - Perform a query in the application window
+* [funcunit.actions Actions] - Simulate user actions like [FuncUnit.prototype.click click],  [FuncUnit.prototype.type type],  [FuncUnit.prototype.drag drag]
+* [funcunit.waits Waits] - Wait for a condition in your page to be met.  Fail the test if the condition isn't met before a timeout.
+* [funcunit.getters Assertions & getters] - Synchronously check a condition in your page.
 
 The setup and assertion methods are part of the [http://docs.jquery.com/Qunit QUnit] API.
 
@@ -153,14 +154,14 @@ You can configure this step to run in any browser via the [integrations settings
 Running in Selenium is great, but physically opening a browser can be too slow for quick 
 regression testing.  [http://www.phantomjs.org/ PhantomJS] is a headless version of WebKit, which can run the same 
 tests from the commandline much faster without opening any visual browser windows. To run 
-this step, first you must [phantomjs PhantomJS]. Then run:
+this step, first you must [funcunit.phantomjs PhantomJS]. Then run:
 
 @codestart
 ./js funcunit/run phantomjs funcunit/test/autosuggest/funcunit.html
 @codeend
 
 Phantom opens your page, runs the same test, and reports results on the commandline. 
-This step can be easily integrated in your build process via [jenkins Jenkins] or [maven Maven].
+This step can be easily integrated in your build process via [funcunit.jenkins Jenkins] or [funcunit.maven Maven].
 
 ## Conclusion
 
@@ -170,5 +171,5 @@ easy debugging, and simple automation.
 FuncUnit will transform your development lifecycle, give your developers confidence, and improve quality.
 
 
-That's it! If you want to learn more, read about FuncUnit's [apifuncunit API] and [integrations] 
-or check out some [demos].
+That's it! If you want to learn more, read about FuncUnit's [FuncUnit API] and [funcunit.integrations integrations] 
+or check out some [funcunit.demos demos].
