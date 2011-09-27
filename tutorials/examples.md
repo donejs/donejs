@@ -16,4 +16,6 @@ This article covers:
 
 ## Todo
 
-## Contacts
+## [contacts Contacts]
+
+Contacts is a application that allows users to add and organize their friend's contact information.
