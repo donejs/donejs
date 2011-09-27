@@ -1,7 +1,7 @@
 @page srchr Srchr
 @parent examples 0
 
-Srchr searches multiple services (like Flickr, Upcoming, and Twitter) and saves the results between page requests.  See it in action [here](http://javascriptmvc.com/srchr/). This article covers:
+Srchr searches several data sources for content and displays it to the user.  See it in action [here](http://javascriptmvc.com/srchr/). This article covers:
 
 - the ideas behind JavaScriptMVC
 - how JavaScriptMVC enables code separation
@@ -9,18 +9,15 @@ Srchr searches multiple services (like Flickr, Upcoming, and Twitter) and saves 
 
 ## Installing the Srchr
 
-You can install Srchr in two ways:
-
-1. By using built in script for installing of JavaScriptMVC apps and plugins - getjs
-2. By cloning it from the [git repository](https://github.com/jupiterjs/srchr)
+You can install Srchr by using steal's [steal.get getjs] or via the [git repository](https://github.com/jupiterjs/srchr).
 
 ### 1. Installing with getjs
 
-Simplest way to install Srchr is to use the built in getjs script. You can use it like this:
+The simplest way to install Srchr is to use the built in getjs script:
 
     > ./js steal/getjs srchr
     
-It will download whole application complete with dependencies.
+It will download the whole application complete with dependencies.
 
 ### 2. Installing via git
 
@@ -43,7 +40,7 @@ Srchr is now ready to be used.
 
 ## The "JavaScriptMVC" way
 
-Srchr was built the 'JavaScriptMVC' way (i.e. competently). It has a folder/file structure where:
+Srchr was built the 'JavaScriptMVC' way. It has a folder/file structure where:
 
 * Code is logically separated and tested
 * Code is easily assembled into higher-order functionality.
