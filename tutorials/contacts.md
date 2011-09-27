@@ -3,7 +3,7 @@
 
 # Contacts
 
-The application we are going to be going through is a simple contacts application that allows users to add and organize contacts.
+Contacts is a application that allows users to add and organize their friend's contact information.
 
 This article describes:
 
