@@ -1,7 +1,7 @@
 @page playermx PlayerMX
 @parent examples 1
 
-This article provides a walkthrough and insight into a simple video player application. Utilizing Popcorn.js and built on JMVC 3.2, we'll cover installing and running the application locally, as well as touching some architecture and code design points.  
+This article provides a walkthrough and insight into a simple video player application. Utilizing Popcorn.js and built on JMVC 3.2, we'll cover installing and running the application locally, as well as outlining the templated event engine.  
 
 __Topics:__  
 Download/Install  
@@ -10,7 +10,13 @@ Running the app
 
 ## Download/Install
 
-The app is hosted by GitHub at: [https://github.com/jupiterjs/playermx/tree/master/player.](https://github.com/jupiterjs/playermx/tree/master/player) You can [download the application directly from GitHub](https://github.com/jupiterjs/playermx/archives/master) or run the following git commands.
+### Download via getjs
+
+From a directory containing steal:
+
+./js steal/getjs https://github.com/jupiterjs/playermx playermx
+
+### Git via Github
 
 From a directory of your choice:
 
@@ -22,15 +28,30 @@ _Navigate to application directory and initialize submodules_
 $ git submodule init  
 $ git submodule update  `
 
+## Running
+
+As we are only dealing with local js/html resources, it is completely possible to run this application from the file system. I recommend [Safari](http://www.apple.com/safari) or [Firefox](http://www.mozilla.org/firefox) for file system testing as they allow the browser to make XHRs locally. Safari will do this by default, but for Firefox you need to do the following:  
+
+Navigate to about:config  
+Set security.fireuri.strict to false  
+
+You should be able to open playermx/player.html in your browser and see the application run.  
+
+_Note: Running from the file system has pros and cons in local development. Being able to run an application locally allows for convenience and provides an avenues for automated testing. For local debugging, however, sometimes it is easier with the help of a local server. Browsers do not track file system XHRs, so you may have a few silent errors when developing. I use and recommend [MAMP](http://www.mamp.info) if you are a Mac developer, but you can use any localhost setup you feel comfortable with._
+
 ## Architecture
 
-Once you've downloaded the application, you'll notice 3 folders within your playermx directory. The 'jquery' folder refers to jquerymx. This is the JMVC core and what we'll be building our application on. The 'steal' folder is our dependency management system. This is how we include other resources such as scripts, stylesheets, templates or other JMVC resources and apps altogether. The 'player' folder is where we'll place our focus as this is the main directory for our application.  
+Once you've downloaded the application, you'll notice 3 folders within your playermx directory. A few notes on the directory structure of this application:
+
+* The 'jquery' folder refers to [jquerymx] [2]. This is the JMVC core and what we'll be building our application on.
+* The ['steal'] [1] folder is our dependency management system. This is how we include other resources such as scripts, stylesheets, templates or other JMVC resources and apps altogether.
+* The 'player' folder is where we'll place our focus as this is the main directory for our application.  
 
 The application is broken up into one main application page, 'player.html', with a corresponding script, 'player.js' and two corresponding widgets. We'll touch player.js first.  
 
 ### player.js
 
-Player.js is our main application script. We'll load any widgets we want to use and initialize them from this file. Steal allows each resource to have resources of its own, allowing for a clean separation of the code base.
+Player.js is our main application script. We'll load any widgets we want to use and initialize them from this file. [Steal] [1] allows each resource to have resources of its own, allowing for a clean separation of the code base.
 
     steal('./play.js',
       './position.js',
@@ -42,15 +63,11 @@ Player.js is our main application script. We'll load any widgets we want to use 
         $('#position').player_position({ video: video });
     });
 
-The first line of player.js is our call to steal. This is going to load all our dependencies for this, asynchronously. In this case, we load play.js and position.js, then execute a function.  
+The first line of player.js is our call to [steal] [1]. This is going to load all our dependencies. In this case, we load play.js and position.js, then execute a function.  
 
 _Tip: ./play.js is a relative path._  
 
-It sometimes is necessary to load resources synchronously, such as when one resource depends on another. To specify and enforce the load order, steal exposes the 'then' method. If we wanted to load play.js and position.js in this fashion, the syntax would change to:  
-
-`steal('./play.js').then('./position.js', function() {});`  
-
-Our app is loading and playing a video clip, so we're going to utilize Popcorn.js to give us some control over our presentation. Play and Position are widgets we have created to isolate functionality within this app. We'll touch these widgets individually in just a moment. JMVC is deeply integrated with jQuery and as such, we can instantiate our widgets with syntax similar to what you would expect in most jQuery plugins. We'll pass the video object returned from Popcorn.js to each widget respectively.  
+Our app is loading and playing a video clip, so we're going to utilize Popcorn.js to give us some control over our presentation. Play and Position are widgets we have created to isolate functionality within this app. Let's build these widgets using the video object returned from Popcorn.js.  
 
 ### play.js
 
@@ -59,9 +76,7 @@ Our app is loading and playing a video clip, so we're going to utilize Popcorn.j
 
       function() {
 
-It's time to utilize a bit of what JMVC is capable of. We'll make use of [$.Controller](http://javascriptmvc.com/docs.html#&who=jQuery.Controller), which will allow us to create our widget at the target element outlined above.
-
-The purpose of this widget is to control the video playback. Lets setup some event listeners to handle the playing and pausing of our video. We'll call our controller 'Play' which will allow this to be accessed via $('selector').play({}). Our init method will check the initial state of our video and set the text accordingly.
+The purpose of this widget is to control the video playback. Lets setup some event listeners to handle the playing and pausing of our video. Using [$.Controller](http://javascriptmvc.com/docs.html#&who=jQuery.Controller), we can create our widget at the target element outlined above. We'll name our controller 'Play', which will allow this to be accessed via $('selector').play({}). Our init method will check the initial state of our video and set the text accordingly.
 
         $.Controller('Play', {
           init : function(){
@@ -72,7 +87,7 @@ The purpose of this widget is to control the video playback. Lets setup some eve
             }
           },
 
-JMVC has a powerful event system which we can take advantage of. Within player.js, we've passed a video object to our controller. We can now listen to events directly on the passed object using JMVC's string interpolation syntax. In the below code, "{video}" refers to our model and "play" is the event we'll listen for.
+Now to illustrate JMVC's templated event system, we can setup a few event handlers. Within player.js, we've passed a video object to our controller. We can listen to events directly on the passed object using JMVC's string interpolation syntax. In the below code, "{video}" refers to our model and "play" is the event we'll listen for.
 
           "{video} play" : function() {
             this.element.text("stop").addClass('stop')
@@ -154,13 +169,5 @@ We won't listen globally for our drag events, but rather scope them to our indic
         });
     });
 
-## Running
-
-As we are only dealing with local js/html resources, it is completely possible to run this application from the file system. I recommend [Safari](http://www.apple.com/safari) or [Firefox](http://www.mozilla.org/firefox) for file system testing as they allow the browser to make XHRs locally. Safari will do this by default, but for Firefox you need to do the following:  
-
-Navigate to about:config  
-Set security.fireuri.strict to false  
-
-You should be able to open playermx/player.html in your browser and see the application run.  
-
-_Note: Running from the file system has pros and cons in local development. Being able to run an application locally allows for convenience and provides an avenues for automated testing. For local debugging, however, sometimes it is easier with the help of a local server. Browsers do not track file system XHRs, so you may have a few silent errors when developing. I use and recommend [MAMP](http://www.mamp.info) if you are a Mac developer, but you can use any localhost setup you feel comfortable with._
+[1] https://github.com/jupiterjs/steal.git
+[2] https://github.com/jupiterjs/jquerymx.git
