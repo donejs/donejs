@@ -18,4 +18,14 @@ This article covers:
 
 ## [contacts Contacts]
 
-Contacts is a application that allows users to add and organize their friend's contact information.
+The contacts example is a lightweight application that allows users to add and organize their friend's contact information.
+
+This tutorial describes:
+
+* Installing and running the application
+* The application's structure and organization
+* How the application's widgets were designed
+* The anatomy of the application's widgets
+* How we glued the application's widgets together using event-oriented-architecture
+
+
