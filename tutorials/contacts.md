@@ -17,7 +17,7 @@ Using techniques we will cover in this tutorial, you will learn how to build an 
 
 The contacts is a lightweight application that allows users to add and organize their friend's contact information.
 
-![Contacts App](images/contacts-preview.jpg "Contacts App")
+@image tutorials/images/contacts_preview.jpg
 
 ## Setup
 
@@ -80,7 +80,8 @@ The application is organized in a sense that everything is a widget.  This is a 
 
 As you begin to build your application, a common practice I use is to look at the application and start splitting up the UI elements into widgets.  Below is a layout of the contact's widgets with their respective names over them.
 
-![Contacts Widgets](images/contacts-widgets.jpg "Contacts Widgets")
+@image tutorials/images/contacts_widgets.jpg
+
 
 Widgets are typically in two different categories; specific to the app, in this case contacts, or can be used in other projects.  The widgets that are more generic and can be used in other applications, I create a folder named the name of the organization I'm developing these widgets for.  Additionally, if I'm using a third-party widget library I would create another top-level folder for that repository.
 
@@ -168,7 +169,7 @@ Widgets in general should be dumb to whats going on around them. They should enc
 
 Let's examine the inputs the _MXUI.Data.Grid_ uses for its input/outputs.
 
-![Grid Input/Outputs](images/inputs-outputs.jpg "Grid Input/Outputs")
+@image tutorials/images/inputs_outputs.jpg
 
 ## Anatomy of the List Module
 
@@ -294,7 +295,8 @@ The contacts widget then observes this change in state using event delegation an
 		this.params.attr("categoryId", item.id);
 	}
 	
-![EOA Example 1](images/eoa-diagram1.jpg "EOA Example 1")
+@image tutorials/images/eoa_diagram1.jpg
+
 
 The grid parameters are a model instance that is defined in _MXUI.Data_.  This model model has some preset attributes, defaults, and helper methods for using when listing items in widgets such as a grid.  It defines things such as: 
 
@@ -323,7 +325,7 @@ In our case, the grid is listening for changes of the attributes.  When we trigg
 	}
 
 
-![EOA Example 2](images/eoa-diagram2.jpg "EOA Example 2")
+@image tutorials/images/eoa_diagram2.jpg
 
 ### Model Events
 
