@@ -19,7 +19,7 @@ JavaScriptMVC is comprised of 4 sub projects:
 
   - [DocumentJS] - A documentation engine
   - [FuncUnit] - A web testing framework
-  - jQueryMX - jQuery MVC eXtensions.
+  - [jquerymx jQueryMX] - jQuery _M_VC e_X_tensions.
   - [stealjs StealJS] - A code manager : dependency management, code cleaning, building, etc.
 
 ### Plugins 
@@ -27,11 +27,13 @@ JavaScriptMVC is comprised of 4 sub projects:
 Sub-projects are futher broken down into plugins.  Just [steal] the ones you need.  Plugins load 
 their own dependencies and won't load duplicate files.  It looks like:
 
-@codestart
-steal('jquery/model',
-  'jquery/view/ejs',
-  'jquery/controller');
-@codeend
+    steal('jquery/model',
+          'jquery/view/ejs',
+          'jquery/controller',
+          function($){
+          ...
+          });
+
 
 <div class='whisper'>
   P.S. <code>steal('jquery')</code> adds <code>jquery/jquery.js</code>

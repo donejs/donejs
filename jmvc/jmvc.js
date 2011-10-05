@@ -1,6 +1,7 @@
 steal('steal/generate',
 	'steal/get',
 	'steal/build',
+	'steal/build/pluginify',
 	'steal/coffee',
 	'steal/less',
 	'steal/clean',
