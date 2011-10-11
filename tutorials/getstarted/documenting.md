@@ -11,7 +11,7 @@ it hard not to document your code.
 Create the docs by running:
 
 @codestart
-> js cookbook/scripts/doc.js
+> js cookbook/scripts/docs.js
 @codeend
 
 
@@ -19,7 +19,7 @@ Create the docs by running:
 
 Open __cookbook/doc.html__ and you'll find something like:
 
-<img src='http://wiki.javascriptmvc.com/wiki/images/2/27/Docs.png' />
+@image tutorials/getstarted/Docs.png
 
 
 ## Writing Documentation
@@ -41,7 +41,7 @@ been exposed to major features of JavaScriptMVC:
  - code separation, 
  - testing, 
  - compression, and 
- - documentation. 
+ - documentation 
  
  This is pretty cool! Look at how simply you went from 
  nothing to a compressed, tested, and documented application.

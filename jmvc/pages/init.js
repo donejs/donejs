@@ -17,7 +17,7 @@
 
 JavaScriptMVC (JMVC) is a MIT licensed client-side JavaScript toolset that helps you 
 build a maintainable, error-free, lightweight 
-application in the shortest amount of time. It packages best-of-bread
+application in the shortest amount of time. It packages best-of-breed
 libraries and tools that are guaranteed (and tested) to work together.  It
 supports every browser that jQuery supports.
 
