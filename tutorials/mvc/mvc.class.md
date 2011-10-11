@@ -148,4 +148,4 @@ Putting it all together, we can make a basic ORM-style model layer.  Just by inh
     })
     
 
-This is similar to how JavaScriptMVC's model layer works.
+This is similar to how JavaScriptMVC's model layer works. Please continue to [mvc.model Model].

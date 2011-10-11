@@ -380,3 +380,5 @@ Lets say we wanted to know when a task is created and add it to the page. After 
       })
 
     })
+    
+ Please continue to [mvc.view View].
