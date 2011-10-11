@@ -1,5 +1,5 @@
 @page funcunit.getstarted Get Started with FuncUnit
-@parent tutorials 5
+@parent tutorials 4
 
 In this guide, we'll use [FuncUnit] to write functional tests for the jQuery UI 
 autocomplete widget. We'll go over:

@@ -1,4 +1,4 @@
-@page getstarted Getting Started
+@page getstarted Get Started with JavaScriptMVC
 @parent tutorials 1
 
 This guide introduces the most important aspects of JavaScriptMVC (JMVC) by 
