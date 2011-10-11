@@ -31,7 +31,7 @@ When initialized, you pass the List a [jQuery.model model] class.  JavaScriptMVC
 
 	this.options.model.findAll(this.options.params, this.callback('list'))
 
-If you look at the models in _contacts/models_, you'll notice findAll is missing. By default, models will request data using REST standards, as described in [jquery.model.encapsulate Service Encapsulation]. Every model has a findAll method, implemented in the based jQuery.Model class.
+If you look at the models in _contacts/models_, you'll notice findAll is missing. By default, models will request data using REST standards, as described in [jquery.model.encapsulate Service Encapsulation]. Every model has a findAll method, implemented in the based [jquery.model jQuery.Model] class.
 
 ### Drawing the List
 
@@ -53,7 +53,7 @@ In a live application, data changes.  The List should be aware of these changes 
     	}
 	},
 
-In the _Gluing Modules Together_ section, we will discuss using this type of observer architecture.
+In the [contacts.glue Gluing Modules Together] section, we will discuss using this type of observer architecture.
 
 ### Responding to Clicks
 
@@ -77,7 +77,7 @@ As items are clicked in the list, a "selected" visual state is applied to the it
 		el.trigger("activate", el.model());
 	}
 	
-In the above code, we  trigger an _activate_ event.  This event is one of List's outputs.  As opposed to applications listening for "click" events, we use activate to provide a level of abstraction.  This allows the widget to provide other ways to activate a row, such as keyboard navigation or clicking.  We could even expand this widget to use touch events for mobile devices, and applications wouldn't have to change.  For more information on this you can read the [mvc.controller Controller] documentation. 
+In the above code, we  trigger an _activate_ event.  This event is one of List's outputs that we listen to using [jquery.controller.listening event delegation].  As opposed to applications listening for "click" events, we use activate to provide a level of abstraction.  This allows the widget to provide other ways to activate a row, such as keyboard navigation or clicking.  We could even expand this widget to use touch events for mobile devices, and applications wouldn't have to change.  For more information on this you can read the [mvc.controller Controller] documentation. 
 
 The mission of this widget was simple: create a list of data that updates itself as the items change.  You and I have probably written this a dozen times in our applications.  This List widget provides a reusable API because it has generic and well defined inputs and outputs.
 

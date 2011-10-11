@@ -76,7 +76,7 @@ The contacts widget listens for events using event delegation and communicates w
 		this.params.attr("categoryId", null);
 	}
 
-In the _Gluing Modules Together_ section, we will touch more on the pattern used to facilitate this cross-widget communication.
+In the [contacts.glue Gluing Modules Together] section, we will touch more on the pattern used to facilitate this cross-widget communication.
 
 Additionally in the contacts folder, you will find the building blocks of any JavascriptMVC application: models for communication with the server, fixtures for simulating AJAX responses from the server, and functional tests for testing the application.
 
