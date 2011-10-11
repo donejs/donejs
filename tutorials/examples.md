@@ -14,7 +14,10 @@ This article covers:
 
 ## [playermx PlayerMX]
 
-## Todo
+## [todo Todo]
+
+In this guide, we're going to be installing and walking through the simplest [JavaScriptMVC](http://javascriptmvc.com/)
+application imaginable -- a TODO list manager.
 
 ## [contacts Contacts]
 

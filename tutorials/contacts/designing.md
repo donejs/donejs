@@ -11,7 +11,7 @@ Outputs are anything a widget visibly produces for the outside world.  This can 
 
 Let's examine the inputs and outputs of the _MXUI.Data.Grid_ widget.
 
-@image tutorials/images/inputs-outputs.jpg
+@image tutorials/images/inputs_outputs.jpg
 
 ## Anatomy of the List Module
 

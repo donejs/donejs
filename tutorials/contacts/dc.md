@@ -24,7 +24,7 @@ The application can be divided up into a few widgets:
 
 Heres a visual representation of how this app is broken up into modules.
 
-@image tutorials/images/contacts-widgets.jpg
+@image tutorials/images/contacts_widgets.jpg
 
 ## Folder Structure
 

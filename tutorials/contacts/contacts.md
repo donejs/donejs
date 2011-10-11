@@ -13,7 +13,7 @@ This tutorial describes:
 
 Using techniques we will cover in this tutorial, you will learn how to build an application that is modular, testable, and scaleable.
 
-@image tutorials/images/contacts-preview.jpg
+@image tutorials/images/contacts_preview.jpg
 
 ## Setup
 

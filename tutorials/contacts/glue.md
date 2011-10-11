@@ -45,7 +45,7 @@ The contacts widget then observes this state change using event delegation and u
 	
 The contacts widget listens for events high in the DOM, so it can capture any events triggered by child widgets.
 
-@image tutorials/images/eoa-diagram1.jpg
+@image tutorials/images/eoa_diagram1.jpg
 
 
 Grid parameters are a JavaScriptMVC Model instance, used to define common data attributes like limit, offset, and count.  The JavascriptMVC Model implements an observer pattern. As changes are made to attributes, widgets can listen for the _updated_ event and react accordingly.
@@ -69,7 +69,7 @@ In the sample code above we call [jquery.model.prototype.attr attr] on this mode
 	}
 
 
-@image tutorials/images/eoa-diagram2.jpg
+@image tutorials/images/eoa_diagram2.jpg
 
 ## Changes in Data
 
