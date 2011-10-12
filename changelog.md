@@ -1,3 +1,80 @@
+## 3.2 ()
+
+### JavaScriptMVC
+
+- Updated Getting Started Guide
+- Added tutorials for FuncUnit, jQueryMX, and StealJS
+- Added examples for Contacts, PlayerMX, Todo, and Srchr apps.
+- Added Organizing your App, Searchable Ajax Apps, Migrating to 3.1, and Ajax Service Guidelines tutorial
+
+### StealJS
+
+- js accepts `-e` to exit on error
+- steal works asynchronously 
+- steal uses suffix as type (using steal.type)
+- removed steal.plugins, steal.less, steal.css, etc.
+- added steal.parse
+- fixed bug with steal.dev not handling nested parenthesis
+- added steal.html and steal.html.crawl
+- IE loads more than 32 styles
+- added steal.browser
+- steal.get can follow steals and install dependencies
+- added steal.loaded and steal.has
+
+### jQueryMX
+
+  - Better distance calculation on drag-drop
+  - $.Range fixes for IE
+  - Added $.Observe and $.route
+  - fixtures handle 0 based ids
+  - CoffeeScript generator
+  - Moved string helpers to lang/string
+  - Added $.Object helpers
+  - $.fixture can intercept a request and handle templated urls.
+  - Updated generators to insert steal requests auto-magically
+  - FormParams leaves values as strings by default.
+  - dimensions works when not provided an element
+  - upgraded to jQuery 1.6.4
+  
+#### View
+
+  - EJS escapes content by default.  Use <%== to not escape.
+  - Bugs fixed jQuery modify helpers when not passing html.
+  - EJS filenames show up in firebug on the filesystem.
+
+
+#### Controller
+
+  - Removed Document Controllers
+  - pluginName works right
+  - Controller's can bind on constructors or other functions.
+  - plugin helper code happens in setup
+
+#### Model
+
+  - added beta $.Model.Store
+  - Removed associations, added convert
+  - removed wrap and wrapMany in favor of model and models.
+  
+### FuncUnit
+
+  - 'inherits' from jQuery via .sub()
+  - Uses steal.browser so PhantomJS and browsers can work
+  - Faster Page Opening
+  - Uses latest QUnit
+  
+
+### Syn
+
+  - rightclick works better
+
+### DocumentJS
+
+  - caches content in localStorage
+  - better breadcumb
+  - handles .md files
+ 
+
 ## 3.1 (5/17/2011)
 
 ### JavaScriptMVC
@@ -26,7 +103,7 @@
 - Added filters to Fixtures
 - Models and Fixtures support create, delete, and update model encapsulation.
 
-#### Controller
+#### Events
 
 - Added swipe, swipeleft and swiperight events
 - Swipe left and swipe right added to jQuery.event.special for autobinding with controller
@@ -38,6 +115,9 @@
 - Limit and step take center param
 - Limit can limit center of drag
 - Added pause and resume for events
+
+#### Controller
+
 - Added object binding to parameterized controller events.  EX: "{window} load".
     
 #### View
