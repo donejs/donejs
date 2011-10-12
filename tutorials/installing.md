@@ -6,7 +6,7 @@
 JavaScriptMVC requires Java JRE 1.6 or greater for:
 
  - Compression (Google Closure)
- - Running FuncUnit tests with Selenium
+ - Running [http://www.funcunit.com/ FuncUnit] tests with [http://seleniumhq.org/ Selenium]
  - Easy updating
  - Code Generators
 
@@ -17,17 +17,17 @@ Download [http://www.java.com/en/download/index.jsp Java here].
 
 There are 2 ways to get JavaScriptMVC:
 
- - Forking it with git
- - [download downloading] it
+ - [developwithgit Forking it with git]
+ - [http://javascriptmvc.com/builder.html Downloading it]
  
-We (and the community) would much prefer you to develop with git.  JavaScriptMVC is built 
+We (and the [http://forum.javascriptmvc.com/ community]) would much prefer you to develop with git.  JavaScriptMVC is built 
 around modular development so it fits in perfectly
 with git development.  Plus we can trade improvements really easy. 
 
 
 ## Downloading
 
-[download Download] the latest JavaScriptMVC. 
+[http://javascriptmvc.com/builder.html Download] the latest JavaScriptMVC. 
 Unzip the folder on your file system or web server.  
 If you are using this on a webserver, 
 unzip in a public folder where the server hosts static content.  
@@ -95,7 +95,7 @@ Open a command line to that folder and run:
 [Lin/Mac] > ./js
 @codeend
 
-This starts the Rhino JS engine.  Type <code>quit()</code> to exit.
+This starts the [http://www.mozilla.org/rhino/ Rhino JS engine].  Type <code>quit()</code> to exit.
 
 ## Updating JavaScriptMVC
 

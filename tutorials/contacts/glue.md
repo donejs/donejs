@@ -32,7 +32,7 @@ As items are clicked in the list, it triggers an "activate" event, including the
 
 	el.trigger("activate", el.model());
 
-_Pro Tip:  Because we bound instances of models using EJS as shown below, in our controller code we can call .model() on the element that was bound to retrieve the model as shown above._
+_Pro Tip:  Because we bound [jquery.fn.model instances of models using EJS] as shown below, in our controller code we can call .model() on the element that was bound to retrieve the model as shown above._
 
 	<% for(var i =0 ; i < items.length;i ++){ %>
   		<li <%= items[i]%> >
@@ -45,12 +45,12 @@ The contacts widget then observes this state change using event delegation and u
 	
 The contacts widget listens for events high in the DOM, so it can capture any events triggered by child widgets.
 
-@image tutorials/images/eoa-diagram1.jpg
+@image tutorials/images/eoa_diagram1.jpg
 
 
 Grid parameters are a JavaScriptMVC Model instance, used to define common data attributes like limit, offset, and count.  The JavascriptMVC Model implements an observer pattern. As changes are made to attributes, widgets can listen for the _updated_ event and react accordingly.
 
-In the sample code above we call _attr_ on this model instance to update the parameters.  The grid is listening for changes in the attributes.  Above, when activate is triggered, _categoryId_ is changed.  The grid observes this change and executes an AJAX request to get data for the current parameter set. 
+In the sample code above we call [jquery.model.prototype.attr attr] on this model instance to update the parameters.  The grid is listening for changes in the attributes.  Above, when activate is triggered, _categoryId_ is changed.  The grid observes this change and executes an AJAX request to get data for the current parameter set. 
 
 	"{params} updated.attr" : function(params, ev, attr, val){
 		if(attr !== 'count'){
@@ -69,7 +69,7 @@ In the sample code above we call _attr_ on this model instance to update the par
 	}
 
 
-@image tutorials/images/eoa-diagram2.jpg
+@image tutorials/images/eoa_diagram2.jpg
 
 ## Changes in Data
 
@@ -94,7 +94,7 @@ The List widget provides a good example of binding directly to model updates.
     	}
 	}
 
-As model changes are made, such as an update to a contact's name, we listen for these changes in the List and update the UI accordingly.
+As model changes are made, such as an update to a contact's name, we listen for these changes in the List and update the UI accordingly using [jquery.model.events model events].
 
 ## Wrap-up
 
