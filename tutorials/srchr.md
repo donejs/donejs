@@ -3,13 +3,14 @@
 
 Srchr searches several data sources for content and displays it to the user.  See it in action [here](http://javascriptmvc.com/srchr/). This article covers:
 
-- the ideas behind JavaScriptMVC
-- how JavaScriptMVC enables code separation
-- srchr's architecture
+- Installation of Srchr app
+- The ideas behind JavaScriptMVC (JMVC)
+- How JMVC enables code separation
+- Srchr's architecture
 
 This article will talk about architecture of the Srchr application, and how evented architecture can help you build loosely coupled, scalable applications. You will also learn how to assemble small pieces of functionality into the full blown application.
 
-## Installing the Srchr
+## Installing Srchr
 
 You can install Srchr by using steal's [steal.get getjs] or via the [git repository](https://github.com/jupiterjs/srchr).
 
@@ -29,9 +30,29 @@ You can also install the Srchr app by cloning the git repo:
     $ cd srchr
     $ git submodule update --init
     
-Srchr is now ready to be used.
+Once you get the application you should have structure similar to below
 
-## How was Srchr built
+    /srchr [top-level directory]
+        /jquery
+        /steal
+        /funcunit
+        /scripts
+        /srchr
+            /scripts
+            /test
+            /models
+            /fixtures
+            /views
+            funcunit.html
+            qunit.html
+            srchr.css
+            srchr.js
+            srchr.html
+            ...
+            
+Srchr is now ready to be used. To run the Srchr applciation simply open the _srchr/srchr.html_ in your browser. We will be using [jQuery.fixture fixtures] to simulate the AJAX requests so running it in a server configuration isn't necessary ([googlefilesystem unless you're using Chrome])
+
+## How Srchr was built
 
 Srchr was built the 'JavaScriptMVC' way. It has a folder/file structure where:
 
@@ -95,7 +116,7 @@ Let's take a detailed look in to the tab widget:
 Disabler widget has two event handlers. First one listens to the activate event on list items:
 
     "{activateSelector} activate": function( el, ev ) {
-        if ( el.hasClass('disabled') ) {
+    	if ( el.hasClass('disabled') ) {
     		ev.preventDefault();
     	}
     }
@@ -221,17 +242,95 @@ JavaScriptMVC comes with the dependency manager called Steal. It allows every wi
     
 Steal is smart enough to load resources only once even though multiple widgets may list the same resource. You can read more about steal in it's [own documentation](http://edge.javascriptmvc.com/jmvc/docs.html#!stealjs).
 
-## Use JavaScriptMVC to test and build application
-
-After your modules are built and assembled to the application there are some steps left before your application is ready.
-
-### How to test your application with JavaScriptMVC
+## How to test your application with JavaScriptMVC
 
 JavaScriptMVC comes with two test frameworks built in. QUnit is used to unit test your models and FuncUnit functionally tests your whole application.
 
 If you open srchr/qunit.html in your browser, it will run unit tests, and for functional testing open srchr/funcunit.html. Read more about [FuncUnit](http://javascriptmvc.com/docs.html#&who=FuncUnit) and [QUnit](http://docs.jquery.com/Qunit).
 
-### How to build a production version
+In this article we already covered the separation of code, but another aspect of code separation is test isolation. In every module folder you will have a test file that should test only that widget. Usual module folder structure looks like this:
+
+    funcunit.html
+    funcunit/
+        tabs_test.js
+        funcunit.js
+    tabs.js
+    tabs.html
+    
+Every module has a demo page that helps you develop and test that module in isolation. In case of the tabs widget this file is called tabs.html. If you open that file you will see this code:
+
+    <h1>Srchr.Tabs</h1>
+    <p>A very basic tabs widget that creates 'activate' events.</p>
+    <h2>Demo</h2>
+    <p>Click the different tabs.</p>
+      <ul id='resultsTab'>
+      <li><a href='#flickr'>Flickr</a></li>
+      <li><a href='#yahoo'>Yahoo</a></li>
+      <li><a href='#upcoming'>Upcoming</a></li>
+    </ul>
+
+    <div id='flickr' class='tab'>one</div>
+    <div id='yahoo' class='tab'>two</div>
+    <div id='upcoming' class='tab'>three</div>
+
+    <script type='text/javascript' src='../../steal/steal.js'></script>
+
+    <script type='text/javascript' >
+      steal('srchr/tabs', function(){
+        $('#resultsTab').srchr_tabs();
+      })
+    </script>
+
+
+As you can see this page bootstraps the tabs widget. This is the minimum needed for the tabs widget to run. You should always use the demo page to develop your widgets because you can also use that page to test that widget. In case of the tabs widget that code is in tabs/funcunit/tabs_test.js:
+
+    module("srchr/tabs",{
+    	setup : function(){
+    		S.open('//srchr/tabs/tabs.html')
+    	}
+    });
+
+
+    test("Proper hiding and showing", function() {
+    	S("li:eq(1)").click();
+    	S("div:eq(1)").visible(function() {
+    		equals(S("div:eq(0)").css('display'), 'none', "Old tab contents are hidden");
+    		ok(!S("li:eq(0)").hasClass('active'), 'Old tab is not set to active');
+    		equals(S("div:eq(1)").css('display'), 'block', "New tab contents are visible");
+    		ok(S("li:eq(1)").hasClass('active'), 'New tab is set to active');
+    	});
+    });
+
+    test("Clicking twice doesn't break anything", function() {
+    	S("li:eq(2)").click();
+    	S("li:eq(2)").click();
+
+    	S("div:eq(2)").visible(function() {
+    		equals(S("div:eq(2)").css('display'), 'block', "New tab contents are visible");
+    		ok(S("li:eq(2)").hasClass('active'), 'New tab is set to active');
+    	});
+    });
+
+What this code does is:
+
+- Opens the tabs' widget demo page (tabs.html). That sets up the tabs widget
+- It simulates the user interaction to test the widget.
+
+This is the pattern you should use when you develop your applications. Every widget should have it's own set of tests. You should also have application level tests that test how the widget work together. You can find this file in test/funcunit/srchr_test.js. This file tests all of the higher level srchr's functionality. 
+
+You can find all of the srchr tests at this locations:
+
+- Disabler widget: [test code](https://github.com/jupiterjs/srchr/blob/master/srchr/disabler/funcunit/disabler_test.js), [test page](http://javascriptmvc.com/srchr/disabler/funcunit.html)
+- History widget: [test code](https://github.com/jupiterjs/srchr/blob/master/srchr/history/funcunit/history_test.js), [test page](http://javascriptmvc.com/srchr/history/funcunit.html)
+- Search widget: [test code](https://github.com/jupiterjs/srchr/blob/master/srchr/search/funcunit/search_test.js), [test page](http://javascriptmvc.com/srchr/search/funcunit.html)
+- Search result widget: [test code](https://github.com/jupiterjs/srchr/blob/master/srchr/search_result/funcunit/search_result_test.js), [test page](http://javascriptmvc.com/srchr/search_result/funcunit.html)
+- Search tabs widget: [test code](https://github.com/jupiterjs/srchr/blob/master/srchr/search_tabs/funcunit/search_tabs_test.js), [test page](http://javascriptmvc.com/srchr/search_tabs/funcunit.html)
+- Tabs widget: [test code](https://github.com/jupiterjs/srchr/blob/master/srchr/tabs/funcunit/tabs_test.js), [test page](http://javascriptmvc.com/srchr/tabs/funcunit.html)
+- Application tests: [test code](https://github.com/jupiterjs/srchr/blob/master/srchr/test/funcunit/srchr_test.js), [test page](http://javascriptmvc.com/srchr/funcunit.html)
+
+
+
+## How to build a production version
 
 JavaScriptMVC comes with the build script for your applications. That way you can have everything separated and isolated in the development mode, but in production it gets compiled to two files: production.js and production.css. 
 
