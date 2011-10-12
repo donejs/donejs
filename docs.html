@@ -20,9 +20,6 @@
 <div id='defaults'>
 <ul id="menu" class="ui-menu">
 	<li class="ui-menu-item">
-    	<a class="menuLink" href="#&amp;search=core"><span class="menuSpan">Core</span></a>
-	</li>
-	<li class="ui-menu-item">
     	<a class="menuLink" href="#favorites"><span class="menuSpan">Favorites</span></a>
 	</li>
 	<li class="ui-menu-item">
@@ -36,7 +33,7 @@
 	</li>
 </ul>
 </div>
-<div class="logo-text"><a href='http://javascriptmvc.com'>JavaScript<img src='../documentjs/jmvcdoc/images/logo80x30.png' class="logo-image"/></a></div>
+<div class="logo-text"><a href='http://javascriptmvc.com'><img src='documentjs/jmvcdoc/images/logo80x30.png' class="logo-image"/></a></div>
 </div>
 <div class="bottomCorner"><div>&nbsp;</div></div>
 </div>
@@ -56,10 +53,7 @@
             <a href="http://jupiterit.com">&copy; Jupiter IT - JavaScriptMVC Training and Support</a>
 		<a class="api_links" href="http://javascriptmvc.com/docs/api.html#&who=api"></a>
 		</div>
-		<script type="text/javascript">
-			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-		</script>
+		<script src='http://www.google-analytics.com/ga.js' type='text/javascript'></script>
 		<script type="text/javascript">
 			try{
 			var pageTracker = _gat._getTracker("UA-2302003-4");
@@ -70,6 +64,10 @@
             DOCS_LOCATION = "jmvc/docs/" //adds searchData to this
             COMMENTS_LOCATION = "http://jmvcs3.disqus.com/embed.js"
             GOOGLE_ANALYTICS_TRACKER_ID = "UA-2302003-4";
+			JMVCDOC_TIMESTAMP = 2634234343122;
+			steal = {
+				loaded: ['jmvcdoc/style.css']
+			}
         </script>
         <script type='text/javascript' 
                 src='steal/steal.production.js?documentjs/jmvcdoc'>   

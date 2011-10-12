@@ -4,7 +4,7 @@
 This article walks through a simple video player application utilizing Popcorn.js. We'll cover:
 
  - Installing and running the Application
- - Templated Events with $.Controller//TODO: link this subpage in docs
+ - Templated Events with [mvc.controller $.Controller]
  - How PlayerMX is built
 
 ## Installing and Running the Application
@@ -13,10 +13,13 @@ There's two options to install PlayerMX: getjs or using git.
 
 ### Download with getjs
 
-//TODO: link to jmvc install docs & root folder article
 After downloading and installing JMVC, run the following command:
 
 `./js steal/getjs https://github.com/jupiterjs/playermx/player`
+
+* [installing Installing JavaScriptMVC]
+* [rootfolder JMVC root folder]
+
 
 ### Git with Github
 
@@ -33,7 +36,7 @@ $ git submodule update  --init`
 
 Open player/player.html in your browser and see the application run:
 
-![PlayerMX Screenshot](images/playermx.png)
+![PlayerMX Screenshot](tutorials/images/playermx.png)
 
 _Note: Safari and Chrome currently support the mp4 codec, however Firefox requires the h.264 Flash player to process mp4's._
 
@@ -45,11 +48,9 @@ Repo: [https://github.com/jupiterjs/playermx](https://github.com/jupiterjs/playe
 
 Repo: [https://github.com/jbuck/popcorn-js](https://github.com/jbuck/popcorn-js)
 
-> Popcorn.js is an event framework for HTML5 media. Popcorn.js utilizes the native HTMLMediaElement properties, methods and events, normalizes them into an easy to learn API and provides a plugin system for community contributed interactions.  
+> _Popcorn.js is an event framework for HTML5 media. Popcorn.js utilizes the native HTMLMediaElement properties, methods and events, normalizes them into an easy to learn API and provides a plugin system for community contributed interactions._  
 
 _[Source: http://popcornjs.org/documentation](http://popcornjs.org/documentation)_
-
-http://popcornjs.org/api
 
 Popcorn.js wraps up our mp4 into a `video` object which we can pass to our widgets. Our widgets can then play and pause the video based on user interaction. The Popcorn.js API we'll be using is as follows:
 
@@ -74,19 +75,19 @@ Popcorn.js wraps up our mp4 into a `video` object which we can pass to our widge
 
 Templated events create a simple way to bind events without concern for cleanup. For example, binding an event to a DOM element with $.bind(), will be removed when you call $.remove() on that element. However, if you want to listen to events on a model, templated events handle the unbinding for you. In essence, memory concerns are reduced with templated events.
 
-Specifically with `PlayerMX`, our widgets listen to events produced by our Popcorn video element. If that element is removed from our page, by using templated events, we don't need to worry about cleaning up bound methods.
+Specifically with PlayerMX, our widgets listen to events produced by our Popcorn video element. If that element is removed from our page, by using templated events, we don't need to worry about cleaning up bound methods.
 
 ## PlayerMX Architecture
 
 Once you've downloaded the application, you'll notice 3 folders within your `playermx` directory. A few notes on the directory structure of this application:
 
 * The `jquery` folder refers to [jquerymx](https://github.com/jupiterjs/jquerymx). This is the JMVC core and what we'll be building our application on.
-* The ['steal'](https://github.com/jupiterjs/steal) folder is our dependency management system. This is how we include other resources such as scripts, stylesheets, templates or other JMVC resources and apps altogether.
+* The [steal](https://github.com/jupiterjs/steal) folder is our dependency management system. This is how we include other resources such as scripts, stylesheets, templates or other JMVC resources and apps altogether.
 * The `player` folder is where we'll place our focus as this is the main directory for our application.  
 
 The application is broken up into one main application page, `player.html`, with a corresponding script, `player.js` and two corresponding widgets.
 
-![PlayerMX Architecture](images/playermx_overview.png)
+![PlayerMX Architecture](tutorials/images/playermx_overview.png)
 
 ### player.js
 
@@ -106,7 +107,7 @@ The first line of `player.js` is our call to `steal`. This is going to load all 
 
 ### play.js
 
-![PlayerMX Screenshot](images/playermx_play.png)
+![PlayerMX Screenshot](tutorials/images/playermx_play.png)
 
     steal('player/popcorn',
       'jquery/controller',
@@ -115,7 +116,7 @@ The first line of `player.js` is our call to `steal`. This is going to load all 
 
 The purpose of this widget is to control the video playback. Listening to the `play` and `pause` events on the Popcorn.js object, we'll add a CSS class designating playback state.
 
-Our widget will be created using [$.Controller](http://javascriptmvc.com/docs.html#&who=jQuery.Controller). By naming our controller "play", we have now have a jQuery.fn.play() method. `init` is the constructor method for our controller. Any passed parameters are accessible via `options` on the controller.
+Our widget will be created using `$.Controller`. By naming our controller "play", we have now have a `jQuery.fn.play()` method. `init` is the constructor method for our controller. Any passed parameters are accessible via `options` on the controller.
 
         $.Controller('Play', {
           init : function(){
@@ -150,7 +151,7 @@ Templated events allow listening to events on any object, not just DOM events. I
 
 ### position.js
 
-![PlayerMX Screenshot](images/playermx_position.png)
+![PlayerMX Screenshot](tutorials/images/playermx_position.png)
 
     steal('player/popcorn',
       'jquery/controller',
@@ -189,7 +190,7 @@ Listen to the Popcorn.js `timeupdate` event on our video model to recalculate ou
             this.moving.css("left", percent*width+"px")
           },
 
-_Note: [draginit]() and 'dragend' are just a couple of events provided by the JMVC framework. [http://edge.javascriptmvc.com/jmvc/docs.html#!jQuery.Drag](http://edge.javascriptmvc.com/jmvc/docs.html#!jQuery.Drag)_  
+_Note: `draginit` and `dragend` are just a couple of events provided by the JMVC framework. [http://edge.javascriptmvc.com/jmvc/docs.html#!jQuery.Drag](http://edge.javascriptmvc.com/jmvc/docs.html#!jQuery.Drag)_  
 
 We won't listen globally for our drag events, but rather scope them to our indicator div element. We can now call the Popcorn.js `play` and `pause` methods, trusting other widgets to respond as needed. In this app, these events will get picked up by our 'Play' widget to start/stop the playback.
 

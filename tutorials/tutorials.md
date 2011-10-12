@@ -6,15 +6,29 @@
 Learn how to install JavaScriptMVC.  This is a prerequisite 
 for most of the other tutorials.
 
-### [mvc The MVC in JavaScriptMVC]
+### [getstarted Get Started with JavaScriptMVC]
 
-A walkthrough of the MVC parts of JavaScriptMVC.  This is a must read if you want to understand
-how it all fits together.
+Build, minify, test, and document a basic recipe application.  This tutorial
+covers the major components of JavaScriptMVC.
+
+### [mvc Get started with jQueryMX]
+
+A walkthrough of the MVC parts of jQueryMX.  This is a must read if you 
+want to understand how they work together.
+
+### [tutorials.steal Get Started With StealJS] (in-progress)
+
+Walks through StealJS's features.
+
+### [funcunit.getstarted Get Started with FuncUnit]
+
+Uses [FuncUnit] to write functional tests for the jQuery UI 
+autocomplete widget.
 
 ### [organizing Organizing Your App]
 
 From a small to large projects, 
-learning the best way of organizing a JavaScriptMVC application and
+covers the best way of organizing a JavaScriptMVC application and
 scaling it to meet future needs.
 
 ### [ajaxy Searchable Ajax Apps]
@@ -22,6 +36,11 @@ scaling it to meet future needs.
 Build a simple widget 
 that loads content with ajax.  This walkthrough demonstrates how to make
 a site Google crawlable and searchable.
-  
-## Reusable CRUD List
 
+### [migrate Migrating from 3.0 and 3.1]
+
+This guide outlines the things you have to look at when upgrading from version 3.0 or 3.1.
+
+### [services Ajax Service Guidelines]
+
+This guide details suggests a service layer design that minimizes the amount of extra work to get JavaScriptMVC running.

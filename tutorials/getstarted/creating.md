@@ -4,7 +4,9 @@
 We're going to create a basic cookbook application that
 lets us create, and delete recipes. It will look like:
 
-<img src='http://wiki.javascriptmvc.com/wiki/images/c/c8/Cookbook.png'/>
+@image tutorials/getstarted/Cookbook.png
+
+
 
 JavaScriptMVC uses 
 [steal.generate generator scripts] to 
@@ -74,14 +76,15 @@ page followed by <code>?cookbook</code> like:
 If you open cookbook/cookbook.html, you'll see a
 JavaScriptMVC welcome screen.  
 
-<img src='http://wiki.javascriptmvc.com/wiki/images/4/42/Welcome.png' />
+@image tutorials/getstarted/Welcome.png
+
+
 
 Open <code>cookbook/cookbook.html</code> and you will find:
 
 @codestart html
-<script type='text/javascript' 
-        src='<%= path_to_steal %>/steal/steal.js?<%= path %>'>	 
-</script>
+&lt;script type='text/javascript' 
+        src='../steal/steal.js?cookbook'>
 @codeend
 
 This line loads [steal] and tells steal to 
@@ -211,7 +214,9 @@ so it looks like:
 That's it. You've created a simple Cookbook 
 application. Open cookbook/cookbook.html in a browser. 
 
-<img src='http://wiki.javascriptmvc.com/wiki/images/c/c8/Cookbook.png'/>
+@image tutorials/getstarted/Cookbook.png
+
+
 
 <div style='background-color: #dddddd;  margin: 20px 0px;padding: 20px'>
 <p>
@@ -508,39 +513,5 @@ The cookbook application loads both of these widgets and adds them to the page.
 When Cookbook.Recipe.Create creates a Recipe, it creates a 'created' event which
 Cookbook.Recipe.List listens for and adds that newly created recipe to its list
 of recipes.
-
-## Adding an "is tasty" column
-
-In <code>cookbook/views/recipe/init.ejs</code> 
-add a <b>th</b> like this:
-
-@codestart html
-&lt;% for(var attr in Cookbook.Models.Recipe.attributes){%>
-    &lt;% if(attr == 'id') continue;%>
-    &lt;th><%= attr%> &lt;/th>    
-&lt;%}%>
-<u><b>&lt;th>Tasty?&lt;/th></b></u>
-&lt;th>Options&lt;/th>
-@codeend
-
-In <code>cookbook/views/recipe/show.ejs</code> add a <b>td</b> like this:
-
-@codestart html
-&lt;%for(var attribute in this.Class.attributes){%>
-    &lt;%if(attribute == 'id') continue;%>
-    &lt;td class='&lt;%= attribute%>'>
-            &lt;%=this[attribute]%>
-    &lt;/td>
-&lt;%}%>
-<u><b>&lt;td>&lt;%= this.isTasty() %>&lt;/td></b></u>
-&lt;td>
-    &lt;a href='javascript: void(0)' class='edit'>edit&lt;/a>
-    &lt;a href='javascript: void(0)' class='destroy'>destroy&lt;/a>
-&lt;/td>
-@codeend
-
-Reload your page.  You should see the 
-Tasty column.  Add a recipe with mushrooms
-and Tasty? should be false.
 
 Continue to [testing Testing Cookbook].

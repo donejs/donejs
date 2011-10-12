@@ -135,3 +135,5 @@ For templates that are not used immediately, preload and cache template them wit
         $.get('user.ejs',function(){},'view');
       },500)
     })
+    
+ Please continue to [mvc.controller Controller].
