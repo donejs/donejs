@@ -1,20 +1,21 @@
-## 3.1
+## 3.1 (5/17/2011)
 
-5/17/2011
+### JavaScriptMVC
 
-JavaScriptMVC
 - Added getjmvc script
 - Added install script for windows
 - Added new init page with framework overview
 - Added error level (-e) support to the js.bat (Windows) and ./js (Mac, Linux)
 
-jQuery MX
+### jQueryMX
+
 - jQuery upgraded to 1.6.1
 - .val method supports Views. EX: $('input').val('view_name', {});
 - Added range plugin
 - Added deparam plugin - Takes a string of name value pairs and returns a Object literal that represents those params.
 
-Model
+#### Model
+
 - Deferreds and Converter Support.
 - Added VERB support to parameterized CRUD urls.  EX:  update: "POST /recipe/update/{id}.json"
 - Global model events. EX: Recipe.bind('update', func).
@@ -25,7 +26,8 @@ Model
 - Added filters to Fixtures
 - Models and Fixtures support create, delete, and update model encapsulation.
 
-Controller
+#### Controller
+
 - Added swipe, swipeleft and swiperight events
 - Swipe left and swipe right added to jQuery.event.special for autobinding with controller
 - Hover can set leave. EX: $('.elem').bind('hoverleave', func)
@@ -38,16 +40,19 @@ Controller
 - Added pause and resume for events
 - Added object binding to parameterized controller events.  EX: "{window} load".
     
-View
+#### View
+
 - Deferreds support
 - Better warning when templates don't exist
     
-Funcunit
+#### Funcunit
+
 - Changes to the repeat API.
 - Added eval.
 - Added examples.
 
-Syn
+#### Syn
+
 - Syn adjusts scrolling for drag / move positions not in the page.
 - Syn loads in Rhino, and documentation can be generated.
 - Syn works under Env.js.
