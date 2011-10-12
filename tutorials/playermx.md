@@ -78,13 +78,15 @@ Specifically with `PlayerMX`, our widgets listen to events produced by our Popco
 
 ## PlayerMX Architecture
 
-Once you've downloaded the application, you'll notice 3 folders within your <code>playermx</code> directory. A few notes on the directory structure of this application:
+Once you've downloaded the application, you'll notice 3 folders within your `playermx` directory. A few notes on the directory structure of this application:
 
 * The `jquery` folder refers to [jquerymx](https://github.com/jupiterjs/jquerymx). This is the JMVC core and what we'll be building our application on.
 * The ['steal'](https://github.com/jupiterjs/steal) folder is our dependency management system. This is how we include other resources such as scripts, stylesheets, templates or other JMVC resources and apps altogether.
 * The `player` folder is where we'll place our focus as this is the main directory for our application.  
 
 The application is broken up into one main application page, `player.html`, with a corresponding script, `player.js` and two corresponding widgets.
+
+![PlayerMX Architecture](images/playermx_overview.png)
 
 ### player.js
 
@@ -156,10 +158,7 @@ Templated events allow listening to events on any object, not just DOM events. I
       'jquery/event/resize',
       'jquery/event/drag/limit',
 
-//reword
-Similar to the creation of our 'Play' widget, let's make a widget to show a progression bar for our video. This should not only display playback position, but be draggable as well.
-
-`this` in the following context, refers to our widget instance. Our progress indicator will be accessible via the `moving` property. A simple div will suffice for this example and we'll set some basic css properties such as position and dimensions.
+Similar to the creation of our 'Play' widget, let's make a widget to show a progression bar for our video. This should not only display playback position, but be draggable as well. `this` in the following context, refers to our widget instance. Our progress indicator will be accessible via the `moving` property. A simple div will suffice for this example and we'll set some basic css properties such as position and dimensions.
 
       function() {
         $.Controller('PlayerPosition', {
