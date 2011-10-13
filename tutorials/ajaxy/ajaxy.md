@@ -92,6 +92,11 @@ __ajaxy/fixtures/videos.html__
 
 Finally, change <code>ajaxy.js</code> to look like:
 
+
+    steal('jquery/controller',
+          'jquery/event/hashchange', 
+          'steal/html',function(){
+          
     $.Controller('Ajaxy',{
         init : function(){
             this.updateContent()
@@ -116,7 +121,9 @@ Finally, change <code>ajaxy.js</code> to look like:
         }
     })
     
-    $('#content').ajaxy()
+    $('#content').ajaxy();
+    
+    });
 
 When a hashchange (<code>"{window} hashchange"</code>) event occurs, Ajaxy
 uses the <code>window.location.hash</code> value to make a 
