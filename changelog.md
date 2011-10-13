@@ -55,6 +55,7 @@
   - added beta $.Model.Store
   - Removed associations, added convert
   - removed wrap and wrapMany in favor of model and models.
+  - Model.List creates updated events instead of update events.
   
 ### FuncUnit
 
