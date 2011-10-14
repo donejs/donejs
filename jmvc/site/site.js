@@ -1,13 +1,9 @@
 steal.loadedProductionCSS = true;
 
-steal
-	.plugins('steal/less')
-	.then(function($){
-		steal.less('site')
-	})
-	.plugins('jquery/controller', 'jquery/view/ejs')
-	.views('//jmvc/site/views/blog.ejs')
-	.then(function($){
+steal('steal/less')
+	.then('./site.less')
+	.then('jquery/controller', 'jquery/view/ejs')
+	.then('//jmvc/site/views/blog.ejs', function($){
 
 jQuery.Controller.extend('Feed',
 /* @Static */

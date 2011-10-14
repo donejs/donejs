@@ -14,6 +14,7 @@ Create the docs by running:
 > js cookbook/scripts/docs.js
 @codeend
 
+_Note: Verify cookbook.html is not in production mode before running the above command._
 
 ## Viewing Documentation
 
@@ -38,10 +39,10 @@ for more information.
 In the context of this trivial application, you've 
 been exposed to major features of JavaScriptMVC: 
 
- - code separation, 
- - testing, 
- - compression, and 
- - documentation 
+ - code separation
+ - testing
+ - compression
+ - documentation
  
  This is pretty cool! Look at how simply you went from 
  nothing to a compressed, tested, and documented application.

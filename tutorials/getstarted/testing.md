@@ -22,7 +22,8 @@ tests in the browser or Envjs (and now PhantomJS with a little extra work).
 
 Open <code>cookbook/qunit.html</code>.  You should see something like:
 
-<img src='http://wiki.javascriptmvc.com/wiki/images/2/27/Qunit.png'/>
+@image jmvc/images/test_cookbook_example.png
+
 
 We'll see how this works in a second.  First, lets run the unit tests
 in Envjs.

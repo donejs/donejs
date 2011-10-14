@@ -4,9 +4,6 @@
 [submodule "funcunit"]
 	path = funcunit
 	url = git://github.com/jupiterjs/funcunit.git
-[submodule "jmvcdoc"]
-	path = jmvcdoc
-	url = git://github.com/jupiterjs/jmvcdoc.git
 [submodule "jquery"]
 	path = jquery
 	url = git://github.com/jupiterjs/jquerymx.git
