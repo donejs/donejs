@@ -20,40 +20,37 @@ into the pit of success!
 To create your application, open a console window and 
 navigate to your public directory. Run:
 
-@codestart text
-> js jquery\generate\app cookbook
-@codeend
+    > js jquery\generate\app cookbook
+
 
 This script creates an application folder and 
 files. Here's what each file does:
 
-@codestart
-cookbook/                // folder for your app
-  cookbook.css           // css for your app
-  cookbook.html          // a page for your app
-  cookbook.js            // app file, loads other files
-  docs/                  // documentation
-  fixtures/              // simulated ajax responses
-  funcunit.html          // functional test page
-  models/                // model & data layers
-  qunit.html             // unit test page
-  scripts/               // command line scripts
-    build.html           // html for build script
-    build.js             // build script
-    clean.js             // code cleaning / linting
-    crawl.js             // generate search content
-    docs.js              // create documentation
-  test/                    
-    funcunit             // functional tests
-      cookbook_test.js   // functional test
-      funcunit.js        // loads functional tests
-    qunit/               // unit tests
-      cookbook_test.js   // unit test
-      qunit.js           // loads unit tests
-@codeend
 
-Read [folders Folder and File Organization]
-for more information.
+    cookbook/                // folder for your app
+      cookbook.css           // css for your app
+      cookbook.html          // a page for your app
+      cookbook.js            // app file, loads other files
+      docs/                  // documentation
+      fixtures/              // simulated ajax responses
+      funcunit.html          // functional test page
+      models/                // model & data layers
+      qunit.html             // unit test page
+      scripts/               // command line scripts
+        build.html           // html for build script
+        build.js             // build script
+        clean.js             // code cleaning / linting
+        crawl.js             // generate search content
+        docs.js              // create documentation
+      test/                    
+        funcunit             // functional tests
+          cookbook_test.js   // functional test
+          funcunit.js        // loads functional tests
+        qunit/               // unit tests
+          cookbook_test.js   // unit test
+          qunit.js           // loads unit tests
+
+
 
 We'll use cookbook.html for our application. If 
 you need to make another page for your app you 
