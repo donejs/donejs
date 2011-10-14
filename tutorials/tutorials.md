@@ -1,5 +1,7 @@
-@page tutorials Tutorials and Guides
+@page tutorials Tutorials
 @parent index 4
+
+This is where your learning starts. Go through these tutorials to learn JavaScriptMVC basics. Also check out these [examples example apps]
 
 ### [installing Installing JavaScriptMVC]
 
@@ -37,10 +39,10 @@ Build a simple widget
 that loads content with ajax.  This walkthrough demonstrates how to make
 a site Google crawlable and searchable.
 
-### [migrate Migrating from 3.0 and 3.1]
-
-This guide outlines the things you have to look at when upgrading from version 3.0 or 3.1.
-
 ### [services Ajax Service Guidelines]
 
 This guide details suggests a service layer design that minimizes the amount of extra work to get JavaScriptMVC running.
+
+### [migrate Migrating from 3.0 and 3.1]
+
+This guide outlines the things you have to look at when upgrading from version 3.0 or 3.1.
