@@ -25,29 +25,8 @@ Now let's take a look at the anatomy of our application:
 
     /todo [top-level, the GitHub repository]
       /jquery
-        /class
-        /controller
-        /model
-        /view
-        jquery.js
-        ...
       /steal
-        /build
-        /generate
-        js
-        js.bat
-        steal.js
-        ...
       /funcunit
-        /qunit
-          qunit.js
-          ...
-        /scripts
-        /test
-        funcunit.html
-        funcunit.js
-        qunit.html
-        ...
       /todo
         /scripts
         /test
@@ -86,7 +65,7 @@ If you look at `todo.js` the first thing you'll notice is that all the code is w
 
 In fact, this is true of every JavaScript file in a JavaScriptMVC application: we use `steal` to state our dependencies up-front, which tells the framework what libraries, plugins, stylesheets, etc. we need to load before we can begin. Typically, the final argument to `steal` will be a callback function, which will be executed when all the other dependencies (and _their_ dependencies, and so on...) have been loaded and executed as well. No more worrying whether you forgot any `<script>` tags, or whether you've got them in the right order!
 
-> For our application, we can see that our script requires the [jQuery.Model.List $.Model.List] class (which itself requires the [jQuery.Model $.Model] class, the [jQuery.Controller $.Controller] class, a jQuery JSON helper, and our application's stylesheet.
+> For our application, we can see that our script requires the [jQuery.Model.List $.Model.List] class (which itself requires the [jQuery.Model $.Model] class), the [jQuery.Controller $.Controller] class, a jQuery JSON helper, and our application's stylesheet.
 
 ### Model
 
@@ -94,7 +73,7 @@ All models in JavaScriptMVC extend the [jQuery.Model $.Model] class:
 
     $.Model('Todo', { /* static properties */ }, { /* instance/prototype properties */ })
 
-> If you need a quick refresher on how to use JVMC's classes, see [jQuery.Class $.Class].)
+> If you need a quick refresher on how to use JVMC's classes, see [jQuery.Class $.Class].
 
 In the case of our application, the `Todo` model represents a single To-do item. Its job is simply to know about the name and completed state of the item, how to persist that information, and how to notify the rest of the application when the item is created, updated, or destroyed.
 
