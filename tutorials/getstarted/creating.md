@@ -188,7 +188,7 @@ and <code>cookbook/list</code> and then tries to add these widgets to the
 
 However, <code>#recipes</code> and <code>#create</code> elements do not 
 exist.  All we have to do now is add them.  Open __cookbook/cookbook.html__
-and add a <code>#recipes</code> __ul__ a and <code>#create</code> __form__
+and add a <code>#recipes</code> __ul__ and a <code>#create</code> __form__
 so it looks like:
 
 @codestart html
@@ -198,7 +198,7 @@ so it looks like:
 		&lt;title>cookbook&lt;/title>
 	&lt;/head>
 	&lt;body>
-	    &lt;h1>Recipes&lt;/h1>
+	    &lt;h1>Welcome to JavaScriptMVC 3.2!&lt;/h1>
 	    &lt;ul id='recipes'>&lt;/ul>
 	    &lt;form id='create' action=''>&lt;/form>
 		&lt;script type='text/javascript' 
@@ -268,11 +268,11 @@ The Cookbook application can be broken into 5 parts:
     
       $.Model('Cookbook.Models.Recipe',
       {
-    	findAll: "/recipes.json",
-      	findOne : "/recipes/{id}.json", 
-      	create : "/recipes.json",
-     	update : "/recipes/{id}.json",
-      	destroy : "/recipes/{id}.json"
+        findAll: "/recipes.json",
+        findOne : "/recipes/{id}.json", 
+        create : "/recipes.json",
+        update : "/recipes/{id}.json",
+        destroy : "/recipes/{id}.json"
       },
       {});
     })
@@ -283,38 +283,38 @@ create, retrieve, update, and delete models programmatically like:
 
 __create__
 
-  // create a recipe instance
-  var recipe = new Cookbook.Models.Recipe({
-    name: 'Hot Dog',
-    description: 'nuke dog, put in bun'
-  })
+    // create a recipe instance
+    var recipe = new Cookbook.Models.Recipe({
+      name: 'Hot Dog',
+      description: 'nuke dog, put in bun'
+     })
   
-  // call save to create on the server
-  recipe.save()
+    // call save to create on the server
+    recipe.save()
 
 __retrieve__
 
-  // get recipes from the server
-  Cookbook.Models.Recipe.findAll({}, function(recipes){
-    // do something with recipes
-  })
+    // get recipes from the server
+    Cookbook.Models.Recipe.findAll({}, function(recipes){
+      // do something with recipes
+    })
 
 __update__
 
-  // update the properties of a created recipe
-  recipe.attrs({
-    name: 'Bratwurst',
-    description: 'nuke bratwurst, put in bun'
-  });
+    // update the properties of a created recipe
+    recipe.attrs({
+      name: 'Bratwurst',
+      description: 'nuke bratwurst, put in bun'
+    });
   
-  // call save to send updates to the server
-  recipe.save()
+    // call save to send updates to the server
+    recipe.save()
 
 __delete__
 
-  // call destroy
-  recipe.destroy()
-  
+    // call destroy
+    recipe.destroy()
+
 Of course, we don't have a server to make requests to.  This is
 where fixtures come in.
 
@@ -348,30 +348,29 @@ independent of the rest of the application.
 Open <code>cookbook/recipe/create/create.js</code> to
 see the Cookbook.Recipe.Create control's code:
 
-steal( 'jquery/controller',
-       'jquery/view/ejs',
-	   'jquery/dom/form_params',
-	   'jquery/controller/view',
-	   'cookbook/models' )
-	.then('./views/init.ejs', function($){
+    steal( 'jquery/controller',
+           'jquery/view/ejs',
+           'jquery/dom/form_params',
+           'jquery/controller/view',
+           'cookbook/models' )
+    .then('./views/init.ejs', function($){
 
-$.Controller('Cookbook.Recipe.Create',
-{
-	init : function(){
-		this.element.html(this.view());
-	},
-	submit : function(el, ev){
-		ev.preventDefault();
-		this.element.find('[type=submit]').val('Creating...')
-		new Cookbook.Models.Recipe(el.formParams()).save(this.callback('saved'));
-	},
-	saved : function(){
-		this.element.find('[type=submit]').val('Create');
-		this.element[0].reset()
-	}
-})
-
-});
+      $.Controller('Cookbook.Recipe.Create',
+      {
+        init : function(){
+          this.element.html(this.view());
+        },
+        submit : function(el, ev){
+          ev.preventDefault();
+          this.element.find('[type=submit]').val('Creating...');
+          new Cookbook.Models.Recipe(el.formParams()).save(this.callback('saved'));
+        },
+        saved : function(){
+          this.element.find('[type=submit]').val('Create');
+          this.element[0].reset();
+        }
+      });
+    });
 
 This code uses [steal] to load dependencies and then creates a 
 <code>Cookbook.Recipe.Create</code> controller.  This creates
