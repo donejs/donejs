@@ -1,6 +1,6 @@
 steal('jquery/controller',
 	  'jquery/event/hashchange', 
-	  'steal/html',function(){
+	  'steal/html/client.js',function(){
 	
 	$.Controller('Ajaxy',{
 		init : function(){
