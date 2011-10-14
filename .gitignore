@@ -3,3 +3,4 @@ jmvc/docs/*
 cookbook/*
 docs/*
 scripts/key
+.DS_Store
