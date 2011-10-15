@@ -3,7 +3,7 @@
 
 ## Requirements
 
-JavaScriptMVC requires Java JRE 1.6 or greater for:
+JavaScriptMVC requires [http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html Java JRE 1.6] or greater for:
 
  - Compression (Google Closure)
  - Running [http://www.funcunit.com/ FuncUnit] tests with [http://seleniumhq.org/ Selenium]
