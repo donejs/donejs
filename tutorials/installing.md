@@ -3,7 +3,7 @@
 
 ## Requirements
 
-JavaScriptMVC requires Java JRE 1.6 or greater for:
+JavaScriptMVC requires [http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html Java JRE 1.6] or greater for:
 
  - Compression (Google Closure)
  - Running [http://www.funcunit.com/ FuncUnit] tests with [http://seleniumhq.org/ Selenium]
@@ -17,8 +17,8 @@ Download [http://www.java.com/en/download/index.jsp Java here].
 
 There are 2 ways to get JavaScriptMVC:
 
- - [developwithgit Forking it with git]
- - [http://javascriptmvc.com/builder.html Downloading it]
+ - [http://javascriptmvc.com/builder.html Downloading]
+ - [developwithgit Installing JavaScriptMVC with Git]
  
 We (and the [http://forum.javascriptmvc.com/ community]) would much prefer you to develop with git.  JavaScriptMVC is built 
 around modular development so it fits in perfectly
@@ -38,7 +38,7 @@ unzip in a public folder where the server hosts static content.
   put them under a javascriptmvc folder in your public directory).
 </div>
 
-## Installing JavaScriptMVC with GIT.
+## Installing JavaScriptMVC with Git.
 
 JavaScriptMVC is comprised of four sub projects:
 

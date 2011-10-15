@@ -141,7 +141,7 @@ the page loads initially.
 To crawl your site and generate google-searchable html, run:
 
 @codestart none
-js ajaxify/scripts/crawl.js
+js ajaxy/scripts/crawl.js
 @codeend
 
 This script peforms the following actions:
@@ -175,5 +175,25 @@ If you haven't already, read up on
 Google's [http://code.google.com/web/ajaxcrawling/docs/getting-started.html Ajax crawling API].
 
 When google wants to crawl your site, it will send a 
-request to your page with <code>_escaped_fragment_=<code>.  When this happens, redirect
-google to the generated html page.  Yes, it's that easy!
+request to your page with <code>\_escaped\_fragment=</code>.  
+	
+When your server sees this param, redirect google to the generated html page.  For example, when the Google Spider requests <code>http://mysite.com?\_escaped\_fragment=val</code>, this is its attempt to crawl <code>http://mysite.com#!val</code>.  You should redirect this request to <code>http://mysite.com/html/val.html</code>.
+
+Yes, it's that easy!
+
+## Phantom for Advanced Pages
+
+By default the crawl script uses EnvJS to open your page and build a static snapshot.  For some pages, EnvJS won't be powerful enough to accurately simulate everything.  If your page experiences errors, you can use PhantomJS (headless Webkit) to generate snapshots instead, which may work better.
+
+To turn on Phantom:
+
+1. Install it using the install instructions [funcunit.phantomjs here]
+1. Open scripts/crawl.js and change the second parameter of steal.html.crawl to an options object with a browser option, like this:
+
+    steal('steal/html', function(){
+		steal.html.crawl("ajaxy/ajaxy.html", 
+		{
+			out: 'ajaxy/out',
+			browser: 'phantomjs'
+		})
+	})

@@ -49,6 +49,11 @@ the fork button (in the upper right of the page).
 To make the next several steps easier, we've made scripts for [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc Mac] 
 and [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc.bat Windows] users that automate adding your repos and setting them up.
 
+_Note: For the Mac script, be sure to set permissions to run locally._  
+@codestart text
+chmod 754 getjmvc
+@codeend
+
 Use this script to install JMVC from github or your own fork. If its already installed, it will get latest for all the submodules.  
 Assumes your project uses git.
 
