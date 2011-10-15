@@ -1,6 +1,6 @@
 TOC:
-  A.  How to get (and contribute) to JMVC 3.1  
-  B.  Getting Started with JMVC 3.1
+  A.  How to get (and contribute) to JMVC 3.2 
+  B.  Getting Started with JMVC 3.2
 
 
 A.  How to get (and contribute) JMVC
@@ -35,30 +35,24 @@ B. Getting Started with JMVC
   2. Generate scaffold:
   			./js steal/generate/scaffold Cookbook.Models.Recipe
 
-  3. Include models/controllers in cookbook/cookbook.js:
-			.models('recipe')
-			.controllers('recipe')
+  3. Add html to cookbook/cookbook.html:
+			<ul id='recipes'></ul>
+			<form id='create' action=''></form>
 
   4. See your recipes app:  
-  			Open callcenter.html in a browser.
+  			Open cookbook/cookbook.html in a browser.
 
-  5. Include functional tests in test/funcunit/funcunit.js:
-			.then("recipe_controller_test")
+  5. Run functional tests in the browser: 
+  			Open cookbook/funcunit.html in a browser (turn off popup blockers).
 
-  6. Run functional tests in the browser: 
-  			Open funcunit.html in a browser (turn off popup blockers).
+  6. Run functional tests with selenium:
+  			./funcunit/run selenium cookbook/funcunit.html
 
-  7. Run functional tests with selenium:
-  			./funcunit/envjs cookbook/funcunit.html
+  7. Run unit tests in the browser: 
+  			Open cookbook/qunit.html in a browser.
 
-  8. Include unit tests in test/qunit/qunit.js:
-			.then("recipe_test")
-
-  9. Run unit tests in the browser: 
-  			Open qunit.html in a browser.
-
-  10. Run unit tests with Rhino:
-  			./funcunit/envjs cookbook/qunit.html
+  8. Run unit tests with Rhino:
+  			./funcunit/run envjs cookbook/qunit.html
 
   11. Compress app:
   			./steal/js cookbook/scripts/build.js
@@ -66,7 +60,7 @@ B. Getting Started with JMVC
   12. Turn on production mode in callcenter.html and reload page:
 			src='../steal/steal.production.js?cookbook'
 
-  13. Restore development mode by changing the script tag back, then generate docs:
+  13. Generate docs:
   			./steal/js cookbook/scripts/doc.js
 
   14. View docs: 
