@@ -50,6 +50,7 @@
 				
 			</div>
 			<div id="disqus_thread"></div>
+      <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 		</div>
 	</div>
 </div>
@@ -64,10 +65,29 @@
 </script>
 <script type='text/javascript'>
 	DOCS_LOCATION = "docs/" //adds searchData to this
-	JMVCDOC_TIMESTAMP = 263706824
+	JMVCDOC_TIMESTAMP = 263728274
 </script>
 <script type='text/javascript'
 	src='../steal/steal.js?documentjs/jmvcdoc'>
 </script>
+<script type="text/javascript">
+  window.disqus_identifier = window.location.hash;
+  window.disqus_url = window.location.toString();
+  steal('jquery/dom/route', 'http://jmvcs3.disqus.com/embed.js').then(function(){
+    $.route.delegate('who', 'change', function(ev, attr, how, newVal, oldVal) {
+      DISQUS.reset({
+        reload: true,
+        config: function () {  
+          this.page.identifier = window.location.hash;  
+          this.page.url = window.location.toString();
+        }
+      });
+    })
+  });
+</script>
+<style type="text/css">
+  body > iframe { width: 0;} 
+  #dsq-content #dsq-form-area .dsq-attach-media-container iframe { height: 13px; padding: 0;}
+</style>
 	</body>
 </html>
