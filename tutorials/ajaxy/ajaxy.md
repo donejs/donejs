@@ -190,7 +190,7 @@ To turn on Phantom:
 1. Install it using the install instructions [funcunit.phantomjs here]
 1. Open scripts/crawl.js and change the second parameter of steal.html.crawl to an options object with a browser option, like this:
 
-    steal('steal/html/crawl', function(){
+    steal('steal/html', function(){
 		steal.html.crawl("ajaxy/ajaxy.html", 
 		{
 			out: 'ajaxy/out',
