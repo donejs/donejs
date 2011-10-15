@@ -1,20 +1,31 @@
 @page tutorials.steal Get Started With StealJS
 @parent tutorials 3
 
+__NOTE:__  _This tutorial is under development.  We will have it done shortly_.
+
+
+There's a lot more to making JavaScript apps 
+than writing JavaScript. [stealjs StealJS] is a 
+collection of command and browser based JavaScript 
+utilities that make building, 
+packaging, sharing, and consuming JavaScript applications easy.
+
 This tutorial will cover building a 
-basic tabs widget with StealJS.  For now, this is a rough outline.
+basic tabs widget with __only__ 
+StealJS.
 
 ### Installing Steal
 
-Download StealJS or JavaScriptMVC and unzip it in a public folder.
+[javascriptmvc.com/builder.html Download  StealJS] or 
+[installing install JavaScriptMVC] and 
+unzip it in a public folder.
 
-### Setting up your app.
+__Note:__ StealJS requires Java 1.6 or greater.
 
-JavaScriptMVC encourages you to have two root 
-folders.  One for reusable widgets, plugins and 
-other code that can be potentially used across multiple applications.
+### Creating An App.
 
-The other folder will be code specific to your application.
+Steal organizes your application's content in an
+application folder.  Generate an application.
 
 
 ### Setting up your page
