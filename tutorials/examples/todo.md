@@ -109,7 +109,25 @@ Given the `localStorage` helper we've created, we can now define a finder method
 
 > _Tip_: Don't let that `new this( ... )` trip you up. Since we're in the static (class) context, `this` simply refers to the `Todo` class itself. Writing `new Todo( ... )` would have the same effect, but this way our code won't break if we ever decide to rename the class to something else.
 
-The rest of the CRUD methods are similar enough, so we won't go through each one individually.
+The static `create` and `update` methods may be called directly, but are most often invoked automatically by the model layer when an instance is saved. The `create` method expects an `attrs` argument to describe the properties of the To-do item we want to create:
+
+    create: function(attrs, success){
+      this.localStore(function(todos){
+        attrs.id = attrs.id || parseInt(100000 * Math.random());
+        todos[attrs.id] = attrs;
+      });
+      success({id: attrs.id})
+    }
+
+`Update` is similar to `create`, but rather than adding a new object to local storage, an existing object is looked up and modified in place with `jQuery.extend`:
+
+    update: function(id, attrs, success){
+      this.localStore(function(todos){
+        var todo = todos[id];
+        $.extend(todo, attrs);
+      });
+      success({});
+    }
 
 ### Model Lists
 
@@ -210,10 +228,10 @@ In a similar way, we will listen for the list's "remove" and "update" events. Up
       this.updateStats();
     }
 
-The "update" event is fired for individual items. In this case, we want to render the single item template ("todoEJS") to replace the HTML of the item which was changed:
+The "updated" event is fired both on individual items and on the list as a whole. In this case, we want to render the single item template ("todoEJS") to replace the HTML of the item which was changed:
 
     // when an item is updated
-    "{list} update": function(list, ev, item) {
+    "{list} updated": function(list, ev, item) {
       item.elements().html("todoEJS", item);
       this.updateStats();
     }
