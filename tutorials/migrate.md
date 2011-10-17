@@ -1,4 +1,4 @@
-@page migrate Migrating from 3.0 and 3.1
+@page migrate Upgrading to 3.2
 @parent tutorials 8
 
 There are many new feature in JavaScriptMVC 3.2 that help you build great JavaScript applications.
