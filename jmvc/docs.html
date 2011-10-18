@@ -65,7 +65,7 @@
 </script>
 <script type='text/javascript'>
 	DOCS_LOCATION = "docs/" //adds searchData to this
-	JMVCDOC_TIMESTAMP = 263728274
+	JMVCDOC_TIMESTAMP = 263779778
 </script>
 <script type='text/javascript'
 	src='../steal/steal.js?documentjs/jmvcdoc'>
@@ -75,13 +75,15 @@
   window.disqus_url = window.location.toString();
   steal('jquery/dom/route', 'http://jmvcs3.disqus.com/embed.js').then(function(){
     $.route.delegate('who', 'change', function(ev, attr, how, newVal, oldVal) {
-      DISQUS.reset({
-        reload: true,
-        config: function () {  
-          this.page.identifier = window.location.hash;  
-          this.page.url = window.location.toString();
-        }
-      });
+	if (window.location.protocol !== "file:") { // avoid this for crawl script
+		DISQUS.reset({
+			reload: true,
+			config: function(){
+				this.page.identifier = window.location.hash;
+				this.page.url = window.location.toString();
+			}
+		});
+	}
     })
   });
 </script>
