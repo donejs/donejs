@@ -1,3 +1,13 @@
+## 3.2.1 (10/18/11)
+
+### Steal
+
+- Fixed a bug in steal/html that made it unusable
+
+### FuncUnit
+
+- Fixed a bug in PhantomJS steal.browser
+
 ## 3.2 (10/15/11)
 
 ### JavaScriptMVC
