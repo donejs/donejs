@@ -1,4 +1,4 @@
-der<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
@@ -73,7 +73,7 @@ der<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 </div>
 <script type='text/javascript'>
 	DOCS_LOCATION = "docs/" //adds searchData to this
-	JMVCDOC_TIMESTAMP = 263725889
+	JMVCDOC_TIMESTAMP = 263793756
 </script>
 <script type='text/javascript'
 	src='../steal/steal.js?documentjs/jmvcdoc'>
@@ -83,15 +83,15 @@ der<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
   window.disqus_url = window.location.toString();
   steal('jquery/dom/route', 'http://jmvcs3.disqus.com/embed.js').then(function(){
     $.route.delegate('who', 'change', function(ev, attr, how, newVal, oldVal) {
-	if (window.location.protocol !== "file:") { // avoid this for crawl script
-		DISQUS.reset({
-			reload: true,
-			config: function(){
-				this.page.identifier = window.location.hash;
-				this.page.url = window.location.toString();
-			}
-		});
-	}
+		if (window.location.protocol !== "file:") { // avoid this for crawl script
+			  DISQUS.reset({
+			    reload: true,
+			    config: function () {  
+			      this.page.identifier = window.location.hash;  
+			      this.page.url = window.location.toString();
+			    }
+			  });
+	     }
     })
   });
 </script>
