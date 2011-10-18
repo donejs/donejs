@@ -1,10 +1,23 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+der<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
 	<title>JavaScriptMVC</title>
 	<link rel="stylesheet" type='text/css' href='../documentjs/jmvcdoc/style.css'/>
 	<link rel="shortcut icon" href="../documentjs/jmvcdoc/images/favicon.ico"/>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-xxxxx-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
 </head>
 <body>
 <div id='documentation'>
@@ -58,11 +71,6 @@
 	<a href="http://jupiterit.com">&copy; Jupiter Consulting - JavaScriptMVC Training and Support</a>
 	<a class="api_links" href="http://javascriptmvc.com/docs/api.html#&who=api"></a>
 </div>
-<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	GOOGLE_ANALYTICS_TRACKER_ID = "UA-xxxxxxxx-x";
-</script>
 <script type='text/javascript'>
 	DOCS_LOCATION = "docs/" //adds searchData to this
 	JMVCDOC_TIMESTAMP = 263725889
@@ -75,13 +83,15 @@
   window.disqus_url = window.location.toString();
   steal('jquery/dom/route', 'http://jmvcs3.disqus.com/embed.js').then(function(){
     $.route.delegate('who', 'change', function(ev, attr, how, newVal, oldVal) {
-      DISQUS.reset({
-        reload: true,
-        config: function () {  
-          this.page.identifier = window.location.hash;  
-          this.page.url = window.location.toString();
-        }
-      });
+	if (window.location.protocol !== "file:") { // avoid this for crawl script
+		DISQUS.reset({
+			reload: true,
+			config: function(){
+				this.page.identifier = window.location.hash;
+				this.page.url = window.location.toString();
+			}
+		});
+	}
     })
   });
 </script>
