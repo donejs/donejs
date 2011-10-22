@@ -45,7 +45,7 @@ Repo: [https://github.com/jupiterjs/playermx](https://github.com/jupiterjs/playe
 
 ## PopcornJS Overview
 
-Repo: [https://github.com/jbuck/popcorn-js](https://github.com/jbuck/popcorn-js)
+Repo: [https://github.com/cadecairos/popcorn-js](https://github.com/cadecairos/popcorn-js)
 
 > _Popcorn.js is an event framework for HTML5 media. Popcorn.js utilizes the native HTMLMediaElement properties, methods and events, normalizes them into an easy to learn API and provides a plugin system for community contributed interactions._  
 
