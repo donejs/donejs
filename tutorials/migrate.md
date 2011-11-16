@@ -91,3 +91,35 @@ Check out the documentation on [jquery.model.events | Model events] for detailed
 ## Controller History
 
 Controller history using OpenAjax has been removed in 3.2. Use [jQuery.route] for full history and routing support.
+
+## Wrap Removed
+
+The AJAX response converter 'wrap' and 'wrapMany' have been removed in favor of a [native jQuery converter http://api.jquery.com/extending-ajax/#Converters].
+
+Before, you would do a _this.callback_ on the success like:
+
+	findAll : function(params, success, error ){
+		return $.ajax({
+			url: '/services/recipes.json',
+			type: 'get',
+			data: params
+			dataType : 'json',
+			success: this.callback(['wrapMany',success])
+		});
+	}
+
+now becomes:
+
+	findAll : function(params, success, error ){
+		return $.ajax({
+			url: '/services/recipes.json',
+			type: 'get',
+			data: params
+			dataType : 'json recipe.models',
+			success: success
+			});
+		}
+		
+## Callback Renamed to Proxy
+
+The _this.callback_ method has been deprecated and the preferred method is now _this.proxy_.
