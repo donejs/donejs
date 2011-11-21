@@ -1,3 +1,10 @@
+## 3.2.2
+
+### Model
+
+- Removed this.publish
+
+
 ## 3.2.1 (10/18/11)
 
 ### Steal

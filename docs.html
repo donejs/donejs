@@ -1,14 +1,16 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+		"http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
 <head>
-<title>JavaScriptMVC Documentation</title>		
-<link rel="stylesheet" type='text/css' href='documentjs/jmvcdoc/style.css' />
-<link rel="shortcut icon" href="documentjs/jmvcdoc/images/favicon.ico" />
+	<title>JavaScriptMVC</title>
+	<link rel="stylesheet" type='text/css' href='documentjs/jmvcdoc/style.css'/>
+	<link rel="shortcut icon" href="documentjs/jmvcdoc/images/favicon.ico"/>
 	<script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-2302003-4']);
-  _gaq.push(['_trackPageview']);
+  _gaq.push(['_setAccount', 'UA-2302003-4'],
+	['_trackPageview'],
+	['_trackPageLoadTime']);
 
   (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -17,68 +19,79 @@
   })();
 
 </script>
-<meta name="fragment" content="!">
 </head>
 <body>
 <div id='documentation'>
-<div id='top'>
-<div class="topCorner">
-<div class="right"></div>
-<div class="left"></div>
-</div>
-<div class="content">
-<div id="searchRoundCorners">
-<input id='search' type='input' disabled='true'/>
-</div>
-<div id='defaults'>
-<ul id="menu" class="ui-menu">
-<!--
-<li class="ui-menu-item">
-<a class="menuLink" href="#favorites"><span class="menuSpan">Favorites</span></a>
-</li>
--->
-<li class="ui-menu-item">
-<a class="menuLink" href="follow.html" title="Follow"><span class="menuSpan red">Follow</span></a>
-</li>
-<li class="ui-menu-item">
-<a class="menuLink" href="contribute.html" title="Contribute"><span class="menuSpan red">Contribute</span></a>
-</li>
-<li class="ui-menu-item">
-<a class="menuLink" href="code.html" title="Code"><span class="menuSpan red">Code</span></a>
-</li>
-</ul>
-</div>
-<div class="logo-text"><a href='http://javascriptmvc.com'><img src='documentjs/jmvcdoc/images/logo80x30.png' class="logo-image"/></a></div>
-</div>
-<div class="bottomCorner"><div>&nbsp;</div></div>
-</div>
-<div id='bottom'>       
-<div id='nav'>
-<a>Loading ... </a>
-</div>
-<div id='doc_container'>
-<div id='doc'>
-
-</div>
-<div id="disqus_thread"></div>
-</div>
-</div>
+	<div id='top'>
+		<div class="topCorner">
+			<div class="right"></div>
+			<div class="left"></div>
+		</div>
+		<div class="content">
+			<div id="searchRoundCorners">
+				<input id='search' type='input' disabled='true'/>
+			</div>
+			<div id='defaults'>
+				<ul id="menu" class="ui-menu">
+					<!--
+					<li class="ui-menu-item">
+						<a class="menuLink" href="#favorites"><span class="menuSpan">Favorites</span></a>
+					</li>
+					-->
+					<li class="ui-menu-item">
+						<a class="menuLink" href="follow.html" title="Follow"><span
+								class="menuSpan red">Follow</span></a>
+					</li>
+					<li class="ui-menu-item">
+						<a class="menuLink" href="contribute.html" title="Contribute"><span class="menuSpan red">Contribute</span></a>
+					</li>
+					<li class="ui-menu-item">
+						<a class="menuLink" href="code.html" title="Code"><span class="menuSpan red">Code</span></a>
+					</li>
+				</ul>
+			</div>
+			<div class="logo-text"><a href='http://javascriptmvc.com'><img
+					src='documentjs/jmvcdoc/images/logo80x30.png' class="logo-image"/></a></div>
+		</div>
+		<div class="bottomCorner">
+			<div>&nbsp;</div>
+		</div>
+	</div>
+	<div id='bottom'>
+		<div id='nav'>
+			<a>Loading ... </a>
+		</div>
+		<div id='doc_container'>
+			<div id='doc'>
+				
+			</div>
+			<div id="disqus_thread"></div>
+		</div>
+	</div>
 </div>
 <div id='low'>
-<a href="http://jupiterit.com">&copy; Jupiter Consulting - JavaScriptMVC Training and Support</a>
-<a class="api_links" href="http://javascriptmvc.com/docs/api.html#&who=api"></a>
+	<a href="http://jupiterit.com">&copy; Jupiter Consulting - JavaScriptMVC Training and Support</a>
+	<a class="api_links" href="http://javascriptmvc.com/docs/api.html#&who=api"></a>
 </div>
 <script type='text/javascript'>
-DOCS_LOCATION = "jmvc/docs/" //adds searchData to this
-COMMENTS_LOCATION = "http://jmvcs3.disqus.com/embed.js"
-JMVCDOC_TIMESTAMP = 2634234343122;
+DOCS_SRC_MAP = {
+		'funcunit' : 'https://github.com/jupiterjs/funcunit',
+		'jquery' : 'https://github.com/jupiterjs/jquerymx',
+		'steal' : 'https://github.com/jupiterjs/steal',
+		'documentjs' : 'https://github.com/jupiterjs/documentjs'
+};
+
+	DOCS_LOCATION = "jmvc/docs/" //adds searchData to this
+	JMVCDOC_TIMESTAMP = 1321511402902
+	COMMENTS_LOCATION = 'http://jmvcs3.disqus.com/embed.js';
 </script>
-<script type='text/javascript' 
-src='steal/steal.production.js?documentjs/jmvcdoc'>   
+<script type='text/javascript'
+	src='steal/steal.js?documentjs/jmvcdoc'>
 </script>
+
 <style type="text/css">
-body > iframe { width: 0;} 
-#dsq-content #dsq-form-area .dsq-attach-media-container iframe { height: 13px; padding: 0;}
+  body > iframe { width: 0;} 
+  #dsq-content #dsq-form-area .dsq-attach-media-container iframe { height: 13px; padding: 0;}
 </style>
-</body>
+	</body>
 </html>

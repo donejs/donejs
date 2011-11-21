@@ -63,7 +63,6 @@
 				
 			</div>
 			<div id="disqus_thread"></div>
-      <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 		</div>
 	</div>
 </div>
@@ -72,29 +71,20 @@
 	<a class="api_links" href="http://javascriptmvc.com/docs/api.html#&who=api"></a>
 </div>
 <script type='text/javascript'>
+	DOCS_SRC_MAP = {
+		'funcunit' : 'https://github.com/jupiterjs/funcunit',
+		'jquery' : 'https://github.com/jupiterjs/jquerymx',
+		'steal' : 'https://github.com/jupiterjs/steal',
+		'documentjs' : 'https://github.com/jupiterjs/documentjs'
+	};
 	DOCS_LOCATION = "docs/" //adds searchData to this
-	JMVCDOC_TIMESTAMP = 263793756
+	JMVCDOC_TIMESTAMP = 264302280
+	COMMENTS_LOCATION = 'http://jmvcs3.disqus.com/embed.js';
 </script>
 <script type='text/javascript'
 	src='../steal/steal.js?documentjs/jmvcdoc'>
 </script>
-<script type="text/javascript">
-  window.disqus_identifier = window.location.hash;
-  window.disqus_url = window.location.toString();
-  steal('jquery/dom/route', 'http://jmvcs3.disqus.com/embed.js').then(function(){
-    $.route.delegate('who', 'change', function(ev, attr, how, newVal, oldVal) {
-		if (window.location.protocol !== "file:") { // avoid this for crawl script
-			  DISQUS.reset({
-			    reload: true,
-			    config: function () {  
-			      this.page.identifier = window.location.hash;  
-			      this.page.url = window.location.toString();
-			    }
-			  });
-	     }
-    })
-  });
-</script>
+
 <style type="text/css">
   body > iframe { width: 0;} 
   #dsq-content #dsq-form-area .dsq-attach-media-container iframe { height: 13px; padding: 0;}

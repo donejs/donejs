@@ -4,3 +4,4 @@ cookbook/*
 docs/*
 scripts/key
 .DS_Store
+html/
