@@ -1,5 +1,6 @@
 @page examples Examples
 @parent index 5
+@description Example application to learn from.
 
 Here is the list of the example JavaScriptMVC applications. They cover specific JavaScriptMVC features and are ordered by complexity. If you need an introduction to the JavaScriptMVC framework it is best to read them in order.
 
