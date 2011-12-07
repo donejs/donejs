@@ -6,7 +6,8 @@ steal('steal/generate',
 	'steal/less',
 	'steal/clean',
 	'steal/parse',
-	'steal/html/crawl'
+	'steal/html/crawl',
+	'steal/instrument'
 )
 .then('documentjs')
 .then('./pages/init.js')
