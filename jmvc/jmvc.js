@@ -6,7 +6,8 @@ steal('steal/generate',
 	'steal/less',
 	'steal/clean',
 	'steal/parse',
-	'steal/html/crawl'
+	'steal/html/crawl',
+	'steal/instrument'
 )
 .then('documentjs')
 .then('./pages/init.js')
@@ -50,7 +51,8 @@ steal('steal/generate',
 'jquery/dom/selection',
 'jquery/dom/route',
 'jquery/lang/string/deparam',
-'jquery/lang/object'
+'jquery/lang/object',
+'mxui'
 )
 // funcunit should always be included last because it puts jquery in noconflict mode
 .then('funcunit')

@@ -1,6 +1,8 @@
 @page tutorials Tutorials
 @parent index 4
 
+@description Tutorials on JavaScriptMVC.
+
 This is where your learning starts. Go through these tutorials to learn JavaScriptMVC basics. Also check out these [examples example apps]
 
 ### [installing Installing JavaScriptMVC]
