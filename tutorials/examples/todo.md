@@ -269,10 +269,6 @@ Remember our discussion above about decoupling fetching from rendering? It appli
 
 This causes the "add" event to fire, which in turn triggers our `"{list} add"` handler above. We don't have to write any new code to handle this render: it's already happening automatically! Nowhere in the application have we explicitly bound any model callbacks to changes in the view: everything happens through events.
 
-### Hookups
-
-
-
 ## That's It!
 
 JavaScriptMVC enables you to write even the simplest application **the right way** from the start. With a Model that's completely independent from any knowledge of user interface behavior, and a Controller that's all ready to scale up to the complexities of modern Web experiences, you won't find yourself rewriting your app over and over again to deliver the goods.
