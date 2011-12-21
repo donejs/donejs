@@ -162,11 +162,8 @@ Feed.extend('BlogFeed',
 		var html = [], d, date, li, url;
 		for(var i = 0, ii = data.length; i < 6 && i < data.length; i++){
 			date = this.formatDate(data[i].publish_date);
-			url = "http://jupiterjs.com/news/"
-					+ data[i].title.toLowerCase()
-						.replace(/[\.\:\-\!]/g, " ")
-						.replace(/\s+$/, "")
-						.split(/\s+/).join("-")
+			url = "http://jupiterjs.com"
+					+ data[i].url
 			d = {
 				title  : data[i].title,
 				month  : date.month,
