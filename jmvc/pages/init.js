@@ -46,11 +46,11 @@ of the sub-project.
 the missing functionality necessary to implement and organize
 large-scale jQuery applications. For example, it includes things like:
 
-  - A [jQuery.Class class] system
   - Special events like [jQuery.Drag drag]-[jQuery.Drop drop] and [jQuery.event.special.resize resize]
   - Language helpers like [jQuery.toJSON toJSON] and an [jQuery.Observe observable system]
   - DOM extensions for things like [jQuery.Range text ranges] and [jQuery.cookie cookies]
   - Browser history [jQuery.route routing].
+  - A [jQuery.Class class-like] system
   
 jQueryMX also puts the MVC in JavaScript with $.Model,
 $.View, and $.Controller.  [jQuery.Model Models] connect to your
@@ -64,9 +64,9 @@ and even independently of other parts of jQueryMX.  For example, you can use $.C
 
 ## StealJS
 
-[stealjs StealJS] is a "code manager" that keeps your code beautiful and organized
-while developing and FAST for users in production.  Its collection of command-line and
-browser-based utilities enable you to:
+[stealjs StealJS] is a "code manager" that keeps code beautiful and organized
+while developing and FAST for users in production.  It's a collection of 
+command-line and browser-based utilities enabling you to:
 
   - [steal load] JS, CSS, LESS, and CoffeeScript files and build them into a single production file.
   - [steal.generate generate] an application file/folder structure, complete with test, build and documentation scripts.
