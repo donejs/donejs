@@ -15,30 +15,30 @@
 	</div>	
 </div>
 
-JavaScriptMVC (JMVC) is a MIT licensed client-side JavaScript toolset that helps you 
-build a maintainable, error-free, lightweight 
-application in the shortest amount of time. It packages best-of-breed
-libraries and tools that are guaranteed (and tested) to work together.  It
+JavaScriptMVC (JMVC) is a MIT licensed, client-side, JavaScript framework that 
+builds maintainable, error-free, lightweight 
+applications as quick as possible. It packs best-of-breed
+libraries and tools that are guaranteed to work together.  It
 supports every browser that jQuery supports.
+
+If you are new to the framework, this page followed by 
+the [tutorials] is the best place to start.
 
 JMVC's goodies are broken down into four sub-projects:
 
   - [jquerymx jQueryMX] - jQuery MVC and DOM extensions
   - [stealjs StealJS] - JavaScript and CSS dependency management and build tools
-  - [FuncUnit] - Functional and Unit Testing framework
-  - [DocumentJS] - Documentation Engine
+  - [FuncUnit] - Functional and unit testing framework
+  - [DocumentJS] - Documentation engine
 
-JavaScriptMVC is extremely modular. You can use each sub-project together or 
-separately (via the [http://javascriptmvc.com/builder.html download builder]). This means
-that you can start small, using only [jQuery.Controller $.Controller] and add in parts
+JavaScriptMVC is extremely modular. Use each sub-project together or 
+separately (via the [http://javascriptmvc.com/builder.html download builder]). Start 
+small, using only [jQuery.Controller $.Controller] and add in parts
 of the framework as necessary. 
 
-If you are new to the framework, this page followed by 
-the [tutorials tutorials and Guides] is the best place to start.
-
-The remainder of this page highlights what is in each project. Click 
+The remainder of this page highlights each sub-project. Click 
 the the project links on the left for a more in-depth overview 
-of each project.
+of the sub-project.
 
 ## jQueryMX
 
