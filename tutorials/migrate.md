@@ -128,3 +128,6 @@ The _this.callback_ method has been deprecated and the preferred method is now _
 
 The _steal.browser.rhino_ has been removed. We are using _steal.browsers_ namespace for the browser drivers.  If you were using this to have rhino skip files in the build process, you can now use: _steal.isRhino_.
 
+## Associations
+
+Associations were removed in favor of [jQuery.Model.static.attributes].  Attribute type values can also represent the name of a function which is used is for associated data now.
