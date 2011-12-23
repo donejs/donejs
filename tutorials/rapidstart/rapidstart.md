@@ -740,7 +740,7 @@ architectures.
 
 ### destroy `controller.destroy()`
 
-[$.Controller.prototype.destroy] unbinds a controllers
+[$.Controller.prototype.destroy] unbinds a controller's
 event handlers and releases its element, but does not remove 
 the element from the page. 
 
@@ -763,7 +763,7 @@ data by calling `$(document.body).empty()`._
 
 ### update `controller.update(options)`
 
-[$.Controller.prototype.update] updates a controllers 
+[$.Controller.prototype.update] updates a controller's 
 `this.options` and rebinds all event handlers.  This is useful
 when you want to listen to a specific model:
 
