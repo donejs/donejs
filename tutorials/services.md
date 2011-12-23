@@ -1,5 +1,5 @@
 @page services Ajax Service Guidelines
-@parent tutorials 7
+@parent tutorials 8
 
 JavaScriptMVC's flexibility allows it to 
 be used with almost any service layer.  However, 

@@ -1,4 +1,3 @@
-/**
 @page rootfolder
 The root folder is the folder where JavaScriptMVC is installed (the folder which has
 funcunit, jquery, steal, documentjs, etc).  
@@ -9,5 +8,3 @@ steal.plugins references files from the root folder.  Also, paths that begin wit
 
     steal('//foo/bar') //-> ROOTFOLDER/foo/bar
     $('#foo').html('//views/bar.ejs',{}) // uses ROOTFOLDER/views/bar.ejs
- */
-// 

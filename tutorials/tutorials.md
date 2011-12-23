@@ -10,6 +10,10 @@ This is where your learning starts. Go through these tutorials to learn JavaScri
 Learn how to install JavaScriptMVC.  This is a prerequisite 
 for most of the other tutorials.
 
+### [rapidstart Rapid Start]
+
+Want to take JMVC for a test-drive?  Start here.
+
 ### [getstarted Get Started with JavaScriptMVC]
 
 Build, minify, test, and document a basic recipe application.  This tutorial

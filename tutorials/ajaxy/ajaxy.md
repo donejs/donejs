@@ -1,5 +1,5 @@
 @page ajaxy Searchable Ajax Apps
-@parent tutorials 6
+@parent tutorials 7
 
 This tutorial walks you through building a simple widget
 that listens for changes in the browser location hash

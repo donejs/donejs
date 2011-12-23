@@ -1,5 +1,5 @@
 @page mvc Get Started with jQueryMX
-@parent tutorials 2
+@parent tutorials 3
 
 [jquerymx jQueryMX] is JavaScriptMVC's collection 
 of useful jQuery extensions.  Every part of jQueryMX can be used without

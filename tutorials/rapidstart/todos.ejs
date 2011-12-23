@@ -1,0 +1,6 @@
+<% $.each(this, function(i, todo){ %>
+  <li <%= (el) -> el.model(todo) %>>
+    <%= todo.name %>
+    <a href="javascript://" class='destroy'>X</a>
+  </li>
+<% }) %>

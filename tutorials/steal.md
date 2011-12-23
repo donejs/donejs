@@ -1,5 +1,5 @@
 @page tutorials.steal Get Started With StealJS
-@parent tutorials 3
+@parent tutorials 4
 
 __NOTE:__  _This tutorial is under development.  We will have it done shortly_.
 

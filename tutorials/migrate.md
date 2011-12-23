@@ -1,5 +1,5 @@
 @page migrate Upgrading to 3.2
-@parent tutorials 8
+@parent tutorials 9
 
 There are many new feature in JavaScriptMVC 3.2 that help you build great JavaScript applications.
 Although 3.2 is not strictly backwards compatible it is possible to upgrade from

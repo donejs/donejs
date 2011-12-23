@@ -1,5 +1,5 @@
 @page getstarted Get Started with JavaScriptMVC
-@parent tutorials 1
+@parent tutorials 2
 
 This guide introduces the most important aspects of JavaScriptMVC (JMVC) by 
 creating a simple cookbook application.

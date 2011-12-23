@@ -95,15 +95,12 @@ anything.  It's extensible.  And with Markdown support, it's easy to document yo
 
  */
 steal(
-'./api.js',
-'./download.js',
 './learn.js',
 './why.js',
 './help.js',
 './developingwithgit.js',
 './folders.js',
-'./developingjmvc.js',
-'./rapidstart.js')
+'./developingjmvc.js')
 
 
 
