@@ -734,8 +734,8 @@ __destroyed__ events.  We'll handle __updateded__ too:
     
     new Todos("#todos");
 
-This is better because it works if another widget
-destroyed the todo. It works very well with real-time
+This is better because it removes the todo's element from the page even if another widget
+destroyed the todo. Also, this very well with real-time
 architectures.
 
 ### destroy `controller.destroy()`
