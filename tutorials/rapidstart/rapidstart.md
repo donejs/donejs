@@ -79,7 +79,7 @@ start of your path like:
 
     steal('./helpers.js')
     
-Steal also support css, allowing you to `todos/todos.css` 
+Steal also supports css, allowing you to steal `todos/todos.css` 
 like:
 
     steal('./todos.css')
@@ -119,11 +119,11 @@ The following goes through each plugin while we build the todos app.
 
 ## $.Class `$.Class([name,] [classProps,] [prototypeProps])`
 
-[$.Class] is used to create Constructor functions that create
-instance's objects with shared properties. It's used by both
+Constructors made with [$.Class] are used to create
+objects with shared properties. It's used by both
 __$.Controller__ and __$.Model__.
 
-To create a __Class__ class of your own, call __$.Class__ with the:
+To create a __Class__ of your own, call __$.Class__ with the:
 
   - __name__ of the class which can be used for introspection,
   - __classProperties__ that are attached directly to the constructor, and
@@ -170,7 +170,7 @@ on the prototype chain like:_
 
 ### constructor / init `new Class(arg1, arg2)`
 
-When a class instance is created, __$.Class__ creates the instance and 
+When a class constructor is invoked, __$.Class__ creates the instance and 
 calls [$.Class.prototype.init $.Class.prototype.init] with 
 the arguments passed to `new Class(...)`.
 
@@ -189,7 +189,7 @@ the arguments passed to `new Class(...)`.
 
 _Brief aside on __init__.  $.Class actually calls 
 [$.Class.prototype.setup $.Class.prototype.setup] before 
-init.  `setup` can be used to change the arguments passed to __init__._
+init.  `setup` can be used to change (or normalize) the arguments passed to __init__._
 
 ## Model `$.Model(name, classProperties, prototypeProperties)`
 
@@ -393,7 +393,7 @@ Listening to changes in the Model is what MVC
 is about.  Model lets you [$.Model::bind bind] to changes 
 on an individual instance 
 or [$.Model.bind all instances]. For example, you can listen to 
-when an instance is __created__ like:
+when an instance is __created__ on the server like:
 
     var todo = new Todo({name: "mow lawn"});
     todo.bind('created', function(ev, todo){
@@ -401,7 +401,7 @@ when an instance is __created__ like:
     })
     todo.save()
     
-You can listen to anytime an __instance__ is created by 
+You can listen to anytime an __instance__ is created on the server by 
 binding on the model:
 
     Todo.bind('created', function(ev, todo){
@@ -409,7 +409,7 @@ binding on the model:
     })
 
 Model produces the following events on 
-the model class an instances because of Ajax requests:
+the model class and instances whenever a model Ajax request completes:
 
   - __created__ - an instance is created on the server
   - __updated__ - an instance is updated on the server
@@ -434,7 +434,7 @@ get back the model instance with:
 ### elements `todo.elements( [context] )`
 
 [$.Model::elements Elements] retrieves the elements that 
-have a model instance. A __context__ element can be 
+have a model instance. A __context__ element (or query string) can be 
 provided to limit the search to within a particular element:
 
     todo.elements('#todos');
@@ -476,7 +476,7 @@ Render this with:
     });
 
 __$.View__ works with any template language, such
-as JAML, jQuery-tmpl, Mustache and super-powers them with:
+as JAML, jQuery-tmpl, Mustache and superpowers them with:
 
   - Loading from scripts and external files 
   - using templates with jQuery __modifiers__ like html
@@ -500,10 +500,13 @@ To make this work, make sure `todos.html` has a `#todos` element like:
 
 ### Deferreds 
 
-__$.Model__'s ajax methods return a deffered and __$.View__
+__$.Model__'s ajax methods return a deffered. __$.View__
 accepts deferreds, making this hotness possible:
 
     $('#todos').html('todos.ejs', Todo.findAll() )
+    
+This syntax will render todos.ejs with the todo instances in the AJAX request 
+made by Todo.findAll, whenever its completed.
     
 ### Hookup `<li <%= (el)-> CODE %> >`
 
@@ -513,18 +516,18 @@ callbacks on elements in your template.  These callback functions
 get called after the template has been 
 inserted into the DOM. You can call jQuery methods on the element like:
 
-    <li <%= ($el)-> $el.fadeIn() %> style='display:none'>
+    <li <%= ($el) -> $el.fadeIn() %> style='display:none'>
       <%= this[i].name %>
     </li>
 
-Add a __returning__  magic tag (`<%= %>`) that 
+In your code, add a __returning__  magic tag (`<%= %>`) that 
 matches the _arrow function syntax_.  The argument passed to the function will
 be the jQuery-wrapped element.  
 
 This lets you hookup model data to elements in EJS.  Change __todos.ejs__ to:
 
     <% $.each(this, function(i, todo){ %>
-      <li <%= (el) -> el.model(todo) %>>
+      <li <%= ($el) -> $el.model(todo) %>>
         <%= todo.name %>
         <a href="javascript://" class='destroy'>X</a>
       </li>
@@ -536,13 +539,13 @@ This lets you hookup model data to elements in EJS.  Change __todos.ejs__ to:
 ## Controller `$.Controller(name, classProps, prototypeProps)`
 
 [$.Controller] creates organized, memory-leak free, 
-rapidly performing jQuery widgets. It is used to create UI controls like 
+rapidly performing, stateful jQuery widgets. It is used to create UI controls like 
 tabs, grids, and contextmenus and used to organize them 
 into higher-order business rules with [$.route]. Its serves as 
 both a traditional view and a 
 traditional controller.
   
-Lets make a basic todos widget that 
+Let's make a basic todos widget that 
 lists todos and lets 
 us destroy them. Add the following to __todos.js__:
 
@@ -554,7 +557,7 @@ us destroy them. Add the following to __todos.js__:
 
 We can create this widget on the `#todos` element with:
 
-    new Todos('#todos', {} );
+    new Todos('#todos', {});
 
 ### init `$.Controller.prototype.init(element, options)`
 
@@ -566,7 +569,7 @@ new Controller instance is created.  It's called with:
                   raw HTMLElement, or a css selector.  This is
                   set as __this.element__ on the controller instance.
   - __options__ - The second argument passed to new Controller, extended with
-                  the Controller's static defaults. This is set as 
+                  the Controller's static __defaults__. This is set as 
                   __this.options__ on the controller instance.
 
 and any other arguments passed to `new Controller()`.  For example:
@@ -592,7 +595,7 @@ element the controller is created on.
 ### options `this.options`
 
 [$.Controller.prototype.options this.options] is the second argument passed to 
-`new Controller()` merged with the controller's static defaults property.
+`new Controller()` merged with the controller's static __defaults__ property.
 
 ### Listening to events
 
@@ -644,7 +647,7 @@ is clicked:
       }
     })
 
-### Templated Event Handlers pt1 `"{optionName}"`
+### Templated Event Handlers Pt 1 `"{optionName}"`
 
 Customize event handler behavior with `"{NAME}"` in
 the event handler name.  The following allows customization 
@@ -682,11 +685,11 @@ and then the `window`.  For example, we could customize it instead like:
 
 The selector can also be templated.
 
-### Templated Event Handlers pt2 `"{objectName}"`
+### Templated Event Handlers Pt 2 `"{objectName}"`
 
 Controller can also bind to objects other than `this.element` with
 templated event handlers.  This is __especially critical__
-for avoiding memory leaks that are so common among MVC applications.
+for avoiding memory leaks that are so common among MVC applications.  
 
 If the value inside `{NAME}` is an object, that object will be 
 bound to.  For example, the following tooltip listens to 
@@ -705,9 +708,9 @@ clicks on the window:
     new Tooltip( $('<div>INFO</div>').appendTo(el) )
     
 This is convenient when needing to 
-listen to model updates.  Instead of adding callback
+listen to model updates.  Instead of adding a callback
 to `todo.destroy(cb)`, we should be listening to 
-__destroyed__ events.  We'll handle __updateded__ too:
+__destroyed__ events.  We'll handle __updated__ too:
 
     $.Controller("Todos",{
       "init" : function( element , options ){
@@ -735,7 +738,7 @@ __destroyed__ events.  We'll handle __updateded__ too:
     new Todos("#todos");
 
 This is better because it removes the todo's element from the page even if another widget
-destroyed the todo. Also, this very well with real-time
+destroyed the todo. Also, this works very well with real-time
 architectures.
 
 ### destroy `controller.destroy()`
@@ -752,6 +755,9 @@ __destroy__ is called automatically.
 
     new Todos("#todos")
     $("#todos").remove();
+    
+All event handlers bound with Controller are unbound when the controller 
+is destroyed (or its element is removed).
 
 _Brief aside on destroy and templated event binding. Taken 
 together, templated event binding, and controller's automatic
