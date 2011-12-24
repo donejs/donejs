@@ -171,7 +171,7 @@ on the prototype chain like:_
 ### constructor / init `new Class(arg1, arg2)`
 
 When a class constructor is invoked, __$.Class__ creates the instance and 
-calls [$.Class.prototype.init $.Class.prototype.init] with 
+calls [$.Class.prototype.init] with 
 the arguments passed to `new Class(...)`.
 
     $.Class('Todo',{
