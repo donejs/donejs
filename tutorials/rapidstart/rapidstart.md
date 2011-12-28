@@ -959,16 +959,9 @@ Replace the test code within the steal callback with the following:
     
 Reload __funcunit.html__.  You'll see the page open and run the test in a separate window.
 
-### Coverage stats
-
-FuncUnit has the ability to instrument your code and provide code coverage metrics.  
-At the top of the __funcunit.html__ page, click the checkbox next to coverage.  The test 
-will run with instrumentation turned on and show a coverage report. <a href='http://javascriptmvc.com/tutorials/rapidstart/funcunit.html?steal[instrument]=jquery%2Cfuncunit%2Csteal%2Cdocumentjs%2C*%2Ftest%2C*_test.js%2Cmxui%2C*funcunit.js'>See it in action</a>
-
-Todos.js is 81% covered by our first simple test.  Not bad!
-
-Click Todos.js to see a line by line breakdown of what has been tested.  Notice 
-we haven't tested any of the code that handles destroying or updating a todo.  
+FuncUnit has the ability to provide code coverage stats.  <a href='http://javascriptmvc.com/tutorials/rapidstart/funcunit.html?steal[instrument]=jquery%2Cfuncunit%2Csteal%2Cdocumentjs%2C*%2Ftest%2C*_test.js%2Cmxui%2C*funcunit.js'>Click</a> 
+the checkbox next to coverage to 
+see a coverage report.  81% isn't bad!  Click Todos.js to see a line by line breakdown.
 
 ### Automation
 
