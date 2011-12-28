@@ -885,33 +885,25 @@ everything. Congrats!  [//tutorials/rapidstart/todos.html See it in action].
 
 ## FuncUnit
 
-JavaScriptMVC uses [FuncUnit] for testing.  FuncUnit supports two types of testing:
+JavaScriptMVC uses [FuncUnit] for testing.  FuncUnit provides an API for writing functional 
+tests that simulate clicks and keypresses a user would make.
 
-  - functional - simulate clicks and keypresses a user would make.
-  - unit - call directly to JS methods and test the results.
+To create a FuncUnit test:
 
-But you start creating these tests in the same way - by making a test page
-and a test script. Lets say you wanted to
-test <code>helloworld.js</code> and <code>helloworld.html</code>.  Without code generators,
-you add 4 files to make helloworld look like:
+* Create a test file that steals funcunit and
+* Create a funcunit.html page that steals your test file
 
-    helloworld\
-        helloworld.html
-        helloworld.js
-        funcunit.html
-        funcunit.js
-        qunit.html
-        qunit.js
-
-Put the following in qunit.html:
+In the __todos__ directory, make funcunit.html and add the following HTML:
 
     <html>
       <head>
-        <link rel="stylesheet" type="text/css" href="../funcunit/qunit/qunit.css" />
-        <script type='text/javascript' src='../steal/steal.js?helloworld\qunit.js'></script>
+        <link rel="stylesheet" type="text/css" 
+          href="../funcunit/qunit/qunit.css" />
+        <script type='text/javascript' 
+          src='../steal/steal.js?todos/funcunit.js'></script>
       </head>
       <body>
-        <h1 id="qunit-header">Hello World Unit Test Suite</h1>
+        <h1 id="qunit-header">Todos Test Suite</h1>
     	<h2 id="qunit-banner"></h2>
     	<div id="qunit-testrunner-toolbar"></div>
     	<h2 id="qunit-userAgent"></h2>
@@ -920,39 +912,70 @@ Put the following in qunit.html:
 		<div id="qunit-test-area"></div>
       </body>
     </html>
+    
+Now make __funcunit.js__ and add the following:
 
-funcunit.html will look the same except change <code>qunit.js</code> to <code>funcunit.js</code>.
-
-qunit.js might look like:
-
-    steal.plugins('funcunit/qunit').then('//helloworld/helloworld', function(){
+    steal('funcunit', function(){
       
-      module('helloworld')
+      module('todos')
       
-      test('something is there', function(){
-        ok(helloworld, "there's an object called helloworld");
+      test('todos test', function(){
+        ok(true, "the test loads");
       })
     
     })
 
-funcunit.js might look like:
+Open __funcunit.html__ in your browser.  One test passes.
 
-    steal.plugins('funcunit').then( function(){
-      
-      module('helloworld',{
-        setup : function(){
-          S.open('//helloworld/helloworld.html');
-        }
-      })
-      
-      test('The page says hello world', function(){
-        ok(S(':contains(hello world)').size(), "The page says hello world");
-      })
+### Writing a test
+
+We tell the test to open the todos page using [FuncUnit.open S.open]:
+
+    S.open("//todos/todos.html");
     
+Once the page is open, we select the first todo and click it:
+
+    S(".todo:first").click();
+    
+S is a copy of jQuery's $ that adds FuncUnit's API. The editor input will 
+now appear.  Tell FuncUnit to wait for this using a [funcunit.waits wait] command:
+
+    S("#editor").val("wake up", "First Todo added correctly");
+    
+The second parameter is an assertion message.
+
+Replace the test code within the steal callback with the following:
+
+    module('todos', {
+      setup: function(){
+        S.open("//todos/todos.html");
+      }
     })
+    
+    test('open first todo', function(){
+      S(".todo:first").click();
+      S("#editor").val("wake up", "First Todo added correctly");
+    })
+    
+Reload __funcunit.html__.  You'll see the page open and run the test in a separate window.
 
-To run these tests, you can either open the test page with your browser, or with envjs:
+### Coverage stats
 
-    funcunit\envjs helloworld\funcunit.html
-    funcunit\envjs helloworld\qunit.html
+FuncUnit has the ability to instrument your code and provide code coverage metrics.  
+At the top of the __funcunit.html__ page, click the checkbox next to coverage.  The test 
+will run with instrumentation turned on and show a coverage report. <a href='http://javascriptmvc.com/tutorials/rapidstart/funcunit.html?steal[instrument]=jquery%2Cfuncunit%2Csteal%2Cdocumentjs%2C*%2Ftest%2C*_test.js%2Cmxui%2C*funcunit.js'>See it in action</a>
 
+Todos.js is 81% covered by our first simple test.  Not bad!
+
+Click Todos.js to see a line by line breakdown of what has been tested.  Notice 
+we haven't tested any of the code that handles destroying or updating a todo.  
+
+### Automation
+
+To run these tests automated, run the following from the console:
+
+    ./js funcunit/run selenium todos/funcunit.html
+
+FuncUnit supports [funcunit.integrations integration] with CI tools 
+like [funcunit.jenkins Jenkins], build tools like [funcunit.maven maven], 
+and running via the [funcunit.phantomjs PhantomJS] headless browser.
