@@ -51,7 +51,7 @@ and [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc.bat W
 
 _Note: For the Mac script, be sure to set permissions to run locally._  
 @codestart text
-chmod 754 getjmvc
+chmod 755 getjmvc
 @codeend
 
 Use this script to install JMVC from github or your own fork. If its already installed, it will get latest for all the submodules.  
