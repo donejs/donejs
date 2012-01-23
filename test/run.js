@@ -2,6 +2,8 @@
 
 STEALPRINT = false;
 
+load("save/test/run.js");
+
 load("steal/test/run.js");
 
 // funcunit here ...
