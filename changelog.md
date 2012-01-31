@@ -23,6 +23,7 @@
 
 ### jQueryMX
 
+- upgraded jQuery to v1.7.1
 - updated docs for plugin hookups
 - removed OpenAjax integration from $.Model
 - fixed bug with unique in model
