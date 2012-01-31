@@ -33,6 +33,7 @@
 - resize event correctly propagates extra data
 - fixed drop so it handles elements removed from the DOM
 - $.Model.serialize() calls converter with the Class scope
+- _jQuery.Event.prototype.key_ is now _jQuery.Event.prototype.keyName_
 
 ### FuncUnit
 
