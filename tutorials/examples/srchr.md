@@ -1,7 +1,7 @@
 @page srchr Srchr
 @parent examples 0
 
-Srchr searches several data sources for content and displays it to the user.  See it in action [here](http://javascriptmvc.com/srchr/). This article covers:
+Srchr searches several data sources for content and displays it to the user.  See it in action [here](http://javascriptmvc.com/srchr/srchr.html). This article covers:
 
 - Installing Srchr
 - The ideas behind JavaScriptMVC (JMVC)
