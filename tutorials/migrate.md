@@ -131,3 +131,158 @@ The _steal.browser.rhino_ has been removed. We are using _steal.browsers_ namesp
 ## Associations
 
 Associations were removed in favor of [jQuery.Model.static.attributes].  Attribute type values can also represent the name of a function which is used is for associated data now.
+
+## Upgrade Process and Advice
+
+The changes listed above require significant adaptation of your code base.
+
+1) The word 'controllers' is no longer good for JMVC. If you have controllers in a directory of that name, change the name to something else. JMVC has new, automatic behavior that will break your system if you don't. 
+
+Controller names must also be changed to the new directory name. Eg,
+
+	jQuery.Controller.extend('Appname.Controllers.Controllername')
+
+becomes
+
+	jQuery.Controller.extend('Appname.NewName.Controllername')
+
+and, the instantiation,
+
+	appname_controllers_controllername()
+
+becomes
+
+	appname_newname_controllername()
+
+2) The suffix "_controller" is no longer valid. Remove it from your controller names.
+
+3) Steal() has changed completely. It no longer has specific methods for different kinds of files. Eg,
+
+	steal.plugins(
+			'jquery/controller',
+			'jquery/controller/view'
+	)
+
+Becomes
+
+	steal(
+			'jquery/controller',
+			'jquery/controller/view'
+	)
+
+As do all the rest of the type-specific loaders: .resources(), .models(), .controllers(), .views() & .css()
+
+4) The base directory steal() looks in has changed. Instead of referring to the directory containing the steal() build file, it refers to the directory containing the *call*, ie, if you have 
+
+	foo/index.html containing <script src='steal/steal.js?appName'>
+
+Steal() will find your build file:
+
+	foo/appName/appName.js
+
+Previously, an unqualified reference, eg,
+
+	steal.resource('someJqueryPlugin');
+
+would find 
+
+	foo/appName/someJqueryPlugin.js
+
+now you must use:
+
+	steal('appName/someJqueryPlugin.js');
+
+Where appName/ is in the same directory as index.html.
+
+Note that both the application directory and extension are now necessary for most files (except controllers which refer to a directory structure).
+
+5) Steal() no longer makes assumptions about your directory structure. It no longer assumes, for example, a 'models' directory. File paths must, therefore be fully specified. 
+
+Instead of 
+
+	steal.models( 'session');
+
+Use
+
+	steal('appDir/models/session');
+
+5) Steal() now defaults to asynchronous loading. You must insure that your dependencies are loaded in the correct order using steal.then().
+
+If you have nested controller directories, eg
+
+parentController/
+--------parentController.js
+--------subordinateController/
+----------------subordinateController.js
+----------------views/
+------------------------subordinateController.ejs
+--------views
+----------------parentController.ejs
+
+Make sure that you have them in the correct order
+
+steal('parentController')
+.then('subordinateController')
+
+If they are* reversed*, the creation of parentController will overwrite the pre-existing directory containing subordinateController.
+
+(Note also, different from other components, controllers are *not* called as files. They are referred by their directory and assumed to have a javascript file of the same name inside.)
+
+It is also possible for controllers to be instantiated and views executed before loading is finished. CSS files must be appropriately sequenced, too.
+
+6) Initialization of the system has changed. The "unload" controller is no longer valid and does not run. $.ready() might run before components are all loaded.
+
+Remove "onDocument: true". Change the controller method load() to init() (ie, make it like other controllers).
+
+Add an instantiation of the initial controller to steal(). (Steal() now allows the final parameter of any of its methods to be a function.) Eg,
+
+steal(
+	'appName/initializingController'
+)
+.then(
+	'appName/someOtherController',
+	function(){
+		appName_initializingController(); //run initializing controller
+		//any $.ready() code goes here, too
+	}
+);
+
+7) With asynchronous loading, it is possible for dom elements to be queued but not rendered by the time they are needed by system code. For example, it is possible to get wrong values from jquery, for DOM elements that have been sent to the browser by code but not yet written to the DOM. It may be necessary to wrap initializing code in a timeout() of tenth of a second or so.
+
+8) this.publish() no longer works in models.
+
+You must now use:
+
+	$([this]).trigger(eventName, data); //where this is the model with the call
+
+To receive the event in a controller, the old syntax no longer works.
+
+Instead of
+
+	'modelName.eventName subscribe':function(eventName, data){}
+
+use
+
+	'{appName.models.modelName} eventName': function(sourceObject, eventObject, data){}
+
+Note that the parameters to the receiving function have changed completely.
+
+9) In views rendered with EJS, the output delimiter:
+
+	<%=varName%>
+
+now produces html that is escaped.
+
+When this is undesirable (eg, when the variable contains html), you must use:
+
+	<%==varName%>
+
+To send the variable data unchanged.
+
+10) formParams() now produces an array for radio buttons. You must add 
+
+	radioVarName=this.element.formParams().radioVarName.pop();
+
+To extract a scalar value.
+
+11) formParams() no longer evaluates form values by default. Boolean variables containing the value 'true' or 'false' are not x===true or x===false, they are typeof(x)=='string'. Similarly with numbers. To return to the previous behavior, you must change the call to formParams(true). This will tell the method to evaluate parameters.
