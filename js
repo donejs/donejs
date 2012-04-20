@@ -54,5 +54,5 @@ OUT=$?
 
 if [ $ERRORLEV -eq 1 -a $OUT -eq 1 ]
 then
-	exit $?
+	exit $OUT
 fi
