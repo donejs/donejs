@@ -30,10 +30,10 @@ A.  How to get (and contribute) JMVC
 B. Getting Started with JMVC
 
   1. Generate app: 
-  			./js jquery/generate/app cookbook
+  			./js steal/generate/app cookbook
 
   2. Generate scaffold:
-  			./js jquery/generate/scaffold Cookbook.Models.Recipe
+  			./js steal/generate/scaffold Cookbook.Models.Recipe
 
   3. Add html to cookbook/cookbook.html:
 			<ul id='recipes'></ul>

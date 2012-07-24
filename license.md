@@ -1,4 +1,8 @@
-Copyright (C) 2011 by Jupiter, http://jupiterit.com
+# License
+
+Copyright (C) 2012 by [Bitovi](http://bitovi.com)
+
+The MIT license:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

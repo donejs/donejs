@@ -1,57 +1,53 @@
-## 3.2.2 (1/20/12)
+## 3.3
 
-### JavaScriptMVC
+CanJS is now stolen and is the prefered way of doing things.  $.Class, $.Model, $.View, $.Controller, $.route, $.Observe are all
+now can.NAME.  To maintain large amounts of backwards compatability, these things still exist.  However,
+using can is now encouraged.  Also, can has things as plugins that were included by default previously.
 
-- MXUI library is now officially in beta
 
-### StealJS
+### Class
 
-- added steal.instrument
-- better diagnostics in env.js
-- better diagnostics in build process
-- added isDirectory, move; fixed isFile in steal.File
-- fixed parser to handle hex literals
-- phantom supports https protocol
-- fixed loaded bug
-- added toClass on generators
-- fixed CSS url and data references in production builds
-- improved error handling in steal.request 
-- upgrade to LESS v1.1.6
-- fixed cache busting in IE
-- fixed steal.crawl to handle subdirectories
-- changed //@ to //! prefix in steal directives
+ - Removed .Class access to instance's constructor function, use .constructor instead
+ - Removed callback, use .proxy
 
-### jQueryMX
+### Controller
 
-- upgraded jQuery to v1.7.1
-- updated docs for plugin hookups
-- removed OpenAjax integration from $.Model
-- fixed bug with unique in model
-- EJS now accepts blocks
-- improvements and fixes to $.Observe, $.route and $.Model.List
-- form_params fixes and documentation updates
-- don't hookup val() or text()
-- resize event correctly propagates extra data
-- fixed drop so it handles elements removed from the DOM
-- $.Model.serialize() calls converter with the Class scope
-- _jQuery.Event.prototype.key_ is now _jQuery.Event.prototype.keyName_
+ - `delegate` and `bind` are replaced with `on`
 
-### FuncUnit
+### Observe
 
-- added coverage option to view test coverage via cobertura
-- added noautorun option to run tests individually or on demand
-- fixing bug in S.open of URLs that have a hash
-- supporting timeouts for waits
-- every action has an implicit exists() before it runs
-- added node proxy script
-- updated selenium to support FF8
-- added an optional message parameter which adds an assertion for wait conditions
-- fixed iframe-lookup logic to work in IE
+ - $.O is removed
+ - attrs is now just attr
+ - sort is removed (temporarily)
 
-### Syn
+### Model
 
-- fixed problem with keypress not being changed by a focus in keydown
-- fixed center-of-element calculation for IE
+ - model's implemented ajax methods do not take success / error, they produce methods that do
+ - model.update(attrs, success, error) is removed, use model.attr(attrs).save(success, error)
+ - model list does not get updated events, listen for change
+ - error message handlers get `handler(ev, attr, errorName)`
+ - `this` in save's success handler `save(succes, error)` is now the deferred.
+ - There are no default fixtures for models anymore.
+ - there is no error handler on attributes.  Use an event handler.
+ 
+### View
+
+ - Returns a documentFragment
+ - All types are moved into can
+ - Helpers are removed
+ - plugin is gone, use <%= (el)-> el.pluginName(args) %>
+ - callback functions execute before the fragment is inserted into the DOM
+
+### Fixture
+
+ - fixture.make returns a store
+
+## 3.2.2
+
+### Model
+
+- Removed this.publish
+
 
 ## 3.2.1 (10/18/11)
 
