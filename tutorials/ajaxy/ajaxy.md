@@ -24,7 +24,7 @@ of the content of an Ajax application.  Read Google's documentation on its
 [installing Download and install] the latest version of JavaScriptMVC.
 
 After installing JavaScriptMVC, open a command line to 
-the [steal.static.root steal.root] folder (where you unzipped 
+the [steal.static.root steal.config().root] folder (where you unzipped
 JavaScriptMVC).  
 
 

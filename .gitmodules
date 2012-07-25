@@ -13,3 +13,6 @@
 [submodule "can"]
 	path = can
 	url = git@github.com:jupiterjs/canjs.git
+[submodule "canui"]
+	path = canui
+	url = git://github.com/jupiterjs/canui.git
