@@ -14,7 +14,7 @@ steal('steal/generate',function(steal){
 		path_to_steal : new steal.File(_args[0]).pathToRoot()
 	}, steal.system)
 	
-	steal.generate("done/generate/templates/plugin",_args[0],data)
+	steal.generate("jmvc/generate/templates/plugin",_args[0],data)
 	
 })();
 

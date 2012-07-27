@@ -1,7 +1,12 @@
-	$.fixture.make("<%= underscore %>", 5, function(i, <%= underscore %>){
-		var descriptions = ["grill fish", "make ice", "cut onions"]
+	var store = can.fixture.make(5, function(i, <%= underscore %>){
 		return {
 			name: "<%= underscore %> "+i,
-			description: $.fixture.rand( descriptions , 1)[0]
+			description: "Model " + i
 		}
-	})
+	});
+
+  can.fixture('GET /<%= plural %>', store.findAll);
+  can.fixture('GET /<%= plural %>/{id}', store.findOne);
+  can.fixture('POST /<%= plural %>', store.create);
+  can.fixture('PUT /<%= plural %>/{id}', store.update);
+  can.fixture('DELETE /<%= plural %>/{id}', store.destroy);

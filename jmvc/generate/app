@@ -7,7 +7,7 @@ if (!_args[0]) {
 
 load('steal/rhino/rhino.js');
 
-steal('steal/generate','steal/generate/system.js',function(steal){
+steal('steal/generate','steal/generate/system.js', function(steal) {
 	var classed =  steal.generate.toClass(_args[0]),
 		md = steal.generate.convert(classed),
 		data = steal.extend({
@@ -17,7 +17,6 @@ steal('steal/generate','steal/generate/system.js',function(steal){
 			path_to_steal : steal.File(_args[0]).pathToRoot()
 		}, steal.system);
 	
-	
-	steal.generate("done/generate/templates/app", _args[0], data);
+	steal.generate("jmvc/generate/templates/app", _args[0], data);
 });
 

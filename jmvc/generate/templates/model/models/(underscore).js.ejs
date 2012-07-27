@@ -9,11 +9,11 @@ steal('can/model', function(){
 can.Model('<%=name%>',
 /* @Static */
 {
-	findAll: "/<%= plural %>.json",
-  	findOne : "/<%= plural %>/{id}.json", 
-  	create : "/<%= plural %>.json",
- 	update : "/<%= plural %>/{id}.json",
-  	destroy : "/<%= plural %>/{id}.json"
+	findAll: "GET /<%= plural %>",
+  	findOne : "GET /<%= plural %>/{id}",
+  	create : "POST /<%= plural %>",
+ 	  update : "PUT /<%= plural %>/{id}",
+  	destroy : "DELETE /<%= plural %>/{id}"
 },
 /* @Prototype */
 {});

@@ -30,7 +30,7 @@ function(steal){
 		path =  _args[0].toLowerCase().replace(/\./g,"/");
 
 	md.path_to_steal = new steal.File(path).pathToRoot()
-	steal.generate("done/generate/templates/controller",md.path+"/"+md.underscore,md)
+	steal.generate("jmvc/generate/templates/control",md.path+"/"+md.underscore,md)
 	
 });
 

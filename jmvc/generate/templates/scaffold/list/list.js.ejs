@@ -1,18 +1,17 @@
-steal( 'jquery/controller',
-	   'jquery/view/ejs',
-	   'jquery/controller/view',
-	   '<%= appPath %>/models' )
-.then( './views/init.ejs', 
-       './views/<%= underscore %>.ejs', 
-       function($){
+steal( 'can/control',
+    'can/view/ejs',
+    '<%= appPath %>/models',
+    './views/init.ejs',
+    './views/<%= underscore %>.ejs',
+       function(Control, can, Models){
 
 /**
  * @class <%=baseName%>.List
  * @parent index
- * @inherits jQuery.Controller
+ * @inherits can.Control
  * Lists <%= plural %> and lets you destroy them.
  */
-$.Controller('<%=baseName%>.List',
+can.Control('<%=baseName%>.List',
 /** @Static */
 {
 	defaults : {}

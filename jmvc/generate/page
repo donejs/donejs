@@ -17,5 +17,5 @@ steal('steal/generate','steal/generate/system.js',function(steal){
 	}, steal.system)
 	
 	var to = path+"/"+_args[1];
-	steal.generate.render("done/generate/templates/page.ejs", to, data)
+	steal.generate.render("jmvc/generate/templates/page.ejs", to, data)
 });
