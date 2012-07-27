@@ -11,7 +11,7 @@ JavaScriptMVC requires [http://www.oracle.com/technetwork/java/javase/downloads/
  - Code Generators
 
 But your backend server can be written in any language.  
-Download [http://www.java.com/en/download/index.jsp Java here].
+Download the latest [http://www.java.com/en/download/index.jsp Java JRE here].
 
 ## Getting JavaScriptMVC
 
@@ -40,10 +40,12 @@ unzip in a public folder where the server hosts static content.
 
 ## Installing JavaScriptMVC with Git.
 
-JavaScriptMVC is comprised of four sub projects:
+JavaScriptMVC is comprised of six sub projects:
 
  - [http://github.com/jupiterjs/steal]
- - [http://github.com/jupiterjs/jquerymx]
+ - [https://github.com/jupiterjs/canjs]
+ - [https://github.com/jupiterjs/canui]
+ - [https://github.com/jupiterjs/jquerypp]
  - [http://github.com/jupiterjs/documentjs]
  - [http://github.com/jupiterjs/funcunit]
 
@@ -57,12 +59,14 @@ Forking the repos looks like:
 
 @codestart text
 git submodule add git@github.com:_YOU_/steal.git public/steal
-git submodule add git@github.com:_YOU_/jquerymx.git public/<b style='font-size: 14px;color: red'>jquery</b>
+git submodule add git@github.com:_YOU_/canjs.git public/canjs
+git submodule add git@github.com:_YOU_/canui.git public/canui
+git submodule add git@github.com:_YOU_/jquerypp.git public/jquerypp
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
 @codeend
 
-Notice that the javascriptmvc repository is put in a <b style='font-size: 14px;color: red'>jquery</b> folder.  
+Notice that the JavaScriptMVC repository is put in a <b style='font-size: 14px;color: red'>canjs</b> folder.  
 
 After installing the repository, run:
 
@@ -80,8 +84,10 @@ In your public (or static) folder, you should have something that looks like:
 static
   \documentjs - DocumentJS library
   \funcunit   - FuncUnit testing library
-  \jquery     - jQuery and MVC plugins
-  \steal      - compression and build system
+  \canjs      - CanJS MVC Framework
+  \canui      - Widgets built on CanJS and jQuery++
+  \jquery     - jQuery's missing utils and special events
+  \steal      - Compression and build system
   \js.bat     - Windows Rhino shortcut
   \js         - Mac/Linux Rhino shortcut
 @codeend
@@ -108,6 +114,8 @@ C:\workspace\Cookbook>js documentjs\update
 C:\workspace\Cookbook>js funcunit\update
 C:\workspace\Cookbook>js jquery\update
 C:\workspace\Cookbook>js steal\update
+C:\workspace\Cookbook>js canjs\update
+C:\workspace\Cookbook>js canui\update
 @codeend
 <div class='whisper'>
 	P.S. If you are using linux/mac you
