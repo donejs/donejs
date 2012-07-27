@@ -37,7 +37,7 @@ your page. In the [rootfolder root folder] create a __todos__ folder
 and empty __todos.html__ and __todos.js__ that look like:
 
     ROOT\
-        can\
+				can\
         documentjs\
         jquery\
         funcunit\
@@ -106,12 +106,16 @@ Instead, do:
 For this application, we will load CanJS' most
 common plugins.  Add the following to __todos.js__:
 
-    steal('can/construct',
-          'can/model',
-          'can/util/fixture',
-          'can/view/ejs',
-          'can/control',
-          'can/route',
+    steal('can/util/exports.js',
+         'can/construct/super',
+         'can/model',
+         'can/model/elements',
+         'can/util/fixture',
+         'can/view/ejs',
+         'can/view/modifiers',
+         'can/control',
+         'can/control/route'
+         'can/control/plugin'
           function(){
           
     })
@@ -209,11 +213,16 @@ To create a __Model__ class, call __can.Model__ with the:
 
 Make a Todo model in __todos.js__ like the following:
 
-    steal('can/construct',
-          'can/control',
+    steal('can/util/exports.js',
+          'can/construct/super',
           'can/model',
-          'can/view/ejs',
+          'can/model/elements',
           'can/util/fixture',
+          'can/view/ejs',
+          'can/view/modifiers',
+          'can/control',
+          'can/control/route',
+          'can/control/plugin',
           function(){
           
       can.Model('Todo',{
@@ -649,8 +658,7 @@ of the event that destroys a todo:
     // create Todos with this.options.destroyEvent
     new Todos("#todos",{destroyEvent: "mouseenter"})
 
-Values inside `{NAME}` are looked up on the controller's `this.options`
-and then the `window`.  For example, we could customize it instead like:
+Values inside `{NAME}` are looked up on the controller's `this.options` and then the `window`.  For example, we could customize it instead like:
 
     can.Control("Todos",{
       "init" : function( element , options ){ ... },
@@ -671,8 +679,7 @@ The selector can also be templated.
 
 ### Templated Event Handlers Pt 2 `"{objectName}"`
 
-Controller can also bind to objects other than `this.element` with
-templated event handlers.  This is __especially critical__
+Controller can also bind to objects other than `this.element` with templated event handlers.  This is __especially critical__
 for avoiding memory leaks that are so common among MVC applications.  
 
 If the value inside `{NAME}` is an object, that object will be 
@@ -740,21 +747,17 @@ __destroy__ is called automatically.
     new Todos("#todos")
     $("#todos").remove();
     
-All event handlers bound with Controller are unbound when the controller 
-is destroyed (or its element is removed).
+All event handlers bound with Controller are unbound when the controller is destroyed (or its element is removed).
 
 _Brief aside on destroy and templated event binding. Taken 
 together, templated event binding, and controller's automatic
-clean-up make it almost impossible 
-to write leaking applications. An application that uses
-only templated event handlers on controllers within the body
-could free up all 
+clean-up make it almost impossible to write leaking applications. An application that usesonly templated event handlers on controllers within the bodycould free up all 
 data by calling `$(document.body).empty()`._
 
 ### update `controller.update(options)`
 
 [can.Control.prototype.update] updates a controller's 
-`this.options` and rebinds all event handlers.  This is useful
+`this.options` and rebinds all event handlers. This is useful
 when you want to listen to a specific model:
 
     can.Control('Editor',{
@@ -793,12 +796,12 @@ when you want to listen to a specific model:
     // switch it to the second todo
     editor.update({todo: todo2});
 
-Notice that because we are overwriting `update`, we must call __\_super__.
+Notice that because we are overwriting `update`, we must call __\_super__ (You should steal [can.Construct.super] plugin to have this._super function available).
 
 ## Routing
 
-[$.route] is the core of JavaScriptMVC's 
-routing functionality. It is a [jQuery.Observe] that
+[can.route] is the core of JavaScriptMVC's 
+routing functionality. It is a [can.Observe] that
 updates `window.location.hash` when it's properties change
 and updates its properties when `window.location.hash` 
 changes. It allows very sophisticated routing behavior ... too
@@ -819,22 +822,20 @@ Listen to routes in controller's with special "route" events like:
     // create routing controller
     new Routing(document.body);
 
-The `route` methods get called back with the route __data__.  The 
-empty `"route"` will be called with no data. But, `"todos/:id route"`
-will be called with data like: `{id: 6}`.
+The `route` methods get called back with the route __data__.  The empty `"route"` will be called with no data. But, `"todos/:id route"`will be called with data like: `{id: 6}`.
 
 We can update the route by changing $.route's data like:
 
-    $.route.attr('id','6') // location.hash = #!todos/6
+    can.route.attr('id','6') // location.hash = #!todos/6
     
 Or we can set the hash ourselves like
 
-    var hash = $.route.url({id: 7}) // #!todos/7
+    var hash = can.route.url({id: 7}) // #!todos/7
     location.hash = hash;
 
 The following enhances the Routing controller to listen for
-`".todo selected"` events and change the `$.route`.  When the
-$.route changes, it retrieves the todo from the server
+`".todo selected"` events and change the `can.route`.  When the
+can.route changes, it retrieves the todo from the server
 and updates the editor widget.
 
     can.Control("Routing",{
@@ -853,7 +854,7 @@ and updates the editor widget.
         }, this))
       },
       ".todo selected" : function(el, ev, todo){
-        $.route.attr('id',todo.id);
+        can.route.attr('id',todo.id);
       }
     });
     
@@ -899,7 +900,7 @@ In the __todos__ directory, make funcunit.html and add the following HTML:
     
 Now make __funcunit.js__ and add the following:
 
-    steal('funcunit', function(){
+    steal('funcunit', function(FuncUnit){
       
       module('todos')
       
