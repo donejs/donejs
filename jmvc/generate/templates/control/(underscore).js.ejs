@@ -1,0 +1,21 @@
+steal( 'can/control','can/view/ejs' )
+	.then( './views/init.ejs', function($){
+
+/**
+ * @class <%= name %>
+ */
+can.Control('<%= name %>',
+/** @Static */
+{
+	defaults : {}
+},
+/** @Prototype */
+{
+	init : function(){
+		this.element.html("//<%= path %>/<%= underscore %>/views/init.ejs",{
+			message: "Hello World"
+		});
+	}
+})
+
+});

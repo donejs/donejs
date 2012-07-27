@@ -1,0 +1,21 @@
+steal('can/model', function(){
+
+/**
+ * @class <%=name%>
+ * @parent index
+ * @inherits can.Model
+ * Wraps backend <%=underscore%> services.  
+ */
+can.Model('<%=name%>',
+/* @Static */
+{
+	findAll: "/<%= plural %>.json",
+  	findOne : "/<%= plural %>/{id}.json", 
+  	create : "/<%= plural %>.json",
+ 	update : "/<%= plural %>/{id}.json",
+  	destroy : "/<%= plural %>/{id}.json"
+},
+/* @Prototype */
+{});
+
+})
