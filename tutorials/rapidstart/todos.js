@@ -1,13 +1,16 @@
-steal('jquery/class',
-      'jquery/model',
-      'jquery/dom/fixture',
-      'jquery/view/ejs',
-      'jquery/controller',
-      'jquery/controller/route',
-      function($){
-
+steal('can/util/exports.js',
+      'can/construct/super',
+      'can/model',
+      'can/model/elements',
+      'can/util/fixture',
+      'can/view/ejs',
+      'can/view/modifiers',
+      'can/control',
+      'can/control/route',
+      'can/control/plugin',
+      function(){
 // THE MODEL
-$.Model('Todo',{
+can.Model('Todo', {
 	findAll : "GET /todos",
 	findOne : "GET /todos/{id}",
 	create  : "POST /todos",
@@ -24,35 +27,35 @@ var TODOS = [
     {id: 3, name: "do dishes"}
 ];
 // findAll
-$.fixture("GET /todos", function(){
-	return [TODOS]
+can.fixture("GET /todos", function(){
+	return TODOS
 });
 
 // findOne
-$.fixture("GET /todos/{id}", function(orig){
+can.fixture("GET /todos/{id}", function(orig){
 	return TODOS[(+orig.data.id)-1];
 })
 
 // create
 var id= 4;
-$.fixture("POST /todos", function(){
+can.fixture("POST /todos", function(){
 	return {id: (id++)}
 })
 
 // update
-$.fixture("PUT /todos/{id}", function(){
+can.fixture("PUT /todos/{id}", function(){
 	return {};
 })
 
 // destroy
-$.fixture("DELETE /todos/{id}", function(){
+can.fixture("DELETE /todos/{id}", function(){
 	return {};
 });
 
 // THE CONTROLLERS
-$.Controller("Todos",{
+Todos = can.Control({
   "init" : function( element , options ){
-    this.element.html('todos.ejs', Todo.findAll() )
+    this.element.html('todos.ejs', Todo.findAll({}) )
   },
   "li click" : function(li){
     li.trigger('selected', li.model() );
@@ -73,7 +76,7 @@ $.Controller("Todos",{
   }
 });
 
-$.Controller('Editor',{
+Editor = can.Control({
   update : function(options){
     this._super(options)
     this.setName();
@@ -97,7 +100,7 @@ $.Controller('Editor',{
   }
 });
 
-$.Controller("Routing",{
+Routing = can.Control({
   init : function(){
     this.editor = new Editor("#editor")
     new Todos("#todos");
@@ -113,7 +116,7 @@ $.Controller("Routing",{
     }, this))
   },
   ".todo selected" : function(el, ev, todo){
-    $.route.attr('id',todo.id);
+    can.route.attr('id',todo.id);
   }
 });
 

@@ -36,10 +36,10 @@ following METHOD and URLS:
 Before going into detail about what each 
 <code>METHOD URL</code> does, it's worth 
 quickly describing how parameters are 
-passed to the query string.  [jQuery.Model] passes 
-parameters to jQuery's $.ajax that get 
-converted by [jQuery.param http://api.jquery.com/jQuery.param/]. For 
-example, if we wanted
+passed to the query string.  [can.Model] passes 
+parameters to your framework of choices ajax handler
+and that gets converted by [can.param]. 
+For example, if we wanted
 all messages for a given user, 
 sorted first by date, then by the users's name, 
 we might call something like:
@@ -235,7 +235,7 @@ Where we can convert that easily to a JavaScript date like
 ## CUD Multiple Items with a Single Request
 
 Often, you want to create, update, or delete items with a single request.  This is
-most often done with [jQuery.Model.List].
+most often done with [can.Model.List].
 
 
 ## Handling Errors

@@ -1,4 +1,4 @@
-<% $.each(this, function(i, todo){ %>
+<% can.each(this, function(todo){ %>
   <li <%= (el) -> el.model(todo) %>>
     <%= todo.name %>
     <a href="javascript://" class='destroy'>X</a>
