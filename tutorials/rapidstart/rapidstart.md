@@ -8,27 +8,27 @@ for a more in-depth overview.
 ## Get JavaScriptMVC
 
 [http://javascriptmvc.com/builder.html Download it] or 
-[developwithgit pull it from Git].  JavaScriptMVC (JMVC) is a collection of 4 sub-projects. 
+[developwithgit pull it from Git].  JavaScriptMVC (JMVC) is a collection of 5 sub-projects. 
 Once you have JavaScriptMVC, you should have a folder with:
 
+    can        - MVC parts of the project
     documentjs - documentation engine
     funcunit   - testing app
-    jquery     - jquery and jQueryMX plugins
+    jquery     - jQuery++ plugins
     steal      - dependency management
     js         - JS command line for Linux/Mac
     js.bat     - JS command line for Windows
 
-<b>Notice</b>: This folder, the one that has the sub-projects, is 
-called the [rootfolder ROOT FOLDER]</b>.
+<b>Notice</b>: This folder, the one that has the sub-projects, is called the [rootfolder ROOT FOLDER]</b>.
 
 ## Get JavaScriptMVC running.
 
 JMVC uses [steal steal/steal.js] for dependency 
 management. Steal loads scripts.  To use JavaScriptMVC's 
-features like [$.Controller] and [$.View],
+features like [can.Control] and [can.view],
 'steal' them like:
 
-    steal('jquery/controller','jquery/view/ejs',function(){
+    steal('can/control','can/view/ejs',function(){
        //code that uses controller and view goes here
     })
 
@@ -37,6 +37,7 @@ your page. In the [rootfolder root folder] create a __todos__ folder
 and empty __todos.html__ and __todos.js__ that look like:
 
     ROOT\
+				can\
         documentjs\
         jquery\
         funcunit\
@@ -69,10 +70,10 @@ _todos.js_ loading.
 and templates into your application.  
 
 Path are assumed to be relative to the [rootfolder root folder]. This
-means that the following always loads `jquery/class/class.js`
+means that the following always loads `can/construct/construct.js`
 no matter which file is calling steal:
 
-    steal('jquery/class/class.js');
+    steal('can/construct/construct.js');
     
 You can load relative to the current file by adding `./` to the
 start of your path like:
@@ -84,57 +85,57 @@ like:
 
     steal('./todos.css')
 
-Because loading paths like `jquery/class/class.js` is so 
+Because loading paths like `can/construct/construct.js` is so 
 common, if you do not provide an extension like `.js`, steal 
 will append the last folder name and `.js`. This makes
-the following load `jquery/class/class.js`:
+the following load `can/construct/construct.js`:
 
-    steal('jquery/class')
+    steal('can/construct')
 
 Steal is an asynchronous loader, so you can't do:
 
-    steal('jquery/class')
-    $.Class
+    steal('can/construct')
+    can.Construct
     
 Instead, do:
 
-    steal('jquery/class', function(){
-      $.Class
+    steal('can/construct', function(){
+      can.Construct
     })
 
-For this application, we will load jQueryMX's most
+For this application, we will load CanJS' most
 common plugins.  Add the following to __todos.js__:
 
-    steal('jquery/class',
-          'jquery/model',
-          'jquery/dom/fixture',
-          'jquery/view/ejs',
-          'jquery/controller',
-          'jquery/controller/route',
-          function($){
+    steal('can/construct',
+          'can/model',
+          'can/util/fixture',
+          'can/view/ejs',
+          'can/control',
+          'can/route',
+          function(){
           
     })
 
 The following goes through each plugin while we build the todos app.
 
-## $.Class `$.Class([name,] [classProps,] [prototypeProps])`
+## can.Construct `can.Construct([name,] [classProps,] [prototypeProps])`
 
-Constructors made with [$.Class] are used to create
+Constructors made with [can.Construct] are used to create
 objects with shared properties. It's used by both
-__$.Controller__ and __$.Model__.
+__can.Control__ and __can.Model__.
 
-To create a __Class__ of your own, call __$.Class__ with the:
+To create a __Constructor function__ of your own, call __can.Construct__ with the:
 
   - __name__ of the class which can be used for introspection,
   - __classProperties__ that are attached directly to the constructor, and
   - instance __prototypeProperties__.
 
-__$.Class__ sets up the prototype chain so subclasses can be further 
+__can.Construct__ sets up the prototype chain so subclasses can be further 
 extended and sub-classed as far as you like:
 
-    steal('jquery/class', function(){
+    steal('can/construct', function(){
     
-      $.Class("Todo",{
+      can.Construct("Todo",{
         init : function(){},
     
         author : function(){ ... },
@@ -155,9 +156,7 @@ extended and sub-classed as far as you like:
     });
 
 
-_Brief aside on `super`.  $.Class provides a 
-`_super` method to call the function of the same name higher 
-on the prototype chain like:_
+_Brief aside on `super`. If you steal the `can/construct/super` plugin,  can.Construct provides a `_super` method to call the function of the same name higher on the prototype chain like:_
 
 
     var SecureNote = Todo({
@@ -170,11 +169,10 @@ on the prototype chain like:_
 
 ### constructor / init `new Class(arg1, arg2)`
 
-When a class constructor is invoked, __$.Class__ creates the instance and 
-calls [$.Class.prototype.init] with 
-the arguments passed to `new Class(...)`.
+When a constructor is called with the `new` keyword, __can.Construct__ creates the instance and calls [can.Construct.prototype.init] with 
+the arguments passed to `new ConstructorFunction(…)`.
 
-    $.Class('Todo',{
+    can.Construct('Todo',{
       init : function(text) {
         this.text = text
       },
@@ -187,39 +185,38 @@ the arguments passed to `new Class(...)`.
     todo.read()
 
 
-_Brief aside on __init__.  $.Class actually calls 
-[$.Class.prototype.setup $.Class.prototype.setup] before 
-init.  `setup` can be used to change (or normalize) the arguments passed to __init__._
+_Brief aside on __init__.  can.Construct actually calls 
+[can.Construct.prototype.setup can.Construct.prototype.setup] before init. `setup` can be used to change (or normalize) the arguments passed to __init__._
 
-## Model `$.Model(name, classProperties, prototypeProperties)`
+## Model `can.Model(name, classProperties, prototypeProperties)`
 
 Models are central to any application.  They 
 contain data and logic surrounding it.  You 
-extend [$.Model $.Model] with your domain specific 
-methods and $.Model provides a set of methods 
+extend [can.Model can.Model] with your domain specific 
+methods and can.Model provides a set of methods 
 for managing changes.
 
-To create a __Model__ class, call __$.Model__ with the:
+To create a __Model__ class, call __can.Model__ with the:
 
   - __name__ of the class,
   - __classProperties__, including 
-    [$.Model.findAll findAll],
-    [$.Model.findAll findOne],
-    [$.Model.create create],
-    [$.Model.update update],
-    [$.Model.destroy destroy] properties, and
+    [can.Model.findAll findAll],
+    [can.Model.findAll findOne],
+    [can.Model.create create],
+    [can.Model.update update],
+    [can.Model.destroy destroy] properties, and
   - prototype instance properties.
 
 Make a Todo model in __todos.js__ like the following:
 
-    steal('jquery/class',
-          'jquery/controller',
-          'jquery/model',
-          'jquery/view/ejs',
-          'jquery/dom/fixture',
-          function($){
+    steal('can/construct',
+          'can/control',
+          'can/model',
+          'can/view/ejs',
+          'can/util/fixture',
+          function(){
           
-      $.Model('Todo',{
+      can.Model('Todo',{
         findAll : "GET /todos",
         findOne : "GET /todos/{id}",
         create  : "POST /todos",
@@ -231,7 +228,7 @@ Make a Todo model in __todos.js__ like the following:
     
 __Note:__ Try the following commands in your browser:
 
-### new $.Model(attributes)
+### new can.Model(attributes)
 
 Create a todo instance like:
 
@@ -239,7 +236,7 @@ Create a todo instance like:
     
 ### attr `model.attr( name, [value] )`
 
-[$.Model.prototype.attr] reads or sets properties on model instances.
+[can.Model.prototype.attr] reads or sets properties on model instances.
 
     todo.attr('name') //-> "do the dishes"
     
@@ -251,13 +248,11 @@ Create a todo instance like:
     
 ### Talking to the server
 
-Model uses static [$.Model.findAll findAll],
-[$.Model.findAll findOne], [$.Model.create create],
-[$.Model.update update], and [$.Model.destroy destroy]
+Model uses static [can.Model.findAll findAll],
+[can.Model.findAll findOne], [can.Model.create create],
+[can.Model.update update], and [can.Model.destroy destroy]
 methods to create, read, update and delete 
 model instances on the server.  
-
-
 
 Now you can call methods on Todo that
 make changes on the server.  For example, 
@@ -270,12 +265,11 @@ to `GET /todos`.
 
 Assuming your server does not have a `/todos` service,
 this won't work.  That's ok, we can simulate them with
-[$.fixture].
+[can.fixture].
 
-### $.fixture `$.fixture(url, fixture(original, settings, headers) )`
+### can.fixture `can.fixture(url, fixture(original, settings, headers) )`
 
-Fixtures simulate requests to a specific 
-url.  The `fixture` function is called with:
+Fixtures simulate requests to a specific url.  The `fixture` function is called with:
 
   - __original__ - original settings passed to $.ajax
   - __settings__ - settings normalized by $.ajax
@@ -296,35 +290,35 @@ data.
 To simulate the todo services, add the following within the
 steal callback:
 
-	// our list of todos
-	var TODOS = [
+  // our list of todos
+  var TODOS = [
         {id: 1, name: "wake up"},
         {id: 2, name: "take out trash"},
         {id: 3, name: "do dishes"}
     ];
     // findAll
-    $.fixture("GET /todos", function(){
+    can.fixture("GET /todos", function(){
       return [TODOS]
     });
     
     // findOne
-    $.fixture("GET /todos/{id}", function(orig){
+    can.fixture("GET /todos/{id}", function(orig){
       return TODOS[(+orig.data.id)-1];
     })
     
     // create
     var id= 4;
-    $.fixture("POST /todos", function(){
+    can.fixture("POST /todos", function(){
       return {id: (id++)}
     })
     
     // update
-    $.fixture("PUT /todos/{id}", function(){
+    can.fixture("PUT /todos/{id}", function(){
       return {};
     })
     
     // destroy
-    $.fixture("DELETE /todos/{id}", function(){
+    can.fixture("DELETE /todos/{id}", function(){
       return {};
     })
 
@@ -332,7 +326,7 @@ Now you can use Model's ajax methods to CRUD todos.
 
 ### findAll `findAll( params, success( todos ), error() )`
 
-[$.Model.findAll findAll] retrieves multiple todos:
+[can.Model.findAll findAll] retrieves multiple todos:
 
     Todo.findAll({}, function( todos ) {
       console.log( todos );
@@ -340,7 +334,7 @@ Now you can use Model's ajax methods to CRUD todos.
 
 ### findOne `findOne( params, success( todo ), error() )`
 
-[$.Model.findOne findOne] retrieves a single todo:
+[can.Model.findOne findOne] retrieves a single todo:
 
     Todo.findOne({}, function( todo ) {
       console.log( todo );
@@ -348,7 +342,7 @@ Now you can use Model's ajax methods to CRUD todos.
 
 ### save `todo.save( success( todo ), error() )`
 
-[$.Model::save Save] can __create__ 
+[can.Model::save Save] can __create__ 
 or __update__ instances depending if the 
 instance has already been created or not.
 
@@ -375,7 +369,7 @@ and call __save__ again like the following:
 
 ### destroy `todo.destroy( success( todo ), error() )`
 
-[$.Model.prototype.destroy Destroy] deletes a 
+[can.Model.prototype.destroy Destroy] deletes a 
 record on the server.  You can do this like:
 
     var todo = new Todo({name: "mow lawn"});
@@ -390,9 +384,9 @@ record on the server.  You can do this like:
 ### bind `todo.bind( event, handler(ev, todo ) )`
 
 Listening to changes in the Model is what MVC 
-is about.  Model lets you [$.Model::bind bind] to changes 
+is about.  Model lets you [can.Model::bind bind] to changes 
 on an individual instance 
-or [$.Model.bind all instances]. For example, you can listen to 
+or [can.Model.bind all instances]. For example, you can listen to 
 when an instance is __created__ on the server like:
 
     var todo = new Todo({name: "mow lawn"});
@@ -418,8 +412,7 @@ the model class and instances whenever a model Ajax request completes:
 ### $.fn.model `$(el).model([modelInstance])`
 
 It can be helpful to label an element with a model instance
-so it can be retrieved later. [jQuery.fn.model] is used
-to get and set a model instance on an element.
+so it can be retrieved later. If you steal [can.Model.elements] plugin you can use [jQuery.fn.model] to get and set a model instance on an element.
 
 To set an instance:
 
@@ -433,15 +426,14 @@ get back the model instance with:
     
 ### elements `todo.elements( [context] )`
 
-[$.Model::elements Elements] retrieves the elements that 
-have a model instance. A __context__ element (or query string) can be 
-provided to limit the search to within a particular element:
+By stealing [can.Model.elements] plugin you can use  [can.Model::elements Elements] to retreive the elements that 
+have a model instance. A __context__ element (or query string) can be provided to limit the search to within a particular element:
 
     todo.elements('#todos');
 
-## View `$.View( idOrUrl, data )`
+## View `can.view( idOrUrl, data )`
 
-[$.View $.View] is used to easily create HTML with
+[can.view can.view] is used to easily create HTML with
 JS templates. Pass it ...
 
   - the __id__ of a script tag to use as the content of the template
@@ -459,10 +451,10 @@ example, add the following to __todos.html__:
 Render a list of todos with:
 
      Todo.findAll( {}, function( todos ){
-         console.log( $.View( 'todosEJS', todos ) );
+         console.log( can.view( 'todosEJS', todos ) );
      });
 
-$.View also takes a __url__ for a template location.  __Create__ 
+can.view also takes a __url__ for a template location.  __Create__ 
 a _todos/todos.ejs_ file that contains the following:
 
     <% for(var i = 0; i < this.length; i++ ){ %>
@@ -472,10 +464,10 @@ a _todos/todos.ejs_ file that contains the following:
 Render this with:
 
     Todo.findAll( {}, function( todos ){
-      console.log( $.View( 'todos.ejs', todos ) );
+      console.log( can.view( 'todos.ejs', todos ) );
     });
 
-__$.View__ works with any template language, such
+__can.view__ works with any template language, such
 as JAML, jQuery-tmpl, Mustache and superpowers them with:
 
   - Loading from scripts and external files 
@@ -486,7 +478,7 @@ as JAML, jQuery-tmpl, Mustache and superpowers them with:
 
 ### Modifiers - <code>el.<i>modifier</i>( idOrUrl, data )</code>
 
-__$.View__ overwrites the jQuery's html modifiers
+__can.view__ overwrites the jQuery's html modifiers
 after, append, before, html, prepend, replaceWith, and text,
 allowing you to write:
 
@@ -500,20 +492,19 @@ To make this work, make sure `todos.html` has a `#todos` element like:
 
 ### Deferreds 
 
-__$.Model__'s ajax methods return a deffered. __$.View__
+__can.Model__'s ajax methods return a deffered. __can.view__
 accepts deferreds, making this hotness possible:
 
     $('#todos').html('todos.ejs', Todo.findAll() )
     
-This syntax will render todos.ejs with the todo instances in the AJAX request 
-made by Todo.findAll, whenever its completed.
+This syntax will render todos.ejs with the todo instances in the AJAX request made by Todo.findAll, whenever its completed.
+You will need to steal the [can.view.modifiers] plugin to enable this functionality.
     
 ### Hookup `<li <%= (el)-> CODE %> >`
 
-[$.View.hookup] lets you provide 
+[can.view.hookup] lets you provide 
 [http://wiki.ecmascript.org/doku.php?id=strawman:arrow_function_syntax ES5-style arrow function] 
-callbacks on elements in your template.  These callback functions
-get called after the template has been 
+callbacks on elements in your template.  These callback functions get called after the template has been 
 inserted into the DOM. You can call jQuery methods on the element like:
 
     <li <%= ($el) -> $el.fadeIn() %> style='display:none'>
@@ -536,20 +527,15 @@ This lets you hookup model data to elements in EJS.  Change __todos.ejs__ to:
 
 
 
-## Controller `$.Controller(name, classProps, prototypeProps)`
+## Controller `can.Control(name, classProps, prototypeProps)`
 
-[$.Controller] creates organized, memory-leak free, 
-rapidly performing, stateful jQuery widgets. It is used to create UI controls like 
-tabs, grids, and contextmenus and used to organize them 
-into higher-order business rules with [$.route]. Its serves as 
-both a traditional view and a 
-traditional controller.
+[can.Control] creates organized, memory-leak free, 
+rapidly performing, stateful jQuery widgets. It is used to create UI controls like tabs, grids, and contextmenus and used to organize them into higher-order business rules with [can.route]. Its serves as both a traditional view and a traditional controller.
   
-Let's make a basic todos widget that 
-lists todos and lets 
+Let's make a basic todos widget that lists todos and lets 
 us destroy them. Add the following to __todos.js__:
 
-    $.Controller("Todos",{
+    can.Control("Todos",{
       "init" : function( element , options ){
         this.element.html('todos.ejs', Todo.findAll() )
       }
@@ -559,22 +545,20 @@ We can create this widget on the `#todos` element with:
 
     new Todos('#todos', {});
 
-### init `$.Controller.prototype.init(element, options)`
+### init `can.Control.prototype.init(element, options)`
 
-[$.Controller::init Init] is called when a
+[can.Control::init Init] is called when a
 new Controller instance is created.  It's called with:
 
   - __element__ - The jQuery wrapped element passed to the 
-                  controller.  Controller accepts a jQuery element, a
-                  raw HTMLElement, or a css selector.  This is
-                  set as __this.element__ on the controller instance.
-  - __options__ - The second argument passed to new Controller, extended with
-                  the Controller's static __defaults__. This is set as 
+                  controller. Control accepts a raw HTMLElement, a CSS selector, or a NodeList.  This is set as __this.element__ on the controller instance.
+  - __options__ - The second argument passed to new Control, extended with
+                  the Control's static __defaults__. This is set as 
                   __this.options__ on the controller instance.
 
-and any other arguments passed to `new Controller()`.  For example:
+and any other arguments passed to `new Control()`.  For example:
 
-    $.Controller("Todos",
+    can.Control("Todos",
     {
       defaults : {template: 'todos.ejs'}
     },
@@ -585,24 +569,25 @@ and any other arguments passed to `new Controller()`.  For example:
     })
     
     new Todos( document.body.firstElementChild );
-    new Todos( $('#todos'), {template: 'specialTodos.ejs'})
+    new Todos( '#todos', {template: 'specialTodos.ejs'})
 
 ### element `this.element`
 
-[$.Controller.prototype.element this.element] is the jQuery-wrapped
-element the controller is created on. 
+[can.Control.prototype.element this.element] this.element is the NodeList of a single element, the element the control is created on.
+
+Each library wraps the element differently. If you are using jQuery, the element is wrapped with jQuery( element ).
 
 ### options `this.options`
 
-[$.Controller.prototype.options this.options] is the second argument passed to 
-`new Controller()` merged with the controller's static __defaults__ property.
+[can.Control.prototype.options this.options] is the second argument passed to 
+`new Control()` merged with the controller's static __defaults__ property.
 
 ### Listening to events
 
-Controller automatically binds prototype methods that look
+Control automatically binds prototype methods that look
 like event handlers.  Listen to __click__s on `<li>` elements like:
 
-    $.Controller("Todos",{
+    can.Control("Todos",{
       "init" : function( element , options ){
         this.element.html('todos.ejs', Todo.findAll() )
       },
@@ -616,16 +601,15 @@ like event handlers.  Listen to __click__s on `<li>` elements like:
 
 When an `<li>` is clicked, `"li click"` is called with:
 
-  - The jQuery-wrapped __element__ that was clicked
+  - The NodeList of a single __element__ that was clicked (each library will wrap this node differently)
   - The __event__ data
 
-Controller uses event delegation, so you can add `<li>`s without needing to rebind
-event handlers.
+Control uses event delegation, so you can add `<li>`s without needing to rebind event handlers.
 
 To destroy a todo when it's `<a href='javascript:// class='destroy'>` link 
 is clicked:
 
-    $.Controller("Todos",{
+    can.Control("Todos",{
       "init" : function( element , options ){
         this.element.html('todos.ejs', Todo.findAll() )
       },
@@ -653,7 +637,7 @@ Customize event handler behavior with `"{NAME}"` in
 the event handler name.  The following allows customization 
 of the event that destroys a todo:
 
-    $.Controller("Todos",{
+    can.Control("Todos",{
       "init" : function( element , options ){ ... },
       "li click" : function(li){ ... },
       
@@ -668,7 +652,7 @@ of the event that destroys a todo:
 Values inside `{NAME}` are looked up on the controller's `this.options`
 and then the `window`.  For example, we could customize it instead like:
 
-    $.Controller("Todos",{
+    can.Control("Todos",{
       "init" : function( element , options ){ ... },
       "li click" : function(li){ ... },
       
@@ -695,7 +679,7 @@ If the value inside `{NAME}` is an object, that object will be
 bound to.  For example, the following tooltip listens to 
 clicks on the window:
 
-    $.Controller("Tooltip",{
+    can.Control("Tooltip",{
       "{window} click" : function(el, ev){
         // hide only if we clicked outside the tooltip
         if(! this.element.has(ev.target ) {
@@ -712,7 +696,7 @@ listen to model updates.  Instead of adding a callback
 to `todo.destroy(cb)`, we should be listening to 
 __destroyed__ events.  We'll handle __updated__ too:
 
-    $.Controller("Todos",{
+    can.Control("Todos",{
       "init" : function( element , options ){
         this.element.html('todos.ejs', Todo.findAll() )
       },
@@ -743,7 +727,7 @@ architectures.
 
 ### destroy `controller.destroy()`
 
-[$.Controller.prototype.destroy] unbinds a controller's
+[can.Control.prototype.destroy] unbinds a controller's
 event handlers and releases its element, but does not remove 
 the element from the page. 
 
@@ -769,11 +753,11 @@ data by calling `$(document.body).empty()`._
 
 ### update `controller.update(options)`
 
-[$.Controller.prototype.update] updates a controller's 
+[can.Control.prototype.update] updates a controller's 
 `this.options` and rebinds all event handlers.  This is useful
 when you want to listen to a specific model:
 
-    $.Controller('Editor',{
+    can.Control('Editor',{
       update : function(options){
         this._super(options)
         this.setName();
@@ -823,7 +807,7 @@ the basics with ease.
 
 Listen to routes in controller's with special "route" events like:
 
-    $.Controller("Routing",{
+    can.Control("Routing",{
       "route" : function(){
         // matches empty hash, #, or #!
       },
@@ -853,7 +837,7 @@ The following enhances the Routing controller to listen for
 $.route changes, it retrieves the todo from the server
 and updates the editor widget.
 
-    $.Controller("Routing",{
+    can.Control("Routing",{
       init : function(){
         this.editor = new Editor("#editor")
         new Todos("#todos");
@@ -904,12 +888,12 @@ In the __todos__ directory, make funcunit.html and add the following HTML:
       </head>
       <body>
         <h1 id="qunit-header">Todos Test Suite</h1>
-    	<h2 id="qunit-banner"></h2>
-    	<div id="qunit-testrunner-toolbar"></div>
-    	<h2 id="qunit-userAgent"></h2>
-		<div id="test-content"></div>
+      <h2 id="qunit-banner"></h2>
+      <div id="qunit-testrunner-toolbar"></div>
+      <h2 id="qunit-userAgent"></h2>
+    <div id="test-content"></div>
         <ol id="qunit-tests"></ol>
-		<div id="qunit-test-area"></div>
+    <div id="qunit-test-area"></div>
       </body>
     </html>
     
