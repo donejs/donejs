@@ -1,1 +1,0 @@
-c({"name": "FuncUnit", "children": ["funcunit.actions", "funcunit.getters", "funcunit.coverage", "funcunit.demos", "funcunit.features", "funcunit.finding", "funcunit.integrations", "funcunit.remote", "funcunit.waits"]})
