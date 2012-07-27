@@ -17,27 +17,27 @@ of making quality, maintainable applications in the shortest amount of time.
 
 JavaScriptMVC is comprised of 4 sub projects:
 
+  - [canjs CanJS] - A client side MVC framework
+  - [stealjs StealJS] - A code manager : dependency management, code cleaning, building, etc.
   - [DocumentJS] - A documentation engine
   - [FuncUnit] - A web testing framework
-  - [jquerymx jQueryMX] - jQuery _M_VC e_X_tensions.
-  - [stealjs StealJS] - A code manager : dependency management, code cleaning, building, etc.
 
 ### Plugins 
 
 Sub-projects are futher broken down into plugins.  Just [steal] the ones you need.  Plugins load 
 their own dependencies and won't load duplicate files.  It looks like:
 
-    steal('jquery/model',
-          'jquery/view/ejs',
-          'jquery/controller',
-          function($){
+    steal('can/model',
+          'can/view/ejs',
+          'can/control',
+          function(Model, EJS, Control){
           ...
-          });
+    });
 
 
 <div class='whisper'>
-  P.S. <code>steal('jquery')</code> adds <code>jquery/jquery.js</code>
- to your project. </div>
+P.S. <code>steal('jquery')</code> adds <code>jquery/jquery.js</code> to your project.
+</div>
 
 ## License
 
@@ -50,5 +50,5 @@ These exceptions, although permissive licenses themselves, are not linked in you
 
 ## Installing JavaScriptMVC
 
-Before continuing, make sure you have [installing installed JavaScriptMVC].  Once you
+Before continuing, make sure you have [installing installed JavaScriptMVC]. Once you
 have installed JavaScriptMVC, continue to [creating Creating Cookbook].
