@@ -20,7 +20,7 @@ tests in the browser or Envjs (and now PhantomJS with a little extra work).
 
 ### Run Unit Tests in the Browser
 
-Open <code>cookbook/qunit.html</code>.  You should see something like:
+Open `cookbook/qunit.html`.  You should see something like:
 
 @image jmvc/images/test_cookbook_example.png
 
@@ -51,12 +51,12 @@ organizing them into tests and modules.  The best place to start understanding t
 unit tests is to read through [http://docs.jquery.com/QUnit QUnit's documentation].
 
 __cookbook/qunit.html__ loads [steal] and tells it to load
-<code>cookbook/test/qunit/qunit.js</code> which loads your unit tests:
+`cookbook/test/qunit/qunit.js` which loads your unit tests:
 
- - <code>cookbook/test/qunit/cookbook_test.js</code>
- - <code>cookbook/test/qunit/recipe_test.js</code>
+ - `cookbook/test/qunit/cookbook_test.js`
+ - `cookbook/test/qunit/recipe_test.js`
  
-These files steal <code>funcunit/qunit</code> then 
+These files steal `funcunit/qunit` then 
 declare tests that get run once 
 all scripts have loaded.
 
@@ -97,7 +97,7 @@ Cookbook's functional tests test the recipe create and recipe lists widgets.
 
 ### Run Functional Tests in the Browser
 
-Open <code>cookbook/funcunit.html</code>.  You should see something like:
+Open `cookbook/funcunit.html`.  You should see something like:
 
 <img src='http://wiki.javascriptmvc.com/wiki/images/b/b6/Funcunit.png'/>
 
@@ -130,41 +130,39 @@ few settings in the browser.  Please see the [FuncUnit FuncUnit documentation] f
 
 ## Understanding FuncUnit Tests
 
-<p>FuncUnit adds to QUnit the ability to open another page, in this case
-<code>cookbook/cookbook.html</code>, perform actions on it, and
-get information from it.</p>
+FuncUnit adds to QUnit the ability to open another page, in this case
+`cookbook/cookbook.html`, perform actions on it, and
+get information from it.
 
-The <code>cookbook/funcunit.html</code>  page
-works just like <code>qunit.html</code> except the 'funcunit' plugin is loaded which 
-provides [FuncUnit].  FuncUnit is aliased to "<b>S</b>" to highlight the similarity between its API
+The `cookbook/funcunit.html`  page
+works just like `qunit.html` except the 'funcunit' plugin is loaded which 
+provides [FuncUnit]. FuncUnit is aliased to `S` to highlight the similarity between its API
 and jQuery's API.
 
 Let take a quick look at a FuncUnit test:
 
-@codestart
-test("create recipes", function(){
-    
-  //type Ice in the name field
-  S("[name=name]").type("Ice")
-    
-  //type Cold Water in the description field
-  S("[name=description]").type("Cold Water")
-    
-  //click the submit button
-  S("[type=submit]").click()
-    
-  //wait until the 2nd recipe exists
-  S('.recipe:nth-child(2)').exists()
-  
-  //Gets the text of the first td
-  S('.recipe:nth-child(2) td:first').text(function(text){
-  
-    //checks taht it has ice
-    ok(text.match(/Ice/), "Typed Ice");
-  });
-  
-})
-@codeend
+    test("create recipes", function(){
+
+      //type Ice in the name field
+      S("[name=name]").type("Ice")
+
+      //type Cold Water in the description field
+      S("[name=description]").type("Cold Water")
+
+      //click the submit button
+      S("[type=submit]").click()
+
+      //wait until the 2nd recipe exists
+      S('.recipe:nth-child(2)').exists()
+
+      //Gets the text of the first td
+      S('.recipe:nth-child(2) td:first').text(function(text){
+
+        //checks taht it has ice
+        ok(text.match(/Ice/), "Typed Ice");
+      });
+
+    })
 
 Functional tests are largely many asynchronous actions 
 (clicks and keypresses)

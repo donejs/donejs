@@ -10,9 +10,7 @@ it hard not to document your code.
 
 Create the docs by running:
 
-@codestart
-> js cookbook/scripts/docs.js
-@codeend
+    > js cookbook/scripts/docs.js
 
 _Note: Verify cookbook.html is not in production mode before running the above command._
 
@@ -21,7 +19,6 @@ _Note: Verify cookbook.html is not in production mode before running the above c
 Open __cookbook/doc.html__ and you'll find something like:
 
 @image tutorials/getstarted/Docs.png
-
 
 ## Writing Documentation
 
