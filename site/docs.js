@@ -25,4 +25,5 @@ steal('steal/generate',
 	'can/view/modifiers')
 .then('jquery/build/lib.js')
 .then('funcunit')
-.then('canui')
+.then('./pages/init.js')
+// .then('canui')
