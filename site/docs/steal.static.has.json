@@ -1,1 +1,0 @@
-c({"name": "steal.static.has", "params": {}, "ret": {"type": "undefined", "description": ""}, "type": "function", "parents": ["steal.static"], "comment": "<p>Used to tell steal that it is loading a number of plugins</p>", "hide": true, "src": "steal/steal.js", "line": 883, "children": []})

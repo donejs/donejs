@@ -1,1 +1,0 @@
-c({"name": "steal.URI.prototype", "type": "prototype", "parents": ["steal.URI"], "comment": "", "src": "steal/steal.js", "line": 362, "children": ["steal.URI.prototype.normalize", "steal.URI.prototype.steal.config", "steal.URI.prototype.steal.config.root", "steal.URI.prototype.steal.id", "steal.URI.prototype.steal.idToUri"]})

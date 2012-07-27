@@ -1,1 +1,0 @@
-c({"name": "steal.URI", "type": "class", "comment": "<p>A URL / URI helper for getting information from a URL.</p>\n\n<pre><code>var uri = URI( \"http://stealjs.com/index.html\" )\nuri.path //-&gt; \"/index.html\"\n</code></pre>", "src": "steal/steal.js", "line": 307, "children": ["steal.URI.page", "steal.URI.cur", "steal.URI.prototype"]})
