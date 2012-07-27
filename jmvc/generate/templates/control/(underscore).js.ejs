@@ -1,5 +1,4 @@
-steal( 'can/control','can/view/ejs' )
-	.then( './views/init.ejs', function($){
+steal('can/control', 'can/view/ejs', './views/init.ejs', function(){
 
 /**
  * @class <%= name %>
@@ -12,9 +11,9 @@ can.Control('<%= name %>',
 /** @Prototype */
 {
 	init : function(){
-		this.element.html("//<%= path %>/<%= underscore %>/views/init.ejs",{
+		this.element.html(can.view("//<%= path %>/<%= underscore %>/views/init.ejs",{
 			message: "Hello World"
-		});
+		}));
 	}
 })
 

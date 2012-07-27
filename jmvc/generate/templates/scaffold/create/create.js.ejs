@@ -1,9 +1,4 @@
-steal( 'jquery/controller',
-       'jquery/view/ejs',
-	   'jquery/dom/form_params',
-	   'jquery/controller/view',
-	   '<%= appPath %>/models' )
-	.then('./views/init.ejs', function($){
+steal('can', 'can/control/view', 'jquery/dom/form_params', '<%= appPath %>/models', './views/init.ejs', function() {
 
 /**
  * @class <%=baseName%>.Create
@@ -11,7 +6,7 @@ steal( 'jquery/controller',
  * @inherits jQuery.Controller
  * Creates <%= plural %>
  */
-$.Controller('<%=baseName%>.Create',
+can.Control('<%=baseName%>.Create',
 /** @Prototype */
 {
 	init : function(){
@@ -19,12 +14,12 @@ $.Controller('<%=baseName%>.Create',
 	},
 	submit : function(el, ev){
 		ev.preventDefault();
-		this.element.find('[type=submit]').val('Creating...')
-		new <%= name %>(el.formParams()).save(this.callback('saved'));
-	},
-	saved : function(){
-		this.element.find('[type=submit]').val('Create');
-		this.element[0].reset()
+		var el = this.element;
+    el.find('[type=submit]').val('Creating...')
+		new <%= name %>(el.formParams()).save().done(function() {
+      el.find('[type=submit]').val('Create');
+      el[0].reset()
+    });
 	}
 })
 

@@ -20,18 +20,15 @@ JavaScriptMVC is comprised of 4 sub projects:
   - [canjs CanJS] - A client side MVC framework
   - [jquerypp jQuery++] - A collection of useful DOM helpers and special events for jQuery
   - [stealjs StealJS] - A code manager: dependency management, code cleaning, building, etc.
-  - [documentjs DocumentJS] - A documentation engine
-  - [funcunit FuncUnit] - A web testing framework
+  - [DocumentJS DocumentJS] - A documentation engine
+  - [FuncUnit FuncUnit] - A web testing framework
 
 ### Plugins 
 
 Sub-projects are futher broken down into plugins. Just [steal] the ones you need. Plugins load
 their own dependencies and won't load duplicate files.  It looks like:
 
-    steal('can/model',
-          'can/view/ejs',
-          'can/control',
-          function(Model, EJS, Control){
+    steal('can/control', function() {
           ...
     });
 

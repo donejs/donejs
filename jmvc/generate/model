@@ -64,13 +64,10 @@ function(steal){
 		}
 	}
 	
-	/*
-	// $.fixture.make for this model in fixtures.js
+	// can.fixture.make for this model in fixtures.js
 	var text = readFile("jmvc/generate/templates/fixturemake.ejs");
-	console.log(text);
 	var fixturetext = new steal.EJS({
 		text: text
 	}).render(md);
 	steal.generate.insertCode(md.appPath+"/fixtures/fixtures.js", fixturetext);
-	*/
 });

@@ -18,7 +18,7 @@
 		<script type='text/javascript'>
 			steal('<%= path %>/<%= underscore %>',function(){
 				
-				$('#<%= underscore %>').<%= plugin %>();
+				new <%= name %>('#<%= underscore %>');
 			})
 		</script>
 	</body>
