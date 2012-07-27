@@ -19,10 +19,15 @@ Want to take JMVC for a test-drive?  Start here.
 Build, minify, test, and document a basic recipe application.  This tutorial
 covers the major components of JavaScriptMVC.
 
-### [mvc Get started with jQueryMX]
+### [mvc Get started with CanJS]
 
-A walkthrough of the MVC parts of jQueryMX.  This is a must read if you 
+A walkthrough of the MVC parts of JavaScript MVC.  This is a must read if you 
 want to understand how they work together.
+
+### [tutorials.jquerypp Get started with jQuery++]
+
+jQuery++ is a collection of useful jQuery libraries that provide the missing 
+functionality necessary to implement and organize large-scale jQuery applications.
 
 ### [tutorials.steal Get Started With StealJS] (in-progress)
 

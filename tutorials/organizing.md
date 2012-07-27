@@ -1,5 +1,5 @@
 @page organizing Organizing Your App
-@parent tutorials 6
+@parent tutorials 7
 
 The secret to building large apps is to NEVER build
 large apps.  Break up your applications into small 
@@ -37,7 +37,7 @@ app's codebase.  What works for 10 files does not work for 100.
 
 Complicating matters, an individual JavaScript file might have dependencies on
 non-JavaScript resources.  It's easy to imagine a menu needing 
-a specific stylesheet, images, or [jQuery.View client side template] to run.  
+a specific stylesheet, images, or [can.view client side template] to run.  
 
 Spreading these dependencies across images, styles, templates etc folders
 leads to bad organization and potentially bad performance.  For example, it can be
@@ -46,7 +46,7 @@ hard to know if a particular style rule is needed.
 ### The Fix
 
 JavaScriptMVC gives each resource you author it's own folder.  Typically,
-the folder will hold the resource, the its demo page, test page,
+the folder will hold the resource, its demo page, test page,
 test script, and any other files specific to that resource.
 
 For example, a tabs folder might look like:
@@ -88,7 +88,7 @@ being built.
 
 Create an application folder structure with:
 
-    js jquery\generate\app cms
+    js jmvc\generate\app cms
 
 
 #### Library Folders 
@@ -103,12 +103,13 @@ the name of the organization building the controls.
 An application is comprised of various resources.  JavaScriptMVC's code generators can 
 be used to create these resources.
 
-__Model__ - A model represents a set of services.  Typically, they exist within an application
-folder's <code>models</code> directory and are used to request data by other controls.
+__Model__ - A model represents a set of services. Typically, they exist within 
+an application folder's <code>models</code> directory and are used to request 
+data by other controls.
 
 Generate a model like:
 
-    js jquery\generate\model cms\models\image
+    js jmvc\generate\model cms\models\image
 
 
 __Controller__ - A controller is a widget or code that combines and organizes
@@ -117,13 +118,13 @@ to an application should be put in a folder within an application folder.
 
 Generate a controller like:
 
-    js jquery\generate\controller jupiter\tabs
+    js jmvc\generate\controller bitovi\tabs
 
 
 __Plugin__ - A plugin is a low-level reusable module such as a special event or dom extension.
 It does not typically have a visible component.  These should be added to library folders.
 
-    js jquery\generate\plugin jupiter\range
+    js jmvc\generate\plugin bitovi\range
 
 
 ## Example Application
@@ -136,7 +137,7 @@ to be able to edit a selected item of that type.
 
 
 
-If the application's name is __cms__ and it is built by __Jupiter__, a basic version's
+If the application's name is __cms__ and it is built by __Bitovi__, a basic version's
 folder structure might look like:
 
 
@@ -144,7 +145,7 @@ folder structure might look like:
       \models    - models for the CMS
       \views     - views to configure the grid
       cms.js
-    \jupiter
+    \bitovi
       \tabs      - a basic tabs widget
       \edit      - binds a form to edit a model instance
       \grid      - a configurable grid
@@ -156,44 +157,53 @@ enough to produces the desired functionality. In this case,
 <code>cms/cms.js</code> might look like:
 
     // load dependencies
-    steal('jupiter/tabs',
-          'jupiter/grid',
-          'jupiter/create',
+    steal('bitovi/tabs',
+          'bitovi/grid',
+          'bitovi/create',
           './models/image',
           './models/video',
           './models/article',function(){
       
       // add tabs to the page
-      $('#tabs').jupiter_tabs();
+      var tabs = new Bitovi.Tabs('#tabs');
       
       // Configure the video grid
-      $('#videos').jupiter_grid({
+      var videos = new Bitovi.Grid('#videos', {
         model: Cms.Models.Video,
         view: "//cms/views/videos.ejs"
       })
       
       // listen for when a video is selected
-      .bind('select' , function(ev, video){
-        
-        // update the edit form with the selected 
-        // video's attributes
-        $('#videoEdit').jupiter_edit({ model: video });
-      });
+      videos.element.find('li').bind('selected', 
+        function(ev, video){
+          // update the edit form with the selected 
+          // video's attributes
+          new Bitovi.Edit('#videoEdit', { model: video });
+        }
+      );
   
       // Do the same for images and articles
-      $('#images').jupiter_grid({
+      var images = new Bitovi.Grid('#images', {
         model: Cms.Models.Image,
         view: "//cms/views/images.ejs"
-      }).bind('select' , function(ev, image){
-        $('#imageEdit').jupiter_edit({ model: image });
       });
+
+      images.element.find('li').bind('selected', 
+        function(ev, image){
+          new Bitovi.Edit('#imageEdit', { model: image });
+        }
+      );
       
-      $('#articles').jupiter_grid({
+      var articles = new Bitovi.Grid('#articles', {
         model: Cms.Models.Article,
         view: "//cms/views/article.ejs"
-      }).bind('select' , function(ev, article){
-        $('#articleEdit').jupiter_edit({ model: article });
-      });
+      })
+      
+      articles.element.find('li').bind('selected', 
+        function(ev, article){
+          new Bitovi.Edit('#articleEdit', { model: article });
+        }
+      );
 
     })
 
@@ -219,7 +229,7 @@ in the application folder.  We'll encapsulate it in a controller for each type:
       \models  
       \views     
       cms.js
-    \jupiter
+    \bitovi
       \thumbnail
       \tabs     
       \edit      
@@ -231,53 +241,52 @@ in the application folder.  We'll encapsulate it in a controller for each type:
     steal('cms/articles',
           'cms/images',
           'cms/videos',
-          'jupiter/tabs',
+          'bitovi/tabs',
           function(){
       
-      $('#tabs').jupiter_tabs();
+      new Bitovi.Tabs('#tabs');
       
       // add the video grid
-      $('#videos').cms_videos()
+      new Cms.Videos('#videos');
       
       // Do the same for images and articles
-      $('#images').cms_images();
-      $('#articles').cms_articles();
+      new Cms.Images('#images');
+      new Cms.Articles('#articles');
 
     })
 
 <code>cms/articles/articles.js</code> might look like:
 
-    steal('jupiter/grid',
-          'jupiter/edit',
-          'jquery/controller', 
-          'jquery/view/ejs',
-          'jupiter/thumbnail',
+    steal('bitovi/grid',
+          'bitovi/edit',
+          'can/control', 
+          'can/view/ejs',
+          'bitovi/thumbnail',
           function(){
       
-      $.Controller('Cms.Articles',
-      {
-        listensTo: ["select"]
-      },
+      can.Control('Cms.Articles',
+      { },
       {
         init : function(){
           // draw the html for the tab
           this.element.html('//cms/articles/views/init.ejs',{});
 
           // configure the grid
-          this.find('.grid').jupiter_grid({
-	        model: Cms.Models.Article,
-	        view: "//cms/articles/views/article.ejs"
+          new Bitovi.Grid(this.find('.grid'), {
+            model: Cms.Models.Article,
+            view: "//cms/articles/views/article.ejs"
+          })
 	      });
         },
 
         // when the grid triggers a select event
-        "select" : function(el, ev, article){
-
-          // add or update the edit control
-          this.find('.edit').jupiter_edit({ model: article })
+        " select" : function(el, ev){
+          var editor = new Bitovi.Edit({
+            model: el.data('model')
+          })
 
           // add the thumbnail editor
-          	.find('.thumbs').jupiter_thumbnail();
+          new Bitovi.Thumbnail(editor.find('.thumbs'));
         }
       });
       
@@ -312,7 +321,7 @@ folder structure would look like:
       \models  
       \views     
       cms.js
-    \jupiter
+    \bitovi
       \thumbnail
       \tabs     
       \edit      
@@ -323,26 +332,26 @@ folder structure would look like:
 
     steal('cms/articles/grid',
           'cms/articles/edit',
-          'jquery/controller',
-          'jquery/view/ejs',
+          'can/control',
+          'can/view/ejs',
           function(){
       
-      $.Controller('Cms.Articles',
-      {
-        listensTo: ["select"]
-      },
+      can.Control('Cms.Articles',
+      { },
       {
         init : function(){
           // draw the initial html
           this.element.html('//cms/articles/views/init.ejs',{});
           
           // create the articles grid
-          this.find('.grid').cms_articles_grid();
+          new Cms.Articles.Grid(this.find('.grid'));
         },
-        "select" : function(el, ev, article){
+        " select" : function(el, ev, article){
           
           // update the articles edit control
-          this.find('.edit').cms_articles_edit({ model: article });
+          new Cms.Articles.Edit(this.find('.edit'), { 
+            model: article 
+          });
         }
       });
     })
@@ -355,7 +364,7 @@ Higher-order controls (<code>cms/articles/articles.js</code>) combine leaves and
 into more complex functionality.  The root of the application is the application file 
 (<code>cms/cms.js</code>).  It combines and configures all high-level widgets.
 
-In general, low-level controls use jQuery.trigger to send messages 'up' to higher-order
+In general, low-level controls use can.trigger to send messages 'up' to higher-order
 controls.  Higher-order controls typically call methods on lower-level controls
 
 The Cms.Articles control listening to a 'select' event produced by
@@ -363,7 +372,7 @@ Cms.Articles.Grid and creating (or updating) the Cms.Articles.Edit control
 is a great example of this.
 
 The situation where this breaks down is usually when a 'state' needs to be shared and communicated
-across several controls.  [jQuery.Observe] and client [jQuery.Model models] are useful 
+across several controls.  [can.Observe] and client [can.Model models] are useful 
 for this situation.
 
 ## Conclusion
