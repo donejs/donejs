@@ -1,5 +1,5 @@
 <% can.each(this, function(todo){ %>
-  <li <%= (el) -> el.model(todo) %>>
+  <li <%= (el) -> el.data('model', todo).addClass('todo todo_' + todo.id) %>>
     <%= todo.name %>
     <a href="javascript://" class='destroy'>X</a>
   </li>

@@ -11,10 +11,10 @@ for a more in-depth overview.
 [developwithgit pull it from Git].  JavaScriptMVC (JMVC) is a collection of 5 sub-projects. 
 Once you have JavaScriptMVC, you should have a folder with:
 
-    can        - MVC parts of the project
+    can        - lightweight MVC components
     documentjs - documentation engine
     funcunit   - testing app
-    jquery     - jQuery++ plugins
+    jquery     - [jQuery++](http://jquerypp.com) project, useful collections of jQuery plugins
     steal      - dependency management
     js         - JS command line for Linux/Mac
     js.bat     - JS command line for Windows
@@ -37,7 +37,7 @@ your page. In the [rootfolder root folder] create a __todos__ folder
 and empty __todos.html__ and __todos.js__ that look like:
 
     ROOT\
-				can\
+        can\
         documentjs\
         jquery\
         funcunit\
@@ -61,17 +61,14 @@ To load _steal.js_ and _todos.js_, make __todos.html__ look like:
     </html>
     
 
-Open the page in your browser.  Use a debugger like firebug to see _steal.js_ and
-_todos.js_ loading.
+Open the page in your browser.  Use a debugger like firebug to see _steal.js_ and _todos.js_ loading.
 
 ## steal `steal([paths])`
 
 [steal] is used to load scripts, styles, even CoffeeScript, LESS
 and templates into your application.  
 
-Path are assumed to be relative to the [rootfolder root folder]. This
-means that the following always loads `can/construct/construct.js`
-no matter which file is calling steal:
+Path are assumed to be relative to the [rootfolder root folder]. This means that the following always loads `can/construct/construct.js` no matter which file is calling steal:
 
     steal('can/construct/construct.js');
     
@@ -106,17 +103,15 @@ Instead, do:
 For this application, we will load CanJS' most
 common plugins.  Add the following to __todos.js__:
 
-    steal('can/util/exports.js',
+    steal('can/util',
          'can/construct/super',
          'can/model',
-         'can/model/elements',
          'can/util/fixture',
          'can/view/ejs',
          'can/view/modifiers',
          'can/control',
          'can/control/route'
-         'can/control/plugin'
-          function(){
+          function(can){
           
     })
 
@@ -134,8 +129,7 @@ To create a __Constructor function__ of your own, call __can.Construct__ with th
   - __classProperties__ that are attached directly to the constructor, and
   - instance __prototypeProperties__.
 
-__can.Construct__ sets up the prototype chain so subclasses can be further 
-extended and sub-classed as far as you like:
+__can.Construct__ sets up the prototype chain so subclasses can be further extended and sub-classed as far as you like:
 
     steal('can/construct', function(){
     
@@ -392,11 +386,7 @@ record on the server.  You can do this like:
 
 ### bind `todo.bind( event, handler(ev, todo ) )`
 
-Listening to changes in the Model is what MVC 
-is about.  Model lets you [can.Model::bind bind] to changes 
-on an individual instance 
-or [can.Model.bind all instances]. For example, you can listen to 
-when an instance is __created__ on the server like:
+Listening to changes in the Model is what MVC is about.  Model lets you [can.Model::bind bind] to changes on an individual instance or [can.Model.bind all instances]. For example, you can listen to when an instance is __created__ on the server like:
 
     var todo = new Todo({name: "mow lawn"});
     todo.bind('created', function(ev, todo){
@@ -404,41 +394,17 @@ when an instance is __created__ on the server like:
     })
     todo.save()
     
-You can listen to anytime an __instance__ is created on the server by 
-binding on the model:
+You can listen to anytime an __instance__ is created on the server by binding on the model:
 
     Todo.bind('created', function(ev, todo){
       console.log("created", todo );
     })
 
-Model produces the following events on 
-the model class and instances whenever a model Ajax request completes:
+Model produces the following events on the model class and instances whenever a model Ajax request completes:
 
   - __created__ - an instance is created on the server
   - __updated__ - an instance is updated on the server
   - __destroyed__ - an instance is destroyed on the server
-
-### $.fn.model `$(el).model([modelInstance])`
-
-It can be helpful to label an element with a model instance
-so it can be retrieved later. If you steal [can.Model.elements] plugin you can use [jQuery.fn.model] to get and set a model instance on an element.
-
-To set an instance:
-
-    var li = $('<li>').model( new Todo({id: 5}) )
-                      .appendTo("#todos");
-    
-This will add __'todo todo_5'__ to the `<li>`'s className. We can
-get back the model instance with:
-
-    li.model().id //-> 5
-    
-### elements `todo.elements( [context] )`
-
-By stealing [can.Model.elements] plugin you can use  [can.Model::elements Elements] to retreive the elements that 
-have a model instance. A __context__ element (or query string) can be provided to limit the search to within a particular element:
-
-    todo.elements('#todos');
 
 ## View `can.view( idOrUrl, data )`
 
@@ -463,8 +429,7 @@ Render a list of todos with:
          console.log( can.view( 'todosEJS', todos ) );
      });
 
-can.view also takes a __url__ for a template location.  __Create__ 
-a _todos/todos.ejs_ file that contains the following:
+can.view also takes a __url__ for a template location.  __Create__ a _todos/todos.ejs_ file that contains the following:
 
     <% for(var i = 0; i < this.length; i++ ){ %>
       <li><%= this[i].name %></li>
@@ -521,20 +486,18 @@ inserted into the DOM. You can call jQuery methods on the element like:
     </li>
 
 In your code, add a __returning__  magic tag (`<%= %>`) that 
-matches the _arrow function syntax_.  The argument passed to the function will
-be the jQuery-wrapped element.  
+matches the _arrow function syntax_.  The argument passed to the function will be the jQuery-wrapped element.  
 
 This lets you hookup model data to elements in EJS.  Change __todos.ejs__ to:
 
     <% $.each(this, function(i, todo){ %>
-      <li <%= ($el) -> $el.model(todo) %>>
+      <li <%= ($el) -> $el.data('model', todo).addClass('todo todo_' + todo.id) %>>
         <%= todo.name %>
         <a href="javascript://" class='destroy'>X</a>
       </li>
     <% }) %>
 
-
-
+Here we're setting model instance in the element's data and adding classes which will allow us to select this element just by knowing model's id.
 
 ## Controller `can.Control(name, classProps, prototypeProps)`
 
@@ -588,8 +551,7 @@ Each library wraps the element differently. If you are using jQuery, the element
 
 ### options `this.options`
 
-[can.Control.prototype.options this.options] is the second argument passed to 
-`new Control()` merged with the controller's static __defaults__ property.
+[can.Control.prototype.options this.options] is the second argument passed to `new Control()` merged with the controller's static __defaults__ property.
 
 ### Listening to events
 
@@ -615,8 +577,7 @@ When an `<li>` is clicked, `"li click"` is called with:
 
 Control uses event delegation, so you can add `<li>`s without needing to rebind event handlers.
 
-To destroy a todo when it's `<a href='javascript:// class='destroy'>` link 
-is clicked:
+To destroy a todo when it's `<a href='javascript:// class='destroy'>` link is clicked:
 
     can.Control("Todos",{
       "init" : function( element , options ){
@@ -627,10 +588,10 @@ is clicked:
       },
       "li .destroy click" : function(el, ev){
         // get the li element that has the model
-        var li = el.closest('.todo');
+        var li = el.closest('li');
         
         // get the model
-        var todo = li.model()
+        var todo = li.data('model')
         
         //destroy it
         todo.destroy(function(){
@@ -712,25 +673,22 @@ __destroyed__ events.  We'll handle __updated__ too:
       },
       "li .destroy click" : function(el, ev){
         el.closest('.todo')
-          .model()
+          .data('model')
           .destroy();
         ev.stopPropagation();
       },
       "{Todo} destroyed" : function(Todo, ev, destroyedTodo){
-        destroyedTodo.elements(this.element)
-                     .remove();
+        this.element.find('.todo_' + destroyedTodo.id).remove();
       },
       "{Todo} updated" : function(Todo, ev, updatedTodo){
-        updatedTodo.elements(this.element)
-                   .replaceWith('todos.ejs',[updatedTodo]);
+        this.element.find('.todo_' + updatedTodo.id)
+                    .replaceWith('todos.ejs',[updatedTodo]);
       }
     })
     
     new Todos("#todos");
 
-This is better because it removes the todo's element from the page even if another widget
-destroyed the todo. Also, this works very well with real-time
-architectures.
+This is better because it removes the todo's element from the page even if another widget destroyed the todo. Also, this works very well with real-time architectures.
 
 ### destroy `controller.destroy()`
 
@@ -754,15 +712,14 @@ together, templated event binding, and controller's automatic
 clean-up make it almost impossible to write leaking applications. An application that usesonly templated event handlers on controllers within the bodycould free up all 
 data by calling `$(document.body).empty()`._
 
-### update `controller.update(options)`
+### on `control.on()`
 
-[can.Control.prototype.update] updates a controller's 
-`this.options` and rebinds all event handlers. This is useful
-when you want to listen to a specific model:
+[can.Control.prototype.on] function rebinds all event handlers. We can use it to make controller listen to a specific model by creating the `update` function that will update controller's `this.options` and then call `this.on()`:
 
     can.Control('Editor',{
       update : function(options){
-        this._super(options)
+        can.extend(this.options, options);
+        this.on();
         this.setName();
       },
       // a helper that sets the value of the input
@@ -795,8 +752,6 @@ when you want to listen to a specific model:
     
     // switch it to the second todo
     editor.update({todo: todo2});
-
-Notice that because we are overwriting `update`, we must call __\_super__ (You should steal [can.Construct.super] plugin to have this._super function available).
 
 ## Routing
 

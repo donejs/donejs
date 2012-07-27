@@ -1,14 +1,12 @@
-steal('can/util/exports.js',
-      'can/construct/super',
+steal('can/util',
       'can/model',
-      'can/model/elements',
       'can/util/fixture',
       'can/view/ejs',
       'can/view/modifiers',
       'can/control',
       'can/control/route',
       'can/control/plugin',
-      function(){
+      function(can){
 // THE MODEL
 can.Model('Todo', {
 	findAll : "GET /todos",
@@ -58,27 +56,27 @@ Todos = can.Control({
     this.element.html('todos.ejs', Todo.findAll({}) )
   },
   "li click" : function(li){
-    li.trigger('selected', li.model() );
+    li.trigger('selected', li.data('model') );
   },
   "li .destroy click" : function(el, ev){
     el.closest('.todo')
-      .model()
-      .destroy();
+    .data('model')
+    .destroy();
     ev.stopPropagation();
   },
   "{Todo} destroyed" : function(Todo, ev, destroyedTodo){
-    destroyedTodo.elements(this.element)
-                 .remove();
+    this.element.find('.todo_' + destroyedTodo.id).remove();
   },
   "{Todo} updated" : function(Todo, ev, updatedTodo){
-    updatedTodo.elements(this.element)
-               .replaceWith('todos.ejs',[updatedTodo]);
+    this.element.find('.todo_' + updatedTodo.id)
+                .replaceWith('todos.ejs',[updatedTodo]);
   }
 });
 
 Editor = can.Control({
   update : function(options){
-    this._super(options)
+    can.extend(this.options, options);
+    this.on();
     this.setName();
   },
   // a helper that sets the value of the input
