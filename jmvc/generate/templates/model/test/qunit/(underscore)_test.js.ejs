@@ -31,7 +31,7 @@ steal("funcunit/qunit", "<%= appPath %>/fixtures", "<%= appPath %>/models/<%= un
 		new <%= name %>({name: "cook dinner", description: "chicken"}).
 	            save(function(<%= underscore %>){
 	            	equals(<%= underscore %>.description,"chicken");
-	        		<%= underscore %>.update({description: "steak"},function(<%= underscore %>){
+	        		<%= underscore %>.attr({description: "steak"}).save(function(<%= underscore %>){
 	        			equals(<%= underscore %>.description,"steak");
 	        			<%= underscore %>.destroy();
 						start();

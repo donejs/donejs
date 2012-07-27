@@ -17,7 +17,7 @@
 		<script type='text/javascript'>
 			steal('<%= appPath %>/<%= underscore %>/create','<%= appPath %>/fixtures',function(){
 				
-				$('#create').<%= appPath %>_<%= underscore %>_create();
+				new <%= baseName %>.Create('#create');
 				<%= name %>.bind('created', function(ev, <%=underscore%>){
 					$('<div>').html("<h3>"+<%=underscore%>.name+"</h3><p>"+<%=underscore%>.description+"</p>")
 					        .appendTo( $('#<%= plural %>') )

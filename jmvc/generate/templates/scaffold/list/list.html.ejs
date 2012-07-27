@@ -17,7 +17,7 @@
 		<script type='text/javascript'>
 			steal('<%= appPath %>/<%= underscore %>/list','<%= appPath %>/fixtures',function(){
 				
-				$('#<%= plural %>').<%= appPath %>_<%= underscore %>_list();
+				new <%= baseName %>.List('#<%= plural %>');
 				
 				$('#create').click(function(){
 					new <%= name %>({

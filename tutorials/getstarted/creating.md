@@ -447,7 +447,10 @@ using `this.view('init', list)`.
 
     <% this.each(function(current) { %>
       <li <%= current %>>
-        <h3><%= current.attr('name') %> <a href='javascript://' class='destroy'>X</a></h3>
+        <h3>
+          <%= current.attr('name') %>
+          <a href='javascript://' class='destroy'>X</a>
+        </h3>
         <p><%= current.attr('description') %></p>
       </li>
     <% }) %>

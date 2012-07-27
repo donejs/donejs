@@ -22,7 +22,7 @@ Verify that production.js was created by checking your `cookbook` folder.
 Switch to production mode by changing the script tag to include steal.production.js:
 
     <script type='text/javascript'
-           src='../steal/steal.<span style="text-decoration:underline;"><b>production</b></span>.js?cookbook'>
+           src='../steal/steal.production</span>.js?cookbook'>
     </script>
 
 ## Reload and verify

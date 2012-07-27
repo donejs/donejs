@@ -22,25 +22,21 @@ tests in the browser or Envjs (and now PhantomJS with a little extra work).
 
 Open `cookbook/qunit.html`.  You should see something like:
 
-@image jmvc/images/test_cookbook_example.png
-
+@image site/images/test_cookbook_example.png
 
 We'll see how this works in a second.  First, lets run the unit tests
 in Envjs.
 
-### Run Unit Tests in Envjs
+### Run Unit Tests with Selenium
 
-Envjs is a JavaScript-based browser for Rhino.  FuncUnit
-can run your tests in this simulated environment.  
+Selenium automates browsers. FuncUnit can run your tests in this environment.
 
 In a command window type:
 
-@codestart
-> js funcunit/run envjs cookbook/qunit.html
-@codeend
+    > js funcunit/open/selenium cookbook/qunit.html
 
 This runs qunit.html in a simulated 
-browser environment.  The output should look like:
+browser environment. The output should look like:
 
 <img src='http://wiki.javascriptmvc.com/wiki/images/2/24/Qunit-envjs.png' width='500px'>
 
@@ -108,9 +104,7 @@ with FuncUnit.
 
 In a command window type:
 
-@codestart
-> js funcunit\run selenium cookbook\funcunit.html
-@codeend
+    > js funcunit/open/selenium cookbook/funcunit.html
 
 This should open Firefox and IE if you are using Windows.  The results of the
 test should look like:
@@ -122,11 +116,8 @@ test should look like:
 	so selenium can find them.
 </div>
 
-
 If you are having trouble running the tests in Internet Explorer, you need to change a 
 few settings in the browser.  Please see the [FuncUnit FuncUnit documentation] for troubleshooting help.
-
-
 
 ## Understanding FuncUnit Tests
 

@@ -6,3 +6,4 @@ scripts/key
 .DS_Store
 html/
 .idea
+selenium.log
