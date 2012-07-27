@@ -1,4 +1,4 @@
-jmvc/docs/*
+site/docs/*
 .tmp*
 cookbook/*
 docs/*

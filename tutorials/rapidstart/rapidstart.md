@@ -37,7 +37,7 @@ your page. In the [rootfolder root folder] create a __todos__ folder
 and empty __todos.html__ and __todos.js__ that look like:
 
     ROOT\
-				can\
+        can\
         documentjs\
         jquery\
         funcunit\

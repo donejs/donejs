@@ -6,13 +6,9 @@ lets us create, and delete recipes. It will look like:
 
 @image tutorials/getstarted/Cookbook.png
 
-
-
-JavaScriptMVC uses 
-[steal.generate generator scripts] to 
-assist you
-in setting up your application's 
-files and folders.  They make everything you need to fall
+JavaScriptMVC uses [steal.generate generator scripts] to
+assist you in setting up your application's
+files and folders. They make everything you need to fall
 into the pit of success!
 
 ## Generating an Application
@@ -22,8 +18,7 @@ navigate to your public directory. Run:
 
     > js jquery\generate\app cookbook
 
-
-This script creates an application folder and 
+This script creates an application folder and
 files. Here's what each file does:
 
 
@@ -57,7 +52,7 @@ you need to make another page for your app you
 can generate it:
 
 @codestart text
-> js jquery\generate\page cookbook index.html
+> js jmvc\generate\page cookbook index.html
 Generating ... index.html
 @codeend
 

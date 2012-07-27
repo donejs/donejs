@@ -1,0 +1,1 @@
+c({"name": "steal.URI.page", "type": "attribute", "parents": ["steal.URI"], "comment": "<p>@attriute page\nThe location of the page as a URI.</p>\n\n<pre><code>steal.URI.page.protocol //-&gt; \"http\"\n</code></pre>", "src": "steal/steal.js", "line": 479, "children": []})
