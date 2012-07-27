@@ -1,0 +1,1 @@
+c({"name": "jQuery.Model", "children": ["jquery.model.deferreds", "jquery.model.encapsulate", "jquery.model.typeconversion"]})
