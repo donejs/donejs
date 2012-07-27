@@ -16,7 +16,7 @@ with the <code>ajaxy/scripts/crawl.js</code> script.
 
 The crawl script generates html pages that Google can use as a representation
 of the content of an Ajax application.  Read Google's documentation on its
-[http://code.google.com/web/ajaxcrawling/docs/getting-started.html Ajax crawling API]
+[https://developers.google.com/webmasters/ajax-crawling/docs/getting-started Ajax crawling API]
  before continuing this tutorial.
 
 ## Setup
@@ -31,7 +31,8 @@ JavaScriptMVC).
 We'll use the application generator to generate an application
 skeleton folder.  Run:
 
-    js jquery/generate/app ajaxy
+    [WINDOWS] > js jmvc/generate/app ajaxy
+    [Lin/Mac] > ./js jmvc/generate/app ajaxy
 
 ## The Code
 
@@ -92,26 +93,22 @@ __ajaxy/fixtures/videos.html__
 
 Finally, change <code>ajaxy.js</code> to look like:
 
-
-    steal('jquery/controller',
-          'jquery/event/hashchange', 
-          'steal/html',function(){
+    steal('jquery',
+          'can/construct/proxy',
+          'can/control',
+          'can/route',
+          'steal/html',
+          function($, can){
           
-    $.Controller('Ajaxy',{
-        init : function(){
-            this.updateContent()
+    var Ajaxy = can.Control({
+        "{route} change" : function(route, ev){
+            this.updateContent(route.page)
         },
-        "{window} hashchange" : function(){
-            this.updateContent();
-        },
-        updateContent : function(){
-            var hash = window.location.hash.substr(2),
-                url = "fixtures/"+(hash || "videos")+".html";
-            
+        updateContent : function(hash){
             // postpone reading the html 
             steal.html.wait();
             
-            $.get(url, {}, this.callback('replaceContent'),"text" )
+            $.get("fixtures/" + hash + ".html", {}, this.proxy('replaceContent'), "text")
         },
         replaceContent : function(html){
             this.element.html(html);
@@ -120,15 +117,16 @@ Finally, change <code>ajaxy.js</code> to look like:
             steal.html.ready();
         }
     })
-    
-    $('#content').ajaxy();
-    
+
+    new Ajaxy('#content', { route: can.route(":page", { page: "videos" }) });
+
     });
 
-When a hashchange (<code>"{window} hashchange"</code>) event occurs, Ajaxy
-uses the <code>window.location.hash</code> value to make a 
+When a route (<code>"{route} change"</code>) event occurs, Ajaxy
+uses the <code>route.page</code> value to make a 
 request (<code>$.get</code>)
-for content in the<code>fixtures</code> folder.  
+for content in the<code>fixtures</code> folder.  For more information
+on routing, visit [can.route].
 
 When the content is retrieved, it replaces the element's 
 html (<code>this.element.html(...)</code>).
@@ -141,7 +139,8 @@ the page loads initially.
 To crawl your site and generate google-searchable html, run:
 
 @codestart none
-js ajaxy/scripts/crawl.js
+[WINDOWS] > js ajaxy\scripts\crawl.js
+[Lin/Mac] > ./js ajaxy/scripts/crawl.js
 @codeend
 
 This script peforms the following actions:
@@ -151,14 +150,14 @@ This script peforms the following actions:
   3. Scrapes its contents.
   4. Writes the contents to a file.
   5. Adds any links in the page that start with #! to be indexed
-  6. Changes <code>window.location.hash</code> to the next index-able page
+  6. Changes the url hash to the next index-able page
   7. Goto #2 and repeats until all pages have been loaded
 
 
 ## Pausing the html scraping.
 
 By default, the contents are scraped immediately after the page's scripts have loaded or
-the window.location.hash has changed.  The Ajax request for content
+the route has changed.  The Ajax request for content
 happens asynchronously so we have to tell [steal.html] to wait to scrape the content.
 
 To do this, Ajaxy calls:
@@ -172,7 +171,7 @@ before the Ajax request.  And when the page is ready, Ajaxy calls:
 ## Getting Google To Crawl Your Site
 
 If you haven't already, read up on 
-Google's [http://code.google.com/web/ajaxcrawling/docs/getting-started.html Ajax crawling API].
+Google's [https://developers.google.com/webmasters/ajax-crawling/docs/getting-started Ajax crawling API].
 
 When google wants to crawl your site, it will send a 
 request to your page with <code>\_escaped\_fragment=</code>.  
