@@ -31,14 +31,11 @@ Now let's take a look at the anatomy of our application:
       /steal
       /todo
         /scripts
-        /styles
-          base.css
-          todo.css
         /test
-        /views
-          todo.ejs
         funcunit.html
         qunit.html
+        todo.css
+        todo.ejs
         todo.html
         todo.js
 
