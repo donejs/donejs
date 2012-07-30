@@ -7,3 +7,4 @@ scripts/key
 html/
 .idea
 selenium.log
+packages/*

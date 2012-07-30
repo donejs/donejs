@@ -37,7 +37,22 @@ of the sub-project.
 
 ## CanJS
 
+[canjs CanJS] is a JavaScript framework that makes
+building rich web applications easy and the MVC of
+JavaScriptMVC. The library is extremely lightweight
+(at only 8.5k minified and compressed) and full featured.
+
+Everything you want and need to know about CanJS
+[http://canjs.us can be found here.]
+
 ## jQuery++
+
+[jquerypp jQuery++] is a collection of useful jQuery libraries that provide the
+missing functionality necessary to implement and organize large-scale
+jQuery applications. It provides low-level utilities for things that
+jQuery doesn’t support.
+
+The best way to get started is the [jQuery++ overview](http://jquerypp.com).
 
 ## StealJS
 

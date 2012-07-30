@@ -1,5 +1,6 @@
 @page contacts Contacts
 @parent examples 1
+@hide
 
 This is a tutorial application that introduces and explains step-by-step how to architect a JavascriptMVC 3.0 style application using a contacts application.  Contacts is a lightweight application that allows users to add and organize their friends' contact information.
 

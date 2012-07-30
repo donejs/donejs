@@ -157,7 +157,7 @@ tests from the commandline much faster without opening any visual browser window
 this step, first you must [funcunit.phantomjs PhantomJS]. Then run:
 
 @codestart
-./js funcunit/run phantomjs funcunit/test/autosuggest/funcunit.html
+./js funcunit/open/phantomjs funcunit/test/autosuggest/funcunit.html
 @codeend
 
 Phantom opens your page, runs the same test, and reports results on the commandline. 

@@ -6,6 +6,3 @@ steal("documentjs", function(DocumentJS){
 		out : 'site/docs'
 	});
 });
-
-
-
