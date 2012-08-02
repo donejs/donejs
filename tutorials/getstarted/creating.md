@@ -162,8 +162,8 @@ looks like:
       'cookbook/recipe/list',
     function(){
       // set your application up
-      $('#recipes').cookbook_recipe_list();
-      $('#create').cookbook_recipe_create();
+      new Cookbook.Recipe.List('#recipes');
+      new Cookbook.Recipe.Create('#create');
     })
 
 You'll notice that it now loads `cookbook/create`
