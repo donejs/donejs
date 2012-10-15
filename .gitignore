@@ -9,3 +9,5 @@ html/
 selenium.log
 packages/*
 tmp/*
+node_modules
+npm-debug.log
