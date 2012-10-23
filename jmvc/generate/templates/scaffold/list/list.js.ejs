@@ -1,37 +1,38 @@
-steal( 'can/control/view', 'can/view/ejs', 'can/model/elements', '<%= appPath %>/models', './views/init.ejs',
-function(){
+steal( 'can', 'can/control/view', 'can/view/ejs', 'can/model/elements', '<%= appPath %>/models', './views/init.ejs',
+function(can){
 
-/**
- * @class <%=baseName%>.List
- * @parent index
- * @inherits can.Control
- * Lists <%= plural %> and lets you destroy them.
- */
-can.Control('<%=baseName%>.List',
-/** @Static */
-{
-	defaults : {}
-},
-/** @Prototype */
-{
-  init : function(){
-    <%= name %>.findAll().done(can.proxy(this.list, this));
+  /**
+   * @class <%=baseName%>.List
+   * @parent index
+   * @inherits can.Control
+   * Lists <%= plural %> and lets you destroy them.
+   */
+  can.Control('<%=baseName%>.List',
+  /** @Static */
+  {
+    defaults : {}
   },
+  /** @Prototype */
+  {
+    init : function(){
+      <%= name %>.findAll().done(can.proxy(this.list, this));
+    },
 
-  list : function(list) {
-    this.list = list;
-    this.element.html(this.view('init', list));
-  },
+    list : function(list) {
+      this.list = list;
+      this.element.html(this.view('init', list));
+    },
 
-  '.destroy click': function( el ){
-    if(confirm("Are you sure you want to destroy?")){
-     el.closest('.<%= underscore %>').model().destroy();
+    '.destroy click': function( el ){
+      if(confirm("Are you sure you want to destroy?")){
+       el.closest('.<%= underscore %>').model().destroy();
+      }
+    },
+
+    "{Cookbook.Models.Recipe} created" : function(Recipe, ev, recipe){
+     this.list.push(recipe);
     }
-  },
+  });
 
-  "{Cookbook.Models.Recipe} created" : function(Recipe, ev, recipe){
-   this.list.push(recipe);
-  }
-});
-
+  return <%=baseName%>.List;
 });

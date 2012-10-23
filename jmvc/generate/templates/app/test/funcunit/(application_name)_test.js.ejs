@@ -1,7 +1,7 @@
-steal("funcunit", function(){
+steal("funcunit", function(FuncUnit){
 	module("<%=application_name%> test", { 
 		setup: function(){
-			S.open("//<%= path %>/<%=application_name%>.html");
+			S.open("//<%= path %>/index.html");
 		}
 	});
 	
