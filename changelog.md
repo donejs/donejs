@@ -29,6 +29,7 @@ using can is now encouraged.  Also, can has things as plugins that were included
  - `this` in save's success handler `save(succes, error)` is now the deferred.
  - There are no default fixtures for models anymore.
  - there is no error handler on attributes.  Use an event handler.
+ - Abstracted element helper `.models` to be applicable to `can.Observe` and renamed to `.instances`
  
 ### View
 
