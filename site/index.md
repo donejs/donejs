@@ -25,11 +25,11 @@ the [tutorials] is the best place to start.
 
 JMVC's goodies are broken down into four sub-projects:
 
-  - [canjs CanJS] - A client side MVC framework
+  - [canjs CanJS] - A client side MVC Framework
   - [jquerypp jQuery++] - A collection of useful DOM helpers and special events for jQuery
   - [stealjs StealJS] - JavaScript and CSS dependency management and build tools
-  - [FuncUnit] - Functional and unit testing framework
-  - [DocumentJS] - Documentation engine
+  - [funcunit FuncUnit] - Functional and unit testing framework
+  - [documentjs DocumentJS] - Documentation engine
 
 The remainder of this page highlights each sub-project. Click
 the the project links on the left for a more in-depth overview 
@@ -71,7 +71,7 @@ command-line and browser-based utilities enabling you to:
 
 ## FuncUnit
 
-[FuncUnit] is a web application testing framework that provides automated unit and 
+[funcunit FuncUnit] is a web application testing framework that provides automated unit and 
 functional testing.  Tests are written and debugged in the browser with
 FuncUnit's short, terse, jQuery-like API.  The same tests can be instantly 
 automated, run by Envjs or Selenium.  
@@ -81,6 +81,6 @@ system.
 
 ## DocumentJS
 
-[DocumentJS] provides powerful JavaScript documenting 
+[documentjs DocumentJS] provides powerful JavaScript documenting 
 capabilities.  This whole website is built with it! DocumentJS can document practically 
 anything.  It's extensible.  And with Markdown support, it's easy to document your code.

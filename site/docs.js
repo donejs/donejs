@@ -1,13 +1,20 @@
-//steal('steal/generate',
-//	'steal/get',
-//	'steal/build',
-//	'steal/build/pluginify',
-//	'steal/coffee',
-//	'steal/less',
-//	'steal/clean',
-//	'steal/parse',
-//	'steal/html/crawl')
-//.then('documentjs')
+steal('can')
+
+steal('steal/generate',
+	'steal/get',
+	'steal/build',
+	'steal/build/pluginify',
+	'steal/coffee',
+	'steal/less',
+	'steal/clean',
+	'steal/parse',
+	'steal/html/crawl')
+
+
+steal('documentjs',
+	  'funcunit',
+	  'jquery')
+
 steal('can/construct',
 	'can/construct/proxy',
 	'can/control',
@@ -23,7 +30,5 @@ steal('can/construct',
 	'can/view/ejs',
 	'can/util/fixture',
 	'can/view/modifiers')
-// .then('jquery/build/lib.js')
-// .then('funcunit')
-.then('./pages/init.js')
+
 // .then('canui')
