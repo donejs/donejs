@@ -2,6 +2,7 @@ site/docs/*
 .tmp*
 cookbook/*
 docs/*
+docs.html
 scripts/key
 .DS_Store
 html/
