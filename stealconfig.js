@@ -8,6 +8,11 @@ steal.config({
 	paths: {
 		"jquery": "can/util/jquery/jquery.1.8.2.js"
 	},
+	shim : {
+		jquery: {
+			exports: "jQuery"
+		}
+	},
 	ext: {
 		js: "js",
 		css: "css",
