@@ -27,8 +27,21 @@
 				<input id='search' type='input' disabled='true'/>
 			</div>
 			<div id='defaults'>
-				<ul id="menu" class="ui-menu"></ul>
+        <ul id="menu" class="ui-menu">
+          <li class="ui-menu-item">
+            <a class="menuLink" href="http://javascriptmvc.com/#&amp;who=follow" title="Follow"><span class="menuSpan red">Follow</span></a>
+          </li>
+          <li class="ui-menu-item">
+            <a class="menuLink" href="#&amp;who=contribute" title="Contribute"><span class="menuSpan red">Contribute</span></a>
+          </li>
+          <li class="ui-menu-item">
+            <a class="menuLink" href="#&amp;who=code" title="Code"><span class="menuSpan red">Code</span></a>
+          </li>
+        </ul>
 			</div>
+      <div class="logo-text">
+        <a href='http://javascriptmvc.com'><img src='../documentjs/jmvcdoc/images/logo80x30.png' class="logo-image"></a>
+      </div>
 		</div>
 	</div>
 	<div id='bottom'>
@@ -56,7 +69,7 @@
 		mxui : 'https://github.com/jupiterjs/mxui'
 	};
 	DOCS_LOCATION = "docs/" //adds searchData to this
-	JMVCDOC_TIMESTAMP = 1352262480935;
+	JMVCDOC_TIMESTAMP = 1352420654055;
 	COMMENTS_LOCATION = 'http://jmvcs3.disqus.com/embed.js';
 	steal = {
 		loaded: ['documentjs/jmvcdoc/production.css']
