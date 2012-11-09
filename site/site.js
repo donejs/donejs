@@ -39,7 +39,6 @@ jQuery.Controller.extend('Feed',
 	}
 });
 
-
 Feed.extend('TwitterFeed',
 /* @Static */
 {

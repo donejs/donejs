@@ -1,5 +1,5 @@
 @page tutorials Tutorials
-@parent index 4
+@parent index 5
 
 @description Tutorials on JavaScriptMVC.
 
