@@ -27,6 +27,7 @@ steal('can/construct',
 	'can/route',
 	'can/view/ejs',
 	'can/util/fixture',
-	'can/view/modifiers')
+	'can/view/modifiers',
+	'can/view/mustache')
 
 // .then('canui')
