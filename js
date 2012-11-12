@@ -10,7 +10,7 @@ then
 fi
 CP=funcunit/java/selenium-java-client-driver.jar:steal/rhino/js.jar
 
-ERRORLEV=0
+export ERRORLEV=0
 if [ $1 = "-e" ]
 then
 	ERRORLEV=1
@@ -53,5 +53,6 @@ java -Xmx512m -Xss1024k -cp $CP org.mozilla.javascript.tools.shell.Main -e _args
 
 if [ $ERRORLEV = "1" -a $? = "1" ]
 then
-	exit $?
+
+	exit 1
 fi
