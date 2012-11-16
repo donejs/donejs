@@ -12,7 +12,7 @@
 	url = git://github.com/jupiterjs/jquerypp.git
 [submodule "can"]
 	path = can
-	url = git://github.com/jupiterjs/canjs.git
+	url = git://github.com/bitovi/canjs.git
 [submodule "canui"]
 	path = canui
-	url = git://github.com/jupiterjs/canui.git
+	url = git://github.com/bitovi/canui.git
