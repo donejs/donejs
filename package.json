@@ -1,0 +1,31 @@
+{
+  "name" : "JavaScriptMVC",
+  "description" : "A full stack JavaScript application framework containing CanJS, StealJS, FuncUnit, jQuery++, and DocumentJS.",
+  "version" : "3.3.0pre",
+  "author" : {
+    "name" : "Bitovi",
+    "email" : "contact@bitovi.com",
+    "web" : "http://bitovi.com/"
+  },
+  "devDependencies" : {
+    "grunt" : "~0.3.11",
+    "grunt-closure-tools" : "~0.6.2",
+    "http-server" : "0.5.1",
+    "docco" : ">= 0.1.x",
+    "node-beautify" : "*",
+    "github" : ">= 0.1.7",
+    "commander" : "*",
+    "tafa-misc-util" : "*"
+  },
+  "homepage" : "http://javascriptmvc.com/",
+  "repository" : {
+    "type" : "git",
+    "url" : "git@github.com:jupiterjs/javascriptmvc.git"
+  },
+  "licenses" : [
+    {
+      "type" : "MIT",
+      "url" : "http://opensource.org/licenses/mit-license.php"
+    }
+  ]
+}
