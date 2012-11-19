@@ -15,10 +15,8 @@ module.exports = function (grunt) {
 				}
 			}
 			var outFile = options.out ? path.join(options.out, path.basename(file)) : file;
-			// TODO use Grunt internals
 			grunt.log.writeln('Stripping ' + file + ' of all multiline and empty inline comments');
 
-			// Put new index.html into production mode
 			var code = grunt.file.read(file);
 
 			// Remove multiline comments

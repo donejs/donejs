@@ -17,17 +17,6 @@ module.exports = function (grunt) {
 		indentSize : 2
 	};
 
-	var merge = function () {
-		var out = {};
-
-		for (var i = 0; i < arguments.length; i++) {
-			for (var key in arguments[i]) {
-				out[key] = arguments[i][key];
-			}
-		}
-		return out;
-	};
-
 	grunt.registerMultiTask('beautify', 'Javascript beautifier', function () {
 		var beautifier = require('node-beautify');
 
