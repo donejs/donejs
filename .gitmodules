@@ -13,3 +13,6 @@
 [submodule "canui"]
 	path = canui
 	url = git://github.com/bitovi/canui.git
+[submodule "jquery"]
+	path = jquery
+	url = git@github.com:bitovi/jquerypp.git
