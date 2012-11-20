@@ -6,13 +6,13 @@
 	url = git://github.com/bitovi/canui.git
 [submodule "jquery"]
 	path = jquery
-	url = git@github.com:bitovi/jquerypp.git
+	url = git://github.com/bitovi/jquerypp.git
 [submodule "steal"]
 	path = steal
-	url = git@github.com:bitovi/steal.git
+	url = git://github.com/bitovi/steal.git
 [submodule "funcunit"]
 	path = funcunit
-	url = git@github.com:bitovi/funcunit.git
+	url = git://github.com/bitovi/funcunit.git
 [submodule "documentjs"]
 	path = documentjs
-	url = git@github.com:bitovi/documentjs.git
+	url = git://github.com/bitovi/documentjs.git
