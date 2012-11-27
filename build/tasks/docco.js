@@ -9,7 +9,7 @@ module.exports = function(grunt) {
 		var options = grunt.config(['docco', this.target]);
 		var defaults = _.extend({
 			exclude : [/\.min\./]
-		}, grunt.config('strip')._options);
+		}, grunt.config('docco')._options);
 		grunt.verbose.writeflags(options, 'Options');
 		var done = this.async();
 		var src = grunt.file.expandFiles(this.file.src).filter(function(file) {
