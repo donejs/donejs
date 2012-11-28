@@ -1,7 +1,7 @@
 steal('can',
 	'funcunit',
 	'documentjs',
-	'jquery')
+	'jquery/build/lib.js')
 
 steal('steal/generate',
 	'steal/get',

@@ -28,8 +28,8 @@ JMVC's goodies are broken down into four sub-projects:
   - [canjs CanJS] - A client side MVC Framework
   - [jquerypp jQuery++] - A collection of useful DOM helpers and special events for jQuery
   - [stealjs StealJS] - JavaScript and CSS dependency management and build tools
-  - [funcunit FuncUnit] - Functional and unit testing framework
-  - [documentjs DocumentJS] - Documentation engine
+  - [FuncUnit FuncUnit] - Functional and unit testing framework
+  - [DocumentJS DocumentJS] - Documentation engine
 
 The remainder of this page highlights each sub-project. Click
 the the project links on the left for a more in-depth overview 
@@ -40,7 +40,7 @@ of the sub-project.
 [canjs CanJS] is a JavaScript framework that makes
 building rich web applications easy and the MVC of
 JavaScriptMVC. The library is extremely lightweight
-(at only 8.5k minified and compressed) and full featured.
+(at only 11k minified and compressed) and full featured.
 
 Everything you want and need to know about CanJS
 [http://canjs.us can be found here.]

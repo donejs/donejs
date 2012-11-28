@@ -1,6 +1,6 @@
 .tmp*
 cookbook/*
-./site/docs/*
+site/docs/*
 scripts/key
 .DS_Store
 html/
