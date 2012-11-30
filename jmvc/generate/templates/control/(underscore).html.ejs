@@ -10,16 +10,13 @@
         </style>
 	</head>
 	<body>
-	    <h1><%= name %> Demo</h1>
+    <h1><%= name %> Demo</h1>
 		<div id='<%= underscore %>'></div>
-		<script type='text/javascript' 
-                src='<%= path_to_steal %>/steal/steal.js'>
-        </script>
+		<script type='text/javascript' src='<%= path_to_steal %>/steal/steal.js'></script>
 		<script type='text/javascript'>
-			steal('<%= path %>/<%= underscore %>',function(){
-				
-				new <%= name %>('#<%= underscore %>');
-			})
+			steal('<%= path %>/<%= underscore %>',function(Control){
+				new Control('#<%= underscore %>');
+			});
 		</script>
 	</body>
 </html>

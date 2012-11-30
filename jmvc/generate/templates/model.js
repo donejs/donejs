@@ -48,7 +48,7 @@ steal(	'steal/generate',
 		
 		try{
 			// steal this model in models.js
-			steal.generate.insertSteal(md.appPath+"/models/models.js", "./"+md.underscore+".js");
+			// steal.generate.insertSteal(md.appPath+"/models/models.js", "./"+md.underscore+".js");
 			
 			// steal this model's unit test in qunit.js
 			steal.generate.insertSteal(md.appPath+"/test/qunit/qunit.js", "./"+md.underscore+"_test.js");

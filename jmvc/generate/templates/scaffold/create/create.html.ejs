@@ -15,10 +15,11 @@
                 src='../../../steal/steal.js'>
         </script>
 		<script type='text/javascript'>
-			steal('<%= appPath %>/<%= underscore %>/create','<%= appPath %>/fixtures',function(){
+			steal('<%= appPath %>/<%= underscore %>/create','<%= appPath %>/models/<%= underscore %>.js',
+          '<%= appPath %>/fixtures',function(Create, Model){
 				
-				new <%= baseName %>.Create('#create');
-				<%= name %>.bind('created', function(ev, <%=underscore%>){
+				new Create('#create');
+				Model.bind('created', function(ev, <%=underscore%>){
 					$('<div>').html("<h3>"+<%=underscore%>.name+"</h3><p>"+<%=underscore%>.description+"</p>")
 					        .appendTo( $('#<%= plural %>') )
 				})

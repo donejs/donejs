@@ -48,6 +48,8 @@ function(steal){
 
 	md.appPath =  md.path.replace(/\/models$/,"");
 	md.baseName = md.name.replace(/\.Models.*/, "."+md.className);
+	var splits = md.baseName.split('.');
+	md.shortName = splits[splits.length - 1];
 
   // generate /scaffold files
 	steal.generate("jmvc/generate/templates/scaffold",md.appPath+"/"+md.underscore,md);
@@ -67,29 +69,17 @@ function(steal){
 		md.appPath+"/"+md.appPath+".js",
 		md.appPath+"/"+md.underscore+"/list", true)
 
-
+  /*
 	var text = readFile("jmvc/generate/templates/scaffoldHookup.ejs");
 	var hookup = new steal.EJS({
 		text: text
 	}).render(md);
 	steal.generate.insertCode(md.appPath+"/"+md.appPath+".js", hookup );
+	*/
 
 	// Model stuff
   // generate the files
   steal.generate("jmvc/generate/templates/model", md.appPath, md)
-
-  try{
-    // steal this model in models.js
-    steal.generate.insertSteal(md.appPath+"/models/models.js", "./"+md.underscore+".js");
-
-    // steal this model's unit test in qunit.js
-    steal.generate.insertSteal(md.appPath+"/test/qunit/qunit.js", "./"+md.underscore+"_test.js");
-  } catch (e) {
-    if(e.type && e.type == "DUPLICATE"){
-      print("! Error: This model was already created!")
-      quit();
-    }
-  }
 
   // can.fixture.make for this model in fixtures.js
   var text = readFile("jmvc/generate/templates/fixturemake.ejs");

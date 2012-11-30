@@ -49,20 +49,7 @@ function(steal){
 	
 	
 	// generate the files
-	steal.generate("jmvc/generate/templates/model", md.appPath, md)
-	
-	try{
-		// steal this model in models.js
-		steal.generate.insertSteal(md.appPath+"/models/models.js", "./"+md.underscore+".js");
-		
-		// steal this model's unit test in qunit.js
-		steal.generate.insertSteal(md.appPath+"/test/qunit/qunit.js", "./"+md.underscore+"_test.js");
-	} catch (e) {
-		if(e.type && e.type == "DUPLICATE"){
-			print("! Error: This model was already created!")	
-			quit();
-		}
-	}
+	steal.generate("jmvc/generate/templates/model", md.appPath, md);
 	
 	// can.fixture.make for this model in fixtures.js
 	var text = readFile("jmvc/generate/templates/fixturemake.ejs");

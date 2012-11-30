@@ -1,22 +1,18 @@
 steal('can/model', function(Model){
-
   /**
    * @class <%=name%>
    * @parent index
    * @inherits can.Model
    * Wraps backend <%=underscore%> services.
    */
-  Model('<%=name%>',
-  /* @Static */
-  {
-    findAll: "GET /<%= plural %>",
-      findOne : "GET /<%= plural %>/{id}",
-      create : "POST /<%= plural %>",
-      update : "PUT /<%= plural %>/{id}",
-      destroy : "DELETE /<%= plural %>/{id}"
-  },
-  /* @Prototype */
-  {});
-
-  return <%=name%>;
-})
+  return Model({
+      /* @static */
+      findAll: "GET /<%= plural %>",
+        findOne : "GET /<%= plural %>/{id}",
+        create : "POST /<%= plural %>",
+        update : "PUT /<%= plural %>/{id}",
+        destroy : "DELETE /<%= plural %>/{id}"
+    },
+    /* @Prototype */
+    {});
+});

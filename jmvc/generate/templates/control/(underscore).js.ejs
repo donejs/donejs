@@ -1,21 +1,17 @@
-steal('can/control', 'can/view/ejs', './views/init.ejs', function(Control, EJS){
-
+steal('can/control', 'can/view/ejs', './views/init.ejs', function(Control, EJS, initView){
     /**
      * @class <%= name %>
      */
-    Control('<%= name %>',
-    /** @Static */
-    {
-      defaults : {}
-    },
-    /** @Prototype */
-    {
-      init : function(){
-        this.element.html(can.view("//<%= path %>/<%= underscore %>/views/init.ejs",{
-          message: "Hello World"
-        }));
-      }
-    })
-
-    return <%= name %>;
+    return Control({
+        /** @Static */
+        defaults : {}
+      },
+      /** @Prototype */
+      {
+        init : function(){
+          this.element.html(initView({
+            message: "Hello World"
+          }));
+        }
+      });
 });

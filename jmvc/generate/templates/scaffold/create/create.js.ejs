@@ -1,29 +1,32 @@
-steal('can', 'can/control/view', 'jquery/dom/form_params', '<%= appPath %>/models', './views/init.ejs',
-function(Control) {
+steal('can/control', '<%= appPath %>/models/<%= underscore %>.js', './views/init.ejs', 'jquery/dom/form_params',
+	function (Control, Model, initView) {
 
-  /**
-   * @class <%=baseName%>.Create
-   * @parent index
-   * @inherits jQuery.Controller
-   * Creates <%= plural %>
-   */
-  can.Control('<%=baseName%>.Create',
-  /** @Prototype */
-  {
-    init : function(){
-      this.element.html(this.view());
-    },
-    submit : function(el, ev){
-      ev.preventDefault();
-      var el = this.element;
-      el.find('[type=submit]').val('Creating...')
-      new <%= name %>(el.formParams()).save().done(function() {
-        el.find('[type=submit]').val('Create');
-        el[0].reset()
-      });
-    }
-  });
-
-  return <%=baseName%>.Create;
-
+	/**
+	 * @class <%=baseName%>.Create
+	 * @parent index
+	 * @inherits jQuery.Controller
+	 * Creates <%= plural %>
+	 */
+	return Control(
+	/** @static */
+	{
+		defaults : {
+			Model : Model
+		}
+	},
+	/** @Prototype */
+	{
+		init : function () {
+			this.element.html(initView());
+		},
+		submit : function (el, ev) {
+			ev.preventDefault();
+			var el = this.element;
+			el.find('[type=submit]').val('Creating...')
+			new this.options.Model(el.formParams()).save().done(function() {
+				el.find('[type=submit]').val('Create');
+				el[0].reset()
+			});
+		}
+	});
 });

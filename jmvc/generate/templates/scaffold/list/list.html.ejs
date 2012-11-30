@@ -15,12 +15,13 @@
                 src='../../../steal/steal.js'>
         </script>
 		<script type='text/javascript'>
-			steal('<%= appPath %>/<%= underscore %>/list','<%= appPath %>/fixtures',function(){
+			steal('<%= appPath %>/<%= underscore %>/list', '<%= appPath %>/models/<%= underscore %>.js',
+          '<%= appPath %>/fixtures',function(List, Model){
 				
-				new <%= baseName %>.List('#<%= plural %>');
+				new List('#<%= plural %>');
 				
 				$('#create').click(function(){
-					new <%= name %>({
+					new Model({
 						name: "Grilled Cheese",
 						description: "Bread and Cheese"
 					}).save();
