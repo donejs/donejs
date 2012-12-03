@@ -10,26 +10,9 @@ steal(	'steal/generate',
 		'steal/generate/system.js',
 		'steal/generate/inflector.js',
 function(steal){
+	var md = steal.generate.convert(_args[0]);
 
-	var upper = function(parts){
-		for(var i =0; i < parts.length; i++){
-			parts[i] = parts[i].charAt(0).toUpperCase()+parts[i].substr(1)
-		}
-		return parts
-	}
-	
-	if(_args[0].charAt(0) !== _args[0].charAt(0).toUpperCase()){
-		var caps = upper( _args[0].split(/_|-/) ).join(''),
-			name = upper(caps.split("/")).join('.');
-		
-		print("  Creating "+name);
-		_args[0] = name;
-	}
-	
-	var md = steal.generate.convert(_args[0]),
-		path =  _args[0].toLowerCase().replace('.',"/");
-	
-	var folder = md.path.replace(/\/\w+$/, "")
+	var folder = md.path.replace(/\/\w+$/, "");
 	if(!folder){
 		print("! Error: Models need to be part of an app");
 		quit();
@@ -38,23 +21,26 @@ function(steal){
 		print("! Error: folder "+folder+" does not exist!");
 		quit();
 	}
-	
-	md.path_to_steal = new steal.File(path).pathToRoot();
+
+	md.path_to_steal = new steal.File(md.path).pathToRoot();
 	md.appPath =  md.path.replace(/\/models$/,"");
-	
+
 	//check pluralization of last part
 	if(steal.Inflector.singularize(md.underscore) !== md.underscore){
-		print("! Warning: Model names should be singular.  I don't think "+md.underscore+" is singular!")	
+		print("! Warning: Model names should be singular.  I don't think "+md.underscore+" is singular!")
 	}
-	
-	
+
+
 	// generate the files
 	steal.generate("jmvc/generate/templates/model", md.appPath, md);
-	
-	// can.fixture.make for this model in fixtures.js
-	var text = readFile("jmvc/generate/templates/fixturemake.ejs");
-	var fixturetext = new steal.EJS({
-		text: text
-	}).render(md);
-	steal.generate.insertCode(md.appPath+"/fixtures/fixtures.js", fixturetext);
+
+	// add to models/fixtures/fixtures.js
+	steal.generate.insertSteal(md.appPath + '/models/fixtures/fixtures.js',
+		md.appPath + '/models/fixtures/' + md.fullName + '.js');
+
+	//	var text = readFile("jmvc/generate/templates/partials/fixture.js.ejs");
+	//	var fixturetext = new steal.EJS({
+	//		text: text
+	//	}).render(md);
+	//	steal.generate.insertCode(md.appPath+"/models/fixtures/fixtures.js", fixturetext);
 });

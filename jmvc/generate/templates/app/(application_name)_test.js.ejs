@@ -1,0 +1,14 @@
+steal('funcunit', function (S) {
+
+	// this tests the assembly 
+	module("<%= application_name %> test", {
+		setup : function () {
+			S.open("//<%= path %>/index.html");
+		}
+	});
+
+	test("Copy Test", function () {
+		equals(S("h1").text(), "Welcome to JavaScriptMVC!", "welcome text");
+	});
+
+});
