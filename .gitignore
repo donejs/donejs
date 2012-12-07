@@ -1,13 +1,12 @@
 .tmp*
-cookbook/*
+cookbook*
 site/docs/*
 scripts/key
 .DS_Store
 html/
-.idea
 selenium.log
 packages/*
-tmp/*
+tmp*
 node_modules
 npm-debug.log
 backbone

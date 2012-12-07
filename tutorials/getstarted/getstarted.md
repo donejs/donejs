@@ -28,13 +28,14 @@ JavaScriptMVC is comprised of 4 sub projects:
 Sub-projects are futher broken down into plugins. Just [steal] the ones you need. Plugins load
 their own dependencies and won't load duplicate files.  It looks like:
 
-    steal('can/control', function() {
-          ...
+    steal('can/control', function(Control) {
+      Control // -> the Control API
+      ...
     });
 
 
 <div class='whisper'>
-P.S. <code>steal('jquery')</code> adds <code>jquery/jquery.js</code> to your project.
+P.S. <code>steal('can/control')</code> adds <code>can/control/control.js</code> to your project.
 </div>
 
 ## License
