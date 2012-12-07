@@ -7,31 +7,31 @@ function (Control, view, initView, Model) {
 	 * Lists <%= plural %> and lets you destroy them.
 	 */
 	return Control(
-		/** @Static */
-		{
-			defaults : {
-				Model : Model
+	/** @Static */
+	{
+		defaults : {
+			Model : Model
+		}
+	},
+	/** @Prototype */
+	{
+		init : function () {
+			this.options.Model.findAll().done(can.proxy(this.list, this));
+		},
+
+		list : function (list) {
+			this.list = list;
+			this.element.html(initView(list));
+		},
+
+		'.destroy click' : function (el) {
+			if (confirm("Are you sure you want to destroy?")) {
+				el.closest('.<%= underscore %>').data('model').destroy();
 			}
 		},
-		/** @Prototype */
-		{
-			init : function () {
-				this.options.Model.findAll().done(can.proxy(this.list, this));
-			},
 
-			list : function (list) {
-				this.list = list;
-				this.element.html(initView(list));
-			},
-
-			'.destroy click' : function (el) {
-				if (confirm("Are you sure you want to destroy?")) {
-					el.closest('.<%= underscore %>').data('model').destroy();
-				}
-			},
-
-			"{Model} created" : function (Model, ev, instance) {
-				this.list.push(instance);
-			}
-		});
+		"{Model} created" : function (Model, ev, instance) {
+			this.list.push(instance);
+		}
+	});
 });
