@@ -1,6 +1,7 @@
 steal('can', function (can) {
 	/**
-	 * @class <%= className %>
+	 * @class <%= module %>
+	 * @alias <%= Alias %>
 	 * @parent index
 	 * @inherits can.Model
 	 *
@@ -9,11 +10,11 @@ steal('can', function (can) {
 	return can.Model(
 	/* @static */
 	{
-		findAll : "GET /<%= plural %>",
-		findOne : "GET /<%= plural %>/{id}",
-		create : "POST /<%= plural %>",
-		update : "PUT /<%= plural %>/{id}",
-		destroy : "DELETE /<%= plural %>/{id}"
+		findAll : "GET /<%= pluralAlias %>",
+		findOne : "GET /<%= pluralAlias %>/{id}",
+		create : "POST /<%= pluralAlias %>",
+		update : "PUT /<%= pluralAlias %>/{id}",
+		destroy : "DELETE /<%= pluralAlias %>/{id}"
 	},
 	/* @Prototype */
 	{});

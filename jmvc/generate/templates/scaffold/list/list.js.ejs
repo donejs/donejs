@@ -1,36 +1,32 @@
-steal('can/control', 'can/view/ejs', './views/init.ejs', '<%= appPath %>/models/<%= underscore %>.js',
-function (Control, view, initView, Model) {
+steal('can','./init.ejs', '<%= appPath %>/models/<%= underscore %>.js',
+function (can, initView, <%=Alias%>) {
 	/**
-	 * @class <%=baseName%>.List
+	 * @class <%=module%>
+	 * @alias Recipe<%=Alias%>
 	 * @parent index
 	 * @inherits can.Control
 	 * Lists <%= plural %> and lets you destroy them.
 	 */
-	return Control(
+	return can.Control(
 	/** @Static */
 	{
 		defaults : {
-			Model : Model
+			<%=Alias%>: <%=Alias%>
 		}
 	},
 	/** @Prototype */
 	{
 		init : function () {
-			this.options.Model.findAll().done(can.proxy(this.list, this));
+			this.list = new <%=Alias%>.List();
+			this.element.html(initView(this.list));
+			this.list.replace(<%=Alias%>.findAll());
 		},
-
-		list : function (list) {
-			this.list = list;
-			this.element.html(initView(list));
-		},
-
 		'.destroy click' : function (el) {
 			if (confirm("Are you sure you want to destroy?")) {
-				el.closest('.<%= underscore %>').data('model').destroy();
+				el.closest('.<%= underscore %>').data('<%= underscore %>').destroy();
 			}
 		},
-
-		"{Model} created" : function (Model, ev, instance) {
+		"{<%=Alias%>} created" : function (Model, ev, instance) {
 			this.list.push(instance);
 		}
 	});

@@ -8,20 +8,23 @@
         </style>
 	</head>
 	<body>
-	    <h1><%= baseName %>.List Demo</h1>
+	    <h1><%= module %> Demo</h1>
 		<ul id='<%= plural %>'></ul>
-		<a href='javascript://' id='create'>Create <%= className %></a>
+		<a href='javascript://' id='create'>Create <%= Alias %></a>
 		<script type='text/javascript' 
                 src='../../../steal/steal.js'>
         </script>
 		<script type='text/javascript'>
-			steal('<%= appPath %>/<%= underscore %>/list', '<%= appPath %>/models/<%= underscore %>.js',
-          '<%= appPath %>/fixtures',function(List, Model){
+			steal(
+				'<%= appPath %>/<%= underscore %>/list', 
+				'<%= appPath %>/models/<%= underscore %>.js',
+          		'<%= appPath %>/models/fixtures',
+          		function(<%=Alias%>List, <%=Alias%>){
 				
-				new List('#<%= plural %>');
+				new <%=Alias%>List('#<%= plural %>');
 				
 				$('#create').click(function(){
-					new Model({
+					new <%=Alias%>({
 						name: "Grilled Cheese",
 						description: "Bread and Cheese"
 					}).save();

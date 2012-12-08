@@ -14,7 +14,7 @@ steal(	'steal/generate',
 		'jmvc/generate/templates/model.js',
 function(steal){
 	//check capitalization
-
+	print("MODEL")
 	steal.generate.model(_args[0]);
 
 	var parts = _args[0].split("."), part;

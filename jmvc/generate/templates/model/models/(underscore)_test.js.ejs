@@ -1,14 +1,18 @@
-steal( "<%= appPath %>/models/<%= underscore %>.js", "funcunit/qunit", "<%= appPath %>/models/fixtures", function(<%= className %>){
-	module("Model: <%= name %>");
+steal( "<%= appPath %>/models/<%= underscore %>.js", 
+	   "funcunit/qunit", 
+	   "<%= appPath %>/models/fixtures", 
+	   function( <%= Alias %> ){
+	   	
+	module("<%= module %>");
 	
 	test("findAll", function(){
 		expect(4);
 		stop();
-		<%= className %>.findAll({}, function(<%= plural %>){
-			ok(<%= plural %>)
-	        ok(<%= plural %>.length)
-	        ok(<%= plural %>[0].name)
-	        ok(<%= plural %>[0].description)
+		<%= Alias %>.findAll({}, function(<%= pluralAlias %>){
+			ok(<%= pluralAlias %>)
+	        ok(<%= pluralAlias %>.length)
+	        ok(<%= pluralAlias %>[0].name)
+	        ok(<%= pluralAlias %>[0].description)
 			start();
 		});
 	});
@@ -16,7 +20,7 @@ steal( "<%= appPath %>/models/<%= underscore %>.js", "funcunit/qunit", "<%= appP
 	test("create", function(){
 		expect(3)
 		stop();
-		new <%= className %>({name: "dry cleaning", description: "take to street corner"}).save(function(<%= underscore %>) {
+		new <%= Alias %>({name: "dry cleaning", description: "take to street corner"}).save(function(<%= underscore %>) {
 			ok(<%= underscore %>);
 			ok(<%= underscore %>.id);
 			equals(<%= underscore %>.name,"dry cleaning")
@@ -28,7 +32,7 @@ steal( "<%= appPath %>/models/<%= underscore %>.js", "funcunit/qunit", "<%= appP
 	test("update" , function(){
 		expect(2);
 		stop();
-		new <%= className %>({name: "cook dinner", description: "chicken"}).save(function(<%= underscore %>) {
+		new <%= Alias %>({name: "cook dinner", description: "chicken"}).save(function(<%= underscore %>) {
 			equals(<%= underscore %>.description,"chicken");
 			<%= underscore %>.attr({description: "steak"}).save(function(<%= underscore %>){
 				equals(<%= underscore %>.description,"steak");
@@ -41,7 +45,7 @@ steal( "<%= appPath %>/models/<%= underscore %>.js", "funcunit/qunit", "<%= appP
 	test("destroy", function(){
 		expect(1);
 		stop();
-		new <%= className %>({name: "mow grass", description: "use riding mower"}).destroy(function(<%= underscore %>) {
+		new <%= Alias %>({name: "mow grass", description: "use riding mower"}).destroy(function(<%= underscore %>) {
 			ok( true ,"Destroy called" )
 			start();
 		});

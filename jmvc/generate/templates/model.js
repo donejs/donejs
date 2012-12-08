@@ -11,21 +11,21 @@ steal(	'steal/generate',
 		}
 		return parts
 	}
-	
+	/**
+	 * Creates a model at the location provided
+	 */
 	steal.generate.model = function(arg){
 		
-		if(arg.charAt(0) !== arg.charAt(0).toUpperCase()){
-			var caps = upper( arg.split(/_|-/) ).join(''),
-				name = upper(caps.split("/")).join('.');
-			
-			print("  Creating "+name);
-			arg = name;
+		// make sure we have a module id
+		if(arg.indexOf(".") > -1){
+			print("JMVC's generators use module ids. Please remove any periods (.).");
+			quit();
 		}
+		var md = steal.generate.convert(arg);
 		
-		var md = steal.generate.convert(arg),
-			path =  arg.toLowerCase().replace('.',"/");
+			path =  arg;
 		
-		var folder = md.path.replace(/\/\w+$/, "")
+		var folder = md.parentModule;
 		if(!folder){
 			print("! Error: Models need to be part of an app");
 			quit();
@@ -36,37 +36,33 @@ steal(	'steal/generate',
 		}
 		
 		md.path_to_steal = new steal.File(path).pathToRoot();
-		md.appPath =  md.path.replace(/\/models$/,"");
 		
 		//check pluralization of last part
-		if(steal.Inflector.singularize(md.underscore) !== md.underscore){
-			print("! Warning: Model names should be singular.  I don't think "+md.underscore+" is singular!")	
+		if(md.pluralAlias === md.alias){
+			print("! Warning: Model names should be singular.  I don't think "+md._alias+" is singular!")	
 		}
 		
 		// generate the files
-		steal.generate("jquery/generate/templates/model", md.appPath, md)
+		steal.generate("jmvc/generate/templates/model", md.appPath, md)
 		
 		try{
 			// steal this model in models.js
 			// steal.generate.insertSteal(md.appPath+"/models/models.js", "./"+md.underscore+".js");
 			
 			// steal this model's unit test in qunit.js
-			steal.generate.insertSteal(md.appPath+"/test/qunit/qunit.js", "./"+md.underscore+"_test.js");
+			steal.generate.insertSteal(md.appPath+"/"+md.appName+"_test.js", "./models/"+md._alias+"_test.js");
 		} catch (e) {
 			if(e.type && e.type == "DUPLICATE"){
 				print("! Error: This model was already created!")	
 				quit();
 			}
 		}
-		// $.fixture.make for this model in fixtures.js
-	
 		
-		
-		var text = readFile("jquery/generate/templates/fixturemake.ejs");
+		var text = readFile("jmvc/generate/templates/fixturemake.ejs");
 		var fixturetext = new steal.EJS({
 			text: text
 		}).render(md);
-		steal.generate.insertCode(md.appPath+"/fixtures/fixtures.js", fixturetext);
+		steal.generate.insertCode(md.appPath+"/models/fixtures/fixtures.js", fixturetext);
 		
 	}
 	
