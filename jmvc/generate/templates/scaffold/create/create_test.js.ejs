@@ -1,6 +1,6 @@
 steal('funcunit', function () {
 
-	module("<%=baseName%>.Create", {
+	module("<%= appPath %>/<%underscore%>/create", {
 		setup : function () {
 			S.open("//<%= appPath %>/<%= underscore %>/create/create.html");
 		}

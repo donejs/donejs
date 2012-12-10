@@ -1,8 +1,8 @@
 steal('can','./init.ejs', '<%= appPath %>/models/<%= underscore %>.js',
 function (can, initView, <%=Alias%>) {
 	/**
-	 * @class <%=module%>
-	 * @alias Recipe<%=Alias%>
+	 * @class <%= appPath %>/<%= underscore %>/list
+	 * @alias <%=Alias%>List
 	 * @parent index
 	 * @inherits can.Control
 	 * Lists <%= plural %> and lets you destroy them.

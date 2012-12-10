@@ -5,7 +5,7 @@ steal(
 	'<%= appPath %>/models/fixtures',
 	function(S, <%=Alias%>List, <%=Alias%> ){
 
-module("<%=module%>", { 
+module("<%= appPath %>/<%underscore%>/list", { 
 	setup: function(){
 		$("#qunit-test-area").append("<div id='<%=plural%>'></div>");
 		this.list = new <%=Alias%>List("#<%=plural%>");
