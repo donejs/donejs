@@ -1,6 +1,6 @@
 steal(
 	'funcunit',
-	'<%= appPath %>/<%= underscore %>/list',
+	'./list.js',
 	'<%= appPath %>/models/<%= underscore %>.js',
 	'<%= appPath %>/models/fixtures',
 	function(S, <%=Alias%>List, <%=Alias%> ){
@@ -9,6 +9,9 @@ module("<%= appPath %>/<%underscore%>/list", {
 	setup: function(){
 		$("#qunit-test-area").append("<div id='<%=plural%>'></div>");
 		this.list = new <%=Alias%>List("#<%=plural%>");
+	},
+	teardown: function(){
+		$("#qunit-test-area").empty()
 	}
 });
 

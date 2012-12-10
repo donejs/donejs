@@ -1,21 +1,41 @@
-steal('funcunit', function () {
+steal('funcunit', 
+	'./create.js',
+	'<%= appPath %>/models/<%= underscore %>.js',
+	'<%= appPath %>/models/fixtures', 
+	function (S, <%=Alias%>Create, <%=Alias%> ) {
 
-	module("<%= appPath %>/<%underscore%>/create", {
-		setup : function () {
-			S.open("//<%= appPath %>/<%= underscore %>/create/create.html");
-		}
-	});
+module("<%= appPath %>/<%=underscore%>/create", {
+	setup: function(){
+		$("#qunit-test-area").append("<form id='create'></form>");
+		new <%=Alias%>Create("#create");
+	},
+	teardown: function(){
+		$("#qunit-test-area").empty()
+	}
+});
 
-	test("create <%= plural %>", function () {
-		S("[name=name]").type("Ice Water");
-		S("[name=description]").type("Pour water in a glass. Add ice cubes.");
-		S("[type=submit]").click();
-		S('h3:contains(Ice Water)')
-			.exists(function () {
-				ok(true, "Ice Water added");
-				equals(S("[name=name]").val(), "", "form reset");
-				equals(S("[name=description]").val(), "", "form reset");
-			})
-	});
+test("create <%= plural %>", function () {
+	stop();
+	
+	<%=Alias%>.bind("created",function(ev, <%= alias %>){
+		ok(true, "Ice Water added");
+		equals(<%= alias %>.name, "Ice Water", "name set correctly");
+		
+		equals(<%= alias %>.description, "Pour water in a glass. Add ice cubes.", "description set correctly")
+		start();
+	})
+	
+	S("[name=name]").type("Ice Water");
+	S("[name=description]").type("Pour water in a glass. Add ice cubes.");
+	
+	S("[type=submit]").click();
+	
+	S("[type=submit]").val("Creating...","button text changed while created");
+	S("[type=submit]").val("Create", function(){
+		ok(true, "button text changed back after create" )
+		equals(S("[name=name]").val(), "", "form reset");
+		equals(S("[name=description]").val(), "", "form reset");
+	})
+});
 
 });
