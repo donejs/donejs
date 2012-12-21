@@ -1,15 +1,17 @@
 
-var store = fixture.make(5, function(i, <%= alias %>){
-	return {
-		name: "<%= alias %> "+i,
-		description: "<%= alias %> " + i
-	}
-});
+	var store = fixture.make(5, function(i){
+		return {
+			name: "<%= alias %> "+i,
+			description: "<%= alias %> " + i
+		}
+	});
+	
+	fixture({
+		'GET /<%= pluralAlias %>' : store.findAll,
+		'GET /<%= pluralAlias %>/{id}' : store.findOne,
+		'POST /<%= pluralAlias %>' : store.create,
+		'PUT /<%= pluralAlias %>/{id}' : store.update,
+		'DELETE /<%= pluralAlias %>/{id}' : store.destroy
+	});
 
-fixture({
-	'GET /<%= pluralAlias %>' : store.findAll,
-	'GET /<%= pluralAlias %>/{id}' : store.findOne,
-	'POST /<%= pluralAlias %>' : store.create,
-	'PUT /<%= pluralAlias %>/{id}' : store.update,
-	'DELETE /<%= pluralAlias %>/{id}' : store.destroy
-});
+	return store;
