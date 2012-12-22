@@ -7,14 +7,11 @@ if (!_args[0]) {
 load('steal/rhino/rhino.js');
 
 steal('steal/generate',function(steal){
-	var	data = steal.extend({
-		path: _args[0], 
-		application_name: _args[0].match(/[^\/]*$/)[0],
-		current_path: steal.File.cwdURL(),
-		path_to_steal : new steal.File(_args[0]).pathToRoot()
-	}, steal.system)
 	
-	steal.generate("jmvc/generate/templates/plugin",_args[0],data)
+	var md = steal.generate.convert(_args[0]);
+
+	md.path_to_steal = new steal.File(md.module).pathToRoot();
+	steal.generate("jmvc/generate/templates/plugin",md.module,md);
 	
 })();
 

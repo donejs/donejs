@@ -68,7 +68,7 @@ function(steal){
 		md.appPath+"/"+md.appPath+".js",
 		md.appPath+"/"+md.underscore+"/list", {newline: true, name: md.Alias+"List"})
 	} catch(e) {
-		quit();
+		//quit();
 	}
   
 	var text = readFile("jmvc/generate/templates/scaffoldHookup.ejs");
@@ -91,5 +91,18 @@ function(steal){
 			appFile.substring(0, scriptIndex)+hookupHTML+appFile.substr(scriptIndex)
 		);
 	}
+	
+	var text = readFile("jmvc/generate/templates/scaffoldTest.ejs"),
+		testCode = new steal.EJS({
+			text: text
+		}).render(md);
+		
+	if( readFile(md.appPath+"/"+md.appName+"_test.js").indexOf(testCode) == -1  ) {
+		steal.generate.insertCode(md.appPath+"/"+md.appName+"_test.js", testCode );
+		
+	}
+	
+	
+	
 	
 });

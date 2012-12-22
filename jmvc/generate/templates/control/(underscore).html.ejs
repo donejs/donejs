@@ -1,22 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="en">
 	<head>
-		<title><%= name %></title>
-        <style type='text/css'>
-            body {font-family: verdana}
-            .error {border: solid 1px red;}
-            .error_text { color: red; font-size: 10px;}
-            td {padding: 3px;}
-        </style>
+		<title><%= Alias %></title>
 	</head>
 	<body>
-    <h1><%= name %> Demo</h1>
+    		<h1><%= Alias %> Demo</h1>
 		<div id='<%= underscore %>'></div>
-		<script type='text/javascript' src='<%= path_to_steal %>/steal/steal.js'></script>
-		<script type='text/javascript'>
-			steal('<%= path %>/<%= underscore %>',function(Control){
-				new Control('#<%= underscore %>');
-			});
+		<script src='<%= path_to_steal %>/steal/steal.js'></script>
+		<script>
+		steal('<%= module %>',function(<%= Alias %>){
+			new <%= Alias %>('#<%= underscore %>');
+		});
 		</script>
 	</body>
 </html>
