@@ -1,5 +1,5 @@
 
-    steal('funcunit', function(){
+steal('funcunit', function(){
       
     module('todos', {
       setup: function(){
@@ -12,4 +12,4 @@
       S("#editor").val("wake up", "First Todo added correctly");
     })
     
-    })
+})
