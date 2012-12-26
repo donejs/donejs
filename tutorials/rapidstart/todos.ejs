@@ -1,5 +1,5 @@
 <% this.each(function(todo){ %>
-  <li <%= (el) -> el.data('todo', todo) %>>
+  <li <%= (el) -> el.data('todo', todo) %> class='todo'>
     <%= todo.attr('name') %>
     <a href="javascript://" class='destroy'>X</a>
   </li>

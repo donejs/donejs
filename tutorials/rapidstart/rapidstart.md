@@ -495,7 +495,7 @@ function will be the jQuery-wrapped element.
 This lets you hookup model data to elements in EJS.  Change __todos.ejs__ to:
 
     <% this.each(function(todo){ %>
-      <li <%= (el) -> el.data('todo', todo) %>>
+      <li <%= (el) -> el.data('todo', todo) %> class='todo'>
         <%= todo.attr('name') %>
         <a href="javascript://" class='destroy'>X</a>
       </li>
@@ -723,7 +723,7 @@ changes. It allows very sophisticated routing behavior ... too
 sophisticated for this guide. But, it also handles 
 the basics with ease.  
 
-Listen to routes in controller's with special "route" events like:
+Listen to routes in controls with special "route" events like:
 
     var Routing = can.Control({
       "route" : function(){
@@ -737,7 +737,7 @@ Listen to routes in controller's with special "route" events like:
     // create routing controller
     new Routing(document.body);
 
-The `route` methods get called back with the 
+`route` methods get called back with 
 route __data__.  The empty `"route"` will be called 
 with no data. But, `"todos/:id route"` will be called 
 with data like: `{id: 6}`.
@@ -751,8 +751,8 @@ Or we can set the hash ourselves like
     var hash = can.route.url({id: 7}) // #!todos/7
     location.hash = hash;
 
-The following enhances the Routing controller to listen for
-`".todo selected"` events and change the `can.route`.  When the
+The following enhances the Routing control to listen for
+`".todo selected"` events and update `can.route`.  When the
 can.route changes, it retrieves the todo from the server
 and updates the editor widget.
 
@@ -788,37 +788,25 @@ everything. Congrats!  [//tutorials/rapidstart/todos.html See it in action].
 
 ## FuncUnit
 
-JavaScriptMVC uses [FuncUnit] for testing.  FuncUnit provides an API for writing functional 
-tests that simulate clicks and keypresses a user would make.
+JavaScriptMVC uses [FuncUnit] for testing.  FuncUnit provides an API 
+for writing functional tests that simulate clicks and keypresses a user would make.
 
 To create a FuncUnit test:
 
 * Create a test file that steals funcunit and
-* Create a funcunit.html page that steals your test file
+* Create a test.html page that steals your test file
 
-In the __todos__ directory, make funcunit.html and add the following HTML:
+In the __todos__ directory, make test.html and add the following HTML:
 
     <html>
-      <head>
-        <link rel="stylesheet" type="text/css" 
-          href="../funcunit/qunit/qunit.css" />
-        <script type='text/javascript' 
-          src='../steal/steal.js?todos/funcunit.js'></script>
-      </head>
       <body>
-        <h1 id="qunit-header">Todos Test Suite</h1>
-      <h2 id="qunit-banner"></h2>
-      <div id="qunit-testrunner-toolbar"></div>
-      <h2 id="qunit-userAgent"></h2>
-    <div id="test-content"></div>
-        <ol id="qunit-tests"></ol>
-    <div id="qunit-test-area"></div>
+        <script src='../steal/steal.js?todos/todos_test.js'></script>
       </body>
     </html>
     
-Now make __funcunit.js__ and add the following:
+Now make __todos_test.js__ and add the following:
 
-    steal('funcunit', function(FuncUnit){
+    steal('funcunit', function(S){
       
       module('todos')
       
@@ -828,20 +816,21 @@ Now make __funcunit.js__ and add the following:
     
     })
 
-Open __funcunit.html__ in your browser.  One test passes.
+Open __test.html__ in your browser.  One test passes.
 
 ### Writing a test
 
-We tell the test to open the todos page using [FuncUnit.open S.open]:
+`S` is FuncUnit.  FuncUnit's API is very similar to jQuery's (hence the S). Tell 
+the test to open the todos page using [FuncUnit.open S.open]:
 
     S.open("//todos/todos.html");
     
-Once the page is open, we select the first todo and click it:
+Once the page is open, select the first todo and click it:
 
     S(".todo:first").click();
     
-S is a copy of jQuery's $ that adds FuncUnit's API. The editor input will 
-now appear.  Tell FuncUnit to wait for this using a [funcunit.waits wait] command:
+Selecting a todo will set the input element's value to the first todo's name. Wait 
+for this using a [funcunit.waits wait] command:
 
     S("#editor").val("wake up", "First Todo added correctly");
     
@@ -855,22 +844,21 @@ Replace the test code within the steal callback with the following:
       }
     })
     
-    test('open first todo', function(){
+    test('edit first todo', function(){
       S(".todo:first").click();
       S("#editor").val("wake up", "First Todo added correctly");
     })
     
-Reload __funcunit.html__.  You'll see the page open and run the test in a separate window.
+Reload [//tutorials/rapidstart/test.html test.html]. You'll 
+see the page open and run the test in a separate window.
 
-FuncUnit has the ability to provide code coverage stats.  <a href='http://javascriptmvc.com/tutorials/rapidstart/funcunit.html?steal[instrument]=jquery%2Cfuncunit%2Csteal%2Cdocumentjs%2C*%2Ftest%2C*_test.js%2Cmxui%2C*funcunit.js'>Click</a> 
-the checkbox next to coverage to 
-see a coverage report.  81% isn't bad!  Click Todos.js to see a line by line breakdown.
+    // TOOD SHOW COVERAGE STATS BRIAN
 
 ### Automation
 
 To run these tests automated, run the following from the console:
 
-    ./js funcunit/run selenium todos/funcunit.html
+    ./js funcunit/open/selenium todos/test.html
 
 FuncUnit supports [funcunit.integrations integration] with CI tools 
 like [funcunit.jenkins Jenkins], build tools like [funcunit.maven maven], 

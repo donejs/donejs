@@ -3,6 +3,15 @@ steal('can',
       'can/util/fixture',
       function(can, todosEJS){
       	
+	Todo = can.Model({
+		findAll : "GET /todos",
+		findOne : "GET /todos/{id}",
+		create  : "POST /todos",
+		update  : "PUT /todos/{id}",
+		destroy : "DELETE /todos/{id}"
+	},
+	{});
+      	
     // our list of todos
     var TODOS = [
         {id: 1, name: "wake up"},
