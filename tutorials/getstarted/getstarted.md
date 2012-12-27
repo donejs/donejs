@@ -10,12 +10,34 @@ Before jumping in, there are some things you should know:
 
 ### Purpose
 
-JavaScriptMVC is for client side JavaScript development.  JavaScriptMVC is our way
-of making quality, maintainable applications in the shortest amount of time.
+Use JavaScriptMVC to develop client-side JavaScript apps. JMVC was 
+created by [http://bitovi.com Bitovi], a JavaScript consulting 
+company, to create quality, maintainable apps in the shortest 
+amount of time. Since that time, JMVC has undergone 7 primary production releases
+with over 100 outside contributors.
+
+Unlike most JavaScript projects, JMVC is a 
+true __framework__. It supplies best-of-bread solutions for things like:
+
+ - DOM manipulation
+ - MVC Architecture
+ - Testing
+ - Dependency management
+ - Documentation
+ 
+It tightly integrates these solutions so they
+work together seemlessly. 
+
+Finally, JMVC provides __direction to development__ so
+teams of developers can work together more 
+effectively. With repeatable development patterns,
+it's easy to have multiple developers working on a
+complex code base.
+
 
 ### Sub Projects
 
-JavaScriptMVC is comprised of 4 sub projects:
+JavaScriptMVC is comprised of 5 sub projects:
 
   - [canjs CanJS] - A client side MVC framework
   - [jquerypp jQuery++] - A collection of useful DOM helpers and special events for jQuery
@@ -28,7 +50,7 @@ JavaScriptMVC is comprised of 4 sub projects:
 Sub-projects are futher broken down into plugins. Just [steal] the ones you need. Plugins load
 their own dependencies and won't load duplicate files.  It looks like:
 
-    steal('can/control', function(Control) {
+    steal('can/control', function( Control ) {
       Control // -> the Control API
       ...
     });

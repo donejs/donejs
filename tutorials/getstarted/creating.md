@@ -6,54 +6,47 @@ lets us create, and delete recipes. It will look like:
 
 @image tutorials/getstarted/Cookbook.png
 
-JavaScriptMVC uses [steal.generate generator scripts] to
-assist you in setting up your application's
-files and folders. They make everything you need to fall
-into the pit of success!
+</br>
+We'll use JavaScriptMVC's [steal.generate generator scripts] to
+assist in setting up your application's
+files and folders. They save time creating boilerplate
+js, html, and css files.
 
 ## Generating an Application
 
 To create your application, open a console window and 
-navigate to your public directory. Run:
+navigate to your [rootfolder root folder], and run:
 
-    > js jmvc\generate\app cookbook
+    > ./js jmvc/generate/app cookbook
 
 This script creates an application folder and
 files. Here's what each file does:
 
 
     cookbook/                // folder for your app
-      cookbook.css           // css for your app
-      cookbook.html          // a page for your app
+      cookbook.less          // less for your app
+      index.html             // a page for your app
       cookbook.js            // app file, loads other files
-      docs/                  // documentation
-      fixtures/              // simulated ajax responses
-      funcunit.html          // functional test page
+      test.html              // app's test page
+      cookbook_test.js       // app's tests
       models/                // model & data layers
-      qunit.html             // unit test page
+        fixtures/            // simulated Ajax responses
       scripts/               // command line scripts
         build.html           // html for build script
         build.js             // build script
         clean.js             // code cleaning / linting
         crawl.js             // generate search content
         docs.js              // create documentation
-      test/                    
-        funcunit             // functional tests
-          cookbook_test.js   // functional test
-          funcunit.js        // loads functional tests
-        qunit/               // unit tests
-          cookbook_test.js   // unit test
-          qunit.js           // loads unit tests
 
 
 
-We'll use cookbook.html for our application. If 
+We'll use index.html for our application. If 
 you need to make another page for your app you 
 can generate it:
 
 @codestart text
-> js jmvc\generate\page cookbook index.html
-Generating ... index.html
+> ./js jmvc/generate/page cookbook dev.html
+Generating ... dev.html
 @codeend
 
 Or you add the steal script to an existing page 
@@ -63,15 +56,14 @@ page followed by `?cookbook` like:
             src='../path/to/steal/steal.js?cookbook'>
     </script>
 
-If you open cookbook/cookbook.html, you'll see a
+If you open cookbook/index.html, you'll see a
 JavaScriptMVC welcome screen.  
 
 @image tutorials/getstarted/Welcome.png
 
-Open `cookbook/cookbook.html` and you will find:
+Open `cookbook/index.html` and you will find:
 
-    <script type='text/javascript'
-          src='../steal/steal.js?cookbook'>
+    <script src='../steal/steal.js?cookbook'>
     </script>
 
 This line loads [steal] and tells steal to 
@@ -79,15 +71,14 @@ load `cookbook/cookbook.js`. `cookbook/cookbook.js` is
 your application file.  Open it and you will find:
 
     steal(
-	    './cookbook.css', 			// application CSS file
-	    './models/models.js',		// steals all your models
-	    './fixtures/fixtures.js',	// sets up fixtures for your models
-	    function(){					// configure your application
+	    './cookbook.less', 			
+	    './models/fixtures/fixtures.js',	
+	    function(){					
 		
 	})
 
 The application file loads and configures your applications resources.  Currently,
-it's loading the app's css file, models and fixtures (there are no fixtures or models yet).
+it's loading the app's less file, fixtures (there are no fixtures yet).
 
 Now it's time to make some widgets, models, and fixtures that allow us to create and delete
 recipes!  
@@ -103,7 +94,7 @@ We'll use the scaffold generator to quickly create:
 
 To scaffold recipes run the following in the command-line console:
 
-    > js jmvc\generate\scaffold Cookbook.Models.Recipe
+    > ./js jmvc/generate/scaffold cookbook/models/recipe
 
 Here's what each part does:
 
@@ -134,20 +125,10 @@ widget that lists recipes.
 
 __(steal added)__
 
-The generator will also list files that 
-say "(steal added)". For example:
-
-@codestart text
-cookbook/models/models.js (steal added)
-@codeend    
-
-The "(steal added)" means the generator is 
+"(steal added)" means the generator is 
 adding a steal call to load
 a generated file for you.  For example, 
-`cookbook/models/models.js` now steals your
-`recipe.js` model like:
-
-    steal('./recipe.js')
+`cookbook/cookbook.js` now steals `'cookbook/recipe/create'` and `'cookbook/recipe/list'`.
 
 ## Page Setup
 
@@ -155,40 +136,32 @@ After the generator runs, your application file (`cookbook.js`)
 looks like:
 
     steal(
-      './cookbook.css', // application CSS file
-      './models/models.js',	// steals all your models
-      './fixtures/fixtures.js',	// sets up fixtures for your models
-      'cookbook/recipe/create',
-      'cookbook/recipe/list',
-    function(){
-      // set your application up
-      new Cookbook.Recipe.List('#recipes');
-      new Cookbook.Recipe.Create('#create');
+        'cookbook/recipe/create',
+        'cookbook/recipe/list',
+        './cookbook.less',
+        './models/fixtures/fixtures.js',
+        function(RecipeCreate, RecipeList){
+    
+        new RecipeList('#recipes');
+        new RecipeCreate('#create');
     })
 
-You'll notice that it now loads `cookbook/create`
-and `cookbook/list` and then tries to add these widgets to the
+You'll notice that it now loads `cookbook/recipe/create`
+and `cookbook/recipe/list` and then tries to add these widgets to the
 `#recipes` and `#create` elements.  
 
-However, `#recipes` and `#create` elements do not 
-exist.  All we have to do now is add them.  Open __cookbook/cookbook.html__
+However, `#recipes` and `#create` elements did not 
+exist! Fortunately, the generator also added their HTML to `index.html` so that 
+it includes:
+
+All we have to do now is add them.  Open __cookbook/cookbook.html__
 and add a `#recipes` __ul__ and a `#create` __form__
 so it looks like:
 
-    <!DOCTYPE HTML>
-    <html lang="en">
-      <head>
-        <title>cookbook</title>
-      </head>
-      <body>
-          <h1>Welcome to JavaScriptMVC!</h1>
-          <ul id='recipes'></ul>
-          <form id='create' action=''></form>
-        <script type='text/javascript' 
-                  src='../steal/steal.js?cookbook'>	 
-            </script>
-      </body>
-    </html>
+
+    <h1>Welcome to JavaScriptMVC!</h1>
+    <ul id='recipes'></ul>
+          
 
 ## Run Cookbook
 
@@ -241,37 +214,30 @@ The Cookbook application can be broken into 5 parts:
 
 `cookbook/models/recipe.js` looks like:
 
-    steal('can/model', function(){
-      /**
-       * @class Cookbook.Models.Recipe
-       * @parent index
-       * @inherits can.Model
-       * Wraps backend recipe services.
-       */
-      can.Model('Cookbook.Models.Recipe',
-      /* @Static */
-      {
-        findAll: "GET /recipes",
-          findOne : "GET /recipes/{id}",
-          create : "POST /recipes",
-          update : "PUT /recipes/{id}",
-          destroy : "DELETE /recipes/{id}"
-      },
-      /* @Prototype */
-      {});
-    })
+    steal('can', function (can) {
+    
+        return can.Model(
+        {
+            findAll : "GET /recipes",
+            findOne : "GET /recipes/{id}",
+            create : "POST /recipes",
+            update : "PUT /recipes/{id}",
+            destroy : "DELETE /recipes/{id}"
+	    },
+	    {});
+    });
 
-This loads [jQuery.Model can.Model] and uses it to create a 
-`Cookbook.Models.Recipe` class.  This class lets us
+This loads [can.Model] and uses it to create a 
+constructor function that lets us
 create, retrieve, update, and delete models programmatically like:
 
 __create__
 
     // create a recipe instance
-    var recipe = new Cookbook.Models.Recipe({
+    var recipe = new Recipe({
       name: 'Hot Dog',
       description: 'nuke dog, put in bun'
-     })
+    })
   
     // call save to create on the server
     recipe.save()
@@ -279,14 +245,14 @@ __create__
 __retrieve__
 
     // get recipes from the server
-    Cookbook.Models.Recipe.findAll({}).done(function(recipes){
+    Recipe.findAll({}, function(recipes){
       // do something with recipes
     })
 
 __update__
 
     // update the properties of a created recipe
-    recipe.attrs({
+    recipe.attr({
       name: 'Bratwurst',
       description: 'nuke bratwurst, put in bun'
     });
@@ -308,92 +274,97 @@ where fixtures come in.
 simulate the response. They are a great tool that enables
 you to start work on the front end without a ready server.
 
-Open `cookbook/fixtures/fixtures.js` and you will this:
+Open `cookbook/models/fixtures/fixtures.js` and you will this:
 
-    steal("can/util/fixture", function(){
-      var store = can.fixture.make(5, function(i, recipe){
-        return {
-          name: "recipe "+i,
-          description: "Model " + i
-        }
-      });
-
-      can.fixture('GET /recipes', store.findAll);
-      can.fixture('GET /recipes/{id}', store.findOne);
-      can.fixture('POST /recipes', store.create);
-      can.fixture('PUT /recipes/{id}', store.update);
-      can.fixture('DELETE /recipes/{id}', store.destroy);
-    })
+    steal("can/util/fixture", function(fixture) {
+    
+        var store = fixture.store(5, function(i){
+            return {
+                name: "recipe "+i,
+                description: "recipe " + i
+            }
+        });
+    
+        fixture({
+            'GET /recipes' : store.findAll,
+            'GET /recipes/{id}' : store.findOne,
+            'POST /recipes' : store.create,
+            'PUT /recipes/{id}' : store.update,
+            'DELETE /recipes/{id}' : store.destroy
+        });
+    
+        return store;
+    });
 
 The scaffold generator added this to simulate a server 
 with 5 recipes.  Read more about how this works on
-[can.fixture.make make's documentation page].
+[can.fixture.store store's documentation page].
 
 ### The Recipe Create Control
 
 Open `cookbook/recipe/create/create.html` in your 
-browser.  This page demos the Cookbook.Recipe.Create control and
-lets you create recipes.  It lets us work on Cookbook.Recipe.Create
+browser.  This page demos the RecipeCreate control and
+lets you create recipes.  It lets us work on a control
 independent of the rest of the application.
 
-Open `cookbook/recipe/create/create.js` to
-see the Cookbook.Recipe.Create control's code:
+Open `cookbook/recipe/create/create.js` to find:
 
-    steal('can', 'can/control/view', 'cookbook/models', './views/init.ejs', function() {
-      /**
-       * @class Cookbook.Recipe.Create
-       * @parent index
-       * @inherits jQuery.Controller
-       * Creates recipes
-       */
-      can.Control('Cookbook.Recipe.Create',
-      /** @Prototype */
-      {
-        init : function(){
-          this.element.html(this.view());
-        },
-        submit : function(el, ev){
-          ev.preventDefault();
-          var el = this.element;
-          el.find('[type=submit]').val('Creating...')
-          new Cookbook.Models.Recipe(el.formParams()).save().done(function() {
-            el.find('[type=submit]').val('Create');
-            el[0].reset()
-          });
-        }
-      })
+    steal('can', 
+        'cookbook/models/recipe.js',
+        './init.ejs', 
+        'jquery/dom/form_params',
+        function (can, Recipe, initView) {
+    
+        return can.Control(
+        /** @Prototype */
+        {
+            init: function () {
+                this.element.html(initView());
+            },
+            submit: function (el, ev) {
+                ev.preventDefault();
+                el.find('[type=submit]').val('Creating...');
+                
+                new Recipe(el.formParams()).save(function() {
+                    el.find('[type=submit]').val('Create');
+                    el[0].reset()
+                });
+            }
+        });
     });
 
-This code uses [steal] to load dependencies and then creates a 
-`Cookbook.Recipe.Create` controller.  This creates
-a `cookbook_recipe_create` jQuery helper function that
-can be called on a form element like:
+This code uses [steal] to load dependencies and then creates and returns 
+a control constructor function.  In `cookbook/cookbook.js` that 
+control constructor function is aliased as RecipeCreate.  A new instance
+is created on the `#create` element as follows:
 
-    new Cookbook.Recipe.Create('form#create')
+    new RecipeCreate('#create')
 
-When the jQuery plugin is called, the controller's `init`
+When a control instance is created, the control's `init`
 method is called and runs 
 
-    this.element.html(this.view());
+    this.element.html(initView());
     
-This code renders the template at `cookbook/recipe/create/views/init.ejs`
-into the controller's [can.Control.prototype.element element].
+`initView` is a [can.view.renderer renderer] function that renders
+the template at `cookbook/recipe/create/init.ejs` into 
+a documentFragment. That document fragment is set as the control's inner html
+using jQuery's [http://api.jquery.com/html/ html] method.
 
-When the jQuery plugin is called controller also binds event handlers on the
-controller's element.  In this case, it listens for "submit" events on the element.
+When a control instance is created, it also binds event handlers on the
+control's element.  In this case, it listens for "submit" events on the element.
 
 When a submit event happens, it updates the submit button's text, then creates
 a new recipe.
 
 ### The Recipe List Control
 
-Open `cookbook/recipe/create/create.html` in your 
-browser.  This page demos the Cookbook.Recipe.List control. It loads
+Open `cookbook/recipe/list/list.html` in your 
+browser.  This page demos the RecipeList control. It loads
 Recipes from the server, lets you delete recipes, and it also 
 listens for recipes being created and adds them to the list.
 
 Open `cookbook/recipe/list/list.js` to
-see the Cookbook.Recipe.Create control's code:
+see the control's code:
 
     steal( 'can/control/view', 'can/view/ejs', 'can/model/elements',
       'cookbook/models', './views/init.ejs', function(){

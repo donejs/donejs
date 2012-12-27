@@ -90,6 +90,7 @@ function(steal){
 		steal.File(md.appPath+"/index.html").save(
 			appFile.substring(0, scriptIndex)+hookupHTML+appFile.substr(scriptIndex)
 		);
+		steal.print('      '+md.appPath+"/index.html"+" (html added)");
 	}
 	
 	var text = readFile("jmvc/generate/templates/scaffoldTest.ejs"),
