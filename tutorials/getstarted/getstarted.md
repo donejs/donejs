@@ -72,4 +72,4 @@ These exceptions, although permissive licenses themselves, are not linked in you
 ## Installing JavaScriptMVC
 
 Before continuing, make sure you have [installing installed JavaScriptMVC]. Once you
-have installed JavaScriptMVC, continue to [creating Creating Cookbook].
+have installed JavaScriptMVC, continue to [cookbook.creating Creating Cookbook].

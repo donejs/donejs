@@ -1,4 +1,4 @@
-@page creating Creating Cookbook
+@page cookbook.creating Creating Cookbook
 @parent getstarted 0
 
 We're going to create a basic cookbook application that
@@ -153,14 +153,6 @@ and `cookbook/recipe/list` and then tries to add these widgets to the
 However, `#recipes` and `#create` elements did not 
 exist! Fortunately, the generator also added their HTML to `index.html` so that 
 it includes:
-
-All we have to do now is add them.  Open __cookbook/cookbook.html__
-and add a `#recipes` __ul__ and a `#create` __form__
-so it looks like:
-
-
-    <h1>Welcome to JavaScriptMVC!</h1>
-    <ul id='recipes'></ul>
           
 
 ## Run Cookbook
@@ -197,18 +189,18 @@ google know you'd like Chrome to work on the filesystem!
 </div>
 
 
-Continue to [testing Testing Cookbook] or continue to read how
+Continue to [cookbook.testing Testing Cookbook] or continue to read how
 this code works.
 
 ## How it Works
 
 The Cookbook application can be broken into 5 parts:
 
-  - The Recipe Model
-  - The Recipe Fixture
-  - The Recipe Create control
-  - The Recipe List control
-  - The Cookbook application that puts it all together
+  - The Recipe model
+  - The recipes fixture
+  - The RecipeCreate control
+  - The RecipeList control
+  - The cookbook application that puts it all together
 
 ### The Recipe Model and Fixture
 
@@ -227,7 +219,7 @@ The Cookbook application can be broken into 5 parts:
 	    {});
     });
 
-This loads [can.Model] and uses it to create a 
+This loads CanJS's core, which includes [can.Model], and uses it to create a 
 constructor function that lets us
 create, retrieve, update, and delete models programmatically like:
 
@@ -271,7 +263,7 @@ where fixtures come in.
 ### The Recipe Fixture
 
 [can.fixture Fixtures] intercept Ajax requests and
-simulate the response. They are a great tool that enables
+simulate the response. They enable
 you to start work on the front end without a ready server.
 
 Open `cookbook/models/fixtures/fixtures.js` and you will this:
@@ -300,7 +292,7 @@ The scaffold generator added this to simulate a server
 with 5 recipes.  Read more about how this works on
 [can.fixture.store store's documentation page].
 
-### The Recipe Create Control
+### The RecipeCreate control
 
 Open `cookbook/recipe/create/create.html` in your 
 browser.  This page demos the RecipeCreate control and
@@ -319,7 +311,7 @@ Open `cookbook/recipe/create/create.js` to find:
         /** @Prototype */
         {
             init: function () {
-                this.element.html(initView());
+                this.element.html(initEJS());
             },
             submit: function (el, ev) {
                 ev.preventDefault();
@@ -343,9 +335,9 @@ is created on the `#create` element as follows:
 When a control instance is created, the control's `init`
 method is called and runs 
 
-    this.element.html(initView());
+    this.element.html(initEJS());
     
-`initView` is a [can.view.renderer renderer] function that renders
+`initEJS` is a [can.view.renderer renderer] function that renders
 the template at `cookbook/recipe/create/init.ejs` into 
 a documentFragment. That document fragment is set as the control's inner html
 using jQuery's [http://api.jquery.com/html/ html] method.
@@ -356,7 +348,7 @@ control's element.  In this case, it listens for "submit" events on the element.
 When a submit event happens, it updates the submit button's text, then creates
 a new recipe.
 
-### The Recipe List Control
+### The RecipeList control
 
 Open `cookbook/recipe/list/list.html` in your 
 browser.  This page demos the RecipeList control. It loads
@@ -366,110 +358,114 @@ listens for recipes being created and adds them to the list.
 Open `cookbook/recipe/list/list.js` to
 see the control's code:
 
-    steal( 'can/control/view', 'can/view/ejs', 'can/model/elements',
-      'cookbook/models', './views/init.ejs', function(){
-
-      /**
-       * @class Cookbook.Recipe.List
-       * @parent index
-       * @inherits can.Control
-       * Lists recipes and lets you destroy them.
-       */
-      can.Control('Cookbook.Recipe.List',
-      /** @Static */
-      {
-        defaults : {}
-      },
-      /** @Prototype */
-      {
-        init : function(){
-          Cookbook.Models.Recipe.findAll().done(can.proxy(this.list, this));
+    steal('can',
+        './init.ejs',
+        'cookbook/models/recipe.js',
+        function (can, initEJS, Recipe) {
+    
+        return can.Control(
+        /** @Static */
+        {
+            defaults : {
+                Recipe: Recipe
+            }
         },
-
-        list : function(list) {
-          this.list = list;
-          this.element.html(this.view('init', list));
-        },
-
-        '.destroy click': function( el ){
-          if(confirm("Are you sure you want to destroy?")){
-           el.closest('.recipe').model().destroy();
-          }
-        },
-
-        "{Cookbook.Models.Recipe} created" : function(Recipe, ev, recipe){
-         this.list.push(recipe);
-        }
-      });
-
+        /** @Prototype */
+        {
+            init: function () {
+                this.list = new Recipe.List();
+                this.element.html(initEJS(this.list));
+                this.list.replace(Recipe.findAll());
+            },
+            '.destroy click': function (el) {
+                if (confirm("Are you sure you want to destroy?")) {
+                    el.closest('.recipe').data('recipe').destroy();
+                }
+            },
+            "{Recipe} created": function (Model, ev, instance) {
+                this.list.push(instance);
+            }
+        });
     });
 
-When the List control is added to the page, `init` is called:
+In `cookbook/cookbook.js`, when a `new RecipeList` is created, `init` is 
+called. `init` first creates an empty [can.Model.List]:
 
-     Cookbook.Models.Recipe.findAll().done(can.proxy(this.list, this));
+    this.list = new Recipe.List();
+     
+Then it renders `cookbook/recipe/list/init.ejs` and sets the result as
+the inner html of the `controls` element:
 
-This does the following:
-
-Makes a findAll request to the `Cookbook.Models.Recipe` model and when it returns executes the `list` method
-of the control. There we store the returned list and render `cookbook/recipe/list/views/init.ejs` with the list data
-using `this.view('init', list)`.
+    this.element.html(initEJS(this.list));
 
 `init.ejs` looks like:
 
     <% this.each(function(current) { %>
-      <li <%= current %>>
-        <h3>
-          <%= current.attr('name') %>
-          <a href='javascript://' class='destroy'>X</a>
-        </h3>
-        <p><%= current.attr('description') %></p>
-      </li>
+      <li class="recipe" <%= (el) -> el.data('recipe', current) %>>
+      <h3>
+        <%= current.attr('name') %>
+        <a href='javascript://' class='destroy'>X</a>
+      </h3>
+      <p><%= current.attr('description') %></p>
+    </li>
     <% }) %>
 
-This iterates through the recipes retrieved from the server.  For each
-recipe, it creates an LI element and renders `name` and `description` using
-live binding.
+In the template, `this` is `this.list`. `this.list` is initially empty so
+the inner html of `this.element` is empty. The [can.Observe.List::replace list.replace](items)
+method replaces the contents of the list with `items`.  If `items` is a
+[can.deferred deferred], it replaces the contents of the list with the
+resolved value of the deferred.
 
-Notice that the view 'adds' each recipe instance to its LI element with:
+The following replaces the items in `this.list` with `Recipes` from the server:
 
-    <%= current %>
+    this.list.replace(Recipe.findAll());
 
-This adds the model to jQuery.data and sets a 'recipe' className on the 
-LI element.  We'll make use of this in a moment.
+Once the list is updated, the page is automatically updated 
+with live-binding. `init.ejs` iterates through the recipes. For each
+recipe, it creates an LI element and renders `name` and `description`.
+
+Notice that the view adds each recipe instance to its LI element's data with:
+
+    <%= (el) -> el.data('recipe', current) %>
 
 __Destroying Recipes__
 
-Each recipe has a destroy link.  When it is clicked on the list's
+Each recipe has a destroy link.  When it is clicked, the list's
 `'.destroy click'` method is called:
 
-    if(confirm("Are you sure you want to destroy?")){
-      el.closest('.recipe').model().destroy();
+    '.destroy click': function (el) {
+        if (confirm("Are you sure you want to destroy?")) {
+            el.closest('.recipe').data('recipe').destroy();
+        }
     }
 
-This method checks if you want to destroy the method.  If you do,
-it finds the parent 'recipe' element and gets back the model instance (that's
-in jQuery.data). It then calls [can.Model.prototype.destroy model's destroy] method.
+This method checks if you want to destroy the recipe.  If you do,
+it finds the parent 'recipe' element and gets back the recipe instance that's
+in jQuery.data. It then calls [can.Model.prototype.destroy model's destroy] method.
 
 When a model is destroyed, all occurrences will be removed from any list. Due to live binding
-the displayed list will update automatically.
+the recipe on the page will be removed automatically.
 
 __Creating Recipes__
 
 When a recipe is created, a "created" event is triggered.  The List control listens for this
 with:
 
-    "{Cookbook.Models.Recipe} created" : function(Recipe, ev, recipe){
-     this.list.push(recipe);
+    "{Recipe} created" : function(Recipe, ev, recipe){
+      this.list.push(recipe);
     }
 
-So, when a recipe is created, we just add it to the list we are currently displaying.
-Again, thanks to live binding the list will just update itself without having anything else to do.
+When a recipe is created, we just add it to the list we are currently displaying.
+Thanks to live binding the list will show the new recipe.
 
 ### Putting it all Together
 
 The cookbook application loads both of these widgets and adds them to the page.
-When Cookbook.Recipe.Create creates a Recipe, it creates a 'created' event which
-Cookbook.Recipe.List listens for and adds that newly created recipe to its list
+When RecipeCreate creates a Recipe, it creates a 'created' event which
+RecipeList listens for and adds that newly created recipe to its list
 of recipes.
 
-Continue to [testing Testing Cookbook].
+It's useful to notice that `RecipeCreate` and `RecipeList` operate independently of
+each other.
+
+Continue to [cookbook.testing Testing Cookbook].

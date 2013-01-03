@@ -1,5 +1,5 @@
 steal('can', '<%= appPath %>/models/<%= underscore %>.js', './init.ejs', 'jquery/dom/form_params',
-	function (can, <%= Alias %>, initView) {
+	function (can, <%= Alias %>, initEJS) {
 
 	/**
 	 * @class <%= appPath %>/<%= underscore %>/create
@@ -12,7 +12,7 @@ steal('can', '<%= appPath %>/models/<%= underscore %>.js', './init.ejs', 'jquery
 	/** @Prototype */
 	{
 		init: function () {
-			this.element.html(initView());
+			this.element.html(initEJS());
 		},
 		submit: function (el, ev) {
 			ev.preventDefault();

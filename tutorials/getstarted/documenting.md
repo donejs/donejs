@@ -1,4 +1,4 @@
-@page documenting Documenting Cookbook
+@page cookbook.documenting Documenting Cookbook
 @parent getstarted 3
 
 Documentation is a critical step in creating maintainable code. 

@@ -1,14 +1,21 @@
-@page compressing Compressing Cookbook
+@page building.cookbook Building Cookbook
 @parent getstarted 2
 
-There is a large overhead associated with downloading many JavaScript files.
-Server side compression makes it simple to concatenate and compress your code into one file.
+There is a large overhead associated with 
+downloading many JavaScript and CSS files. [stealjs StealJS]
+can build your app into a single minified JS and CSS file
+for faster download.
 
-## Compress Script
+<div class='whisper'>
+	It can also break your app into cache-able minified parts
+	for more advanced performance techniques.
+</div>
 
-To compress your application, run the following command from a console:
+## Build Script
 
-    C:\workspace\Cookbook>js cookbook\scripts\build.js
+To build your application, run the following command from a console:
+
+     > ./js cookbook/scripts/build.js
        steal/steal.js
        ...
        ignore ../steal/dev/dev.js
@@ -30,4 +37,4 @@ Switch to production mode by changing the script tag to include steal.production
 Reload your page. Only two JavaScript files will load: steal.production.js and production.js.
 Not bad considering 28 files are loaded in development mode.
 
-When you're ready, learn how to [documenting Document Cookbook]
+When you're ready, learn how to [cookbook.documenting Document Cookbook]
