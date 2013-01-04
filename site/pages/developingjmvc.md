@@ -1,4 +1,3 @@
-/**
 @page developingjmvc Developing JavaScriptMVC
 
 Awesome, you want to contribute back some code to JavaScriptMVC, or build your own
@@ -124,5 +123,3 @@ ruby scripts\deploy.rb
 
 First you need to add our EC2 private key in the scripts folder, named key.  If you want to 
 deploy, talk to Brian to get access to this key.
- */
-//break

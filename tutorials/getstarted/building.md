@@ -16,11 +16,10 @@ for faster download.
 To build your application, run the following command from a console:
 
      > ./js cookbook/scripts/build.js
-       steal/steal.js
+       Building to cookbook/
        ...
-       ignore ../steal/dev/dev.js
-       ...
-    Package #0: 'cookbook/production.js'.
+       Building cookbook/production.js
+                cookbook/production.css
 
 Verify that production.js was created by checking your `cookbook` folder.
 

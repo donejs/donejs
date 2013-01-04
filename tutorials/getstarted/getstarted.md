@@ -26,13 +26,10 @@ true __framework__. It supplies best-of-bread solutions for things like:
  - Documentation
  
 It tightly integrates these solutions so they
-work together seemlessly. 
-
-Finally, JMVC provides __direction to development__ so
-teams of developers can work together more 
-effectively. With repeatable development patterns,
-it's easy to have multiple developers working on a
-complex code base.
+work together seemlessly. With repeatable development 
+patterns, JMVC provides __direction to development__ making it easy
+for teams to work together more 
+effectively.
 
 
 ### Sub Projects

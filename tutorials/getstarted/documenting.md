@@ -4,19 +4,18 @@
 Documentation is a critical step in creating maintainable code. 
 It's often burdensome on developers and 
 becomes neglected. JavaScriptMVC's integrates [DocumentJS] to make
-it hard not to document your code. 
+it easy to document your code. 
 
 ## Generating Documentation
 
 Create the docs by running:
 
-    > js cookbook/scripts/docs.js
+    > ./js cookbook/scripts/docs.js
 
-_Note: Verify cookbook.html is not in production mode before running the above command._
 
 ## Viewing Documentation
 
-Open __cookbook/doc.html__ and you'll find something like:
+Open __cookbook/docs.html__ and you'll find something like:
 
 @image tutorials/getstarted/Docs.png
 
@@ -38,9 +37,9 @@ been exposed to major features of JavaScriptMVC:
 
  - code separation
  - testing
- - compression
+ - building
  - documentation
  
- This is pretty cool! Look at how simply you went from 
- nothing to a compressed, tested, and documented application.
+This is pretty cool! Look at how simply you went from 
+nothing to a compressed, tested, and documented application.
 

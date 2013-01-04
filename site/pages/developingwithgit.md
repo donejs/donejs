@@ -1,4 +1,3 @@
-/*
 @page developwithgit Developing With Git
 
 Thank you so much for developing with git.  You're making 
@@ -19,10 +18,11 @@ If you don't, you might find the following resources helpful:
 
 ## Git-ing JavaScriptMVC
 
-JavaScriptMVC is comprised of five sub projects:
+JavaScriptMVC is comprised of 6 sub projects:
 
  - [http://github.com/jupiterjs/steal]
- - [http://github.com/jupiterjs/jquerymx]
+ - [http://github.com/jupiterjs/canjs]
+ - [http://github.com/jupiterjs/jquerypp]
  - [http://github.com/jupiterjs/documentjs]
  - [http://github.com/jupiterjs/funcunit]
  - [http://github.com/jupiterjs/syn]
@@ -36,7 +36,7 @@ Assuming you have a github account set up, and are signed in,
 click each of the github links and click 
 the fork button (in the upper right of the page).
 
-@image jmvc/images/fork.png
+@image site/images/fork.png
 
 <div class='whisper'>PRO TIP: 
   If you're working for a company, you should create company forks and give 
@@ -181,7 +181,3 @@ Finally, you just have to move the 'js' commands out of steal for convienence:
 Yes, that was more annoying then just downloading it, but you're making the 
 world a better place for yourself and for others.
 
-
-
- */
-//break

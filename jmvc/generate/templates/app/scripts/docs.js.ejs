@@ -3,6 +3,6 @@
 load('steal/rhino/rhino.js');
 steal("documentjs", function(DocumentJS){
 	DocumentJS('<%= path %>/index.html', {
-		markdown : ['<%= application_name %>']
+		markdown : ['<%= application_name %>', 'steal', 'jquery', 'can', 'funcunit']
 	});
 });
