@@ -20,12 +20,12 @@ If you don't, you might find the following resources helpful:
 
 JavaScriptMVC is comprised of 6 sub projects:
 
- - [http://github.com/jupiterjs/steal]
- - [http://github.com/jupiterjs/canjs]
- - [http://github.com/jupiterjs/jquerypp]
- - [http://github.com/jupiterjs/documentjs]
- - [http://github.com/jupiterjs/funcunit]
- - [http://github.com/jupiterjs/syn]
+ - [http://github.com/bitovi/steal]
+ - [http://github.com/bitovi/canjs]
+ - [http://github.com/bitovi/jquerypp]
+ - [http://github.com/bitovi/documentjs]
+ - [http://github.com/bitovi/funcunit]
+ - [http://github.com/bitovi/syn]
 
 We're going to fork each of these projects and add them as submodules to your
 master git project.
@@ -46,8 +46,8 @@ the fork button (in the upper right of the page).
 
 #### Installing with a script
 
-To make the next several steps easier, we've made scripts for [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc Mac] 
-and [https://github.com/jupiterjs/javascriptmvc/raw/master/scripts/getjmvc.bat Windows] users that automate adding your repos and setting them up.
+To make the next several steps easier, we've made scripts for [https://github.com/bitovi/javascriptmvc/raw/master/scripts/getjmvc Mac] 
+and [https://github.com/bitovi/javascriptmvc/raw/master/scripts/getjmvc.bat Windows] users that automate adding your repos and setting them up.
 
 _Note: For the Mac script, be sure to set permissions to run locally._  
 @codestart text
@@ -58,7 +58,7 @@ Use this script to install JMVC from github or your own fork. If its already ins
 Assumes your project uses git.
 
 ##### Options: 
- - -u username (default is jupiterjs)
+ - -u username (default is bitovi)
  - -b branch (default is master)
  - -s source url (default is https://github.com)
  - -p install path (default is current directory)
@@ -67,7 +67,7 @@ Assumes your project uses git.
 
 Windows users can ignore the ./ in the path:
 
-Default usage.  This will install from https://jupiterjs@github.com/jupiterjs/steal.git
+Default usage.  This will install from https://bitovi@github.com:bitovi/steal.git
 @codestart text
 ./getjmvc
 @codeend
@@ -82,7 +82,7 @@ Install to your own path.  You can specify the path where the submodules are ins
 ./getjmvc -p public/
 @codeend
 
-Install a different branch (used to install the 2.0 branches for steal, jquerymx, and funcunit).
+Install a different branch (used to install the 2.0 branches for steal, canjs, jquerypp, and funcunit).
 @codestart text
 ./getjmvc -b 2.0
 @codeend
@@ -99,7 +99,7 @@ Install from a different repository (not github) or from ssh instead of http (if
 ./getjmvc -p public/
 @codeend
 
-Note: This script installs steal, documentjs, jquerymx, and funcunit, and it downloads syn from whatever is in funcunit/.gitmodules.  
+Note: This script installs steal, documentjs, canjs, jquerypp, and funcunit, and it downloads syn from whatever is in funcunit/.gitmodules.  
 If you wish to fork your own syn and use that fork, you have to change your funcunit/.gitmodules to point to the right location manually.  
 Check it in and future installs will work fine.
 
@@ -112,7 +112,8 @@ to your project like:
 
 @codestart text
 git submodule add git@github.com:<b>_YOU_</b>/steal.git <b>public</b>/steal
-git submodule add git@github.com:_YOU_/jquerymx.git public/<b>jquery</b>
+git submodule add git@github.com:_YOU_/canjs.git public/<b>canjs</b>
+git submodule add git@github.com:_YOU_/jquerypp.git public/<b>jquerypp</b>
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
 @codeend
@@ -145,12 +146,12 @@ git checkout master
 
 Syn is a submodule of the funcunit project.  To add your fork to funcunit, 
 first you have to change the submodule to point to your fork 
-(because it points to the jupiterjs fork).  To do this, open funcunit/.gitmodules.  You'll see:
+(because it points to the bitovi fork).  To do this, open funcunit/.gitmodules.  You'll see:
 
 @codestart text
 [submodule "syn"]
 	path = syn
-	url = git@github.com:jupiterjs/syn.git
+	url = git@github.com:bitovi/syn.git
 	update = merge
 @codeend
 
