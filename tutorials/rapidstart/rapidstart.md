@@ -11,13 +11,15 @@ for a more in-depth overview.
 [developwithgit pull it from Git].  JavaScriptMVC (JMVC) is a collection of 5 sub-projects. 
 Once you have JavaScriptMVC, you should have a folder with:
 
-    can        - lightweight MVC components
-    documentjs - documentation engine
-    funcunit   - testing app
-    jquery     - useful collections of jQuery plugins
-    steal      - dependency management
-    js         - JS command line for Linux/Mac
-    js.bat     - JS command line for Windows
+    can            - lightweight MVC components
+    documentjs     - documentation engine
+    funcunit       - testing app
+    jquery         - useful collections of jQuery plugins
+    steal          - dependency management
+    js             - JS command line for Linux/Mac
+    js.bat         - JS command line for Windows
+    stealconfig.js - configuration file for script loading
+
 
 <b>Notice</b>: The folder that has these sub-projects is called the [rootfolder root folder].
 
@@ -852,7 +854,29 @@ Replace the test code within the steal callback with the following:
 Reload [//tutorials/rapidstart/test.html test.html]. You'll 
 see the page open and run the test in a separate window.
 
-    // TOOD SHOW COVERAGE STATS BRIAN
+### Test Coverage
+
+You can see which parts of your app are covered by your tests and which 
+parts need more testing using the [steal.instrument steal/instrument] plugin.
+
+To add coverage, add the following code to the very bottom of stealconfig.js:
+
+    steal('steal/instrument', function(instrument){
+      instrument({
+        ignores: ["jquery","can","funcunit","steal",
+                "*/test","*_test.js","*funcunit.js"]
+      })
+    })
+
+Reload [//tutorials/rapidstart/test.html test.html]. When the tests are done, you'll see 
+overall coverage stats.
+
+@image tutorials/images/coverage1.png
+
+
+Click the filename to see what lines did and didn't run.
+
+@image tutorials/images/coverage2.png
 
 ### Automation
 

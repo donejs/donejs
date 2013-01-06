@@ -25,7 +25,8 @@ To run all of __cookbook's__ tests, open
 `cookbook/test.html` in a browser. You should
 see something like [//cookbook/test.html this].
 
-To run those same tests with [http://seleniumhq.org/ Selenium], run:
+To run those same tests with [funcunit.selenium Selenium], run:
+
 
     > ./js funcunit/open/selenium cookbook/test.html
 
@@ -35,28 +36,22 @@ You should see something like:
 
 <div class='whisper'>
 	If Selenium is unable to open your browsers, it's likely you have them in an
-	unusual location.  Read [FuncUnit.browsers] for information on how to configure browsers
-	so selenium can find them.
+	unusual location.  Read the Other Browsers section in [funcunit.selenium Selenium] 
+	docs for information on how to configure browsers so selenium can find them.
 </div>
 
-Continue to [building.cookbook Building Cookbook] or read on to learn how
-these tests work.
+Continue to [building.cookbook Building Cookbook] or continuen reading to learn how
+this code works.
 
 ## Tiered testing
 
-If an application should be built of small, isolated modules
-that are glued together, an application's tests should
-reflect that. 
+If an application should be built of small, isolated modules that are glued together, its tests should reflect that.
 
-Cookbook's modules are each designed
-to built and tested independently. For example, the
-`cookbook/recipe/create` module has its own tests
-and test page. Open [//cookbook/recipe/create/test.html cookbook/recipe/create/test.html]
+Cookbook's modules are each designed to be built and tested independently. For example, the `cookbook/recipe/create` module has its own tests and test page. Open [//cookbook/recipe/create/test.html cookbook/recipe/create/test.html]
 and it will run the tests in  `cookbook/recipe/create/create_test.js`.
 
-To test the "glue", `cookbook_test.js` loads all modules tests 
-and then provides an integration test, verifying the application
-works as expected.
+To test the "glue", `cookbook_test.js` loads all modules' tests 
+and provides an integration test, verifying the application as a whole works as expected.
 
 The following goes through:
 
@@ -68,7 +63,7 @@ The following goes through:
 ## recipe_test.js
 
 `cookbook/models/recipe_test.js` unit tests the 
-`cookbook/models/recipe` module which is aliased as Recipe. It starts 
+`cookbook/models/recipe`, module which is aliased as Recipe. It starts 
 by loading the `Recipe` model, QUnit, and the fixtures
 used to simulate the server:
 
@@ -99,8 +94,8 @@ The `findAll` test calls `Recipe.findAll` and
 attempts to verify that it returns recipes with
 a name and description.
 
-Because `Recipe.findAll` is asyncronous, this
-test calls QUnit's `stop` and `start` method
+Because `Recipe.findAll` is asynchronous, this
+test calls QUnit's `stop` and `start` methods
 to signal when the test is complete.
 
 `recipe_test.js` goes on to test the remainder of 
@@ -136,9 +131,9 @@ code that runs before and after every test:
     });
 
 `setup` creates a _form_ element and creates a new `RecipeCreate` instance
-on it.  `teardown` removes the element and 
-[resets can.fixture.store.reset] the `recipeStore` to
-contain the original set of recipes.
+
+on it.  `teardown` removes the element and [can.fixture.store.reset resets] the
+`recipeStore` to contain the original set of recipes.
 
 `create_test.js` tests that RecipeCreate can create a recipe:
 
@@ -165,8 +160,8 @@ listen to a recipe being created and check it's contents like:
         Recipe.unbind("created",arguments.callee);
     })
 		
-As this test is asyncronous, it calls QUnit's stop and start. After
-listening to Recipe's being created, the test creates
+As this test is asynchronous, it calls QUnit's stop and start. After
+listening to Recipes being created, the test creates
 a recipe by simulating a user filling in the recipe form and clicking submit:
 
     S("[name=name]").type("Ice Water");
@@ -218,7 +213,7 @@ code that runs before and after every test:
 
 `setup` creates a _div_ element and creates a new `RecipeList` 
 instance. That list will be accessible within each test as `this.list`. 
-`teardown` removes the element and [resets can.fixture.store.reset] 
+`teardown` removes the element and [can.fixture.store.reset resets] 
 the `recipeStore` to contain the original set of recipes.
 
 Then, `list_test.js` tests that RecipeList displays all
@@ -252,7 +247,7 @@ up on the page:
 		              .exists("Lists created recipe");
 	})
 
-To test deleting a recipe, `list_test.js` creates a recipe, then
+To test deleting a recipe, `list_test.js` creates a recipe then
 clicks its destroy link and makes sure the element has been removed:
 
 	test("delete recipes", function(){
@@ -294,7 +289,7 @@ Next it defines which module it's testing:
     });
 
 `setup` uses FuncUnit to open the application's page. Any
-FuncUnit commands, for example `S("h1").text()` will
+FuncUnit commands, for example `S("h1").text()`, will
 operate within that page instead of the 
 testing window. This is ideal for integration and functional tests.
 
