@@ -56,12 +56,12 @@ page followed by `?cookbook` like:
             src='../path/to/steal/steal.js?cookbook'>
     </script>
 
-If you open cookbook/index.html, you'll see a
+If you open [//cookbook/index.html], you'll see a
 JavaScriptMVC welcome screen.  
 
 @image tutorials/getstarted/Welcome.png
 
-Open `cookbook/index.html` and you will find:
+<br/>Open `cookbook/index.html` and you will find:
 
     <script src='../steal/steal.js?cookbook'>
     </script>
@@ -337,7 +337,7 @@ method is called and runs
 
     this.element.html(initEJS());
     
-`initEJS` is a [can.view.renderer renderer] function that renders
+`initEJS` is a [can.view.ejs renderer] function that renders
 the template at `cookbook/recipe/create/init.ejs` into 
 a documentFragment. That document fragment is set as the control's inner html
 using jQuery's [http://api.jquery.com/html/ html] method.

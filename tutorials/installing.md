@@ -19,11 +19,6 @@ There are 2 ways to get JavaScriptMVC:
 
  - [http://javascriptmvc.com/builder.html Downloading]
  - [developwithgit Installing JavaScriptMVC with Git]
- 
-We (and the [http://forum.javascriptmvc.com/ community]) would much prefer you to develop with git.  JavaScriptMVC is built 
-around modular development so it fits in perfectly
-with git development.  Plus we can trade improvements really easy. 
-
 
 ## Downloading
 
@@ -42,12 +37,12 @@ unzip in a public folder where the server hosts static content.
 
 JavaScriptMVC is comprised of six sub projects:
 
- - [http://github.com/jupiterjs/steal]
- - [https://github.com/jupiterjs/canjs]
- - [https://github.com/jupiterjs/canui]
- - [https://github.com/jupiterjs/jquerypp]
- - [http://github.com/jupiterjs/documentjs]
- - [http://github.com/jupiterjs/funcunit]
+ - [http://github.com/bitovi/steal]
+ - [https://github.com/bitovi/canjs]
+ - [https://github.com/bitovi/canui]
+ - [https://github.com/bitovi/jquerypp]
+ - [http://github.com/bitovi/documentjs]
+ - [http://github.com/bitovi/funcunit]
 
 You want to fork each project and add it as a submodule to your project 
 in a public folder (where your server keeps static content).
@@ -59,14 +54,15 @@ Forking the repos looks like:
 
 @codestart text
 git submodule add git@github.com:_YOU_/steal.git public/steal
-git submodule add git@github.com:_YOU_/canjs.git public/canjs
+git submodule add git@github.com:_YOU_/canjs.git public/can
 git submodule add git@github.com:_YOU_/canui.git public/canui
-git submodule add git@github.com:_YOU_/jquerypp.git public/jquerypp
+git submodule add git@github.com:_YOU_/jquerypp.git public/jquery
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
 @codeend
 
-Notice that the JavaScriptMVC repository is put in a <b style='font-size: 14px;color: red'>canjs</b> folder.  
+Notice that CanJS is in <b style='font-size: 14px;color: red'>can</b> folder and
+jQuery++ is in the <b style='font-size: 14px;color: red'>jquery</b> folder.  
 
 After installing the repository, run:
 
@@ -110,12 +106,12 @@ just pull changes.  Otherwise, to get the latest, most
 error free code, in a console, type:
 
 @codestart text
-C:\workspace\Cookbook>js documentjs\update
-C:\workspace\Cookbook>js funcunit\update
-C:\workspace\Cookbook>js jquery\update
-C:\workspace\Cookbook>js steal\update
-C:\workspace\Cookbook>js canjs\update
-C:\workspace\Cookbook>js canui\update
+> ./js documentjs/update
+> ./js funcunit/update
+> ./js jquery/update
+> ./js steal/update
+> ./js can/update
+> ./js canui/update
 @codeend
 <div class='whisper'>
 	P.S. If you are using linux/mac you
