@@ -1,16 +1,15 @@
-#!/bin/bash
 #
 # Use this script to install JMVC from github or your own fork. If its already installed, 
 # it will get latest for all the submodules.  Assumes your project uses git.
 #
 # Options: 
-#	-u username (default is jupiterjs)
+#	-u username (default is bitovi)
 #	-b branch (default is master)
 #	-s source url (default is https://github.com)
 #	-p install path (default is current directory)
 #
 # Usage:
-#	Default usage.  This will install from https://jupiterjs@github.com/jupiterjs/steal.git
+#	Default usage.  This will install from https://bitovi@github.com/bitovi/steal.git
 #		./getjmvc
 #
 #	Use your own forked submodule repositories. This will install from https://github.com/mycompany/steal.git
@@ -19,7 +18,7 @@
 #	Install to your own path.  You can specify the path where the submodules are installed, like to public/
 #		./getjmvc -p public/
 #
-#	Install a different branch (used to install the 2.0 branches for steal, jquerymx, and funcunit).
+#	Install a different branch (used to install the 2.0 branches for steal, canjs, jquerypp, and funcunit).
 #		./getjmvc -b 2.0
 #
 #	Install from a different repository (not github) or from ssh instead of http (if you have write access).
@@ -31,7 +30,7 @@
 #		./getjmvc -p public/
 
 
-USERNAME=jupiterjs
+USERNAME=bitovi
 BRANCH=master
 SRC=https://github.com
 INSTALLPATH=
@@ -73,16 +72,17 @@ then
 	exit 127
 fi
 
-# if its http, should look like this: https://github.com/jupiterjs/jquerymx.git
+# if its http, should look like this: https://github.com/bitovi/canjs.git
 if [[ $SRC =~ :// ]]; then
 	FULLSRC=$SRC/$USERNAME
-# else it should look like this: git@github.com:jupiterjs/jquerymx.git
+# else it should look like this: git@github.com:bitovi/canjs.git
 else
 	FULLSRC=$SRC:$USERNAME
 fi
 
 git submodule add $FULLSRC/steal.git ${INSTALLPATH}steal
-git submodule add $FULLSRC/jquerymx.git ${INSTALLPATH}jquery
+git submodule add $FULLSRC/canjs.git ${INSTALLPATH}canjs
+git submodule add $FULLSRC/jquerypp.git ${INSTALLPATH}jquerypp
 git submodule add $FULLSRC/documentjs.git ${INSTALLPATH}documentjs
 git submodule add $FULLSRC/funcunit.git ${INSTALLPATH}funcunit
 git submodule init

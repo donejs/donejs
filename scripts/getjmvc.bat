@@ -2,24 +2,24 @@
 :: it will get latest for all the submodules.  Assumes your project uses git.
 ::
 :: Options: 
-::	-u username (default is jupiterjs)
+::	-u username (default is bitovi)
 ::	-b branch (default is master)
 ::	-s source url (default is https://github.com)
 ::	-p install path (default is current directory)
 ::
 :: Usage:
-::	Default usage.  This will install from https://jupiterjs@github.com/jupiterjs/steal.git
+::	Default usage.  This will install from https://bitovi@github.com/bitovi/steal.git
 ::		./getjmvc
 ::
 ::	Use your own forked submodule repositories. This will install from 
-::	https://github.com/jupiterjs/steal.git
+::	https://github.com/bitovi/steal.git
 ::		./getjmvc -u cengage
 ::
 ::	Install to your own path.  You can specify the path where the submodules are installed, 
 ::	like to public/
 ::		./getjmvc -p public/
 ::
-::	Install a different branch (used to install the 2.0 branches for steal, jquerymx, and funcunit).
+::	Install a different branch (used to install the 2.0 branches for steal, canjs, jquerypp, and funcunit).
 ::		./getjmvc -b 2.0
 ::
 ::	Install from a different repository (not github) or from ssh instead of http (if you have 
@@ -32,7 +32,7 @@
 ::		./getjmvc -p public/
 
 @echo off
-set USERNAME=jupiterjs
+set USERNAME=bitovi
 set BRANCH=master
 set SRC=https://github.com
 set INSTALLPATH=./
@@ -83,7 +83,8 @@ set FULLSRC=%SRC%/%USERNAME%
 
 :INSTALL
 call git submodule add %FULLSRC%/steal.git %INSTALLPATH%steal
-call git submodule add %FULLSRC%/jquerymx.git %INSTALLPATH%jquery
+call git submodule add %FULLSRC%/canjs.git %INSTALLPATH%canjs
+call git submodule add %FULLSRC%/jquerypp.git %INSTALLPATH%jquerypp
 call git submodule add %FULLSRC%/documentjs.git %INSTALLPATH%documentjs
 call git submodule add %FULLSRC%/funcunit.git %INSTALLPATH%funcunit
 call git submodule init
