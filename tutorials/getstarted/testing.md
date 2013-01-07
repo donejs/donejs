@@ -27,15 +27,17 @@ see something like [//cookbook/test.html this].
 
 To run those same tests with [funcunit.selenium Selenium], run:
 
+
     > ./js funcunit/open/selenium cookbook/test.html
 
 You should see something like:
 
-__TODO__
+@image tutorials/getstarted/selenium-run.png
 
 <div class='whisper'>
 	If Selenium is unable to open your browsers, it's likely you have them in an
-	unusual location.  Read the Other Browsers section in [funcunit.selenium Selenium] docs for information on how to configure browsers so selenium can find them.
+	unusual location.  Read the Other Browsers section in [funcunit.selenium Selenium] 
+	docs for information on how to configure browsers so selenium can find them.
 </div>
 
 Continue to [building.cookbook Building Cookbook] or continuen reading to learn how
@@ -118,7 +120,8 @@ code that runs before and after every test:
 
     module("cookbook/recipe/create", {
         setup: function(){
-            $("#qunit-test-area").append("<form id='create'></form>");
+            $("#qunit-test-area")
+                      .append("<form id='create'></form>");
             new RecipeCreate("#create");
         },
         teardown: function(){
@@ -128,8 +131,9 @@ code that runs before and after every test:
     });
 
 `setup` creates a _form_ element and creates a new `RecipeCreate` instance
-on it.  `teardown` removes the element and [can.fixture.store.reset resets] the `recipeStore` to
-contain the original set of recipes.
+
+on it.  `teardown` removes the element and [can.fixture.store.reset resets] the
+`recipeStore` to contain the original set of recipes.
 
 `create_test.js` tests that RecipeCreate can create a recipe:
 
@@ -258,7 +262,8 @@ clicks its destroy link and makes sure the element has been removed:
 		S.confirm(true);
 		S('h3:last a').click();
 		
-		S('h3:contains(Ice Water)').missing("Grilled Cheese Removed");
+		S('h3:contains(Ice Water)')
+		    .missing("Grilled Cheese Removed");
 		
 	});
 
