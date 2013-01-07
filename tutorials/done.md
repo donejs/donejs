@@ -1,4 +1,4 @@
-@page migrate Upgrading to 3.3
+@page done Upgrading to 3.3
 @parent tutorials 11
 
 JavaScriptMVC 3.3 introduces a lot of new features to build large and responsive applications. As such, there are a few changes from 3.2 and this guide walks through the API differences between the versions.
