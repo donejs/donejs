@@ -142,7 +142,7 @@ Feed.extend('BlogFeed',
 /* @Prototype */
 {
 	init : function(){
-		var forumUrl = 'http://bitovi.com/news/feed/javascriptmvc.json?callback=BlogFeed.loadData';
+		var forumUrl = 'http://jupiterjs.com/news/feed/javascriptmvc.json?callback=BlogFeed.loadData';
 		$.ajax({
 			url: forumUrl,
 			dataType: 'script'
@@ -161,7 +161,7 @@ Feed.extend('BlogFeed',
 		var html = [], d, date, li, url;
 		for(var i = 0, ii = data.length; i < 6 && i < data.length; i++){
 			date = this.formatDate(data[i].publish_date);
-			url = "http://bitovi.com"
+			url = "http://jupiterjs.com"
 					+ data[i].url
 			d = {
 				title  : data[i].title,
