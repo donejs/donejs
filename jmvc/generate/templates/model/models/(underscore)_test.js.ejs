@@ -9,10 +9,10 @@ steal( "./<%= underscore %>.js",
 		expect(4);
 		stop();
 		<%= Alias %>.findAll({}, function(<%= pluralAlias %>){
-			ok(<%= pluralAlias %>)
-	        ok(<%= pluralAlias %>.length)
-	        ok(<%= pluralAlias %>[0].name)
-	        ok(<%= pluralAlias %>[0].description)
+			ok(<%= pluralAlias %>, "findAll provides an object")
+	        ok(<%= pluralAlias %>.length, "findAll provides something array-like")
+	        ok(<%= pluralAlias %>[0].name, "findAll provides an object with a name")
+	        ok(<%= pluralAlias %>[0].description, "findAll provides an object with a description")
 			start();
 		});
 	});
@@ -21,9 +21,9 @@ steal( "./<%= underscore %>.js",
 		expect(3)
 		stop();
 		new <%= Alias %>({name: "dry cleaning", description: "take to street corner"}).save(function(<%= underscore %>) {
-			ok(<%= underscore %>);
-			ok(<%= underscore %>.id);
-			equals(<%= underscore %>.name,"dry cleaning")
+			ok(<%= underscore %>, "save provides an object");
+			ok(<%= underscore %>.id, "save provides and object with an id");
+			equals(<%= underscore %>.name,"dry cleaning", "save provides an objec with a name")
 			<%= underscore %>.destroy()
 			start();
 		});
@@ -33,9 +33,9 @@ steal( "./<%= underscore %>.js",
 		expect(2);
 		stop();
 		new <%= Alias %>({name: "cook dinner", description: "chicken"}).save(function(<%= underscore %>) {
-			equals(<%= underscore %>.description,"chicken");
+			equals(<%= underscore %>.description,"chicken", "save creates with description");
 			<%= underscore %>.attr({description: "steak"}).save(function(<%= underscore %>){
-				equals(<%= underscore %>.description,"steak");
+				equals(<%= underscore %>.description,"steak", "save udpates with description");
 				<%= underscore %>.destroy();
 				start();
 			});
