@@ -1,165 +1,323 @@
-@page testing Testing Cookbook
+@page cookbook.testing Testing Cookbook
 @parent getstarted 1
 
 JavaScriptMVC puts a tremendous emphasis on 
-testing. It uses [FuncUnit] to provide easy to write functional and
-unit tests that can be run in the browser or automated!
+testing. It uses [FuncUnit] to easily write 
+tests that can be run in the browser or automated. FuncUnit
+integrates:
 
-When you scaffolded recipe, it created tests for you.  This guide will show you how to:
+ - QUnit - Assertions and testing structure
+ - Syn - Synthetic user events like clicking and typing
+ - Selenium / PhantomJS - Browser automation
 
-- Run unit tests.
+When you scaffolded recipe, it created tests and test pages for you. This 
+guide will show you how to:
+
+- Run tests.
 - Understand the unit tests.
 - Run functional tests.
 - Understand the functional tests.
 - Test isTasty functionality.
 
-## Run Unit Tests
+## Run Tests
 
-FuncUnit uses QUnit unit test things like models and basic plugins.  You can run these
-tests in the browser or Envjs (and now PhantomJS with a little extra work).
+To run all of __cookbook's__ tests, open
+`cookbook/test.html` in a browser. You should
+see something like [//cookbook/test.html this].
 
-### Run Unit Tests in the Browser
-
-Open `cookbook/qunit.html`.  You should see something like:
-
-@image site/images/test_cookbook_example.png
-
-We'll see how this works in a second.  First, lets run the unit tests
-in Envjs.
-
-### Run Unit Tests with Selenium
-
-Selenium automates browsers. FuncUnit can run your tests in this environment.
-
-In a command window type:
-
-    > js funcunit/open/selenium cookbook/qunit.html
-
-This runs qunit.html in a simulated 
-browser environment. The output should look like:
-
-<img src='http://wiki.javascriptmvc.com/wiki/images/2/24/Qunit-envjs.png' width='500px'>
-
-## Understanding the Unit Tests
-
-FuncUnit uses [http://docs.jquery.com/QUnit QUnit] for assertions and
-organizing them into tests and modules.  The best place to start understanding the
-unit tests is to read through [http://docs.jquery.com/QUnit QUnit's documentation].
-
-__cookbook/qunit.html__ loads [steal] and tells it to load
-`cookbook/test/qunit/qunit.js` which loads your unit tests:
-
- - `cookbook/test/qunit/cookbook_test.js`
- - `cookbook/test/qunit/recipe_test.js`
- 
-These files steal `funcunit/qunit` then 
-declare tests that get run once 
-all scripts have loaded.
-
-Open __cookbook/test/qunit/recipe_test.js__, 
-and lets see how the __findAll__ test works:
+To run those same tests with [funcunit.selenium Selenium], run:
 
 
-    //creates a test
-    test("findAll", function(){
-      //prevents the next test from running
-      stop(2000);
-      
-      //requests recipes
-      Cookbook.Models.Recipe.findAll({}, function(recipes){
-    
-        //makes sure we have something
-        ok(recipes)
-    
-        //makes sure we have at least 1 recipe
-        ok(recipes.length)
-    
-        //makes sure a recipe looks right
-        ok(recipes[0].name)
-        ok(recipes[0].description)
-    
-        //allows the next test to start
-        start()
-      });
-    })
+    > ./js funcunit/open/selenium cookbook/test.html
 
-## Run Functional Tests
+You should see something like:
 
-Functional tests are used to test things 
-that require user interaction like widgets that listen for 
-clicks and key events.
+@image tutorials/getstarted/selenium-run.png
 
-Cookbook's functional tests test the recipe create and recipe lists widgets.
-
-### Run Functional Tests in the Browser
-
-Open `cookbook/funcunit.html`.  You should see something like:
-
-<img src='http://wiki.javascriptmvc.com/wiki/images/b/b6/Funcunit.png'/>
-
-### Run Functional Tests in Selenium
-
-[http://seleniumhq.org/ Selenium] can automate launching browsers and is packaged
-with FuncUnit.
-
-In a command window type:
-
-    > js funcunit/open/selenium cookbook/funcunit.html
-
-This should open Firefox and IE if you are using Windows.  The results of the
-test should look like:
-
-<img src='http://wiki.javascriptmvc.com/wiki/images/a/a7/Funcunit-envjs.png' width='500px'>
 <div class='whisper'>
 	If Selenium is unable to open your browsers, it's likely you have them in an
-	unusual location.  Read [FuncUnit.static.browsers] for information on how to configure browsers
-	so selenium can find them.
+	unusual location.  Read the Other Browsers section in [funcunit.selenium Selenium] 
+	docs for information on how to configure browsers so selenium can find them.
 </div>
 
-If you are having trouble running the tests in Internet Explorer, you need to change a 
-few settings in the browser.  Please see the [FuncUnit FuncUnit documentation] for troubleshooting help.
+Continue to [building.cookbook Building Cookbook] or continuen reading to learn how
+this code works.
 
-## Understanding FuncUnit Tests
+## Tiered testing
 
-FuncUnit adds to QUnit the ability to open another page, in this case
-`cookbook/cookbook.html`, perform actions on it, and
-get information from it.
+If an application should be built of small, isolated modules that are glued together, its tests should reflect that.
 
-The `cookbook/funcunit.html`  page
-works just like `qunit.html` except the 'funcunit' plugin is loaded which 
-provides [FuncUnit]. FuncUnit is aliased to `S` to highlight the similarity between its API
-and jQuery's API.
+Cookbook's modules are each designed to be built and tested independently. For example, the `cookbook/recipe/create` module has its own tests and test page. Open [//cookbook/recipe/create/test.html cookbook/recipe/create/test.html]
+and it will run the tests in  `cookbook/recipe/create/create_test.js`.
 
-Let take a quick look at a FuncUnit test:
+To test the "glue", `cookbook_test.js` loads all modules' tests 
+and provides an integration test, verifying the application as a whole works as expected.
 
-    test("create recipes", function(){
+The following goes through:
 
-      //type Ice in the name field
-      S("[name=name]").type("Ice")
+ - cookbook/models/recipe_test.js
+ - cookbook/recipe/create/create_test.js
+ - cookbook/recipe/list/list_test.js
+ - cookbook/cookbook_test.js
 
-      //type Cold Water in the description field
-      S("[name=description]").type("Cold Water")
+## recipe_test.js
 
-      //click the submit button
-      S("[type=submit]").click()
+`cookbook/models/recipe_test.js` unit tests the 
+`cookbook/models/recipe`, module which is aliased as Recipe. It starts 
+by loading the `Recipe` model, QUnit, and the fixtures
+used to simulate the server:
 
-      //wait until the 2nd recipe exists
-      S('.recipe:nth-child(2)').exists()
+    steal( "./recipe.js", 
+        "funcunit/qunit", 
+        "cookbook/models/fixtures", 
+        function( Recipe ){
 
-      //Gets the text of the first td
-      S('.recipe:nth-child(2) td:first').text(function(text){
+Next it specifies which module the following tests belong to:
 
-        //checks taht it has ice
-        ok(text.match(/Ice/), "Typed Ice");
-      });
+    module("cookbook/models/recipe");
+    
+Then, it defines a `findAll` test: 
 
+	test("findAll", function(){
+		expect(4);
+		stop();
+		Recipe.findAll({}, function(recipes){
+			ok(recipes)
+	        ok(recipes.length)
+	        ok(recipes[0].name)
+	        ok(recipes[0].description)
+			start();
+		});
+	});
+
+The `findAll` test calls `Recipe.findAll` and
+attempts to verify that it returns recipes with
+a name and description.
+
+Because `Recipe.findAll` is asynchronous, this
+test calls QUnit's `stop` and `start` methods
+to signal when the test is complete.
+
+`recipe_test.js` goes on to test the remainder of 
+`Recipe`'s CRUD methods: create, update, destroy.
+
+## create_test.js
+
+`cookbook/recipe/create/create_test.js` tests 
+the `cookbook/recipe/create` module aliased as
+RecipeCreate.  It starts by loading funcunit, the 
+RecipeCreate control, the Recipe model and
+the recipeStore fixture:
+
+    steal('funcunit', 
+	    './create.js',
+	    'cookbook/models/recipe.js',
+	    'cookbook/models/fixtures', 
+	    function (S, RecipeCreate, Recipe, recipeStore ) {
+
+Next, it defines the module, with setup and teardown 
+code that runs before and after every test:
+
+    module("cookbook/recipe/create", {
+        setup: function(){
+            $("#qunit-test-area")
+                      .append("<form id='create'></form>");
+            new RecipeCreate("#create");
+        },
+        teardown: function(){
+            $("#qunit-test-area").empty();
+            recipeStore.reset();
+        }
+    });
+
+`setup` creates a _form_ element and creates a new `RecipeCreate` instance
+
+on it.  `teardown` removes the element and [can.fixture.store.reset resets] the
+`recipeStore` to contain the original set of recipes.
+
+`create_test.js` tests that RecipeCreate can create a recipe:
+
+    test("create recipes", function () {
+    	   ...
+    });
+
+We are going to create an __Ice Water__ recipe, so we
+listen to a recipe being created and check it's contents like:
+
+    stop();
+    Recipe.bind("created",function(ev, recipe){
+        ok(true, "Ice Water added");
+        
+        equals(recipe.name, 
+            "Ice Water", 
+            "name set correctly");
+            
+        equals(recipe.description, 
+            "Pour water in a glass. Add ice cubes.", 
+            "description set correctly" );
+            
+        start();
+        Recipe.unbind("created",arguments.callee);
     })
+		
+As this test is asynchronous, it calls QUnit's stop and start. After
+listening to Recipes being created, the test creates
+a recipe by simulating a user filling in the recipe form and clicking submit:
 
-Functional tests are largely many asynchronous actions 
-(clicks and keypresses)
-with relatively few checks/assertions.  
-FuncUnit's goal is to provide as readable and linear syntax as possible.
-FuncUnit statements are actually stored and then run asynchronously.  This requires that
-getting a value from the page happens in a callback function.
+    S("[name=name]").type("Ice Water");
+    S("[name=description]").type("Pour water in a glass. "+
+                                 "Add ice cubes.");
+		
+    S("[type=submit]").click();
 
-For more information on FuncUnit, read its [FuncUnit documentation]
+Then, it verifies the submit button's value is "Creating":
+
+    S("[type=submit]").val("Creating...",
+                           "button text changed while created");
+
+Finally, when the value is changed back to "Create", the 
+test checks that the form has been reset: 
+
+    S("[type=submit]").val("Create", function(){
+        ok(true, "button text changed back after create" );
+        equals(S("[name=name]").val(), "", "form reset");
+        equals(S("[name=description]").val(), "", "form reset");
+    });
+		
+## list_test.js
+
+`cookbook/recipe/list/list_test.js` tests the `cookbook/recipe/list`
+module aliased as RecipeList. It starts by loading funcunit, the 
+RecipeList control, the Recipe model and
+the recipeStore fixture:
+
+    steal('funcunit', 
+	    './list.js',
+	    'cookbook/models/recipe.js',
+	    'cookbook/models/fixtures', 
+	    function (S, RecipeCreate, Recipe, recipeStore ) {
+
+Next, it defines the module it is testing, with setup and teardown 
+code that runs before and after every test:
+
+    module("cookbook/recipe/list", {
+        setup: function(){
+            $("#qunit-test-area").append("<div id='recipes'></div>");
+            this.list = new RecipeList("#recipes");
+        },
+        teardown: function(){
+            $("#qunit-test-area").empty();
+            recipeStore.reset();
+        }
+    });
+
+`setup` creates a _div_ element and creates a new `RecipeList` 
+instance. That list will be accessible within each test as `this.list`. 
+`teardown` removes the element and [can.fixture.store.reset resets] 
+the `recipeStore` to contain the original set of recipes.
+
+Then, `list_test.js` tests that RecipeList displays all
+the recipes that are loaded on the server:
+
+    test("lists all recipes", function(){
+        stop();
+
+        Recipe.findAll({}, function(recipes){
+    
+            S(".recipe").size(recipes.length,function(){
+                ok(true, "All recipes listed");
+    		
+                start();
+            })
+        })
+    });
+    
+And it tests that created recipes are added to the list of recipes
+by creating a recipe and making sure a corresponding element shows 
+up on the page:
+
+    test("lists created recipes", function(){
+		
+        new Recipe({
+            name: "Grilled Cheese",
+            description: "grill cheese in bread"
+        }).save();
+		
+		S('h3:contains(Grilled Cheese X)')
+		              .exists("Lists created recipe");
+	})
+
+To test deleting a recipe, `list_test.js` creates a recipe then
+clicks its destroy link and makes sure the element has been removed:
+
+	test("delete recipes", function(){
+		new Recipe({
+			name: "Ice Water",
+			description: "mix ice and water"
+		}).save();
+		
+		// wait until grilled cheese has been added
+		S('h3:contains(Ice Water X)').exists();
+		
+		S.confirm(true);
+		S('h3:last a').click();
+		
+		S('h3:contains(Ice Water)')
+		    .missing("Grilled Cheese Removed");
+		
+	});
+
+## cookbook_test.js
+
+`cookbook/cookbook_test.js` loads all other tests
+and tests the `cookbook` module. It starts
+by loading FuncUnit and all the other tests:
+
+    steal(
+        'funcunit',
+        './models/recipe_test.js',
+        'cookbook/recipe/create/create_test.js',
+        'cookbook/recipe/list/list_test.js',
+        function (S) {
+
+Next it defines which module it's testing:
+
+    module("cookbook", {
+        setup : function () {
+            S.open("//cookbook/index.html");
+        }
+    });
+
+`setup` uses FuncUnit to open the application's page. Any
+FuncUnit commands, for example `S("h1").text()`, will
+operate within that page instead of the 
+testing window. This is ideal for integration and functional tests.
+
+`cookbook_test.js` then tests if the page contains
+JavaScriptMVC's welcome text:
+
+	test("welcome test", function () {
+		equals( S("h1").text(), 
+		        "Welcome to JavaScriptMVC!", 
+		        "welcome text" );
+	});
+
+Finally, it tests the integration between RecipeCreate and 
+RecipeList by creating a recipe and making sure it is 
+listed on the page:
+
+	test("creating a recipes adds it to the list ", function () {
+		
+		S("[name=name]").type("Ice Water");
+		S("[name=description]").type("Pour water in a glass. "+
+		                             "Add ice cubes.");
+		
+		S("[type=submit]").click();
+		
+		S("h3:contains(Ice Water)").exists();
+		S("p:contains(Pour water in a glass. Add ice cubes.)")
+		  .exists()
+	});
+
+
+Continue to [building.cookbook Building Cookbook].

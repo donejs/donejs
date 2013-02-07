@@ -1,10 +1,23 @@
-@page rootfolder
-The root folder is the folder where JavaScriptMVC is installed (the folder which has
-funcunit, jquery, steal, documentjs, etc).  
+@page rootfolder Root Folder
 
-Typically, the root folder should be a public folder that serves static content.
+The root folder is the folder where JavaScriptMVC is installed. This is the parent
+folder of the `steal`, `can`, etc folder.  For example:
 
-steal.plugins references files from the root folder.  Also, paths that begin with "//" also reference the root folder:
+    ROOT/
+      can/
+      jquery/
+      steal/
+      documentjs/
+      
+Typically, the root folder should be a public folder that serves static content. It's often named something 
+like `static` or `public` depending on what server and system setup you have.
 
-    steal('//foo/bar') //-> ROOTFOLDER/foo/bar
-    $('#foo').html('//views/bar.ejs',{}) // uses ROOTFOLDER/views/bar.ejs
+By default, `steal(moduleId)`, references files from the root folder. The following loads
+`ROOT/foo/bar.js`:
+
+    steal('foo/bar.js')
+    
+Paths that begin with `"//"` also reference the root folder.  The following 
+loads `ROOT/views/bar.ejs
+
+    $('#foo').html('//views/bar.ejs',{})

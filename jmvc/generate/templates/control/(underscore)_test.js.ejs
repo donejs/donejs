@@ -1,14 +1,18 @@
-steal('funcunit', function(FuncUnit){
+steal('<%= module %>','funcunit', function( <%=Alias%>, S ) {
 
-module("<%= fullName %>", { 
-	setup: function(){
-		S.open("//<%= path %>/<%=underscore%>/<%=underscore%>.html");
-	}
-});
-
-test("Text Test", function(){
-	equals(S("h1").text(), "<%= fullName %> Demo","demo text");
-});
-
+	module("<%= module %>", { 
+		setup: function(){
+			S.open( window );
+			$("#qunit-test-area").html("<div id='<%=underscore%>'></div>")
+		},
+		teardown: function(){
+			$("#qunit-test-area").empty();
+		}
+	});
+	
+	test("updates the element's html", function(){
+		new <%= Alias %>('#<%=underscore%>');
+		ok( $('#<%=underscore%>').html() , "updated html" );
+	});
 
 });

@@ -62,7 +62,12 @@ steal(	'steal/generate',
 		var fixturetext = new steal.EJS({
 			text: text
 		}).render(md);
-		steal.generate.insertCode(md.appPath+"/models/fixtures/fixtures.js", fixturetext);
+		
+		
+		if(readFile(md.appPath+"/models/fixtures/fixtures.js").indexOf(fixturetext) == -1){
+			steal.generate.insertCode(md.appPath+"/models/fixtures/fixtures.js", fixturetext);
+		}
+		
 		
 	}
 	

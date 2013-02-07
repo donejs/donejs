@@ -57,3 +57,7 @@ This guide details suggests a service layer design that minimizes the amount of 
 ### [migrate Migrating from 3.0 and 3.1]
 
 This guide outlines the things you have to look at when upgrading from version 3.0 or 3.1.
+
+### [done Migrating from 3.2 to 3.3]
+
+This guide outlines the API changes for moving a project from version 3.2.

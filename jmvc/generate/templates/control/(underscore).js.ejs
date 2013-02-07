@@ -1,18 +1,19 @@
-steal('can/control', './init.ejs', function(Control, initView){
+steal('can','./init.ejs', function(can, initView){
     /**
-     * @class <%= name %>
+     * @class <%= module %>
+	 * @alias <%= Alias %>   
      */
-    return Control(
-    /** @Static */
-    {
-        defaults : {}
-      },
-      /** @Prototype */
-      {
-        init : function(){
-          this.element.html(initView({
-            message: "Hello World from <%= name %>"
-          }));
-        }
-      });
+    return can.Control(
+	/** @Static */
+	{
+		defaults : {}
+	},
+	/** @Prototype */
+	{
+		init : function(){
+			this.element.html(initView({
+				message: "Hello World from <%= Alias %>"
+			}));
+		}
+	});
 });

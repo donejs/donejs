@@ -1,6 +1,6 @@
-/**
- * @page help Get Help
- * <h1 class='addFavorite'>Getting Help</h1>
+@page help Get Help
+
+<h1 class='addFavorite'>Getting Help</h1>
    There are a number of ways to get help:
 <h2>Premium Support and Training</h2>
 <a href='http://jupiterit.com/training.html' class='floatLeft'>
@@ -26,5 +26,3 @@ Ask questions on  [http://groups.google.com/group/javascriptmvc JavaScriptMVC's 
 <h2  class='spaced'>Search the Documentation</h2>
 <img src='http://wiki.javascriptmvc.com/wiki/images/a/ab/Support.png' class='floatLeft'/>
 JMVC's documentation is searchable.  Type in the input on the top right.
- */
-//asdfs

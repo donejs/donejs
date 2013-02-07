@@ -1,4 +1,3 @@
-/**
 @page developingjmvc Developing JavaScriptMVC
 
 Awesome, you want to contribute back some code to JavaScriptMVC, or build your own
@@ -8,14 +7,15 @@ explains how.
 JavaScriptMVC is comprised of several projects, each with 
 it's own repository:
 
- - [http://github.com/jupiterjs/steal]
- - [http://github.com/jupiterjs/jquerymx]
- - [http://github.com/jupiterjs/documentjs]
- - [http://github.com/jupiterjs/funcunit]
+ - [http://github.com/bitovi/steal]
+ - [http://github.com/bitovi/canjs]
+ - [http://github.com/bitovi/jquerypp]
+ - [http://github.com/bitovi/documentjs]
+ - [http://github.com/bitovi/funcunit]
 
 These are collected in the javascriptmvc repository:
 
- - [http://github.com/jupiterjs/javascriptmvc]
+ - [http://github.com/bitovi/javascriptmvc]
 
 Read how to get, test, and build each project in JavaScriptMVC:
 
@@ -25,18 +25,18 @@ In Github, fork the repo you want to make changes to.  Then clone
 the javascriptmvc repo and install the submodules like:
 
 @codestart
-git clone git@github.com:jupiterjs/javascriptmvc
+git clone git@github.com:bitovi/javascriptmvc
 @codeend
 
 Now, open the javascriptmvc folder's .gitmodule file and change the url of the submodule(s)
 you have forked.  For example, you might change:
 
 @codestart
-	url = git://github.com/jupiterjs/jquerymx.git
+	url = git://github.com/bitovi/canjs.git
 @codeend
 to
 @codestart
-	url = git://github.com/justinbmeyer/jquerymx.git
+	url = git://github.com/justinbmeyer/canjs.git
 @codeend
 
 Now run:
@@ -57,7 +57,7 @@ Now make your changes!
 
 ## 2. Test
 
-To test FuncUnit, Steal, and jQueryMX combined open 
+To test FuncUnit, Steal, CanJS, and jQuery++ combined open 
 <a href='/test.html'>javascriptmvc/test.html</a> in 
 every supported browser and run:
 
@@ -89,15 +89,26 @@ Run:
 funcunit/envjs funcunit/funcunit.html
 @codeend
 
-#### jQueryMX
+#### CanJS
 
-Open <a href='/jquery/qunit.html'>/jquery/qunit.html</a> 
+Open <a href='/canjs/qunit.html'>/canjs/qunit.html</a> 
 in every browser.
 
 Run:
 
 @codestart
-./js jquery/test/run.js
+./js canjs/test/run.js
+@codeend
+
+#### jQuery++
+
+Open <a href='/jquerypp/qunit.html'>/jquerypp/qunit.html</a> 
+in every browser.
+
+Run:
+
+@codestart
+./js jquerypp/test/run.js
 @codeend
 
 
@@ -124,5 +135,3 @@ ruby scripts\deploy.rb
 
 First you need to add our EC2 private key in the scripts folder, named key.  If you want to 
 deploy, talk to Brian to get access to this key.
- */
-//break

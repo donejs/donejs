@@ -68,7 +68,7 @@ function(steal){
 		md.appPath+"/"+md.appPath+".js",
 		md.appPath+"/"+md.underscore+"/list", {newline: true, name: md.Alias+"List"})
 	} catch(e) {
-		quit();
+		//quit();
 	}
   
 	var text = readFile("jmvc/generate/templates/scaffoldHookup.ejs");
@@ -77,14 +77,33 @@ function(steal){
 	}).render(md);
 	steal.generate.insertCode(md.appPath+"/"+md.appName+".js", hookup );
 	
-	// can.fixture.make for this model in fixtures.js
-	var text = readFile("jmvc/generate/templates/fixturemake.ejs");
-	var fixturetext = new steal.EJS({
-	    text: text
+	// insert the HTML into index
+	var text = readFile("jmvc/generate/templates/scaffoldHTML.ejs");
+	var hookupHTML = new steal.EJS({
+		text: text
 	}).render(md);
-	if( readFile(md.appPath+"/fixtures/fixtures.js").indexOf(fixturetext) >= 0 ) {
-		print("! Already added fixture.");
-	} else {
-		steal.generate.insertCode(md.appPath+"/fixtures/fixtures.js", fixturetext);
+	
+	var appFile = readFile( md.appPath+"/index.html" );
+	
+	if( appFile.indexOf(text) == -1  ){
+		var scriptIndex = appFile.indexOf("<script");
+		steal.File(md.appPath+"/index.html").save(
+			appFile.substring(0, scriptIndex)+hookupHTML+appFile.substr(scriptIndex)
+		);
+		steal.print('      '+md.appPath+"/index.html"+" (html added)");
 	}
+	
+	var text = readFile("jmvc/generate/templates/scaffoldTest.ejs"),
+		testCode = new steal.EJS({
+			text: text
+		}).render(md);
+		
+	if( readFile(md.appPath+"/"+md.appName+"_test.js").indexOf(testCode) == -1  ) {
+		steal.generate.insertCode(md.appPath+"/"+md.appName+"_test.js", testCode );
+		
+	}
+	
+	
+	
+	
 });

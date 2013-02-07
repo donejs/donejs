@@ -1,5 +1,5 @@
 steal('can', '<%= appPath %>/models/<%= underscore %>.js', './init.ejs', 'jquery/dom/form_params',
-	function (can, <%= Alias %>, initView) {
+	function (can, <%= Alias %>, initEJS) {
 
 	/**
 	 * @class <%= appPath %>/<%= underscore %>/create
@@ -9,14 +9,12 @@ steal('can', '<%= appPath %>/models/<%= underscore %>.js', './init.ejs', 'jquery
 	 * Creates <%= plural %>
 	 */
 	return can.Control(
-	/** @static */
-	{},
 	/** @Prototype */
 	{
-		init : function () {
-			this.element.html(initView());
+		init: function () {
+			this.element.html(initEJS());
 		},
-		submit : function (el, ev) {
+		submit: function (el, ev) {
 			ev.preventDefault();
 			el.find('[type=submit]').val('Creating...')
 			new <%= Alias %>(el.formParams()).save(function() {

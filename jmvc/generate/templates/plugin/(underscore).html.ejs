@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<title><%= alias %></title>
+	</head>
+	<body>
+	    <h1><%= alias %> Demo</h1>
+        <p>This is a dummy page to show off your plugin</p>
+		<script src='<%= path_to_steal %>/steal/steal.js'></script>
+		<script type='text/javascript'>
+		steal('<%= module %>', function(<%= alias %>){
+			
+		})
+		</script>
+	</body>
+</html>
