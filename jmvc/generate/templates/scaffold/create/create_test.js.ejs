@@ -25,7 +25,7 @@ steal('funcunit',
 				"Pour water in a glass. Add ice cubes.", 
 				"description set correctly");
 			start();
-			Recipe.unbind("created",arguments.callee);
+			<%=Alias%>.unbind("created",arguments.callee);
 		})
 		
 		S("[name=name]").type("Ice Water");
