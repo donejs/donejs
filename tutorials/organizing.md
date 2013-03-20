@@ -15,7 +15,7 @@ the reasons for doing this and patterns for doing it.
 ## Why
 
 Traditionally JavaScript, CSS and static resources were seen as second-class
-citizens when compared to server code.  JavaScript code was put in a single
+citizens when compared to server code.  JavaScript was put in a single
 flat 'scripts' folder that looked like:
 
     button.js
@@ -36,12 +36,13 @@ increasingly represents a larger percentage of an
 app's codebase.  What works for 10 files does not work for 100.
 
 Complicating matters, an individual JavaScript file might have dependencies on
-non-JavaScript resources.  It's easy to imagine a menu needing 
-a specific stylesheet, images, or [can.view client side template] to run.  
+non-JavaScript resources.  A menu might need
+a specific stylesheet, images, or [can.view client side template].  
 
-Spreading these dependencies across images, styles, templates etc folders
-leads to bad organization and potentially bad performance.  For example, it can be
-hard to know if a particular style rule is needed.
+Spreading these dependencies across images, styles, and template folders
+makes it more difficult to know what depends on what. Over the lifetime
+of an an application, it makes it more likely you'll be loading 
+resources that are not needed.
 
 ### The Fix
 
@@ -98,27 +99,27 @@ can be reused across several applications.  It is the perfect place for
 reusable controls like a tabs widget.  Typically folder names reflect
 the name of the organization building the controls.  
 
-### Resource Types
+### Module Types
 
-An application is comprised of various resources.  JavaScriptMVC's code generators can 
-be used to create these resources.
+An application is comprised of various modules.  JavaScriptMVC's code generators can 
+be used to create .
 
-__Model__ - A model represents a set of services. Typically, they exist within 
-an application folder's <code>models</code> directory and are used to request 
-data by other controls.
+__Model__ - A model represents a set of services. Typically, models exist within 
+an application folder's `models` directory and are used to request 
+data.
 
 Generate a model like:
 
     js jmvc\generate\model cms\models\image
 
-
-__Controller__ - A controller is a widget or code that combines and organizes
-several widgets.  Reusable widgets are added to library folders.  Controllers specific
+__Control__ - A [can.Control] can be a traditional view (a tabs widget) or
+a traditional controller (coordinates model and view). Reusable controls are 
+added to library folders.  Controls specific
 to an application should be put in a folder within an application folder.
 
 Generate a controller like:
 
-    js jmvc\generate\controller bitovi\tabs
+    js jmvc\generate\control bitovi\tabs
 
 
 __Plugin__ - A plugin is a low-level reusable module such as a special event or dom extension.
@@ -160,25 +161,30 @@ enough to produces the desired functionality. In this case,
     steal('bitovi/tabs',
           'bitovi/grid',
           'bitovi/create',
-          './models/image',
-          './models/video',
-          './models/article',function(){
+          './models/image.js',
+          './models/video.js',
+          './models/article.js',
+          function(
+          	Tabs, Grid, Create, 
+          	Image, Video, Article
+          ){
       
       // add tabs to the page
-      var tabs = new Bitovi.Tabs('#tabs');
+      var tabs = new Tabs('#tabs');
       
       // Configure the video grid
-      var videos = new Bitovi.Grid('#videos', {
+      var videos = new Grid($videos, {
         model: Cms.Models.Video,
         view: "//cms/views/videos.ejs"
-      })
+      }),
+      	videoEdit = new Edit('#videoEdit')
       
       // listen for when a video is selected
-      videos.element.find('li').bind('selected', 
+      videos.element.on('selected','li', 
         function(ev, video){
           // update the edit form with the selected 
           // video's attributes
-          new Bitovi.Edit('#videoEdit', { model: video });
+          videoEdit.update(video);
         }
       );
   
@@ -186,22 +192,24 @@ enough to produces the desired functionality. In this case,
       var images = new Bitovi.Grid('#images', {
         model: Cms.Models.Image,
         view: "//cms/views/images.ejs"
-      });
+      }),
+      	imageEdit = new Edit('#imageEdit');
 
-      images.element.find('li').bind('selected', 
+      images.element.on('selected','li', 
         function(ev, image){
-          new Bitovi.Edit('#imageEdit', { model: image });
+          imageEdit.update(video);
         }
       );
       
-      var articles = new Bitovi.Grid('#articles', {
-        model: Cms.Models.Article,
+      var articles = new Grid('#articles', {
+        model: Article,
         view: "//cms/views/article.ejs"
-      })
+      }),
+      	articleEdit = new Edit('#articleEdit');
       
-      articles.element.find('li').bind('selected', 
+      articles.element.on('selected','li', 
         function(ev, article){
-          new Bitovi.Edit('#articleEdit', { model: article });
+          articleEdit.update(video);
         }
       );
 
@@ -220,7 +228,7 @@ the requirements of your application.  For example, you might need to
 add specific functionality around listing and editing videos (such as a thumbnail editor).
 
 This is application specific functionality and belongs 
-in the application folder.  We'll encapsulate it in a controller for each type:
+in the application folder.  We'll encapsulate it in a controller [can.Control] for each type:
 
     \cms
       \articles - the articles tab
@@ -242,51 +250,52 @@ in the application folder.  We'll encapsulate it in a controller for each type:
           'cms/images',
           'cms/videos',
           'bitovi/tabs',
-          function(){
+          function(
+            Articles, Images, Videos, Tabs
+          ){
       
-      new Bitovi.Tabs('#tabs');
+      new Tabs('#tabs');
       
       // add the video grid
-      new Cms.Videos('#videos');
+      new Videos('#videos');
       
       // Do the same for images and articles
-      new Cms.Images('#images');
-      new Cms.Articles('#articles');
+      new Images('#images');
+      new Articles('#articles');
 
     })
 
 <code>cms/articles/articles.js</code> might look like:
 
-    steal('bitovi/grid',
+    steal('can', 
+          'bitovi/grid',
           'bitovi/edit',
-          'can/control', 
-          'can/view/ejs',
-          'bitovi/thumbnail',
-          function(){
+          './init.ejs',
+          './article.ejs',
+          'bitovi/models/article.js',
+          function(can, 
+                   Grid, Edit, 
+                   initEJS, articleEJS, 
+                   Article){
       
-      can.Control('Cms.Articles',
-      { },
-      {
+      return can.Control({
+      
         init : function(){
           // draw the html for the tab
-          this.element.html('//cms/articles/views/init.ejs',{});
+          this.element.html(initEJS({}));
 
           // configure the grid
-          new Bitovi.Grid(this.find('.grid'), {
-            model: Cms.Models.Article,
-            view: "//cms/articles/views/article.ejs"
+          new Grid(this.find('.grid'), {
+            model: Article,
+            view: articleEJS
           })
-	      });
+          
+          this.editor = new Edit(".edit")
         },
 
         // when the grid triggers a select event
-        " select" : function(el, ev){
-          var editor = new Bitovi.Edit({
-            model: el.data('model')
-          })
-
-          // add the thumbnail editor
-          new Bitovi.Thumbnail(editor.find('.thumbs'));
+        "li select" : function(el, ev, article){
+          this.editor.update(article)
         }
       });
       
@@ -328,51 +337,44 @@ folder structure would look like:
       \grid      
 
 
-<code>cms/articles/articles.js</code> might now look like:
+`cms/articles/articles.js` would look the same, except it would
+change __Grid__ and __Edit__ to point to `cms/articles/grid` and
+`cms/articles/edit`:
 
-    steal('cms/articles/grid',
+
+    steal('can', 
+          'cms/articles/grid',
           'cms/articles/edit',
-          'can/control',
-          'can/view/ejs',
-          function(){
-      
-      can.Control('Cms.Articles',
-      { },
-      {
-        init : function(){
-          // draw the initial html
-          this.element.html('//cms/articles/views/init.ejs',{});
-          
-          // create the articles grid
-          new Cms.Articles.Grid(this.find('.grid'));
-        },
-        " select" : function(el, ev, article){
-          
-          // update the articles edit control
-          new Cms.Articles.Edit(this.find('.edit'), { 
-            model: article 
-          });
-        }
-      });
+          './init.ejs',
+          './article.ejs',
+          'bitovi/models/article.js',
+          function(can, 
+                   Grid, Edit, 
+                   initEJS, articleEJS, 
+                   Article){
+       ...
     })
 
 JavaScriptMVC encourages you to organize your application folder as a tree.
 The leaves of the tree are micro-controls that perform a specific task (such as
 allowing the editing of videos).  
 
-Higher-order controls (<code>cms/articles/articles.js</code>) combine leaves and other nodes 
+Higher-order controls (`cms/articles/articles.js`) combine leaves and other nodes 
 into more complex functionality.  The root of the application is the application file 
-(<code>cms/cms.js</code>).  It combines and configures all high-level widgets.
+(`cms/cms.js`).  It combines and configures all high-level widgets.
 
-In general, low-level controls use can.trigger to send messages 'up' to higher-order
+Communication between modules is done with the observer 
+pattern ([can.compute] or [can.Observe]) or with events.
+
+With events, low-level controls use `$.fn.trigger` to send messages 'up' to higher-order
 controls.  Higher-order controls typically call methods on lower-level controls
 
-The Cms.Articles control listening to a 'select' event produced by
-Cms.Articles.Grid and creating (or updating) the Cms.Articles.Edit control
+The Articles control listening to a 'select' event produced by
+Grid and creating (or updating) the Edit control
 is a great example of this.
 
 The situation where this breaks down is usually when a 'state' needs to be shared and communicated
-across several controls.  [can.Observe] and client [can.Model models] are useful 
+across several controls.  [can.Observe] and  [can.Observe] are useful 
 for this situation.
 
 ## Conclusion

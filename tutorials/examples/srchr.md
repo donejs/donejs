@@ -1,51 +1,47 @@
 @page srchr Srchr
 @parent examples 0
 
-Srchr searches several data sources for content and displays it to the user.  See it in action [here](http://javascriptmvc.com/srchr/srchr.html). This article covers:
+Srchr searches several data sources for content and 
+displays it to the user.  See it in 
+action [here](http://javascriptmvc.com/srchr/srchr.html). This article covers:
 
 - Installing Srchr
 - The ideas behind JavaScriptMVC (JMVC)
 - How JMVC enables code separation
 - Srchr's architecture
 
-This article will talk about the architecture of the Srchr application, and how event oriented architecture can help you build loosely coupled, scalable applications. You will also learn how to assemble small pieces of functionality into the full blown application.
+This article will talk about the 
+architecture of the Srchr application, and how [can.compute] 
+can help you build loosely coupled, scalable applications. You will 
+also learn how to assemble small pieces of functionality into the full blown application.
 
 ## Installing Srchr
 
-You can install Srchr by using steal's [steal.get getjs] or via the [git repository](https://github.com/jupiterjs/srchr).
 
-### 1. Installing with getjs
+Install the Srchr app by cloning the git repo:
 
-The simplest way to install Srchr is to use the built in getjs script:
-
-    $ ./js steal/getjs srchr
-    
-It will download the whole application complete with dependencies.
-
-### 2. Installing via git
-
-You can also install the Srchr app by cloning the git repo:
-
-    $ git clone https://github.com/jupiterjs/srchr
-    $ cd srchr
-    $ git submodule update --init
+    > git clone git://github.com/bitovi/srchr srchr
+    > cd srchr
+    > git submodule update --init --recursive
     
 Once you get the application you should have a structure similar to below
 
     /srchr [top-level directory]
-        /jquery
+        /can
+        /documentjs
         /steal
         /funcunit
-        /scripts
         /srchr
-            /scripts
-            /test
+            /history
             /models
-            /fixtures
-            /views
-            funcunit.html
-            qunit.html
-            srchr.css
+            /scripts
+            /search
+            /search_result
+            /tabs
+            /templates
+            /test
+            test.html
+            srchr.less
             srchr.js
             srchr.html
             ...
@@ -56,44 +52,37 @@ Srchr is now ready to be used. To run the Srchr application simply open _srchr/s
 
 Srchr was built the 'JavaScriptMVC' way. It has a folder/file structure where:
 
-* Code is logically separated and tested
+* Code is logically separated and tested.
 * Code is easily assembled into higher-order functionality.
 * Higher order functionality is tested.
 
 ## How to organize and separate code
 
-Every JavaScript application implements widgets to show and manipulate data. In JavaScriptMVC every one of these widgets is built as an isolated part that can be reused and tested. These widgets communicate to each other with events, which results in a loosely coupled application. 
+Every JavaScript application implements widgets to 
+show and manipulate data. In JavaScriptMVC every one of 
+these widgets is built as an isolated part that can be reused and 
+tested. These widgets communicate to each other via a shared [can.compute], which 
+results in a loosely coupled application. 
 
 Srchr is broken into logically separated components: 
 
-* Disabler - Listens for search messages and disables tab buttons. 
 * History - A cookie saved list of items. 
 * Search - Creates a search message when a search happens. 
 * Search Result - Seaches for results and displays them. 
 * Tabs - A basic tabs widget. 
-
-
-This is the event diagram of Srchr:
-
-@image tutorials/images/diagram.png
-
-
 
 This is the widget organization in Srchr:
 
 @image tutorials/images/app_organization.png
 
 
+### User Workflow
 
-By creating dumb, isolated widgets with a loose coupling to the rest of the application, we can easily organize code. Every widget is living in it's own directory complete with tests and resources.  This allows us to test each of the widgets separately and reuse the code across projects.
+A user using Srchr might perform the following:
 
-### Srchr's workflow
-
-Srchr's workflow can be outlined like this:
-
-1. User selects (via checkboxes) services that should be searched
-2. User enters search term and clicks the search button
-3. On tab activation a search is performed and results are shown (since first enabled tab is active by default, these results will be shown immediately)
+1. Select (via checkboxes) services that should be searched
+2. Enter a search term and clicks the search button
+3. Click result tabs to see their results.
 4. Search params are saved to the history (via cookie)
 
 ### Search behavior

@@ -99,22 +99,3 @@ Open a command line to that folder and run:
 
 This starts the [http://www.mozilla.org/rhino/ Rhino JS engine].  Type <code>quit()</code> to exit.
 
-## Updating JavaScriptMVC
-
-We are constantly improving JMVC.  If you're using git, you can
-just pull changes.  Otherwise, to get the latest, most
-error free code, in a console, type:
-
-@codestart text
-> ./js documentjs/update
-> ./js funcunit/update
-> ./js jquery/update
-> ./js steal/update
-> ./js can/update
-> ./js canui/update
-@codeend
-<div class='whisper'>
-	P.S. If you are using linux/mac you
-	want to use <code>./js</code> and change <code>\</code> 
-	to <code>/</code>.
-</div>
