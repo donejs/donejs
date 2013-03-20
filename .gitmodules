@@ -4,9 +4,6 @@
 [submodule "canui"]
 	path = canui
 	url = git://github.com/bitovi/canui.git
-[submodule "jquery"]
-	path = jquery
-	url = git://github.com/bitovi/jquerypp.git
 [submodule "steal"]
 	path = steal
 	url = git://github.com/bitovi/steal.git
@@ -16,3 +13,6 @@
 [submodule "documentjs"]
 	path = documentjs
 	url = git://github.com/bitovi/documentjs.git
+[submodule "jquerypp"]
+	path = jquerypp
+	url = git://github.com/bitovi/jquerypp.git
