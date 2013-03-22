@@ -5,35 +5,27 @@ module.exports = function( grunt ) {
 	grunt.registerMultiTask('build', 'Runs build files.', function() {
 		var done = this.async();
 		var target = this.target;
-		var files = Array.isArray(this.file.src) ? this.file.src : [this.file.src];
-		// TODO grunt.file.expandFiles(this.file.src);
-		var series = files.map(function (file) {
-			return function(callback) {
-				var options = grunt.config.process(['build', target]);
-				var args = [file, options.out || 'dist/', options.version || 'edge'];
-				var libraries = Array.isArray(options.libraries) ? options.libraries : [];
 
-				args.push.apply(args, libraries);
+		var options = grunt.config.process(['build', target]);
+		var args = [this.data.src, this.data.out || 'dist/', this.data.version || 'edge'];
+		var libraries = Array.isArray(this.data.libraries) ? this.data.libraries : [];
 
-				grunt.verbose.writeflags(options, 'Options');
-				grunt.log.writeln('Running  ./js ' + args.join(' '));
+		args.push.apply(args, libraries);
 
-				grunt.utils.exec({
-					cmd : "./js",
-					args : args,
-					opts : {
-						cwd: jsDir
-					}
-				}, function(error, result, code) {
-					callback(error, result, code);
-				});
+		grunt.verbose.writeflags(this.data, 'Options');
+		grunt.log.writeln('Running  ./js ' + args.join(' '));
 
-				grunt.log.write("Building " + file + " with Steal...\n");
+		grunt.util.spawn({
+			cmd : "./js",
+			args : args,
+			opts : {
+				cwd: jsDir
 			}
-		});
-		grunt.utils.async.parallel(series, function(error, results) {
+		}, function(error, result, code) {
 			grunt.log.writeln('Done building');
 			done();
-		})
+		});
+
+		grunt.log.write("Building " + this.data.src + " with Steal...\n");
 	});
 };

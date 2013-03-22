@@ -5,14 +5,14 @@ var docco = require('docco');
 
 module.exports = function(grunt) {
 	grunt.registerMultiTask('docco', 'Docco processor.', function() {
-		var _ = grunt.utils._;
+		var _ = grunt.util._;
 		var options = grunt.config.process(['docco', this.target]);
 		var defaults = _.extend({
 			exclude : [/\.min\./]
 		}, grunt.config.process('docco')._options);
 		grunt.verbose.writeflags(options, 'Options');
 		var done = this.async();
-		var src = grunt.file.expandFiles(this.file.src).filter(function(file) {
+		var src = grunt.file.expand(this.data.src).filter(function(file) {
 			for(var i = 0; i < defaults.exclude.length; i++) {
 				if(defaults.exclude[i].test(file)) {
 					return false;
