@@ -6,23 +6,17 @@ var docco = require('docco');
 module.exports = function(grunt) {
 	grunt.registerMultiTask('docco', 'Docco processor.', function() {
 		var _ = grunt.util._;
-		var options = grunt.config.process(['docco', this.target]);
-		var defaults = _.extend({
-			exclude : [/\.min\./]
-		}, grunt.config.process('docco')._options);
-		grunt.verbose.writeflags(options, 'Options');
 		var done = this.async();
-		var src = grunt.file.expand(this.data.src).filter(function(file) {
-			for(var i = 0; i < defaults.exclude.length; i++) {
-				if(defaults.exclude[i].test(file)) {
-					return false;
-				}
-			}
-			return true;
+		var options = this.options();
+		var src = grunt.file.expand(this.data.files).filter(function(file) {
+			return !_.some(options.exclude, function(exclude) {
+				return exclude.test(file);
+			});
 		});
 
-		docco.document(src, _.extend({}, defaults.docco, options.docco) || {}, function(err, result, code){
-			grunt.log.writeln("Doccoed [" + src.join(", ") + "]; " + err ? err : "(No errors)" + "\n" + result + " " + code);
+		docco.document( _.extend({ args: src }, this.data.docco, options.docco), function(err, result, code){
+			grunt.log.writeln("Doccoed [" + src.join(", ") + "]; " +
+				err ? err : "(No errors)" + "\n" + result + " " + code);
 			done();
 		});
 	});
