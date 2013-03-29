@@ -40,6 +40,11 @@ module.exports = function (grunt) {
 		var excludes = grunt.config(['beautifier', this.target, 'exclude']);
 
 		grunt.file.expand(this.filesSrc).filter(function (file) {
+			if(/\.min\./.test(file)) {
+				grunt.log.writeln('Not beautifying ' + file);
+				return false;
+			}
+
 			for (var i = 0; i < excludes.length; i++) {
 				if (excludes[i].test(file)) {
 					grunt.log.writeln('Not beautifying ' + file);
