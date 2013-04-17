@@ -61,7 +61,7 @@ if [ -f ${INSTALLPATH}steal/steal.js ]
 then
 	cd ${INSTALLPATH}steal
 	git pull origin master
-	cd ../jquery
+	cd ../jquerypp
 	git pull origin master
 	cd ../documentjs
 	git pull origin master
@@ -81,7 +81,7 @@ else
 fi
 
 git submodule add $FULLSRC/steal.git ${INSTALLPATH}steal
-git submodule add $FULLSRC/canjs.git ${INSTALLPATH}canjs
+git submodule add $FULLSRC/canjs.git ${INSTALLPATH}can
 git submodule add $FULLSRC/jquerypp.git ${INSTALLPATH}jquerypp
 git submodule add $FULLSRC/documentjs.git ${INSTALLPATH}documentjs
 git submodule add $FULLSRC/funcunit.git ${INSTALLPATH}funcunit
@@ -89,7 +89,9 @@ git submodule init
 git submodule update
 cd ${INSTALLPATH}steal
 git checkout $BRANCH
-cd ../jquery
+cd ../can
+git checkout $BRANCH
+cd ../jquerypp
 git checkout $BRANCH
 cd ../documentjs
 git checkout master
