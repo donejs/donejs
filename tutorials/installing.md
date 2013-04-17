@@ -56,13 +56,13 @@ Forking the repos looks like:
 git submodule add git@github.com:_YOU_/steal.git public/steal
 git submodule add git@github.com:_YOU_/canjs.git public/can
 git submodule add git@github.com:_YOU_/canui.git public/canui
-git submodule add git@github.com:_YOU_/jquerypp.git public/jquery
+git submodule add git@github.com:_YOU_/jquerypp.git public/jquerypp
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
 @codeend
 
 Notice that CanJS is in <b style='font-size: 14px;color: red'>can</b> folder and
-jQuery++ is in the <b style='font-size: 14px;color: red'>jquery</b> folder.  
+jQuery++ is in the <b style='font-size: 14px;color: red'>jquerypp</b> folder.  
 
 After installing the repository, run:
 

@@ -14,7 +14,7 @@ Once you have JavaScriptMVC, you should have a folder with:
     can            - lightweight MVC components
     documentjs     - documentation engine
     funcunit       - testing app
-    jquery         - useful collections of jQuery plugins
+    jquerypp       - useful collections of jQuery plugins
     steal          - dependency management
     js             - JS command line for Linux/Mac
     js.bat         - JS command line for Windows
@@ -26,7 +26,7 @@ Once you have JavaScriptMVC, you should have a folder with:
 ## Get JavaScriptMVC running.
 
 JMVC uses [steal steal/steal.js] for dependency 
-management. Steal loads scripts.  To use JavaScriptMVC's 
+management. Steal loads scripts, CSS and more.  To use JavaScriptMVC's 
 features like [can.Control] and [can.view],
 'steal' them like:
 
