@@ -12,7 +12,7 @@
     "grunt-closure-tools": "0.7.7",
     "http-server": "0.5.1",
     "docco": "0.6.2",
-    "node-beautify": "*",
+    "js-beautify": "1.2.0",
     "github": ">= 0.1.7",
     "commander": "*",
     "tafa-misc-util": "*",
