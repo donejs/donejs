@@ -71,7 +71,7 @@ command-line and browser-based utilities enabling you to:
 
 ## FuncUnit
 
-[funcunit FuncUnit] is a web application testing framework that provides automated unit and 
+[FuncUnit FuncUnit] is a web application testing framework that provides automated unit and 
 functional testing.  Tests are written and debugged in the browser with
 FuncUnit's short, terse, jQuery-like API.  The same tests can be instantly 
 automated, run by Envjs or Selenium.  

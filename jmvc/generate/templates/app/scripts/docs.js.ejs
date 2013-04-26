@@ -1,8 +1,0 @@
-//js <%= path %>/scripts/doc.js
-
-load('steal/rhino/rhino.js');
-steal("documentjs", function(DocumentJS){
-	DocumentJS('<%= path %>/index.html', {
-		markdown : ['<%= application_name %>', 'steal', 'jquery', 'can', 'funcunit']
-	});
-});

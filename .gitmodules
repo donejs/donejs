@@ -13,3 +13,6 @@
 [submodule "jquerypp"]
 	path = jquerypp
 	url = https://github.com/bitovi/jquerypp.git
+[submodule "jmvc"]
+	path = jmvc
+	url = git://github.com/bitovi/jmvc-generators
