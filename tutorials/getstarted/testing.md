@@ -35,10 +35,13 @@ To run all of __cookbook's__ tests, open
 `cookbook/test.html` in a browser. You should
 see something like [//cookbook/test.html this].
 
-To run those same tests with [funcunit.selenium Selenium], run:
+To run those same tests with [funcunit.selenium Selenium], first you must set up a 
+local server, like Apache, running at the javascriptmvc root.  Make sure you can 
+open your test page from this server, at a URL like http://localhost/javascriptmvc/cookbook/test.html.
 
+Then run:
 
-    > ./js funcunit/open/selenium cookbook/test.html
+    > ./js funcunit/open/selenium http://localhost/javascriptmvc/cookbook/test.html
 
 You should see something like:
 
