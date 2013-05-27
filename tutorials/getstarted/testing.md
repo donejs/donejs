@@ -21,6 +21,16 @@ guide will show you how to:
 
 ## Run Tests
 
+Open cookbook_test.js.  You'll notice it steals tests for the model and controls.  There 
+are also tests that verify the original "Welcome to JavaScriptMVC" text that we removed.  Remove the 
+extraneous tests so `cookbook_test.js` just looks like this:
+
+steal(
+    'funcunit',
+    './models/recipe_test.js',
+    'cookbook/recipe/create/create_test.js',
+    'cookbook/recipe/list/list_test.js');
+
 To run all of __cookbook's__ tests, open
 `cookbook/test.html` in a browser. You should
 see something like [//cookbook/test.html this].

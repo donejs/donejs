@@ -153,7 +153,25 @@ and `cookbook/recipe/list` and then tries to add these widgets to the
 However, `#recipes` and `#create` elements did not 
 exist! Fortunately, the generator also added their HTML to `index.html` so that 
 it includes:
-          
+
+    <h2>Recipes</h2>
+    <ul id='recipes'></ul>
+    <form id='create'></form>
+
+Remove all other generated parts of the `index.html` page so it just looks like:
+
+    <!DOCTYPE HTML>
+    <html lang="en">
+        <head>
+            <title>cookbook</title>
+        </head>
+        <body>
+            <h2>Recipes</h2>
+            <ul id='recipes'></ul>
+            <form id='create'></form>
+            <script type='text/javascript' src='../steal/steal.js?cookbook'></script>
+        </body>
+    </html>
 
 ## Run Cookbook
 
