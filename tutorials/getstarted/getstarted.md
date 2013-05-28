@@ -61,8 +61,8 @@ P.S. <code>steal('can/control')</code> adds <code>can/control/control.js</code> 
 
 JavaScriptMVC is MIT with the following exceptions:
 
- - [http://www.mozilla.org/rhino/ Rhino] - JS command line ([http://www.mozilla.org/MPL/ MPL] 1.1)
- - [http://seleniumhq.org/ Selenium] - Browser Automation ([http://www.apache.org/licenses/LICENSE-2.0 Apache 2])
+ - [Rhino](http://www.mozilla.org/rhino/) - JS command line ([MPL 1.1](http://www.mozilla.org/MPL/))
+ - [Selenium](http://seleniumhq.org/) - Browser Automation ([Apache 2](http://www.apache.org/licenses/LICENSE-2.0))
 
 These exceptions, although permissive licenses themselves, are not linked in your final production build.
 

@@ -1,6 +1,8 @@
 @page cookbook.documenting Documenting Cookbook
 @parent getstarted 3
 
+@body
+
 Documentation is a critical step in creating maintainable code. 
 It's often burdensome on developers and 
 becomes neglected. JavaScriptMVC's integrates [DocumentJS] to make

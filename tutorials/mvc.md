@@ -7,7 +7,7 @@ JavaScriptMVC. The library is extremely lightweight
 (at only 8.5k minified and compressed) and full featured.
 
 Everything you want and need to know about CanJS 
-[http://canjs.us can be found here.] You will find documentation
+[ can be found here.](http://canjs.us) You will find documentation
 on how to use CanJS, examples of CanJS in action, as well as
 a customizable download builder.
 

@@ -1,6 +1,8 @@
 @page cookbook.creating Creating Cookbook
 @parent getstarted 0
 
+@body
+
 We're going to create a basic cookbook application that
 lets us create, and delete recipes. It will look like:
 
@@ -56,7 +58,7 @@ page followed by `?cookbook` like:
             src='../path/to/steal/steal.js?cookbook'>
     </script>
 
-If you open [//cookbook/index.html], you'll see a
+If you open //cookbook/index.html, you'll see a
 JavaScriptMVC welcome screen.  
 
 @image tutorials/getstarted/Welcome.png
@@ -280,7 +282,7 @@ where fixtures come in.
 
 ### The Recipe Fixture
 
-[can.fixture Fixtures] intercept Ajax requests and
+[can.fixture Fixtures] intercept AJAX requests and
 simulate the response. They enable
 you to start work on the front end without a ready server.
 
@@ -429,7 +431,7 @@ the inner html of the `controls` element:
     <% }) %>
 
 In the template, `this` is `this.list`. `this.list` is initially empty so
-the inner html of `this.element` is empty. The [can.Observe.List::replace list.replace](items)
+the inner html of `this.element` is empty. The [can.Observe.List.prototype.replace replace]
 method replaces the contents of the list with `items`.  If `items` is a
 [can.deferred deferred], it replaces the contents of the list with the
 resolved value of the deferred.

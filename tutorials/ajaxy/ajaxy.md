@@ -16,7 +16,7 @@ with the <code>ajaxy/scripts/crawl.js</code> script.
 
 The crawl script generates html pages that Google can use as a representation
 of the content of an Ajax application.  Read Google's documentation on its
-[https://developers.google.com/webmasters/ajax-crawling/docs/getting-started Ajax crawling API]
+[Ajax crawling API](https://developers.google.com/webmasters/ajax-crawling/docs/getting-started)
  before continuing this tutorial.
 
 ## Setup
@@ -24,7 +24,7 @@ of the content of an Ajax application.  Read Google's documentation on its
 [installing Download and install] the latest version of JavaScriptMVC.
 
 After installing JavaScriptMVC, open a command line to 
-the [steal.static.root steal.config().root] folder (where you unzipped
+the [steal.config.root steal.config.root] folder (where you unzipped
 JavaScriptMVC).  
 
 
@@ -171,7 +171,7 @@ before the Ajax request.  And when the page is ready, Ajaxy calls:
 ## Getting Google To Crawl Your Site
 
 If you haven't already, read up on 
-Google's [https://developers.google.com/webmasters/ajax-crawling/docs/getting-started Ajax crawling API].
+Google's [Ajax crawling API.](https://developers.google.com/webmasters/ajax-crawling/docs/getting-started)
 
 When google wants to crawl your site, it will send a 
 request to your page with <code>\_escaped\_fragment=</code>.  
@@ -189,10 +189,12 @@ To turn on Phantom:
 1. Install it using the install instructions [funcunit.phantomjs here]
 1. Open scripts/crawl.js and change the second parameter of steal.html.crawl to an options object with a browser option, like this:
 
-    steal('steal/html', function(){
-		steal.html.crawl("ajaxy/ajaxy.html", 
-		{
-			out: 'ajaxy/out',
-			browser: 'phantomjs'
-		})
-	})
+@codestart
+steal('steal/html', function(){
+  steal.html.crawl("ajaxy/ajaxy.html", 
+  {
+    out: 'ajaxy/out',
+    browser: 'phantomjs'
+  })
+})
+@codeend

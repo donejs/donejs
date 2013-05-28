@@ -1,6 +1,8 @@
 @page funcunit.getstarted Get Started with FuncUnit
 @parent tutorials 6
 
+@body
+
 In this guide, we'll use [FuncUnit] to write functional tests for the jQuery UI 
 autocomplete widget. We'll go over:
 
@@ -17,7 +19,7 @@ Open _funcunit/test/autosuggest/autosuggest.html_ in a browser.  Type "J" in the
 @image funcunit/pages/images/autosuggest.png
 
 
-This page is a simple demo app, using jQueryUI [http://jqueryui.com/demos/autocomplete/ autocomplete]. It 
+This page is a simple demo app, using [jQueryUI autocomplete](http://jqueryui.com/demos/autocomplete/). It 
 shows results when you start typing, then you can click a result (or use mouse navigation) to populate the input.
 
 There is a test already written.  Open <i>funcunit/test/autosuggest/autosuggest_test.js</i> in your IDE:
@@ -39,7 +41,7 @@ test("results appear",function(){
 });
 @codeend
 
-As you can probably tell, the [s S method] is an alias for jQuery (*).  This test:
+As you can probably tell, the [funcunit.finding S method] is an alias for jQuery (*).  This test:
 
 1. Opens autosuggest.html
 1. Grabs the input element, clicks it, and types "Java"

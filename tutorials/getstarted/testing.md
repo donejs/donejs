@@ -1,6 +1,8 @@
 @page cookbook.testing Testing Cookbook
 @parent getstarted 1
 
+@body
+
 JavaScriptMVC puts a tremendous emphasis on 
 testing. It uses [FuncUnit] to easily write 
 tests that can be run in the browser or automated. FuncUnit
@@ -25,15 +27,16 @@ Open cookbook_test.js.  You'll notice it steals tests for the model and controls
 are also tests that verify the original "Welcome to JavaScriptMVC" text that we removed.  Remove the 
 extraneous tests so `cookbook_test.js` just looks like this:
 
+@codestart
 steal(
     'funcunit',
     './models/recipe_test.js',
     'cookbook/recipe/create/create_test.js',
     'cookbook/recipe/list/list_test.js');
+@codeend
 
 To run all of __cookbook's__ tests, open
-`cookbook/test.html` in a browser. You should
-see something like [//cookbook/test.html this].
+`cookbook/test.html` in a browser.
 
 To run those same tests with [funcunit.selenium Selenium], first you must set up a 
 local server, like Apache, running at the javascriptmvc root.  Make sure you can 
@@ -60,7 +63,7 @@ this code works.
 
 If an application should be built of small, isolated modules that are glued together, its tests should reflect that.
 
-Cookbook's modules are each designed to be built and tested independently. For example, the `cookbook/recipe/create` module has its own tests and test page. Open [//cookbook/recipe/create/test.html cookbook/recipe/create/test.html]
+Cookbook's modules are each designed to be built and tested independently. For example, the `cookbook/recipe/create` module has its own tests and test page. Open `cookbook/recipe/create/test.html`
 and it will run the tests in  `cookbook/recipe/create/create_test.js`.
 
 To test the "glue", `cookbook_test.js` loads all modules' tests 

@@ -7,6 +7,6 @@ jQuery applications. It provides low-level utilities for things that
 jQuery doesn’t support.
 
 You can find out everything you need to know about jQuery++ 
-[http://jquerypp.com at its site.] jQuery++ is included with 
+[at its site.](http://jquerypp.com) jQuery++ is included with 
 JavaScriptMVC by default in the <code>jquery</code> folder in the root 
 of your project.

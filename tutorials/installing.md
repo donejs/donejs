@@ -3,26 +3,26 @@
 
 ## Requirements
 
-JavaScriptMVC requires [http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html Java JRE 1.6] or greater for:
+JavaScriptMVC requires [Java JRE 1.6](http://www.oracle.com/technetwork/java/javase/downloads/java-se-jdk-7-download-432154.html) or greater for:
 
  - Compression (Google Closure)
- - Running [http://www.funcunit.com/ FuncUnit] tests with [http://seleniumhq.org/ Selenium]
+ - Running [FuncUnit](http://www.funcunit.com/) tests with [Selenium](http://seleniumhq.org/)
  - Easy updating
  - Code Generators
 
 But your backend server can be written in any language.  
-Download the latest [http://www.java.com/en/download/index.jsp Java JRE here].
+Download the latest [Java JRE here](http://www.java.com/en/download/index.jsp).
 
 ## Getting JavaScriptMVC
 
 There are 2 ways to get JavaScriptMVC:
 
- - [http://javascriptmvc.com/builder.html Downloading]
+ - [Downloading](http://javascriptmvc.com/builder.html)
  - [developwithgit Installing JavaScriptMVC with Git]
 
 ## Downloading
 
-[http://javascriptmvc.com/builder.html Download] the latest JavaScriptMVC. 
+[Download](http://javascriptmvc.com/builder.html) the latest JavaScriptMVC. 
 Unzip the folder on your file system or web server.  
 If you are using this on a webserver, 
 unzip in a public folder where the server hosts static content.  
@@ -37,12 +37,12 @@ unzip in a public folder where the server hosts static content.
 
 JavaScriptMVC is comprised of six sub projects:
 
- - [http://github.com/bitovi/steal]
- - [https://github.com/bitovi/canjs]
- - [https://github.com/bitovi/canui]
- - [https://github.com/bitovi/jquerypp]
- - [http://github.com/bitovi/documentjs]
- - [http://github.com/bitovi/funcunit]
+ - [http://github.com/bitovi/steal](http://github.com/bitovi/steal)
+ - [https://github.com/bitovi/canjs](https://github.com/bitovi/canjs)
+ - [https://github.com/bitovi/canui](https://github.com/bitovi/canui)
+ - [https://github.com/bitovi/jquerypp](https://github.com/bitovi/jquerypp)
+ - [http://github.com/bitovi/documentjs](http://github.com/bitovi/documentjs)
+ - [http://github.com/bitovi/funcunit](http://github.com/bitovi/funcunit)
 
 You want to fork each project and add it as a submodule to your project 
 in a public folder (where your server keeps static content).
@@ -97,5 +97,5 @@ Open a command line to that folder and run:
 [Lin/Mac] > ./js
 @codeend
 
-This starts the [http://www.mozilla.org/rhino/ Rhino JS engine].  Type <code>quit()</code> to exit.
+This starts the [Rhino JS engine](http://www.mozilla.org/rhino/).  Type <code>quit()</code> to exit.
 

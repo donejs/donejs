@@ -1,13 +1,15 @@
 @page rapidstart Rapid Start
 @parent tutorials 1
 
+@body
+
 This walks through the basics of JavaScriptMVC by building a 
 smal todo app.  Check out the [getstarted Getting Started Guide] 
 for a more in-depth overview.
 
 ## Get JavaScriptMVC
 
-[http://javascriptmvc.com/builder.html Download it] or 
+[Download it](http://javascriptmvc.com/builder.html) or 
 [developwithgit pull it from Git].  JavaScriptMVC (JMVC) is a collection of 5 sub-projects. 
 Once you have JavaScriptMVC, you should have a folder with:
 
@@ -171,7 +173,7 @@ __can.Construct__ sets up the prototype chain so subclasses can be further exten
     });
 
 
-_Brief aside on `super`. If you steal the [can.Construct.super can/construct/super] plugin,  can.Construct provides a `_super` method to call the function of the same name higher on the prototype chain like:_
+_Brief aside on `super`. If you steal the [super can.Construct.super] plugin,  can.Construct provides a `_super` method to call the function of the same name higher on the prototype chain like:_
 
 
     var SecureNote = Todo({
@@ -218,7 +220,7 @@ To create a __Model__ constructor, call __can.Model__ with the:
 
   - __staticProperties__, including 
     [can.Model.findAll findAll],
-    [can.Model.findAll findOne],
+    [can.Model.findOne findOne],
     [can.Model.create create],
     [can.Model.update update],
     [can.Model.destroy destroy] properties, and
@@ -264,7 +266,7 @@ Create a todo instance like:
 ### Talking to the server
 
 Model uses static [can.Model.findAll findAll],
-[can.Model.findAll findOne], [can.Model.create create],
+[can.Model.findOne findOne], [can.Model.create create],
 [can.Model.update update], and [can.Model.destroy destroy]
 methods to create, read, update and delete 
 model instances on the server.  
@@ -481,8 +483,8 @@ To make this work, make sure `todos.html` has a `#todos` element like:
     
 ### Hookup `<li <%= (el)-> CODE %> >`
 
-[can.view.hookup] lets you provide 
-[http://wiki.ecmascript.org/doku.php?id=strawman:arrow_function_syntax ES5-style arrow function] 
+[jQuery.fn.hookup can.view.hookup] lets you provide 
+[ES5-style arrow function](http://wiki.ecmascript.org/doku.php?id=strawman:arrow_function_syntax)
 callbacks on elements in your template.  These callback functions get called after the template has been 
 inserted into the DOM. You can call jQuery methods on the element like:
 
@@ -532,7 +534,7 @@ We can create this widget on the `#todos` element with:
 
 ### init `can.Control.prototype.init(element, options)`
 
-[can.Control::init Init] is called when a
+[Init](can.Control) is called when a
 new Controller instance is created.  It's called with:
 
   - __element__ - The jQuery wrapped element passed to the 
@@ -786,7 +788,7 @@ between the `can.route`, `Editor` and `Todos`.  `Editor` and `Todos`
 are traditional views, consuming models.
 
 If you can understand this, you understand 
-everything. Congrats!  [//tutorials/rapidstart/todos.html See it in action].
+everything. Congrats!
 
 ## FuncUnit
 
@@ -851,7 +853,7 @@ Replace the test code within the steal callback with the following:
       S("#editor").val("wake up", "First Todo added correctly");
     })
     
-Reload [//tutorials/rapidstart/test.html test.html]. You'll 
+Reload test.html. You'll 
 see the page open and run the test in a separate window.
 
 ### Test Coverage
@@ -868,7 +870,7 @@ To add coverage, add the following code to the very bottom of stealconfig.js:
       })
     })
 
-Reload [//tutorials/rapidstart/test.html test.html]. When the tests are done, you'll see 
+Reload test.html. When the tests are done, you'll see 
 overall coverage stats.
 
 @image tutorials/images/coverage1.png

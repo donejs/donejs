@@ -18,7 +18,7 @@ The best over-all service layer can be described as JSON REST.
 
 JSON is used as the data received and sometimes sent to the server.
 
-REST is [http://en.wikipedia.org/wiki/Representational_state_transfer Representational State Transfer]
+[REST](http://en.wikipedia.org/wiki/Representational_state_transfer Representational State Transfer) is 
 where there are resource urls that are 
 modified with <code>GET POST PUT</code> and <code>DELETE</code> methods.  
 

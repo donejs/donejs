@@ -1,6 +1,8 @@
 @page organizing Organizing Your App
 @parent tutorials 7
 
+@body
+
 The secret to building large apps is to NEVER build
 large apps.  Break up your applications into small 
 pieces.  Then assemble those testable, bite-sized pieces 
@@ -374,7 +376,7 @@ Grid and creating (or updating) the Edit control
 is a great example of this.
 
 The situation where this breaks down is usually when a 'state' needs to be shared and communicated
-across several controls.  [can.Observe] and  [can.Observe] are useful 
+across several controls.  [can.compute] and  [can.Observe] are useful 
 for this situation.
 
 ## Conclusion

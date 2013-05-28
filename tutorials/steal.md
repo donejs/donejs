@@ -1,6 +1,8 @@
 @page tutorials.steal Get Started With StealJS
 @parent tutorials 5
 
+@body
+
 __NOTE:__  _This tutorial is under development.  We will have it done shortly_.
 
 
@@ -16,7 +18,7 @@ StealJS.
 
 ### Installing Steal
 
-[javascriptmvc.com/builder.html Download  StealJS] or 
+[Download StealJS](http://javascriptmvc.com/builder.html) or 
 [installing install JavaScriptMVC] and 
 unzip it in a public folder.
 
