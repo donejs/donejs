@@ -4,7 +4,6 @@ steal('can',
 	'jquery/build/lib.js')
 
 steal('steal/generate',
-	'steal/get',
 	'steal/build',
 	'steal/build/pluginify',
 	'steal/coffee',
