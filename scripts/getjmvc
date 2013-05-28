@@ -85,16 +85,19 @@ git submodule add $FULLSRC/canjs.git ${INSTALLPATH}can
 git submodule add $FULLSRC/jquerypp.git ${INSTALLPATH}jquerypp
 git submodule add $FULLSRC/documentjs.git ${INSTALLPATH}documentjs
 git submodule add $FULLSRC/funcunit.git ${INSTALLPATH}funcunit
+git submodule add $FULLSRC/jmvc-generators.git ${INSTALLPATH}jmvc
 git submodule init
 git submodule update
 cd ${INSTALLPATH}steal
+git checkout $BRANCH
+cd ../jmvc
 git checkout $BRANCH
 cd ../can
 git checkout $BRANCH
 cd ../jquerypp
 git checkout $BRANCH
 cd ../documentjs
-git checkout master
+git checkout $BRANCH
 cd ../funcunit
 git checkout $BRANCH
 git submodule init

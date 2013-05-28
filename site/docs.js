@@ -3,7 +3,7 @@ steal('can',
 	'documentjs',
 	'jquery/build/lib.js')
 
-steal('steal/generate',
+steal('steal','steal/generate',
 	'steal/build',
 	'steal/build/pluginify',
 	'steal/coffee',
