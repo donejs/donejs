@@ -29,4 +29,6 @@ steal('can/construct',
 	'can/view/modifiers',
 	'can/view/mustache')
 
+steal('can/util/func.js')
+
 // .then('canui')
