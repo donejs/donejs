@@ -4,7 +4,7 @@
 
 Here is the list of the example JavaScriptMVC applications. They cover specific JavaScriptMVC features and are ordered by complexity. If you need an introduction to the JavaScriptMVC framework it is best to read them in order.
 
-## [todo Todo] - [open application &#x21D7;](todo/todo.html)
+## [todo TodoMVC JavaScriptMVC] - [open application &#x21D7;](tutorials/examples/todo.html)
 
 In this guide, we're going to be installing and walking through the simplest [JavaScriptMVC](http://javascriptmvc.com/)
 application imaginable &mdash; a TODO list manager.
@@ -13,16 +13,6 @@ This article covers:
 
 - Separation of application logic from user interface
 - Using model lists to manage collection of models
-
-## [playermx PlayerMX] - [open application &#x21D7;](player/player.html)
-
-This article walks through a simple video player application utilizing Popcorn.js. 
-
-This article covers:
-
-- Installing and running the Application
-- Templated Events with [jQuery.Controller $.Controller]
-- How PlayerMX is built
 
 ## [srchr Srchr] - [open application &#x21D7;](srchr/srchr.html)
 

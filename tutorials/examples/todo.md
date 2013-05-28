@@ -3,22 +3,26 @@
 
 ## Introduction
 
-In this article we will be learning the basics of [JavaScriptMVC](http://javascriptmvc.com/) and the [Model-View-Controller pattern](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) by installing and walking through a simple To-do list manager. The separation of the application's core logic from its user interface behavior is the hallmark of MVC. By working through this exercise you will understand how JavaScriptMVC's particular flavor of this pattern enables you to create more flexible and maintainable browser-based applications.
+In this article we will be learning the basics of [JavaScriptMVC](http://javascriptmvc.com/) and 
+the [Model-View-Controller pattern](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) by installing 
+and walking through a simple Todo list manager. The separation of the 
+application's core logic from its user interface behavior is the hallmark of MVC. By 
+working through this exercise you will understand how JavaScriptMVC's particular flavor of this pattern 
+enables you to create more flexible and maintainable browser-based applications.
 
 Let's get started!
 
 ## Setup
 
-First, clone the application from our [repository](http://github.com/jupiterjs/todo) at GitHub, and initialize all the necessary submodules. The following commands will get you up and running:
+First, clone the application from our [repository](http://github.com/bitovi/todomvc-javascriptmvc) at GitHub, 
+and initialize all the necessary submodules. The following commands will get you up and running:
 
-    $ git clone https://github.com/jupiterjs/todo
-    $ git checkout jmvc_3.3
-    $ cd todo
+    $ git clone http://github.com/bitovi/todomvc-javascriptmvc
+    $ cd todomvc-javascriptmvc
     $ git submodule update --init
 
-This bundle now contains everything you need to run the application locally. Since there is no server-side dependency, you can now open the `todo/todo.html` file in your browser and see it in action.
-
-@image tutorials/images/todos.png
+Open `todomvc-javascriptmvc/todo/index.html` in your browser. You might have to host it
+under a static server.
 
 ## Structure
 
@@ -27,7 +31,7 @@ Now let's take a look at the anatomy of our application:
     /todo [top-level, the GitHub repository]
       /can
       /funcunit
-      /jquery
+      /jquerypp
       /steal
       /todo
         /scripts
@@ -36,7 +40,7 @@ Now let's take a look at the anatomy of our application:
         qunit.html
         todo.css
         todo.ejs
-        todo.html
+        index.html
         todo.js
 
 Breaking it down:
