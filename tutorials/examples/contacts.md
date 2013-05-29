@@ -95,7 +95,7 @@ Heres a visual representation of how this app is broken up into modules.
 
 @image tutorials/images/contacts_design.png
 
-## Tieing it all together
+## Tying it all together
 
 `contacts/contacts.js` will be where the application starts: loading each module, initializing them, and gluing them together.
 
@@ -118,7 +118,8 @@ In the `init` method, we initalize all the base objects and inject the base view
 		this.element.html(initView({ ... });
 
 		// Initalize each Form category
-		can.each(['location', 'category', 'company', 'contact'], function(formType){
+		can.each(['location', 'category', 
+        'company', 'contact'], function(formType){
 			new Form(this.element.find('#' + formType), {
 				edited : this.edited,
 				model  : Models[can.capitalize(formType)],

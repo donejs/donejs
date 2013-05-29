@@ -19,35 +19,34 @@
 		<script type="text/javascript" src="../../steal/steal.js"></script>
         <script type="text/javascript" id="demo-source">
 
-        steal('jquery',
-		      'can/construct/proxy',
-		      'can/control',
-		      'can/route',
-		      'steal/html',
-		      function($, can){
-		      
-		var Ajaxy = can.Control({
-		    "{route} change" : function(route, ev){
-		    	this.updateContent(route.page)
-		    },
-		    updateContent : function(hash){
-		        // postpone reading the html 
-		        steal.html.wait();
-		        
-		        $.get("fixtures/" + hash + ".html", {}, this.proxy('replaceContent'), "text")
-		    },
-		    replaceContent : function(html){
-		        this.element.html(html);
-		        
-		        // indicate the html is ready to be crawled
-		        steal.html.ready();
-		    }
-		})
+steal('jquery',
+  'can/construct/proxy',
+  'can/control',
+  'can/route',
+  'steal/html',
+  function($, can){
+  
+var Ajaxy = can.Control({
+	"{route} change" : function(route, ev){
+		this.updateContent(route.page)
+	},
+	updateContent : function(hash){
+    // postpone reading the html 
+    steal.html.wait();
+    
+    $.get("fixtures/" + hash + ".html", {}, this.proxy('replaceContent'), "text")
+	},
+	replaceContent : function(html){
+    this.element.html(html);
+    // indicate the html is ready to be crawled
+    steal.html.ready();
+	}
+})
 
-		new Ajaxy('#content', { route: can.route(":page", { page: "videos" }) });
-
-		});
-        </script>
+new Ajaxy('#content', { 
+	route: can.route(":page", { page: "videos" }) });
+});
+		</script>
 
 	</body>
 </html>

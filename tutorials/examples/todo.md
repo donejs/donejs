@@ -62,8 +62,8 @@ The diagram below shows how we've broken our application out into model, view, a
 
 If you look at `todo.js` the first thing you'll notice is that all the code is wrapped in a call to the `steal` function:
 
-	steal('can/model', 'can/control', 'can/view/ejs', 'jquery/lang/json')
-	  .then('./todo.css')
+	steal('todo/models/todo.js', 'todo/controls/todos',
+  './todo.less')
 
 In fact, this is true of every JavaScript file in a JavaScriptMVC application: we use `steal` to state our dependencies up-front, which tells the framework what libraries, plugins, stylesheets, etc. we need to load before we can begin. Typically, the final argument to `steal` will be a callback function, which will be executed when all the other dependencies (and _their_ dependencies, and so on...) have been loaded and executed as well. No more worrying whether you forgot any `<script>` tags, or whether you've got them in the right order!
 
@@ -73,7 +73,8 @@ In fact, this is true of every JavaScript file in a JavaScriptMVC application: w
 
 All models in JavaScriptMVC extend the [can.Model Model] class:
 
-    can.Model('Todo', { /* static properties */ }, { /* instance/prototype properties */ })
+    can.Model('Todo', { /* static properties */ }, 
+      { /* instance/prototype properties */ })
 
 > If you need a quick refresher on how to use JVMC's classes, see [can.Construct Construct].
 
@@ -91,7 +92,8 @@ Since we want our To-do list manager to function without a server, we need some 
 	     */
 	    localStore: function(cb){
 	      var name = 'todos-jmvc',
-	        data = $.evalJSON( window.localStorage[name] || (window.localStorage[name] = '[]') ),
+	        data = $.evalJSON( window.localStorage[name] || 
+            (window.localStorage[name] = '[]') ),
 	        res = cb.call(this, data);
 	      if(res !== false){
 	        can.each(data, function(i, todo) {

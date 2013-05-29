@@ -3,9 +3,13 @@
 
 JavaScriptMVC 3.3 introduces a lot of new features to build large and responsive applications. As such, there are a few changes from 3.2 and this guide walks through the API differences between the versions.
 
+## CanJS
+
+[canjs Can] has replaced the previous MVC internals of JavaScript MVC, but provides backwards compatability to jQuery MX. jQuery MX $.Class, $.Model, and $.Controller will not be supported in future versions, and we urge you to switch to using can.
+
 ## Steal
 
-[stealjs | Steal] in 3.3 has support for AMD modules. Steal will still load resources as 3.2, however will also now follow the pattern for dependencies represented by a string id.
+[stealjs Steal] in 3.3 has support for AMD modules. Steal will still load resources as 3.2, however will also now follow the pattern for dependencies represented by a string id.
 
 So, as a simple example:
 
