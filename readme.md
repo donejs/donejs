@@ -1,4 +1,4 @@
-@page index JavaScriptMVC
+@page javascriptmvc JavaScriptMVC
 
 <div class="top">
 	<div class="topCorner">
