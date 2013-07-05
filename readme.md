@@ -62,7 +62,6 @@ command-line and browser-based utilities enabling you to:
 
   - [steal load] JS, CSS, LESS, and CoffeeScript files and build them into a single production file.
   - [steal.generate generate] an application file/folder structure, complete with test, build and documentation scripts.
-  - [steal.get install] 3rd party dependencies.
   - [steal.clean clean and JSLint] your code.
   - make your Ajax app [steal.html crawlable].
   - log [steal.dev messages] in development that get removed in production builds.

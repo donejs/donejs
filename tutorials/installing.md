@@ -27,11 +27,9 @@ Unzip the folder on your file system or web server.
 If you are using this on a webserver, 
 unzip in a public folder where the server hosts static content.  
 	
-<div class='whisper'>PRO TIP: 
-  Unzip these files as
-  high in your apps folder structure as possible (i.e. don't
-  put them under a javascriptmvc folder in your public directory).
-</div>
+> TIP: Unzip these files as
+high in your apps folder structure as possible (i.e. don't
+put them under a javascriptmvc folder in your public directory).
 
 ## Installing JavaScriptMVC with Git.
 

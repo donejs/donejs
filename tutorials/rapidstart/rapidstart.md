@@ -9,9 +9,7 @@ for a more in-depth overview.
 
 ## Get JavaScriptMVC
 
-[Download it](http://javascriptmvc.com/builder.html) or 
-[developwithgit pull it from Git].  JavaScriptMVC (JMVC) is a collection of 5 sub-projects. 
-Once you have JavaScriptMVC, you should have a folder with:
+[installing Install JavaScriptMVC]. Once you have JavaScriptMVC, you should have a folder with:
 
     can            - lightweight MVC components
     documentjs     - documentation engine

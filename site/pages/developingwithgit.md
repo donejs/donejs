@@ -38,11 +38,9 @@ the fork button (in the upper right of the page).
 
 @image site/images/fork.png
 
-<div class='whisper'>PRO TIP: 
-  If you're working for a company, you should create company forks and give 
-  employees access to the company forks.  This will keep everyone using the 
-  same version.
-</div>
+> TIP: If you're working for a company, you should create company forks and give 
+employees access to the company forks.  This will keep everyone using the 
+same version.
 
 #### Installing with a script
 
@@ -57,7 +55,8 @@ chmod 755 getjmvc
 Use this script to install JMVC from github or your own fork. If its already installed, it will get latest for all the submodules.  
 Assumes your project uses git.
 
-##### Options: 
+##### Options
+ 
  - -u username (default is bitovi)
  - -b branch (default is master)
  - -s source url (default is https://github.com)
