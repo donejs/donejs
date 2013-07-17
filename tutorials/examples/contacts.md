@@ -18,7 +18,7 @@ Let's get started!
 
 The application source is hosted by [GitHub](https://github.com/bitovi/contacts). You can download the application on github using the following commands:
 
-	$ git clone https://github.com/jupiterjs/contacts
+	$ git clone https://github.com/bitovi/contacts
     $ cd contacts
     $ git submodule update --init
 

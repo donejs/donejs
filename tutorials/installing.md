@@ -33,14 +33,15 @@ put them under a javascriptmvc folder in your public directory).
 
 ## Installing JavaScriptMVC with Git.
 
-JavaScriptMVC is comprised of six sub projects:
+JavaScriptMVC is comprised of 7 sub projects:
 
- - [http://github.com/bitovi/steal](http://github.com/bitovi/steal)
+ - [https://github.com/bitovi/steal](http://github.com/bitovi/steal)
  - [https://github.com/bitovi/canjs](https://github.com/bitovi/canjs)
  - [https://github.com/bitovi/canui](https://github.com/bitovi/canui)
  - [https://github.com/bitovi/jquerypp](https://github.com/bitovi/jquerypp)
- - [http://github.com/bitovi/documentjs](http://github.com/bitovi/documentjs)
- - [http://github.com/bitovi/funcunit](http://github.com/bitovi/funcunit)
+ - [https://github.com/bitovi/documentjs](http://github.com/bitovi/documentjs)
+ - [https://github.com/bitovi/funcunit](http://github.com/bitovi/funcunit)
+ - [https://github.com/bitovi/jmvc-generators](https://github.com/bitovi/jmvc-generators)
 
 You want to fork each project and add it as a submodule to your project 
 in a public folder (where your server keeps static content).
@@ -57,6 +58,7 @@ git submodule add git@github.com:_YOU_/canui.git public/canui
 git submodule add git@github.com:_YOU_/jquerypp.git public/jquerypp
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
 git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
+git submodule add git@github.com:_YOU_/jmvc-generators.git public/jmvc
 @codeend
 
 Notice that CanJS is in <b style='font-size: 14px;color: red'>can</b> folder and
