@@ -23,16 +23,39 @@ guide will show you how to:
 
 ## Run Tests
 
-Open cookbook_test.js.  You'll notice it steals tests for the model and controls.  There 
-are also tests that verify the original "Welcome to JavaScriptMVC" text that we removed.  Remove the 
-extraneous tests so `cookbook_test.js` just looks like this:
+Open `cookbook/cookbook_test.js`.  You'll notice it steals tests 
+for the model and controls.  There 
+are also tests that verify the 
+original "Welcome to JavaScriptMVC" text that we removed.  __Remove__ the 
+extraneous test so `cookbook_test.js` just looks like this:
 
 @codestart
 steal(
-    'funcunit',
-    './models/recipe_test.js',
-    'cookbook/recipe/create/create_test.js',
-    'cookbook/recipe/list/list_test.js');
+	'funcunit',
+	'./models/recipe_test.js',
+	'cookbook/recipe/create/create_test.js',
+	'cookbook/recipe/list/list_test.js',
+	function (S) {
+
+	// this tests the assembly 
+	module("cookbook", {
+		setup : function () {
+			S.open("//cookbook/index.html");
+		}
+	});
+
+	test("creating a recipes adds it to the list ", function () {
+		
+		S("[name=name]").type("Ice Water");
+		S("[name=description]")
+		  .type("Pour water in a glass. Add ice cubes.");
+		
+		S("[type=submit]").click();
+		
+		S("h3:contains(Ice Water)").exists();
+		S("p:contains(Pour water in a glass. Add ice cubes.)").exists()
+	});
+});
 @codeend
 
 To run all of __cookbook's__ tests, open
@@ -48,7 +71,7 @@ Then run:
 
 You should see something like:
 
-@image tutorials/getstarted/selenium-run.png
+@image ../tutorials/getstarted/selenium-run.png
 
 <div class='whisper'>
 	If Selenium is unable to open your browsers, it's likely you have them in an

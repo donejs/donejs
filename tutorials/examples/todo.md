@@ -56,7 +56,7 @@ MVC is a well-established architectural pattern in software engineering. Without
 
 The diagram below shows how we've broken our application out into model, view, and control layers:
 
-@image tutorials/images/todo_arch.png
+@image ../tutorials/images/todo_arch.png
 
 ### Dependencies
 

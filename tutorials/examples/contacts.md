@@ -10,7 +10,7 @@ This tutorial describes:
 - Dividing the application into modular widgets
 - Tieing the widgets together
 
-@image tutorials/images/contacts_preview.png
+@image ../tutorials/images/contacts_preview.png
 
 Let's get started!
 
@@ -93,7 +93,7 @@ This application can be divided up into a few widgets:
 
 Heres a visual representation of how this app is broken up into modules.
 
-@image tutorials/images/contacts_design.png
+@image ../tutorials/images/contacts_design.png
 
 ## Tying it all together
 

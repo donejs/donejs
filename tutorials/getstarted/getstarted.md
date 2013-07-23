@@ -1,4 +1,4 @@
-@page getstarted Get Started with JavaScriptMVC
+@page getstarted Get Started with JMVC
 @parent tutorials 2
 
 This guide introduces the most important aspects of JavaScriptMVC (JMVC) by 
@@ -53,9 +53,8 @@ their own dependencies and won't load duplicate files.  It looks like:
     });
 
 
-<div class='whisper'>
-P.S. <code>steal('can/control')</code> adds <code>can/control/control.js</code> to your project.
-</div>
+> _P.S. `steal('can/control')` adds `can/control/control.js` to your project._
+
 
 ## License
 

@@ -6,7 +6,7 @@
 We're going to create a basic cookbook application that
 lets us create, and delete recipes. It will look like:
 
-@image tutorials/getstarted/Cookbook.png
+@image ../tutorials/getstarted/Cookbook.png
 
 </br>
 We'll use JavaScriptMVC's [steal.generate generator scripts] to
@@ -61,7 +61,7 @@ page followed by `?cookbook` like:
 If you open //cookbook/index.html, you'll see a
 JavaScriptMVC welcome screen.  
 
-@image tutorials/getstarted/Welcome.png
+@image ../tutorials/getstarted/Welcome.png
 
 <br/>Open `cookbook/index.html` and you will find:
 
@@ -179,9 +179,9 @@ Remove all other generated parts of the `index.html` page so it just looks like:
 
 
 That's it. You've created a simple Cookbook 
-application. Open cookbook/cookbook.html in a browser. 
+application. Open cookbook/index.html in a browser. 
 
-@image tutorials/getstarted/Cookbook.png
+@image ../tutorials/getstarted/Cookbook.png
 
 <div style='background-color: #dddddd;  margin: 20px 0px;padding: 20px'>
 <p>
