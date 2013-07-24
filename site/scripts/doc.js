@@ -5,6 +5,7 @@ steal("documentjs", function(DocumentJS){
 		markdown : [ 'readme.md', 'site', 'tutorials', 'steal', 'jquerypp', 'can', 'funcunit', 'jmvc'],
 		out : 'docs',
 		parent: 'javascriptmvc',
-		"static": "site/static"
+		"static": "site/static",
+		"templates": "site/templates"
 	});
 });
