@@ -6,7 +6,7 @@
 	url = git://github.com/bitovi/steal.git
 [submodule "funcunit"]
 	path = funcunit
-	url = git://github.com/bitovi/funcunit.git
+	url = https://github.com/bitovi/funcunit.git
 [submodule "documentjs"]
 	path = documentjs
 	url = git://github.com/bitovi/documentjs.git
