@@ -35,12 +35,12 @@ put them under a javascriptmvc folder in your public directory).
 
 JavaScriptMVC is comprised of 7 sub projects:
 
- - [https://github.com/bitovi/steal](http://github.com/bitovi/steal)
+ - [https://github.com/bitovi/legacy-steal](http://github.com/bitovi/legacy-steal)
  - [https://github.com/bitovi/canjs](https://github.com/bitovi/canjs)
  - [https://github.com/bitovi/canui](https://github.com/bitovi/canui)
  - [https://github.com/bitovi/jquerypp](https://github.com/bitovi/jquerypp)
  - [https://github.com/bitovi/documentjs](http://github.com/bitovi/documentjs)
- - [https://github.com/bitovi/funcunit](http://github.com/bitovi/funcunit)
+ - [https://github.com/bitovi/legacy-funcunit](http://github.com/bitovi/legacy-funcunit)
  - [https://github.com/bitovi/jmvc-generators](https://github.com/bitovi/jmvc-generators)
 
 You want to fork each project and add it as a submodule to your project 
@@ -52,12 +52,12 @@ explanation, you might want to read
 Forking the repos looks like:
 
 @codestart text
-git submodule add git@github.com:_YOU_/steal.git public/steal
+git submodule add git@github.com:_YOU_/legacy-steal.git public/steal
 git submodule add git@github.com:_YOU_/canjs.git public/can
 git submodule add git@github.com:_YOU_/canui.git public/canui
 git submodule add git@github.com:_YOU_/jquerypp.git public/jquerypp
 git submodule add git@github.com:_YOU_/documentjs.git public/documentjs
-git submodule add git@github.com:_YOU_/funcunit.git public/funcunit
+git submodule add git@github.com:_YOU_/legacy-funcunit.git public/funcunit
 git submodule add git@github.com:_YOU_/jmvc-generators.git public/jmvc
 @codeend
 
