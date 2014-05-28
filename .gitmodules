@@ -10,9 +10,3 @@
 [submodule "jmvc"]
 	path = jmvc
 	url = git://github.com/bitovi/jmvc-generators
-[submodule "steal"]
-	path = steal
-	url = git@github.com:bitovi/legacy-steal.git
-[submodule "funcunit"]
-	path = funcunit
-	url = git@github.com:bitovi/legacy-funcunit.git
