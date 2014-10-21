@@ -1,8 +1,8 @@
 #
-# Use this script to install JMVC from github or your own fork. If its already installed, 
+# Use this script to install JMVC from github or your own fork. If its already installed,
 # it will get latest for all the submodules.  Assumes your project uses git.
 #
-# Options: 
+# Options:
 #	-u username (default is bitovi)
 #	-b branch (default is master)
 #	-s source url (default is https://github.com)
@@ -34,7 +34,7 @@ USERNAME=bitovi
 BRANCH=master
 SRC=https://github.com
 INSTALLPATH=
- 
+
 while getopts ":u:b:s:p:" opt; do
   case $opt in
     u)
@@ -80,11 +80,11 @@ else
 	FULLSRC=$SRC:$USERNAME
 fi
 
-git submodule add $FULLSRC/steal.git ${INSTALLPATH}steal
+git submodule add $FULLSRC/legacy-steal.git ${INSTALLPATH}steal
 git submodule add $FULLSRC/canjs.git ${INSTALLPATH}can
 git submodule add $FULLSRC/jquerypp.git ${INSTALLPATH}jquerypp
 git submodule add $FULLSRC/documentjs.git ${INSTALLPATH}documentjs
-git submodule add $FULLSRC/funcunit.git ${INSTALLPATH}funcunit
+git submodule add $FULLSRC/legacy-funcunit.git ${INSTALLPATH}funcunit
 git submodule add $FULLSRC/jmvc-generators.git ${INSTALLPATH}jmvc
 git submodule init
 git submodule update
@@ -97,7 +97,7 @@ git checkout $BRANCH
 cd ../jquerypp
 git checkout $BRANCH
 cd ../documentjs
-git checkout $BRANCH
+git checkout legacy
 cd ../funcunit
 git checkout $BRANCH
 git submodule init

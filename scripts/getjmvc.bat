@@ -1,7 +1,7 @@
-:: Use this script to install JMVC from github or your own fork. If its already installed, 
+:: Use this script to install JMVC from github or your own fork. If its already installed,
 :: it will get latest for all the submodules.  Assumes your project uses git.
 ::
-:: Options: 
+:: Options:
 ::	-u username (default is bitovi)
 ::	-b branch (default is master)
 ::	-s source url (default is https://github.com)
@@ -11,18 +11,18 @@
 ::	Default usage.  This will install from https://bitovi@github.com/bitovi/steal.git
 ::		./getjmvc
 ::
-::	Use your own forked submodule repositories. This will install from 
+::	Use your own forked submodule repositories. This will install from
 ::	https://github.com/bitovi/steal.git
 ::		./getjmvc -u cengage
 ::
-::	Install to your own path.  You can specify the path where the submodules are installed, 
+::	Install to your own path.  You can specify the path where the submodules are installed,
 ::	like to public/
 ::		./getjmvc -p public/
 ::
 ::	Install a different branch (used to install the 2.0 branches for steal, canjs, jquerypp, and funcunit).
 ::		./getjmvc -b 2.0
 ::
-::	Install from a different repository (not github) or from ssh instead of http (if you have 
+::	Install from a different repository (not github) or from ssh instead of http (if you have
 ::	write access).
 ::		./getjmvc -s git@github.com
 ::		./getjmvc -s http://mygitrepo.com
@@ -39,7 +39,7 @@ set INSTALLPATH=./
 
 :GETOPTS
 if /I "%1"=="-u" (
- 	set USERNAME=%2 
+ 	set USERNAME=%2
  	shift
  	shift
  	goto :GETOPTS
@@ -82,11 +82,11 @@ if "%WITHOUTHTTP%"=="%SRC%" (
 set FULLSRC=%SRC%/%USERNAME%
 
 :INSTALL
-call git submodule add %FULLSRC%/steal.git %INSTALLPATH%steal
+call git submodule add %FULLSRC%/legacy-steal.git %INSTALLPATH%steal
 call git submodule add %FULLSRC%/canjs.git %INSTALLPATH%canjs
 call git submodule add %FULLSRC%/jquerypp.git %INSTALLPATH%jquerypp
 call git submodule add %FULLSRC%/documentjs.git %INSTALLPATH%documentjs
-call git submodule add %FULLSRC%/funcunit.git %INSTALLPATH%funcunit
+call git submodule add %FULLSRC%/legacy-funcunit.git %INSTALLPATH%funcunit
 call git submodule init
 call git submodule update
 cd %INSTALLPATH%steal
@@ -94,7 +94,7 @@ call git checkout %BRANCH%
 cd ..\jquery
 call git checkout %BRANCH%
 cd ..\documentjs
-call git checkout master
+call git checkout legacy
 cd ..\funcunit
 call git checkout %BRANCH%
 call git submodule init
