@@ -37,6 +37,8 @@ of the sub-project.
 
 ## CanJS
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bitovi/javascriptmvc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [canjs CanJS] is a JavaScript framework that makes
 building rich web applications easy and the MVC of
 JavaScriptMVC. The library is extremely lightweight
