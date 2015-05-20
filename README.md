@@ -9,37 +9,54 @@ for building complex JavaScript applications.
 If you are looking for the easist way to get a fully modern development environment setup
 and produce a lightning fast application, you've come to the right place.
 
-This page walks you through what DoneJS provides.
+#### DoneJS Features
 
-Application features:
+_Application features:_
 
 - Isomorphic JavaScript Application 
 - Pushstate routing
 - Real Time Application
 - Run everywhere ( IE9+, Andriod, iOS, node-webkit)
 
-Performance features:
+_Performance features:_
 
 - Progressive loaded optimized production builds
 - Caching and minimal data requests
 - Minimal DOM updates
 - Application logic in worker thread
 
-Maintainence features:
+_Maintainence features:_
 
-- Modlet workflow - tests, docs, and demo pages.
-- Use and create NPM packages.
-- Unit tested models and view models
-- Functional tests
+- Modlet workflow - tests, docs, and demo pages
+- Use and create NPM packages
 - Custom HTML elements
-- Documentation
-- Live reload
 - MVVM single direction architecture
+- Multi Versioned Documentation
+- Live reload
+- Functional tests
+
+#### DoneJS Technologies
+
+- [StealJS](http://stealjs.com) - Module Loader
+- [CanJS](http://canjs.com) - MVVM 
+- [jQuery](http://jquery.com) - DOM helpers
+- [jQuery++](http://jquerypp.com) - Extended DOM helpers
+- [QUnit](https://qunitjs.com/) or Mocha - Assertion library
+- [FuncUnit](http://funcunit.com) - Functional tests
+- Testee or Karma - Test runner
+- [DocumentJS](http://documentjs.com) - Documentation
+
+#### Getting Started Guide
+
+1. Install
+2. 
 
 
-## Application Features
+## Features
 
-### Isomorphic JavaScript Application
+### Application Features
+
+#### Isomorphic JavaScript Application
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application) (SPAs),
 but are able to be rendered on the server.  This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript)
@@ -51,33 +68,33 @@ and has the benefits of SPAs and server side rendering:
 - User Experience - SPAs can provide a more fluid user experience. 
 - Maintenence - Shift user interface logic to the client where it belongs.
 
-### Pushstate routing
+#### Pushstate routing
 
 DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history#The_pushState()_method) to 
 provide navigable and bookmarkable pages and links, while still keeping the user in a single page.
 
-### Real time
+#### Real time
 
 DoneJS applications use real-time connections to keep their users instantly up to
 date with any changes to their model data.  Using set-logic, real-time behavior can be 
 added very easily.
 
-### ¿Run everywhere
+#### ¿Run everywhere
 
 DoneJS applications can run everywhere.  They work in all modern browsers and 
 Internet Explorer 9 and up.  And, using [Apache Cordova](https://cordova.apache.org/) or [NW.js](https://github.com/nwjs/nw.js), DoneJS can build your app
 so it works as an iOS, Andriod or Desktop Mac or Windows app.
 
 
-## Performance features
+### Performance features
 
-### Progressive loaded optimized production builds
+#### Progressive loaded optimized production builds
 
 DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
 
-### Caching and minimal data requests
+#### Caching and minimal data requests
 
 DoneJS applications are able to do variety of performance improvements by intelligently managing the data 
 layer.  Example techniques:
@@ -90,18 +107,18 @@ layer.  Example techniques:
    user visits the page.
 
 
-### Minimal DOM updates
+#### Minimal DOM updates
 
 Update only the part of the DOM that needs to be updated, very quickly.
 
-### ¿Application logic in worker thread
+#### ¿Application logic in worker thread
 
 Run all of your application's logic in a worker thread.  Leaving the main thread to only update the DOM.
 
 
-## Maintainence features
+### Maintainence features
 
-### Modlet workflows - tests, docs, and demo pages.
+#### Modlet workflows - tests, docs, and demo pages.
 
 DoneJS applications are built so every module is treated as its own application.  Every module
 is given its own folder.  Instead of organizing a project by grouping files based on type like:
@@ -145,7 +162,7 @@ Modelets include pages that run just that module's tests and a demo page that sh
 module's functionality.
 
 
-### Use and create NPM packages
+#### Use and create NPM packages
 
 DoneJS applications can use packages published to NPM without configuration.  Import pacakges
 written in ES6 module syntax, AMD, or CommonJS.
@@ -154,7 +171,7 @@ You can also export your modules to other formats.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
 
-### Custom HTML Elements
+#### Custom HTML Elements
 
 DoneJS applications use custom HTML elements to compose and orchestrate an application's behavior.
 
@@ -168,7 +185,7 @@ DoneJS applications use custom HTML elements to compose and orchestrate an appli
 </bit-graph>
 ```
 
-### MVVM single direction architecture
+#### MVVM single direction architecture
 
 DoneJS applications are architecturally Model-View-ViewModel applications where all events and updates flow in a 
 single direction.  It's easy to define view models that derive their data from source data but in
@@ -176,17 +193,17 @@ a deterministic and synchronous flow.  View updates happen only after all models
 
 DoneJS uses [CanJS](http://canjs.com) for custom elements and a MVVM architecture.  CanJS is small, fast, and powerful.
 
-### Multi Versioned Documentation
+#### Multi Versioned Documentation
 
 DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation.
 
-### Live reload
+#### Live reload
 
 DoneJS applications keep developers focused because they enable super fast updates when code changes.  Live-reload
 listens to when source files change, and update only the modules that need to change.  Developers speend less time
 waiting for refreshes and builds.
 
-### Functional tests
+#### Functional tests
 
 DoneJS applications are functionally tested with highly accurate event simulation.
 
