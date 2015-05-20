@@ -1,0 +1,35 @@
+{
+  "name": "donejs",
+  "version": "0.0.1",
+  "description": "Your app is done",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/donejs/donejs.git"
+  },
+  "keywords": [
+    "CanJS",
+    "StealJS",
+    "DoneJS"
+  ],
+  "author": "Bitovi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/donejs/donejs/issues"
+  },
+  "homepage": "https://github.com/donejs/donejs",
+  "peerDependencies": {
+    "steal": "^0.10.4",
+    "steal-qunit": "0.0.4",
+    "funcunit": "^3.0.0",
+    "can": "git://github.com/bitovi/canjs#place-my-order2",
+    "can-connect": "git://github.com/canjs/can-connect#place-my-order2",
+    "done-autorender": "0.0.3",
+    "done-css": "^0.0.6",
+    "documentjs": "^0.3.0-pre.1",
+    "jquery": "^1.11.3"
+  }
+}
