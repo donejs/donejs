@@ -13,10 +13,10 @@ and produce a lightning fast application, you've come to the right place.
 
 _Application features:_
 
-- Isomorphic JavaScript Application 
+- Isomorphic (same code on server and client).
 - Pushstate routing
-- Real Time Application
-- Run everywhere ( IE9+, Andriod, iOS, node-webkit)
+- Real Time
+- Run everywhere ( IE9+, Andriod, iOS, node-webkit )
 
 _Performance features:_
 
@@ -46,17 +46,22 @@ _Maintainence features:_
 - Testee or Karma - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
-#### Getting Started Guide
+#### DoneJS Getting Started Guide
+
+The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http://place-my-order.com) application. 
 
 1. Install
-2. 
+2. Setting up server side rendering
+3. Setting up routing.
+4. Getting data from the server and showing it in the page.
+5. Settup up a real-time connection.
 
 
 ## Features
 
 ### Application Features
 
-#### Isomorphic JavaScript Application
+#### Isomorphic
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application) (SPAs),
 but are able to be rendered on the server.  This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript)
