@@ -43,7 +43,7 @@ Create `public/pmo/main.stache`
 
 - ¿ DocType ?
 
-#### 2.  Create the application view model
+#### 2.  Create the application view model {#app-view-model}
 
 ```
 // pmo/app.js
@@ -58,7 +58,7 @@ export default AppState;
 
 - ¿ pmo/pmo ?
 
-#### 3. Create a file like:
+#### 3. Render the template on the server.
 
 ```
 var ssr = require("done-server-side-render");
@@ -83,7 +83,7 @@ set package.json:
     "start": "node lib/index.js",
 ```
 
-#### 4. Serve!
+#### 4. Start the Server {#start-server}
 
 Run:
 
