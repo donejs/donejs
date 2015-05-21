@@ -83,7 +83,7 @@ set package.json:
     "start": "node lib/index.js",
 ```
 
-#### 4. Start the Server {#start-server}
+#### 4. Start the Server #### {#start-server}
 
 Run:
 
