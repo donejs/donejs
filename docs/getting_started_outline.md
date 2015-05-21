@@ -207,4 +207,90 @@ Update `main.stache`
 ```
 
 ## 4. Getting data from the server and showing it in the page.
+
+#### Setting up a basic server.
+
+> npm install place-my-order-server
+> ./node_modules/.bin/place-my-order-server --port 2200
+
+#### Proxy to that server
+
+```
+./node_modules/.bin/done-server --proxy 2200 --port 3030
+```
+
+#### Creating a restaurants connection.
+
+```js
+import Map from 'can/map/';
+import List from 'can/list/';
+import connectSuperMap from 'can-connect/super-map';
+
+export var Restaurant = can.Map.extend({});
+Restaurant.List = can.List.extend({
+  Map: Restaurant
+});
+
+export var restaurantConnection = superMap({
+  resource: "/api/restaurants",
+  idProp: '_id',
+  Map: Restaurant,
+  List: Restaurant.List,
+  name: "restaurants"
+});
+
+window.restaurantConnection = restaurantConnection;
+```
+
+#### Test the connection
+
+```js
+restaurantConnection.findAll({})
+	.then(function(restaurants){
+	  console.log( restaurants.attr() );
+	});
+```
+
+#### Add to the page
+
+```js
+export var ViewModel = Map.extend({
+  define: {
+    restaurants: function(){
+      return restaurantConnection.findAll({});
+    }
+  }
+});
+```
+
+```html
+{{#if restaurants.isPending}}
+  <div class="restaurant loading"></div>
+{{/if}}
+{{#if restaurants.isResolved}}
+  {{#each restaurants.value}}
+    <div class="restaurant">
+      <img src="/{{images.thumbnail}}" width="100" height="100">
+      <h3>{{name}}</h3>
+      {{#address}}
+      <div class="address">
+        {{street}}<br />{{city}}, {{state}} {{zip}}
+      </div>
+      {{/address}}
+
+      <div class="hours-price">
+        $$$<br />
+        Hours: M-F 10am-11pm
+        <span class="open-now">Open Now</span>
+      </div>
+
+      <a class="btn" can-href="{ page='restaurants' slug=slug }">Details</a>
+      <br />
+    </div>
+  {{/each}}
+{{/if}}
+```
+
+
+
 ## 5. Settup up a real-time connection.

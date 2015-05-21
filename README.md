@@ -67,8 +67,8 @@ The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http
    6. Create a order history element
    7. Switch between three pages
 4. Getting data from the server and showing it in the page.
-5. Settup up a real-time connection.
-
+5. Settup up a real-time connection
+6. Creating a unit-tested view model
 
 ## Features
 
