@@ -43,7 +43,7 @@ Create `public/pmo/main.stache`
 
 - ¿ DocType ?
 
-#### 2.  Create the application view model {#app-view-model}
+#### 2.  Create the application view model
 
 ```
 // pmo/app.js
@@ -83,7 +83,7 @@ set package.json:
     "start": "node lib/index.js",
 ```
 
-#### 4. Start the Server #### {#start-server}
+#### 4. Start the Server
 
 Run:
 
