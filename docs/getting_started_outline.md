@@ -28,7 +28,7 @@ Create `public/pmo/main.stache`
     {{asset "css"}}
   </head>
   <body>
-    <can-import from="pmo/app" [viewModel]="{this}" />
+    <can-import from="pmo/app" [.]="{value}" />
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
@@ -43,7 +43,7 @@ Create `public/pmo/main.stache`
 
 - ¿ DocType ?
 
-#### 2.  Create a the application view model.
+#### 2.  Create the application view model
 
 ```
 // pmo/app.js
