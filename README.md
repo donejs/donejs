@@ -55,10 +55,17 @@ The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http
    2. Setup Client
 2. Setting up server side rendering
    1. Create the main template
-   2. [Create the application view model](docs/getting_started_outline.md#)
+   2. [Create the application view model](docs/getting_started_outline.md#create-the-application-view-model)
    3. Render the main template on the server
-   4. [Start the server](docs/getting_started_outline.md#)
-3. Setting up routing.
+   4. [Start the server](docs/getting_started_outline.md#start-the-server)
+3. Setting up routing
+   1. Create routes
+   2. Create a homepage element
+   3. Create a restaurant list element
+   4. Switch between pages
+   5. Create a header element
+   6. Create a order history element
+   7. Switch between three pages
 4. Getting data from the server and showing it in the page.
 5. Settup up a real-time connection.
 

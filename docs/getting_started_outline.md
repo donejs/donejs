@@ -17,7 +17,7 @@ In your public folder:
 
 ## 2. Setting up server side rendering
 
-#### 1. Create a template
+#### Create a template
 
 Create `public/pmo/main.stache`
 
@@ -43,7 +43,7 @@ Create `public/pmo/main.stache`
 
 - ¿ DocType ?
 
-#### 2.  Create the application view model
+#### Create the application view model
 
 ```
 // pmo/app.js
@@ -58,7 +58,7 @@ export default AppState;
 
 - ¿ pmo/pmo ?
 
-#### 3. Render the template on the server.
+#### Render the template on the server.
 
 ```
 var ssr = require("done-server-side-render");
@@ -83,7 +83,7 @@ set package.json:
     "start": "node lib/index.js",
 ```
 
-#### 4. Start the Server
+#### Start the Server
 
 Run:
 
@@ -94,6 +94,117 @@ Open your browser.
 Enjoy!
 
 
-## 3. Setting up routing.
+## 3. Setting up routing
+
+In this part, you will create routes, two pages that are managed by custom elements,
+and then be able to navigate between pages.
+
+
+#### Create Routes
+
+Add to _app.js_.
+
+```
+route(':page', { page: 'home' });
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+```
+
+#### Creating a homepage element
+
+```html
+<can-component tag='pmo-home'>
+  <template>
+     <div class="homepage">
+	  <img src="images/homepage-hero.jpg" width="250" height="380" />
+	  <h1>Ordering food has never been easier</h1>
+	  <p>We make it easier than ever to order gourmet food from your favorite local restaurants.</p>
+	  <p><a class="btn" can-href="{page='restaurants'}" role="button">Choose a Restaurant</a></p>
+	</div>
+  </template>
+</can-component>
+```
+
+#### Creating a restaruant list element
+
+The compeonent:
+
+```js
+import Component from 'can/component/';
+import Map from 'can/map/';
+import template from './list.stache!';
+
+export var ViewModel = Map.extend({});
+
+export default Component.extend({
+  tag: 'pmo-restaurant-list',
+  viewModel: ViewModel,
+  template: template
+});
+```
+
+The template:
+
+```
+<a can-href="{page='home'}">Homepage</a>
+<h2>Restaurants</h2>
+```
+
+#### Switch between pages
+
+Update `main.stache`.
+
+```html
+{{#eq page "home"}}
+  <can-import from="pmo/home/">
+    <pmo-home></pmo-home>
+  </can-import>
+{{/eq}}
+{{#eq page "restaurants"}}
+  <can-import from="pmo/restaurant/list">
+    <pmo-restaurant-list></pmo-restaurant-list>
+  </can-import>
+{{/eq}}
+```
+
+This progressively loads the modules
+
+#### Create the header.
+
+```
+<li class='{{eq page 'home'}}'>
+	<a can-href='{page= "home"}'>Home</a>
+</li>
+```
+
+#### Create the order history page
+
+As a partial?
+
+#### Switch between all three pages
+
+Update `main.stache`
+
+```html
+<can-import from="pmo/header/" />
+<pmo-header page="{page}"></pmo-header>
+
+{{#eq page "home"}}
+  <can-import from="pmo/home/">
+    <pmo-home></pmo-home>
+  </can-import>
+{{/eq}}
+{{#eq page "restaurants"}}
+  <can-import from="pmo/restaurant/list">
+    <pmo-restaurant-list></pmo-restaurant-list>
+  </can-import>
+{{/eq}}
+{{#eq page "order-history"}}
+  <can-import from="pmo/order/history">
+    <pmo-order-history></pmo-order-history>
+  </can-import>
+{{/eq}}
+```
+
 ## 4. Getting data from the server and showing it in the page.
 ## 5. Settup up a real-time connection.
