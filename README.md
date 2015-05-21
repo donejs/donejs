@@ -51,6 +51,8 @@ _Maintainence features:_
 The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http://place-my-order.com) application. 
 
 1. Install
+   1.  Setup Server
+   2.  Setup Client
 2. Setting up server side rendering
 3. Setting up routing.
 4. Getting data from the server and showing it in the page.
