@@ -67,8 +67,32 @@ The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http
    6. Create a order history element
    7. Switch between three pages
 4. Getting data from the server and showing it in the page.
-5. Settup up a real-time connection
-6. Creating a unit-tested view model
+5. Creating a unit-tested view model and demo page
+   1. Identify the view model state properties
+   2. Test the view model
+      1. Setup the test
+      2. Create fake data
+      3. Use fake data for ajax requests
+      4. Create a view model instance and test its behavior
+   3. Write the view model 
+      1. Make dependent models
+      2. Define stateful property behaviors
+      3. Verify the test
+   4. Create a demo page
+   5. Write the template
+      1. Verify the demo page and application works.
+6. Setup continuous integration (CI) and tests. 
+6. Nested routes
+7. Importing other projects
+8. Creating data
+9. Settup up a real-time connection
+10. Production Builds
+    1. Bundling your app
+    2. Building to iOS and Andriod
+    3. Buliding to NW.js
+11. Deploying
+	
+
 
 ## Features
 
