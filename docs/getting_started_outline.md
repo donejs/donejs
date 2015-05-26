@@ -47,7 +47,7 @@ Create `public/pmo/main.stache`
 
 ```
 // pmo/app.js
-import AppMap from "can/map/app/";
+import AppMap from "can-ssr/app-map";
 
 const AppState = AppMap.extend({
   message: "Hello World!"
