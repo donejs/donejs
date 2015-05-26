@@ -45,6 +45,7 @@ _Maintainence features:_
 - [FuncUnit](http://funcunit.com) - Functional tests
 - Testee or Karma - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
+- [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
 
 #### DoneJS Getting Started Guide
 
