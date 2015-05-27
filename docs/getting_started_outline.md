@@ -61,7 +61,7 @@ export default AppState;
 #### Render the template on the server.
 
 ```
-var ssr = require("done-server-side-render");
+var ssr = require("can-ssr");
 var url = require("url");
 
 var render = ssr({
