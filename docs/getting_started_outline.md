@@ -210,8 +210,10 @@ Update `main.stache`
 
 #### Setting up a basic server.
 
-> npm install place-my-order-server
-> ./node_modules/.bin/place-my-order-server --port 2200
+```
+npm install place-my-order-server
+./node_modules/.bin/place-my-order-server --port 2200
+```
 
 #### Proxy to that server
 
