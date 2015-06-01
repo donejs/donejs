@@ -28,7 +28,7 @@ Create `public/pmo/main.stache`
     {{asset "css"}}
   </head>
   <body>
-    <can-import from="pmo/app" [.]="{value}" />
+    <can-import from="pmo/app" as="@viewModel" />
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
