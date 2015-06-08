@@ -7,26 +7,52 @@ application with all of [Features DoneJS's features].
 
 @body
 
-## Install
+## Setting up
 
-Define a public folder for client code and a place for your server-side rendering code.
+The first step to get your DoneJS application running is creating the folder and in it initializing a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
 
-In your server:
+> mkdir place-my-order
+> cd place-my-order
+> npm init
 
-> npm install done-server-side-render
-
-In your public folder:
+After answering the question prompts, we need to install the project dependencies
 
 > npm install donejs --save
 
-- ¿ Should we have two donejs, possibly not if it's only going to do server side rendering ?
+- ¿ Peer dependencies won't be installed automatically anymore in NPM 3 ?
+
+And the server that hosts the application and is reponsible for server side rendering:
+
+> npm install can-ssr --save
+
+## Using place-my-order-api
+
+For our demo application backend we will use the `place-my-order-api` package which will start an API server locally. The package can be installed globally:
+
+> npm install place-my-order-api -g
+
+### MongoDB
+
+`place-my-order-api` requires MongoDB. If you don't have it yet, install and start [MongoDB](https://www.mongodb.org/) with the default settings. [MongoHub](http://mongohub.todayclose.com/) is a helpful client to view and query databases.
+
+Start MongoDB with:
+
+> sudo mkdir -p /data/db
+
+> sudo mongod --fork --logpath /var/log/mongodb.log
 
 
-## Setting up server side rendering
+### Start the API server
 
-### Create a template
+Then start the API server on port 7070 with
 
-Create `public/pmo/main.stache`
+> place-my-order-api --port 7070
+
+## Getting started
+
+### Create a template and main file
+
+Now we can start to add some files. Create `pmo/main.stache` with the following content:
 
 ```
 <html>
@@ -48,9 +74,7 @@ Create `public/pmo/main.stache`
 </html>
 ```
 
-- ¿ DocType ?
-
-### Create the application view model
+And the application main file like this:
 
 ```
 // pmo/app.js
@@ -64,48 +88,33 @@ export default AppState;
 ```
 
 - ¿ pmo/pmo ?
+- ¿ DocType ?
 
-### Render the template on the server.
+## Starting the application
 
-```
-var ssr = require("can-ssr");
-var url = require("url");
+With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our same server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
 
-var render = ssr({
-  config: path.join(__dirname, "..", "/public/package.json!npm"),
-  main: "pmo/layout.stache!done-autorender"
-});
-
-express.use("/", function(req, res){
-    var pathname = url.parse(req.url).pathname;
-
-    render(pathname).then(html => res.send(html))
-}));
-```
-
-set package.json:
-
-```
+```js
 "scripts": {
-    "start": "node lib/index.js",
+    "start": "can-server --proxy http://localhost:7070 --port 8080",
 ```
 
-### Start the Server
+`main` in `package.json` (by default set to `index.js`) also needs to be changed to:
 
-Run:
+```js
+"main": "pmo/main.stache!done-autorender"
+```
 
->  npm start
+Then start the application with
 
-Open your browser.
+> npm start
 
-Enjoy!
-
+Go to [http://localhost:8080](http://localhost:8080) and see the hello world message.
 
 ## Setting up routing
 
 In this part, you will create routes, two pages that are managed by custom elements,
 and then be able to navigate between pages.
-
 
 ### Create Routes
 
