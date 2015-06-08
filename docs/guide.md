@@ -11,9 +11,11 @@ application with all of [Features DoneJS's features].
 
 The first step to get your DoneJS application running is creating the folder and in it initializing a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
 
+```
 > mkdir place-my-order
 > cd place-my-order
 > npm init
+```
 
 After answering the question prompts, we need to install the project dependencies
 
