@@ -1,4 +1,13 @@
-## 1. Install
+@page Guide
+@parent DoneJS
+@hide sidebar
+@outline 2 ol
+@description Learn how to create the [place-my-order](http://place-my-order.com) 
+application with all of [Features DoneJS's features].
+
+@body
+
+## Install
 
 Define a public folder for client code and a place for your server-side rendering code.
 
@@ -10,14 +19,12 @@ In your public folder:
 
 > npm install donejs --save
 
-
-
 - ¿ Should we have two donejs, possibly not if it's only going to do server side rendering ?
 
 
-## 2. Setting up server side rendering
+## Setting up server side rendering
 
-#### Create a template
+### Create a template
 
 Create `public/pmo/main.stache`
 
@@ -43,7 +50,7 @@ Create `public/pmo/main.stache`
 
 - ¿ DocType ?
 
-#### Create the application view model
+### Create the application view model
 
 ```
 // pmo/app.js
@@ -58,7 +65,7 @@ export default AppState;
 
 - ¿ pmo/pmo ?
 
-#### Render the template on the server.
+### Render the template on the server.
 
 ```
 var ssr = require("can-ssr");
@@ -83,7 +90,7 @@ set package.json:
     "start": "node lib/index.js",
 ```
 
-#### Start the Server
+### Start the Server
 
 Run:
 
@@ -94,13 +101,13 @@ Open your browser.
 Enjoy!
 
 
-## 3. Setting up routing
+## Setting up routing
 
 In this part, you will create routes, two pages that are managed by custom elements,
 and then be able to navigate between pages.
 
 
-#### Create Routes
+### Create Routes
 
 Add to _app.js_.
 
@@ -110,7 +117,7 @@ route(':page/:slug', { slug: null });
 route(':page/:slug/:action', { slug: null, action: null });
 ```
 
-#### Creating a homepage element
+### Creating a homepage element
 
 ```html
 <can-component tag='pmo-home'>
@@ -125,7 +132,7 @@ route(':page/:slug/:action', { slug: null, action: null });
 </can-component>
 ```
 
-#### Creating a restaruant list element
+### Creating a restaruant list element
 
 The compeonent:
 
@@ -150,7 +157,7 @@ The template:
 <h2>Restaurants</h2>
 ```
 
-#### Switch between pages
+### Switch between pages
 
 Update `main.stache`.
 
@@ -169,7 +176,7 @@ Update `main.stache`.
 
 This progressively loads the modules
 
-#### Create the header.
+### Create the header.
 
 ```
 <li class='{{eq page 'home'}}'>
@@ -177,11 +184,11 @@ This progressively loads the modules
 </li>
 ```
 
-#### Create the order history page
+### Create the order history page
 
 As a partial?
 
-#### Switch between all three pages
+### Switch between all three pages
 
 Update `main.stache`
 
@@ -206,22 +213,22 @@ Update `main.stache`
 {{/eq}}
 ```
 
-## 4. Getting data from the server and showing it in the page.
+## Getting data from the server and showing it in the page.
 
-#### Setting up a basic server.
+### Setting up a basic server.
 
 ```
 npm install place-my-order-server
 ./node_modules/.bin/place-my-order-server --port 2200
 ```
 
-#### Proxy to that server
+### Proxy to that server
 
 ```
 ./node_modules/.bin/done-server --proxy 2200 --port 3030
 ```
 
-#### Creating a restaurants connection.
+### Creating a restaurants connection.
 
 ```js
 import Map from 'can/map/';
@@ -244,7 +251,7 @@ export var restaurantConnection = superMap({
 window.restaurantConnection = restaurantConnection;
 ```
 
-#### Test the connection
+### Test the connection
 
 ```js
 restaurantConnection.findAll({})
@@ -253,7 +260,7 @@ restaurantConnection.findAll({})
 	});
 ```
 
-#### Add to the page
+### Add to the page
 
 ```js
 export var ViewModel = Map.extend({
@@ -293,7 +300,7 @@ export var ViewModel = Map.extend({
 {{/if}}
 ```
 
-## 5. Creating a unit-tested view model
+## Creating a unit-tested view model
 
 Lets make the restaurants page let a user select a state and city and
 finally see a list of restaurants for that state and city.
@@ -597,14 +604,29 @@ Open some page.
 {{/if}}
 ```
 
-#### Verify the demo page and application works.
+### Verify the demo page and application works.
 
 Open up the demo page.
 
 Open up the app.
 
-## 6. Nested routes
+## Setup continous integration (CI) and tests
 
+## Nested routes
 
+## Importing other projects
 
-## 6. Settup up a real-time connection
+## Creating data
+
+## Setup a real-time connection
+
+## Production builds
+
+### Bundling your app
+
+### Building to iOS and Andriod
+
+### Building to NW.js
+
+## Deploying
+

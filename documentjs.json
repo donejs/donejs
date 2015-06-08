@@ -1,0 +1,13 @@
+{
+	"sites": {
+		"guides": {
+			"glob": {
+				"pattern": "{docs/**.md,*.md}"
+			},
+			"parent": "DoneJS",
+			"dest": "site",
+			"ignoreTemplateRender": true,
+			"templates" : "docs/theme/templates"
+		}
+	}
+}
