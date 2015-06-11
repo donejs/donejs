@@ -30,6 +30,10 @@
     "done-autorender": "0.0.3",
     "done-css": "^0.0.6",
     "documentjs": "^0.3.0-pre.4",
-    "jquery": "^2.0.0"
+    "jquery": "^2.0.0",
+    "can-ssr": "^0.1.1"
+  },
+  "devDependencies": {
+    "documentjs": "^0.3.0-pre.4"
   }
 }

@@ -7,52 +7,67 @@ application with all of [Features DoneJS's features].
 
 @body
 
-## Setting up
+## Setup
 
-The first step to get your DoneJS application running is creating the folder and in it initializing a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
+In this section we will create our DoneJS project and set up a REST API that the application can use.
+You will need [NodeJS](http://www.meetup.com/yyc-js/events/222682935/?a=ra1_te) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
+
+### Creating the project
+
+To get the DoneJS application running, create a new folder and in it initialize a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
 
 ```
-> mkdir place-my-order
-> cd place-my-order
-> npm init
+mkdir place-my-order
+cd place-my-order
+npm init
 ```
 
-After answering the question prompts, we need to install the project dependencies
+`npm init` will ask a couple of questions which can all be answered by choosing the default. The final prompt looks like this:
 
-> npm install donejs --save
+![npm init prompts](img/npm-init.png)
 
-- ¿ Peer dependencies won't be installed automatically anymore in NPM 3 ?
+Now we can install the DoneJS package and write it as a dependency into `package.json` so that a new copy of the application can be set up by simply typing `npm install` in the future:
 
-And the server that hosts the application and is reponsible for server side rendering:
+```
+npm install donejs --save
+```
 
-> npm install can-ssr --save
+This will also install all of DoneJS's dependencies like StealJS, CanJS etc.
 
-## Using place-my-order-api
+### Setup a service API
 
-For our demo application backend we will use the `place-my-order-api` package which will start an API server locally. The package can be installed globally:
+Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. How to create an API will not part of this guide. Instead we just install and start an existing service API module that can be used with our application:
 
-> npm install place-my-order-api -g
+```
+npm install place-my-order-api --save
+```
 
-### MongoDB
+A good way to easily start the API (here on port `7070`) is adding it as an NPM script to the `package.json`:
 
-`place-my-order-api` requires MongoDB. If you don't have it yet, install and start [MongoDB](https://www.mongodb.org/) with the default settings. [MongoHub](http://mongohub.todayclose.com/) is a helpful client to view and query databases.
+```js
+"scripts": {
+    "api": "place-my-order-api --port 7070",
+```
 
-Start MongoDB with:
+Which allows to start the API server with:
 
-> sudo mkdir -p /data/db
+```
+npm run api
+```
 
-> sudo mongod --fork --logpath /var/log/mongodb.log
+The server will initialize some default data (restaurants and orders) on the first startup. Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) to see a JSON list of restaurant data.
 
+## Setting up server side rendering
 
-### Start the API server
-
-Then start the API server on port 7070 with
-
-> place-my-order-api --port 7070
-
-## Getting started
+In the following paragraphs we will create the basic template and application file and start a server which hosts those files and is also responsible for pre-rendering the application on the server and proxy API calls.
 
 ### Create a template and main file
+
+Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the layout 
+
+// Summary
+// Code
+// Explanation
 
 Now we can start to add some files. Create `pmo/main.stache` with the following content:
 
@@ -89,10 +104,7 @@ const AppState = AppMap.extend({
 export default AppState;
 ```
 
-- ¿ pmo/pmo ?
-- ¿ DocType ?
-
-## Starting the application
+### Starting the application
 
 With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our same server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
 
