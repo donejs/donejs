@@ -130,33 +130,59 @@ Go to [http://localhost:8080](http://localhost:8080) and see the hello world mes
 
 ## Creating components
 
+One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained components. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the globa application state.
 
-### Create the header.
+There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component])). Larger components can be split up into individual files.
 
+### Creating a header and homepage element
+
+The header component is fairly simple and basically consists of only the template. Create `pmo/header.component` with the following content:
+
+```html
+<can-component tag="pmo-home">
+  <template>
+     <can-import from="can/view/href/"/>
+     <header>
+       <nav>
+         <h1>place-my-order.com</h1>
+         <ul>
+           <li class="{{#eq page 'home'}}active{{/eq}}">
+             <a can-href='{page="home"}'>Home</a>
+           </li>
+           <li class="{{#eq page 'restaurants'}}active{{/eq}}">
+             <a can-href='{page="restaurants"}'>Restaurants</a>
+           </li>
+           <li class="{{#eq page 'orders'}}active{{/eq}}">
+             <a can-href='{page="orders"}'>Order History</a>
+           </li>
+         </ul>
+       </nav>
+     </header>
+  </template>
+</can-component>
 ```
-<li class='{{eq page 'home'}}'>
-	<a can-href='{page= "home"}'>Home</a>
-</li>
-```
 
-### Creating a homepage element
+Here we created a [can.Component]() using a web-component style declaration provided by the [system-component]() plugin. The component does not have any separate styles or functionality other than the template. `<can-import from="can/view/href/"/>` loads a `can-href` helper which allows it to easily create links to corresponding routes.
+
+The homepage element in `pmo/home.component` is very similar:
 
 ```html
 <can-component tag='pmo-home'>
   <template>
      <div class="homepage">
-	  <img src="images/homepage-hero.jpg" width="250" height="380" />
-	  <h1>Ordering food has never been easier</h1>
-	  <p>We make it easier than ever to order gourmet food from your favorite local restaurants.</p>
-	  <p><a class="btn" can-href="{page='restaurants'}" role="button">Choose a Restaurant</a></p>
-	</div>
+       <img src="images/homepage-hero.jpg" width="250" height="380" />
+       <h1>Ordering food has never been easier</h1>
+       <p>We make it easier than ever to order gourmet food from your favorite local restaurants.</p>
+       <p><a class="btn" href="/restaurants" role="button">Choose a Restaurant</a></p>
+     </div>
   </template>
 </can-component>
 ```
 
-### Creating a restaruant list element
 
-The compeonent:
+### Creating a restaurant list element
+
+The restaurant list will contain more functionality which is why we can split it up into separate files for the template and the component itself. When comprised of multiple files, they are put together into their own folder so that the standalone component can be easily shared and tested. We call it the [modlet pattern]().
 
 ```js
 import Component from 'can/component/';
@@ -179,7 +205,7 @@ The template:
 <h2>Restaurants</h2>
 ```
 
-### Create the order history page
+### Create the order history element
 
 As a partial?
 
@@ -217,7 +243,7 @@ route(':page/:slug/:action', { slug: null, action: null });
 export default AppState;
 ```
 
-### Switch between pages
+### Switch between components
 
 Update `main.stache`.
 
@@ -235,8 +261,6 @@ Update `main.stache`.
 ```
 
 This progressively loads the modules
-
-### Switch between all three pages
 
 Update `main.stache`
 
