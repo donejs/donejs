@@ -72,7 +72,7 @@ Every DoneJS application consists of at least two files: A main template (`pmo/m
     {{asset "css"}}
   </head>
   <body>
-    <can-import from="pmo/app" as="@viewModel" />
+    <can-import from="pmo/app" [.]="{value}" />
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
@@ -92,15 +92,20 @@ The application main file at `pmo/app.js` looks like this:
 ```
 // pmo/app.js
 import AppMap from "can-ssr/app-map";
+import 'can/map/define/';
 
 const AppState = AppMap.extend({
-  message: "Hello World!"
+  define: {
+    message: {
+      value: 'Hello World!'
+    }
+  }
 });
 
 export default AppState;
 ```
 
-This initializes an `AppMap` which contains a global application state and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
+This initializes an `AppMap` which contains a global application state and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client. We will cover what `can/map/define/` does in more detail later but in the `define` object or `AppState` we can now create a `message` property with a default value `Hello World!`.
 
 ### Starting the application
 
@@ -123,21 +128,8 @@ Then we can start the application with
 
 Go to [http://localhost:8080](http://localhost:8080) and see the hello world message.
 
-## Setting up routing
+## Creating components
 
-In this part, you will create routes, two pages that are managed by custom elements,
-and then make it possible to navigate between pages.
-
-### Create Routes
-
-
-Add to _app.js_.
-
-```
-route(':page', { page: 'home' });
-route(':page/:slug', { slug: null });
-route(':page/:slug/:action', { slug: null, action: null });
-```
 
 ### Create the header.
 
@@ -187,6 +179,44 @@ The template:
 <h2>Restaurants</h2>
 ```
 
+### Create the order history page
+
+As a partial?
+
+## Setting up routing
+
+In this part, you will create routes, two pages that are managed by custom elements,
+and then make it possible to navigate between pages.
+
+### Create Routes
+
+Routing works slightly different than what you might be used to from other libraries Instead of declaring routes and mapping those to actions, our application will use CanJS [can.route]() which allows to map property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of our application.
+
+If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+
+Change our `pmo/app.js` file to:
+
+```
+// pmo/app.js
+import AppMap from "can-ssr/app-map";
+import 'can/map/define/';
+import route from 'can/route/';
+
+const AppState = AppMap.extend({
+  define: {
+    message: {
+      value: 'Hello World!'
+    }
+  }
+});
+
+route(':page', { page: 'home' });
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+
+export default AppState;
+```
+
 ### Switch between pages
 
 Update `main.stache`.
@@ -205,10 +235,6 @@ Update `main.stache`.
 ```
 
 This progressively loads the modules
-
-### Create the order history page
-
-As a partial?
 
 ### Switch between all three pages
 

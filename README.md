@@ -2,7 +2,7 @@
 @hide title
 @hide sidebar
 
-# DoneJS
+![DoneJS logo](img/donejs-main.png)
 
 DoneJS is easist way to get a high performance, real time, web and mobile application 
 done! The framework provides a nearly comprehensive combination of technologies for 
