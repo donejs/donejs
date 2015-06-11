@@ -63,13 +63,7 @@ In the following paragraphs we will create the basic template and application fi
 
 ### Create a template and main file
 
-Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the layout 
-
-// Summary
-// Code
-// Explanation
-
-Now we can start to add some files. Create `pmo/main.stache` with the following content:
+Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add a `pmo/main.stache` to the project that has the following content:
 
 ```
 <html>
@@ -91,7 +85,9 @@ Now we can start to add some files. Create `pmo/main.stache` with the following 
 </html>
 ```
 
-And the application main file like this:
+This is an HTML5 template that uses the [Handlebars syntax]() compatible [can.stache]() as the view engine and renders a `message` property from the application state. The `asset` helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
+
+The application main file at `pmo/app.js` looks like this:
 
 ```
 // pmo/app.js
@@ -104,9 +100,11 @@ const AppState = AppMap.extend({
 export default AppState;
 ```
 
+This initializes an `AppMap` which contains a global application state and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
+
 ### Starting the application
 
-With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our same server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
+With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
 
 ```js
 "scripts": {
@@ -119,7 +117,7 @@ With those two files available we can start the server which hosts and renders t
 "main": "pmo/main.stache!done-autorender"
 ```
 
-Then start the application with
+Then we can start the application with
 
 > npm start
 
@@ -128,7 +126,7 @@ Go to [http://localhost:8080](http://localhost:8080) and see the hello world mes
 ## Setting up routing
 
 In this part, you will create routes, two pages that are managed by custom elements,
-and then be able to navigate between pages.
+and then make it possible to navigate between pages.
 
 ### Create Routes
 
@@ -138,6 +136,14 @@ Add to _app.js_.
 route(':page', { page: 'home' });
 route(':page/:slug', { slug: null });
 route(':page/:slug/:action', { slug: null, action: null });
+```
+
+### Create the header.
+
+```
+<li class='{{eq page 'home'}}'>
+	<a can-href='{page= "home"}'>Home</a>
+</li>
 ```
 
 ### Creating a homepage element
@@ -199,14 +205,6 @@ Update `main.stache`.
 
 This progressively loads the modules
 
-### Create the header.
-
-```
-<li class='{{eq page 'home'}}'>
-	<a can-href='{page= "home"}'>Home</a>
-</li>
-```
-
 ### Create the order history page
 
 As a partial?
@@ -237,19 +235,6 @@ Update `main.stache`
 ```
 
 ## Getting data from the server and showing it in the page.
-
-### Setting up a basic server.
-
-```
-npm install place-my-order-server
-./node_modules/.bin/place-my-order-server --port 2200
-```
-
-### Proxy to that server
-
-```
-./node_modules/.bin/done-server --proxy 2200 --port 3030
-```
 
 ### Creating a restaurants connection.
 
