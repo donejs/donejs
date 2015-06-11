@@ -63,7 +63,7 @@ In the following paragraphs we will create the basic template and application fi
 
 ### Create a template and main file
 
-Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add a `pmo/main.stache` to the project that has the following content:
+Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add a `pmo/main.stache` to the project with the following content:
 
 ```
 <html>
@@ -114,7 +114,7 @@ With those two files available we can start the server which hosts and renders t
 `main` in `package.json` (by default set to `index.js`) also needs to be changed to:
 
 ```js
-"main": "pmo/main.stache!done-autorender"
+"main": "pmo/main.stache!done-autorender",
 ```
 
 Then we can start the application with
@@ -129,6 +129,7 @@ In this part, you will create routes, two pages that are managed by custom eleme
 and then make it possible to navigate between pages.
 
 ### Create Routes
+
 
 Add to _app.js_.
 
@@ -618,7 +619,7 @@ Open up the demo page.
 
 Open up the app.
 
-## Setup continous integration (CI) and tests
+## Setup automated tests and continuous integration (CI)
 
 ## Nested routes
 
