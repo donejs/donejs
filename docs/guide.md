@@ -7,26 +7,69 @@ application with all of [Features DoneJS's features].
 
 @body
 
-## Install
+## Setup
 
-Define a public folder for client code and a place for your server-side rendering code.
+In this section we will create our DoneJS project and set up a REST API that the application can use.
+You will need [NodeJS](http://www.meetup.com/yyc-js/events/222682935/?a=ra1_te) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
 
-In your server:
+### Creating the project
 
-> npm install done-server-side-render
+To get the DoneJS application running, create a new folder and in it initialize a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
 
-In your public folder:
+```
+mkdir place-my-order
+cd place-my-order
+npm init
+```
 
-> npm install donejs --save
+`npm init` will ask a couple of questions which can all be answered by choosing the default. The final prompt looks like this:
 
-- ¿ Should we have two donejs, possibly not if it's only going to do server side rendering ?
+![npm init prompts](img/npm-init.png)
 
+Now we can install the DoneJS package and write it as a dependency into `package.json` so that a new copy of the application can be set up by simply typing `npm install` in the future:
+
+```
+npm install donejs --save
+```
+
+This will also install all of DoneJS's dependencies like StealJS, CanJS etc.
+
+### Setup a service API
+
+Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. How to create an API will not part of this guide. Instead we just install and start an existing service API module that can be used with our application:
+
+```
+npm install place-my-order-api --save
+```
+
+A good way to easily start the API (here on port `7070`) is adding it as an NPM script to the `package.json`:
+
+```js
+"scripts": {
+    "api": "place-my-order-api --port 7070",
+```
+
+Which allows to start the API server with:
+
+```
+npm run api
+```
+
+The server will initialize some default data (restaurants and orders) on the first startup. Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) to see a JSON list of restaurant data.
 
 ## Setting up server side rendering
 
-### Create a template
+In the following paragraphs we will create the basic template and application file and start a server which hosts those files and is also responsible for pre-rendering the application on the server and proxy API calls.
 
-Create `public/pmo/main.stache`
+### Create a template and main file
+
+Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the layout 
+
+// Summary
+// Code
+// Explanation
+
+Now we can start to add some files. Create `pmo/main.stache` with the following content:
 
 ```
 <html>
@@ -48,9 +91,7 @@ Create `public/pmo/main.stache`
 </html>
 ```
 
-- ¿ DocType ?
-
-### Create the application view model
+And the application main file like this:
 
 ```
 // pmo/app.js
@@ -63,49 +104,31 @@ const AppState = AppMap.extend({
 export default AppState;
 ```
 
-- ¿ pmo/pmo ?
+### Starting the application
 
-### Render the template on the server.
+With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our same server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
 
-```
-var ssr = require("can-ssr");
-var url = require("url");
-
-var render = ssr({
-  config: path.join(__dirname, "..", "/public/package.json!npm"),
-  main: "pmo/layout.stache!done-autorender"
-});
-
-express.use("/", function(req, res){
-    var pathname = url.parse(req.url).pathname;
-
-    render(pathname).then(html => res.send(html))
-}));
-```
-
-set package.json:
-
-```
+```js
 "scripts": {
-    "start": "node lib/index.js",
+    "start": "can-server --proxy http://localhost:7070 --port 8080",
 ```
 
-### Start the Server
+`main` in `package.json` (by default set to `index.js`) also needs to be changed to:
 
-Run:
+```js
+"main": "pmo/main.stache!done-autorender"
+```
 
->  npm start
+Then start the application with
 
-Open your browser.
+> npm start
 
-Enjoy!
-
+Go to [http://localhost:8080](http://localhost:8080) and see the hello world message.
 
 ## Setting up routing
 
 In this part, you will create routes, two pages that are managed by custom elements,
 and then be able to navigate between pages.
-
 
 ### Create Routes
 
