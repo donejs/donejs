@@ -2,10 +2,17 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description Learn how to create the [place-my-order](http://place-my-order.com) 
-application with all of [Features DoneJS's features].
+@description In this guide you will learn about all of [DoneJS features] by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
 
-![DoneJS app]()
+
+![DoneJS app](img/place-my-order.png)
+
+
+After the initial application setup (including a server that hosts and pre-renders the application) we will create several custom elements and then glue them together using the application state and routes. Then we will learn how to retrieve data fromt he server using a RESTful API.
+
+After that we will talk more about view-models and how to identify, implement and tests their functionality. Once we have unit tests running in the browser we will automate running those tests and also show how to set them up on a continuous integration server. In the next chapters we will show how to easily import existing projects using NPM and how to set up a real-time connection for the application.
+
+Finally we will describe how to build and deploy your application, for the web and also as a desktop application with nw.js and a mobile appl with Cordova.
 
 @body
 
@@ -16,7 +23,7 @@ You will need [NodeJS](http://www.meetup.com/yyc-js/events/222682935/?a=ra1_te) 
 
 ### Create the project
 
-To get the DoneJS application running, create a new folder and in it initialize a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
+To get set up, create a new folder and in it initialize a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
 
 ```
 mkdir place-my-order
@@ -26,7 +33,7 @@ npm init
 
 [npm init](https://docs.npmjs.com/cli/init) will ask a couple of questions which can all be answered by choosing the default.
 
-Now we can install the DoneJS package and write it as a dependency into `package.json` so that a new copy of the application can be set up by simply typing `npm install` in the future:
+Now we can install the DoneJS package and write it as a dependency into `package.json` so that a new copy of the application can be set up in the future by simply typing `npm install`:
 
 ```
 npm install donejs --save
@@ -44,39 +51,52 @@ This will also install all of DoneJS's dependencies like:
 - [DocumentJS](http://documentjs.com) - Documentation
 - [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
 
+The initial folder structure then looks like this:
+
+```
+├── package.json
+├── node_modules
+|   ├── can
+|   └── ...
+```
+
 ### Setup a service API
 
-Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. How to create an API will not part of this guide. Instead we just install and start an existing service API module that can be used with our application:
+Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. How to create an API will not part of this guide. Instead we just install and start an existing service API that can be used with our application:
 
 ```
 npm install place-my-order-api --save
 ```
 
-Top start the API (here on port `7070`) add it as an NPM script to the `package.json`:
+To start the API (here on port `7070`) add it as an NPM script to the `package.json`:
 
 ```js
 "scripts": {
     "api": "place-my-order-api --port 7070",
 ```
 
-Which allows to start the API server with:
+Which allows to start the server with:
 
 ```
 npm run api
 ```
 
-The server will initialize some default data (restaurants and orders) on the first startup. Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) to see a JSON list of restaurant data.
+At first startup, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) to see a JSON list of restaurant data. Keep this server running during development.
 
 ## Setup server side rendering
 
-In the following paragraphs we will create:
+In the following paragraphs we will:
 
-- the basic template and application file
-- start a server which hosts those files and is also responsible for pre-rendering the application on the server and proxy API calls.
+- create the basic template
+- create the main application file
+- start a server which
+  - hosts those static files
+  - is responsible for pre-rendering the application
+  - proxies REST API calls to avoid cross-origin issues
 
 ### Create a template and main file
 
-Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add a `pmo/main.stache` to the project with the following content:
+Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. `pmo` will be used as our application main directory. Add `pmo/main.stache` to the project with the following content:
 
 ```
 <html>
@@ -116,6 +136,16 @@ export default AppState;
 
 This initializes an `AppMap` which contains a global application state and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client. We will cover what `can/map/define/` does in more detail later but in the `define` object or `AppState` we can now create a `message` property with a default value `Hello World!`.
 
+The complete file structure of our fully functional application now looks like this:
+
+```
+├── node_modules
+├── package.json
+├── pmo
+|   ├── app.js
+|   └── main.stache
+```
+
 ### Starting the application
 
 With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
@@ -139,11 +169,11 @@ Go to [http://localhost:8080](http://localhost:8080) and see the hello world mes
 
 ## Creating custom elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained components. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the globa application state.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained modules. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the globa application state.
 
 There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component])). Larger components can be split up into individual files.
 
-### Creating a header and homepage element
+### Creating homepage element
 
 The header component is fairly simple and basically consists of only the template. Create `pmo/header.component` with the following content:
 
