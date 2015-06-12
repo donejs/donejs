@@ -5,14 +5,16 @@
 @description Learn how to create the [place-my-order](http://place-my-order.com) 
 application with all of [Features DoneJS's features].
 
+![DoneJS app]()
+
 @body
 
-## Setup
+## Setup the project
 
 In this section we will create our DoneJS project and set up a REST API that the application can use.
 You will need [NodeJS](http://www.meetup.com/yyc-js/events/222682935/?a=ra1_te) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
 
-### Creating the project
+### Create the project
 
 To get the DoneJS application running, create a new folder and in it initialize a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
 
@@ -22,9 +24,7 @@ cd place-my-order
 npm init
 ```
 
-`npm init` will ask a couple of questions which can all be answered by choosing the default. The final prompt looks like this:
-
-![npm init prompts](img/npm-init.png)
+[npm init](https://docs.npmjs.com/cli/init) will ask a couple of questions which can all be answered by choosing the default.
 
 Now we can install the DoneJS package and write it as a dependency into `package.json` so that a new copy of the application can be set up by simply typing `npm install` in the future:
 
@@ -32,7 +32,17 @@ Now we can install the DoneJS package and write it as a dependency into `package
 npm install donejs --save
 ```
 
-This will also install all of DoneJS's dependencies like StealJS, CanJS etc.
+This will also install all of DoneJS's dependencies like:
+
+- [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
+- [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
+- [jQuery](http://jquery.com) - DOM helpers
+- [jQuery++](http://jquerypp.com) - Extended DOM helpers
+- [QUnit](https://qunitjs.com/) or Mocha - Assertion library
+- [FuncUnit](http://funcunit.com) - Functional tests
+- Testee or Karma - Test runner
+- [DocumentJS](http://documentjs.com) - Documentation
+- [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
 
 ### Setup a service API
 
@@ -42,7 +52,7 @@ Single page applications usually communicate with a RESTful API and a websocket 
 npm install place-my-order-api --save
 ```
 
-A good way to easily start the API (here on port `7070`) is adding it as an NPM script to the `package.json`:
+Top start the API (here on port `7070`) add it as an NPM script to the `package.json`:
 
 ```js
 "scripts": {
@@ -57,9 +67,12 @@ npm run api
 
 The server will initialize some default data (restaurants and orders) on the first startup. Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) to see a JSON list of restaurant data.
 
-## Setting up server side rendering
+## Setup server side rendering
 
-In the following paragraphs we will create the basic template and application file and start a server which hosts those files and is also responsible for pre-rendering the application on the server and proxy API calls.
+In the following paragraphs we will create:
+
+- the basic template and application file
+- start a server which hosts those files and is also responsible for pre-rendering the application on the server and proxy API calls.
 
 ### Create a template and main file
 
@@ -77,7 +90,8 @@ Every DoneJS application consists of at least two files: A main template (`pmo/m
     {{asset "inline-cache"}}
 
     {{#isProduction}}
-    <script src="/node_modules/steal/steal.production.js" main="pmo/main.stache!done-autorender"></script>
+    <script src="/node_modules/steal/steal.production.js"
+      main="pmo/main.stache!done-autorender"></script>
     {{else}}
     <script src="/node_modules/steal/steal.js"></script>
     {{/isProduction}}
@@ -85,21 +99,16 @@ Every DoneJS application consists of at least two files: A main template (`pmo/m
 </html>
 ```
 
-This is an HTML5 template that uses the [Handlebars syntax]() compatible [can.stache]() as the view engine and renders a `message` property from the application state. The `asset` helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
+This is an HTML5 template that uses the [Handlebars syntax]() compatible [can.stache]() as the view engine and renders a `message` property from the application state. The [asset]() helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
 
 The application main file at `pmo/app.js` looks like this:
 
 ```
 // pmo/app.js
 import AppMap from "can-ssr/app-map";
-import 'can/map/define/';
 
 const AppState = AppMap.extend({
-  define: {
-    message: {
-      value: 'Hello World!'
-    }
-  }
+  message: 'Hello World!'
 });
 
 export default AppState;
@@ -113,7 +122,7 @@ With those two files available we can start the server which hosts and renders t
 
 ```js
 "scripts": {
-    "start": "can-server --proxy http://localhost:7070 --port 8080",
+    "start": "can-serve --proxy http://localhost:7070 --port 8080",
 ```
 
 `main` in `package.json` (by default set to `index.js`) also needs to be changed to:
@@ -128,7 +137,7 @@ Then we can start the application with
 
 Go to [http://localhost:8080](http://localhost:8080) and see the hello world message.
 
-## Creating components
+## Creating custom elements
 
 One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained components. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the globa application state.
 
@@ -137,32 +146,6 @@ There are two ways of creating components. For smaller components we can define 
 ### Creating a header and homepage element
 
 The header component is fairly simple and basically consists of only the template. Create `pmo/header.component` with the following content:
-
-```html
-<can-component tag="pmo-home">
-  <template>
-     <can-import from="can/view/href/"/>
-     <header>
-       <nav>
-         <h1>place-my-order.com</h1>
-         <ul>
-           <li class="{{#eq page 'home'}}active{{/eq}}">
-             <a can-href='{page="home"}'>Home</a>
-           </li>
-           <li class="{{#eq page 'restaurants'}}active{{/eq}}">
-             <a can-href='{page="restaurants"}'>Restaurants</a>
-           </li>
-           <li class="{{#eq page 'orders'}}active{{/eq}}">
-             <a can-href='{page="orders"}'>Order History</a>
-           </li>
-         </ul>
-       </nav>
-     </header>
-  </template>
-</can-component>
-```
-
-Here we created a [can.Component]() using a web-component style declaration provided by the [system-component]() plugin. The component does not have any separate styles or functionality other than the template. `<can-import from="can/view/href/"/>` loads a `can-href` helper which allows it to easily create links to corresponding routes.
 
 The homepage element in `pmo/home.component` is very similar:
 
@@ -178,6 +161,8 @@ The homepage element in `pmo/home.component` is very similar:
   </template>
 </can-component>
 ```
+
+Here we created a [can.Component]() using a web-component style declaration provided by the [system-component]() plugin. The component does not have any separate styles or functionality other than the template. `<can-import from="can/view/href/"/>` loads a `can-href` helper which allows it to easily create links to corresponding routes.
 
 
 ### Creating a restaurant list element
@@ -241,6 +226,32 @@ route(':page/:slug', { slug: null });
 route(':page/:slug/:action', { slug: null, action: null });
 
 export default AppState;
+```
+
+### Adding a header element
+
+```html
+<can-component tag="pmo-header">
+  <template>
+     <can-import from="can/view/href/"/>
+     <header>
+       <nav>
+         <h1>place-my-order.com</h1>
+         <ul>
+           <li class="{{#eq page 'home'}}active{{/eq}}">
+             <a can-href='{page="home"}'>Home</a>
+           </li>
+           <li class="{{#eq page 'restaurants'}}active{{/eq}}">
+             <a can-href='{page="restaurants"}'>Restaurants</a>
+           </li>
+           <li class="{{#eq page 'orders'}}active{{/eq}}">
+             <a can-href='{page="orders"}'>Order History</a>
+           </li>
+         </ul>
+       </nav>
+     </header>
+  </template>
+</can-component>
 ```
 
 ### Switch between components
