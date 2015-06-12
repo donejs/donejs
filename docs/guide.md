@@ -624,7 +624,102 @@ Open up the app.
 
 ### Bundling your app
 
-### Building to iOS and Andriod
+To bundle your application create a build script. You could use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example let's simply create a `build.js` file:
+
+#### build.js
+
+```js
+var stealTools = require("steal-tools");
+
+stealTools.build({
+  config: __dirname + "/package.json!npm"
+});
+```
+
+Then run the script:
+
+```
+node build
+```
+
+This will build the application to a `dist/` folder in the project's base directory.
+
+From here your application is ready to be used in production. You can enable production by setting the `NODE_ENV` variable:
+
+```
+export NODE_ENV=production
+```
+
+Restart your server to see the application load in production.
+
+### Building to iOS and Android
+
+Using [steal-cordova](https://www.npmjs.com/package/steal-cordova) you can easily turn your web application into a [Cordova](https://cordova.apache.org/) app that runs in iOS and Android.
+
+First install steal-cordova as a devDependency in your project:
+
+```shell
+npm install steal-cordova --save-dev
+```
+
+Then update your build.js to make Cordova builds when you provide the **cordova** argument:
+
+```js
+var stealTools = require("steal-tools");
+
+stealTools.build({
+  config: __dirname + "/package.json!npm"
+});
+```
+
+becomes:
+
+```js
+var stealTools = require("steal-tools");
+
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+});
+
+var cordovaOptions = {
+  buildDir: "./build/cordova",
+  id: "com.hello.world",
+  name: "HelloWorld",
+  platforms: ["ios", "android"],
+  index: __dirname + "/cordova.html"
+};
+
+var stealCordova = require("steal-cordova")(cordovaOptions);
+
+// Check if the cordova option is passed.
+var buildCordova = process.argv.indexOf("cordova") > 0;
+
+if(buildCordova) {
+
+  buildPromise.then(stealCordova.build);
+
+}
+```
+
+This allows you to build a Cordova app with:
+
+```shell
+node build cordova
+```
+
+You can also use steal-cordova to launch an emulator after the build is complete, change:
+
+```js
+buildPromise.then(stealCordova.build);
+```
+
+to:
+
+```js
+buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
+```
+
+Which will launch the iOS emulator.
 
 ### Building to NW.js
 
