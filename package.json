@@ -1,10 +1,16 @@
 {
   "name": "donejs",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Your app is done",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "document:watch": "documentjs --watch",
+    "document": "documentjs && cp -R docs/img site/img",
+    "publish": "git push origin --tags",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish"
   },
   "repository": {
     "type": "git",
@@ -30,6 +36,10 @@
     "done-autorender": "0.0.3",
     "done-css": "^0.0.6",
     "documentjs": "^0.3.0-pre.4",
-    "jquery": "^2.0.0"
+    "jquery": "^1.11.0",
+    "can-ssr": "^0.1.1"
+  },
+  "devDependencies": {
+    "documentjs": "^0.3.0-pre.4"
   }
 }

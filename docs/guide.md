@@ -7,26 +7,63 @@ application with all of [Features DoneJS's features].
 
 @body
 
-## Install
+## Setup
 
-Define a public folder for client code and a place for your server-side rendering code.
+In this section we will create our DoneJS project and set up a REST API that the application can use.
+You will need [NodeJS](http://www.meetup.com/yyc-js/events/222682935/?a=ra1_te) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
 
-In your server:
+### Creating the project
 
-> npm install done-server-side-render
+To get the DoneJS application running, create a new folder and in it initialize a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
 
-In your public folder:
+```
+mkdir place-my-order
+cd place-my-order
+npm init
+```
 
-> npm install donejs --save
+`npm init` will ask a couple of questions which can all be answered by choosing the default. The final prompt looks like this:
 
-- ¿ Should we have two donejs, possibly not if it's only going to do server side rendering ?
+![npm init prompts](img/npm-init.png)
 
+Now we can install the DoneJS package and write it as a dependency into `package.json` so that a new copy of the application can be set up by simply typing `npm install` in the future:
+
+```
+npm install donejs --save
+```
+
+This will also install all of DoneJS's dependencies like StealJS, CanJS etc.
+
+### Setup a service API
+
+Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. How to create an API will not part of this guide. Instead we just install and start an existing service API module that can be used with our application:
+
+```
+npm install place-my-order-api --save
+```
+
+A good way to easily start the API (here on port `7070`) is adding it as an NPM script to the `package.json`:
+
+```js
+"scripts": {
+    "api": "place-my-order-api --port 7070",
+```
+
+Which allows to start the API server with:
+
+```
+npm run api
+```
+
+The server will initialize some default data (restaurants and orders) on the first startup. Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) to see a JSON list of restaurant data.
 
 ## Setting up server side rendering
 
-### Create a template
+In the following paragraphs we will create the basic template and application file and start a server which hosts those files and is also responsible for pre-rendering the application on the server and proxy API calls.
 
-Create `public/pmo/main.stache`
+### Create a template and main file
+
+Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add a `pmo/main.stache` to the project with the following content:
 
 ```
 <html>
@@ -35,7 +72,7 @@ Create `public/pmo/main.stache`
     {{asset "css"}}
   </head>
   <body>
-    <can-import from="pmo/app" as="@viewModel" />
+    <can-import from="pmo/app" [.]="{value}" />
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
@@ -48,93 +85,104 @@ Create `public/pmo/main.stache`
 </html>
 ```
 
-- ¿ DocType ?
+This is an HTML5 template that uses the [Handlebars syntax]() compatible [can.stache]() as the view engine and renders a `message` property from the application state. The `asset` helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
 
-### Create the application view model
+The application main file at `pmo/app.js` looks like this:
 
 ```
 // pmo/app.js
 import AppMap from "can-ssr/app-map";
+import 'can/map/define/';
 
 const AppState = AppMap.extend({
-  message: "Hello World!"
+  define: {
+    message: {
+      value: 'Hello World!'
+    }
+  }
 });
 
 export default AppState;
 ```
 
-- ¿ pmo/pmo ?
+This initializes an `AppMap` which contains a global application state and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client. We will cover what `can/map/define/` does in more detail later but in the `define` object or `AppState` we can now create a `message` property with a default value `Hello World!`.
 
-### Render the template on the server.
+### Starting the application
 
-```
-var ssr = require("can-ssr");
-var url = require("url");
+With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
 
-var render = ssr({
-  config: path.join(__dirname, "..", "/public/package.json!npm"),
-  main: "pmo/layout.stache!done-autorender"
-});
-
-express.use("/", function(req, res){
-    var pathname = url.parse(req.url).pathname;
-
-    render(pathname).then(html => res.send(html))
-}));
-```
-
-set package.json:
-
-```
+```js
 "scripts": {
-    "start": "node lib/index.js",
+    "start": "can-server --proxy http://localhost:7070 --port 8080",
 ```
 
-### Start the Server
+`main` in `package.json` (by default set to `index.js`) also needs to be changed to:
 
-Run:
-
->  npm start
-
-Open your browser.
-
-Enjoy!
-
-
-## Setting up routing
-
-In this part, you will create routes, two pages that are managed by custom elements,
-and then be able to navigate between pages.
-
-
-### Create Routes
-
-Add to _app.js_.
-
-```
-route(':page', { page: 'home' });
-route(':page/:slug', { slug: null });
-route(':page/:slug/:action', { slug: null, action: null });
+```js
+"main": "pmo/main.stache!done-autorender",
 ```
 
-### Creating a homepage element
+Then we can start the application with
+
+> npm start
+
+Go to [http://localhost:8080](http://localhost:8080) and see the hello world message.
+
+## Creating components
+
+One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained components. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the globa application state.
+
+There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component])). Larger components can be split up into individual files.
+
+### Creating a header and homepage element
+
+The header component is fairly simple and basically consists of only the template. Create `pmo/header.component` with the following content:
+
+```html
+<can-component tag="pmo-home">
+  <template>
+     <can-import from="can/view/href/"/>
+     <header>
+       <nav>
+         <h1>place-my-order.com</h1>
+         <ul>
+           <li class="{{#eq page 'home'}}active{{/eq}}">
+             <a can-href='{page="home"}'>Home</a>
+           </li>
+           <li class="{{#eq page 'restaurants'}}active{{/eq}}">
+             <a can-href='{page="restaurants"}'>Restaurants</a>
+           </li>
+           <li class="{{#eq page 'orders'}}active{{/eq}}">
+             <a can-href='{page="orders"}'>Order History</a>
+           </li>
+         </ul>
+       </nav>
+     </header>
+  </template>
+</can-component>
+```
+
+Here we created a [can.Component]() using a web-component style declaration provided by the [system-component]() plugin. The component does not have any separate styles or functionality other than the template. `<can-import from="can/view/href/"/>` loads a `can-href` helper which allows it to easily create links to corresponding routes.
+
+The homepage element in `pmo/home.component` is very similar:
 
 ```html
 <can-component tag='pmo-home'>
   <template>
      <div class="homepage">
-	  <img src="images/homepage-hero.jpg" width="250" height="380" />
-	  <h1>Ordering food has never been easier</h1>
-	  <p>We make it easier than ever to order gourmet food from your favorite local restaurants.</p>
-	  <p><a class="btn" can-href="{page='restaurants'}" role="button">Choose a Restaurant</a></p>
-	</div>
+       <img src="images/homepage-hero.jpg" width="250" height="380" />
+       <h1>Ordering food has never been easier</h1>
+       <p>We make it easier than ever to order gourmet food from your favorite local restaurants.</p>
+       <p><a class="btn" href="/restaurants" role="button">Choose a Restaurant</a></p>
+     </div>
   </template>
 </can-component>
 ```
 
-### Creating a restaruant list element
 
-The compeonent:
+### Creating a restaurant list element
+
+The restaurant list will contain more functionality which is why we can split it up into separate files for the template and the component itself. When comprised of multiple files, they are put together into their own folder so that the standalone component can be easily shared and tested. We call it the [modlet pattern]().
 
 ```js
 import Component from 'can/component/';
@@ -157,7 +205,45 @@ The template:
 <h2>Restaurants</h2>
 ```
 
-### Switch between pages
+### Create the order history element
+
+As a partial?
+
+## Setting up routing
+
+In this part, you will create routes, two pages that are managed by custom elements,
+and then make it possible to navigate between pages.
+
+### Create Routes
+
+Routing works slightly different than what you might be used to from other libraries Instead of declaring routes and mapping those to actions, our application will use CanJS [can.route]() which allows to map property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of our application.
+
+If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+
+Change our `pmo/app.js` file to:
+
+```
+// pmo/app.js
+import AppMap from "can-ssr/app-map";
+import 'can/map/define/';
+import route from 'can/route/';
+
+const AppState = AppMap.extend({
+  define: {
+    message: {
+      value: 'Hello World!'
+    }
+  }
+});
+
+route(':page', { page: 'home' });
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+
+export default AppState;
+```
+
+### Switch between components
 
 Update `main.stache`.
 
@@ -175,20 +261,6 @@ Update `main.stache`.
 ```
 
 This progressively loads the modules
-
-### Create the header.
-
-```
-<li class='{{eq page 'home'}}'>
-	<a can-href='{page= "home"}'>Home</a>
-</li>
-```
-
-### Create the order history page
-
-As a partial?
-
-### Switch between all three pages
 
 Update `main.stache`
 
@@ -214,19 +286,6 @@ Update `main.stache`
 ```
 
 ## Getting data from the server and showing it in the page.
-
-### Setting up a basic server.
-
-```
-npm install place-my-order-server
-./node_modules/.bin/place-my-order-server --port 2200
-```
-
-### Proxy to that server
-
-```
-./node_modules/.bin/done-server --proxy 2200 --port 3030
-```
 
 ### Creating a restaurants connection.
 
@@ -610,7 +669,7 @@ Open up the demo page.
 
 Open up the app.
 
-## Setup continous integration (CI) and tests
+## Setup automated tests and continuous integration (CI)
 
 ## Nested routes
 
