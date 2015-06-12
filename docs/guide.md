@@ -134,7 +134,7 @@ const AppState = AppMap.extend({
 export default AppState;
 ```
 
-This initializes an `AppMap` which contains a global application state and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client. We will cover what `can/map/define/` does in more detail later but in the `define` object or `AppState` we can now create a `message` property with a default value `Hello World!`.
+This initializes an `AppMap` which contains the application state (with a default `message` property) and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
 
 The complete file structure of our fully functional application now looks like this:
 
@@ -169,15 +169,13 @@ Go to [http://localhost:8080](http://localhost:8080) and see the hello world mes
 
 ## Creating custom elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained modules. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the globa application state.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained modules. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the global application state.
 
-There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component])). Larger components can be split up into individual files.
+There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component]())). Larger components can be split up into individual files.
 
-### Creating homepage element
+### Creating a homepage element
 
-The header component is fairly simple and basically consists of only the template. Create `pmo/header.component` with the following content:
-
-The homepage element in `pmo/home.component` is very similar:
+The homepage element in `pmo/home.component` is very simple and basically just consists of a template:
 
 ```html
 <can-component tag='pmo-home'>
@@ -192,12 +190,11 @@ The homepage element in `pmo/home.component` is very similar:
 </can-component>
 ```
 
-Here we created a [can.Component]() using a web-component style declaration provided by the [system-component]() plugin. The component does not have any separate styles or functionality other than the template. `<can-import from="can/view/href/"/>` loads a `can-href` helper which allows it to easily create links to corresponding routes.
-
+Here we created a [can.Component]() named `pmo-home` using a web-component style declaration. The component does not have any separate styles or functionality other than the template.
 
 ### Creating a restaurant list element
 
-The restaurant list will contain more functionality which is why we can split it up into separate files for the template and the component itself. When comprised of multiple files, they are put together into their own folder so that the standalone component can be easily shared and tested. We call it the [modlet pattern]().
+The restaurant list will contain more functionality which is why we can split it into separate files for the template and the component itself. When comprised of multiple files, they are put together into their own folder so that the standalone component can be easily re-used and tested. In `pmo/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
@@ -213,16 +210,29 @@ export default Component.extend({
 });
 ```
 
-The template:
+The template at `pmo/restaurant/list/list.stache`:
 
 ```
 <a can-href="{page='home'}">Homepage</a>
 <h2>Restaurants</h2>
 ```
 
+We now have this folder structure:
+
+```
+├── node_modules
+├── package.json
+├── pmo
+|   ├── app.js
+|   └── main.stache
+|   ├── restaurant
+|   |   ├── list
+|   |   |   ├── list.js
+|   |   |   ├── list.stache
+```
+
 ### Create the order history element
 
-As a partial?
 
 ## Setting up routing
 
@@ -260,6 +270,8 @@ export default AppState;
 
 ### Adding a header element
 
+This is also a good time to add a header element at `pmo/header.component` that links to the different routes we just defined.
+
 ```html
 <can-component tag="pmo-header">
   <template>
@@ -286,24 +298,7 @@ export default AppState;
 
 ### Switch between components
 
-Update `main.stache`.
-
-```html
-{{#eq page "home"}}
-  <can-import from="pmo/home/">
-    <pmo-home></pmo-home>
-  </can-import>
-{{/eq}}
-{{#eq page "restaurants"}}
-  <can-import from="pmo/restaurant/list">
-    <pmo-restaurant-list></pmo-restaurant-list>
-  </can-import>
-{{/eq}}
-```
-
-This progressively loads the modules
-
-Update `main.stache`
+Now we can glue all those individual components together in `pmo/main.stache`. What we want to do is based on the current page (home, restaurants or orde-rhistory) load the correct component and then initialize it with the information from the application state that it needs. `pmo/main.stache`:
 
 ```html
 <can-import from="pmo/header/" />
