@@ -2,17 +2,17 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description In this guide you will learn about all of [DoneJS features] by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
+@description In this guide you will learn about all of [DoneJS features]() by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
 
 
 ![DoneJS app](img/place-my-order.png)
 
 
-After the initial application setup (including a server that hosts and pre-renders the application) we will create several custom elements and then glue them together using the application state and routes. Then we will learn how to retrieve data fromt he server using a RESTful API.
+After the initial application setup (including a server that hosts and pre-renders the application) we will create several custom elements and then glue them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
 
-After that we will talk more about view-models and how to identify, implement and tests their functionality. Once we have unit tests running in the browser we will automate running those tests and also show how to set them up on a continuous integration server. In the next chapters we will show how to easily import existing projects using NPM and how to set up a real-time connection for the application.
+After that we will talk more about what a view-model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser we will automate running those tests from the command line locally and also on a continuous integration server. In the subsequent chapters we will show how to easily import other existing modules into our application and how to set up a real-time connection.
 
-Finally we will describe how to build and deploy your application, for the web and also as a desktop application with nw.js and a mobile appl with Cordova.
+Finally we will describe how to build and deploy your application for the web and also as a desktop application with nw.js and a mobile app with Cordova.
 
 @body
 
