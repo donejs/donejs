@@ -914,7 +914,7 @@ And finally update your package.json. There are two things you'll want to change
 }
 ```
 
-Next you'll need to update your routes file to use hashchange based routing because NW.js runs within the file protocol. If you haven't already install `steal-platform`. Then in your pmo/routes module add the following condition:
+Next, if using pushstate routing, you'll need to update your routes to use hash-based routing because NW.js runs within the file protocol. If you haven't already install `steal-platform`. Then in your pmo/app module add the following condition:
 
 ```js
 import platform from 'steal-platform';
