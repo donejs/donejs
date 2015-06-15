@@ -780,7 +780,101 @@ buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
 
 Which will launch the iOS emulator.
 
+#### AJAX
+
+When not running in a traditional browser environment you'll need to make your AJAX requests
+to an external URL. The module `steal-platform` aids in detecting environments like Cordova
+so you can include special behavior.  Install the module:
+
+```
+npm install steal-platform --save
+```
+
+Create a file: `pmo/models/base-url.js` and place this code:
+
+```js
+import platform from "steal-platform";
+
+let baseUrl = '';
+
+if(platform.isCordova || platform.isNW) {
+  baseUrl = 'http://place-my-order.com';
+}
+
+export default baseUrl;
+```
+
+This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be make there.
+
+You'll also need to update your models to use the baseUrl in your superMaps. For example in pmo/models/state do:
+
+```js
+import baseUrl from './base-url';
+
+superMap({
+  resource: baseUrl + '/api/states',
+  ...
+});
+```
+
 ### Building to NW.js
+
+[steal-nw](https://github.com/stealjs/steal-nw) is a module that makes it easy to create [NW.js](http://nwjs.io/) applications.
+
+Instead steal-nw as a devDependency:
+
+```shell
+npm install steal-nw --save-dev
+```
+
+Update your build.js [created above](#section_Bundlingyourapp) to include building a NW.js package:
+
+```js
+var nwOptions = {
+  buildDir: "./build",
+  platforms: ["osx"],
+  files: [
+    "package.json",
+    "nw.html",
+
+    "node_modules/steal/steal.production.js",
+    "images/**/*"
+  ]
+};
+
+var stealNw = require("steal-nw");
+
+buildPromise.then(function(buildResult){
+  stealNw(nwOptions, buildResult);
+});
+```
+
+You'll also need to create a nw.html (this is the entry point for your NW.js app):
+
+```html
+<html>
+  <head><title>Place My Order</title></head>
+  <body>
+    <script src="node_modules/steal/steal.production.js" main="pmo/layout.stache!done-autorender"></script>
+  </body>
+</html>
+```
+
+And finally update your package.json. There are two things you'll want to change:
+
+1. Your "main" must be "nw.html".
+
+2. You can set "window" options to match the application layout. Let's update the size of the window:
+
+```json
+  "window": {
+    "width": 1060,
+    "height": 625
+  }
+```
+
+Now you can build your NW.js with `node build nw`. Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
+
 
 ## Deploying
 
