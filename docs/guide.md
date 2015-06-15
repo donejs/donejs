@@ -908,11 +908,23 @@ And finally update your package.json. There are two things you'll want to change
 2. You can set "window" options to match the application layout. Let's update the size of the window:
 
 ```json
-  "window": {
-    "width": 1060,
-    "height": 625
-  }
+"window": {
+  "width": 1060,
+  "height": 625
+}
 ```
+
+Next you'll need to update your routes file to use hashchange based routing because NW.js runs within the file protocol. If you haven't already install `steal-platform`. Then in your pmo/routes module add the following condition:
+
+```js
+import platform from 'steal-platform';
+
+if(platform.isCordova || platform.isNW) {
+  route.defaultBinding = "hashchange";
+}
+```
+
+This will set can.route to use hash urls which is needed in both Cordova and NW.js environments.
 
 Now you can build your NW.js with `node build nw`. Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
 
