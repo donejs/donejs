@@ -791,7 +791,7 @@ var buildCordova = process.argv.indexOf("cordova") > 0;
 
 if(buildCordova) {
 
-  buildPromise.then(stealCordova.build);
+  buildPromise = buildPromise.then(stealCordova.build);
 
 }
 ```
@@ -880,9 +880,14 @@ var nwOptions = {
 
 var stealNw = require("steal-nw");
 
-buildPromise.then(function(buildResult){
-  stealNw(nwOptions, buildResult);
-});
+// Check if the cordova option is passed.
+var buildNW = process.argv.indexOf("nw") > 0;
+
+if(buildNW) {
+  buildPromise = buildPromise.then(function(buildResult){
+    stealNw(nwOptions, buildResult);
+  });
+}
 ```
 
 You'll also need to create a nw.html (this is the entry point for your NW.js app):
