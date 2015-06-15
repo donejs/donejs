@@ -8,9 +8,9 @@
 ![DoneJS app](img/place-my-order.png)
 
 
-After the initial application setup (including a server that hosts and pre-renders the application) we will create several custom elements and then glue them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
+After the initial application setup (including a server that hosts and pre-renders the application) we will create several custom elements and then bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
 
-After that we will talk more about what a view-model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser we will automate running those tests from the command line locally and also on a continuous integration server. In the subsequent chapters we will show how to easily import other existing modules into our application and how to set up a real-time connection.
+After that we will talk more about what a view-model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser we will automate running them from the command line locally and also on a continuous integration server. In the subsequent chapters we will show how to easily import other existing modules into our application and how to set up a real-time connection.
 
 Finally we will describe how to build and deploy your application for the web and also as a desktop application with nw.js and a mobile app with Cordova.
 
@@ -55,8 +55,8 @@ The initial folder structure then looks like this:
 
 ```
 ├── package.json
-├── node_modules
-|   ├── can
+├── node_modules/
+|   ├── can/
 |   └── ...
 ```
 
@@ -96,9 +96,10 @@ In the following paragraphs we will:
 
 ### Create a template and main file
 
-Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. `pmo` will be used as our application main directory. Add `pmo/main.stache` to the project with the following content:
+Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add `pmo/main.stache` to the project with the following content:
 
-```
+```html
+<!DOCTYPE html>
 <html>
   <head>
     <title>Place My Order</title>
@@ -119,7 +120,7 @@ Every DoneJS application consists of at least two files: A main template (`pmo/m
 </html>
 ```
 
-This is an HTML5 template that uses the [Handlebars syntax]() compatible [can.stache]() as the view engine and renders a `message` property from the application state. The [asset]() helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
+This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/) compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. The [asset]() helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
 
 The application main file at `pmo/app.js` looks like this:
 
@@ -136,12 +137,12 @@ export default AppState;
 
 This initializes an `AppMap` which contains the application state (with a default `message` property) and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
 
-The complete file structure of our fully functional application now looks like this:
+The complete file structure of the application now looks like this:
 
 ```
-├── node_modules
+├── node_modules/
 ├── package.json
-├── pmo
+├── pmo/
 |   ├── app.js
 |   └── main.stache
 ```
@@ -165,20 +166,20 @@ Then we can start the application with
 
 > npm start
 
-Go to [http://localhost:8080](http://localhost:8080) and see the hello world message.
+Go to [http://localhost:8080](http://localhost:8080) to see the hello world message.
 
 ## Creating custom elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained modules. In the following section we will create four different components for the header, homepage, the restaurant list and the order history. In the next chapter we will glue them all together using routes and the global application state.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained modules. In the following section we will create different components for the homepage, the restaurant list and the order history. After that we will glue them all together using routes and the global application state.
 
-There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component]())). Larger components can be split up into individual files.
+There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component](https://github.com/stealjs/system-component))). Larger components can be split up into individual files.
 
 ### Creating a homepage element
 
-The homepage element in `pmo/home.component` is very simple and basically just consists of a template:
+The homepage element in `pmo/home.component` is very simple and just consists of a template:
 
 ```html
-<can-component tag='pmo-home'>
+<can-component tag="pmo-home">
   <template>
      <div class="homepage">
        <img src="images/homepage-hero.jpg" width="250" height="380" />
@@ -190,11 +191,30 @@ The homepage element in `pmo/home.component` is very simple and basically just c
 </can-component>
 ```
 
-Here we created a [can.Component]() named `pmo-home` using a web-component style declaration. The component does not have any separate styles or functionality other than the template.
+Here we created a [can.Component](http://canjs.com/docs/can.Component.html) named `pmo-home` using a [web-component](http://webcomponents.org/) style declaration. The component does not have any separate styles or functionality other than the template.
+
+### Create the order history element
+
+For now, the order history is very similar. In `pmo/order/history.component`:
+
+```
+<can-component tag="pmo-order-history">
+  <template>
+    <div class="order-history">
+      <div class="order header">
+        <address>Name / Address / Phone</address>
+        <div class="items">Order</div>
+        <div class="total">Total</div>
+        <div class="actions">Action</div>
+      </div>
+    </div>
+  </template>
+</can-component>
+```
 
 ### Creating a restaurant list element
 
-The restaurant list will contain more functionality which is why we can split it into separate files for the template and the component itself. When comprised of multiple files, they are put together into their own folder so that the standalone component can be easily re-used and tested. In `pmo/restaurant/list/list.js`:
+The restaurant list will contain more functionality which is why we can split it into separate files for the template and the component logic. All files are put together into their own folder so that components can be easily re-used and tested individually. In `pmo/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
@@ -210,56 +230,51 @@ export default Component.extend({
 });
 ```
 
-The template at `pmo/restaurant/list/list.stache`:
+And add a simple template at `pmo/restaurant/list/list.stache`:
 
 ```
 <a can-href="{page='home'}">Homepage</a>
 <h2>Restaurants</h2>
 ```
 
-We now have this folder structure:
+We will add more functionality to this element in a later chapter. Your folder structure should look like this:
 
 ```
 ├── node_modules
 ├── package.json
-├── pmo
+├── pmo/
 |   ├── app.js
 |   └── main.stache
-|   ├── restaurant
-|   |   ├── list
+|   ├── order/
+|   |   ├── history.component
+|   ├── restaurant/
+|   |   ├── list/
 |   |   |   ├── list.js
 |   |   |   ├── list.stache
 ```
 
-### Create the order history element
-
-
 ## Setting up routing
 
-In this part, you will create routes, two pages that are managed by custom elements,
-and then make it possible to navigate between pages.
+In this part, we will create routes and dynamically load and bring the custom elements we created together on the main page.
 
 ### Create Routes
 
-Routing works slightly different than what you might be used to from other libraries Instead of declaring routes and mapping those to actions, our application will use CanJS [can.route]() which allows to map property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of our application.
+Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS [can.route](http://canjs.com/docs/can.route.html) which allows to map property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of the application state.
 
 If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
-Change our `pmo/app.js` file to:
+To add the routes, change `pmo/app.js` to:
 
 ```
 // pmo/app.js
 import AppMap from "can-ssr/app-map";
-import 'can/map/define/';
 import route from 'can/route/';
 
 const AppState = AppMap.extend({
-  define: {
-    message: {
-      value: 'Hello World!'
-    }
-  }
+  message: 'Hello World!'
 });
+
+export default AppState;
 
 route(':page', { page: 'home' });
 route(':page/:slug', { slug: null });
@@ -268,9 +283,15 @@ route(':page/:slug/:action', { slug: null, action: null });
 export default AppState;
 ```
 
+Now we have three routes available:
+
+- `:page` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `AppState` to `home` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
+- `:page/:slug` which matches restaurant links like [http://localhost:8080/restaurants/spago](http://localhost:8080/restaurants/spago) which sets `page` and `slug` (a URL friendly restaurant short name)
+- `:page/:slug/:action` which will be used to show the order page for a specific restaurant e.g. [http://localhost:8080/restaurants/spago/order](http://localhost:8080/restaurants/spago/order)
+
 ### Adding a header element
 
-This is also a good time to add a header element at `pmo/header.component` that links to the different routes we just defined.
+Now is also a good time to add a header element at `pmo/header.component` that links to the different routes we just defined.
 
 ```html
 <can-component tag="pmo-header">
@@ -281,13 +302,13 @@ This is also a good time to add a header element at `pmo/header.component` that 
          <h1>place-my-order.com</h1>
          <ul>
            <li class="{{#eq page 'home'}}active{{/eq}}">
-             <a can-href='{page="home"}'>Home</a>
+             <a can-href="{page='home'}">Home</a>
            </li>
            <li class="{{#eq page 'restaurants'}}active{{/eq}}">
-             <a can-href='{page="restaurants"}'>Restaurants</a>
+             <a can-href="{page='restaurants'}">Restaurants</a>
            </li>
-           <li class="{{#eq page 'orders'}}active{{/eq}}">
-             <a can-href='{page="orders"}'>Order History</a>
+           <li class="{{#eq page 'order-history'}}active{{/eq}}">
+             <a can-href="{page='order-history'}">Order History</a>
            </li>
          </ul>
        </nav>
@@ -296,76 +317,133 @@ This is also a good time to add a header element at `pmo/header.component` that 
 </can-component>
 ```
 
+Here we use the `eq` helper to make the appropriate link active and then use [can-href]() to create links based on the the application state (e.g. by setting the `page` property to `home`) which will then create the proper links based on the route ([http://localhost:8080/home](http://localhost:8080/home) in this case).
+
 ### Switch between components
 
-Now we can glue all those individual components together in `pmo/main.stache`. What we want to do is based on the current page (home, restaurants or orde-rhistory) load the correct component and then initialize it with the information from the application state that it needs. `pmo/main.stache`:
+Now we can glue all those individual components together in `pmo/main.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct components and then initialize it with the information from the application state it needs. Update `pmo/main.stache` to:
 
 ```html
-<can-import from="pmo/header/" />
-<pmo-header page="{page}"></pmo-header>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place My Order</title>
+    {{asset "css"}}
+  </head>
+  <body>
+    <can-import from="pmo/app" [.]="{value}" />
 
-{{#eq page "home"}}
-  <can-import from="pmo/home/">
-    <pmo-home></pmo-home>
-  </can-import>
-{{/eq}}
-{{#eq page "restaurants"}}
-  <can-import from="pmo/restaurant/list">
-    <pmo-restaurant-list></pmo-restaurant-list>
-  </can-import>
-{{/eq}}
-{{#eq page "order-history"}}
-  <can-import from="pmo/order/history">
-    <pmo-order-history></pmo-order-history>
-  </can-import>
-{{/eq}}
+    <can-import from="pmo/header.component!" />
+    <pmo-header page="{page}"></pmo-header>
+
+    {{#eq page "home"}}
+      <can-import from="pmo/home.component!">
+        <pmo-home></pmo-home>
+      </can-import>
+    {{/eq}}
+    {{#eq page "restaurants"}}
+      <can-import from="pmo/restaurant/list">
+        <pmo-restaurant-list></pmo-restaurant-list>
+      </can-import>
+    {{/eq}}
+    {{#eq page "order-history"}}
+      <can-import from="pmo/order/history.component">
+        <pmo-order-history></pmo-order-history>
+      </can-import>
+    {{/eq}}
+
+    {{asset "inline-cache"}}
+
+    {{#isProduction}}
+    <script src="/node_modules/steal/steal.production.js"
+      main="pmo/main.stache!done-autorender"></script>
+    {{else}}
+    <script src="/node_modules/steal/steal.js"></script>
+    {{/isProduction}}
+  </body>
+</html>
 ```
+
+Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. If you now reload [http://localhost:8080/](http://localhost:8080/) you should see the header and the home component and be able to navigate.
 
 ## Getting data from the server and showing it in the page.
 
+[can-connect]() is a powerful data layer that allows our application to connect to the RESTful API that we set up with `place-my-order-api`.
+
 ### Creating a restaurants connection.
+
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to do two things:
+
+1. Create a Restaurants [can.Map](http://canjs.com/docs/can.Map.html) and [can.List](http://canjs.com/docs/can.List.html)
+2. Create a connection to `/api/restaurants`
+
+We will put the connection in `pmo/models/restaurant.js`:
 
 ```js
 import Map from 'can/map/';
 import List from 'can/list/';
-import connectSuperMap from 'can-connect/super-map';
+import superMap from 'can-connect/super-map';
 
-export var Restaurant = can.Map.extend({});
-Restaurant.List = can.List.extend({
-  Map: Restaurant
-});
+export const Restaurant = can.Map.extend({});
 
-export var restaurantConnection = superMap({
-  resource: "/api/restaurants",
+export const restaurantConnection = superMap({
+  resource: '/api/restaurants',
   idProp: '_id',
   Map: Restaurant,
   List: Restaurant.List,
-  name: "restaurants"
+  name: 'restaurants'
 });
-
-window.restaurantConnection = restaurantConnection;
 ```
+
+The connection is a can-connect [superMap]() and besides setting the `Map` and `List` type the connection should return we also define:
+
+- `resource` - The URL of the REST endpoint
+- `idProp` - The property name of the data unique identifier
+- `name` - A short name used as an identifier when caching data
 
 ### Test the connection
 
+To test the connection you can temporarily add the following to `pmo/app.js`:
+
 ```js
+import { restaurantConnection } from './models/restaurant';
+
 restaurantConnection.findAll({})
 	.then(function(restaurants){
-	  console.log( restaurants.attr() );
+	  console.log(restaurants.attr());
 	});
 ```
 
+After reloading the homepage you should see the restaurant information logged in the console.
+
 ### Add to the page
 
+Now that we know we get data from the server we can update the `ViewModel` in `pmo/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
+
 ```js
+import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import template from './list.stache!';
+
 export var ViewModel = Map.extend({
   define: {
-    restaurants: function(){
-      return restaurantConnection.findAll({});
+    restaurants: {
+      value: function(){
+        return restaurantConnection.findAll({});
+      }
     }
   }
 });
+
+export default Component.extend({
+  tag: 'pmo-restaurant-list',
+  viewModel: ViewModel,
+  template: template
+});
 ```
+
+And update the template at `pmo/restaurant/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
 
 ```html
 {{#if restaurants.isPending}}
@@ -393,6 +471,26 @@ export var ViewModel = Map.extend({
     </div>
   {{/each}}
 {{/if}}
+```
+
+By checking for `restaurants.isPending` and `restaurants.isResolved` we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at `restaurants.value`.
+
+The current folder structure and files look like this:
+
+```
+├── node_modules
+├── package.json
+├── pmo/
+|   ├── app.js
+|   └── main.stache
+|   ├── models/
+|   |   ├── restaurant.js
+|   ├── order/
+|   |   ├── history.component
+|   ├── restaurant/
+|   |   ├── list/
+|   |   |   ├── list.js
+|   |   |   ├── list.stache
 ```
 
 ## Creating a unit-tested view model
