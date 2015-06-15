@@ -719,7 +719,7 @@ Open up the app.
 
 ### Bundling your app
 
-To bundle your application create a build script. You could use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example let's simply create a `build.js` file:
+To bundle our application for production we create a build script. We could use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example let's simply create a `build.js` file:
 
 #### build.js
 
@@ -739,25 +739,25 @@ node build
 
 This will build the application to a `dist/` folder in the project's base directory.
 
-From here your application is ready to be used in production. You can enable production by setting the `NODE_ENV` variable:
+From here your application is ready to be used in production. Enable production mode by setting the `NODE_ENV` variable:
 
 ```
 export NODE_ENV=production
 ```
 
-Restart your server to see the application load in production.
+Restart the server to see the application load in production.
 
 ### Building to iOS and Android
 
-Using [steal-cordova](https://www.npmjs.com/package/steal-cordova) you can easily turn your web application into a [Cordova](https://cordova.apache.org/) app that runs in iOS and Android.
+Using [steal-cordova](https://www.npmjs.com/package/steal-cordova) we can easily turn our web application into a [Cordova](https://cordova.apache.org/) app that runs in iOS and Android.
 
-First install steal-cordova as a devDependency in your project:
+First install steal-cordova as a devDependency:
 
 ```shell
 npm install steal-cordova --save-dev
 ```
 
-Then update your build.js to make Cordova builds when you provide the **cordova** argument:
+Then update build.js to make Cordova builds when provided the **cordova** argument:
 
 ```js
 var stealTools = require("steal-tools");
@@ -796,13 +796,13 @@ if(buildCordova) {
 }
 ```
 
-This allows you to build a Cordova app with:
+This allows us to build a Cordova app with:
 
 ```shell
 node build cordova
 ```
 
-You can also use steal-cordova to launch an emulator after the build is complete, change:
+steal-cordova can also be used to launch an emulator after the build is complete, change:
 
 ```js
 buildPromise.then(stealCordova.build);
@@ -814,13 +814,13 @@ to:
 buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
 ```
 
-Which will launch the iOS emulator.
+Which will launch the iOS emulator. Substitute `android` for the Android emulator.
 
 #### AJAX
 
-When not running in a traditional browser environment you'll need to make your AJAX requests
+When not running in a traditional browser environment AJAX requests need to be made
 to an external URL. The module `steal-platform` aids in detecting environments like Cordova
-so you can include special behavior.  Install the module:
+so special behavior can be added.  Install the module:
 
 ```
 npm install steal-platform --save
@@ -840,9 +840,9 @@ if(platform.isCordova || platform.isNW) {
 export default baseUrl;
 ```
 
-This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be make there.
+This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be made there.
 
-You'll also need to update your models to use the baseUrl in your superMaps. For example in pmo/models/state do:
+Our models will also need to be updated to use the baseUrl. For example in pmo/models/state do:
 
 ```js
 import baseUrl from './base-url';
@@ -857,13 +857,13 @@ superMap({
 
 [steal-nw](https://github.com/stealjs/steal-nw) is a module that makes it easy to create [NW.js](http://nwjs.io/) applications.
 
-Instead steal-nw as a devDependency:
+Install steal-nw as a devDependency:
 
 ```shell
 npm install steal-nw --save-dev
 ```
 
-Update your build.js [created above](#section_Bundlingyourapp) to include building a NW.js package:
+Update build.js [created above](#section_Bundlingyourapp) to include building a NW.js package:
 
 ```js
 var nwOptions = {
@@ -890,7 +890,7 @@ if(buildNW) {
 }
 ```
 
-You'll also need to create a nw.html (this is the entry point for your NW.js app):
+We also need to create a nw.html (this is the entry point for the NW.js app):
 
 ```html
 <html>
@@ -901,20 +901,26 @@ You'll also need to create a nw.html (this is the entry point for your NW.js app
 </html>
 ```
 
-And finally update your package.json. There are two things you'll want to change:
+And finally update package.json. There are two things we need to change:
 
-1. Your "main" must be "nw.html".
+1. The "main" must be "nw.html".
 
-2. You can set "window" options to match the application layout. Let's update the size of the window:
+2. We can set "window" options to match the application layout. Let's update the size of the window:
 
 ```json
-"window": {
-  "width": 1060,
-  "height": 625
+{
+  "main": "nw.html",
+
+  ...
+
+  "window": {
+    "width": 1060,
+    "height": 625
+  }
 }
 ```
 
-Next, if using pushstate routing, you'll need to update your routes to use hash-based routing because NW.js runs within the file protocol. If you haven't already install `steal-platform`. Then in your pmo/app module add the following condition:
+Next, if using pushstate routing, we need to update our routes to use hash-based routing because NW.js runs within the file protocol. If you haven't already installed `steal-platform`, do so now. Then in pmo/app module add the following condition:
 
 ```js
 import platform from 'steal-platform';
@@ -924,9 +930,9 @@ if(platform.isCordova || platform.isNW) {
 }
 ```
 
-This will set can.route to use hash urls which is needed in both Cordova and NW.js environments.
+This will set can.route to use hash urls, which is needed in both Cordova and NW.js environments.
 
-Now you can build your NW.js with `node build nw`. Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
+Now we can build to NW.js with `node build nw`. Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
 
 
 ## Deploying
