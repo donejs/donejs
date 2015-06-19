@@ -151,7 +151,7 @@ Every DoneJS application consists of at least two files: A main template (`pmo/i
 
     {{#if isProduction}}
       <script src="/node_modules/steal/steal.production.js"
-        main="pmo/main.stache!done-autorender"></script>
+        main="pmo/index.stache!done-autorender"></script>
     {{else}}
       <script src="/node_modules/steal/steal.js"></script>
     {{/if}}
@@ -183,7 +183,7 @@ The complete file structure of the application now looks like this:
 ├── package.json
 ├── pmo/
 |   ├── app.js
-|   └── main.stache
+|   └── index.stache
 ```
 
 ### Starting the application
@@ -283,7 +283,7 @@ We will add more functionality to this element in a later chapter. Your folder s
 ├── package.json
 ├── pmo/
 |   ├── app.js
-|   └── main.stache
+|   └── index.stache
 |   ├── order/
 |   |   ├── history.component
 |   ├── restaurant/
@@ -360,7 +360,7 @@ Here we use the `eq` helper to make the appropriate link active and then use [ca
 
 ### Switch between components
 
-Now we can glue all those individual components together in `pmo/main.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `pmo/main.stache` to:
+Now we can glue all those individual components together in `pmo/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `pmo/index.stache` to:
 
 ```html
 <!DOCTYPE html>
@@ -395,7 +395,7 @@ Now we can glue all those individual components together in `pmo/main.stache`. W
 
     {{#isProduction}}
     <script src="/node_modules/steal/steal.production.js"
-      main="pmo/main.stache!done-autorender"></script>
+      main="pmo/index.stache!done-autorender"></script>
     {{else}}
     <script src="/node_modules/steal/steal.js"></script>
     {{/isProduction}}
@@ -518,7 +518,7 @@ The current folder structure and files look like this:
 ├── package.json
 ├── pmo/
 |   ├── app.js
-|   └── main.stache
+|   └── index.stache
 |   ├── models/
 |   |   ├── restaurant.js
 |   ├── order/

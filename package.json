@@ -37,6 +37,7 @@
     "done-css": "0.0.8",
     "funcunit": "^3.0.0",
     "steal": "^0.10.5",
-    "steal-qunit": "0.0.4"
+    "steal-qunit": "0.0.4",
+    "jquery": "^1.11.3"
   }
 }
