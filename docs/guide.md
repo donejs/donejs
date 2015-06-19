@@ -56,7 +56,10 @@ The initial folder structure then looks like this:
 ```
 ├── package.json
 ├── node_modules/
-|   ├── can/
+|   ├── .bin/
+|   └── can/
+|   └── can-connect/
+|   └── can-ssr/
 |   └── ...
 ```
 
@@ -68,7 +71,36 @@ Single page applications usually communicate with a RESTful API and a websocket 
 npm install place-my-order-api --save
 ```
 
-To start the API (here on port `7070`) add it as an NPM script to the `package.json`:
+With the `package.json` currently lookingn similar to this:
+
+```js
+{
+  "name": "place-my-order",
+  "version": "0.0.1",
+  "description": "The place-my-order.com frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bitovi",
+  "license": "MIT",
+  "dependencies": {
+    "can": "^2.3.0-pre.1",
+    "can-connect": "0.0.1",
+    "can-ssr": "^0.1.2",
+    "documentjs": "^0.3.0-pre.4",
+    "done-autorender": "0.0.3",
+    "done-css": "0.0.6",
+    "donejs": "0.0.3",
+    "funcunit": "^3.0.0",
+    "jquery": "^1.11.3",
+    "steal": "^0.10.5",
+    "steal-qunit": "0.0.4"
+  }
+}
+```
+
+We can add a API server start script into the `scripts` section that looks like this:
 
 ```js
 "scripts": {
@@ -96,7 +128,13 @@ In the following paragraphs we will:
 
 ### Create a template and main file
 
-Every DoneJS application consists of at least two files: A main template (`pmo/main.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add `pmo/main.stache` to the project with the following content:
+Before we create the first files we also need to install the `place-my-order-assets` package which contains the images and styles for the application:
+
+```
+npm install place-my-order-assets --save
+```
+
+Every DoneJS application consists of at least two files: A main template (`pmo/index.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add `pmo/index.stache` to the project with the following content:
 
 ```html
 <!DOCTYPE html>
@@ -106,21 +144,22 @@ Every DoneJS application consists of at least two files: A main template (`pmo/m
     {{asset "css"}}
   </head>
   <body>
+    <can-import from="place-my-order-assets" />
     <can-import from="pmo/app" [.]="{value}" />
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
-    {{#isProduction}}
-    <script src="/node_modules/steal/steal.production.js"
-      main="pmo/main.stache!done-autorender"></script>
+    {{#if isProduction}}
+      <script src="/node_modules/steal/steal.production.js"
+        main="pmo/main.stache!done-autorender"></script>
     {{else}}
-    <script src="/node_modules/steal/steal.js"></script>
-    {{/isProduction}}
+      <script src="/node_modules/steal/steal.js"></script>
+    {{/if}}
   </body>
 </html>
 ```
 
-This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/) compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. The [asset]() helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
+This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/) compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. Here the `place-my-order-assets` package (which loads the LESS styles for the application) and `pmo/app` which it the main application file. The [asset]() helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
 
 The application main file at `pmo/app.js` looks like this:
 
@@ -159,7 +198,7 @@ With those two files available we can start the server which hosts and renders t
 `main` in `package.json` (by default set to `index.js`) also needs to be changed to:
 
 ```js
-"main": "pmo/main.stache!done-autorender",
+"main": "pmo/index.stache!done-autorender",
 ```
 
 Then we can start the application with
@@ -321,7 +360,7 @@ Here we use the `eq` helper to make the appropriate link active and then use [ca
 
 ### Switch between components
 
-Now we can glue all those individual components together in `pmo/main.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct components and then initialize it with the information from the application state it needs. Update `pmo/main.stache` to:
+Now we can glue all those individual components together in `pmo/main.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `pmo/main.stache` to:
 
 ```html
 <!DOCTYPE html>
@@ -380,19 +419,15 @@ At the beginning of this guide we set up a REST API at [http://localhost:7070](h
 We will put the connection in `pmo/models/restaurant.js`:
 
 ```js
-import Map from 'can/map/';
-import List from 'can/list/';
 import superMap from 'can-connect/super-map';
 
-export const Restaurant = can.Map.extend({});
-
-export const restaurantConnection = superMap({
+export const connection = superMap({
   resource: '/api/restaurants',
   idProp: '_id',
-  Map: Restaurant,
-  List: Restaurant.List,
   name: 'restaurants'
 });
+
+export default connection.Map;
 ```
 
 The connection is a can-connect [superMap]() and besides setting the `Map` and `List` type the connection should return we also define:
@@ -406,15 +441,15 @@ The connection is a can-connect [superMap]() and besides setting the `Map` and `
 To test the connection you can temporarily add the following to `pmo/app.js`:
 
 ```js
-import { restaurantConnection } from './models/restaurant';
+import Restaurant from './models/restaurant';
 
-restaurantConnection.findAll({})
+Restaurant.getList({})
 	.then(function(restaurants){
 	  console.log(restaurants.attr());
 	});
 ```
 
-After reloading the homepage you should see the restaurant information logged in the console.
+After reloading the homepage you should see the restaurant information logged in the console. Once verified you can remove the test code again.
 
 ### Add to the page
 
@@ -425,12 +460,13 @@ import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
 import template from './list.stache!';
+import Restaurant from 'pmo/models/restaurant';
 
 export var ViewModel = Map.extend({
   define: {
     restaurants: {
-      value: function(){
-        return restaurantConnection.findAll({});
+      value(){
+        return restaurantConnection.getList({});
       }
     }
   }
@@ -495,10 +531,17 @@ The current folder structure and files look like this:
 
 ## Creating a unit-tested view model
 
-Lets make the restaurants page let a user select a state and city and
-finally see a list of restaurants for that state and city.
+In this chapter we will create a view model for the restaurant list functionality. What we want to do is to show a dropdown of all available states with a restaurants and when the user selects a state show a list of cities. Once a city is selected we will load a list of all restaurants for that city with the result looking like this:
+
+![Restaurant list](img/restaurant-list.png)
 
 ### Identify view model state
+
+First we need to identify the properties that our view model needs to provide. We want to load a list of states from the server (all asynchronous requests return a [Promise](https://promisesaplus.com/)) and let the user select a single state. Then we do the same for cities and finally load the restaurant list for that selection.
+
+![Restaurant list model state](img/restaurant-list-state.png)
+
+Which means the data model will look like this:
 
 ```js
 {
@@ -510,169 +553,60 @@ finally see a list of restaurants for that state and city.
 }
 ```
 
-### Test the view model
+### Create dependent models
 
-#### Setup the test
-
-
-```js
-import {ViewModel as RestaurantListVM} from "./list";
-import QUnit from 'steal-qunit';
-import fixture from 'can/util/fixture/';
-
-QUnit.module("pmo/restaurant/list");
-
-QUnit.asyncTest("basics", function(){
-
-
-
-});
-```
-
-#### Create fake data
+The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the according models just like we did for Restaurants already. In `pmo/models/state.js`:
 
 ```js
-QUnit.asyncTest("basics", function(){
+// pmo/models/state.js
+import superMap from 'can-connect/can/super-map/';
 
-	var states = [{ name: "Calisota", short: "CA" }, 
-                 { name: "New Troy", short: "NT"}];
-	var caCities = [{state: "CA",name: "Casadina"}];
-	var ntCities = [{state: "NT", name: "Alberny"}];
-	var casadinaRestaurants = [{
-     "_id":"1","name":
-     "Cheese City","slug":"cheese-city”
-    }];
-
-
-});
-
-```
-
-#### Use fake data for Ajax requests
-
-```js
-QUnit.asyncTest("basics", function(){
-	…
-	var casadinaRestaurants = [{ … }];
-
-    fixture({
-	  "/api/states": ()=> ({data: states}),
-	  "/api/cities": function(request){
-		return request.data.state === "CA" ? caCities : ntCities;	  
-      },
-	  "/api/restaurants": ()=> ({data: casadinaRestaurants})
-	})	
-
-
-});
-```
-
-#### Create a view model instance and test its behavior
-
-```
-QUnit.asyncTest("basics", function(){
-	…
-	var casadinaRestaurants = [{ … }];
-	fixture({…})	
-
-    var rlVM = new RestaurantListVM();
-	
-	rlVM.attr("states").then(function(vmStates){
-		QUnit.deepEqual(vmStates.attr(), states, "Got states");
-		rlVM.attr("state","CA");
-	});
-
-   rlVM.one("cities", function( ev, citiesPromise ) {
-		citiesPromise.then(function( vmCities ) {
-			deepEqual(vmCities.attr(), caCities, "Got ca cities");
-			rlVM.attr("city", "Casadina");
-		});
-	});
-	
-	rlVM.one("restaurants", function(ev, restaurantsPromise){
-		restaurantsPromise.then(function(vmRestaurants){
-			deepEqual(vmRestaurants.attr(), casadinaRestaurants);
-
-			rlVM.attr("state","NT");			
-			ok( !rlVM.attr("city"), "city selection removed" );
-			rlVM.attr("cities").then(function(vmCities){
-				deepEqual(vmCities.attr(), ntCities);
-				start();
-			});
-		});
-	});
-
-});
-```
-
-### Write the view model
-
-#### Make dependent models
-
-State:
-
-```
-import Map from 'can/map/';
-import List from 'can/list/';
-import superMap from 'can-connect/super-map';
-
-const State = Map.extend({});
-
-State.List = List.extend({});
-
-superMap({
-  resource: '/api/states',
+export const connection = superMap({
+  url: '/api/states',
   idProp: 'short',
-  Map: State,
-  List: State.List,
   name: 'states'
 });
 
-export default State;
+export default connection.Map;
 ```
 
-City:
+and `pmo/models/city.js`:
 
-```
-import Map from 'can/map/';
-import List from 'can/list/';
-import superMap from 'can-connect/super-map';
+```js
+// pmo/models/city.js
+import superMap from 'can-connect/can/super-map/';
 
-const City = Map.extend({});
-
-City.List = List.extend({});
-
-superMap({
-  resource: '/api/cities',
+export const connection = superMap({
+  url: '/api/cities',
   idProp: 'name',
-  Map: City,
-  List: City.List,
-  name: 'cities'
+  name: 'states'
 });
 
-export default City;
+export default connection.Map;
 ```
 
-#### Define stateful property behaviors
+### Implement view model behavior
+
+Now that we identified the view model properties we need and created the models necessary to load them we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view-model at `pmo/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
-
-import City from 'pmo/models/city';
-import State from 'pmo/models/state';
-import Restaurant from 'pmo/models/restaurant';
 import template from './list.stache!';
+import Restaurant from 'pmo/models/restaurant';
+import State from 'pmo/models/state';
+import City from 'pmo/models/city';
 
-export const ViewModel = Map.extend({
+export var ViewModel = Map.extend({
   define: {
     states: {
       get() {
-        return State.findAll({});
+        return State.getList({});
       }
     },
     state: {
+      type: 'string',
       value: null,
       set() {
         // Remove the city when the state changes
@@ -681,24 +615,32 @@ export const ViewModel = Map.extend({
     },
     cities: {
       get() {
-        var state = this.attr('state');
-        return state ? City.findAll({ state }) : null;
+        let state = this.attr('state');
+
+        if(!state) {
+          return null;
+        }
+
+        return City.getList({ state });
       }
     },
     city: {
+      type: 'string',
       value: null
     },
     restaurants: {
-      get: function(){
-        var params = {},
-          state = this.attr('state'),
-          city = this.attr('city');
+      get() {
+        let state = this.attr('state');
+        let city = this.attr('city');
 
-        return state && city ?
-          Restaurant.findAll({
+        if(state && city) {
+          return Restaurant.getList({
             'address.state': state,
             'address.city': city
-          }) : null;
+          });
+        }
+
+        return null;
       }
     }
   }
@@ -707,13 +649,226 @@ export const ViewModel = Map.extend({
 export default Component.extend({
   tag: 'pmo-restaurant-list',
   viewModel: ViewModel,
-  template
+  template: template
 });
 ```
 
-#### Verify the test
+Let's take a closer look at those properties:
 
-Open some page.
+- `states` will just return a list of all available states by calling `State.getList({})`
+- `state` is a string property set to `null` by default (no selection). Additionally, when `state` is changed we will also remove the dependent `city` selection.
+- `cities` will return `null` if no state has been selected, otherwise load all the cities for a given state by sending `state` as a query paramter (which will make a request like [http://localhost:8080/api/cities?state=IL](ttp://localhost:8080/api/cities?state=IL))
+- `city` is a simple string, set to `null` by default
+- `restaurants` will always be `null` unless both, a `city` and a `state` are selected. If both are selected, it will set the `address.state` and `address.city` query parameters which returns a list of all restaurants whose address matches those parameters.
+
+### Create a test
+
+Now we can set up a test for this view model to make sure that it works. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS friendly wrapper (`steal-qunit`) in `pmo/restaurants/list/list_test.js`:
+
+```js
+// pmo/restaurants/list/list_test.js
+import { ViewModel } from './list';
+import QUnit from 'steal-qunit';
+
+QUnit.module('pmo/restaurant/list');
+
+QUnit.test('basics', function(){
+  ok(true, 'Test ran');
+});
+```
+
+To run the test we can create a simple HTML page in the same folder (`pmo/restaurants/list/test.html`):
+
+```html
+<title>pmo/restaurant/list</title>
+<script src="../../../node_modules/steal/steal.js" main="pmo/restaurant/list/list_test"></script>
+<div id="qunit-fixture"></div>
+```
+
+When opening [http://localhost:8080/pmo/restaurants/list/test.html](http://localhost:8080/pmo/restaurants/list/test.html) we can see the test pass.
+
+#### Create fake data
+
+Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test. Change `pmo/restaurants/list/list_test.js` to:
+
+```js
+// pmo/restaurants/list/list_test.js
+import { ViewModel } from './list';
+import QUnit from 'steal-qunit';
+import fixture from 'can/util/fixture/';
+
+const statesFixture = [
+  { name: 'Calisota', short: 'CA' },
+  { name: 'New Troy', short: 'NT'}
+];
+
+const citiesFixture = {
+  CA: [{ state: 'CA',name: 'Casadina' }],
+  NT: [{ state: 'NT', name: 'Alberny' }]
+}
+
+const restaurantsFixture = [{
+  _id: 1,
+  name: 'Cheese City',
+  slug:'cheese-city',
+  address: {
+    city: 'Casadina',
+    state: 'CA'
+  }
+}, {
+  _id: 2,
+  name: 'Crab Barn',
+  slug:'crab-barn',
+  address: {
+    city: 'Alberny',
+    state: 'NT'
+  }
+}];
+
+fixture({
+  "/api/states": function() {
+    return { data: statesFixture };
+  },
+  "/api/cities": function(request) {
+    if(request.data.state === 'CA') {
+      return { data: citiesFixture.CA };
+    }
+    return { data: citiesFixture.NT };
+  },
+  "/api/restaurants": function() {
+    if(data['address.city'] === 'Alberny' && data['address.state'] === 'NT') {
+      return { data: [ restaurantsFixture[1] ] };
+    }
+
+    return { data: restaurantsFixture };
+  }
+});
+
+QUnit.module('pmo/restaurant/list');
+```
+
+#### Test the view model
+
+Now we can add the actual tests for our view model to the end of `pmo/restaurants/list/list_test.js`:
+
+```
+QUnit.asyncTest('loads all states', function() {
+  var vm = new ViewModel();
+  vm.attr('states').then(states => {
+    QUnit.deepEqual(states.attr(), statesFixture, 'Got all states');
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('setting a state loads its cities', function() {
+  var vm = new ViewModel();
+  assert.equal(vm.attr('cities'), null, '');
+  vm.attr('state', 'CA');
+  vm.attr('cities').then(cities => {
+    QUnit.deepEqual(cities.attr(), citiesFixture.CA);
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('changing a state resets city', function() {
+  var vm = new ViewModel();
+  assert.equal(vm.attr('cities'), null, '');
+  vm.attr('state', 'CA');
+  vm.attr('cities').then(cities => {
+    QUnit.deepEqual(cities.attr(), citiesFixture.CA);
+    vm.attr('state', 'NT');
+    QUnit.equal(vm.attr('city'), null);
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
+  var vm = new ViewModel();
+  vm.attr('state', 'NT');
+  vm.attr('city', 'Alberny');
+
+  vm.attr('restaurants').then(restaurants => {
+    QUnit.deepEqual(restaurants.attr(), [ restaurantsFixture[1] ]);
+    QUnit.start();
+  });
+});
+```
+
+Visit [http://localhost:8080/pmo/restaurants/list/test.html](http://localhost:8080/pmo/restaurants/list/test.html) to see all tests passing.
+
+### Write the template
+
+Now that our view model is implemented and tested we can use its data to update the template at `pmo/restaurant/list/list.stache` to:
+
+```
+<div class="restaurants">
+  <h2 class="page-header">Restaurants</h2>
+  <form class="form">
+    <div class="form-group">
+      <label>State</label>
+      <select can-value="{state}" {{#if states.isPending}}disabled{{/if}}>
+        {{#if states.isPending}}
+          <option value="">Loading...</option>
+        {{else}}
+          {{^if state}}
+          <option value="">Choose a state</option>
+          {{/if}}
+          {{#each states.value}}
+          <option value="{{short}}">{{name}}</option>
+          {{/each}}
+        {{/if}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <select can-value="city" {{^if state}}disabled{{/if}}>
+        {{#if cities.isPending}}
+          <option value="">Loading...</option>
+        {{else}}
+          {{^if city}}
+          <option value="">Choose a city</option>
+          {{/if}}
+          {{#each cities.value}}
+          <option>{{name}}</option>
+          {{/each}}
+        {{/if}}
+      </select>
+    </div>
+  </form>
+
+  {{#if restaurants.isPending}}
+  <div class="restaurant loading"></div>
+  {{/if}}
+
+  {{#if restaurants.isResolved}}
+    {{#each restaurants.value}}
+    <div class="restaurant">
+      <img src="/{{images.thumbnail}}" width="100" height="100">
+      <h3>{{name}}</h3>
+      {{#address}}
+      <div class="address">
+        {{street}}<br />{{city}}, {{state}} {{zip}}
+      </div>
+      {{/address}}
+
+      <div class="hours-price">
+        $$$<br />
+        Hours: M-F 10am-11pm
+        <span class="open-now">Open Now</span>
+      </div>
+
+      <a class="btn" can-href="{ page='restaurants' slug=slug }">Place My Order</a>
+      <br />
+    </div>
+    {{/each}}
+  {{/if}}
+</div>
+```
+
+Some things worth pointing out:
+
+- since `states` and `cities` return a promise we can check the promise status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
+- The `state` and `city` property are bound to their select fields via [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
 
 ### Create a demo page
 
@@ -728,80 +883,6 @@ Open some page.
 <script src="../../node_modules/steal/steal.js"
         main="can/view/autorender/"></script>
 ```
-
-### Write the template
-
-- ¿ Are all the class names necessary ?
-- ¿ Should we show creating a helper for a `<select>` ?
-
-```
-<h2 class="page-header">Restaurants</h2>
-  <form class="form">
-  <div class="form-group">
-    <label>State</label>
-    <select class="form-control" can-value="{state}" {{#if states.isPending}}disabled{{/if}}>
-      {{#if states.isPending}}
-        <option value="">Loading...</option>
-      {{else}}
-        {{^if state}}
-        <option value="">Choose a state</option>
-        {{/if}}
-        {{#each states.value}}
-        <option value="{{short}}">{{name}}</option>
-        {{/each}}
-      {{/if}}
-    </select>
-  </div>
-  <div class="form-group">
-    <label>City</label>
-    <select class="form-control" can-value="city" {{^if state}}disabled{{/if}}>
-      {{#if cities.isPending}}
-        <option value="">Loading...</option>
-      {{else}}
-        {{^if city}}
-        <option value="">Choose a city</option>
-        {{/if}}
-        {{#each cities.value}}
-        <option>{{name}}</option>
-        {{/each}}
-      {{/if}}
-    </select>
-  </div>
-</form>
-
-{{#if restaurants.isPending}}
-<div class="restaurant loading"></div>
-{{/if}}
-
-{{#if restaurants.isResolved}}
-  {{#each restaurants.value}}
-  <div class="restaurant">
-    <img src="/{{images.thumbnail}}" width="100" height="100">
-    <h3>{{name}}</h3>
-    {{#address}}
-    <div class="address">
-      {{street}}<br />{{city}}, {{state}} {{zip}}
-    </div>
-    {{/address}}
-
-    <div class="hours-price">
-      $$$<br />
-      Hours: M-F 10am-11pm
-      <span class="open-now">Open Now</span>
-    </div>
-
-    <a class="btn" can-href="{ page='restaurants' slug=slug }">Place My Order</a>
-    <br />
-  </div>
-  {{/each}}
-{{/if}}
-```
-
-### Verify the demo page and application works.
-
-Open up the demo page.
-
-Open up the app.
 
 ## Setup automated tests and continuous integration (CI)
 
