@@ -10,7 +10,8 @@
     "publish": "git push origin --tags",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish"
+    "release:major": "npm version major && npm publish",
+    "reinit": "npm install steal steal-qunit funcunit can can-connect done-autorender done-css documentjs can-ssr --save-dev"
   },
   "repository": {
     "type": "git",
@@ -28,18 +29,14 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "peerDependencies": {
-    "steal": "^0.10.4",
-    "steal-qunit": "0.0.4",
-    "funcunit": "^3.0.0",
     "can": "^2.3.0-pre.1",
-    "can-connect": "^0.0.1",
-    "done-autorender": "0.0.3",
-    "done-css": "^0.0.6",
+    "can-connect": "0.0.2",
+    "can-ssr": "^0.2.0",
     "documentjs": "^0.3.0-pre.4",
-    "jquery": "^1.11.0",
-    "can-ssr": "^0.1.1"
-  },
-  "devDependencies": {
-    "documentjs": "^0.3.0-pre.4"
+    "done-autorender": "0.1.0-pre.2",
+    "done-css": "0.0.8",
+    "funcunit": "^3.0.0",
+    "steal": "^0.10.5",
+    "steal-qunit": "0.0.4"
   }
 }
