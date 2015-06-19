@@ -39,5 +39,8 @@
     "steal": "^0.10.5",
     "steal-qunit": "0.0.4",
     "jquery": "^1.11.3"
+  },
+  "dependencies": {
+    "system-component": "0.0.3"
   }
 }

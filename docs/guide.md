@@ -221,7 +221,7 @@ The homepage element in `pmo/home.component` is very simple and just consists of
 <can-component tag="pmo-home">
   <template>
      <div class="homepage">
-       <img src="images/homepage-hero.jpg" width="250" height="380" />
+       <img src="node_modules/place-my-order-assets/images/homepage-hero.jpg" width="250" height="380" />
        <h1>Ordering food has never been easier</h1>
        <p>We make it easier than ever to order gourmet food from your favorite local restaurants.</p>
        <p><a class="btn" href="/restaurants" role="button">Choose a Restaurant</a></p>
@@ -309,9 +309,7 @@ To add the routes, change `pmo/app.js` to:
 import AppMap from "can-ssr/app-map";
 import route from 'can/route/';
 
-const AppState = AppMap.extend({
-  message: 'Hello World!'
-});
+const AppState = AppMap.extend({});
 
 export default AppState;
 
@@ -370,6 +368,7 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
     {{asset "css"}}
   </head>
   <body>
+    <can-import from="place-my-order-assets" />
     <can-import from="pmo/app" [.]="{value}" />
 
     <can-import from="pmo/header.component!" />
@@ -381,24 +380,24 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
       </can-import>
     {{/eq}}
     {{#eq page "restaurants"}}
-      <can-import from="pmo/restaurant/list">
+      <can-import from="pmo/restaurant/list/">
         <pmo-restaurant-list></pmo-restaurant-list>
       </can-import>
     {{/eq}}
     {{#eq page "order-history"}}
-      <can-import from="pmo/order/history.component">
+      <can-import from="pmo/order/history.component!">
         <pmo-order-history></pmo-order-history>
       </can-import>
     {{/eq}}
 
     {{asset "inline-cache"}}
 
-    {{#isProduction}}
-    <script src="/node_modules/steal/steal.production.js"
-      main="pmo/index.stache!done-autorender"></script>
+    {{#if isProduction}}
+      <script src="/node_modules/steal/steal.production.js"
+        main="pmo/main.stache!done-autorender"></script>
     {{else}}
-    <script src="/node_modules/steal/steal.js"></script>
-    {{/isProduction}}
+      <script src="/node_modules/steal/steal.js"></script>
+    {{/if}}
   </body>
 </html>
 ```
@@ -419,7 +418,7 @@ At the beginning of this guide we set up a REST API at [http://localhost:7070](h
 We will put the connection in `pmo/models/restaurant.js`:
 
 ```js
-import superMap from 'can-connect/super-map';
+import superMap from 'can-connect/can/super-map/';
 
 export const connection = superMap({
   resource: '/api/restaurants',
@@ -466,7 +465,7 @@ export var ViewModel = Map.extend({
   define: {
     restaurants: {
       value(){
-        return restaurantConnection.getList({});
+        return Restaurant.getList({});
       }
     }
   }
@@ -482,31 +481,34 @@ export default Component.extend({
 And update the template at `pmo/restaurant/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
 
 ```html
-{{#if restaurants.isPending}}
-  <div class="restaurant loading"></div>
-{{/if}}
-{{#if restaurants.isResolved}}
-  {{#each restaurants.value}}
-    <div class="restaurant">
-      <img src="/{{images.thumbnail}}" width="100" height="100">
-      <h3>{{name}}</h3>
-      {{#address}}
-      <div class="address">
-        {{street}}<br />{{city}}, {{state}} {{zip}}
-      </div>
-      {{/address}}
+<div class="restaurants">
+  <h2 class="page-header">Restaurants</h2>
+  {{#if restaurants.isPending}}
+    <div class="restaurant loading"></div>
+  {{/if}}
+  {{#if restaurants.isResolved}}
+    {{#each restaurants.value}}
+      <div class="restaurant">
+        <img src="/{{images.thumbnail}}" width="100" height="100">
+        <h3>{{name}}</h3>
+        {{#address}}
+        <div class="address">
+          {{street}}<br />{{city}}, {{state}} {{zip}}
+        </div>
+        {{/address}}
 
-      <div class="hours-price">
-        $$$<br />
-        Hours: M-F 10am-11pm
-        <span class="open-now">Open Now</span>
-      </div>
+        <div class="hours-price">
+          $$$<br />
+          Hours: M-F 10am-11pm
+          <span class="open-now">Open Now</span>
+        </div>
 
-      <a class="btn" can-href="{ page='restaurants' slug=slug }">Details</a>
-      <br />
-    </div>
-  {{/each}}
-{{/if}}
+        <a class="btn" can-href="{ page='restaurants' slug=slug }">Details</a>
+        <br />
+      </div>
+    {{/each}}
+  {{/if}}
+</div>
 ```
 
 By checking for `restaurants.isPending` and `restaurants.isResolved` we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at `restaurants.value`.
@@ -689,25 +691,23 @@ When opening [http://localhost:8080/pmo/restaurants/list/test.html](http://local
 
 #### Create fake data
 
-Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test. Change `pmo/restaurants/list/list_test.js` to:
+Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. We will put them in `pmo/models/fixtures.js`:
 
 ```js
-// pmo/restaurants/list/list_test.js
-import { ViewModel } from './list';
-import QUnit from 'steal-qunit';
+// pmo/models/fixtures.js
 import fixture from 'can/util/fixture/';
 
-const statesFixture = [
+export const statesFixture = [
   { name: 'Calisota', short: 'CA' },
   { name: 'New Troy', short: 'NT'}
 ];
 
-const citiesFixture = {
+export const citiesFixture = {
   CA: [{ state: 'CA',name: 'Casadina' }],
   NT: [{ state: 'NT', name: 'Alberny' }]
 }
 
-const restaurantsFixture = [{
+export const restaurantsFixture = [{
   _id: 1,
   name: 'Cheese City',
   slug:'cheese-city',
@@ -744,14 +744,18 @@ fixture({
   }
 });
 
-QUnit.module('pmo/restaurant/list');
+export default fixture;
 ```
 
 #### Test the view model
 
-Now we can add the actual tests for our view model to the end of `pmo/restaurants/list/list_test.js`:
+Now we can add the actual tests for our view model by changing `pmo/restaurants/list/list_test.js` to:
 
 ```
+import { statesFixture, citiesFixture, restaurantsFixture } from 'pmo/models/fixtures';
+
+QUnit.module('pmo/restaurant/list');
+
 QUnit.asyncTest('loads all states', function() {
   var vm = new ViewModel();
   vm.attr('states').then(states => {
@@ -872,13 +876,13 @@ Some things worth pointing out:
 
 ### Create a demo page
 
-- ¿ What fixtures should be used ?
+With all the component files contained in the `pmo/restaurant/list/` folder we can also add a demo page at `pmo/restaurants/list/demo.html` that uses fixture to demonstrate the component:
 
 ```html
-<script type='text/stache' can-autorender>
+<script type="text/stache" can-autorender>
+  <can-import from="pmo/models/fixtures" />
   <can-import from="pmo/restaurant/list/" />
-  <can-import from="pmo/models/fixtures/" />
-  <pmo-order slug="spago"></pmo-order>
+  <pmo-restaurant-list></pmo-restaurant-list>
 </script>
 <script src="../../node_modules/steal/steal.js"
         main="can/view/autorender/"></script>
