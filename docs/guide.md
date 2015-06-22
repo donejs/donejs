@@ -890,7 +890,200 @@ With all the component files contained in the `pmo/restaurant/list/` folder we c
 
 ## Setup automated tests and continuous integration (CI)
 
+In this chapter we will automate running the tests so that they can be used in a [continuous integration]() environment. We will use [TravisCI]() as the CI server.
+
+### Creating a global test page
+
+While we already created an individual test page in `pmo/restaurants/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Lets create `pmo/test.html` like:
+
+```html
+<title>Place my order tests</title>
+<script src="node_modules/steal/steal.js" main="pmo/test"></script>
+<div id="qunit-fixture"></div>
+```
+
+And `pmo/test.js` which loads all the tests as:
+
+```js
+import 'pmo/models/fixtures';
+import 'pmo/restaurant/list/list_test';
+
+window.localStorage.clear();
+```
+
+If you now go to [http://localhost:8080/test.html](http://localhost:8080/test.html) we still see all restaurant list tests passing but we will add more here later on.
+
+### Setting up a test runner
+
+The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee]() which makes it easy to run those tests from the command line without much configuration in any browser. In our example we will use Firefox since it is also installed in the Travis CI environment.
+
+```
+npm install testee --save-dev
+```
+
+Then we can change the `test` script in `package.json` which currently shows something like
+
+```
+"test": "echo \"Error: no test specified\" && exit 1"
+```
+
+To:
+
+```js
+"scripts": {
+    "test": "testee test.html --browsers firefox",
+```
+
+Now running `npm test` from the command line will open Firefox and run the tests using our fixtures. Make sure that Firefox is installed and not currently running.
+
+### Setting up TravisCI
+
+[TravisCI]() is a continuous integration service that is free for open source projects.
+
+
 ## Nested routes
+
+Until now we used three top level routes, `home`, `restaurants` and `order-history`. We did however also define two additional routes in `pmo/app.js` which looked like:
+
+```js
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+```
+
+What we want to do now is use those routes when we are in the `restaurants` page. The relevant section in `pmo/index.stache` currently looks like this:
+
+```html
+{{#eq page "restaurants"}}
+  <can-import from="pmo/restaurant/list/">
+    <pmo-restaurant-list></pmo-restaurant-list>
+  </can-import>
+{{/eq}}
+```
+
+We want to support two additional routes:
+
+- `restaurants/:slug` which shows a details page for the restaurant with `slug` being a URL friendly short name for the restaurant
+- `restaurants/:slug/order` which shows the menu of the current restaurant and allows us to make a selection and then send our order.
+
+### Create additional components
+
+To make this happen we need two more components. First `pmo/restaurant/details.component` which loads the restaurants (based on the `slug`) and then displays its information (with some Lorem Ipsum in the description):
+
+```html
+<can-component tag="pmo-restaurant-details">
+  <template>
+    <restaurant-model get="{ _id=slug }">
+      {{#if isPending}}
+        <div class="loading"></div>
+      {{else}}
+      {{#value}}
+      <div class="restaurant-header"
+          style="background-image: url(/{{images.banner}});">
+        <div class="background">
+          <h2>{{name}}</h2>
+
+          {{#address}}
+          <div class="address">
+            {{street}}<br />{{city}}, {{state}} {{zip}}
+          </div>
+          {{/address}}
+
+          <div class="hours-price">
+            $$$<br />
+            Hours: M-F 10am-11pm
+            <span class="open-now">Open Now</span>
+          </div>
+
+          <br />
+        </div>
+      </div>
+
+      <div class="restaurant-content">
+        <h3>The best food this side of the Mississippi</h3>
+
+        <p class="description">
+          <img src="/{{images.owner}}" />
+          Description for {{name}}
+        </p>
+        <p class="order-link">
+          <a class="btn" can-href="{ page='restaurants' slug=slug action='order'}">
+            Order from {{name}}
+          </a>
+        </p>
+      </div>
+      {{/value}}
+      {{/if}}
+    </restaurant-model>
+  </template>
+</can-component>
+```
+
+The order component will be a little more complex which is why we will put it into its own folder at `pmo/order/new/`. For now we just use placeholder content and implement the functionality in the following chapters. In `pmo/order/new/new.js`:
+
+```js
+import Component from 'can/component/component';
+import Map from 'can/map/';
+import 'can/map/define/';
+import template from './new.stache!';
+
+export const ViewModel = Map.extend({});
+
+export default Component.extend({
+  tag: 'pmo-order-new',
+  viewModel: ViewModel,
+  template
+});
+```
+
+And for the template at `pmo/order/new/new.stache`:
+
+```html
+<div class="order-form">
+  <h2>Order here</h2>
+</div>
+```
+
+### Add to the main template
+
+Now we can add those components to the main template (at `pmo/index.stache`) with conditions based on the routes that we want to match. Change the section which contains
+
+```html
+{{#eq page "restaurants"}}
+  <can-import from="pmo/restaurant/list/">
+    <pmo-restaurant-list></pmo-restaurant-list>
+  </can-import>
+{{/eq}}
+```
+
+To:
+
+```html
+{{#eq page "restaurants"}}
+  {{#if slug}}
+    {{#eq action 'order'}}
+      <can-import from="pmo/order/new/">
+        <pmo-order-new slug="{slug}"></pmo-order-new>
+      </can-import>
+    {{/eq}}
+
+    {{^if action}}
+      <can-import from="pmo/restaurant/details.component!">
+        <pmo-restaurant-details></pmo-restaurant-details>
+      </can-import>
+    {{/if}}
+  {{else}}
+    <can-import from="pmo/restaurant/list/">
+      <pmo-restaurant-list></pmo-restaurant-list>
+    </can-import>
+  {{/if}}
+{{/eq}}
+```
+
+Here we are basically just adding some more conditions if `page` is set to `restaurants`:
+
+- When there is not `slug` set show the original restaurant list
+- When `slug` is set but no `action`, show the restaurant details
+- When `slug` is set and `action` is `order`, show the order component for that restaurant
 
 ## Importing other projects
 
