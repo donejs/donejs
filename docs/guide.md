@@ -1087,9 +1087,247 @@ Here we are basically just adding some more conditions if `page` is set to `rest
 
 ## Importing other projects
 
+The NPM package manager integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Lets add it as a project dependency with:
+
+```
+npm install bit-tabs --save
+```
+
+And then integrate it into `pmo/order/new/new.stache`:
+
+```html
+<can-import from="bit-tabs"/>
+
+<bit-tabs tabs-class="nav nav-tabs">
+  <bit-panel title="Lunch menu">
+    This is the lunch menu
+  </bit-panel>
+  <bit-panel title="Dinner menu">
+    This is the dinner menu
+  </bit-panel>
+</bit-tabs>
+```
+
+Here we just import the `bit-tabs` package using `can-import` which will then provide the `bit-tabs` and `bit-panel` custom elements.
+
 ## Creating data
 
+In this section we will
+
+### Updating the order model
+
+First, we want to update the order model
+
+```js
+let ItemsList = can.List.extend({}, {
+  has: function(item) {
+    return this.indexOf(item) !== -1;
+  },
+
+  toggle: function(item) {
+    var index = this.indexOf(item);
+
+    if (index !== -1) {
+      this.splice(index, 1);
+    } else {
+      this.push(item);
+    }
+  }
+});
+
+let Order = can.Map.extend({
+  define: {
+    status: {
+      value: 'new'
+    },
+    items: {
+      Value: ItemsList
+    },
+    total: {
+      get() {
+        let total = 0.0;
+        this.attr('items').forEach(item => total += parseFloat(item.attr('price')));
+        return total.toFixed(2);
+      }
+    }
+  },
+
+  markAs(status) {
+    this.attr('status', status);
+    this.save();
+  }
+});
+```
+
+### Implement the view model
+
+```js
+import Component from 'can/component/component';
+import Map from 'can/map/';
+import 'can/map/define/';
+import template from './new.stache!';
+import Restaurant from 'pmo/models/restaurant';
+import Order from 'pmo/models/order';
+
+export const ViewModel = Map.extend({
+  define: {
+    slug: {
+      type: 'string'
+    },
+    order: {
+      Value: Order
+    },
+    saveStatus: {
+      Value: Object
+    },
+    canPlaceOrder: {
+      type: 'boolean',
+      get() {
+        let items = this.attr('order.items');
+        return items.attr('length');
+      }
+    },
+    restaurant: {
+      get(old) {
+        let _id = this.attr('slug');
+        if(!old && _id) {
+          let dfd = Restaurant.get({ _id }).then(restaurant => {
+            this.attr('order.slug', restaurant.attr('slug'));
+            return restaurant;
+          });
+
+          this.attr('@root').pageData('restaurant', { _id }, dfd);
+
+          return dfd;
+        }
+
+        return old;
+      }
+    }
+  },
+
+  placeOrder() {
+    let order = this.attr('order');
+    this.attr('saveStatus', order.save());
+    return false;
+  },
+
+  startNewOrder: function() {
+    this.attr('order', new Order());
+    this.attr('saveStatus', null);
+    return false;
+  }
+});
+
+export default Component.extend({
+  tag: 'pmo-order-new',
+  viewModel: ViewModel,
+  template
+});
+```
+
+### Create the template
+
+```html
+<can-import from="bit-tabs"/>
+<can-import from="pmo/order/details.component!" />
+<can-import from="pmo/order/phone/phone.component!"/>
+
+<div class="order-form">
+  {{#if restaurant.isPending}}
+    <div class="loading"></div>
+  {{else}}
+    {{#restaurant.value}}
+      {{#if saveStatus.isResolved}}
+        <pmo-order-details order="{saveStatus.value}"></pmo-order-details>
+        <p><a href="javascript://" (click)="{startNewOrder}">Place another order</a></p>
+      {{else}}
+        <h3>Order from {{name}}</h3>
+
+        <form (submit)="placeOrder">
+          <bit-tabs tabs-class="nav nav-tabs">
+            <p class="info {{^if order.items.length}}text-error{{else}}text-success{{/if}}">
+              {{^if order.items.length}}
+                Please choose an item
+              {{else}}
+                {{order.items.length}} selected
+              {{/if}}
+            </p>
+            <bit-panel title="Lunch menu">
+              <ul class="list-group">
+                {{#each menu.lunch}}
+                  <li class="list-group-item">
+                    <label>
+                      <input type="checkbox"
+                        (change)="{order.items.toggle this}"
+                        {{#if order.items.has}}checked{{/if}}>
+                      {{name}} <span class="badge">${{price}}</span>
+                    </label>
+                  </li>
+                {{/each}}
+              </ul>
+            </bit-panel>
+            <bit-panel title="Dinner menu">
+              <ul class="list-group">
+                {{#each menu.dinner}}
+                  <li class="list-group-item">
+                    <label>
+                      <input type="checkbox"
+                        (change)="{order.items.toggle this}"
+                        {{#if order.items.has}}checked{{/if}}>
+                      {{name}} <span class="badge">${{price}}</span>
+                    </label>
+                  </li>
+                {{/each}}
+              </ul>
+            </bit-panel>
+          </bit-tabs>
+
+          <div class="form-group">
+            <label class="control-label">Name:</label>
+            <input name="name" type="text" class="form-control" can-value="{order.name}">
+            <p>Please enter your name.</p>
+          </div>
+            <div class="form-group">
+            <label class="control-label">Address:</label>
+            <input name="address" type="text" class="form-control" can-value="{order.address}">
+            <p class="help-text">Please enter your address.</p>
+          </div>
+          <pmo-order-phone order="{order}"></pmo-order-phone>
+          <div class="submit">
+            <h4>Total: ${{order.total}}</h4>
+            {{#if saveStatus.isResolved}}
+              Received order (Confirmation: {{saveStatus.value._id}})
+            {{else}}
+              {{#if saveStatus.isPending}}
+                <div class="loading"></div>
+              {{else}}
+                <button type="submit" {{^if canPlaceOrder}}disabled{{/if}} class="btn">Place My Order!</button>
+              {{/if}}
+            {{/if}}
+          </div>
+        </form>
+      {{/if}}
+    {{/restaurant.value}}
+  {{/if}}
+</div>
+```
+
 ## Setup a real-time connection
+
+can-connect makes it very easy to add real-time functionality as there is a way of being notified when a model on the server has been created, updated or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket) which allow to send push notifications to a client.
+
+The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework which additionally to providing a REST API also sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time all we need to do is add listeners for those events to `pmo/models/order.js` and in the handler notify the order connection:
+
+```js
+import io from 'socket.io-client';
+
+const socket = io();
+
+socket.on('orders created', order => orderConnection.createInstance(order));
+socket.on('orders updated', order => orderConnection.updateInstance(order));
+socket.on('orders removed', order => orderConnection.destroyInstance(order));
+```
 
 ## Production builds
 
