@@ -423,7 +423,7 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
 </html>
 ```
 
-Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. By setting `can-tag="pmo-loading"` we will see a loading indicator while the import loading. If you now reload [http://localhost:8080/](http://localhost:8080/) we can see the header and the home component and be able to navigate to the different pages through the header.
+Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. By setting `can-tag="pmo-loading"` we will see a loading indicator while the import is loading. If you now reload [http://localhost:8080/](http://localhost:8080/) we can see the header and the home component and be able to navigate to the different pages through the header.
 
 ## Getting data from the server and showing it in the page.
 
@@ -431,12 +431,7 @@ Here we use the `eq` helper to check for the page, then progressively load the c
 
 ### Creating a restaurants connection.
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to do two things:
-
-1. Create a Restaurants [can.Map](http://canjs.com/docs/can.Map.html) and [can.List](http://canjs.com/docs/can.List.html)
-2. Create a connection to `/api/restaurants`
-
-We will put the connection in `pmo/models/restaurant.js`:
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant connection and model in `pmo/models/restaurant.js`:
 
 ```js
 import superMap from 'can-connect/can/super-map/';
@@ -456,6 +451,8 @@ We create a connection with:
 - `idProp` - The property name of the data unique identifier
 - `name` - A short name used as an identifier when caching data
 
+And then export `connection.Map` as the default which returns a model that we can use to retrieve data.
+
 ### Test the connection
 
 To test the connection you can temporarily add the following to `pmo/app.js`:
@@ -470,7 +467,7 @@ After reloading the homepage you should see the restaurant information logged in
 
 ### Add to the page
 
-Now that we know we get data from the server we can update the `ViewModel` in `pmo/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
+Now that we verified to get data from the server we can update the `ViewModel` in `pmo/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
 
 ```js
 import Component from 'can/component/';
@@ -683,7 +680,7 @@ Let's take a closer look at those properties:
 
 ### Create a test
 
-Now we can set up a test for this view model to make sure that it works. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS friendly wrapper (`steal-qunit`) in `pmo/restaurant/list/list_test.js`:
+View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS friendly wrapper (`steal-qunit`) in `pmo/restaurant/list/list_test.js`:
 
 ```js
 // pmo/restaurant/list/list_test.js
@@ -768,7 +765,7 @@ export default fixture;
 
 #### Test the view model
 
-Now we can add the actual tests for our view model by changing `pmo/restaurant/list/list_test.js` to:
+With those fake data available we can test our view model by changing `pmo/restaurant/list/list_test.js` to:
 
 ```
 import QUnit from 'steal-qunit';
@@ -897,7 +894,7 @@ Some things worth pointing out:
 
 ### Create a demo page
 
-With all the component files contained in the `pmo/restaurant/list/` folder we can also add a demo page at `pmo/restaurant/list/demo.html` that uses fixture to demonstrate the component:
+With all the component files contained in the `pmo/restaurant/list/` folder we can also add a demo page at `pmo/restaurant/list/demo.html` that uses fixtures to demonstrate the component:
 
 ```html
 <script type="text/stache" can-autorender>
