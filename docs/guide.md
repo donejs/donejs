@@ -137,7 +137,6 @@ npm install place-my-order-assets --save
 Every DoneJS application consists of at least two files: A main template (`pmo/index.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add `pmo/index.stache` to the project with the following content:
 
 ```html
-<!DOCTYPE html>
 <html>
   <head>
     <title>Place My Order</title>
@@ -221,10 +220,14 @@ The homepage element in `pmo/home.component` is very simple and just consists of
 <can-component tag="pmo-home">
   <template>
      <div class="homepage">
-       <img src="node_modules/place-my-order-assets/images/homepage-hero.jpg" width="250" height="380" />
-       <h1>Ordering food has never been easier</h1>
-       <p>We make it easier than ever to order gourmet food from your favorite local restaurants.</p>
-       <p><a class="btn" href="/restaurants" role="button">Choose a Restaurant</a></p>
+      <img src="node_modules/place-my-order-assets/images/homepage-hero.jpg"
+          width="250" height="380" />
+      <h1>Ordering food has never been easier</h1>
+      <p>
+        We make it easier than ever to order gourmet food
+        from your favorite local restaurants.
+      </p>
+      <p><a class="btn" href="/restaurants" role="button">Choose a Restaurant</a></p>
      </div>
   </template>
 </can-component>
@@ -253,7 +256,7 @@ For now, the order history is very similar. In `pmo/order/history.component`:
 
 ### Creating a restaurant list element
 
-The restaurant list will contain more functionality which is why we can split it into separate files for the template and the component logic. All files are put together into their own folder so that components can be easily re-used and tested individually. In `pmo/restaurant/list/list.js`:
+The restaurant list will contain more functionality which is why we will split it into separate files for the template and the component logic. All files are put together into their own folder so that components can be easily re-used and tested individually. In `pmo/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
@@ -272,8 +275,10 @@ export default Component.extend({
 And add a simple template at `pmo/restaurant/list/list.stache`:
 
 ```
-<a can-href="{page='home'}">Homepage</a>
-<h2>Restaurants</h2>
+<div class="restaurants">
+  <a can-href="{page='home'}">Homepage</a>
+  <h2 class="page-header">Restaurants</h2>
+</div>
 ```
 
 We will add more functionality to this element in a later chapter. Your folder structure should look like this:
@@ -361,7 +366,6 @@ Here we use the `eq` helper to make the appropriate link active and then use [ca
 Now we can glue all those individual components together in `pmo/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `pmo/index.stache` to:
 
 ```html
-<!DOCTYPE html>
 <html>
   <head>
     <title>Place My Order</title>
@@ -1456,7 +1460,7 @@ This tells DocumentJS to parse all `.js` and `.md` files in the `pmo/` folder wi
 Now we need to create a Markdown file that provides the `pmo` main parent page. Add `pmo/index.md`:
 
 ```
-@page pmo
+@@page pmo
 
 # place-my-order.com
 

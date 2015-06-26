@@ -31,7 +31,7 @@
   "peerDependencies": {
     "can": "^2.3.0-pre.1",
     "can-connect": "0.0.2",
-    "can-ssr": "^0.2.0",
+    "can-ssr": "^0.3.0",
     "documentjs": "^0.3.0-pre.4",
     "done-autorender": "0.1.0-pre.2",
     "done-css": "0.0.8",
