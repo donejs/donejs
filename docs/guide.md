@@ -361,6 +361,22 @@ Now is also a good time to add a header element at `pmo/header.component` that l
 
 Here we use the `eq` helper to make the appropriate link active and then use [can-href]() to create links based on the the application state (e.g. by setting the `page` property to `home`) which will then create the proper links based on the route ([http://localhost:8080/home](http://localhost:8080/home) in this case).
 
+### Create a loading indicator
+
+To show that something is currently loading, let's create a `pmo-loading` component in `pmo/loading.component`:
+
+```html
+<can-component tag="pmo-loading">
+  <template>
+    {{#eq state "resolved"}}
+      <content></content>
+    {{else}}
+      <div class="loading"></div>
+    {{/eq}}
+  </template>
+</can-component>
+```
+
 ### Switch between components
 
 Now we can glue all those individual components together in `pmo/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `pmo/index.stache` to:
@@ -375,21 +391,22 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
     <can-import from="place-my-order-assets" />
     <can-import from="pmo/app" [.]="{value}" />
 
+    <can-import from="pmo/loading.component!" />
     <can-import from="pmo/header.component!" />
     <pmo-header page="{page}"></pmo-header>
 
     {{#eq page "home"}}
-      <can-import from="pmo/home.component!">
+      <can-import from="pmo/home.component!" can-tag="pmo-loading">
         <pmo-home></pmo-home>
       </can-import>
     {{/eq}}
     {{#eq page "restaurants"}}
-      <can-import from="pmo/restaurant/list/">
+      <can-import from="pmo/restaurant/list/" can-tag="pmo-loading">
         <pmo-restaurant-list></pmo-restaurant-list>
       </can-import>
     {{/eq}}
     {{#eq page "order-history"}}
-      <can-import from="pmo/order/history.component!">
+      <can-import from="pmo/order/history.component!" can-tag="pmo-loading">
         <pmo-order-history></pmo-order-history>
       </can-import>
     {{/eq}}
@@ -406,7 +423,7 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
 </html>
 ```
 
-Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. If you now reload [http://localhost:8080/](http://localhost:8080/) you should see the header and the home component and be able to navigate.
+Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. By setting `can-tag="pmo-loading"` we will see a loading indicator while the import loading. If you now reload [http://localhost:8080/](http://localhost:8080/) we can see the header and the home component and be able to navigate to the different pages through the header.
 
 ## Getting data from the server and showing it in the page.
 
@@ -425,7 +442,7 @@ We will put the connection in `pmo/models/restaurant.js`:
 import superMap from 'can-connect/can/super-map/';
 
 export const connection = superMap({
-  resource: '/api/restaurants',
+  url: '/api/restaurants',
   idProp: '_id',
   name: 'restaurants'
 });
@@ -433,9 +450,9 @@ export const connection = superMap({
 export default connection.Map;
 ```
 
-The connection is a can-connect [superMap]() and besides setting the `Map` and `List` type the connection should return we also define:
+We create a connection with:
 
-- `resource` - The URL of the REST endpoint
+- `url` - The URL of the REST endpoint
 - `idProp` - The property name of the data unique identifier
 - `name` - A short name used as an identifier when caching data
 
@@ -446,10 +463,7 @@ To test the connection you can temporarily add the following to `pmo/app.js`:
 ```js
 import Restaurant from './models/restaurant';
 
-Restaurant.getList({})
-	.then(function(restaurants){
-	  console.log(restaurants.attr());
-	});
+Restaurant.getList({}).then(restaurants => console.log(restaurants.attr()));
 ```
 
 After reloading the homepage you should see the restaurant information logged in the console. Once verified you can remove the test code again.
@@ -669,10 +683,10 @@ Let's take a closer look at those properties:
 
 ### Create a test
 
-Now we can set up a test for this view model to make sure that it works. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS friendly wrapper (`steal-qunit`) in `pmo/restaurants/list/list_test.js`:
+Now we can set up a test for this view model to make sure that it works. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS friendly wrapper (`steal-qunit`) in `pmo/restaurant/list/list_test.js`:
 
 ```js
-// pmo/restaurants/list/list_test.js
+// pmo/restaurant/list/list_test.js
 import { ViewModel } from './list';
 import QUnit from 'steal-qunit';
 
@@ -683,7 +697,7 @@ QUnit.test('basics', function(){
 });
 ```
 
-To run the test we can create a simple HTML page in the same folder (`pmo/restaurants/list/test.html`):
+To run the test we can create a simple HTML page in the same folder (`pmo/restaurant/list/test.html`):
 
 ```html
 <title>pmo/restaurant/list</title>
@@ -691,7 +705,7 @@ To run the test we can create a simple HTML page in the same folder (`pmo/restau
 <div id="qunit-fixture"></div>
 ```
 
-When opening [http://localhost:8080/pmo/restaurants/list/test.html](http://localhost:8080/pmo/restaurants/list/test.html) we can see the test pass.
+When opening [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/pmo/restaurant/list/test.html) we can see the test pass.
 
 #### Create fake data
 
@@ -699,7 +713,7 @@ Unit tests should be able to run by themselves without the need for an API serve
 
 ```js
 // pmo/models/fixtures.js
-import fixture from 'can/util/fixture/';
+import fixture from 'can-connect/fixture/';
 
 export const statesFixture = [
   { name: 'Calisota', short: 'CA' },
@@ -730,17 +744,18 @@ export const restaurantsFixture = [{
 }];
 
 fixture({
-  "/api/states": function() {
+  '/api/states': function() {
     return { data: statesFixture };
   },
-  "/api/cities": function(request) {
+
+  '/api/cities': function(request) {
     if(request.data.state === 'CA') {
       return { data: citiesFixture.CA };
     }
     return { data: citiesFixture.NT };
   },
-  "/api/restaurants": function() {
-    if(data['address.city'] === 'Alberny' && data['address.state'] === 'NT') {
+  '/api/restaurants': function(req) {
+    if(req.data['address.city'] === 'Alberny' && req.data['address.state'] === 'NT') {
       return { data: [ restaurantsFixture[1] ] };
     }
 
@@ -753,10 +768,12 @@ export default fixture;
 
 #### Test the view model
 
-Now we can add the actual tests for our view model by changing `pmo/restaurants/list/list_test.js` to:
+Now we can add the actual tests for our view model by changing `pmo/restaurant/list/list_test.js` to:
 
 ```
+import QUnit from 'steal-qunit';
 import { statesFixture, citiesFixture, restaurantsFixture } from 'pmo/models/fixtures';
+import { ViewModel } from './list';
 
 QUnit.module('pmo/restaurant/list');
 
@@ -770,7 +787,7 @@ QUnit.asyncTest('loads all states', function() {
 
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
-  assert.equal(vm.attr('cities'), null, '');
+  QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
   vm.attr('cities').then(cities => {
     QUnit.deepEqual(cities.attr(), citiesFixture.CA);
@@ -780,7 +797,7 @@ QUnit.asyncTest('setting a state loads its cities', function() {
 
 QUnit.asyncTest('changing a state resets city', function() {
   var vm = new ViewModel();
-  assert.equal(vm.attr('cities'), null, '');
+  QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
   vm.attr('cities').then(cities => {
     QUnit.deepEqual(cities.attr(), citiesFixture.CA);
@@ -802,7 +819,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 });
 ```
 
-Visit [http://localhost:8080/pmo/restaurants/list/test.html](http://localhost:8080/pmo/restaurants/list/test.html) to see all tests passing.
+Visit [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/pmo/restaurant/list/test.html) to see all tests passing.
 
 ### Write the template
 
@@ -880,17 +897,20 @@ Some things worth pointing out:
 
 ### Create a demo page
 
-With all the component files contained in the `pmo/restaurant/list/` folder we can also add a demo page at `pmo/restaurants/list/demo.html` that uses fixture to demonstrate the component:
+With all the component files contained in the `pmo/restaurant/list/` folder we can also add a demo page at `pmo/restaurant/list/demo.html` that uses fixture to demonstrate the component:
 
 ```html
 <script type="text/stache" can-autorender>
+  <can-import from="place-my-order-assets" />
   <can-import from="pmo/models/fixtures" />
   <can-import from="pmo/restaurant/list/" />
   <pmo-restaurant-list></pmo-restaurant-list>
 </script>
-<script src="../../node_modules/steal/steal.js"
+<script src="../../../node_modules/steal/steal.js"
         main="can/view/autorender/"></script>
 ```
+
+View the demo page at [http://localhost:8080/pmo/restaurant/list/demo.html](http://localhost:8080/pmo/restaurant/list/demo.html) .
 
 ## Setup automated tests and continuous integration (CI)
 
@@ -898,11 +918,11 @@ In this chapter we will automate running the tests so that they can be used in a
 
 ### Creating a global test page
 
-While we already created an individual test page in `pmo/restaurants/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Lets create `pmo/test.html` like:
+While we already created an individual test page in `pmo/restaurant/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Lets create `pmo/test.html` like:
 
 ```html
 <title>Place my order tests</title>
-<script src="node_modules/steal/steal.js" main="pmo/test"></script>
+<script src="../node_modules/steal/steal.js" main="pmo/test"></script>
 <div id="qunit-fixture"></div>
 ```
 
@@ -915,11 +935,11 @@ import 'pmo/restaurant/list/list_test';
 window.localStorage.clear();
 ```
 
-If you now go to [http://localhost:8080/test.html](http://localhost:8080/test.html) we still see all restaurant list tests passing but we will add more here later on.
+If you now go to [http://localhost:8080/pmo/test.html](http://localhost:8080/pmo/test.html) we still see all restaurant list tests passing but we will add more here later on.
 
 ### Setting up a test runner
 
-The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee]() which makes it easy to run those tests from the command line without much configuration in any browser. In our example we will use Firefox since it is also installed in the Travis CI environment.
+The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee]() which makes it easy to run those tests in any browser from the command line without much configuration. In our example we will use Firefox since it is also installed in the Travis CI environment.
 
 ```
 npm install testee --save-dev
@@ -935,15 +955,27 @@ To:
 
 ```js
 "scripts": {
-    "test": "testee test.html --browsers firefox",
+    "test": "testee pmo/test.html --browsers firefox",
 ```
 
 Now running `npm test` from the command line will open Firefox and run the tests using our fixtures. Make sure that Firefox is installed and not currently running.
 
-### Setting up TravisCI
+### Setting continuous integration (Travis CI)
 
-[TravisCI]() is a continuous integration service that is free for open source projects.
+The way our application now is set up, all a continuous integration server now has to do is clone the application repository, run `npm install` and then run `npm test`. There are many open source CI server with the most popular one probably [Jenkins]() and many hosted solutions.
 
+We will use [TravisCI]() as our hosted solution because it is free for open source projects. After signing up with GitHub, we just have to enable the place-my-order repository for CI in the Travis CI account settings and add the following `.travis.yml`:
+
+```
+language: node_js
+node_js: node
+script: npm test
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+```
+
+This tells Travis CI to run the tests on a NodeJS project and also set up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
 
 ## Nested routes
 
@@ -971,7 +1003,7 @@ We want to support two additional routes:
 
 ### Create additional components
 
-To make this happen we need two more components. First `pmo/restaurant/details.component` which loads the restaurants (based on the `slug`) and then displays its information (with some Lorem Ipsum in the description):
+To make this happen we need two more components. First `pmo/restaurant/details.component` which loads the restaurants (based on the `slug`) and then displays its information:
 
 ```html
 <can-component tag="pmo-restaurant-details">
@@ -1065,18 +1097,18 @@ To:
 {{#eq page "restaurants"}}
   {{#if slug}}
     {{#eq action 'order'}}
-      <can-import from="pmo/order/new/">
+      <can-import from="pmo/order/new/" can-tag="pmo-loading">
         <pmo-order-new slug="{slug}"></pmo-order-new>
       </can-import>
     {{/eq}}
 
     {{^if action}}
-      <can-import from="pmo/restaurant/details.component!">
+      <can-import from="pmo/restaurant/details.component!" can-tag="pmo-loading">
         <pmo-restaurant-details></pmo-restaurant-details>
       </can-import>
     {{/if}}
   {{else}}
-    <can-import from="pmo/restaurant/list/">
+    <can-import from="pmo/restaurant/list/" can-tag="pmo-loading">
       <pmo-restaurant-list></pmo-restaurant-list>
     </can-import>
   {{/if}}
@@ -1100,16 +1132,19 @@ npm install bit-tabs --save
 And then integrate it into `pmo/order/new/new.stache`:
 
 ```html
-<can-import from="bit-tabs"/>
+<div class="order-form">
+  <h2>Order here</h2>
+  <can-import from="bit-tabs"/>
 
-<bit-tabs tabs-class="nav nav-tabs">
-  <bit-panel title="Lunch menu">
-    This is the lunch menu
-  </bit-panel>
-  <bit-panel title="Dinner menu">
-    This is the dinner menu
-  </bit-panel>
-</bit-tabs>
+  <bit-tabs tabs-class="nav nav-tabs">
+    <bit-panel title="Lunch menu">
+      This is the lunch menu
+    </bit-panel>
+    <bit-panel title="Dinner menu">
+      This is the dinner menu
+    </bit-panel>
+  </bit-tabs>
+</div>
 ```
 
 Here we just import the `bit-tabs` package using `can-import` which will then provide the `bit-tabs` and `bit-panel` custom elements.
@@ -1171,10 +1206,17 @@ First, let's look at the restaurant data we get back from the server. It looks s
 }
 ```
 
-We have a `menu` property which provides a `lunch` and `dinner` option (which should show in the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order and also check if an item is in the order already, set a default order status (`new`) and be able to calculate the order total. For that to happen we update `pmo/models/order.js` to:
+We have a `menu` property which provides a `lunch` and `dinner` option (which should show in the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order and also check if an item is in the order already, set a default order status (`new`) and be able to calculate the order total. For that to happen we need to create a new model at `pmo/models/order.js` with the following content:
 
 ```js
-const ItemsList = can.List.extend({}, {
+// pmo/models/order.js
+import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import List from 'can/list/';
+import Map from 'can/map/';
+import 'can/map/define/';
+
+const ItemsList = List.extend({}, {
   has: function(item) {
     return this.indexOf(item) !== -1;
   },
@@ -1190,7 +1232,7 @@ const ItemsList = can.List.extend({}, {
   }
 });
 
-let Order = can.Map.extend({
+let Order = Map.extend({
   define: {
     status: {
       value: 'new'
@@ -1212,9 +1254,21 @@ let Order = can.Map.extend({
     this.save();
   }
 });
+
+export const connection = superMap({
+  url: '/api/orders',
+  idProp: 'name',
+  Map: Order,
+  List: Order.List,
+  name: 'orders'
+});
+
+tag('order-model', orderConnection);
+
+export default Order;
 ```
 
-Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We define the `items` property to be that list so we can use `has` and `toggle` directly in our template. We also set a default `status` and a getter for calculating the order `total` which just adds up all the item prices.
+Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We define the `items` property of an order to be that list so we can use `has` and `toggle` directly in the template. We also set a default `status` and a getter for calculating the order `total` which just adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
 ### Implement the view model
 
@@ -1247,15 +1301,16 @@ export const ViewModel = Map.extend({
     }
   },
 
-  startNewOrder: function() {
-    this.attr('order', new Order());
-    this.attr('saveStatus', null);
+  placeOrder() {
+    let order = this.attr('order');
+    order.attr('restaurant', this.attr('restaurant._id'));
+    this.attr('saveStatus', order.save());
     return false;
   },
 
-  placeOrder() {
-    let order = this.attr('order');
-    this.attr('saveStatus', order.save());
+  startNewOrder: function() {
+    this.attr('order', new Order());
+    this.attr('saveStatus', null);
     return false;
   }
 });
@@ -1267,7 +1322,7 @@ export default Component.extend({
 });
 ```
 
-Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` which we will use to enable/disable the submit button and `saveStatus` which will become a Deferred once the order is submitted. `placeOrder` just saves the current order and sets `status` and `startNewOrder` initializes a new empty order if you submitted one already.
+Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus` which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
 ### Write the template
 
@@ -1309,7 +1364,7 @@ Now we can import that component and update `pmo/order/new/new.stache` to:
 <can-import from="pmo/order/details.component!" />
 
 <div class="order-form">
-  <restaurant-model get="{ _id=slug }">
+  <restaurant-model get="{ _id=slug }" [restaurant]="{value}">
     {{#if isPending}}
       <div class="loading"></div>
     {{else}}
@@ -1407,6 +1462,8 @@ This is a longer template so lets walk through it:
 
 can-connect makes it very easy to add real-time functionality as there is a way of being notified when a model on the server has been created, updated or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket) which allow to send push notifications to a client.
 
+### Adding real-time events to a model
+
 The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework which additionally to providing a REST API also sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time all we need to do is add listeners for those events to `pmo/models/order.js` and in the handler notify the order connection:
 
 ```
@@ -1422,6 +1479,68 @@ socket.on('orders created', order => orderConnection.createInstance(order));
 socket.on('orders updated', order => orderConnection.updateInstance(order));
 socket.on('orders removed', order => orderConnection.destroyInstance(order));
 ```
+
+### Update the template
+
+That's all the JavaScript we need to implement real-time functionality. All the rest can be done in the order history template by updating `pmo/order/history.component` to:
+
+```html
+<can-component tag="pmo-order-history">
+  <template>
+    <can-import from="pmo/models/order" />
+
+    <div class="order-history">
+      <div class="order header">
+        <address>Name / Address / Phone</address>
+        <div class="items">Order</div>
+        <div class="total">Total</div>
+        <div class="actions">Action</div>
+      </div>
+
+      <can-import from="pmo/order/list.component!" can-tag="pmo-loading">
+        <order-model getList="{status='new'}">
+          <pmo-order-list
+            orders="{.}"
+            status="new"
+            title="New Orders"
+            empty-message="No new orders">
+          </pmo-order-list>
+        </order-model>
+
+        <order-model getList="{status='preparing'}">
+          <pmo-order-list
+            orders="{.}"
+            status="preparing"
+            title="Preparing"
+            empty-message="No orders preparing">
+          </pmo-order-list>
+        </order-model>
+
+        <order-model getList="{status='delivery'}">
+          <pmo-order-list
+            orders="{.}"
+            status="delivery"
+            title="In delivery"
+            empty-message="No orders in delivery">
+          </pmo-order-list>
+        </order-model>
+
+        <order-model getList="{status='delivered'}">
+          <pmo-order-list
+            orders="{.}"
+            status="delivered"
+            title="Delivered"
+            empty-message="No delivered orders">
+          </pmo-order-list>
+        </order-model>
+      </can-import>
+
+    </div>
+  </template>
+</can-component>
+```
+
+First we import the order model and then just call `<order-model getList="{status='<status>'}">` for each order status. That's it. If we now open the order page we see some already completed default orders. Keeping the page open and placing a new order will update it automatically.
 
 ## Create documentation
 
@@ -1698,7 +1817,7 @@ Our models will also need to be updated to use the baseUrl. For example in pmo/m
 import baseUrl from './base-url';
 
 superMap({
-  resource: baseUrl + '/api/states',
+  url: baseUrl + '/api/states',
   ...
 });
 ```
