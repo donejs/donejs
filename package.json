@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "peerDependencies": {
-    "can": "^2.3.0-pre.1",
-    "can-connect": "0.0.2",
+    "can": "^2.3.0-pre.2",
+    "can-connect": "^0.0.3",
     "can-ssr": "^0.3.0",
     "documentjs": "^0.3.0-pre.4",
     "done-autorender": "0.1.0-pre.2",
