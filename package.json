@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Your app is done",
   "main": "index.js",
   "scripts": {
