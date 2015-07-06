@@ -8,22 +8,22 @@
 ![DoneJS app](img/place-my-order.png)
 
 
-After the initial application setup (including a server that hosts and pre-renders the application) we will create several custom elements and then bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
+After the initial application setup that includes a server that hosts and pre-renders the application we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
 
-After that we will talk more about what a view-model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser we will automate running them from the command line locally and also on a continuous integration server. In the subsequent chapters we will show how to easily import other existing modules into our application and how to set up a real-time connection.
+After that we will talk about what a view-model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser, we will automate running them locally from the command line and also on a continuous integration server. In the subsequent chapters, we will show how to easily import other modules into our application and how to set up a real-time connection.
 
-Finally we will describe how to build and deploy your application for the web and also as a desktop application with nw.js and a mobile app with Cordova.
+Finally, we will describe how to build and deploy your application for the web, as a desktop application with nw.js, and as a mobile app with Cordova.
 
 @body
 
 ## Setup the project
 
-In this section we will create our DoneJS project and set up a REST API that the application can use.
+In this section we will create our DoneJS project and set up a REST API for the application to use.
 You will need [NodeJS](http://www.meetup.com/yyc-js/events/222682935/?a=ra1_te) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
 
 ### Create the project
 
-To get set up, create a new folder and in it initialize a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration:
+To get started, we create a new folder with a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration by running the following commands:
 
 ```
 mkdir place-my-order
@@ -31,15 +31,15 @@ cd place-my-order
 npm init
 ```
 
-[npm init](https://docs.npmjs.com/cli/init) will ask a couple of questions which can all be answered by choosing the default.
+[npm init](https://docs.npmjs.com/cli/init) will ask a couple of questions which we can all answer with the default answers.
 
-Now we can install the DoneJS package and write it as a dependency into `package.json` so that a new copy of the application can be set up in the future by simply typing `npm install`:
+Now we can install the DoneJS package and write it as a dependency into `package.json`:
 
 ```
 npm install donejs --save
 ```
 
-This will also install all of DoneJS's dependencies like:
+This will also install all of DoneJS's dependencies:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
@@ -51,7 +51,7 @@ This will also install all of DoneJS's dependencies like:
 - [DocumentJS](http://documentjs.com) - Documentation
 - [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
 
-The initial folder structure then looks like this:
+The initial folder structure now looks like this:
 
 ```
 ├── package.json
@@ -65,13 +65,13 @@ The initial folder structure then looks like this:
 
 ### Setup a service API
 
-Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. How to create an API will not part of this guide. Instead we just install and start an existing service API that can be used with our application:
+Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we just install and start an existing service API that can be used with our application:
 
 ```
 npm install place-my-order-api --save
 ```
 
-With the `package.json` currently lookingn similar to this:
+The `package.json` should now look similar to this:
 
 ```js
 {
@@ -100,20 +100,22 @@ With the `package.json` currently lookingn similar to this:
 }
 ```
 
-We can add a API server start script into the `scripts` section that looks like this:
+We can add an API server start script into the `scripts` section like this:
 
 ```js
 "scripts": {
     "api": "place-my-order-api --port 7070",
+    "test": "echo \"Error: no test specified\" && exit 1"
+},
 ```
 
-Which allows to start the server with:
+Which allows starting the server with:
 
 ```
 npm run api
 ```
 
-At first startup, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) to see a JSON list of restaurant data. Keep this server running during development.
+At first startup, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) were we can see a JSON list of restaurant data. Keep this server running during development.
 
 ## Setup server side rendering
 
@@ -134,7 +136,7 @@ Before we create the first files we also need to install the `place-my-order-ass
 npm install place-my-order-assets --save
 ```
 
-Every DoneJS application consists of at least two files: A main template (`pmo/index.stache`) which contains the main template and links to the development or production assets and a `pmo/app.js` which is the main application file that initializes the application state and routes. Add `pmo/index.stache` to the project with the following content:
+Every DoneJS application consists of at least two files: A main template (in this case `pmo/index.stache`) which contains the main template and links to the development or production assets, and a main application file (`pmo/app.js`) that initializes the application state and routes. Create `pmo/index.stache` with the following content:
 
 ```html
 <html>
@@ -158,9 +160,9 @@ Every DoneJS application consists of at least two files: A main template (`pmo/i
 </html>
 ```
 
-This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/) compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. Here the `place-my-order-assets` package (which loads the LESS styles for the application) and `pmo/app` which it the main application file. The [asset]() helper provides assets like CSS styles, cached data and links to scripts based on the environment (development or production).
+This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/)-compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. First the `place-my-order-assets` package (which loads the LESS styles for the application) followed by `pmo/app` which is the main application file. The [asset]() helper provides assets like CSS styles, cached data, and links to scripts based on the environment (development or production).
 
-The application main file at `pmo/app.js` looks like this:
+The main application file at `pmo/app.js` looks like this:
 
 ```
 // pmo/app.js
@@ -187,14 +189,14 @@ The complete file structure of the application now looks like this:
 
 ### Starting the application
 
-With those two files available we can start the server which hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
+With those two files available we can start the server that hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
 
 ```js
 "scripts": {
     "start": "can-serve --proxy http://localhost:7070 --port 8080",
 ```
 
-`main` in `package.json` (by default set to `index.js`) also needs to be changed to:
+`"main"`, in `package.json` (by default set to `index.js`), also needs to be changed to:
 
 ```js
 "main": "pmo/index.stache!done-autorender",
@@ -202,13 +204,15 @@ With those two files available we can start the server which hosts and renders t
 
 Then we can start the application with
 
-> npm start
+```
+npm start
+```
 
-Go to [http://localhost:8080](http://localhost:8080) to see the hello world message.
+Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" message.
 
 ## Creating custom elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual self-contained modules. In the following section we will create different components for the homepage, the restaurant list and the order history. After that we will glue them all together using routes and the global application state.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules. In the following section we will create different components for the homepage, the restaurant list, and the order history. After that, we will glue them all together using routes and the global application state.
 
 There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component](https://github.com/stealjs/system-component))). Larger components can be split up into individual files.
 
@@ -256,7 +260,7 @@ For now, the order history is very similar. In `pmo/order/history.component`:
 
 ### Creating a restaurant list element
 
-The restaurant list will contain more functionality which is why we will split it into separate files for the template and the component logic. All files are put together into their own folder so that components can be easily re-used and tested individually. In `pmo/restaurant/list/list.js`:
+The restaurant list will contain more functionality, which is why we will split it into separate files for the template and the component logic. All files are put together in the component's own folder so that they can be easily re-used and tested. Put the following content in `pmo/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
@@ -299,11 +303,11 @@ We will add more functionality to this element in a later chapter. Your folder s
 
 ## Setting up routing
 
-In this part, we will create routes and dynamically load and bring the custom elements we created together on the main page.
+In this part, we will create routes and dynamically load and bring together the custom elements we created on the main page.
 
 ### Create Routes
 
-Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS [can.route](http://canjs.com/docs/can.route.html) which allows to map property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of the application state.
+Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of the application state.
 
 If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
@@ -423,15 +427,15 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
 </html>
 ```
 
-Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. By setting `can-tag="pmo-loading"` we will see a loading indicator while the import is loading. If you now reload [http://localhost:8080/](http://localhost:8080/) we can see the header and the home component and be able to navigate to the different pages through the header.
+Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. Now, if we reload [http://localhost:8080/](http://localhost:8080/), we can see the header and the home component and be able to navigate to the different pages through the header.
 
-## Getting data from the server and showing it in the page.
+## Getting and Displaying Data from the Server
 
 [can-connect]() is a powerful data layer that allows our application to connect to the RESTful API that we set up with `place-my-order-api`.
 
 ### Creating a restaurants connection.
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant connection and model in `pmo/models/restaurant.js`:
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and later told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant connection and model in `pmo/models/restaurant.js`:
 
 ```js
 import superMap from 'can-connect/can/super-map/';
@@ -465,9 +469,9 @@ Restaurant.getList({}).then(restaurants => console.log(restaurants.attr()));
 
 After reloading the homepage you should see the restaurant information logged in the console. Once verified you can remove the test code again.
 
-### Add to the page
+### Add the connection to the page
 
-Now that we verified to get data from the server we can update the `ViewModel` in `pmo/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
+Now we can update the `ViewModel` in `pmo/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
 
 ```js
 import Component from 'can/component/';
@@ -548,17 +552,17 @@ The current folder structure and files look like this:
 
 ## Creating a unit-tested view model
 
-In this chapter we will create a view model for the restaurant list functionality. What we want to do is to show a dropdown of all available states with a restaurants and when the user selects a state show a list of cities. Once a city is selected we will load a list of all restaurants for that city with the result looking like this:
+In this chapter we will create a view model for the restaurant list functionality. We want  to show a dropdown of all available states with restaurants. When the user selects a state, we want to show a list of cities with restaurants. Once a city is selected, we will load a list of all restaurants for that city. The end result will look like this:
 
 ![Restaurant list](img/restaurant-list.png)
 
 ### Identify view model state
 
-First we need to identify the properties that our view model needs to provide. We want to load a list of states from the server (all asynchronous requests return a [Promise](https://promisesaplus.com/)) and let the user select a single state. Then we do the same for cities and finally load the restaurant list for that selection.
+First we need to identify the properties that our view model needs to provide. We want to load a list of states from the server and let the user select a single state. Then we do the same for cities and finally load the restaurant list for that selection.
 
 ![Restaurant list model state](img/restaurant-list-state.png)
 
-Which means the data model will look like this:
+All asynchronous requests return a Promise, so the data model will look like this:
 
 ```js
 {
@@ -604,7 +608,7 @@ export default connection.Map;
 
 ### Implement view model behavior
 
-Now that we identified the view model properties we need and created the models necessary to load them we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view-model at `pmo/restaurant/list/list.js`:
+Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view-model at `pmo/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
@@ -672,15 +676,15 @@ export default Component.extend({
 
 Let's take a closer look at those properties:
 
-- `states` will just return a list of all available states by calling `State.getList({})`
-- `state` is a string property set to `null` by default (no selection). Additionally, when `state` is changed we will also remove the dependent `city` selection.
-- `cities` will return `null` if no state has been selected, otherwise load all the cities for a given state by sending `state` as a query paramter (which will make a request like [http://localhost:8080/api/cities?state=IL](ttp://localhost:8080/api/cities?state=IL))
+- `states` will return a list of all available states by calling `State.getList({})`
+- `state` is a string property set to `null` by default (no selection). Additionally, when `state` is changed we will remove the dependent `city` selection.
+- `cities` will return `null` if no state has been selected; otherwise, it will load all the cities for a given state by sending `state` as a query paramater (which will make a request like [http://localhost:8080/api/cities?state=IL](ttp://localhost:8080/api/cities?state=IL))
 - `city` is a simple string, set to `null` by default
-- `restaurants` will always be `null` unless both, a `city` and a `state` are selected. If both are selected, it will set the `address.state` and `address.city` query parameters which returns a list of all restaurants whose address matches those parameters.
+- `restaurants` will always be `null` unless both a `city` and a `state` are selected. If both are selected, it will set the `address.state` and `address.city` query parameters which will return a list of all restaurants whose address matches those parameters.
 
 ### Create a test
 
-View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS friendly wrapper (`steal-qunit`) in `pmo/restaurant/list/list_test.js`:
+View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`) in `pmo/restaurant/list/list_test.js`:
 
 ```js
 // pmo/restaurant/list/list_test.js
@@ -704,7 +708,7 @@ To run the test we can create a simple HTML page in the same folder (`pmo/restau
 
 When opening [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/pmo/restaurant/list/test.html) we can see the test pass.
 
-#### Create fake data
+#### Fixtures: Create fake data
 
 Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. We will put them in `pmo/models/fixtures.js`:
 
@@ -820,7 +824,7 @@ Visit [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:808
 
 ### Write the template
 
-Now that our view model is implemented and tested we can use its data to update the template at `pmo/restaurant/list/list.stache` to:
+Now that our view model is implemented and tested, we can use its data to update the template at `pmo/restaurant/list/list.stache` to:
 
 ```
 <div class="restaurants">
@@ -889,8 +893,8 @@ Now that our view model is implemented and tested we can use its data to update 
 
 Some things worth pointing out:
 
-- since `states` and `cities` return a promise we can check the promise status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
-- The `state` and `city` property are bound to their select fields via [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
+- Since `states` and `cities` return a promise, we can check the promise status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
+- The `state` and `city` properties are bound to their select fields via [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
 
 ### Create a demo page
 
@@ -915,7 +919,7 @@ In this chapter we will automate running the tests so that they can be used in a
 
 ### Creating a global test page
 
-While we already created an individual test page in `pmo/restaurant/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Lets create `pmo/test.html` like:
+While we already created an individual test page in `pmo/restaurant/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Let's create `pmo/test.html` like:
 
 ```html
 <title>Place my order tests</title>
@@ -923,7 +927,7 @@ While we already created an individual test page in `pmo/restaurant/list/test.ht
 <div id="qunit-fixture"></div>
 ```
 
-And `pmo/test.js` which loads all the tests as:
+And `pmo/test.js` which loads all the tests:
 
 ```js
 import 'pmo/models/fixtures';
@@ -942,26 +946,25 @@ The tests can be automated with any test runner that supports running QUnit test
 npm install testee --save-dev
 ```
 
-Then we can change the `test` script in `package.json` which currently shows something like
+Then we can change the `test` script in `package.json` from this:
 
 ```
 "test": "echo \"Error: no test specified\" && exit 1"
 ```
 
-To:
+To this:
 
 ```js
-"scripts": {
-    "test": "testee pmo/test.html --browsers firefox",
+  "test": "testee pmo/test.html --browsers firefox",
 ```
 
-Now running `npm test` from the command line will open Firefox and run the tests using our fixtures. Make sure that Firefox is installed and not currently running.
+Now, running `npm test` from the command line will open Firefox and run the tests using our fixtures. Make sure that Firefox is installed and not currently running.
 
 ### Setting continuous integration (Travis CI)
 
-The way our application now is set up, all a continuous integration server now has to do is clone the application repository, run `npm install` and then run `npm test`. There are many open source CI server with the most popular one probably [Jenkins]() and many hosted solutions.
+The way our application is set up, all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers (the most popular one probably [Jenkins]() and, many hosted solutions).
 
-We will use [TravisCI]() as our hosted solution because it is free for open source projects. After signing up with GitHub, we just have to enable the place-my-order repository for CI in the Travis CI account settings and add the following `.travis.yml`:
+We will use [TravisCI]() as our hosted solution because it is free for open source projects. After signing up with GitHub, all we have to do is to enable the place-my-order repository for CI in the Travis CI account settings and add the following `.travis.yml` to our project root:
 
 ```
 language: node_js
@@ -976,14 +979,14 @@ This tells Travis CI to run the tests on a NodeJS project and also set up a wind
 
 ## Nested routes
 
-Until now we used three top level routes, `home`, `restaurants` and `order-history`. We did however also define two additional routes in `pmo/app.js` which looked like:
+Until now we've used three top level routes: `home`, `restaurants` and `order-history`. We did however also define two additional routes in `pmo/app.js` which looked like:
 
 ```js
 route(':page/:slug', { slug: null });
 route(':page/:slug/:action', { slug: null, action: null });
 ```
 
-What we want to do now is use those routes when we are in the `restaurants` page. The relevant section in `pmo/index.stache` currently looks like this:
+We want to use those routes when we are in the `restaurants` page. The relevant section in `pmo/index.stache` currently looks like this:
 
 ```html
 {{#eq page "restaurants"}}
@@ -995,12 +998,12 @@ What we want to do now is use those routes when we are in the `restaurants` page
 
 We want to support two additional routes:
 
-- `restaurants/:slug` which shows a details page for the restaurant with `slug` being a URL friendly short name for the restaurant
-- `restaurants/:slug/order` which shows the menu of the current restaurant and allows us to make a selection and then send our order.
+- `restaurants/:slug`, which shows a details page for the restaurant with `slug` being a URL friendly short name for the restaurant
+- `restaurants/:slug/order`, which shows the menu of the current restaurant and allows us to make a selection and then send our order.
 
 ### Create additional components
 
-To make this happen we need two more components. First `pmo/restaurant/details.component` which loads the restaurants (based on the `slug`) and then displays its information:
+To make this happen, we need two more components. First, `pmo/restaurant/details.component` which loads the restaurant (based on the `slug`) and then displays its information:
 
 ```html
 <can-component tag="pmo-restaurant-details">
@@ -1051,7 +1054,7 @@ To make this happen we need two more components. First `pmo/restaurant/details.c
 </can-component>
 ```
 
-The order component will be a little more complex which is why we will put it into its own folder at `pmo/order/new/`. For now we just use placeholder content and implement the functionality in the following chapters. In `pmo/order/new/new.js`:
+The order component will be a little more complex, which is why we will put it into its own folder at `pmo/order/new/`. For now, we will just use placeholder content and implement the functionality in following chapters. In `pmo/order/new/new.js`:
 
 ```js
 import Component from 'can/component/component';
@@ -1112,15 +1115,15 @@ To:
 {{/eq}}
 ```
 
-Here we are basically just adding some more conditions if `page` is set to `restaurants`:
+Here we are basically adding some more conditions if `page` is set to `restaurants`:
 
-- When there is not `slug` set show the original restaurant list
+- When there is not `slug` set, show the original restaurant list
 - When `slug` is set but no `action`, show the restaurant details
 - When `slug` is set and `action` is `order`, show the order component for that restaurant
 
 ## Importing other projects
 
-The NPM package manager integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Lets add it as a project dependency with:
+The NPM integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
 ```
 npm install bit-tabs --save
@@ -1148,11 +1151,11 @@ Here we just import the `bit-tabs` package using `can-import` which will then pr
 
 ## Creating data
 
-In this section we will update the order component to be able to select restaurant menu items and submit a new order for a restaurant.
+In this section, we will update the order component to be able to select restaurant menu items and submit a new order for a restaurant.
 
 ### Updating the order model
 
-First, let's look at the restaurant data we get back from the server. It looks something like this:
+First, let's look at the restaurant data we get back from the server. It looks like this:
 
 ```js
 {
@@ -1203,7 +1206,7 @@ First, let's look at the restaurant data we get back from the server. It looks s
 }
 ```
 
-We have a `menu` property which provides a `lunch` and `dinner` option (which should show in the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order and also check if an item is in the order already, set a default order status (`new`) and be able to calculate the order total. For that to happen we need to create a new model at `pmo/models/order.js` with the following content:
+We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new model at `pmo/models/order.js` with the following content:
 
 ```js
 // pmo/models/order.js
@@ -1265,7 +1268,7 @@ tag('order-model', orderConnection);
 export default Order;
 ```
 
-Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We define the `items` property of an order to be that list so we can use `has` and `toggle` directly in the template. We also set a default `status` and a getter for calculating the order `total` which just adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
+Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another <order-model> tag to load orders in the order history template later.
 
 ### Implement the view model
 
@@ -1305,7 +1308,7 @@ export const ViewModel = Map.extend({
     return false;
   },
 
-  startNewOrder: function() {
+  startNewOrder() {
     this.attr('order', new Order());
     this.attr('saveStatus', null);
     return false;
@@ -1319,11 +1322,11 @@ export default Component.extend({
 });
 ```
 
-Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus` which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
+Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
 ### Write the template
 
-First, lets implement a small order confirmation component in `pmo/order/details.component`:
+First, let's implement a small order confirmation component in `pmo/order/details.component`:
 
 ```html
 <can-component tag="pmo-order-details">
@@ -1450,18 +1453,18 @@ This is a longer template so lets walk through it:
 - Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item]
 - `(submit)="{placeOrder}"` will call `placeOrder` from our view model when the form is submitted
 - The interesting part for showing a menu item is the checkbox `<input type="checkbox" (change)="{order.items.toggle this}" {{#if order.items.has}}checked{{/if}}>`
-  - `(change)` binds to the checkbox change event and runs `order.items.toggle` which adds toggles the item from `ItemList` which we created in the model
+  - `(change)` binds to the checkbox change event and runs `order.items.toggle` which toggles the item from `ItemList`, which we created in the model
   - `order.item.has` sets the checked status to whether or not this item is in the order
-- Then we will show form elements for name, address and phone number which are bound to the order model using [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
-- Finally we will disable the button with `{{^if canPlaceOrder}}disabled{{/if}}` which calls `canPlaceOrder` in the view model and returns false if no menu items are selected.
+- Then we show form elements for name, address, and phone number, which are bound to the order model using [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
+- Finally we disable the button with `{{^if canPlaceOrder}}disabled{{/if}}` which calls `canPlaceOrder` from the view model and returns false if no menu items are selected.
 
-## Setup a real-time connection
+## Set up a real-time connection
 
-can-connect makes it very easy to add real-time functionality as there is a way of being notified when a model on the server has been created, updated or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket) which allow to send push notifications to a client.
+can-connect makes it very easy to implement real-time functionality.It is capable of listening to notifications from the server when server data  has been created, updated, or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket), which allow sending push notifications to a client.
 
 ### Adding real-time events to a model
 
-The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework which additionally to providing a REST API also sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time all we need to do is add listeners for those events to `pmo/models/order.js` and in the handler notify the order connection:
+The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `pmo/models/order.js` and in the handler notify the order connection:
 
 ```
 npm install socket.io-client
@@ -1537,11 +1540,11 @@ That's all the JavaScript we need to implement real-time functionality. All the 
 </can-component>
 ```
 
-First we import the order model and then just call `<order-model getList="{status='<status>'}">` for each order status. That's it. If we now open the order page we see some already completed default orders. Keeping the page open and placing a new order will update it automatically.
+First we import the order model and then just call `<order-model getList="{status='<status>'}">` for each order status. That's it. If we now open the order page we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
 ## Create documentation
 
-Documenting our code is very important to quickly get other developers up to speed. [DocumentJS]() helps making documentation easier. Based on Markdown files and code comments in your project it will generate a full documentation page.
+Documenting our code is very important to quickly get other developers up to speed. [DocumentJS]() makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in your project.
 
 ### Configuring DocumentJS
 
@@ -1564,7 +1567,7 @@ To configure DocumentJS we need a `documentjs.json` in the project main folder t
 }
 ```
 
-This tells DocumentJS to parse all `.js` and `.md` files in the `pmo/` folder with the `pmo` page as the main parent and write the generated documentation into a `docs/` folder. Since DocumentJS is only installed locally (as a dependency of DoneJS) we will also add a documentation script to our `package.json`:
+This tells DocumentJS to parse all `.js` and `.md` files in the `pmo/` folder (with the `pmo` page as the main parent) and to write the generated documentation into a `docs/` folder. Since DocumentJS is only installed locally (as a dependency of DoneJS) we will also add a documentation script to our `package.json`:
 
 ```js
   "scripts": {
@@ -1679,7 +1682,7 @@ export default Component.extend({
 });
 ```
 
-If we now run `npm run document` again, we will see the module show up in the menu bar and are able to navigate through the different properties.
+If we now run `npm run document` again, we will see the module show up in the menu bar and will be able to navigate through the different properties.
 
 ## Production builds
 
@@ -1768,7 +1771,7 @@ This allows us to build a Cordova app with:
 node build cordova
 ```
 
-steal-cordova can also be used to launch an emulator after the build is complete, change:
+steal-cordova can also be used to launch an emulator after the build is complete. Change:
 
 ```js
 buildPromise.then(stealCordova.build);
@@ -1784,7 +1787,7 @@ Which will launch the iOS emulator. Substitute `android` for the Android emulato
 
 #### AJAX
 
-When not running in a traditional browser environment AJAX requests need to be made
+When not running in a traditional browser environment, AJAX requests need to be made
 to an external URL. The module `steal-platform` aids in detecting environments like Cordova
 so special behavior can be added.  Install the module:
 
@@ -1856,7 +1859,7 @@ if(buildNW) {
 }
 ```
 
-We also need to create a nw.html (this is the entry point for the NW.js app):
+We also need to create an nw.html (this is the entry point for the NW.js app):
 
 ```html
 <html>
