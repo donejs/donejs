@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Your app is done",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "can-ssr": "^0.3.0",
     "documentjs": "^0.3.0-pre.4",
     "done-autorender": "0.1.0-pre.2",
-    "done-css": "0.0.8",
+    "done-css": "^0.0.9",
     "funcunit": "^3.0.0",
     "steal": "^0.10.5",
     "steal-qunit": "0.0.4",
