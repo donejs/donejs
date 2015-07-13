@@ -214,7 +214,7 @@ Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" me
 
 One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules. In the following section we will create different components for the homepage, the restaurant list, and the order history. After that, we will glue them all together using routes and the global application state.
 
-There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [system-component](https://github.com/stealjs/system-component))). Larger components can be split up into individual files.
+There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [done-component](https://github.com/donejs/done-component))). Larger components can be split up into individual files.
 
 ### Creating a homepage element
 
