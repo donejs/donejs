@@ -2,10 +2,10 @@
 @hide title
 @hide sidebar
 
-![DoneJS logo](img/donejs-logo-black.svg)
+![DoneJS logo](http://donejs.com/img/donejs-logo-black.svg)
 
-DoneJS is easist way to get a high performance, real time, web and mobile application 
-done! The framework provides a nearly comprehensive combination of technologies for 
+DoneJS is easist way to get a high performance, real time, web and mobile application
+done! The framework provides a nearly comprehensive combination of technologies for
 building complex JavaScript applications.
 
 If you are looking for the fastest way to get a fully modern development environment setup
@@ -23,7 +23,7 @@ DoneJS is a combination of the following technologies:
 - [DocumentJS](http://documentjs.com) - Documentation
 - [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
 
-DoneJS is a `npm` package that simply installs all the previous 
+DoneJS is a `npm` package that simply installs all the previous
 technologies.  This site exists to explain the collective benefits of these technologies
 and provides a [Guide guide] for using them together to build an "amazing" application.
 
@@ -58,7 +58,7 @@ _Maintainence features:_
 
 #### Getting Started Guide ([Guide main article])
 
-The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http://place-my-order.com) application. 
+The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http://place-my-order.com) application.
 
 1. Install
    1. Setup Server
@@ -84,14 +84,14 @@ The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http
       2. Create fake data
       3. Use fake data for ajax requests
       4. Create a view model instance and test its behavior
-   3. Write the view model 
+   3. Write the view model
       1. Make dependent models
       2. Define stateful property behaviors
       3. Verify the test
    4. Create a demo page
    5. Write the template
       1. Verify the demo page and application works.
-6. Setup continuous integration (CI) and tests. 
+6. Setup continuous integration (CI) and tests.
 6. Nested routes
 7. Importing other projects
 8. Creating data
@@ -101,10 +101,3 @@ The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http
     2. Building to iOS and Andriod
     3. Buliding to NW.js
 11. Deploying
-	
-
-
-
-
-
-
