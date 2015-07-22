@@ -3,6 +3,9 @@
   "version": "0.0.9",
   "description": "Your app is done",
   "main": "index.js",
+  "bin": {
+    "donejs": "./bin/donejs"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "document:watch": "documentjs --watch",
@@ -10,12 +13,11 @@
     "publish": "git push origin --tags",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish",
-    "reinit": "npm install steal steal-qunit funcunit can can-connect done-autorender done-css documentjs can-ssr --save-dev"
+    "release:major": "npm version major && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/donejs/donejs.git"
+    "url": "git+https://github.com/donejs/donejs.git"
   },
   "keywords": [
     "CanJS",
@@ -28,20 +30,15 @@
     "url": "https://github.com/donejs/donejs/issues"
   },
   "homepage": "https://github.com/donejs/donejs",
-  "peerDependencies": {
-    "can": "^2.3.0-pre.2",
-    "can-connect": "^0.0.3",
-    "can-ssr": "^0.3.0",
-    "documentjs": "^0.3.0-pre.4",
-    "done-autorender": "0.1.0-pre.2",
-    "done-css": "^0.0.10",
-    "funcunit": "^3.0.0",
-    "steal": "^0.10.5",
-    "steal-qunit": "0.0.4",
-    "jquery": "^1.11.3",
-    "done-component": "^0.1.0"
-  },
   "devDependencies": {
     "documentjs": "^0.3.0-pre.4"
+  },
+  "dependencies": {
+    "app-module-path": "^1.0.2",
+    "npm": "^2.13.1",
+    "q": "^1.4.1"
+  },
+  "directories": {
+    "doc": "docs"
   }
 }

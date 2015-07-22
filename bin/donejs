@@ -1,0 +1,116 @@
+#!/usr/bin/env node
+
+var npm = require('npm');
+var path = require('path');
+var exec = require('child_process').exec;
+var appModule = require('app-module-path');
+var fs = require('fs');
+var Q = require('q');
+
+var parameters = process.argv;
+var command = parameters[2];
+var root = path.join(process.cwd(), 'node_modules');
+
+appModule.addPath(root);
+
+// Returns a .then-able function that installs a single module
+// if it is not available in the current path
+function installIfMissing(module) {
+  return function (previous) {
+    try {
+      require.resolve(module);
+    } catch (e) {
+      return Q.ninvoke(npm.commands, 'install', [module]).then(function () {
+        return previous;
+      });
+    }
+
+    return previous;
+  }
+}
+
+// Log error messages
+function log(promise) {
+  return promise.fail(function(error) {
+    console.error(error.message || error);
+    process.exit(1);
+  });
+}
+
+// Run any of the Yeoman generators from the current generator-donejs
+function generator() {
+  return Q.ninvoke(npm, 'load', { loaded: false })
+    .then(installIfMissing('yeoman-environment'))
+    .then(installIfMissing('generator-donejs'))
+    .then(function () {
+      var yeoman = require('yeoman-environment');
+      var env = yeoman.createEnv();
+      var args = [];
+      var generators = require('generator-donejs');
+
+      Object.keys(generators).forEach(function(name) {
+        env.register(require.resolve('generator-donejs/' + name), name);
+      });
+
+      if (command === 'init') {
+        args = ['app'];
+      } else {
+        args = parameters.slice(3, parameters.length);
+      }
+
+      return Q.ninvoke(env, 'run', args);
+    });
+}
+
+// Run a command and pipe the output.
+// The returned promise will reject if there is a non-zero exist status
+function runCommand(cmd, args) {
+  var params = args ? ' ' + args.join(' ') : '';
+  var command = cmd + params;
+  var child = exec(command, { cwd: process.cwd() });
+  var deferred = Q.defer();
+
+  child.stdout.pipe(process.stdout);
+  child.stderr.pipe(process.stderr);
+
+  child.on('exit', function(status) {
+    if(status !== 0) {
+      deferred.reject(new Error('Could not run command ' + command));
+    } else {
+      deferred.resolve();
+    }
+  });
+
+  return deferred.promise;
+}
+
+// A list of commands directly supported by the CLI
+var commands = {
+  init: generator,
+  generate: generator
+};
+
+if(commands[command]) {
+  log(commands[command]());
+} else {
+  try {
+    var pkg = require(path.join(process.cwd(), 'package.json'));
+
+    if(pkg.scripts[command]) {
+      log(runCommand('npm run ' + command));
+    } else {
+      // If the command is not supported try running node_modules/.bin/donejs-command
+      // with all the parameters
+      var cmd = path.join(root, 'donejs-' + command);
+      if(!fs.existsSync(cmd)) {
+        console.error('Command "' + command + '" is not available');
+        return process.exit(1);
+      }
+
+      var promise = runCommand(cmd, parameters.slice(3, parameters.length))();
+      log(promise);
+    }
+  } catch(e) {
+    console.error('No local package.json found. Please run "donejs init"');
+  }
+}
