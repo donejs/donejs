@@ -19,7 +19,7 @@ Finally, we will describe how to build and deploy your application for the web, 
 ## Setup the project
 
 In this section we will create our DoneJS project and set up a REST API for the application to use.
-You will need [NodeJS](http://www.meetup.com/yyc-js/events/222682935/?a=ra1_te) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
+You will need [NodeJS](http://nodejs.org) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
 
 ### Create the project
 

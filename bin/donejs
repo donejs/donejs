@@ -9,6 +9,14 @@ var Q = require('q');
 
 var parameters = process.argv;
 var command = parameters[2];
+
+if(command === 'init' && parameters[3]) {
+  var appDir = path.join(process.cwd(), parameters[3]);
+  console.log('Creating folder ', parameters[3]);
+  fs.mkdirSync(appDir);
+  process.chdir(appDir);
+}
+
 var root = path.join(process.cwd(), 'node_modules');
 
 appModule.addPath(root);
@@ -20,6 +28,7 @@ function installIfMissing(module) {
     try {
       require.resolve(module);
     } catch (e) {
+      console.log('Installing ' + module);
       return Q.ninvoke(npm.commands, 'install', [module]).then(function () {
         return previous;
       });
