@@ -2005,6 +2005,32 @@ Now your assets will live on a CDN. You can update your `index.stache` template 
 {{/switch}}
 ```
 
+### Deploy your Node code
+
+At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to gain the benefit of server-side rendering.
+
+Down the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
+
+After you've installed it, login by running:
+
+```
+heroku login
+```
+
+Create a new app by running:
+
+```
+heroku create
+```
+
+This will return the url where your app can be viewed. Before you open it you'll need to do an initial deploy by running:
+
+```
+git push heroku master
+```
+
+Any time in the future you want to deploy simply push to the heroku remote.
+
 ### Continuous Integration
 
 Previously we set up Travis CI [for automated testing](http://donejs.com/Guide.html#section_Settingcontinuousintegration_TravisCI_) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy your code to production once tests have passed.
