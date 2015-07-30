@@ -150,12 +150,18 @@ Every DoneJS application consists of at least two files: A main template (in thi
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
-    {{#if isProduction}}
-      <script src="/node_modules/steal/steal.production.js"
-        main="pmo/index.stache!done-autorender"></script>
-    {{else}}
-      <script src="/node_modules/steal/steal.js"></script>
-    {{/if}}
+    {{#switch @env.NODE_ENV}}
+
+      {{#case "production"}}
+        <script src="/node_modules/steal/steal.production.js"
+          main="pmo/index.stache!done-autorender"></script>
+      {{/case}}
+
+      {{#default}}
+        <script src="node_modules/steal/steal.js"></script>
+      {{/default}}
+
+    {{/switch}}
   </body>
 </html>
 ```
@@ -417,12 +423,19 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
 
     {{asset "inline-cache"}}
 
-    {{#if isProduction}}
-      <script src="/node_modules/steal/steal.production.js"
-        main="pmo/main.stache!done-autorender"></script>
-    {{else}}
-      <script src="/node_modules/steal/steal.js"></script>
-    {{/if}}
+
+    {{#switch @env.NODE_ENV}}
+
+      {{#case "production"}}
+        <script src="/node_modules/steal/steal.production.js"
+          main="pmo/index.stache!done-autorender"></script>
+      {{/case}}
+
+      {{#default}}
+        <script src="node_modules/steal/steal.js"></script>
+      {{/default}}
+
+    {{/switch}}
   </body>
 </html>
 ```
@@ -1942,9 +1955,9 @@ steal-bundler will find all of the assets you reference in your CSS and copy the
 
 The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example we'll use Divshot to create a free account to deploy our Place My Order content.
 
-... set up credentials
+After you've created a free account use the [divshot-cli](https://www.npmjs.com/package/divshot-cli#login) tool to login to your account which will generate a credentials key file.
 
-After you've set up your Divshot account with creditionals edit your package.json to add it as a deployment target:
+Next edit your package.json to add Divshot as a deployment target:
 
 ```json
 {
@@ -1954,9 +1967,13 @@ After you've set up your Divshot account with creditionals edit your package.jso
 
   "donejs": {
     "deploy": {
-      "production": {
-        "type": "divshot",
-        "bucket": "place-my-order"
+      "services": {
+        "production": {
+          "type": "divshot",
+          "config": {
+            "name": "place-my-order"
+          }
+        }
       }
     }
   }
@@ -1964,13 +1981,7 @@ After you've set up your Divshot account with creditionals edit your package.jso
 }
 ```
 
-Set your access credentials as environment variable:
-
-```
-export DIVSHOT_TOKEN=your token
-```
-
-You can also specify the token in a `.divshot.json` file, but we'll use environment variables because it will make it easier to use with continuous integration.
+The "services" option is a list of deploy targets, you can name these whatever you like but we will use "production" to make the environment configured in Divshot. Additionally the "name" specifies the CDN name provided by Divshot.
 
 Now do your first deploy with the donejs command:
 
