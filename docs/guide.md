@@ -1949,7 +1949,7 @@ buildPromise.then(function(buildResult){
 
 ```
 
-steal-bundler will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools sets the [bundlesPath] to `dist/bundles`, and steal-bundler will place images, for example, in `dist/images`.
+steal-bundler will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and steal-bundler will place images, for example, in `dist/images`.
 
 ### Deploy to a CDN
 
