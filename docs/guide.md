@@ -1940,6 +1940,58 @@ steal-bundler will find all of the assets you reference in your CSS and copy the
 
 ### Deploy to a CDN
 
-Divshot...
+The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example we'll use Divshot to create a free account to deploy our Place My Order content.
+
+... set up credentials
+
+After you've set up your Divshot account with creditionals edit your package.json to add it as a deployment target:
+
+```json
+{
+  "name": "place-my-order"
+
+  ...
+
+  "donejs": {
+    "deploy": {
+      "production": {
+        "type": "divshot",
+        "bucket": "place-my-order"
+      }
+    }
+  }
+
+}
+```
+
+Set your access credentials as environment variable:
+
+```
+export DIVSHOT_TOKEN=your token
+```
+
+You can also specify the token in a `.divshot.json` file, but we'll use environment variables because it will make it easier to use with continuous integration.
+
+Now do your first deploy with the donejs command:
+
+```
+donejs deploy
+```
+
+Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there:
+
+```html
+{{#switch @env.NODE_ENV}}
+
+  {{#case "production"}}
+    <script src="http://divshotcdn.com/place-my-order/node_modules/steal/steal.production.js"></script>
+  {{/case}}
+
+  {{#default}}
+    <script src="node_modules/steal/steal.js"></script>
+  {{/default}}
+
+{{/switch}}
+```
 
 ### Continuous Integration
