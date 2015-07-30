@@ -1955,9 +1955,7 @@ steal-bundler will find all of the assets you reference in your CSS and copy the
 
 The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example we'll use Divshot to create a free account to deploy our Place My Order content.
 
-After you've created a free account use the [divshot-cli](https://www.npmjs.com/package/divshot-cli#login) tool to login to your account which will generate a credentials key file.
-
-Next edit your package.json to add Divshot as a deployment target:
+After you've created a free account, next edit your package.json to add Divshot as a deployment target:
 
 ```json
 {
@@ -1989,6 +1987,8 @@ Now do your first deploy with the donejs command:
 donejs deploy
 ```
 
+The cli will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
+
 Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there:
 
 ```html
@@ -2006,3 +2006,24 @@ Now your assets will live on a CDN. You can update your `index.stache` template 
 ```
 
 ### Continuous Integration
+
+Previously we set up Travis CI [for automated testing](http://donejs.com/Guide.html#section_Settingcontinuousintegration_TravisCI_) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy your code to production once tests have passed.
+
+Open your `.travis.yml` file and add a new `deploy` key that looks like this:
+
+```yaml
+deploy:
+  skip_cleanup: true
+  provider: "heroku"
+  before_deploy: node_modules/.bin/donejs-deploy
+```
+
+In order for Travis to be able to deploy your static assets you need to provide it the access token you generated before. This token will be stored in `~/.divshot/config/user.json`.  Install the [TravisCI cli](https://github.com/travis-ci/travis.rb#readme) which will generated encrypted environment variables that can be set on Travis. Run the command:
+
+```
+travis encrypt DIVSHOT_TOKEN=token --add
+```
+
+Where `token` is found in `~/.divshot/config/user.json`. This will add an encrypted version of the token to your .travis.yml file.
+
+Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Divshot's CDN.
