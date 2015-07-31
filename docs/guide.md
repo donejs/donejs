@@ -1940,9 +1940,7 @@ var buildPromise = stealTools.build({
 });
 
 buildPromise.then(function(buildResult){
-  return bundleAssets(buildResult, {
-    glob: "images/**/*"
-  });
+  return bundleAssets(buildResult);
 });
 
 ...
