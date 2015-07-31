@@ -1965,9 +1965,8 @@ After you've created a free account, next edit your package.json to add Divshot 
     "deploy": {
       "root": "dist"
       "services": {
-        "prod": {
+        "production": {
           "type": "divshot",
-          "environment": "production"
           "config": {
             "name": "place-my-order"
           }
@@ -1978,13 +1977,14 @@ After you've created a free account, next edit your package.json to add Divshot 
 }
 ```
 
-The "services" property is a list of deploy targets. You can name these whatever you like but we will use "prod" and configure the Divshot environment to deploy to production. Additionally the "name" specifies the Divshot application name.
+The `services` property is a list of deploy targets. You can name these whatever you like but we will use "production". The `config.name` specifies the Divshot application name. With regards to Divshot, the "environment" property is not provided, so the name of the service is used in its stead. If the name of a Divshot service is not equal to "development", "staging", or "production" you will be warned, and the environment will default to "development".
 
 Now do your first deployment with the donejs command:
 
 ```
 donejs deploy
 ```
+The `production` service will be selected whether or not you provide the name of the service as an argument because there is only one service configured.  Optionally, if you have more than one service configured, you could add a `"default": true` property to a particular service to specify it as the default service selected when an argument is not provided.
 
 The command-line interface will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
 
