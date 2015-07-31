@@ -1951,7 +1951,7 @@ steal-bundler will find all of the assets you reference in your CSS and copy the
 
 ### Deploy to a CDN
 
-The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example we'll use Divshot to create a free account to deploy our Place My Order content.
+The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example, we are going to deploy to Divshot.  This requires you to first create a free account on [Divshot](https://divshot.com). Divshot allows Github or Google to authenticate your account, but we recommend you take the email and password route.  This will make it easier to create an Divshot API token.
 
 After you've created a free account, next edit your package.json to add Divshot as a deployment target:
 
@@ -1963,9 +1963,11 @@ After you've created a free account, next edit your package.json to add Divshot 
 
   "donejs": {
     "deploy": {
+      "root": "dist"
       "services": {
-        "production": {
+        "prod": {
           "type": "divshot",
+          "environment": "production"
           "config": {
             "name": "place-my-order"
           }
@@ -1973,33 +1975,30 @@ After you've created a free account, next edit your package.json to add Divshot 
       }
     }
   }
-
 }
 ```
 
-The "services" option is a list of deploy targets, you can name these whatever you like but we will use "production" to make the environment configured in Divshot. Additionally the "name" specifies the CDN name provided by Divshot.
+The "services" property is a list of deploy targets. You can name these whatever you like but we will use "prod" and configure the Divshot environment to deploy to production. Additionally the "name" specifies the Divshot application name.
 
-Now do your first deploy with the donejs command:
+Now do your first deployment with the donejs command:
 
 ```
 donejs deploy
 ```
 
-The cli will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
+The command-line interface will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
 
 Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there:
 
 ```html
 {{#switch @env.NODE_ENV}}
-
   {{#case "production"}}
-    <script src="http://divshotcdn.com/place-my-order/node_modules/steal/steal.production.js"></script>
+    <script src="http://production.place-my-order.divshot.io/node_modules/steal/steal.production.js"></script>
   {{/case}}
 
   {{#default}}
     <script src="node_modules/steal/steal.js"></script>
   {{/default}}
-
 {{/switch}}
 ```
 
