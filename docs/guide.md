@@ -1969,7 +1969,12 @@ After you've created a free account, next edit your package.json to add Divshot 
         "production": {
           "type": "divshot",
           "config": {
-            "name": "place-my-order"
+            "name": "place-my-order",
+            "headers": {
+              "/**": {
+                "Access-Control-Allow-Origin": "*"
+              }
+            }
           }
         }
       }
@@ -1979,7 +1984,7 @@ After you've created a free account, next edit your package.json to add Divshot 
 }
 ```
 
-The "services" option is a list of deploy targets, you can name these whatever you like but we will use "production" to make the environment configured in Divshot. Additionally the "name" specifies the CDN name provided by Divshot.
+The "services" option is a list of deploy targets, you can name these whatever you like but we will use "production" to match the environment configured in Divshot. Additionally the "name" specifies the CDN name provided by Divshot.
 
 Now do your first deploy with the donejs command:
 
