@@ -1940,9 +1940,7 @@ var buildPromise = stealTools.build({
 });
 
 buildPromise.then(function(buildResult){
-  return bundleAssets(buildResult, {
-    glob: "images/**/*"
-  });
+  return bundleAssets(buildResult);
 });
 
 ...
@@ -1953,7 +1951,7 @@ steal-bundler will find all of the assets you reference in your CSS and copy the
 
 ### Deploy to a CDN
 
-The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example we'll use Divshot to create a free account to deploy our Place My Order content.
+The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example, we are going to deploy to Divshot.  This requires you to first create a free account on [Divshot](https://divshot.com). Divshot allows Github or Google to authenticate your account, but we recommend you take the email and password route.  This will make it easier to create an Divshot API token.
 
 After you've created a free account, next edit your package.json to add Divshot as a deployment target:
 
@@ -1965,6 +1963,7 @@ After you've created a free account, next edit your package.json to add Divshot 
 
   "donejs": {
     "deploy": {
+      "root": "dist"
       "services": {
         "production": {
           "type": "divshot",
@@ -1980,33 +1979,31 @@ After you've created a free account, next edit your package.json to add Divshot 
       }
     }
   }
-
 }
 ```
 
-The "services" option is a list of deploy targets, you can name these whatever you like but we will use "production" to match the environment configured in Divshot. Additionally the "name" specifies the CDN name provided by Divshot.
+The `services` property is a list of deploy targets. You can name these whatever you like but we will use "production". The `config.name` specifies the Divshot application name. With regards to Divshot, the "environment" property is not provided, so the name of the service is used in its stead. If the name of a Divshot service is not equal to "development", "staging", or "production" you will be warned, and the environment will default to "development".
 
-Now do your first deploy with the donejs command:
+Now do your first deployment with the donejs command:
 
 ```
 donejs deploy
 ```
+The `production` service will be selected whether or not you provide the name of the service as an argument because there is only one service configured.  Optionally, if you have more than one service configured, you could add a `"default": true` property to a particular service to specify it as the default service selected when an argument is not provided.
 
-The cli will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
+The command-line interface will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
 
 Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there:
 
 ```html
 {{#switch @env.NODE_ENV}}
-
   {{#case "production"}}
-    <script src="http://divshotcdn.com/place-my-order/node_modules/steal/steal.production.js"></script>
+    <script src="http://production.place-my-order.divshot.io/node_modules/steal/steal.production.js"></script>
   {{/case}}
 
   {{#default}}
     <script src="node_modules/steal/steal.js"></script>
   {{/default}}
-
 {{/switch}}
 ```
 
