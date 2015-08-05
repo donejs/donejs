@@ -166,7 +166,7 @@ Every DoneJS application consists of at least two files: A main template (in thi
 </html>
 ```
 
-This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/)-compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. First the `place-my-order-assets` package (which loads the LESS styles for the application) followed by `pmo/app` which is the main application file. The [asset]() helper provides assets like CSS styles, cached data, and links to scripts based on the environment (development or production).
+This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/)-compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. First the `place-my-order-assets` package (which loads the LESS styles for the application) followed by `pmo/app` which is the main application file. The [asset](https://github.com/canjs/can-ssr#asset-helper) helper provides assets like CSS styles, cached data, and links to scripts based on the environment (development or production).
 
 The main application file at `pmo/app.js` looks like this:
 
