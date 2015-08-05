@@ -146,7 +146,7 @@ Every DoneJS application consists of at least two files: A main template (in thi
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="pmo/app" [.]="{value}" />
+    <can-import from="pmo/app" as="viewModel" />
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
@@ -399,7 +399,7 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="pmo/app" [.]="{value}" />
+    <can-import from="pmo/app" as="viewModel" />
 
     <can-import from="pmo/loading.component!" />
     <can-import from="pmo/header.component!" />
