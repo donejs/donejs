@@ -342,6 +342,7 @@ To add the routes, change `src/app.js` to:
 // src/app.js
 import AppMap from "can-ssr/app-map";
 import route from 'can/route/';
+import 'can/route/pushstate/';
 
 const AppState = AppMap.extend({});
 
