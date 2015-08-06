@@ -464,7 +464,7 @@ Here we use the `eq` helper to check for the page, then progressively load the c
 
 ## Getting and Displaying Data from the Server
 
-[can-connect]() is a powerful data layer that allows our application to connect to the RESTful API that we set up with `place-my-order-api`.
+[can-connect](http://connect.canjs.com/) is a powerful data layer that allows our application to connect to the RESTful API that we set up with `place-my-order-api`.
 
 ### Creating a restaurants connection.
 
