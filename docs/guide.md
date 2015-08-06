@@ -1838,12 +1838,6 @@ stealTools.build({
 });
 ```
 
-Install the dependency StealTools:
-
-```
-npm install steal-tools --save-dev
-```
-
 Then run the script:
 
 ```
