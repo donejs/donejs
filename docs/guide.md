@@ -219,13 +219,19 @@ There are two ways of creating components. For smaller components we can define 
 
 ### Creating a homepage element
 
-The homepage element in `pmo/home.component` is very simple and just consists of a template:
+To generate a new component run:
+
+```
+donejs generate component home.component
+```
+
+This will create a file at `src/home.component` containing the basic layout of components. Update it to reflect the below content:
 
 ```html
 <can-component tag="pmo-home">
   <template>
      <div class="homepage">
-      <img src="node_modules/place-my-order-assets/images/homepage-hero.jpg"
+      <img src="{{~ node_modules/place-my-order-assets/images/homepage-hero.jpg }}"
           width="250" height="380" />
       <h1>Ordering food has never been easier</h1>
       <p>
@@ -242,7 +248,13 @@ Here we created a [can.Component](http://canjs.com/docs/can.Component.html) name
 
 ### Create the order history element
 
-For now, the order history is very similar. In `pmo/order/history.component`:
+For now, the order history is very similar. 
+
+```
+donejs generate component order/history.component
+```
+
+And update it in `src/order/history.component`:
 
 ```
 <can-component tag="pmo-order-history">
@@ -261,7 +273,19 @@ For now, the order history is very similar. In `pmo/order/history.component`:
 
 ### Creating a restaurant list element
 
-The restaurant list will contain more functionality, which is why we will split it into separate files for the template and the component logic. All files are put together in the component's own folder so that they can be easily re-used and tested. Put the following content in `pmo/restaurant/list/list.js`:
+The restaurant list will contain more functionality, which is why we will split it into separate files for the template and the component logic. All files are put together in the component's own folder so that they can be easily re-used and tested.
+
+If you run:
+
+```
+donejs generate component restaurant/list
+```
+
+It will create a folder src/restaurant/list` containing this structure:
+
+
+
+Put the following content in `src/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
@@ -277,7 +301,7 @@ export default Component.extend({
 });
 ```
 
-And add a simple template at `pmo/restaurant/list/list.stache`:
+And add a simple template at `src/restaurant/list/list.stache`:
 
 ```
 <div class="restaurants">
@@ -291,7 +315,7 @@ We will add more functionality to this element in a later chapter. Your folder s
 ```
 ├── node_modules
 ├── package.json
-├── pmo/
+├── src/
 |   ├── app.js
 |   └── index.stache
 |   ├── order/
@@ -312,10 +336,10 @@ Routing works slightly different than what you might be used to from other libra
 
 If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
-To add the routes, change `pmo/app.js` to:
+To add the routes, change `src/app.js` to:
 
 ```
-// pmo/app.js
+// src/app.js
 import AppMap from "can-ssr/app-map";
 import route from 'can/route/';
 
@@ -338,7 +362,7 @@ Now we have three routes available:
 
 ### Adding a header element
 
-Now is also a good time to add a header element at `pmo/header.component` that links to the different routes we just defined.
+Now is also a good time to add a header element at `src/header.component` that links to the different routes we just defined.
 
 ```html
 <can-component tag="pmo-header">
@@ -368,7 +392,7 @@ Here we use the `eq` helper to make the appropriate link active and then use [ca
 
 ### Create a loading indicator
 
-To show that something is currently loading, let's create a `pmo-loading` component in `pmo/loading.component`:
+To show that something is currently loading, let's create a `pmo-loading` component in `src/loading.component`:
 
 ```html
 <can-component tag="pmo-loading">
@@ -384,7 +408,7 @@ To show that something is currently loading, let's create a `pmo-loading` compon
 
 ### Switch between components
 
-Now we can glue all those individual components together in `pmo/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `pmo/index.stache` to:
+Now we can glue all those individual components together in `src/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `src/index.stache` to:
 
 ```html
 <html>
@@ -394,24 +418,24 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="pmo/app" as="viewModel" />
+    <can-import from="place-my-order/app" as="viewModel" />
 
-    <can-import from="pmo/loading.component!" />
-    <can-import from="pmo/header.component!" />
+    <can-import from="place-my-order/loading.component!" />
+    <can-import from="place-my-order/header.component!" />
     <pmo-header page="{page}"></pmo-header>
 
     {{#eq page "home"}}
-      <can-import from="pmo/home.component!" can-tag="pmo-loading">
+      <can-import from="place-my-order/home.component!" can-tag="pmo-loading">
         <pmo-home></pmo-home>
       </can-import>
     {{/eq}}
     {{#eq page "restaurants"}}
-      <can-import from="pmo/restaurant/list/" can-tag="pmo-loading">
+      <can-import from="place-my-order/restaurant/list/" can-tag="pmo-loading">
         <pmo-restaurant-list></pmo-restaurant-list>
       </can-import>
     {{/eq}}
     {{#eq page "order-history"}}
-      <can-import from="pmo/order/history.component!" can-tag="pmo-loading">
+      <can-import from="place-my-order/order/history.component!" can-tag="pmo-loading">
         <pmo-order-history></pmo-order-history>
       </can-import>
     {{/eq}}
@@ -423,7 +447,7 @@ Now we can glue all those individual components together in `pmo/index.stache`. 
 
       {{#case "production"}}
         <script src="/node_modules/steal/steal.production.js"
-          main="pmo/index.stache!done-autorender"></script>
+          main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
 
       {{#default}}
@@ -443,7 +467,7 @@ Here we use the `eq` helper to check for the page, then progressively load the c
 
 ### Creating a restaurants connection.
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and later told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant connection and model in `pmo/models/restaurant.js`:
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and later told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant connection and model in `src/models/restaurant.js`:
 
 ```js
 import superMap from 'can-connect/can/super-map/';
@@ -467,7 +491,7 @@ And then export `connection.Map` as the default which returns a model that we ca
 
 ### Test the connection
 
-To test the connection you can temporarily add the following to `pmo/app.js`:
+To test the connection you can temporarily add the following to `src/app.js`:
 
 ```js
 import Restaurant from './models/restaurant';
@@ -479,14 +503,14 @@ After reloading the homepage you should see the restaurant information logged in
 
 ### Add the connection to the page
 
-Now we can update the `ViewModel` in `pmo/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
+Now we can update the `ViewModel` in `src/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
 
 ```js
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
 import template from './list.stache!';
-import Restaurant from 'pmo/models/restaurant';
+import Restaurant from 'place-my-order/models/restaurant';
 
 export var ViewModel = Map.extend({
   define: {
@@ -505,7 +529,7 @@ export default Component.extend({
 });
 ```
 
-And update the template at `pmo/restaurant/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
+And update the template at `place-my-order/restaurant/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
 
 ```html
 <div class="restaurants">
@@ -545,7 +569,7 @@ The current folder structure and files look like this:
 ```
 ├── node_modules
 ├── package.json
-├── pmo/
+├── src/
 |   ├── app.js
 |   └── index.stache
 |   ├── models/
@@ -584,10 +608,10 @@ All asynchronous requests return a Promise, so the data model will look like thi
 
 ### Create dependent models
 
-The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the according models just like we did for Restaurants already. In `pmo/models/state.js`:
+The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the according models just like we did for Restaurants already. In `place-my-order/models/state.js`:
 
 ```js
-// pmo/models/state.js
+// src/models/state.js
 import superMap from 'can-connect/can/super-map/';
 
 export const connection = superMap({
@@ -599,10 +623,10 @@ export const connection = superMap({
 export default connection.Map;
 ```
 
-and `pmo/models/city.js`:
+and `src/models/city.js`:
 
 ```js
-// pmo/models/city.js
+// src/models/city.js
 import superMap from 'can-connect/can/super-map/';
 
 export const connection = superMap({
@@ -616,16 +640,16 @@ export default connection.Map;
 
 ### Implement view model behavior
 
-Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view-model at `pmo/restaurant/list/list.js`:
+Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view-model at `src/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
 import template from './list.stache!';
-import Restaurant from 'pmo/models/restaurant';
-import State from 'pmo/models/state';
-import City from 'pmo/models/city';
+import Restaurant from 'place-my-order/models/restaurant';
+import State from 'place-my-order/models/state';
+import City from 'place-my-order/models/city';
 
 export var ViewModel = Map.extend({
   define: {
@@ -692,36 +716,36 @@ Let's take a closer look at those properties:
 
 ### Create a test
 
-View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`) in `pmo/restaurant/list/list_test.js`:
+View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`) in `place-my-order/restaurant/list/list_test.js`:
 
 ```js
-// pmo/restaurant/list/list_test.js
+// src/restaurant/list/list_test.js
 import { ViewModel } from './list';
 import QUnit from 'steal-qunit';
 
-QUnit.module('pmo/restaurant/list');
+QUnit.module('place-my-order/restaurant/list');
 
 QUnit.test('basics', function(){
   ok(true, 'Test ran');
 });
 ```
 
-To run the test we can create a simple HTML page in the same folder (`pmo/restaurant/list/test.html`):
+To run the test we can create a simple HTML page in the same folder (`src/restaurant/list/test.html`):
 
 ```html
-<title>pmo/restaurant/list</title>
-<script src="../../../node_modules/steal/steal.js" main="pmo/restaurant/list/list_test"></script>
+<title>place-my-order/restaurant/list</title>
+<script src="../../../node_modules/steal/steal.js" main="place-my-order/restaurant/list/list_test"></script>
 <div id="qunit-fixture"></div>
 ```
 
-When opening [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/pmo/restaurant/list/test.html) we can see the test pass.
+When opening [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) we can see the test pass.
 
 #### Fixtures: Create fake data
 
-Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. We will put them in `pmo/models/fixtures.js`:
+Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. We will put them in `src/models/fixtures.js`:
 
 ```js
-// pmo/models/fixtures.js
+// src/models/fixtures.js
 import fixture from 'can-connect/fixture/';
 
 export const statesFixture = [
@@ -777,14 +801,14 @@ export default fixture;
 
 #### Test the view model
 
-With those fake data available we can test our view model by changing `pmo/restaurant/list/list_test.js` to:
+With those fake data available we can test our view model by changing `src/restaurant/list/list_test.js` to:
 
 ```
 import QUnit from 'steal-qunit';
-import { statesFixture, citiesFixture, restaurantsFixture } from 'pmo/models/fixtures';
+import { statesFixture, citiesFixture, restaurantsFixture } from 'place-my-order/models/fixtures';
 import { ViewModel } from './list';
 
-QUnit.module('pmo/restaurant/list');
+QUnit.module('place-my-order/restaurant/list');
 
 QUnit.asyncTest('loads all states', function() {
   var vm = new ViewModel();
@@ -828,11 +852,11 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 });
 ```
 
-Visit [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/pmo/restaurant/list/test.html) to see all tests passing.
+Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
 
 ### Write the template
 
-Now that our view model is implemented and tested, we can use its data to update the template at `pmo/restaurant/list/list.stache` to:
+Now that our view model is implemented and tested, we can use its data to update the template at `src/restaurant/list/list.stache` to:
 
 ```
 <div class="restaurants">
@@ -906,20 +930,20 @@ Some things worth pointing out:
 
 ### Create a demo page
 
-With all the component files contained in the `pmo/restaurant/list/` folder we can also add a demo page at `pmo/restaurant/list/demo.html` that uses fixtures to demonstrate the component:
+With all the component files contained in the `src/restaurant/list/` folder we can also add a demo page at `src/restaurant/list/demo.html` that uses fixtures to demonstrate the component:
 
 ```html
 <script type="text/stache" can-autorender>
   <can-import from="place-my-order-assets" />
-  <can-import from="pmo/models/fixtures" />
-  <can-import from="pmo/restaurant/list/" />
+  <can-import from="place-my-order/models/fixtures" />
+  <can-import from="place-my-order/restaurant/list/" />
   <pmo-restaurant-list></pmo-restaurant-list>
 </script>
 <script src="../../../node_modules/steal/steal.js"
         main="can/view/autorender/"></script>
 ```
 
-View the demo page at [http://localhost:8080/pmo/restaurant/list/demo.html](http://localhost:8080/pmo/restaurant/list/demo.html) .
+View the demo page at [http://localhost:8080/src/restaurant/list/demo.html](http://localhost:8080/src/restaurant/list/demo.html) .
 
 ## Setup automated tests and continuous integration (CI)
 
@@ -927,24 +951,24 @@ In this chapter we will automate running the tests so that they can be used in a
 
 ### Creating a global test page
 
-While we already created an individual test page in `pmo/restaurant/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Let's create `pmo/test.html` like:
+While we already created an individual test page in `src/restaurant/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Let's create `src/test.html` like:
 
 ```html
 <title>Place my order tests</title>
-<script src="../node_modules/steal/steal.js" main="pmo/test"></script>
+<script src="../node_modules/steal/steal.js" main="place-my-order/test"></script>
 <div id="qunit-fixture"></div>
 ```
 
-And `pmo/test.js` which loads all the tests:
+And `src/test.js` which loads all the tests:
 
 ```js
-import 'pmo/models/fixtures';
-import 'pmo/restaurant/list/list_test';
+import 'place-my-order/models/fixtures';
+import 'place-my-order/restaurant/list/list_test';
 
 window.localStorage.clear();
 ```
 
-If you now go to [http://localhost:8080/pmo/test.html](http://localhost:8080/pmo/test.html) we still see all restaurant list tests passing but we will add more here later on.
+If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src/test.html) we still see all restaurant list tests passing but we will add more here later on.
 
 ### Setting up a test runner
 
@@ -963,7 +987,7 @@ Then we can change the `test` script in `package.json` from this:
 To this:
 
 ```js
-  "test": "testee pmo/test.html --browsers firefox",
+  "test": "testee src/test.html --browsers firefox",
 ```
 
 Now, running `npm test` from the command line will open Firefox and run the tests using our fixtures. Make sure that Firefox is installed and not currently running.
@@ -987,18 +1011,18 @@ This tells Travis CI to run the tests on a NodeJS project and also set up a wind
 
 ## Nested routes
 
-Until now we've used three top level routes: `home`, `restaurants` and `order-history`. We did however also define two additional routes in `pmo/app.js` which looked like:
+Until now we've used three top level routes: `home`, `restaurants` and `order-history`. We did however also define two additional routes in `src/app.js` which looked like:
 
 ```js
 route(':page/:slug', { slug: null });
 route(':page/:slug/:action', { slug: null, action: null });
 ```
 
-We want to use those routes when we are in the `restaurants` page. The relevant section in `pmo/index.stache` currently looks like this:
+We want to use those routes when we are in the `restaurants` page. The relevant section in `src/index.stache` currently looks like this:
 
 ```html
 {{#eq page "restaurants"}}
-  <can-import from="pmo/restaurant/list/">
+  <can-import from="src/restaurant/list/">
     <pmo-restaurant-list></pmo-restaurant-list>
   </can-import>
 {{/eq}}
@@ -1011,7 +1035,7 @@ We want to support two additional routes:
 
 ### Create additional components
 
-To make this happen, we need two more components. First, `pmo/restaurant/details.component` which loads the restaurant (based on the `slug`) and then displays its information:
+To make this happen, we need two more components. First, `src/restaurant/details.component` which loads the restaurant (based on the `slug`) and then displays its information:
 
 ```html
 <can-component tag="pmo-restaurant-details">
@@ -1062,7 +1086,7 @@ To make this happen, we need two more components. First, `pmo/restaurant/details
 </can-component>
 ```
 
-The order component will be a little more complex, which is why we will put it into its own folder at `pmo/order/new/`. For now, we will just use placeholder content and implement the functionality in following chapters. In `pmo/order/new/new.js`:
+The order component will be a little more complex, which is why we will put it into its own folder at `src/order/new/`. For now, we will just use placeholder content and implement the functionality in following chapters. In `src/order/new/new.js`:
 
 ```js
 import Component from 'can/component/component';
@@ -1079,7 +1103,7 @@ export default Component.extend({
 });
 ```
 
-And for the template at `pmo/order/new/new.stache`:
+And for the template at `src/order/new/new.stache`:
 
 ```html
 <div class="order-form">
@@ -1089,11 +1113,11 @@ And for the template at `pmo/order/new/new.stache`:
 
 ### Add to the main template
 
-Now we can add those components to the main template (at `pmo/index.stache`) with conditions based on the routes that we want to match. Change the section which contains
+Now we can add those components to the main template (at `src/index.stache`) with conditions based on the routes that we want to match. Change the section which contains
 
 ```html
 {{#eq page "restaurants"}}
-  <can-import from="pmo/restaurant/list/">
+  <can-import from="place-my-order/restaurant/list/">
     <pmo-restaurant-list></pmo-restaurant-list>
   </can-import>
 {{/eq}}
@@ -1105,18 +1129,18 @@ To:
 {{#eq page "restaurants"}}
   {{#if slug}}
     {{#eq action 'order'}}
-      <can-import from="pmo/order/new/" can-tag="pmo-loading">
+      <can-import from="place-my-order/order/new/" can-tag="pmo-loading">
         <pmo-order-new slug="{slug}"></pmo-order-new>
       </can-import>
     {{/eq}}
 
     {{^if action}}
-      <can-import from="pmo/restaurant/details.component!" can-tag="pmo-loading">
+      <can-import from="place-my-order/restaurant/details.component!" can-tag="pmo-loading">
         <pmo-restaurant-details></pmo-restaurant-details>
       </can-import>
     {{/if}}
   {{else}}
-    <can-import from="pmo/restaurant/list/" can-tag="pmo-loading">
+    <can-import from="place-my-order/restaurant/list/" can-tag="pmo-loading">
       <pmo-restaurant-list></pmo-restaurant-list>
     </can-import>
   {{/if}}
@@ -1137,7 +1161,7 @@ The NPM integration of StealJS makes it very easy to share and import other comp
 npm install bit-tabs --save
 ```
 
-And then integrate it into `pmo/order/new/new.stache`:
+And then integrate it into `src/order/new/new.stache`:
 
 ```html
 <div class="order-form">
@@ -1214,10 +1238,10 @@ First, let's look at the restaurant data we get back from the server. It looks l
 }
 ```
 
-We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new model at `pmo/models/order.js` with the following content:
+We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new model at `src/models/order.js` with the following content:
 
 ```js
-// pmo/models/order.js
+// src/models/order.js
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import List from 'can/list/';
@@ -1280,15 +1304,15 @@ Here we define an `ItemsList` which allows us to toggle menu items and check if 
 
 ### Implement the view model
 
-Now we can update the view model in `pmo/order/new/new.js`:
+Now we can update the view model in `src/order/new/new.js`:
 
 ```js
 import Component from 'can/component/component';
 import Map from 'can/map/';
 import 'can/map/define/';
 import template from './new.stache!';
-import Restaurant from 'pmo/models/restaurant';
-import Order from 'pmo/models/order';
+import Restaurant from 'place-my-order/models/restaurant';
+import Order from 'place-my-order/models/order';
 
 export const ViewModel = Map.extend({
   define: {
@@ -1334,7 +1358,7 @@ Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder
 
 ### Write the template
 
-First, let's implement a small order confirmation component in `pmo/order/details.component`:
+First, let's implement a small order confirmation component in `src/order/details.component`:
 
 ```html
 <can-component tag="pmo-order-details">
@@ -1365,11 +1389,11 @@ First, let's implement a small order confirmation component in `pmo/order/detail
 </can-component>
 ```
 
-Now we can import that component and update `pmo/order/new/new.stache` to:
+Now we can import that component and update `src/order/new/new.stache` to:
 
 ```html
 <can-import from="bit-tabs"/>
-<can-import from="pmo/order/details.component!" />
+<can-import from="place-my-order/order/details.component!" />
 
 <div class="order-form">
   <restaurant-model get="{ _id=slug }" [restaurant]="{value}">
@@ -1455,7 +1479,7 @@ Now we can import that component and update `pmo/order/new/new.stache` to:
 
 This is a longer template so lets walk through it:
 
-- `<can-import from="pmo/order/details.component!" />` loads the order details component we previously created
+- `<can-import from="place-my-order/order/details.component!" />` loads the order details component we previously created
 - `<restaurant-model get="{ _id=slug }">` loads a restaurant based on the slug value passed to the component
 - If the `saveStatus` deferred is resolved we show the `pmo-order-details` component with that order
 - Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item]
@@ -1472,7 +1496,7 @@ can-connect makes it very easy to implement real-time functionality.It is capabl
 
 ### Adding real-time events to a model
 
-The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `pmo/models/order.js` and in the handler notify the order connection:
+The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection:
 
 ```
 npm install socket.io-client
@@ -1490,12 +1514,12 @@ socket.on('orders removed', order => orderConnection.destroyInstance(order));
 
 ### Update the template
 
-That's all the JavaScript we need to implement real-time functionality. All the rest can be done in the order history template by updating `pmo/order/history.component` to:
+That's all the JavaScript we need to implement real-time functionality. All the rest can be done in the order history template by updating `src/order/history.component` to:
 
 ```html
 <can-component tag="pmo-order-history">
   <template>
-    <can-import from="pmo/models/order" />
+    <can-import from="place-my-order/models/order" />
 
     <div class="order-history">
       <div class="order header">
@@ -1505,7 +1529,7 @@ That's all the JavaScript we need to implement real-time functionality. All the 
         <div class="actions">Action</div>
       </div>
 
-      <can-import from="pmo/order/list.component!" can-tag="pmo-loading">
+      <can-import from="place-my-order/order/list.component!" can-tag="pmo-loading">
         <order-model getList="{status='new'}">
           <pmo-order-list
             orders="{.}"
@@ -1568,14 +1592,14 @@ To configure DocumentJS we need a `documentjs.json` in the project main folder t
         "page": "docs"
       },
       "glob": {
-        "pattern": "pmo/**/*.{js,md}"
+        "pattern": "src/**/*.{js,md}"
       }
     }
   }
 }
 ```
 
-This tells DocumentJS to parse all `.js` and `.md` files in the `pmo/` folder (with the `pmo` page as the main parent) and to write the generated documentation into a `docs/` folder. Since DocumentJS is only installed locally (as a dependency of DoneJS) we will also add a documentation script to our `package.json`:
+This tells DocumentJS to parse all `.js` and `.md` files in the `src/` folder (with the `pmo` page as the main parent) and to write the generated documentation into a `docs/` folder. Since DocumentJS is only installed locally (as a dependency of DoneJS) we will also add a documentation script to our `package.json`:
 
 ```js
   "scripts": {
@@ -1584,7 +1608,7 @@ This tells DocumentJS to parse all `.js` and `.md` files in the `pmo/` folder (w
 
 ### Create a main documentation file
 
-Now we need to create a Markdown file that provides the `pmo` main parent page. Add `pmo/index.md`:
+Now we need to create a Markdown file that provides the `pmo` main parent page. Add `src/index.md`:
 
 ```
 @@page pmo
@@ -1604,18 +1628,18 @@ And go to [http://localhost:8080/docs/](http://localhost:8080/docs/) we will see
 
 ### Documenting a module
 
-Now we can add the documentation for a module. Let's use `pmo/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
+Now we can add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
 
 ```js
 import Component from 'can/component/component';
 import Map from 'can/map/';
 import 'can/map/define/';
 import template from './new.stache!';
-import Restaurant from 'pmo/models/restaurant';
-import Order from 'pmo/models/order';
+import Restaurant from 'place-my-order/models/restaurant';
+import Order from 'place-my-order/models/order';
 
 /**
- * @module pmo/order/new
+ * @module place-my-order/order/new
  * @parent pmo
  */
 export const ViewModel = Map.extend({
@@ -1630,7 +1654,7 @@ export const ViewModel = Map.extend({
       type: 'string'
     },
     /**
-     * @property {pmo/models/order} order
+     * @property {place-my-order/models/order} order
      *
      * The order that is being processed. Will
      * be an empty new order inititally.
@@ -1803,7 +1827,7 @@ so special behavior can be added.  Install the module:
 npm install steal-platform --save
 ```
 
-Create a file: `pmo/models/base-url.js` and place this code:
+Create a file: `src/models/base-url.js` and place this code:
 
 ```js
 import platform from "steal-platform";
@@ -1819,7 +1843,7 @@ export default baseUrl;
 
 This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be made there.
 
-Our models will also need to be updated to use the baseUrl. For example in pmo/models/state do:
+Our models will also need to be updated to use the baseUrl. For example in `src/models/state` do:
 
 ```js
 import baseUrl from './base-url';
@@ -1873,7 +1897,7 @@ We also need to create an nw.html (this is the entry point for the NW.js app):
 <html>
   <head><title>Place My Order</title></head>
   <body>
-    <script src="node_modules/steal/steal.production.js" main="pmo/layout.stache!done-autorender"></script>
+    <script src="node_modules/steal/steal.production.js" main="index.stache!done-autorender"></script>
   </body>
 </html>
 ```
@@ -1897,7 +1921,7 @@ And finally update package.json. There are two things we need to change:
 }
 ```
 
-Next, if using pushstate routing, we need to update our routes to use hash-based routing because NW.js runs within the file protocol. If you haven't already installed `steal-platform`, do so now. Then in pmo/app module add the following condition:
+Next, if using pushstate routing, we need to update our routes to use hash-based routing because NW.js runs within the file protocol. If you haven't already installed `steal-platform`, do so now. Then in `src/app.js` module add the following condition:
 
 ```js
 import platform from 'steal-platform';
