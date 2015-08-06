@@ -110,6 +110,19 @@ We can add an API server start script into the `scripts` section like this:
 },
 ```
 
+Also update your npmIgnore so that Steal doesn't load this Node module:
+
+```js
+"system": {
+  ...
+
+  "npmIgnore": [
+    ...
+    "place-my-order-api"
+  ]
+}
+```
+
 Which allows starting the server with:
 
 ```
@@ -504,7 +517,7 @@ After reloading the homepage you should see the restaurant information logged in
 
 ### Add the connection to the page
 
-Now we can update the `ViewModel` in `src/restaurant/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
+Now we can update the `ViewModel` in `src/restaurant/list/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
 
 ```js
 import Component from 'can/component/';
@@ -530,7 +543,7 @@ export default Component.extend({
 });
 ```
 
-And update the template at `place-my-order/restaurant/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
+And update the template at `src/restaurant/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
 
 ```html
 <div class="restaurants">
@@ -1296,7 +1309,7 @@ export const connection = superMap({
   name: 'orders'
 });
 
-tag('order-model', orderConnection);
+tag('order-model', connection);
 
 export default Order;
 ```
@@ -1572,6 +1585,79 @@ That's all the JavaScript we need to implement real-time functionality. All the 
   </template>
 </can-component>
 ```
+
+And creating `src/order/list.component`:
+
+```html
+<can-component tag="pmo-order-list">
+  <template>
+    <h4>{{title}}</h4>
+
+    {{#if orders.isPending}}
+     <div class="loading"></div>
+    {{else}}
+      {{#each orders.value}}
+      <div class="order {{status}}">
+        <address>
+          {{name}} <br />{{address}} <br />{{phone}}
+        </address>
+
+        <div class="items">
+          <ul>
+            {{#each items}}<li>{{name}}</li>{{/each}}
+          </ul>
+        </div>
+
+        <div class="total">${{total}}</div>
+
+        <div class="actions">
+          {{#eq status 'new'}}
+          <span class="badge">New Order!</span>
+          <p class="action">
+            Mark as:
+            <a href="javascript://" can-click="{markAs 'preparing'}">
+              Preparing
+            </a>
+          </p>
+          {{/eq}}
+
+          {{#eq status 'preparing'}}
+          <span class="badge">Preparing</span>
+          <p class="action">
+            Mark as:
+            <a href="javascript://"  can-click="{markAs 'delivery'}">
+              Out for delivery
+            </a>
+          </p>
+          {{/eq}}
+
+          {{#eq status 'delivery'}}
+          <span class="badge">Out for delivery</span>
+          <p class="action">
+            Mark as:
+            <a href="javascript://"  can-click="{markAs 'delivered'}">
+              Delivered
+            </a>
+          </p>
+          {{/eq}}
+
+          {{#eq status 'delivered'}}
+          <span class="badge">Delivered</span>
+          {{/eq}}
+
+          <p class="action">
+            <a href="javascript://"  can-click="{destroy}">Delete</a>
+          </p>
+        </div>
+      </div>
+      {{/each}}
+
+      {{^if orders.value.length}}
+      <div class="order empty">{{emptyMessage}}</div>
+      {{/if}}
+    {{/if}}
+  </template>
+</can-component>```
 
 First we import the order model and then just call `<order-model getList="{status='<status>'}">` for each order status. That's it. If we now open the order page we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
