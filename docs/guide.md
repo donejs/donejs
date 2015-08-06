@@ -28,16 +28,12 @@ To get started, we create a new folder with a [package.json](https://docs.npmjs.
 ```
 mkdir place-my-order
 cd place-my-order
-npm init
+
+npm install donejs -g
+donejs init
 ```
 
-[npm init](https://docs.npmjs.com/cli/init) will ask a couple of questions which we can all answer with the default answers.
-
-Now we can install the DoneJS package and write it as a dependency into `package.json`:
-
-```
-npm install donejs --save
-```
+Installing donejs globally gives you access to all of the tools you'll need to work on your project. `donejs init` will create a package.json for you with all dependencies needed. You can probably answer all of the questions by accepting the default answers.
 
 This will also install all of DoneJS's dependencies:
 
@@ -55,6 +51,11 @@ The initial folder structure now looks like this:
 
 ```
 ├── package.json
+├── src/
+|   ├── models/
+|   └── index.stache
+|   └── app.js
+|   └── ...
 ├── node_modules/
 |   ├── .bin/
 |   └── can/
@@ -87,7 +88,7 @@ The `package.json` should now look similar to this:
   "dependencies": {
     "can": "^2.3.0-pre.1",
     "can-connect": "0.0.1",
-    "can-ssr": "^0.1.2",
+    "can-ssr": "^0.5.1",
     "documentjs": "^0.3.0-pre.4",
     "done-autorender": "0.0.3",
     "done-css": "0.0.6",
@@ -136,9 +137,9 @@ Before we create the first files we also need to install the `place-my-order-ass
 npm install place-my-order-assets --save
 ```
 
-Every DoneJS application consists of at least two files: A main template (in this case `pmo/index.stache`) which contains the main template and links to the development or production assets, and a main application file (`pmo/app.js`) that initializes the application state and routes. Create `pmo/index.stache` with the following content:
+Every DoneJS application consists of at least two files: A main template (in this case `src/index.stache`) which contains the main template and links to the development or production assets, and a main application file (`src/app.js`) that initializes the application state and routes. `src/index.stache` was already created for you when you ran `donejs init`, so update it to reflect the below content:
 
-```html
+```handlebars
 <html>
   <head>
     <title>Place My Order</title>
@@ -146,7 +147,7 @@ Every DoneJS application consists of at least two files: A main template (in thi
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="pmo/app" as="viewModel" />
+    <can-import from="place-my-order/app" as="viewModel" />
     <h1>{{message}}</h1>
     {{asset "inline-cache"}}
 
@@ -154,7 +155,7 @@ Every DoneJS application consists of at least two files: A main template (in thi
 
       {{#case "production"}}
         <script src="/node_modules/steal/steal.production.js"
-          main="pmo/index.stache!done-autorender"></script>
+          main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
 
       {{#default}}
@@ -166,12 +167,12 @@ Every DoneJS application consists of at least two files: A main template (in thi
 </html>
 ```
 
-This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/)-compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. First the `place-my-order-assets` package (which loads the LESS styles for the application) followed by `pmo/app` which is the main application file. The [asset](https://github.com/canjs/can-ssr#asset-helper) helper provides assets like CSS styles, cached data, and links to scripts based on the environment (development or production).
+This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/)-compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. First the `place-my-order-assets` package (which loads the LESS styles for the application) followed by `place-my-order/app` which is the main application file. The [asset](https://github.com/canjs/can-ssr#asset-helper) helper provides assets like CSS styles, cached data, and links to scripts based on the environment (development or production).
 
-The main application file at `pmo/app.js` looks like this:
+The main application file at `src/app.js` looks like this:
 
 ```
-// pmo/app.js
+// src/app.js
 import AppMap from "can-ssr/app-map";
 
 const AppState = AppMap.extend({
@@ -181,31 +182,25 @@ const AppState = AppMap.extend({
 export default AppState;
 ```
 
-This initializes an `AppMap` which contains the application state (with a default `message` property) and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
+This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) which contains the application state (with a default `message` property) and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
 
 The complete file structure of the application now looks like this:
 
 ```
 ├── node_modules/
 ├── package.json
-├── pmo/
+├── src/
 |   ├── app.js
 |   └── index.stache
 ```
 
 ### Starting the application
 
-With those two files available we can start the server that hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` add:
+With those two files available we can start the server that hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` it contains:
 
 ```js
 "scripts": {
     "start": "can-serve --proxy http://localhost:7070 --port 8080",
-```
-
-`"main"`, in `package.json` (by default set to `index.js`), also needs to be changed to:
-
-```js
-"main": "pmo/index.stache!done-autorender",
 ```
 
 Then we can start the application with
