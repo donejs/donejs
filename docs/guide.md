@@ -2096,31 +2096,31 @@ Now we can build to NW.js with `node build nw`. Once the build is complete the b
 
 Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at `node_modules/place-my-order-assets/images`.
 
-[steal-bundler](https://github.com/stealjs/steal-bundler) is a utility for bundling all of your static assets into a folder that can be deployed to production by itself. Install steal-bundler as a devDependency:
+StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.
 
-```
-npm install steal-bundler --save-dev
-```
-
-And add it to your build script. steal-bundler receives the BuildResult created by StealTools (like steal-cordova and steal-nw), so change your script like so:
+To use this capability add an option to your build script to enable it. Change:
 
 ```js
-var stealTools = require("steal-tools");
-var bundleAssets = require("steal-bundler");
-
 var buildPromise = stealTools.build({
   config: __dirname + "/package.json!npm"
 });
-
-buildPromise.then(function(buildResult){
-  return bundleAssets(buildResult);
-});
-
-...
-
 ```
 
-steal-bundler will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and steal-bundler will place images, for example, in `dist/images`.
+to:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: {
+    glob: "node_modules/place-my-order-assets/images/**/*"
+  }
+});
+```
+
+
+
+StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place images, for example, in `dist/images`.
 
 ### Deploy to a CDN
 
