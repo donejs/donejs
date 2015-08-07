@@ -1909,7 +1909,11 @@ var cordovaOptions = {
   id: "com.hello.world",
   name: "HelloWorld",
   platforms: ["ios", "android"],
-  index: __dirname + "/cordova.html"
+  index: __dirname + "/cordova.html",
+  glob: [
+    "node_modules/steal/steal.production.js",
+    "images/**/*"
+  ]
 };
 
 var stealCordova = require("steal-cordova")(cordovaOptions);
@@ -1922,6 +1926,17 @@ if(buildCordova) {
   buildPromise = buildPromise.then(stealCordova.build);
 
 }
+```
+
+Unlike your web app which runs from a server, Cordova apps need a html file. Copy/paste this into a cordova.html
+
+```html
+<html>
+  <head><title>Place My Order</title></head>
+  <body>
+    <script src="node_modules/steal/steal.production.js" main="dguide/index.stache!done-autorender"></script>
+  </body>
+</html>
 ```
 
 This allows us to build a Cordova app with:
@@ -1979,6 +1994,18 @@ superMap({
   url: baseUrl + '/api/states',
   ...
 });
+```
+
+#### Routing
+
+We can also use `steal-platform` to switch to hashchange routing for Cordova apps. Cordova (and NW.js) do not work with pushstate routing, so we can conditionally fallback. Add this to `src/app.js`:
+
+```js
+import platform from 'steal-plaform';
+
+if(platform.isCordova || platform.isNW) {
+  route.defaultBinding = 'hashchange';
+}
 ```
 
 ### Building to NW.js
