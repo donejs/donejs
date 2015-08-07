@@ -110,19 +110,6 @@ We can add an API server start script into the `scripts` section like this:
 },
 ```
 
-Also update your npmIgnore so that Steal doesn't load this Node module:
-
-```js
-"system": {
-  ...
-
-  "npmIgnore": [
-    ...
-    "place-my-order-api"
-  ]
-}
-```
-
 Which allows starting the server with:
 
 ```
@@ -1829,7 +1816,7 @@ Before creating a production bundle we need to update the `package.json` to add 
     }
   },
   "map": {
-    "can/util/vdom/vdom": "@empty"
+    "can/util/vdom/vdom": "./@empty"
   },
   "meta": {
     "can/util/vdom/vdom": {
