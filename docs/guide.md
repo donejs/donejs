@@ -1909,7 +1909,7 @@ var cordovaOptions = {
   id: "com.hello.world",
   name: "HelloWorld",
   platforms: ["ios", "android"],
-  index: __dirname + "/cordova.html",
+  index: __dirname + "/app.html",
   glob: [
     "node_modules/steal/steal.production.js",
     "images/**/*"
@@ -1928,7 +1928,7 @@ if(buildCordova) {
 }
 ```
 
-Unlike your web app which runs from a server, Cordova apps need a html file. Copy/paste this into a cordova.html
+Unlike your web app which runs from a server, Cordova (and NW.js) apps need a html file. Copy/paste this into an app.html
 
 ```html
 <html>
@@ -2026,7 +2026,7 @@ var nwOptions = {
   platforms: ["osx"],
   files: [
     "package.json",
-    "nw.html",
+    "app.html",
 
     "node_modules/steal/steal.production.js",
     "images/**/*"
@@ -2045,26 +2045,15 @@ if(buildNW) {
 }
 ```
 
-We also need to create an nw.html (this is the entry point for the NW.js app):
-
-```html
-<html>
-  <head><title>Place My Order</title></head>
-  <body>
-    <script src="node_modules/steal/steal.production.js" main="index.stache!done-autorender"></script>
-  </body>
-</html>
-```
-
 And finally update package.json. There are two things we need to change:
 
-1. The "main" must be "nw.html".
+1. The "main" must be "app.html". This is the same `.html` file we created for the Cordova build.
 
 2. We can set "window" options to match the application layout. Let's update the size of the window:
 
 ```json
 {
-  "main": "nw.html",
+  "main": "app.html",
 
   ...
 
