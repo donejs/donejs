@@ -2157,6 +2157,21 @@ After you've created a free account, next edit your package.json to add Divshot 
 
 The `services` property is a list of deploy targets. You can name these whatever you like but we will use "production". The `config.name` specifies the Divshot application name. With regards to Divshot, the "environment" property is not provided, so the name of the service is used in its stead. If the name of a Divshot service is not equal to "development", "staging", or "production" you will be warned, and the environment will default to "development".
 
+Next, update your package.json to set the baseURL that will be used in production, by setting the "envs" config, it should be something like:
+
+```json
+{
+  "system": {
+    "envs": {
+      "production": {
+        "baseURL": "https://production.place-my-order.divshot.io"
+      }
+    },
+    ...
+  }
+}
+```
+
 Now do your first deployment with the donejs command:
 
 ```
@@ -2171,7 +2186,7 @@ Now your assets will live on a CDN. You can update your `index.stache` template 
 ```html
 {{#switch @env.NODE_ENV}}
   {{#case "production"}}
-    <script src="http://production.place-my-order.divshot.io/node_modules/steal/steal.production.js"></script>
+    <script src="https://production.place-my-order.divshot.io/node_modules/steal/steal.production.js"></script>
   {{/case}}
 
   {{#default}}
@@ -2198,7 +2213,13 @@ Create a new app by running:
 heroku create
 ```
 
-This will return the url where your app can be viewed. Before you open it you'll need to do an initial deploy by running:
+This will return the url where your app can be viewed. Before you open it you'll need to update the NODE_ENV variable:
+
+```
+heroku config:set NODE_ENV=production
+```
+
+And do an initial deploy.
 
 ```
 git push heroku master
