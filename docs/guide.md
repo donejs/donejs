@@ -2199,7 +2199,7 @@ Now your assets will live on a CDN. You can update your `index.stache` template 
 
 At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to gain the benefit of server-side rendering.
 
-Down the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
+Download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
 
 After you've installed it, login by running:
 
@@ -2219,6 +2219,12 @@ This will return the url where your app can be viewed. Before you open it you'll
 heroku config:set NODE_ENV=production
 ```
 
+Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using can-serve our Procfile just looks like this:
+
+```
+web: node_modules/.bin/can-serve --proxy http://place-my-order.com/api
+```
+
 And do an initial deploy.
 
 ```
@@ -2227,17 +2233,32 @@ git push heroku master
 
 Any time in the future you want to deploy simply push to the heroku remote.
 
-### Continuous Integration
+### Continuous Deployment
 
 Previously we set up Travis CI [for automated testing](http://donejs.com/Guide.html#section_Settingcontinuousintegration_TravisCI_) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy your code to production once tests have passed.
 
 Open your `.travis.yml` file and add a new `deploy` key that looks like this:
 
 ```yaml
+before_deploy:
+  - "git config --global user.email \"me@example.com\""
+  - "git config --global user.name \"PMO deploy bot\""
+  - "node build"
+  - "git add dist/ --force"
+  - "git commit -m \"Updating build.\""
+  - "node_modules/.bin/donejs-deploy"
 deploy:
   skip_cleanup: true
   provider: "heroku"
-  before_deploy: node_modules/.bin/donejs-deploy
+  app: my-app
+```
+
+You can find the name of the app by running `heroku apps:info`.
+
+In order to deploy to Heroku you need to provide Travis with your Heroku API key. From the cli:
+
+```
+travis encrypt $(heroku auth:token) --add deploy.api_key
 ```
 
 In order for Travis to be able to deploy your static assets you need to provide it the access token you generated before. This token will be stored in `~/.divshot/config/user.json`.  Install the [TravisCI cli](https://github.com/travis-ci/travis.rb#readme) which will generated encrypted environment variables that can be set on Travis. Run the command:
