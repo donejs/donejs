@@ -110,7 +110,7 @@ if(commands[command]) {
     } else {
       // If the command is not supported try running node_modules/.bin/donejs-command
       // with all the parameters
-      var cmd = path.join(root, 'donejs-' + command);
+      var cmd = path.join(root, '.bin', 'donejs-' + command);
       if(!fs.existsSync(cmd)) {
         console.error('Command "' + command + '" is not available');
         return process.exit(1);
