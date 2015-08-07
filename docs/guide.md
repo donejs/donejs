@@ -14,6 +14,7 @@ After that we will talk about what a view-model is and how to identify, implemen
 
 Finally, we will describe how to build and deploy your application for the web, as a desktop application with nw.js, and as a mobile app with Cordova.
 
+
 @body
 
 ## Setup the project
@@ -23,19 +24,19 @@ You will need [NodeJS](http://nodejs.org) or [io.js](https://iojs.org/en/index.h
 
 ### Create the project
 
-To get started, we create a new folder with a [package.json](https://docs.npmjs.com/files/package.json) which will contain information about your project, its dependencies and configuration by running the following commands:
+To get started, let's install the DoneJS command line utility globally:
 
 ```
-mkdir place-my-order
-cd place-my-order
-
-npm install donejs -g
-donejs init
+npm install -g donejs
 ```
 
-Installing donejs globally gives you access to all of the tools you'll need to work on your project. `donejs init` will create a package.json for you with all dependencies needed. You can probably answer all of the questions by accepting the default answers.
+Then we can create a new DoneJS application:
 
-This will also install all of DoneJS's dependencies:
+```
+donejs init place-my-order
+```
+
+The initialization process will ask you questions like the name of your application (set to `place-my-order` which we can keep) and a short name which you can answer with `pmo` (short for `place-my-order`). Note that the short name is important. It will be used as a prefix for the component tag names. For example, the home component we generate later in this guide will have the a tag name of `pmo-home`. The other questions can be skipped for now by hitting enter. This will install all of DoneJS dependencies, among other things the main projects:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
@@ -45,24 +46,42 @@ This will also install all of DoneJS's dependencies:
 - [FuncUnit](http://funcunit.com) - Functional tests
 - Testee or Karma - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
-- [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
 
-The initial folder structure now looks like this:
+If we now go into the `place-my-order` folder we can see the following files:
 
 ```
 ├── package.json
 ├── src/
+|   ├── app.js
+|   ├── index.stache
 |   ├── models/
-|   └── index.stache
-|   └── app.js
-|   └── ...
+|   |   ├── fixtures.js
+|   |   ├── test.js
+|   ├── styles.less
+|   ├── test.html
+|   ├── test.js
 ├── node_modules/
-|   ├── .bin/
-|   └── can/
-|   └── can-connect/
-|   └── can-ssr/
-|   └── ...
 ```
+
+Let's have a quick look at what those files are for:
+
+- `package.json` is the main configuration file that defines all our application dependencies and other settings
+- `src` is the folder where all our development assets live on their own modlets (more about that later)
+- `src/app.js` is the main application file which which exports the main application state
+- `src/index.stache` is the main template used for both, server side rendering and on the client
+- `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures.js` which will reference all the specific models fixtures files (so that we can run model related tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
+- `src/styles.less` is the main application styles LESS
+- `src/test.html` and `src/test.js` are used to collect all individual component and model tests we will create throughout this guide to run in a single test file.
+
+### Development mode
+
+DoneJS comes with its own server which does both, host your development files and automatically pre-renders the application on the server. DoneJS' development mode will also start a [live-reload](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) server that automatically reloads files in the browser as they change. You can start both by running:
+
+```
+donejs develop
+```
+
+The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
 
 ### Setup a service API
 
@@ -72,64 +91,23 @@ Single page applications usually communicate with a RESTful API and a websocket 
 npm install place-my-order-api --save
 ```
 
-The `package.json` should now look similar to this:
-
-```js
-{
-  "name": "place-my-order",
-  "version": "0.0.1",
-  "description": "The place-my-order.com frontend",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Bitovi",
-  "license": "MIT",
-  "dependencies": {
-    "can": "^2.3.0-pre.1",
-    "can-connect": "0.0.1",
-    "can-ssr": "^0.5.1",
-    "documentjs": "^0.3.0-pre.4",
-    "done-autorender": "0.0.3",
-    "done-css": "0.0.6",
-    "donejs": "0.0.3",
-    "funcunit": "^3.0.0",
-    "jquery": "^1.11.3",
-    "steal": "^0.10.5",
-    "steal-qunit": "0.0.4"
-  }
-}
-```
-
-We can add an API server start script into the `scripts` section like this:
+Now, we can add an API server start script into the `scripts` section of our `package.json` like this:
 
 ```js
 "scripts": {
-    "api": "place-my-order-api --port 7070",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "api": "place-my-order-api --port 7070"
 },
 ```
 
-Which allows starting the server with:
+Which allows to start the server like:
 
 ```
-npm run api
+donejs api
 ```
 
 At first startup, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) were we can see a JSON list of restaurant data. Keep this server running during development.
 
-## Setup server side rendering
-
-In the following paragraphs we will:
-
-- create the basic template
-- create the main application file
-- start a server which
-  - hosts those static files
-  - is responsible for pre-rendering the application
-  - proxies REST API calls to avoid cross-origin issues
-
-### Create a template and main file
+### Loading assets
 
 Before we create the first files we also need to install the `place-my-order-assets` package which contains the images and styles for the application:
 
@@ -137,31 +115,31 @@ Before we create the first files we also need to install the `place-my-order-ass
 npm install place-my-order-assets --save
 ```
 
-Every DoneJS application consists of at least two files: A main template (in this case `src/index.stache`) which contains the main template and links to the development or production assets, and a main application file (`src/app.js`) that initializes the application state and routes. `src/index.stache` was already created for you when you ran `donejs init`, so update it to reflect the below content:
+Every DoneJS application consists of at least two files: A main template (in this case `src/index.stache`) which contains the main template and links to the development or production assets, and a main application file (`src/app.js`) that initializes the application state and routes. `src/index.stache` was already created for you when you ran `donejs init`, so we can update it to reflect the below content:
 
 ```handlebars
 <html>
   <head>
-    <title>Place My Order</title>
+    <title>{{title}}</title>
     {{asset "css"}}
   </head>
   <body>
     <can-import from="place-my-order-assets" />
+    <can-import from="place-my-order/styles.less!" />
     <can-import from="place-my-order/app" as="viewModel" />
+
     <h1>{{message}}</h1>
+
     {{asset "inline-cache"}}
 
     {{#switch @env.NODE_ENV}}
-
       {{#case "production"}}
         <script src="/node_modules/steal/steal.production.js"
           main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
-
       {{#default}}
         <script src="node_modules/steal/steal.js"></script>
       {{/default}}
-
     {{/switch}}
   </body>
 </html>
@@ -184,38 +162,35 @@ export default AppState;
 
 This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) which contains the application state (with a default `message` property) and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
 
-The complete file structure of the application now looks like this:
-
-```
-├── node_modules/
-├── package.json
-├── src/
-|   ├── app.js
-|   └── index.stache
-```
-
 ### Starting the application
 
-With those two files available we can start the server that hosts and renders the application. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. In the `scripts` section of `package.json` it contains:
+Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. This means that we need to modify the `start` scripti in our `package.json` from:
 
 ```js
 "scripts": {
-    "start": "can-serve --proxy http://localhost:7070 --port 8080",
+  "start": "can-serve --port 8080",
+```
+
+To:
+
+```js
+"scripts": {
+  "start": "can-serve --proxy http://localhost:7070 --port 8080",
 ```
 
 Then we can start the application with
 
 ```
-npm start
+donejs develop
 ```
 
-Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" message.
+Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" message with the application styles loaded.
 
 ## Creating custom elements
 
 One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules. In the following section we will create different components for the homepage, the restaurant list, and the order history. After that, we will glue them all together using routes and the global application state.
 
-There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [done-component](https://github.com/donejs/done-component))). Larger components can be split up into individual files.
+There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [done-component](https://github.com/donejs/done-component)). Larger components can be split up into individual files.
 
 ### Creating a homepage element
 
@@ -225,13 +200,13 @@ To generate a new component run:
 donejs generate component home.component
 ```
 
-This will create a file at `src/home.component` containing the basic layout of components. Update it to reflect the below content:
+We can answer the question about the tag name for all the components with the default suggestion by hitting enter. This will create a file at `src/home.component` containing the basic layout of components. We will update it to reflect the below content:
 
 ```html
 <can-component tag="pmo-home">
   <template>
      <div class="homepage">
-      <img src="{{~ node_modules/place-my-order-assets/images/homepage-hero.jpg }}"
+      <img src="{{~ 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}"
           width="250" height="380" />
       <h1>Ordering food has never been easier</h1>
       <p>
@@ -254,7 +229,7 @@ For now, the order history is very similar.
 donejs generate component order/history.component
 ```
 
-And update it in `src/order/history.component`:
+And update `src/order/history.component`:
 
 ```
 <can-component tag="pmo-order-history">
@@ -275,42 +250,13 @@ And update it in `src/order/history.component`:
 
 The restaurant list will contain more functionality, which is why we will split it into separate files for the template and the component logic. All files are put together in the component's own folder so that they can be easily re-used and tested.
 
-If you run:
+We can create a basic component like that by running:
 
 ```
 donejs generate component restaurant/list
 ```
 
-It will create a folder src/restaurant/list` containing this structure:
-
-
-
-Put the following content in `src/restaurant/list/list.js`:
-
-```js
-import Component from 'can/component/';
-import Map from 'can/map/';
-import template from './list.stache!';
-
-export var ViewModel = Map.extend({});
-
-export default Component.extend({
-  tag: 'pmo-restaurant-list',
-  viewModel: ViewModel,
-  template: template
-});
-```
-
-And add a simple template at `src/restaurant/list/list.stache`:
-
-```
-<div class="restaurants">
-  <a can-href="{page='home'}">Homepage</a>
-  <h2 class="page-header">Restaurants</h2>
-</div>
-```
-
-We will add more functionality to this element in a later chapter. Your folder structure should look like this:
+The folder structure looks like this:
 
 ```
 ├── node_modules
@@ -318,13 +264,21 @@ We will add more functionality to this element in a later chapter. Your folder s
 ├── src/
 |   ├── app.js
 |   └── index.stache
+|   ├── models
 |   ├── order/
 |   |   ├── history.component
 |   ├── restaurant/
 |   |   ├── list/
+|   |   |   ├── list.html
 |   |   |   ├── list.js
+|   |   |   ├── list.less
+|   |   |   ├── list.md
 |   |   |   ├── list.stache
+|   |   |   ├── list_test.js
+|   |   |   ├── test.html
 ```
+
+We will learn more about those files and add more functionality to this element in a later chapter but it already contains a fully functional component with a demo page (see [localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html)), a basic test (at [localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html)) and documentation placeholders.
 
 ## Setting up routing
 
@@ -338,13 +292,15 @@ If you want to learn more about CanJS routing visit the CanJS guide on [Applicat
 
 To add the routes, change `src/app.js` to:
 
-```
-// src/app.js
+```js
 import AppMap from "can-ssr/app-map";
 import route from 'can/route/';
 import 'can/route/pushstate/';
 
-const AppState = AppMap.extend({});
+const AppState = AppMap.extend({
+  message: 'Hello World!',
+  title: 'place-my-order'
+});
 
 export default AppState;
 
@@ -363,7 +319,13 @@ Now we have three routes available:
 
 ### Adding a header element
 
-Now is also a good time to add a header element at `src/header.component` that links to the different routes we just defined.
+Now is also a good time to add a header element that links to the different routes we just defined. We can run
+
+```
+donejs generate component header.component
+```
+
+and update `src/header.component` to:
 
 ```html
 <can-component tag="pmo-header">
@@ -393,7 +355,13 @@ Here we use the `eq` helper to make the appropriate link active and then use [ca
 
 ### Create a loading indicator
 
-To show that something is currently loading, let's create a `pmo-loading` component in `src/loading.component`:
+To show that something is currently loading, let's create a `pmo-loading` component:
+
+```
+donejs generate component loading.component
+```
+
+With changing `src/loading.component` to:
 
 ```html
 <can-component tag="pmo-loading">
@@ -425,42 +393,40 @@ Now we can glue all those individual components together in `src/index.stache`. 
     <can-import from="place-my-order/header.component!" />
     <pmo-header page="{page}"></pmo-header>
 
-    {{#eq page "home"}}
-      <can-import from="place-my-order/home.component!" can-tag="pmo-loading">
-        <pmo-home></pmo-home>
-      </can-import>
-    {{/eq}}
-    {{#eq page "restaurants"}}
-      <can-import from="place-my-order/restaurant/list/" can-tag="pmo-loading">
-        <pmo-restaurant-list></pmo-restaurant-list>
-      </can-import>
-    {{/eq}}
-    {{#eq page "order-history"}}
-      <can-import from="place-my-order/order/history.component!" can-tag="pmo-loading">
-        <pmo-order-history></pmo-order-history>
-      </can-import>
-    {{/eq}}
+    {{#switch page}}
+      {{#case "home"}}
+        <can-import from="place-my-order/home.component!" can-tag="pmo-loading">
+          <pmo-home></pmo-home>
+        </can-import>
+      {{/case}}
+      {{#case "restaurants"}}
+        <can-import from="place-my-order/restaurant/list/" can-tag="pmo-loading">
+          <pmo-restaurant-list></pmo-restaurant-list>
+        </can-import>
+      {{/case}}
+      {{#case "order-history"}}
+        <can-import from="place-my-order/order/history.component!" can-tag="pmo-loading">
+          <pmo-order-history></pmo-order-history>
+        </can-import>
+      {{/case}}
+    {{/switch}}
 
     {{asset "inline-cache"}}
 
-
     {{#switch @env.NODE_ENV}}
-
       {{#case "production"}}
         <script src="/node_modules/steal/steal.production.js"
           main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
-
       {{#default}}
         <script src="node_modules/steal/steal.js"></script>
       {{/default}}
-
     {{/switch}}
   </body>
 </html>
 ```
 
-Here we use the `eq` helper to check for the page, then progressively load the component with [can-import]() and initialize it. Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. Now, if we reload [http://localhost:8080/](http://localhost:8080/), we can see the header and the home component and be able to navigate to the different pages through the header.
+Here we make a `switch` statement that checks for the current `page` property, then progressively load the component with [can-import]() and initializes it. Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. Now, if we reload [http://localhost:8080/](http://localhost:8080/), we can see the header and the home component and be able to navigate to the different pages through the header.
 
 ## Getting and Displaying Data from the Server
 
@@ -468,27 +434,28 @@ Here we use the `eq` helper to check for the page, then progressively load the c
 
 ### Creating a restaurants connection.
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and later told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant connection and model in `src/models/restaurant.js`:
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and later told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant supermodel:
 
 ```js
-import superMap from 'can-connect/can/super-map/';
-
-export const connection = superMap({
-  url: '/api/restaurants',
-  idProp: '_id',
-  name: 'restaurants'
-});
-
-export default connection.Map;
+donejs generate supermodel restaurant
 ```
 
-We create a connection with:
+Answer the question about the URL endpoint with `/api/restaurants` and the name of the id property with `_id`. We now created a model and fixtures (for testing without an API) with a folder structure like this:
 
-- `url` - The URL of the REST endpoint
-- `idProp` - The property name of the data unique identifier
-- `name` - A short name used as an identifier when caching data
-
-And then export `connection.Map` as the default which returns a model that we can use to retrieve data.
+```
+├── node_modules
+├── package.json
+├── src/
+|   ├── app.js
+|   └── index.stache
+|   ├── models/
+|   |   ├── fixtures/
+|   |   |   ├── restaurant.js
+|   |   ├── fixtures.js
+|   |   ├── restaurant.js
+|   |   ├── restaurant_test.js
+|   |   ├── test.js
+```
 
 ### Test the connection
 
@@ -502,7 +469,7 @@ Restaurant.getList({}).then(restaurants => console.log(restaurants.attr()));
 
 After reloading the homepage you should see the restaurant information logged in the console. Once verified you can remove the test code again.
 
-### Add the connection to the page
+### Add data to the page
 
 Now we can update the `ViewModel` in `src/restaurant/list/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
 
@@ -563,25 +530,7 @@ And update the template at `src/restaurant/list.stache` to use the [Promise](htt
 </div>
 ```
 
-By checking for `restaurants.isPending` and `restaurants.isResolved` we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at `restaurants.value`.
-
-The current folder structure and files look like this:
-
-```
-├── node_modules
-├── package.json
-├── src/
-|   ├── app.js
-|   └── index.stache
-|   ├── models/
-|   |   ├── restaurant.js
-|   ├── order/
-|   |   ├── history.component
-|   ├── restaurant/
-|   |   ├── list/
-|   |   |   ├── list.js
-|   |   |   ├── list.stache
-```
+By checking for `restaurants.isPending` and `restaurants.isResolved` we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at `restaurants.value`. When navigating to the restaurants page now we can see a list of all restaurants.
 
 ## Creating a unit-tested view model
 
