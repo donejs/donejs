@@ -1805,6 +1805,40 @@ If we now run `npm run document` again, we will see the module show up in the me
 
 ## Production builds
 
+Before creating a production bundle we need to update the `package.json` to add some configuration. Add the following to your "system" section, what it does is:
+
+* Makes the vdom be a dependency of jquery on the server, to facilitate server side rendering.
+* Makes the vdom be ignored in the browser.
+* Creates a *sideBundle* for the vdom so that the progressive bundling algorithm (talked about in the next section) isn't affected by it.
+
+```json
+"system": {
+  ...
+
+  "envs": {
+    "server,build": {
+      "map": {
+        "can/util/vdom/vdom": "can/util/vdom/vdom"
+      },
+      "meta": {
+        "jquery": {
+          "format": "global",
+          "deps": ["can/util/vdom/vdom"]
+        }
+      }
+    }
+  },
+  "map": {
+    "can/util/vdom/vdom": "@empty"
+  },
+  "meta": {
+    "can/util/vdom/vdom": {
+      "sideBundle": true
+    }
+  }
+}
+```
+
 ### Progressive loading
 
 Our `index.stache` contains a can-import tag for each of the pages we have implemented. These can-imports which have nested html will be progressively loaded; the restaurant list page's JavaScript and CSS will only be loaded when the user visits that page.
@@ -1849,10 +1883,10 @@ This will build the application to a `dist/` folder in the project's base direct
 From here your application is ready to be used in production. Enable production mode by setting the `NODE_ENV` variable:
 
 ```
-export NODE_ENV=production
+NODE_ENV=production npm start
 ```
 
-Restart the server to see the application load in production.
+Refresh your browser to see the application load in production.
 
 ### Building to iOS and Android
 
