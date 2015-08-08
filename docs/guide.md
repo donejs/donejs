@@ -558,35 +558,19 @@ All asynchronous requests return a Promise, so the data model will look like thi
 
 ### Create dependent models
 
-The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the according models just like we did for Restaurants already. In `place-my-order/models/state.js`:
+The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the according models just like we did for Restaurants already. For
 
-```js
-// src/models/state.js
-import superMap from 'can-connect/can/super-map/';
-
-export const connection = superMap({
-  url: '/api/states',
-  idProp: 'short',
-  name: 'states'
-});
-
-export default connection.Map;
+```
+donejs generate supermodel state
 ```
 
-and `src/models/city.js`:
+Set the URL to `/api/states` and the id property to `short` and for
 
-```js
-// src/models/city.js
-import superMap from 'can-connect/can/super-map/';
-
-export const connection = superMap({
-  url: '/api/cities',
-  idProp: 'name',
-  name: 'states'
-});
-
-export default connection.Map;
 ```
+donejs generate supermodel city
+```
+
+The URL is `/api/cities` and the id property is `name`. Now we can load a list of states and cities.
 
 ### Implement view model behavior
 
@@ -666,49 +650,85 @@ Let's take a closer look at those properties:
 
 ### Create a test
 
-View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`) in `place-my-order/restaurant/list/list_test.js`:
-
-```js
-// src/restaurant/list/list_test.js
-import { ViewModel } from './list';
-import QUnit from 'steal-qunit';
-
-QUnit.module('place-my-order/restaurant/list');
-
-QUnit.test('basics', function(){
-  ok(true, 'Test ran');
-});
-```
-
-To run the test we can create a simple HTML page in the same folder (`src/restaurant/list/test.html`):
-
-```html
-<title>place-my-order/restaurant/list</title>
-<script src="../../../node_modules/steal/steal.js" main="place-my-order/restaurant/list/list_test"></script>
-<div id="qunit-fixture"></div>
-```
-
-When opening [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) we can see the test pass.
+View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`). When we generated the component we already got a fully working test page for the component which can be opened at [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html). Currently, the existing tests are failing because we updated the view model but in this chapter we will create some unit tests for the new functionality.
 
 #### Fixtures: Create fake data
 
-Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. We will put them in `src/models/fixtures.js`:
+Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. Now we can add fake data by updating `src/models/fixtures/state.js` to:
 
 ```js
-// src/models/fixtures.js
-import fixture from 'can-connect/fixture/';
+import fixture from 'can/util/fixture/';
 
-export const statesFixture = [
+const statesFixture = [
   { name: 'Calisota', short: 'CA' },
   { name: 'New Troy', short: 'NT'}
 ];
 
-export const citiesFixture = {
+const store = fixture.store(5, function(i){
+  return {
+    short: i,
+    name: "state number "+i,
+    ownerId: fixture.rand(10)
+  };
+});
+
+fixture({
+  'GET /api/states': function() {
+    return statesFixture;
+  },
+  'GET /api/states/{short}': store.findOne,
+  'POST /api/states': store.create,
+  'PUT /api/states/{short}': store.update,
+  'DELETE /api/states/{short}': store.destroy
+});
+```
+
+`src/models/fixtures/city.js` looks like:
+
+```js
+import fixture from 'can/util/fixture/';
+
+const store = fixture.store(5, function(i){
+  return {
+    name: i,
+    name: "city number "+i,
+    ownerId: fixture.rand(10)
+  };
+});
+
+const citiesFixture = {
   CA: [{ state: 'CA',name: 'Casadina' }],
   NT: [{ state: 'NT', name: 'Alberny' }]
 }
 
-export const restaurantsFixture = [{
+fixture({
+  'GET /api/cities': function(request) {
+    if(request.data.state === 'CA') {
+      return { data: citiesFixture.CA };
+    }
+    return { data: citiesFixture.NT };
+  },
+  'GET /api/cities/{name}': store.findOne,
+  'POST /api/cities': store.create,
+  'PUT /api/cities/{name}': store.update,
+  'DELETE /api/cities/{name}': store.destroy
+});
+```
+
+And we also need to provide a restaurant list according to the selected city and state in `src/models/fixtures/restaurant.js`:
+
+```js
+import fixture from 'can/util/fixture/';
+
+const store = fixture.store(5, function(i){
+  return {
+    _id: i,
+    name: "restaurant number "+i,
+    ownerId: fixture.rand(10)
+  };
+});
+
+const restaurantsFixture = [{
   _id: 1,
   name: 'Cheese City',
   slug:'cheese-city',
@@ -727,26 +747,18 @@ export const restaurantsFixture = [{
 }];
 
 fixture({
-  '/api/states': function() {
-    return { data: statesFixture };
-  },
-
-  '/api/cities': function(request) {
-    if(request.data.state === 'CA') {
-      return { data: citiesFixture.CA };
-    }
-    return { data: citiesFixture.NT };
-  },
-  '/api/restaurants': function(req) {
+  'GET /api/restaurants': function(req) {
     if(req.data['address.city'] === 'Alberny' && req.data['address.state'] === 'NT') {
       return { data: [ restaurantsFixture[1] ] };
     }
 
     return { data: restaurantsFixture };
-  }
+  },
+  'GET /api/restaurants/{_id}': store.findOne,
+  'POST /api/restaurants': store.create,
+  'PUT /api/restaurants/{_id}': store.update,
+  'DELETE /api/restaurants/{_id}': store.destroy
 });
-
-export default fixture;
 ```
 
 #### Test the view model
@@ -755,35 +767,53 @@ With those fake data available we can test our view model by changing `src/resta
 
 ```
 import QUnit from 'steal-qunit';
-import { statesFixture, citiesFixture, restaurantsFixture } from 'place-my-order/models/fixtures';
+import '../../models/fixtures';
 import { ViewModel } from './list';
+
+const expectedSates = [
+  { name: 'Calisota', short: 'CA' },
+  { name: 'New Troy', short: 'NT'}
+];
+const expectedCities = [{ state: 'CA',name: 'Casadina' }];
+const expectedRestaurants = [{
+  _id: 2,
+  name: 'Crab Barn',
+  slug:'crab-barn',
+  address: {
+    city: 'Alberny',
+    state: 'NT'
+  }
+}];
 
 QUnit.module('place-my-order/restaurant/list');
 
 QUnit.asyncTest('loads all states', function() {
   var vm = new ViewModel();
+
   vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), statesFixture, 'Got all states');
+    QUnit.deepEqual(states.attr(), expectedSates, 'Got all states');
     QUnit.start();
   });
 });
 
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
+
   QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
   vm.attr('cities').then(cities => {
-    QUnit.deepEqual(cities.attr(), citiesFixture.CA);
+    QUnit.deepEqual(cities.attr(), expectedCities);
     QUnit.start();
   });
 });
 
 QUnit.asyncTest('changing a state resets city', function() {
   var vm = new ViewModel();
+
   QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
   vm.attr('cities').then(cities => {
-    QUnit.deepEqual(cities.attr(), citiesFixture.CA);
+    QUnit.deepEqual(cities.attr(), expectedCities);
     vm.attr('state', 'NT');
     QUnit.equal(vm.attr('city'), null);
     QUnit.start();
@@ -792,11 +822,12 @@ QUnit.asyncTest('changing a state resets city', function() {
 
 QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
   var vm = new ViewModel();
+
   vm.attr('state', 'NT');
   vm.attr('city', 'Alberny');
 
   vm.attr('restaurants').then(restaurants => {
-    QUnit.deepEqual(restaurants.attr(), [ restaurantsFixture[1] ]);
+    QUnit.deepEqual(restaurants.attr(), expectedRestaurants);
     QUnit.start();
   });
 });
@@ -878,9 +909,11 @@ Some things worth pointing out:
 - Since `states` and `cities` return a promise, we can check the promise status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
 - The `state` and `city` properties are bound to their select fields via [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
 
-### Create a demo page
+Now we have a component that lets us select state and city and displays the appropriate restaurant list.
 
-With all the component files contained in the `src/restaurant/list/` folder we can also add a demo page at `src/restaurant/list/demo.html` that uses fixtures to demonstrate the component:
+### Update the demo page
+
+We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We want to update it to use fixtures to demonstrate the use of the component:
 
 ```html
 <script type="text/stache" can-autorender>
@@ -893,65 +926,43 @@ With all the component files contained in the `src/restaurant/list/` folder we c
         main="can/view/autorender/"></script>
 ```
 
-View the demo page at [http://localhost:8080/src/restaurant/list/demo.html](http://localhost:8080/src/restaurant/list/demo.html) .
+View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
 
 ## Setup automated tests and continuous integration (CI)
 
-In this chapter we will automate running the tests so that they can be used in a [continuous integration]() environment. We will use [TravisCI]() as the CI server.
+In this chapter we will automate running the tests so that they can be used in a [continuous integration]() environment. We will use [TravisCI](https://travis-ci.org/) as the CI server.
 
 ### Creating a global test page
 
-While we already created an individual test page in `src/restaurant/list/test.html` it is also useful to have another test page that loads and runs all the tests at once. Let's create `src/test.html` like:
-
-```html
-<title>Place my order tests</title>
-<script src="../node_modules/steal/steal.js" main="place-my-order/test"></script>
-<div id="qunit-fixture"></div>
-```
-
-And `src/test.js` which loads all the tests:
+We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [src/test.html](http://localhost:8080/src/test.html). All tests are being loaded in `src/test.js`. Since we do not tests our models at the moment, let's remove the `import 'src/models/test'` part so that it looks like this:
 
 ```js
-import 'place-my-order/models/fixtures';
-import 'place-my-order/restaurant/list/list_test';
+import QUnit from 'steal-qunit';
 
-window.localStorage.clear();
+import 'src/restaurant/list/list_test';
 ```
 
 If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src/test.html) we still see all restaurant list tests passing but we will add more here later on.
 
-### Setting up a test runner
+### Using a test runner
 
-The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee]() which makes it easy to run those tests in any browser from the command line without much configuration. In our example we will use Firefox since it is also installed in the Travis CI environment.
-
-```
-npm install testee --save-dev
-```
-
-Then we can change the `test` script in `package.json` from this:
+The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee]() which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
 
 ```
-"test": "echo \"Error: no test specified\" && exit 1"
+donejs test
 ```
 
-To this:
-
-```js
-  "test": "testee src/test.html --browsers firefox",
-```
-
-Now, running `npm test` from the command line will open Firefox and run the tests using our fixtures. Make sure that Firefox is installed and not currently running.
+To see the tests passing on the command line.
 
 ### Setting continuous integration (Travis CI)
 
-The way our application is set up, all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers (the most popular one probably [Jenkins]() and, many hosted solutions).
+The way our application is set up, all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers (the most popular one probably [Jenkins](https://jenkins-ci.org/) and) many hosted solutions.
 
-We will use [TravisCI]() as our hosted solution because it is free for open source projects. After signing up with GitHub, all we have to do is to enable the place-my-order repository for CI in the Travis CI account settings and add the following `.travis.yml` to our project root:
+We will use TravisCI as our hosted solution because it is free for open source projects. After signing up with GitHub, we have to enable the place-my-order repository in the Travis CI account settings and add the following `.travis.yml` to our project root:
 
 ```
 language: node_js
 node_js: node
-script: npm test
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
@@ -971,11 +982,11 @@ route(':page/:slug/:action', { slug: null, action: null });
 We want to use those routes when we are in the `restaurants` page. The relevant section in `src/index.stache` currently looks like this:
 
 ```html
-{{#eq page "restaurants"}}
+{{#case "restaurants"}}
   <can-import from="src/restaurant/list/">
     <pmo-restaurant-list></pmo-restaurant-list>
   </can-import>
-{{/eq}}
+{{/case}}
 ```
 
 We want to support two additional routes:
@@ -985,7 +996,13 @@ We want to support two additional routes:
 
 ### Create additional components
 
-To make this happen, we need two more components. First, `src/restaurant/details.component` which loads the restaurant (based on the `slug`) and then displays its information:
+To make this happen, we need two more components. First, the `pmo-restaurant-details` component which loads the restaurant (based on the `slug`) and then displays its information.
+
+```
+donejs generate component restaurant/details.component
+```
+
+And change `src/restaurant/details.component` to:
 
 ```html
 <can-component tag="pmo-restaurant-details">
@@ -1036,47 +1053,31 @@ To make this happen, we need two more components. First, `src/restaurant/details
 </can-component>
 ```
 
-The order component will be a little more complex, which is why we will put it into its own folder at `src/order/new/`. For now, we will just use placeholder content and implement the functionality in following chapters. In `src/order/new/new.js`:
+The order component will be a little more complex, which is why we will put it into its own folder:
 
-```js
-import Component from 'can/component/component';
-import Map from 'can/map/';
-import 'can/map/define/';
-import template from './new.stache!';
-
-export const ViewModel = Map.extend({});
-
-export default Component.extend({
-  tag: 'pmo-order-new',
-  viewModel: ViewModel,
-  template
-});
+```
+donejs generate component order/new
 ```
 
-And for the template at `src/order/new/new.stache`:
-
-```html
-<div class="order-form">
-  <h2>Order here</h2>
-</div>
-```
+For now, we will just use placeholder content and implement the functionality in
+the following chapters.
 
 ### Add to the main template
 
 Now we can add those components to the main template (at `src/index.stache`) with conditions based on the routes that we want to match. Change the section which contains
 
 ```html
-{{#eq page "restaurants"}}
+{{#case "restaurants"}}
   <can-import from="place-my-order/restaurant/list/">
     <pmo-restaurant-list></pmo-restaurant-list>
   </can-import>
-{{/eq}}
+{{/case}}
 ```
 
 To:
 
 ```html
-{{#eq page "restaurants"}}
+{{#case "restaurants"}}
   {{#if slug}}
     {{#eq action 'order'}}
       <can-import from="place-my-order/order/new/" can-tag="pmo-loading">
@@ -1094,12 +1095,12 @@ To:
       <pmo-restaurant-list></pmo-restaurant-list>
     </can-import>
   {{/if}}
-{{/eq}}
+{{/case}}
 ```
 
-Here we are basically adding some more conditions if `page` is set to `restaurants`:
+Here we are adding some more conditions if `page` is set to `restaurants`:
 
-- When there is not `slug` set, show the original restaurant list
+- When there is no `slug` set, show the original restaurant list
 - When `slug` is set but no `action`, show the restaurant details
 - When `slug` is set and `action` is `order`, show the order component for that restaurant
 
@@ -1188,10 +1189,15 @@ First, let's look at the restaurant data we get back from the server. It looks l
 }
 ```
 
-We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new model at `src/models/order.js` with the following content:
+We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new `order` model:
+
+```
+donejs generate supermodel order
+```
+
+Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
 ```js
-// src/models/order.js
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
 import List from 'can/list/';
@@ -1250,7 +1256,7 @@ tag('order-model', connection);
 export default Order;
 ```
 
-Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another <order-model> tag to load orders in the order history template later.
+Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
 ### Implement the view model
 
@@ -1308,7 +1314,13 @@ Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder
 
 ### Write the template
 
-First, let's implement a small order confirmation component in `src/order/details.component`:
+First, let's implement a small order confirmation component with
+
+```
+donejs generate component order/details.component
+```
+
+and changing `src/order/details.component` to:
 
 ```html
 <can-component tag="pmo-order-details">
@@ -1442,7 +1454,7 @@ This is a longer template so lets walk through it:
 
 ## Set up a real-time connection
 
-can-connect makes it very easy to implement real-time functionality.It is capable of listening to notifications from the server when server data  has been created, updated, or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket), which allow sending push notifications to a client.
+can-connect makes it very easy to implement real-time functionality. It is capable of listening to notifications from the server when server data has been created, updated, or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket), which allow sending push notifications to a client.
 
 ### Adding real-time events to a model
 
@@ -1522,7 +1534,13 @@ That's all the JavaScript we need to implement real-time functionality. All the 
 </can-component>
 ```
 
-And creating `src/order/list.component`:
+And creating the `pmo-order-list` component with
+
+```
+donejs generate component order/list.component
+```
+
+Changing `src/order/list.component` to:
 
 ```html
 <can-component tag="pmo-order-list">

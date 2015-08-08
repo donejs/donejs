@@ -7,6 +7,7 @@ var appModule = require('app-module-path');
 var fs = require('fs');
 var Q = require('q');
 
+var mypkg = require(path.join(__dirname, '..', 'package.json'));
 var parameters = process.argv;
 var command = parameters[2];
 
@@ -41,7 +42,7 @@ function installIfMissing(module) {
 // Log error messages
 function log(promise) {
   return promise.fail(function(error) {
-    console.error(error.message || error);
+    console.error(error.stack || error.message || error);
     process.exit(1);
   });
 }
@@ -62,12 +63,15 @@ function generator() {
       });
 
       if (command === 'init') {
-        args = ['app'];
+        args = ['app', {
+          version: mypkg.version,
+          packages: mypkg.donejs
+        }];
       } else {
-        args = parameters.slice(3, parameters.length);
+        args = [ parameters.slice(3, parameters.length) ];
       }
 
-      return Q.ninvoke(env, 'run', args);
+      return Q.npost(env, 'run', args);
     });
 }
 
