@@ -2181,7 +2181,15 @@ Add a new `Procfile` that tells Heroku what to launch as the app's server. Since
 web: node_modules/.bin/can-serve --proxy http://place-my-order.com/api
 ```
 
-And do an initial deploy.
+Since Heroku needs the build artifacts we need to commit those before pushing to Heroku, I always do this in a separate branch:
+
+```
+git checkout -b deploy
+git add -f dist
+git commit -m "Deploying to Heroku"
+```
+
+And finally do an initial deploy.
 
 ```
 git push heroku master
