@@ -315,6 +315,8 @@ Now we have three routes available:
 - `:page/:slug` which matches restaurant links like [http://localhost:8080/restaurants/spago](http://localhost:8080/restaurants/spago) which sets `page` and `slug` (a URL friendly restaurant short name)
 - `:page/:slug/:action` which will be used to show the order page for a specific restaurant e.g. [http://localhost:8080/restaurants/spago/order](http://localhost:8080/restaurants/spago/order)
 
+**Note**: Whenever we create new routes we also need to restarting the development server. While the browser knows about the new routes as soon as you save the file, the server does not, so a restart is needed for them to work.
+
 ### Adding a header element
 
 Now is also a good time to add a header element that links to the different routes we just defined. We can run
