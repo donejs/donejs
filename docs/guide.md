@@ -690,7 +690,6 @@ import fixture from 'can/util/fixture/';
 
 const store = fixture.store(5, function(i){
   return {
-    name: i,
     name: "city number "+i,
     ownerId: fixture.rand(10)
   };
@@ -966,8 +965,6 @@ node_js: node
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-addons:
-    firefox: "39.0"
 ```
 
 This tells Travis CI to run the tests on a NodeJS project and also set up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
