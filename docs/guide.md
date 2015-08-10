@@ -296,10 +296,15 @@ To add the routes, change `src/app.js` to:
 import AppMap from "can-ssr/app-map";
 import route from 'can/route/';
 import 'can/route/pushstate/';
+import 'can/map/define/';
 
 const AppViewModel = AppMap.extend({
-  message: 'Hello World!',
-  title: 'place-my-order'
+  define: {
+    title: {
+      serialize: false,
+      value: 'place-my-order'
+    }
+  }
 });
 
 route(':page', { page: 'home' });
