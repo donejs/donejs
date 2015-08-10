@@ -67,7 +67,7 @@ Let's have a quick look at what those files are for:
 
 - `package.json` is the main configuration file that defines all our application dependencies and other settings
 - `src` is the folder where all our development assets live on their own modlets (more about that later)
-- `src/app.js` is the main application file which which exports the main application state
+- `src/app.js` is the main application file which exports the main application state
 - `src/index.stache` is the main template used for both, server side rendering and on the client
 - `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures.js` which will reference all the specific models fixtures files (so that we can run model related tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
 - `src/styles.less` is the main application styles LESS
@@ -153,11 +153,11 @@ The main application file at `src/app.js` looks like this:
 // src/app.js
 import AppMap from "can-ssr/app-map";
 
-const AppState = AppMap.extend({
+const AppViewModel = AppMap.extend({
   message: 'Hello World!'
 });
 
-export default AppState;
+export default AppViewModel;
 ```
 
 This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) which contains the application state (with a default `message` property) and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
@@ -297,23 +297,21 @@ import AppMap from "can-ssr/app-map";
 import route from 'can/route/';
 import 'can/route/pushstate/';
 
-const AppState = AppMap.extend({
+const AppViewModel = AppMap.extend({
   message: 'Hello World!',
   title: 'place-my-order'
 });
-
-export default AppState;
 
 route(':page', { page: 'home' });
 route(':page/:slug', { slug: null });
 route(':page/:slug/:action', { slug: null, action: null });
 
-export default AppState;
+export default AppViewModel;
 ```
 
 Now we have three routes available:
 
-- `:page` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `AppState` to `home` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
+- `:page` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `AppViewModel` to `home` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
 - `:page/:slug` which matches restaurant links like [http://localhost:8080/restaurants/spago](http://localhost:8080/restaurants/spago) which sets `page` and `slug` (a URL friendly restaurant short name)
 - `:page/:slug/:action` which will be used to show the order page for a specific restaurant e.g. [http://localhost:8080/restaurants/spago/order](http://localhost:8080/restaurants/spago/order)
 
