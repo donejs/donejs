@@ -13,7 +13,7 @@ var command = parameters[2];
 
 if(command === 'init' && parameters[3]) {
   var appDir = path.join(process.cwd(), parameters[3]);
-  console.log('Creating folder ', parameters[3]);
+  console.log('Creating folder ' + parameters[3]);
   fs.mkdirSync(appDir);
   process.chdir(appDir);
 }
