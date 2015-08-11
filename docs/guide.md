@@ -197,10 +197,10 @@ There are two ways of creating components. For smaller components we can define 
 To generate a new component run:
 
 ```
-donejs generate component home.component
+donejs generate component home.component pmo-home
 ```
 
-We can answer the question about the tag name for all the components with the default suggestion by hitting enter. This will create a file at `src/home.component` containing the basic layout of components. We will update it to reflect the below content:
+This will create a file at `src/home.component` containing the basic layout of components. We will update it to reflect the below content:
 
 ```html
 <can-component tag="pmo-home">
@@ -226,7 +226,7 @@ Here we created a [can.Component](http://canjs.com/docs/can.Component.html) name
 For now, the order history is very similar. 
 
 ```
-donejs generate component order/history.component
+donejs generate component order/history.component pmo-order-history
 ```
 
 And update `src/order/history.component`:
@@ -253,7 +253,7 @@ The restaurant list will contain more functionality, which is why we will split 
 We can create a basic component like that by running:
 
 ```
-donejs generate component restaurant/list
+donejs generate component restaurant/list pmo-restaurant-list
 ```
 
 The folder structure looks like this:
@@ -327,7 +327,7 @@ Now we have three routes available:
 Now is also a good time to add a header element that links to the different routes we just defined. We can run
 
 ```
-donejs generate component header.component
+donejs generate component header.component pmo-header
 ```
 
 and update `src/header.component` to:
@@ -363,7 +363,7 @@ Here we use the `eq` helper to make the appropriate link active and then use [ca
 To show that something is currently loading, let's create a `pmo-loading` component:
 
 ```
-donejs generate component loading.component
+donejs generate component loading.component pmo-loading
 ```
 
 With changing `src/loading.component` to:
@@ -1003,7 +1003,7 @@ We want to support two additional routes:
 To make this happen, we need two more components. First, the `pmo-restaurant-details` component which loads the restaurant (based on the `slug`) and then displays its information.
 
 ```
-donejs generate component restaurant/details.component
+donejs generate component restaurant/details.component pmo-restaurant-details
 ```
 
 And change `src/restaurant/details.component` to:
@@ -1060,7 +1060,7 @@ And change `src/restaurant/details.component` to:
 The order component will be a little more complex, which is why we will put it into its own folder:
 
 ```
-donejs generate component order/new
+donejs generate component order/new pmo-order-new
 ```
 
 For now, we will just use placeholder content and implement the functionality in
@@ -1321,7 +1321,7 @@ Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder
 First, let's implement a small order confirmation component with
 
 ```
-donejs generate component order/details.component
+donejs generate component order/details.component pmo-order-details
 ```
 
 and changing `src/order/details.component` to:
@@ -1541,7 +1541,7 @@ That's all the JavaScript we need to implement real-time functionality. All the 
 And creating the `pmo-order-list` component with
 
 ```
-donejs generate component order/list.component
+donejs generate component order/list.component pmo-order-list
 ```
 
 Changing `src/order/list.component` to:
