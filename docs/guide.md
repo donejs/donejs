@@ -138,7 +138,7 @@ Every DoneJS application consists of at least two files: A main template (in thi
           main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
-        <script src="node_modules/steal/steal.js"></script>
+        <script src="/node_modules/steal/steal.js"></script>
       {{/default}}
     {{/switch}}
   </body>
@@ -424,7 +424,7 @@ Now we can glue all those individual components together in `src/index.stache`. 
           main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
-        <script src="node_modules/steal/steal.js"></script>
+        <script src="/node_modules/steal/steal.js"></script>
       {{/default}}
     {{/switch}}
   </body>
