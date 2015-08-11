@@ -36,7 +36,7 @@ Then we can create a new DoneJS application:
 donejs init place-my-order
 ```
 
-The initialization process will ask you questions like the name of your application (set to `place-my-order` which we can keep) and a short name which you can answer with `pmo` (short for `place-my-order`). Note that the short name is important. It will be used as a prefix for the component tag names. For example, the home component we generate later in this guide will have the a tag name of `pmo-home`. The other questions can be skipped for now by hitting enter. This will install all of DoneJS dependencies, among other things the main projects:
+The initialization process will ask you questions like the name of your application (set to `place-my-order` which we can keep) and the source folder (set to `src` which we can keep as well). The other questions can be skipped for now by hitting enter. This will install all of DoneJS dependencies, among other things the main projects:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
@@ -47,7 +47,13 @@ The initialization process will ask you questions like the name of your applicat
 - Testee or Karma - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
-If we now go into the `place-my-order` folder we can see the following files:
+If we now go into the `place-my-order` folder with
+
+```
+cd place-my-order
+```
+
+We can see the following files:
 
 ```
 ├── package.json
@@ -95,8 +101,7 @@ Now, we can add an API server start script into the `scripts` section of our `pa
 
 ```js
 "scripts": {
-    "api": "place-my-order-api --port 7070"
-},
+    "api": "place-my-order-api --port 7070",
 ```
 
 Which allows to start the server like:
@@ -168,6 +173,7 @@ Now our application is good to go and we can start the server. We need to proxy 
 
 ```js
 "scripts": {
+  "api": "place-my-order-api --port 7070",
   "start": "can-serve --port 8080",
 ```
 
@@ -175,6 +181,7 @@ To:
 
 ```js
 "scripts": {
+  "api": "place-my-order-api --port 7070",
   "start": "can-serve --proxy http://localhost:7070 --port 8080",
 ```
 
