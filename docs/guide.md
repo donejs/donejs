@@ -778,7 +778,7 @@ With those fake data available we can test our view model by changing `src/resta
 
 ```
 import QUnit from 'steal-qunit';
-import '../../models/fixtures';
+import '../../models/fixtures/';
 import { ViewModel } from './list';
 
 const expectedSates = [
