@@ -87,7 +87,7 @@ DoneJS comes with its own server which does both, host your development files an
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
+The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`. Kill the server for now, we need to install a few dependencies (ctrl+c on Windows, cmd+c on Mac).
 
 ### Setup a service API
 
