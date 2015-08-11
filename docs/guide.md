@@ -929,7 +929,7 @@ We already have an existing demo page at [src/restaurant/list/list.html](http://
 ```html
 <script type="text/stache" can-autorender>
   <can-import from="place-my-order-assets" />
-  <can-import from="place-my-order/models/fixtures" />
+  <can-import from="place-my-order/models/fixtures/" />
   <can-import from="place-my-order/restaurant/list/" />
   <pmo-restaurant-list></pmo-restaurant-list>
 </script>
