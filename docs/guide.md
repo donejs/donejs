@@ -158,11 +158,19 @@ The main application file at `src/app.js` looks like this:
 
 ```
 // src/app.js
+import "can/route/";
 import AppMap from "can-ssr/app-map";
+import 'can/map/define/';
 
 const AppViewModel = AppMap.extend({
-  message: 'Hello World!',
-  title: 'place-my-order'
+  define: {
+    message: {
+      value: 'Hello World!'
+    },
+    title: {
+      value: 'place-my-order'
+    }
+  }
 });
 
 export default AppViewModel;
