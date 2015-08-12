@@ -1819,21 +1819,6 @@ Before creating a production bundle we need to update the `package.json` to add 
 
 Our `index.stache` contains a can-import tag for each of the pages we have implemented. These can-imports which have nested html will be progressively loaded; the restaurant list page's JavaScript and CSS will only be loaded when the user visits that page.
 
-To create an optimized production build StealTools will break apart the app into bundles that will be progressively loaded. We will add one bundle for each of these pages by updating our package.json like so:
-
-```js
-"system": {
-  ...
-  "bundle": [
-    "dguide/home.component!",
-    "dguide/order/new/",
-    "dguide/restaurant/details.component!",
-    "dguide/restaurant/list/",
-    "dguide/order/history.component!"
-  ]
-}
-```
-
 ### Bundling your app
 
 To bundle our application for production we create a build script. We could use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example let's simply create a `build.js` file:
