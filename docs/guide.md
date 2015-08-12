@@ -1232,7 +1232,7 @@ let Order = Map.extend({
 
 export const connection = superMap({
   url: '/api/orders',
-  idProp: 'name',
+  idProp: '_id',
   Map: Order,
   List: Order.List,
   name: 'orders'
