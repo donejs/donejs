@@ -737,11 +737,11 @@ const store = fixture.store([{
 });
 
 fixture({
-  'GET /restaurant': store.findAll,
-  'GET /restaurant/{id}': store.findOne,
-  'POST /restaurant': store.create,
-  'PUT /restaurant/{id}': store.update,
-  'DELETE /restaurant/{id}': store.destroy
+  'GET /api/restaurant': store.findAll,
+  'GET /api/restaurant/{id}': store.findOne,
+  'POST /api/restaurant': store.create,
+  'PUT /api/restaurant/{id}': store.update,
+  'DELETE /api/restaurant/{id}': store.destroy
 });
 
 export default store;
