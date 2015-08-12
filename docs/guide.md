@@ -1680,7 +1680,7 @@ This is the documentation for the frontend of [place-my-order.com](http://place-
 If we now run
 
 ```
-npm run document
+donejs document
 ```
 
 And go to [http://localhost:8080/docs/](http://localhost:8080/docs/) we will see the documentation generated from that page.
@@ -1744,9 +1744,11 @@ export const ViewModel = Map.extend({
   },
 
   /**
+   * @function placeOrder
+   *
    * Save the current order and update the status Deferred.
    *
-   * @returns {boolean} false to prevent the form submission
+   * @return {boolean} false to prevent the form submission
    */
   placeOrder() {
     let order = this.attr('order');
@@ -1755,9 +1757,11 @@ export const ViewModel = Map.extend({
   },
 
   /**
+   * @function startNewOrder
+   *
    * Resets the order form, so a new order can be placed.
    *
-   * @returns {boolean} false to prevent the form submission
+   * @return {boolean} false to prevent the form submission
    */
   startNewOrder: function() {
     this.attr('order', new Order());
@@ -1773,7 +1777,7 @@ export default Component.extend({
 });
 ```
 
-If we now run `npm run document` again, we will see the module show up in the menu bar and will be able to navigate through the different properties.
+If we now run `donejs document` again, we will see the module show up in the menu bar and will be able to navigate through the different properties.
 
 ## Production builds
 
