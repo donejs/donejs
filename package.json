@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -51,7 +51,7 @@
       "done-css": "~1.1.6",
       "generator-donejs": "^0.2.7",
       "jquery": "~2.1.4",
-      "steal": "^0.11.0-pre.3",
+      "steal": "^0.11.0-pre.4",
       "yeoman-environment": "~1.2.7"
     },
     "devDependencies": {
