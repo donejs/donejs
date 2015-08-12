@@ -1445,20 +1445,50 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 
 ### Adding real-time events to a model
 
-The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection:
+The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
+
+Stop your development server so we can install socket.io, a little bit of configuration is needed to make it work. Unlike most of our code, socket.io is exclusively a feature for the browser, but our application also runs in Node. StealJS provides the ability to ignore a module and to set configuration on each environment. Update your package.json, adding the following to the `"system"` object:
+
+```json
+{
+  "system": {
+    ...
+    "map": {
+      "socket.io-client": "socket.io-client/socket.io"
+    },
+    "meta": {
+      "socket.io-client/socket.io": {
+        "format": "global"
+      }
+    },
+    "envs": {
+      "server": {
+        "map": {
+          "socket.io-client/socket.io": "@empty"
+        }
+      }
+    }
+  }
+}
+```
 
 ```
-npm install socket.io-client
+npm install socket.io-client --save
 ```
+
+Now you can restart your server with `donejs develop` and visit the order page. In `src/models/order.js` add:
 
 ```js
 import io from 'socket.io-client';
 
-const socket = io();
+// io will be undefined when running on the server.
+if(io) {
+  const socket = io();
 
-socket.on('orders created', order => orderConnection.createInstance(order));
-socket.on('orders updated', order => orderConnection.updateInstance(order));
-socket.on('orders removed', order => orderConnection.destroyInstance(order));
+  socket.on('orders created', order => orderConnection.createInstance(order));
+  socket.on('orders updated', order => orderConnection.updateInstance(order));
+  socket.on('orders removed', order => orderConnection.destroyInstance(order));
+}
 ```
 
 ### Update the template
