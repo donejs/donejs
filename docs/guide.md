@@ -991,6 +991,7 @@ donejs generate component restaurant/details.component pmo-restaurant-details
 And change `src/restaurant/details.component` to:
 
 ```html
+<can-import from="place-my-order/models/restaurant"/>
 <can-component tag="pmo-restaurant-details">
   <template>
     <restaurant-model get="{ _id=slug }">
