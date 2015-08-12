@@ -1783,7 +1783,7 @@ If we now run `donejs document` again, we will see the module show up in the men
 
 Now we're ready to create a production build; go ahead and kill your development server, we won't need it from here on.
 
-Before creating a production build we need to update the `package.json` to add some configuration. Add the following to your "system" section, what it does is:
+Before creating a production build we need to update the `package.json` to add some configuration. Replace the following in the **"system"** section; what it does is:
 
 * Makes the vdom be a dependency of jquery on the server, to facilitate server side rendering.
 * Makes the vdom be ignored in the browser.
@@ -1791,9 +1791,38 @@ Before creating a production build we need to update the `package.json` to add s
 
 ```json
 "system": {
-  ...
-
+  "main": "place-my-order/index.stache!done-autorender",
+  "directories": {
+    "lib": "src"
+  },
+  "configDependencies": [
+    "live-reload"
+  ],
+  "npmIgnore": [
+    "documentjs",
+    "testee",
+    "donejs-deploy",
+    "yeoman-generator",
+    "generator-donejs"
+  ],
+  "map": {
+    "can/util/vdom/vdom": "./@empty",
+    "socket.io-client": "socket.io-client/socket.io"
+  },
+  "meta": {
+    "socket.io-client/socket.io": {
+      "format": "global"
+    },
+    "can/util/vdom/vdom": {
+      "sideBundle": true
+    }
+  },
   "envs": {
+    "server": {
+      "map": {
+        "socket.io-client/socket.io": "@empty"
+      }
+    },
     "server,build": {
       "map": {
         "can/util/vdom/vdom": "can/util/vdom/vdom"
@@ -1804,14 +1833,6 @@ Before creating a production build we need to update the `package.json` to add s
           "deps": ["can/util/vdom/vdom"]
         }
       }
-    }
-  },
-  "map": {
-    "can/util/vdom/vdom": "./@empty"
-  },
-  "meta": {
-    "can/util/vdom/vdom": {
-      "sideBundle": true
     }
   }
 }
