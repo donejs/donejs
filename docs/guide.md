@@ -159,7 +159,8 @@ The main application file at `src/app.js` looks like this:
 import AppMap from "can-ssr/app-map";
 
 const AppViewModel = AppMap.extend({
-  message: 'Hello World!'
+  message: 'Hello World!',
+  title: 'place-my-order'
 });
 
 export default AppViewModel;
@@ -230,7 +231,7 @@ Here we created a [can.Component](http://canjs.com/docs/can.Component.html) name
 
 ### Create the order history element
 
-For now, the order history is very similar. 
+For now, the order history is very similar.
 
 ```
 donejs generate component order/history.component pmo-order-history
@@ -495,7 +496,7 @@ import Restaurant from 'place-my-order/models/restaurant';
 export var ViewModel = Map.extend({
   define: {
     restaurants: {
-      value(){
+      value() {
         return Restaurant.getList({});
       }
     }
@@ -509,7 +510,7 @@ export default Component.extend({
 });
 ```
 
-And update the template at `src/restaurant/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
+And update the template at `src/restaurant/list/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
 
 ```html
 <div class="restaurants">
@@ -669,77 +670,51 @@ View models that are decoupled from the actual presentation make it easy to test
 Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. Now we can add fake data by updating `src/models/fixtures/state.js` to:
 
 ```js
-import fixture from 'can/util/fixture/';
+import fixture from 'can-connect/fixture/';
 
-const statesFixture = [
+const store = fixture.store([
   { name: 'Calisota', short: 'CA' },
   { name: 'New Troy', short: 'NT'}
-];
-
-const store = fixture.store(5, function(i){
-  return {
-    short: i,
-    name: "state number "+i,
-    ownerId: fixture.rand(10)
-  };
-});
+],{});
 
 fixture({
-  'GET /api/states': function() {
-    return statesFixture;
-  },
-  'GET /api/states/{short}': store.findOne,
+  'GET /api/states': store.findAll,
+  'GET /api/states/{_id}': store.findOne,
   'POST /api/states': store.create,
-  'PUT /api/states/{short}': store.update,
-  'DELETE /api/states/{short}': store.destroy
+  'PUT /api/states/{_id}': store.update,
+  'DELETE /api/states/{_id}': store.destroy
 });
+
+export default store;
 ```
 
 `src/models/fixtures/city.js` looks like:
 
 ```js
-import fixture from 'can/util/fixture/';
+import fixture from 'can-connect/fixture/';
 
-const store = fixture.store(5, function(i){
-  return {
-    name: "city number "+i,
-    ownerId: fixture.rand(10)
-  };
-});
-
-const citiesFixture = {
-  CA: [{ state: 'CA',name: 'Casadina' }],
-  NT: [{ state: 'NT', name: 'Alberny' }]
-}
+const store = fixture.store([
+  { state: 'CA', name: 'Casadina' },
+  { state: 'NT', name: 'Alberny' }
+],{});
 
 fixture({
-  'GET /api/cities': function(request) {
-    if(request.data.state === 'CA') {
-      return { data: citiesFixture.CA };
-    }
-    return { data: citiesFixture.NT };
-  },
-  'GET /api/cities/{name}': store.findOne,
+  'GET /api/cities': store.findAll,
+  'GET /api/cities/{_id}': store.findOne,
   'POST /api/cities': store.create,
-  'PUT /api/cities/{name}': store.update,
-  'DELETE /api/cities/{name}': store.destroy
+  'PUT /api/cities/{_id}': store.update,
+  'DELETE /api/cities/{_id}': store.destroy
 });
+
+export default store;
 ```
 
 And we also need to provide a restaurant list according to the selected city and state in `src/models/fixtures/restaurant.js`:
 
 ```js
-import fixture from 'can/util/fixture/';
+import fixture from 'can-connect/fixture/';
 
-const store = fixture.store(5, function(i){
-  return {
-    _id: i,
-    name: "restaurant number "+i,
-    ownerId: fixture.rand(10)
-  };
-});
-
-const restaurantsFixture = [{
+const store = fixture.store([{
   _id: 1,
   name: 'Cheese City',
   slug:'cheese-city',
@@ -755,21 +730,24 @@ const restaurantsFixture = [{
     city: 'Alberny',
     state: 'NT'
   }
-}];
+}],{
+  "address.city": function(restaurantValue, paramValue, restaurant){
+    return restaurant.address.city === paramValue;
+  },
+  "address.state": function(restaurantValue, paramValue, restaurant){
+    return restaurant.address.state === paramValue;
+  }
+});
 
 fixture({
-  'GET /api/restaurants': function(req) {
-    if(req.data['address.city'] === 'Alberny' && req.data['address.state'] === 'NT') {
-      return { data: [ restaurantsFixture[1] ] };
-    }
-
-    return { data: restaurantsFixture };
-  },
-  'GET /api/restaurants/{_id}': store.findOne,
+  'GET /api/restaurants': store.findAll,
+  'GET /api/restaurants/{id}': store.findOne,
   'POST /api/restaurants': store.create,
-  'PUT /api/restaurants/{_id}': store.update,
-  'DELETE /api/restaurants/{_id}': store.destroy
+  'PUT /api/restaurants/{id}': store.update,
+  'DELETE /api/restaurants/{id}': store.destroy
 });
+
+export default store;
 ```
 
 #### Test the view model
@@ -778,37 +756,30 @@ With those fake data available we can test our view model by changing `src/resta
 
 ```
 import QUnit from 'steal-qunit';
-import '../../models/fixtures/';
+import cityStore from 'place-my-order/models/fixtures/city';
+import stateStore from 'place-my-order/models/fixtures/state';
+import restaurantStore from 'place-my-order/models/fixtures/restaurant';
 import { ViewModel } from './list';
 
-const expectedSates = [
-  { name: 'Calisota', short: 'CA' },
-  { name: 'New Troy', short: 'NT'}
-];
-const expectedCities = [{ state: 'CA',name: 'Casadina' }];
-const expectedRestaurants = [{
-  _id: 2,
-  name: 'Crab Barn',
-  slug:'crab-barn',
-  address: {
-    city: 'Alberny',
-    state: 'NT'
+QUnit.module('place-my-order/restaurant/list', {
+  beforeEach() {
+    localStorage.clear();
   }
-}];
-
-QUnit.module('place-my-order/restaurant/list');
+});
 
 QUnit.asyncTest('loads all states', function() {
   var vm = new ViewModel();
+  var expectedSates = stateStore.findAll({});
 
   vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), expectedSates, 'Got all states');
+    QUnit.deepEqual(states.attr(), expectedSates.data, 'Got all states');
     QUnit.start();
   });
 });
 
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
+  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
 
   QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
@@ -820,6 +791,7 @@ QUnit.asyncTest('setting a state loads its cities', function() {
 
 QUnit.asyncTest('changing a state resets city', function() {
   var vm = new ViewModel();
+  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
 
   QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
@@ -833,6 +805,9 @@ QUnit.asyncTest('changing a state resets city', function() {
 
 QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
   var vm = new ViewModel();
+  var expectedRestaurants = restaurantStore.findAll({
+  	data: {"address.city": "Alberny"}
+  }).data;
 
   vm.attr('state', 'NT');
   vm.attr('city', 'Alberny');
@@ -844,7 +819,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 });
 ```
 
-Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
+Here, we are using the expected data we defined in each fixture to compare with what we are actually getting. Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
 
 ### Write the template
 
@@ -1016,6 +991,7 @@ donejs generate component restaurant/details.component pmo-restaurant-details
 And change `src/restaurant/details.component` to:
 
 ```html
+<can-import from="place-my-order/models/restaurant"/>
 <can-component tag="pmo-restaurant-details">
   <template>
     <restaurant-model get="{ _id=slug }">
@@ -1622,7 +1598,8 @@ Changing `src/order/list.component` to:
       {{/if}}
     {{/if}}
   </template>
-</can-component>```
+</can-component>
+```
 
 First we import the order model and then just call `<order-model getList="{status='<status>'}">` for each order status. That's it. If we now open the order page we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
