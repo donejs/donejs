@@ -1781,7 +1781,9 @@ If we now run `donejs document` again, we will see the module show up in the men
 
 ## Production builds
 
-Before creating a production bundle we need to update the `package.json` to add some configuration. Add the following to your "system" section, what it does is:
+Now we're ready to create a production build; go ahead and kill your development server, we won't need it from here on.
+
+Before creating a production build we need to update the `package.json` to add some configuration. Add the following to your "system" section, what it does is:
 
 * Makes the vdom be a dependency of jquery on the server, to facilitate server side rendering.
 * Makes the vdom be ignored in the browser.
