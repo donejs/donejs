@@ -565,8 +565,6 @@ In this chapter we will create a view model for the restaurant list functionalit
 
 First we need to identify the properties that our view model needs to provide. We want to load a list of states from the server and let the user select a single state. Then we do the same for cities and finally load the restaurant list for that selection.
 
-![Restaurant list model state](img/restaurant-list-state.png)
-
 All asynchronous requests return a Promise, so the data model will look like this:
 
 ```js
@@ -689,10 +687,10 @@ const store = fixture.store([
 
 fixture({
   'GET /api/states': store.findAll,
-  'GET /api/states/{_id}': store.findOne,
+  'GET /api/states/{short}': store.findOne,
   'POST /api/states': store.create,
-  'PUT /api/states/{_id}': store.update,
-  'DELETE /api/states/{_id}': store.destroy
+  'PUT /api/states/{short}': store.update,
+  'DELETE /api/states/{short}': store.destroy
 });
 
 export default store;
@@ -710,10 +708,10 @@ const store = fixture.store([
 
 fixture({
   'GET /api/cities': store.findAll,
-  'GET /api/cities/{_id}': store.findOne,
+  'GET /api/cities/{name}': store.findOne,
   'POST /api/cities': store.create,
-  'PUT /api/cities/{_id}': store.update,
-  'DELETE /api/cities/{_id}': store.destroy
+  'PUT /api/cities/{name}': store.update,
+  'DELETE /api/cities/{name}': store.destroy
 });
 
 export default store;
