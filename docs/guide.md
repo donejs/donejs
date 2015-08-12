@@ -87,7 +87,9 @@ DoneJS comes with its own server which does both, host your development files an
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`. Kill the server for now, we need to install a few dependencies (ctrl+c on Windows, cmd+c on Mac).
+The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
+
+**Note**: Kill the server for now while we need to install a few dependencies (ctrl+c on Windows, cmd+c on Mac).
 
 ### Setup a service API
 
@@ -1447,7 +1449,7 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 
 The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
 
-Stop your development server so we can install socket.io, a little bit of configuration is needed to make it work. Unlike most of our code, socket.io is exclusively a feature for the browser, but our application also runs in Node. StealJS provides the ability to ignore a module and to set configuration on each environment. Update your package.json, adding the following to the `"system"` object:
+**Note**: Stop your development server so we can install socket.io, a little bit of configuration is needed to make it work. Unlike most of our code, socket.io is exclusively a feature for the browser, but our application also runs in Node. StealJS provides the ability to ignore a module and to set configuration on each environment. Update your package.json, adding the following to the `"system"` object:
 
 ```json
 {
