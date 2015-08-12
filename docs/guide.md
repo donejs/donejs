@@ -1493,65 +1493,7 @@ if(io) {
 
 ### Update the template
 
-That's all the JavaScript we need to implement real-time functionality. All the rest can be done in the order history template by updating `src/order/history.component` to:
-
-```html
-<can-component tag="pmo-order-history">
-  <template>
-    <can-import from="place-my-order/models/order" />
-
-    <div class="order-history">
-      <div class="order header">
-        <address>Name / Address / Phone</address>
-        <div class="items">Order</div>
-        <div class="total">Total</div>
-        <div class="actions">Action</div>
-      </div>
-
-      <can-import from="place-my-order/order/list.component!" can-tag="pmo-loading">
-        <order-model getList="{status='new'}">
-          <pmo-order-list
-            orders="{.}"
-            status="new"
-            title="New Orders"
-            empty-message="No new orders">
-          </pmo-order-list>
-        </order-model>
-
-        <order-model getList="{status='preparing'}">
-          <pmo-order-list
-            orders="{.}"
-            status="preparing"
-            title="Preparing"
-            empty-message="No orders preparing">
-          </pmo-order-list>
-        </order-model>
-
-        <order-model getList="{status='delivery'}">
-          <pmo-order-list
-            orders="{.}"
-            status="delivery"
-            title="In delivery"
-            empty-message="No orders in delivery">
-          </pmo-order-list>
-        </order-model>
-
-        <order-model getList="{status='delivered'}">
-          <pmo-order-list
-            orders="{.}"
-            status="delivered"
-            title="Delivered"
-            empty-message="No delivered orders">
-          </pmo-order-list>
-        </order-model>
-      </can-import>
-
-    </div>
-  </template>
-</can-component>
-```
-
-And creating the `pmo-order-list` component with
+That's all the JavaScript we need to implement real-time functionality. All the rest can be done by creating the `pmo-order-list` component with:
 
 ```
 donejs generate component order/list.component pmo-order-list
@@ -1627,6 +1569,64 @@ Changing `src/order/list.component` to:
       <div class="order empty">{{emptyMessage}}</div>
       {{/if}}
     {{/if}}
+  </template>
+</can-component>
+```
+
+And in the order history template by updating `src/order/history.component` to:
+
+```html
+<can-component tag="pmo-order-history">
+  <template>
+    <can-import from="place-my-order/models/order" />
+
+    <div class="order-history">
+      <div class="order header">
+        <address>Name / Address / Phone</address>
+        <div class="items">Order</div>
+        <div class="total">Total</div>
+        <div class="actions">Action</div>
+      </div>
+
+      <can-import from="place-my-order/order/list.component!" can-tag="pmo-loading">
+        <order-model getList="{status='new'}">
+          <pmo-order-list
+            orders="{.}"
+            status="new"
+            title="New Orders"
+            empty-message="No new orders">
+          </pmo-order-list>
+        </order-model>
+
+        <order-model getList="{status='preparing'}">
+          <pmo-order-list
+            orders="{.}"
+            status="preparing"
+            title="Preparing"
+            empty-message="No orders preparing">
+          </pmo-order-list>
+        </order-model>
+
+        <order-model getList="{status='delivery'}">
+          <pmo-order-list
+            orders="{.}"
+            status="delivery"
+            title="In delivery"
+            empty-message="No orders in delivery">
+          </pmo-order-list>
+        </order-model>
+
+        <order-model getList="{status='delivered'}">
+          <pmo-order-list
+            orders="{.}"
+            status="delivered"
+            title="Delivered"
+            empty-message="No delivered orders">
+          </pmo-order-list>
+        </order-model>
+      </can-import>
+
+    </div>
   </template>
 </can-component>
 ```
