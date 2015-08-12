@@ -733,6 +733,9 @@ const store = fixture.store([{
 }],{
   "address.city": function(restaurantValue, paramValue, restaurant){
     return restaurant.address.city === paramValue;
+  },
+  "address.state": function(restaurantValue, paramValue, restaurant){
+    return restaurant.address.state === paramValue;
   }
 });
 
@@ -766,17 +769,17 @@ QUnit.module('place-my-order/restaurant/list', {
 
 QUnit.asyncTest('loads all states', function() {
   var vm = new ViewModel();
-  var expectedSates = stateStore.findAll();
+  var expectedSates = stateStore.findAll({});
 
   vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), expectedSates, 'Got all states');
+    QUnit.deepEqual(states.attr(), expectedSates.data, 'Got all states');
     QUnit.start();
   });
 });
 
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
-  var expectedCities = [ cityStore.findAll().data[0] ];
+  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
 
   QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
@@ -788,7 +791,7 @@ QUnit.asyncTest('setting a state loads its cities', function() {
 
 QUnit.asyncTest('changing a state resets city', function() {
   var vm = new ViewModel();
-  var expectedCities = [ cityStore.findAll().data[0] ];
+  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
 
   QUnit.equal(vm.attr('cities'), null, '');
   vm.attr('state', 'CA');
@@ -802,7 +805,9 @@ QUnit.asyncTest('changing a state resets city', function() {
 
 QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
   var vm = new ViewModel();
-  var expectedRestaurants = [ restaurantStore.findAll().data[1] ];
+  var expectedRestaurants = restaurantStore.findAll({
+  	data: {"address.city": "Alberny"}
+  }).data;
 
   vm.attr('state', 'NT');
   vm.attr('city', 'Alberny');
