@@ -675,7 +675,7 @@ import fixture from 'can-connect/fixture/';
 const store = fixture.store([
   { name: 'Calisota', short: 'CA' },
   { name: 'New Troy', short: 'NT'}
-]);
+],{});
 
 fixture({
   'GET /api/states': store.findAll,
@@ -696,7 +696,7 @@ import fixture from 'can-connect/fixture/';
 const store = fixture.store([
   { state: 'CA', name: 'Casadina' },
   { state: 'NT', name: 'Alberny' }
-]);
+],{});
 
 fixture({
   'GET /api/cities': store.findAll,
@@ -730,7 +730,11 @@ const store = fixture.store([{
     city: 'Alberny',
     state: 'NT'
   }
-}]);
+}],{
+  "address.city": function(restaurantValue, paramValue, restaurant){
+    return restaurant.address.city === paramValue;
+  }
+});
 
 fixture({
   'GET /restaurant': store.findAll,
