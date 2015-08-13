@@ -531,7 +531,7 @@ And update the template at `src/restaurant/list/list.stache` to use the [Promise
   {{#if restaurants.isResolved}}
     {{#each restaurants.value}}
       <div class="restaurant">
-        <img src="/{{images.thumbnail}}" width="100" height="100">
+        <img src="{{~ images.thumbnail}}" width="100" height="100">
         <h3>{{name}}</h3>
         {{#address}}
         <div class="address">
@@ -729,6 +729,11 @@ const store = fixture.store([{
   address: {
     city: 'Casadina',
     state: 'CA'
+  },
+  images: {
+    banner: "node_modules/place-my-order-assets/images/1-banner.jpg",
+    owner: "node_modules/place-my-order-assets/images/2-owner.jpg",
+    thumbnail: "node_modules/place-my-order-assets/images/3-thumbnail.jpg"
   }
 }, {
   _id: 2,
@@ -737,6 +742,11 @@ const store = fixture.store([{
   address: {
     city: 'Alberny',
     state: 'NT'
+  },
+  images: {
+    banner: "node_modules/place-my-order-assets/images/2-banner.jpg",
+    owner: "node_modules/place-my-order-assets/images/3-owner.jpg",
+    thumbnail: "node_modules/place-my-order-assets/images/2-thumbnail.jpg"
   }
 }],{
   "address.city": function(restaurantValue, paramValue, restaurant){
@@ -2183,7 +2193,7 @@ Now your assets will live on a CDN. You can update your `index.stache` template 
   {{/case}}
 
   {{#default}}
-    <script src="node_modules/steal/steal.js"></script>
+    <script src="/node_modules/steal/steal.js"></script>
   {{/default}}
 {{/switch}}
 ```
