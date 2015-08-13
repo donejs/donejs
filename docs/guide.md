@@ -56,7 +56,10 @@ cd place-my-order
 We can see the following files:
 
 ```
+├── documentjs.json
 ├── package.json
+├── readme.md
+├── test.html
 ├── src/
 |   ├── app.js
 |   ├── index.stache
@@ -64,20 +67,25 @@ We can see the following files:
 |   |   ├── fixtures.js
 |   |   ├── test.js
 |   ├── styles.less
-|   ├── test.html
-|   ├── test.js
+|   ├── test/
+|   |   ├── test.js
+|   |   ├── smoke.js
 ├── node_modules/
 ```
 
 Let's have a quick look at what those files are for:
 
 - `package.json` is the main configuration file that defines all our application dependencies and other settings
+- `test.html` is used to run all our tests
+- `documentjs.json` is the configuration file for generating documentation
+- `readme.md` is the readme file for your repository
 - `src` is the folder where all our development assets live on their own modlets (more about that later)
 - `src/app.js` is the main application file which exports the main application state
 - `src/index.stache` is the main template used for both, server side rendering and on the client
 - `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures.js` which will reference all the specific models fixtures files (so that we can run model related tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
 - `src/styles.less` is the main application styles LESS
-- `src/test.html` and `src/test.js` are used to collect all individual component and model tests we will create throughout this guide to run in a single test file.
+- `src/test/test.js` collects all individual component and model tests we will create throughout this guide and is loaded by `test.html`
+- `src/test/smoke.js` will contain functional smoke tests for our application
 
 ### Development mode
 
@@ -967,12 +975,13 @@ We will use TravisCI as our hosted solution because it is free for open source p
 ```
 language: node_js
 node_js: node
+script: npm start & npm test
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 ```
 
-This tells Travis CI to run the tests on a NodeJS project and also set up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
+By default Travis CI runs `npm test` but we will also need our server running (for the functional tests) so we set it in the `script` section. `before_install` sets up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
 
 ## Nested routes
 
@@ -1653,59 +1662,19 @@ First we import the order model and then just call `<order-model getList="{statu
 
 ## Create documentation
 
-Documenting our code is very important to quickly get other developers up to speed. [DocumentJS]() makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in your project.
+Documenting our code is very important to quickly get other developers up to speed. [DocumentJS](http://documentjs.com/) makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.
 
 ### Configuring DocumentJS
 
-To configure DocumentJS we need a `documentjs.json` in the project main folder that looks like this:
-
-```js
-{
-  "sites": {
-    "docs": {
-      "dest": "docs",
-      "parent": "pmo",
-      "pageConfig": {
-        "page": "docs"
-      },
-      "glob": {
-        "pattern": "src/**/*.{js,md}"
-      }
-    }
-  }
-}
-```
-
-This tells DocumentJS to parse all `.js` and `.md` files in the `src/` folder (with the `pmo` page as the main parent) and to write the generated documentation into a `docs/` folder. Since DocumentJS is only installed locally (as a dependency of DoneJS) we will also add a documentation script to our `package.json`:
-
-```js
-  "scripts": {
-    "document": "documentjs",
-```
-
-### Create a main documentation file
-
-Now we need to create a Markdown file that provides the `pmo` main parent page. Add `src/index.md`:
-
-```
-@@page pmo
-
-# place-my-order.com
-
-This is the documentation for the frontend of [place-my-order.com](http://place-my-order.com).
-```
-
-If we now run
+When we initialized the application all the infrastructure necessary to generate the documentation has already been set up. New modlet components will be added automatically. We can generate the documentation with:
 
 ```
 donejs document
 ```
 
-And go to [http://localhost:8080/docs/](http://localhost:8080/docs/) we will see the documentation generated from that page.
-
 ### Documenting a module
 
-Now we can add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
+Let's add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
 
 ```js
 import Component from 'can/component/component';
@@ -1716,8 +1685,7 @@ import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
 /**
- * @module place-my-order/order/new
- * @parent pmo
+ * @add order/new
  */
 export const ViewModel = Map.extend({
   define: {
