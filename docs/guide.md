@@ -2128,6 +2128,16 @@ After you've created a free account, next edit your package.json to add Divshot 
 
 The `services` property is a list of deploy targets. You can name these whatever you like but we will use "production". The `config.name` specifies the Divshot application name. With regards to Divshot, the "environment" property is not provided, so the name of the service is used in its stead. If the name of a Divshot service is not equal to "development", "staging", or "production" you will be warned, and the environment will default to "development".
 
+Now do your first deployment with the donejs command:
+
+```
+donejs deploy
+```
+
+The command-line interface will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
+
+The `production` service will be selected whether or not you provide the name of the service as an argument because there is only one service configured.  Optionally, if you have more than one service configured, you could add a `"default": true` property to a particular service to specify it as the default service selected when an argument is not provided.
+
 Next, update your package.json to set the baseURL that will be used in production, by setting the "envs" config, it should be something like:
 
 ```json
@@ -2135,7 +2145,7 @@ Next, update your package.json to set the baseURL that will be used in productio
   "system": {
     "envs": {
       "production": {
-        "baseURL": "https://production.place-my-order.divshot.io"
+        "baseURL": "https://place-my-order.divshot.io/"
       }
     },
     ...
@@ -2143,28 +2153,28 @@ Next, update your package.json to set the baseURL that will be used in productio
 }
 ```
 
-Now do your first deployment with the donejs command:
+**Note**: Your baseURL will be something different, it should have been provided to you when you ran `donejs deploy`.
 
-```
-donejs deploy
-```
-
-The `production` service will be selected whether or not you provide the name of the service as an argument because there is only one service configured.  Optionally, if you have more than one service configured, you could add a `"default": true` property to a particular service to specify it as the default service selected when an argument is not provided.
-
-The command-line interface will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
-
-Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there:
+Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there. Use the same app name that you used in the previous section.
 
 ```html
 {{#switch @env.NODE_ENV}}
   {{#case "production"}}
-    <script src="https://production.place-my-order.divshot.io/node_modules/steal/steal.production.js"></script>
+    <script src="https://place-my-order.divshot.io/node_modules/steal/steal.production.js"
+      main="place-my-order/index.stache!done-autorender"></script>
   {{/case}}
 
   {{#default}}
     <script src="/node_modules/steal/steal.js"></script>
   {{/default}}
 {{/switch}}
+```
+
+Now do one last build and deploy your code, which is finally ready to run on Divshot:
+
+```
+node build
+donejs deploy
 ```
 
 ### Deploy your Node code
