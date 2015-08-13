@@ -2139,7 +2139,7 @@ After you've created a free account, next edit your package.json to add Divshot 
 
   "donejs": {
     "deploy": {
-      "root": "dist"
+      "root": "dist",
       "services": {
         "production": {
           "type": "divshot",
