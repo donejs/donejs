@@ -1911,8 +1911,8 @@ var buildPromise = stealTools.build({
 
 var cordovaOptions = {
   buildDir: "./build/cordova",
-  id: "com.hello.world",
-  name: "HelloWorld",
+  id: "com.donejs.placemyorder",
+  name: "PlaceMyOrder",
   platforms: ["ios", "android"],
   index: __dirname + "/app.html",
   glob: [
@@ -1939,10 +1939,9 @@ Unlike your web app which runs from a server, Cordova (and NW.js) apps need a ht
 <html>
   <head><title>Place My Order</title></head>
   <body>
-    <script src="node_modules/steal/steal.production.js" main="dguide/index.stache!done-autorender"></script>
+    <script load-bundles env="cordova" src="node_modules/steal/steal.production.js" main="place-my-order/index.stache!done-autorender"></script>
   </body>
-</html>
-```
+</html>```
 
 This allows us to build a Cordova app with:
 
@@ -2006,7 +2005,7 @@ superMap({
 We can also use `steal-platform` to switch to hashchange routing for Cordova apps. Cordova (and NW.js) do not work with pushstate routing, so we can conditionally fallback. Add this to `src/app.js`:
 
 ```js
-import platform from 'steal-plaform';
+import platform from 'steal-platform';
 
 if(platform.isCordova || platform.isNW) {
   route.defaultBinding = 'hashchange';
