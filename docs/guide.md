@@ -1927,7 +1927,7 @@ var cordovaOptions = {
   index: __dirname + "/app.html",
   glob: [
     "node_modules/steal/steal.production.js",
-    "images/**/*"
+    "node_modules/place-my-order-assets/images/**/*"
   ]
 };
 
@@ -2043,7 +2043,7 @@ var nwOptions = {
     "app.html",
 
     "node_modules/steal/steal.production.js",
-    "images/**/*"
+    "node_modules/place-my-order-assets/images/**/*"
   ]
 };
 
@@ -2123,7 +2123,7 @@ var buildPromise = stealTools.build({
 
 
 
-StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place images, for example, in `dist/images`.
+StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
 
 ### Deploy to a CDN
 
@@ -2180,6 +2180,7 @@ Now do your first deployment with the donejs command:
 ```
 donejs deploy
 ```
+
 The `production` service will be selected whether or not you provide the name of the service as an argument because there is only one service configured.  Optionally, if you have more than one service configured, you could add a `"default": true` property to a particular service to specify it as the default service selected when an argument is not provided.
 
 The command-line interface will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
