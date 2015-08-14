@@ -166,8 +166,8 @@ The main application file at `src/app.js` looks like this:
 
 ```
 // src/app.js
-import "can/route/";
-import AppMap from "can-ssr/app-map";
+import AppMap from 'can-ssr/app-map';
+import route from 'can/route/';
 import 'can/map/define/';
 
 const AppViewModel = AppMap.extend({
@@ -176,7 +176,8 @@ const AppViewModel = AppMap.extend({
       value: 'Hello World!'
     },
     title: {
-      value: 'place-my-order'
+      value: 'place-my-order',
+      serialize: false
     }
   }
 });
@@ -319,7 +320,7 @@ If you want to learn more about CanJS routing visit the CanJS guide on [Applicat
 To add the routes, change `src/app.js` to:
 
 ```js
-import AppMap from "can-ssr/app-map";
+import AppMap from 'can-ssr/app-map';
 import route from 'can/route/';
 import 'can/route/pushstate/';
 import 'can/map/define/';
