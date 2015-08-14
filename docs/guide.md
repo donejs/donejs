@@ -2153,7 +2153,7 @@ Next, update your package.json to set the baseURL that will be used in productio
 }
 ```
 
-**Note**: Your baseURL will be something different, it will be the **name** you gave to your app in the previous section.
+**Note**: Your baseURL will be something different, it will include the **name** you gave to your app in the previous section.
 
 Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there. Use the same app name that you used in the previous section. **Important**: Again, swap out "place-my-order.divshot.io" here for the name of your app.
 
