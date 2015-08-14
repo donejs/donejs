@@ -2097,7 +2097,7 @@ StealTools will find all of the assets you reference in your CSS and copy them t
 
 The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example, we are going to deploy to Divshot.  This requires you to first create a free account on [Divshot](https://divshot.com). Divshot allows Github or Google to authenticate your account, but we recommend you take the email and password route.  This will make it easier to create an Divshot API token.
 
-After you've created a free account, next edit your package.json to add Divshot as a deployment target:
+After you've created a free account, next edit your package.json to add Divshot as a deployment target. You will give your application a unique name that will act as the subdomain. You can name it anything you want, but we'll use "place-my-order" here. You might call yours "place-my-order-tom" if your name's Tom. Name it whatever you want, just remember what you chose because you'll have to know this later.
 
 ```json
 {
@@ -2153,9 +2153,9 @@ Next, update your package.json to set the baseURL that will be used in productio
 }
 ```
 
-**Note**: Your baseURL will be something different, it should have been provided to you when you ran `donejs deploy`.
+**Note**: Your baseURL will be something different, it will be the **name** you gave to your app in the previous section.
 
-Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there. Use the same app name that you used in the previous section.
+Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there. Use the same app name that you used in the previous section. **Important**: Again, swap out "place-my-order.divshot.io" here for the name of your app.
 
 ```html
 {{#switch @env.NODE_ENV}}
