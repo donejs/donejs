@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -45,11 +45,11 @@
     "dependencies": {
       "can": "~2.3.0-pre.8",
       "can-connect": "~0.2.2",
-      "can-ssr": "^0.5.4",
+      "can-ssr": "^0.5.5",
       "done-autorender": "^0.3.1",
       "done-component": "^0.1.0",
       "done-css": "~1.1.6",
-      "generator-donejs": "^0.2.7",
+      "generator-donejs": "^0.2.9",
       "jquery": "~2.1.4",
       "steal": "^0.11.0-pre.6",
       "yeoman-environment": "~1.2.7"
