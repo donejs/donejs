@@ -1918,7 +1918,7 @@ Unlike your web app which runs from a server, Cordova (and NW.js) apps need a ht
 <html>
   <head><title>Place My Order</title></head>
   <body>
-    <script load-bundles env="cordova" src="node_modules/steal/steal.production.js" main="place-my-order/index.stache!done-autorender"></script>
+    <script load-bundles env="cordova,production" src="node_modules/steal/steal.production.js" main="place-my-order/index.stache!done-autorender"></script>
   </body>
 </html>```
 
