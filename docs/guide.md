@@ -2219,7 +2219,7 @@ git commit -m "Deploying to Heroku"
 And finally do an initial deploy.
 
 ```
-git push heroku master
+git push heroku deploy:master
 ```
 
 Any time in the future you want to deploy simply push to the heroku remote.
