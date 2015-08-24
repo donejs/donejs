@@ -1373,7 +1373,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
 <can-import from="place-my-order/order/details.component!" />
 
 <div class="order-form">
-  <restaurant-model get="{ _id=slug }" [restaurant]="{value}">
+  <restaurant-model get="{ _id=slug }" #restaurant="{value}">
     {{#if isPending}}
       <div class="loading"></div>
     {{else}}
