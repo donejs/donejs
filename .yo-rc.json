@@ -1,0 +1,6 @@
+{
+  "generator-donejs": {
+    "folder": "test",
+    "name": "donejs"
+  }
+}

@@ -1,128 +1,122 @@
 #!/usr/bin/env node
 
-var npm = require('npm');
 var path = require('path');
-var spawn = require('child_process').spawn;
 var appModule = require('app-module-path');
 var fs = require('fs');
-var Q = require('q');
+var program = require('commander');
+var mkdirp = require('mkdirp');
 
+var utils = require('../lib/utils');
+var log = utils.log;
 var mypkg = require(path.join(__dirname, '..', 'package.json'));
-var parameters = process.argv;
-var command = parameters[2];
-
-if(command === 'init' && parameters[3]) {
-  var appDir = path.join(process.cwd(), parameters[3]);
-  console.log('Creating folder ' + parameters[3]);
-  fs.mkdirSync(appDir);
-  process.chdir(appDir);
-}
-
+var curpkg = {};
 var root = path.join(process.cwd(), 'node_modules');
+var binPath = path.join(root, '.bin');
 
-appModule.addPath(root);
+var commandList = ['init', 'generate'];
+var listSeparator = '\n\t• ';
+var initDescription = 'Initialize a new DoneJS application in a new folder or the current one';
+var generatorDescription = 'No generators available.';
 
-// Returns a .then-able function that installs a single module
-// if it is not available in the current path
-function installIfMissing(module) {
-  return function (previous) {
-    try {
-      require.resolve(module);
-    } catch (e) {
-      console.log('Installing ' + module);
-      return Q.ninvoke(npm.commands, 'install', [module]).then(function () {
-        return previous;
-      });
-    }
-
-    return previous;
-  }
+try {
+  curpkg = require(path.join(process.cwd(), 'package.json'));
+} catch(e) {
+  // otherwise no local package.json
 }
 
-// Log error messages
-function log(promise) {
-  return promise.fail(function(error) {
-    console.error(error.stack || error.message || error);
-    process.exit(1);
-  });
+try {
+  var generators = require('generator-donejs');
+  generatorDescription = 'Run a generator. Available generators:';
+  generatorDescription += listSeparator +
+    Object.keys(generators).join(listSeparator);
+} catch(e) {
+  // We can do this because `generatorDescription` is already set
 }
 
-// Run any of the Yeoman generators from the current generator-donejs
-function generator() {
-  return Q.ninvoke(npm, 'load', { loaded: false })
-    .then(installIfMissing('yeoman-environment'))
-    .then(installIfMissing('generator-donejs'))
-    .then(function () {
-      var yeoman = require('yeoman-environment');
-      var env = yeoman.createEnv();
-      var args = [];
-      var generators = require('generator-donejs');
+var actions = {
+  init: function(folder) {
+    if(folder) {
+      var appDir = path.join(process.cwd(), folder);
 
-      Object.keys(generators).forEach(function(name) {
-        env.register(require.resolve('generator-donejs/' + name), name);
-      });
-
-      if (command === 'init') {
-        args = ['app', {
-          version: mypkg.version,
-          packages: mypkg.donejs
-        }];
-      } else {
-        args = [ parameters.slice(3, parameters.length) ];
+      if(fs.existsSync(appDir)) {
+        console.error('Folder `' + folder + '` already exsits.');
+        return;
       }
 
-      return Q.npost(env, 'run', args);
-    });
-}
+      console.log('Creating folder ' + folder);
 
-// Run a command and pipe the output.
-// The returned promise will reject if there is a non-zero exist status
-function runCommand(cmd, args) {
-  var child = spawn(cmd, args, {
-    cwd: process.cwd(),
-    stdio: 'inherit'
-  });
 
-  var deferred = Q.defer();
-
-  child.on('exit', function(status) {
-    if(status !== 0) {
-      deferred.reject(new Error('Could not run command ' + command));
-    } else {
-      deferred.resolve();
+      mkdirp.sync(appDir);
+      process.chdir(appDir);
     }
-  });
 
-  return deferred.promise;
-}
+    root = path.join(process.cwd(), 'node_modules');
+    appModule.addPath(root);
 
-// A list of commands directly supported by the CLI
-var commands = {
-  init: generator,
-  generate: generator
+    log(utils.generate([ 'app', {
+        version: mypkg.version,
+        packages: mypkg.donejs
+      }
+    ]));
+  },
+  generate: function(type, options) {
+    appModule.addPath(root);
+    log(utils.generate([ [type].concat(options) ]));
+  },
+  catchAll: function(command) {
+    console.error('Could not run `' + command + '`');
+    program.help();
+  }
 };
 
-if(commands[command]) {
-  log(commands[command]());
-} else {
-  try {
-    var pkg = require(path.join(process.cwd(), 'package.json'));
+program.version(mypkg.version);
 
-    if(pkg.scripts[command]) {
-      log(runCommand('npm', ['run', command]));
-    } else {
-      // If the command is not supported try running node_modules/.bin/donejs-command
-      // with all the parameters
-      var cmd = path.join(root, '.bin', 'donejs-' + command);
-      if(!fs.existsSync(cmd)) {
-        console.error('Command "' + command + '" is not available');
-        return process.exit(1);
-      }
+// donejs init
+program.command('init [folder]')
+  .description(initDescription)
+  .action(actions.init);
 
-      var promise = runCommand(cmd, parameters.slice(3, parameters.length));
-      log(promise);
-    }
-  } catch(e) {
-    console.error('No local package.json found. Please run "donejs init"');
+// donejs generate
+program.command('generate <name> [options...]')
+  .description(generatorDescription)
+  .action(actions.generate);
+
+// Lists all NPM scripts of the package.json in the current folder
+Object.keys(curpkg.scripts || {}).forEach(function(script) {
+  if(commandList.indexOf(script) === -1) {
+    commandList.push(script);
+    program.command(script)
+      .description('NPM `' + curpkg.scripts[script] + '`')
+      .action(function() {
+        log(utils.runScript(script));
+      });
   }
+});
+
+// List all other local binaries
+if(fs.existsSync(binPath)) {
+  fs.readdirSync(binPath).forEach(function(name) {
+    if(commandList.indexOf(name) === -1) {
+      commandList.push(name);
+      program.command(name + ' [...args]')
+        .description('')
+        .action(function(args) {
+          log(utils.runCommand(path.join(binPath, name), args));
+        });
+    }
+  });
 }
+
+// catchall
+program.command('*')
+  .description('')
+  .action(actions.catchAll);
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
+}
+
+exports.actions = actions;
+exports.program = program;
