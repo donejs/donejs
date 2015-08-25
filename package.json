@@ -7,7 +7,7 @@
     "donejs": "./bin/donejs"
   },
   "scripts": {
-    "test": "mocha test/ --timeout 60000",
+    "test": "mocha test/ --timeout 120000",
     "verify": "echo \"NPM script ran\"",
     "document:watch": "documentjs --watch",
     "document": "documentjs -f && rm -rf site/img && cp -R docs/img site/img",
