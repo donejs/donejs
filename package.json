@@ -7,7 +7,8 @@
     "donejs": "./bin/donejs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/ --timeout 120000",
+    "verify": "echo \"NPM script ran\"",
     "document:watch": "documentjs --watch",
     "document": "documentjs -f && rm -rf site/img && cp -R docs/img site/img",
     "publish": "git push origin --tags",
@@ -31,10 +32,13 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
-    "documentjs": "^0.3.0-pre.4"
+    "documentjs": "^0.3.0-pre.4",
+    "mocha": "^2.2.5"
   },
   "dependencies": {
     "app-module-path": "^1.0.2",
+    "commander": "^2.8.1",
+    "mkdirp": "^0.5.1",
     "npm": "^2.13.1",
     "q": "^1.4.1"
   },
