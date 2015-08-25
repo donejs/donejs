@@ -1132,7 +1132,7 @@ And then integrate it into `src/order/new/new.stache`:
 ```html
 <div class="order-form">
   <h2>Order here</h2>
-  <can-import from="bit-tabs"/>
+  <can-import from="bit-tabs/unstyled"/>
 
   <bit-tabs tabs-class="nav nav-tabs">
     <bit-panel title="Lunch menu">
@@ -1145,7 +1145,7 @@ And then integrate it into `src/order/new/new.stache`:
 </div>
 ```
 
-Here we just import the `bit-tabs` package using `can-import` which will then provide the `bit-tabs` and `bit-panel` custom elements.
+Here we just import the `unstyled` module from the `bit-tabs` package using `can-import` which will then provide the `bit-tabs` and `bit-panel` custom elements.
 
 ## Creating data
 
@@ -1369,7 +1369,7 @@ and changing `src/order/details.component` to:
 Now we can import that component and update `src/order/new/new.stache` to:
 
 ```html
-<can-import from="bit-tabs"/>
+<can-import from="bit-tabs/unstyled"/>
 <can-import from="place-my-order/order/details.component!" />
 
 <div class="order-form">
