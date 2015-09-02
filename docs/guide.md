@@ -1490,7 +1490,7 @@ The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) Node
       }
     },
     "envs": {
-      "server": {
+      "server-development": {
         "map": {
           "socket.io-client/socket.io": "@empty"
         }
@@ -1793,32 +1793,22 @@ Before creating a production build we need to update the `package.json` to add s
     "generator-donejs"
   ],
   "map": {
-    "can/util/vdom/vdom": "./@empty",
     "socket.io-client": "socket.io-client/socket.io"
   },
   "meta": {
     "socket.io-client/socket.io": {
       "format": "global"
-    },
-    "can/util/vdom/vdom": {
-      "sideBundle": true
     }
   },
   "envs": {
-    "server": {
+    "server-development": {
       "map": {
-        "socket.io-client/socket.io": "@empty"
+        "socket.io-client": "@empty"
       }
     },
-    "server,build": {
+    "server-production": {
       "map": {
-        "can/util/vdom/vdom": "can/util/vdom/vdom"
-      },
-      "meta": {
-        "jquery": {
-          "format": "global",
-          "deps": ["can/util/vdom/vdom"]
-        }
+        "socket.io-client": "@empty"
       }
     }
   }
@@ -2145,7 +2135,7 @@ Next, update your package.json to set the baseURL that will be used in productio
 {
   "system": {
     "envs": {
-      "production": {
+      "server-production": {
         "baseURL": "https://place-my-order.divshot.io/"
       }
     },
