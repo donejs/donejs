@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var path = require('path');
-var appModule = require('app-module-path');
 var fs = require('fs');
 var program = require('commander');
 var mkdirp = require('mkdirp');
@@ -51,17 +50,15 @@ var actions = {
     }
 
     root = path.join(process.cwd(), 'node_modules');
-    appModule.addPath(root);
 
-    log(utils.generate([ 'app', {
+    log(utils.generate(root, [ 'app', {
         version: mypkg.version,
         packages: mypkg.donejs
       }
     ]));
   },
   generate: function(type, options) {
-    appModule.addPath(root);
-    log(utils.generate([ [type].concat(options) ]));
+    log(utils.generate(root, [ [type].concat(options) ]));
   },
   catchAll: function(command) {
     console.error('Could not run `' + command + '`');

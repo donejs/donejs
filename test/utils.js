@@ -33,7 +33,8 @@ describe('DoneJS CLI tests', function() {
 
     it('generate .component', function(done) {
       var moduleName = 'dummy/component.component';
-      utils.generate([
+      var root = path.join(__dirname, '..', 'node_modules');
+      utils.generate(root, [
           ['component', moduleName, 'dummy-component']
         ])
         .then(function() {
