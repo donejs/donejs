@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.2.16",
+  "version": "0.3.0",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -47,23 +47,23 @@
   },
   "donejs": {
     "dependencies": {
-      "can": "~2.3.0-pre.8",
+      "can": "~2.3.0-pre.9",
       "can-connect": "~0.2.2",
-      "can-ssr": "^0.5.5",
+      "can-ssr": "^0.5.7",
       "done-autorender": "^0.3.1",
       "done-component": "^0.2.0",
-      "done-css": "~1.1.6",
+      "done-css": "~1.1.7",
       "generator-donejs": "^0.2.9",
       "jquery": "~2.1.4",
-      "steal": "^0.11.0-pre.6",
+      "steal": "^0.11.0-pre.8",
       "yeoman-environment": "~1.2.7"
     },
     "devDependencies": {
       "documentjs": "^0.3.0",
-      "donejs-deploy": "^0.1.5",
+      "donejs-deploy": "^0.1.6",
       "funcunit": "~3.0.0",
       "steal-qunit": "^0.1.1",
-      "steal-tools": "^0.11.0-pre.9",
+      "steal-tools": "^0.11.0-pre.11",
       "testee": "^0.2.0"
     }
   }
