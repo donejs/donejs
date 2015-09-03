@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -53,7 +53,7 @@
       "can": "~2.3.0-pre.10",
       "can-connect": "~0.2.2",
       "can-ssr": "^0.5.8",
-      "done-autorender": "^0.3.1",
+      "done-autorender": "^0.4.0",
       "done-component": "^0.2.0",
       "done-css": "~1.1.7",
       "generator-donejs": "^0.2.9",
