@@ -4,7 +4,7 @@
 
 ![DoneJS logo](http://donejs.com/img/donejs-logo-black.svg)
 
-DoneJS is easist way to get a high performance, real time, web and mobile application
+DoneJS is easiest way to get a high performance, real time, web and mobile application
 done! The framework provides a nearly comprehensive combination of technologies for
 building complex JavaScript applications.
 
@@ -35,7 +35,7 @@ _Application features:_
 - Isomorphic (same code on server and client).
 - Pushstate routing
 - Real Time
-- Run everywhere ( IE9+, Andriod, iOS, node-webkit )
+- Run everywhere ( IE9+, Android, iOS, node-webkit )
 
 _Performance features:_
 
@@ -44,7 +44,7 @@ _Performance features:_
 - Minimal DOM updates
 - Application logic in worker thread
 
-_Maintainence features:_
+_Maintenance features:_
 
 - Modlet workflow - tests, docs, and demo pages
 - Use and create NPM packages
@@ -95,9 +95,9 @@ The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http
 6. Nested routes
 7. Importing other projects
 8. Creating data
-9. Settup up a real-time connection
+9. Setup up a real-time connection
 10. Production Builds
     1. Bundling your app
-    2. Building to iOS and Andriod
-    3. Buliding to NW.js
+    2. Building to iOS and Android
+    3. Building to NW.js
 11. Deploying
