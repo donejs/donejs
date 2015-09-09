@@ -56,25 +56,28 @@ cd place-my-order
 We can see the following files:
 
 ```
+├── .yo-rc.json
 ├── documentjs.json
 ├── package.json
 ├── readme.md
-├── test.html
 ├── src/
 |   ├── app.js
 |   ├── index.stache
 |   ├── models/
-|   |   ├── fixtures.js
+|   |   ├── fixtures
+|   |   |   ├── fixtures.js
 |   |   ├── test.js
 |   ├── styles.less
+|   ├── test.html
 |   ├── test/
 |   |   ├── test.js
-|   |   ├── smoke.js
+|   |   ├── functional.js
 ├── node_modules/
 ```
 
 Let's have a quick look at what those files are for:
 
+- `.yo-rc.json` contains information for running the generators
 - `package.json` is the main configuration file that defines all our application dependencies and other settings
 - `test.html` is used to run all our tests
 - `documentjs.json` is the configuration file for generating documentation
@@ -82,10 +85,10 @@ Let's have a quick look at what those files are for:
 - `src` is the folder where all our development assets live on their own modlets (more about that later)
 - `src/app.js` is the main application file which exports the main application state
 - `src/index.stache` is the main template used for both, server side rendering and on the client
-- `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures.js` which will reference all the specific models fixtures files (so that we can run model related tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
+- `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures/fixtures.js` which will reference all the specific models fixtures files (so that we can run model related tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
 - `src/styles.less` is the main application styles LESS
 - `src/test/test.js` collects all individual component and model tests we will create throughout this guide and is loaded by `test.html`
-- `src/test/smoke.js` will contain functional smoke tests for our application
+- `src/test/functional.js` will contain functional smoke tests for our application
 
 ### Development mode
 
@@ -1094,17 +1097,19 @@ To:
 ```html
 {{#case "restaurants"}}
   {{#if slug}}
-    {{#eq action 'order'}}
-      <can-import from="place-my-order/order/new/" can-tag="pmo-loading">
-        <pmo-order-new slug="{slug}"></pmo-order-new>
-      </can-import>
-    {{/eq}}
+    {{#switch action}}
+      {{#case 'order'}}
+        <can-import from="place-my-order/order/new/" can-tag="pmo-loading">
+          <pmo-order-new slug="{slug}"></pmo-order-new>
+        </can-import>
+      {{/case}}
 
-    {{^if action}}
-      <can-import from="place-my-order/restaurant/details.component!" can-tag="pmo-loading">
-        <pmo-restaurant-details></pmo-restaurant-details>
-      </can-import>
-    {{/if}}
+      {{#default}}
+        <can-import from="place-my-order/restaurant/details.component!" can-tag="pmo-loading">
+          <pmo-restaurant-details></pmo-restaurant-details>
+        </can-import>
+      {{/default}}
+    {{/switch}}
   {{else}}
     <can-import from="place-my-order/restaurant/list/" can-tag="pmo-loading">
       <pmo-restaurant-list></pmo-restaurant-list>

@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
-    "documentjs": "^0.3.0-pre.4",
+    "documentjs": "^0.3.0",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5"
   },
