@@ -1,7 +1,6 @@
 @charcoal: #2b3034;
 @white: #FFF;
 @gray: #777;
-//@blue:    #148fb6;
 @blue: #3781a4;
 body {
   background-color: #eae9e9;
@@ -148,6 +147,7 @@ body.donejs {
   .performance {
     color: @white;
     background-color: @blue;
+    padding-bottom: 129px;
     a {
       color: @white;
       text-decoration: underline;
@@ -160,7 +160,7 @@ body.donejs {
       font-size: 20px;
     }
     .rollover {
-      margin:0;
+      margin: 0;
     }
     .spacer {
       background-image: url("../img/line.png");
@@ -172,18 +172,19 @@ body.donejs {
       position: relative;
 
       .row {
-        margin:36px auto;
-        width:1500px;
+        margin: 36px auto;
+        width: 1500px;
         position: relative;
-        left:-43px;
+        left: -78px;
+        padding-bottom: 50px;
       }
       .donejs-text img {
-        left:72px;
+        left: 72px;
         position: relative;
         opacity: 0.5;
       }
       .naive-text img {
-        left:-72px;
+        left: -72px;
         position: relative;
         opacity: 0.5;
       }
@@ -196,82 +197,82 @@ body.donejs {
     .col-custom-1 {
       //width: 10%;
       float: left;
-      border:1px solid yellow;
+      border: 1px solid yellow;
     }
     .col-custom-3 {
       //width: 25%;
       float: left;
-      border:1px solid white;
+      border: 1px solid white;
     }
     .col-custom-2 {
       //width: 20%;
       float: left;
-      border:1px solid red;
+      border: 1px solid red;
     }
+    .trail {
+      .heavy {
+        margin-top: 35px;
+        margin-bottom: 0;
+      }
+      .links {
+        padding: 0 215px;
+      }
+    }
+  }
 
+  .maintainable {
+    color: @white;
+    background-color: @charcoal;
+    h1 {
+      margin-bottom: 58px;
+    }
+    h2.trail {
+      margin-top: 53px;
+    }
+    .lead-in {
+      padding: 176px 214px 241px 214px;
+    }
+    .lead {
+      margin: 0 170px;
+      font-size: 20px;
+    }
+    .caption {
+      background-color: @blue;
+    }
+    .links {
+      margin: 0 90px;
+      a {
+        color: @white;
+        text-decoration: underline;
+        font-size: 18px;
+      }
+    }
+  }
+
+  .community {
+    color: @white;
+    background-color: black;
+
+    h2.trail {
+      margin-top: 53px;
+    }
+    .lead-in {
+      padding: 84px 45px 37px 45px;
+    }
+    h4 {
+      padding: 0 340px;
+    }
+    .links {
+      text-align: left;
+      padding: 0 21px 0 218px;
+      a {
+        color: @white;
+        text-decoration: underline;
+      }
+    }
   }
 }
 
-
-//  .section.maintainable {
-//    background-color: @charcoal;
-//    color: @white;
-//    padding: 10% 15%;
-//
-//    h1 {
-//      margin: 100px 0 40px 0;
-//      font-size: 60px;
-//    }
-//    h2 {
-//      margin-top: 0;
-//    }
-//    h3 {
-//      margin-top: 60px;
-//    }
-//    .inside-full-height {
-//      background-color: #0598c4;
-//    }
-//    .content {
-//      text-align: left;
-//
-//    }
-//    .img-responsive {
-//      width: 100%;
-//      max-width: 100%;
-//    }
-//    .caption {
-//      padding: 20px;
-//    }
-//
-//    .col-sm-6 {
-//      padding: 15px;
-//    }
-//
-//    .center-block {
-//      float: none !important
-//    }
-//
-//  }
-//
-
-//
-//.icon-holder {
-//  display: block;
-//  height: 40px;
-//  width: 40px;
-//  border: 1px solid white;
-//  margin: 0 auto;
-//
-//}
-//
-//.navbar {
-//  margin-bottom: 0;
-//}
-//
-//.hero {
-//  background-color: grey;
-//}
-//
 /* content styles */
 
 .inside-full-height {
@@ -371,7 +372,7 @@ body.donejs {
 
   .col-sm-height {
     display: table-cell;
-    float: none;
+
     height: 100%;
   }
 
