@@ -92,7 +92,7 @@ body.donejs {
     }
   }
 
-  .usability {
+  .usability.container {
     background-color: @white;
     .lead-in {
       padding: 88px 200px 113px;
@@ -144,7 +144,7 @@ body.donejs {
     }
   }
 
-  .performance {
+  .performance.container {
     color: @white;
     background-color: @blue;
     padding-bottom: 129px;
@@ -220,7 +220,7 @@ body.donejs {
     }
   }
 
-  .maintainable {
+  .maintainable.container {
     color: @white;
     background-color: @charcoal;
     h1 {
@@ -236,8 +236,19 @@ body.donejs {
       margin: 0 170px;
       font-size: 20px;
     }
-    .caption {
+    .inside {
       background-color: @blue;
+      //height:100%;
+    }
+    //video {
+    //  font-size: 0;
+    //}
+    .img-responsive {
+      height:234px;
+      width:100%;
+    }
+    .row {
+      margin-bottom: 20px;
     }
     .links {
       margin: 0 90px;
@@ -249,7 +260,7 @@ body.donejs {
     }
   }
 
-  .community {
+  .community.container {
     color: @white;
     background-color: black;
 
@@ -372,7 +383,7 @@ body.donejs {
 
   .col-sm-height {
     display: table-cell;
-
+    float: none;
     height: 100%;
   }
 
