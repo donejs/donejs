@@ -109,6 +109,16 @@
 				src="./static/steal.production.js"
 	    		bundles-path="bundles"></script>
 	{{/if}}
+
+
 </body>
+
+
+
+{{#ifCurrentFromConfig "../index.html"}}
+<script>
+    // cool scripts go here
+</script>
+{{/ifCurrentFromConfig}}
 
 </html>
