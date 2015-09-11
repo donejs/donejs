@@ -1,0 +1,368 @@
+@charcoal: #2b3034;
+@white: #FFF;
+@gray: #777;
+//@blue:    #148fb6;
+@blue: #3781a4;
+body {
+  background-color: #eae9e9;
+}
+
+body.donejs {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+
+  h1 {
+    font-size: 60px;
+  }
+
+  .light {
+    font-weight: 100;
+  }
+
+  .normal {
+    font-weight: 400;
+  }
+
+  .heavy {
+    font-weight: 700;
+  }
+
+  .hero {
+    color: @white;
+    background-image: url("../img/background.jpg");
+    a {
+      color: @white;
+      text-decoration: underline;
+    }
+    .lead-in {
+      padding: 60px 200px;
+      margin: 0 auto;
+    }
+
+    .lead {
+      margin: 10px 60px;
+      font-size: 20px;
+    }
+    .install {
+      margin-top: 60px;
+      p {
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      .code {
+        padding-left: 155px;
+      }
+      pre {
+        padding: 14px 20px;
+        color: black;
+        font-size: 18px;
+        line-height: normal;
+        text-align: left;
+      }
+      .start {
+        padding-top: 27px;
+        .btn {
+          display: block;
+          height: 32px;
+          width: 270px;
+          background-color: @blue;
+          text-decoration: none;
+          padding: 3px;
+        }
+      }
+    }
+    .triptych {
+      margin: 0 auto;
+      margin-top: 45px;
+      .box {
+        padding: 24px 90px 74px;
+        line-height: normal;
+        background-image: url("../img/down-arrow.png");
+        background-size: 35px;
+        background-position: 50% 90%;
+        background-repeat: no-repeat;
+      }
+
+      .usability {
+        background-color: rgba(90, 90, 90, 0.5);
+      }
+      .performance {
+        background-color: rgba(5, 152, 196, 0.5);
+      }
+      .maintainable {
+        background-color: rgba(40, 40, 40, 0.5);
+      }
+    }
+  }
+
+  .usability {
+    background-color: @white;
+    .lead-in {
+      padding: 88px 200px;
+      margin: 0 auto;
+    }
+    .lead {
+      margin: 6px 160px;
+      font-size: 20px;
+    }
+    h3 {
+      margin-top: 33px;
+    }
+    h3.learn {
+      margin-top: 20px;
+      a {
+        color: black;
+        text-decoration: underline;
+      }
+    }
+
+    h2.better {
+      margin-top: 58px;
+    }
+    .spacer {
+      background-image: url("../img/line.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 80px;
+    }
+
+    .phase img {
+      margin-bottom: 28px;
+    }
+    .btn {
+      display: block;
+      height: 40px;
+      width: 190px;
+      background-color: @blue;
+      text-decoration: none;
+      padding: 7px;
+      color: @white;
+    }
+    .trail {
+      margin: 6px 125px;
+      font-size: 20px;
+      a {
+        color: black;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+//  .section.usability {
+
+//    padding: 7% 15%;
+//
+//    .lead {
+//      margin: 0 14%;
+//    }
+//    .trail {
+//      font-size: 18px;
+//      margin: 0 14%;
+//    }
+//
+//    a {
+//      color: black;
+//    }
+//
+//  }
+
+//  .section.maintainable {
+//    background-color: @charcoal;
+//    color: @white;
+//    padding: 10% 15%;
+//
+//    h1 {
+//      margin: 100px 0 40px 0;
+//      font-size: 60px;
+//    }
+//    h2 {
+//      margin-top: 0;
+//    }
+//    h3 {
+//      margin-top: 60px;
+//    }
+//    .inside-full-height {
+//      background-color: #0598c4;
+//    }
+//    .content {
+//      text-align: left;
+//
+//    }
+//    .img-responsive {
+//      width: 100%;
+//      max-width: 100%;
+//    }
+//    .caption {
+//      padding: 20px;
+//    }
+//
+//    .col-sm-6 {
+//      padding: 15px;
+//    }
+//
+//    .center-block {
+//      float: none !important
+//    }
+//
+//  }
+//
+//
+//  .section.performance {
+//    color: @white;
+//    background-color: @blue;
+//    .title-padding {
+//      padding: 7% 15%;
+//    }
+//
+//    .lead {
+//      margin: 0 18%;
+//    }
+//    .graph-padding {
+//      margin: 0 5%;
+//    }
+//    .trail {
+//      font-size: 18px;
+//      margin: 0 14%;
+//    }
+//
+//  }
+//}
+//
+//.icon-holder {
+//  display: block;
+//  height: 40px;
+//  width: 40px;
+//  border: 1px solid white;
+//  margin: 0 auto;
+//
+//}
+//
+//.navbar {
+//  margin-bottom: 0;
+//}
+//
+//.hero {
+//  background-color: grey;
+//}
+//
+/* content styles */
+
+.inside-full-height {
+  /*
+  // if you want to give content full height give him height: 100%;
+  // with content full height you can't apply margins to the content
+  // content full height does not work in ie http://stackoverflow.com/questions/27384433/ie-display-table-cell-child-ignores-height-100
+  */
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* columns of same height styles */
+.row-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+
+}
+
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
+}
+
+//
+//@media (min-width: 480px) {
+//  .row-xs-height {
+//    //display: table;
+//    //table-layout: fixed;
+//    height: 100%;
+//    width: 100%;
+//  }
+//
+//  .col-xs-height {
+//    display: table-cell;
+//    float: none;
+//    height: 100%;
+//  }
+//
+//}
+//
+//@media (min-width: 768px) {
+//  .row-sm-height {
+//    //display: table;
+//    //table-layout: fixed;
+//    height: 100%;
+//    width: 100%;
+//  }
+//
+//  .col-sm-height {
+//    display: table-cell;
+//    float: none;
+//    height: 100%;
+//  }
+//
+//}
+//
+//@media (min-width: 992px) {
+//  .row-md-height {
+//    //display: table;
+//    //table-layout: fixed;
+//    height: 100%;
+//    width: 100%;
+//  }
+//
+//  .col-md-height {
+//    display: table-cell;
+//    float: none;
+//    height: 100%;
+//  }
+//
+//}
+//
+@media (min-width: 1200px) {
+
+  .donejs div.container {
+    width: 100%;
+
+    .content {
+      width: 1250px;
+      border: 1px solid blue;
+    }
+  }
+
+  .row-sm-height {
+    display: table;
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
+  }
+
+  .col-sm-height {
+    display: table-cell;
+    float: none;
+    height: 100%;
+  }
+
+}
+
+.donejs {
+  .clearfix {
+    .clearfix();
+  }
+}
+
+//.donejs {
+//  #low:after,#low:before,.clearfix:after,.clearfix:before,.container-fluid:after,.container-fluid:before,.container:after,.container:before,.row:after,.row:before {
+//    content: " ";
+//    display: table
+//  }
+//
+//  #low:after,.clearfix:after,.container-fluid:after,.container:after,.row:after {
+//    clear: both
+//  }
+//}
+
