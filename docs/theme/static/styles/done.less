@@ -35,12 +35,11 @@ body.donejs {
       text-decoration: underline;
     }
     .lead-in {
-      padding: 60px 200px;
-      margin: 0 auto;
+      padding: 57px 200px;
     }
 
     .lead {
-      margin: 10px 60px;
+      margin: 4px 60px;
       font-size: 20px;
     }
     .install {
@@ -72,7 +71,6 @@ body.donejs {
       }
     }
     .triptych {
-      margin: 0 auto;
       margin-top: 45px;
       .box {
         padding: 24px 90px 74px;
@@ -98,18 +96,17 @@ body.donejs {
   .usability {
     background-color: @white;
     .lead-in {
-      padding: 88px 200px;
-      margin: 0 auto;
+      padding: 88px 200px 113px;
     }
     .lead {
       margin: 6px 160px;
       font-size: 20px;
     }
     h3 {
-      margin-top: 33px;
+      margin-top: 28px;
     }
     h3.learn {
-      margin-top: 20px;
+      margin-top: 18px;
       a {
         color: black;
         text-decoration: underline;
@@ -139,7 +136,7 @@ body.donejs {
       color: @white;
     }
     .trail {
-      margin: 6px 125px;
+      margin: 0 125px;
       font-size: 20px;
       a {
         color: black;
@@ -147,25 +144,74 @@ body.donejs {
       }
     }
   }
+
+  .performance {
+    color: @white;
+    background-color: @blue;
+    a {
+      color: @white;
+      text-decoration: underline;
+    }
+    .lead-in {
+      padding: 105px 200px 0 200px;
+    }
+    .lead {
+      margin: 0 170px;
+      font-size: 20px;
+    }
+    .rollover {
+      margin:0;
+    }
+    .spacer {
+      background-image: url("../img/line.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 68px;
+    }
+    .graph {
+      position: relative;
+
+      .row {
+        margin:36px auto;
+        width:1500px;
+        position: relative;
+        left:-43px;
+      }
+      .donejs-text img {
+        left:72px;
+        position: relative;
+        opacity: 0.5;
+      }
+      .naive-text img {
+        left:-72px;
+        position: relative;
+        opacity: 0.5;
+      }
+    }
+
+    .col-head {
+      font-size: 10px;
+    }
+
+    .col-custom-1 {
+      //width: 10%;
+      float: left;
+      border:1px solid yellow;
+    }
+    .col-custom-3 {
+      //width: 25%;
+      float: left;
+      border:1px solid white;
+    }
+    .col-custom-2 {
+      //width: 20%;
+      float: left;
+      border:1px solid red;
+    }
+
+  }
 }
 
-//  .section.usability {
-
-//    padding: 7% 15%;
-//
-//    .lead {
-//      margin: 0 14%;
-//    }
-//    .trail {
-//      font-size: 18px;
-//      margin: 0 14%;
-//    }
-//
-//    a {
-//      color: black;
-//    }
-//
-//  }
 
 //  .section.maintainable {
 //    background-color: @charcoal;
@@ -207,27 +253,7 @@ body.donejs {
 //
 //  }
 //
-//
-//  .section.performance {
-//    color: @white;
-//    background-color: @blue;
-//    .title-padding {
-//      padding: 7% 15%;
-//    }
-//
-//    .lead {
-//      margin: 0 18%;
-//    }
-//    .graph-padding {
-//      margin: 0 5%;
-//    }
-//    .trail {
-//      font-size: 18px;
-//      margin: 0 14%;
-//    }
-//
-//  }
-//}
+
 //
 //.icon-holder {
 //  display: block;
@@ -331,6 +357,8 @@ body.donejs {
     .content {
       width: 1250px;
       border: 1px solid blue;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 
