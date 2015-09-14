@@ -1,14 +1,14 @@
 {
-	"sites": {
-		"guides": {
-			"glob": {
-				"pattern": "docs/**.{md,mustache}"
-			},
-			"parent": "donejs",
-			"dest": "site",
-			"ignoreTemplateRender": true,
-			"templates" : "docs/theme/templates",
-			"static" : "docs/theme/static"
-		}
-	}
+  "sites": {
+    "guides": {
+      "glob": {
+        "pattern": "docs/**.{md,mustache}"
+      },
+      "parent": "donejs",
+      "dest": "site",
+      "ignoreTemplateRender": true,
+      "templates": "docs/theme/templates",
+      "static": "docs/theme/static"
+    }
+  }
 }
