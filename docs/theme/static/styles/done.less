@@ -2,6 +2,8 @@
 @white: #FFF;
 @gray: #777;
 @blue: #3781a4;
+@black: #444;
+
 body {
   background-color: #eae9e9;
 }
@@ -29,6 +31,11 @@ body.donejs {
   .hero {
     color: @white;
     background-image: url("../img/background.jpg");
+    background-size: cover;
+    padding:0;
+    .transparency {
+      background-color: rgba(0, 0, 0, .55);
+    }
     a {
       color: @white;
       text-decoration: underline;
@@ -45,49 +52,71 @@ body.donejs {
       margin-top: 60px;
       p {
         font-size: 14px;
-        margin-bottom: 4px;
+        margin-bottom: 1px;
       }
       .code {
-        padding-left: 155px;
+        text-align: right;
+        .caption {
+          margin: 0 auto;
+          width:285px;
+
+        }
       }
-      pre {
-        padding: 14px 20px;
-        color: black;
+      textarea {
+        padding: 10px;
+        color: @black;
         font-size: 18px;
         line-height: normal;
         text-align: left;
+        width:285px;
+        font-family: 'Source Code Pro', monospace;
+        border-color: @blue;
+        border-width: 2px;
       }
       .start {
         padding-top: 27px;
         .btn {
           display: block;
-          height: 32px;
-          width: 270px;
+          height: 35px;
+          width: 268px;
           background-color: @blue;
           text-decoration: none;
-          padding: 3px;
+          padding: 5px;
         }
+      }
+      .social {
+        text-align: left;
+        padding-top: 12px;
+      }
+      .ghbtns {
+        margin-left: 17px;
+
       }
     }
     .triptych {
       margin-top: 45px;
+      margin-left:0;
+      margin-right:0;
       .box {
-        padding: 24px 90px 74px;
+        cursor: pointer;
+        padding: 40px 90px 105px;
         line-height: normal;
         background-image: url("../img/donejs-final_arrow-icon 1.svg");
-        background-size: 35px;
-        background-position: 50% 90%;
+        background-size: 26px;
+        background-position: 50% 80%;
         background-repeat: no-repeat;
+
+        font-size: 16px;
       }
 
       .usability {
-        background-color: rgba(90, 90, 90, 0.5);
+        background-color: rgba(90, 90, 90, 0.8);
       }
       .performance {
-        background-color: rgba(5, 152, 196, 0.5);
+        background-color: rgba(5, 152, 196, 0.8);
       }
       .maintainable {
-        background-color: rgba(40, 40, 40, 0.5);
+        background-color: rgba(40, 40, 40, 0.8);
       }
     }
   }
@@ -95,7 +124,7 @@ body.donejs {
   .usability.container {
     background-color: @white;
     .lead-in {
-      padding: 88px 200px 113px;
+      padding: 88px 10% 113px;
     }
     .lead {
       margin: 6px 160px;
@@ -107,7 +136,7 @@ body.donejs {
     h3.learn {
       margin-top: 18px;
       a {
-        color: black;
+        color: @black;
         text-decoration: underline;
       }
     }
@@ -144,7 +173,7 @@ body.donejs {
       margin: 0 125px;
       font-size: 20px;
       a {
-        color: black;
+        color: @black;
         text-decoration: underline;
       }
     }
@@ -179,7 +208,7 @@ body.donejs {
 
       .row {
         margin: 36px auto;
-        width: 1500px;
+        width: 1400px;
         position: relative;
         left: -78px;
         padding-bottom: 50px;
@@ -266,7 +295,7 @@ body.donejs {
 
   .community.container {
     color: @white;
-    background-color: black;
+    background-color: @black;
 
     h2.trail {
       margin-top: 53px;
@@ -316,65 +345,29 @@ body.donejs {
   height: 100%;
 }
 
-//
-//@media (min-width: 480px) {
-//  .row-xs-height {
-//    //display: table;
-//    //table-layout: fixed;
-//    height: 100%;
-//    width: 100%;
-//  }
-//
-//  .col-xs-height {
-//    display: table-cell;
-//    float: none;
-//    height: 100%;
-//  }
-//
-//}
-//
-//@media (min-width: 768px) {
-//  .row-sm-height {
-//    //display: table;
-//    //table-layout: fixed;
-//    height: 100%;
-//    width: 100%;
-//  }
-//
-//  .col-sm-height {
-//    display: table-cell;
-//    float: none;
-//    height: 100%;
-//  }
-//
-//}
-//
-//@media (min-width: 992px) {
-//  .row-md-height {
-//    //display: table;
-//    //table-layout: fixed;
-//    height: 100%;
-//    width: 100%;
-//  }
-//
-//  .col-md-height {
-//    display: table-cell;
-//    float: none;
-//    height: 100%;
-//  }
-//
-//}
-//
+@media (min-width: 768px) {
+  .donejs div.container {
+    width: 1076px;
+  }
+}
+
+@media (min-width: 992px) {
+  .donejs div.container {
+    width: 1076px;
+  }
+}
+
 @media (min-width: 1200px) {
 
   .donejs div.container {
     width: 100%;
+  }
 
-    .content {
-      width: 1250px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+
+  .content {
+    width: 1250px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .row-sm-height {
