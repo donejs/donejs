@@ -363,10 +363,26 @@ body.donejs {
   height: 100%;
 }
 
+.row-sm-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+.col-sm-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
+}
+
+
+.donejs div.container {
+  width: 100%;
+}
+
 @media (min-width: 768px) {
-  .donejs div.container {
-    width: 1076px;
-  }
+
 
   .donejs-text {
     left: -124px;
@@ -378,9 +394,6 @@ body.donejs {
 }
 
 @media (min-width: 992px) {
-  .donejs div.container {
-    width: 1076px;
-  }
 
   .donejs-text {
     left: -143px;
@@ -394,9 +407,6 @@ body.donejs {
 
 @media (min-width: 1200px) {
 
-  .donejs div.container {
-    width: 100%;
-  }
 
   .donejs-text {
     left: -20px;
@@ -412,18 +422,7 @@ body.donejs {
     margin-right: auto;
   }
 
-  .row-sm-height {
-    display: table;
-    table-layout: fixed;
-    height: 100%;
-    width: 100%;
-  }
 
-  .col-sm-height {
-    display: table-cell;
-    float: none;
-    height: 100%;
-  }
 
 }
 
