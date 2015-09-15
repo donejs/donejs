@@ -37,7 +37,9 @@ steal("./content_list.js",
         }
 
         $('.triptych .box').hover(function(){
+            $(this).stop().animate({'background-position-y':'90%'}, 325);
         }, function(){
+            $(this).stop().animate({'background-position-y':'80%'}, 325);
         }).click(function(event){
             var target = $(this).data('target');
             $('html, body').animate({
@@ -88,6 +90,13 @@ steal("./content_list.js",
             function(el){
                 $(this).get(0).pause();
             });
+
+        $('.usability-row .btn').hover(function(){
+            $(this).find('img').stop().animate({'margin-left':'12px'}, 225);
+        }, function(){
+            $(this).find('img').stop().animate({'margin-left':'0'}, 225);
+        })
+
     });
 
 
