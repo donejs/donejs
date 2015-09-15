@@ -8,6 +8,19 @@ body {
   background-color: #eae9e9;
 }
 
+header {
+  background-color: #CCC;
+
+  .nav > li > a {
+    color: @black;
+  }
+  .nav > li.active > a {
+    background-color: rgba(5, 152, 196, .8);
+    border: none;
+    color: @white;
+  }
+}
+
 body.donejs {
   text-align: center;
   font-family: 'Lato', sans-serif;
@@ -91,8 +104,8 @@ body.donejs {
       }
       .ghbtns {
         margin-left: 17px;
-        float:right;
-        width:80px;
+        float: right;
+        width: 80px;
 
       }
     }
@@ -158,7 +171,7 @@ body.donejs {
       margin-bottom: 28px;
     }
     .img-wrap {
-      display:inline-block;
+      display: inline-block;
       height: 28px;
       width: 30px;
       text-align: left;
@@ -170,7 +183,7 @@ body.donejs {
       background-color: @blue;
       text-decoration: none;
       padding: 7px;
-      padding-left:24px;
+      padding-left: 24px;
 
       color: @white;
       img {
@@ -228,7 +241,7 @@ body.donejs {
         margin: 36px auto;
         padding-bottom: 50px;
         position: relative;
-        display:flex;
+        display: flex;
       }
       .col.donejs {
         text-align: right;
@@ -331,7 +344,7 @@ body.donejs {
   }
 
   footer {
-    margin-top:0;
+    margin-top: 0;
   }
 }
 
