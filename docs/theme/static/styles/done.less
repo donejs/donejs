@@ -32,7 +32,7 @@ body.donejs {
     color: @white;
     background-image: url("../img/background.jpg");
     background-size: cover;
-    padding:0;
+    padding: 0;
     .transparency {
       background-color: rgba(0, 0, 0, .55);
     }
@@ -58,7 +58,7 @@ body.donejs {
         text-align: right;
         .caption {
           margin: 0 auto;
-          width:285px;
+          width: 285px;
 
         }
       }
@@ -68,7 +68,7 @@ body.donejs {
         font-size: 18px;
         line-height: normal;
         text-align: left;
-        width:285px;
+        width: 285px;
         font-family: 'Source Code Pro', monospace;
         border-color: @blue;
         border-width: 2px;
@@ -95,8 +95,8 @@ body.donejs {
     }
     .triptych {
       margin-top: 45px;
-      margin-left:0;
-      margin-right:0;
+      margin-left: 0;
+      margin-right: 0;
       .box {
         cursor: pointer;
         padding: 40px 90px 105px;
@@ -163,10 +163,10 @@ body.donejs {
       padding: 7px;
       color: @white;
       img {
-        height:14px;
+        height: 14px;
         width: 14px;
         vertical-align: top;
-        margin-top:5px;
+        margin-top: 5px;
       }
     }
     .trail {
@@ -204,25 +204,31 @@ body.donejs {
       height: 68px;
     }
     .graph {
-      position: relative;
 
-      .row {
+      .col {
+        position: relative;
+        float: left;
+        width: 50%;
+      }
+      .performance-row {
+        background-image: url("../img/donejs-final_Graph 5.svg");
+        background-repeat: no-repeat;
+        background-position: center;
         margin: 36px auto;
-        width: 1400px;
-        position: relative;
-        left: -78px;
         padding-bottom: 50px;
-      }
-      .donejs-text {
-        left: 72px;
         position: relative;
-        opacity: 0.5;
+        display:flex;
       }
 
-      .naive-text{
-        left: -72px;
-        position: relative;
-        opacity: 0.5;
+      .donejs-text, .naive-text {
+        position: absolute;
+        opacity: 0;
+      }
+      .naive-thumbs {
+        margin-left: 50px;
+      }
+      .donejs-thumbs {
+        margin-right: 50px;
       }
     }
 
@@ -230,15 +236,6 @@ body.donejs {
       font-size: 10px;
     }
 
-    .col-custom-1 {
-      float: left;
-    }
-    .col-custom-3 {
-      float: left;
-    }
-    .col-custom-2 {
-      float: left;
-    }
     .trail {
       .heavy {
         margin-top: 35px;
@@ -277,8 +274,8 @@ body.donejs {
       font-size: smaller;
     }
     .img-responsive {
-      height:234px;
-      width:100%;
+      height: 234px;
+      width: 100%;
     }
     .row {
       margin-bottom: 20px;
@@ -349,12 +346,29 @@ body.donejs {
   .donejs div.container {
     width: 1076px;
   }
+
+  .donejs-text {
+    left: -143px;
+  }
+
+  .naive-text {
+    left: 379px;
+  }
 }
 
 @media (min-width: 992px) {
   .donejs div.container {
     width: 1076px;
   }
+
+  .donejs-text {
+    left: -143px;
+  }
+
+  .naive-text {
+    left: 379px;
+  }
+
 }
 
 @media (min-width: 1200px) {
@@ -363,6 +377,13 @@ body.donejs {
     width: 100%;
   }
 
+  .donejs-text {
+    left: -93px;
+  }
+
+  .naive-text {
+    left: 429px;
+  }
 
   .content {
     width: 1250px;
