@@ -51,7 +51,7 @@ body.donejs {
     }
     a {
       color: @white;
-      text-decoration: underline;
+      line-height: 1.5em;
     }
     .lead-in {
       padding: 57px 200px;
@@ -72,7 +72,6 @@ body.donejs {
         .caption {
           margin: 0 auto;
           width: 285px;
-
         }
       }
       textarea {
@@ -116,13 +115,13 @@ body.donejs {
       .box {
         cursor: pointer;
         padding: 40px 90px 105px;
-        line-height: normal;
         background-image: url("../img/donejs-final_arrow-icon 1.svg");
         background-size: 26px;
         background-position: 50% 80%;
         background-repeat: no-repeat;
-
+        line-height: normal;
         font-size: 16px;
+
       }
 
       .usability {
@@ -228,7 +227,6 @@ body.donejs {
       height: 68px;
     }
     .graph {
-
       .col {
         position: relative;
         float: left;
@@ -241,6 +239,7 @@ body.donejs {
         margin: 36px auto;
         padding-bottom: 50px;
         position: relative;
+        display: -webkit-flex;
         display: flex;
       }
       .col.donejs {
@@ -389,54 +388,16 @@ body.donejs {
   height: 100%;
 }
 
-
 .donejs div.container {
   width: 100%;
 }
 
-@media (min-width: 768px) {
-
-
-  .donejs-text {
-    left: -124px;
-  }
-
-  .naive-text {
-    left: 358px;
-  }
+.donejs-text {
+  right: 314px;
 }
 
-@media (min-width: 992px) {
-
-  .donejs-text {
-    left: -143px;
-  }
-
-  .naive-text {
-    left: 379px;
-  }
-
-}
-
-@media (min-width: 1200px) {
-
-
-  .donejs-text {
-    left: -20px;
-  }
-
-  .naive-text {
-    left: 358px;
-  }
-
-  .content {
-    width: 1250px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-
-
+.naive-text {
+  left: 314px;
 }
 
 .donejs {
