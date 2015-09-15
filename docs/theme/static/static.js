@@ -55,7 +55,7 @@ steal("./content_list.js",
         $('.performance-row .donejs').hover(
             function(){
                 var row = $('.performance-row');
-                row.stop().animate({left: row.width() / 4}, 500);
+                row.stop().animate({left: row.width() / 16}, 500);
                 $('.donejs-text').stop().animate({opacity: 1}, 500);
                 $('.naive-thumbs').stop().animate({opacity: 0.5}, 500);
             },
@@ -70,7 +70,7 @@ steal("./content_list.js",
         $('.performance-row .naive').hover(
             function(){
                 var row = $('.performance-row');
-                row.stop().animate({left: -(row.width() / 4)}, 500);
+                row.stop().animate({left: -(row.width() / 16)}, 500);
                 $('.naive-text').stop().animate({opacity: 1}, 500);
                 $('.donejs-thumbs').stop().animate({opacity: 0.5}, 500);
 
