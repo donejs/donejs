@@ -21,8 +21,27 @@ header {
   }
 }
 
+/*
+* Responsive Columns Same Height
+* http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-columns-of-same-height
+* http://stackoverflow.com/questions/20773342/bootstrap-3-100-height-of-custom-div-inside-column
+*/
+
+.table-row {
+  display: table;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.table-row > [class*="col-"] {
+  float: none;
+  display: table-cell;
+  vertical-align: top;
+}
+
+
 body.donejs {
-  text-align: center;
+  text-align: center; /*most of the text on the page is centered, so make it the default*/
   font-family: 'Lato', sans-serif;
 
   h1 {
@@ -108,10 +127,9 @@ body.donejs {
 
       }
     }
+
     .triptych {
       margin-top: 45px;
-      margin-left: 0;
-      margin-right: 0;
       .box {
         cursor: pointer;
         padding: 40px 90px 105px;
@@ -136,7 +154,7 @@ body.donejs {
     }
   }
 
-  .usability.container {
+  .usability.wrapper {
     background-color: @white;
     .lead-in {
       padding: 88px 10% 113px;
@@ -169,6 +187,7 @@ body.donejs {
     .phase img {
       margin-bottom: 28px;
     }
+
     .img-wrap {
       display: inline-block;
       height: 28px;
@@ -176,6 +195,7 @@ body.donejs {
       text-align: left;
     }
     .btn {
+      color: @white;
       display: block;
       height: 40px;
       width: 100%;
@@ -184,7 +204,6 @@ body.donejs {
       padding: 7px;
       padding-left: 24px;
 
-      color: @white;
       img {
         height: 14px;
         width: 14px;
@@ -202,7 +221,7 @@ body.donejs {
     }
   }
 
-  .performance.container {
+  .performance.wrapper {
     color: @white;
     background-color: @blue;
     padding-bottom: 129px;
@@ -276,9 +295,19 @@ body.donejs {
     }
   }
 
-  .maintainable.container {
+  .maintainable.wrapper {
     color: @white;
     background-color: @charcoal;
+
+
+    .background {
+      background-color: @blue;
+      border: 15px solid @charcoal;
+      padding: 0;
+    }
+
+
+
     h1 {
       margin-bottom: 58px;
     }
@@ -292,10 +321,7 @@ body.donejs {
       margin: 0 170px;
       font-size: 20px;
     }
-    .inside {
-      background-color: @blue;
-      //height:100%;
-    }
+
     .caption {
       text-align: left;
       padding: 10px 25px;
@@ -303,8 +329,8 @@ body.donejs {
       font-size: smaller;
     }
     .img-responsive {
-      height: 100%;
-      width: 100%;
+      height: auto;
+      width: auto;
     }
     .row {
       margin-bottom: 20px;
@@ -319,7 +345,7 @@ body.donejs {
     }
   }
 
-  .community.container {
+  .community.wrapper {
     color: @white;
     background-color: @black;
 
@@ -347,52 +373,7 @@ body.donejs {
   }
 }
 
-/* content styles */
-
-.inside-full-height {
-  /*
-  // if you want to give content full height give him height: 100%;
-  // with content full height you can't apply margins to the content
-  // content full height does not work in ie http://stackoverflow.com/questions/27384433/ie-display-table-cell-child-ignores-height-100
-  */
-  height: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-/* columns of same height styles */
-.row-height {
-  display: table;
-  table-layout: fixed;
-  height: 100%;
-  width: 100%;
-
-}
-
-.col-height {
-  display: table-cell;
-  float: none;
-  height: 100%;
-}
-
-.row-sm-height {
-  display: table;
-  table-layout: fixed;
-  height: 100%;
-  width: 100%;
-}
-
-.maintainable .col-sm-height {
-  float: left;
-}
-
-.col-sm-height {
-  display: table-cell;
-  float: none;
-  height: 100%;
-}
-
-.donejs div.container {
+.donejs div.wrapper {
   width: 100%;
 }
 
@@ -403,21 +384,4 @@ body.donejs {
 .naive-text {
   left: 314px;
 }
-
-.donejs {
-  .clearfix {
-    .clearfix();
-  }
-}
-
-//.donejs {
-//  #low:after,#low:before,.clearfix:after,.clearfix:before,.container-fluid:after,.container-fluid:before,.container:after,.container:before,.row:after,.row:before {
-//    content: " ";
-//    display: table
-//  }
-//
-//  #low:after,.clearfix:after,.container-fluid:after,.container:after,.row:after {
-//    clear: both
-//  }
-//}
 
