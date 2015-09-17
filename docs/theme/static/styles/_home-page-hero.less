@@ -1,0 +1,120 @@
+ body.donejs {
+     .hero {
+        color: @white;
+        background-image: url("../img/background.jpg");
+        background-size: cover;
+        padding: 0;
+        .transparency {
+          background-color: rgba(33, 38, 40, .75);
+        }
+        a {
+          color: @white;
+          line-height: 1.5em;
+        }
+        .lead-in {
+          padding: 57px 200px;
+          h1 {
+            font-size: 75px;
+              margin: 20px;
+          }
+            h3 {
+                max-width: 700px;
+                font-weight: 300;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+
+        .lead {
+          margin: 4px 60px;
+          font-size: 20px;
+        }
+        .install {
+          margin-top: 60px;
+          p {
+            font-size: 14px;
+            margin-bottom: 1px;
+          }
+          .code {
+            text-align: right;
+            .caption {
+              margin: 0 auto;
+              width: 285px;
+            }
+          }
+          textarea {
+            padding: 10px;
+            color: @black;
+            font-size: 18px;
+            line-height: normal;
+            text-align: left;
+            width: 290px;
+            font-family: 'Source Code Pro', monospace;
+            border-color: @blue;
+            border-width: 2px;
+          }
+          .start {
+            padding-top: 27px;
+            .btn {
+              height: 35px;
+              width: 290px;
+              padding: 5px;
+            }
+          }
+          .social {
+            text-align: left;
+            padding-top: 12px;
+            width: 290px;
+          }
+          .ghbtns {
+            margin-left: 17px;
+            float: right;
+            width: 80px;
+
+          }
+        }
+
+        .triptych {
+          margin-top: 45px;
+          .box {
+            cursor: pointer;
+            padding: 40px 90px 105px;
+            background-image: url("../img/donejs-final_arrow-icon_1.svg");
+            background-size: 26px;
+            background-position: 50% 80%;
+            background-repeat: no-repeat;
+            line-height: normal;
+            font-size: 16px;
+
+          }
+
+          .usability {
+            background-color: rgba(93, 96, 97, 0.8);
+          }
+          .performance {
+            background-color: rgba(5, 152, 196, 0.8);
+          }
+          .maintainable {
+            background-color: rgba(33, 38, 40, .8);
+          }
+        }
+      }
+    }
+/*
+* Responsive Columns Same Height
+* http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-columns-of-same-height
+* http://stackoverflow.com/questions/20773342/bootstrap-3-100-height-of-custom-div-inside-column
+*/
+
+.table-row {
+  display: table;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.table-row > [class*="col-"] {
+  float: none;
+  display: table-cell;
+  vertical-align: top;
+}
+      
