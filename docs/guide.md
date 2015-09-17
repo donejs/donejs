@@ -1947,7 +1947,7 @@ so special behavior can be added.  Install the module:
 npm install steal-platform --save
 ```
 
-Create a file: `src/models/base-url.js` and place this code:
+Create a file: `src/service-base-url.js` and place this code:
 
 ```js
 import platform from "steal-platform";
@@ -1966,7 +1966,7 @@ This detects if the environment running your app is either Cordova or NW.js and 
 Our models will also need to be updated to use the baseUrl. For example in `src/models/state` do:
 
 ```js
-import baseUrl from './base-url';
+import baseUrl from '../service-base-url';
 
 superMap({
   url: baseUrl + '/api/states',
