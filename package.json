@@ -53,7 +53,7 @@
     "dependencies": {
       "can": "~2.3.0-pre.10",
       "can-connect": "~0.2.2",
-      "can-ssr": "^0.5.8",
+      "can-ssr": "^0.7.0",
       "done-autorender": "^0.4.0",
       "done-component": "^0.2.0",
       "done-css": "~1.1.8",
