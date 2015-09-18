@@ -1,21 +1,150 @@
 body.Features,
 body.Guide {
-	background-color: #FFFFFF;
+	@containerWidth: 1000px;
+	@contentWidth: 700px;
+
+	background-color: #FCFEFD;
+	color: #000000;
 
 	> .container {
-		width: 1250px;
-		background-color: #FCFEFD;
+		display: block;
+		width: 1000px;
+		margin: 0px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0px;
 
 		> .content {
-			margin-left: 375px;
+			display: block!important;
+			margin: 0px;
+			margin-left: auto;
+			padding: 0px;
+			width: @contentWidth;
+			background-color: transparent;
+			border: none;
+			border-radius: 0px;
 		}
 	}
 
+	/* left navigation */
 	section.contents {
 		position: fixed;
+		z-index: 5;
 		top: 100px;
-		left: 110px;
-		background-color: #3B83A3;
+		left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 )";
+		width: 250px;
+		background-color: @logoColor;
+
+		ol {
+			margin: 0px;
+			list-style: none;
+
+			li {
+				padding: 0px;
+				margin: 0px;
+				line-height: normal;
+
+				a:hover {
+					text-decoration: none;
+				}
+			}
+		}
+
+		> ol {
+			padding: 15px;
+			padding-right: 0px;
+
+			> li {
+				font-weight: 600;
+				font-size: 22px;
+				margin-bottom: 5px;
+				padding-right: 5px;
+
+				a {
+					color: #FFFFFF;
+					font-weight: 600;
+				}
+			}
+
+			> ol {
+				padding: 0px;
+
+				> li a {
+					font-size: 13px;
+					padding-top: 4px;
+					padding-bottom: 5px;
+					padding-left: 13px;
+					padding-right: 5px;
+					display: block;
+					font-weight: 600;
+					color: #AED8E5; //lightblue
+
+					&:hover {
+						position: relative;
+						background-color: @charcoal;
+						color: #FFFFFF;
+
+						&:before {
+							content: ">";
+							position: absolute;
+							font-size: 10px;
+							left: 3px;
+							top: 50%;
+							transform: translateY( -50% );
+						}
+					}
+				}
+			}
+		}
+	}
+
+	/* main body of content */
+	section.comment {
+		&:before {
+			/* this prevents vertical margin collapsing */
+			content: "\007C\00a0\00a0";
+			font-size: 0px;
+		}
+		h2 {
+			@h2height: 222px;
+
+			display: block;
+			position: absolute;
+			left: 0px;
+			right: 0px;
+			padding-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
+			padding-top: 70px;
+			height: @h2height;
+			background-color: @charcoal;
+			color: @white;
+			z-index: 1;
+			font-size: 50px;
+			background-image: url( "/static/img/background.jpg" );
+			margin-top: 40px;
+
+			& + * {
+				padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
+			}
+
+			&:before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0px;
+				bottom: 0px;
+				right: 0px;
+				left: 0px;
+				z-index: -1;
+				background-color: rgba( 33, 38, 40, 0.75 );
+			}
+		}
+		h3 {
+			color: @logoColor;
+			font-size: 40px;
+			margin-top: 50px;
+			border-top: 1px solid #EEEEEE;
+			padding-top: 50px;
+		}
 	}
 
 }
