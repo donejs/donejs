@@ -1,5 +1,5 @@
 @import 'reset.less';
-@import 'variables.less';
+@import 'variables.less'; //our custom colors (@charcoal, @blue, @black, etc) are at the bottom of this file
 @import 'base.less';
 @import 'typography.less';
 @import 'helper.less';
@@ -13,11 +13,23 @@
 @import 'swatches.less';
 @import 'guides.less';
 @import 'ie.less';
+// ^ default documentjs imports
 
+//files that apply to the whole site
 @import 'bootstrap/bootstrap.less';
-@import '_donejs-variables.less';
-@import '_home-page-hero.less';
-@import '_home-page-body.less';
-@import '_footer.less';
 @import 'done.less';
+
+//files for the home page "body.donejs"
 @import '_donejs-typography.less';
+@import '_home-page-body.less';
+@import '_home-page-hero.less';
+@import '_footer.less';
+
+//layout and sidebar navigation shared on Features and Guide
+@import '_shared_layout.less';
+
+//Features page specific stuff
+@import '_features.less';
+
+//Guide page specific stuff
+@import '_guide.less';

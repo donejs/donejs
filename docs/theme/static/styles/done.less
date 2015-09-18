@@ -1,7 +1,3 @@
-body {
-  background-color: #eae9e9;
-}
-
 header {
   background-color: #CCC;
 
@@ -15,8 +11,20 @@ header {
   }
 }
 
+/*
+* Responsive Columns Same Height
+* http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-columns-of-same-height
+* http://stackoverflow.com/questions/20773342/bootstrap-3-100-height-of-custom-div-inside-column
+*/
 
+.table-row {
+  display: table;
+  width: 100%;
+  margin: 0 auto;
+}
 
-
-
-
+.table-row > [class*="col-"] {
+  float: none;
+  display: table-cell;
+  vertical-align: top;
+}
