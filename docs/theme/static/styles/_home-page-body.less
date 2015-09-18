@@ -14,7 +14,7 @@ body.donejs {
     background-color: @white;
     .lead-in {
       max-width: 900px;
-      padding: 88px 0 113px;
+      padding: 88px 2% 113px;
     }
     .lead {
       max-width: 700px;
@@ -23,27 +23,36 @@ body.donejs {
         margin: 0 auto;
     }
     h3 {
-      margin-top: 28px;
+      margin-top: 18px;
         &.heavy {
-            font-weight: 700;
         }
     }
+    .usability-row:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+    }
     h3.learn {
-      margin-top: 30px;
+
       a {
         color: @black;
+        font-weight: 400;
         text-decoration: underline;
       }
     }
 
     h2.better {
-      margin-top: 58px;
+      margin-top: 45px;
     }
     .spacer {
       background-image: url("../img/line.png");
       background-position: center;
       background-repeat: no-repeat;
       height: 80px;
+      margin-bottom: 10px;
     }
 
     .phase img {
@@ -73,12 +82,17 @@ body.donejs {
         margin-top: 5px;
       }
     }
-    .trail {
-      margin: 0 125px;
-      font-size: 20px;
+    p.trail {
+      font-size: 17px;
+      max-width: 500px;
+      display: block;
+      margin: 0 auto;
       a {
-        color: @black;
+        color: @blue;
+        font-weight: 400;
+          &:hover {
         text-decoration: underline;
+        }
       }
     }
   }
@@ -92,15 +106,14 @@ body.donejs {
       text-decoration: underline;
     }
     .lead-in {
-      padding: 105px 200px 0 200px;
+      max-width: 1000px;
+    padding-top: 200px;
     }
     .lead {
-      margin: 0 170px;
       font-size: 20px;
+        font-weight: 300;
     }
-    .rollover {
-      margin: 0;
-    }
+
     .spacer {
       background-image: url("../img/line.png");
       background-position: center;
@@ -146,13 +159,18 @@ body.donejs {
       font-size: 10px;
     }
 
-    .trail {
-      .heavy {
-        margin-top: 35px;
-        margin-bottom: 0;
-      }
-      .links {
-        padding: 0 215px;
+    p.trail {
+      font-size: 17px;
+      max-width: 600px;
+      display: block;
+      margin: 0 auto;
+      a {
+        color: lighten(@blue, 40%);
+        font-weight: 400;
+        text-decoration: none;
+          &:hover {
+        text-decoration: underline;
+        }
       }
     }
   }
@@ -173,14 +191,25 @@ body.donejs {
     h1 {
       margin-bottom: 58px;
     }
-    h2.trail {
-      margin-top: 53px;
+    p.trail {
+      display: block;
+      margin: 0 auto;
+      font-size: 17px;
+      a {
+        color: lighten(@blue, 30%);
+        font-weight: 400;
+        text-decoration: none;
+          &:hover {
+        text-decoration: underline;
+        }
+      }
     }
     .lead-in {
-      padding: 176px 214px 241px 214px;
+        padding: 200px 0;
+        max-width: 1000px;
     }
     .lead {
-      margin: 0 170px;
+      
       font-size: 20px;
     }
 
