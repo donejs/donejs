@@ -2140,7 +2140,7 @@ Next, update your package.json to set the baseURL that will be used in productio
 {
   "system": {
     "envs": {
-      "server-production": {
+      "production": {
         "baseURL": "https://place-my-order.divshot.io/"
       }
     },
