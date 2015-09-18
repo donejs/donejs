@@ -1,5 +1,6 @@
  body.donejs {
      .hero {
+        text-align: center; /*most of the text on the page is centered, so make it the default*/
         color: @white;
         background-image: url("../img/background.jpg");
         background-size: cover;
@@ -12,10 +13,10 @@
           line-height: 1.5em;
         }
         .lead-in {
-          padding: 57px 200px;
+          padding: 45px 35px;
           h1 {
             font-size: 75px;
-              margin: 20px;
+              margin: 20px 0 10px;
           }
             h3 {
                 max-width: 700px;
@@ -30,16 +31,23 @@
           font-size: 20px;
         }
         .install {
-          margin-top: 60px;
+          margin-top: 45px;
           p {
             font-size: 14px;
             margin-bottom: 1px;
           }
+         .install-donejs, .guide {
+            width: 50%;
+             display: block;
+             float: left;
+         }
           .code {
             text-align: right;
             .caption {
+                display: block;
               margin: 0 auto;
               width: 285px;
+                text-align: center;
             }
           }
           textarea {
@@ -53,8 +61,10 @@
             border-color: @blue;
             border-width: 2px;
           }
+          .guide {
+             padding-top: 24px;
+            }
           .start {
-            padding-top: 27px;
             .btn {
               height: 35px;
               width: 290px;
@@ -78,14 +88,26 @@
           margin-top: 45px;
           .box {
             cursor: pointer;
-            padding: 40px 90px 105px;
+            // padding: 40px 90px 105px;
+            padding: 2% 6% 6%;
+            @media(min-width: 1200px) {
+                  padding: 2% 4% 4%;
+            }
+            @media(min-width: 1800px) {
+                  padding: 1% 4% 3%;
+            }
             background-image: url("../img/donejs-final_arrow-icon_1.svg");
             background-size: 26px;
-            background-position: 50% 80%;
+            background-position: 50% 90%;
             background-repeat: no-repeat;
             line-height: normal;
             font-size: 16px;
-
+              p {
+                font-size: 15px;
+              }
+              a {
+                  font-weight: 400;
+              }
           }
 
           .usability {

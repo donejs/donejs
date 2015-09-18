@@ -1,18 +1,33 @@
 body.donejs {
+    .usability.wrapper, .maintainable.wrapper,  .performance.wrapper, .community.wrapper {
+        text-align: center; /*most of the text on the page is centered, so make it the default*/
+    }
+    .lead-in {
+        max-width: 1000px;
+        display: block;
+        margin: 0 auto;
+    }
+    
   .usability.wrapper {
     background-color: @white;
     .lead-in {
-      padding: 88px 10% 113px;
+      max-width: 900px;
+      padding: 88px 0 113px;
     }
     .lead {
-      margin: 6px 160px;
+      max-width: 700px;
       font-size: 20px;
+        display: block;
+        margin: 0 auto;
     }
     h3 {
       margin-top: 28px;
+        &.heavy {
+            font-weight: 700;
+        }
     }
     h3.learn {
-      margin-top: 18px;
+      margin-top: 30px;
       a {
         color: @black;
         text-decoration: underline;
