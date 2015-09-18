@@ -1913,9 +1913,10 @@ Unlike your web app which runs from a server, Cordova (and NW.js) apps need a ht
 <html>
   <head><title>Place My Order</title></head>
   <body>
-    <script load-bundles env="cordova,production" src="node_modules/steal/steal.production.js" main="place-my-order/index.stache!done-autorender"></script>
+    <script load-bundles env="cordova-production" src="node_modules/steal/steal.production.js" main="place-my-order/index.stache!done-autorender"></script>
   </body>
-</html>```
+</html>
+```
 
 This allows us to build a Cordova app with:
 
@@ -2080,6 +2081,7 @@ var buildPromise = stealTools.build({
   config: __dirname + "/package.json!npm"
 }, {
   bundleAssets: {
+    infer: false,
     glob: "node_modules/place-my-order-assets/images/**/*"
   }
 });
