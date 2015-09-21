@@ -77,22 +77,62 @@ body.Guide {
 					display: block;
 					font-weight: 600;
 					color: #AED8E5; //lightblue
+				}
+				> li:hover a,
+				> li.active a {
+					position: relative;
+					background-color: @charcoal;
+					color: #FFFFFF;
 
-					&:hover {
-						position: relative;
-						background-color: @charcoal;
-						color: #FFFFFF;
-
-						&:before {
-							content: ">";
-							position: absolute;
-							font-size: 10px;
-							left: 3px;
-							top: 50%;
-							transform: translateY( -50% );
-						}
+					&:before {
+						content: ">";
+						position: absolute;
+						font-size: 10px;
+						left: 3px;
+						top: 50%;
+						transform: translateY( -50% );
 					}
 				}
+			}
+		}
+	}
+
+	section.title .heading {
+		@h1height: 170px;
+
+		position: initial;
+		height: @h1height;
+
+		h1 + ul.tags {
+			display: none;
+		}
+		h1 {
+			display: block;
+			position: absolute;
+			left: 0px;
+			right: 0px;
+			padding-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
+			padding-top: 5px;
+			height: @h1height;
+			background-color: #FFFFFF;
+			color: @black;
+			z-index: 1;
+			font-weight: 100;
+			font-size: 100px;
+			background-image: url( "/static/img/background.jpg" );
+			margin-bottom: 40px;
+			max-width: initial;
+
+			&:before {
+				content: "";
+				display: block;
+				position: absolute;
+				top: 0px;
+				bottom: 0px;
+				right: 0px;
+				left: 0px;
+				z-index: -1;
+				background-color: fade( #FFFFFF, 75% );
 			}
 		}
 	}
@@ -104,9 +144,9 @@ body.Guide {
 			content: "\007C\00a0\00a0";
 			font-size: 0px;
 		}
+		
+		@h2height: 222px;
 		h2 {
-			@h2height: 222px;
-
 			display: block;
 			position: absolute;
 			left: 0px;
@@ -121,10 +161,6 @@ body.Guide {
 			background-image: url( "/static/img/background.jpg" );
 			margin-top: 40px;
 
-			& + * {
-				padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
-			}
-
 			&:before {
 				content: "";
 				display: block;
@@ -136,6 +172,16 @@ body.Guide {
 				z-index: -1;
 				background-color: rgba( 33, 38, 40, 0.75 );
 			}
+			&:after {
+				//this is avoiding a problem with document.elementFromPoint that sets what nav item is active
+				content: "";
+				display: block;
+				position: absolute;
+				top: -40px;
+				height: 41px;
+				right: 0px;
+				left: 0px;
+			}
 		}
 		h3 {
 			color: @logoColor;
@@ -143,6 +189,19 @@ body.Guide {
 			margin-top: 50px;
 			border-top: 1px solid #EEEEEE;
 			padding-top: 50px;
+		}
+
+ 		h2 + * {
+			padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
+		}
+		h2 + p {
+			padding-top: @h2height + 100px!important;
+		}
+		h2 + p,
+		h2 + p + p,
+		h2 + p + p + p {
+			font-weight: bold;
+			color: @logoColor;
 		}
 	}
 
