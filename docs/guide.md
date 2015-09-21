@@ -63,6 +63,7 @@ We can see the following files:
 ├── src/
 |   ├── app.js
 |   ├── index.stache
+|   ├── index.html
 |   ├── models/
 |   |   ├── fixtures
 |   |   |   ├── fixtures.js
@@ -77,22 +78,23 @@ We can see the following files:
 
 Let's have a quick look at what those files are for:
 
-- `.yo-rc.json` contains information for running the generators
-- `package.json` is the main configuration file that defines all our application dependencies and other settings
-- `test.html` is used to run all our tests
-- `documentjs.json` is the configuration file for generating documentation
-- `readme.md` is the readme file for your repository
-- `src` is the folder where all our development assets live on their own modlets (more about that later)
-- `src/app.js` is the main application file which exports the main application state
-- `src/index.stache` is the main template used for both, server side rendering and on the client
+- `.yo-rc.json` contains information for running the generators.
+- `package.json` is the main configuration file that defines all our application dependencies and other settings.
+- `test.html` is used to run all our tests.
+- `documentjs.json` is the configuration file for generating documentation.
+- `readme.md` is the readme file for your repository.
+- `src` is the folder where all our development assets live on their own modlets (more about that later).
+- `src/app.js` is the main application file which exports the main application state.
+- `src/index.stache` is the main client template that includes server-side rendering.
+- `src/index.html` is the main client template to use if you want to opt out of server-side rendering.
 - `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures/fixtures.js` which will reference all the specific models fixtures files (so that we can run model related tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
-- `src/styles.less` is the main application styles LESS
-- `src/test/test.js` collects all individual component and model tests we will create throughout this guide and is loaded by `test.html`
-- `src/test/functional.js` will contain functional smoke tests for our application
+- `src/styles.less` is the main application styles LESS.
+- `src/test/test.js` collects all individual component and model tests we will create throughout this guide and is loaded by `test.html`.
+- `src/test/functional.js` will contain functional smoke tests for our application.
 
 ### Development mode
 
-DoneJS comes with its own server which does both, host your development files and automatically pre-renders the application on the server. DoneJS' development mode will also start a [live-reload](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) server that automatically reloads files in the browser as they change. You can start both by running:
+DoneJS comes with its own server which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also start a [live-reload](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) server that automatically reloads files in the browser as they change. You can start both by running:
 
 ```
 donejs develop
