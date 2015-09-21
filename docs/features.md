@@ -1,6 +1,7 @@
 @page Features
 @parent DoneJS
 @hide sidebar
+@outline 2 ol
 
 @description Learn what DoneJS can do for your application and developers.
 

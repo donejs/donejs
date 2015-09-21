@@ -1,25 +1,20 @@
-<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
-
-<div class="hero container">
+<div class="hero wrapper">
     <div class="transparency">
 
-        <div class="lead-in content">
+        <div class="lead-in">
             <h1 class="heavy">Your App. Done.</h1>
 
-            <h3 class="lead"><span class="heavy">DoneJS</span> is an open source JavaScript framework that makes it easy
-                to build high performance,
-                real time web and mobile applications.</h3>
+            <h3 class="lead"><span class="heavy">DoneJS</span> is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.</h3>
 
 
-            <div class="row install">
-                <div class="col-sm-6 code">
+            <div class="row table-row install">
+                <div class="install-donejs">
                     <p class="caption">Ready to install DoneJS?</p>
                     <textarea>npm install -g donejs &#13;donejs init my-app</textarea>
 
                 </div>
-                <div class="col-sm-6 start">
-                    <p><a class="btn" href="Guide.html" role="button">Start Tutorial</a></p>
+                <div class="guide">
+                    <p><a class="btn" href="Guide.html" role="button">Start Guide</a></p>
 
                     <div class="social">
 
@@ -38,73 +33,67 @@
             </div>
         </div>
 
-        <div class="row triptych">
-            <div class="row-height">
-                <div class="col-sm-4 col-sm-height box usability" data-target="usability">
-                    <div class="inside inside-full-height">
+        <div class="row table-row triptych">
+            <!--<div class="row-height">-->
+            <div class="col-sm-4 box usability" data-target="usability">
+                <h2><span class="light">Improved App</span><br>Usability</h2>
 
-                        <h2><span>Improved App</span> <span class="heavy">Usability</span></h2>
+                <p><a href="Features.html">iOS, Android, and Desktop Builds</a>; 
+                    <a href="Features.html">Supports All Browsers, even IE8</a>; 
+                    <a href="Features.html">Real time Connected</a>;
+                    <a href="Features.html">Pretty URL’s with Pushstate</a></p>
 
-                        <a href="Features.html">iOS, Android, and Desktop Builds; Supports All
-                            Browsers, even IE8; Real
-                            time
-                            Connected;
-                            Pretty URL’s with Pushstate</a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-sm-height box performance" data-target="performance">
-                    <div class="inside inside-full-height">
-
-                        <h2><span>Better </span> <span class="heavy">Performance</span></h2>
-
-                        <a href="Features.html">Server Side Rendered (Isomorphic); Progressive
-                            Loading; Minimal Data
-                            Requests;
-                            Minimal
-                            DOM Updates; Worker Thread Rendering; Deploy to a CDN</a>
-                    </div>
-                </div>
-                <div class="col-sm-4 col-sm-height box maintainable" data-target="maintainable">
-                    <div class="inside inside-full-height">
-
-                        <h2><span>More </span> <span class="heavy">Maintainable</span></h2>
-
-                        <a href="Features.html">Unit and Functional Tests; Documentation;
-                            Continuous Integration &
-                            Deployment;
-                            NPM
-                            Packages; ES6 Modules; Modlets; Custom HTML Elements; MVVM Reactive Architecture; Live
-                            reload; Generators</a>
-                    </div>
-                </div>
             </div>
+            <div class="col-sm-4 box performance" data-target="performance">
+                <h2><span class="light">Better</span><br>Performance</h2>
+
+                <p><a href="Features.html">Server Side Rendered (Isomorphic)</a>; 
+                    <a href="Features.html">Progressive Loading </a>; 
+                    <a href="Features.html">Minimal Data Requests</a>;
+                    <a href="Features.html">Minimal DOM Updates</a>; 
+                    <a href="Features.html">Worker Thread Rendering; Deploy to a CDN</a></p>
+
+            </div>
+            <div class="col-sm-4 box maintainable" data-target="maintainable">
+                <h2><span class="light">More</span><br>Maintainable</h2>
+                <p><a href="Features.html">Unit and Functional Tests</a>; 
+                    <a href="Features.html">Documentation</a>;
+                    <a href="Features.html">Continuous Integration &amp; Deployment</a>;
+                    <a href="Features.html">NPM Packages</a>; 
+                    <a href="Features.html">ES6 Modules</a>; 
+                    <a href="Features.html">Modlets</a>;
+                    <a href="Features.html">Custom HTML Elements</a>; 
+                    <a href="Features.html">MVVM Reactive Architecture</a>; 
+                    <a href="Features.html">Live reload</a>; 
+                    <a href="Features.html">Generators</a>
+                </p>
+            </div>
+            <!--</div>-->
         </div>
     </div>
 </div>
 
 
-<div class="usability container">
+<div class="usability wrapper">
 
-    <div class="lead-in content">
+    <div class="lead-in">
         <a id="usability"></a>
 
         <h1><span class="light">Improved App</span> <span class="heavy">Usability</span></h1>
 
-        <h3 class="lead">DoneJS is used to make beautiful, real-time user interfaces that can be exported to run on
-            every
-            platform.</h3>
+        <h3 class="lead"><span class="bold">DoneJS</span><span class="normal"> is used to make beautiful, real-time user interfaces that can be exported to run on every platform.</span></h3>
 
-        <h3>Take our example app for a spin:</h3>
+        <h3 class="heavy">Take our example app for a spin:</h3>
 
         <div class="spacer"></div>
 
 
-        <div class="row usability-row">
+        <div class="usability-row">
             <div class="col-sm-3">
                 <div class="phase ios">
                     <img src="static/img/thumb-ios.svg">
 
-                    <p><a class="btn" href="Guide.html" role="button">iOS <span class="img-wrap"><img
+                    <p><a class="btn" href="https://github.com/donejs/donejs/wiki/Deploying-to-iOS-for-testing" role="button">iOS <span class="img-wrap"><img
                             src="static/img/donejs-final_arrow-icon_2.svg"></span></a></p>
                 </div>
             </div>
@@ -112,7 +101,7 @@
                 <div class="phase android">
                     <img src="static/img/thumb-android.svg">
 
-                    <p><a class="btn" href="Guide.html" role="button">Android <span class="img-wrap"><img
+                    <p><a class="btn" href="https://github.com/donejs/place-my-order/releases/download/v0.2.0/android-release-unsigned.apk" role="button">Android <span class="img-wrap"><img
                             src="static/img/donejs-final_arrow-icon_2.svg"></span></a></p>
                 </div>
             </div>
@@ -128,14 +117,14 @@
                 <div class="phase ontheweb">
                     <img src="static/img/thumb-on-the-web.svg">
 
-                    <p><a class="btn" href="Guide.html" role="button">On the Web <span class="img-wrap"><img
+                    <p><a class="btn" href="https://github.com/donejs/place-my-order/archive/v0.2.0.zip" role="button">On the Web <span class="img-wrap"><img
                             src="static/img/donejs-final_arrow-icon_2.svg"></span></a></p>
                 </div>
             </div>
 
         </div>
 
-        <h3 class="normal learn">Learn how to build this in our <a href="Guide.html">getting started guide!</a></h3>
+        <h3 class="light learn">Learn how to build this in our <a href="Guide.html">getting started guide!</a></h3>
 
         <h2 class="heavy better">More ways DoneJS is better for users:</h2>
 
@@ -149,22 +138,22 @@
 
 </div>
 
-<div class="performance container">
-    <div class="lead-in content">
+<div class="performance wrapper">
+    <div class="lead-in">
         <a id="performance"></a>
 
         <div class="title-padding">
             <h1><span class="light">Better</span> <span class="heavy">Performance</span></h1>
 
-            <h3 class="lead">DoneJS is configured for maximum responsiveness right out of the box.</h3>
+            <h3 class="lead"><span class="bold">DoneJS</span> is configured for maximum performance right out of the box.</h3>
 
-            <h3 class="rollover">Rollover the graph to see how it works</h3>
+            <h3 class="heavy">Rollover the graph to see how it works:</h3>
         </div>
 
         <div class="spacer"></div>
 
     </div>
-    <div class="graph content">
+    <div class="graph">
         <div class="performance-row">
             <div class="col donejs">
                 <img class="donejs-text" src="static/img/donejs-final_Graph_1.svg">
@@ -176,180 +165,172 @@
             </div>
         </div>
     </div>
-    <div class="trail content">
 
         <h2 class="heavy">More ways DoneJS improves app performance:</h2>
-
-        <h3 class="links">
+        <p class="trail">
             <a href="Guide.html#">Server Side Rendered (Isomorphic)</a> |
             <a href="Guide.html#">Progressive Loading</a> |
             <a href="Guide.html#">Minimal Data Requests</a> |
             <a href="Guide.html#">Minimal DOM Updates</a> |
             <a href="Guide.html#">Worker Thread Rendering</a> |
             <a href="Guide.html#">Deploy to a CDN</a>
-        </h3>
-
-    </div>
+        </p>
 </div>
 
-<div class="maintainable container">
-    <div class="lead-in content">
+<div class="maintainable wrapper">
+    <div class="lead-in">
         <a id="maintainable"></a>
 
         <h1><span class="light">More</span> <span class="heavy">Maintainable</span></h1>
+         <h3 class="lead"><span class="bold">DoneJS</span> helps developers get things done quickly with an eye toward maintenance.</h3>
 
-        <div class="row">
-            <div class="row-height ">
-                <div class="col-sm-6 col-sm-height">
-                    <div class="inside inside-full-height">
+        <div class="row table-row">
 
-                        <img src="static/img/donejs-documentation.png" class="img-responsive" alt="Responsive image">
+            <div class="col-sm-6 background">
 
-                        <div class="caption">
-                            <h2 class="heavy">Documentation</h2>
+                <img src="static/img/donejs-documentation.png" class="img-responsive" alt="Responsive image">
 
-                            <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
-                        </div>
+                <div class="caption">
+                    <h2 class="heavy">Documentation</h2>
 
-                    </div>
+                    <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
                 </div>
-                <div class="col-sm-6 col-sm-height">
-                    <div class="inside inside-full-height">
 
-                        <video preload="auto" poster="static/img/donejs-testing.gif" class="img-responsive">
-                            <source src="static/img/donejs-testing.mov" type="video/mp4">
-                            <source src="static/img/donejs-testing.mp4" type="video/mp4">
-                            <source src="static/img/donejs-testing.ogg" type="video/mp4">
-                            <source src="static/img/donejs-testing.webm" type="video/webm">
-                        </video>
-
-                        <div class="caption">
-                            <h2 class="heavy">Testing</h2>
-
-                            <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
-                        </div>
-
-                    </div>
-                </div>
             </div>
+            <div class="col-sm-6 background">
+
+                <video preload="auto" poster="static/img/donejs-testing.gif" class="img-responsive">
+                    <source src="static/img/donejs-testing.mov" type="video/mp4">
+                    <source src="static/img/donejs-testing.mp4" type="video/mp4">
+                    <source src="static/img/donejs-testing.ogg" type="video/mp4">
+                    <source src="static/img/donejs-testing.webm" type="video/webm">
+                </video>
+
+                <div class="caption">
+                    <h2 class="heavy">Testing</h2>
+
+                    <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
+                </div>
+
+            </div>
+
         </div>
-        <div class="row">
-            <div class="row-height">
-                <div class="col-sm-6 col-sm-height">
-                    <div class="inside inside-full-height">
-                        <video preload="auto" poster="static/img/donejs-live-reload.gif" class="img-responsive">
-                            <source src="static/img/donejs-live-reload.mov" type="video/mp4">
-                            <source src="static/img/donejs-live-reload.mp4" type="video/mp4">
-                            <source src="static/img/donejs-live-reload.ogg" type="video/mp4">
-                            <source src="static/img/donejs-live-reload.webm" type="video/webm">
-                        </video>
+        <div class="row table-row">
 
-                        <div class="caption">
-                            <h2 class="heavy">Live Reload</h2>
+            <div class="col-sm-6 background">
+                <video preload="auto" poster="static/img/donejs-live-reload.gif" class="img-responsive">
+                    <source src="static/img/donejs-live-reload.mov" type="video/mp4">
+                    <source src="static/img/donejs-live-reload.mp4" type="video/mp4">
+                    <source src="static/img/donejs-live-reload.ogg" type="video/mp4">
+                    <source src="static/img/donejs-live-reload.webm" type="video/webm">
+                </video>
 
-                            <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
-                        </div>
+                <div class="caption">
+                    <h2 class="heavy">Live Reload</h2>
 
-                    </div>
+                    <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
                 </div>
-                <div class="col-sm-6 col-sm-height">
-                    <div class="inside inside-full-height">
-                        <video preload="auto" poster="static/img/donejs-npm-packaging-custom-elements.gif" class="img-responsive">
-                            <source src="static/img/donejs-npm-packaging-custom-elements.mov" type="video/mp4">
-                            <source src="static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4">
-                            <source src="static/img/donejs-npm-packaging-custom-elements.ogg" type="video/mp4">
-                            <source src="static/img/donejs-npm-packaging-custom-elements.webm" type="video/webm">
-                        </video>
 
-                        <div class="caption">
-                            <h2 class="heavy">NPM Packaging &amp; Custom HTML Elements</h2>
 
-                            <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
-                        </div>
-
-                    </div>
-                </div>
             </div>
+            <div class="col-sm-6 background">
+                <video preload="auto" poster="static/img/donejs-npm-packaging-custom-elements.gif"
+                       class="img-responsive">
+                    <source src="static/img/donejs-npm-packaging-custom-elements.mov" type="video/mp4">
+                    <source src="static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4">
+                    <source src="static/img/donejs-npm-packaging-custom-elements.ogg" type="video/mp4">
+                    <source src="static/img/donejs-npm-packaging-custom-elements.webm" type="video/webm">
+                </video>
+
+                <div class="caption">
+                    <h2 class="heavy">NPM Packaging &amp; Custom HTML Elements</h2>
+
+                    <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
+                </div>
+
+
+            </div>
+
         </div>
-        <!--<div class="row">
-            <div class="row-height">
-                <div class="col-sm-6 col-sm-height">
-                    <div class="inside inside-full-height">
 
-                        <img src="http://lorempixel.com/g/400/200/" class="img-responsive" alt="Responsive image">
 
-                        <div class="caption">
-                            <h2 class="heavy">MVVM Reactive Architecture</h2>
+        <div class="row table-row">
 
-                            <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
-                        </div>
+            <div class="col-sm-6 background">
+                <img src="http://placehold.it/1000x565" class="img-responsive" alt="Responsive image">
 
-                    </div>
+                <div class="caption">
+                    <h2 class="heavy">MVVM Reactive Architecture</h2>
+
+                    <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
                 </div>
-                <div class="col-sm-6 col-sm-height">
-                    <div class="inside inside-full-height">
 
-                        <img src="http://lorempixel.com/g/400/200/" class="img-responsive" alt="Responsive image">
 
-                        <div class="caption">
-                            <h2 class="heavy">Continuous Integration & Deployment</h2>
-
-                            <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
-                        </div>
-
-                    </div>
-                </div>
             </div>
-        </div>-->
-        <h2 class="trail heavy">More ways DoneJS helps developers do their jobs</h2>
+            <div class="col-sm-6 background">
+                <img src="http://placehold.it/1000x565" class="img-responsive" alt="Responsive image">
 
-        <h3 class="links">
+                <div class="caption">
+                    <h2 class="heavy">Continuous Integration &amp; Deployment</h2>
+
+                    <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <h2>More ways DoneJS helps developers do their jobs</h2>
+
+        <p class="trail">
             <a href="Guide.html#">Unit and Functional Tests</a> |
-            <a href="Guide.html#">Documentation; Continuous Integration and Deployment; NPM Packages</a> |
+            <a href="Guide.html#">Live reload</a> |
+            <a href="Guide.html#">Documentation</a> |
+            <a href="Guide.html#">NPM Packages</a> |
+            <a href="Guide.html#">Continuous Integration and Deployment</a> |
             <a href="Guide.html#">ES6 Modules</a> |
             <a href="Guide.html#">Modlets</a> |
             <a href="Guide.html#">Custom HTML Elements</a> |
             <a href="Guide.html#">MVVM Reactive Architecture</a> |
-            <a href="Guide.html#">Live reload; Generators</a>
-        </h3>
+            <a href="Guide.html#">Generators</a>
+        </p>
 
     </div>
 
 </div>
 
-
-<div class="community container">
-    <div class="lead-in content">
+<div class="community wrapper">
+    <div class="lead-in">
         <h1><span class="heavy">Community</span></h1>
-        <h4>We’re always here to help, and we’d love to hear from you. Here’s some links to help you out.</h4>
+        <h4>We’re always here to help, and we’d love to hear from you. <br>Here are some links to help you out.</h4>
     </div>
 
-    <div class="content row links">
+    <div class="row table-row links ">
 
-        <div class="col-sm-4 col-sm-height">
+        <div class="col-sm-4 ">
 
             <h3><span class="heavy">Help</span></h3>
 
             <p>If you’re looking for help the best place to start is the forums or our Gitter chatroom.</p>
 
-            <p><a href="https://gitter.im/donejs/donejs">Gitter</a> (100 Conversations)</p>
+            <p><a href="https://gitter.im/donejs/donejs">Gitter</a></p>
 
-            <p><a href="#">Forum </a> (100 FAQ’s)</p>
+            <p><a href="#">Forum </a></p>
 
-            <p><a href="http://stackoverflow.com/search?q=donejs">Stack Overflow</a> (100 Conversations)</p>
+            <p><a href="http://stackoverflow.com/search?q=donejs">Stack Overflow</a></p>
         </div>
-        <div class="col-sm-4 col-sm-height">
+        <div class="col-sm-4 ">
 
             <h3><span class="heavy">Keep in Touch</span></h3>
 
-            <p><a href="https://twitter.com/bitovi">Twitter</a> (100 Followers)</p>
+            <p><a href="https://twitter.com/bitovi">Twitter</a></p>
 
-            <p><a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">Youtube</a> (200 Videos)</p>
+            <p><a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">Youtube</a></p>
 
-            <p><a href="http://blog.bitovi.com/">Blog</a> (100 Articles)</p>
+            <p><a href="http://blog.bitovi.com/">Blog</a></p>
 
         </div>
-        <div class="col-sm-4 col-sm-height">
+        <div class="col-sm-4 ">
 
             <h3><span class="heavy">Contribute</span></h3>
 

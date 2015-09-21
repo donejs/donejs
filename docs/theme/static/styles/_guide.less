@@ -1,0 +1,22 @@
+body.Guide {
+	
+	/* left navigation overwrites*/
+	section.contents {
+		> ol > li ~ li {
+			border-top: solid 1px lighten(@blue, 5%);
+		}
+		> ol {   
+			> li {
+				font-size: 15px;
+				padding-top: 4px;
+
+				a {
+					font-weight: 400;
+				}
+				&.active a {   
+					font-weight: 700;
+				}
+			}
+		}
+	}
+}

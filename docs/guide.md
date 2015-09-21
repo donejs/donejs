@@ -5,7 +5,7 @@
 @description In this guide you will learn about all of [DoneJS features]() by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
 
 
-![DoneJS app](img/place-my-order.png)
+![DoneJS app](static/img/place-my-order.png)
 
 
 After the initial application setup that includes a server that hosts and pre-renders the application we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
@@ -571,7 +571,7 @@ By checking for `restaurants.isPending` and `restaurants.isResolved` we are able
 
 In this chapter we will create a view model for the restaurant list functionality. We want  to show a dropdown of all available states with restaurants. When the user selects a state, we want to show a list of cities with restaurants. Once a city is selected, we will load a list of all restaurants for that city. The end result will look like this:
 
-![Restaurant list](img/restaurant-list.png)
+![Restaurant list](static/img/restaurant-list.png)
 
 ### Identify view model state
 

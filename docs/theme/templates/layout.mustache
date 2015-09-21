@@ -23,15 +23,17 @@
 	{{^devBuild}}
 	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
 	{{/devBuild}}
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:100,300,700,900">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
 	<!--[if lt IE 9]>
-   <script type="text/javascript" src="static/html5shiv.js"></script>
-    <!--<![endif]-->
-  <style type="text/css">
-    .brand {
-      background-image: url('/static/img/donejs-logo-white.svg') !important;
-      background-size: 170px;
-    }
-  </style>
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<!--<![endif]-->
+	<style type="text/css">
+		.brand {
+			background-image: url('/static/img/donejs-logo-white.svg') !important;
+			background-size: 170px;
+		}
+	</style>
 
 </head>
 
@@ -42,18 +44,18 @@
 			<div class="logo-menu">
 				<a class="brand" href="./index.html">DoneJS</a>
 				<ul class="dropdown-menu">
-		          <li><a href="http://donejs.com" class="active">DoneJS</a></li>
-		          <li><a href="http://canjs.com">CanJS</a></li>
-		          <li><a href="http://stealjs.com">StealJS</a></li>
-		          <li><a href="http://jquerypp.com">jQuery++</a></li>
-		          <li><a href="http://funcunit.com">FuncUnit</a></li>
-		          <li><a href="http://documentjs.com">DocumentJS</a></li>
-		        </ul>
+					<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+					<li><a href="http://canjs.com">CanJS</a></li>
+					<li><a href="http://stealjs.com">StealJS</a></li>
+					<li><a href="http://jquerypp.com">jQuery++</a></li>
+					<li><a href="http://funcunit.com">FuncUnit</a></li>
+					<li><a href="http://documentjs.com">DocumentJS</a></li>
+				</ul>
 			</div>
 			<ul class="nav">
 				<li {{#ifCurrentFromConfig "../index.html"}}class="active"{{/ifCurrentFromConfig}}>
-	              <a href="./index.html">Home</a>
-                </li>
+					<a href="./index.html">Home</a>
+				</li>
 				<li {{#ifCurrentFromConfig "../Features.html"}}class="active"{{/ifCurrentFromConfig}}>
 					<a href="./Features.html">Features</a>
 				</li>
@@ -99,16 +101,16 @@
 	{{else}}
 		<script>
 		  steal = {
-		    instantiated: {
-		      "bundles/static.css!$css" : null
-		    }
+			instantiated: {
+			  "bundles/static.css!$css" : null
+			}
 		  }
 		</script>
 		<script type='text/javascript' 
 				data-main="static"
 				data-config="./static/config.js"
 				src="./static/steal.production.js"
-	    		bundles-path="bundles"></script>
+				bundles-path="bundles"></script>
 	{{/if}}
 
 
@@ -118,7 +120,7 @@
 
 {{#ifCurrentFromConfig "../index.html"}}
 <script>
-    // cool scripts go here
+	// cool scripts go here
 </script>
 {{/ifCurrentFromConfig}}
 
