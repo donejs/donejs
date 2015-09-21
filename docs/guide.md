@@ -236,7 +236,7 @@ This will create a file at `src/home.component` containing the basic layout of c
 <can-component tag="pmo-home">
   <template>
      <div class="homepage">
-      <img src="{{~ 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}"
+      <img src="{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}"
           width="250" height="380" />
       <h1>Ordering food has never been easier</h1>
       <p>
@@ -543,7 +543,7 @@ And update the template at `src/restaurant/list/list.stache` to use the [Promise
   {{#if restaurants.isResolved}}
     {{#each restaurants.value}}
       <div class="restaurant">
-        <img src="{{~ images.thumbnail}}" width="100" height="100">
+        <img src="{{joinBase images.thumbnail}}" width="100" height="100">
         <h3>{{name}}</h3>
         {{#address}}
         <div class="address">
