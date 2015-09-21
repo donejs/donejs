@@ -3,12 +3,20 @@ body.donejs {
   
   .usability.wrapper, .maintainable.wrapper,  .performance.wrapper, .community.wrapper {
     text-align: center; /*most of the text on the page is centered, so make it the default*/
+    a {
+        white-space: nowrap;
+    }
+    h1 {
+        line-height: 55px;
+        padding-bottom: 10px;
+    }
   }
   .lead-in {
     max-width: 1000px;
     display: block;
     margin: 0 auto;
   }
+
     
   .usability.wrapper {
     background-color: @white;
@@ -175,6 +183,7 @@ body.donejs {
       }
     }
   }
+    
 
   .maintainable.wrapper {
     color: @white;
@@ -185,12 +194,17 @@ body.donejs {
       background-color: @blue;
       border: 15px solid @charcoal;
       padding: 0;
+      video {
+        height: 280px;
+        overflow: hidden;
+          width: 100%;
+      }
     }
 
 
 
     h1 {
-      margin-bottom: 58px;
+        line-height: 50px;
     }
     p.trail {
       display: block;
@@ -210,9 +224,10 @@ body.donejs {
         padding: 100px 0;
         max-width: 1000px;
     }
-    .lead {
-      
+    h3.lead {
       font-size: 20px;
+      margin-bottom: 60px;
+    font-weight: 300;
     }
 
     .caption {
@@ -241,22 +256,34 @@ body.donejs {
   .community.wrapper {
     color: @white;
     background-color: @black;
+        h3 {
+            font-size: 30px;
+        }
 
     h2.trail {
       margin-top: 53px;
     }
     .lead-in {
-      padding: 84px 45px 37px 45px;
+      padding-top: 100px;
     }
     h4 {
-      padding: 0 340px;
+        font-weight: 300;
     }
     .links {
-      text-align: left;
-      padding: 0 21px 0 218px;
+        text-align: left;
+        max-width: 1000px;
+        padding: 50px 0 100px;
+        p {
+            margin-bottom: 5px;
+        }
       a {
-        color: @white;
+        color: lighten(@blue, 30%);
+        font-weight: 700;
+        text-decoration: none;
+          &:hover {
         text-decoration: underline;
+              color: @white;
+        }
       }
     }
   }

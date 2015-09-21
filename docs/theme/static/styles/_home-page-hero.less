@@ -13,12 +13,20 @@
   a {
     color: @white;
     line-height: 1.5em;
+    white-space: nowrap;
+    @media(max-width: 1000px) {
+            white-space: normal;
+      }
   }
   .lead-in {
     padding: 45px 35px;
     h1 {
       font-size: 75px;
         margin: 20px 0 10px;
+        @media(max-width: 700px) {
+            font-size: 55px;
+            line-height: 50px;
+      }
     }
       h3 {
           max-width: 700px;
