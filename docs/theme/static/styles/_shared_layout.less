@@ -1,3 +1,5 @@
+
+
 body.Features,
 body.Guide {
 	/* @containerWidth @contentWidth defined in ./variables.less near the bottom */
@@ -54,9 +56,8 @@ body.Guide {
 		}
 
 		> ol {
-			padding: 15px;
-			padding-right: 0px;
-
+			padding: 15px 0 5px 15px;
+            
 			> li {
 				font-weight: 900;
 				font-size: 20px;
@@ -73,14 +74,12 @@ body.Guide {
 				padding: 0px;
 
 				> li a {
-					font-size: 13px;
-					padding-top: 4px;
-					padding-bottom: 5px;
-					padding-left: 13px;
-					padding-right: 5px;
+					font-size: 14px;
+                    padding: 2px 5px 4px 13px;
 					display: block;
 					font-weight: 400;
-					color: #AED8E5; //lightblue
+					color: lighten(@blue, 35%);
+                    line-height: 15px;
 				}
 				> li:hover a,
 				> li.active a {

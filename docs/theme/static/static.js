@@ -21,7 +21,6 @@ steal("./content_list.js",
             this.select();
         });
 
-
         if ($('.twitter-follow-button').length) {
             // replace the "Follow @canjs!" link with a little wiget with follower count.
             $('#twitter-wjs').remove();
