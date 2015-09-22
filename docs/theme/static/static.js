@@ -88,13 +88,17 @@ steal("./content_list.js",
             },
             function(el){
                 $(this).get(0).pause();
-            });
+            }
+        );
 
-        $('.usability-row .btn').hover(function(){
-            $(this).find('img').stop().animate({'margin-left':'12px'}, 225);
-        }, function(){
-            $(this).find('img').stop().animate({'margin-left':'0'}, 225);
-        });
+        $( ".usability-dl-options" ).hover(
+            function () {
+                $( this ).prev( ".btn" ).addClass( "active" );
+            },
+            function () {
+                $( this ).prev( ".btn" ).removeClass( "active" );
+            }
+        );
 
 
 
