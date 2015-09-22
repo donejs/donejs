@@ -82,13 +82,76 @@ body.donejs {
       text-decoration: none;
       padding: 7px;
       padding-left: 24px;
+      font-size: 16px;
 
       img {
         height: 14px;
         width: 14px;
         vertical-align: top;
         margin-top: 5px;
+        margin-left: 0px;
+        -webkit-transition: margin-left 200ms ease-out;
+        transition: margin-left 200ms ease-out;
       }
+
+      &.active img,
+      &:hover img {
+        margin-left: 12px;
+      }
+    }
+    .desktop .btn {
+      img {
+        margin-left: 0px;
+        transform: rotateZ( 0deg );
+        -webkit-transition: margin-left 200ms ease-out, transform 200ms ease-out, -webkit-transform 200ms ease-out;
+        transition: margin-left 200ms ease-out, transform 200ms ease-out, -webkit-transform 200ms ease-out;
+      }
+      &.active img,
+      &:hover img {
+        margin-left: 12px;
+        transform: rotateZ( 90deg );
+        -webkit-transform: rotateZ( 90deg );
+      }
+    }
+    .usability-dl-options {
+      position: absolute;
+      background-color: #FFFFFF;
+      overflow: hidden;
+      border: 2px solid @logoColor;
+      width: ~"calc( 100% - 30px )";
+      padding-top: 0px;
+      padding-bottom: 0px;
+      max-height: 0px;
+      -webkit-transition: max-height 300ms ease-out, padding 300ms ease-out;
+      transition: max-height 300ms ease-out, padding 300ms ease-out;
+
+      a {
+        position: relative;
+        display: block;
+        padding: 2px;
+        padding-left: 10px;
+        font-weight: 600;
+        color: @charcoal;
+        text-align: left;
+        font-size: 16px;
+
+        &:before {
+          content: "For ";
+          font-weight: 300;
+        }
+
+        &:hover {
+          color: #FFFFFF;
+          background-color: @logoColor;
+          text-decoration: none;
+        }
+      }
+    }
+    .usability-dl-options:hover,
+    .btn:hover + .usability-dl-options {
+      max-height: 250px;
+      padding-top: 6px;
+      padding-bottom: 6px;
     }
     p.trail {
       font-size: 17px;
@@ -112,6 +175,9 @@ body.donejs {
     a {
       color: @white;
       text-decoration: underline;
+    }
+    p {
+        color: white;
     }
     .lead-in {
       max-width: 1000px;
