@@ -1,15 +1,28 @@
-
-
 body.Features,
 body.Guide {
 	/* @containerWidth @contentWidth defined in ./variables.less near the bottom */
     
 	background-color: #FCFEFD;
 	color: #000000;
+
     a {
         font-weight: 900;
         color: @logoColor;
     }
+
+
+	pre {
+		border-top: 15px solid @logoColor;
+		background-color: @cust-pre-bg;
+
+		code.prettyprint {
+			word-wrap: break-word;
+
+			.pln {
+			  color: @cust-pln-color;
+			}
+		}
+	}
 
 	> .container {
 		display: block;
