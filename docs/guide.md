@@ -467,7 +467,7 @@ Here we make a `switch` statement that checks for the current `page` property, t
 
 [can-connect](http://connect.canjs.com/) is a powerful data layer that allows our application to connect to the RESTful API that we set up with `place-my-order-api`.
 
-### Creating a restaurants connection.
+### Creating a restaurants connection
 
 At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and later told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant supermodel:
 

@@ -167,6 +167,39 @@ steal("./content_list.js",
             }
         });
 
+        
+        //hijack page jumps, animate scroll
+        $( function () {
+            var clickFn = function () {
+                var offset = -60;
+                var thisLi = $( this ).closest( "li" );
+                if ( thisLi.is( "body.Features ol > ol > li:first-child" ) ) {
+                    offset = 222 - 55;
+                }
+                if ( thisLi.is( "body.Features ol > ol:first-of-type > li:first-child" ) ) {
+                    offset = 222 - 70;
+                }
+                $( 'html, body' ).animate({
+                    scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
+                }, 500);
+            };
+
+            var hashOnLoad = window.location.hash;
+            var jumpOnLoad = null;
+
+            $( "section.contents a" ).each( function () {
+                this.href = this.href.replace( "#", "#section=" );
+
+                if ( hashOnLoad && this.href.replace( /.*?#section=/, "#section=" ) === hashOnLoad ) {
+                    jumpOnLoad = this;
+                }
+
+                $( this ).on( "click", clickFn );
+
+                return true;
+            });
+
+            if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
+        });
+
     });
-
-
