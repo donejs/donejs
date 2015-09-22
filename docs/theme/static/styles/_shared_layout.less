@@ -3,9 +3,13 @@
 body.Features,
 body.Guide {
 	/* @containerWidth @contentWidth defined in ./variables.less near the bottom */
-
+    
 	background-color: #FCFEFD;
 	color: #000000;
+    a {
+        font-weight: 900;
+        color: @logoColor;
+    }
 
 	> .container {
 		display: block;
@@ -74,8 +78,8 @@ body.Guide {
 				padding: 0px;
 
 				> li a {
-					font-size: 14px;
-                    padding: 2px 5px 4px 13px;
+					font-size: 13px;
+                    padding: 3px 5px 4px 13px;
 					display: block;
 					font-weight: 400;
 					color: lighten(@blue, 35%);
@@ -167,7 +171,7 @@ body.Guide {
 			font-size: 50px;
 			background-image: url( "/static/img/background.jpg" );
 			margin-top: 40px;
-
+          
 			&:before {
 				content: "";
 				display: block;
@@ -207,8 +211,9 @@ body.Guide {
 		h2 + p,
 		h2 + p + p,
 		h2 + p + p + p {
-			font-weight: bold;
-			color: @logoColor;
+			font-weight: 400;
+			color: @grey;
+            font-size: 19px;
 		}
 	}
 
