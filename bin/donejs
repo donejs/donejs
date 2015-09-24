@@ -4,12 +4,15 @@ var path = require('path');
 var fs = require('fs');
 var program = require('commander');
 var mkdirp = require('mkdirp');
+var execSync = require("child_process").execSync;
 
 var utils = require('../lib/utils');
 var log = utils.log;
+
 var mypkg = require(path.join(__dirname, '..', 'package.json'));
 var curpkg = {};
-var root = path.join(process.cwd(), 'node_modules');
+
+var root = path.join(execSync("npm prefix").toString().trim(), 'node_modules');
 var binPath = path.join(root, '.bin');
 
 var commandList = ['init', 'generate'];
