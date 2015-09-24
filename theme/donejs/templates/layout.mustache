@@ -18,52 +18,24 @@
 <head>
 	<meta charset="utf-8">
 	<title>{{makeParentTitle}} {{#if title}}- {{title}} {{else}} {{#if name}}- {{name}}{{/if}}{{/if}}</title>
-	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
-	<meta name="author" content="Bitovi - DoneJS">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
 	{{^devBuild}}
 	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
 	{{/devBuild}}
-	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
 	<!--[if lt IE 9]>
-		<script type="text/javascript" src="static/html5shiv.js"></script>
-	<!--<![endif]-->
-	<style type="text/css">
-		.brand {
-			background-image: url('/static/img/donejs-logo-white.svg') !important;
-			background-size: 170px;
-		}
-	</style>
-
+   <script type="text/javascript" src="static/html5shiv.js"></script>
+    <!--<![endif]-->
 </head>
 
-<body class="docs {{name}}">
+<body class="docs">
 	<header>
-		<nav class="container">
+		<nav class="container atomgroom">
 
 			<div class="logo-menu">
-				<a class="brand" href="./index.html">DoneJS</a>
-				<ul class="dropdown-menu">
-					<li><a href="http://donejs.com" class="active">DoneJS</a></li>
-					<li><a href="http://canjs.com">CanJS</a></li>
-					<li><a href="http://stealjs.com">StealJS</a></li>
-					<li><a href="http://jquerypp.com">jQuery++</a></li>
-					<li><a href="http://funcunit.com">FuncUnit</a></li>
-					<li><a href="http://documentjs.com">DocumentJS</a></li>
-				</ul>
+				<a class="brand" href="./index.html">{{makeParentTitle}}</a>
 			</div>
-			<ul class="nav">
-				<li {{#ifCurrentFromConfig "../index.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./index.html">Home</a>
-				</li>
-				<li {{#ifCurrentFromConfig "../Features.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./Features.html">Features</a>
-				</li>
-				<li {{#ifCurrentFromConfig "../Guide.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./Guide.html">Guide</a>
-				</li>
-			</ul>
+
 			<div class="pull-right">
 				<div class="bitovi-menu">
 					<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
@@ -102,27 +74,17 @@
 	{{else}}
 		<script>
 		  steal = {
-			instantiated: {
-			  "bundles/static.css!$css" : null
-			}
+		    instantiated: {
+		      "bundles/static.css!$css" : null
+		    }
 		  }
 		</script>
 		<script type='text/javascript'
 				data-main="static"
 				data-config="./static/config.js"
 				src="./static/steal.production.js"
-				bundles-path="bundles"></script>
+	    		bundles-path="bundles"></script>
 	{{/if}}
-
-
 </body>
-
-
-
-{{#ifCurrentFromConfig "../index.html"}}
-<script>
-	// cool scripts go here
-</script>
-{{/ifCurrentFromConfig}}
 
 </html>

@@ -1,4 +1,8 @@
 {
+  "siteDefaults" {
+    "templates": "theme/donejs/templates",
+    "static": "theme/donejs/static"
+  },
   "sites": {
     "guides": {
       "glob": {
