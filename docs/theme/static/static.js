@@ -1,6 +1,8 @@
 steal("./content_list.js",
     "./frame_helper.js",
     "./versions.js",
+    "./js/collapse.js",
+    "./js/dropdown.js",
     "./styles/styles.less!",
     "./prettify", function(ContentList, FrameHelper, Versions){
         var codes = document.getElementsByTagName("code");
@@ -170,7 +172,7 @@ steal("./content_list.js",
             }
         });
 
-        
+
         //hijack page jumps, animate scroll
         $( function () {
             var clickFn = function () {

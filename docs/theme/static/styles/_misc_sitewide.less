@@ -4,6 +4,12 @@
 * http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-columns-of-same-height
 * http://stackoverflow.com/questions/20773342/bootstrap-3-100-height-of-custom-div-inside-column
 */
+.reset-padding {
+  padding:0;
+}
+.reset-margin {
+  margin:0;
+}
 
 .table-row {
   display: table;
@@ -15,14 +21,22 @@
     vertical-align: top;
   }
 }
-
+.container {
+  @media (max-width: @screen-sm) {
+    width: auto;
+  }
+}
 
 
 
 /* site wide footer */
 footer {
 	background-color: @logoColor;
-
+  .links {
+    @media (min-width: @screen-sm) {
+      .table-row;
+    }
+  }
 	nav.container {
 		a {
 			background-image: url( '/static/img/donejs-logo-final-02.svg' )!important;

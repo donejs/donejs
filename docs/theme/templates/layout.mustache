@@ -35,56 +35,68 @@
 			background-size: 170px;
 		}
 	</style>
-
 </head>
-
 <body class="docs {{name}}">
-	<header>
-		<nav class="container">
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+			  <div class="container">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+			    </div>
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li {{#ifCurrentFromConfig "../index.html"}}class="active"{{/ifCurrentFromConfig}}>
+								<a href="./index.html">Home</a>
+							</li>
+							<li {{#ifCurrentFromConfig "../Features.html"}}class="active"{{/ifCurrentFromConfig}}>
+								<a href="./Features.html">Features</a>
+							</li>
+							<li {{#ifCurrentFromConfig "../Guide.html"}}class="active"{{/ifCurrentFromConfig}}>
+								<a href="./Guide.html">Guide</a>
+							</li>
+						</ul>
 
-			<div class="logo-menu">
-				<a class="brand" href="./index.html">DoneJS</a>
-				<ul class="dropdown-menu">
-					<li><a href="http://donejs.com" class="active">DoneJS</a></li>
-					<li><a href="http://canjs.com">CanJS</a></li>
-					<li><a href="http://stealjs.com">StealJS</a></li>
-					<li><a href="http://jquerypp.com">jQuery++</a></li>
-					<li><a href="http://funcunit.com">FuncUnit</a></li>
-					<li><a href="http://documentjs.com">DocumentJS</a></li>
-				</ul>
-			</div>
-			<ul class="nav">
-				<li {{#ifCurrentFromConfig "../index.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./index.html">Home</a>
-				</li>
-				<li {{#ifCurrentFromConfig "../Features.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./Features.html">Features</a>
-				</li>
-				<li {{#ifCurrentFromConfig "../Guide.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./Guide.html">Guide</a>
-				</li>
-			</ul>
-			<div class="pull-right">
-				<div class="bitovi-menu">
-					<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
-					<ul class="dropdown-menu">
-						<li><a href="http://bitovi.com">Bitovi.com</a></li>
-						<li><a href="http://bitovi.com/blog/">Blog</a></li>
-						<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
-						<li><a href="http://bitovi.com/training/">Training</a></li>
-						<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
-						<li><a href="http://bitovi.com/people/">People</a></li>
-						<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+			      <ul class="nav navbar-nav navbar-right bitovi-menu">
+			        <li><a href="#">Link</a></li>
+			        <li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+			          <ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+			          </ul>
+			        </li>
+			      </ul>
+			    </div>
+			  </div>
+			</nav>
+		</header>
 
 	{{{content}}}
 	{{^hideFooter}}
 	<footer>
-		<nav class="container">
+		<nav>
 			<a class="brand javascriptmvc" href="index.html"></a>
 		</nav>
 	</footer>
@@ -113,11 +125,7 @@
 				src="./static/steal.production.js"
 				bundles-path="bundles"></script>
 	{{/if}}
-
-
 </body>
-
-
 
 {{#ifCurrentFromConfig "../index.html"}}
 <script>
