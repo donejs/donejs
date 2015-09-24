@@ -12,14 +12,49 @@
 ### Isomorphic
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application) (SPAs),
-but are able to be rendered on the server.  This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript)
-and has the benefits of SPAs and server side rendering:
+and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript). SPAs and server side rendering come with great benefits:
 
-- Speed - A user can see their content immediately.  No loading bars necessary. 
-- SEO - While [Google can execute JavaScript](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), 
-  it's not perfect, Google isn't the only search engine, and you might want others to be able to scrape your site.
-- User Experience - SPAs can provide a more fluid user experience. 
-- Maintenence - Shift user interface logic to the client where it belongs.
+#### **Speed**
+A user can see their content immediately. No spinners necessary.
+
+[[[TODO: image of loaded vs spinner from home page]]]
+
+#### **SEO**
+While [Google can execute JavaScript](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), it's not perfect and there are many other search engines that want to scrape your site and drive traffic your way.
+
+#### **User Experience**
+SPAs can provide a more fluid user experience.
+
+#### **Maintenence**
+Shift user interface logic to the client where it belongs.
+
+DoneJS brings server side rendering with an incredibly fast, single context virtual DOM.
+With a single context on the server (default, but optional), no additional process or memory is used per request. You don't even have to reload the application, throwing out all of the overhead baggage you used to expect from a server request, and getting it done as fast as possible.
+
+To render those requests, DoneJS uses a virtual DOM that only implements the fundamental apis that jQuery needs to manipulate the DOM. That means the rendering here is *fast* and we're only carrying a fraction of the weight an approach using a full headless browser has.
+
+Other solutions to server side rendering force you to get all the data manually, to know when the page is done loading, and make it difficult to have components load their own data. DoneJS takes care of all of this and makes it incredibly easy to make your most important components immediately visible to the user and to the bots crawling your site:
+
+```
+var promise = Recipe.getList();
+this.attr("@root").waitFor( promise );
+
+<html>
+  <can-import from="model/recipes" />
+  <recipe-model get-list="{ rating: 5 }">
+    {{#each dish}}
+      * * * * * {{title}}
+    {{/each}}
+  </recipe-model>
+</html>
+```
+
+Project: https://github.com/canjs/can-ssr
+
+Docs-link: https://github.com/canjs/can-ssr
+
+Guide-link: 
+
 
 ### Pushstate routing
 
