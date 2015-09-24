@@ -23,9 +23,9 @@ a {
   h1 {
     font-size: 75px;
       margin: 20px 0 10px;
-      @media(max-width: 700px) {
-          font-size: 55px;
-          line-height: 50px;
+      @media(max-width: @screen-sm) {
+        font-size: 55px;
+        line-height: 50px;
     }
   }
     h3 {
@@ -130,6 +130,11 @@ a {
   .maintainable {
     background-color: rgba(33, 38, 40, .8);
   }
+  @media (min-width: @screen-sm) {
+    .table-row;
+  }
+}
+.links {
   @media (min-width: @screen-sm) {
     .table-row;
   }

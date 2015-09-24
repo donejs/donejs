@@ -1,30 +1,80 @@
 body {
-  padding-top: 60px;
-
-  header {
-
-    .navbar-default{
-      background-color: rgba( 255, 255, 255, 0.87 );
-      box-shadow: 0px 3px 5px fade( #CCCCCC, 50% );
-    }
-    nav.container {
-
-      .nav > li > a {
-        color: @black;
-        text-shadow: initial;
-      }
-      .nav > li.active > a {
-        background-color: rgba(5, 152, 196, .8);
-        border: none;
-        color: @white;
-      }
-
-      .bitovi-menu a {
-        text-decoration: none;
-        overflow: hidden;
-        opacity: 1;
-        color: @black;
-      }
+  padding-top: 55px;
+}
+header {
+  .container {
+    height: auto;
+  }
+  .navbar-default{
+    background-color: rgba( 255, 255, 255, 0.87 );
+    box-shadow: 0px 3px 5px fade( #CCCCCC, 50% );
+  }
+  .nav {
+    top: 13px;
+    @media(max-width: @screen-md) {
+      top: -2px;
+      width:100%;
+      margin:0;
     }
   }
+  .navbar-collapse {
+    @media(max-width: @screen-xs){
+      padding-top:20px;
+        .bitovi-menu {
+          .icon-bits {
+            color: @teal;
+            text-shadow: none;
+            opacity: 1;
+          }
+          .dropdown-menu {
+          display: block;
+          visibility: visible;
+          position: relative;
+          top:auto;
+          left: auto;
+          background-color: transparent;
+          border: 0;
+          box-shadow: none;
+          width: 100%;
+          li, a {
+            width: 100%;
+            display: block;
+          }
+          a {
+            color: @gray-base;
+          }
+        }
+      }
+    }
+    @media (min-width: @screen-sm) {
+      padding-top:0;
+    }
+  }
+  .nav > li {
+    display: block;
+    width: 100%;
+    @media(min-width: @screen-sm) {
+      margin-right: 10px;
+      width: auto;
+    }
+  }
+  .nav > li > a {
+    color: @black;
+    text-shadow: initial;
+    display: block;
+    width: 100%;
+    @media(min-width: @screen-sm) {
+      width: auto;
+    }
+  }
+  .nav > li.active > a {
+    border: 1px solid rgb(5,152,196);
+  }
+  .bitovi-menu a {
+    text-decoration: none;
+    overflow: hidden;
+    opacity: 1;
+    color: @black;
+  }
+
 }
