@@ -99,8 +99,11 @@ a {
  margin-top: 20px;
  .box {
    cursor: pointer;
-   // padding: 40px 90px 105px;
-   padding: 2% 6% 6%;
+   padding: 2% 6% 15%;
+
+   @media (min-width: @screen-sm){
+     padding: 2% 6% 6%;
+   }
    @media(min-width: 1200px) {
          padding: 2% 4% 4%;
    }

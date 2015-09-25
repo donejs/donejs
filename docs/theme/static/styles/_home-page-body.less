@@ -174,6 +174,9 @@ body.donejs {
   color: @white;
   background-color: @logoColor;
   padding-bottom: 100px;
+  @media(max-width: @screen-xs){
+    padding-bottom: 30px;
+  }
   a {
     color: @white;
     text-decoration: underline;
@@ -185,7 +188,10 @@ body.donejs {
     max-width: 1000px;
     padding-top: 100px;
     @media(max-width: @screen-xs){
-      padding-top: 44px 2% 113px;
+      padding-top: 44px;
+      padding-left:0;
+      padding-right: 0;
+      padding-bottom:0;
     }
   }
   .lead {
@@ -254,7 +260,38 @@ body.donejs {
     }
   }
 }
+.mobile-graph {
+  position: relative;
+  height: 425px;
+  width: 100%;
+  overflow-x: hidden;
+  padding:0;
 
+  .graph-logos {
+    padding:0;
+    width: 86px;
+    position: absolute;
+    z-index: 3;
+    left: 0;
+    top:0;
+    height: 425px;
+  }
+  .graph-timeline-wrapper {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding:0;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    top:0;
+  }
+  .graph-timeline{
+    width: 2600px;
+    background-color: @logoColor;
+    padding-left:86px
+  }
+}
 
 .maintainable.wrapper {
   color: @white;
