@@ -2,11 +2,13 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description In this guide you will create [chat.donejs.com](http://chat.donejs.com) a simple real-time chat built with [DoneJS features](Features.html).
+@description In this guide you will create [chat.donejs.com](http://chat.donejs.com), a simple real-time chat built with [DoneJS features](Features.html).
 
-After installing DoneJS and generating our first application we will learn how to easily add Bootstrap and a tabs widget to the homepage, create new components and set up basic routing between two pages.
 
-We will learn how to add a model that connects to a RESTful API and also how to make the application real-time. Finally we will build the application into optimized production bundles, deploy the static assets to a CDN and also run the chat as a mobile and desktop application.
+After installing DoneJS and generating the application we will learn how to easily add Bootstrap and a tabs widget to the homepage, create custom elements and set up basic routing between two pages.
+
+We will learn how to add a model that connects to a RESTful API and also how to make the application real-time. Finally we will build the application into optimized production bundles, deploy the static assets to a CDN and also run it as a mobile and desktop application.
+
 
 @body
 
@@ -39,7 +41,7 @@ The initialization process will ask you questions like the name of your applicat
 - [Testee](https://github.com/bitovi/testee) - JavaScript Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
-If we now go into the `donej-chat` folder with
+If we now go into the `donejs-chat` folder with
 
 ```
 cd donejs-chat
@@ -89,36 +91,7 @@ Bootstrap is [available on NPM](https://www.npmjs.com/package/bootstrap) so we c
 npm install bootstrap --save
 ```
 
-To add it to the application we have to import it by changing `index.stache` to:
-
-```html
-<html>
-  <head>
-    <title>{{title}}</title>
-    {{asset "css"}}
-  </head>
-  <body>
-    <can-import from="bootstrap/less/bootstrap.less!" />
-    <can-import from="donejs-chat/styles.less!" />
-    <can-import from="donejs-chat/app" as="viewModel" />
-
-    {{asset "inline-cache"}}
-
-    {{#switch @env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="http://donejs-chat.divshot.io/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
-  </body>
-</html>
-```
-
-The only thing we added to the existing `src/index.stache` is the `<can-import from="bootstrap/less/bootstrap.less!" />` line which tells DoneJS to import the main Bootstrap LESS file. The `!` indicates it should be loaded with the LESS processor.
-
-To test it and also see live-reload in action let's add some HTML that uses the Bootstrap styles by changing `src/index.stache` to this:
+Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap.less!" />` which tells DoneJS to import the main Bootstrap LESS file and also add some HTML that uses the Bootstrap styles. The `!` indicates it should be loaded with the LESS preprocessor.
 
 ```html
 <html>
@@ -136,7 +109,10 @@ To test it and also see live-reload in action let's add some HTML that uses the 
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-          <h1>Hello world</h1>
+          <h1 class="page-header text-center">
+            <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
+            <br>Chat
+          </h1>
         </div>
       </div>
     </div>
@@ -180,7 +156,11 @@ Normally `bit-tabs` automatically loads its own styles. Since we want to use the
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-          <h1>Hello world</h1>
+          <h1 class="page-header text-center">
+            <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
+            <br>Chat
+          </h1>
+
           <bit-tabs tabs-class="nav nav-tabs">
             <bit-panel title="CanJS">
               CanJS provides the MV*
@@ -205,16 +185,20 @@ Normally `bit-tabs` automatically loads its own styles. Since we want to use the
 </html>
 ```
 
-To add a little more whitespace we will also add
+To add a little more whitespace we can add
 
 ```css
 bit-panel {
-    display: block;
-    padding: 10px;
+  display: block;
+  padding: 10px;
+
+  &:empty {
+    display: none;
+  }
 }
 ```
 
-To `src/styles.less`.
+to `src/styles.less`.
 
 ## Custom elements and routing
 
@@ -222,19 +206,13 @@ In this part we will create two custom elements one for the homepage and another
 
 ### Generate custom elements
 
-Now we will create two different custom elements. The homepage (with the HTML tag name `chat-home`) won't be very big so we can put everything into a single file at `src/home.component`. To generate it we can run:
+The homepage custom element (with the HTML tag name `chat-home`) won't be very big so we can put everything into a single file at `src/home.component`. To generate it we can run:
 
 ```
 donejs generate component home.component chat-home
 ```
 
-> donejs generate component messages chat-messages
-
-### Navigate between pages
-
-Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of the application state.
-
-If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+We can now copy most of the code from the homepage into this component so that it looks like this:
 
 ```html
 <can-component tag="chat-home">
@@ -244,59 +222,160 @@ If you want to learn more about CanJS routing visit the CanJS guide on [Applicat
     h1.page-header { margin-top: 0; }
   </style>
   <template>
-    <can-import from="can/view/href/" />
     <h1 class="page-header text-center">
-        <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" />
-        <br>Chat
+      <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
+      <br>Chat
     </h1>
+
+    <bit-tabs tabs-class="nav nav-tabs">
+      <bit-panel title="CanJS">
+        CanJS provides the MV*
+      </bit-panel>
+      <bit-panel title="StealJS">
+        StealJS provides the infrastructure.
+      </bit-panel>
+    </bit-tabs>
+  </template>
+</can-component>
+```
+
+The messages component (with the tag `chat-messages`) will be a little more complex which is why we generate it using the [modlet file naming pattern]():
+
+```
+donejs generate component messages chat-messages
+```
+
+We will later update those files with the chat messages functionality.
+
+### Navigate between pages
+
+Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of the application state.
+
+If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+
+First, let's update `src/home.component` with a link to the chat messages page:
+
+```html
+<can-component tag="chat-home">
+  <style type="less">
+    display: block;
+
+    h1.page-header { margin-top: 0; }
+  </style>
+  <template>
+    <h1 class="page-header text-center">
+      <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
+      <br>Chat
+    </h1>
+
+    <bit-tabs tabs-class="nav nav-tabs">
+      <bit-panel title="CanJS">
+        CanJS provides the MV*
+      </bit-panel>
+      <bit-panel title="StealJS">
+        StealJS provides the infrastructure.
+      </bit-panel>
+    </bit-tabs>
 
     <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">Start chat</a>
   </template>
 </can-component>
 ```
 
+When the "Start chat" button is clicked, `can-href="{ page='chat' }"` will make sure that our application state gets updated with that property. This state will also be reflected in the route.
 
-2. Add link on chat page (`messages/messages.stache`)
+Next we add a link to go back to the chat page (`messages/messages.stache`):
 
 ```html
-<can-import from="can/view/href/" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
 <p>{{message}}</p>
 ```
 
-3. Add route in `app.js`
+Then, to get a pretty route we have to add a mapping for the `page` property in `src/app.js` which then looks like this:
 
 ```js
+import AppMap from "can-ssr/app-map";
+import route from "can/route/";
+import 'can/map/define/';
+import 'can/route/pushstate/';
+
+const AppViewModel = AppMap.extend({
+  define: {
+    message: {
+      value: 'Hello World!',
+      serialize: false
+    },
+    title: {
+      value: 'donejs-chat',
+      serialize: false
+    }
+  }
+});
+
 route('/:page', { page: 'home' });
+
+export default AppViewModel;
 ```
 
-4. Load dynamically in `index.stache`
+### Switch between pages
+
+Finally we can glue both components together as separate pages in `src/index.stache`. This is done by dynamically importing each component (showing a `Loading...` message while they are loading) and showing them based on the `page` property (which we set in the route):
 
 
 ```html
-<div class="container">
-  <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
-    {{#eq page 'chat'}}
-      <can-import from="donejs-chat/messages/">
-        {{#if isPending}}
-          Loading...
-        {{else}}
-          <chat-messages/>
-        {{/if}}
-      </can-import>
-    {{else}}
-      <can-import from="donejs-chat/home.component!">
-        {{#if isPending}}
-          Loading...
-        {{else}}
-          <chat-home/>
-        {{/if}}
-      </can-import>
-    {{/eq}}
+<html>
+  <head>
+    <title>{{title}}</title>
+    {{asset "css"}}
+  </head>
+  <body>
+    <can-import from="bootstrap/less/bootstrap.less!" />
+    <can-import from="donejs-chat/styles.less!" />
+    <can-import from="donejs-chat/app" as="viewModel" />
+    <can-import from="bit-tabs/unstyled" />
+
+    {{asset "inline-cache"}}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+              {{#eq page 'chat'}}
+                <can-import from="donejs-chat/messages/">
+                  {{#if isPending}}
+                    Loading...
+                  {{else}}
+                    <chat-messages/>
+                  {{/if}}
+                </can-import>
+              {{else}}
+                <can-import from="donejs-chat/home.component!">
+                  {{#if isPending}}
+                    Loading...
+                  {{else}}
+                    <chat-home/>
+                  {{/if}}
+                </can-import>
+              {{/eq}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+
+    {{#switch @env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="http://donejs-chat.divshot.io/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
+</html>
 ```
 
 ## Messages model
