@@ -17,6 +17,9 @@ header {
       margin:0;
     }
   }
+  .dropdown-menu {
+    border-radius: 0;
+  }
   .navbar-collapse {
     @media(max-width: @screen-xs){
       padding-top:20px;
@@ -27,15 +30,15 @@ header {
             opacity: 1;
           }
           .dropdown-menu {
-          display: block;
-          visibility: visible;
-          position: relative;
-          top:auto;
-          left: auto;
-          background-color: transparent;
-          border: 0;
-          box-shadow: none;
-          width: 100%;
+            display: block;
+            visibility: visible;
+            position: relative;
+            top:auto;
+            left: auto;
+            background-color: transparent;
+            border: 0;
+            box-shadow: none;
+            width: 100%;
           li, a {
             width: 100%;
             display: block;
@@ -70,11 +73,20 @@ header {
   .nav > li.active > a {
     border: 1px solid rgb(5,152,196);
   }
-  .bitovi-menu a {
-    text-decoration: none;
-    overflow: hidden;
-    opacity: 1;
-    color: @black;
+  .bitovi-menu {
+    top: 0px;
+    .dropdown-menu {
+      top: 53px;
+    }
+    .bitovi.icon-bits {
+      text-decoration: none;
+      overflow: hidden;
+      opacity: 1;
+      color: @black;
+      line-height: 46px;
+      text-shadow: none;
+    }
+
   }
 
 }
