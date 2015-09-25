@@ -275,6 +275,17 @@ body.donejs {
     left: 0;
     top:0;
     height: 425px;
+    &:before{
+      content: ' › ';
+      position: absolute;
+      top: 39%;
+      left: 40%;
+      opacity:1;
+      animation: fadeInAndOut 2s infinite;
+      color: white;
+      font-size: 50px;
+      // todo, remove this element completely once the user scrolls the graph
+    }
   }
   .graph-timeline-wrapper {
     overflow-y: hidden;
@@ -287,7 +298,7 @@ body.donejs {
     top:0;
   }
   .graph-timeline{
-    width: 2600px;
+    width: 2530px;
     background-color: @logoColor;
     padding-left:86px
   }
