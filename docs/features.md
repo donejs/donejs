@@ -21,15 +21,15 @@ A user sees their content immediately. No spinners necessary.
 
 DoneJS brings server side rendering with an incredibly fast, single context virtual DOM.
 
-Running a single context on the server (default, but optional), no additional process or memory is used per request. You don't even have to reload the application, throwing out all of the overhead baggage you used to expect from a server request, and getting it done as fast as possible.
+Running a single context on the server (default, but optional), no additional processes or memory is used per request. You don't even have to reload the application. This eliminates all of the overhead baggage you used to expect from a server request, and gets it done as fast as possible.
 
 #### **SEO**
 While [Google can execute JavaScript](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), it's not perfect and there are many other search engines that want to scrape your site and drive traffic your way.
 
 Rendering requests in DoneJS uses a virtual DOM that only implements the fundamental apis that jQuery needs to manipulate the DOM. That means the rendering here is *fast* and your markup is ready to serve with the SEO benefits a static page would have.
 
-#### **Competitors**
-Other solutions to server side rendering force you to get all the data manually, to know when the page is done loading, and make it difficult to have components load their own data. DoneJS takes care of all of this and makes it incredibly easy to make your most important components immediately visible to the user and to the bots crawling your site. And because DoneJS renders using a virtual DOM, it's super fast and only carrying a fraction of the weight an approach using a full headless browser has.
+#### **DoneJS compared to alternatives**
+Other solutions to server side rendering force you to get all the data manually, to know when the page is done loading, and make it difficult to have components load their own data. DoneJS takes care of all of this and makes it incredibly easy to make your most important components immediately visible to the user and to the bots crawling your site. And because DoneJS renders using a [virtual DOM](https://github.com/canjs/can-simple-dom), it's super fast and only carrying a fraction of the weight an approach using a full headless browser has.
 
 #### **How easy?**
 Just add one line to your most important components:
