@@ -131,7 +131,6 @@ a {
          font-weight: 400;
      }
  }
-
  .usability {
    background-color: rgba(93, 96, 97, 0.8);
  }
@@ -141,7 +140,21 @@ a {
  .maintainable {
    background-color: rgba(33, 38, 40, .8);
  }
- @media (min-width: @screen-sm) {
+ @media(min-width: @screen-sm) {
+   .usability,
+   .performance,
+   .maintainable {
+     min-height: 400px;
+   }
+ }
+ @media(min-width: @screen-md) {
+   .usability,
+   .performance,
+   .maintainable {
+     min-height: 380px;
+   }
+ }
+ @media (min-width: @screen-lg) {
    .table-row;
  }
 }
