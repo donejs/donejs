@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.5.0-pre.3",
+  "version": "0.5.0-pre.6",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -44,6 +44,7 @@
     "mkdirp": "^0.5.1",
     "npm": "^2.13.1",
     "q": "^1.4.1",
+    "steal-platform": "0.0.4",
     "yeoman-environment": "^1.2.7"
   },
   "directories": {
@@ -51,22 +52,22 @@
   },
   "donejs": {
     "dependencies": {
-      "can": "~2.3.0-pre.12",
+      "can": "~2.3.0-pre.13",
       "can-connect": "~0.2.2",
-      "can-ssr": "^0.7.0",
+      "can-ssr": "^0.7.4",
       "done-autorender": "^0.4.0",
       "done-component": "^0.2.0",
       "done-css": "~1.1.8",
-      "generator-donejs": "^0.2.9",
+      "generator-donejs": "^0.2.14",
       "jquery": "~2.1.4",
       "steal": "^0.12.0-pre.0"
     },
     "devDependencies": {
       "documentjs": "^0.3.0",
-      "donejs-deploy": "^0.1.6",
+      "donejs-deploy": "^0.2.0",
       "funcunit": "~3.0.0",
       "steal-qunit": "^0.1.1",
-      "steal-tools": "^0.12.0-pre.2",
+      "steal-tools": "^0.12.0-pre.3",
       "testee": "^0.2.0"
     }
   }
