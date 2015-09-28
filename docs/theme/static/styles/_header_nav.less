@@ -23,6 +23,30 @@ header {
   .navbar-default .navbar-toggle {
     color: black;
     text-shadow: none;
+    border:0;
+    &:focus,
+    &:hover {
+      background: none;
+    }
+    .mobile-menu-label{
+      display: none;
+    }
+    .mobile-menu-close {
+      display: block;
+      animation: fadeIn 1s 1;
+      font-size: 16px;
+      color: @logoColor;
+      font-weight: bold;
+    }
+    &.collapsed {
+      border: 1px solid #ddd;
+      .mobile-menu-label{
+        display: block;
+      }
+      .mobile-menu-close {
+        display: none;
+      }
+    }
   }
   .navbar {
     border:0;
@@ -36,13 +60,21 @@ header {
     }
   }
   .navbar-collapse {
+    &.in {
+      background: rgba(255,255,255,0.9);
+    }
     @media(max-width: @screen-xs){
       padding-top:20px;
         .bitovi-menu {
+          border-top: 1px solid @gray-light;
+          border-bottom: 1px solid @gray-light;
+          a {
+            font-size: 12px;
+            text-transform: uppercase;
+            padding-left: 10px;
+          }
           .icon-bits {
-            color: @teal;
-            text-shadow: none;
-            opacity: 1;
+            display: none;
           }
           .dropdown-menu {
             display: block;
@@ -54,6 +86,13 @@ header {
             border: 0;
             box-shadow: none;
             width: 100%;
+          li {
+            &:last-child {
+              a {
+                border-bottom:0;
+              }
+            }
+          }
           li, a {
             width: 100%;
             display: block;
@@ -61,6 +100,45 @@ header {
           a {
             color: @gray-base;
           }
+        }
+      }
+      .menu-lib-logos {
+        margin:0;
+        padding:0;
+        li {
+          display: inline-block;
+          width: 19%;
+          padding: 10px 0;
+          text-align: center;
+        }
+        a {
+          display: block;
+          text-align: center;
+        }
+        .logo-canjs,
+        .logo-stealjs,
+        .logo-jqueryplus,
+        .logo-funcunit,
+        .logo-docjs {
+          margin: 0 auto;
+        }
+        .logo-canjs {
+          width: 50px;
+        }
+        .logo-stealjs,
+        .logo-jqueryplus,
+        .logo-funcunit {
+          width: 35px;
+        }
+        .logo-docjs {
+          width: 40px;
+        }
+        .logo-label {
+          font-size: 10px;
+          font-weight: bold;
+          color: #666;
+          display: block;
+          clear:both;
         }
       }
     }
