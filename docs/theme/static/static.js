@@ -133,7 +133,7 @@ steal("./content_list.js",
         });
 
         var activeH2Li = $();
-        var doJQCollapsing = $( "body.Guide" ).length ? true : false;
+        var doJQCollapsing = $( "body.Guide, body.place-my-order" ).length ? true : false;
 
         if ( doJQCollapsing ) {
             $( "section.contents ol ol" ).hide();
