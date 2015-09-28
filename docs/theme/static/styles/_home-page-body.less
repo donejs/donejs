@@ -124,6 +124,7 @@ body.donejs {
     position: absolute;
     background-color: #FFFFFF;
     overflow: hidden;
+    visibility: hidden;
     border: 2px solid @logoColor;
     width: ~"calc( 100% - 30px )";
     padding-top: 0px;
@@ -131,6 +132,10 @@ body.donejs {
     max-height: 0px;
     -webkit-transition: max-height 300ms ease-out, padding 300ms ease-out;
     transition: max-height 300ms ease-out, padding 300ms ease-out;
+    @media(max-width: @screen-xs){
+      position: relative;
+      width: 100%;
+    }
 
     a {
       position: relative;
@@ -159,6 +164,7 @@ body.donejs {
     max-height: 250px;
     padding-top: 6px;
     padding-bottom: 6px;
+    visibility: visible;
   }
   p.trail {
     font-size: 17px;
