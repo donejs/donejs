@@ -200,7 +200,7 @@ body.donejs {
   color: @white;
   background-color: @logoColor;
   padding-bottom: 100px;
-  @media(max-width: @screen-xs){
+  @media(max-width: @screen-sm){
     padding-bottom: 30px;
   }
   a {
@@ -288,10 +288,11 @@ body.donejs {
 }
 .mobile-graph {
   position: relative;
-  height: 425px;
+  height: 485px;
   width: 100%;
   overflow-x: hidden;
   padding:0;
+  background: @logoColor;
 
   .graph-logos {
     padding:0;
@@ -301,6 +302,8 @@ body.donejs {
     left: 0;
     top:0;
     height: 425px;
+    border-right: 1px solid rgba(255,255,255, 0.3);
+
     &:before{
       content: ' › ';
       position: absolute;
@@ -334,19 +337,26 @@ body.donejs {
   color: @white;
   background-color: @charcoal;
 
-
   .background {
     background-color: @logoColor;
     border: 15px solid @charcoal;
     padding: 0;
     video {
-      height: 280px;
+      height: auto;
       overflow: hidden;
-        width: 100%;
+      width: 100%;
+      vertical-align: middle;
+      @media(max-width:@screen-xs) {
+        height:195px;
+      }
+      @media(min-width:@screen-sm) {
+        height: 200px;
+      }
+      @media(min-width:@screen-md) {
+        height: 266px;
+      }
     }
   }
-
-
 
   h1 {
       line-height: 50px;
