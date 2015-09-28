@@ -4,6 +4,7 @@
 @outline 2 ol
 @description In this guide you will create [chat.donejs.com](http://chat.donejs.com), a simple real-time chat built with [DoneJS features](Features.html).
 
+![DoneJS chat](static/img/donejs-chat.png)
 
 After installing DoneJS and generating the application we will learn how to easily add Bootstrap and a tabs widget to the homepage, create custom elements and set up basic routing between two pages.
 
@@ -47,28 +48,6 @@ If we now go into the `donejs-chat` folder with
 cd donejs-chat
 ```
 
-We can see the following files:
-
-```
-├── .yo-rc.json
-├── documentjs.json
-├── package.json
-├── readme.md
-├── src/
-|   ├── app.js
-|   ├── index.stache
-|   ├── models/
-|   |   ├── fixtures
-|   |   |   ├── fixtures.js
-|   |   ├── test.js
-|   ├── styles.less
-|   ├── test.html
-|   ├── test/
-|   |   ├── test.js
-|   |   ├── functional.js
-├── node_modules/
-```
-
 ### Development mode
 
 DoneJS comes with its own server which does both, host your development files and automatically pre-renders the application on the server. Development mode will also start a [live-reload](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) server that automatically reloads files in the browser as they change. You can start both by running:
@@ -77,7 +56,7 @@ DoneJS comes with its own server which does both, host your development files an
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
+The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser.
 
 ## Importing other projects
 
@@ -85,13 +64,13 @@ DoneJS makes it easy to import other projects that are published on [NPM](https:
 
 ### Adding Bootstrap
 
-Bootstrap is [available on NPM](https://www.npmjs.com/package/bootstrap) so we can install and save it as a dependency of our chat like this:
+Bootstrap is [available on NPM](https://www.npmjs.com/package/bootstrap) so we can install and save it as a dependency of our application like this:
 
 ```
 npm install bootstrap --save
 ```
 
-Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap.less!" />` which tells DoneJS to import the main Bootstrap LESS file and also add some HTML that uses the Bootstrap styles. The `!` indicates it should be loaded with the LESS preprocessor.
+Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap.less!" />` which tells DoneJS to import the main Bootstrap LESS file and also add some HTML that uses the Bootstrap styles:
 
 ```html
 <html>
@@ -119,7 +98,7 @@ Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap
 
     {{#switch @env.NODE_ENV}}
       {{#case "production"}}
-        <script src="http://donejs-chat.divshot.io/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -137,7 +116,7 @@ The next module we want to import is [bit-tabs](https://github.com/bitovi-compon
 npm install bit-tabs --save
 ```
 
-Normally `bit-tabs` automatically loads its own styles. Since we want to use the Bootstrap tabs styles we want will import `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup with those tabs. `src/index.stache` then looks like this:
+We will import the tabs custom elements without the styles from `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup using those tabs. `src/index.stache` then looks like this:
 
 ```html
 <html>
@@ -175,7 +154,7 @@ Normally `bit-tabs` automatically loads its own styles. Since we want to use the
 
     {{#switch @env.NODE_ENV}}
       {{#case "production"}}
-        <script src="http://donejs-chat.divshot.io/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -185,7 +164,7 @@ Normally `bit-tabs` automatically loads its own styles. Since we want to use the
 </html>
 ```
 
-To add a little more whitespace we can add
+To add a little more whitespace we can update `src/styles.less` with:
 
 ```css
 bit-panel {
@@ -198,21 +177,19 @@ bit-panel {
 }
 ```
 
-to `src/styles.less`.
-
 ## Custom elements and routing
 
-In this part we will create two custom elements one for the homepage and another to display the chat messages. Then we will create routes to toggle between those two pages.
+In this part we will create our own custom elements similar to the `bit-tabs` we previously used. One for the homepage and another to display the chat messages. Then we will create routes to toggle between those two pages.
 
 ### Generate custom elements
 
 The homepage custom element (with the HTML tag name `chat-home`) won't be very big so we can put everything into a single file at `src/home.component`. To generate it we can run:
 
 ```
-donejs generate component home.component chat-home
+donejs generate component home.componen9t chat-home
 ```
 
-We can now copy most of the code from the homepage into this component so that it looks like this:
+We can now copy most of the content from the homepage into this component so that it looks like this:
 
 ```html
 <can-component tag="chat-home">
@@ -239,13 +216,55 @@ We can now copy most of the code from the homepage into this component so that i
 </can-component>
 ```
 
+And update `src/index.stache` to dynamically load and initialize this component instead:
+
+```html
+<html>
+  <head>
+    <title>{{title}}</title>
+    {{asset "css"}}
+  </head>
+  <body>
+    <can-import from="bootstrap/less/bootstrap.less!" />
+    <can-import from="donejs-chat/styles.less!" />
+    <can-import from="donejs-chat/app" as="viewModel" />
+    <can-import from="bit-tabs/unstyled" />
+
+    {{asset "inline-cache"}}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          <can-import from="donejs-chat/home.component!">
+            {{#if isPending}}
+              Loading...
+            {{else}}
+              <chat-home/>
+            {{/if}}
+          </can-import>
+        </div>
+      </div>
+    </div>
+
+    {{#switch @env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
+</html>
+```
+
 The messages component (with the tag `chat-messages`) will be a little more complex which is why we generate it using the [modlet file naming pattern]():
 
 ```
 donejs generate component messages chat-messages
 ```
 
-We will later update those files with the chat messages functionality.
+Later we will update those files with the chat messages functionality.
 
 ### Navigate between pages
 
@@ -301,10 +320,6 @@ import 'can/route/pushstate/';
 
 const AppViewModel = AppMap.extend({
   define: {
-    message: {
-      value: 'Hello World!',
-      serialize: false
-    },
     title: {
       value: 'donejs-chat',
       serialize: false
@@ -319,7 +334,7 @@ export default AppViewModel;
 
 ### Switch between pages
 
-Finally we can glue both components together as separate pages in `src/index.stache`. This is done by dynamically importing each component (showing a `Loading...` message while they are loading) and showing them based on the `page` property (which we set in the route):
+Finally we can glue both components together as separate pages in `src/index.stache`. This is done by dynamically importing each component and showing them based on the `page` property (which we set in the route):
 
 
 ```html
@@ -339,36 +354,30 @@ Finally we can glue both components together as separate pages in `src/index.sta
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-8 col-sm-offset-2">
-              {{#eq page 'chat'}}
-                <can-import from="donejs-chat/messages/">
-                  {{#if isPending}}
-                    Loading...
-                  {{else}}
-                    <chat-messages/>
-                  {{/if}}
-                </can-import>
+          {{#eq page 'chat'}}
+            <can-import from="donejs-chat/messages/">
+              {{#if isPending}}
+                Loading...
               {{else}}
-                <can-import from="donejs-chat/home.component!">
-                  {{#if isPending}}
-                    Loading...
-                  {{else}}
-                    <chat-home/>
-                  {{/if}}
-                </can-import>
-              {{/eq}}
-              </div>
-            </div>
-          </div>
+                <chat-messages/>
+              {{/if}}
+            </can-import>
+          {{else}}
+            <can-import from="donejs-chat/home.component!">
+              {{#if isPending}}
+                Loading...
+              {{else}}
+                <chat-home/>
+              {{/if}}
+            </can-import>
+          {{/eq}}
         </div>
       </div>
     </div>
 
     {{#switch @env.NODE_ENV}}
       {{#case "production"}}
-        <script src="http://donejs-chat.divshot.io/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -378,21 +387,30 @@ Finally we can glue both components together as separate pages in `src/index.sta
 </html>
 ```
 
-## Messages model
+Now we dynamically load both components while navigating between the home and messages page.
+
+## Message connection
+
+In this part we will create a messages model that connects to a remote RESTful API and then make the message list update in real-time.
 
 ### Generate Message model
 
-> donejs generate supermodel message
+To create a connection for our mesages we will use [can-connect supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html) which we can generate like this:
 
-Set URL to `http://donejs-chat.herokuapp.com/api/messages`.
+```
+donejs generate supermodel message
+```
 
-### Use Message model
+When asked for the URL endpoint we have to make sure to set it to our remote API at `http://chat.donejs.com/api/messages`. The other prompt can be answered by the default by hitting enter.
 
-In `src/messages/messages.stache`:
+### Using the connection
+
+This was all we needed to create a connection to our REST endpoint. We can go ahead and use it, for example by importing it in `src/messages/messages.stache` and requesting a list of all mesages with the `message-model` custom element:
 
 ```html
+<can-import from="donejs-chat/models/message" />
+<h5><a can-href="{ page='home' }">Home</a></h5>
 <message-model get-list="{}">
-  <h5><a can-href="{ page='home' }">Home</a></h5>
   <div class="list-group">
     {{#each ./value}}
       <a class="list-group-item">
@@ -409,30 +427,28 @@ In `src/messages/messages.stache`:
 </message-model>
 ```
 
-alternate:
+### Creating messages
+
+Now that we see either the list of messages or a notification that there are no message we can add the form to create new messages. The form simply binds the `name` and `message` property to the components view model and calls `send` when hitting the enter key in the message input. With that `src/messages/messages.stache` now looks like this:
 
 ```html
 <can-import from="donejs-chat/models/message" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
-<message-model get-list="{}" class="list-group">
-  {{#each ./value}}
-    <a class="list-group-item">
-      <h4 class="list-group-item-heading">{{name}}</h4>
-      <p class="list-group-item-text">{{message}}</p>
-    </a>
-  {{else}}
+<message-model get-list="{}">
+  <div class="list-group">
+    {{#each ./value}}
+      <a class="list-group-item">
+        <h4 class="list-group-item-heading">{{name}}</h4>
+        <p class="list-group-item-text">{{message}}</p>
+      </a>
+    {{/each}}
+    {{^if ./value.length}}
     <a class="list-group-item">
       <h4 class="list-group-item-heading">No messages</h4>
     </a>
-  {{/each}}
+    {{/if}}
+  </div>
 </message-model>
-```
-
-### Create messages
-
-1. add html, and (enter) event handler
-
-```html
 <div class="row">
   <div class="col-sm-3">
     <input type="text" class="form-control" id="name" placeholder="Your name" can-value="{name}">
@@ -443,13 +459,7 @@ alternate:
 </div>
 ```
 
-2. import Message model in messages.js
-
-```html
-<can-import from="donejs-chat/models/message" />
-```
-
-3. Add send method in `src/messages/messages.js`
+Next we have to implement the `send` method that is being called when pressing enter in `src/messages/messages.js`:
 
 ```js
 import Component from 'can/component/';
@@ -475,83 +485,101 @@ export default Component.extend({
 });
 ```
 
-4. Talk about set logic
+It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty the input field.
 
+### Real-time connections
 
-## Real-time connections
+Right now our chat updates automatically with our own new messages but not with messages from other clients. However, the API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) also provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we need to install a [Socket.io client wrapper](https://github.com/stealjs/steal-socket.io):
 
 ```
-> npm install socket.io-client --save
+npm install steal-socket.io --save
 ```
 
-Add to `src/models/message.js`
+And update `src/models/message.js` to look like this:
 
 ```js
-import io from 'socket.io-client';
+import can from 'can';
+import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import 'can/map/define/define';
+import io from 'steal-socket.io';
+
+export const Message = can.Map.extend({
+  define: {}
+});
+
+Message.List = can.List.extend({
+  Map: Message
+}, {});
+
+export const messageConnection = superMap({
+  url: 'http://chat.donejs.com/api/messages',
+  idProp: 'id',
+  Map: Message,
+  List: Message.List,
+  name: 'message'
+});
+
+tag('message-model', messageConnection);
 
 if(typeof io === 'function') {
-  const socket = io('http://donejs-chat.herokuapp.com');
+  const socket = io('http://chat.donejs.com');
 
   socket.on('messages created', order => messageConnection.createInstance(order));
   socket.on('messages updated', order => messageConnection.updateInstance(order));
   socket.on('messages removed', order => messageConnection.destroyInstance(order));
 }
+
+export default Message;
 ```
 
-### Add configuration. 
-
-```js
-"map": {
-  "socket.io-client": "socket.io-client/socket.io"
-},
-"envs": {
-  "server-development": {
-    "map": {
-      "socket.io-client/socket.io": "@empty"
-    }
-  },
-  "server-production": {
-    "baseURL": "https://donejs-chat.divshot.io/",
-    "map": {
-      "socket.io-client/socket.io": "@empty"
-    }
-  }
-},
-"meta": {
-  "socket.io-client/socket.io": {
-    "format": "global",
-    "exports": "io"
-  }
-}
-```
+Try opening another browser window to see sending and receiving messages in real-time.
 
 ## Production build
 
+Now that we implemented the complete chat functionality we can get our application ready for production.
+
 ### Run build
 
-> node build
+We can find the build configuration in the `build.js` in our application folder. Everything is already set up the way we need it so we can simply make a build by running
+
+```
+node build
+```
+
+The optimized bundles that make sure that your JavaScript and CSS assets load as fast as possible are located in the `dist/` folder.
 
 ### Set to production.
 
-Close the old server and run
+To test the production build we can close the current server and set the environment (`NODE_ENV`) to `production`:
 
-> NODE_ENV=production donejs start
+```
+NODE_ENV=production donejs start
+```
 
-### Show bundles loading progressively
+If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab or the developer tools.
 
 ## Deploy
 
-0. Create Divshot application, install the CLI tool and log in
+Now that we verified that our application works in production we can deploy it on the web. For this guide we will use [Divshot](https://divshot.com/) which provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support.
+
+### Setting up Divshot
+
+Create a free Divshot account and create a new app in the control panel. Then install the CLI via
 
 ```
-> npm install -g divshot-cli
+npm install -g divshot-cli
 ```
 
+And log in with your credentials
+
 ```
-> divshot login
+divshot login
 ```
 
-1. Paste config in 
+### Configuring DoneJS
+
+Now we can add the Divshot deployment configuration to our `package.json` like this:
 
 ```js
 "donejs": {
@@ -574,14 +602,55 @@ Close the old server and run
 }
 ```
 
-1. Run `node build` again.
-2. Run `donejs deploy`
-3. Add http://donejs-chat.divshot.io to <script src and to envs.server-production.baseURL
-4. Show off 
+And also update the production baseURL:
+
+```
+...
+"system": {
+  ...
+  "envs": {
+    "server-production": {
+      "baseURL": "https://donejs-chat.divshot.io/"
+    }
+  }
+}
+```
+
+Make sure to replace `"name": "donejs-chat"` with the name of the application you created. We also need to update `src/index.stache` to load its assets from the Divshot by changing the `{{#switch @env.NODE_ENV}}` section to:
+
+```html
+{{#switch @env.NODE_ENV}}
+  {{#case "production"}}
+    <script src="http://donejs-chat.divshot.io/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+  {{/case}}
+  {{#default}}
+    <script src="/node_modules/steal/steal.js"></script>
+  {{/default}}
+{{/switch}}
+```
+
+Again, make sure to replace `http://donejs-chat.divshot.io` with your Divshot URL. Then we can deploy the application by running:
+
+```
+node build
+donejs deploy
+```
+
+And verify that the application is loading from the CDN by running
+
+```
+NODE_ENV=production donejs start
+```
+
+We can see our assets being loaded from the Divshot CDN.
 
 ## Desktop and mobile apps
 
-First create an `app.html` file that looks like:
+In the last part of this guide we will make builds of our chat as a mobile application for iOS using [Cordova](https://cordova.apache.org/) and as a desktop application with [nw.js](http://nwjs.io/).
+
+### Creating app.html
+
+Both desktop and mobile need a separate entry point that loads our chat without server side rendering. Create an `app.html` file that looks like:
 
 ```html
 <html>
@@ -594,9 +663,19 @@ First create an `app.html` file that looks like:
 
 ### Cordova
 
-Make sure all platform SDKs like XCode (for iOS) and the Android SDK are installed.
+To build the chat as a Cordova based mobile application we need to have the appropriate platform SDK installed. XCode can be downloaded via the AppStore so we will use it to create an iOS application that can be tested in the ios simulator. After installing XCode to launch the simulator we also need to run:
 
-Update `build.js` to:
+```
+npm install ios-sim -g
+```
+
+Now we can install the DoneJS Cordova tools with
+
+```
+npm install steal-cordova --save-dev
+```
+
+As well as update `build.js` to:
 
 ```js
 var stealTools = require("steal-tools");
@@ -620,7 +699,6 @@ var cordovaOptions = {
 };
 
 var stealCordova = require("steal-cordova")(cordovaOptions);
-
 // Check if the cordova option is passed.
 var buildCordova = process.argv.indexOf("cordova") > 0;
 
@@ -629,15 +707,23 @@ if(buildCordova) {
 }
 ```
 
-Then run
+To run the Cordova build and launch the simulator we can now run
 
-> npm install ios-sim -g
+```
+node build cordova
+```
 
-> node build cordova
+If everything went well we should see the iOS simulator starting with our application.
 
 ### NW.js
 
-Update your `package.json`:
+For the desktop build we first have to install the build tools:
+
+```
+npm install steal-nw --save-dev
+```
+
+As well as update our `package.json` changing `main` to `app.html` and add information about the desktop window:
 
 ```js
 "main": "app.html",
@@ -649,9 +735,37 @@ Update your `package.json`:
 }
 ```
 
-Add to `build.js`:
+And then update `build.js` to:
 
 ```js
+var stealTools = require("steal-tools");
+
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: true
+});
+
+var cordovaOptions = {
+  buildDir: "./build/cordova",
+  id: "com.donejs.chat",
+  name: "DoneJS chat",
+  platforms: ["ios"],
+  plugins: ["cordova-plugin-transport-security"],
+  index: __dirname + "/app.html",
+  glob: [
+    "node_modules/steal/steal.production.js"
+  ]
+};
+
+var stealCordova = require("steal-cordova")(cordovaOptions);
+// Check if the cordova option is passed.
+var buildCordova = process.argv.indexOf("cordova") > 0;
+
+if(buildCordova) {
+  buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
+}
+
 var nwOptions = {
   buildDir: "./build",
   platforms: ["osx"],
@@ -675,22 +789,48 @@ if(buildNW) {
 }
 ```
 
-Add to app.js
+Both, Cordova and NW.js need our application to use hash based URL routing which we can enable per platform with:
 
 ```
+npm install steal-platform --save
+```
+
+Updating `src/app.js` to:
+
+```
+import AppMap from "can-ssr/app-map";
+import route from "can/route/";
+import 'can/map/define/';
+import 'can/route/pushstate/';
 import platform from "steal-platform"
-```
 
-```
 if(platform.isCordova || platform.isNW) {
  route.defaultBinding = "hashchange";
 }
+
+const AppViewModel = AppMap.extend({
+  define: {
+    title: {
+      value: 'donejs-chat',
+      serialize: false
+    }
+  }
+});
+
+route('/:page', { page: 'home' });
+
+export default AppViewModel;
 ```
 
-Then run
+Now we can run the build with
 
-> node build nw
+```
+node build nw
+```
 
-> cd build/donejs-chat/osx64
+The application can be opened with
 
-> open donejs-chat.app
+```
+cd build/donejs-chat/osx64
+open donejs-chat.app
+```
