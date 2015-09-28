@@ -61,9 +61,45 @@ Guide-link:
 
 ### Progressive loading
 
-DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable 
+DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable system.
 
+Steal will map the dependencies of each page and bundle them in a way that has the lowest possible wasted size across page requests. Check it out:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
+
+Our algorithm is VERY smart with the optimization. With it comes the ability to progressively load your requests; That is, only loading the CSS and JS that's needed, as it's needed.
+
+#### **And it's super easy to use!**
+Progressive loading is done simply by specifying it directly in your templates:
+
+```
+<div class="col-sm-8 col-sm-offset-2">
+  {{#eq page 'chat'}}
+    <can-import from="donejs-chat/messages/">
+      {{#if isPending}}
+        Loading...
+      {{else}}
+        <chat-messages/>
+      {{/if}}
+    </can-import>
+  {{else}}
+    <can-import from="donejs-chat/home.component!">
+      {{#if isPending}}
+        Loading...
+      {{else}}
+        <chat-home/>
+      {{/if}}
+    </can-import>
+  {{/eq}}
+</div>
+```
+
+That's it! No need for additional logic or steps in your JavaScript.
+
+
+Project: 
+Docs-link: done-autorender stache stealjs
+Guide-link: 
+
 
 ### Caching and minimal data requests
 
@@ -124,9 +160,60 @@ provide navigable and bookmarkable pages and links, while still keeping the user
 
 DoneJS applications are functionally tested with highly accurate event simulation.
 
+For simple unit and integration assertions, DoneJS uses [QUnit](https://qunitjs.com/). For high level interaction/DOM tests someone in a QA role might define, DoneJS uses [FuncUnit](http://funcunit.com/).
+
+FuncUnit enhances assertion libraries like QUnit and enables it to simulate user actions, easily test asynchronous behavior, and support black box testing. It uses a simple jQuery-like syntax to do the assertions:
+
+```js
+test('destroying todos', function() {
+  F('#new-todo').type('Sweet. [enter]');
+ 
+  F('.todo label:contains("Sweet.")').visible('basic assert');
+  F('.destroy').click();
+ 
+  F('.todo label:contains("Sweet.")').missing('destroyed todo');
+});
+```
+
+Unit tests should be able to run by themselves without the need for an API server though, so
+
+#### **Creating fake data: Fixtures!**
+
+DoneJS does even more to make testing easy and more valuable by using fixtures. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. It's easy to set up too:
+
+```js
+import fixture from 'can-connect/fixture/';
+
+const store = fixture.store([
+  { name: 'Calisota', short: 'CA' },
+  { name: 'New Troy', short: 'NT'}
+],{});
+
+fixture({
+  'GET /api/states': store.findAll,
+  'GET /api/states/{short}': store.findOne,
+  'POST /api/states': store.create,
+  'PUT /api/states/{short}': store.update,
+  'DELETE /api/states/{short}': store.destroy
+});
+
+export default store;
+```
+
+That's it! Now any calls to the states api url will return faked data automatically when the store is pulled into your app with StealJS! No need to change any of your code; It just works like you've already built the backend service.
+
+
 ### Documentation
 
 DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation.
+DocumentJS lets you:
+
+- Write documentation inline or in markdown files.
+- Specify your code's behavior precisely with JSDoc and Google Closure Compiler annotations.
+- Customize your site's theme and layout.
+- Generate multi-version documentation.
+
+With DocumentJS's flexibility, themeability, and customizability you can generate extremely useful documentation sites. In fact, this site is generated from it!
 
 ### Continuous Integration & Deployment
 
@@ -134,12 +221,36 @@ TODO
 
 ### NPM Packages
 
-DoneJS applications can use packages published to NPM without configuration.  Import pacakges
-written in ES6 module syntax, AMD, or CommonJS.
+Get more done faster by bringing other people's code into your client side project with StealJS's NPM Packages.
 
-You can also export your modules to other formats.
+DoneJS applications can use packages published to NPM without configuration.  Automatically load dependencies installed with npm and import pacakges written in ES6 module syntax, AMD, or CommonJS.
+
+It's fast and easy to do:
+```
+$ npm install jquery --save
+```
+
+then, in your javascript if you're using ES6 module syntax:
+```
+import $ from "jquery";
+```
+
+or if you're more comfortable going with steal's syntax:
+```
+steal( "jquery", function( $ ) {
+  //...
+});
+```
+
+You can also export your modules to other formats such as:
+- CommonJS and Browserify
+- AMD and r.js
+- or even &lt;script&gt; and &lt;link&gt; tags if you're adding new ideas to old code
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
+
+If you publish your DoneJS [modlets](#section_Modlets), you'll be building things you can use and reuse across your projects for years to come.
+
 
 ### ES6 Modules
 
@@ -191,7 +302,7 @@ module's functionality.
 
 ### Custom HTML Elements
 
-DoneJS applications use custom HTML elements to compose and orchestrate an application's behavior.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules based on custom HTML elements.
 
 ```html
 <order-model findAll="{previousWeek}" [previousWeekData]="{value}"/>
@@ -202,6 +313,41 @@ DoneJS applications use custom HTML elements to compose and orchestrate an appli
   <bit-series data="{../currentWeekData}" color="Blue"/>
 </bit-graph>
 ```
+
+The functionality and content for the custom elements comes from identifying them as the tag for a component definition:
+```
+var Iheartdonejs = can.Component.extend({
+  tag: 'i-heart-donejs',
+  viewModel: can.Map.extend({
+    define: {
+      message: {
+        value: 'I <3 DoneJS'
+      },
+      messages: {
+        value: [
+          'I <3 DoneJS',
+          'DoneJS FTW',
+          'Get it done, use DoneJS',
+          'More time to pet the kitty!'
+        ]
+      }
+    },
+    changeMessage: function () {
+      var msgs = this.attr( "messages" );
+      this.attr( "message", msgs[ ~~( Math.random() * msgs.length ) ] );
+    }
+  }),
+  template: "<div can-click='{changeMessage}'>{{message}}</div>"
+});
+```
+
+DoneJS [Generators](#section_Generators) will help you get started on your components with just a few keystrokes!
+
+Plus, if you've built something awesome, you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
+
+Guide: http://donejs.com/Guide.html#section_Creatingcustomelements
+
+Project: http://canjs.com/guides/Recipes.html#section_BuildWidgets_UIElements
 
 ### MVVM Reactive
 
@@ -223,4 +369,128 @@ waiting for refreshes and builds.
 
 ### Generators
 
-TODO
+DoneJS comes with generators that eliminate the boilerplate in creating new components.
+
+If you need a new simple component, just run this in your terminal:
+
+```
+donejs generate component soeasy.component so-easy
+```
+
+and you'll get a simple starter file like this:
+
+```
+<can-component tag="so-easy">
+  <style>
+    p { font-weight: bold; }
+  </style>
+  <template>
+    <p>{{message}}</p>
+  </template>
+  <view-model>
+    import Map from 'can/map/';
+    import 'can/map/define/';
+
+    export default Map.extend({
+      define: {
+        message: {
+          value: 'This is the so-easy component'
+        }
+      }
+    });
+  </view-model>
+</can-component>
+```
+
+that you can import into your templates!
+
+```
+  <can-import from="src/soeasy.component!">
+    {{#if isPending}}
+      Loading...
+    {{else}}
+      <so-easy/>
+    {{/if}}
+  </can-import>
+```
+
+Or, if your component isn't so simple, go all out and generate the modlet:
+
+```
+donejs generate component suchwin such-win
+```
+
+which does all of this:
+
+```
+create src/suchwin/suchwin.html
+
+  <script type="text/stache" can-autorender>
+    <can-import from="src/suchwin/" />
+    <such-win></such-win>
+  </script>
+  <script src="../../node_modules/steal/steal.js" main="can/view/autorender/"></script> 
+
+create src/suchwin/suchwin.js
+
+  import Component from 'can/component/';
+  import Map from 'can/map/';
+  import 'can/map/define/';
+  import './suchwin.less!';
+  import template from './suchwin.stache!';
+
+  export const ViewModel = Map.extend({
+    define: {
+      message: {
+        value: 'This is the such-win component'
+      }
+    }
+  });
+
+  export default Component.extend({
+    tag: 'such-win',
+    viewModel: ViewModel,
+    template
+  });
+
+create src/suchwin/suchwin.md
+
+  @@parent place-my-order
+  @@module {can.Component} suchwin <such-win>
+  @@signature `<such-win>`
+
+  @@body
+
+  ## <such-win>
+
+create src/suchwin/suchwin.less
+
+  such-win {
+
+  }
+
+create src/suchwin/suchwin.stache
+
+  <p>{{message}}</p>
+
+create src/suchwin/suchwin_test.js
+
+  import QUnit from 'steal-qunit';
+  import { ViewModel } from './suchwin';
+
+  // ViewModel unit tests
+  QUnit.module('suchwin');
+
+  QUnit.test('Has message', function(){
+    var vm = new ViewModel();
+    QUnit.equal(vm.attr('message'), 'This is the such-win component');
+  });
+
+create src/suchwin/test.html
+
+  <title>suchwin</title>
+  <script src="../../node_modules/steal/steal.js" main="src/suchwin/suchwin_test"></script>
+  <div id="qunit-fixture"></div>
+```
+
+Plus, you can even customize these and add more as you see fit!
