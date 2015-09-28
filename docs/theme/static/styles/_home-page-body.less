@@ -23,7 +23,7 @@ body.donejs {
     max-width: 900px;
     padding: 88px 2% 113px;
     @media(max-width: @screen-xs){
-      padding: 44px 2% 113px;
+      padding: 44px 2% 50px;
     }
   }
   .lead {
@@ -171,11 +171,26 @@ body.donejs {
     max-width: 500px;
     display: block;
     margin: 0 auto;
+    color: #393E40;
     a {
       color: @logoColor;
       font-weight: 400;
-        &:hover {
+      @media(max-width: @screen-xs){
+        display: block;
+        width: 100%;
+        border-bottom:1px solid #ccc;
+        padding: 10px 0;
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+      &:hover {
       text-decoration: underline;
+      }
+    }
+    @media(max-width: @screen-xs){
+      .pipe-spacer{
+        display: none;
       }
     }
   }
