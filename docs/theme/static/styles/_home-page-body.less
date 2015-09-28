@@ -438,16 +438,28 @@ body.donejs {
       text-align: left;
       max-width: 1000px;
       padding: 50px 0 100px;
-      p {
-          margin-bottom: 5px;
+      @media(max-width: @screen-xs){
+        padding:0 0 50px;
+        text-align: center;
       }
-    a {
-      color: lighten(@logoColor, 30%);
-      font-weight: 700;
-      text-decoration: none;
-        &:hover {
-      text-decoration: underline;
-            color: @white;
+      p {
+        margin-bottom: 5px;
+      }
+      a {
+        color: lighten(@logoColor, 30%);
+        font-weight: 700;
+        text-decoration: none;
+        @media(max-width: @screen-xs){
+          display: block;
+          padding: 10px 0;
+          border-bottom: 1px solid lighten(@charcoal, 20%);
+          &:last-child {
+            border: 0;
+          }
+        }
+      &:hover {
+        text-decoration: underline;
+        color: @white;
       }
     }
   }
