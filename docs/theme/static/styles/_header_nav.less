@@ -64,7 +64,7 @@ header {
       background: rgba(255,255,255,0.9);
     }
     @media(max-width: @screen-xs){
-      padding-top:20px;
+      padding-top:10px;
         .bitovi-menu {
           border-top: 1px solid @gray-light;
           border-bottom: 1px solid @gray-light;
@@ -108,7 +108,7 @@ header {
         li {
           display: inline-block;
           width: 19%;
-          padding: 10px 0;
+          padding: 0;
           text-align: center;
         }
         a {
@@ -184,5 +184,34 @@ header {
   .guides-menu:hover .dropdown-menu {
     display: block;
     visibility: visible;
+  }
+  .guides-menu {
+    @media(max-width: @screen-xs){
+      .dropdown-menu {
+        display: block;
+        visibility: visible;
+        border:0;
+        background: none;
+        position: relative;
+        box-shadow: none;
+        top:0;
+        width: 100%;
+        li, a {
+          width: 100%;
+          display: block;
+        }
+        li {
+          &:last-child {
+            a {
+              border:0;
+            }
+          }
+        }
+        a {
+          color: @gray;
+          padding: 0 20px;
+        }
+      }
+    }
   }
 }
