@@ -41,7 +41,7 @@ var actions = {
       var appDir = path.join(process.cwd(), folder);
 
       if(fs.existsSync(appDir)) {
-        console.error('Folder `' + folder + '` already exsits.');
+        console.error('Folder `' + folder + '` already exists.');
         return;
       }
 
