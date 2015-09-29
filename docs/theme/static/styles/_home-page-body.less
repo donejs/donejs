@@ -289,9 +289,40 @@ body.donejs {
     }
   }
 }
+.performance-mobile-trail {
+  background: @logoColor;
+  text-align: center;
+
+  h2 {
+    color: #fff;
+  }
+  p.trail {
+    a {
+      color: #fff;
+      font-weight: 400;
+      @media(max-width: @screen-xs){
+        display: block;
+        width: 100%;
+        border-bottom:1px solid #ccc;
+        padding: 10px 0;
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+      &:hover {
+      text-decoration: underline;
+      }
+    }
+    @media(max-width: @screen-xs){
+      .pipe-spacer{
+        display: none;
+      }
+    }
+  }
+}
 .mobile-graph {
   position: relative;
-  height: 485px;
+  height: 430px;
   width: 100%;
   overflow-x: hidden;
   padding:0;
