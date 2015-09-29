@@ -46,5 +46,14 @@ describe('DoneJS CLI tests', function() {
         })
         .fail(fail);
     });
+
+    it("get project root", function(done) {
+        var pathFromTest = path.join(process.cwd(), "node_modules");
+        utils.projectRoot().then(function(p) {
+            assert.equal(path.join(p, "node_modules"), pathFromTest);
+            done();
+        })
+        .fail(fail);
+    });
   });
 });
