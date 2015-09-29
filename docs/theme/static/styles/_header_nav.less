@@ -181,11 +181,26 @@ header {
     }
 
   }
-  .guides-menu:hover .dropdown-menu {
-    display: block;
-    visibility: visible;
-  }
   .guides-menu {
+    &:hover {
+      .dropdown-menu {
+        display: block;
+        visibility: visible;
+      }
+    }
+    .dropdown-menu {
+      top: 41px;
+      &:before {
+        content:'';
+        display: block;
+        width: 100px;
+        height:20px;
+        background: transparent;
+        top:-20px;
+        left:0;
+        position: absolute;
+      }
+    }
     @media(max-width: @screen-xs){
       .dropdown-menu {
         display: block;
@@ -196,6 +211,9 @@ header {
         box-shadow: none;
         top:0;
         width: 100%;
+        &:before{
+          display: none;
+        }
         li, a {
           width: 100%;
           display: block;
