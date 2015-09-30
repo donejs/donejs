@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.5.0-pre.8",
+  "version": "0.5.0-pre.9",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -60,14 +60,14 @@
       "done-css": "~1.1.8",
       "generator-donejs": "^0.2.14",
       "jquery": "~2.1.4",
-      "steal": "^0.12.0-pre.7"
+      "steal": "^0.12.0-pre.9"
     },
     "devDependencies": {
       "documentjs": "^0.3.0",
       "donejs-deploy": "^0.2.0",
       "funcunit": "~3.0.0",
       "steal-qunit": "^0.1.1",
-      "steal-tools": "^0.12.0-pre.3",
+      "steal-tools": "^0.12.0-pre.4",
       "testee": "^0.2.0"
     }
   }
