@@ -4,27 +4,18 @@ var path = require('path');
 var fs = require('fs');
 var program = require('commander');
 var mkdirp = require('mkdirp');
-var execSync = require("child_process").execSync;
 
 var utils = require('../lib/utils');
 var log = utils.log;
 
-var mypkg = require(path.join(__dirname, '..', 'package.json'));
-var curpkg = {};
+var root = "";
 
-var root = path.join(execSync("npm prefix").toString().trim(), 'node_modules');
-var binPath = path.join(root, '.bin');
+var mypkg = require(path.join(__dirname, '..', 'package.json'));
 
 var commandList = ['init', 'generate'];
 var listSeparator = '\n\t• ';
 var initDescription = 'Initialize a new DoneJS application in a new folder or the current one';
 var generatorDescription = 'No generators available.';
-
-try {
-  curpkg = require(path.join(process.cwd(), 'package.json'));
-} catch(e) {
-  // otherwise no local package.json
-}
 
 try {
   var generators = require('generator-donejs');
@@ -39,21 +30,17 @@ var actions = {
   init: function(folder) {
     if(folder) {
       var appDir = path.join(process.cwd(), folder);
-
       if(fs.existsSync(appDir)) {
         console.error('Folder `' + folder + '` already exists.');
         return;
       }
 
       console.log('Creating folder ' + folder);
-
-
       mkdirp.sync(appDir);
       process.chdir(appDir);
     }
 
     root = path.join(process.cwd(), 'node_modules');
-
     log(utils.generate(root, [ 'app', {
         version: mypkg.version,
         packages: mypkg.donejs
@@ -81,42 +68,50 @@ program.command('generate <name> [options...]')
   .description(generatorDescription)
   .action(actions.generate);
 
-// Lists all NPM scripts of the package.json in the current folder
-Object.keys(curpkg.scripts || {}).forEach(function(script) {
-  if(commandList.indexOf(script) === -1) {
-    commandList.push(script);
-    program.command(script)
-      .description('NPM `' + curpkg.scripts[script] + '`')
-      .action(function() {
-        log(utils.runScript(script));
-      });
-  }
-});
-
-// List all other local binaries
-if(fs.existsSync(binPath)) {
-  fs.readdirSync(binPath).forEach(function(name) {
-    if(commandList.indexOf(name) === -1) {
-      commandList.push(name);
-      program.command(name + ' [...args]')
-        .description('')
-        .action(function(args) {
-          log(utils.runCommand(path.join(binPath, name), args));
-        });
-    }
-  });
-}
-
 // catchall
 program.command('*')
   .description('')
   .action(actions.catchAll);
 
-program.parse(process.argv);
+utils.projectRoot().then(function(root) {
+    // Lists all NPM scripts of the package.json in the current folder
+    var curpkg = {};
+    try {
+      curpkg = require(path.join(root, 'package.json'));
+    } catch(e) {
+      // otherwise no local package.json
+    }
+    Object.keys(curpkg.scripts || {}).forEach(function(script) {
+      if(commandList.indexOf(script) === -1) {
+        commandList.push(script);
+        program.command(script)
+          .description('NPM `' + curpkg.scripts[script] + '`')
+          .action(function() {
+            log(utils.runScript(script));
+          });
+      }
+    });
 
-if (!program.args.length) {
-  program.help();
-}
+    // List all other local binaries
+    var binPath = path.join(path.join(root, "node_modules"), '.bin');
+    if(fs.existsSync(binPath)) {
+      fs.readdirSync(binPath).forEach(function(name) {
+        if(commandList.indexOf(name) === -1) {
+          commandList.push(name);
+          program.command(name + ' [...args]')
+            .description('')
+            .action(function(args) {
+              log(utils.runCommand(path.join(binPath, name), args));
+            });
+        }
+      });
+    }
+
+    program.parse(process.argv);
+    if (!program.args.length) {
+        program.help();
+    }
+});
 
 exports.actions = actions;
 exports.program = program;
