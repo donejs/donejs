@@ -4,28 +4,38 @@
 * http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-columns-of-same-height
 * http://stackoverflow.com/questions/20773342/bootstrap-3-100-height-of-custom-div-inside-column
 */
+.reset-padding {
+  padding:0;
+}
+.reset-margin {
+  margin:0;
+}
 
 .table-row {
   display: table;
   width: 100%;
   margin: 0 auto;
+  > [class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+  }
 }
-
-.table-row > [class*="col-"] {
-  float: none;
-  display: table-cell;
-  vertical-align: top;
+.container {
+  @media (max-width: @screen-sm) {
+    width: auto;
+  }
 }
-
 
 
 /* site wide footer */
 footer {
+  .clearfix;
 	background-color: @logoColor;
-
-	nav.container {
-		a {
+	nav {
+		a.brand {
 			background-image: url( '/static/img/donejs-logo-final-02.svg' )!important;
+      margin: 13px auto;
 		}
 	}
 }

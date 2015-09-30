@@ -19,8 +19,10 @@
 	<meta charset="utf-8">
 	<title>{{makeParentTitle}} {{#if title}}- {{title}} {{else}} {{#if name}}- {{name}}{{/if}}{{/if}}</title>
 	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	{{^devBuild}}
 	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
 	{{/devBuild}}
@@ -34,71 +36,115 @@
 			background-size: 170px;
 		}
 	</style>
-
 </head>
-
 <body class="docs {{name}}">
-	<header>
-		<nav class="container">
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+			  <div class="container">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close">X</span>
+			      </button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+			    </div>
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li {{#ifCurrentFromConfig "../index.html"}}class="active"{{/ifCurrentFromConfig}}>
+								<a href="./index.html">Home</a>
+							</li>
+							<li {{#ifCurrentFromConfig "../Features.html"}}class="active"{{/ifCurrentFromConfig}}>
+								<a href="./Features.html">Features</a>
+							</li>
+							<li class="guides-menu">
+									<a href="/guides.html">Guides</a>
+									<ul class="dropdown-menu">
+											<li {{#ifCurrentFromConfig "../Guide.html"}}class="active"{{/ifCurrentFromConfig}}><a href="./Guide.html">Quick start</a></li>
+											<li><a {{#ifCurrentFromConfig "../place-my-order.html"}}class="active"{{/ifCurrentFromConfig}} href="./place-my-order.html">place-my-order.com</a></li>
+									</ul>
+							</li>
+						</ul>
 
-			<div class="logo-menu">
-				<a class="brand" href="./index.html">DoneJS</a>
-				<ul class="dropdown-menu">
-					<li><a href="http://donejs.com" class="active">DoneJS</a></li>
-					<li><a href="http://canjs.com">CanJS</a></li>
-					<li><a href="http://stealjs.com">StealJS</a></li>
-					<li><a href="http://jquerypp.com">jQuery++</a></li>
-					<li><a href="http://funcunit.com">FuncUnit</a></li>
-					<li><a href="http://documentjs.com">DocumentJS</a></li>
-				</ul>
-			</div>
-			<ul class="nav">
-				<li {{#ifCurrentFromConfig "../index.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./index.html">Home</a>
-				</li>
-				<li {{#ifCurrentFromConfig "../Features.html"}}class="active"{{/ifCurrentFromConfig}}>
-					<a href="./Features.html">Features</a>
-				</li>
-                <li class="guides-menu">
-                    <a href="/guides.html">Guides</a>
-                    <ul class="dropdown-menu">
-                        <li {{#ifCurrentFromConfig "../Guide.html"}}class="active"{{/ifCurrentFromConfig}}><a href="./Guide.html">Quick start</a></li>
-                        <li><a {{#ifCurrentFromConfig "../place-my-order.html"}}class="active"{{/ifCurrentFromConfig}} href="./place-my-order.html">place-my-order.com</a></li>
-                    </ul>
-                </li>
-			</ul>
-			<div class="pull-right">
-				<div class="bitovi-menu">
-					<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
-					<ul class="dropdown-menu">
-						<li><a href="http://bitovi.com">Bitovi.com</a></li>
-						<li><a href="http://bitovi.com/blog/">Blog</a></li>
-						<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
-						<li><a href="http://bitovi.com/training/">Training</a></li>
-						<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
-						<li><a href="http://bitovi.com/people/">People</a></li>
-						<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+			      <ul class="nav navbar-nav navbar-right bitovi-menu">
+			        <li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+			          <ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+			          </ul>
+			        </li>
+			      </ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="/static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="/static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="/static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">JQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="/static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="/static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+			    </div>
+			  </div>
+			</nav>
+		</header>
+
 
 	{{{content}}}
 	{{^hideFooter}}
 	<footer>
-		<nav class="container">
+		<nav>
 			<a class="brand javascriptmvc" href="index.html"></a>
 		</nav>
 	</footer>
 	{{/hideFooter}}
-	
+
 	<script type="text/javascript">
 		var docObject = {{{docObjectString}}};
 	</script>
-	
+
 	{{#if devBuild}}
-		<script type='text/javascript' 
+		<script type='text/javascript'
 				data-main="static"
 				data-config="./static/config.js"
 				src="./static/steal/steal.js"></script>
@@ -110,25 +156,22 @@
 			}
 		  }
 		</script>
-		<script type='text/javascript' 
+		<script type='text/javascript'
 				data-main="static"
 				data-config="./static/config.js"
 				src="./static/steal.production.js"
 				bundles-path="bundles"></script>
 	{{/if}}
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<script>
- (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
- (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
- m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
- })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
- ga('create', 'UA-2302003-14', 'auto');
- ga('send', 'pageview');
-</script>
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
 </body>
-
-
 
 {{#ifCurrentFromConfig "../index.html"}}
 <script>

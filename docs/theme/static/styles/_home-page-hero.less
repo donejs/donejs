@@ -1,137 +1,165 @@
- body.donejs .hero {
+body.donejs .hero {
 
-  text-align: center; /*most of the text on the page is centered, so make it the default*/
-  color: @white;
-  background-image: url("../img/background.jpg");
-  background-size: cover;
-  padding: 0;
+ text-align: center; /*most of the text on the page is centered, so make it the default*/
+ color: @white;
+ background-image: url("../img/background.jpg");
+ background-size: cover;
+ padding: 0;
+}
+.transparency {
+ background-color: rgba(33, 38, 40, .75);
+}
 
-  .transparency {
-    background-color: rgba(33, 38, 40, .75);
-  }
-  
-  a {
-    color: @white;
-    line-height: 1.5em;
-    white-space: nowrap;
-    @media(max-width: 1000px) {
-            white-space: normal;
-      }
-  }
-  .lead-in {
-    padding: 45px 35px;
-    h1 {
-      font-size: 75px;
-        margin: 20px 0 10px;
-        @media(max-width: 700px) {
-            font-size: 55px;
-            line-height: 50px;
-      }
-    }
-      h3 {
-          max-width: 700px;
-          font-weight: 300;
-          display: block;
-          margin: 0 auto;
-      }
-  }
-
-  .lead {
-    margin: 4px 60px;
-    font-size: 20px;
-  }
-  .install {
-    margin-top: 45px;
-      max-width: 630px;
-    p {
-      font-size: 14px;
-      margin-bottom: 1px;
-    }
-   .install-donejs, .guide {
-       display: block;
-       width: 50%;
-       float: left;
-   }
-    .code {
-      text-align: right;
-      .caption {
-          display: block;
-        margin: 0 auto;
-        width: 285px;
-          text-align: center;
-      }
-    }
-    textarea {
-      padding: 10px;
-      color: @black;
-      font-size: 18px;
-      line-height: normal;
-      text-align: left;
-      width: 290px;
-      font-family: 'Source Code Pro', monospace;
-      border-color: @logoColor;
-      border-width: 2px;
-    }
-    .guide {
-       padding-top: 24px;
-      }
-      .btn {
-        height: 35px;
-        width: 290px;
-        padding: 5px;
-        display: block;
-        margin: 0 auto;
-      }
-    .social {
-      text-align: left;
-      padding-top: 12px;
-      width: 290px;
-      display: block;
-      margin: 0 auto;
-    }
-    .ghbtns {
-      margin-left: 17px;
-      float: right;
-      width: 80px;
-
-    }
-  }
-
-  .triptych {
-    margin-top: 20px;
-    .box {
-      cursor: pointer;
-      // padding: 40px 90px 105px;
-      padding: 2% 6% 6%;
-      @media(min-width: 1200px) {
-            padding: 2% 4% 4%;
-      }
-      @media(min-width: 1800px) {
-            padding: 1% 4% 3%;
-      }
-      background-image: url("../img/donejs-final_arrow-icon_1.svg");
-      background-size: 26px;
-      background-position: 50% 90%;
-      background-repeat: no-repeat;
-      line-height: normal;
-      font-size: 16px;
-        p {
-          font-size: 15px;
-        }
-        a {
-            font-weight: 300;
-        }
-    }
-
-    .usability {
-      background-color: rgba(93, 96, 97, 0.8);
-    }
-    .performance {
-      background-color: rgba(5, 152, 196, 0.8);
-    }
-    .maintainable {
-      background-color: rgba(33, 38, 40, .8);
-    }
+a {
+ color: @white;
+ line-height: 1.5em;
+ white-space: nowrap;
+ @media(max-width: 1000px) {
+   white-space: normal;
   }
 }
-      
+.lead-in {
+ padding: 45px 35px;
+ h1 {
+   font-size: 75px;
+     margin: 20px 0 10px;
+     @media(max-width: @screen-sm) {
+       font-size: 55px;
+       line-height: 50px;
+     }
+     @media(max-width: @screen-xs) {
+       font-size: 40px;
+       line-height: 50px;
+     }
+ }
+   h3 {
+    max-width: 700px;
+    font-weight: 300;
+    display: block;
+    margin: 0 auto;
+   }
+}
+
+.lead {
+ margin: 4px 60px;
+ font-size: 20px;
+}
+.install {
+  margin-top: 45px;
+  max-width: 630px;
+ p {
+   font-size: 14px;
+   margin-bottom: 1px;
+ }
+ .code {
+   text-align: right;
+   .caption {
+    display: block;
+    margin: 0 auto;
+    width: 285px;
+    text-align: center;
+   }
+ }
+ textarea {
+   padding: 10px;
+   color: @black;
+   font-size: 18px;
+   line-height: normal;
+   text-align: left;
+   font-family: 'Source Code Pro', monospace;
+   border-color: @logoColor;
+   border-width: 2px;
+   width: 100%;
+ }
+ .guide {
+    padding-top: 24px;
+   }
+   .btn {
+     height: 35px;
+     padding: 5px;
+     display: block;
+     margin: 0 auto;
+     width: 100% !important;
+   }
+ .social {
+   text-align: left;
+   padding-top: 12px;
+   display: block;
+   margin: 0 auto;
+ }
+ .ghbtns {
+   margin-left: 10px;
+   float: right;
+   width: 80px;
+   @media(max-width: @screen-xs){
+     float: none;
+     margin-left:0;
+   }
+
+ }
+ @media (min-width: @screen-sm) {
+   .table-row;
+   margin-top: 45px;
+ }
+}
+
+.triptych {
+ margin-top: 20px;
+ .box {
+   cursor: pointer;
+   padding: 2% 6% 15%;
+
+   @media (min-width: @screen-sm){
+     padding: 2% 6% 6%;
+   }
+   @media(min-width: 1200px) {
+         padding: 2% 4% 4%;
+   }
+   @media(min-width: 1800px) {
+         padding: 1% 4% 3%;
+   }
+   background-image: url("../img/donejs-final_arrow-icon_1.svg");
+   background-size: 26px;
+   background-position: 50% 90%;
+   background-repeat: no-repeat;
+   line-height: normal;
+   font-size: 16px;
+     p {
+       font-size: 15px;
+     }
+     a {
+         font-weight: 400;
+     }
+ }
+ .usability {
+   background-color: rgba(93, 96, 97, 0.8);
+ }
+ .performance {
+   background-color: rgba(5, 152, 196, 0.8);
+ }
+ .maintainable {
+   background-color: rgba(33, 38, 40, .8);
+ }
+ @media(min-width: @screen-sm) {
+   .usability,
+   .performance,
+   .maintainable {
+     min-height: 400px;
+   }
+ }
+ @media(min-width: @screen-md) {
+   .usability,
+   .performance,
+   .maintainable {
+     min-height: 380px;
+   }
+ }
+ @media (min-width: @screen-lg) {
+   .table-row;
+ }
+}
+.links {
+ @media (min-width: @screen-sm) {
+   .table-row;
+ }
+}
