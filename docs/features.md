@@ -14,7 +14,7 @@
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
 and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript) aka [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9). Server side rendering comes with great benefits:
 
-#### **Speed**
+#### Speed
 A user sees their content immediately. No spinners necessary.
 
 [[[TODO: image of loaded vs spinner from home page]]]
@@ -23,15 +23,15 @@ DoneJS brings server side rendering with an incredibly fast, single context virt
 
 Running a single context on the server (default, but optional), no additional processes or memory is used per request. You don't even have to reload the application. This eliminates all of the overhead baggage you used to expect from a server request, and gets it done as fast as possible.
 
-#### **SEO**
+#### SEO
 While [Google can execute JavaScript](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), it's not perfect and there are many other search engines that want to scrape your site and drive traffic your way.
 
 Rendering requests in DoneJS uses a virtual DOM that only implements the fundamental apis that jQuery needs to manipulate the DOM. That means the rendering here is *fast* and your markup is ready to serve with the SEO benefits a static page would have.
 
-#### **DoneJS compared to alternatives**
+#### DoneJS compared to alternatives
 Other solutions to server side rendering force you to get all the data manually, to know when the page is done loading, and make it difficult to have components load their own data. DoneJS takes care of all of this and makes it incredibly easy to make your most important components immediately visible to the user and to the bots crawling your site. And because DoneJS renders using a [virtual DOM](https://github.com/canjs/can-simple-dom), it's super fast and only carrying a fraction of the weight an approach using a full headless browser has.
 
-#### **How easy?**
+#### How easy?
 Just add one line to your most important components:
 ```
 this.attr( "@root" ).waitFor( promise );
@@ -61,18 +61,18 @@ Guide-link:
 
 ### Progressive loading
 
-DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable system.
+DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load *fast*.
 
-Steal will map the dependencies of each page and bundle them in a way that has the lowest possible wasted size across page requests. Check it out:
+Steal analyzes the dependencies of each page and bundle them in a way that has the lowest possible wasted size across page requests. Check it out:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
 
-Our algorithm is VERY smart with the optimization. With it comes the ability to progressively load your requests; That is, only loading the CSS and JS that's needed, as it's needed.
+Our algorithm is VERY smart with the optimization and doesn't require you to configure your bundles like our competitors do. For example, should jQuery and Underscore be in some "core" library? StealJS makes these decisions for you, better than you could make for yourself.
 
-#### **And it's super easy to use!**
-Progressive loading is done simply by specifying it directly in your templates:
+#### And it's super easy to use!
+Progressive loading is done simply by specifying it directly in your templates. Here, as the page changes, it will begin loading the additional JS needed and briefly show "Loading..." until it completes:
 
 ```
-<div class="col-sm-8 col-sm-offset-2">
+<div>
   {{#eq page 'chat'}}
     <can-import from="donejs-chat/messages/">
       {{#if isPending}}
@@ -93,7 +93,7 @@ Progressive loading is done simply by specifying it directly in your templates:
 </div>
 ```
 
-That's it! No need for additional logic or steps in your JavaScript.
+That's it! No need for additional configuration in your JavaScript.
 
 
 Project: 
@@ -177,7 +177,7 @@ test('destroying todos', function() {
 
 Unit tests should be able to run by themselves without the need for an API server though, so
 
-#### **Creating fake data: Fixtures!**
+#### Creating fake data: Fixtures!
 
 DoneJS does even more to make testing easy and more valuable by using fixtures. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. It's easy to set up too:
 
@@ -223,7 +223,7 @@ TODO
 
 Get more done faster by bringing other people's code into your client side project with StealJS's NPM Packages.
 
-DoneJS applications can use packages published to NPM without configuration.  Automatically load dependencies installed with npm and import pacakges written in ES6 module syntax, AMD, or CommonJS.
+DoneJS applications can use packages published to NPM without configuration.  Automatically load dependencies installed with npm and import packages written in ES6 module syntax, AMD, or CommonJS.
 
 It's fast and easy to do:
 ```
@@ -351,11 +351,23 @@ Project: http://canjs.com/guides/Recipes.html#section_BuildWidgets_UIElements
 
 ### MVVM Reactive
 
-DoneJS applications are architecturally Model-View-ViewModel applications where all events and updates flow in a 
-single direction.  It's easy to define view models that derive their data from source data but in
-a deterministic and synchronous flow.  View updates happen only after all models and view models have been updated.
+DoneJS applications are architecturally [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) applications where all events and updates flow in a 
+single direction. It's easy to define view models that derive their data from source data but in
+a deterministic and synchronous flow. View updates happen only after all models and view models have been updated.
 
-DoneJS uses [CanJS](http://canjs.com) for custom elements and a MVVM architecture.  CanJS is small, fast, and powerful.
+DoneJS uses [CanJS](http://canjs.com) for custom elements and a MVVM architecture. CanJS is small, fast, and powerful.
+
+MVVM separates concerns in development in a few ways:
+
+#### Views (Templates)
+Templates have no complex calculations and will therefore be easier to change and update in the future. This is good because UI will often change late in the process as user feedback comes into play.
+
+#### Models
+Models are the bare-bones representation of the data as it's stored on a server. In CanJS the model will define its API endpoints too.
+
+#### ViewModels
+ViewModels are the glue between views and models; They will do the complex logic and provide simple values to check and render in templates, as well as any transformations of model data to view data. ViewModels are closely related to the idea of a current state so they'll handle reading, updating, deleting, and cancelling form information changes, for example.
+
 
 ### Architecture
 
@@ -363,9 +375,22 @@ TODO
 
 ### Hot Module Swapping & Live Reload
 
-DoneJS applications keep developers focused because they enable super fast updates when code changes.  Live-reload
-listens to when source files change, and update only the modules that need to change.  Developers speend less time
+DoneJS applications keep developers focused because they enable super fast updates when code changes. Live-reload
+listens to when source files change, and update only the modules that need to change. Developers speend less time
 waiting for refreshes and builds.
+
+When you save your work, Steal doesn’t refresh the page, but only re-imports modules that are marked as dirty. This is hot swapping with live-reload. The result is a blazing fast development experience:
+
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"><source video-src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4" type="video/mp4" class="source-mp4" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"></video>
+
+<br>
+When you begin working on your DoneJS application, just run
+```
+donejs develop
+```
+in your terminal to start using live-reload!
+
+
 
 ### Generators
 
