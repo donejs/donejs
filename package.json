@@ -52,15 +52,15 @@
   },
   "donejs": {
     "dependencies": {
-      "can": "~2.3.0-pre.13",
-      "can-connect": "~0.2.2",
-      "can-ssr": "^0.7.5",
+      "can": "^2.3.0-beta.0",
+      "can-connect": "^0.3.0",
+      "can-ssr": "^0.8.0",
       "done-autorender": "^0.4.0",
       "done-component": "^0.2.0",
       "done-css": "~1.1.8",
       "generator-donejs": "^0.2.14",
-      "jquery": "~2.1.4",
-      "steal": "^0.12.0-pre.9"
+      "jquery": "^2.1.4",
+      "steal": "^0.12.0-pre.7"
     },
     "devDependencies": {
       "documentjs": "^0.3.0",
