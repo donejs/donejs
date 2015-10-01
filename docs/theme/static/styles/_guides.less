@@ -1,0 +1,40 @@
+/* This file is for styles that apply specifically to the "Guides.html" page that link to the actual guides */
+body.Guides {
+	background-color: #FCFEFD;
+	color: #000000;
+
+    a {
+        font-weight: 900;
+        color: @logoColor;
+    }
+
+	> .container {
+		display: block;
+		width: 1000px;
+		margin: 0px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 50px;
+		padding: 0px;
+		padding-bottom: 50px;
+		border-radius: 0px;
+		border-bottom: 1px solid #EEE;
+
+		> .content {
+			display: block!important;
+			margin: 0px;
+			padding: 0px;
+			background-color: transparent;
+			border: none;
+			border-radius: 0px;
+		}
+	}
+
+	section.contents {
+		display: none;
+	}
+	
+	section.title .heading h1 + ul.tags {
+		display: none;
+	}
+}
