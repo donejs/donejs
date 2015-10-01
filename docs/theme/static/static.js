@@ -83,13 +83,14 @@ steal("./content_list.js",
                 $('.donejs-thumbs').stop().animate({opacity: 1}, 500);
             }
         );
-
         $('video').hover(
             function(el){
                 $(this).get(0).play();
+                $(this).parent('div').addClass('playing');
             },
             function(el){
                 $(this).get(0).pause();
+                $(this).parent('div').removeClass('playing');
             }
         );
 
