@@ -56,7 +56,7 @@ Then we can start the development and live-reload server by running:
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser.
+The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. This server needs to stay open at all times so we recommend opening a new terminal window for the other commands.
 
 ## Importing other projects
 
@@ -227,6 +227,7 @@ And update `src/index.stache` to dynamically load and initialize this component 
   <head>
     <title>{{title}}</title>
     {{asset "css"}}
+    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />
@@ -314,7 +315,7 @@ Next we add a link to go back to the chat page (`messages/messages.stache`):
 <p>{{message}}</p>
 ```
 
-Then, to get a pretty route we have to add a mapping for the `page` property in `src/app.js` which then looks like this:
+Then, to get a pretty route we add a mapping for the `page` property in `src/app.js` which then looks like this:
 
 ```js
 import AppMap from "can-ssr/app-map";
@@ -338,7 +339,7 @@ export default AppViewModel;
 
 ### Switch between pages
 
-Finally we can glue both components together as separate pages in `src/index.stache`. This is done by dynamically importing each component and showing them based on the `page` property (which we set in the route):
+Finally we can glue both components together as separate pages in `src/index.stache`. This is done by adding another dynamic import for the `chat/messages/` component and showing each import based on the `page` property (which we set in the route):
 
 
 ```html
@@ -346,6 +347,7 @@ Finally we can glue both components together as separate pages in `src/index.sta
   <head>
     <title>{{title}}</title>
     {{asset "css"}}
+    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />
@@ -405,7 +407,7 @@ To create a connection for our mesages we will use [can-connect supermodel](http
 donejs generate supermodel message
 ```
 
-When asked for the URL endpoint we have to make sure to set it to our remote API at `http://chat.donejs.com/api/messages`. The other prompt can be answered by the default by hitting enter.
+When asked for the URL endpoint we have to make sure to set it to our remote API at [http://chat.donejs.com/api/messages](http://chat.donejs.com/api/messages). The other prompt can be answered with the default by hitting enter.
 
 ### Using the connection
 
@@ -431,12 +433,13 @@ This was all we needed to create a connection to our REST endpoint. We can go ah
 </message-model>
 ```
 
+If we now open [localhost:8080/chat](http://localhost:8080/chat) we can see the list of messages from the server or the text that there are no messages.
+
 ### Creating messages
 
-Now that we see either the list of messages or a notification that there are no message we can add the form to create new messages. The form simply binds the `name` and `message` property to the components view model and calls `send` when hitting the enter key in the message input. With that `src/messages/messages.stache` looks like this:
+Now can add the form to create new messages. The form simply binds the `name` and `message` property to the components view model and calls `send` when hitting the enter key in the message input. With that `src/messages/messages.stache` looks like this:
 
 ```html
-<can-import from="donejs-chat/models/message" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
 <message-model get-list="{}">
   <div class="list-group">
@@ -455,10 +458,10 @@ Now that we see either the list of messages or a notification that there are no 
 </message-model>
 <div class="row">
   <div class="col-sm-3">
-    <input type="text" class="form-control" id="name" placeholder="Your name" can-value="{name}">
+    <input type="text" class="form-control" id="name" placeholder="Your name" {($value)}="name">
   </div>
   <div class="col-sm-9">
-    <input type="text" class="form-control" id="message" placeholder="Your message" can-value="{message}" (enter)="{send}">
+    <input type="text" class="form-control" id="message" placeholder="Your message" {($value)}="message" ($enter)="send">
   </div>
 </div>
 ```
@@ -489,9 +492,9 @@ export default Component.extend({
 });
 ```
 
-It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty the input field.
+It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty the input field. If we now put in our name and send a new message it will show up automatically in our messages list.
 
-### Real-time connections
+### Real-time connection
 
 Right now our chat updates automatically with our own new messages but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) does provide a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we need to install a [Socket.io client wrapper](https://github.com/stealjs/steal-socket.io):
 
@@ -537,7 +540,7 @@ if(typeof io === 'function') {
 export default Message;
 ```
 
-Try opening another browser window to see receiving messages in real-time.
+This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages. Try opening another browser window to see receiving messages in real-time.
 
 ## Production build
 
@@ -548,14 +551,14 @@ Now that we implemented the complete chat functionality we can get our applicati
 We can find the build configuration in `build.js` in the application folder. Everything is already set up so we can simply make a build by running
 
 ```
-node build
+donejs build
 ```
 
-The optimized bundles that make sure that your JavaScript and CSS assets load as fast as possible are located in the `dist/` folder.
+The optimized bundles that load your JavaScript and CSS as fast as possible are located in the `dist/` folder.
 
 ### Set to production.
 
-To test the production build, close the current server (with `CTRL + C`) and set the environment (`NODE_ENV`) to `production`:
+To test the production build, close the current server (with `CTRL + C`) and start it with the environment (`NODE_ENV`) set to `production`:
 
 ```
 NODE_ENV=production donejs start
@@ -636,7 +639,7 @@ Make sure to replace `"name": "donejs-chat"` with the name of the application yo
 Again, make sure to replace `http://donejs-chat.divshot.io` with your own Divshot URL. Then we can deploy the application by running:
 
 ```
-node build
+donejs build
 donejs deploy
 ```
 
