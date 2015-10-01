@@ -48,15 +48,12 @@ body.donejs {
   .maintainable-btn {
     background-color: rgba(33,38,40,.8);
   }
-  // on scroll, apply these classes to the buttons
-  // this should happen as the user reaches the bottom of the hero div
-  &.fixed { // apply .fixed to the .overview-btn wrapper div
+  &.fixed {
     position:fixed;
     top: 36px;
     left: 0;
     width: 100%;
     .fadeInUp;
-    // apply .condensed to the <a>
     .overview-btn.condensed {
       width: 33.33333%;
       display: inline-block;
@@ -68,12 +65,10 @@ body.donejs {
       .light {
         display: none;
       }
-      // if the user scrolls into each of these sections apply the .active class to the <a>
-      // else if the user taps apply the .active class to the element
-      // and remove the .active class from the other element
       &.usability-btn.active,
       &.performance-btn.active,
       &.maintainable-btn.active {
+        background-color: rgba(0,0,0,.9);
         &:after {
           position: absolute;
           content:'';
@@ -83,21 +78,7 @@ body.donejs {
           height: 0;
           border-left: 10px solid transparent;
           border-right: 10px solid transparent;
-        }
-      }
-      &.usability-btn.active {
-        &:after{
-          border-top: 10px solid rgba(93,96,97,.8);
-        }
-      }
-      &.performance-btn.active {
-        &:after{
-          border-top: 10px solid rgba(5,152,196,.8);
-        }
-      }
-      &.maintainable-btn.active {
-        &:after{
-          border-top: 10px solid rgba(33,38,40,.8);
+          border-top: 10px solid rgba(0,0,0,.9);
         }
       }
     }
