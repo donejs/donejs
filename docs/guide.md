@@ -77,6 +77,7 @@ Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap
   <head>
     <title>{{title}}</title>
     {{asset "css"}}
+    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />
@@ -125,6 +126,7 @@ We will import the tabs custom elements without the styles from `bit-tabs/unstyl
   <head>
     <title>{{title}}</title>
     {{asset "css"}}
+    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />

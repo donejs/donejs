@@ -8,8 +8,6 @@ var mkdirp = require('mkdirp');
 var utils = require('../lib/utils');
 var log = utils.log;
 
-var root = "";
-
 var mypkg = require(path.join(__dirname, '..', 'package.json'));
 
 var commandList = ['init', 'generate'];
@@ -17,101 +15,100 @@ var listSeparator = '\n\t• ';
 var initDescription = 'Initialize a new DoneJS application in a new folder or the current one';
 var generatorDescription = 'No generators available.';
 
-try {
-  var generators = require('generator-donejs');
-  generatorDescription = 'Run a generator. Available generators:';
-  generatorDescription += listSeparator +
-    Object.keys(generators).join(listSeparator);
-} catch(e) {
-  // We can do this because `generatorDescription` is already set
-}
+program.version(mypkg.version);
 
-var actions = {
-  init: function(folder) {
-    if(folder) {
-      var appDir = path.join(process.cwd(), folder);
-      if(fs.existsSync(appDir)) {
-        console.error('Folder `' + folder + '` already exists.');
-        return;
+utils.projectRoot().then(function (root) {
+  var actions = {
+    init: function (folder) {
+      if (folder) {
+        var appDir = path.join(process.cwd(), folder);
+        if (fs.existsSync(appDir)) {
+          console.error('Folder `' + folder + '` already exists.');
+          return;
+        }
+
+        console.log('Creating folder ' + folder);
+        mkdirp.sync(appDir);
+        process.chdir(appDir);
       }
 
-      console.log('Creating folder ' + folder);
-      mkdirp.sync(appDir);
-      process.chdir(appDir);
-    }
-
-    root = path.join(process.cwd(), 'node_modules');
-    log(utils.generate(root, [ 'app', {
+      root = path.join(process.cwd(), 'node_modules');
+      log(utils.generate(root, ['app', {
         version: mypkg.version,
         packages: mypkg.donejs
       }
-    ]));
-  },
-  generate: function(type, options) {
-    log(utils.generate(root, [ [type].concat(options) ]));
-  },
-  catchAll: function(command) {
-    console.error('Could not run `' + command + '`');
-    program.help();
-  }
-};
-
-program.version(mypkg.version);
-
-// donejs init
-program.command('init [folder]')
-  .description(initDescription)
-  .action(actions.init);
-
-// donejs generate
-program.command('generate <name> [options...]')
-  .description(generatorDescription)
-  .action(actions.generate);
-
-// catchall
-program.command('*')
-  .description('')
-  .action(actions.catchAll);
-
-utils.projectRoot().then(function(root) {
-    // Lists all NPM scripts of the package.json in the current folder
-    var curpkg = {};
-    try {
-      curpkg = require(path.join(root, 'package.json'));
-    } catch(e) {
-      // otherwise no local package.json
+      ]));
+    },
+    generate: function (type, options) {
+      log(utils.generate(path.join(root, 'node_modules'), [[type].concat(options)]));
+    },
+    catchAll: function (command) {
+      console.error('Could not run `' + command + '`');
+      program.help();
     }
-    Object.keys(curpkg.scripts || {}).forEach(function(script) {
-      if(commandList.indexOf(script) === -1) {
-        commandList.push(script);
-        program.command(script)
-          .description('NPM `' + curpkg.scripts[script] + '`')
-          .action(function() {
-            log(utils.runScript(script));
+  };
+  // Lists all NPM scripts of the package.json in the current folder
+  var curpkg = {};
+  try {
+    curpkg = require(path.join(root, 'package.json'));
+  } catch (e) {
+    // otherwise no local package.json
+  }
+
+  try {
+    var generators = require(path.join(root, 'node_modules', 'generator-donejs'));
+    generatorDescription = 'Run a generator. Available generators:';
+    generatorDescription += listSeparator +
+    Object.keys(generators).join(listSeparator);
+  } catch (e) {
+    // We can do this because `generatorDescription` is already set
+  }
+
+  // donejs init
+  program.command('init [folder]')
+    .description(initDescription)
+    .action(actions.init);
+
+  // donejs generate
+  program.command('generate <name> [options...]')
+    .description(generatorDescription)
+    .action(actions.generate);
+
+  // catchall
+  program.command('*')
+    .description('')
+    .action(actions.catchAll);
+
+  Object.keys(curpkg.scripts || {}).forEach(function (script) {
+    if (commandList.indexOf(script) === -1) {
+      commandList.push(script);
+      program.command(script)
+        .description('NPM `' + curpkg.scripts[script] + '`')
+        .action(function () {
+          log(utils.runScript(script));
+        });
+    }
+  });
+
+  // List all other local binaries
+  var binPath = path.join(path.join(root, "node_modules"), '.bin');
+  if (fs.existsSync(binPath)) {
+    fs.readdirSync(binPath).forEach(function (name) {
+      if (commandList.indexOf(name) === -1) {
+        commandList.push(name);
+        program.command(name + ' [...args]')
+          .description('')
+          .action(function (args) {
+            log(utils.runCommand(path.join(binPath, name), args));
           });
       }
     });
+  }
 
-    // List all other local binaries
-    var binPath = path.join(path.join(root, "node_modules"), '.bin');
-    if(fs.existsSync(binPath)) {
-      fs.readdirSync(binPath).forEach(function(name) {
-        if(commandList.indexOf(name) === -1) {
-          commandList.push(name);
-          program.command(name + ' [...args]')
-            .description('')
-            .action(function(args) {
-              log(utils.runCommand(path.join(binPath, name), args));
-            });
-        }
-      });
-    }
-
-    program.parse(process.argv);
-    if (!program.args.length) {
-        program.help();
-    }
+  program.parse(process.argv);
+  if (!program.args.length) {
+    program.help();
+  }
 });
 
-exports.actions = actions;
 exports.program = program;
