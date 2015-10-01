@@ -432,12 +432,16 @@ body.donejs {
   .graph-timeline-wrapper {
     overflow-y: hidden;
     overflow-x: scroll;
+    overflow: -moz-scrollbars-none;
     padding:0;
     width: 100%;
     position: absolute;
     z-index: 1;
     left: 0px;
     top:0;
+    &::-webkit-scrollbar {
+    display: none;
+    }
   }
   .graph-timeline{
     width: 2530px;
