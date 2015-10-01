@@ -16,6 +16,75 @@ body.donejs {
   display: block;
   margin: 0 auto;
 }
+.overview-nav {
+  position: absolute;
+  width: ~"calc( 100% - 60px )";
+  padding-top: 20px;
+  z-index: 5;
+  .overview-btn {
+    display: block;
+    width: 100%;
+    color: white;
+    background-image: url(../img/donejs-final_arrow-icon_1.svg);
+    background-size: 15px;
+    background-position: 90% 50%;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    border-radius: 2px;
+    font-weight: 300;
+    font-size: 18px;
+    text-decoration: none;
+    &:last-child {
+      margin: 0;
+    }
+  }
+  .usability-btn {
+    background-color: rgba(93,96,97,.8);
+  }
+  .performance-btn {
+    background-color: rgba(5,152,196,.8);
+  }
+  .maintainable-btn {
+    background-color: rgba(33,38,40,.8);
+  }
+  &.fixed {
+    position:fixed;
+    top: 36px;
+    left: 0;
+    width: 100%;
+    .fadeInUp;
+    .overview-btn.condensed {
+      width: 33.33333%;
+      display: inline-block;
+      float: left;
+      background-image: none;
+      font-size: 14px;
+      border-radius: 0;
+      position: relative;
+      .light {
+        display: none;
+      }
+      &.usability-btn.active,
+      &.performance-btn.active,
+      &.maintainable-btn.active {
+        background-color: rgba(0,0,0,.9);
+        &:after {
+          position: absolute;
+          content:'';
+          bottom:-10px;
+          left: 42%;
+          width: 0;
+          height: 0;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid rgba(0,0,0,.9);
+        }
+      }
+    }
+  }
+
+}
 
 .usability.wrapper {
   background-color: @white;

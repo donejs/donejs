@@ -173,16 +173,16 @@ steal("./content_list.js",
         });
 
 
-        //hijack page jumps, animate scroll
+        //hijack guide page jumps, animate scroll
         $( function () {
             var clickFn = function () {
-                var offset = -60;
+                var offset = -55;
                 var thisLi = $( this ).closest( "li" );
                 if ( thisLi.is( "body.Features ol > ol > li:first-child" ) ) {
-                    offset = 222 - 55;
+                    offset = 222 - 50;
                 }
                 if ( thisLi.is( "body.Features ol > ol:first-of-type > li:first-child" ) ) {
-                    offset = 222 - 70;
+                    offset = 222 - 65;
                 }
                 $( 'html, body' ).animate({
                     scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
@@ -207,4 +207,91 @@ steal("./content_list.js",
             if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
         });
 
+
+
+
+        var isMobileSize = false;
+        var windowResize = function () {
+            var width = $( window ).width();
+            if ( width < 768 ) {
+                isMobileSize = true;
+            } else {
+                isMobileSize = false;
+            }
+        };
+        windowResize();
+        $( window ).resize( windowResize );
+
+        $( window ).scroll(function () {
+            if ( !isMobileSize ) return;
+
+            //.container-fluid > row > *
+                //.usability.wrapper
+                //.performance.wrapper
+                //.maintainable.wrapper
+                //.community.wrapper
+
+            var el = document.elementFromPoint( ~~( document.body.offsetWidth / 2 ), 325 );
+            el = $( el ).closest( ".container-fluid > .row > *" );
+            if ( !el.length ) {
+                return;
+            }
+            var curSect = el.is( ".usability.wrapper, .performance.wrapper, .maintainable.wrapper, .community.wrapper" );
+            if ( curSect ) {
+                curSect = el;
+            } else {
+                curSect = el.prevAll( ".usability.wrapper, .performance.wrapper, .maintainable.wrapper, .community.wrapper" ).eq( 0 );
+            }
+
+            if ( !curSect.length ) {
+                //none are active and you're above usability.wrapper so un-fixed and un-condensed
+                $( "body.donejs .overview-nav" ).removeClass( "fixed" );
+                $( "body.donejs .overview-nav .overview-btn" ).removeClass( "condensed" ).removeClass( "active" );
+            } else if ( curSect.is( ".usability.wrapper" ) ) {
+                //fixed, condensed, usability is active
+                $( "body.donejs .overview-nav" ).addClass( "fixed" );
+                $( "body.donejs .overview-nav .overview-btn" ).addClass( "condensed" ).removeClass( "active" );
+                $( "body.donejs .overview-nav .usability-btn" ).addClass( "active" );
+            } else if ( curSect.is( ".performance.wrapper" ) ) {
+                //fixed, condensed, performance is active
+                $( "body.donejs .overview-nav" ).addClass( "fixed" );
+                $( "body.donejs .overview-nav .overview-btn" ).addClass( "condensed" ).removeClass( "active" );
+                $( "body.donejs .overview-nav .performance-btn" ).addClass( "active" );
+            } else if ( curSect.is( ".maintainable.wrapper" ) ) {
+                //fixed, condensed, maintainable is active
+                $( "body.donejs .overview-nav" ).addClass( "fixed" );
+                $( "body.donejs .overview-nav .overview-btn" ).addClass( "condensed" ).removeClass( "active" );
+                $( "body.donejs .overview-nav .maintainable-btn" ).addClass( "active" );
+            } else if ( curSect.is( ".community.wrapper" ) ) {
+                //none are active but still is fixed and condensed
+                $( "body.donejs .overview-nav" ).addClass( "fixed" );
+                $( "body.donejs .overview-nav .overview-btn" ).addClass( "condensed" ).removeClass( "active" );
+            }
+        });
+        //hijack home page page jumps, animate scroll
+        $( function () {
+            var clickFn = function () {
+                var offset = -140;
+                $( 'html, body' ).animate({
+                    scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
+                }, 500);
+            };
+
+            var hashOnLoad = window.location.hash;
+            var jumpOnLoad = null;
+
+            $( ".overview-nav a" ).each( function () {
+                this.href = this.href.replace( "#", "#section=" );
+
+                if ( hashOnLoad && this.href.replace( /.*?#section=/, "#section=" ) === hashOnLoad ) {
+                    jumpOnLoad = this;
+                }
+
+                $( this ).on( "click", clickFn );
+
+                return true;
+            });
+
+            if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
+        });
     });
