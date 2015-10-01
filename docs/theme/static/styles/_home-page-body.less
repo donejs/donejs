@@ -141,6 +141,9 @@ body.donejs {
 
   .phase img {
     margin-bottom: 28px;
+    @media(max-width: @screen-xs-max){
+      max-width: none;
+    }
   }
 
   .img-wrap {
@@ -148,6 +151,9 @@ body.donejs {
     height: 28px;
     width: 30px;
     text-align: left;
+    @media(max-width: @screen-xs-max){
+      width: auto;
+    }
   }
   .btn {
     color: @white;
@@ -159,7 +165,11 @@ body.donejs {
     padding: 7px;
     padding-left: 24px;
     font-size: 16px;
-
+    @media(max-width: @screen-xs-max){
+      padding-left: 0;
+      padding-right: 0;
+      text-align: center;
+    }
     img {
       height: 14px;
       width: 14px;
@@ -439,7 +449,7 @@ body.donejs {
 .maintainable.wrapper {
   color: @white;
   background-color: @charcoal;
-
+  overflow: hidden;
   .background {
     background-color: @logoColor;
     border: 15px solid @charcoal;
