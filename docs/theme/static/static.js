@@ -173,16 +173,16 @@ steal("./content_list.js",
         });
 
 
-        //hijack page jumps, animate scroll
+        //hijack guide page jumps, animate scroll
         $( function () {
             var clickFn = function () {
-                var offset = -60;
+                var offset = -55;
                 var thisLi = $( this ).closest( "li" );
                 if ( thisLi.is( "body.Features ol > ol > li:first-child" ) ) {
-                    offset = 222 - 55;
+                    offset = 222 - 50;
                 }
                 if ( thisLi.is( "body.Features ol > ol:first-of-type > li:first-child" ) ) {
-                    offset = 222 - 70;
+                    offset = 222 - 65;
                 }
                 $( 'html, body' ).animate({
                     scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
@@ -266,7 +266,32 @@ steal("./content_list.js",
                 //none are active but still is fixed and condensed
                 $( "body.donejs .overview-nav" ).addClass( "fixed" );
                 $( "body.donejs .overview-nav .overview-btn" ).addClass( "condensed" ).removeClass( "active" );
-
             }
+        });
+        //hijack home page page jumps, animate scroll
+        $( function () {
+            var clickFn = function () {
+                var offset = -140;
+                $( 'html, body' ).animate({
+                    scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
+                }, 500);
+            };
+
+            var hashOnLoad = window.location.hash;
+            var jumpOnLoad = null;
+
+            $( ".overview-nav a" ).each( function () {
+                this.href = this.href.replace( "#", "#section=" );
+
+                if ( hashOnLoad && this.href.replace( /.*?#section=/, "#section=" ) === hashOnLoad ) {
+                    jumpOnLoad = this;
+                }
+
+                $( this ).on( "click", clickFn );
+
+                return true;
+            });
+
+            if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
         });
     });
