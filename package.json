@@ -12,7 +12,7 @@
     "mocha": "mocha test/ --timeout 120000",
     "verify": "echo \"NPM script ran\"",
     "document:watch": "documentjs --watch",
-    "document": "documentjs -f",
+    "document": "documentjs -f && cp docs/theme/static/favicon.ico site/favicon.ico",
     "publish": "git push origin --tags",
     "release:prerelease": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
