@@ -52,13 +52,13 @@
   },
   "donejs": {
     "dependencies": {
-      "can": "^2.3.0-beta.0",
+      "can": "^2.3.0-beta.1",
       "can-connect": "^0.3.0",
-      "can-ssr": "^0.8.0",
+      "can-ssr": "^0.9.0",
       "done-autorender": "^0.4.0",
       "done-component": "^0.2.0",
       "done-css": "~1.1.9",
-      "generator-donejs": "^0.2.14",
+      "generator-donejs": "^0.3.0",
       "jquery": "^2.1.4",
       "steal": "^0.12.0-pre.7"
     },
