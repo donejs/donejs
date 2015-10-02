@@ -15,7 +15,8 @@ var listSeparator = '\n\t• ';
 var initDescription = 'Initialize a new DoneJS application in a new folder or the current one';
 var generatorDescription = 'No generators available.';
 
-program.version(mypkg.version);
+program.version(mypkg.version)
+  .description("The DoneJS command line utility lets you run generators, NPM scripts and binaries local to your project.");
 
 utils.projectRoot().then(function (root) {
   var actions = {
@@ -82,10 +83,10 @@ utils.projectRoot().then(function (root) {
   Object.keys(curpkg.scripts || {}).forEach(function (script) {
     if (commandList.indexOf(script) === -1) {
       commandList.push(script);
-      program.command(script)
-        .description('NPM `' + curpkg.scripts[script] + '`')
-        .action(function () {
-          log(utils.runScript(script));
+      program.command(script + ' [...args]')
+        .description('`' + curpkg.scripts[script] + '` (package.json)')
+        .action(function (args) {
+          log(utils.runScript(script, args));
         });
     }
   });

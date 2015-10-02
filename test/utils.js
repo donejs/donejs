@@ -24,7 +24,7 @@ describe('DoneJS CLI tests', function() {
     });
 
     it('runScript and runCommand', function(done) {
-      utils.runScript('verify').then(function(child) {
+      utils.runScript('verify', ['testing', 'args']).then(function(child) {
           assert.equal(child.exitCode, 0, 'Exited successfully');
           done();
         })

@@ -10,7 +10,7 @@
     "test": "npm run jshint && npm run mocha",
     "jshint": "jshint lib/. bin/donejs test/. --config",
     "mocha": "mocha test/ --timeout 120000",
-    "verify": "echo \"NPM script ran\"",
+    "verify": "echo \"Script ran $1 $2\"",
     "document:watch": "documentjs --watch",
     "document": "documentjs -f",
     "publish": "git push origin --tags",
