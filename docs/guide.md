@@ -203,6 +203,7 @@ We can now copy most of the content from the homepage into this component so tha
     h1.page-header { margin-top: 0; }
   </style>
   <template>
+    <can-import from="bit-tabs/unstyled" />
     <h1 class="page-header text-center">
       <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
       <br>Chat
@@ -233,7 +234,6 @@ And update `src/index.stache` to dynamically load and initialize this component 
     <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="donejs-chat/styles.less!" />
     <can-import from="donejs-chat/app" as="viewModel" />
-    <can-import from="bit-tabs/unstyled" />
 
     {{asset "inline-cache"}}
 
@@ -287,6 +287,7 @@ First, let's update `src/home.component` with a link to the chat messages page:
     h1.page-header { margin-top: 0; }
   </style>
   <template>
+    <can-import from="bit-tabs/unstyled" />
     <h1 class="page-header text-center">
       <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
       <br>Chat
@@ -353,7 +354,6 @@ Finally we can glue both components together as separate pages in `src/index.sta
     <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="donejs-chat/styles.less!" />
     <can-import from="donejs-chat/app" as="viewModel" />
-    <can-import from="bit-tabs/unstyled" />
 
     {{asset "inline-cache"}}
 
