@@ -721,7 +721,7 @@ npm install steal-nw --save-dev
 As well as update our `package.json` changing `main` to `app.html` and add information about the desktop window:
 
 ```js
-"main": "app.html",
+"main": "production.html",
 ...
 "window": {
   "width": 1060,
@@ -747,7 +747,7 @@ var cordovaOptions = {
   name: "DoneJS chat",
   platforms: ["ios"],
   plugins: ["cordova-plugin-transport-security"],
-  index: __dirname + "/app.html",
+  index: __dirname + "/production.html",
   glob: [
     "node_modules/steal/steal.production.js"
   ]
@@ -766,7 +766,7 @@ var nwOptions = {
   platforms: ["osx"],
   files: [
     "package.json",
-    "app.html",
+    "production.html",
     "node_modules/steal/steal.production.js"
   ],
   version: "0.12.3"
