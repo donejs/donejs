@@ -19,47 +19,45 @@ body:not(.donejs):not(.Guides) {
       max-width: 100%;
     }
   }
-	> .container {
+	> .container-fluid {
 		display: block;
-		margin: 0px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50px;
-		padding: 0px;
-		padding-bottom: 50px;
-		border-radius: 0px;
-		border-bottom: 1px solid #EEE;
-    @media(min-width: @screen-lg){
-      width: 1000px;
-    }
+    margin: 0 auto 50px;
+    padding: 0 0 50px;
+    border-radius: 0;
+    border-bottom: 1px solid #EEE;
     @media(min-width: @screen-sm){
       width: 100%;
     }
 		@media(max-width: @screen-xs-max) {
 			width: 100%;
 		}
-		> .content {
+		@media(min-width: @screen-lg){
+			width: 1000px;
+			table-layout: fixed;
+		}
+		.content.docs {
 			display: block!important;
-			margin: 0px;
-			margin-left: auto;
+			margin: 0 0 0 350px;
 			padding: 0px;
 			background-color: transparent;
 			border: none;
 			border-radius: 0px;
       @media(min-width:@screen-lg){
         width: @contentWidth;
+				position: initial;
       }
-			@media(max-width: @screen-xs-max) {
+			@media(max-width: @screen-md-max) {
 				margin-right: auto;
 				width: 100%;
-				padding-left: 15px;
-				padding-right: 15px;
+				padding-left: 40px;
+				padding-right: 40px;
+				margin:50px 0;
 			}
 		}
 	}
   .content.docs,
-  .container.api{
-    @media(max-width: @screen-xs){
+  .container.api {
+    @media(max-width: @screen-md-max){
       width: 100%;
     }
   }
@@ -222,12 +220,11 @@ body:not(.donejs):not(.Guides) {
 			margin-top: 40px;
 			height: @h2height;
 			z-index: 1;
-			@media(max-width: @screen-xs-max){
-				padding-top: ~"calc(222px - 45%)";
+			@media(max-width: @screen-md){
 				line-height:1;
 				font-size: 35px;
 				height: auto;
-				padding: 40px 20px;
+				padding: 60px 40px;
 			}
 			&:before {
 				content: "";
@@ -261,14 +258,14 @@ body:not(.donejs):not(.Guides) {
 
  		h2 + * {
 			padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
-			@media(max-width: @screen-xs-max){
-				padding-top: 170px !important;
+			@media(max-width: @screen-md-max){
+				padding-top: @h2height !important;
 			}
 
 		}
 		h2 + p {
 			padding-top: @h2height + 100px!important;
-			@media(max-width: @screen-xs-max){
+			@media(max-width: @screen-md-max){
 				padding-top: @h2height !important;
 			}
 		}
@@ -285,7 +282,7 @@ body:not(.donejs):not(.Guides) {
 		}
 	}
 
-	@media(max-width: @screen-sm) {
+	@media(max-width: @screen-md-max) {
 		.scroll-spy-title {
 			width: 100%;
 			position: fixed;
