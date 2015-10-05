@@ -150,6 +150,20 @@ steal("./content_list.js",
         windowResize();
         $( window ).resize( windowResize );
 
+        $( "section.contents" ).mousemove( function ( m ) {
+            if ( !isMobileSize ) {
+                var $this = $( this );
+                var hoverScrollZoneSize = 50;
+                var pos = $this.position();
+                if ( m.clientY < pos.top + hoverScrollZoneSize ) {
+                    //scroll up
+                    $this.scrollTop( $this.scrollTop() - 10 );
+                } else if ( m.clientY > pos.top + $this.height() - hoverScrollZoneSize ) {
+                    //scroll down
+                    $this.scrollTop( $this.scrollTop() + 10 );
+                }
+            }
+        });
 
 
         var getNavToHeaderEl = function ( hEl ) {

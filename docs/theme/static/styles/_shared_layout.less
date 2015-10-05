@@ -56,6 +56,8 @@ body:not(.donejs):not(.Guides) {
 		left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 )";
 		width: 250px;
 		background-color: @logoColor;
+		max-height: ~"calc( 100% - 100px )";
+		overflow: hidden;
 
 		ol {
 			margin: 0px;
