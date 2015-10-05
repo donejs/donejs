@@ -22,7 +22,20 @@
 	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
 	<meta name="author" content="Bitovi - DoneJS">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-16x16.png" sizes="16x16">
 	{{^devBuild}}
 	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
 	{{/devBuild}}
@@ -30,24 +43,18 @@
 	<!--[if lt IE 9]>
 		<script type="text/javascript" src="static/html5shiv.js"></script>
 	<!--<![endif]-->
-	<style type="text/css">
-		.brand {
-			background-image: url('/static/img/donejs-logo-white.svg') !important;
-			background-size: 170px;
-		}
-	</style>
 </head>
 <body class="docs {{name}}">
 		<header>
 			<nav class="navbar navbar-default navbar-fixed-top">
-			  <div class="container">
-			    <!-- Brand and toggle get grouped for better mobile display -->
-			    <div class="navbar-header">
-			      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			        <span class="sr-only">Toggle navigation</span>
-			        <span class="mobile-menu-label">MENU</span>
-							<span class="mobile-menu-close">X</span>
-			      </button>
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
 						<div class="logo-menu">
 							<a class="brand" href="./index.html">DoneJS</a>
 							<ul class="dropdown-menu hidden-xs">
@@ -59,8 +66,8 @@
 								<li><a href="http://documentjs.com">DocumentJS</a></li>
 							</ul>
 						</div>
-			    </div>
-			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li {{#ifCurrentFromConfig "../index.html"}}class="active"{{/ifCurrentFromConfig}}>
 								<a href="./index.html">Home</a>
@@ -69,7 +76,7 @@
 								<a href="./Features.html">Features</a>
 							</li>
 							<li class="guides-menu">
-									<a href="/guides.html">Guides</a>
+									<a href="/Guides.html">Guides</a>
 									<ul class="dropdown-menu">
 											<li {{#ifCurrentFromConfig "../Guide.html"}}class="active"{{/ifCurrentFromConfig}}><a href="./Guide.html">Quick start</a></li>
 											<li><a {{#ifCurrentFromConfig "../place-my-order.html"}}class="active"{{/ifCurrentFromConfig}} href="./place-my-order.html">place-my-order.com</a></li>
@@ -77,10 +84,10 @@
 							</li>
 						</ul>
 
-			      <ul class="nav navbar-nav navbar-right bitovi-menu">
-			        <li class="dropdown">
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
 								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
-			          <ul class="dropdown-menu">
+								<ul class="dropdown-menu">
 									<li><a href="http://bitovi.com">Bitovi.com</a></li>
 									<li><a href="http://bitovi.com/blog/">Blog</a></li>
 									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
@@ -88,9 +95,9 @@
 									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
 									<li><a href="http://bitovi.com/people/">People</a></li>
 									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
-			          </ul>
-			        </li>
-			      </ul>
+								</ul>
+							</li>
+						</ul>
 						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
 							<li>
 								<a href="#">
@@ -124,12 +131,16 @@
 							</li>
 						</ul>
 
-			    </div>
-			  </div>
+					</div>
+				</div>
 			</nav>
 		</header>
 
-
+	<div class="scroll-spy-title hidden-sm hidden-md hidden-lg">
+		<span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2"></div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
 	{{{content}}}
 	{{^hideFooter}}
 	<footer>
@@ -150,11 +161,11 @@
 				src="./static/steal/steal.js"></script>
 	{{else}}
 		<script>
-		  steal = {
+			steal = {
 			instantiated: {
-			  "bundles/static.css!$css" : null
+				"bundles/static.css!$css" : null
 			}
-		  }
+			}
 		</script>
 		<script type='text/javascript'
 				data-main="static"

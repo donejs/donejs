@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.5.0-pre.8",
+  "version": "0.5.0-pre.13",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -10,9 +10,9 @@
     "test": "npm run jshint && npm run mocha",
     "jshint": "jshint lib/. bin/donejs test/. --config",
     "mocha": "mocha test/ --timeout 120000",
-    "verify": "echo \"NPM script ran\"",
+    "verify": "echo \"Script ran $1 $2\"",
     "document:watch": "documentjs --watch",
-    "document": "documentjs -f",
+    "document": "documentjs -f && cp docs/theme/static/favicon.ico site/favicon.ico",
     "publish": "git push origin --tags",
     "release:prerelease": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
@@ -52,14 +52,14 @@
   },
   "donejs": {
     "dependencies": {
-      "can": "~2.3.0-pre.13",
-      "can-connect": "~0.2.2",
-      "can-ssr": "^0.7.5",
-      "done-autorender": "^0.4.0",
+      "can": "^2.3.0-beta.1",
+      "can-connect": "^0.3.0",
+      "can-ssr": "^0.9.0",
+      "done-autorender": "^0.4.2",
       "done-component": "^0.2.0",
-      "done-css": "~1.1.8",
-      "generator-donejs": "^0.2.14",
-      "jquery": "~2.1.4",
+      "done-css": "~1.1.10",
+      "generator-donejs": "^0.3.0",
+      "jquery": "^2.1.4",
       "steal": "^0.12.0-pre.7"
     },
     "devDependencies": {
@@ -67,7 +67,7 @@
       "donejs-deploy": "^0.2.0",
       "funcunit": "~3.0.0",
       "steal-qunit": "^0.1.1",
-      "steal-tools": "^0.12.0-pre.3",
+      "steal-tools": "^0.12.0-pre.4",
       "testee": "^0.2.0"
     }
   }

@@ -5,7 +5,32 @@
             <div class="lead-in">
                 <h1 class="heavy">Your App. Done.</h1>
                 <h3 class="lead"><span class="heavy">DoneJS</span> is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.</h3>
-                <div class="install">
+                <div class="overview-nav hidden-sm hidden-md hidden-lg">
+                  <a href="#usability" class="overview-btn usability-btn">
+                    <span class="light">Improved App </span><span class="heavy">Usability</span>
+                  </a>
+                  <a href="#performance" class="overview-btn performance-btn">
+                    <span class="light">Better </span><span class="heavy">Performance</span>
+                  </a>
+                  <a href="#maintainable" class="overview-btn maintainable-btn">
+                    <span class="light">More </span><span class="heavy">Maintainable</span>
+                  </a>
+                </div>
+                <div class="install hidden-sm hidden-md hidden-lg">
+                  <div class="col-xs-12 guide">
+                      <div class="social">
+                        <a href="https://twitter.com/donejs" class="twitter-follow-button" data-show-count="true" data-dnt="true" data-show-screen-name="false">Follow @donejs</a>
+                        <iframe height="20px" class="ghbtns" src="http://ghbtns.com/github-btn.html?user=donejs&repo=donejs&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0"></iframe>
+                      </div>
+                  </div>
+                  <div class="col-xs-12 install-donejs">
+                      <p class="caption">Ready to install DoneJS?</p>
+                      <textarea>npm install -g donejs &#13;donejs init my-app</textarea>
+                      <p><a class="btn" href="Guide.html" role="button">Start Guide</a></p>
+
+                  </div>
+                </div>
+                <div class="install hidden-xs">
                     <div class="col-xs-12 col-sm-6 install-donejs">
                         <p class="caption">Ready to install DoneJS?</p>
                         <textarea>npm install -g donejs &#13;donejs init my-app</textarea>
@@ -23,36 +48,36 @@
                 <div class="col-xs-12 col-sm-4 box usability" data-target="usability">
                     <h2><span class="light">Improved App</span><br>Usability</h2>
                     <p>
-                      <a href="Features.html">iOS, Android, and Desktop Builds</a>;
-                      <a href="Features.html">Supports All Browsers, even IE8</a>;
-                      <a href="Features.html">Real time Connected</a>;
-                      <a href="Features.html">Pretty URL’s with Pushstate</a>
+                      <a href="/Features.html#section=section_iOS_Android_andDesktopBuilds">iOS, Android, and Desktop Builds</a>;
+                      <a href="/Features.html#section=section_SupportsAllBrowsers_EvenIE8">Supports All Browsers, even IE8</a>;
+                      <a href="/Features.html#section=section_RealTimeConnected">Real time Connected</a>;
+                      <a href="/Features.html#section=section_PrettyURL_swithPushstate">Pretty URL’s with Pushstate</a>
                     </p>
                 </div>
                 <div class="col-xs-12 col-sm-4 box performance" data-target="performance">
                     <h2><span class="light">Better</span><br>Performance</h2>
                     <p>
-                      <a href="Features.html">Server Side Rendered (Isomorphic)</a>;
-                      <a href="Features.html">Progressive Loading </a>;
-                      <a href="Features.html">Minimal Data Requests</a>;
-                      <a href="Features.html">Minimal DOM Updates</a>;
-                      <a href="Features.html">Worker Thread Rendering; Deploy to a CDN</a>
-                      <a href="Features.html">Deploy to a CDN</a>
+                      <a href="/Features.html#section=section_ServerSideRendered">Server Side Rendered (Isomorphic)</a>;
+                      <a href="/Features.html#section=section_Progressiveloading">Progressive Loading </a>;
+                      <a href="/Features.html#section=section_Cachingandminimaldatarequests">Minimal Data Requests</a>;
+                      <a href="/Features.html#section=section_MinimalDOMupdates">Minimal DOM Updates</a>;
+                      <a href="/Features.html#section=section_WorkerThreadRendering">Worker Thread Rendering</a>
+                      <a href="/Features.html#section=section_DeploytoaCDN">Deploy to a CDN</a>
                     </p>
                 </div>
                 <div class="col-xs-12 col-sm-4 box maintainable" data-target="maintainable">
                     <h2><span class="light">More</span><br>Maintainable</h2>
                     <p>
-                      <a href="Features.html">Unit and Functional Tests</a>;
-                      <a href="Features.html">Documentation</a>;
-                      <a href="Features.html">Continuous Integration &amp; Deployment</a>;
-                      <a href="Features.html">NPM Packages</a>;
-                      <a href="Features.html">ES6 Modules</a>;
-                      <a href="Features.html">Modlets</a>;
-                      <a href="Features.html">Custom HTML Elements</a>;
-                      <a href="Features.html">MVVM Reactive Architecture</a>;
-                      <a href="Features.html">Live reload</a>;
-                      <a href="Features.html">Generators</a>
+                      <a href="/Features.html#section=section_UnitandFunctionalTests">Unit and Functional Tests</a>;
+                      <a href="/Features.html#section=section_Documentation">Documentation</a>;
+                      <a href="/Features.html#section=section_ContinuousIntegration_Deployment">Continuous Integration &amp; Deployment</a>;
+                      <a href="/Features.html#section=section_NPMPackages">NPM Packages</a>;
+                      <a href="/Features.html#section=section_ES6Modules">ES6 Modules</a>;
+                      <a href="/Features.html#section=section_Modlets">Modlets</a>;
+                      <a href="/Features.html#section=section_CustomHTMLElements">Custom HTML Elements</a>;
+                      <a href="/Features.html#section=section_MVVMReactive">MVVM Reactive Architecture</a>;
+                      <a href="/Features.html#section=section_HotModuleSwapping_LiveReload">Live reload</a>;
+                      <a href="/Features.html#section=section_Generators">Generators</a>
                     </p>
                 </div>
             </div>
@@ -61,13 +86,13 @@
 
     <div class="usability wrapper">
         <div class="lead-in">
-            <a id="usability"></a>
+            <a id="usability" style="vertical-align: top;"></a>
             <h1><span class="light">Improved App</span> <span class="heavy">Usability</span></h1>
             <h3 class="lead"><span class="bold">DoneJS</span><span class="normal"> is used to make beautiful, real-time user interfaces that can be exported to run on every platform.</span></h3>
             <h3 class="heavy">Take our example app for a spin:</h3>
             <div class="spacer"></div>
             <div class="usability-row">
-                <div class="col-sm-3">
+                <div class="col-xs-6 col-sm-3">
                     <div class="phase ios">
                         <img src="static/img/thumb-ios.svg">
                         <a class="btn" href="https://github.com/donejs/donejs/wiki/Deploying-to-iOS-for-testing" role="button">
@@ -78,7 +103,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-xs-6 col-sm-3">
                     <div class="phase android">
                         <img src="static/img/thumb-android.svg">
                         <a class="btn" href="https://github.com/donejs/place-my-order/releases/download/v0.2.0/android-release-unsigned.apk" role="button">
@@ -89,7 +114,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-xs-6 col-sm-3">
                   <!-- be careful of JS classes here. -->
                     <div class="phase desktop">
                         <img src="static/img/thumb-desktop.svg">
@@ -112,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-xs-6 col-sm-3">
                     <div class="phase ontheweb">
                         <img src="static/img/thumb-on-the-web.svg">
                         <a class="btn" href="https://github.com/donejs/place-my-order/archive/v0.2.0.zip" role="button">
@@ -127,16 +152,16 @@
             <h3 class="light learn">Learn how to build this in our <a href="Guide.html">getting started guide!</a></h3>
             <h2 class="heavy better">More ways DoneJS is better for users:</h2>
             <p class="trail">
-              <a href="Guide.html#">iOS, Android, and Desktop Builds</a><span class="pipe-spacer"> | </span>
-              <a href="Guide.html#">Supports All Browsers, even IE8</a><span class="pipe-spacer"> | </span>
-              <a href="Guide.html#">Real Time Connected</a><span class="pipe-spacer"> | </span>
-              <a href="Guide.html#">Pretty URL’s with Pushstate</a>
+              <a href="/Features.html#section=section_iOS_Android_andDesktopBuilds">iOS, Android, and Desktop Builds</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_SupportsAllBrowsers_EvenIE8">Supports All Browsers, even IE8</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_RealTimeConnected">Real Time Connected</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_PrettyURL_swithPushstate">Pretty URL’s with Pushstate</a>
             </p>
         </div>
     </div>
     <div class="performance wrapper col-xs-12 hidden-md hidden-lg">
       <div class="lead-in">
-          <a id="performance"></a>
+          <a id="performance" style="vertical-align: top;"></a>
           <div class="title-padding">
               <h1><span class="light">Better</span> <span class="heavy">Performance</span></h1>
               <h3 class="lead"><span class="bold">DoneJS</span> is configured for maximum performance right out of the box.</h3>
@@ -154,10 +179,21 @@
             <img src="/static/img/donejs-mobile-guide-timeline.gif" srcset="/static/img/donejs-mobile-guide-timeline.gif 1x, /static/img/donejs-mobile-guide-timeline-2x.gif 2x">
         </div>
       </div>
+
+    </div>
+    <div class="performance-mobile-trail col-xs-12 hidden-md hidden-lg">
+      <h2 class="heavy">More ways DoneJS improves app performance:</h2>
+      <p class="trail">
+          <a href="/Features.html#section=section_ServerSideRendered">Server Side Rendered (Isomorphic)</a><span class="pipe-spacer"> | </span>
+          <a href="/Features.html#section=section_Progressiveloading">Progressive Loading</a><span class="pipe-spacer"> | </span>
+          <a href="/Features.html#section=section_Cachingandminimaldatarequests">Minimal Data Requests</a><span class="pipe-spacer"> | </span>
+          <a href="/Features.html#section=section_MinimalDOMupdates">Minimal DOM Updates</a><span class="pipe-spacer"> | </span>
+          <a href="/Features.html#section=section_WorkerThreadRendering">Worker Thread Rendering</a><span class="pipe-spacer"> | </span>
+          <a href="/Features.html#section=section_DeploytoaCDN">Deploy to a CDN</a>
+      </p>
     </div>
     <div class="performance wrapper hidden-xs hidden-sm">
         <div class="lead-in">
-            <a id="performance"></a>
             <div class="title-padding">
                 <h1><span class="light">Better</span> <span class="heavy">Performance</span></h1>
                 <h3 class="lead"><span class="bold">DoneJS</span> is configured for maximum performance right out of the box.</h3>
@@ -179,12 +215,12 @@
         </div>
         <h2 class="heavy">More ways DoneJS improves app performance:</h2>
         <p class="trail">
-            <a href="Guide.html#">Server Side Rendered (Isomorphic)</a> |
-            <a href="Guide.html#">Progressive Loading</a> |
-            <a href="Guide.html#">Minimal Data Requests</a> |
-            <a href="Guide.html#">Minimal DOM Updates</a> |
-            <a href="Guide.html#">Worker Thread Rendering</a> |
-            <a href="Guide.html#">Deploy to a CDN</a>
+            <a href="/Features.html#section=section_ServerSideRendered">Server Side Rendered (Isomorphic)</a><span class="pipe-spacer"> | </span>
+            <a href="/Features.html#section=section_Progressiveloading">Progressive Loading</a><span class="pipe-spacer"> | </span>
+            <a href="/Features.html#section=section_Cachingandminimaldatarequests">Minimal Data Requests</a><span class="pipe-spacer"> | </span>
+            <a href="/Features.html#section=section_MinimalDOMupdates">Minimal DOM Updates</a><span class="pipe-spacer"> | </span>
+            <a href="/Features.html#section=section_WorkerThreadRendering">Worker Thread Rendering</a><span class="pipe-spacer"> | </span>
+            <a href="/Features.html#section=section_DeploytoaCDN">Deploy to a CDN</a>
         </p>
     </div>
 
@@ -201,8 +237,8 @@
                         <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 background">
-                    <video preload="auto" poster="static/img/donejs-testing.jpg" class="img-responsive">
+                <div class="col-xs-12 col-sm-6 background video">
+                    <video tabindex="0" preload="auto" poster="static/img/donejs-testing.jpg" class="img-responsive">
                         <source src="static/img/donejs-testing.mov" type="video/mp4">
                         <source src="static/img/donejs-testing.mp4" type="video/mp4">
                         <source src="static/img/donejs-testing.ogg" type="video/mp4">
@@ -215,8 +251,8 @@
                 </div>
             </div>
             <div class="maintain-blocks">
-                <div class="col-xs-12 col-sm-6 background">
-                    <video preload="auto" poster="static/img/donejs-live-reload.jpg" class="img-responsive">
+                <div class="col-xs-12 col-sm-6 background video">
+                    <video tabindex="0" preload="auto" poster="static/img/donejs-live-reload.jpg" class="img-responsive">
                         <source src="static/img/donejs-live-reload.mov" type="video/mp4">
                         <source src="static/img/donejs-live-reload.mp4" type="video/mp4">
                         <source src="static/img/donejs-live-reload.ogg" type="video/mp4">
@@ -227,8 +263,8 @@
                         <p>DoneJS applications keep developers focused because they enable super fast updates when code changes, updating only the modules that need to change.</p>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 background">
-                    <video preload="auto" poster="static/img/donejs-npm-packaging-custom-elements.jpg" class="img-responsive">
+                <div class="col-xs-12 col-sm-6 background video">
+                    <video tabindex="0" preload="auto" poster="static/img/donejs-npm-packaging-custom-elements.jpg" class="img-responsive">
                         <source src="static/img/donejs-npm-packaging-custom-elements.mov" type="video/mp4">
                         <source src="static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4">
                         <source src="static/img/donejs-npm-packaging-custom-elements.ogg" type="video/mp4">
@@ -258,16 +294,16 @@
             </div>
             <h2>More ways DoneJS helps developers do their jobs</h2>
             <p class="trail">
-                <a href="Guide.html#">Unit and Functional Tests</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">Live reload</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">Documentation</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">NPM Packages</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">Continuous Integration and Deployment</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">ES6 Modules</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">Modlets</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">Custom HTML Elements</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">MVVM Reactive Architecture</a><span class="pipe-spacer"> | </span>
-                <a href="Guide.html#">Generators</a>
+                <a href="/Features.html#section=section_UnitandFunctionalTests">Unit and Functional Tests</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_HotModuleSwapping_LiveReload">Live reload</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_Documentation">Documentation</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_NPMPackages">NPM Packages</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_ContinuousIntegration_Deployment">Continuous Integration and Deployment</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_ES6Modules">ES6 Modules</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_Modlets">Modlets</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_CustomHTMLElements">Custom HTML Elements</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_MVVMReactive">MVVM Reactive Architecture</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_Generators">Generators</a>
             </p>
 
         </div>

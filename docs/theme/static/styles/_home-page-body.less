@@ -1,5 +1,8 @@
 body.donejs {
   background-color: #eae9e9;
+  .scroll-spy-title {
+    display: none;
+  }
 }
 .usability.wrapper, .maintainable.wrapper,  .performance.wrapper, .community.wrapper {
   text-align: center; /*most of the text on the page is centered, so make it the default*/
@@ -15,6 +18,75 @@ body.donejs {
   max-width: 1000px;
   display: block;
   margin: 0 auto;
+}
+.overview-nav {
+  position: absolute;
+  width: ~"calc( 100% - 60px )";
+  padding-top: 20px;
+  z-index: 5;
+  .overview-btn {
+    display: block;
+    width: 100%;
+    color: white;
+    background-image: url(../img/donejs-final_arrow-icon_1.svg);
+    background-size: 15px;
+    background-position: 90% 50%;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    border-radius: 2px;
+    font-weight: 300;
+    font-size: 18px;
+    text-decoration: none;
+    &:last-child {
+      margin: 0;
+    }
+  }
+  .usability-btn {
+    background-color: rgba(93,96,97,.8);
+  }
+  .performance-btn {
+    background-color: rgba(5,152,196,.8);
+  }
+  .maintainable-btn {
+    background-color: rgba(33,38,40,.8);
+  }
+  &.fixed {
+    position:fixed;
+    top: 36px;
+    left: 0;
+    width: 100%;
+    .fadeInUp;
+    .overview-btn.condensed {
+      width: 33.33333%;
+      display: inline-block;
+      float: left;
+      background-image: none;
+      font-size: 14px;
+      border-radius: 0;
+      position: relative;
+      .light {
+        display: none;
+      }
+      &.usability-btn.active,
+      &.performance-btn.active,
+      &.maintainable-btn.active {
+        background-color: rgba(0,0,0,.9);
+        &:after {
+          position: absolute;
+          content:'';
+          bottom:-10px;
+          left: 42%;
+          width: 0;
+          height: 0;
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-top: 10px solid rgba(0,0,0,.9);
+        }
+      }
+    }
+  }
+
 }
 
 .usability.wrapper {
@@ -72,6 +144,9 @@ body.donejs {
 
   .phase img {
     margin-bottom: 28px;
+    @media(max-width: @screen-xs-max){
+      max-width: none;
+    }
   }
 
   .img-wrap {
@@ -79,6 +154,9 @@ body.donejs {
     height: 28px;
     width: 30px;
     text-align: left;
+    @media(max-width: @screen-xs-max){
+      width: auto;
+    }
   }
   .btn {
     color: @white;
@@ -90,7 +168,11 @@ body.donejs {
     padding: 7px;
     padding-left: 24px;
     font-size: 16px;
-
+    @media(max-width: @screen-xs-max){
+      padding-left: 0;
+      padding-right: 0;
+      text-align: center;
+    }
     img {
       height: 14px;
       width: 14px;
@@ -289,9 +371,40 @@ body.donejs {
     }
   }
 }
+.performance-mobile-trail {
+  background: @logoColor;
+  text-align: center;
+
+  h2 {
+    color: #fff;
+  }
+  p.trail {
+    a {
+      color: #fff;
+      font-weight: 400;
+      @media(max-width: @screen-xs){
+        display: block;
+        width: 100%;
+        border-bottom:1px solid #ccc;
+        padding: 10px 0;
+        &:last-child {
+          border-bottom: 0;
+        }
+      }
+      &:hover {
+      text-decoration: underline;
+      }
+    }
+    @media(max-width: @screen-xs){
+      .pipe-spacer{
+        display: none;
+      }
+    }
+  }
+}
 .mobile-graph {
   position: relative;
-  height: 485px;
+  height: 465px;
   width: 100%;
   overflow-x: hidden;
   padding:0;
@@ -310,7 +423,7 @@ body.donejs {
     &:before{
       content: ' › ';
       position: absolute;
-      top: 39%;
+      top: 42.5%;
       left: 40%;
       opacity:1;
       animation: fadeInAndOut 2s infinite;
@@ -322,15 +435,19 @@ body.donejs {
   .graph-timeline-wrapper {
     overflow-y: hidden;
     overflow-x: scroll;
+    overflow: -moz-scrollbars-none;
     padding:0;
     width: 100%;
     position: absolute;
     z-index: 1;
     left: 0px;
     top:0;
+    &::-webkit-scrollbar {
+    display: none;
+    }
   }
   .graph-timeline{
-    width: 2530px;
+    width: 1800px;
     background-color: @logoColor;
     padding-left:86px
   }
@@ -339,11 +456,33 @@ body.donejs {
 .maintainable.wrapper {
   color: @white;
   background-color: @charcoal;
-
+  overflow: hidden;
   .background {
     background-color: @logoColor;
     border: 15px solid @charcoal;
     padding: 0;
+    position: relative;
+    @media(min-width: @screen-md){
+      &.video {
+        &:after {
+          content:'';
+          background-image: url("../img/play_circle_filled.svg");
+          background-size: cover;
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          top:30%;
+          right:47%;
+          opacity: .8;
+          z-index: 4;
+        }
+        &.playing {
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
     video {
       height: auto;
       overflow: hidden;

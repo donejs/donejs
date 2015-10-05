@@ -24,7 +24,7 @@ describe('DoneJS CLI tests', function() {
     });
 
     it('runScript and runCommand', function(done) {
-      utils.runScript('verify').then(function(child) {
+      utils.runScript('verify', ['testing', 'args']).then(function(child) {
           assert.equal(child.exitCode, 0, 'Exited successfully');
           done();
         })
@@ -43,6 +43,15 @@ describe('DoneJS CLI tests', function() {
             assert.ok(exists, 'Component file generate');
             done();
           });
+        })
+        .fail(fail);
+    });
+
+    it("get project root", function(done) {
+        var pathFromTest = path.join(process.cwd(), "node_modules");
+        utils.projectRoot().then(function(p) {
+            assert.equal(path.join(p, "node_modules"), pathFromTest);
+            done();
         })
         .fail(fail);
     });

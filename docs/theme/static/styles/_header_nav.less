@@ -11,7 +11,7 @@ header {
   }
   .nav {
     top: 13px;
-    @media(max-width: @screen-xs) {
+    @media(max-width: @screen-xs-max) {
       width: 100%;
       top:-2px;
       margin:0;
@@ -34,9 +34,11 @@ header {
     .mobile-menu-close {
       display: block;
       animation: fadeIn 1s 1;
-      font-size: 16px;
-      color: @logoColor;
-      font-weight: bold;
+      background-image: url("/static/img/icon-close--blue.svg");
+      width: 14px;
+      height: 14px;
+      top: 3px;
+      position: relative;
     }
     &.collapsed {
       border: 1px solid #ddd;
@@ -63,7 +65,7 @@ header {
     &.in {
       background: rgba(255,255,255,0.9);
     }
-    @media(max-width: @screen-xs){
+    @media(max-width: @screen-xs-max) {
       padding-top:10px;
         .bitovi-menu {
           border-top: 1px solid @gray-light;
@@ -181,11 +183,26 @@ header {
     }
 
   }
-  .guides-menu:hover .dropdown-menu {
-    display: block;
-    visibility: visible;
-  }
   .guides-menu {
+    &:hover {
+      .dropdown-menu {
+        display: block;
+        visibility: visible;
+      }
+    }
+    .dropdown-menu {
+      top: 41px;
+      &:before {
+        content:'';
+        display: block;
+        width: 100px;
+        height:20px;
+        background: transparent;
+        top:-20px;
+        left:0;
+        position: absolute;
+      }
+    }
     @media(max-width: @screen-xs){
       .dropdown-menu {
         display: block;
@@ -196,6 +213,9 @@ header {
         box-shadow: none;
         top:0;
         width: 100%;
+        &:before{
+          display: none;
+        }
         li, a {
           width: 100%;
           display: block;
