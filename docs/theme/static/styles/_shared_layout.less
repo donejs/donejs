@@ -37,7 +37,8 @@ body:not(.donejs):not(.Guides) {
 		}
 		.content.docs {
 			display: block!important;
-			margin: 0 0 0 350px;
+			margin: 0;
+			margin-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
 			padding: 0px;
 			background-color: transparent;
 			border: none;
