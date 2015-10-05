@@ -83,6 +83,7 @@ steal("./content_list.js",
                 $('.donejs-thumbs').stop().animate({opacity: 1}, 500);
             }
         );
+
         $('video').hover(
             function(el){
                 $(this).get(0).play();
@@ -103,6 +104,20 @@ steal("./content_list.js",
             }
         );
 
+
+
+
+        var isMobileSize = false;
+        var windowResize = function () {
+            var width = $( window ).width();
+            if ( width < 768 ) {
+                isMobileSize = true;
+            } else {
+                isMobileSize = false;
+            }
+        };
+        windowResize();
+        $( window ).resize( windowResize );
 
 
 
@@ -135,6 +150,28 @@ steal("./content_list.js",
             }
         });
 
+        var getSpyableElementFromPoint = (function () {
+            var lastElAtPoint, x, y;
+            var fromThese = $( "section.comment > *" );
+
+            var eachFn = function ( i, el ) {
+                var elPos = el.getBoundingClientRect();
+                if ( elPos.left <= x && x <= elPos.right && elPos.top <= y && y <= elPos.bottom ) {
+                    lastElAtPoint = el;
+                }
+            };
+
+            return function ( xArg, yArg ) {
+                lastElAtPoint = null;
+                x = xArg;
+                y = yArg;
+                fromThese.each( eachFn );
+                return lastElAtPoint;
+            };
+        })();
+
+        var scrollSpyCurrentH2 = $( "#scrollSpyCurrentH2" );
+        var scrollSpyCurrentH3 = $( "#scrollSpyCurrentH3" );
         var activeH2Li = $();
         var doJQCollapsing = $( "body.Guide, body.place-my-order" ).length ? true : false;
 
@@ -142,10 +179,34 @@ steal("./content_list.js",
             $( "section.contents ol ol" ).hide();
         }
 
-        $(window).scroll(function () {
-            var el = document.elementFromPoint( ~~( document.body.offsetWidth / 2 ), 250 );
-            el = $( el ).closest( "section.comment > *" );
+        // if isMobileSize
+        // $( ".scroll-spy-title .menu-indicator" ) menus-closed menus-open
+        // $( "section.contents" ) active
+
+        var scrollPosOnMenuOpen = -1;
+        $( ".scroll-spy-title" ).on( "click", function () {
+            var menu = $( "section.contents" );
+            if ( menu.is( ".active" ) ) {
+                menu.removeClass( "active" );
+                $( this ).find( ".menu-indicator" ).addClass( "menus-closed" ).removeClass( "menus-open" );
+                scrollPosOnMenuOpen = -1;
+            } else {
+                menu.addClass( "active" );
+                $( this ).find( ".menu-indicator" ).addClass( "menus-open" ).removeClass( "menus-closed" );
+                scrollPosOnMenuOpen = $( window ).scrollTop();
+            }
+        });
+
+        var lastH3 = null;
+        var bounceAnimTO = null;
+        $( window ).scroll(function () {
+            //if ( scrollPosOnMenuOpen > -1 ) {
+            //    $( 'html, body' ).scrollTop( scrollPosOnMenuOpen );
+            //    return;
+            //}
+            var el = $( getSpyableElementFromPoint( ~~( document.body.offsetWidth / 2 ), 250 ) );
             if ( !el.length ) {
+                //TODO check if above all h2's and: scrollSpyCurrentH2.html( "" ); scrollSpyCurrentH3.html( "" );
                 return;
             }
             var h2 = el[ 0 ].tagName.toLowerCase() === "h2" ? el : el.prevAll( "h2:first" );
@@ -157,6 +218,24 @@ steal("./content_list.js",
 
             var navToH2 = getNavToHeaderEl( h2 ).closest( "li" );
             var navToH3 = navToH2.next( "ol" ).find( "li" ).has( getNavToHeaderEl( h3 ) );
+
+            if ( navToH3.length ) {
+                scrollSpyCurrentH2.removeClass( "h2Only" );
+                scrollSpyCurrentH2.html( navToH2.find( "a" ).html() );
+                scrollSpyCurrentH3.html( navToH3.find( "a" ).html() );
+                if ( lastH3 !== navToH3[ 0 ] ) {
+                    lastH3 = navToH3[ 0 ];
+                    clearTimeout( bounceAnimTO );
+                    scrollSpyCurrentH3.addClass( "js-shrink-bounce" );
+                    bounceAnimTO = setTimeout( function () {
+                        scrollSpyCurrentH3.removeClass( "js-shrink-bounce" );
+                    }, 75 );
+                }
+            } else {
+                scrollSpyCurrentH2.addClass( "h2Only" );
+                scrollSpyCurrentH2.html( navToH2.find( "a" ).html() );
+                //scrollSpyCurrentH3.html( "" );
+            }
 
             $( "section.contents ol ol li.active" ).not( navToH3 ).removeClass( "active" );
             navToH3.addClass( "active" );
@@ -211,17 +290,6 @@ steal("./content_list.js",
 
 
 
-        var isMobileSize = false;
-        var windowResize = function () {
-            var width = $( window ).width();
-            if ( width < 768 ) {
-                isMobileSize = true;
-            } else {
-                isMobileSize = false;
-            }
-        };
-        windowResize();
-        $( window ).resize( windowResize );
 
         $( window ).scroll(function () {
             if ( !isMobileSize ) return;
