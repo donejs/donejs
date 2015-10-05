@@ -83,17 +83,18 @@ steal("./content_list.js",
                 $('.donejs-thumbs').stop().animate({opacity: 1}, 500);
             }
         );
-
-        $('video').hover(
-            function(el){
+        
+        (function () {
+            var enterEv = function(el){
                 $(this).get(0).play();
                 $(this).parent('div').addClass('playing');
-            },
-            function(el){
+            };
+            var leaveEv = function(el){
                 $(this).get(0).pause();
                 $(this).parent('div').removeClass('playing');
-            }
-        );
+            };
+            $('video').hover( enterEv, leaveEv ).focusin( enterEv ).focusout( leaveEv );
+        })();
 
         $( ".usability-dl-options" ).hover(
             function () {
@@ -103,6 +104,36 @@ steal("./content_list.js",
                 $( this ).prev( ".btn" ).removeClass( "active" );
             }
         );
+
+
+        $(function () {
+            // click drag to scroll homepage tablet timeline
+            // https://github.com/donejs/donejs/issues/151
+            var curDown = false;
+            var curXPos = 0;
+            var elScrollPos = 0;
+            var graphTimeline = $( ".graph-timeline-wrapper" );
+            if ( graphTimeline.length === 0 ) {
+                return;
+            }
+
+            $( window ).mousemove( function ( m ) {
+                if( curDown === true ) {
+                    graphTimeline.scrollLeft( elScrollPos + ( curXPos - m.pageX ) );
+                }
+            });
+
+            graphTimeline.mousedown( function ( m ) {
+                m.preventDefault();
+                curDown = true;
+                curXPos = m.pageX;
+                elScrollPos = graphTimeline.scrollLeft();
+            });
+
+            $( window ).mouseup( function () {
+                curDown = false;
+            });
+        });
 
 
 
