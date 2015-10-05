@@ -26,6 +26,9 @@ body:not(.donejs):not(.Guides) {
 		padding-bottom: 50px;
 		border-radius: 0px;
 		border-bottom: 1px solid #EEE;
+		@media(max-width: @screen-xs-max) {
+			width: 100%;
+		}
 
 		> .content {
 			display: block!important;
@@ -36,6 +39,12 @@ body:not(.donejs):not(.Guides) {
 			background-color: transparent;
 			border: none;
 			border-radius: 0px;
+			@media(max-width: @screen-xs-max) {
+				margin-right: auto;
+				width: 100%;
+				padding-left: 15px;
+				padding-right: 15px;
+			}
 		}
 	}
 
@@ -160,6 +169,10 @@ body:not(.donejs):not(.Guides) {
 			content: "\007C\00a0\00a0";
 			font-size: 0px;
 		}
+		@media(max-width: @screen-xs-max) {
+			word-wrap: break-word;
+			overflow: hidden;
+		}
 
 		@h2height: 222px;
 		h2 {
@@ -218,8 +231,159 @@ body:not(.donejs):not(.Guides) {
 		h2 + p + p + p {
 			font-weight: 400;
 			color: @grey;
-            font-size: 19px;
+      font-size: 19px;
+		}
+
+		iframe {
+			max-width: 100%;
 		}
 	}
 
+	@media(max-width: @screen-xs-max) {
+		.scroll-spy-title {
+			width: 100%;
+			position: fixed;
+			top: 55px;
+			background-color: @logoColor;
+			height: 50px;
+			z-index: 10;
+			padding-top: 5px;
+
+			.menu-indicator {
+				position: absolute;
+				left: 15px;
+				color: #FFFFFF;
+				font-size: 20px;
+				top: 50%;
+				-webkit-transform: translateY( -50% );
+				transform: translateY( -50% );
+			}
+			.menus-closed:before {
+				background-image: url("/static/img/icon-guide-menu.svg");
+				width: 17px;
+				height: 11px;
+			}
+			.menus-open:before {
+				background-image: url("/static/img/icon-close.svg");
+				width: 14px;
+				height: 14px;
+				.fadeInUp;
+			}
+			.menus-closed:before,
+			.menus-open:before {
+				cursor: pointer;
+				display: inline-block;
+				content: " ";
+			}
+			#scrollSpyCurrentH2 {
+				color: #FFFFFF;
+				white-space: nowrap;
+				font-size: 18px;
+				font-weight: 500;
+				text-align: center;
+				margin-top: 0px;
+				transition: margin-top 0.25s ease-out;
+			}
+			#scrollSpyCurrentH2.h2Only {
+				margin-top: 10px;
+			}
+			#scrollSpyCurrentH3 {
+				color: #FFFFFF;
+				white-space: nowrap;
+				font-size: 14px;
+				font-weight: 300;
+				text-align: center;
+				margin-top: -6px;
+				opacity: 1;
+				text-indent: 0px;
+				transition: opacity 0.25s ease-out, text-indent 0.25s ease-out, font-size 0.075s ease-out;
+			}
+			.h2Only + #scrollSpyCurrentH3 {
+				opacity: 0;
+				text-indent: 250px;
+			}
+			.js-shrink-bounce {
+				font-size: 0.8 * 18px!important;
+				opacity: 0!important;
+			}
+		}
+		section.contents {
+			display: none;
+			left: 0px;
+			max-height: ~"calc( 100% - 100px )";
+			overflow-y: scroll; /* has to be scroll, not auto */
+			-webkit-overflow-scrolling: touch;
+			&.active {
+				display: block;
+				width: 100%;
+			}
+			a {
+				display: block;
+				text-decoration: none;
+			}
+			> ol{
+				padding:0;
+				text-indent: 15px;
+				&:not(.linenums) {
+					margin:5px 0 0 0;
+				}
+				> li > a {
+					font-size: 16px;
+				}
+				> ol {
+					> li {
+						border-bottom: 1px solid #9fc2d0;
+						margin: 0 10px;
+						padding:0;
+						&:first-child {
+							margin-top: 10px;
+						}
+						&:last-child {
+							margin-bottom: 10px;
+							border-bottom: 0;
+						}
+						> a {
+							padding: 7px 20px;
+							color: #fff;
+						}
+						&.active  {
+							border:0;
+						}
+					}
+				}
+			}
+			> ol > li {
+				position: relative;
+				background-color: #3b6b7f;
+				margin-bottom:0;
+				padding: 6px 0;
+				border-top:1px solid #fff;
+				background-image: url("/static/img/icon-plus.svg");
+				background-size: 11px 11px;
+				background-position: 97% 50%;
+				background-repeat: no-repeat;
+
+				&.active {
+					background-image: url("/static/img/icon-collapse.svg");
+					background-size: 11px 11px;
+					background-position: 97% 50%;
+					background-repeat: no-repeat;
+				}
+				&.active {
+					border-bottom:0;
+				}
+			}
+			> ol > li + ol {
+				max-height: 0px;
+				overflow: hidden;
+				transition: max-height 0.25s ease-out;
+				&:not(.linenums) {
+					margin:0;
+				}
+			}
+			> ol > li.active + ol {
+				max-height: 750px;
+			}
+		}
+	}
 }
