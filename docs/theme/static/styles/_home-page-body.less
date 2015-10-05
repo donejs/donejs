@@ -462,26 +462,27 @@ body.donejs {
     border: 15px solid @charcoal;
     padding: 0;
     position: relative;
-    &.video {
-      &:after {
-        content:'';
-        background-image: url("../img/play_circle_filled.svg");
-        background-size: cover;
-        width: 40px;
-        height: 40px;
-        position: absolute;
-        top:25%;
-        right:47%;
-        opacity: .8;
-        z-index: 4;
-      }
-      &.playing {
+    @media(min-width: @screen-md){
+      &.video {
         &:after {
-          display: none;
+          content:'';
+          background-image: url("../img/play_circle_filled.svg");
+          background-size: cover;
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          top:30%;
+          right:47%;
+          opacity: .8;
+          z-index: 4;
+        }
+        &.playing {
+          &:after {
+            display: none;
+          }
         }
       }
     }
-
     video {
       height: auto;
       overflow: hidden;
