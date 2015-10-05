@@ -4,30 +4,30 @@ body:not(.donejs):not(.Guides) {
 	background-color: #FCFEFD;
 	color: #000000;
 
-  a {
-      font-weight: 900;
-      color: @logoColor;
-  }
+	a {
+		font-weight: 900;
+		color: @logoColor;
+	}
 
 	pre {
 		code.prettyprint {
 			word-wrap: break-word;
 		}
 	}
-  iframe {
-    @media(max-width: @screen-xs){
-      max-width: 100%;
-    }
-  }
+	iframe {
+		@media(max-width: @screen-xs){
+			max-width: 100%;
+		}
+	}
 	> .container-fluid {
 		display: block;
-    margin: 0 auto 50px;
-    padding: 0 0 50px;
-    border-radius: 0;
-    border-bottom: 1px solid #EEE;
-    @media(min-width: @screen-sm){
-      width: 100%;
-    }
+		margin: 0 auto 50px;
+		padding: 0 0 50px;
+		border-radius: 0;
+		border-bottom: 1px solid #EEE;
+		@media(min-width: @screen-sm){
+			width: 100%;
+		}
 		@media(max-width: @screen-xs-max) {
 			width: 100%;
 		}
@@ -43,10 +43,10 @@ body:not(.donejs):not(.Guides) {
 			background-color: transparent;
 			border: none;
 			border-radius: 0px;
-      @media(min-width:@screen-lg){
-        width: @contentWidth;
+			@media(min-width:@screen-lg){
+				width: @contentWidth;
 				position: initial;
-      }
+			}
 			@media(max-width: @screen-md-max) {
 				margin-right: auto;
 				width: 100%;
@@ -56,22 +56,22 @@ body:not(.donejs):not(.Guides) {
 			}
 		}
 	}
-  .content.docs,
-  .container.api {
-    @media(max-width: @screen-md-max){
-      width: 100%;
-    }
-  }
-  .container.api>* {
-    @media(max-width: @screen-xs){
-      display: block !important;
-    }
-  }
-  .comment {
-    @media(max-width: @screen-xs){
-      word-wrap: break-word;
-    }
-  }
+	.content.docs,
+	.container.api {
+		@media(max-width: @screen-md-max){
+			width: 100%;
+		}
+	}
+	.container.api>* {
+		@media(max-width: @screen-xs){
+			display: block !important;
+		}
+	}
+	.comment {
+		@media(max-width: @screen-xs){
+			word-wrap: break-word;
+		}
+	}
 	/* left navigation */
 	section.contents {
 		position: fixed;
@@ -108,7 +108,7 @@ body:not(.donejs):not(.Guides) {
 				a {
 					color: #FFFFFF;
 					font-weight: 700;
-          white-space: normal;
+					white-space: normal;
 				}
 			}
 
@@ -117,11 +117,11 @@ body:not(.donejs):not(.Guides) {
 
 				> li a {
 					font-size: 13px;
-                    padding: 3px 5px 4px 13px;
+										padding: 3px 5px 4px 13px;
 					display: block;
 					font-weight: 400;
 					color: lighten(@logoColor, 35%);
-                    line-height: 15px;
+										line-height: 15px;
 				}
 				> li:hover a,
 				> li.active a {
@@ -257,7 +257,7 @@ body:not(.donejs):not(.Guides) {
 			padding-top: 50px;
 		}
 
- 		h2 + * {
+		h2 + * {
 			padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
 			@media(max-width: @screen-md-max){
 				padding-top: @h2height !important;
@@ -275,7 +275,7 @@ body:not(.donejs):not(.Guides) {
 		h2 + p + p + p {
 			font-weight: 400;
 			color: @grey;
-      font-size: 19px;
+			font-size: 19px;
 		}
 
 		iframe {
