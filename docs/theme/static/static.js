@@ -83,16 +83,17 @@ steal("./content_list.js",
                 $('.donejs-thumbs').stop().animate({opacity: 1}, 500);
             }
         );
-        $('video').hover(
-            function(el){
+        (function () {
+            var enterEv = function(el){
                 $(this).get(0).play();
                 $(this).parent('div').addClass('playing');
-            },
-            function(el){
+            };
+            var leaveEv = function(el){
                 $(this).get(0).pause();
                 $(this).parent('div').removeClass('playing');
-            }
-        );
+            };
+            $('video').hover( enterEv, leaveEv ).focusin( enterEv ).focusout( leaveEv );
+        })();
 
         $( ".usability-dl-options" ).hover(
             function () {
