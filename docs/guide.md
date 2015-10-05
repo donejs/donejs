@@ -2,24 +2,19 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description In this guide you will create [chat.donejs.com](http://chat.donejs.com), a simple real-time chat built with [DoneJS features](Features.html).
+@description In this guide we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 
 ![DoneJS chat](static/img/donejs-chat.png)
 
-After installing DoneJS and generating the application we will learn how to add Bootstrap and a tabs widget to the homepage, create custom elements and set up basic routing between two pages.
+In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the home- and the chat messages page. After that we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected) to the messages pages.
 
-We will learn how to add a model that connects to a RESTful API and also how to make the application real-time. Finally we will build the application into optimized production bundles, deploy the static assets to a CDN and also run it as a mobile and desktop application.
-
+In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). Finally we will also create a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
 
 @body
 
 ## Setup
 
-In this section we will install DoneJS, generate a new application and start a development server.
-
-### Install donejs
-
-To get started, let's install the DoneJS command line utility globally:
+In this section we will install DoneJS, generate a new application and start a development server. To get started, let's install the DoneJS command line utility globally:
 
 ```
 npm install -g donejs
@@ -31,7 +26,7 @@ Then we create a new DoneJS application called `donejs-chat`:
 donejs init donejs-chat
 ```
 
-The initialization process will ask questions like the name of your application the source folder etc. which we can answer with the default settings by hitting enter. This will install all of DoneJS dependencies, including the following:
+This will create a new folder called `donejs-chat` and in it generate our application. The initialization process will ask questions like the name of your application the source folder etc. which we can all answer with the default settings by hitting enter. This will install of DoneJS dependencies, including the following:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
@@ -42,35 +37,36 @@ The initialization process will ask questions like the name of your application 
 - [Testee](https://github.com/bitovi/testee) - JavaScript Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
+## Adding Bootstrap
+
+DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add the [Bootstrap](http://getbootstrap.com/) styles to the page and and see DoneJS [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
+
 ### Development mode
 
-DoneJS comes with its own development server which hosts your development files and automatically [renders](ssr-feature) the application on the server. Development mode will also start a [live-reload](feature/) server that automatically reloads files in the browser as they change. First, let's go into the `donejs-chat` application directory:
+DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode will also start the [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) server that automatically reloads files in the browser as they change. First, let's go into the `donejs-chat` application directory:
 
 ```
 cd donejs-chat
 ```
 
-Then we can start the development and live-reload server by running:
+Then we can development mode by running:
 
 ```
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. This server needs to stay open at all times so we recommend opening a new terminal window for the other commands.
+The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application showing a default homepage. This server needs to stay open at all times so we recommend opening a new terminal window for the other commands.
 
-## Importing other projects
 
-DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add the [Bootstrap](http://getbootstrap.com/) styles to the page and also use the [bit-tabs](https://github.com/bitovi-components/bit-tabs) widget on the homepage.
+### Adding to the page
 
-### Adding Bootstrap
-
-Since Bootstrap is [available on NPM](https://www.npmjs.com/package/bootstrap) we can install and save it as a dependency of our application like this:
+Now we can install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
 ```
 npm install bootstrap --save
 ```
 
-Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap.less!" />` which tells DoneJS to import the main Bootstrap LESS file and also add some HTML that uses the Bootstrap styles:
+To see live-reload in action, let's update the main template to import the main Bootstrap LESS file and also add some HTML that uses those styles. `src/index.stache` then looks like this:
 
 ```html
 <html>
@@ -82,13 +78,14 @@ Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="donejs-chat/styles.less!" />
-    <can-import from="donejs-chat/app" as="viewModel" />
+    <can-import from="donejs-chat/app" export-as="viewModel" />
 
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
           <h1 class="page-header text-center">
-            <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
+            <img src="http://donejs.com/static/img/donejs-logo-white.svg"
+                alt="DoneJS logo" style="width: 100%;" />
             <br>Chat
           </h1>
         </div>
@@ -99,7 +96,8 @@ Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="/node_modules/steal/steal.production.js"
+            main="donejs-chat/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -109,91 +107,21 @@ Let's update `src/index.stache` with `<can-import from="bootstrap/less/bootstrap
 </html>
 ```
 
-If you have the page still open in the browser you should already see the updated styles and content.
+If you have a browser window open at [http://localhost:8080/](localhost:8080) you should already see the updated styles and content and any change you make will show up as soon as you save it.
 
-### Tabs widget
+## Routing and components
 
-The next module we want to import is [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
-
-```
-npm install bit-tabs --save
-```
-
-We will import the tabs custom elements without the styles from `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup using those tabs. `src/index.stache` then looks like this:
-
-```html
-<html>
-  <head>
-    <title>{{title}}</title>
-    {{asset "css"}}
-    {{asset "html5shiv"}}
-  </head>
-  <body>
-    <can-import from="bootstrap/less/bootstrap.less!" />
-    <can-import from="donejs-chat/styles.less!" />
-    <can-import from="donejs-chat/app" as="viewModel" />
-    <can-import from="bit-tabs/unstyled" />
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <h1 class="page-header text-center">
-            <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
-            <br>Chat
-          </h1>
-
-          <bit-tabs tabs-class="nav nav-tabs">
-            <bit-panel title="CanJS">
-              CanJS provides the MV*
-            </bit-panel>
-            <bit-panel title="StealJS">
-              StealJS provides the infrastructure.
-            </bit-panel>
-          </bit-tabs>
-        </div>
-      </div>
-    </div>
-
-    {{asset "inline-cache"}}
-
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
-  </body>
-</html>
-```
-
-To add a little more whitespace we can update `src/styles.less` with:
-
-```css
-bit-panel {
-  display: block;
-  padding: 10px;
-
-  &:empty {
-    display: none;
-  }
-}
-```
-
-## Custom elements and routing
-
-In this part we will create our own custom elements similar to the `bit-tabs` we just used. One for the homepage and another to display the chat messages. Then we will create routes to toggle between those two pages.
+In this part we will create our own custom HTML elements. One for the homepage and another to display the chat messages. Then we will create routes to toggle between those two pages.
 
 ### Generate custom elements
 
-The homepage custom element (with the HTML tag name `chat-home`) won't be very big so we can put everything into a single file. To generate it we can run:
+The homepage custom element (with the HTML tag name `chat-home`) won't be very big so we can put everything into a single `.component` file. To generate it we can run:
 
 ```
 donejs generate component home.component chat-home
 ```
 
-We can now copy most of the content from the homepage into this component so that `src/home.component` looks like this:
+And then move the content from the homepage into this component so that `src/home.component` looks like this:
 
 ```html
 <can-component tag="chat-home">
@@ -203,20 +131,11 @@ We can now copy most of the content from the homepage into this component so tha
     h1.page-header { margin-top: 0; }
   </style>
   <template>
-    <can-import from="bit-tabs/unstyled" />
     <h1 class="page-header text-center">
-      <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
+      <img src="http://donejs.com/static/img/donejs-logo-white.svg"
+        alt="DoneJS logo" style="width: 100%;" />
       <br>Chat
     </h1>
-
-    <bit-tabs tabs-class="nav nav-tabs">
-      <bit-panel title="CanJS">
-        CanJS provides the MV*
-      </bit-panel>
-      <bit-panel title="StealJS">
-        StealJS provides the infrastructure.
-      </bit-panel>
-    </bit-tabs>
   </template>
 </can-component>
 ```
@@ -233,7 +152,7 @@ And update `src/index.stache` to dynamically load and initialize this component 
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="donejs-chat/styles.less!" />
-    <can-import from="donejs-chat/app" as="viewModel" />
+    <can-import from="donejs-chat/app" export-as="viewModel" />
 
     <div class="container">
       <div class="row">
@@ -263,13 +182,13 @@ And update `src/index.stache` to dynamically load and initialize this component 
 </html>
 ```
 
-The messages component (with the tag `chat-messages`) will be a little more complex which is why we generate it into several files according to the modlet pattern.
+The messages component (with the tag `chat-messages`) will be a little more complex which is why we generate it using [modlet file pattern](Features.html#section=section_Modlets).
 
 ```
 donejs generate component messages chat-messages
 ```
 
-Later we will update those files with the chat messages functionality.
+Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
@@ -287,20 +206,10 @@ First, let's update `src/home.component` with a link to the chat messages page:
     h1.page-header { margin-top: 0; }
   </style>
   <template>
-    <can-import from="bit-tabs/unstyled" />
     <h1 class="page-header text-center">
       <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
       <br>Chat
     </h1>
-
-    <bit-tabs tabs-class="nav nav-tabs">
-      <bit-panel title="CanJS">
-        CanJS provides the MV*
-      </bit-panel>
-      <bit-panel title="StealJS">
-        StealJS provides the infrastructure.
-      </bit-panel>
-    </bit-tabs>
 
     <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">Start chat</a>
   </template>
@@ -353,7 +262,7 @@ Finally we can glue both components together as separate pages in `src/index.sta
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />
     <can-import from="donejs-chat/styles.less!" />
-    <can-import from="donejs-chat/app" as="viewModel" />
+    <can-import from="donejs-chat/app" export-as="viewModel" />
 
     <div class="container">
       <div class="row">
@@ -395,9 +304,69 @@ Finally we can glue both components together as separate pages in `src/index.sta
 
 Now we dynamically load both components while navigating between the home and messages page.
 
-## Message connection
 
-In this part we will create a messages model that connects to a remote RESTful API and then make the message list receive real-time updates from other clients.
+## Homepage
+
+Now that we can navigate between pages we can finish implementing their functionality. Let's start with the homepage.
+
+
+### Installing bit-tabs
+
+On the homepage we will just add and load [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
+
+```
+npm install bit-tabs --save
+```
+
+### Update the homepage
+
+Then we import the tabs custom elements without the styles from `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup using those tabs. `src/home.component` then looks like this:
+
+```html
+<can-component tag="chat-home">
+  <style type="less">
+    display: block;
+
+    h1.page-header { margin-top: 0; }
+  </style>
+  <template>
+    <can-import from="bit-tabs/unstyled" />
+    <h1 class="page-header text-center">
+      <img src="http://donejs.com/static/img/donejs-logo-white.svg"
+        alt="DoneJS logo" style="width: 100%;" />
+      <br>Chat
+    </h1>
+
+    <bit-tabs tabs-class="nav nav-tabs">
+      <bit-panel title="CanJS">
+        CanJS provides the MV*
+      </bit-panel>
+      <bit-panel title="StealJS">
+        StealJS provides the infrastructure.
+      </bit-panel>
+    </bit-tabs>
+
+    <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">Start chat</a>
+  </template>
+</can-component>
+```
+
+To add a little more whitespace we can update `src/styles.less` with:
+
+```css
+bit-panel {
+  display: block;
+  padding: 10px;
+
+  &:empty {
+    display: none;
+  }
+}
+```
+
+## Messages page
+
+For the messages page we will create a messages model that connects to a RESTful API and then make the message list receive real-time updates from other clients.
 
 ### Generate Message model
 
@@ -458,10 +427,12 @@ Now can add the form to create new messages. The form simply binds the `name` an
 </message-model>
 <div class="row">
   <div class="col-sm-3">
-    <input type="text" class="form-control" id="name" placeholder="Your name" {($value)}="name">
+    <input type="text" class="form-control" id="name"
+        placeholder="Your name" {($value)}="name">
   </div>
   <div class="col-sm-9">
-    <input type="text" class="form-control" id="message" placeholder="Your message" {($value)}="message" ($enter)="send">
+    <input type="text" class="form-control" id="message"
+        placeholder="Your message" {($value)}="message" ($enter)="send">
   </div>
 </div>
 ```
