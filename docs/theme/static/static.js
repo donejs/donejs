@@ -253,7 +253,8 @@ steal("./content_list.js",
             //}
             var el = $( getSpyableElementFromPoint( ~~( document.body.offsetWidth / 2 ), 250 ) );
             if ( !el.length ) {
-                if ( $( window ).scrollTop() + 250 < $( ".comment h2:first-of-type" ).offset().top ) {
+                var temp = $( ".comment h2:first-of-type" );
+                if ( temp.length && $( window ).scrollTop() + 250 < temp.offset().top ) {
                     scrollSpyCurrentH2.addClass( "h2Only" );
                     scrollSpyCurrentH2.html( "Table of Contents" );
                     scrollSpyCurrentH3.html( "" );
