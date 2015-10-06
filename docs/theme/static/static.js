@@ -233,10 +233,12 @@ steal("./content_list.js",
             var menu = $( "section.contents" );
             if ( menu.is( ".active" ) ) {
                 menu.removeClass( "active" );
+                document.body.style.overflow = "";
                 $( this ).find( ".menu-indicator" ).addClass( "menus-closed" ).removeClass( "menus-open" );
                 scrollPosOnMenuOpen = -1;
             } else {
                 menu.addClass( "active" );
+                document.body.style.overflow = "hidden";
                 $( this ).find( ".menu-indicator" ).addClass( "menus-open" ).removeClass( "menus-closed" );
                 scrollPosOnMenuOpen = $( window ).scrollTop();
             }
@@ -312,6 +314,9 @@ steal("./content_list.js",
                 }
                 if ( thisLi.is( "body.Features ol > ol:first-of-type > li:first-child" ) ) {
                     offset = 222 - 65;
+                }
+                if ( $( "section.contents" ).is( ".active" ) && thisLi.is( "ol > ol > li" ) ) {
+                    $( ".scroll-spy-title" ).click();
                 }
                 $( 'html, body' ).animate({
                     scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset

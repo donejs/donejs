@@ -50,8 +50,8 @@ body:not(.donejs) {
 			@media(max-width: @screen-md-max) {
 				margin-right: auto;
 				width: 100%;
-				padding-left: 40px;
-				padding-right: 40px;
+				padding-left: 20px;
+				padding-right: 20px;
 				margin:50px 0;
 			}
 		}
@@ -232,7 +232,7 @@ body:not(.donejs) {
 				line-height:1;
 				font-size: 35px;
 				height: auto;
-				padding: 60px 40px;
+				padding: 60px 20px;
 			}
 			&:before {
 				content: "";
@@ -332,8 +332,15 @@ body:not(.donejs) {
 				font-size: 18px;
 				font-weight: 500;
 				text-align: center;
-				margin-top: 0px;
+				margin: 0 auto;
 				transition: margin-top 0.25s ease-out;
+				max-width: 235px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				@media(min-width: @screen-md){
+					max-width: 600px
+				}
 			}
 			#scrollSpyCurrentH2.h2Only {
 				margin-top: 10px;
@@ -374,12 +381,12 @@ body:not(.donejs) {
 			}
 			> ol{
 				padding:0;
-				text-indent: 15px;
 				&:not(.linenums) {
 					margin:5px 0 0 0 !important;
 				}
 				> li > a {
 					font-size: 16px;
+					padding: 0 50px 0 15px;
 				}
 				> ol {
 					> li {
