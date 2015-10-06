@@ -1,53 +1,77 @@
-body:not(.donejs):not(.Guides) {
+body:not(.donejs) {
 	/* @containerWidth @contentWidth defined in ./variables.less near the bottom */
 
 	background-color: #FCFEFD;
 	color: #000000;
 
-    a {
-        font-weight: 900;
-        color: @logoColor;
-    }
+	a {
+		font-weight: 900;
+		color: @logoColor;
+	}
 
 	pre {
 		code.prettyprint {
 			word-wrap: break-word;
 		}
 	}
-
-	> .container {
+	iframe {
+		@media(max-width: @screen-xs){
+			max-width: 100%;
+		}
+	}
+	> .container-fluid {
 		display: block;
-		width: 1000px;
-		margin: 0px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50px;
-		padding: 0px;
-		padding-bottom: 50px;
-		border-radius: 0px;
+		margin: 0 auto 50px;
+		padding: 0 15px 50px 15px;
+		border-radius: 0;
 		border-bottom: 1px solid #EEE;
+		@media(min-width: @screen-sm){
+			width: 100%;
+		}
 		@media(max-width: @screen-xs-max) {
 			width: 100%;
 		}
-
-		> .content {
+		@media(min-width: @screen-lg){
+			width: 1000px;
+			table-layout: fixed;
+		}
+		.content.docs {
 			display: block!important;
-			margin: 0px;
-			margin-left: auto;
+			margin: 0;
+			margin-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
 			padding: 0px;
-			width: @contentWidth;
 			background-color: transparent;
 			border: none;
 			border-radius: 0px;
-			@media(max-width: @screen-xs-max) {
+			@media(min-width:@screen-lg){
+				width: @contentWidth;
+				position: initial;
+			}
+			@media(max-width: @screen-md-max) {
 				margin-right: auto;
 				width: 100%;
-				padding-left: 15px;
-				padding-right: 15px;
+				padding-left: 40px;
+				padding-right: 40px;
+				margin:50px 0;
 			}
 		}
 	}
-
+	.content.docs,
+	.container.api {
+		@media(max-width: @screen-md-max){
+			width: 100%;
+		}
+	}
+	.container.api>* {
+		@media(max-width: @screen-xs){
+			display: block !important;
+		}
+	}
+	.comment {
+		@media(max-width: @screen-xs){
+			word-wrap: break-word;
+		}
+	}
 	/* left navigation */
 	section.contents {
 		position: fixed;
@@ -79,14 +103,19 @@ body:not(.donejs):not(.Guides) {
 
 			> li {
 				font-weight: 900;
-				font-size: 20px;
+				font-size: 15px;
 				margin-bottom: 5px;
 				padding-right: 5px;
+				line-height: 18px;
+				padding-top: 6px;
 
 				a {
 					color: #FFFFFF;
-					font-weight: 700;
-          white-space: normal;
+					font-weight: 400;
+					white-space: normal;
+				}
+				&.active a {
+					font-weight: 900;
 				}
 			}
 
@@ -95,11 +124,11 @@ body:not(.donejs):not(.Guides) {
 
 				> li a {
 					font-size: 13px;
-                    padding: 3px 5px 4px 13px;
+										padding: 3px 5px 4px 13px;
 					display: block;
 					font-weight: 400;
 					color: lighten(@logoColor, 35%);
-                    line-height: 15px;
+										line-height: 15px;
 				}
 				> li:hover a,
 				> li.active a {
@@ -126,10 +155,11 @@ body:not(.donejs):not(.Guides) {
 
 	section.title .heading {
 		@h1height: 222px;
-
 		position: initial;
 		height: @h1height;
-
+		@media(max-width: @screen-xs-max){
+				height: 160px;
+		}
 		h1 + ul.tags {
 			display: none;
 		}
@@ -149,6 +179,14 @@ body:not(.donejs):not(.Guides) {
 			background-image: url( "/static/img/background.jpg" );
 			margin-bottom: 40px;
 			max-width: initial;
+			@media(max-width: @screen-xs-max){
+				text-align: center;
+				font-size: 400%;
+				line-height: 1;
+				height: auto;
+				padding: 40px 20px;
+				word-wrap: normal;
+			}
 
 			&:before {
 				content: "";
@@ -175,23 +213,27 @@ body:not(.donejs):not(.Guides) {
 			word-wrap: break-word;
 			overflow: hidden;
 		}
-
 		@h2height: 222px;
 		h2 {
-			display: block;
 			position: absolute;
 			left: 0px;
 			right: 0px;
 			padding-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
 			padding-top: 70px;
-			height: @h2height;
+			display: block;
 			background-color: @charcoal;
 			color: @white;
-			z-index: 1;
 			font-size: 50px;
 			background-image: url( "/static/img/background.jpg" );
 			margin-top: 40px;
-
+			height: @h2height;
+			z-index: 1;
+			@media(max-width: @screen-md){
+				line-height:1;
+				font-size: 35px;
+				height: auto;
+				padding: 60px 40px;
+			}
 			&:before {
 				content: "";
 				display: block;
@@ -222,18 +264,25 @@ body:not(.donejs):not(.Guides) {
 			padding-top: 50px;
 		}
 
- 		h2 + * {
+		h2 + * {
 			padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
+			@media(max-width: @screen-sm-max){
+				padding-top: 205px !important;
+			}
+
 		}
 		h2 + p {
 			padding-top: @h2height + 100px!important;
+			@media(max-width: @screen-sm-max){
+				padding-top: 255px !important;
+			}
 		}
 		h2 + p,
 		h2 + p + p,
 		h2 + p + p + p {
 			font-weight: 400;
 			color: @grey;
-      font-size: 19px;
+			font-size: 19px;
 		}
 
 		iframe {
@@ -241,7 +290,7 @@ body:not(.donejs):not(.Guides) {
 		}
 	}
 
-	@media(max-width: @screen-xs-max) {
+	@media(max-width: @screen-md-max) {
 		.scroll-spy-title {
 			width: 100%;
 			position: fixed;
@@ -327,7 +376,7 @@ body:not(.donejs):not(.Guides) {
 				padding:0;
 				text-indent: 15px;
 				&:not(.linenums) {
-					margin:5px 0 0 0;
+					margin:5px 0 0 0 !important;
 				}
 				> li > a {
 					font-size: 16px;
@@ -358,7 +407,7 @@ body:not(.donejs):not(.Guides) {
 				position: relative;
 				background-color: #3b6b7f;
 				margin-bottom:0;
-				padding: 6px 0;
+				padding: 10px 0;
 				border-top:1px solid #fff;
 				background-image: url("/static/img/icon-plus.svg");
 				background-size: 11px 11px;
@@ -380,7 +429,7 @@ body:not(.donejs):not(.Guides) {
 				overflow: hidden;
 				transition: max-height 0.25s ease-out;
 				&:not(.linenums) {
-					margin:0;
+					margin:0 !important;
 				}
 			}
 			> ol > li.active + ol {
