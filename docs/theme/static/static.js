@@ -313,6 +313,9 @@ steal("./content_list.js",
                 if ( thisLi.is( "body.Features ol > ol:first-of-type > li:first-child" ) ) {
                     offset = 222 - 65;
                 }
+                if ( $( "section.contents" ).is( ".active" ) && thisLi.is( "ol > ol > li" ) ) {
+                    $( ".scroll-spy-title" ).click();
+                }
                 $( 'html, body' ).animate({
                     scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
                 }, 500);
