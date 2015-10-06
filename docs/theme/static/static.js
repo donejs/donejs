@@ -233,10 +233,12 @@ steal("./content_list.js",
             var menu = $( "section.contents" );
             if ( menu.is( ".active" ) ) {
                 menu.removeClass( "active" );
+                document.body.style.overflow = "";
                 $( this ).find( ".menu-indicator" ).addClass( "menus-closed" ).removeClass( "menus-open" );
                 scrollPosOnMenuOpen = -1;
             } else {
                 menu.addClass( "active" );
+                document.body.style.overflow = "hidden";
                 $( this ).find( ".menu-indicator" ).addClass( "menus-open" ).removeClass( "menus-closed" );
                 scrollPosOnMenuOpen = $( window ).scrollTop();
             }
