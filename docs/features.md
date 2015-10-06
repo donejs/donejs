@@ -394,10 +394,60 @@ in your terminal to start using live-reload!
 
 ### Generators
 
-DoneJS comes with generators that eliminate the boilerplate in creating new components.
+Hit the ground running ( in the right direction ) with DoneJS's generators. They'll set everything up to be written the right way and eliminate the boilerplate in getting started and adding components.
 
-If you need a new simple component, just run this in your terminal:
+#### donejs init
 
+Hello World! This will get you all set up, install the DoneJS projects, and take care of all the little details.
+
+Pop open a terminal in your project's folder and run
+```
+donejs init
+```
+Give your project an name and answer the other basic info prompts. That's it! Ready to roll!
+
+```
+create package.json
+create readme.md
+create documentjs.json
+create .gitignore
+create build.js
+create production.html
+create development.html
+create src/test.html
+create src/app.js
+create src/index.stache
+create src/index.md
+create src/styles.less
+create src/test/test.js
+create src/test/functional.js
+create src/models/fixtures/fixtures.js
+create src/models/test.js
+```
+
+#### donejs generate component
+
+And once you're ready to work on a component, DoneJS will get you started quickly!
+
+```
+donejs generate component suchwin such-win
+```
+
+which gives you all of this organized as a modlet!
+
+```
+create src/suchwin/suchwin.html
+create src/suchwin/suchwin.js
+create src/suchwin/suchwin.md
+create src/suchwin/suchwin.less
+create src/suchwin/suchwin.stache
+create src/suchwin/suchwin_test.js
+create src/suchwin/test.html
+```
+
+#### There are other generators too!
+
+For simple components:
 ```
 donejs generate component soeasy.component so-easy
 ```
@@ -439,83 +489,6 @@ that you can import into your templates!
   </can-import>
 ```
 
-Or, if your component isn't so simple, go all out and generate the modlet:
-
-```
-donejs generate component suchwin such-win
-```
-
-which does all of this:
-
-```
-create src/suchwin/suchwin.html
-
-  <script type="text/stache" can-autorender>
-    <can-import from="src/suchwin/" />
-    <such-win></such-win>
-  </script>
-  <script src="../../node_modules/steal/steal.js" main="can/view/autorender/"></script> 
-
-create src/suchwin/suchwin.js
-
-  import Component from 'can/component/';
-  import Map from 'can/map/';
-  import 'can/map/define/';
-  import './suchwin.less!';
-  import template from './suchwin.stache!';
-
-  export const ViewModel = Map.extend({
-    define: {
-      message: {
-        value: 'This is the such-win component'
-      }
-    }
-  });
-
-  export default Component.extend({
-    tag: 'such-win',
-    viewModel: ViewModel,
-    template
-  });
-
-create src/suchwin/suchwin.md
-
-  @@parent place-my-order
-  @@module {can.Component} suchwin <such-win>
-  @@signature `<such-win>`
-
-  @@body
-
-  ## <such-win>
-
-create src/suchwin/suchwin.less
-
-  such-win {
-
-  }
-
-create src/suchwin/suchwin.stache
-
-  <p>{{message}}</p>
-
-create src/suchwin/suchwin_test.js
-
-  import QUnit from 'steal-qunit';
-  import { ViewModel } from './suchwin';
-
-  // ViewModel unit tests
-  QUnit.module('suchwin');
-
-  QUnit.test('Has message', function(){
-    var vm = new ViewModel();
-    QUnit.equal(vm.attr('message'), 'This is the such-win component');
-  });
-
-create src/suchwin/test.html
-
-  <title>suchwin</title>
-  <script src="../../node_modules/steal/steal.js" main="src/suchwin/suchwin_test"></script>
-  <div id="qunit-fixture"></div>
-```
+But wait there's "[super models](/place-my-order.html#section=section_Creatingarestaurantsconnection)" too!
 
 Plus, you can even customize these and add more as you see fit!
