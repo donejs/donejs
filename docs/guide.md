@@ -55,7 +55,7 @@ Then we can development mode by running:
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application showing a default homepage. This server needs to stay open at all times so we recommend opening a new terminal window for the other commands.
+The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application showing a default homepage. This server needs to stay open at all times so the all following commands should run in a new terminal window.
 
 
 ### Adding to the page
@@ -66,7 +66,7 @@ Now we can install the [Bootstrap NPM package](https://www.npmjs.com/package/boo
 npm install bootstrap --save
 ```
 
-To see live-reload in action, let's update the main template to import the main Bootstrap LESS file and also add some HTML that uses those styles. `src/index.stache` then looks like this:
+To see live-reload in action, let's update the main template to import the Bootstrap LESS file and also add some HTML that uses those styles. `src/index.stache` then looks like this:
 
 ```html
 <html>
@@ -96,8 +96,7 @@ To see live-reload in action, let's update the main template to import the main 
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="/node_modules/steal/steal.production.js"
-            main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="<%= name %>/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -111,7 +110,7 @@ If you have a browser window open at [http://localhost:8080/](localhost:8080) yo
 
 ## Routing and components
 
-In this part we will create our own custom HTML elements. One for the homepage and another to display the chat messages. Then we will create routes to toggle between those two pages.
+In this part we will create our own custom HTML elements. One for the homepage and another to display the chat messages. Then we will create routes to navigate between those two pages.
 
 ### Generate custom elements
 
@@ -172,7 +171,7 @@ And update `src/index.stache` to dynamically load and initialize this component 
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="<%= name %>/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -292,7 +291,7 @@ Finally we can glue both components together as separate pages in `src/index.sta
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="<%= name %>/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -302,7 +301,7 @@ Finally we can glue both components together as separate pages in `src/index.sta
 </html>
 ```
 
-Now we dynamically load both components while navigating between the home and messages page.
+Now we dynamically load both components while navigating between the home and messages page and everything will also be [rendered on the server](Features.html#section=section_ServerSideRendered). For example, if you open [localhost:8080/chat](http://localhost:8080/chat) directly in the browser we will see the chat messages page right away while our JavaScript is being loaded in the backround. Viewing the source will the dynamically inserted styles and the according HTML.
 
 
 ## Homepage
@@ -312,13 +311,13 @@ Now that we can navigate between pages we can finish implementing their function
 
 ### Installing bit-tabs
 
-On the homepage we will just add and load [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
+On the homepage we will add and load [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
 
 ```
 npm install bit-tabs --save
 ```
 
-### Update the homepage
+### Update the page
 
 Then we import the tabs custom elements without the styles from `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup using those tabs. `src/home.component` then looks like this:
 
@@ -366,7 +365,7 @@ bit-panel {
 
 ## Messages page
 
-For the messages page we will create a messages model that connects to a RESTful API and then make the message list receive real-time updates from other clients.
+For the messages page we will create a messages model that connects to a RESTful API, add the ability to retrieve and show all messages as well as creating new messages and then make the message list receive real-time updates from other clients.
 
 ### Generate Message model
 
@@ -463,11 +462,13 @@ export default Component.extend({
 });
 ```
 
-It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty the input field. If we now put in our name and send a new message it will show up automatically in our messages list.
+It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty the input field.
+
+If we now put in our name and send a new message it will show up automatically in our messages list. In fact, all lists that are related to that model will be updated automatically with new, modified and deleted data with [can-connect](http://connect.canjs.com/) which also provides [caching and minimizing data requests](Features.html#section=section_Cachingandminimaldatarequests).
 
 ### Real-time connection
 
-Right now our chat updates automatically with our own new messages but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) does provide a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we need to install a [Socket.io client wrapper](https://github.com/stealjs/steal-socket.io):
+Right now our chat updates automatically with our own messages but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) does provide a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
 
 ```
 npm install steal-socket.io --save
@@ -512,7 +513,7 @@ socket.on('messages removed',
 export default Message;
 ```
 
-This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages. Try opening another browser window to see receiving messages in real-time.
+This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
 ## Production build
 
@@ -536,7 +537,7 @@ To test the production build, close the current server (with `CTRL + C`) and sta
 NODE_ENV=production donejs start
 ```
 
-If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab or the developer tools.
+If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production we can only see about 10 requests and a significantly reduced file-size.
 
 ## Deploy
 
@@ -544,15 +545,10 @@ Now that we verified that our application works in production we can deploy it o
 
 ### Setting up Divshot
 
-Create a free [Divshot](https://divshot.com/) account and a new app in the control panel. Then install the CLI via
+Sign up for free at [divshot.com](https://divshot.com/) and then install the command line tool and log in with your credentials with:
 
 ```
 npm install -g divshot-cli
-```
-
-And log in with your credentials
-
-```
 divshot login
 ```
 
@@ -568,7 +564,7 @@ Now we can add the Divshot deployment configuration to our `package.json` like t
       "production": {
         "type": "divshot",
         "config": {
-          "name": "donejs-chat",
+          "name": "donejs-chat-<user>",
           "headers": {
             "/**": {
               "Access-Control-Allow-Origin": "*"
@@ -581,6 +577,8 @@ Now we can add the Divshot deployment configuration to our `package.json` like t
 }
 ```
 
+Change the `<user>` part in `"name": "donejs-chat-<user>"` to your GitHub username. This will be your Divshot application name (you can choose any other available name as well).
+
 And also update the production `baseURL` in the `system` section:
 
 ```
@@ -589,26 +587,13 @@ And also update the production `baseURL` in the `system` section:
   ...
   "envs": {
     "server-production": {
-      "baseURL": "https://donejs-chat.divshot.io/"
+      "baseURL": "https://donejs-chat-<user>.divshot.io/"
     }
   }
 }
 ```
 
-Make sure to replace `"name": "donejs-chat"` with the name of the application you created. We also need to update `src/index.stache` to load its assets from the Divshot by changing the `{{#switch env.NODE_ENV}}` section to:
-
-```html
-{{#switch env.NODE_ENV}}
-  {{#case "production"}}
-    <script src="http://donejs-chat.divshot.io/node_modules/steal/steal.production.js"  main="donejs-chat/index.stache!done-autorender"></script>
-  {{/case}}
-  {{#default}}
-    <script src="/node_modules/steal/steal.js"></script>
-  {{/default}}
-{{/switch}}
-```
-
-Again, make sure to replace `http://donejs-chat.divshot.io` with your own Divshot URL. Then we can deploy the application by running:
+Again, make sure to replace the URL with your Divshot application name. Then we can deploy the application by running:
 
 ```
 donejs build
@@ -629,7 +614,7 @@ In the last part of this guide we will make builds of our chat as a mobile appli
 
 ### Cordova
 
-To build the chat as a Cordova based mobile application you need to have the appropriate platform SDK installed. XCode can be downloaded via the AppStore so we will use it to create an iOS application that can be tested in the ios simulator. After installing XCode to launch the simulator we also need to run:
+To build the chat as a Cordova based mobile application you need to have each platforms SDK installed. XCode can be downloaded via the AppStore so we will use it to create an iOS application that can be tested in the ios simulator. After installing XCode to launch the simulator we also need to install the `ios-sim` command line utility:
 
 ```
 npm install ios-sim -g
@@ -758,7 +743,7 @@ if(buildNW) {
 Now we can run the build with
 
 ```
-node build nw
+donejs build nw
 ```
 
 The application can be opened with
