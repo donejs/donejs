@@ -251,7 +251,11 @@ steal("./content_list.js",
             //}
             var el = $( getSpyableElementFromPoint( ~~( document.body.offsetWidth / 2 ), 250 ) );
             if ( !el.length ) {
-                //TODO check if above all h2's and: scrollSpyCurrentH2.html( "" ); scrollSpyCurrentH3.html( "" );
+                if ( $( window ).scrollTop() + 250 < $( ".comment h2:first-of-type" ).offset().top ) {
+                    scrollSpyCurrentH2.addClass( "h2Only" );
+                    scrollSpyCurrentH2.html( "Table of Contents" );
+                    scrollSpyCurrentH3.html( "" );
+                }
                 return;
             }
             var h2 = el[ 0 ].tagName.toLowerCase() === "h2" ? el : el.prevAll( "h2:first" );
