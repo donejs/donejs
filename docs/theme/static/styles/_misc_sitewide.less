@@ -6,43 +6,41 @@
 */
 .donejs,
 .docs {
-  .brand {
-   background-image: url('/static/img/donejs-logo-white.svg');
-   background-size: 170px;
+	.brand {
+	 background-image: url('/static/img/donejs-logo-white.svg');
+	 background-size: 170px;
  }
 }
 .reset-padding {
-  padding:0;
+	padding:0;
 }
 .reset-margin {
-  margin:0;
+	margin:0;
 }
-
 .table-row {
-  display: table;
-  width: 100%;
-  margin: 0 auto;
-  > [class*="col-"] {
-    float: none;
-    display: table-cell;
-    vertical-align: top;
-  }
+	display: table;
+	width: 100%;
+	margin: 0 auto;
+	> [class*="col-"] {
+		float: none;
+		display: table-cell;
+		vertical-align: top;
+	}
 }
 .container {
-  @media (max-width: @screen-sm) {
-    width: auto;
-  }
+	@media (max-width: @screen-sm) {
+		width: auto;
+	}
 }
-
 
 /* site wide footer */
 footer {
-  .clearfix;
+	.clearfix;
 	background-color: @logoColor;
 	nav {
 		a.brand {
 			background-image: url( '/static/img/donejs-logo-final-02.svg' )!important;
-      margin: 13px auto;
+			margin: 13px auto;
 		}
 	}
 }
