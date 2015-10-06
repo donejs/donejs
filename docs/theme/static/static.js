@@ -357,7 +357,7 @@ steal("./content_list.js",
                 curSect = el.prevAll( ".usability.wrapper, .performance.wrapper, .maintainable.wrapper, .community.wrapper" ).eq( 0 );
             }
 
-            if ( !curSect.length ) {
+            if ( !curSect.length && $( window ).scrollTop() < ($( ".hero" ).height() - 50) ) {
                 //none are active and you're above usability.wrapper so un-fixed and un-condensed
                 $( "body.donejs .overview-nav" ).removeClass( "fixed" );
                 $( "body.donejs .overview-nav .overview-btn" ).removeClass( "condensed" ).removeClass( "active" );
