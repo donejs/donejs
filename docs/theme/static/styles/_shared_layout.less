@@ -22,6 +22,7 @@ body:not(.donejs) {
 	> .container-fluid {
 		display: block;
 		margin: 0 auto 50px;
+		padding: 0 15px 50px 15px;
 		border-radius: 0;
 		border-bottom: 1px solid #EEE;
 		@media(min-width: @screen-sm){
@@ -263,15 +264,15 @@ body:not(.donejs) {
 
 		h2 + * {
 			padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
-			@media(max-width: @screen-md-max){
-				padding-top: @h2height !important;
+			@media(max-width: @screen-sm-max){
+				padding-top: 205px !important;
 			}
 
 		}
 		h2 + p {
 			padding-top: @h2height + 100px!important;
-			@media(max-width: @screen-md-max){
-				padding-top: @h2height !important;
+			@media(max-width: @screen-sm-max){
+				padding-top: 255px !important;
 			}
 		}
 		h2 + p,
