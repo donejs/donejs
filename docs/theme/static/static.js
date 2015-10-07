@@ -106,6 +106,12 @@ steal("./content_list.js",
         );
 
 
+        //set Guides as active in main navigation if nothing else is active
+        if ( $( ".navbar-nav:first > .active" ).length === 0 ) {
+            $( ".guides-menu" ).addClass( "active" );
+        }
+
+
         $(function () {
             // click drag to scroll homepage tablet timeline
             // https://github.com/donejs/donejs/issues/151
