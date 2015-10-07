@@ -17,7 +17,7 @@ and are able to be rendered on the server by running the same code. This is know
 #### Speed
 A user sees their content immediately. No spinners necessary.
 
-[[[TODO: image of loaded vs spinner from home page]]]
+<img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
 DoneJS brings server side rendering with an incredibly fast, single context virtual DOM.
 
