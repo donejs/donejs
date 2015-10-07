@@ -59,7 +59,7 @@ Docs-link: https://github.com/canjs/can-ssr
 Guide-link: 
 
 
-### Progressive loading
+### Progressive Loading
 
 DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load *fast*.
 
@@ -101,7 +101,7 @@ Docs-link: done-autorender stache stealjs
 Guide-link: 
 
 
-### Caching and minimal data requests
+### Caching and Minimal Data Requests
 
 DoneJS applications are able to do variety of performance improvements by intelligently managing the data 
 layer.  Example techniques:
@@ -114,42 +114,171 @@ layer.  Example techniques:
    user visits the page.
 
 
-### Minimal DOM updates
+### Minimal DOM Updates
 
-Update only the part of the DOM that needs to be updated, very quickly.
+Keeping the DOM updated is one of the most expensive aspects of a Single Page Application. However, because DoneJS uses CanJS, DOM updates occur only as often as necessary. Unlike other libraries that can run expensive digest cycles that check all bound data on a page for changes, CanJS only triggers updates when data has changed and only calculates the changes on elements bound to that data. This means overhead for making a single DOM update is as little as possible.
 
 ### Worker Thread Rendering
 
-Run all of your application's logic in a worker thread.  Leaving the main thread to only update the DOM.
+Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM. Your templates first render in a lightweight Virtual DOM on the worker side and changes are diffed and sent to the window side to be applied to the actual DOM.  Only changes are ever applied to the window and the most expensive part of a web application, DOM updates, are separated from application logic, which means your application can continue to run while paints occur.
 
+<img src="./static/img/donejs-single-thread.gif" alt="A traditional single threaded javascript application" />
+_With a single thread only one operation can occur at a time_
+
+<img src="./static/img/donejs-multi-thread.gif" alt="A javascript application using a worker thread" />
+_Using a worker thread application logic can still occur while the DOM is rendered. This can nearly double the number of operations._
+
+Due to this parallelization your application doesn’t have to worry so much about being doing things performantly as long as it is performant enough not to block the worker thread. For your users this means the application will always feel snappy.
+
+If you’re already using done-autorender you only need to update one line:
+```
+<script src=”node_modules/steal/steal.js” main=”my-app!done-autorender”></script>
+```
+to
+```
+<script src=”node_modules/steal/steal.js” main=”my-app!done-worker-autorender”></script>
+```
 
 ### Deploy to a CDN
 
-content delivery network
+DoneJS makes it simple to deploy your static assets to a CDN (content delivery network).
+
+CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne. 
+
+<img src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
+_Without a CDN requests will take longer to fulfill if the user is located further away from your servers._
+
+<img src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
+_With a CDN requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
+
+The donejs CLI supports deploying your assets to AWS S3 and Divshot. After [configuring your CDN](./place-my-order.html#section=section_DeploytoaCDN), simply run:
+```
+donejs deploy
+```
 
 
 ## Usability features
 
 ### iOS, Android, and Desktop Builds
 
-TODO: Links are on the homepage
+DoneJS makes iOS, Android and desktop builds of your application quick and easy. Building for mobile and desktop can expand the reach and user-base of your application with minimal effort.
+
+For iOS and Android builds, DoneJS uses [Apache Cordova](https://cordova.apache.org/) to easily generate an "app" version that is ready to be uploaded to the App Store/Google Play. In addition, Cordova gives you access to many of the phone's features, including the camera and GPS, unlocking your app's potential.
+
+<img src="./static/img/gThrive1.gif" alt="/static/img/gThrive1.gif" />
+
+Imagine being able to precisely locate a user and direct them to your nearest location, or allow them to scan a QR code in your store or on your website. All of this is easy with DoneJS.
+
+Building for mobile is simple with the steal-cordova plugin. First, install the plugin:
+````
+npm install steal-cordova --save-dev
+````
+And build your application:
+```
+var stealTools = require("steal-tools");
+
+var cordovaOptions = {
+  buildDir: "./build/cordova",
+  id: "com.hello.world",
+  name: "HelloWorld",
+  platforms: ["ios", "android"],
+  index: __dirname + "/index.html"
+};
+
+var stealCordova = require("steal-cordova")(cordovaOptions);
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+});
+
+buildPromise.then(stealCordova.build);
+```
+DoneJS can also build native desktop applications using [NW.js](https://github.com/nwjs/nw.js) and steal-nw. NW.js allows you to run Node.js modules directly from the DOM, unleashing the potential of your application. Building to desktop is as simple as building to mobile. Install:
+```
+npm install steal-nw --save-dev
+```
+and build:
+```
+var stealTools = require("steal-tools");
+var stealNw = require("steal-nw");
+
+var nwOptions = {
+  buildDir: "./build",
+  platforms: ["osx"],
+  files: ["./**/*"]
+};
+
+var buildPromise = stealTools({
+  config: __dirname + "/package.json!npm"
+});
+
+buildPromise.then(function(buildResult){
+    stealNw(nwOptions, buildResult);
+});
+```
+It's that easy! Building to iOS, Android and desktop expands your potential audience and can make your app more powerful. DoneJS makes this quick and easy, with minimal configuration, all using your web application's codebase.
 
 ### Supports All Browsers, Even IE8
 
-DoneJS applications can run everywhere.  They work in all modern browsers and 
-Internet Explorer 9 and up.  And, using [Apache Cordova](https://cordova.apache.org/) or [NW.js](https://github.com/nwjs/nw.js), DoneJS can build your app
-so it works as an iOS, Andriod or Desktop Mac or Windows app.
+DoneJS is compatible with modern and legacy versions of all browsers, including Chrome, Firefox, Safari, and Internet Explorer back to version 8. While other frameworks eschew legacy browser support, DoneJS embraces it. Doing so maximizing compatibility, and thus potential audience adoption, of your app.
+
+[As of September 2015](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar), 8.77% of Internet users are not using the latest version of their web browser. Of those, 2.26% still use Internet Explorer 8 as their primary browser! 
+
+<img src="./static/img/browser-stats.png" alt="Source: http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar" />
+_Source: http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar_
+
+Who are these users? Most are corporate users tethered to an IT policy, or users in emerging markets. Both represent potentially large market segments, and support for them should be considered when building your application.
+
+By maintaining legacy browser support, DoneJS enables you to maximize the reach of your audience with no additional effort.
 
 ### Real Time Connected
 
-DoneJS applications use real-time connections to keep their users instantly up to
-date with any changes to their model data.  Using set-logic, real-time behavior can be 
-added very easily.
+Building apps that require real time updates and communication using DoneJS is easy. DoneJS can seemlessly integrate with your [Socket.io](https://socket.io) backend. After configuring Socket.io on the client to use can-connect, lists and indiviual models will be updated in real time. Your views will automatically update to reflect the changes.
+
+Real time apps can help solve traditionally difficult problems. Like building a chat interface or how to keep data on the client up-to-date when other users are modifying it. With DoneJS’s solution there is not much to think about, and just a few lines of code on the client and server.
+
+[Check out our quick-start guide](./Guide.html) to see how we build a real time connected chat app.
+
 
 ### Pretty URL's with Pushstate
 
-DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Manipulating_the_browser_history#The_pushState()_method) to 
-provide navigable and bookmarkable pages and links, while still keeping the user in a single page.
+DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable and bookmarkable pages and links, while still keeping the user in a single page. 
+
+The use of pushstate allows your apps to have “Pretty URL’s” like: myapp.com*/user/1234* instead of a hashed route like myapp.com*#page=user&userId=1234* or myapp.com/*#/user/1234*. Pretty URLs with pushstate are indexable, bookmarkable, and allow users to use the back and refresh buttons without losing state.
+
+Routing is easily configured using can.route. Routes are given a URL template, and optionally an object with a set of default values.
+
+```
+can.route(':page', { page: 'home' });
+can.route(':page/:slug', { slug: null });
+can.route(':page/:slug/:action', { slug: null, action: null });
+```
+
+With the use of the can-href attribute, creating links in your view is just as easy:
+
+```
+<a can-href="{page='home'}">Home</a>
+```
+
+Thanks to CanJS’s unique two-way routing your app isn’t married or dependent to a specific URL pattern. Depending on the state your app can read from the URL or update it. If a state change occurs, CanJS will update your routes, and vice-versa if a route change occurs, CanJS will update your application state. Your view can now handle how and what to render depending on your app state. You don’t need fragile routing configurations to trigger renders or state changes.
+
+For example, using our routing configurations above and a template like the one below, all the work is done. If a user enters the application at myapp.com/restaurants, the property ‘page’ on our application state is set to the value ‘restaurants’, and our template will render the appropriate component. Alternatively, if our app changes the value of ‘page’ at any point the routes will update to match the change, and our templates will render accordingly. 
+
+```
+{{#switch page}}
+  {{#case "home"}}
+      <pmo-home></pmo-home>
+  {{/case}}
+  {{#case "restaurants"}}
+      <pmo-restaurant-list></pmo-restaurant-list>
+  {{/case}}
+  {{#case "order-history"}}
+      <pmo-order-history></pmo-order-history>
+  {{/case}}
+{{/switch}}
+```
+
+[Follow the guide here](./place-my-order.html#section=section_Settinguprouting) to learn how to set up Pretty URLs and Pushstate in your DoneJS app.
+
 
 
 
@@ -217,7 +346,14 @@ With DocumentJS's flexibility, themeability, and customizability you can generat
 
 ### Continuous Integration & Deployment
 
-TODO
+Continuous Integration (CI) and Continuous Deployment (CD) are amazing tools. With CI pull requests will trigger tests and builds to insure any new code won’t break your application. CD means that any release or merges to your release branch will trigger tests, builds and deployment. All of this is automated and can be tightly integrated into git. Popular services for continuous integration and deployment include TravisCI and Jenkins.
+
+<imgssss>
+_Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
+
+DoneJS helps you with the most important aspect of CI and CD -- Tests! (link to test feature) Our generators add tests so you can start every component of your app with proper testing. No more excuses. This is often the biggest hurdle for projects to move to CI and CD. Without proper tests and CI merging new code is risky, and automatically deploying code is just silly -- but not with DoneJS!
+
+[Checkout our guide](./place-my-order.html#section=section_Setupautomatedtestsandcontinuousintegration_CI_) to learn how to set up testing and CI with TravisCI for your DoneJS app.
 
 ### NPM Packages
 
@@ -254,7 +390,7 @@ If you publish your DoneJS [modlets](#section_Modlets), you'll be building thing
 
 ### ES6 Modules
 
-TODO
+DoneJS future proofs your app by not only letting you use ES6 syntax, but also by allowing you to build your app using [ES6 Modules](http://www.2ality.com/2014/09/es6-modules-final.html). ES6 modules provide a global standard for creating modules in JavaScript!
 
 ### Modlets
 
@@ -371,7 +507,7 @@ ViewModels are the glue between views and models; They will do the complex logic
 
 ### Architecture
 
-TODO
+The architecture for a DoneJS app is really a marriage and extension of the foundations laid by CanJS’s MVVM (model, view, view model) architecture. Where DoneJS and CanJS are really unique from other MVVM frameworks are our well articulated viewModels thanks to CanJS’s observable objects and our define plugin.
 
 ### Hot Module Swapping & Live Reload
 
