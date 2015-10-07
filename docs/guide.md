@@ -114,7 +114,7 @@ In this part we will create our own custom HTML elements. One for the homepage a
 
 ### Generate custom elements
 
-The homepage custom element (with the HTML tag name `chat-home`) won't be very big so we can put everything into a single `.component` file. To generate it we can run:
+The homepage custom element (with the HTML tag name `chat-home`) won't be very big, so we'll put everything into a single `.component` file. To generate it run:
 
 ```
 donejs generate component home.component chat-home
@@ -181,7 +181,7 @@ And update `src/index.stache` to dynamically load and initialize this component 
 </html>
 ```
 
-The messages component (with the tag `chat-messages`) will be a little more complex which is why we generate it using [modlet file pattern](Features.html#section=section_Modlets).
+The messages component (with the tag `chat-messages`) will be a little more complex, so we'll generate it using the [modlet file pattern](Features.html#section=section_Modlets).
 
 ```
 donejs generate component messages chat-messages
@@ -301,7 +301,9 @@ Finally we can glue both components together as separate pages in `src/index.sta
 </html>
 ```
 
-Now we dynamically load both components while navigating between the home and messages page and everything will also be [rendered on the server](Features.html#section=section_ServerSideRendered). For example, if you open [localhost:8080/chat](http://localhost:8080/chat) directly in the browser we will see the chat messages page right away while our JavaScript is being loaded in the backround. Viewing the source will the dynamically inserted styles and the according HTML.
+Now each component is being dynamically loaded while navigating between the home and messages page.
+
+Also, everything will be [rendered on the server](Features.html#section=section_ServerSideRendered). If you open [localhost:8080/chat](http://localhost:8080/chat) directly in the browser, you'll see the chat messages page right away, while the JavaScript is being loaded in the backround. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
 
 
 ## Homepage
@@ -319,7 +321,7 @@ npm install bit-tabs --save
 
 ### Update the page
 
-Then we import the tabs custom elements without the styles from `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup using those tabs. `src/home.component` then looks like this:
+Then we import the tabs custom elements without its styles from `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup using those tabs. `src/home.component` then looks like this:
 
 ```html
 <can-component tag="chat-home">
@@ -365,7 +367,11 @@ bit-panel {
 
 ## Messages page
 
-For the messages page we will create a messages model that connects to a RESTful API, add the ability to retrieve and show all messages as well as creating new messages and then make the message list receive real-time updates from other clients.
+For the messages page we will:
+
+ * create a messages model that connects to a RESTful API
+ * add the ability to retrieve and show all messages as well as creating new messages
+ * make the message list receive real-time updates from other clients
 
 ### Generate Message model
 
@@ -379,7 +385,7 @@ When asked for the URL endpoint we have to make sure to set it to our remote API
 
 ### Using the connection
 
-This was all we needed to create a connection to our REST endpoint. We can go ahead and use it, for example by importing it in `src/messages/messages.stache` and requesting a list of all mesages with the `message-model` custom element:
+The generated file is all that is needed to create a connection to our REST endpoint. We can go ahead and use it by importing it in `src/messages/messages.stache` and requesting a list of all mesages with the `message-model` custom element:
 
 ```html
 <can-import from="donejs-chat/models/message" />
@@ -401,13 +407,14 @@ This was all we needed to create a connection to our REST endpoint. We can go ah
 </message-model>
 ```
 
-If we now open [localhost:8080/chat](http://localhost:8080/chat) we can see the list of messages from the server or the text that there are no messages.
+If we now open [localhost:8080/chat](http://localhost:8080/chat) we either see the list of messages from the server or the text that there are no messages.
 
 ### Creating messages
 
-Now can add the form to create new messages. The form simply binds the `name` and `message` property to the components view model and calls `send` when hitting the enter key in the message input. With that `src/messages/messages.stache` looks like this:
+Now can add the form to create new messages. The form simply binds the `name` and `message` property to the components view model and calls `send` when hitting the enter key in the message input. `src/messages/messages.stache` will now look like this:
 
 ```html
+<can-import from="donejs-chat/models/message" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
 <message-model get-list="{}">
   <div class="list-group">
@@ -462,13 +469,13 @@ export default Component.extend({
 });
 ```
 
-It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty the input field.
+It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty to reset the input field.
 
-If we now put in our name and send a new message it will show up automatically in our messages list. In fact, all lists that are related to that model will be updated automatically with new, modified and deleted data with [can-connect](http://connect.canjs.com/) which also provides [caching and minimizing data requests](Features.html#section=section_Cachingandminimaldatarequests).
+If we now enter a name and message, it will appear automatically in our messages list. In fact, all lists that are related to that model will be updated automatically in the page whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimizing data requests](Features.html#section=section_Cachingandminimaldatarequests).
 
 ### Real-time connection
 
-Right now our chat updates automatically with our own messages but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) does provide a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
+Right now our chat updates automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
 
 ```
 npm install steal-socket.io --save
@@ -527,9 +534,9 @@ We can find the build configuration in `build.js` in the application folder. Eve
 donejs build
 ```
 
-The optimized bundles that load your JavaScript and CSS as fast as possible are located in the `dist/` folder.
+The optimized bundles that load your JavaScript and CSS as fast as possible are sent to the `dist/` folder.
 
-### Set to production.
+### Turn on production
 
 To test the production build, close the current server (with `CTRL + C`) and start it with the environment (`NODE_ENV`) set to `production`:
 
@@ -537,15 +544,15 @@ To test the production build, close the current server (with `CTRL + C`) and sta
 NODE_ENV=production donejs start
 ```
 
-If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production we can only see about 10 requests and a significantly reduced file-size.
+If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
 ## Deploy
 
-Now that we verified that our application works in production we can deploy it on the web. For this guide we will use [Divshot](https://divshot.com/) which provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support.
+Now that we verified that our application works in production, we can deploy it to the web. For this guide we will use [Divshot](https://divshot.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support.
 
 ### Setting up Divshot
 
-Sign up for free at [divshot.com](https://divshot.com/) and then install the command line tool and log in with your credentials with:
+Sign up for free at [divshot.com](https://divshot.com/). Then install the command line tool and log in with your credentials:
 
 ```
 npm install -g divshot-cli
@@ -610,11 +617,13 @@ We should now see our assets being loaded from the Divshot CDN.
 
 ## Desktop and mobile apps
 
-In the last part of this guide we will make builds of our chat as a mobile application for iOS using [Cordova](https://cordova.apache.org/) and as a desktop application with [nw.js](http://nwjs.io/).
+In the last part of this guide we will make mobile and desktop builds of our chat application, using [Cordova](https://cordova.apache.org/) and [nw.js](http://nwjs.io/).
 
 ### Cordova
 
-To build the chat as a Cordova based mobile application you need to have each platforms SDK installed. XCode can be downloaded via the AppStore so we will use it to create an iOS application that can be tested in the ios simulator. After installing XCode to launch the simulator we also need to install the `ios-sim` command line utility:
+To build the application as a Cordova based mobile application you need to have each platform's SDK installed. XCode can be downloaded via the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator. 
+
+We'll also need to install the `ios-sim` command line utility in order to launch the simulator:
 
 ```
 npm install ios-sim -g
@@ -664,17 +673,17 @@ To run the Cordova build and launch the simulator we can now run
 donejs build cordova
 ```
 
-If everything went well we should see the iOS simulator starting with our application.
+If everything went well we should see the iOS simulator running our application.
 
 ### NW.js
 
-For the desktop build we first have to install the build tools:
+To set up the desktop build, first we have to install the build tools:
 
 ```
 npm install steal-nw --save-dev
 ```
 
-As well as update our `package.json` changing `main` to `app.html` and add information about the desktop window:
+We'll also update our `package.json`, changing `main` to `app.html` and addding information about the desktop window:
 
 ```js
 "main": "production.html",
@@ -746,7 +755,7 @@ Now we can run the build with
 donejs build nw
 ```
 
-The application can be opened with
+The OS X application can be opened with
 
 ```
 cd build/donejs-chat/osx64
@@ -755,6 +764,6 @@ open donejs-chat.app
 
 ## What's next?
 
-In this guide we created a small real-time chat application that connect to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We build an optimized bundle for production and deployed it to a static file host and CDN. Last we made builds of the application as a mobile and desktop application.
+In this guide we created a small chat application that connects to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We built an optimized bundle for production and deployed it to a static file host and CDN. Last we made builds of the application as a mobile and desktop application.
 
-If you want to learn more about DoneJS like how to create more complex custom elements and routes, write and automatically run tests, Continuous Integration and Continuous Deployment head over to the [place-my-order Guide](./place-my-order.html).
+If you want to learn more about DoneJS - like how to create more complex custom elements and routes, write and automatically run tests, Continuous Integration and Continuous Deployment - head over to the [place-my-order Guide](./place-my-order.html).
