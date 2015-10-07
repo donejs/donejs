@@ -340,10 +340,10 @@ Then we import the tabs custom elements without its styles from `bit-tabs/unstyl
 
     <bit-tabs tabs-class="nav nav-tabs">
       <bit-panel title="CanJS">
-        CanJS provides the MV*
+        <p>CanJS provides the MV*</p>
       </bit-panel>
       <bit-panel title="StealJS">
-        StealJS provides the infrastructure.
+        <p>StealJS provides the infrastructure.</p>
       </bit-panel>
     </bit-tabs>
 
@@ -355,13 +355,8 @@ Then we import the tabs custom elements without its styles from `bit-tabs/unstyl
 To add a little more whitespace we can update `src/styles.less` with:
 
 ```css
-bit-panel {
-  display: block;
+bit-panel p {
   padding: 10px;
-
-  &:empty {
-    display: none;
-  }
 }
 ```
 
