@@ -86,7 +86,7 @@ body:not(.donejs) {
 				padding: 0px;
 				margin: 0px;
 				line-height: normal;
-
+				a,
 				a:hover {
 					text-decoration: none;
 				}
@@ -172,6 +172,7 @@ body:not(.donejs) {
 			font-weight: 100;
 			font-size: 105px;
 			background-image: url( "/static/img/background.jpg" );
+			background-attachment: fixed;
 			margin-bottom: 40px;
 			max-width: initial;
 			@media(max-width: @screen-xs-max){
@@ -208,13 +209,13 @@ body:not(.donejs) {
 			word-wrap: break-word;
 			overflow: hidden;
 		}
-		@h2height: 222px;
+		@h2height: 175px;
 		h2 {
 			position: absolute;
 			left: 0px;
 			right: 0px;
 			padding-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
-			padding-top: 70px;
+			padding-top: 50px;
 			display: block;
 			background-color: @charcoal;
 			color: @white;
