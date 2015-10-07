@@ -6,19 +6,21 @@
 
 <img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); margin: 20px 0; border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
-In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the home- and the chat messages page. After that we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected) to the messages pages.
+In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
 
-In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). Finally we will also create a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
+In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). We will conclude with creating a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
 
 @body
 
 ## Setup
 
-In this section we will install DoneJS, generate a new application and start a development server. To get started, let's install the DoneJS command line utility globally:
+In this section we will install DoneJS and generate a new application. To get started, let's install the DoneJS command line utility globally:
 
 ```
 npm install -g donejs
 ```
+
+### Generate the application
 
 Then we create a new DoneJS application called `donejs-chat`:
 
@@ -26,39 +28,40 @@ Then we create a new DoneJS application called `donejs-chat`:
 donejs init donejs-chat
 ```
 
-This will create a new folder called `donejs-chat` and in it generate our application. The initialization process will ask questions like the name of your application the source folder etc. which we can all answer with the default settings by hitting enter. This will install of DoneJS dependencies, including the following:
+This will create a new folder called `donejs-chat` and in it generate our application. The initialization process will ask questions like the name of your application, the source folder, etc. We can answer these with the default settings by hitting enter. This will install all of DoneJS's dependencies, including the following:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
 - [jQuery](http://jquery.com) - DOM helpers
 - [jQuery++](http://jquerypp.com) - Extended DOM helpers
-- [QUnit](https://qunitjs.com/) or Mocha - Assertion library
+- [QUnit](https://qunitjs.com/) - Assertion library (optionally: [Mocha] or [Jasmine])
 - [FuncUnit](http://funcunit.com) - Functional tests
 - [Testee](https://github.com/bitovi/testee) - JavaScript Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
-## Adding Bootstrap
-
-DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add the [Bootstrap](http://getbootstrap.com/) styles to the page and and see DoneJS [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
-
 ### Development mode
 
-DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode will also start the [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) server that automatically reloads files in the browser as they change. First, let's go into the `donejs-chat` application directory:
+DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode starts the [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) server that automatically reloads files in the browser and on the server as they change. To start it let's go into the `donejs-chat` application directory:
 
 ```
 cd donejs-chat
 ```
 
-Then we can development mode by running:
+Then we can start development mode by running:
 
 ```
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application showing a default homepage. This server needs to stay open at all times so the all following commands should run in a new terminal window.
+The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage. This server needs to stay open at all times so the all following commands should run in a new terminal window.
+
+If you ran into any problems, get in touch with us [on Gitter](https://gitter.im/donejs/donejs).
 
 
-### Adding to the page
+## Adding Bootstrap
+
+DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add the [Bootstrap](http://getbootstrap.com/) styles to the page and and see DoneJS [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
+
 
 Now we can install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
@@ -66,7 +69,7 @@ Now we can install the [Bootstrap NPM package](https://www.npmjs.com/package/boo
 npm install bootstrap --save
 ```
 
-To see live-reload in action, let's update the main template to import the Bootstrap LESS file and also add some HTML that uses those styles. `src/index.stache` then looks like this:
+To see live-reload in action, let's update the main template to import the Bootstrap LESS file and also add some HTML that uses those styles. Update `src/index.stache` to look like this:
 
 ```html
 <html>
@@ -96,7 +99,7 @@ To see live-reload in action, let's update the main template to import the Boots
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="<%= name %>/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="donejs-chat/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -171,7 +174,7 @@ And update `src/index.stache` to dynamically load and initialize this component 
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="<%= name %>/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="donejs-chat/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -291,7 +294,7 @@ Finally we can glue both components together as separate pages in `src/index.sta
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="<%= name %>/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="donejs-chat/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
