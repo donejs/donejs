@@ -83,7 +83,7 @@ steal("./content_list.js",
                 $('.donejs-thumbs').stop().animate({opacity: 1}, 500);
             }
         );
-        
+
         (function () {
             var enterEv = function(el){
                 $(this).get(0).play();
@@ -232,8 +232,10 @@ steal("./content_list.js",
             }
             if ( doDisable ) {
                 document.body.style.overflow = "hidden";
+                document.body.style.position = "fixed";
             } else {
                 document.body.style.overflow = "";
+                document.body.style.position = "";
             }
         };
 
