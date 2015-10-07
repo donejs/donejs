@@ -224,24 +224,48 @@ steal("./content_list.js",
             $( "section.contents ol ol" ).hide();
         }
 
-        // if isMobileSize
-        // $( ".scroll-spy-title .menu-indicator" ) menus-closed menus-open
-        // $( "section.contents" ) active
+        var disableBodyScroll = [];
+        var setBodyScroll = function () {
+            var doDisable = false;
+            for ( var i = 0; i < disableBodyScroll.length; i++ ) {
+                doDisable |= disableBodyScroll[ i ]();
+            }
+            if ( doDisable ) {
+                document.body.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "";
+            }
+        };
 
         var scrollPosOnMenuOpen = -1;
         $( ".scroll-spy-title" ).on( "click", function () {
             var menu = $( "section.contents" );
             if ( menu.is( ".active" ) ) {
                 menu.removeClass( "active" );
-                document.body.style.overflow = "";
+                setBodyScroll();
                 $( this ).find( ".menu-indicator" ).addClass( "menus-closed" ).removeClass( "menus-open" );
                 scrollPosOnMenuOpen = -1;
             } else {
                 menu.addClass( "active" );
-                document.body.style.overflow = "hidden";
+                setBodyScroll();
                 $( this ).find( ".menu-indicator" ).addClass( "menus-open" ).removeClass( "menus-closed" );
                 scrollPosOnMenuOpen = $( window ).scrollTop();
             }
+        });
+        disableBodyScroll.push( function () {
+            return $( "section.contents" ).is( ".active" );
+        });
+
+        $( function () {
+            var menu = $( "#bs-example-navbar-collapse-1" );
+            if ( !menu.length ) return;
+
+            disableBodyScroll.push( function () {
+                return menu.is( ".in" );
+            });
+
+            menu.on( "shown.bs.collapse", setBodyScroll );
+            menu.on( "hidden.bs.collapse", setBodyScroll );
         });
 
         var lastH3 = null;
