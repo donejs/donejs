@@ -4,7 +4,7 @@
 @outline 2 ol
 @description In this guide we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 
-![DoneJS chat](static/img/donejs-chat.gif)
+<img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); margin: 20px 0; border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the home- and the chat messages page. After that we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected) to the messages pages.
 
@@ -616,7 +616,7 @@ In the last part of this guide we will make mobile and desktop builds of our cha
 
 ### Cordova
 
-To build the application as a Cordova based mobile application you need to have each platform's SDK installed. XCode can be downloaded via the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator. 
+To build the application as a Cordova based mobile application you need to have each platform's SDK installed. XCode can be downloaded via the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator.
 
 We'll also need to install the `ios-sim` command line utility in order to launch the simulator:
 
