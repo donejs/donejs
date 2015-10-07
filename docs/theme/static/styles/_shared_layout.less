@@ -67,11 +67,6 @@ body:not(.donejs) {
 			display: block !important;
 		}
 	}
-	.comment {
-		@media(max-width: @screen-xs){
-			word-wrap: break-word;
-		}
-	}
 	/* left navigation */
 	section.contents {
 		position: fixed;
@@ -262,6 +257,12 @@ body:not(.donejs) {
 			margin-top: 50px;
 			border-top: 1px solid #EEEEEE;
 			padding-top: 50px;
+			@media(max-width: @screen-md){
+				line-height: 1;
+				margin-bottom: 35px;
+			}
+
+
 		}
 
 		h2 + * {
