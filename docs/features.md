@@ -357,36 +357,52 @@ DoneJS helps you with the most important aspect of CI and CD -- Tests! (link to 
 
 ### NPM Packages
 
-Get more done faster by bringing other people's code into your client side project with StealJS's NPM Packages.
+DoneJS applications can use packages published to NPM without configuration thanks to StealJS. Get more done faster by incorporating other people's code into your client side project!
 
-DoneJS applications can use packages published to NPM without configuration.  Automatically load dependencies installed with npm and import packages written in ES6 module syntax, AMD, or CommonJS.
-
-It's fast and easy to do:
+It's fast and easy to install a package from the terminal:
 ```
-$ npm install jquery --save
+npm install jquery --save
 ```
 
-then, in your javascript if you're using ES6 module syntax:
+The dependencies for packages installed with npm are automatically loaded.
+
+Import packages written in ES6 module syntax, AMD, or CommonJS easily:
 ```
 import $ from "jquery";
 ```
 
-or if you're more comfortable going with steal's syntax:
-```
-steal( "jquery", function( $ ) {
-  //...
-});
-```
+#### You can create and share your own too!
 
-You can also export your modules to other formats such as:
+DoneJS supports exporting your modules to other formats such as:
 - CommonJS and Browserify
 - AMD and r.js
 - or even &lt;script&gt; and &lt;link&gt; tags if you're adding new ideas to old code
 
+This makes reuse across an organization much easier! If you publish your DoneJS [modlets](#section_Modlets), you'll be building things you can use and reuse across your projects for years to come.
+
+Just create your [export script](http://stealjs.com/docs/steal-tools.export.html), *myexport.js*:
+```js
+var stealTools = require("steal-tools");
+stealTools.export({
+  system: {
+    config: __dirname+"/package.json!npm"
+  },
+  outputs: {
+    amd: {
+      format: "amd",
+      graphs: true,
+      dest: __dirname+"/dist/amd"
+    }
+});
+```
+
+and execute it from your termnial:
+```
+node myexport.js
+```
+
+#### Watch our demonstration video for more
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
-
-If you publish your DoneJS [modlets](#section_Modlets), you'll be building things you can use and reuse across your projects for years to come.
-
 
 ### ES6 Modules
 
