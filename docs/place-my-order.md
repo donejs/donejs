@@ -57,13 +57,15 @@ We can see the following files:
 
 ```
 ├── .yo-rc.json
+├── build.js
+├── development.html
 ├── documentjs.json
 ├── package.json
+├── production.html
 ├── readme.md
 ├── src/
 |   ├── app.js
 |   ├── index.stache
-|   ├── index.html
 |   ├── models/
 |   |   ├── fixtures
 |   |   |   ├── fixtures.js
@@ -79,6 +81,7 @@ We can see the following files:
 Let's have a quick look at the purpose of each:
 
 - `.yo-rc.json` contains information for running the generators.
+- `development.html`, `production.html` those pages can run the DoneJS application in development or production mode without a server
 - `package.json` is the main configuration file that defines all our application dependencies and other settings.
 - `test.html` is used to run all our tests.
 - `documentjs.json` is the configuration file for generating documentation.
@@ -86,7 +89,6 @@ Let's have a quick look at the purpose of each:
 - `src` is the folder where all our development assets live in their own modlets (more about that later).
 - `src/app.js` is the main application file, which exports the main application state.
 - `src/index.stache` is the main client template that includes server-side rendering.
-- `src/index.html` is the main client template to use if you want to opt out of server-side rendering.
 - `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures/fixtures.js` which will reference all the specific models fixtures files (so that we can run model tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
 - `src/styles.less` is the main application styles.
 - `src/test/test.js` collects all individual component and model tests we will create throughout this guide and is loaded by `test.html`.
@@ -135,10 +137,10 @@ Before we get to the code, we also need to install the `place-my-order-assets` p
 npm install place-my-order-assets --save
 ```
 
-Every DoneJS application consists of at least two files: 
+Every DoneJS application consists of at least two files:
 
  1. **A main template** (in this case `src/index.stache`) which contains the main template and links to the development or production assets
- 1. **A main application file** (`src/app.js`) that initializes the application state and routes
+ 1. **A main application view-model** (`src/app.js`) that initializes the application state and routes
 
 `src/index.stache` was already created for us when we ran `donejs init`, so we can update it to reflect the below content:
 
@@ -147,20 +149,20 @@ Every DoneJS application consists of at least two files:
   <head>
     <title>{{title}}</title>
     {{asset "css"}}
+    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="place-my-order-assets" />
     <can-import from="place-my-order/styles.less!" />
-    <can-import from="place-my-order/app" as="viewModel" />
+    <can-import from="place-my-order/app" export-as="viewModel" />
 
     <h1>{{message}}</h1>
 
     {{asset "inline-cache"}}
 
-    {{#switch @env.NODE_ENV}}
+    {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="/node_modules/steal/steal.production.js"
-          main="place-my-order/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -174,7 +176,7 @@ This is an HTML5 template that uses [can.stache](http://canjs.com/docs/can.stach
 
 `can-import` loads the template's dependencies:
  1. The `place-my-order-assets` package, which loads the LESS styles for the application
- 1. `place-my-order/app`, which is the main application file 
+ 1. `place-my-order/app`, which is the main application file
 
 The [asset](http://canjs.github.io/can-ssr/doc/can-ssr.helpers.asset.html) helper loads assets like CSS, cached data, and scripts, regardless of the current environment (development or production).
 
@@ -182,14 +184,16 @@ The main application file at `src/app.js` looks like this:
 
 ```
 // src/app.js
-import AppMap from 'can-ssr/app-map';
-import route from 'can/route/';
+import AppMap from "can-ssr/app-map";
+import route from "can/route/";
 import 'can/map/define/';
+import 'can/route/pushstate/';
 
 const AppViewModel = AppMap.extend({
   define: {
     message: {
-      value: 'Hello World!'
+      value: 'Hello World!',
+      serialize: false
     },
     title: {
       value: 'place-my-order',
@@ -219,6 +223,7 @@ To:
 "scripts": {
   "api": "place-my-order-api --port 7070",
   "start": "can-serve --proxy http://localhost:7070 --port 8080",
+  "develop": "can-serve --develop --proxy http://localhost:7070 --port 8080",
 ```
 
 Then we can start the application with
@@ -329,7 +334,7 @@ In this part, we will create routes - URL patterns that load specific parts of o
 
 ### Create Routes
 
-Routing works a bit differently than what you might be used to in other libraries. In other libraries, you might declare routes and map those to controller-like actions. 
+Routing works a bit differently than what you might be used to in other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
 DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /foo) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
@@ -438,12 +443,14 @@ Update `src/index.stache` to:
 ```html
 <html>
   <head>
-    <title>Place My Order</title>
+    <title>{{title}}</title>
     {{asset "css"}}
+    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/app" as="viewModel" />
+    <can-import from="place-my-order/styles.less!" />
+    <can-import from="place-my-order/app" export-as="viewModel" />
 
     <can-import from="place-my-order/loading.component!" />
     <can-import from="place-my-order/header.component!" />
@@ -469,10 +476,9 @@ Update `src/index.stache` to:
 
     {{asset "inline-cache"}}
 
-    {{#switch @env.NODE_ENV}}
+    {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="/node_modules/steal/steal.production.js"
-          main="place-my-order/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="place-my-order/index.stache!done-autorender"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -488,13 +494,13 @@ Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator whil
 
 Now if we reload [http://localhost:8080/](http://localhost:8080/), we can see the header and the home component and be able to navigate to the different pages through the header.
 
-## Getting and Displaying Data from the Server
+## Getting Data from the Server
 
 In this next part, we'll connect to the RESTful API that we set up with `place-my-order-api`, using the powerful data layer provided by [can-connect](http://connect.canjs.com/).
 
 ### Creating a restaurants connection
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). 
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api).
 
 To manage the restaurant data located at [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants), we'll create a restaurant supermodel:
 
@@ -502,7 +508,7 @@ To manage the restaurant data located at [http://localhost:8080/api/restaurants]
 donejs generate supermodel restaurant
 ```
 
-Answer the question about the URL endpoint with `/api/restaurants` and the name of the id property with `_id`. 
+Answer the question about the URL endpoint with `/api/restaurants` and the name of the id property with `_id`.
 
 We have now created a model and fixtures (for testing without an API) with a folder structure like this:
 
@@ -600,7 +606,7 @@ Note the usage of `can-href` to set up a link that points to each restaurant. `s
 
 ## Creating a unit-tested view model
 
-In this section we will create a view model for the restaurant list functionality. 
+In this section we will create a view model for the restaurant list functionality.
 
 We'll show a dropdown of all available US states. When the user selects a state, we'll show a list of cities. Once a city is selected, we'll load a list of all restaurants for that city. The end result will look like this:
 
@@ -896,7 +902,7 @@ Update `src/restaurant/list/list.stache` to:
   <form class="form">
     <div class="form-group">
       <label>State</label>
-      <select can-value="{state}" {{#if states.isPending}}disabled{{/if}}>
+      <select {($value)}="state" {{#if states.isPending}}disabled{{/if}}>
         {{#if states.isPending}}
           <option value="">Loading...</option>
         {{else}}
@@ -911,7 +917,7 @@ Update `src/restaurant/list/list.stache` to:
     </div>
     <div class="form-group">
       <label>City</label>
-      <select can-value="city" {{^if state}}disabled{{/if}}>
+      <select {($value)}="city"{{^if state}}disabled{{/if}}>
         {{#if cities.isPending}}
           <option value="">Loading...</option>
         {{else}}
@@ -958,7 +964,7 @@ Update `src/restaurant/list/list.stache` to:
 Some things worth pointing out:
 
 - Since `states` and `cities` return a promise, we can check the promise's status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
-- The `state` and `city` properties are bound to their select fields via [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
+- The `state` and `city` properties are two-way bound to their select fields via [{($value)}](http://canjs.com/docs/can.view.bindings.can-value.html)
 
 Now we have a component that lets us select state and city and displays the appropriate restaurant list.
 
@@ -979,13 +985,13 @@ We already have an existing demo page at [src/restaurant/list/list.html](http://
 
 View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
 
-## Setup automated tests and continuous integration (CI)
+## Automated tests and continuous integration
 
 In this chapter we will automate running the tests so that they can be used in a [continuous integration]() environment. We will use [TravisCI](https://travis-ci.org/) as the CI server.
 
-### Creating a global test page
+### Using the global test page
 
-We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [src/test.html](http://localhost:8080/src/test.html). All tests are being loaded in `src/test.js`. Since we do not tests our models at the moment, let's remove the `import 'src/models/test'` part so that it looks like this:
+We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [src/test.html](http://localhost:8080/src/test.html). All tests are being loaded in `src/test/test.js`. Since we do not tests our models at the moment, let's remove the `import 'src/models/test'` part so that `src/test/test.js` looks like this:
 
 ```js
 import QUnit from 'steal-qunit';
@@ -1420,11 +1426,11 @@ Now we can import that component and update `src/order/new/new.stache` to:
       {{#value}}
         {{#if saveStatus.isResolved}}
           <pmo-order-details order="{saveStatus.value}"></pmo-order-details>
-          <p><a href="javascript://" (click)="{startNewOrder}">Place another order</a></p>
+          <p><a href="javascript://" ($click)="startNewOrder">Place another order</a></p>
         {{else}}
           <h3>Order from {{name}}</h3>
 
-          <form (submit)="{placeOrder}">
+          <form ($submit)="placeOrder">
             <bit-tabs tabs-class="nav nav-tabs">
               <p class="info {{^if order.items.length}}text-error{{else}}text-success{{/if}}">
                 {{^if order.items.length}}
@@ -1439,7 +1445,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
                     <li class="list-group-item">
                       <label>
                         <input type="checkbox"
-                          (change)="{order.items.toggle this}"
+                          ($change)="{order.items.toggle this}"
                           {{#if order.items.has}}checked{{/if}}>
                         {{name}} <span class="badge">${{price}}</span>
                       </label>
@@ -1453,7 +1459,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
                     <li class="list-group-item">
                       <label>
                         <input type="checkbox"
-                          (change)="{order.items.toggle this}"
+                          ($change)="{order.items.toggle this}"
                           {{#if order.items.has}}checked{{/if}}>
                         {{name}} <span class="badge">${{price}}</span>
                       </label>
@@ -1465,17 +1471,17 @@ Now we can import that component and update `src/order/new/new.stache` to:
 
             <div class="form-group">
               <label class="control-label">Name:</label>
-              <input name="name" type="text" class="form-control" can-value="{order.name}">
+              <input name="name" type="text" class="form-control" {($value)}="order.name">
               <p>Please enter your name.</p>
             </div>
             <div class="form-group">
               <label class="control-label">Address:</label>
-              <input name="address" type="text" class="form-control" can-value="{order.address}">
+              <input name="address" type="text" class="form-control" {($value)}="order.address">
               <p class="help-text">Please enter your address.</p>
             </div>
             <div class="form-group">
               <label class="control-label">Phone:</label>
-              <input name="phone" type="text" class="form-control" can-value="{order.phone}">
+              <input name="phone" type="text" class="form-control" {($value)}="order.phone">
               <p class="help-text">Please enter your phone number.</p>
             </div>
             <div class="submit">
@@ -1515,48 +1521,20 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 
 The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
 
-**Note**: Stop your development server so we can install socket.io, a little bit of configuration is needed to make it work. Unlike most of our code, socket.io is exclusively a feature for the browser, but our application also runs in Node. StealJS provides the ability to ignore a module and to set configuration on each environment. Update your package.json, adding the following to the `"system"` object:
-
-```json
-{
-  "system": {
-    ...
-    "map": {
-      "socket.io-client": "socket.io-client/socket.io"
-    },
-    "meta": {
-      "socket.io-client/socket.io": {
-        "format": "global"
-      }
-    },
-    "envs": {
-      "server-development": {
-        "map": {
-          "socket.io-client/socket.io": "@empty"
-        }
-      }
-    }
-  }
-}
+```
+npm install steal-socket.io --save
 ```
 
-```
-npm install socket.io-client --save
-```
-
-Now you can restart your server with `donejs develop` and visit the order page. In `src/models/order.js` add:
+In `src/models/order.js` add:
 
 ```js
-import io from 'socket.io-client';
+import io from 'steal-socket.io';
 
-// io will be undefined when running on the server.
-if(io) {
-  const socket = io();
+const socket = io();
 
-  socket.on('orders created', order => connection.createInstance(order));
-  socket.on('orders updated', order => connection.updateInstance(order));
-  socket.on('orders removed', order => connection.destroyInstance(order));
-}
+socket.on('orders created', order => connection.createInstance(order));
+socket.on('orders updated', order => connection.updateInstance(order));
+socket.on('orders removed', order => connection.destroyInstance(order));
 ```
 
 ### Update the template
@@ -1810,73 +1788,16 @@ If we now run `donejs document` again, we will see the module show up in the men
 
 Now we're ready to create a production build; go ahead and kill your development server, we won't need it from here on.
 
-Before creating a production build we need to update the `package.json` to add some configuration. Replace the following in the **"system"** section; what it does is:
-
-* Makes the vdom be a dependency of jquery on the server, to facilitate server side rendering.
-* Makes the vdom be ignored in the browser.
-* Creates a *sideBundle* for the vdom so that the progressive bundling algorithm (talked about in the next section) isn't affected by it.
-
-```json
-"system": {
-  "main": "place-my-order/index.stache!done-autorender",
-  "directories": {
-    "lib": "src"
-  },
-  "configDependencies": [
-    "live-reload"
-  ],
-  "npmIgnore": [
-    "documentjs",
-    "testee",
-    "donejs-deploy",
-    "yeoman-generator",
-    "generator-donejs"
-  ],
-  "map": {
-    "socket.io-client": "socket.io-client/socket.io"
-  },
-  "meta": {
-    "socket.io-client/socket.io": {
-      "format": "global"
-    }
-  },
-  "envs": {
-    "server-development": {
-      "map": {
-        "socket.io-client": "@empty"
-      }
-    },
-    "server-production": {
-      "map": {
-        "socket.io-client": "@empty"
-      }
-    }
-  }
-}
-```
-
 ### Progressive loading
 
 Our `index.stache` contains a can-import tag for each of the pages we have implemented. These can-imports which have nested html will be progressively loaded; the restaurant list page's JavaScript and CSS will only be loaded when the user visits that page.
 
 ### Bundling your app
 
-To bundle our application for production we create a build script. We could use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example let's simply create a `build.js` file:
-
-#### build.js
-
-```js
-var stealTools = require("steal-tools");
-
-stealTools.build({
-  config: __dirname + "/package.json!npm"
-});
-```
-
-Then run the script:
+To bundle our application for production we use the build script in `build.js`. We could also use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example we just run it directly with Node. Everything is set up already so we run:
 
 ```
-node build
+donejs build
 ```
 
 This will build the application to a `dist/` folder in the project's base directory.
@@ -1884,7 +1805,7 @@ This will build the application to a `dist/` folder in the project's base direct
 From here your application is ready to be used in production. Enable production mode by setting the `NODE_ENV` variable:
 
 ```
-NODE_ENV=production npm start
+NODE_ENV=production donejs start
 ```
 
 Refresh your browser to see the application load in production.
@@ -1899,17 +1820,7 @@ First install steal-cordova as a devDependency:
 npm install steal-cordova --save-dev
 ```
 
-Then update build.js to make Cordova builds when provided the **cordova** argument:
-
-```js
-var stealTools = require("steal-tools");
-
-stealTools.build({
-  config: __dirname + "/package.json!npm"
-});
-```
-
-becomes:
+Then update `build.js` to make Cordova builds when provided the **cordova** argument:
 
 ```js
 var stealTools = require("steal-tools");
@@ -1923,7 +1834,7 @@ var cordovaOptions = {
   id: "com.donejs.placemyorder",
   name: "PlaceMyOrder",
   platforms: ["ios", "android"],
-  index: __dirname + "/app.html",
+  index: __dirname + "/production.html",
   glob: [
     "node_modules/steal/steal.production.js",
     "node_modules/place-my-order-assets/images/**/*"
@@ -1937,41 +1848,20 @@ var buildCordova = process.argv.indexOf("cordova") > 0;
 
 if(buildCordova) {
 
-  buildPromise = buildPromise.then(stealCordova.build);
+  buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
 
 }
 ```
 
-Unlike your web app which runs from a server, Cordova (and NW.js) apps need a html file. Copy/paste this into an app.html
+Unlike your web app which runs from a server, Cordova (and NW.js) apps need a html file which is why we will use `production.html`.
 
-```html
-<html>
-  <head><title>Place My Order</title></head>
-  <body>
-    <script load-bundles env="cordova-production" src="node_modules/steal/steal.production.js" main="place-my-order/index.stache!done-autorender"></script>
-  </body>
-</html>
-```
-
-This allows us to build a Cordova app with:
+Now we can build a Cordova app with:
 
 ```shell
 node build cordova
 ```
 
-steal-cordova can also be used to launch an emulator after the build is complete. Change:
-
-```js
-buildPromise.then(stealCordova.build);
-```
-
-to:
-
-```js
-buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
-```
-
-Which will launch the iOS emulator. Substitute `android` for the Android emulator.
+Which will launch the iOS emulator after a successful build. emulator.
 
 #### AJAX
 
@@ -2010,18 +1900,6 @@ superMap({
 });
 ```
 
-#### Routing
-
-We can also use `steal-platform` to switch to hashchange routing for Cordova apps. Cordova (and NW.js) do not work with pushstate routing, so we can conditionally fallback. Add this to `src/app.js`:
-
-```js
-import platform from 'steal-platform';
-
-if(platform.isCordova || platform.isNW) {
-  route.defaultBinding = 'hashchange';
-}
-```
-
 ### Building to NW.js
 
 [steal-nw](https://github.com/stealjs/steal-nw) is a module that makes it easy to create [NW.js](http://nwjs.io/) applications.
@@ -2040,8 +1918,7 @@ var nwOptions = {
   platforms: ["osx"],
   files: [
     "package.json",
-    "app.html",
-
+    "production.html",
     "node_modules/steal/steal.production.js",
     "node_modules/place-my-order-assets/images/**/*"
   ]
@@ -2067,7 +1944,7 @@ And finally update package.json. There are two things we need to change:
 
 ```json
 {
-  "main": "app.html",
+  "main": "production.html",
 
   ...
 
@@ -2078,19 +1955,13 @@ And finally update package.json. There are two things we need to change:
 }
 ```
 
-Next, if using pushstate routing, we need to update our routes to use hash-based routing because NW.js runs within the file protocol. If you haven't already installed `steal-platform`, do so now. Then in `src/app.js` module add the following condition:
+Now we can build to NW.js with
 
-```js
-import platform from 'steal-platform';
-
-if(platform.isCordova || platform.isNW) {
-  route.defaultBinding = "hashchange";
-}
+```
+node build nw
 ```
 
-This will set can.route to use hash urls, which is needed in both Cordova and NW.js environments.
-
-Now we can build to NW.js with `node build nw`. Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
+Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
 
 
 ## Deploying
@@ -2121,8 +1992,6 @@ var buildPromise = stealTools.build({
   }
 });
 ```
-
-
 
 StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
 
@@ -2186,24 +2055,7 @@ Next, update your package.json to set the baseURL that will be used in productio
 }
 ```
 
-**Note**: Your baseURL will be something different, it will include the **name** you gave to your app in the previous section.
-
-Now your assets will live on a CDN. You can update your `index.stache` template to use the CDN to load Steal; all of assets will also come from there. Use the same app name that you used in the previous section. **Important**: Again, swap out "place-my-order.divshot.io" here for the name of your app.
-
-```html
-{{#switch @env.NODE_ENV}}
-  {{#case "production"}}
-    <script src="https://place-my-order.divshot.io/node_modules/steal/steal.production.js"
-      main="place-my-order/index.stache!done-autorender"></script>
-  {{/case}}
-
-  {{#default}}
-    <script src="/node_modules/steal/steal.js"></script>
-  {{/default}}
-{{/switch}}
-```
-
-Now do one last build and deploy your code, which is finally ready to run on Divshot:
+**Note**: Your baseURL will be something different, it will include the **name** you gave to your app in the previous section. Now your assets will live on a CDN. Make one last build and deploy your code, which is finally ready to run on Divshot:
 
 ```
 node build
