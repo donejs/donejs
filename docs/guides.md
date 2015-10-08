@@ -3,7 +3,7 @@
 @hide sidebar
 @outline 2 ol
 
-@description DoneJS is about getting your application ... er ... __done__ so you can spend time with 
+@description DoneJS is about getting your application ... well, __done__ so you can spend time with 
 your friends and family.  To demonstrate how easy it is to make something amazing with all the bells and
 wistles a modern developer needs, we created the following guides.
 
