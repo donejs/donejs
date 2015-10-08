@@ -8,7 +8,7 @@
 
 ## Quick start - [donejs-chat](http://chat.donejs.com/)
 
-In the [quick start guide](/Guide.html) we will built a small chat application - [http://chat.donejs.com/](http://chat.donejs.com/).  It demonstrates:
+In the [quick start guide](/Guide.html) we will build a small chat application - [http://chat.donejs.com/](http://chat.donejs.com/).  It demonstrates:
 
 - Live reload (aka Hot Module Swapping)
 - Server-side rendering
@@ -19,7 +19,7 @@ In the [quick start guide](/Guide.html) we will built a small chat application -
 
 ## In depth - [place-my-order](http://place-my-order.com)
 
-In this [place-my-order guide](/place-my-order.html) we will go into detail, creating [http://place-my-order.com](http://place-my-order.com) a restaurant menu order application. You'll learn about everything in the "Quick start" and more:
+In the [place-my-order guide](/place-my-order.html) we will go into detail, creating [http://place-my-order.com](http://place-my-order.com) a restaurant menu order application. You'll learn about everything in the "Quick start" and more:
 
 - MVVM architecture
 - Testing
