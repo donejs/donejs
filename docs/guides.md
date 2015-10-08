@@ -6,11 +6,22 @@
 
 @body
 
-## Quick start
+## Quick start - [donejs-chat](http://chat.donejs.com/)
 
-In the [quick start guide](/Guide.html) we will built a small chat application.
+In the [quick start guide](/Guide.html) we will built a small chat application - [http://chat.donejs.com/](http://chat.donejs.com/).  It demonstrates:
 
-## place-my-order.com
+- Live reload (aka Hot Module Swapping)
+- Server-side rendering
+- Progressive loading
+- Real time connections
+- Building and deploying to a CDN.
+- Builds to Codova (mobile) and NW.js (desktop).
 
-In this [place-my-order guide](/place-my-order.html) we will go into detail, creating place-my-order.com a restaurant menu order application. We will learn about testing, nested routs, continuous integration and deployment.
- 
+## In depth - [place-my-order](http://place-my-order.com)
+
+In this [place-my-order guide](/place-my-order.html) we will go into detail, creating [http://place-my-order.com](http://place-my-order.com) a restaurant menu order application. You'll learn about everything in the "Quick start" and more:
+
+- Testable MVVM architecture
+- Nested routing
+- Continous integration continous depolyment
+- Documentation
