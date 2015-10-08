@@ -2,6 +2,7 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
+
 @description DoneJS is about getting your application ... er ... done so you can spend time with 
 your friends and family.  To demonstrate how easy it is to make an application with all the bells and
 wistles a modern developer needs, we created the following guides.
