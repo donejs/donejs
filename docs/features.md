@@ -52,11 +52,9 @@ can.Component.extend({
 });
 ```
 
-Project: https://github.com/canjs/can-ssr
+View the documentation for can-ssr [here](https://github.com/canjs/can-ssr).
 
-Docs-link: https://github.com/canjs/can-ssr
-
-Guide-link: 
+[Follow the Guide](./place-my-order.html) to see how to set up server side rendering in your app!
 
 
 ### Progressive Loading
@@ -94,11 +92,6 @@ Progressive loading is done simply by specifying it directly in your templates. 
 ```
 
 That's it! No need for additional configuration in your JavaScript.
-
-
-Project: 
-Docs-link: done-autorender stache stealjs
-Guide-link: 
 
 
 ### Caching and Minimal Data Requests
@@ -501,29 +494,156 @@ Guide: http://donejs.com/Guide.html#section_Creatingcustomelements
 
 Project: http://canjs.com/guides/Recipes.html#section_BuildWidgets_UIElements
 
-### MVVM Reactive
-
-DoneJS applications are architecturally [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) applications where all events and updates flow in a 
-single direction. It's easy to define view models that derive their data from source data but in
-a deterministic and synchronous flow. View updates happen only after all models and view models have been updated.
-
-DoneJS uses [CanJS](http://canjs.com) for custom elements and a MVVM architecture. CanJS is small, fast, and powerful.
-
-MVVM separates concerns in development in a few ways:
+### MVVM Architecture
+DoneJS applications are architecturally [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) applications. DoneJS uses CanJS for custom elements and it’s MVVM architecture. CanJS is small, fast, and powerful. Where DoneJS and CanJS are really unique from other MVVM frameworks are our well articulated view models thanks to CanJS’s observable objects and their [define property](http://canjs.com/docs/can.Map.prototype.define.html).
 
 #### Views (Templates)
-Templates have no complex calculations and will therefore be easier to change and update in the future. This is good because UI will often change late in the process as user feedback comes into play.
+DoneJS uses [stache](http://canjs.com/docs/can.stache.html) templates. Templates have no complex calculations and will therefore be easier to change and update in the future. This is good because UI will often change late in the process as user feedback comes into play.
 
 #### Models
-Models are the bare-bones representation of the data as it's stored on a server. In CanJS the model will define its API endpoints too.
+Models are the bare-bones representation of the data as it's stored on a server. Models are intended to be generic and used across viewModels in your app as needed. This means that you won’t ever have logic for formatting data for your views, but you may have logic to sanitize or validate data for your API endpoints.
 
 #### ViewModels
-ViewModels are the glue between views and models; They will do the complex logic and provide simple values to check and render in templates, as well as any transformations of model data to view data. ViewModels are closely related to the idea of a current state so they'll handle reading, updating, deleting, and cancelling form information changes, for example.
+ViewModels are the glue between views and models; They will do the complex logic and provide simple values to check and render in templates, as well as any transformations of model data to view data.
+For example, if we have a page that shows user information we may create a property on our viewModel that shows a user’s full name which is derived from the user’s first and last name.
+
+```
+var Person = can.Map.extend({
+define: {
+     fullName: {
+        get () {
+           return this.attr("first") + " " + this.attr("last");
+         }
+    }
+}
+});
+```
+
+#### Define is Awesome
+The example above under viewModels shows how the define property can be used to create virtual properties. Define becomes really powerful when specifying a property’s get and set functions. If we take a look at the [Place My Order App’s](./place-my-order.html) page for finding restaurants we can see how define turns a traditionally complex problem into something very simple, clear and easily tested.
 
 
-### Architecture
 
-The architecture for a DoneJS app is really a marriage and extension of the foundations laid by CanJS’s MVVM (model, view, view model) architecture. Where DoneJS and CanJS are really unique from other MVVM frameworks are our well articulated viewModels thanks to CanJS’s observable objects and our define plugin.
+A user selects their desired state and it triggers an API call to get a list of available cities for that state. If the users changes the state, the selected city is removed, and a new list of cities is loaded.
+
+Here is a snippet from the viewModel for just the state and city:
+
+```
+export var ViewModel = Map.extend({
+  define: {
+    // Our list of states
+    states: {
+      get() {
+        return State.getList({});
+      }
+    },
+    // The selected state
+    state: {
+      type: 'string',
+      value: null,
+      set() {
+        // Remove the city when the state changes
+        this.attr('city', null);
+      }
+    },
+    // The list of cities
+    cities: {
+      get() {
+        let state = this.attr('state');
+
+        if(!state) {
+          return null;
+        }
+
+        return City.getList({ state });
+      }
+    },
+    // The selected city
+    city: {
+      type: 'string',
+      value: null
+    }
+  }
+});
+```
+
+Because all the logic for this page is happening inside our viewModel writing tests are simple and can be done without even creating a view. You can see that only when a `state` is set will our viewModel fetch `cities`.  We also know to remove the selected `city` when the users sets a new `state`.  
+
+What would normally be a pretty complex chain of logic is pretty straightforward and clear thanks to the use of getters and setters on our properties. It’s easy to know and test the expected behaviour of each property even though there are dependencies on other values.
+
+Here is a snippet from the tests for this page:
+
+```
+QUnit.asyncTest('loads all states', function() {
+  var vm = new ViewModel();
+  var expectedSates = stateStore.findAll({});
+
+  vm.attr('states').then(states => {
+    QUnit.deepEqual(states.attr(), expectedSates.data, 'Got all states');
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('setting a state loads its cities', function() {
+  var vm = new ViewModel();
+  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
+
+  QUnit.equal(vm.attr('cities'), null, '');
+  vm.attr('state', 'CA');
+  vm.attr('cities').then(cities => {
+    QUnit.deepEqual(cities.attr(), expectedCities);
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('changing a state resets city', function() {
+  var vm = new ViewModel();
+  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
+
+  QUnit.equal(vm.attr('cities'), null, '');
+  vm.attr('state', 'CA');
+  vm.attr('cities').then(cities => {
+    QUnit.deepEqual(cities.attr(), expectedCities);
+    vm.attr('state', 'NT');
+    QUnit.equal(vm.attr('city'), null);
+    QUnit.start();
+  });
+});
+```
+As you can see we only need to work with the view model to test the functionality of our UI.
+
+And finally, here is the very simple template for our page (removing some bootstrap boilerplate):
+```
+<label>State</label>
+<select can-value="{state}" {{#if states.isPending}}disabled{{/if}}>
+  {{#if states.isPending}}
+    <option value="">Loading...</option>
+  {{else}}
+    {{^if state}}
+    <option value="">Choose a state</option>
+    {{/if}}
+    {{#each states.value}}
+    <option value="{{short}}">{{name}}</option>
+    {{/each}}
+  {{/if}}
+</select>
+<label>City</label>
+<select can-value="city" {{^if state}}disabled{{/if}}>
+  {{#if cities.isPending}}
+    <option value="">Loading...</option>
+  {{else}}
+    {{^if city}}
+    <option value="">Choose a city</option>
+    {{/if}}
+    {{#each cities.value}}
+    <option>{{name}}</option>
+    {{/each}}
+  {{/if}}
+</select>
+```
+Our template elegantly handles disabled and loading states, and the markup is incredibly simple and concise.
+
+Check out our guide for a full walk through of the Place My Order app.
 
 ### Hot Module Swapping & Live Reload
 
