@@ -3,12 +3,6 @@ body:not(.donejs) {
 
 	background-color: #FCFEFD;
 	color: #000000;
-
-	a {
-		font-weight: 900;
-		color: @logoColor;
-	}
-
 	pre {
 		code.prettyprint {
 			word-wrap: break-word;
@@ -56,6 +50,10 @@ body:not(.donejs) {
 			}
 			.description,
 			.comment {
+				a {
+					font-weight: 900;
+					color: @logoColor;
+				}
 				ul li {
 					font-weight: 400;
     			color: #424a4e;
