@@ -227,6 +227,8 @@ By maintaining legacy browser support, DoneJS enables you to maximize the reach 
 
 Building apps that require real time updates and communication using DoneJS is easy. DoneJS can seemlessly integrate with your [Socket.io](https://socket.io) backend. After configuring Socket.io on the client to use can-connect, lists and indiviual models will be updated in real time. Your views will automatically update to reflect the changes.
 
+<img src="./static/img/donejs-real-time-v2.gif" alt="How a real time connected app works!" />
+
 Real time apps can help solve traditionally difficult problems. Like building a chat interface or how to keep data on the client up-to-date when other users are modifying it. With DoneJS’s solution there is not much to think about, and just a few lines of code on the client and server.
 
 [Check out our quick-start guide](./Guide.html) to see how we build a real time connected chat app.
