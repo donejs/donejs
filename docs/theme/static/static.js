@@ -238,10 +238,14 @@ steal("./content_list.js",
             }
             if ( doDisable ) {
                 document.body.style.overflow = "hidden";
-                document.body.style.position = "fixed";
+                if ( /iPad|iPhone|iPod/.test(navigator.platform) ) {
+                    document.body.style.position = "fixed";
+                }
             } else {
                 document.body.style.overflow = "";
-                document.body.style.position = "";
+                if ( /iPad|iPhone|iPod/.test(navigator.platform) ) {
+                    document.body.style.position = "";
+                }
             }
         };
 
@@ -342,12 +346,6 @@ steal("./content_list.js",
             var clickFn = function () {
                 var offset = -55;
                 var thisLi = $( this ).closest( "li" );
-                if ( thisLi.is( "body.Features ol > ol > li:first-child" ) ) {
-                    offset = 222 - 50;
-                }
-                if ( thisLi.is( "body.Features ol > ol:first-of-type > li:first-child" ) ) {
-                    offset = 222 - 65;
-                }
                 if ( $( "section.contents" ).is( ".active" ) && thisLi.is( "ol > ol > li" ) ) {
                     $( ".scroll-spy-title" ).click();
                 }
