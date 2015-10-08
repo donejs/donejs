@@ -21,7 +21,8 @@ In the [quick start guide](/Guide.html) we will built a small chat application -
 
 In this [place-my-order guide](/place-my-order.html) we will go into detail, creating [http://place-my-order.com](http://place-my-order.com) a restaurant menu order application. You'll learn about everything in the "Quick start" and more:
 
-- Testable MVVM architecture
+- MVVM architecture
+- Testing
 - Nested routing
 - Continous integration continous depolyment
 - Documentation
