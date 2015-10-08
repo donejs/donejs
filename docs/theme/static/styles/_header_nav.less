@@ -16,10 +16,6 @@ header {
       top:-2px;
       margin:0;
     }
-    li:hover > a {
-      background: none;
-    }
-
   }
   .dropdown-menu {
     border-radius: 0;
@@ -172,7 +168,6 @@ header {
     text-shadow: initial;
     display: block;
     width: 100%;
-    font-weight: 400;
     @media(min-width: @screen-sm) {
       width: auto;
     }
@@ -215,7 +210,7 @@ header {
         position: absolute;
       }
     }
-    @media(max-width: @screen-sm){
+    @media(max-width: @screen-xs-max){
       .dropdown-menu {
         display: block;
         visibility: visible;

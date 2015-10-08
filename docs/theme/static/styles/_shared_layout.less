@@ -231,8 +231,9 @@ body:not(.donejs) {
 			z-index: 1;
 			@media(max-width: @screen-md){
 				line-height:1;
-				font-size: 35px;
-				height: auto;
+				font-size: 25px;
+				max-height: 180px;
+				margin-top:40px;
 				padding: 60px 20px;
 			}
 			&:before {
@@ -257,19 +258,22 @@ body:not(.donejs) {
 				left: 0px;
 			}
 		}
-		h3 {
+		h3, h4, h5, h6 {
 			color: @logoColor;
+		}
+		h3 {
 			font-size: 40px;
 			margin-top: 50px;
 			@media(max-width: @screen-md){
 				line-height: 1;
 				margin-bottom: 35px;
+				font-size: 23px;
 			}
 		}
 		h2 + * {
 			margin-top: @h2height + 150px!important; /* the px added here are the margin under the h2 */
 			@media(max-width: @screen-sm-max){
-				margin-top: 255px !important;
+				margin-top: 250px !important;
 			}
 
 		}
