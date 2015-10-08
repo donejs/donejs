@@ -3,12 +3,6 @@ body:not(.donejs) {
 
 	background-color: #FCFEFD;
 	color: #000000;
-
-	a {
-		font-weight: 900;
-		color: @logoColor;
-	}
-
 	pre {
 		code.prettyprint {
 			word-wrap: break-word;
@@ -53,6 +47,17 @@ body:not(.donejs) {
 				padding-left: 20px;
 				padding-right: 20px;
 				margin:50px 0;
+			}
+			.description,
+			.comment {
+				a {
+					font-weight: 900;
+					color: @logoColor;
+				}
+				ul li {
+					font-weight: 400;
+    			color: #424a4e;
+				}
 			}
 		}
 	}
@@ -209,19 +214,19 @@ body:not(.donejs) {
 			word-wrap: break-word;
 			overflow: hidden;
 		}
-		@h2height: 175px;
+		@h2height: 150px;
 		h2 {
 			position: absolute;
 			left: 0px;
 			right: 0px;
 			padding-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
-			padding-top: 50px;
+			padding-top: 40px;
 			display: block;
 			background-color: @charcoal;
 			color: @white;
 			font-size: 50px;
 			background-image: url( "/static/img/background.jpg" );
-			margin-top: 40px;
+			margin-top: 100px;
 			height: @h2height;
 			z-index: 1;
 			@media(max-width: @screen-md){
@@ -256,28 +261,17 @@ body:not(.donejs) {
 			color: @logoColor;
 			font-size: 40px;
 			margin-top: 50px;
-			border-top: 1px solid #EEEEEE;
-			padding-top: 50px;
 			@media(max-width: @screen-md){
 				line-height: 1;
 				margin-bottom: 35px;
 			}
-
-
 		}
-
 		h2 + * {
-			padding-top: @h2height + 50px!important; /* the px added here are the margin under the h2 */
+			margin-top: @h2height + 150px!important; /* the px added here are the margin under the h2 */
 			@media(max-width: @screen-sm-max){
-				padding-top: 205px !important;
+				margin-top: 255px !important;
 			}
 
-		}
-		h2 + p {
-			padding-top: @h2height + 100px!important;
-			@media(max-width: @screen-sm-max){
-				padding-top: 255px !important;
-			}
 		}
 		h2 + p,
 		h2 + p + p,
