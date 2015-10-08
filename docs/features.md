@@ -490,10 +490,6 @@ DoneJS [Generators](#section_Generators) will help you get started on your compo
 
 Plus, if you've built something awesome, you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
 
-Guide: http://donejs.com/Guide.html#section_Creatingcustomelements
-
-Project: http://canjs.com/guides/Recipes.html#section_BuildWidgets_UIElements
-
 ### MVVM Architecture
 DoneJS applications are architecturally [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) applications. DoneJS uses CanJS for custom elements and it’s MVVM architecture. CanJS is small, fast, and powerful. Where DoneJS and CanJS are really unique from other MVVM frameworks are our well articulated view models thanks to CanJS’s observable objects and their [define property](http://canjs.com/docs/can.Map.prototype.define.html).
 
@@ -522,7 +518,7 @@ define: {
 #### Define is Awesome
 The example above under viewModels shows how the define property can be used to create virtual properties. Define becomes really powerful when specifying a property’s get and set functions. If we take a look at the [Place My Order App’s](./place-my-order.html) page for finding restaurants we can see how define turns a traditionally complex problem into something very simple, clear and easily tested.
 
-
+<img src="./static/img/pmo-picker.gif" alt="The place my order city and state picker." />
 
 A user selects their desired state and it triggers an API call to get a list of available cities for that state. If the users changes the state, the selected city is removed, and a new list of cities is loaded.
 
