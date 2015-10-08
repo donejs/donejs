@@ -53,23 +53,26 @@ Then we can start development mode by running:
 donejs develop
 ```
 
-The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage. This server needs to stay open at all times so the all following commands should run in a new terminal window.
+The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage.
 
-If you ran into any problems, get in touch with us [on Gitter](https://gitter.im/donejs/donejs).
+If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs).
 
 
 ## Adding Bootstrap
 
-DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add the [Bootstrap](http://getbootstrap.com/) styles to the page and and see DoneJS [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
+DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
 
+### Installing the NPM package
 
-Now we can install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
+Keep the server from `donejs develop` running and open a new terminal window to install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
 ```
 npm install bootstrap --save
 ```
 
-To see live-reload in action, let's update the main template to import the Bootstrap LESS file and also add some HTML that uses those styles. Update `src/index.stache` to look like this:
+### Add it to the page
+
+To see live-reload in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. Update `src/index.stache` to look like this:
 
 ```html
 <html>
@@ -109,7 +112,7 @@ To see live-reload in action, let's update the main template to import the Boots
 </html>
 ```
 
-If you have a browser window open at [http://localhost:8080/](localhost:8080) you should already see the updated styles and content and any change you make will show up as soon as you save it.
+If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save it. Feel free to edit the HTML or `src/styles.less` to see how live-reload updates the page automatically.
 
 ## Routing and components
 
@@ -117,20 +120,18 @@ In this part we will create our own custom HTML elements. One for the homepage a
 
 ### Generate custom elements
 
-The homepage custom element (with the HTML tag name `chat-home`) won't be very big, so we'll put everything into a single `.component` file. To generate it run:
+The homepage custom element (with the HTML tag name `chat-home`) won't be very big or complex, so we put everything into a single `.component` file. To generate it run:
 
 ```
 donejs generate component home.component chat-home
 ```
 
-And then move the content from the homepage into this component so that `src/home.component` looks like this:
+Then move the content from the homepage into this component so that `src/home.component` looks like this:
 
 ```html
 <can-component tag="chat-home">
   <style type="less">
     display: block;
-
-    h1.page-header { margin-top: 0; }
   </style>
   <template>
     <h1 class="page-header text-center">
@@ -142,49 +143,7 @@ And then move the content from the homepage into this component so that `src/hom
 </can-component>
 ```
 
-And update `src/index.stache` to dynamically load and initialize this component instead:
-
-```html
-<html>
-  <head>
-    <title>{{title}}</title>
-    {{asset "css"}}
-    {{asset "html5shiv"}}
-  </head>
-  <body>
-    <can-import from="bootstrap/less/bootstrap.less!" />
-    <can-import from="donejs-chat/styles.less!" />
-    <can-import from="donejs-chat/app" export-as="viewModel" />
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <can-import from="donejs-chat/home.component!">
-            {{#if isPending}}
-              Loading...
-            {{else}}
-              <chat-home/>
-            {{/if}}
-          </can-import>
-        </div>
-      </div>
-    </div>
-
-    {{asset "inline-cache"}}
-
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="donejs-chat/index.stache!done-autorender"></script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
-  </body>
-</html>
-```
-
-The messages component (with the tag `chat-messages`) will be a little more complex, so we'll generate it using the [modlet file pattern](Features.html#section=section_Modlets).
+The messages component (with the tag `chat-messages`) will be a little more complex, so we generate it using the [modlet file pattern](Features.html#section=section_Modlets).
 
 ```
 donejs generate component messages chat-messages
@@ -194,7 +153,7 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of the application state.
+Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from a URL string to properties in our application view-model.
 
 If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
@@ -213,21 +172,23 @@ First, let's update `src/home.component` with a link to the chat messages page:
       <br>Chat
     </h1>
 
-    <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">Start chat</a>
+    <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">
+      Start chat
+    </a>
   </template>
 </can-component>
 ```
 
-When the "Start chat" button is clicked, `can-href="{ page='chat' }"` will make sure that our application state gets updated with that property. This state will also be reflected in the route.
+When the "Start chat" button is clicked, `can-href="{ page='chat' }"` will make sure that our application view-model gets updated with that property. This property will also update the URL.
 
-Next we add a link to go back to the chat page (`messages/messages.stache`):
+Next we add a link to go back to the chat page by updating `messages/messages.stache` to:
 
 ```html
 <h5><a can-href="{ page='home' }">Home</a></h5>
 <p>{{message}}</p>
 ```
 
-Then, to get a pretty route we add a mapping for the `page` property in `src/app.js` which then looks like this:
+Then we add a routing rule for the `page` property in `src/app.js`:
 
 ```js
 import AppMap from "can-ssr/app-map";
@@ -251,7 +212,7 @@ export default AppViewModel;
 
 ### Switch between pages
 
-Finally we can glue both components together as separate pages in `src/index.stache`. This is done by adding another dynamic import for the `chat/messages/` component and showing each import based on the `page` property (which we set in the route):
+Finally we glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `chat/messages/` components and showing each import based on the `page` property:
 
 
 ```html
@@ -306,17 +267,17 @@ Finally we can glue both components together as separate pages in `src/index.sta
 
 Now each component is being dynamically loaded while navigating between the home and messages page.
 
-Also, everything will be [rendered on the server](Features.html#section=section_ServerSideRendered). If you open [localhost:8080/chat](http://localhost:8080/chat) directly in the browser, you'll see the chat messages page right away, while the JavaScript is being loaded in the backround. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
+Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the pages content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
 
 
 ## Homepage
 
-Now that we can navigate between pages we can finish implementing their functionality. Let's start with the homepage.
+Now that we can navigate between pages, we will finish implementing their functionality, starting with the homepage.
 
 
 ### Installing bit-tabs
 
-On the homepage we will add and load [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
+On the homepage let's install and add [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
 
 ```
 npm install bit-tabs --save
@@ -324,14 +285,16 @@ npm install bit-tabs --save
 
 ### Update the page
 
-Then we import the tabs custom elements without its styles from `bit-tabs/unstyled` the same way as we did with Bootstrap already. Let's also add some markup using those tabs. `src/home.component` then looks like this:
+Then import the unstyled custom elements from `bit-tabs/unstyled` (since we want to use the Bootstrap tabs styles). Update `src/home.component` to look like this:
 
 ```html
 <can-component tag="chat-home">
   <style type="less">
     display: block;
 
-    h1.page-header { margin-top: 0; }
+    bit-panel p {
+      padding: 10px;
+    }
   </style>
   <template>
     <can-import from="bit-tabs/unstyled" />
@@ -350,56 +313,50 @@ Then we import the tabs custom elements without its styles from `bit-tabs/unstyl
       </bit-panel>
     </bit-tabs>
 
-    <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">Start chat</a>
+    <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">
+      Start chat
+    </a>
   </template>
 </can-component>
-```
-
-To add a little more whitespace we can update `src/styles.less` with:
-
-```css
-bit-panel p {
-  padding: 10px;
-}
 ```
 
 ## Messages page
 
 For the messages page we will:
 
- * create a messages model that connects to a RESTful API
- * add the ability to retrieve and show all messages as well as creating new messages
- * make the message list receive real-time updates from other clients
+ * Create a messages model that connects to a RESTful API.
+ * Add the ability to retrieve and show all messages as well as creating new messages.
+ * Make the message list receive real-time updates from other clients.
 
 ### Generate Message model
 
-To create a connection for our mesages we will use [can-connect supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html) which we can generate like this:
+To load messages from the server we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermode like this:
 
 ```
 donejs generate supermodel message
 ```
 
-When asked for the URL endpoint we have to make sure to set it to our remote API at [http://chat.donejs.com/api/messages](http://chat.donejs.com/api/messages). The other prompt can be answered with the default by hitting enter.
+When asked for the URL set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
 
 ### Using the connection
 
-The generated file is all that is needed to create a connection to our REST endpoint. We can go ahead and use it by importing it in `src/messages/messages.stache` and requesting a list of all mesages with the `message-model` custom element:
+The generated file is all that is needed to connect to our REST API. Use it by importing it and requesting a list of all messages with the `message-model` custom element. Update  `src/messages/messages.stache` to:
 
 ```html
 <can-import from="donejs-chat/models/message" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
-<message-model get-list="{}">
+<message-model get-list="{}" class="list-group">
   <div class="list-group">
     {{#each ./value}}
-      <a class="list-group-item">
+      <div class="list-group-item">
         <h4 class="list-group-item-heading">{{name}}</h4>
         <p class="list-group-item-text">{{message}}</p>
-      </a>
+      </div>
     {{/each}}
     {{^if ./value.length}}
-    <a class="list-group-item">
+    <div class="list-group-item">
       <h4 class="list-group-item-heading">No messages</h4>
-    </a>
+    </div>
     {{/if}}
   </div>
 </message-model>
@@ -409,39 +366,38 @@ If we now open [localhost:8080/chat](http://localhost:8080/chat) we either see t
 
 ### Creating messages
 
-Now can add the form to create new messages. The form simply binds the `name` and `message` property to the components view model and calls `send` when hitting the enter key in the message input. `src/messages/messages.stache` will now look like this:
+Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. Update `src/messages/messages.stache` to look like this:
 
 ```html
-<can-import from="donejs-chat/models/message" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
-<message-model get-list="{}">
+<message-model get-list="{}" class="list-group">
   <div class="list-group">
     {{#each ./value}}
-      <a class="list-group-item">
+      <div class="list-group-item">
         <h4 class="list-group-item-heading">{{name}}</h4>
         <p class="list-group-item-text">{{message}}</p>
-      </a>
+      </div>
     {{/each}}
     {{^if ./value.length}}
-    <a class="list-group-item">
+    <div class="list-group-item">
       <h4 class="list-group-item-heading">No messages</h4>
-    </a>
+    </div>
     {{/if}}
   </div>
 </message-model>
 <div class="row">
   <div class="col-sm-3">
-    <input type="text" class="form-control" id="name"
-        placeholder="Your name" {($value)}="name">
+    <input type="text" class="form-control" placeholder="Your name"
+        {($value)}="name">
   </div>
   <div class="col-sm-9">
-    <input type="text" class="form-control" id="message"
-        placeholder="Your message" {($value)}="message" ($enter)="send">
+    <input type="text" class="form-control" placeholder="Your message"
+        {($value)}="message" ($enter)="send()">
   </div>
 </div>
 ```
 
-Next we have to implement the `send` method that is being called when pressing enter in `src/messages/messages.js`:
+Next we have to implement the `send()` method. Update `src/messages/messages.js` to this:
 
 ```js
 import Component from 'can/component/';
@@ -467,9 +423,9 @@ export default Component.extend({
 });
 ```
 
-It simply takes the `name` and `message` properties which are bound to the input fields from the view-model and creates and saves a new `Message` instance. Once completed successfully we can set the message back to empty to reset the input field.
+The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance and saves it to the server. Once completed successfully it sets the message to an empty string to reset the input field.
 
-If we now enter a name and message, it will appear automatically in our messages list. In fact, all lists that are related to that model will be updated automatically in the page whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimizing data requests](Features.html#section=section_Cachingandminimaldatarequests).
+You can now enter your name and a message! It will automatically appear in our messages list. In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimizing data requests](Features.html#section=section_Cachingandminimaldatarequests).
 
 ### Real-time connection
 
