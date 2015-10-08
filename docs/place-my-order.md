@@ -2,24 +2,24 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description In this guide you will learn about all of [DoneJS features]() by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
+@description In this guide you will learn about all of [DoneJS' features]() by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
 
 
 ![DoneJS app](static/img/place-my-order.png)
 
 
-After the initial application setup that includes a server that hosts and pre-renders the application we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
+After the initial application setup, which includes a server that hosts and pre-renders the application, we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
 
-After that we will talk about what a view-model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser, we will automate running them locally from the command line and also on a continuous integration server. In the subsequent chapters, we will show how to easily import other modules into our application and how to set up a real-time connection.
+After that we will talk about what a view model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser, we will automate running them locally from the command line and also on a continuous integration server. In the subsequent chapters, we will show how to easily import other modules into our application and how to set up a real-time connection.
 
-Finally, we will describe how to build and deploy your application for the web, as a desktop application with nw.js, and as a mobile app with Cordova.
+Finally, we will describe how to build and deploy our application to the web, as a desktop application with nw.js, and as a mobile app with Cordova.
 
 
 @body
 
-## Setup the project
+## Set up the project
 
-In this section we will create our DoneJS project and set up a REST API for the application to use.
+In this section we will create our DoneJS project and set up a RESTful API for the application to use.
 You will need [NodeJS](http://nodejs.org) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
 
 ### Create the project
@@ -36,7 +36,7 @@ Then we can create a new DoneJS application:
 donejs init place-my-order
 ```
 
-The initialization process will ask you questions like the name of your application (set to `place-my-order` which we can keep) and the source folder (set to `src` which we can keep as well). The other questions can be skipped for now by hitting enter. This will install all of DoneJS dependencies, among other things the main projects:
+The initialization process will ask you questions like the name of your application (set to `place-my-order`) and the source folder (set to `src`). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
@@ -76,66 +76,71 @@ We can see the following files:
 ├── node_modules/
 ```
 
-Let's have a quick look at what those files are for:
+Let's have a quick look at the purpose of each:
 
 - `.yo-rc.json` contains information for running the generators.
 - `package.json` is the main configuration file that defines all our application dependencies and other settings.
 - `test.html` is used to run all our tests.
 - `documentjs.json` is the configuration file for generating documentation.
 - `readme.md` is the readme file for your repository.
-- `src` is the folder where all our development assets live on their own modlets (more about that later).
-- `src/app.js` is the main application file which exports the main application state.
+- `src` is the folder where all our development assets live in their own modlets (more about that later).
+- `src/app.js` is the main application file, which exports the main application state.
 - `src/index.stache` is the main client template that includes server-side rendering.
 - `src/index.html` is the main client template to use if you want to opt out of server-side rendering.
-- `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures/fixtures.js` which will reference all the specific models fixtures files (so that we can run model related tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
-- `src/styles.less` is the main application styles LESS.
+- `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures/fixtures.js` which will reference all the specific models fixtures files (so that we can run model tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
+- `src/styles.less` is the main application styles.
 - `src/test/test.js` collects all individual component and model tests we will create throughout this guide and is loaded by `test.html`.
 - `src/test/functional.js` will contain functional smoke tests for our application.
 
 ### Development mode
 
-DoneJS comes with its own server which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also start a [live-reload](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) server that automatically reloads files in the browser as they change. You can start both by running:
+DoneJS comes with its own server, which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also start a [live-reload](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) server that automatically reloads files in the browser as they change. You can start both by running:
 
 ```
 donejs develop
 ```
 
-The default port is 8080 so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
-
-**Note**: Kill the server for now while we need to install a few dependencies (ctrl+c on Windows, cmd+c on Mac).
+The default port is 8080, so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
 
 ### Setup a service API
 
-Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we just install and start an existing service API that can be used with our application:
+Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we'll just install and start an existing service API created specifically for use with this tutorial:
+
+**Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows, cmd+c on Mac).
 
 ```
 npm install place-my-order-api --save
 ```
 
-Now, we can add an API server start script into the `scripts` section of our `package.json` like this:
+Now we can add an API server start script into the `scripts` section of our `package.json` like this:
 
 ```js
 "scripts": {
     "api": "place-my-order-api --port 7070",
 ```
 
-Which allows to start the server like:
+Which allows us to start the server like:
 
 ```
 donejs api
 ```
 
-At first startup, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants) were we can see a JSON list of restaurant data. Keep this server running during development.
+The first time it starts, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants), where we can see a JSON list of restaurant data. Keep this server running during development.
 
 ### Loading assets
 
-Before we create the first files we also need to install the `place-my-order-assets` package which contains the images and styles for the application:
+Before we get to the code, we also need to install the `place-my-order-assets` package which contains the images and styles specifically for this tutorial's application:
 
 ```
 npm install place-my-order-assets --save
 ```
 
-Every DoneJS application consists of at least two files: A main template (in this case `src/index.stache`) which contains the main template and links to the development or production assets, and a main application file (`src/app.js`) that initializes the application state and routes. `src/index.stache` was already created for you when you ran `donejs init`, so we can update it to reflect the below content:
+Every DoneJS application consists of at least two files: 
+
+ 1. **A main template** (in this case `src/index.stache`) which contains the main template and links to the development or production assets
+ 1. **A main application file** (`src/app.js`) that initializes the application state and routes
+
+`src/index.stache` was already created for us when we ran `donejs init`, so we can update it to reflect the below content:
 
 ```handlebars
 <html>
@@ -165,7 +170,13 @@ Every DoneJS application consists of at least two files: A main template (in thi
 </html>
 ```
 
-This is an HTML5 template that uses the [Handlebars syntax](http://handlebarsjs.com/)-compatible [can.stache](http://canjs.com/docs/can.stache.html) as the view engine and renders a `message` property from the application state. `can-import` loads dependencies of the templates. First the `place-my-order-assets` package (which loads the LESS styles for the application) followed by `place-my-order/app` which is the main application file. The [asset](https://github.com/canjs/can-ssr#asset-helper) helper provides assets like CSS styles, cached data, and links to scripts based on the environment (development or production).
+This is an HTML5 template that uses [can.stache](http://canjs.com/docs/can.stache.html) - a [Handlebars syntax](http://handlebarsjs.com/)-compatible view engine. It renders a `message` property from the application state.
+
+`can-import` loads the template's dependencies:
+ 1. The `place-my-order-assets` package, which loads the LESS styles for the application
+ 1. `place-my-order/app`, which is the main application file 
+
+The [asset](http://canjs.github.io/can-ssr/doc/can-ssr.helpers.asset.html) helper loads assets like CSS, cached data, and scripts, regardless of the current environment (development or production).
 
 The main application file at `src/app.js` looks like this:
 
@@ -190,11 +201,11 @@ const AppViewModel = AppMap.extend({
 export default AppViewModel;
 ```
 
-This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) which contains the application state (with a default `message` property) and is also responsible for caching data when rendering on the server so that it doesn't need to be requested again on the client.
+This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
 
 ### Starting the application
 
-Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid same origin issues. This means that we need to modify the `start` scripti in our `package.json` from:
+Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid violating the same origin policy. This means that we need to modify the `start` script in our `package.json` from:
 
 ```js
 "scripts": {
@@ -220,9 +231,9 @@ Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" me
 
 ## Creating custom elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules. In the following section we will create different components for the homepage, the restaurant list, and the order history. After that, we will glue them all together using routes and the global application state.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules. In the following section we will create separate components for the homepage, the restaurant list, and the order history page. After that, we will glue them all together using routes and the global application state.
 
-There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [done-component](https://github.com/donejs/done-component)). Larger components can be split up into individual files.
+There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single `.component` file (to learn more see [done-component](https://github.com/donejs/done-component)). Larger components can be split up into several separate files.
 
 ### Creating a homepage element
 
@@ -232,7 +243,7 @@ To generate a new component run:
 donejs generate component home.component pmo-home
 ```
 
-This will create a file at `src/home.component` containing the basic layout of components. We will update it to reflect the below content:
+This will create a file at `src/home.component` containing the basic ingredients of a component. We will update it to reflect the below content:
 
 ```html
 <can-component tag="pmo-home">
@@ -251,11 +262,11 @@ This will create a file at `src/home.component` containing the basic layout of c
 </can-component>
 ```
 
-Here we created a [can.Component](http://canjs.com/docs/can.Component.html) named `pmo-home` using a [web-component](http://webcomponents.org/) style declaration. The component does not have any separate styles or functionality other than the template.
+Here we created a [can.Component](http://canjs.com/docs/can.Component.html) named `pmo-home` using a [web-component](http://webcomponents.org/) style declaration. This particular component is just a basic template, it does not have much in the way of styles or functionality.
 
 ### Create the order history element
 
-For now, the order history is very similar.
+We'll create an initial version of order history that is very similar.
 
 ```
 donejs generate component order/history.component pmo-order-history
@@ -280,7 +291,7 @@ And update `src/order/history.component`:
 
 ### Creating a restaurant list element
 
-The restaurant list will contain more functionality, which is why we will split it into separate files for the template and the component logic. All files are put together in the component's own folder so that they can be easily re-used and tested.
+The restaurant list will contain more functionality, which is why we will split its template and component logic into separate files.
 
 We can create a basic component like that by running:
 
@@ -288,7 +299,7 @@ We can create a basic component like that by running:
 donejs generate component restaurant/list pmo-restaurant-list
 ```
 
-The folder structure looks like this:
+The component's files are collected in a single folder so that components can be easily tested, moved, and re-used. The folder structure looks like this:
 
 ```
 ├── node_modules
@@ -310,19 +321,21 @@ The folder structure looks like this:
 |   |   |   ├── test.html
 ```
 
-We will learn more about those files and add more functionality to this element in a later chapter but it already contains a fully functional component with a demo page (see [localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html)), a basic test (at [localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html)) and documentation placeholders.
+We will learn more about those files and add more functionality to this element later, but it already contains a fully functional component with a demo page (see [localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html)), a basic test (at [localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html)) and documentation placeholders.
 
 ## Setting up routing
 
-In this part, we will create routes and dynamically load and bring together the custom elements we created on the main page.
+In this part, we will create routes - URL patterns that load specific parts of our single page app. We'll also dynamically load the custom elements we created and integrate them in the application's main page.
 
 ### Create Routes
 
-Routing works slightly different than what you might be used to from other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from a URL string to properties in our application state. As a result, our routes will just be a different representation of the application state.
+Routing works a bit differently than what you might be used to in other libraries. In other libraries, you might declare routes and map those to controller-like actions. 
 
-If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /foo) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
-To add the routes, change `src/app.js` to:
+To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+
+To add our routes, change `src/app.js` to:
 
 ```js
 import AppMap from 'can-ssr/app-map';
@@ -349,10 +362,12 @@ export default AppViewModel;
 Now we have three routes available:
 
 - `:page` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `AppViewModel` to `home` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
-- `:page/:slug` which matches restaurant links like [http://localhost:8080/restaurants/spago](http://localhost:8080/restaurants/spago) which sets `page` and `slug` (a URL friendly restaurant short name)
-- `:page/:slug/:action` which will be used to show the order page for a specific restaurant e.g. [http://localhost:8080/restaurants/spago/order](http://localhost:8080/restaurants/spago/order)
+- `:page/:slug` matches restaurant links like [http://localhost:8080/restaurants/spago](http://localhost:8080/restaurants/spago) and sets `page` and `slug` (a URL friendly restaurant short name)
+- `:page/:slug/:action` will be used to show the order page for a specific restaurant e.g. [http://localhost:8080/restaurants/spago/order](http://localhost:8080/restaurants/spago/order)
 
-**Note**: Whenever we create new routes we also need to restarting the development server. While the browser knows about the new routes as soon as you save the file, the server does not, so a restart is needed for them to work.
+Its important to note that if any of these URLs are matched, AppViewModel, which is the application's global state, will contain these properties, even though they aren't present in the AppViewModel definition directly. Properties can be set on AppViewModel that aren't explicitly defined.
+
+**Note**: Whenever we create new routes we also need to restart the development server. While the browser knows about the new routes as soon as you save the file, the server does not, so a restart is needed for them to work.
 
 ### Adding a header element
 
@@ -388,7 +403,9 @@ and update `src/header.component` to:
 </can-component>
 ```
 
-Here we use the `eq` helper to make the appropriate link active and then use [can-href]() to create links based on the the application state (e.g. by setting the `page` property to `home`) which will then create the proper links based on the route ([http://localhost:8080/home](http://localhost:8080/home) in this case).
+Here we use [can-href](http://canjs.com/2.3-pre/docs/can.view.href.html) to create links that will set values in the application state. For example, the first usage of can-href above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
+
+We also use the Handlebars `eq` helper to make the appropriate link active.
 
 ### Create a loading indicator
 
@@ -398,7 +415,7 @@ To show that something is currently loading, let's create a `pmo-loading` compon
 donejs generate component loading.component pmo-loading
 ```
 
-With changing `src/loading.component` to:
+Change `src/loading.component` to:
 
 ```html
 <can-component tag="pmo-loading">
@@ -414,7 +431,9 @@ With changing `src/loading.component` to:
 
 ### Switch between components
 
-Now we can glue all those individual components together in `src/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it with the information from the application state it needs. Update `src/index.stache` to:
+Now we can glue all those individual components together in `src/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it.
+
+Update `src/index.stache` to:
 
 ```html
 <html>
@@ -463,21 +482,29 @@ Now we can glue all those individual components together in `src/index.stache`. 
 </html>
 ```
 
-Here we make a `switch` statement that checks for the current `page` property, then progressively load the component with [can-import]() and initializes it. Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. Now, if we reload [http://localhost:8080/](http://localhost:8080/), we can see the header and the home component and be able to navigate to the different pages through the header.
+Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) and initializes it.
+
+Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its `state` property to `resolved`.
+
+Now if we reload [http://localhost:8080/](http://localhost:8080/), we can see the header and the home component and be able to navigate to the different pages through the header.
 
 ## Getting and Displaying Data from the Server
 
-[can-connect](http://connect.canjs.com/) is a powerful data layer that allows our application to connect to the RESTful API that we set up with `place-my-order-api`.
+In this next part, we'll connect to the RESTful API that we set up with `place-my-order-api`, using the powerful data layer provided by [can-connect](http://connect.canjs.com/).
 
 ### Creating a restaurants connection
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and later told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). To get the restaurant data from [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants) we need to create a restaurant supermodel:
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api). 
+
+To manage the restaurant data located at [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants), we'll create a restaurant supermodel:
 
 ```js
 donejs generate supermodel restaurant
 ```
 
-Answer the question about the URL endpoint with `/api/restaurants` and the name of the id property with `_id`. We now created a model and fixtures (for testing without an API) with a folder structure like this:
+Answer the question about the URL endpoint with `/api/restaurants` and the name of the id property with `_id`. 
+
+We have now created a model and fixtures (for testing without an API) with a folder structure like this:
 
 ```
 ├── node_modules
@@ -504,7 +531,7 @@ import Restaurant from './models/restaurant';
 Restaurant.getList({}).then(restaurants => console.log(restaurants.attr()));
 ```
 
-After reloading the homepage you should see the restaurant information logged in the console. Once verified you can remove the test code again.
+After reloading the homepage you should see the restaurant information logged in the console. Once you've verified, you can remove the test code.
 
 ### Add data to the page
 
@@ -569,9 +596,13 @@ And update the template at `src/restaurant/list/list.stache` to use the [Promise
 
 By checking for `restaurants.isPending` and `restaurants.isResolved` we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at `restaurants.value`. When navigating to the restaurants page now we can see a list of all restaurants.
 
+Note the usage of `can-href` to set up a link that points to each restaurant. `slug=slug` is not wrapped in quotes because the helper will populate each restaurant's individual `slug` property in the URL created.
+
 ## Creating a unit-tested view model
 
-In this chapter we will create a view model for the restaurant list functionality. We want  to show a dropdown of all available states with restaurants. When the user selects a state, we want to show a list of cities with restaurants. Once a city is selected, we will load a list of all restaurants for that city. The end result will look like this:
+In this section we will create a view model for the restaurant list functionality. 
+
+We'll show a dropdown of all available US states. When the user selects a state, we'll show a list of cities. Once a city is selected, we'll load a list of all restaurants for that city. The end result will look like this:
 
 ![Restaurant list](static/img/restaurant-list.png)
 
@@ -579,7 +610,7 @@ In this chapter we will create a view model for the restaurant list functionalit
 
 First we need to identify the properties that our view model needs to provide. We want to load a list of states from the server and let the user select a single state. Then we do the same for cities and finally load the restaurant list for that selection.
 
-All asynchronous requests return a Promise, so the data model will look like this:
+All asynchronous requests return a Promise, so the data structure will look like this:
 
 ```js
 {
@@ -593,23 +624,23 @@ All asynchronous requests return a Promise, so the data model will look like thi
 
 ### Create dependent models
 
-The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the according models just like we did for Restaurants already. For
+The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the corresponding models like we already did for Restaurants.
 
 ```
 donejs generate supermodel state
 ```
 
-Set the URL to `/api/states` and the id property to `short` and for
+When prompted, set the URL to `/api/states` and the id property to `short`.
 
 ```
 donejs generate supermodel city
 ```
 
-The URL is `/api/cities` and the id property is `name`. Now we can load a list of states and cities.
+For city the URL is `/api/cities` and the id property is `name`. Now we can load a list of states and cities.
 
 ### Implement view model behavior
 
-Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view-model at `src/restaurant/list/list.js`:
+Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
 
 ```js
 import Component from 'can/component/';
@@ -679,17 +710,17 @@ Let's take a closer look at those properties:
 
 - `states` will return a list of all available states by calling `State.getList({})`
 - `state` is a string property set to `null` by default (no selection). Additionally, when `state` is changed we will remove the dependent `city` selection.
-- `cities` will return `null` if no state has been selected; otherwise, it will load all the cities for a given state by sending `state` as a query paramater (which will make a request like [http://localhost:8080/api/cities?state=IL](ttp://localhost:8080/api/cities?state=IL))
+- `cities` will return `null` if no state has been selected. Otherwise, it will load all the cities for a given state by sending `state` as a query paramater (which will make a request like [http://localhost:8080/api/cities?state=IL](ttp://localhost:8080/api/cities?state=IL))
 - `city` is a simple string, set to `null` by default
 - `restaurants` will always be `null` unless both a `city` and a `state` are selected. If both are selected, it will set the `address.state` and `address.city` query parameters which will return a list of all restaurants whose address matches those parameters.
 
 ### Create a test
 
-View models that are decoupled from the actual presentation make it easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`). When we generated the component we already got a fully working test page for the component which can be opened at [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html). Currently, the existing tests are failing because we updated the view model but in this chapter we will create some unit tests for the new functionality.
+View models that are decoupled from the presentation layer are easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`). The component generator created a fully working test page for the component, which can be opened at [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html). Currently, the tests will fail because we changed the view model, but in this section we will create some unit tests for the new functionality.
 
 #### Fixtures: Create fake data
 
-Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. Now we can add fake data by updating `src/models/fixtures/state.js` to:
+Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/state.js` to:
 
 ```js
 import fixture from 'can-connect/fixture/';
@@ -710,7 +741,7 @@ fixture({
 export default store;
 ```
 
-`src/models/fixtures/city.js` looks like:
+Update `src/models/fixtures/city.js` to look like:
 
 ```js
 import fixture from 'can-connect/fixture/';
@@ -784,7 +815,7 @@ export default store;
 
 #### Test the view model
 
-With those fake data available we can test our view model by changing `src/restaurant/list/list_test.js` to:
+With fake data in place, we can test our view model by changing `src/restaurant/list/list_test.js` to:
 
 ```
 import QUnit from 'steal-qunit';
@@ -838,7 +869,7 @@ QUnit.asyncTest('changing a state resets city', function() {
 QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
   var vm = new ViewModel();
   var expectedRestaurants = restaurantStore.findAll({
-  	data: {"address.city": "Alberny"}
+    data: {"address.city": "Alberny"}
   }).data;
 
   vm.attr('state', 'NT');
@@ -851,11 +882,13 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 });
 ```
 
-Here, we are using the expected data we defined in each fixture to compare with what we are actually getting. Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
+These unit tests are comparing expected data (what we we defined in the fixtures) with actual data (how the view model methods are behaving). Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
 
 ### Write the template
 
-Now that our view model is implemented and tested, we can use its data to update the template at `src/restaurant/list/list.stache` to:
+Now that our view model is implemented and tested, we'll update the restaurant list template to support the city/state selection functionality.
+
+Update `src/restaurant/list/list.stache` to:
 
 ```
 <div class="restaurants">
@@ -924,14 +957,14 @@ Now that our view model is implemented and tested, we can use its data to update
 
 Some things worth pointing out:
 
-- Since `states` and `cities` return a promise, we can check the promise status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
+- Since `states` and `cities` return a promise, we can check the promise's status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
 - The `state` and `city` properties are bound to their select fields via [can-value](http://canjs.com/docs/can.view.bindings.can-value.html)
 
 Now we have a component that lets us select state and city and displays the appropriate restaurant list.
 
 ### Update the demo page
 
-We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We want to update it to use fixtures to demonstrate the use of the component:
+We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
 
 ```html
 <script type="text/stache" can-autorender>
