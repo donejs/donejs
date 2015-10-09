@@ -153,9 +153,9 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-Routing works slightly different than what you might be used to with other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from a URL string to properties in our application view-model.
+Routing works slightly different than what you might be used to with other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from the URL to properties in our application view-model.
 
-If you want to learn more about CanJS routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+To learn more about CanJS routing, visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
 First, let's update `src/home.component` with a link to the chat messages page:
 
@@ -183,14 +183,14 @@ First, let's update `src/home.component` with a link to the chat messages page:
 
 When the "Start chat" button is clicked, `can-href="{ page='chat' }"` will make sure that our application view-model gets updated with that property. This property will also update the URL.
 
-Next we add a link to go back to the chat page by updating `messages/messages.stache` to:
+Next, add a link to go back to the chat page by updating `messages/messages.stache` to:
 
 ```html
 <h5><a can-href="{ page='home' }">Home</a></h5>
 <p>{{message}}</p>
 ```
 
-Then we add a routing rule for the `page` property in `src/app.js`:
+Then, add a routing rule for the `page` property in `src/app.js`:
 
 ```js
 import AppMap from "can-ssr/app-map";
@@ -214,7 +214,7 @@ export default AppViewModel;
 
 ### Switch between pages
 
-Finally we glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `chat/messages/` components and showing each import based on the `page` property:
+Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `chat/messages/` components and showing each import based on the `page` property.  Update `src/index.stache` to:
 
 
 ```html
