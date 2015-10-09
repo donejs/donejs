@@ -5,7 +5,7 @@
 @description In this guide you will learn about all of [DoneJS' features]() by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
 
 
-![DoneJS app](static/img/place-my-order.png)
+<img src="/static/img/place-my-order.png" srcset="/static/img/place-my-order.png 1x, /static/img/place-my-order-2x.png 2x">
 
 
 After the initial application setup, which includes a server that hosts and pre-renders the application, we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
@@ -334,9 +334,9 @@ In this part, we will create routes - URL patterns that load specific parts of o
 
 ### Create Routes
 
-Routing works a bit differently than what you might be used to in other libraries. In other libraries, you might declare routes and map those to controller-like actions.
+Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /foo) to properties in our application state. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
 To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 

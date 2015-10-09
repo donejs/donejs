@@ -214,29 +214,21 @@ socket.on('messages removed',
 
 [Follow the guide](./Guide.html#section=section_Real_timeconnection) to see an example in action. View the can-connect real-time documentation [here](http://connect.canjs.com/doc/can-connect%7Creal-time.html).
 
-### Pretty URL's with Pushstate
+### Pretty URLs with Pushstate
 
-DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable and bookmarkable pages and links, while still keeping the user in a single page.
+DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user in a single page. 
 
-The use of pushstate allows your apps to have “Pretty URL’s” like: myapp.com*/user/1234* instead of a hashed route like myapp.com*#page=user&userId=1234* or myapp.com/*#/user/1234*. Pretty URLs with pushstate are indexable, bookmarkable, and allow users to use the back and refresh buttons without losing state.
+The use of pushstate allows your apps to have "Pretty URLs" like `myapp.com/user/1234` instead of uglier hash based URLs like `myapp.com#page=user&userId=1234` or `myapp.com/#!user/1234`.
 
-Routing is easily configured using can.route. Routes are given a URL template, and optionally an object with a set of default values.
+Wiring up these pretty URLs in your code is simple and intuitive.
 
-```
-can.route(':page', { page: 'home' });
-can.route(':page/:slug', { slug: null });
-can.route(':page/:slug/:action', { slug: null, action: null });
-```
+#### How it works
 
-With the use of the can-href attribute, creating links in your view is just as easy:
+Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-```
-<a can-href="{page='home'}">Home</a>
-```
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL patterns, like `/user/1`, to properties in our application state, like `{'userId': 1}`. In other words, our routes will just be a representation of the application state.
 
-Thanks to CanJS’s unique two-way routing your app isn’t married or dependent to a specific URL pattern. Depending on the state your app can read from the URL or update it. If a state change occurs, CanJS will update your routes, and vice-versa if a route change occurs, CanJS will update your application state. Your view can now handle how and what to render depending on your app state. You don’t need fragile routing configurations to trigger renders or state changes.
-
-For example, using our routing configurations above and a template like the one below, all the work is done. If a user enters the application at myapp.com/restaurants, the property ‘page’ on our application state is set to the value ‘restaurants’, and our template will render the appropriate component. Alternatively, if our app changes the value of ‘page’ at any point the routes will update to match the change, and our templates will render accordingly.
+This architecture simplifies routes so that they can be managed entirely in simple data bound templates, like the following example:
 
 ```
 {{#switch page}}
@@ -252,11 +244,7 @@ For example, using our routing configurations above and a template like the one 
 {{/switch}}
 ```
 
-[Follow the guide here](./place-my-order.html#section=section_Settinguprouting) to learn how to set up Pretty URLs and Pushstate in your DoneJS app.
-
-
-
-
+To learn more about routing and setting up Pretty URLs visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html) or follow along in [the guide](./place-my-order.html#section=section_Settinguprouting).
 
 ## Maintainable Features
 
