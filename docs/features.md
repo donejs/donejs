@@ -194,7 +194,7 @@ DoneJS is designed to make it easy to build applications that connects users in 
 
 #### How it works
 
-<video controls style='width:100%;' poster="http://connect.canjs.com/assets/videos/Can-Connect-Anim-2.s3b1-720p.png" src="http://connect.canjs.com/assets/videos/Can-Connect-Anim-2.s3b1-720p.mp4"></video>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/w4mp4oSb6BQ" frameborder="0" allowfullscreen></iframe>
 
 DoneJS' model layer uses set logic to maintain lists of data represented by certain rules, like a list of todos with `{'owner_id': 2}`. These lists are rendered to the UI via data bound templates.
 
