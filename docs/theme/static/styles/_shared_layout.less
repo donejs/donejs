@@ -73,6 +73,12 @@ body:not(.donejs) {
 				}
 			}
 		}
+		.sub-heading {
+			.hide;
+		}
+		.title {
+			border:0;
+		}
 	}
 	.content.docs,
 	.container.api {
@@ -194,6 +200,14 @@ body:not(.donejs) {
 			background-attachment: fixed;
 			margin-bottom: 40px;
 			max-width: initial;
+			@media(max-width: @screen-sm-max){
+				font-size: 90px;
+				text-align:center;
+				padding-left: 0;
+			}
+			@media(min-width: @screen-md){
+				font-size: 90px;
+			}
 			@media(max-width: @screen-xs-max){
 				text-align: center;
 				font-size: 400%;
