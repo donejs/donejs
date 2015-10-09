@@ -173,7 +173,8 @@ First, let's update `src/home.component` with a link to the chat messages page:
       <br>Chat
     </h1>
 
-    <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">
+    <a can-href="{ page='chat' }" 
+       class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>
   </template>
