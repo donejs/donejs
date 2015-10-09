@@ -241,11 +241,13 @@ steal("./content_list.js",
                 if ( /iPad|iPhone|iPod/.test(navigator.platform) ) {
                     document.body.style.position = "fixed";
                 }
+                $( "#greyOutUnderNav" ).show();
             } else {
                 document.body.style.overflow = "";
                 if ( /iPad|iPhone|iPod/.test(navigator.platform) ) {
                     document.body.style.position = "";
                 }
+                $( "#greyOutUnderNav" ).hide();
             }
         };
 
@@ -278,6 +280,15 @@ steal("./content_list.js",
 
             menu.on( "shown.bs.collapse", setBodyScroll );
             menu.on( "hidden.bs.collapse", setBodyScroll );
+        });
+
+        $( "#greyOutUnderNav" ).click( function () {
+            if ( $( "section.contents" ).is( ".active" ) ) {
+                $( ".scroll-spy-title" ).click();
+            }
+            if ( $( "#bs-example-navbar-collapse-1" ).is( ".in" ) ) {
+                $( "#bs-example-navbar-collapse-1" ).collapse( "hide" );
+            }
         });
 
         var lastH3 = null;
