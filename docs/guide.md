@@ -2,7 +2,7 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description In this guide we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
+@description In this guide, we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 
 <img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); margin: 20px 0; border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
@@ -14,7 +14,7 @@ In the final parts of the guide we will make an [optimized, progressively loaded
 
 ## Setup
 
-In this section we will install DoneJS and generate a new application. To get started, let's install the DoneJS command line utility globally:
+In this section, we will install DoneJS and generate a new application. To get started, let's install the DoneJS command line utility globally:
 
 ```
 npm install -g donejs
