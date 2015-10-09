@@ -30,8 +30,19 @@ body.Guides {
 	section.contents,
 	section.description,
 	section.comment {
-		width:700px;
+		width:800px;
 		margin: 0 auto;
+		.app-thumbs {
+			float: left;
+			margin-right:30px;
+			@media(max-width: @screen-xs){
+				float:none;
+				margin: 0 0 20px 0;
+			}
+		}
+		ul {
+			display: inline-block;
+		}
 		@media(max-width: @screen-md){
 			width:100%;
 			margin:0 auto;
@@ -48,6 +59,7 @@ body.Guides {
 	}
 	section.title,
 	section.comment  {
+		border:0;
 		.heading h1 + ul.tags {
 			display: none;
 		}
@@ -81,8 +93,9 @@ body.Guides {
 				font-size: 105px;
 				background: none;
 				margin-bottom: 40px;
-				width: 700px;
+				width:800px;
 				margin: 0 auto;
+				text-align: left;
 				&:before {
 					display: none;
 				}
@@ -91,17 +104,28 @@ body.Guides {
 					width: auto;
 					top:0;
 				}
+				@media(max-width: @screen-xs){
+					text-align: center;
+				}
 			}
 		}
 		h2 {
 			position: initial;
 			left:auto;
 			top:auto;
-			margin:0;
-			padding:0;
+			margin:40px 0 20px 0;
+			padding: 20px 0 0 0;
 			background: none;
 			color: @logoColor;
 			height: auto;
+			display: block;
+			font-size: 40px;
+			border-top: 1px solid @gray-lighter;
+			&:first-child {
+				margin:0px 0 20px 0;
+				padding:0;
+				border:0;
+			}
 			&:before,
 			&:after {
 				display: none;
