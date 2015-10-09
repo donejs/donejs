@@ -158,8 +158,6 @@ DoneJS makes iOS, Android and desktop builds of your application quick and easy.
 
 For iOS and Android builds, DoneJS uses [Apache Cordova](https://cordova.apache.org/) to easily generate an "app" version that is ready to be uploaded to the App Store/Google Play. In addition, Cordova gives you access to many of the phone's features, including the camera and GPS, unlocking your app's potential.
 
-<img src="./static/img/gThrive1.gif" alt="/static/img/gThrive1.gif" />
-
 Imagine being able to precisely locate a user and direct them to your nearest location, or allow them to scan a QR code in your store or on your website. All of this is easy with DoneJS.
 
 Building for mobile is simple with the steal-cordova plugin. First, install the plugin:
