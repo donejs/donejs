@@ -19,11 +19,12 @@ body:not(.donejs) {
 		padding: 0 15px 50px 15px;
 		border-radius: 0;
 		border-bottom: 1px solid #EEE;
-		@media(min-width: @screen-sm){
-			width: 100%;
-		}
 		@media(max-width: @screen-xs-max) {
 			width: 100%;
+		}
+		@media(min-width: @screen-sm-max){
+			width: 100%;
+			table-layout: fixed;
 		}
 		@media(min-width: @screen-lg){
 			width: 1000px;
@@ -46,10 +47,22 @@ body:not(.donejs) {
 				width: 100%;
 				padding-left: 20px;
 				padding-right: 20px;
-				margin:50px 0;
+				margin:0;
+			}
+			@media(max-width: @screen-sm-max){
+				padding-top: 50px;
 			}
 			.description,
 			.comment {
+				@media(min-width: @screen-sm){
+					margin-left: 0px
+				}
+				@media(min-width: @screen-md){
+					margin-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
+				}
+				@media(min-width: @screen-lg){
+					margin-left: 0px
+				}
 				a {
 					font-weight: 900;
 					color: @logoColor;
@@ -82,7 +95,9 @@ body:not(.donejs) {
 		background-color: @logoColor;
 		max-height: ~"calc( 100% - 100px )";
 		overflow: hidden;
-
+		@media(max-width: @screen-sm-max){
+			left:0;
+		}
 		ol {
 			margin: 0px;
 			list-style: none;
@@ -289,7 +304,7 @@ body:not(.donejs) {
 		}
 	}
 
-	@media(max-width: @screen-md-max) {
+	@media(max-width: @screen-sm-max) {
 		.scroll-spy-title {
 			width: 100%;
 			position: fixed;
