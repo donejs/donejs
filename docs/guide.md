@@ -325,25 +325,25 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
 
 ## Messages page
 
-For the messages page we will:
+For the messages page, we will:
 
  * Create a messages model that connects to a RESTful API.
- * Add the ability to retrieve and show all messages as well as creating new messages.
+ * Add the ability to retrieve and list messages and create new messages.
  * Make the message list receive real-time updates from other clients.
 
 ### Generate Message model
 
-To load messages from the server we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermode like this:
+To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermode like this:
 
 ```
 donejs generate supermodel message
 ```
 
-When asked for the URL set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
+When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
 
 ### Using the connection
 
-The generated file is all that is needed to connect to our REST API. Use it by importing it and requesting a list of all messages with the `message-model` custom element. Update  `src/messages/messages.stache` to:
+The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages with the `<message-model>` custom element. Update  `src/messages/messages.stache` to:
 
 ```html
 <can-import from="donejs-chat/models/message" />
@@ -355,12 +355,11 @@ The generated file is all that is needed to connect to our REST API. Use it by i
         <h4 class="list-group-item-heading">{{name}}</h4>
         <p class="list-group-item-text">{{message}}</p>
       </div>
+    {{else}}
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading">No messages</h4>
+      </div>
     {{/each}}
-    {{^if ./value.length}}
-    <div class="list-group-item">
-      <h4 class="list-group-item-heading">No messages</h4>
-    </div>
-    {{/if}}
   </div>
 </message-model>
 ```
