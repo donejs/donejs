@@ -168,7 +168,8 @@ First, let's update `src/home.component` with a link to the chat messages page:
   </style>
   <template>
     <h1 class="page-header text-center">
-      <img src="http://donejs.com/static/img/donejs-logo-white.svg" alt="DoneJS logo" style="width: 100%;" />
+      <img src="http://donejs.com/static/img/donejs-logo-white.svg" 
+           alt="DoneJS logo" style="width: 100%;" />
       <br>Chat
     </h1>
 
