@@ -424,13 +424,13 @@ export default Component.extend({
 });
 ```
 
-The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance and saves it to the server. Once completed successfully it sets the message to an empty string to reset the input field.
+The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance and saves it to the server. Once saved successfully it sets the message to an empty string to reset the input field.
 
-You can now enter your name and a message! It will automatically appear in our messages list. In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimizing data requests](Features.html#section=section_Cachingandminimaldatarequests).
+You can now enter your name and a message! It will automatically appear in our messages list. In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimized data requests](Features.html#section=section_Cachingandminimaldatarequests).
 
 ### Real-time connection
 
-Right now our chat updates automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
+Right now our chat's mesages update automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
 
 ```
 npm install steal-socket.io --save
