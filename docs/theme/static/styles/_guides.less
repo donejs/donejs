@@ -4,7 +4,6 @@ body.Guides {
 	color: #000000;
 	.container-fluid {
 		display: block;
-		width: 1000px;
 		margin: 0px;
 		margin-left: auto;
 		margin-right: auto;
@@ -21,6 +20,7 @@ body.Guides {
 		background-color: transparent;
 		border: none;
 		border-radius: 0px;
+		width: 100%;
 	}
 	section.contents {
 		display: none;
@@ -29,11 +29,17 @@ body.Guides {
 			background-image:  none;
 		}
 	}
+	section.contents,
+	section.description,
+	section.comment {
+		width:700px;
+		margin: 0 auto;
+	}
 	.description,
 	.comment {
 		a {
-				font-weight: 900;
-				color: @logoColor;
+			font-weight: 900;
+			color: @logoColor;
 		}
 	}
 	section.title,
@@ -41,5 +47,37 @@ body.Guides {
 		.heading h1 + ul.tags {
 			display: none;
 		}
+		.heading {
+			padding-top:200px;
+			h1 {
+				display: block;
+				position: absolute;
+				top: 0px;
+				left:0;
+				padding-top: 25px;
+				padding-left: 340px;
+				background-color: #FFFFFF;
+				color: #fff;
+				z-index: 1;
+				font-weight: 100;
+				font-size: 105px;
+				background-image: url( "/static/img/background.jpg" );
+				background-attachment: fixed;
+				margin-bottom: 40px;
+				min-width: 100%;
+				&:before {
+					content: "";
+					display: block;
+					position: absolute;
+					top: 0px;
+					bottom: 0px;
+					right: 0px;
+					left: 0px;
+					z-index: -1;
+					background-color: rgba( 33, 38, 40, 0.75 );
+				}
+			}
+		}
+
 	}
 }
