@@ -10,6 +10,8 @@ In the first part of this guide we will install DoneJS, [generate a new applicat
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). We will conclude with creating a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
 
+If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we're happy to help out.
+
 @body
 
 ## Setup
@@ -47,16 +49,13 @@ DoneJS comes with its own development server which hosts your development files 
 cd donejs-chat
 ```
 
-Then we can start development mode by running:
+We can start development mode by running:
 
 ```
 donejs develop
 ```
 
 The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage.
-
-If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs).
-
 
 ## Adding Bootstrap
 
