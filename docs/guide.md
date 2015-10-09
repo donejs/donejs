@@ -156,9 +156,11 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-Routing works slightly different than what you might be used to with other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from the URL to properties in our application view-model.
+Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-To learn more about CanJS routing, visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
+
+To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
 First, let's update `src/home.component` with a link to the chat messages page:
 
