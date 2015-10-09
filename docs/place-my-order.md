@@ -5,7 +5,7 @@
 @description In this guide you will learn about all of [DoneJS' features]() by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
 
 
-![DoneJS app](static/img/place-my-order.png)
+<img src="/static/img/place-my-order.png" srcset="/static/img/place-my-order.png 1x, /static/img/place-my-order-2x.png 2x">
 
 
 After the initial application setup, which includes a server that hosts and pre-renders the application, we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.
