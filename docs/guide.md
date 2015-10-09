@@ -279,7 +279,7 @@ Now that we can navigate between pages, we will finish implementing their functi
 
 ### Installing bit-tabs
 
-On the homepage let's install and add [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
+On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
 
 ```
 npm install bit-tabs --save
@@ -287,7 +287,7 @@ npm install bit-tabs --save
 
 ### Update the page
 
-Then import the unstyled custom elements from `bit-tabs/unstyled` (since we want to use the Bootstrap tabs styles). Update `src/home.component` to look like this:
+Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled because we will use Bootstrap's styles) and add `<bit-tabs>` and `<bit-panel>` elements to the template. Update `src/home.component` to:
 
 ```html
 <can-component tag="chat-home">
