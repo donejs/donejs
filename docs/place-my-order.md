@@ -1,4 +1,4 @@
-@page place-my-order
+@page place-my-order In depth guide
 @parent DoneJS
 @hide sidebar
 @outline 2 ol

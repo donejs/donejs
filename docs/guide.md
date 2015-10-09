@@ -1,4 +1,4 @@
-@page Guide
+@page Guide Quick start guide
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
