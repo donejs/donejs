@@ -3,9 +3,9 @@
 @hide sidebar
 @outline 2 ol
 
-@description DoneJS goal is to help the JavaScript community make, and continue to make, amazing applications. 
-DoneJS is rebuilt and rebranded from the over 8-year-old [JavaScriptMVC](http://javascriptmvc.com) 
-project. DoneJS is built of many sub-projects, each useful in their own right. Learn about the goals, history, projects, and 
+@description DoneJS goal is to help the JavaScript community make, and continue to make, amazing applications.
+DoneJS is rebuilt and rebranded from the over 8-year-old [JavaScriptMVC](http://javascriptmvc.com)
+project. DoneJS is built of many sub-projects, each useful in their own right. Learn about the goals, history, projects, and
 team behind DoneJS.
 
 @body
@@ -24,7 +24,7 @@ Building a world-class application is difficult.  Ideally, it runs on every mach
 a great user experience. But getting "DONE" on time is even harder. Maintainability is critical.  
 
 DoneJS
-attempts to solve front-end development the 
+attempts to solve front-end development the
 way [computers solved checkers](http://www.scientificamerican.com/article/computers-solve-checkers-its-a-draw/). It
 does this by providing or integrating great technology solutions to difficult problems:
 
@@ -53,11 +53,11 @@ Provide examples of this.
  - Teach - Our tech is worth nothing if people don't know how to use it.  We have a weekly training, and post
    training videos.  We also have "free" single trainings anywhere people can assemble 10 people.  If you'd
    like a free DoneJS training please email. Our full time team is always available to chat on gitter.
-   
+
  - Explore - DoneJS's parts should work with everything.  StealJS works great with ReactJS.  CanJS works
    with RequireJS or Browserify.  can-connect works on its own.  Different combinations suite people differently.  
    Our goal is to enhance other communities with DoneJS's technology.
-   
+
  - Attract - If you have the next great JS idea, we want to encourage you to help build it as part of the DoneJS
    family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full
    time devs to build out your idea.
@@ -89,17 +89,17 @@ solve some of the biggest remaining struggles - real-time, ssr, different builds
 
 ### Today's Effort
 
-After releasing DoneJS, our team will be almost exclusively focused on 
+After releasing DoneJS, our team will be almost exclusively focused on
 DoneJS's community, training, and documentation. DoneJS is amazing, but without getting
 people the skills they need to effecitvely use it, it will go to waste.
 
 - How can people get involved?
-- 
+-
 
 ### Tomorrow's Roadmap
 
 - StealJS's dependency injection
-- DirtyChecking 
+- DirtyChecking
 - can-connect supporting other frameworks
 - Other MV*\ support?
 - Animation utilities
@@ -122,7 +122,7 @@ jQuery that DoneJS uses, we occasionally contribute to, but are maintained by ou
 
 ### steal
 
-### DocumentJS 
+### DocumentJS
 
 ### FuncUnit
 
@@ -139,7 +139,7 @@ jQuery, QUnit, Cordova, NW.js
 The DoneJS family of technologies is built by 100s of contributors:
 
 
-### Core team
+### Core Team
 
 To become a contributor to DoneJS or its sub-projects, you simply have to:
 
@@ -147,7 +147,7 @@ To become a contributor to DoneJS or its sub-projects, you simply have to:
 - attend a monthly meeting
 - make one small contribution, even a spelling correction, a month.
 
-### Fulltime team
+### Full-Time Team
 
  - David
  - Matthew
@@ -157,5 +157,3 @@ To become a contributor to DoneJS or its sub-projects, you simply have to:
 
 Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS. If you would
 like to sponsor development, please contact.
-
-

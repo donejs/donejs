@@ -1,4 +1,4 @@
-@page Guide Quick start guide
+@page Guide Quick Start Guide
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
@@ -26,7 +26,7 @@ In this section, we will install DoneJS and generate a new application. To get s
 npm install -g donejs
 ```
 
-### Generate the application
+### Generate the Application
 
 Then we create a new DoneJS application called `donejs-chat`:
 
@@ -45,7 +45,7 @@ This will create a new folder called `donejs-chat` and in it generate our applic
 - [Testee](https://github.com/bitovi/testee) - JavaScript Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
-### Development mode
+### Development Mode
 
 DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode starts the [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) server that automatically reloads files in the browser and on the server as they change. To start it let's go into the `donejs-chat` application directory:
 
@@ -65,7 +65,7 @@ The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to se
 
 DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
 
-### Installing the NPM package
+### Installing the NPM Package
 
 Keep the server from `donejs develop` running and open a new terminal window to install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
@@ -73,7 +73,7 @@ Keep the server from `donejs develop` running and open a new terminal window to 
 npm install bootstrap --save
 ```
 
-### Add it to the page
+### Add it to the Page
 
 To see live-reload in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. Update `src/index.stache` to look like this:
 
@@ -117,11 +117,11 @@ To see live-reload in action, let's update the main template to import Bootstrap
 
 If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save it. Feel free to edit the HTML or `src/styles.less` to see how live-reload updates the page automatically.
 
-## Routing and components
+## Routing and Components
 
 In this part we will create our own custom HTML elements. One for the homepage and another to display the chat messages. Then we will create routes to navigate between those two pages.
 
-### Generate custom elements
+### Generate Custom Elements
 
 The homepage custom element (with the HTML tag name `chat-home`) won't be very big or complex, so we put everything into a single `.component` file. To generate it run:
 
@@ -217,7 +217,7 @@ route('/:page', { page: 'home' });
 export default AppViewModel;
 ```
 
-### Switch between pages
+### Switch Between Pages
 
 Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `chat/messages/` components and showing each import based on the `page` property.  Update `src/index.stache` to:
 
@@ -277,12 +277,12 @@ Now each component is being dynamically loaded while navigating between the home
 Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the pages content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
 
 
-## Homepage
+## Home Page
 
 Now that we can navigate between pages, we will finish implementing their functionality, starting with the homepage.
 
 
-### Installing bit-tabs
+### Installing Bit-Tabs
 
 On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
 
@@ -290,7 +290,7 @@ On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-comp
 npm install bit-tabs --save
 ```
 
-### Update the page
+### Update the Page
 
 Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled because we will use Bootstrap's styles) and add `<bit-tabs>` and `<bit-panel>` elements to the template. Update `src/home.component` to:
 
@@ -328,7 +328,7 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
 </can-component>
 ```
 
-## Messages page
+## Messages Page
 
 For the messages page, we will:
 
@@ -336,7 +336,7 @@ For the messages page, we will:
  * Add the ability to retrieve and list messages and create new messages.
  * Make the message list receive real-time updates from other clients.
 
-### Generate Message model
+### Generate Message Model
 
 To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermode like this:
 
@@ -346,7 +346,7 @@ donejs generate supermodel message
 
 When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
 
-### Using the connection
+### Using the Connection
 
 The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages with the `<message-model>` custom element. Update  `src/messages/messages.stache` to:
 
@@ -371,7 +371,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
-### Creating messages
+### Creating Messages
 
 Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. Update `src/messages/messages.stache` to look like this:
 
@@ -433,7 +433,7 @@ The `send()` method takes the `name` and `message` properties from the view-mode
 
 You can now enter your name and a message! It will automatically appear in our messages list. In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimized data requests](Features.html#section=section_Cachingandminimaldatarequests).
 
-### Real-time connection
+### Real-Time Connection
 
 Right now our chat's mesages update automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
 
@@ -482,11 +482,11 @@ export default Message;
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
-## Production build
+## Production Build
 
 Now that we implemented the complete chat functionality we can get our application ready for production.
 
-### Run build
+### Run Build
 
 We can find the build configuration in `build.js` in the application folder. Everything is already set up so we can simply make a build by running
 
@@ -496,7 +496,7 @@ donejs build
 
 The optimized bundles that load your JavaScript and CSS as fast as possible are sent to the `dist/` folder.
 
-### Turn on production
+### Turn on Production
 
 To test the production build, close the current server (with `CTRL + C`) and start it with the environment (`NODE_ENV`) set to `production`:
 
@@ -510,7 +510,7 @@ If we now open [localhost:8080](http://localhost:8080/) again we can see the pro
 
 Now that we verified that our application works in production, we can deploy it to the web. For this guide we will use [Divshot](https://divshot.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support.
 
-### Setting up Divshot
+### Setting Up DivShot
 
 Sign up for free at [divshot.com](https://divshot.com/). Then install the command line tool and log in with your credentials:
 
@@ -575,7 +575,7 @@ NODE_ENV=production donejs start
 
 We should now see our assets being loaded from the Divshot CDN.
 
-## Desktop and mobile apps
+## Desktop and Mobile Apps
 
 In the last part of this guide we will make mobile and desktop builds of our chat application, using [Cordova](https://cordova.apache.org/) and [nw.js](http://nwjs.io/).
 
@@ -722,7 +722,7 @@ cd build/donejs-chat/osx64
 open donejs-chat.app
 ```
 
-## What's next?
+## What's Next?
 
 In this guide we created a small chat application that connects to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We built an optimized bundle for production and deployed it to a static file host and CDN. Last we made builds of the application as a mobile and desktop application.
 

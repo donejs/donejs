@@ -28,10 +28,10 @@ While [Google can execute JavaScript](http://googlewebmastercentral.blogspot.ca/
 
 Rendering requests in DoneJS uses a virtual DOM that only implements the fundamental apis that jQuery needs to manipulate the DOM. That means the rendering here is *fast* and your markup is ready to serve with the SEO benefits a static page would have.
 
-#### DoneJS compared to alternatives
+#### DoneJS Compared to Alternatives
 Other solutions to server side rendering force you to get all the data manually, to know when the page is done loading, and make it difficult to have components load their own data. DoneJS takes care of all of this and makes it incredibly easy to make your most important components immediately visible to the user and to the bots crawling your site. And because DoneJS renders using a [virtual DOM](https://github.com/canjs/can-simple-dom), it's super fast and only carrying a fraction of the weight an approach using a full headless browser has.
 
-#### How easy?
+#### How Easy?
 Just add one line to your most important components:
 ```
 this.attr( "%root" ).waitFor( promise );
@@ -66,7 +66,7 @@ Steal analyzes the dependencies of each page and bundle them in a way that has t
 
 Our algorithm is VERY smart with the optimization and doesn't require you to configure your bundles like our competitors do. For example, should jQuery and Underscore be in some "core" library? StealJS makes these decisions for you, better than you could make for yourself.
 
-#### And it's super easy to use!
+#### And It's Super Easy to Use!
 Progressive loading is done simply by specifying it directly in your templates. Here, as the page changes, it will begin loading the additional JS needed and briefly show "Loading..." until it completes:
 
 ```
@@ -96,7 +96,7 @@ That's it! No need for additional configuration in your JavaScript.
 
 ### Caching and Minimal Data Requests
 
-DoneJS applications are able to do variety of performance improvements by intelligently managing the data 
+DoneJS applications are able to do variety of performance improvements by intelligently managing the data
 layer.  Example techniques:
 
  - Fall through cache - Show data in localStorage cache immediately, but in the background, look for updates on the server.
@@ -136,7 +136,7 @@ to
 
 DoneJS makes it simple to deploy your static assets to a CDN (content delivery network).
 
-CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne. 
+CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne.
 
 <img src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
 _Without a CDN requests will take longer to fulfill if the user is located further away from your servers._
@@ -150,7 +150,7 @@ donejs deploy
 ```
 
 
-## Usability features
+## Usability Features
 
 DoneJS is used to make beautiful, real-time user interfaces that can be exported to run on every platform.
 
@@ -160,7 +160,7 @@ Write your application once, then run it natively on every device and operating 
 
 <img src="./static/img/apps.png" />
 
-#### How it works
+#### How it Works
 
 For iOS and Android builds, DoneJS integrates with [Apache Cordova](https://cordova.apache.org/) to generate an "app" version that is ready to be uploaded to the App Store/Google Play.
 
@@ -180,9 +180,9 @@ donejs build
 
 DoneJS applications support Internet Explorer 8 without any additional effort. You can even write applications using [most ES6 features](http://babeljs.io/docs/advanced/caveats/) that run on IE8, using the built-in babel integration.
 
-Many people don't care about this because IE8 is on its way out, which is a very good thing! 
+Many people don't care about this because IE8 is on its way out, which is a very good thing!
 
-But its not quite dead yet, at still [over 3%](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar) of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats. 
+But its not quite dead yet, at still [over 3%](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar) of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats.
 
 And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS makes it easy to write one app that runs everywhere.
 
@@ -192,7 +192,7 @@ DoneJS is designed to make it easy to build applications that connects users in 
 
 [Socket.io](https://socket.io) provides the basics to add real-time capabilities to any JavaScript application, but the challenge of integrating real-time updates into your code remains. DoneJS makes weaving Socket.io backends into your UI simple and automatic.
 
-#### How it works
+#### How it Works
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/w4mp4oSb6BQ" frameborder="0" allowfullscreen></iframe>
 
@@ -246,7 +246,7 @@ This architecture simplifies routes so that they can be managed entirely in simp
 
 To learn more about routing and setting up Pretty URLs visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html) or follow along in [the guide](./place-my-order.html#section=section_Settinguprouting).
 
-## Maintainable features
+## Maintainable Features
 
 ### Unit and Functional Tests
 
@@ -261,10 +261,10 @@ FuncUnit enhances assertion libraries like QUnit and enables it to simulate user
 ```js
 test('destroying todos', function() {
   F('#new-todo').type('Sweet. [enter]');
- 
+
   F('.todo label:contains("Sweet.")').visible('basic assert');
   F('.destroy').click();
- 
+
   F('.todo label:contains("Sweet.")').missing('destroyed todo');
 });
 ```
@@ -290,7 +290,7 @@ F( ".menu" ).click();
 is not just a click event; It goes through the whole motion: mousedown, blur, focus, mouseup, then click!
 
 
-#### What does DoneJS do special? A lot of stuff!
+#### What Does DoneJS Do Special? A lot of stuff!
 
 DoneJS tests are modules just like all your other code. This means you don’t have to compile your app for your tests to run them.
 
@@ -300,7 +300,7 @@ Module-based tests means you can easily run some tests independently of all your
 import QUnit from "steal-qunit";
 import myModule from "my-project/my-module";
 
-Qunit.test( "something", function () { 
+Qunit.test( "something", function () {
   QUnit.ok( myModule, "we have access to your module" );
 });
 ```
@@ -316,7 +316,7 @@ And because these are modules, [live reload](#section_HotModuleSwapping_LiveRelo
 
 It's all super simple - but it gets better! [Generators](#section_Generators) will set these up for you!
 
-#### It's flexible too!
+#### It's Flexible Too!
 
 QUnit is the default assertion library but DoneJS works with jasmine, mocha, and others!
 
@@ -324,7 +324,7 @@ DoneJS also brings [testee](https://github.com/bitovi/testee) into the mix becau
 
 Plus! Unit tests should be able to run by themselves without the need for an API server, sooo:
 
-#### Creating fake data: Fixtures!
+#### Creating Fake Data: Fixtures!
 
 DoneJS does even more to make testing easy and more valuable by using fixtures. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. It's easy to set up too:
 
@@ -388,7 +388,7 @@ Import packages written in ES6 module syntax, AMD, or CommonJS easily:
 import $ from "jquery";
 ```
 
-#### You can create and share your own too!
+#### You Can Create and Share Your Own Too!
 
 DoneJS supports exporting your modules to other formats such as:
 - CommonJS and Browserify
@@ -418,7 +418,7 @@ and execute it from your termnial:
 node myexport.js
 ```
 
-#### Watch our demonstration video for more
+#### Watch Our Demonstration Video for More
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
 
 ### ES6 Modules
@@ -717,7 +717,7 @@ create src/models/fixtures/fixtures.js
 create src/models/test.js
 ```
 
-#### donejs generate component
+#### donejs Generate Component
 
 And once you're ready to work on a component, DoneJS will get you started quickly!
 
@@ -737,7 +737,7 @@ create src/suchwin/suchwin_test.js
 create src/suchwin/test.html
 ```
 
-#### There are other generators too!
+#### There are Other Generators Too!
 
 For simple components:
 ```
