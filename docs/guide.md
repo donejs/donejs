@@ -315,7 +315,8 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
       </bit-panel>
     </bit-tabs>
 
-    <a can-href="{ page='chat' }" class="btn btn-primary btn-block btn-lg">
+    <a can-href="{ page='chat' }" 
+       class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>
   </template>
