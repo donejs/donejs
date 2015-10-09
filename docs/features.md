@@ -34,7 +34,7 @@ Other solutions to server side rendering force you to get all the data manually,
 #### How easy?
 Just add one line to your most important components:
 ```
-this.attr( "@root" ).waitFor( promise );
+this.attr( "%root" ).waitFor( promise );
 ```
 and the component will be rendered with its data from the resolved promise before it's served up!
 
@@ -45,7 +45,7 @@ can.Component.extend({
   viewModel: {
     init: function () {
       var promise = User.getOne( { id: this.attr( "id" ) } );
-      this.attr( "@root" ).waitFor( promise );
+      this.attr( "%root" ).waitFor( promise );
       promise.then( ( user ) => { this.attr( "user", user ); } );
     }
   }
