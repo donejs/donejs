@@ -2,8 +2,7 @@
 body.Guides {
 	background-color: #FCFEFD;
 	color: #000000;
-
-	> .container {
+	.container-fluid {
 		display: block;
 		width: 1000px;
 		margin: 0px;
@@ -14,17 +13,15 @@ body.Guides {
 		padding-bottom: 50px;
 		border-radius: 0px;
 		border-bottom: 1px solid #EEE;
-
-		> .content {
-			display: block!important;
-			margin: 0px;
-			padding: 0px;
-			background-color: transparent;
-			border: none;
-			border-radius: 0px;
-		}
 	}
-
+	.content.docs {
+		display: block!important;
+		margin: 0px;
+		padding: 0px;
+		background-color: transparent;
+		border: none;
+		border-radius: 0px;
+	}
 	section.contents {
 		display: none;
 		> ol > li,
@@ -39,8 +36,10 @@ body.Guides {
 				color: @logoColor;
 		}
 	}
-
-	section.title .heading h1 + ul.tags {
-		display: none;
+	section.title,
+	section.comment  {
+		.heading h1 + ul.tags {
+			display: none;
+		}
 	}
 }
