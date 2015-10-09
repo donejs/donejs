@@ -267,7 +267,7 @@ Finally, we'll glue both components together as separate pages in `src/index.sta
 </html>
 ```
 
-Now each component is being dynamically loaded while navigating between the home and messages page.
+Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
 Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the pages content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
 
