@@ -334,9 +334,9 @@ In this part, we will create routes - URL patterns that load specific parts of o
 
 ### Create Routes
 
-Routing works a bit differently than what you might be used to in other libraries. In other libraries, you might declare routes and map those to controller-like actions.
+Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /foo) to properties in our application state. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
 To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
