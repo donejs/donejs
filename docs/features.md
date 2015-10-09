@@ -280,9 +280,11 @@ For example, using our routing configurations above and a template like the one 
 
 ### Unit and Functional Tests
 
-DoneJS applications are functionally tested with highly accurate event simulation.
+Unit tests test the view models (link to the guide) or other low-level stuff. Unit tests are best!
 
-For simple unit and integration assertions, DoneJS uses [QUnit](https://qunitjs.com/). For high level interaction/DOM tests someone in a QA role might define, DoneJS uses [FuncUnit](http://funcunit.com/).
+Functional tests test user behavior and are great for smoke tests and some integration tests between modules.
+
+For simple unit and integration assertions, DoneJS uses [QUnit](https://qunitjs.com/) by default. For high level interaction/DOM tests someone in a QA role might define, DoneJS uses [FuncUnit](http://funcunit.com/).
 
 FuncUnit enhances assertion libraries like QUnit and enables it to simulate user actions, easily test asynchronous behavior, and support black box testing. It uses a simple jQuery-like syntax to do the assertions:
 
@@ -297,7 +299,60 @@ test('destroying todos', function() {
 });
 ```
 
-Unit tests should be able to run by themselves without the need for an API server though, so
+And they're scriptable!
+
+```
+var openMenu = function ( item ) {
+  F( item ).click();
+  F( ".menu" ).click();
+  F( ".menu-items" ).visible();
+};
+
+openMenu( ".item1" );
+F( ".delete" ).click();
+```
+
+FuncUnit uses [syn](https://github.com/bitovi/syn) to provide accurate event simulation. So this:
+```
+F( ".menu" ).click();
+```
+
+is not just a click event; It goes through the whole motion: mousedown, blur, focus, mouseup, then click!
+
+
+#### What does DoneJS do special? A lot of stuff!
+
+DoneJS tests are modules just like all your other code. This means you don’t have to compile your app for your tests to run them.
+
+Module-based tests means you can easily run some tests independently of all your other tests. This is the foundation for the [modlet pattern](#section_Modlets). To write a test with DoneJS, simply add:
+
+```
+import QUnit from "steal-qunit";
+import myModule from "my-project/my-module";
+
+Qunit.test( "something", function () { 
+  QUnit.ok( myModule, "we have access to your module" );
+});
+```
+
+Then, to create a page that runs just this test:
+```
+<title>My Module's Tests</title>
+<script src="/node_modules/steal/steal.js" main="/my-module/my-module_test.js"></script>
+<div id="qunit-fixture"></div>
+```
+
+And because these are modules, [live reload](#section_HotModuleSwapping_LiveReload) works!
+
+It's all super simple - but it gets better! [Generators](#section_Generators) will set these up for you!
+
+#### It's flexible too!
+
+QUnit is the default assertion library but DoneJS works with jasmine, mocha, and others!
+
+DoneJS also brings [testee](https://github.com/bitovi/testee) into the mix because it allows you to run your tests from the command line for [continuous integration](#section_ContinuousIntegration_Deployment)!
+
+Plus! Unit tests should be able to run by themselves without the need for an API server, sooo:
 
 #### Creating fake data: Fixtures!
 
@@ -323,7 +378,6 @@ export default store;
 ```
 
 That's it! Now any calls to the states api url will return faked data automatically when the store is pulled into your app with StealJS! No need to change any of your code; It just works like you've already built the backend service.
-
 
 ### Documentation
 
