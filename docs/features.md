@@ -166,7 +166,13 @@ For iOS and Android builds, DoneJS integrates with [Apache Cordova](https://cord
 
 For native desktop applications, DoneJS integrates with [NW.js](https://github.com/nwjs/nw.js) to create an native OSX, Windows, or Linux application.
 
-Adding this integration is as simple as running `donejs add cordova` or `donejs add nw` and running your build script.
+Adding this integration is as simple as running
+
+```
+donejs add cordova
+donejs add nw
+donejs build
+```
 
 [Follow the guide](./Guide.html#section_Desktopandmobileapps) to see an example in action.
 
@@ -176,7 +182,7 @@ DoneJS applications support Internet Explorer 8 without any additional effort. Y
 
 Many people don't care about this because IE8 is on its way out, which is a very good thing! 
 
-But its not quite dead yet, at still over 3% of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats. 
+But its not quite dead yet, at still [over 3%](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar) of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats. 
 
 And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS makes it easy to write one app that runs everywhere.
 
@@ -190,11 +196,21 @@ DoneJS is designed to make it easy to build applications that connects users in 
 
 <video controls style='width:100%;' poster="http://connect.canjs.com/assets/videos/Can-Connect-Anim-2.s3b1-720p.png" src="http://connect.canjs.com/assets/videos/Can-Connect-Anim-2.s3b1-720p.mp4"></video>
 
-DoneJS' model layer users set logic to maintain lists of data represented by certain properties, like all todos that are due tomorrow. These lists are rendered to the UI via data bound templates.
+DoneJS' model layer uses set logic to maintain lists of data represented by certain rules, like a list of todos with `{'owner_id': 2}`. These lists are rendered to the UI via data bound templates.
 
 When server-side updates are sent to the client, items are automatically removed or added to any lists they belong to. They also automatically show up in the UI because of the data bindings.
 
 All of this happens with about 4 lines of code.
+
+```
+const socket = io('http://chat.donejs.com');
+socket.on('messages created',
+  order => messageConnection.createInstance(order));
+socket.on('messages updated',
+  order => messageConnection.updateInstance(order));
+socket.on('messages removed',
+  order => messageConnection.destroyInstance(order));
+```
 
 [Follow the guide](./Guide.html#section=section_Real_timeconnection) to see an example in action. View the can-connect real-time documentation [here](http://connect.canjs.com/doc/can-connect%7Creal-time.html).
 
