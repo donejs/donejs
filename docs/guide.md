@@ -364,7 +364,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 </message-model>
 ```
 
-If we now open [localhost:8080/chat](http://localhost:8080/chat) we either see the list of messages from the server or the text that there are no messages.
+If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
 ### Creating messages
 
@@ -379,22 +379,21 @@ Now let's add the form to create new messages. The form two-way binds the `name`
         <h4 class="list-group-item-heading">{{name}}</h4>
         <p class="list-group-item-text">{{message}}</p>
       </div>
+    {{else}}
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading">No messages</h4>
+      </div>
     {{/each}}
-    {{^if ./value.length}}
-    <div class="list-group-item">
-      <h4 class="list-group-item-heading">No messages</h4>
-    </div>
-    {{/if}}
   </div>
 </message-model>
 <div class="row">
   <div class="col-sm-3">
     <input type="text" class="form-control" placeholder="Your name"
-        {($value)}="name">
+           {($value)}="name">
   </div>
   <div class="col-sm-9">
     <input type="text" class="form-control" placeholder="Your message"
-        {($value)}="message" ($enter)="send()">
+           {($value)}="message" ($enter)="send()">
   </div>
 </div>
 ```
