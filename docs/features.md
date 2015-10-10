@@ -427,47 +427,54 @@ DoneJS future proofs your app by not only letting you use ES6 syntax, but also b
 
 ### Modlets
 
-DoneJS applications are built so every module is treated as its own application.  Every module
-is given its own folder.  Instead of organizing a project by grouping files based on type like:
+The secret to building large apps is never build large apps. Break up your application into small pieces. Then, assemble.
+
+DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
+
+#### How it works
+
+Large apps have a lot of files. There are two ways to organize them: by type or by module.
+
 
 ```
-project/
-  js/
-     moduleA.js
-     moduleB.js
-  templates/
-     moduleA.handlebars
-     moduleB.handlebars
-  css/
-     moduleA.css
-     moduleB.less
-  test/
-     moduleA_test.js
-     moduleB_test.js
-  docs/
-     moduleA.markdown
-     moduleB.markdown
+components/
+   tabs.js
+   chat.js
+viewmodels/
+    tabs-vm.js
+    chat-vm.js
+templates/
+   tabs.handlebars
+   chat.handlebars
+css/
+   tabs.css
+   chat.less
+test/
+   tabs_test.js
+   chat_test.js
+docs/
+   tabs.markdown
+   chat.markdown
 
+vs
+
+chat/
+   chat.js          - module code
+   chat.handlebars  - supporting file
+   chat.css         - supporting file
+   chat_test.js     - tests
+   chat.markdown    - docs
+   test.html        - test page
+   chat.html        - demo page
+ tabs/
+ cart/
 ```
 
-A DoneJS application is organized into modlets.  Every module is given its own folder which
-contains the module's code, supporting files (CSS and templates), tests, and documentation like:
+Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. 
 
-```
-project/
-  moduleA/
-     moduleA.js          - module's code
-     moduleA.handlebars  - supporting file
-     moduleA.css         - supporting file
-     moduleA_test.js     - tests
-     moduleA.markdown    - docs
-     test.html           - test page
-     moduleA.html        - demo page
-```
+DoneJS generators create modlets to get you started quickly. Creating isolated test and demo pages for your modlet is simple and doesn't require any extra configuration.
 
-Modelets include pages that run just that module's tests and a demo page that shows off just that
-module's functionality.
-
+To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/), watch [this video](https://youtu.be/eIfUsPdKF4A?t=97), and [follow in the guide](http://donejs.com/Guide.html#section=section_Generatecustomelements) where generators are used to create modlets.
 
 ### Custom HTML Elements
 
