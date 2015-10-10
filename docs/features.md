@@ -423,7 +423,25 @@ node myexport.js
 
 ### ES6 Modules
 
-DoneJS future proofs your app by not only letting you use ES6 syntax, but also by allowing you to build your app using [ES6 Modules](http://www.2ality.com/2014/09/es6-modules-final.html). ES6 modules provide a global standard for creating modules in JavaScript!
+DoneJS supports the compact and powerful [ES6 module](http://www.2ality.com/2014/09/es6-modules-final.html) syntax, even for browsers that don't support it yet. Besides future proofing your application, writing ES6 modules makes it easier to write modular, maintainable code.
+
+````
+import { add, subtract } from "math";
+
+export function subtract(a, b) {
+  return a - b;
+}
+````
+
+#### How it works
+
+DoneJS applications are actually able to import or export any module type: ES6, AMD and CommonJS. This means you can slowly phase in ES6, while still using your old code. You can also use any of the many exciting [ES6 language features](https://github.com/lukehoban/es6features).
+
+A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. The build step will handle this conversion so your production code will run native ES5. You can even run your [ES6 application in IE8](#section=section_SupportsAllBrowsers_EvenIE8)!
+
+To learn more about ES6 and other module support, read the StealJS [ES6 docs](http://stealjs.com/docs/syntax.es6.html
+), the project [exporting docs](http://stealjs.com/docs/StealJS.project-exporting.html
+), and check out the [stealjs/transpile](https://github.com/stealjs/transpile) project.
 
 ### Modlets
 
