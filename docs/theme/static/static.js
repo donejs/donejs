@@ -41,12 +41,6 @@ steal("./content_list.js",
             $(this).stop().animate({'background-position-y':'93%'}, 325);
         }, function(){
             $(this).stop().animate({'background-position-y':'90%'}, 325);
-        }).click(function(event){
-            var target = $(this).data('target');
-            $('html, body').animate({
-                scrollTop: $('#' + target).offset().top
-            }, 500);
-
         });
         $('.triptych a').click(function(){
             event.stopPropagation();
@@ -241,11 +235,13 @@ steal("./content_list.js",
                 if ( /iPad|iPhone|iPod/.test(navigator.platform) ) {
                     document.body.style.position = "fixed";
                 }
+                $( "#greyOutUnderNav" ).show();
             } else {
                 document.body.style.overflow = "";
                 if ( /iPad|iPhone|iPod/.test(navigator.platform) ) {
                     document.body.style.position = "";
                 }
+                $( "#greyOutUnderNav" ).hide();
             }
         };
 
@@ -278,6 +274,15 @@ steal("./content_list.js",
 
             menu.on( "shown.bs.collapse", setBodyScroll );
             menu.on( "hidden.bs.collapse", setBodyScroll );
+        });
+
+        $( "#greyOutUnderNav" ).click( function () {
+            if ( $( "section.contents" ).is( ".active" ) ) {
+                $( ".scroll-spy-title" ).click();
+            }
+            if ( $( "#bs-example-navbar-collapse-1" ).is( ".in" ) ) {
+                $( "#bs-example-navbar-collapse-1" ).collapse( "hide" );
+            }
         });
 
         var lastH3 = null;
@@ -424,10 +429,25 @@ steal("./content_list.js",
         });
         //hijack home page page jumps, animate scroll
         $( function () {
+            $( ".triptych .box" ).click( function () {
+                var offset = -140;
+                var jumpto = $( this ).attr( "data-scrollto" );
+                if ( jumpto === "#performance" ) {
+                    offset = -50;
+                }
+                $( 'html, body' ).animate({
+                    scrollTop: $( jumpto ).offset().top + offset
+                }, 500);
+            });
+
             var clickFn = function () {
                 var offset = -140;
+                var jumpto = this.href.replace( /.*?#section=/, "#" );
+                if ( jumpto === "#performance" ) {
+                    offset = -95;
+                }
                 $( 'html, body' ).animate({
-                    scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
+                    scrollTop: $( jumpto ).offset().top + offset
                 }, 500);
             };
 

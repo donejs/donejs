@@ -4,11 +4,17 @@
 @outline 2 ol
 @description In this guide, we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 
-<img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); margin: 20px 0; border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+
+<img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+
 
 In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). We will conclude with creating a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
+
+If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we're happy to help out.
 
 @body
 
@@ -47,16 +53,13 @@ DoneJS comes with its own development server which hosts your development files 
 cd donejs-chat
 ```
 
-Then we can start development mode by running:
+We can start development mode by running:
 
 ```
 donejs develop
 ```
 
 The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage.
-
-If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs).
-
 
 ## Adding Bootstrap
 
@@ -153,9 +156,11 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-Routing works slightly different than what you might be used to with other libraries. Instead of declaring routes and mapping those to actions, our application will use CanJS's [can.route](http://canjs.com/docs/can.route.html) which allows mapping property names from the URL to properties in our application view-model.
+Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-To learn more about CanJS routing, visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
+
+To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
 First, let's update `src/home.component` with a link to the chat messages page:
 
@@ -168,12 +173,12 @@ First, let's update `src/home.component` with a link to the chat messages page:
   </style>
   <template>
     <h1 class="page-header text-center">
-      <img src="http://donejs.com/static/img/donejs-logo-white.svg" 
+      <img src="http://donejs.com/static/img/donejs-logo-white.svg"
            alt="DoneJS logo" style="width: 100%;" />
       <br>Chat
     </h1>
 
-    <a can-href="{ page='chat' }" 
+    <a can-href="{ page='chat' }"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>
@@ -315,7 +320,7 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
       </bit-panel>
     </bit-tabs>
 
-    <a can-href="{ page='chat' }" 
+    <a can-href="{ page='chat' }"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>

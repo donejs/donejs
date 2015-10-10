@@ -1,9 +1,13 @@
 /* This file is for styles that apply specifically to the "Guides.html" page that link to the actual guides */
-body.Guides {
+body.Guides:not(.Guide):not(.place-my-order) {
 	background-color: #FCFEFD;
 	color: #000000;
 	> .container-fluid {
 		width: 100%;
+		@media(min-width: @screen-sm){
+			width: 100%;
+			table-layout: fixed;
+		}
 		.content.docs {
 			display: block!important;
 			margin: 0px;
@@ -32,12 +36,16 @@ body.Guides {
 	section.comment {
 		width:800px;
 		margin: 0 auto;
+		@media(min-width: @screen-md){
+			margin-left: auto !important;
+		}
 		.app-thumbs {
 			float: left;
 			margin-right:30px;
-			@media(max-width: @screen-xs){
+			@media(max-width: @screen-xs-max){
 				float:none;
 				margin: 0 0 20px 0;
+				display: block;
 			}
 		}
 		ul {
