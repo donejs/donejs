@@ -59,40 +59,38 @@ View the documentation for can-ssr [here](https://github.com/canjs/can-ssr).
 
 ### Progressive Loading
 
+When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These megabytes of extra weight slow down page load performance, especially on mobile devices.
+
 DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load *fast*.
 
-Steal analyzes the dependencies of each page and bundle them in a way that has the lowest possible wasted size across page requests. Check it out:
+There is no configuration needed to enable this feature, and wiring up progressively loaded sections of your app is simple.
+
+#### How it works
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
 
-Our algorithm is VERY smart with the optimization and doesn't require you to configure your bundles like our competitors do. For example, should jQuery and Underscore be in some "core" library? StealJS makes these decisions for you, better than you could make for yourself.
+Other build tools require you to manually configure bundles, which doesn't scale with large applications. 
 
-#### And it's super easy to use!
-Progressive loading is done simply by specifying it directly in your templates. Here, as the page changes, it will begin loading the additional JS needed and briefly show "Loading..." until it completes:
+In a DoneJS application, you simply mark a section to be progressively loaded by wrapping it in your template with `<can-import>`.
 
 ```
-<div>
-  {{#eq page 'chat'}}
-    <can-import from="donejs-chat/messages/">
-      {{#if isPending}}
-        Loading...
-      {{else}}
-        <chat-messages/>
-      {{/if}}
-    </can-import>
-  {{else}}
-    <can-import from="donejs-chat/home.component!">
-      {{#if isPending}}
-        Loading...
-      {{else}}
-        <chat-home/>
-      {{/if}}
-    </can-import>
-  {{/eq}}
-</div>
+{{#eq location 'home'}}
+<can-import from="components/home">
+  <my-home/>
+</can-import>
+{{/eq}}
+{{#eq location 'away'}}
+<can-import from="components/chat">
+  <my-chat/>
+</can-import>
+{{/eq}}
 ```
+
+Then you run the build. A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size. 
 
 That's it! No need for additional configuration in your JavaScript.
 
+For more information, read about [Progressive Loading](http://stealjs.com/docs/steal-tools.guides.progressive_loading.html) in StealJS, the [`<can-import>` tag](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html), and follow [the guide](./Guide.html#section=section_Switchbetweenpages).
 
 ### Caching and Minimal Data Requests
 
@@ -248,15 +246,39 @@ To learn more about routing and setting up Pretty URLs visit the CanJS guide on 
 
 ## Maintainable features
 
-### Unit and Functional Tests
+DoneJS helps developers get things done quickly with an eye toward maintenance.
 
-Unit tests test the view models (link to the guide) or other low-level stuff. Unit tests are best!
+### Testing
 
-Functional tests test user behavior and are great for smoke tests and some integration tests between modules.
+Nothing increases the maintainability of an application more than good automated testing. DoneJS includes a comprehensive test layer that makes writing, running, and maintaining tests intuitive and easy.
 
-For simple unit and integration assertions, DoneJS uses [QUnit](https://qunitjs.com/) by default. For high level interaction/DOM tests someone in a QA role might define, DoneJS uses [FuncUnit](http://funcunit.com/).
+DoneJS provides tools for the entire testing lifecycle:
 
-FuncUnit enhances assertion libraries like QUnit and enables it to simulate user actions, easily test asynchronous behavior, and support black box testing. It uses a simple jQuery-like syntax to do the assertions:
+* **Generators** - create boilerplate tests to get started quickly
+* **Unit testing** - assertion libraries to test your module interfaces
+* **Functional testing** - an API for scripting the browser, simulating user actions, and testing your UI modules
+* **User action event simulation** - accurate event simulation for clicks, types, drags, and other user actions
+* **A command line test runner** - invoke the same tests from the CLI
+* **A browser launcher** - launch several browsers and target your tests against them
+* **A reporting tool** - report results to the CLI or other forms, including coverage
+* **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
+* **A mock layer** - an API to mock out your server APIs so you can test your app in isolation from a server
+
+#### How it works
+
+Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack - so you can spend less time messing with test infrastructure, and more time [mud ridin'](https://youtu.be/s4faD0fox_s?t=261).
+
+##### Generators
+
+The DoneJS app generator command `donejs init` creates a working project-level test HTML and JS file. Component generators via `donejs generate component cart` create a test script and individual test page for each test.
+
+##### Unit tests
+
+Unit tests are used to test the interface for modules like models and view models. You can choose between BDD style unit tests with Jasmine or Mocha, or more functional unit tests with QUnit.
+
+##### Functional tests
+
+Functional tests are used to test UI components by simulating user behavior. The syntax for writing functional tests is jQuery-like, chainable, and asynchronous, simulating user actions and waiting for page elements to change asynchronously.
 
 ```js
 test('destroying todos', function() {
@@ -269,64 +291,36 @@ test('destroying todos', function() {
 });
 ```
 
-And they're scriptable!
+##### Event simulation accuracy
 
-```
-var openMenu = function ( item ) {
-  F( item ).click();
-  F( ".menu" ).click();
-  F( ".menu-items" ).visible();
-};
-
-openMenu( ".item1" );
-F( ".delete" ).click();
-```
-
-FuncUnit uses [syn](https://github.com/bitovi/syn) to provide accurate event simulation. So this:
+User action methods, like click, type, and drag, simulate exactly the sequence of events generated by a browser when a user performs that action. For example this:
 ```
 F( ".menu" ).click();
 ```
 
-is not just a click event; It goes through the whole motion: mousedown, blur, focus, mouseup, then click!
+is not just a click event. It triggers a mousedown, then blur, then focus, then mouseup, then click. The result is more accurate tests that catch bugs early.
 
+Even further, there are differences between how IE and Safari handle a click. DoneJS tests take browser differences into account when running functional tests.
 
-#### What does DoneJS do special? A lot of stuff!
+##### Running tests from the command line
 
-DoneJS tests are modules just like all your other code. This means you don’t have to compile your app for your tests to run them.
+DoneJS comes with a command line test runner, browser launcher, and reporting tool that integrates with any [continuous integration](#section=section_ContinuousIntegration_Deployment) environment. 
 
-Module-based tests means you can easily run some tests independently of all your other tests. This is the foundation for the [modlet pattern](#section_Modlets). To write a test with DoneJS, simply add:
+No setup required, running a DoneJS project's test is as simple as running:
 
 ```
-import QUnit from "steal-qunit";
-import myModule from "my-project/my-module";
-
-Qunit.test( "something", function () { 
-  QUnit.ok( myModule, "we have access to your module" );
-});
+donejs test
 ```
 
-Then, to create a page that runs just this test:
-```
-<title>My Module's Tests</title>
-<script src="/node_modules/steal/steal.js" main="/my-module/my-module_test.js"></script>
-<div id="qunit-fixture"></div>
-```
+You can run launch your unit and functional tests from the cli, either in headless browser mode, or via multiple real browsers. You can even launch browserstack virtual machines to test against any version of Android, Windows, etc.
 
-And because these are modules, [live reload](#section_HotModuleSwapping_LiveReload) works!
+The reporting tool gives detailed information about coverage statistics, and lets you choose from many different output formats, including XML or JSON files.
 
-It's all super simple - but it gets better! [Generators](#section_Generators) will set these up for you!
+##### Mocking server APIs
 
-#### It's flexible too!
+Automated frontend testing is most useful when it has no external dependencies on API servers or specific sets of data. Thus a good mock layer is critical to write resilient tests.
 
-QUnit is the default assertion library but DoneJS works with jasmine, mocha, and others!
-
-DoneJS also brings [testee](https://github.com/bitovi/testee) into the mix because it allows you to run your tests from the command line for [continuous integration](#section_ContinuousIntegration_Deployment)!
-
-Plus! Unit tests should be able to run by themselves without the need for an API server, sooo:
-
-#### Creating fake data: Fixtures!
-
-DoneJS does even more to make testing easy and more valuable by using fixtures. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. It's easy to set up too:
+DoneJS apps use fixtures to emulate REST APIs. A default set of fixtures are created by generators when a new model is created. Fixtures are very flexible, and can be used to simulate error states and slow performing APIs.
 
 ```js
 import fixture from 'can-connect/fixture/';
@@ -347,7 +341,16 @@ fixture({
 export default store;
 ```
 
-That's it! Now any calls to the states api url will return faked data automatically when the store is pulled into your app with StealJS! No need to change any of your code; It just works like you've already built the backend service.
+##### More information
+
+The DoneJS testing layer involves many pieces, so if you want to learn more:
+
+ * follow along in the [Unit testing view model and fixtures](./place-my-order.html#section=section_Creatingaunit_testedviewmodel) section of the guide
+ * see how to run tests and set up CI automation in the [CI section](./place-my-order.html#section=section_Automatedtestsandcontinuousintegration) of the guide
+ * read about [FuncUnit](http://funcunit.com/), the functional testing and asynchronous user action simulating library
+ * read about [syn](https://github.com/bitovi/syn) - the synthetic event library
+ * read about the [Testee.js](https://github.com/bitovi/testee) browser launcher, test runner, and reporting tool
+ * read the [can.fixture](http://canjs.com/docs/can.fixture.html) docs
 
 ### Documentation
 
@@ -423,51 +426,76 @@ node myexport.js
 
 ### ES6 Modules
 
-DoneJS future proofs your app by not only letting you use ES6 syntax, but also by allowing you to build your app using [ES6 Modules](http://www.2ality.com/2014/09/es6-modules-final.html). ES6 modules provide a global standard for creating modules in JavaScript!
+DoneJS supports the compact and powerful [ES6 module](http://www.2ality.com/2014/09/es6-modules-final.html) syntax, even for browsers that don't support it yet. Besides future proofing your application, writing ES6 modules makes it easier to write modular, maintainable code.
+
+````
+import { add, subtract } from "math";
+
+export function subtract(a, b) {
+  return a - b;
+}
+````
+
+#### How it works
+
+DoneJS applications are actually able to import or export any module type: ES6, AMD and CommonJS. This means you can slowly phase in ES6, while still using your old code. You can also use any of the many exciting [ES6 language features](https://github.com/lukehoban/es6features).
+
+A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. The build step will handle this conversion so your production code will run native ES5. You can even run your [ES6 application in IE8](#section=section_SupportsAllBrowsers_EvenIE8)!
+
+To learn more about ES6 and other module support, read the StealJS [ES6 docs](http://stealjs.com/docs/syntax.es6.html
+), the project [exporting docs](http://stealjs.com/docs/StealJS.project-exporting.html
+), and check out the [stealjs/transpile](https://github.com/stealjs/transpile) project.
 
 ### Modlets
 
-DoneJS applications are built so every module is treated as its own application.  Every module
-is given its own folder.  Instead of organizing a project by grouping files based on type like:
+The secret to building large apps is never build large apps. Break up your application into small pieces. Then, assemble.
+
+DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
+
+#### How it works
+
+Large apps have a lot of files. There are two ways to organize them: by type or by module.
+
 
 ```
-project/
-  js/
-     moduleA.js
-     moduleB.js
-  templates/
-     moduleA.handlebars
-     moduleB.handlebars
-  css/
-     moduleA.css
-     moduleB.less
-  test/
-     moduleA_test.js
-     moduleB_test.js
-  docs/
-     moduleA.markdown
-     moduleB.markdown
+components/
+   tabs.js
+   chat.js
+viewmodels/
+    tabs-vm.js
+    chat-vm.js
+templates/
+   tabs.handlebars
+   chat.handlebars
+css/
+   tabs.css
+   chat.less
+test/
+   tabs_test.js
+   chat_test.js
+docs/
+   tabs.markdown
+   chat.markdown
 
+vs
+
+chat/
+   chat.js          - module code
+   chat.handlebars  - supporting file
+   chat.css         - supporting file
+   chat_test.js     - tests
+   chat.markdown    - docs
+   test.html        - test page
+   chat.html        - demo page
+ tabs/
+ cart/
 ```
 
-A DoneJS application is organized into modlets.  Every module is given its own folder which
-contains the module's code, supporting files (CSS and templates), tests, and documentation like:
+Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. 
 
-```
-project/
-  moduleA/
-     moduleA.js          - module's code
-     moduleA.handlebars  - supporting file
-     moduleA.css         - supporting file
-     moduleA_test.js     - tests
-     moduleA.markdown    - docs
-     test.html           - test page
-     moduleA.html        - demo page
-```
+DoneJS generators create modlets to get you started quickly. Creating isolated test and demo pages for your modlet is simple and doesn't require any extra configuration.
 
-Modelets include pages that run just that module's tests and a demo page that shows off just that
-module's functionality.
-
+To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/), watch [this video](https://youtu.be/eIfUsPdKF4A?t=97), and [follow in the guide](http://donejs.com/Guide.html#section=section_Generatecustomelements) where generators are used to create modlets.
 
 ### Custom HTML Elements
 
@@ -665,24 +693,25 @@ Our template elegantly handles disabled and loading states, and the markup is in
 
 Check out our guide for a full walk through of the Place My Order app.
 
-### Hot Module Swapping & Live Reload
+### Live Reload
 
-DoneJS applications keep developers focused because they enable super fast updates when code changes. Live-reload
-listens to when source files change, and update only the modules that need to change. Developers speend less time
-waiting for refreshes and builds.
-
-When you save your work, Steal doesn’t refresh the page, but only re-imports modules that are marked as dirty. This is hot swapping with live-reload. The result is a blazing fast development experience:
+Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
 
 <video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"><source video-src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4" type="video/mp4" class="source-mp4" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"></video>
 
-<br>
-When you begin working on your DoneJS application, just run
+#### How it works
+
+Other live reload servers watch for file changes and force your browser window to refresh. 
+
+DoneJS live reload doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time. It is more like hot swapping than traditional live reload. The result is a blazing fast development experience.
+
+There is no configuration needed to enable this feature. Just start the dev server and begin: 
+
 ```
 donejs develop
 ```
-in your terminal to start using live-reload!
 
-
+To learn more about live reload, read the [StealJS docs](http://stealjs.com/docs/steal.live-reload.html).
 
 ### Generators
 
