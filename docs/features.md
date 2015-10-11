@@ -663,24 +663,25 @@ Our template elegantly handles disabled and loading states, and the markup is in
 
 Check out our guide for a full walk through of the Place My Order app.
 
-### Hot Module Swapping & Live Reload
+### Live Reload
 
-DoneJS applications keep developers focused because they enable super fast updates when code changes. Live-reload
-listens to when source files change, and update only the modules that need to change. Developers speend less time
-waiting for refreshes and builds.
-
-When you save your work, Steal doesn’t refresh the page, but only re-imports modules that are marked as dirty. This is hot swapping with live-reload. The result is a blazing fast development experience:
+Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
 
 <video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"><source video-src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4" type="video/mp4" class="source-mp4" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"></video>
 
-<br>
-When you begin working on your DoneJS application, just run
+#### How it works
+
+Other live reload servers watch for file changes and force your browser window to refresh. 
+
+DoneJS live reload doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time. It is more like hot swapping than traditional live reload. The result is a blazing fast development experience.
+
+There is no configuration needed to enable this feature. Just start the dev server and begin: 
+
 ```
 donejs develop
 ```
-in your terminal to start using live-reload!
 
-
+To learn more about live reload, read the [StealJS docs](http://stealjs.com/docs/steal.live-reload.html).
 
 ### Generators
 
