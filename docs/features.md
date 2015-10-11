@@ -59,40 +59,38 @@ View the documentation for can-ssr [here](https://github.com/canjs/can-ssr).
 
 ### Progressive Loading
 
+When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These megabytes of extra weight slow down page load performance, especially on mobile devices.
+
 DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load *fast*.
 
-Steal analyzes the dependencies of each page and bundle them in a way that has the lowest possible wasted size across page requests. Check it out:
+There is no configuration needed to enable this feature, and wiring up progressively loaded sections of your app is simple.
+
+#### How it works
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
 
-Our algorithm is VERY smart with the optimization and doesn't require you to configure your bundles like our competitors do. For example, should jQuery and Underscore be in some "core" library? StealJS makes these decisions for you, better than you could make for yourself.
+Other build tools require you to manually configure bundles, which doesn't scale with large applications. 
 
-#### And it's super easy to use!
-Progressive loading is done simply by specifying it directly in your templates. Here, as the page changes, it will begin loading the additional JS needed and briefly show "Loading..." until it completes:
+In a DoneJS application, you simply mark a section to be progressively loaded by wrapping it in your template with `<can-import>`.
 
 ```
-<div>
-  {{#eq page 'chat'}}
-    <can-import from="donejs-chat/messages/">
-      {{#if isPending}}
-        Loading...
-      {{else}}
-        <chat-messages/>
-      {{/if}}
-    </can-import>
-  {{else}}
-    <can-import from="donejs-chat/home.component!">
-      {{#if isPending}}
-        Loading...
-      {{else}}
-        <chat-home/>
-      {{/if}}
-    </can-import>
-  {{/eq}}
-</div>
+{{#eq location 'home'}}
+<can-import from="components/home">
+  <my-home/>
+</can-import>
+{{/eq}}
+{{#eq location 'away'}}
+<can-import from="components/chat">
+  <my-chat/>
+</can-import>
+{{/eq}}
 ```
+
+Then you run the build. A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size. 
 
 That's it! No need for additional configuration in your JavaScript.
 
+For more information, read about [Progressive Loading](http://stealjs.com/docs/steal-tools.guides.progressive_loading.html) in StealJS, the [`<can-import>` tag](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html), and follow [the guide](./Guide.html#section=section_Switchbetweenpages).
 
 ### Caching and Minimal Data Requests
 
