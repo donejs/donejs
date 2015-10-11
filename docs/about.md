@@ -40,6 +40,15 @@ To help with maintainability, DoneJS makes sure what a developer should be doing
 - Modlets
 - Generators
 
+For any sufficiently complex application, there are many many layers of foundation needed. There are a ton of options out there, and so much to learn. The rise of the [micro-library](http://microjs.com/#) era has led to a time when picking your stack involves picking from thousands of potential options. 
+
+Having tons of small micro libraries to choose from sounds good in theory. In practice, its a nightmare.
+
+How do you choose? How do you know if they fit well together? What if the industry changes (it will) and a year from now your stack is no longer maintained? More importantly, who has time for that?
+
+http://vignette1.wikia.nocookie.net/starpolar/images/6/6b/Notime.jpg/revision/latest?cb=20150225125846
+
+DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. Its our goal to take any ambiguity around choosing technology for building an app, so you can spend time actually building your app. Spend less time experimenting with ingredients in your tech stack, and more time [shooting vermin with your air rifle](https://www.youtube.com/watch?v=fPN6eeFILAc).
 
 ### Evolve
 
