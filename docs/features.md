@@ -250,7 +250,7 @@ To learn more about routing and setting up Pretty URLs visit the CanJS guide on 
 
 DoneJS helps developers get things done quickly with an eye toward maintenance.
 
-### Testing
+### Comprehensive Testing
 
 Nothing increases the maintainability of an application more than good automated testing. DoneJS includes a comprehensive test layer that makes writing, running, and maintaining tests intuitive and easy.
 
