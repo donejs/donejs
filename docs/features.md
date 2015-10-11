@@ -9,6 +9,8 @@
 
 ## Performance Features
 
+DoneJS is configured for maximum performance right out of the box.
+
 ### Server Side Rendered
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
