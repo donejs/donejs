@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="triptych hidden-xs">
-                <div class="col-xs-12 col-sm-4 box usability" data-target="usability">
+                <div class="col-xs-12 col-sm-4 box usability" data-scrollto="#usability">
                     <h2><span class="light">Improved App</span><br>Usability</h2>
                     <p>
                       <a href="/Features.html#section=section_iOS_Android_andDesktopBuilds">iOS, Android, and Desktop Builds</a>;
@@ -54,7 +54,7 @@
                       <a href="/Features.html#section=section_PrettyURL_swithPushstate">Pretty URL’s with Pushstate</a>
                     </p>
                 </div>
-                <div class="col-xs-12 col-sm-4 box performance" data-target="performance">
+                <div class="col-xs-12 col-sm-4 box performance" data-scrollto="#performance">
                     <h2><span class="light">Better</span><br>Performance</h2>
                     <p>
                       <a href="/Features.html#section=section_ServerSideRendered">Server Side Rendered (Isomorphic)</a>;
@@ -65,18 +65,18 @@
                       <a href="/Features.html#section=section_DeploytoaCDN">Deploy to a CDN</a>
                     </p>
                 </div>
-                <div class="col-xs-12 col-sm-4 box maintainable" data-target="maintainable">
+                <div class="col-xs-12 col-sm-4 box maintainable" data-scrollto="#maintainable">
                     <h2><span class="light">More</span><br>Maintainable</h2>
                     <p>
-                      <a href="/Features.html#section=section_UnitandFunctionalTests">Unit and Functional Tests</a>;
+                      <a href="/Features.html#section=section_ComprehensiveTesting">Comprehensive Testing</a>;
                       <a href="/Features.html#section=section_Documentation">Documentation</a>;
                       <a href="/Features.html#section=section_ContinuousIntegration_Deployment">Continuous Integration &amp; Deployment</a>;
                       <a href="/Features.html#section=section_NPMPackages">NPM Packages</a>;
                       <a href="/Features.html#section=section_ES6Modules">ES6 Modules</a>;
                       <a href="/Features.html#section=section_Modlets">Modlets</a>;
                       <a href="/Features.html#section=section_CustomHTMLElements">Custom HTML Elements</a>;
-                      <a href="/Features.html#section=section_MVVMReactive">MVVM Reactive Architecture</a>;
-                      <a href="/Features.html#section=section_HotModuleSwapping_LiveReload">Live reload</a>;
+                      <a href="/Features.html#section=section_MVVMArchitecture">MVVM Architecture</a>;
+                      <a href="/Features.html#section=section_HotModuleSwapping_LiveReload">Live Reload</a>;
                       <a href="/Features.html#section=section_Generators">Generators</a>
                     </p>
                 </div>
@@ -159,9 +159,10 @@
             </p>
         </div>
     </div>
-    <div class="performance wrapper col-xs-12 hidden-md hidden-lg">
-      <div class="lead-in">
-          <a id="performance" style="vertical-align: top;"></a>
+    
+    <div class="performance wrapper col-xs-12">
+      <a id="performance" style="vertical-align: top;"></a>
+      <div class="lead-in hidden-md hidden-lg">
           <div class="title-padding">
               <h1><span class="light">Better</span> <span class="heavy">Performance</span></h1>
               <h3 class="lead"><span class="bold">DoneJS</span> is configured for maximum performance right out of the box.</h3>
@@ -169,50 +170,17 @@
           </div>
           <div class="spacer"></div>
       </div>
-    </div>
-    <div class="mobile-graph hidden-md hidden-lg">
-      <div class="graph-logos">
-        <img src="/static/img/donejs-mobile-guide-logos.png" srcset="/static/img/donejs-mobile-guide-logos.png 1x, /static/img/donejs-mobile-guide-logos-2x.png 2x">
-      </div>
-      <div class="graph-timeline-wrapper">
-        <div class="graph-timeline">
-            <img src="/static/img/donejs-mobile-guide-timeline.gif" srcset="/static/img/donejs-mobile-guide-timeline.gif 1x, /static/img/donejs-mobile-guide-timeline-2x.gif 2x">
+      <div class="mobile-graph hidden-md hidden-lg">
+        <div class="graph-logos">
+          <img src="/static/img/donejs-mobile-guide-logos.png" srcset="/static/img/donejs-mobile-guide-logos.png 1x, /static/img/donejs-mobile-guide-logos-2x.png 2x">
+        </div>
+        <div class="graph-timeline-wrapper">
+          <div class="graph-timeline">
+              <img src="/static/img/donejs-mobile-guide-timeline.gif" srcset="/static/img/donejs-mobile-guide-timeline.gif 1x, /static/img/donejs-mobile-guide-timeline-2x.gif 2x">
+          </div>
         </div>
       </div>
-
-    </div>
-    <div class="performance-mobile-trail col-xs-12 hidden-md hidden-lg">
-      <h2 class="heavy">More ways DoneJS improves app performance:</h2>
-      <p class="trail">
-          <a href="/Features.html#section=section_ServerSideRendered">Server Side Rendered (Isomorphic)</a><span class="pipe-spacer"> | </span>
-          <a href="/Features.html#section=section_Progressiveloading">Progressive Loading</a><span class="pipe-spacer"> | </span>
-          <a href="/Features.html#section=section_Cachingandminimaldatarequests">Minimal Data Requests</a><span class="pipe-spacer"> | </span>
-          <a href="/Features.html#section=section_MinimalDOMupdates">Minimal DOM Updates</a><span class="pipe-spacer"> | </span>
-          <a href="/Features.html#section=section_WorkerThreadRendering">Worker Thread Rendering</a><span class="pipe-spacer"> | </span>
-          <a href="/Features.html#section=section_DeploytoaCDN">Deploy to a CDN</a>
-      </p>
-    </div>
-    <div class="performance wrapper hidden-xs hidden-sm">
-        <div class="lead-in">
-            <div class="title-padding">
-                <h1><span class="light">Better</span> <span class="heavy">Performance</span></h1>
-                <h3 class="lead"><span class="bold">DoneJS</span> is configured for maximum performance right out of the box.</h3>
-                <h3 class="heavy">Hover over the graph to see how it works:</h3>
-            </div>
-            <div class="spacer"></div>
-        </div>
-        <div class="graph">
-            <div class="performance-row">
-                <div class="col donejs">
-                    <img class="donejs-text" src="static/img/donejs-final_Graph_1.svg">
-                    <img class="donejs-thumbs" src="static/img/donejs-final_Graph_2.svg">
-                </div>
-                <div class="col naive">
-                    <img class="naive-thumbs" src="static/img/donejs-final_Graph_3.svg">
-                    <img class="naive-text" src="static/img/donejs-final_Graph_4.svg">
-                </div>
-            </div>
-        </div>
+      <div class="performance-mobile-trail col-xs-12 hidden-md hidden-lg">
         <h2 class="heavy">More ways DoneJS improves app performance:</h2>
         <p class="trail">
             <a href="/Features.html#section=section_ServerSideRendered">Server Side Rendered (Isomorphic)</a><span class="pipe-spacer"> | </span>
@@ -222,6 +190,38 @@
             <a href="/Features.html#section=section_WorkerThreadRendering">Worker Thread Rendering</a><span class="pipe-spacer"> | </span>
             <a href="/Features.html#section=section_DeploytoaCDN">Deploy to a CDN</a>
         </p>
+      </div>
+      <div class="hidden-xs hidden-sm">
+          <div class="lead-in">
+              <div class="title-padding">
+                  <h1><span class="light">Better</span> <span class="heavy">Performance</span></h1>
+                  <h3 class="lead"><span class="bold">DoneJS</span> is configured for maximum performance right out of the box.</h3>
+                  <h3 class="heavy">Hover over the graph to see how it works:</h3>
+              </div>
+              <div class="spacer"></div>
+          </div>
+          <div class="graph">
+              <div class="performance-row">
+                  <div class="col donejs">
+                      <img class="donejs-text" src="static/img/donejs-final_Graph_1.svg">
+                      <img class="donejs-thumbs" src="static/img/donejs-final_Graph_2.svg">
+                  </div>
+                  <div class="col naive">
+                      <img class="naive-thumbs" src="static/img/donejs-final_Graph_3.svg">
+                      <img class="naive-text" src="static/img/donejs-final_Graph_4.svg">
+                  </div>
+              </div>
+          </div>
+          <h2 class="heavy">More ways DoneJS improves app performance:</h2>
+          <p class="trail">
+              <a href="/Features.html#section=section_ServerSideRendered">Server Side Rendered (Isomorphic)</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_Progressiveloading">Progressive Loading</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_Cachingandminimaldatarequests">Minimal Data Requests</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_MinimalDOMupdates">Minimal DOM Updates</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_WorkerThreadRendering">Worker Thread Rendering</a><span class="pipe-spacer"> | </span>
+              <a href="/Features.html#section=section_DeploytoaCDN">Deploy to a CDN</a>
+          </p>
+      </div>
     </div>
 
     <div class="maintainable wrapper">
@@ -235,6 +235,7 @@
                     <div class="caption">
                         <h2 class="heavy">Documentation</h2>
                         <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
+                        <a href="/Features.html#section=section_Documentation" class="btn">Learn More</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 background video">
@@ -245,8 +246,9 @@
                         <source src="static/img/donejs-testing.webm" type="video/webm">
                     </video>
                     <div class="caption">
-                        <h2 class="heavy">Testing</h2>
+                        <h2 class="heavy">Comprehensive Testing</h2>
                         <p>DoneJS applications are functionally tested with highly accurate event simulation.</p>
+                        <a href="/Features.html#section=section_ComprehensiveTesting" class="btn">Learn More</a>
                     </div>
                 </div>
             </div>
@@ -261,6 +263,7 @@
                     <div class="caption">
                         <h2 class="heavy">Live Reload</h2>
                         <p>DoneJS applications keep developers focused because they enable super fast updates when code changes, updating only the modules that need to change.</p>
+                        <a href="/Features.html#section=section_HotModuleSwapping_LiveReload" class="btn">Learn More</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 background video">
@@ -271,8 +274,8 @@
                         <source src="static/img/donejs-npm-packaging-custom-elements.webm" type="video/webm">
                     </video>
                     <div class="caption">
-                        <h2 class="heavy">NPM Packaging &amp; Custom HTML Elements</h2>
-                        <p>DoneJS applications use DocumentJS to produce multi-versioned documentation.</p>
+                        <h2 class="heavy">NPM Packaging and Custom HTML Elements</h2>
+                        <p>DoneJS applications can use packages published to NPM without configuration.</p>
                     </div>
                 </div>
             </div>
@@ -280,21 +283,23 @@
                 <div class="col-xs-12 col-sm-6 background">
                     <img src="static/img/mvvm-reactive.jpg" class="img-responsive" alt="Responsive image">
                     <div class="caption">
-                        <h2 class="heavy">MVVM Reactive Architecture</h2>
+                        <h2 class="heavy">MVVM Architecture</h2>
                         <p>DoneJS applications are architecturally Model-View-ViewModel applications where all events and updates flow in a single direction.</p>
+                        <a href="/Features.html#section=section_MVVMArchitecture" class="btn">Learn More</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 background">
                     <img src="static/img/continuous-integration0deployment.jpg" class="img-responsive" class="img-responsive" alt="Responsive image">
                     <div class="caption">
-                        <h2 class="heavy">Continuous Integration &amp; Deployment</h2>
+                        <h2 class="heavy">Continuous Integration and Deployment</h2>
                         <p>DoneJS verifies each repository check in with an automated build, allowing teams to detect problems early.</p>
+                        <a href="/Features.html#section=section_ContinuousIntegration_Deployment" class="btn">Learn More</a>
                     </div>
                 </div>
             </div>
             <h2>More ways DoneJS helps developers do their jobs</h2>
             <p class="trail">
-                <a href="/Features.html#section=section_UnitandFunctionalTests">Unit and Functional Tests</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_ComprehensiveTesting">Comprehensive Testing</a><span class="pipe-spacer"> | </span>
                 <a href="/Features.html#section=section_HotModuleSwapping_LiveReload">Live reload</a><span class="pipe-spacer"> | </span>
                 <a href="/Features.html#section=section_Documentation">Documentation</a><span class="pipe-spacer"> | </span>
                 <a href="/Features.html#section=section_NPMPackages">NPM Packages</a><span class="pipe-spacer"> | </span>
@@ -302,7 +307,7 @@
                 <a href="/Features.html#section=section_ES6Modules">ES6 Modules</a><span class="pipe-spacer"> | </span>
                 <a href="/Features.html#section=section_Modlets">Modlets</a><span class="pipe-spacer"> | </span>
                 <a href="/Features.html#section=section_CustomHTMLElements">Custom HTML Elements</a><span class="pipe-spacer"> | </span>
-                <a href="/Features.html#section=section_MVVMReactive">MVVM Reactive Architecture</a><span class="pipe-spacer"> | </span>
+                <a href="/Features.html#section=section_MVVMArchitecture">MVVM Architecture</a><span class="pipe-spacer"> | </span>
                 <a href="/Features.html#section=section_Generators">Generators</a>
             </p>
 

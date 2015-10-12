@@ -414,7 +414,7 @@ body.donejs {
     padding:0;
     width: 86px;
     position: absolute;
-    z-index: 3;
+    z-index: 2;
     left: 0;
     top:0;
     height: 425px;
@@ -551,6 +551,24 @@ body.donejs {
     font-size: smaller;
     p {
       color: #fff;
+    }
+    .btn {
+      background-color: rgba(255, 255, 255, .9);
+      padding: 10px;
+      text-align: center;
+      color: @logoColor;
+      width: 30%;
+      height: auto;
+      margin-bottom: 15px;
+      font-size: 14px;
+      @media(max-width: @screen-xs){
+        width: 100%;
+      }
+      &:hover {
+        text-decoration: none;
+        background-color: rgba(255, 255, 255, 1);
+        .fade-bg-hover;
+      }
     }
   }
   .img-responsive {

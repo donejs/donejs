@@ -9,6 +9,8 @@
 
 ## Performance Features
 
+DoneJS is configured for maximum performance right out of the box.
+
 ### Server Side Rendered
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
@@ -59,40 +61,38 @@ View the documentation for can-ssr [here](https://github.com/canjs/can-ssr).
 
 ### Progressive Loading
 
+When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These megabytes of extra weight slow down page load performance, especially on mobile devices.
+
 DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load *fast*.
 
-Steal analyzes the dependencies of each page and bundle them in a way that has the lowest possible wasted size across page requests. Check it out:
+There is no configuration needed to enable this feature, and wiring up progressively loaded sections of your app is simple.
+
+#### How it works
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
 
-Our algorithm is VERY smart with the optimization and doesn't require you to configure your bundles like our competitors do. For example, should jQuery and Underscore be in some "core" library? StealJS makes these decisions for you, better than you could make for yourself.
+Other build tools require you to manually configure bundles, which doesn't scale with large applications. 
 
-#### And it's super easy to use!
-Progressive loading is done simply by specifying it directly in your templates. Here, as the page changes, it will begin loading the additional JS needed and briefly show "Loading..." until it completes:
+In a DoneJS application, you simply mark a section to be progressively loaded by wrapping it in your template with `<can-import>`.
 
 ```
-<div>
-  {{#eq page 'chat'}}
-    <can-import from="donejs-chat/messages/">
-      {{#if isPending}}
-        Loading...
-      {{else}}
-        <chat-messages/>
-      {{/if}}
-    </can-import>
-  {{else}}
-    <can-import from="donejs-chat/home.component!">
-      {{#if isPending}}
-        Loading...
-      {{else}}
-        <chat-home/>
-      {{/if}}
-    </can-import>
-  {{/eq}}
-</div>
+{{#eq location 'home'}}
+<can-import from="components/home">
+  <my-home/>
+</can-import>
+{{/eq}}
+{{#eq location 'away'}}
+<can-import from="components/chat">
+  <my-chat/>
+</can-import>
+{{/eq}}
 ```
+
+Then you run the build. A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size. 
 
 That's it! No need for additional configuration in your JavaScript.
 
+For more information, read about [Progressive Loading](http://stealjs.com/docs/steal-tools.guides.progressive_loading.html) in StealJS, the [`<can-import>` tag](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html), and follow [the guide](./Guide.html#section=section_Switchbetweenpages).
 
 ### Caching and Minimal Data Requests
 
@@ -109,7 +109,46 @@ layer.  Example techniques:
 
 ### Minimal DOM Updates
 
-Keeping the DOM updated is one of the most expensive aspects of a Single Page Application. However, because DoneJS uses CanJS, DOM updates occur only as often as necessary. Unlike other libraries that can run expensive digest cycles that check all bound data on a page for changes, CanJS only triggers updates when data has changed and only calculates the changes on elements bound to that data. This means overhead for making a single DOM update is as little as possible.
+The rise of templates, data binding, and MV* separation, while boosting maintainability, has come at the cost of performance. Many frameworks are not careful or smart with DOM updates, leading to performance problems as apps scale in complexity and data size.
+
+DoneJS' view engine touches the DOM more minimally and specifically than competitor frameworks, providing better performance in large apps and a "closer to the metal" feel.
+
+#### How it works
+
+Consider the following template:
+
+```html
+{{#rows}}
+<div>{{name}}</div>
+{{/rows}}
+```
+
+And the following change to its data:
+
+```
+rows[0].attr('name', 'changed'); // change the first row's name
+```
+
+In DoneJS, which uses the [can.stache](http://canjs.com/docs/can.stache.html) view engine, that would:
+ 
+ 1. Synchronously trigger a `change` event (because of the [can.Map](http://canjs.com/docs/can.Map.html) synchronous object observe API)
+ 1. The `change` would invoke a data binding event handler in the template layer
+ 1. The handler would immediately result in the following code being run:
+```
+textNode.nodeValue = 'changed';
+```
+
+In Backbone, that would result in the entire template being re-rendered and replaced.
+
+In Angular, at the end of the current $digest cycle, that would result in an expensive comparison between the old rows array and the new one to see what properties have changed. After the changed property is discovered, the specific DOM node would be updated.
+
+In React, that would result in the virtual DOM being re-rendered. A diff algorithm comparing the new and old virtual DOM would discover the changed node, and then the specific DOM node would be updated.
+
+Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally. 
+
+With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
+
+To learn more about this, read about the [can.stache](http://canjs.com/docs/can.stache.html) view engine and [can.Map](http://canjs.com/docs/can.Map.html) observable objects.
 
 ### Worker Thread Rendering
 
@@ -166,7 +205,13 @@ For iOS and Android builds, DoneJS integrates with [Apache Cordova](https://cord
 
 For native desktop applications, DoneJS integrates with [NW.js](https://github.com/nwjs/nw.js) to create an native OSX, Windows, or Linux application.
 
-Adding this integration is as simple as running `donejs add cordova` or `donejs add nw` and running your build script.
+Adding this integration is as simple as running
+
+```
+donejs add cordova
+donejs add nw
+donejs build
+```
 
 [Follow the guide](./Guide.html#section_Desktopandmobileapps) to see an example in action.
 
@@ -176,7 +221,7 @@ DoneJS applications support Internet Explorer 8 without any additional effort. Y
 
 Many people don't care about this because IE8 is on its way out, which is a very good thing! 
 
-But its not quite dead yet, at still over 3% of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats. 
+But its not quite dead yet, at still [over 3%](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar) of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats. 
 
 And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS makes it easy to write one app that runs everywhere.
 
@@ -188,39 +233,41 @@ DoneJS is designed to make it easy to build applications that connects users in 
 
 #### How it works
 
-<video controls style='width:100%;' poster="http://connect.canjs.com/assets/videos/Can-Connect-Anim-2.s3b1-720p.png" src="http://connect.canjs.com/assets/videos/Can-Connect-Anim-2.s3b1-720p.mp4"></video>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/w4mp4oSb6BQ" frameborder="0" allowfullscreen></iframe>
 
-DoneJS' model layer users set logic to maintain lists of data represented by certain properties, like all todos that are due tomorrow. These lists are rendered to the UI via data bound templates.
+DoneJS' model layer uses set logic to maintain lists of data represented by certain rules, like a list of todos with `{'owner_id': 2}`. These lists are rendered to the UI via data bound templates.
 
 When server-side updates are sent to the client, items are automatically removed or added to any lists they belong to. They also automatically show up in the UI because of the data bindings.
 
 All of this happens with about 4 lines of code.
 
+```
+const socket = io('http://chat.donejs.com');
+socket.on('messages created',
+  order => messageConnection.createInstance(order));
+socket.on('messages updated',
+  order => messageConnection.updateInstance(order));
+socket.on('messages removed',
+  order => messageConnection.destroyInstance(order));
+```
+
 [Follow the guide](./Guide.html#section=section_Real_timeconnection) to see an example in action. View the can-connect real-time documentation [here](http://connect.canjs.com/doc/can-connect%7Creal-time.html).
 
-### Pretty URL's with Pushstate
+### Pretty URLs with Pushstate
 
-DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable and bookmarkable pages and links, while still keeping the user in a single page. 
+DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user in a single page. 
 
-The use of pushstate allows your apps to have “Pretty URL’s” like: myapp.com*/user/1234* instead of a hashed route like myapp.com*#page=user&userId=1234* or myapp.com/*#/user/1234*. Pretty URLs with pushstate are indexable, bookmarkable, and allow users to use the back and refresh buttons without losing state.
+The use of pushstate allows your apps to have "Pretty URLs" like `myapp.com/user/1234` instead of uglier hash based URLs like `myapp.com#page=user&userId=1234` or `myapp.com/#!user/1234`.
 
-Routing is easily configured using can.route. Routes are given a URL template, and optionally an object with a set of default values.
+Wiring up these pretty URLs in your code is simple and intuitive.
 
-```
-can.route(':page', { page: 'home' });
-can.route(':page/:slug', { slug: null });
-can.route(':page/:slug/:action', { slug: null, action: null });
-```
+#### How it works
 
-With the use of the can-href attribute, creating links in your view is just as easy:
+Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-```
-<a can-href="{page='home'}">Home</a>
-```
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL patterns, like `/user/1`, to properties in our application state, like `{'userId': 1}`. In other words, our routes will just be a representation of the application state.
 
-Thanks to CanJS’s unique two-way routing your app isn’t married or dependent to a specific URL pattern. Depending on the state your app can read from the URL or update it. If a state change occurs, CanJS will update your routes, and vice-versa if a route change occurs, CanJS will update your application state. Your view can now handle how and what to render depending on your app state. You don’t need fragile routing configurations to trigger renders or state changes.
-
-For example, using our routing configurations above and a template like the one below, all the work is done. If a user enters the application at myapp.com/restaurants, the property ‘page’ on our application state is set to the value ‘restaurants’, and our template will render the appropriate component. Alternatively, if our app changes the value of ‘page’ at any point the routes will update to match the change, and our templates will render accordingly. 
+This architecture simplifies routes so that they can be managed entirely in simple data bound templates, like the following example:
 
 ```
 {{#switch page}}
@@ -236,23 +283,43 @@ For example, using our routing configurations above and a template like the one 
 {{/switch}}
 ```
 
-[Follow the guide here](./place-my-order.html#section=section_Settinguprouting) to learn how to set up Pretty URLs and Pushstate in your DoneJS app.
-
-
-
-
+To learn more about routing and setting up Pretty URLs visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html) or follow along in [the guide](./place-my-order.html#section=section_Settinguprouting).
 
 ## Maintainable features
 
-### Unit and Functional Tests
+DoneJS helps developers get things done quickly with an eye toward maintenance.
 
-Unit tests test the view models (link to the guide) or other low-level stuff. Unit tests are best!
+### Comprehensive Testing
 
-Functional tests test user behavior and are great for smoke tests and some integration tests between modules.
+Nothing increases the maintainability of an application more than good automated testing. DoneJS includes a comprehensive test layer that makes writing, running, and maintaining tests intuitive and easy.
 
-For simple unit and integration assertions, DoneJS uses [QUnit](https://qunitjs.com/) by default. For high level interaction/DOM tests someone in a QA role might define, DoneJS uses [FuncUnit](http://funcunit.com/).
+DoneJS provides tools for the entire testing lifecycle:
 
-FuncUnit enhances assertion libraries like QUnit and enables it to simulate user actions, easily test asynchronous behavior, and support black box testing. It uses a simple jQuery-like syntax to do the assertions:
+* **Generators** - create boilerplate tests to get started quickly
+* **Unit testing** - assertion libraries to test your module interfaces
+* **Functional testing** - an API for scripting the browser, simulating user actions, and testing your UI modules
+* **User action event simulation** - accurate event simulation for clicks, types, drags, and other user actions
+* **A command line test runner** - invoke the same tests from the CLI
+* **A browser launcher** - launch several browsers and target your tests against them
+* **A reporting tool** - report results to the CLI or other forms, including coverage
+* **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
+* **A mock layer** - an API to mock out your server APIs so you can test your app in isolation from a server
+
+#### How it works
+
+Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack - so you can spend less time messing with test infrastructure, and more time [mud ridin'](https://youtu.be/s4faD0fox_s?t=261).
+
+##### Generators
+
+The DoneJS app generator command `donejs init` creates a working project-level test HTML and JS file. Component generators via `donejs generate component cart` create a test script and individual test page for each test.
+
+##### Unit tests
+
+Unit tests are used to test the interface for modules like models and view models. You can choose between BDD style unit tests with Jasmine or Mocha, or more functional unit tests with QUnit.
+
+##### Functional tests
+
+Functional tests are used to test UI components by simulating user behavior. The syntax for writing functional tests is jQuery-like, chainable, and asynchronous, simulating user actions and waiting for page elements to change asynchronously.
 
 ```js
 test('destroying todos', function() {
@@ -265,64 +332,36 @@ test('destroying todos', function() {
 });
 ```
 
-And they're scriptable!
+##### Event simulation accuracy
 
-```
-var openMenu = function ( item ) {
-  F( item ).click();
-  F( ".menu" ).click();
-  F( ".menu-items" ).visible();
-};
-
-openMenu( ".item1" );
-F( ".delete" ).click();
-```
-
-FuncUnit uses [syn](https://github.com/bitovi/syn) to provide accurate event simulation. So this:
+User action methods, like click, type, and drag, simulate exactly the sequence of events generated by a browser when a user performs that action. For example this:
 ```
 F( ".menu" ).click();
 ```
 
-is not just a click event; It goes through the whole motion: mousedown, blur, focus, mouseup, then click!
+is not just a click event. It triggers a mousedown, then blur, then focus, then mouseup, then click. The result is more accurate tests that catch bugs early.
 
+Even further, there are differences between how IE and Safari handle a click. DoneJS tests take browser differences into account when running functional tests.
 
-#### What does DoneJS do special? A lot of stuff!
+##### Running tests from the command line
 
-DoneJS tests are modules just like all your other code. This means you don’t have to compile your app for your tests to run them.
+DoneJS comes with a command line test runner, browser launcher, and reporting tool that integrates with any [continuous integration](#section=section_ContinuousIntegration_Deployment) environment. 
 
-Module-based tests means you can easily run some tests independently of all your other tests. This is the foundation for the [modlet pattern](#section_Modlets). To write a test with DoneJS, simply add:
+No setup required, running a DoneJS project's test is as simple as running:
 
 ```
-import QUnit from "steal-qunit";
-import myModule from "my-project/my-module";
-
-Qunit.test( "something", function () { 
-  QUnit.ok( myModule, "we have access to your module" );
-});
+donejs test
 ```
 
-Then, to create a page that runs just this test:
-```
-<title>My Module's Tests</title>
-<script src="/node_modules/steal/steal.js" main="/my-module/my-module_test.js"></script>
-<div id="qunit-fixture"></div>
-```
+You can run launch your unit and functional tests from the cli, either in headless browser mode, or via multiple real browsers. You can even launch browserstack virtual machines to test against any version of Android, Windows, etc.
 
-And because these are modules, [live reload](#section_HotModuleSwapping_LiveReload) works!
+The reporting tool gives detailed information about coverage statistics, and lets you choose from many different output formats, including XML or JSON files.
 
-It's all super simple - but it gets better! [Generators](#section_Generators) will set these up for you!
+##### Mocking server APIs
 
-#### It's flexible too!
+Automated frontend testing is most useful when it has no external dependencies on API servers or specific sets of data. Thus a good mock layer is critical to write resilient tests.
 
-QUnit is the default assertion library but DoneJS works with jasmine, mocha, and others!
-
-DoneJS also brings [testee](https://github.com/bitovi/testee) into the mix because it allows you to run your tests from the command line for [continuous integration](#section_ContinuousIntegration_Deployment)!
-
-Plus! Unit tests should be able to run by themselves without the need for an API server, sooo:
-
-#### Creating fake data: Fixtures!
-
-DoneJS does even more to make testing easy and more valuable by using fixtures. Fixtures allow us to mock requests to the REST API with data that we can use in the test or in demo pages. Some default fixtures will be provided for every generated model. It's easy to set up too:
+DoneJS apps use fixtures to emulate REST APIs. A default set of fixtures are created by generators when a new model is created. Fixtures are very flexible, and can be used to simulate error states and slow performing APIs.
 
 ```js
 import fixture from 'can-connect/fixture/';
@@ -343,7 +382,16 @@ fixture({
 export default store;
 ```
 
-That's it! Now any calls to the states api url will return faked data automatically when the store is pulled into your app with StealJS! No need to change any of your code; It just works like you've already built the backend service.
+##### More information
+
+The DoneJS testing layer involves many pieces, so if you want to learn more:
+
+ * follow along in the [Unit testing view model and fixtures](./place-my-order.html#section=section_Creatingaunit_testedviewmodel) section of the guide
+ * see how to run tests and set up CI automation in the [CI section](./place-my-order.html#section=section_Automatedtestsandcontinuousintegration) of the guide
+ * read about [FuncUnit](http://funcunit.com/), the functional testing and asynchronous user action simulating library
+ * read about [syn](https://github.com/bitovi/syn) - the synthetic event library
+ * read about the [Testee.js](https://github.com/bitovi/testee) browser launcher, test runner, and reporting tool
+ * read the [can.fixture](http://canjs.com/docs/can.fixture.html) docs
 
 ### Documentation
 
@@ -419,51 +467,76 @@ node myexport.js
 
 ### ES6 Modules
 
-DoneJS future proofs your app by not only letting you use ES6 syntax, but also by allowing you to build your app using [ES6 Modules](http://www.2ality.com/2014/09/es6-modules-final.html). ES6 modules provide a global standard for creating modules in JavaScript!
+DoneJS supports the compact and powerful [ES6 module](http://www.2ality.com/2014/09/es6-modules-final.html) syntax, even for browsers that don't support it yet. Besides future proofing your application, writing ES6 modules makes it easier to write modular, maintainable code.
+
+````
+import { add, subtract } from "math";
+
+export function subtract(a, b) {
+  return a - b;
+}
+````
+
+#### How it works
+
+DoneJS applications are actually able to import or export any module type: ES6, AMD and CommonJS. This means you can slowly phase in ES6, while still using your old code. You can also use any of the many exciting [ES6 language features](https://github.com/lukehoban/es6features).
+
+A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. The build step will handle this conversion so your production code will run native ES5. You can even run your [ES6 application in IE8](#section=section_SupportsAllBrowsers_EvenIE8)!
+
+To learn more about ES6 and other module support, read the StealJS [ES6 docs](http://stealjs.com/docs/syntax.es6.html
+), the project [exporting docs](http://stealjs.com/docs/StealJS.project-exporting.html
+), and check out the [stealjs/transpile](https://github.com/stealjs/transpile) project.
 
 ### Modlets
 
-DoneJS applications are built so every module is treated as its own application.  Every module
-is given its own folder.  Instead of organizing a project by grouping files based on type like:
+The secret to building large apps is never build large apps. Break up your application into small pieces. Then, assemble.
+
+DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
+
+#### How it works
+
+Large apps have a lot of files. There are two ways to organize them: by type or by module.
+
 
 ```
-project/
-  js/
-     moduleA.js
-     moduleB.js
-  templates/
-     moduleA.handlebars
-     moduleB.handlebars
-  css/
-     moduleA.css
-     moduleB.less
-  test/
-     moduleA_test.js
-     moduleB_test.js
-  docs/
-     moduleA.markdown
-     moduleB.markdown
+components/
+   tabs.js
+   chat.js
+viewmodels/
+    tabs-vm.js
+    chat-vm.js
+templates/
+   tabs.handlebars
+   chat.handlebars
+css/
+   tabs.css
+   chat.less
+test/
+   tabs_test.js
+   chat_test.js
+docs/
+   tabs.markdown
+   chat.markdown
 
+vs
+
+chat/
+   chat.js          - module code
+   chat.handlebars  - supporting file
+   chat.css         - supporting file
+   chat_test.js     - tests
+   chat.markdown    - docs
+   test.html        - test page
+   chat.html        - demo page
+ tabs/
+ cart/
 ```
 
-A DoneJS application is organized into modlets.  Every module is given its own folder which
-contains the module's code, supporting files (CSS and templates), tests, and documentation like:
+Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. 
 
-```
-project/
-  moduleA/
-     moduleA.js          - module's code
-     moduleA.handlebars  - supporting file
-     moduleA.css         - supporting file
-     moduleA_test.js     - tests
-     moduleA.markdown    - docs
-     test.html           - test page
-     moduleA.html        - demo page
-```
+DoneJS generators create modlets to get you started quickly. Creating isolated test and demo pages for your modlet is simple and doesn't require any extra configuration.
 
-Modelets include pages that run just that module's tests and a demo page that shows off just that
-module's functionality.
-
+To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/), watch [this video](https://youtu.be/eIfUsPdKF4A?t=97), and [follow in the guide](http://donejs.com/Guide.html#section=section_Generatecustomelements) where generators are used to create modlets.
 
 ### Custom HTML Elements
 
@@ -511,38 +584,76 @@ DoneJS [Generators](#section_Generators) will help you get started on your compo
 Plus, if you've built something awesome, you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
 
 ### MVVM Architecture
-DoneJS applications are architecturally [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) applications. DoneJS uses CanJS for custom elements and it’s MVVM architecture. CanJS is small, fast, and powerful. Where DoneJS and CanJS are really unique from other MVVM frameworks are our well articulated view models thanks to CanJS’s observable objects and their [define property](http://canjs.com/docs/can.Map.prototype.define.html).
 
-#### Views (Templates)
-DoneJS uses [stache](http://canjs.com/docs/can.stache.html) templates. Templates have no complex calculations and will therefore be easier to change and update in the future. This is good because UI will often change late in the process as user feedback comes into play.
+DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) architecture pattern, provided by [CanJS](http://canjs.com/).
 
-#### Models
-Models are the bare-bones representation of the data as it's stored on a server. Models are intended to be generic and used across viewModels in your app as needed. This means that you won’t ever have logic for formatting data for your views, but you may have logic to sanitize or validate data for your API endpoints.
+<img src="./static/img/mvvm.png" alt="MVVM Architecture Diagram" />
 
-#### ViewModels
-ViewModels are the glue between views and models; They will do the complex logic and provide simple values to check and render in templates, as well as any transformations of model data to view data.
-For example, if we have a page that shows user information we may create a property on our viewModel that shows a user’s full name which is derived from the user’s first and last name.
+The introduction of a strong ViewModel has some key advantages for maintaining large applications:
+
+ * **Decouples the presentation from its business logic** - A ViewModel is essentially an object and methods representing the state of a View. This separation of concerns lets the View powerfully express behavior with just HTML and data, while the ViewModel manages the complexities of business logic.
+ * **Enables designer/developer cooperation** - Because the view is stripped of code and business logic, designers can safely and comfortably change the View without fear of breaking things.
+ * **Enables easier testing** - ViewModels can be unit tested easily. Since they represent the view's state without any knowledge of the DOM, they provide a simple interface for testing.
+
+#### How it works
+
+DoneJS has a uniquely strong ViewModel layer compared to other frameworks. The foundation for this is three important layers: computed properties, data bound templates, and an observable data layer.
+
+##### Computed properties
+
+Properties in ViewModels often compute their value from other properties.
 
 ```
-var Person = can.Map.extend({
-define: {
-     fullName: {
-        get () {
-           return this.attr("first") + " " + this.attr("last");
-         }
-    }
+fullName: {
+    get () {
+       return this.attr("first") + " " + this.attr("last");
+     }
 }
-});
 ```
 
-#### Define is Awesome
-The example above under viewModels shows how the define property can be used to create virtual properties. Define becomes really powerful when specifying a property’s get and set functions. If we take a look at the [Place My Order App’s](./place-my-order.html) page for finding restaurants we can see how define turns a traditionally complex problem into something very simple, clear and easily tested.
+##### Data bound templates
 
-<img src="./static/img/pmo-picker.gif" alt="The place my order city and state picker." />
+Those properties are then rendered in the view.
 
-A user selects their desired state and it triggers an API call to get a list of available cities for that state. If the users changes the state, the selected city is removed, and a new list of cities is loaded.
+```
+<div>{{fullName}}</div>
+```
 
-Here is a snippet from the viewModel for just the state and city:
+##### Observable data layer
+
+When a dependent property is changed, this sets off a cascade of events.
+
+```
+person.attr('first', 'Brian'); 
+
+---> // triggers 'change'
+
+fullName: {
+    get () {
+       return this.attr("first") + " " + this.attr("last");
+     }
+} 
+
+---> // knows its dependent property changed, re-computes
+
+<div>{{fullName}}</div> 
+
+---> // changes value in the DOM
+```
+ 1. `firstName` changes (could be due to a user entering data in an input field or a socket.io update).
+ 1. Because of the observable data layer, changes to `firstName` triggers a `change` event. 
+ 1. Because of computed properties, that `change` event tells `fullName` to recompute its value. 
+ 1. Because of data bound templates, when `fullName` changes its value, that change is reflected in the DOM.
+
+##### Computed properties + Data bound templates + Observable data layer = Expressive Power
+
+The interplay of these three layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to their origin. The app then comes alive with rich functionality. 
+
+Without these layers, achieving the fullName functionality would require code that communicates changes between modules, removing the isolation achieved above. Any change to `first` would need to notify `fullName` of a change. Any change to `fullName` would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.
+
+##### An example
+
+DoneJS ViewModels have special per-property hooks to define type, initial value, get, set, remove, and serialize behavior. The result is expressive ViewModels:
 
 ```
 export var ViewModel = Map.extend({
@@ -583,23 +694,13 @@ export var ViewModel = Map.extend({
 });
 ```
 
-Because all the logic for this page is happening inside our viewModel writing tests are simple and can be done without even creating a view. You can see that only when a `state` is set will our viewModel fetch `cities`.  We also know to remove the selected `city` when the users sets a new `state`.  
+The example above defines the behavior in the state, city, restaurant selector seen in this page:
 
-What would normally be a pretty complex chain of logic is pretty straightforward and clear thanks to the use of getters and setters on our properties. It’s easy to know and test the expected behaviour of each property even though there are dependencies on other values.
+<img src="./static/img/pmo-picker.gif" alt="The place my order city and state picker." />
 
-Here is a snippet from the tests for this page:
+A simple unit test for this ViewModel would look like:
 
 ```
-QUnit.asyncTest('loads all states', function() {
-  var vm = new ViewModel();
-  var expectedSates = stateStore.findAll({});
-
-  vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), expectedSates.data, 'Got all states');
-    QUnit.start();
-  });
-});
-
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
   var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
@@ -611,24 +712,16 @@ QUnit.asyncTest('setting a state loads its cities', function() {
     QUnit.start();
   });
 });
-
-QUnit.asyncTest('changing a state resets city', function() {
-  var vm = new ViewModel();
-  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
-
-  QUnit.equal(vm.attr('cities'), null, '');
-  vm.attr('state', 'CA');
-  vm.attr('cities').then(cities => {
-    QUnit.deepEqual(cities.attr(), expectedCities);
-    vm.attr('state', 'NT');
-    QUnit.equal(vm.attr('city'), null);
-    QUnit.start();
-  });
-});
 ```
-As you can see we only need to work with the view model to test the functionality of our UI.
 
-And finally, here is the very simple template for our page (removing some bootstrap boilerplate):
+For a more detailed walk through of this code, follow the [in depth guide](./place-my-order.html).
+
+##### Views
+
+DoneJS Views are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
+
+The View corresponding to the ViewModel example from above:
+
 ```
 <label>State</label>
 <select can-value="{state}" {{#if states.isPending}}disabled{{/if}}>
@@ -657,28 +750,43 @@ And finally, here is the very simple template for our page (removing some bootst
   {{/if}}
 </select>
 ```
-Our template elegantly handles disabled and loading states, and the markup is incredibly simple and concise.
 
-Check out our guide for a full walk through of the Place My Order app.
+##### Models
 
-### Hot Module Swapping & Live Reload
+DoneJS Models wrap data services. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server.
 
-DoneJS applications keep developers focused because they enable super fast updates when code changes. Live-reload
-listens to when source files change, and update only the modules that need to change. Developers speend less time
-waiting for refreshes and builds.
+DoneJS models are built with intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques. 
 
-When you save your work, Steal doesn’t refresh the page, but only re-imports modules that are marked as dirty. This is hot swapping with live-reload. The result is a blazing fast development experience:
+##### More information
+
+The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/). To learn more:
+
+ * Models - read about [can.connect](http://connect.canjs.com/)
+ * Computed properties - read about [can.compute](http://canjs.com/docs/can.compute.html)
+ * Observable data layer - read about [can.Map](http://canjs.com/docs/can.Map.html) and [can.List](http://canjs.com/docs/can.List.html)
+ * ViewModels - read about [can.component](http://canjs.com/docs/can.Component.html), [can.Component.viewModel](http://canjs.com/docs/can.Component.prototype.viewModel.html), and [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html)
+ * Views - read about [can.stache](http://canjs.com/docs/can.stache.html)
+ * [Create a unit tested ViewModel](./place-my-order.html#section=section_Creatingaunit_testedviewmodel) in the in depth guide
+
+### Live Reload
+
+Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
 
 <video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"><source video-src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4" type="video/mp4" class="source-mp4" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"></video>
 
-<br>
-When you begin working on your DoneJS application, just run
+#### How it works
+
+Other live reload servers watch for file changes and force your browser window to refresh. 
+
+DoneJS live reload doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time. It is more like hot swapping than traditional live reload. The result is a blazing fast development experience.
+
+There is no configuration needed to enable this feature. Just start the dev server and begin: 
+
 ```
 donejs develop
 ```
-in your terminal to start using live-reload!
 
-
+To learn more about live reload, read the [StealJS docs](http://stealjs.com/docs/steal.live-reload.html).
 
 ### Generators
 
