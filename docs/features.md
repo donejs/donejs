@@ -197,7 +197,8 @@ DoneJS is used to make beautiful, real-time user interfaces that can be exported
 
 Write your application once, then run it natively on every device and operating system. You can make iOS, Android, and desktop builds of your DoneJS application with no extra effort, expanding your potential audience without having to build separate applications.
 
-<img src="./static/img/apps.png" />
+<img src="./static/img/desktop-mobile.gif" />
+_Our DoneJS Chat App running as a OS X desktop app and inside an iOS emulator._
 
 #### How it works
 
