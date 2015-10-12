@@ -71,7 +71,7 @@ There is no configuration needed to enable this feature, and wiring up progressi
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
 
-Other build tools require you to manually configure bundles, which doesn't scale with large applications. 
+Other build tools require you to manually configure bundles, which doesn't scale with large applications.
 
 In a DoneJS application, you simply mark a section to be progressively loaded by wrapping it in your template with `<can-import>`.
 
@@ -88,7 +88,7 @@ In a DoneJS application, you simply mark a section to be progressively loaded by
 {{/eq}}
 ```
 
-Then you run the build. A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size. 
+Then you run the build. A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size.
 
 That's it! No need for additional configuration in your JavaScript.
 
@@ -96,7 +96,7 @@ For more information, read about [Progressive Loading](http://stealjs.com/docs/s
 
 ### Caching and Minimal Data Requests
 
-DoneJS applications are able to do variety of performance improvements by intelligently managing the data 
+DoneJS applications are able to do variety of performance improvements by intelligently managing the data
 layer.  Example techniques:
 
  - Fall through cache - Show data in localStorage cache immediately, but in the background, look for updates on the server.
@@ -130,7 +130,7 @@ rows[0].attr('name', 'changed'); // change the first row's name
 ```
 
 In DoneJS, which uses the [can.stache](http://canjs.com/docs/can.stache.html) view engine, that would:
- 
+
  1. Synchronously trigger a `change` event (because of the [can.Map](http://canjs.com/docs/can.Map.html) synchronous object observe API)
  1. The `change` would invoke a data binding event handler in the template layer
  1. The handler would immediately result in the following code being run:
@@ -144,7 +144,7 @@ In Angular, at the end of the current $digest cycle, that would result in an exp
 
 In React, that would result in the virtual DOM being re-rendered. A diff algorithm comparing the new and old virtual DOM would discover the changed node, and then the specific DOM node would be updated.
 
-Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally. 
+Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally.
 
 With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
@@ -175,7 +175,7 @@ to
 
 DoneJS makes it simple to deploy your static assets to a CDN (content delivery network).
 
-CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne. 
+CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne.
 
 <img src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
 _Without a CDN requests will take longer to fulfill if the user is located further away from your servers._
@@ -219,9 +219,9 @@ donejs build
 
 DoneJS applications support Internet Explorer 8 without any additional effort. You can even write applications using [most ES6 features](http://babeljs.io/docs/advanced/caveats/) that run on IE8, using the built-in babel integration.
 
-Many people don't care about this because IE8 is on its way out, which is a very good thing! 
+Many people don't care about this because IE8 is on its way out, which is a very good thing!
 
-But its not quite dead yet, at still [over 3%](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar) of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats. 
+But its not quite dead yet, at still [over 3%](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar) of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats.
 
 And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS makes it easy to write one app that runs everywhere.
 
@@ -255,7 +255,7 @@ socket.on('messages removed',
 
 ### Pretty URLs with Pushstate
 
-DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user in a single page. 
+DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user in a single page.
 
 The use of pushstate allows your apps to have "Pretty URLs" like `myapp.com/user/1234` instead of uglier hash based URLs like `myapp.com#page=user&userId=1234` or `myapp.com/#!user/1234`.
 
@@ -324,10 +324,10 @@ Functional tests are used to test UI components by simulating user behavior. The
 ```js
 test('destroying todos', function() {
   F('#new-todo').type('Sweet. [enter]');
- 
+
   F('.todo label:contains("Sweet.")').visible('basic assert');
   F('.destroy').click();
- 
+
   F('.todo label:contains("Sweet.")').missing('destroyed todo');
 });
 ```
@@ -345,7 +345,7 @@ Even further, there are differences between how IE and Safari handle a click. Do
 
 ##### Running tests from the command line
 
-DoneJS comes with a command line test runner, browser launcher, and reporting tool that integrates with any [continuous integration](#section=section_ContinuousIntegration_Deployment) environment. 
+DoneJS comes with a command line test runner, browser launcher, and reporting tool that integrates with any [continuous integration](#section=section_ContinuousIntegration_Deployment) environment.
 
 No setup required, running a DoneJS project's test is as simple as running:
 
@@ -535,7 +535,7 @@ chat/
  cart/
 ```
 
-Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. 
+Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns.
 
 DoneJS generators create modlets to get you started quickly. Creating isolated test and demo pages for your modlet is simple and doesn't require any extra configuration.
 
@@ -590,7 +590,7 @@ Plus, if you've built something awesome, you can publish it to NPM and [use your
 
 DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) architecture pattern, provided by [CanJS](http://canjs.com/).
 
-<img src="./static/img/mvvm.png" alt="MVVM Architecture Diagram" />
+<img src="/static/img/mvvm.png" srcset="/static/img/mvvm.png 1x, /static/img/mvvm-2x.png 2x" alt="MVVM Architecture Diagram" />
 
 The introduction of a strong ViewModel has some key advantages for maintaining large applications:
 
@@ -627,7 +627,7 @@ Those properties are then rendered in the view.
 When a dependent property is changed, this sets off a cascade of events.
 
 ```
-person.attr('first', 'Brian'); 
+person.attr('first', 'Brian');
 
 ---> // triggers 'change'
 
@@ -635,22 +635,22 @@ fullName: {
     get () {
        return this.attr("first") + " " + this.attr("last");
      }
-} 
+}
 
 ---> // knows its dependent property changed, re-computes
 
-<div>{{fullName}}</div> 
+<div>{{fullName}}</div>
 
 ---> // changes value in the DOM
 ```
  1. `firstName` changes (could be due to a user entering data in an input field or a socket.io update).
- 1. Because of the observable data layer, changes to `firstName` triggers a `change` event. 
- 1. Because of computed properties, that `change` event tells `fullName` to recompute its value. 
+ 1. Because of the observable data layer, changes to `firstName` triggers a `change` event.
+ 1. Because of computed properties, that `change` event tells `fullName` to recompute its value.
  1. Because of data bound templates, when `fullName` changes its value, that change is reflected in the DOM.
 
 ##### Computed properties + Data bound templates + Observable data layer = Expressive Power
 
-The interplay of these three layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to their origin. The app then comes alive with rich functionality. 
+The interplay of these three layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to their origin. The app then comes alive with rich functionality.
 
 Without these layers, achieving the fullName functionality would require code that communicates changes between modules, removing the isolation achieved above. Any change to `first` would need to notify `fullName` of a change. Any change to `fullName` would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.
 
@@ -758,7 +758,7 @@ The View corresponding to the ViewModel example from above:
 
 DoneJS Models wrap data services. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server.
 
-DoneJS models are built with intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques. 
+DoneJS models are built with intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques.
 
 ##### More information
 
@@ -779,11 +779,11 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 
 #### How it works
 
-Other live reload servers watch for file changes and force your browser window to refresh. 
+Other live reload servers watch for file changes and force your browser window to refresh.
 
 DoneJS live reload doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time. It is more like hot swapping than traditional live reload. The result is a blazing fast development experience.
 
-There is no configuration needed to enable this feature. Just start the dev server and begin: 
+There is no configuration needed to enable this feature. Just start the dev server and begin:
 
 ```
 donejs develop
