@@ -138,7 +138,7 @@ In DoneJS, which uses the [can.stache](http://canjs.com/docs/can.stache.html) vi
 textNode.nodeValue = 'changed';
 ```
 
-In Backbone, that would result in the entire template being re-rendered and replaced.
+In Backbone, you would need to manually re-render the template or roll your own rendering library.
 
 In Angular, at the end of the current $digest cycle, that would result in an expensive comparison between the old rows array and the new one to see what properties have changed. After the changed property is discovered, the specific DOM node would be updated.
 
@@ -409,8 +409,11 @@ With DocumentJS's flexibility, themeability, and customizability you can generat
 
 Continuous Integration (CI) and Continuous Deployment (CD) are amazing tools. With CI pull requests will trigger tests and builds to insure any new code won’t break your application. CD means that any release or merges to your release branch will trigger tests, builds and deployment. All of this is automated and can be tightly integrated into git. Popular services for continuous integration and deployment include TravisCI and Jenkins.
 
-<imgssss>
+<img src="./static/img/git-failed.gif" alt="A pull request that breaks the build or fails tests" />
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
+<img src="./static/img/git-passed.gif" alt="A pull request that successfully builds in CI" />
+_Example of a GitHub pull request with Travis CI integrated. Let's users know that a PR can safely be merged._
+
 
 DoneJS helps you with the most important aspect of CI and CD -- Tests! (link to test feature) Our generators add tests so you can start every component of your app with proper testing. No more excuses. This is often the biggest hurdle for projects to move to CI and CD. Without proper tests and CI merging new code is risky, and automatically deploying code is just silly -- but not with DoneJS!
 
