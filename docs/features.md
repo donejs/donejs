@@ -772,7 +772,7 @@ The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/). To le
 
 Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"><source video-src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4" type="video/mp4" class="source-mp4" src="https://pbs.twimg.com/tweet_video/CDx8_5cW0AAzvqN.mp4"></video>
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-live-reload.mp4"><source video-src="/static/img/donejs-live-reload.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-live-reload.mp4"></video>
 
 #### How it works
 
