@@ -310,7 +310,7 @@ steal("./content_list.js",
             }
 
             var navToH2 = getNavToHeaderEl( h2 ).closest( "li" );
-            var navToH3 = navToH2.next( "ol" ).find( "li" ).has( getNavToHeaderEl( h3 ) );
+            var navToH3 = navToH2.find( "ol li" ).has( getNavToHeaderEl( h3 ) );
 
             if ( navToH3.length ) {
                 scrollSpyCurrentH2.removeClass( "h2Only" );
@@ -336,12 +336,12 @@ steal("./content_list.js",
             var curH2Li = navToH2.closest( "li" );
             if ( activeH2Li[ 0 ] !== curH2Li[ 0 ] ) {
                 activeH2Li.removeClass( "active" );
-                if ( doJQCollapsing ) activeH2Li.next( "ol" ).hide( 250 );
+                if ( doJQCollapsing ) activeH2Li.find( "ol" ).hide( 250 );
 
                 activeH2Li = curH2Li;
 
                 activeH2Li.addClass( "active" );
-                if ( doJQCollapsing ) activeH2Li.next( "ol" ).show( 250 );
+                if ( doJQCollapsing ) activeH2Li.find( "ol" ).show( 250 );
             }
         });
 
@@ -351,7 +351,7 @@ steal("./content_list.js",
             var clickFn = function () {
                 var offset = -55;
                 var thisLi = $( this ).closest( "li" );
-                if ( $( "section.contents" ).is( ".active" ) && thisLi.is( "ol > ol > li" ) ) {
+                if ( $( "section.contents" ).is( ".active" ) && thisLi.is( "ol > li > ol > li" ) ) {
                     $( ".scroll-spy-title" ).click();
                 }
                 $( 'html, body' ).animate({

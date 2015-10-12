@@ -149,7 +149,7 @@ body:not(.donejs) {
 				}
 			}
 
-			> ol {
+			> li ol {
 				padding: 0px;
 
 				> li a {
@@ -425,7 +425,7 @@ body:not(.donejs) {
 					font-size: 16px;
 					padding: 0 50px 0 15px;
 				}
-				> ol {
+				> li ol {
 					> li {
 						border-bottom: 1px solid #9fc2d0;
 						margin: 0 10px;
@@ -468,7 +468,7 @@ body:not(.donejs) {
 					border-bottom:0;
 				}
 			}
-			> ol > li + ol {
+			> ol > li > ol {
 				max-height: 0px;
 				overflow: hidden;
 				transition: max-height 0.25s ease-out;
@@ -476,7 +476,7 @@ body:not(.donejs) {
 					margin:0 !important;
 				}
 			}
-			> ol > li.active + ol {
+			> ol > li.active > ol {
 				max-height: 750px;
 			}
 		}
