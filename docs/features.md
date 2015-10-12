@@ -109,7 +109,46 @@ layer.  Example techniques:
 
 ### Minimal DOM Updates
 
-Keeping the DOM updated is one of the most expensive aspects of a Single Page Application. However, because DoneJS uses CanJS, DOM updates occur only as often as necessary. Unlike other libraries that can run expensive digest cycles that check all bound data on a page for changes, CanJS only triggers updates when data has changed and only calculates the changes on elements bound to that data. This means overhead for making a single DOM update is as little as possible.
+The rise of templates, data binding, and MV* separation, while boosting maintainability, has come at the cost of performance. Many frameworks are not careful or smart with DOM updates, leading to performance problems as apps scale in complexity and data size.
+
+DoneJS' view engine touches the DOM more minimally and specifically than competitor frameworks, providing better performance in large apps and a "closer to the metal" feel.
+
+#### How it works
+
+Consider the following template:
+
+```html
+{{#rows}}
+<div>{{name}}</div>
+{{/rows}}
+```
+
+And the following change to its data:
+
+```
+rows[0].attr('name', 'changed'); // change the first row's name
+```
+
+In DoneJS, which uses the [can.stache](http://canjs.com/docs/can.stache.html) view engine, that would:
+ 
+ 1. Synchronously trigger a `change` event (because of the [can.Map](http://canjs.com/docs/can.Map.html) synchronous object observe API)
+ 1. The `change` would invoke a data binding event handler in the template layer
+ 1. The handler would immediately result in the following code being run:
+```
+textNode.nodeValue = 'changed';
+```
+
+In Backbone, that would result in the entire template being re-rendered and replaced.
+
+In Angular, at the end of the current $digest cycle, that would result in an expensive comparison between the old rows array and the new one to see what properties have changed. After the changed property is discovered, the specific DOM node would be updated.
+
+In React, that would result in the virtual DOM being re-rendered. A diff algorithm comparing the new and old virtual DOM would discover the changed node, and then the specific DOM node would be updated.
+
+Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally. 
+
+With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
+
+To learn more about this, read about the [can.stache](http://canjs.com/docs/can.stache.html) view engine and [can.Map](http://canjs.com/docs/can.Map.html) observable objects.
 
 ### Worker Thread Rendering
 
