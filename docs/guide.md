@@ -506,6 +506,71 @@ NODE_ENV=production donejs start
 
 If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
+### IE8 Support
+
+Since our application uses cross domain requests we need to make a couple of changes to make it work in IE8 which doesn't support CORS. The first is to create a [jQuery prefilter](http://api.jquery.com/jquery.ajaxprefilter/) so all HTTP requests are marked as being cross domain. Create `src/prefilter.js`:
+
+```js
+import $ from "jquery";
+
+$.ajaxPrefilter(function(options){
+  options.crossDomain = true;
+});
+```
+
+Next we need to install [jQuery transport](http://api.jquery.com/jquery.ajaxtransport/) that will perform our cross domain requests in IE8:
+
+```
+npm install jquery-transport-xdr --save
+```
+
+Finally import both of these modules in your messages model. Change `src/models/message.js` to:
+
+```js
+import can from 'can';
+import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import 'can/map/define/define';
+import io from 'steal-socket.io';
+import 'jquery-transport-xdr';
+import 'donejs-chat/prefilter';
+
+export const Message = can.Map.extend({
+  define: {}
+});
+
+Message.List = can.List.extend({
+  Map: Message
+}, {});
+
+export const messageConnection = superMap({
+  url: 'http://chat.donejs.com/api/messages',
+  idProp: 'id',
+  Map: Message,
+  List: Message.List,
+  name: 'message'
+});
+
+tag('message-model', messageConnection);
+
+const socket = io('http://chat.donejs.com');
+
+socket.on('messages created',
+  order => messageConnection.createInstance(order));
+socket.on('messages updated',
+  order => messageConnection.updateInstance(order));
+socket.on('messages removed',
+  order => messageConnection.destroyInstance(order));
+
+export default Message;
+```
+
+Lastly DoneJS comes with jQuery 2.x by default, but if you need to support IE8 the 1.x branch is necessary. You can switch by installing the right version:
+
+```
+npm install jquery@1.11.0 --save
+```
+
 ## Deploy
 
 Now that we verified that our application works in production, we can deploy it to the web. For this guide we will use [Divshot](https://divshot.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support.
