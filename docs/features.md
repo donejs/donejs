@@ -545,38 +545,76 @@ DoneJS [Generators](#section_Generators) will help you get started on your compo
 Plus, if you've built something awesome, you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
 
 ### MVVM Architecture
-DoneJS applications are architecturally [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) applications. DoneJS uses CanJS for custom elements and it’s MVVM architecture. CanJS is small, fast, and powerful. Where DoneJS and CanJS are really unique from other MVVM frameworks are our well articulated view models thanks to CanJS’s observable objects and their [define property](http://canjs.com/docs/can.Map.prototype.define.html).
 
-#### Views (Templates)
-DoneJS uses [stache](http://canjs.com/docs/can.stache.html) templates. Templates have no complex calculations and will therefore be easier to change and update in the future. This is good because UI will often change late in the process as user feedback comes into play.
+DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) architecture pattern, provided by [CanJS](http://canjs.com/).
 
-#### Models
-Models are the bare-bones representation of the data as it's stored on a server. Models are intended to be generic and used across viewModels in your app as needed. This means that you won’t ever have logic for formatting data for your views, but you may have logic to sanitize or validate data for your API endpoints.
+<img src="./static/img/mvvm.png" alt="MVVM Architecture Diagram" />
 
-#### ViewModels
-ViewModels are the glue between views and models; They will do the complex logic and provide simple values to check and render in templates, as well as any transformations of model data to view data.
-For example, if we have a page that shows user information we may create a property on our viewModel that shows a user’s full name which is derived from the user’s first and last name.
+The introduction of a strong ViewModel has some key advantages for maintaining large applications:
+
+ * **Decouples the presentation from its business logic** - A ViewModel is essentially an object and methods representing the state of a View. This separation of concerns lets the View powerfully express behavior with just HTML and data, while the ViewModel manages the complexities of business logic.
+ * **Enables designer/developer cooperation** - Because the view is stripped of code and business logic, designers can safely and comfortably change the View without fear of breaking things.
+ * **Enables easier testing** - ViewModels can be unit tested easily. Since they represent the view's state without any knowledge of the DOM, they provide a simple interface for testing.
+
+#### How it works
+
+DoneJS has a uniquely strong ViewModel layer compared to other frameworks. The foundation for this is three important layers: computed properties, data bound templates, and an observable data layer.
+
+##### Computed properties
+
+Properties in ViewModels often compute their value from other properties.
 
 ```
-var Person = can.Map.extend({
-define: {
-     fullName: {
-        get () {
-           return this.attr("first") + " " + this.attr("last");
-         }
-    }
+fullName: {
+    get () {
+       return this.attr("first") + " " + this.attr("last");
+     }
 }
-});
 ```
 
-#### Define is Awesome
-The example above under viewModels shows how the define property can be used to create virtual properties. Define becomes really powerful when specifying a property’s get and set functions. If we take a look at the [Place My Order App’s](./place-my-order.html) page for finding restaurants we can see how define turns a traditionally complex problem into something very simple, clear and easily tested.
+##### Data bound templates
 
-<img src="./static/img/pmo-picker.gif" alt="The place my order city and state picker." />
+Those properties are then rendered in the view.
 
-A user selects their desired state and it triggers an API call to get a list of available cities for that state. If the users changes the state, the selected city is removed, and a new list of cities is loaded.
+```
+<div>{{fullName}}</div>
+```
 
-Here is a snippet from the viewModel for just the state and city:
+##### Observable data layer
+
+When a dependent property is changed, this sets off a cascade of events.
+
+```
+person.attr('first', 'Brian'); 
+
+---> // triggers 'change'
+
+fullName: {
+    get () {
+       return this.attr("first") + " " + this.attr("last");
+     }
+} 
+
+---> // knows its dependent property changed, re-computes
+
+<div>{{fullName}}</div> 
+
+---> // changes value in the DOM
+```
+ 1. `firstName` changes (could be due to a user entering data in an input field or a socket.io update).
+ 1. Because of the observable data layer, changes to `firstName` triggers a `change` event. 
+ 1. Because of computed properties, that `change` event tells `fullName` to recompute its value. 
+ 1. Because of data bound templates, when `fullName` changes its value, that change is reflected in the DOM.
+
+##### Computed properties + Data bound templates + Observable data layer = Expressive Power
+
+The interplay of these three layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to their origin. The app then comes alive with rich functionality. 
+
+Without these layers, achieving the fullName functionality would require code that communicates changes between modules, removing the isolation achieved above. Any change to `first` would need to notify `fullName` of a change. Any change to `fullName` would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.
+
+##### An example
+
+DoneJS ViewModels have special per-property hooks to define type, initial value, get, set, remove, and serialize behavior. The result is expressive ViewModels:
 
 ```
 export var ViewModel = Map.extend({
@@ -617,23 +655,13 @@ export var ViewModel = Map.extend({
 });
 ```
 
-Because all the logic for this page is happening inside our viewModel writing tests are simple and can be done without even creating a view. You can see that only when a `state` is set will our viewModel fetch `cities`.  We also know to remove the selected `city` when the users sets a new `state`.  
+The example above defines the behavior in the state, city, restaurant selector seen in this page:
 
-What would normally be a pretty complex chain of logic is pretty straightforward and clear thanks to the use of getters and setters on our properties. It’s easy to know and test the expected behaviour of each property even though there are dependencies on other values.
+<img src="./static/img/pmo-picker.gif" alt="The place my order city and state picker." />
 
-Here is a snippet from the tests for this page:
+A simple unit test for this ViewModel would look like:
 
 ```
-QUnit.asyncTest('loads all states', function() {
-  var vm = new ViewModel();
-  var expectedSates = stateStore.findAll({});
-
-  vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), expectedSates.data, 'Got all states');
-    QUnit.start();
-  });
-});
-
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
   var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
@@ -645,24 +673,16 @@ QUnit.asyncTest('setting a state loads its cities', function() {
     QUnit.start();
   });
 });
-
-QUnit.asyncTest('changing a state resets city', function() {
-  var vm = new ViewModel();
-  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
-
-  QUnit.equal(vm.attr('cities'), null, '');
-  vm.attr('state', 'CA');
-  vm.attr('cities').then(cities => {
-    QUnit.deepEqual(cities.attr(), expectedCities);
-    vm.attr('state', 'NT');
-    QUnit.equal(vm.attr('city'), null);
-    QUnit.start();
-  });
-});
 ```
-As you can see we only need to work with the view model to test the functionality of our UI.
 
-And finally, here is the very simple template for our page (removing some bootstrap boilerplate):
+For a more detailed walk through of this code, follow the [in depth guide](./place-my-order.html).
+
+##### Views
+
+DoneJS Views are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
+
+The View corresponding to the ViewModel example from above:
+
 ```
 <label>State</label>
 <select can-value="{state}" {{#if states.isPending}}disabled{{/if}}>
@@ -691,9 +711,23 @@ And finally, here is the very simple template for our page (removing some bootst
   {{/if}}
 </select>
 ```
-Our template elegantly handles disabled and loading states, and the markup is incredibly simple and concise.
 
-Check out our guide for a full walk through of the Place My Order app.
+##### Models
+
+DoneJS Models wrap data services. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server.
+
+DoneJS models are built with intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques. 
+
+##### More information
+
+The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/). To learn more:
+
+ * Models - read about [can.connect](http://connect.canjs.com/)
+ * Computed properties - read about [can.compute](http://canjs.com/docs/can.compute.html)
+ * Observable data layer - read about [can.Map](http://canjs.com/docs/can.Map.html) and [can.List](http://canjs.com/docs/can.List.html)
+ * ViewModels - read about [can.component](http://canjs.com/docs/can.Component.html), [can.Component.viewModel](http://canjs.com/docs/can.Component.prototype.viewModel.html), and [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html)
+ * Views - read about [can.stache](http://canjs.com/docs/can.stache.html)
+ * [Create a unit tested ViewModel](./place-my-order.html#section=section_Creatingaunit_testedviewmodel) in the in depth guide
 
 ### Live Reload
 
