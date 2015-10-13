@@ -106,7 +106,6 @@ layer.  Example techniques:
  - Service worker background caching - Use a service worker to load and cache data in the background so it is ready when the
    user visits the page.
 
-
 ### Minimal DOM Updates
 
 The rise of templates, data binding, and MV* separation, while boosting maintainability, has come at the cost of performance. Many frameworks are not careful or smart with DOM updates, leading to performance problems as apps scale in complexity and data size.
@@ -183,11 +182,22 @@ _Without a CDN requests will take longer to fulfill if the user is located furth
 <img src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
 _With a CDN requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
 
-The donejs CLI supports deploying your assets to AWS S3 and Divshot. After [configuring your CDN](./place-my-order.html#section=section_DeploytoaCDN), simply run:
-```
-donejs deploy
-```
+#### How it works
 
+It's widely known that CDNs offer the best performance for static assets, but most apps don't use them, mainly because its annoying: annoying to automate, configure, and integrate with your build process.
+
+DoneJS comes with integrations with S3 and Divshot (popular CDN services) that make configuring and deploying to a CDN dirt simple. 
+
+ 1. You sign up for S3 or Divshot.
+ 1. You paste a few lines of config into your package.json that point to the right CDN service.
+ 1. You paste a few more lines that tell your production server to serve static assets from the CDN.
+ 1. You run `donejs deploy`.
+
+That's it. Now when you run your server in production mode, all static assets (CSS, JS, images, etc) are served from the CDN.
+
+Even better, you can set up [continuous deployment](./place-my-order.html#section=section_ContinuousDeployment), so that TravisCI or other tools will deploy your code, including pushing out your latest static files to the CDN, automatically.
+
+For more information, read the [deployment utility docs](https://github.com/donejs/deploy), follow the [deployment section](./Guide.html#section=section_Deploy) in the quick start guide, or the [CDN configuration](./place-my-order.html#section=section_DeploytoaCDN) section in the in depth guide.
 
 ## Usability features
 
