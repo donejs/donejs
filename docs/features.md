@@ -178,6 +178,8 @@ CDNs are distributed networks of servers that serve static assets (CSS, JS, and 
 
 <img src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
 _Without a CDN requests will take longer to fulfill if the user is located further away from your servers._
+<hr />
+
 
 <img src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
 _With a CDN requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
@@ -186,7 +188,7 @@ _With a CDN requests can be fulfilled much quicker. Users are served content fro
 
 It's widely known that CDNs offer the best performance for static assets, but most apps don't use them, mainly because its annoying: annoying to automate, configure, and integrate with your build process.
 
-DoneJS comes with integrations with S3 and Divshot (popular CDN services) that make configuring and deploying to a CDN dirt simple. 
+DoneJS comes with integrations with S3 and Divshot (popular CDN services) that make configuring and deploying to a CDN dirt simple.
 
  1. You sign up for S3 or Divshot.
  1. You paste a few lines of config into your package.json that point to the right CDN service.
