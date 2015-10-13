@@ -153,10 +153,10 @@ To learn more about this, read about the [can.stache](http://canjs.com/docs/can.
 
 Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM. Your templates first render in a lightweight Virtual DOM on the worker side and changes are diffed and sent to the window side to be applied to the actual DOM.  Only changes are ever applied to the window and the most expensive part of a web application, DOM updates, are separated from application logic, which means your application can continue to run while paints occur.
 
-<img src="./static/img/donejs-single-thread.gif" alt="A traditional single threaded javascript application" />
+<img src="/static/img/donejs-single-thread.gif" srcset="/static/img/donejs-single-thread.gif 1x, /static/img/donejs-single-thread-2x.gif 2x" alt="A traditional single threaded javascript application">
 _With a single thread only one operation can occur at a time_
 
-<img src="./static/img/donejs-multi-thread.gif" alt="A javascript application using a worker thread" />
+<img src="/static/img/donejs-multi-thread.gif" srcset="/static/img/donejs-multi-thread.gif 1x, /static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
 _Using a worker thread application logic can still occur while the DOM is rendered. This can nearly double the number of operations._
 
 Due to this parallelization your application doesn’t have to worry so much about being doing things performantly as long as it is performant enough not to block the worker thread. For your users this means the application will always feel snappy.
@@ -422,9 +422,10 @@ With DocumentJS's flexibility, themeability, and customizability you can generat
 
 Continuous Integration (CI) and Continuous Deployment (CD) are amazing tools. With CI pull requests will trigger tests and builds to insure any new code won’t break your application. CD means that any release or merges to your release branch will trigger tests, builds and deployment. All of this is automated and can be tightly integrated into git. Popular services for continuous integration and deployment include TravisCI and Jenkins.
 
-<img src="./static/img/git-failed.gif" alt="A pull request that breaks the build or fails tests" />
+<img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
-<img src="./static/img/git-passed.gif" alt="A pull request that successfully builds in CI" />
+
+<img src="/static/img/git-passed.gif" srcset="/static/img/git-passed.gif 1x, /static/img/git-passed-2x.gif 2x" alt="A pull request that successfully builds in CI">
 _Example of a GitHub pull request with Travis CI integrated. Let's users know that a PR can safely be merged._
 
 
@@ -513,40 +514,7 @@ DoneJS encourages use of the modlet file organization pattern. Modlets are small
 
 Large apps have a lot of files. There are two ways to organize them: by type or by module.
 
-
-```
-components/
-   tabs.js
-   chat.js
-viewmodels/
-    tabs-vm.js
-    chat-vm.js
-templates/
-   tabs.handlebars
-   chat.handlebars
-css/
-   tabs.css
-   chat.less
-test/
-   tabs_test.js
-   chat_test.js
-docs/
-   tabs.markdown
-   chat.markdown
-
-vs
-
-chat/
-   chat.js          - module code
-   chat.handlebars  - supporting file
-   chat.css         - supporting file
-   chat_test.js     - tests
-   chat.markdown    - docs
-   test.html        - test page
-   chat.html        - demo page
- tabs/
- cart/
-```
+<img src="/static/img/donejs-modlet-diagram.png" srcset="/static/img/donejs-modlet-diagram.png 1x, /static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" />
 
 Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns.
 
