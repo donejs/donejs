@@ -19,6 +19,7 @@ program.version(mypkg.version)
   .description("The DoneJS command line utility lets you run generators, NPM scripts and binaries local to your project.");
 
 utils.projectRoot().then(function (root) {
+  var generators = null;
   var actions = {
     init: function (folder) {
       if (folder) {
@@ -35,9 +36,9 @@ utils.projectRoot().then(function (root) {
 
       root = path.join(process.cwd(), 'node_modules');
       log(utils.generate(root, ['app', {
-        version: mypkg.version,
-        packages: mypkg.donejs
-      }
+          version: mypkg.version,
+          packages: mypkg.donejs
+        }
       ]));
     },
     generate: function (type, options) {
@@ -46,6 +47,21 @@ utils.projectRoot().then(function (root) {
     catchAll: function (command) {
       console.error('Could not run `' + command + '`');
       program.help();
+    },
+    add: function(name, params) {
+      if(generators[name]) {
+        return actions.generate(name, params);
+      }
+
+      var moduleName = 'donejs-' + name;
+
+      utils.installIfMissing(moduleName).then(function() {
+        try {
+          var generator = require(root + '/' + moduleName +'/generator');
+        } catch(e) {
+
+        }
+      });
     }
   };
   // Lists all NPM scripts of the package.json in the current folder
@@ -57,7 +73,7 @@ utils.projectRoot().then(function (root) {
   }
 
   try {
-    var generators = require(path.join(root, 'node_modules', 'generator-donejs'));
+    generators = require(path.join(root, 'node_modules', 'generator-donejs'));
     generatorDescription = 'Run a generator. Available generators:';
     generatorDescription += listSeparator +
     Object.keys(generators).join(listSeparator);
@@ -79,6 +95,10 @@ utils.projectRoot().then(function (root) {
   program.command('*')
     .description('')
     .action(actions.catchAll);
+
+  program.command('add <name> [params...]')
+    .description('Add functionality to your project')
+    .action(actions.add);
 
   Object.keys(curpkg.scripts || {}).forEach(function (script) {
     if (commandList.indexOf(script) === -1) {
