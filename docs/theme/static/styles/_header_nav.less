@@ -115,7 +115,7 @@ header {
         }
       }
       .menu-lib-logos {
-        margin:0;
+        margin:15px 0;
         padding:0;
         li {
           display: inline-block;
@@ -191,9 +191,12 @@ header {
       line-height: 46px;
       text-shadow: none;
     }
-
+    @media(max-width:@screen-xs-max){
+        display: none;
+    }
   }
   .guides-menu {
+    .clearfix;
     &:hover {
       .dropdown-menu {
         display: block;
