@@ -93,6 +93,7 @@ body:not(.donejs) {
 				.btn {
 					color: #fff;
 					padding: 10px 40px 10px 20px;
+					margin-top: 20px;
 					display: inline-block;
 					height: auto;
 					width: auto;
@@ -122,6 +123,13 @@ body:not(.donejs) {
 					}
 					+ .btn {
 						margin-left:20px;
+					}
+					@media(max-width: @screen-xs){
+						width: 100%;
+						text-align: center;
+						+ .btn {
+							margin-left: 0;
+						}
 					}
 				}
 			}
