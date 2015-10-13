@@ -71,6 +71,16 @@ body:not(.donejs) {
 					font-weight: 400;
     			color: #424a4e;
 				}
+				ul {
+					line-height: 24px;
+					padding-right: 40px;
+					li {
+						margin-bottom: 20px;
+						&:last-child {
+							margin-bottom:0;
+						}
+					}
+				}
 				img {
 					margin-top: 20px;
 					margin-bottom: 20px;
@@ -265,6 +275,7 @@ body:not(.donejs) {
 			margin-top: 120px;
 			height: @h2height;
 			z-index: 1;
+			line-height: 44px;
 			@media(max-width: @screen-md){
 				line-height:1;
 				font-size: 25px;
@@ -305,7 +316,17 @@ body:not(.donejs) {
 			}
 		}
 		h4, h5, h6 {
-			color: #000000;
+			color: @logoColor;
+			margin-top: 2em;
+		}
+		h4 {
+			font-size: 25px;
+		}
+		h5 {
+			font-size: 20px;
+		}
+		h6 {
+			font-size: 18px;
 		}
 		h2 + * {
 			margin-top: @h2height + 180px!important; /* the px added here are the margin under the h2 */
