@@ -414,15 +414,55 @@ The DoneJS testing layer involves many pieces, so if you want to learn more:
 
 ### Documentation
 
-DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation.
-DocumentJS lets you:
+Documentation is critical for maintainability of any complex application. When key team members leave, docs ensure minimal ramp up time and knowledge loss - this applies for code and styles.
 
-- Write documentation inline or in markdown files.
-- Specify your code's behavior precisely with JSDoc and Google Closure Compiler annotations.
+Yet most teams either don't write docs, or they'll do it "later" - a utoptian future period that is always just out of reach. Why? Because its extra work to set up a tool, configure it, create and maintain separate documentation files, etc.
+
+DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing docs, since all you have to do is comment your code (which most people already do) and run `donejs document`.
+
+You spend less time messing with Documentation generators, and more time [painting your truck camo](https://www.youtube.com/watch?v=DpJ_oPJgyPg).
+
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-documentation.mp4"><source video-src="/static/img/donejs-documentation.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-documentation.mp4"></video>
+
+### How it works
+
+You write comments above the module, method, or object that you want to document:
+
+```js
+/**
+ * @module {function} utils/add
+ * @parent utils
+ * 
+ * The module's description is the first paragraph.
+ * 
+ * The body of the module's documentation.
+ * 
+ * @param {Number} first This param's description.
+ * @param {Number} second This param's description.
+ * @return {Number} This return value's description.
+ */
+export default function(){ ... };
+```
+
+Then run `donejs document`. A browsable documentation website will be generated.
+
+DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation. It lets you:
+
+- Write docs inline or in markdown files.
+- Specify your code's behavior precisely with JSDoc and [Google Closure Compiler annotations](https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=en) - a well known documentation syntax.
 - Customize your site's theme and layout.
-- Generate multi-version documentation.
+- Generate multi-versioned documentation.
+- Document CSS alongside JavaScript. You can even make a [live style guide](http://documentjs.com/examples/styles/index.html).
 
-With DocumentJS's flexibility, themeability, and customizability you can generate extremely useful documentation sites. In fact, this site is generated from it!
+You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](http://canjs.com/docs/index.html) site are generated using DocumentJS.
+
+An important note: when you generate your docs, DocumentJS loads your application in Node, and therefore understands your application's object structure, even if objects or their prototypes are extended in multiple files. Other tools like JSDoc simply parse your files as strings, and therefore do not understand object definitions unless explicitly stated. 
+
+<a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
+
+<a class="btn" href="/place-my-order.html#section=section_Createdocumentation"><span>View the Guide</span></a>
+
+_DoneJS Documentation is a feature of [DocumentJS](http://documentjs.com/)_
 
 ### Continuous Integration & Deployment
 
