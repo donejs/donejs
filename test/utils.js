@@ -12,6 +12,10 @@ function fail(error) {
 
 describe('DoneJS CLI tests', function() {
   describe('utils', function() {
+    before(function () {
+      delete global.donejsTestPluginLoaded;
+    });
+
     it('installIfMissing', function(done) {
       Q.ninvoke(npm, 'load', { loaded: false })
         .then(utils.installIfMissing('day-seconds'))
@@ -21,6 +25,15 @@ describe('DoneJS CLI tests', function() {
           done();
         })
         .fail(fail);
+    });
+
+    it('add', function (done) {
+      utils.add(path.join(process.cwd(), 'node_modules'), 'test-plugin')
+       .then(function () {
+         assert.equal(global.donejsTestPluginLoaded, true, 'donejs-test-plugin module is installed and executed');
+         done();
+       })
+       .fail(fail);
     });
 
     it('runScript and runCommand', function(done) {

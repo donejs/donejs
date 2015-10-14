@@ -49,19 +49,10 @@ utils.projectRoot().then(function (root) {
       program.help();
     },
     add: function(name, params) {
-      if(generators[name]) {
+      if(generators && generators[name]) {
         return actions.generate(name, params);
       }
-
-      var moduleName = 'donejs-' + name;
-
-      utils.installIfMissing(moduleName).then(function() {
-        try {
-          var generator = require(root + '/' + moduleName +'/generator');
-        } catch(e) {
-
-        }
-      });
+      log(utils.add(path.join(root, 'node_modules'), name, params));
     }
   };
   // Lists all NPM scripts of the package.json in the current folder
