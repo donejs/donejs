@@ -456,8 +456,6 @@ DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-ver
 
 You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](http://canjs.com/docs/index.html) site are generated using DocumentJS.
 
-An important note: when you generate your docs, DocumentJS loads your application in Node, and therefore understands your application's object structure, even if objects or their prototypes are extended in multiple files. Other tools like JSDoc simply parse your files as strings, and therefore do not understand object definitions unless explicitly stated. 
-
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
 
 <a class="btn" href="/place-my-order.html#section=section_Createdocumentation"><span>View the Guide</span></a>
