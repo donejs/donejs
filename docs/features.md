@@ -457,7 +457,6 @@ DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-ver
 You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](http://canjs.com/docs/index.html) site are generated using DocumentJS.
 
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
-
 <a class="btn" href="/place-my-order.html#section=section_Createdocumentation"><span>View the Guide</span></a>
 
 _DoneJS Documentation is a feature of [DocumentJS](http://documentjs.com/)_
