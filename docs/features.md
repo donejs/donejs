@@ -318,6 +318,8 @@ DoneJS provides tools for the entire testing lifecycle:
 * **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
 * **A mock layer** - an API to mock out your server APIs so you can test your app in isolation from a server
 
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-testing.mp4"><source video-src="/static/img/donejs-testing.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-testing.mp4"></video>
+
 #### How it works
 
 Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack - so you can spend less time messing with test infrastructure, and more time [mud ridin'](https://youtu.be/s4faD0fox_s?t=261).
