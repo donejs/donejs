@@ -424,7 +424,7 @@ You spend less time messing with Documentation generators, and more time [painti
 
 <video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-documentation.mp4"><source video-src="/static/img/donejs-documentation.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-documentation.mp4"></video>
 
-### How it works
+#### How it works
 
 You write comments above the module, method, or object that you want to document:
 
