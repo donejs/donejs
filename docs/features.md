@@ -93,7 +93,6 @@ Then you run the build. A build time algorithm analyzes the application's depend
 That's it! No need for additional configuration in your JavaScript.
 
 <a class="btn" href="http://stealjs.com/docs/steal-tools.guides.progressive_loading.html"><span>View the Documentation</span></a>
-
 <a class="btn" href="/Guide.html#section=section_Switchbetweenpages"><span>View the Guide</span></a>
 
 _Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additional support via the [`<can-import>` tag](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](http://canjs.com/)_
