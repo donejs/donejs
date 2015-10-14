@@ -441,11 +441,15 @@ DoneJS helps you with the most important aspect of CI and CD -- Tests! (link to 
 
 ### NPM Packages
 
+DoneJS applications can use packages published to NPM without configuration. Get more done faster by incorporating other people's code into your client side project!
 
-
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-live-reload.mp4"><source video-src="/static/img/donejs-live-reload.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-live-reload.mp4"></video>
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-npm-packaging-custom-elements.mp4"><source video-src="/static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-npm-packaging-custom-elements.mp4"></video>
 
 #### How it works
+
+DoneJS apps use StealJS to load modules and install packages. Unlike Browserify or Webpack, StealJS is a client side loader, so you don't have to run a build to load pages. Unlike require.js, you can load packages without tedious configuration steps.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
 
 #### Zero config package installation
 
@@ -455,30 +459,17 @@ Installing a package in a DoneJS app via npm or bower involves no configuration.
 npm install jquery --save
 ```
 
-Then immediately consume that package in your app:
+Then immediately consume that package (and its dependencies) in your app:
 
 ```
 import $ from "jquery";
 ```
 
-Using require.js or other script loaders, you'd have to add pathing and other information to your configuration file before being able to use your package. In DoneJS, this step is bypassed because of scripts that add config to your package.json file as the package is installed.
+Using require.js or other client side loaders, you'd have to add pathing and other information to your configuration file before being able to use your package. In DoneJS, this step is bypassed because of scripts that add config to your package.json file as the package is installed.
 
 You can import that package in any format: CommonJS, AMD, or ES6 module format.
 
 #### Export in any format
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
-
-DoneJS applications can use packages published to NPM without configuration thanks to StealJS. Get more done faster by incorporating other people's code into your client side project!
-
-It's fast and easy to install a package from the terminal:
-
-The dependencies for packages installed with npm are automatically loaded.
-
-Import packages written in ES6 module syntax, AMD, or CommonJS easily:
-
-
-#### You can create and share your own too!
 
 DoneJS supports exporting your modules to other formats such as:
 - CommonJS and Browserify
@@ -508,6 +499,11 @@ and execute it from your termnial:
 node myexport.js
 ```
 
+<a class="btn" href="http://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
+
+<a class="btn" href="/place-my-order.html#section=section_Importingotherprojects"><span>View the Guide</span></a>
+
+_NPM package support is a feature of [StealJS](http://stealjs.com/)_
 
 ### ES6 Modules
 
