@@ -848,101 +848,103 @@ To learn more about live reload, read the [StealJS docs](http://stealjs.com/docs
 
 ### Generators
 
-Hit the ground running ( in the right direction ) with DoneJS's generators. They'll set everything up to be written the right way and eliminate the boilerplate in getting started and adding components.
+DoneJS generators help you kickstart new projects and components. They'll save you time by eliminating boilerplate and scaffolding a working project, component, or module.
 
-#### donejs init
+Generator templates set up many of the best practices and features discussed in the rest of this page, without you even realizing it.
 
-Hello World! This will get you all set up, install the DoneJS projects, and take care of all the little details.
+You spend less time setting up your app, and more time [smashing cars at your local demolition derby](https://youtu.be/8GAKXeuRaDQ?t=790).
 
-Pop open a terminal in your project's folder and run
+#### How it works
+
+The DoneJS generator uses Yeoman to bootstrap your application, component, or model.
+
+There are four generators by default (and you can easily create your own).
+
+##### 1. Project generator
+
+From the command line, run:
+
 ```
 donejs init
 ```
-Give your project an name and answer the other basic info prompts. That's it! Ready to roll!
+
+You'll be prompted for a project name, source folder, and other setup information. DoneJS' project dependencies will be installed, like StealJS and CanJS. In the folder that was created, you'll see:
 
 ```
-create package.json
-create readme.md
-create documentjs.json
-create .gitignore
-create build.js
-create production.html
-create development.html
-create src/test.html
-create src/app.js
-create src/index.stache
-create src/index.md
-create src/styles.less
-create src/test/test.js
-create src/test/functional.js
-create src/models/fixtures/fixtures.js
-create src/models/test.js
+├── .yo-rc.json
+├── build.js
+├── development.html
+├── documentjs.json
+├── package.json
+├── production.html
+├── readme.md
+├── src/
+|   ├── app.js
+|   ├── index.stache
+|   ├── models/
+|   |   ├── fixtures
+|   |   |   ├── fixtures.js
+|   |   ├── test.js
+|   ├── styles.less
+|   ├── test.html
+|   ├── test/
+|   |   ├── test.js
+|   |   ├── functional.js
+├── node_modules/
 ```
 
-#### donejs generate component
+You're now a command away from running application wide tests, generating documentation, running a build, and deploying. Start your server and open your browser and you'll see a functioning hello world page.
 
-And once you're ready to work on a component, DoneJS will get you started quickly!
+##### 2. Modlet component generator
 
-```
-donejs generate component suchwin such-win
-```
-
-which gives you all of this organized as a modlet!
+To create a component organized with the modlet file organization pattern:
 
 ```
-create src/suchwin/suchwin.html
-create src/suchwin/suchwin.js
-create src/suchwin/suchwin.md
-create src/suchwin/suchwin.less
-create src/suchwin/suchwin.stache
-create src/suchwin/suchwin_test.js
-create src/suchwin/test.html
+donejs generate component <folder-path> <component-name>
 ```
 
-#### There are other generators too!
+It will create the following files:
 
-For simple components:
-```
-donejs generate component soeasy.component so-easy
-```
-
-and you'll get a simple starter file like this:
 
 ```
-<can-component tag="so-easy">
-  <style>
-    p { font-weight: bold; }
-  </style>
-  <template>
-    <p>{{message}}</p>
-  </template>
-  <view-model>
-    import Map from 'can/map/';
-    import 'can/map/define/';
-
-    export default Map.extend({
-      define: {
-        message: {
-          value: 'This is the so-easy component'
-        }
-      }
-    });
-  </view-model>
-</can-component>
+restaurant/
+├── list/
+|   ├── list.html
+|   ├── list.js
+|   ├── list.less
+|   ├── list.md
+|   ├── list.stache
+|   ├── list_test.js
+|   ├── test.html
 ```
 
-that you can import into your templates!
+This folder contains everything the component needs: a working demo page, a basic test, and documentation placeholder markdown file.
+
+##### 3. Standalone component generator
+
+For simple, standalone components:
 
 ```
-  <can-import from="src/soeasy.component!">
-    {{#if isPending}}
-      Loading...
-    {{else}}
-      <so-easy/>
-    {{/if}}
-  </can-import>
+donejs generate component <file-name>.component <component-name>
 ```
 
-But wait there's "[super models](/place-my-order.html#section=section_Creatingarestaurantsconnection)" too!
+Which will generate a working component in a single file.
 
-Plus, you can even customize these and add more as you see fit!
+##### 4. Model generator
+
+To create a new model:
+
+```
+donejs generate supermodel <model-name>
+```
+
+This will create:
+
+ - a working model in the application's `models` folder
+ - a working fixture file for that model
+ - a working test, and add the test as a dependency for the application's model test
+
+<a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Generatetheapplication"><span>View the Guide</span></a>
+
+_Generators are provided by the [Generator DoneJS](https://github.com/donejs/generator-donejs) project with additional support via the [donejs](https://github.com/donejs/donejs) CLI_
