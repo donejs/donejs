@@ -440,17 +440,36 @@ DoneJS helps you with the most important aspect of CI and CD -- Tests! (link to 
 
 ### NPM Packages
 
-DoneJS applications can use packages published to NPM without configuration. Get more done faster by incorporating other people's code into your client side project!
+DoneJS makes it easier than ever to share and consume modules via package managers like NPM and Bower. 
+
+You can import modules from any package manager in any format without any configuration. And you can export modules to any format.
+
+The goal of these features is to transform project workflows, making it easier to share and reuse ideas and mini projects across applications with less hassle.
 
 <video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-npm-packaging-custom-elements.mp4"><source video-src="/static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-npm-packaging-custom-elements.mp4"></video>
 
 #### How it works
 
-DoneJS apps use StealJS to load modules and install packages. Unlike Browserify or Webpack, StealJS is a client side loader, so you don't have to run a build to load pages. Unlike require.js, you can load packages without tedious configuration steps.
+If publishing and consuming a JavaScript module is trivial, teams are enabled to design for reuse across their organization. This video introduces NPM import and export:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
 
-#### Zero config package installation
+##### Microapplications
+
+Alongside [generators](#section=section_Generators) and the [modlet pattern](#section_Modlets), which make it easy to create mini pieces of UI functionality, NPM module import and export enables teams to design and share components easily.
+
+In the same way that the [microservices](http://microservices.io/patterns/microservices.html) architecture enabled reusable APIs, the following workflow enables a "microapplication" architecture (reusable component architecture).
+
+ 1. Use generators to create a modlet
+ 1. Develop rich functionality
+ 1. Export and publish it - internally or externally
+ 1. Consume it across applications
+
+Imagine an organization where every app is broken into many reusable pieces, each of which are independently tested, developed, and shared.
+
+##### Zero config package installation
+
+DoneJS apps use StealJS to load modules and install packages. Unlike Browserify or Webpack, StealJS is a client side loader, so you don't have to run a build to load pages.
 
 Installing a package in a DoneJS app via npm or bower involves no configuration. Install your package from the command line:
 
@@ -468,16 +487,13 @@ Using require.js or other client side loaders, you'd have to add pathing and oth
 
 You can import that package in any format: CommonJS, AMD, or ES6 module format.
 
-#### Export in any format
+##### Export in any format
 
-DoneJS supports exporting your modules to other formats such as:
-- CommonJS and Browserify
-- AMD and r.js
-- or even &lt;script&gt; and &lt;link&gt; tags if you're adding new ideas to old code
+DoneJS supports exporting a module in any format: CommonJS, AMD, or ES6 module format, or script and link tags. 
 
-This makes reuse across an organization much easier! If you publish your DoneJS [modlets](#section_Modlets), you'll be building things you can use and reuse across your projects for years to come.
+The advantage of this is that you can publish your module and anyone writing a JavaScript application can use it, regardless of which script loader they are using (or if they aren't using a script loader).
 
-Just create your [export script](http://stealjs.com/docs/steal-tools.export.html), *myexport.js*:
+Just create an [export script](http://stealjs.com/docs/steal-tools.export.html) that points to the output formats you want, along with some options:
 ```js
 var stealTools = require("steal-tools");
 stealTools.export({
@@ -493,13 +509,12 @@ stealTools.export({
 });
 ```
 
-and execute it from your termnial:
+and run it from your command line:
 ```
 node myexport.js
 ```
 
 <a class="btn" href="http://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
-
 <a class="btn" href="/place-my-order.html#section=section_Importingotherprojects"><span>View the Guide</span></a>
 
 _NPM package support is a feature of [StealJS](http://stealjs.com/)_
