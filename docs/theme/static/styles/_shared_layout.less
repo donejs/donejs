@@ -190,7 +190,6 @@ body:not(.donejs) {
 				padding-right: 5px;
 				line-height: 18px;
 				padding-top: 6px;
-
 				> a {
 					color: #FFFFFF;
 					font-weight: 400;
@@ -203,7 +202,13 @@ body:not(.donejs) {
 
 			> li ol {
 				padding: 0px;
-
+				> li {
+					&:first-child {
+						a {
+							margin-top: 10px;
+						}
+					}
+				}
 				> li a {
 					font-size: 13px;
 										padding: 3px 5px 4px 13px;
@@ -381,6 +386,7 @@ body:not(.donejs) {
 		h2 + p + p,
 		h2 + p + p + p {
 			font-weight: 400;
+			color: @grey;
 			font-size: 19px;
 		}
 
