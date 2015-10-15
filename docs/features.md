@@ -462,18 +462,47 @@ _DoneJS Documentation is a feature of [DocumentJS](http://documentjs.com/)_
 
 ### Continuous Integration & Deployment
 
-Continuous Integration (CI) and Continuous Deployment (CD) are amazing tools. With CI pull requests will trigger tests and builds to insure any new code won’t break your application. CD means that any release or merges to your release branch will trigger tests, builds and deployment. All of this is automated and can be tightly integrated into git. Popular services for continuous integration and deployment include TravisCI and Jenkins.
+Continuous Integration (CI) and Continuous Deployment (CD) are must have tools for any modern, efficient dev team.
+
+CI is a practice whereby all active development (i.e. a pull request) is checked against automated tests and builds, allowing problems to be detected early (before merging the code into the release branch).
+
+CD means that any release or merges to your release branch will trigger tests, builds and deployment.
+
+DoneJS provides support for simple integration into popular CI and CD tools, like TravisCI and Jenkins.
+
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" poster="static/img/continuous-integration0deployment.jpg" class="img-responsive">
+        <source src="static/img/donejs-continuous-integration0deployment.mov" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment.mp4" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment.ogg" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+
+#### How it works
 
 <img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
 
-<img src="/static/img/git-passed.gif" srcset="/static/img/git-passed.gif 1x, /static/img/git-passed-2x.gif 2x" alt="A pull request that successfully builds in CI">
-_Example of a GitHub pull request with Travis CI integrated. Let's users know that a PR can safely be merged._
+The trickiest aspect of setting up CI and CD systems is creating automated build, test, and deployment scripts. Every DoneJS app comes with a build, test, and deployment one-liner: `donejs build`, `donejs test`, and `donejs deploy`. 
 
+Integrating with the tools that automatically runs these scripts is quite simple. For instance, setting up Travis CI involves signing up and adding a `.travis.yml` file to the project:
 
-DoneJS helps you with the most important aspect of CI and CD -- Tests! (link to test feature) Our generators add tests so you can start every component of your app with proper testing. No more excuses. This is often the biggest hurdle for projects to move to CI and CD. Without proper tests and CI merging new code is risky, and automatically deploying code is just silly -- but not with DoneJS!
+```
+language: node_js
+node_js: node
+script: npm start & npm test
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+```
 
-[Checkout our guide](./place-my-order.html#section=section_Setupautomatedtestsandcontinuousintegration_CI_) to learn how to set up testing and CI with TravisCI for your DoneJS app.
+The biggest hurdle to getting projects using CI and CD is proper tests and automation. DoneJS provides the plumbing for automation, as well as working [unit tests](#section_ComprehensiveTesting) via generators, making it easy to get started right at the beginning of any project.
+
+<a class="btn" href="/place-my-order.html#section=section_Automatedtestsandcontinuousintegration"><span>View the CI Guide</span></a>
+<a class="btn" href="/place-my-order.html#section=section_ContinuousDeployment"><span>View the CD Guide</span></a>
 
 ### NPM Packages
 
