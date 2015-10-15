@@ -627,7 +627,9 @@ To learn more about the modlet pattern, read this [blog post](http://blog.bitovi
 
 ### Custom HTML Elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules based on custom HTML elements.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules (modlets) based on custom HTML elements.
+
+Consider the following example:
 
 ```html
 <order-model findAll="{previousWeek}" [previousWeekData]="{value}"/>
@@ -638,37 +640,93 @@ One of the most important concepts in DoneJS is splitting up your application fu
   <bit-series data="{../currentWeekData}" color="Blue"/>
 </bit-graph>
 ```
+This code demonstrates:
 
-The functionality and content for the custom elements comes from identifying them as the tag for a component definition:
+ 1. An element that can load data
+ 1. Composable widget elements (a graph with a line-series)
+
+If our designer wanted to add another restaurant, all they would need to do is add another `<order-model>` and `<bit-series>` element.
+
+Here’s a working version of the same example in a JSBin.
+
+<a class="jsbin-embed" href="http://jsbin.com/zanadozize/1/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.0"></script>
+
+Just like HTML’s natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.
+
+#### How it works
+
+First, some background on custom elements and why they're useful. Then, some details about creating powerful custom elements in DoneJS.
+
+##### History of custom elements
+
+Before custom HTML elements existed, to add a datepicker to your page, you would:
+
+ 1. Load a datepicker script
+ 1. Add a placeholder HTML element: <div class='datepicker' />
+ 1. Add JavaScript code to instantiate your datepicker: $('.datepicker').datepicker()
+ 1. Gather your stone tipped spears and forage for small animals to feed your family for the night.
+
+With custom HTML elements, to add the same datepicker, you would:
+
+ 1. Load a datepicker script
+ 1. Add the datepicker to your HTML or template: <datepicker value="{date}"/>
+
+[Web Components](http://webcomponents.org/) are a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers. DoneJS uses CanJS' can.Component to provide a modern take on web components.
+
+Components in DoneJS have three basic building blocks:
+
+ * a template
+ * a viewModel object
+ * event handlers
+
+The major advantages of building applications based on these custom HTML elements are:
+
+ 1. *Ease of page composition* - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.
+ 1. *Forced modularity* - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
+ 1. *Reuse* - Custom elements are designed to be reusable across pages and applications.
+
+##### Single file components
+
+One way to define a compoonent is with a [web component](https://github.com/donejs/done-component) style declaration, using a file with a `.component` extension:
+
 ```
-var Iheartdonejs = can.Component.extend({
-  tag: 'i-heart-donejs',
-  viewModel: can.Map.extend({
-    define: {
-      message: {
-        value: 'I <3 DoneJS'
-      },
-      messages: {
-        value: [
-          'I <3 DoneJS',
-          'DoneJS FTW',
-          'Get it done, use DoneJS',
-          'More time to pet the kitty!'
-        ]
-      }
-    },
-    changeMessage: function () {
-      var msgs = this.attr( "messages" );
-      this.attr( "message", msgs[ ~~( Math.random() * msgs.length ) ] );
-    }
-  }),
-  template: "<div can-click='{changeMessage}'>{{message}}</div>"
-});
+<can-component tag="hello-world">
+    <style type="less">
+        i {
+            color: red;
+        }
+    </style>
+    <template>
+        {{#if visible}}<b>{{message}}</b>{{else}}<i>Click me</i>{{/if}}
+    </template>
+    <script type="view-model">
+        export default {
+            visible: true,
+            message: "Hello There!"
+        };
+    </script>
+    <script type="events">
+        export default {
+            click: function(){
+                this.viewModel.attr("visible", !this.viewModel.attr("visible"))
+            }
+        };
+    </script>
+</can-component>
 ```
 
-DoneJS [Generators](#section_Generators) will help you get started on your components with just a few keystrokes!
 
-Plus, if you've built something awesome, you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
+
+DoneJS [Generators](#section_Generators) will help you get started 
+
+you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
+
+http://blog.bitovi.com/custom-html-element-architecture/
+
+<a class="btn" href="http://canjs.com/docs/can.Component.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Creatingcustomelements"><span>View the Guide</span></a>
+
+_Custom HTML elements are a feature of [CanJS](http://canjs.com/)_
 
 ### MVVM Architecture
 
