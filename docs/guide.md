@@ -578,12 +578,7 @@ Now that we verified that our application works in production, we can deploy it 
 
 ### Setting up Divshot
 
-Sign up for free at [divshot.com](https://divshot.com/). Then install the command line tool and log in with your credentials:
-
-```
-npm install -g divshot-cli
-divshot login
-```
+Sign up for free at [divshot.com](https://divshot.com/). When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
 ### Configuring DoneJS
 
