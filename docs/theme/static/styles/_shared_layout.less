@@ -90,6 +90,48 @@ body:not(.donejs) {
 						.center-block;
 					}
 				}
+				.btn {
+					color: #fff;
+					padding: 10px 40px 10px 20px;
+					margin-top: 20px;
+					display: inline-block;
+					height: auto;
+					width: auto;
+					background-color: rgba(59, 131, 163, 1);
+					span {
+						position: relative;
+						font-weight: 700;
+						&:after {
+							content:'';
+							background-image: url( "/static/img/icon-chevron-white.svg" );
+							background-size: 12px 12px;
+							background-position: 0 0;
+							background-repeat: no-repeat;
+							width: 12px;
+							height: 12px;
+							display: inline-block;
+							margin-left: 8px;
+							position: absolute;
+							top: 5px;
+							right: -20px;
+						}
+					}
+					&:hover {
+						text-decoration: none;
+						background-color: rgba(59, 131, 163, .9);
+						.fade-bg-hover;
+					}
+					+ .btn {
+						margin-left:20px;
+					}
+					@media(max-width: @screen-xs){
+						width: 100%;
+						text-align: center;
+						+ .btn {
+							margin-left: 0;
+						}
+					}
+				}
 			}
 		}
 		.sub-heading {
@@ -347,7 +389,6 @@ body:not(.donejs) {
 			max-width: 100%;
 		}
 	}
-
 	@media(max-width: @screen-sm-max) {
 		.scroll-spy-title {
 			width: 100%;
@@ -392,13 +433,9 @@ body:not(.donejs) {
 				text-align: center;
 				margin: 0 auto;
 				transition: margin-top 0.25s ease-out;
-				max-width: 235px;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
-				@media(min-width: @screen-md){
-					max-width: 600px
-				}
 			}
 			#scrollSpyCurrentH2.h2Only {
 				margin-top: 10px;
@@ -499,6 +536,13 @@ body:not(.donejs) {
 			}
 			> ol > li.active > ol {
 				max-height: 750px;
+			}
+		}
+	}
+	@media(max-width: 425px) {
+		.scroll-spy-title {
+			#scrollSpyCurrentH2 {
+				max-width: 235px;
 			}
 		}
 	}

@@ -92,7 +92,10 @@ Then you run the build. A build time algorithm analyzes the application's depend
 
 That's it! No need for additional configuration in your JavaScript.
 
-For more information, read about [Progressive Loading](http://stealjs.com/docs/steal-tools.guides.progressive_loading.html) in StealJS, the [`<can-import>` tag](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html), and follow [the guide](./Guide.html#section=section_Switchbetweenpages).
+<a class="btn" href="http://stealjs.com/docs/steal-tools.guides.progressive_loading.html"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Switchbetweenpages"><span>View the Guide</span></a>
+
+_Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additional support via the [`<can-import>` tag](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](http://canjs.com/)_
 
 ### Caching and Minimal Data Requests
 
@@ -153,10 +156,10 @@ To learn more about this, read about the [can.stache](http://canjs.com/docs/can.
 
 Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM. Your templates first render in a lightweight Virtual DOM on the worker side and changes are diffed and sent to the window side to be applied to the actual DOM.  Only changes are ever applied to the window and the most expensive part of a web application, DOM updates, are separated from application logic, which means your application can continue to run while paints occur.
 
-<img src="./static/img/donejs-single-thread.gif" alt="A traditional single threaded javascript application" />
+<img src="/static/img/donejs-single-thread.gif" srcset="/static/img/donejs-single-thread.gif 1x, /static/img/donejs-single-thread-2x.gif 2x" alt="A traditional single threaded javascript application">
 _With a single thread only one operation can occur at a time_
 
-<img src="./static/img/donejs-multi-thread.gif" alt="A javascript application using a worker thread" />
+<img src="/static/img/donejs-multi-thread.gif" srcset="/static/img/donejs-multi-thread.gif 1x, /static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
 _Using a worker thread application logic can still occur while the DOM is rendered. This can nearly double the number of operations._
 
 Due to this parallelization your application doesn’t have to worry so much about being doing things performantly as long as it is performant enough not to block the worker thread. For your users this means the application will always feel snappy.
@@ -178,6 +181,8 @@ CDNs are distributed networks of servers that serve static assets (CSS, JS, and 
 
 <img src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
 _Without a CDN requests will take longer to fulfill if the user is located further away from your servers._
+<hr />
+
 
 <img src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
 _With a CDN requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
@@ -186,7 +191,7 @@ _With a CDN requests can be fulfilled much quicker. Users are served content fro
 
 It's widely known that CDNs offer the best performance for static assets, but most apps don't use them, mainly because its annoying: annoying to automate, configure, and integrate with your build process.
 
-DoneJS comes with integrations with S3 and Divshot (popular CDN services) that make configuring and deploying to a CDN dirt simple. 
+DoneJS comes with integrations with S3 and Divshot (popular CDN services) that make configuring and deploying to a CDN dirt simple.
 
  1. You sign up for S3 or Divshot.
  1. You paste a few lines of config into your package.json that point to the right CDN service.
@@ -316,6 +321,8 @@ DoneJS provides tools for the entire testing lifecycle:
 * **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
 * **A mock layer** - an API to mock out your server APIs so you can test your app in isolation from a server
 
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-testing.mp4"><source video-src="/static/img/donejs-testing.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-testing.mp4"></video>
+
 #### How it works
 
 Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack - so you can spend less time messing with test infrastructure, and more time [mud ridin'](https://youtu.be/s4faD0fox_s?t=261).
@@ -406,56 +413,153 @@ The DoneJS testing layer involves many pieces, so if you want to learn more:
 
 ### Documentation
 
-DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation.
-DocumentJS lets you:
+Documentation is critical for maintainability of any complex application. When key team members leave, docs ensure minimal ramp up time and knowledge loss - this applies for code and styles.
 
-- Write documentation inline or in markdown files.
-- Specify your code's behavior precisely with JSDoc and Google Closure Compiler annotations.
+Yet most teams either don't write docs, or they'll do it "later" - a utoptian future period that is always just out of reach. Why? Because its extra work to set up a tool, configure it, create and maintain separate documentation files, etc.
+
+DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing docs, since all you have to do is comment your code (which most people already do) and run `donejs document`.
+
+You spend less time messing with Documentation generators, and more time [painting your truck camo](https://www.youtube.com/watch?v=DpJ_oPJgyPg).
+
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-documentation.mp4"><source video-src="/static/img/donejs-documentation.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-documentation.mp4"></video>
+
+#### How it works
+
+You write comments above the module, method, or object that you want to document:
+
+```js
+/**
+ * @module {function} utils/add
+ * @parent utils
+ * 
+ * The module's description is the first paragraph.
+ * 
+ * The body of the module's documentation.
+ * 
+ * @param {Number} first This param's description.
+ * @param {Number} second This param's description.
+ * @return {Number} This return value's description.
+ */
+export default function(){ ... };
+```
+
+Then run `donejs document`. A browsable documentation website will be generated.
+
+DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation. It lets you:
+
+- Write docs inline or in markdown files.
+- Specify your code's behavior precisely with JSDoc and [Google Closure Compiler annotations](https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=en) - a well known documentation syntax.
 - Customize your site's theme and layout.
-- Generate multi-version documentation.
+- Generate multi-versioned documentation.
+- Document CSS alongside JavaScript. You can even make a [live style guide](http://documentjs.com/examples/styles/index.html).
 
-With DocumentJS's flexibility, themeability, and customizability you can generate extremely useful documentation sites. In fact, this site is generated from it!
+You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](http://canjs.com/docs/index.html) site are generated using DocumentJS.
+
+<a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Createdocumentation"><span>View the Guide</span></a>
+
+_DoneJS Documentation is a feature of [DocumentJS](http://documentjs.com/)_
 
 ### Continuous Integration & Deployment
 
-Continuous Integration (CI) and Continuous Deployment (CD) are amazing tools. With CI pull requests will trigger tests and builds to insure any new code won’t break your application. CD means that any release or merges to your release branch will trigger tests, builds and deployment. All of this is automated and can be tightly integrated into git. Popular services for continuous integration and deployment include TravisCI and Jenkins.
+Continuous Integration (CI) and Continuous Deployment (CD) are must have tools for any modern, efficient dev team.
 
-<img src="./static/img/git-failed.gif" alt="A pull request that breaks the build or fails tests" />
+CI is a practice whereby all active development (i.e. a pull request) is checked against automated tests and builds, allowing problems to be detected early (before merging the code into the release branch).
+
+CD means that any release or merges to your release branch will trigger tests, builds and deployment.
+
+DoneJS provides support for simple integration into popular CI and CD tools, like TravisCI and Jenkins.
+
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" poster="static/img/continuous-integration0deployment.jpg" class="img-responsive">
+        <source src="static/img/donejs-continuous-integration0deployment.mov" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment.mp4" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment.ogg" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+
+#### How it works
+
+<img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
-<img src="./static/img/git-passed.gif" alt="A pull request that successfully builds in CI" />
-_Example of a GitHub pull request with Travis CI integrated. Let's users know that a PR can safely be merged._
 
+The trickiest aspect of setting up CI and CD systems is creating automated build, test, and deployment scripts. Every DoneJS app comes with a build, test, and deployment one-liner: `donejs build`, `donejs test`, and `donejs deploy`. 
 
-DoneJS helps you with the most important aspect of CI and CD -- Tests! (link to test feature) Our generators add tests so you can start every component of your app with proper testing. No more excuses. This is often the biggest hurdle for projects to move to CI and CD. Without proper tests and CI merging new code is risky, and automatically deploying code is just silly -- but not with DoneJS!
+Integrating with the tools that automatically runs these scripts is quite simple. For instance, setting up Travis CI involves signing up and adding a `.travis.yml` file to the project:
 
-[Checkout our guide](./place-my-order.html#section=section_Setupautomatedtestsandcontinuousintegration_CI_) to learn how to set up testing and CI with TravisCI for your DoneJS app.
+```
+language: node_js
+node_js: node
+script: npm start & npm test
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+```
+
+The biggest hurdle to getting projects using CI and CD is proper tests and automation. DoneJS provides the plumbing for automation, as well as working [unit tests](#section_ComprehensiveTesting) via generators, making it easy to get started right at the beginning of any project.
+
+<a class="btn" href="/place-my-order.html#section=section_Automatedtestsandcontinuousintegration"><span>View the CI Guide</span></a>
+<a class="btn" href="/place-my-order.html#section=section_ContinuousDeployment"><span>View the CD Guide</span></a>
 
 ### NPM Packages
 
-DoneJS applications can use packages published to NPM without configuration thanks to StealJS. Get more done faster by incorporating other people's code into your client side project!
+DoneJS makes it easier than ever to share and consume modules via package managers like NPM and Bower. 
 
-It's fast and easy to install a package from the terminal:
+You can import modules from any package manager in any format without any configuration. And you can export modules to any format.
+
+The goal of these features is to transform project workflows, making it easier to share and reuse ideas and mini projects across applications with less hassle.
+
+<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-npm-packaging-custom-elements.mp4"><source video-src="/static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-npm-packaging-custom-elements.mp4"></video>
+
+#### How it works
+
+If publishing and consuming a JavaScript module is trivial, teams are enabled to design for reuse across their organization. This video introduces NPM import and export:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
+
+##### Microapplications
+
+Alongside [generators](#section=section_Generators) and the [modlet pattern](#section_Modlets), which make it easy to create mini pieces of UI functionality, NPM module import and export enables teams to design and share components easily.
+
+In the same way that the [microservices](http://microservices.io/patterns/microservices.html) architecture enabled reusable APIs, the following workflow enables a "microapplication" architecture (reusable component architecture).
+
+ 1. Use generators to create a modlet
+ 1. Develop rich functionality
+ 1. Export and publish it - internally or externally
+ 1. Consume it across applications
+
+Imagine an organization where every app is broken into many reusable pieces, each of which are independently tested, developed, and shared.
+
+##### Zero config package installation
+
+DoneJS apps use StealJS to load modules and install packages. Unlike Browserify or Webpack, StealJS is a client side loader, so you don't have to run a build to load pages.
+
+Installing a package in a DoneJS app via npm or bower involves no configuration. Install your package from the command line:
+
 ```
 npm install jquery --save
 ```
 
-The dependencies for packages installed with npm are automatically loaded.
+Then immediately consume that package (and its dependencies) in your app:
 
-Import packages written in ES6 module syntax, AMD, or CommonJS easily:
 ```
 import $ from "jquery";
 ```
 
-#### You can create and share your own too!
+Using require.js or other client side loaders, you'd have to add pathing and other information to your configuration file before being able to use your package. In DoneJS, this step is bypassed because of scripts that add config to your package.json file as the package is installed.
 
-DoneJS supports exporting your modules to other formats such as:
-- CommonJS and Browserify
-- AMD and r.js
-- or even &lt;script&gt; and &lt;link&gt; tags if you're adding new ideas to old code
+You can import that package in any format: CommonJS, AMD, or ES6 module format.
 
-This makes reuse across an organization much easier! If you publish your DoneJS [modlets](#section_Modlets), you'll be building things you can use and reuse across your projects for years to come.
+##### Export in any format
 
-Just create your [export script](http://stealjs.com/docs/steal-tools.export.html), *myexport.js*:
+DoneJS supports exporting a module in any format: CommonJS, AMD, or ES6 module format, or script and link tags. 
+
+The advantage of this is that you can publish your module and anyone writing a JavaScript application can use it, regardless of which script loader they are using (or if they aren't using a script loader).
+
+Just create an [export script](http://stealjs.com/docs/steal-tools.export.html) that points to the output formats you want, along with some options:
 ```js
 var stealTools = require("steal-tools");
 stealTools.export({
@@ -471,13 +575,15 @@ stealTools.export({
 });
 ```
 
-and execute it from your termnial:
+and run it from your command line:
 ```
 node myexport.js
 ```
 
-#### Watch our demonstration video for more
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
+<a class="btn" href="http://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Importingotherprojects"><span>View the Guide</span></a>
+
+_NPM package support is a feature of [StealJS](http://stealjs.com/)_
 
 ### ES6 Modules
 
@@ -511,40 +617,7 @@ DoneJS encourages use of the modlet file organization pattern. Modlets are small
 
 Large apps have a lot of files. There are two ways to organize them: by type or by module.
 
-
-```
-components/
-   tabs.js
-   chat.js
-viewmodels/
-    tabs-vm.js
-    chat-vm.js
-templates/
-   tabs.handlebars
-   chat.handlebars
-css/
-   tabs.css
-   chat.less
-test/
-   tabs_test.js
-   chat_test.js
-docs/
-   tabs.markdown
-   chat.markdown
-
-vs
-
-chat/
-   chat.js          - module code
-   chat.handlebars  - supporting file
-   chat.css         - supporting file
-   chat_test.js     - tests
-   chat.markdown    - docs
-   test.html        - test page
-   chat.html        - demo page
- tabs/
- cart/
-```
+<img src="/static/img/donejs-modlet-diagram.png" srcset="/static/img/donejs-modlet-diagram.png 1x, /static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" />
 
 Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns.
 
@@ -804,101 +877,103 @@ To learn more about live reload, read the [StealJS docs](http://stealjs.com/docs
 
 ### Generators
 
-Hit the ground running ( in the right direction ) with DoneJS's generators. They'll set everything up to be written the right way and eliminate the boilerplate in getting started and adding components.
+DoneJS generators help you kickstart new projects and components. They'll save you time by eliminating boilerplate and scaffolding a working project, component, or module.
 
-#### donejs init
+Generator templates set up many of the best practices and features discussed in the rest of this page, without you even realizing it.
 
-Hello World! This will get you all set up, install the DoneJS projects, and take care of all the little details.
+You spend less time setting up your app, and more time [smashing cars at your local demolition derby](https://youtu.be/8GAKXeuRaDQ?t=790).
 
-Pop open a terminal in your project's folder and run
+#### How it works
+
+The DoneJS generator uses Yeoman to bootstrap your application, component, or model.
+
+There are four generators by default (and you can easily create your own).
+
+##### 1. Project generator
+
+From the command line, run:
+
 ```
 donejs init
 ```
-Give your project an name and answer the other basic info prompts. That's it! Ready to roll!
+
+You'll be prompted for a project name, source folder, and other setup information. DoneJS' project dependencies will be installed, like StealJS and CanJS. In the folder that was created, you'll see:
 
 ```
-create package.json
-create readme.md
-create documentjs.json
-create .gitignore
-create build.js
-create production.html
-create development.html
-create src/test.html
-create src/app.js
-create src/index.stache
-create src/index.md
-create src/styles.less
-create src/test/test.js
-create src/test/functional.js
-create src/models/fixtures/fixtures.js
-create src/models/test.js
+├── .yo-rc.json
+├── build.js
+├── development.html
+├── documentjs.json
+├── package.json
+├── production.html
+├── readme.md
+├── src/
+|   ├── app.js
+|   ├── index.stache
+|   ├── models/
+|   |   ├── fixtures
+|   |   |   ├── fixtures.js
+|   |   ├── test.js
+|   ├── styles.less
+|   ├── test.html
+|   ├── test/
+|   |   ├── test.js
+|   |   ├── functional.js
+├── node_modules/
 ```
 
-#### donejs generate component
+You're now a command away from running application wide tests, generating documentation, running a build, and deploying. Start your server and open your browser and you'll see a functioning hello world page.
 
-And once you're ready to work on a component, DoneJS will get you started quickly!
+##### 2. Modlet component generator
 
-```
-donejs generate component suchwin such-win
-```
-
-which gives you all of this organized as a modlet!
+To create a component organized with the modlet file organization pattern:
 
 ```
-create src/suchwin/suchwin.html
-create src/suchwin/suchwin.js
-create src/suchwin/suchwin.md
-create src/suchwin/suchwin.less
-create src/suchwin/suchwin.stache
-create src/suchwin/suchwin_test.js
-create src/suchwin/test.html
+donejs generate component <folder-path> <component-name>
 ```
 
-#### There are other generators too!
+It will create the following files:
 
-For simple components:
-```
-donejs generate component soeasy.component so-easy
-```
-
-and you'll get a simple starter file like this:
 
 ```
-<can-component tag="so-easy">
-  <style>
-    p { font-weight: bold; }
-  </style>
-  <template>
-    <p>{{message}}</p>
-  </template>
-  <view-model>
-    import Map from 'can/map/';
-    import 'can/map/define/';
-
-    export default Map.extend({
-      define: {
-        message: {
-          value: 'This is the so-easy component'
-        }
-      }
-    });
-  </view-model>
-</can-component>
+restaurant/
+├── list/
+|   ├── list.html
+|   ├── list.js
+|   ├── list.less
+|   ├── list.md
+|   ├── list.stache
+|   ├── list_test.js
+|   ├── test.html
 ```
 
-that you can import into your templates!
+This folder contains everything the component needs: a working demo page, a basic test, and documentation placeholder markdown file.
+
+##### 3. Standalone component generator
+
+For simple, standalone components:
 
 ```
-  <can-import from="src/soeasy.component!">
-    {{#if isPending}}
-      Loading...
-    {{else}}
-      <so-easy/>
-    {{/if}}
-  </can-import>
+donejs generate component <file-name>.component <component-name>
 ```
 
-But wait there's "[super models](/place-my-order.html#section=section_Creatingarestaurantsconnection)" too!
+Which will generate a working component in a single file.
 
-Plus, you can even customize these and add more as you see fit!
+##### 4. Model generator
+
+To create a new model:
+
+```
+donejs generate supermodel <model-name>
+```
+
+This will create:
+
+ - a working model in the application's `models` folder
+ - a working fixture file for that model
+ - a working test, and add the test as a dependency for the application's model test
+
+<a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Generatetheapplication"><span>View the Guide</span></a>
+
+_Generators are provided by the [Generator DoneJS](https://github.com/donejs/generator-donejs) project with additional support via the [donejs](https://github.com/donejs/donejs) CLI_

@@ -115,6 +115,8 @@ people the skills they need to effecitvely use it, it will go to waste.
 
 ## Projects
 
+Whole is greater than the sum of its parts
+
 DoneJS is comprised of many projects.  There are 1st party projects, where there
 is a high degree of overlap of the teams working on these projects, and 3rd party projects like
 jQuery that DoneJS uses, we occasionally contribute to, but are maintained by outside teams.
