@@ -505,6 +505,8 @@ To test the production build, close the current server (with `CTRL + C`) and sta
 NODE_ENV=production donejs start
 ```
 
+If using Windows you first set the environmental variable, if using the **command prompt** you set with `set NODE_ENV=production` or if using **Powershell** you set it with `$env:NODE_ENV="production"` and then run your application afterwards with `donejs start`.
+
 If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
 ### IE8 Support
@@ -633,6 +635,8 @@ And verify that the application is loading from the CDN by loading it after runn
 ```
 NODE_ENV=production donejs start
 ```
+
+*note: if using Windows set the NODE_ENV variable as you did previously in the building section.*
 
 We should now see our assets being loaded from the Divshot CDN.
 
