@@ -376,6 +376,7 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. Update `src/messages/messages.stache` to look like this:
 
 ```html
+<can-import from="donejs-chat/models/message" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
 <message-model get-list="{}" class="list-group">
   <div class="list-group">
