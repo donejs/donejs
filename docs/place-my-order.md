@@ -1011,9 +1011,9 @@ donejs test
 
 To see the tests passing on the command line.
 
-### Setting continuous integration (Travis CI)
+### Setting up continuous integration (Travis CI)
 
-The way our application is set up, all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers (the most popular one probably [Jenkins](https://jenkins-ci.org/) and) many hosted solutions.
+The way our application is set up, all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers, the most popular one probably [Jenkins](https://jenkins-ci.org/), and many hosted solutions like [Travis](https://travis-ci.org/).
 
 We will use TravisCI as our hosted solution because it is free for open source projects. After signing up with GitHub, we have to enable the place-my-order repository in the Travis CI account settings and add the following `.travis.yml` to our project root:
 
