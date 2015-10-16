@@ -40,7 +40,7 @@ body:not(.donejs) {
 			border-radius: 0px;
 			@media(min-width:@screen-lg){
 				width: @contentWidth;
-				position: initial;
+				position: static;
 			}
 			@media(max-width: @screen-md-max) {
 				margin-right: auto;
@@ -71,7 +71,7 @@ body:not(.donejs) {
 					font-weight: 400;
     			color: #424a4e;
 				}
-				ul {
+				ul, ol {
 					line-height: 24px;
 					padding-right: 40px;
 					li {
@@ -236,7 +236,7 @@ body:not(.donejs) {
 	}
 	section.title .heading {
 		@h1height: 222px;
-		position: initial;
+		position: static;
 		height: @h1height;
 		@media(max-width: @screen-xs-max){
 				height: 160px;
@@ -260,7 +260,7 @@ body:not(.donejs) {
 			background-image: url( "/static/img/background.jpg" );
 			background-attachment: fixed;
 			margin-bottom: 40px;
-			max-width: initial;
+			max-width: none;
 			@media(max-width: @screen-sm-max){
 				font-size: 90px;
 				text-align:center;
@@ -308,7 +308,7 @@ body:not(.donejs) {
 			left: 0px;
 			right: 0px;
 			padding-left: ~"calc( ( 100% - " @containerWidth ~" ) / 2 + " @containerWidth - @contentWidth ~" )";
-			padding-top: 40px;
+			padding-top: 53px;
 			display: block;
 			background-color: @charcoal;
 			color: @white;

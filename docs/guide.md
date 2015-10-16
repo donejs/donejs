@@ -376,6 +376,7 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. Update `src/messages/messages.stache` to look like this:
 
 ```html
+<can-import from="donejs-chat/models/message" />
 <h5><a can-href="{ page='home' }">Home</a></h5>
 <message-model get-list="{}" class="list-group">
   <div class="list-group">
@@ -504,6 +505,8 @@ To test the production build, close the current server (with `CTRL + C`) and sta
 NODE_ENV=production donejs start
 ```
 
+If using Windows you first set the environmental variable, if using the **command prompt** you set with `set NODE_ENV=production` or if using **Powershell** you set it with `$env:NODE_ENV="production"` and then run your application afterwards with `donejs start`.
+
 If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
 ### IE8 Support
@@ -577,12 +580,7 @@ Now that we verified that our application works in production, we can deploy it 
 
 ### Setting up Divshot
 
-Sign up for free at [divshot.com](https://divshot.com/). Then install the command line tool and log in with your credentials:
-
-```
-npm install -g divshot-cli
-divshot login
-```
+Sign up for free at [divshot.com](https://divshot.com/). When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
 ### Configuring DoneJS
 
@@ -637,6 +635,8 @@ And verify that the application is loading from the CDN by loading it after runn
 ```
 NODE_ENV=production donejs start
 ```
+
+*note: if using Windows set the NODE_ENV variable as you did previously in the building section.*
 
 We should now see our assets being loaded from the Divshot CDN.
 
