@@ -55,5 +55,19 @@ describe('DoneJS CLI tests', function() {
         })
         .fail(fail);
     });
+
+		it("runCommand passes stdio for scripts that need a tty", function(done){
+			var script = __dirname + "/tests/needstty.js";
+			var makeAssert = function(val, msg){
+				return function(){
+					assert(val, msg);
+				};
+			};
+			utils.runCommand("node", [script])
+				.then(makeAssert(true, "Script was ran as a tty"),
+							makeAssert(false, "Script not run as a tty"))
+				.then(done, done);
+		});
+
   });
 });
