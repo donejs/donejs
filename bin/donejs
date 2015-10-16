@@ -42,7 +42,7 @@ utils.projectRoot().then(function (root) {
       ]));
     },
     generate: function (type, options) {
-      log(utils.generate(path.join(root, 'node_modules'), [[type].concat(options)]));
+      log(utils.generate(path.join(root, 'node_modules'), 'generator-donejs', [[type].concat(options)]));
     },
     catchAll: function (command) {
       console.error('Could not run `' + command + '`');
