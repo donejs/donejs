@@ -713,9 +713,9 @@ The major advantages of building applications based on these custom HTML element
  1. **Forced modularity** - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
  1. **Reuse** - Custom elements are designed to be reusable across pages and applications.
 
-##### Single file components
+##### Defining a custom element
 
-One way to define a compoonent is with a [web component](https://github.com/donejs/done-component) style declaration, using a file with a `.component` extension:
+One way to define a component is with a [web component](https://github.com/donejs/done-component) style declaration, using a single file with a `.component` extension:
 
 ```html
 <can-component tag="hello-world">
@@ -743,13 +743,68 @@ One way to define a compoonent is with a [web component](https://github.com/done
 </can-component>
 ```
 
+Another way to organize a custom element is a [modlet](#section_Modlets) style file structure: a folder with the element broken into several independent pieces. In this pattern, the custom element's ViewModel, styles, template, event handlers, demo page, tests, and test page are all located in separate files.
 
+DoneJS [Generators](#section_Generators) will create both of these types of custom elements so you can get started quickly.
 
-DoneJS [Generators](#section_Generators) will help you get started 
+##### Data + visual elements = powerful templates
 
-you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
+The beauty and power of custom HTML elements is most apparent when visual widgets (like graphing) is combined with elements that express data. 
 
-http://blog.bitovi.com/custom-html-element-architecture/
+Back to our original example:
+
+```html
+<order-model findAll="{previousWeek}" [previousWeekData]="{value}"/>
+<order-model findAll="{currentWeek}" [currentWeekData]="{value}"/>
+
+<bit-graph title="Week over week">
+  <bit-series data="{../previousWeekData}" />
+  <bit-series data="{../currentWeekData}" color="Blue"/>
+</bit-graph>
+```
+
+This template combines a request for data with an element that expresses it. It's immediately obvious how you would add or remove features from this, allowing for quick changes and easy prototyping. Without custom elements, the same changes would require more difficult code changes and wiring those changes up with widget elements that display the data.
+
+Data custom elements are part of DoneJS via can-connect's [can/tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html).
+
+##### Custom element libraries
+
+Custom elements are designed to be easily shareable across your organization. DoneJS provides support for simple [NPM import and export](#section_NPMPackages) and creating [documentation](#section=section_Documentation) for elements. Together with custom element support, these features make it easier than ever to create reusable bits of functionality and share them.
+
+Some open source examples of DoneJS custom elements:
+ * `<bit-c3>`: [website](http://bitovi-components.github.io/bit-c3/docs/index.html)
+ * `<bit-tabs>`: [website](https://github.com/bitovi-components/bit-tabs) components
+ * `<bit-autocomplete>`: [website](http://bitovi-components.github.io/bit-autocomplete/)
+
+Check out [their source](https://github.com/bitovi-components/bit-tabs) for good examples of shareable, documented, and tested custom elements.
+
+##### In-template dependency declarations
+
+[can-import](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements and other modules straight from a template file like:
+
+```
+<can-import from="components/my_tabs"/>
+<can-import from="helpers/prettyDate"/>
+<my-tabs>
+  <my-panel title="{{prettyDate start}}">...</my-panel>
+  <my-panel title="{{prettyDate end}}">...</my-panel>
+</my-tabs>
+```
+
+The `<can-import>` element also plays a key role in [Progressive Loading](#section=section_ProgressiveLoading). Simply by wrapping a section in a closed can-import, it signals to the build that the enclosed section's dependencies should be progressively loaded.
+
+```
+{{#eq location 'home'}}
+<can-import from="components/home">
+  <my-home/>
+</can-import>
+{{/eq}}
+{{#eq location 'away'}}
+<can-import from="components/chat">
+  <my-chat/>
+</can-import>
+{{/eq}}
+```
 
 <a class="btn" href="http://canjs.com/docs/can.Component.html"><span>View the Documentation</span></a>
 <a class="btn" href="/place-my-order.html#section=section_Creatingcustomelements"><span>View the Guide</span></a>
