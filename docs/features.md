@@ -14,31 +14,71 @@ DoneJS is configured for maximum performance right out of the box.
 ### Server Side Rendered
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
-and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript) aka [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9). Server side rendering comes with great benefits:
+and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript), or [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9). 
 
-#### Speed
-A user sees their content immediately. No spinners necessary.
+Server side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
+
+Other server side rendering systems require additional code and infrastructure to work correctly. DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
+
+#### Page load performance
+
+Server side rendered SPAs can load pre-rendered HTML immediately. It can also cache HTML and serve it from a CDN. 
+
+Traditional SPAs must load the JS, execute, request data, and render before the user sees content. 
+
+<div class="performance wrapper col-xs-12">
+  <a id="performance" style="vertical-align: top;"></a>
+  <div class="mobile-graph">
+    <div class="graph-logos">
+      <img src="/static/img/donejs-mobile-guide-logos.png" srcset="/static/img/donejs-mobile-guide-logos.png 1x, /static/img/donejs-mobile-guide-logos-2x.png 2x">
+    </div>
+    <div class="graph-timeline-wrapper">
+      <div class="graph-timeline">
+          <img src="/static/img/donejs-mobile-guide-timeline.gif" srcset="/static/img/donejs-mobile-guide-timeline.gif 1x, /static/img/donejs-mobile-guide-timeline-2x.gif 2x">
+      </div>
+    </div>
+  </div>
+</div>
+
+#### SEO
+
+Search engines can't easily index SPAs. Server side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
+
+Since search engines see the HTML your server returns, if you want search engines finding your pages, you'll want Google and other search engines seeing fully rendered content, not the spinners that normally load after initial SPAs load.
 
 <img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
-DoneJS brings server side rendering with an incredibly fast, single context virtual DOM.
+#### How it works
 
-Running a single context on the server (default, but optional), no additional processes or memory is used per request. You don't even have to reload the application. This eliminates all of the overhead baggage you used to expect from a server request, and gets it done as fast as possible.
+DoneJS implements SSR with a single context virtual DOM.
 
-#### SEO
-While [Google can execute JavaScript](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), it's not perfect and there are many other search engines that want to scrape your site and drive traffic your way.
+**Single context** means every request to the server reuses the same context: including memory, modules, and even the same instance of the application.
 
-Rendering requests in DoneJS uses a virtual DOM that only implements the fundamental apis that jQuery needs to manipulate the DOM. That means the rendering here is *fast* and your markup is ready to serve with the SEO benefits a static page would have.
+**Virtual DOM** means a virtual representation of the DOM: the fundamental browser APIs that manipulate the DOM, but stubbed out.
 
-#### DoneJS compared to alternatives
-Other solutions to server side rendering force you to get all the data manually, to know when the page is done loading, and make it difficult to have components load their own data. DoneJS takes care of all of this and makes it incredibly easy to make your most important components immediately visible to the user and to the bots crawling your site. And because DoneJS renders using a [virtual DOM](https://github.com/canjs/can-simple-dom), it's super fast and only carrying a fraction of the weight an approach using a full headless browser has.
+When using DoneJS SSR, the same app that runs on the client is loaded in Node. When a request comes in:
+ 1. The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application, which means the initial response is very fast.
+ 1. The app renders content the same way it would in the browser, but with a mocked out virtual DOM, which is much faster than a real DOM. 
+ 1. When rendering is complete, the virtual DOM renders the string representation of the DOM, which is sent back to the client.
 
-#### How easy?
-Just add one line to your most important components:
+Other SSR systems use a headless browser on the server rather than a virtual DOM. These systems are much slower and require much more intensive server resources. A new headless browser instance must be created to handle each incoming request, and headless browsers use a real DOM.
+
+Since SSR produces fully rendered HTML, it's possible to insert a caching layer, or use a service like Akamai, to serve most requests. Traditional SPAs don't have this option.
+
+#### Prepping your app for SSR
+
+Any app that is rendered on the server needs a way to notify the server that any pending asynchronous data requests are finished, and the app can be rendered.
+
+React and other frameworks that support SSR don't provide much in the way of solving this problem. You're left to your own devices to check when all asychronous data requests are done, and delay rendering.
+
+DoneJS provides an easy mechanism for individual components to tell the server when its finished loading.
+
+Just add one line whenever a component has to wait for a promise to resolve:
 ```
 this.attr( "%root" ).waitFor( promise );
 ```
-and the component will be rendered with its data from the resolved promise before it's served up!
+
+The server will wait for all promises sent via `waitFor` before it renders the page. In a full component that might look like this:
 
 ```
 can.Component.extend({
@@ -54,10 +94,10 @@ can.Component.extend({
 });
 ```
 
-View the documentation for can-ssr [here](https://github.com/canjs/can-ssr).
+<a class="btn" href="https://github.com/canjs/can-ssr"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html"><span>View the Guide</span></a>
 
-[Follow the Guide](./place-my-order.html) to see how to set up server side rendering in your app!
-
+_Server side rendering is a feature of [can-ssr](https://github.com/canjs/can-ssr)_
 
 ### Progressive Loading
 
