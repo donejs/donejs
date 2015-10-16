@@ -70,9 +70,10 @@ Any app that is rendered on the server needs a way to notify the server that any
 
 React and other frameworks that support SSR don't provide much in the way of solving this problem. You're left to your own devices to check when all asychronous data requests are done, and delay rendering.
 
-DoneJS provides an easy mechanism for individual components to tell the server when its finished loading.
+DoneJS provides two easy mechanisms for notifying the server when data is finished loading.
 
-Just add one line whenever a component has to wait for a promise to resolve:
+If you're making data requests in JavaScript, just add one line to tell the server to wait for a promise to resolve:
+
 ```
 this.attr( "%root" ).waitFor( promise );
 ```
@@ -91,6 +92,16 @@ can.Component.extend({
     }
   }
 });
+```
+
+If you're using can-connect's [can/tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html) to make data requests in the template, you don't have to do anything. It calls waitFor internally. You just write your template, turn on SSR, and everything works seamlessly:
+
+```
+<message-model get-list="{}">
+  {{#each ./value}}
+    <div>{{text}}</div>
+  {{/each}}
+</message-model>
 ```
 
 <a class="btn" href="https://github.com/canjs/can-ssr"><span>View the Documentation</span></a>
