@@ -194,17 +194,31 @@ To learn more about this, read about the [can.stache](http://canjs.com/docs/can.
 
 ### Worker Thread Rendering
 
-Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM. Your templates first render in a lightweight Virtual DOM on the worker side and changes are diffed and sent to the window side to be applied to the actual DOM.  Only changes are ever applied to the window and the most expensive part of a web application, DOM updates, are separated from application logic, which means your application can continue to run while paints occur.
+Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM. 
+
+#### How it works
+
+Your templates first render in a lightweight Virtual DOM on the worker side and changes are diffed and sent to the window side to be applied to the actual DOM.  Only changes to the DOM are applied to the window. 
+
+The most expensive part of a web application - DOM updates - are separated from application logic, which means your application can continue to run while paints occur.
+
+By default, browsers use only a single thread of execution.
 
 <img src="/static/img/donejs-single-thread.gif" srcset="/static/img/donejs-single-thread.gif 1x, /static/img/donejs-single-thread-2x.gif 2x" alt="A traditional single threaded javascript application">
 _With a single thread only one operation can occur at a time_
 
+This means that performance problems in any area (expensive computations, DOM rendering, processing a large AJAX response, etc) can block the entire application, leaving the browser feeling "frozen".
+
+With worker thread rendering, DOM updates and application logic are run in parallel threads.
+
 <img src="/static/img/donejs-multi-thread.gif" srcset="/static/img/donejs-multi-thread.gif 1x, /static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
 _Using a worker thread application logic can still occur while the DOM is rendered. This can nearly double the number of operations._
 
-Due to this parallelization your application doesn’t have to worry so much about being doing things performantly as long as it is performant enough not to block the worker thread. For your users this means the application will always feel snappy.
+Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads. Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
 
-If you’re already using done-autorender you only need to update one line:
+You spend less time worrying about performance micro-optimizations, and more time [working on epic pool dunk videos](https://www.youtube.com/watch?v=vrgMUi8-7r4&feature=youtu.be&t=19).
+
+Adding worker thread rendering only requires changing one line. Change the main attribute of your page's script tag from:
 ```
 <script src=”node_modules/steal/steal.js” main=”my-app!done-autorender”></script>
 ```
@@ -212,6 +226,12 @@ to
 ```
 <script src=”node_modules/steal/steal.js” main=”my-app!done-worker-autorender”></script>
 ```
+
+At this time, no other framework besides DoneJS, including Angular or React, support worker thread rendering.
+
+<a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
+
+_Worker Thread Rendering is a feature of the [worker-render](https://github.com/canjs/worker-render) project._
 
 ### Deploy to a CDN
 
@@ -361,7 +381,16 @@ DoneJS provides tools for the entire testing lifecycle:
 * **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
 * **A mock layer** - an API to mock out your server APIs so you can test your app in isolation from a server
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-testing.mp4"><source video-src="/static/img/donejs-testing.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-testing.mp4"></video>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-testing.mov" type="video/mp4">
+        <source src="static/img/donejs-testing.mp4" type="video/mp4">
+        <source src="static/img/donejs-testing.ogg" type="video/mp4">
+        <source src="static/img/donejs-testing.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
@@ -461,7 +490,16 @@ DoneJS comes with a documentation tool built in, and it generates multi-versione
 
 You spend less time messing with Documentation generators, and more time [painting your truck camo](https://www.youtube.com/watch?v=DpJ_oPJgyPg).
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-documentation.mp4"><source video-src="/static/img/donejs-documentation.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-documentation.mp4"></video>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-documentation.mov" type="video/mp4">
+        <source src="static/img/donejs-documentation.mp4" type="video/mp4">
+        <source src="static/img/donejs-documentation.ogg" type="video/mp4">
+        <source src="static/img/donejs-documentation.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
@@ -512,7 +550,7 @@ DoneJS provides support for simple integration into popular CI and CD tools, lik
 
 <div class="maintainable wrapper">
   <div class="background video">
-    <video tabindex="0" preload="auto" poster="static/img/continuous-integration0deployment.jpg" class="img-responsive">
+    <video tabindex="0" preload="auto" class="img-responsive">
         <source src="static/img/donejs-continuous-integration0deployment.mov" type="video/mp4">
         <source src="static/img/donejs-continuous-integration0deployment.mp4" type="video/mp4">
         <source src="static/img/donejs-continuous-integration0deployment.ogg" type="video/mp4">
@@ -552,7 +590,17 @@ You can import modules from any package manager in any format without any config
 
 The goal of these features is to transform project workflows, making it easier to share and reuse ideas and mini projects across applications with less hassle.
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-npm-packaging-custom-elements.mp4"><source video-src="/static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-npm-packaging-custom-elements.mp4"></video>
+
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-npm-packaging-custom-elements.mov" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements.ogg" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
@@ -667,7 +715,103 @@ To learn more about the modlet pattern, read this [blog post](http://blog.bitovi
 
 ### Custom HTML Elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules based on custom HTML elements.
+One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules (modlets) based on custom HTML elements.
+
+Consider the following example:
+
+```html
+<order-model findAll="{previousWeek}" [previousWeekData]="{value}"/>
+<order-model findAll="{currentWeek}" [currentWeekData]="{value}"/>
+
+<bit-graph title="Week over week">
+  <bit-series data="{../previousWeekData}" />
+  <bit-series data="{../currentWeekData}" color="Blue"/>
+</bit-graph>
+```
+This code demonstrates:
+
+ 1. An element that can load data
+ 1. Composable widget elements (a graph with a line-series)
+
+If our designer wanted to add another restaurant, all they would need to do is add another `<order-model>` and `<bit-series>` element.
+
+Here’s a working version of the same example in a JSBin.
+
+<a class="jsbin-embed" href="http://jsbin.com/zanadozize/1/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.0"></script>
+
+Just like HTML’s natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.
+
+#### How it works
+
+First, some background on custom elements and why they're useful. Then, some details about creating powerful custom elements in DoneJS.
+
+##### History of custom elements
+
+Before custom HTML elements existed, to add a datepicker to your page, you would:
+
+ 1. Load a datepicker script
+ 1. Add a placeholder HTML element: <div class='datepicker' />
+ 1. Add JavaScript code to instantiate your datepicker: $('.datepicker').datepicker()
+ 1. Gather your stone tipped spears and forage for small animals to feed your family for the night.
+
+With custom HTML elements, to add the same datepicker, you would:
+
+ 1. Load a datepicker script
+ 1. Add the datepicker to your HTML or template: <datepicker value="{date}"/>
+
+[Web Components](http://webcomponents.org/) are a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers. DoneJS uses CanJS' can.Component to provide a modern take on web components.
+
+Components in DoneJS have three basic building blocks:
+
+ * a template
+ * a viewModel object
+ * event handlers
+
+The major advantages of building applications based on these custom HTML elements are:
+
+ 1. **Ease of page composition** - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.
+ 1. **Forced modularity** - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
+ 1. **Reuse** - Custom elements are designed to be reusable across pages and applications.
+
+##### Defining a custom element
+
+One way to define a component is with a [web component](https://github.com/donejs/done-component) style declaration, using a single file with a `.component` extension:
+
+```html
+<can-component tag="hello-world">
+    <style type="less">
+        i {
+            color: red;
+        }
+    </style>
+    <template>
+        {{#if visible}}<b>{{message}}</b>{{else}}<i>Click me</i>{{/if}}
+    </template>
+    <script type="view-model">
+        export default {
+            visible: true,
+            message: "Hello There!"
+        };
+    </script>
+    <script type="events">
+        export default {
+            click: function(){
+                this.viewModel.attr("visible", !this.viewModel.attr("visible"))
+            }
+        };
+    </script>
+</can-component>
+```
+
+Another way to organize a custom element is a [modlet](#section_Modlets) style file structure: a folder with the element broken into several independent pieces. In this pattern, the custom element's ViewModel, styles, template, event handlers, demo page, tests, and test page are all located in separate files.
+
+DoneJS [Generators](#section_Generators) will create both of these types of custom elements so you can get started quickly.
+
+##### Data + visual elements = powerful templates
+
+The beauty and power of custom HTML elements is most apparent when visual widgets (like graphing) is combined with elements that express data. 
+
+Back to our original example:
 
 ```html
 <order-model findAll="{previousWeek}" [previousWeekData]="{value}"/>
@@ -679,36 +823,53 @@ One of the most important concepts in DoneJS is splitting up your application fu
 </bit-graph>
 ```
 
-The functionality and content for the custom elements comes from identifying them as the tag for a component definition:
+This template combines a request for data with an element that expresses it. It's immediately obvious how you would add or remove features from this, allowing for quick changes and easy prototyping. Without custom elements, the same changes would require more difficult code changes and wiring those changes up with widget elements that display the data.
+
+Data custom elements are part of DoneJS via can-connect's [can/tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html).
+
+##### Custom element libraries
+
+Custom elements are designed to be easily shareable across your organization. DoneJS provides support for simple [NPM import and export](#section_NPMPackages) and creating [documentation](#section=section_Documentation) for elements. Together with custom element support, these features make it easier than ever to create reusable bits of functionality and share them.
+
+Some open source examples of DoneJS custom elements:
+ * `<bit-c3>`: [website](http://bitovi-components.github.io/bit-c3/docs/index.html)
+ * `<bit-tabs>`: [website](https://github.com/bitovi-components/bit-tabs) components
+ * `<bit-autocomplete>`: [website](http://bitovi-components.github.io/bit-autocomplete/)
+
+Check out [their source](https://github.com/bitovi-components/bit-tabs) for good examples of shareable, documented, and tested custom elements.
+
+##### In-template dependency declarations
+
+[can-import](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements and other modules straight from a template file like:
+
 ```
-var Iheartdonejs = can.Component.extend({
-  tag: 'i-heart-donejs',
-  viewModel: can.Map.extend({
-    define: {
-      message: {
-        value: 'I <3 DoneJS'
-      },
-      messages: {
-        value: [
-          'I <3 DoneJS',
-          'DoneJS FTW',
-          'Get it done, use DoneJS',
-          'More time to pet the kitty!'
-        ]
-      }
-    },
-    changeMessage: function () {
-      var msgs = this.attr( "messages" );
-      this.attr( "message", msgs[ ~~( Math.random() * msgs.length ) ] );
-    }
-  }),
-  template: "<div can-click='{changeMessage}'>{{message}}</div>"
-});
+<can-import from="components/my_tabs"/>
+<can-import from="helpers/prettyDate"/>
+<my-tabs>
+  <my-panel title="{{prettyDate start}}">...</my-panel>
+  <my-panel title="{{prettyDate end}}">...</my-panel>
+</my-tabs>
 ```
 
-DoneJS [Generators](#section_Generators) will help you get started on your components with just a few keystrokes!
+The `<can-import>` element also plays a key role in [Progressive Loading](#section=section_ProgressiveLoading). Simply by wrapping a section in a closed can-import, it signals to the build that the enclosed section's dependencies should be progressively loaded.
 
-Plus, if you've built something awesome, you can publish it to NPM and [use your component in other projects](#section_NPMPackages)!
+```
+{{#eq location 'home'}}
+<can-import from="components/home">
+  <my-home/>
+</can-import>
+{{/eq}}
+{{#eq location 'away'}}
+<can-import from="components/chat">
+  <my-chat/>
+</can-import>
+{{/eq}}
+```
+
+<a class="btn" href="http://canjs.com/docs/can.Component.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Creatingcustomelements"><span>View the Guide</span></a>
+
+_Custom HTML elements are a feature of [CanJS](http://canjs.com/)_
 
 ### MVVM Architecture
 
@@ -899,7 +1060,16 @@ The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/). To le
 
 Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-live-reload.mp4"><source video-src="/static/img/donejs-live-reload.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-live-reload.mp4"></video>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-live-reload.mov" type="video/mp4">
+        <source src="static/img/donejs-live-reload.mp4" type="video/mp4">
+        <source src="static/img/donejs-live-reload.ogg" type="video/mp4">
+        <source src="static/img/donejs-live-reload.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
