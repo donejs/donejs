@@ -388,6 +388,19 @@ body:not(.donejs) {
 		iframe {
 			max-width: 100%;
 		}
+		.mobile-graph {
+			height: 455px;
+			border: 20px solid #3B83A3;
+			img {
+				margin:0 !important; //shame
+			}
+			@media (max-width: @screen-xs-max){
+				border-top: 20px solid #3B83A3;
+				border-bottom: 20px solid #3B83A3;
+				border-left:0;
+				border-right:0;
+			}
+		}
 	}
 	@media(max-width: @screen-sm-max) {
 		.scroll-spy-title {

@@ -14,7 +14,7 @@ DoneJS is configured for maximum performance right out of the box.
 ### Server Side Rendered
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
-and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript), or [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9). 
+and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript), or [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9).
 
 Server side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
 
@@ -22,12 +22,11 @@ Other server side rendering systems require additional code and infrastructure t
 
 #### Page load performance
 
-Server side rendered SPAs can load pre-rendered HTML immediately. It can also cache HTML and serve it from a CDN. 
+Server side rendered SPAs can load pre-rendered HTML immediately. It can also cache HTML and serve it from a CDN.
 
-Traditional SPAs must load the JS, execute, request data, and render before the user sees content. 
+Traditional SPAs must load the JS, execute, request data, and render before the user sees content.
 
-<div class="performance wrapper col-xs-12">
-  <a id="performance" style="vertical-align: top;"></a>
+
   <div class="mobile-graph">
     <div class="graph-logos">
       <img src="/static/img/donejs-mobile-guide-logos.png" srcset="/static/img/donejs-mobile-guide-logos.png 1x, /static/img/donejs-mobile-guide-logos-2x.png 2x">
@@ -38,7 +37,7 @@ Traditional SPAs must load the JS, execute, request data, and render before the 
       </div>
     </div>
   </div>
-</div>
+
 
 #### SEO
 
@@ -58,7 +57,7 @@ DoneJS implements SSR with a single context virtual DOM.
 
 When using DoneJS SSR, the same app that runs on the client is loaded in Node. When a request comes in:
  1. The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application, which means the initial response is very fast.
- 1. The app renders content the same way it would in the browser, but with a mocked out virtual DOM, which is much faster than a real DOM. 
+ 1. The app renders content the same way it would in the browser, but with a mocked out virtual DOM, which is much faster than a real DOM.
  1. When rendering is complete, the virtual DOM renders the string representation of the DOM, which is sent back to the client.
 
 Other SSR systems use a headless browser on the server rather than a virtual DOM. These systems are much slower and require much more intensive server resources. A new headless browser instance must be created to handle each incoming request, and headless browsers use a real DOM.
@@ -471,11 +470,11 @@ You write comments above the module, method, or object that you want to document
 /**
  * @module {function} utils/add
  * @parent utils
- * 
+ *
  * The module's description is the first paragraph.
- * 
+ *
  * The body of the module's documentation.
- * 
+ *
  * @param {Number} first This param's description.
  * @param {Number} second This param's description.
  * @return {Number} This return value's description.
@@ -526,7 +525,7 @@ DoneJS provides support for simple integration into popular CI and CD tools, lik
 <img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
 
-The trickiest aspect of setting up CI and CD systems is creating automated build, test, and deployment scripts. Every DoneJS app comes with a build, test, and deployment one-liner: `donejs build`, `donejs test`, and `donejs deploy`. 
+The trickiest aspect of setting up CI and CD systems is creating automated build, test, and deployment scripts. Every DoneJS app comes with a build, test, and deployment one-liner: `donejs build`, `donejs test`, and `donejs deploy`.
 
 Integrating with the tools that automatically runs these scripts is quite simple. For instance, setting up Travis CI involves signing up and adding a `.travis.yml` file to the project:
 
@@ -546,7 +545,7 @@ The biggest hurdle to getting projects using CI and CD is proper tests and autom
 
 ### NPM Packages
 
-DoneJS makes it easier than ever to share and consume modules via package managers like NPM and Bower. 
+DoneJS makes it easier than ever to share and consume modules via package managers like NPM and Bower.
 
 You can import modules from any package manager in any format without any configuration. And you can export modules to any format.
 
@@ -595,7 +594,7 @@ You can import that package in any format: CommonJS, AMD, or ES6 module format.
 
 ##### Export in any format
 
-DoneJS supports exporting a module in any format: CommonJS, AMD, or ES6 module format, or script and link tags. 
+DoneJS supports exporting a module in any format: CommonJS, AMD, or ES6 module format, or script and link tags.
 
 The advantage of this is that you can publish your module and anyone writing a JavaScript application can use it, regardless of which script loader they are using (or if they aren't using a script loader).
 
