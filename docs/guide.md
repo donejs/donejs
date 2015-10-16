@@ -20,6 +20,8 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 ## Setup
 
+*Before getting started you might want to check out the [OperatingSystems] guide to make sure you have all of the prerequisites.*
+
 In this section, we will install DoneJS and generate a new application. To get started, let's install the DoneJS command line utility globally:
 
 ```
