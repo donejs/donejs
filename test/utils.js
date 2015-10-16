@@ -27,13 +27,24 @@ describe('DoneJS CLI tests', function() {
         .fail(fail);
     });
 
-    it('add', function (done) {
-      utils.add(path.join(process.cwd(), 'node_modules'), 'test-plugin')
-       .then(function () {
-         assert.equal(global.donejsTestPluginLoaded, true, 'donejs-test-plugin module is installed and executed');
-         done();
-       })
-       .fail(fail);
+    describe('add', function() {
+      it('default export', function(done) {
+        utils.add(path.join(process.cwd(), 'node_modules'), 'test-plugin')
+         .then(function () {
+           assert.equal(global.donejsTestPluginLoaded, 'default', 'donejs-test-plugin module is installed and default export is executed');
+           done();
+         })
+         .fail(fail);
+      });
+
+      it('async export', function(done) {
+        utils.add(path.join(process.cwd(), 'node_modules'), 'test-plugin', ['async'])
+         .then(function () {
+           assert.equal(global.donejsTestPluginLoaded, 'async', 'donejs-test-plugin module is installed and async export is executed');
+           done();
+         })
+         .fail(fail);
+      });
     });
 
     it('runScript and runCommand', function(done) {
