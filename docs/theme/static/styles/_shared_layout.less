@@ -393,6 +393,22 @@ body:not(.donejs) {
 		iframe {
 			max-width: 100%;
 		}
+		.mobile-graph {
+			height: 465px;
+			border: 20px solid #3B83A3;
+			img {
+				margin:0 !important; //shame
+			}
+			.graph-timeline {
+				width: 1700px;
+			}
+			@media (max-width: @screen-xs-max){
+				border-top: 20px solid #3B83A3;
+				border-bottom: 20px solid #3B83A3;
+				border-left:0;
+				border-right:0;
+			}
+		}
 		.maintainable.wrapper .background {
 			border: 0;
 			background: none;
@@ -400,7 +416,6 @@ body:not(.donejs) {
 				top: 45%;
 			}
 		}
-
 	}
 	@media(max-width: @screen-sm-max) {
 		.scroll-spy-title {
