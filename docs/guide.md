@@ -20,7 +20,7 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 ## Setup
 
-*Before getting started you might want to check out the [OperatingSystems] guide to make sure you have all of the prerequisites.*
+*Before getting started you might want to check out the [SettingUp] guide to make sure you have all of the prerequisites.*
 
 In this section, we will install DoneJS and generate a new application. To get started, let's install the DoneJS command line utility globally:
 
@@ -648,13 +648,9 @@ In the last part of this guide we will make mobile and desktop builds of our cha
 
 ### Cordova
 
-To build the application as a Cordova based mobile application you need to have each platform's SDK installed. XCode can be downloaded via the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator.
+To build the application as a Cordova based mobile application you need to have each platform's SDK installed. We'll be building an iOS app if you are a Mac user; Windows users follow the Android instructions
 
-We'll also need to install the `ios-sim` command line utility in order to launch the simulator:
-
-```
-npm install ios-sim -g
-```
+XCode can be downloaded via the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator. For Windows users will will install the [Android Studio](https://developer.android.com/sdk/index.html) which gives us all of the tools we need.
 
 Now we can install the DoneJS Cordova tools with
 
@@ -677,7 +673,7 @@ var cordovaOptions = {
   buildDir: "./build/cordova",
   id: "com.donejs.chat",
   name: "DoneJS chat",
-  platforms: ["ios"],
+  platforms: ["<platform>"],
   plugins: ["cordova-plugin-transport-security"],
   index: __dirname + "/production.html",
   glob: [
@@ -690,9 +686,11 @@ var stealCordova = require("steal-cordova")(cordovaOptions);
 var buildCordova = process.argv.indexOf("cordova") > 0;
 
 if(buildCordova) {
-  buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
+  buildPromise.then(stealCordova.build).then(stealCordova.<platform>.emulate);
 }
 ```
+
+Replace `<platform>` with the platform you are building for; "ios" if on Mac and "android" if on Windows (or another OS).
 
 To run the Cordova build and launch the simulator we can now run
 
@@ -700,7 +698,7 @@ To run the Cordova build and launch the simulator we can now run
 donejs build cordova
 ```
 
-If everything went well we should see the iOS simulator running our application.
+If everything went well we should see the emulator running our application. If using Windows you'll get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then redo the build; this will only happen the first time you build for Cordova.
 
 ### NW.js
 
@@ -755,7 +753,7 @@ if(buildCordova) {
 
 var nwOptions = {
   buildDir: "./build",
-  platforms: ["osx"],
+  platforms: ["<platform>"],
   files: [
     "package.json",
     "production.html",
@@ -776,6 +774,8 @@ if(buildNW) {
 }
 ```
 
+Like before, replace `<platform>` with "osx" if on a Mac and "windows" if on Windows.
+
 Now we can run the build with
 
 ```
@@ -787,6 +787,12 @@ The OS X application can be opened with
 ```
 cd build/donejs-chat/osx64
 open donejs-chat.app
+```
+
+The Windows application can be opened with
+
+```
+.\build\donejs-chat\win64\donejs-chat.exe
 ```
 
 ## What's next?
