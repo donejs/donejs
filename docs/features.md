@@ -321,7 +321,16 @@ DoneJS provides tools for the entire testing lifecycle:
 * **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
 * **A mock layer** - an API to mock out your server APIs so you can test your app in isolation from a server
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-testing.mp4"><source video-src="/static/img/donejs-testing.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-testing.mp4"></video>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-testing.mov" type="video/mp4">
+        <source src="static/img/donejs-testing.mp4" type="video/mp4">
+        <source src="static/img/donejs-testing.ogg" type="video/mp4">
+        <source src="static/img/donejs-testing.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
@@ -421,7 +430,16 @@ DoneJS comes with a documentation tool built in, and it generates multi-versione
 
 You spend less time messing with Documentation generators, and more time [painting your truck camo](https://www.youtube.com/watch?v=DpJ_oPJgyPg).
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-documentation.mp4"><source video-src="/static/img/donejs-documentation.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-documentation.mp4"></video>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-documentation.mov" type="video/mp4">
+        <source src="static/img/donejs-documentation.mp4" type="video/mp4">
+        <source src="static/img/donejs-documentation.ogg" type="video/mp4">
+        <source src="static/img/donejs-documentation.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
@@ -472,7 +490,7 @@ DoneJS provides support for simple integration into popular CI and CD tools, lik
 
 <div class="maintainable wrapper">
   <div class="background video">
-    <video tabindex="0" preload="auto" poster="static/img/continuous-integration0deployment.jpg" class="img-responsive">
+    <video tabindex="0" preload="auto" class="img-responsive">
         <source src="static/img/donejs-continuous-integration0deployment.mov" type="video/mp4">
         <source src="static/img/donejs-continuous-integration0deployment.mp4" type="video/mp4">
         <source src="static/img/donejs-continuous-integration0deployment.ogg" type="video/mp4">
@@ -512,7 +530,17 @@ You can import modules from any package manager in any format without any config
 
 The goal of these features is to transform project workflows, making it easier to share and reuse ideas and mini projects across applications with less hassle.
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-npm-packaging-custom-elements.mp4"><source video-src="/static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-npm-packaging-custom-elements.mp4"></video>
+
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-npm-packaging-custom-elements.mov" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements.ogg" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
@@ -681,15 +709,15 @@ Components in DoneJS have three basic building blocks:
 
 The major advantages of building applications based on these custom HTML elements are:
 
- 1. *Ease of page composition* - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.
- 1. *Forced modularity* - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
- 1. *Reuse* - Custom elements are designed to be reusable across pages and applications.
+ 1. **Ease of page composition** - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.
+ 1. **Forced modularity** - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
+ 1. **Reuse** - Custom elements are designed to be reusable across pages and applications.
 
 ##### Single file components
 
 One way to define a compoonent is with a [web component](https://github.com/donejs/done-component) style declaration, using a file with a `.component` extension:
 
-```
+```html
 <can-component tag="hello-world">
     <style type="less">
         i {
@@ -917,7 +945,16 @@ The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/). To le
 
 Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
 
-<video name="media" class="animated-gif" style="width: 100%;" autoplay="" loop="" src="/static/img/donejs-live-reload.mp4"><source video-src="/static/img/donejs-live-reload.mp4" type="video/mp4" class="source-mp4" src="/static/img/donejs-live-reload.mp4"></video>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="auto" class="img-responsive">
+        <source src="static/img/donejs-live-reload.mov" type="video/mp4">
+        <source src="static/img/donejs-live-reload.mp4" type="video/mp4">
+        <source src="static/img/donejs-live-reload.ogg" type="video/mp4">
+        <source src="static/img/donejs-live-reload.webm" type="video/webm">
+    </video>
+  </div>
+</div>
 
 #### How it works
 
