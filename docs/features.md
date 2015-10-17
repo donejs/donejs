@@ -200,7 +200,10 @@ Of these four approaches, DoneJS knows about the change the quickest, and update
 
 With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
-To learn more about this, read about the [can.stache](http://canjs.com/docs/can.stache.html) view engine and [can.Map](http://canjs.com/docs/can.Map.html) observable objects.
+<a class="btn" href="http://canjs.com/docs/can.stache.html"><span>can.stache Documentation</span></a>
+<a class="btn" href="http://canjs.com/docs/can.Map.html"><span>can.Map Documentation</span></a>
+
+_Minimal DOM updates is a feature of [CanJS](http://canjs.com/)_
 
 ### Worker Thread Rendering
 
@@ -272,7 +275,10 @@ That's it. Now when you run your server in production mode, all static assets (C
 
 Even better, you can set up [continuous deployment](./place-my-order.html#section=section_ContinuousDeployment), so that TravisCI or other tools will deploy your code, including pushing out your latest static files to the CDN, automatically.
 
-For more information, read the [deployment utility docs](https://github.com/donejs/deploy), follow the [deployment section](./Guide.html#section=section_Deploy) in the quick start guide, or the [CDN configuration](./place-my-order.html#section=section_DeploytoaCDN) section in the in depth guide.
+<a class="btn" href="https://github.com/donejs/deploy"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Deploy"><span>View the Guide</span></a>
+
+_CDN deployment is a feature of the [donejs/deploy](https://github.com/donejs/deploy) project._
 
 ## Usability features
 
@@ -299,7 +305,10 @@ donejs add nw
 donejs build
 ```
 
-[Follow the guide](./Guide.html#section_Desktopandmobileapps) to see an example in action.
+<a class="btn" href="https://github.com/stealjs/steal-cordova"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section_Desktopandmobileapps"><span>View the Guide</span></a>
+
+_Cordova and nw.js integration are features of the [steal-cordova](https://github.com/stealjs/steal-cordova) and [steal-nw](https://github.com/stealjs/steal-nw) projects._
 
 ### Supports All Browsers, Even IE8
 
@@ -307,7 +316,7 @@ DoneJS applications support Internet Explorer 8 without any additional effort. Y
 
 Many people don't care about this because IE8 is on its way out, which is a very good thing!
 
-But its not quite dead yet, at still [over 3%](http://gs.statcounter.com/#browser_version_partially_combined-ww-monthly-201508-201509-bar) of the browser market in September 2015. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats.
+But it's [not quite dead yet](https://youtu.be/grbSQ6O6kbs?t=61). For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats.
 
 And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS makes it easy to write one app that runs everywhere.
 
@@ -339,6 +348,11 @@ socket.on('messages removed',
 
 [Follow the guide](./Guide.html#section=section_Real_timeconnection) to see an example in action. View the can-connect real-time documentation [here](http://connect.canjs.com/doc/can-connect%7Creal-time.html).
 
+<a class="btn" href="http://connect.canjs.com/doc/can-connect%7Creal-time.html"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Real_timeconnection"><span>View the Guide</span></a>
+
+_Real time connections is a feature of the [can-connect](http://connect.canjs.com) project._
+
 ### Pretty URLs with Pushstate
 
 DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user in a single page.
@@ -369,7 +383,10 @@ This architecture simplifies routes so that they can be managed entirely in simp
 {{/switch}}
 ```
 
-To learn more about routing and setting up Pretty URLs visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html) or follow along in [the guide](./place-my-order.html#section=section_Settinguprouting).
+<a class="btn" href="http://canjs.com/2.3-pre/guides/AppStateAndRouting.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Settinguprouting"><span>View the Guide</span></a>
+
+_Pretty URLs and routing are features of the [CanJS](http://canjs.com/) project._
 
 ## Maintainable features
 
@@ -701,9 +718,10 @@ DoneJS applications are actually able to import or export any module type: ES6, 
 
 A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. The build step will handle this conversion so your production code will run native ES5. You can even run your [ES6 application in IE8](#section=section_SupportsAllBrowsers_EvenIE8)!
 
-To learn more about ES6 and other module support, read the StealJS [ES6 docs](http://stealjs.com/docs/syntax.es6.html
-), the project [exporting docs](http://stealjs.com/docs/StealJS.project-exporting.html
-), and check out the [stealjs/transpile](https://github.com/stealjs/transpile) project.
+<a class="btn" href="http://stealjs.com/docs/syntax.es6.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html"><span>View the Guide</span></a>
+
+_Pretty URLs and routing are features of the [stealjs/transpile](https://github.com/stealjs/transpile) project._
 
 ### Modlets
 
@@ -722,6 +740,11 @@ Organization by module - or modlets - make large applications easier to maintain
 DoneJS generators create modlets to get you started quickly. Creating isolated test and demo pages for your modlet is simple and doesn't require any extra configuration.
 
 To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/), watch [this video](https://youtu.be/eIfUsPdKF4A?t=97), and [follow in the guide](http://donejs.com/Guide.html#section=section_Generatecustomelements) where generators are used to create modlets.
+
+<a class="btn" href="https://youtu.be/eIfUsPdKF4A?t=97"><span>View the Video</span></a>
+<a class="btn" href="/Guide.html#section=section_Generatecustomelements"><span>View the Guide</span></a>
+
+_Modlets are a feature of DoneJS [generators](#section=section_Generators)._
 
 ### Custom HTML Elements
 
@@ -1057,7 +1080,7 @@ DoneJS models are built with intelligent set logic that enables [real time](#sec
 
 ##### More information
 
-The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/). To learn more:
+To learn more:
 
  * Models - read about [can.connect](http://connect.canjs.com/)
  * Computed properties - read about [can.compute](http://canjs.com/docs/can.compute.html)
@@ -1065,6 +1088,8 @@ The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/). To le
  * ViewModels - read about [can.component](http://canjs.com/docs/can.Component.html), [can.Component.viewModel](http://canjs.com/docs/can.Component.prototype.viewModel.html), and [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html)
  * Views - read about [can.stache](http://canjs.com/docs/can.stache.html)
  * [Create a unit tested ViewModel](./place-my-order.html#section=section_Creatingaunit_testedviewmodel) in the in depth guide
+
+_The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/)._
 
 ### Live Reload
 
@@ -1094,6 +1119,12 @@ donejs develop
 ```
 
 To learn more about live reload, read the [StealJS docs](http://stealjs.com/docs/steal.live-reload.html).
+
+
+<a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
+
+_Live reload is a feature of [StealJS](http://stealjs.com/)._
+
 
 ### Generators
 
