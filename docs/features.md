@@ -111,7 +111,7 @@ _Server side rendering is a feature of [can-ssr](https://github.com/canjs/can-ss
 
 ### Progressive Loading
 
-When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These megabytes of extra weight slow down page load performance, especially on mobile devices.
+When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These kilobytes of extra weight slow down page load performance, especially on mobile devices.
 
 DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load *fast*.
 
@@ -126,19 +126,25 @@ Other build tools require you to manually configure bundles, which doesn't scale
 In a DoneJS application, you simply mark a section to be progressively loaded by wrapping it in your template with `<can-import>`.
 
 ```
-{{#eq location 'home'}}
+{{#eq page 'home'}}
 <can-import from="components/home">
-  <my-home/>
+  <home-page/>
 </can-import>
 {{/eq}}
-{{#eq location 'away'}}
+{{#eq page 'chat'}}
 <can-import from="components/chat">
-  <my-chat/>
+  <chat-page/>
 </can-import>
 {{/eq}}
 ```
 
-Then you run the build. A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size.
+Then you run the build. 
+
+```
+donejs build
+```
+
+A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size.
 
 That's it! No need for additional configuration in your JavaScript.
 
@@ -286,14 +292,14 @@ DoneJS is used to make beautiful, real-time user interfaces that can be exported
 
 ### iOS, Android, and Desktop Builds
 
-Write your application once, then run it natively on every device and operating system. You can make iOS, Android, and desktop builds of your DoneJS application with no extra effort, expanding your potential audience without having to build separate applications.
+Write your application once, then run it natively on every device and operating system. You can make iOS, Android, and desktop builds of your DoneJS application with no extra effort.
 
 <img src="./static/img/desktop-mobile.gif" />
 _Our DoneJS Chat App running as a OS X desktop app and inside an iOS emulator._
 
 #### How it works
 
-For iOS and Android builds, DoneJS integrates with [Apache Cordova](https://cordova.apache.org/) to generate an "app" version that is ready to be uploaded to the App Store/Google Play.
+For iOS and Android builds, DoneJS integrates with [Apache Cordova](https://cordova.apache.org/) to generate a mobile app that is ready to be uploaded to Apple's App Store or Google Play.
 
 For native desktop applications, DoneJS integrates with [NW.js](https://github.com/nwjs/nw.js) to create an native OSX, Windows, or Linux application.
 
@@ -304,6 +310,8 @@ donejs add cordova
 donejs add nw
 donejs build
 ```
+
+With these simple integrations, you can expand your potential audience without having to build separate applications.
 
 <a class="btn" href="https://github.com/stealjs/steal-cordova"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html#section_Desktopandmobileapps"><span>View the Guide</span></a>
@@ -324,13 +332,17 @@ And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS 
 
 DoneJS is designed to make it easy to build applications that connects users in real-time.
 
-[Socket.io](https://socket.io) provides the basics to add real-time capabilities to any JavaScript application, but the challenge of integrating real-time updates into your code remains. DoneJS makes weaving Socket.io backends into your UI simple and automatic.
+[Socket.io](https://socket.io) provides the basics to add real-time capabilities to any JavaScript application, but the challenge of integrating real-time updates into your code remains. 
+
+When new data arrives, how do you know what data structures to add it to? And where to re-render? Code must be written to send socket.io data across your application, but that code becomes aware of too much, and therefore is brittle and hard to maintain.
+
+DoneJS makes weaving Socket.io backends into your UI simple and automatic.
 
 #### How it works
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/w4mp4oSb6BQ" frameborder="0" allowfullscreen></iframe>
 
-DoneJS' model layer uses set logic to maintain lists of data represented by certain rules, like a list of todos with `{'owner_id': 2}`. These lists are rendered to the UI via data bound templates.
+DoneJS' model layer uses set logic to maintain lists of data represented by JSON properties, like a list of todos with `{'ownerId': 2}`. These lists are rendered to the UI via data bound templates.
 
 When server-side updates are sent to the client, items are automatically removed or added to any lists they belong to. They also automatically show up in the UI because of the data bindings.
 
@@ -372,13 +384,14 @@ This architecture simplifies routes so that they can be managed entirely in simp
 ```
 {{#switch page}}
   {{#case "home"}}
-      <pmo-home></pmo-home>
+      <myapp-home></myapp-home>
   {{/case}}
-  {{#case "restaurants"}}
-      <pmo-restaurant-list></pmo-restaurant-list>
-  {{/case}}
-  {{#case "order-history"}}
-      <pmo-order-history></pmo-order-history>
+  {{#case "users"}}
+    {{#if slug}}
+      <myapp-user-detail user-id="{slug}"></myapp-user-detail>
+    {{else}}
+      <myapp-users></myapp-users>
+    {{/if}}
   {{/case}}
 {{/switch}}
 ```
@@ -716,7 +729,7 @@ export function subtract(a, b) {
 
 DoneJS applications are actually able to import or export any module type: ES6, AMD and CommonJS. This means you can slowly phase in ES6, while still using your old code. You can also use any of the many exciting [ES6 language features](https://github.com/lukehoban/es6features).
 
-A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. The build step will handle this conversion so your production code will run native ES5. You can even run your [ES6 application in IE8](#section=section_SupportsAllBrowsers_EvenIE8)!
+A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. During development, the compiler runs in the browser, so changes are happening live without a build step. During the build, your code is compiled to ES5, so your production code will run native in every browser. You can even run your [ES6 application in IE8](#section=section_SupportsAllBrowsers_EvenIE8)!
 
 <a class="btn" href="http://stealjs.com/docs/syntax.es6.html"><span>View the Documentation</span></a>
 <a class="btn" href="/place-my-order.html"><span>View the Guide</span></a>
@@ -725,7 +738,7 @@ _Pretty URLs and routing are features of the [stealjs/transpile](https://github.
 
 ### Modlets
 
-The secret to building large apps is never build large apps. Break up your application into small pieces. Then, assemble.
+The secret to building large apps is to never build large apps. Break up your application into small pieces. Then, assemble.
 
 DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
 
@@ -735,11 +748,15 @@ Large apps have a lot of files. There are two ways to organize them: by type or 
 
 <img src="/static/img/donejs-modlet-diagram.png" srcset="/static/img/donejs-modlet-diagram.png 1x, /static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" />
 
-Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns.
+Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. The benefits include:
 
-DoneJS generators create modlets to get you started quickly. Creating isolated test and demo pages for your modlet is simple and doesn't require any extra configuration.
+ * Each modlet contains its own demo page and its own test page. Getting a demo page running forces separation of concerns and isolated modules - hallmarks of good design. A standalone demo and test page makes it easy to work on pieces of your application in isolation.
+ * Developers are more likely to update tests and documentation if they are sitting right next to the module they are editing. The test is not hidden in a `tests` folder that is more easily ignored.
+ * You can develop the application without having to load the entire application and all of its tests on every change.
 
-To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/), watch [this video](https://youtu.be/eIfUsPdKF4A?t=97), and [follow in the guide](http://donejs.com/Guide.html#section=section_Generatecustomelements) where generators are used to create modlets.
+An example modlet from the [in depth guide](/place-my-order.html) is the [order/new](https://github.com/donejs/place-my-order/tree/master/src/restaurant/list) component. It has its own [demo page](http://www.place-my-order.com/src/order/new/demo.html) and [test page](http://www.place-my-order.com/src/order/new/test.html).
+
+DoneJS generators create modlets to get you started quickly. To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/).
 
 <a class="btn" href="https://youtu.be/eIfUsPdKF4A?t=97"><span>View the Video</span></a>
 <a class="btn" href="/Guide.html#section=section_Generatecustomelements"><span>View the Guide</span></a>
@@ -1108,18 +1125,15 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 
 #### How it works
 
-Other live reload servers watch for file changes and force your browser window to refresh.
+Other live reload servers watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time. 
 
-DoneJS live reload doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time. It is more like hot swapping than traditional live reload. The result is a blazing fast development experience.
+The correct terminology is actually [hot swapping](https://en.wikipedia.org/wiki/Hot_swapping), not live reload. Regardless of what it's called, the result is a blazing fast development experience.
 
 There is no configuration needed to enable this feature. Just start the dev server and begin:
 
 ```
 donejs develop
 ```
-
-To learn more about live reload, read the [StealJS docs](http://stealjs.com/docs/steal.live-reload.html).
-
 
 <a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
 
