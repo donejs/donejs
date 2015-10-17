@@ -189,9 +189,9 @@ rows[0].attr('name', 'changed'); // change the first row's name
 
 In DoneJS, which uses the [can.stache](http://canjs.com/docs/can.stache.html) view engine, that would:
 
- 1. Synchronously trigger a `change` event (because of the [can.Map](http://canjs.com/docs/can.Map.html) synchronous object observe API)
- 1. The `change` would invoke a data binding event handler in the template layer
- 1. The handler would immediately result in the following code being run:
+ 1. Trigger an event (because of the [can.Map](http://canjs.com/docs/can.Map.html) object observe API)
+ 1. The event invokes a data binding event handler in the template layer
+ 1. The handler immediately results in the following code being run:
 ```
 textNode.nodeValue = 'changed';
 ```
@@ -413,13 +413,13 @@ DoneJS provides tools for the entire testing lifecycle:
 
 * **Generators** - create boilerplate tests to get started quickly
 * **Unit testing** - assertion libraries to test your module interfaces
-* **Functional testing** - an API for scripting the browser, simulating user actions, and testing your UI modules
+* **Functional testing** - scripting the browser, simulating user actions, and testing your UI modules
 * **User action event simulation** - accurate event simulation for clicks, types, drags, and other user actions
 * **A command line test runner** - invoke the same tests from the CLI
 * **A browser launcher** - launch several browsers and target your tests against them
-* **A reporting tool** - report results to the CLI or other forms, including coverage
+* **A reporting tool** - report results, including code coverage, to the CLI, in various formats
 * **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
-* **A mock layer** - an API to mock out your server APIs so you can test your app in isolation from a server
+* **A mock layer** - mock out your server APIs so you can test your app in isolation from a server
 
 <div class="maintainable wrapper">
   <div class="background video">
