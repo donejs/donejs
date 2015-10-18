@@ -272,12 +272,43 @@ _With a CDN requests can be fulfilled much quicker. Users are served content fro
 
 It's widely known that CDNs offer the best performance for static assets, but most apps don't use them, mainly because its annoying: annoying to automate, configure, and integrate with your build process.
 
-DoneJS comes with integrations with S3 and Divshot (popular CDN services) that make configuring and deploying to a CDN dirt simple.
+DoneJS comes with integrations with [S3](https://aws.amazon.com/s3/) and [Divshot](https://divshot.com/) (popular CDN services) that make configuring and deploying to a CDN dirt simple.
 
  1. You sign up for S3 or Divshot.
- 1. You paste a few lines of config into your package.json that point to the right CDN service.
- 1. You paste a few more lines that tell your production server to serve static assets from the CDN.
- 1. You run `donejs deploy`.
+ 2. You paste a few lines of config into your `package.json` that point to the right CDN service.
+ 
+   ```
+    "donejs": {
+      "deploy": {
+        "root": "dist",
+        "services": {
+          "production": {
+            "type": "divshot",
+            "config": {
+              "name": "place-my-order",
+              "headers": {
+                "/**": {
+                  "Access-Control-Allow-Origin": "*"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+   ```
+ 3. You paste a few more lines that tell your production server to serve static assets from the CDN.
+
+   ```
+   {
+     "system": {
+       "envs": {
+         "production": {
+           "baseURL": "https://place-my-order.divshot.io/"
+         }
+       },
+   ```
+ 4. You run `donejs deploy`.
 
 That's it. Now when you run your server in production mode, all static assets (CSS, JS, images, etc) are served from the CDN.
 
