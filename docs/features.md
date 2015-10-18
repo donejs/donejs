@@ -1175,7 +1175,7 @@ _Live reload is a feature of [StealJS](http://stealjs.com/)._
 
 ### Generators
 
-DoneJS generators help you kickstart new projects and components. They'll save you time by eliminating boilerplate and scaffolding a working project, component, or module.
+DoneJS generators help you kickstart new projects and components. They'll save you time, eliminating boilerplate by scaffolding a working project, component, or module.
 
 Generator templates set up many of the best practices and features discussed in the rest of this page, without you even realizing it.
 
@@ -1187,7 +1187,7 @@ The DoneJS generator uses Yeoman to bootstrap your application, component, or mo
 
 There are four generators by default (and you can easily create your own).
 
-##### 1. Project generator
+##### Project generator
 
 From the command line, run:
 
@@ -1220,11 +1220,11 @@ You'll be prompted for a project name, source folder, and other setup informatio
 ├── node_modules/
 ```
 
-You're now a command away from running application wide tests, generating documentation, running a build, and deploying. Start your server and open your browser and you'll see a functioning hello world page.
+You're now a command away from running application wide tests, generating documentation, and running a build. Start your server with `donejs develop`, open your browser, and you'll see a functioning, server side rendered hello world page.
 
-##### 2. Modlet component generator
+##### Modlet component generator
 
-To create a component organized with the modlet file organization pattern:
+To create a [component](http://canjs.com/docs/can.Component.html) organized with the [modlet](#section_Modlets) file organization pattern:
 
 ```
 donejs generate component <folder-path> <component-name>
@@ -1245,9 +1245,9 @@ restaurant/
 |   ├── test.html
 ```
 
-This folder contains everything the component needs: a working demo page, a basic test, and documentation placeholder markdown file.
+This folder contains everything a properly maintained component needs: a working demo page, a basic test, and documentation placeholder markdown file.
 
-##### 3. Standalone component generator
+##### Simple component generator
 
 For simple, standalone components:
 
@@ -1257,9 +1257,9 @@ donejs generate component <file-name>.component <component-name>
 
 Which will generate a working component in a single file.
 
-##### 4. Model generator
+##### Model generator
 
-To create a new model:
+To create a new [model](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html):
 
 ```
 donejs generate supermodel <model-name>
