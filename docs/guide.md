@@ -10,7 +10,7 @@
 
 
 
-In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
+In the first part of this guide we will install DoneJS, [generate a newc application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). We will conclude with creating a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
 
@@ -180,7 +180,7 @@ First, let's update `src/home.component` with a link to the chat messages page:
       <br>Chat
     </h1>
 
-    <a can-href="{ page='chat' }"
+    <a href="{{routeUrl page='chat' }}"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>
@@ -188,12 +188,12 @@ First, let's update `src/home.component` with a link to the chat messages page:
 </can-component>
 ```
 
-When the "Start chat" button is clicked, `can-href="{ page='chat' }"` will make sure that our application view-model gets updated with that property. This property will also update the URL.
+When the "Start chat" button is clicked, `href="{{routeUrl page='chat'}}"` will make sure that our application view-model gets updated with that property. This property will also update the URL.
 
 Next, add a link to go back to the chat page by updating `messages/messages.stache` to:
 
 ```html
-<h5><a can-href="{ page='home' }">Home</a></h5>
+<h5><a href="{{routeUrl page='home'}}">Home</a></h5>
 <p>{{message}}</p>
 ```
 
@@ -322,7 +322,7 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
       </bit-panel>
     </bit-tabs>
 
-    <a can-href="{ page='chat' }"
+    <a href="{{routeUrl page='chat'}}"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>
@@ -354,7 +354,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 
 ```html
 <can-import from="donejs-chat/models/message" />
-<h5><a can-href="{ page='home' }">Home</a></h5>
+<h5><a href="{{routeUrl page='home'}}">Home</a></h5>
 <message-model get-list="{}" class="list-group">
   <div class="list-group">
     {{#each ./value}}
@@ -379,7 +379,7 @@ Now let's add the form to create new messages. The form two-way binds the `name`
 
 ```html
 <can-import from="donejs-chat/models/message" />
-<h5><a can-href="{ page='home' }">Home</a></h5>
+<h5><a href="{{routeUrl page='home'}}">Home</a></h5>
 <message-model get-list="{}" class="list-group">
   <div class="list-group">
     {{#each ./value}}
