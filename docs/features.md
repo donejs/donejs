@@ -78,7 +78,7 @@ If you're making data requests in JavaScript, just add one line to tell the serv
 this.attr( "%root" ).waitFor( promise );
 ```
 
-The server will wait for all promises sent via `waitFor` before it renders the page. In a full component that might look like this:
+The server will wait for all promises registered via `waitFor` before it renders the page. In a full component that might look like this:
 
 ```
 can.Component.extend({
@@ -215,11 +215,15 @@ _Minimal DOM updates is a feature of [CanJS](http://canjs.com/)_
 
 Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM. 
 
+Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
+
+You spend less time worrying about performance micro-optimizations, and more time [working on epic pool dunk videos](https://www.youtube.com/watch?v=vrgMUi8-7r4&feature=youtu.be&t=19).
+
 #### How it works
 
-Your templates first render in a lightweight Virtual DOM on the worker side and changes are diffed and sent to the window side to be applied to the actual DOM.  Only changes to the DOM are applied to the window. 
+Templates first render in a lightweight Virtual DOM in a [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). Changes are diffed and sent to the main thread to be applied to the real DOM. The main thread is only notified when there are changes to the DOM.
 
-The most expensive part of a web application - DOM updates - are separated from application logic, which means your application can continue to run while paints occur.
+The most expensive part of a web application - DOM updates - are separated from application logic, which means your application can continue to run while DOM reflows occur.
 
 By default, browsers use only a single thread of execution.
 
@@ -231,11 +235,9 @@ This means that performance problems in any area (expensive computations, DOM re
 With worker thread rendering, DOM updates and application logic are run in parallel threads.
 
 <img src="/static/img/donejs-multi-thread.gif" srcset="/static/img/donejs-multi-thread.gif 1x, /static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
-_Using a worker thread application logic can still occur while the DOM is rendered. This can nearly double the number of operations._
+_Using a worker thread application logic can still occur while the DOM is rendered. This could nearly double the number of operations per second._
 
-Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads. Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
-
-You spend less time worrying about performance micro-optimizations, and more time [working on epic pool dunk videos](https://www.youtube.com/watch?v=vrgMUi8-7r4&feature=youtu.be&t=19).
+Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads. 
 
 Adding worker thread rendering only requires changing one line. Change the main attribute of your page's script tag from:
 ```
@@ -246,7 +248,7 @@ to
 <script src=”node_modules/steal/steal.js” main=”my-app!done-worker-autorender”></script>
 ```
 
-At this time, no other framework besides DoneJS, including Angular or React, support worker thread rendering.
+At this time, no other framework besides DoneJS, including Angular or React, support worker thread rendering out of the box.
 
 <a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
 
