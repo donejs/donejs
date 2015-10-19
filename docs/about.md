@@ -5,10 +5,17 @@
 
 @description 
 
-DoneJS' goal is to help the JavaScript community make, and continue to make, amazing applications. 
-DoneJS is rebuilt and rebranded from the over 8-year-old [JavaScriptMVC](http://javascriptmvc.com) 
-project. DoneJS is built of many sub-projects, each useful in their own right. Learn about the goals, history, projects, and 
-team behind DoneJS.
+DoneJS is a compilation of the best technology for every aspect of developing a complex JavaScript app, all working together seamlessly.
+
+Our mission is to enable the JavaScript community to make amazing apps - high performance, maintainable, and highly usable -  by default.
+
+And as times change and new techniques emerge, we'll continue improving the stack, providing a simple upgrade path along the way.
+
+To us, enabling the community is about more than code - it means meeting, teaching, sharing ideas, and project collaboration. We want to make our community - those that use DoneJS and any of its pieces - stronger, through relationships, communication, and skills.
+
+DoneJS is rebuilt and rebranded from the 8+ year old [JavaScriptMVC](http://javascriptmvc.com) project. DoneJS is comprised of CanJS, StealJS, and many other sub-projects. 
+
+Learn about the goals, history, projects, and team behind DoneJS.
 
 @body
 
@@ -16,26 +23,68 @@ team behind DoneJS.
 
 DoneJS has three primary goals:
 
-1.  To make it easy to build and maintain high performance, real time, web and mobile (amazing) applications.
+1.  To enable developers to easily create high performance, maintainable, highly usable (amazing) applications.
 2.  To continually evolve with new techniques and tools.
 3.  To support the technology community.
 
 ### Amazing Applications
 
-Building a world-class application is difficult.  Ideally, it runs on every machine, runs fast, and provides
-a great user experience. But getting "DONE" on time is even harder. Maintainability is critical.  
+Building a modern application is increasingly difficult. There are many competing concerns to balance.
 
-DoneJS
-attempts to solve front-end development the 
-way [computers solved checkers](http://www.scientificamerican.com/article/computers-solve-checkers-its-a-draw/). It
-does this by providing or integrating great technology solutions to difficult problems:
+It should be fast (that means many things). It should reach as many users as possible (run on every browser and platform).  It should provide a great user experience. 
+
+It should also be maintainable, otherwise it will be too expensive in the long run.
+
+And yet it needs to be done on time, making the previous requirements hard to fit in.
+
+DoneJS aims to guide developers down a yellow brick road towards a successful JavaScript application: making every step towards an amazing application well lit and simple.
+
+Our goal is to make it hard to NOT make an amazing application using DoneJS.
+
+We aim to do this in three main ways:
+
+1. Providing a full, integrated solution: literally everything you need to build a complex app.
+1. Solving hard technical problems.
+2. Providing tools that eliminate any barrier to "doing the right thing"
+
+#### 1. Full stack
+
+For any sufficiently complex application, there are many many layers of foundation needed. 
+
+There are a ton of options out there, and so much to learn. The rise of the [micro-library](http://microjs.com/#) era has led to a time when picking your stack involves picking from thousands of potential options, and infinite possible combinations that have to work together well.
+
+Having many small micro libraries to choose from sounds good in theory. In practice, we've found it presents more challenges than benefits.
+
+How do you choose? How do you know if they fit well together? What if the industry changes (it will) and a year from now your stack is no longer maintained? How do you find support for your unique combination of tools?
+
+More importantly, who has time for that?
+
+DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. Its our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app. 
+
+We've compiled best in class tools for every part of the JavaScript application lifecycle: from tooling, to application architecture, to production deployment.
+
+Just like Apple owning the whole stack from software to hardware to retails makes for a great experience: the whole DoneJS stack is greater than the sum of its parts. A few examples:
+
+* generators
+* can-import
+* server side rendering simplicity
+
+#### 2. Hard technical problems
+
+DoneJS aims to identify the hard parts of front-end development, and solve them, or at least make them as simple for developers as possible.
+
+A few examples:
 
 - Server Side Rendering
 - Automatic real-time updates
 - Builds to mobile and desktop
 - Optimal builds deployed to a CDN
 
-To help with maintainability, DoneJS makes sure what a developer should be doing is as easy as possible:
+#### 3. Doing the right thing
+
+To us, the `right thing` means doing the extra work that makes your code easier to debug and maintain: things like tests, docs, continuous integration, and deployment automation.
+
+Often, there is a barrier to doing the right thing: finding the right tools, learning about them, setting up, and configuring them. DoneJS aims to remove this barrier, making doing the `right thing` simply part of the normal dev cycle.
 
 - Tests and Documentation
 - Guides for CI and CD
@@ -106,8 +155,6 @@ people the skills they need to effecitvely use it, it will go to waste.
 - Animation utilities
 
 ## Projects
-
-Whole is greater than the sum of its parts
 
 DoneJS is comprised of many projects.  There are 1st party projects, where there
 is a high degree of overlap of the teams working on these projects, and 3rd party projects like

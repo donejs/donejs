@@ -35,8 +35,7 @@ And as times change and new techniques emerge, we'll continue adding those to th
 
 With DoneJS, you don't have to think about steps 1-4, just focus on step 5.
 
-DoneJS is rebuilt and rebranded from the 8+ year old [JavaScriptMVC](http://javascriptmvc.com) 
-project. DoneJS is comprised of CanJS, StealJS, and many other sub-projects.
+DoneJS is rebuilt and rebranded from the 8+ year old [JavaScriptMVC](http://javascriptmvc.com) project. DoneJS is comprised of CanJS, StealJS, and many other sub-projects.
 
 DoneJS' goal is to enable you to make amazing apps by default - high performance, real-time, maintainable, and cross-platform.
 
