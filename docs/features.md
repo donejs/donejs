@@ -18,7 +18,11 @@ and are able to be rendered on the server by running the same code. This is know
 
 Server side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
 
-Other server side rendering systems require additional code and infrastructure to work correctly. DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
+SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The difference to your users is a noticeable difference in perceived page load performance:
+
+<img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
+
+Compared to other server side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
 
 #### Page load performance
 
@@ -26,26 +30,11 @@ Server side rendered SPAs can load pre-rendered HTML immediately. It can also ca
 
 Traditional SPAs must load the JS, execute, request data, and render before the user sees content.
 
-
-  <div class="mobile-graph">
-    <div class="graph-logos">
-      <img src="/static/img/donejs-mobile-guide-logos.png" srcset="/static/img/donejs-mobile-guide-logos.png 1x, /static/img/donejs-mobile-guide-logos-2x.png 2x">
-    </div>
-    <div class="graph-timeline-wrapper">
-      <div class="graph-timeline">
-          <img src="/static/img/donejs-mobile-guide-timeline.gif" srcset="/static/img/donejs-mobile-guide-timeline.gif 1x, /static/img/donejs-mobile-guide-timeline-2x.gif 2x">
-      </div>
-    </div>
-  </div>
-
-
 #### SEO
 
 Search engines can't easily index SPAs. Server side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
 
 Since search engines see the HTML your server returns, if you want search engines finding your pages, you'll want Google and other search engines seeing fully rendered content, not the spinners that normally load after initial SPAs load.
-
-<img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
 #### How it works
 
@@ -56,15 +45,19 @@ DoneJS implements SSR with a single context virtual DOM.
 **Virtual DOM** means a virtual representation of the DOM: the fundamental browser APIs that manipulate the DOM, but stubbed out.
 
 When using DoneJS SSR, the same app that runs on the client is loaded in Node. When a request comes in:
- 1. The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application, which means the initial response is very fast.
+ 1. The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application (single context is optional, so reload is something you can opt into) which means the initial response is very fast.
  1. The app renders content the same way it would in the browser, but with a mocked out virtual DOM, which is much faster than a real DOM.
+ 1. The server waits for all your asynchronous data requests to finish before signaling that rendering is complete (more on how that works below).
  1. When rendering is complete, the virtual DOM renders the string representation of the DOM, which is sent back to the client.
 
-Other SSR systems use a headless browser on the server rather than a virtual DOM. These systems are much slower and require much more intensive server resources. A new headless browser instance must be created to handle each incoming request, and headless browsers use a real DOM.
 
 Since SSR produces fully rendered HTML, it's possible to insert a caching layer, or use a service like Akamai, to serve most requests. Traditional SPAs don't have this option.
 
-#### Prepping your app for SSR
+Rather than a virtual DOM, other SSR systems use a headless browser on the server, like PhantomJS, which uses a real DOM. These systems are much slower and require much more intensive server resources. 
+
+Some systems, even if they do use a virtual DOM, require a new browser instance entirely, or at the very least, reloading the application and its memory for each incoming request, which also is slower and more resource intensive than DoneJS SSR.
+
+##### Prepping your app for SSR
 
 Any app that is rendered on the server needs a way to notify the server that any pending asynchronous data requests are finished, and the app can be rendered.
 
@@ -72,7 +65,17 @@ React and other frameworks that support SSR don't provide much in the way of sol
 
 DoneJS provides two easy mechanisms for notifying the server when data is finished loading.
 
-If you're making data requests in JavaScript, just add one line to tell the server to wait for a promise to resolve:
+The more common way is to make data requests in the template, which is possible via can-connect's [can-tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html). It calls a method internally that tells the server to wait for its promise to resolve. You just write your template, turn on SSR, and everything works seamlessly:
+
+```
+<message-model get-list="{}">
+  {{#each ./value}}
+    <div>{{text}}</div>
+  {{/each}}
+</message-model>
+```
+
+If you're making data requests in JavaScript, just add one line to do this manually:
 
 ```
 this.attr( "%root" ).waitFor( promise );
@@ -92,16 +95,6 @@ can.Component.extend({
     }
   }
 });
-```
-
-If you're using can-connect's [can/tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html) to make data requests in the template, you don't have to do anything. It calls waitFor internally. You just write your template, turn on SSR, and everything works seamlessly:
-
-```
-<message-model get-list="{}">
-  {{#each ./value}}
-    <div>{{text}}</div>
-  {{/each}}
-</message-model>
 ```
 
 <a class="btn" href="https://github.com/canjs/can-ssr"><span>View the Documentation</span></a>
