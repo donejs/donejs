@@ -53,7 +53,7 @@ When using DoneJS SSR, the same app that runs on the client is loaded in Node. W
 
 Since SSR produces fully rendered HTML, it's possible to insert a caching layer, or use a service like Akamai, to serve most requests. Traditional SPAs don't have this option.
 
-Rather than a virtual DOM, other SSR systems use a headless browser on the server, like PhantomJS, which uses a real DOM. These systems are much slower and require much more intensive server resources. 
+Rather than a virtual DOM, other SSR systems use a headless browser on the server, like PhantomJS, which uses a real DOM. These systems are much slower and require much more intensive server resources.
 
 Some systems, even if they do use a virtual DOM, require a new browser instance entirely, or at the very least, reloading the application and its memory for each incoming request, which also is slower and more resource intensive than DoneJS SSR.
 
@@ -131,7 +131,7 @@ In a DoneJS application, you simply mark a section to be progressively loaded by
 {{/eq}}
 ```
 
-Then you run the build. 
+Then you run the build.
 
 ```
 donejs build
@@ -206,7 +206,7 @@ _Minimal DOM updates is a feature of [CanJS](http://canjs.com/)_
 
 ### Worker Thread Rendering
 
-Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM. 
+Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM.
 
 Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
 
@@ -230,7 +230,7 @@ With worker thread rendering, DOM updates and application logic are run in paral
 <img src="/static/img/donejs-multi-thread.gif" srcset="/static/img/donejs-multi-thread.gif 1x, /static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
 _Using a worker thread application logic can still occur while the DOM is rendered. This could nearly double the number of operations per second._
 
-Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads. 
+Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads.
 
 Adding worker thread rendering only requires changing one line. Change the main attribute of your page's script tag from:
 ```
@@ -253,12 +253,12 @@ DoneJS makes it simple to deploy your static assets to a CDN (content delivery n
 
 CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne.
 
-<img src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
+<img class="img-with-caption" src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
 _Without a CDN requests will take longer to fulfill if the user is located further away from your servers._
 <hr />
 
 
-<img src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
+<img class="img-with-caption" src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
 _With a CDN requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
 
 #### How it works
@@ -269,7 +269,7 @@ DoneJS comes with integrations with [S3](https://aws.amazon.com/s3/) and [Divsho
 
  1. You sign up for S3 or Divshot.
  2. You paste a few lines of config into your `package.json` that point to the right CDN service.
- 
+
    ```
     "donejs": {
       "deploy": {
@@ -358,7 +358,7 @@ And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS 
 
 DoneJS is designed to make it easy to build applications that connects users in real-time.
 
-[Socket.io](https://socket.io) provides the basics to add real-time capabilities to any JavaScript application, but the challenge of integrating real-time updates into your code remains. 
+[Socket.io](https://socket.io) provides the basics to add real-time capabilities to any JavaScript application, but the challenge of integrating real-time updates into your code remains.
 
 When new data arrives, how do you know what data structures to add it to? And where to re-render? Code must be written to send socket.io data across your application, but that code becomes aware of too much, and therefore is brittle and hard to maintain.
 
@@ -539,7 +539,7 @@ export default store;
 
 ##### Simple authoring
 
-Several DoneJS features converge to make authoring tests extremely simple. 
+Several DoneJS features converge to make authoring tests extremely simple.
 
 Because of [ES6 Module](#section=section_ES6Modules) support, everything in a DoneJS app is a module, so a test can simply import the modules it needs - such as fixtues and module under test:
 
@@ -558,7 +558,7 @@ Other frameworks require a build step before tests can be run. These builds conc
 
 Because DoneJS uses a client side loader that makes it simple to start a new page that loads its own dependencies, there is no build script needed to compile and run tests.
 
-You just run the generator, load your modules, write your test, and run it - from the browser or CLI. 
+You just run the generator, load your modules, write your test, and run it - from the browser or CLI.
 
 ##### More information
 
@@ -640,7 +640,7 @@ CI is a practice whereby all active development (i.e. a pull request) is checked
 <img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
 
-CD means that any release or merges to your release branch will trigger tests, builds and deployment. 
+CD means that any release or merges to your release branch will trigger tests, builds and deployment.
 
 Paired together, CI and CD enable automatic, frequent releases. CD isn't possible without CI. Good automated testing is a must to provide the confidence to release without introducing bugs.
 
@@ -669,7 +669,7 @@ Steps 1, 2, and 3 are the hard parts. Step 4 is simple. DoneJS supports  in two 
 
 ##### Proper test support
 
-DoneJS comes with comprehensive support for testing. The [Testing](#section=section_ComprehensiveTesting) section contains much more detail about testing support. 
+DoneJS comes with comprehensive support for testing. The [Testing](#section=section_ComprehensiveTesting) section contains much more detail about testing support.
 
 [Generators](#section=section_Generators) create working test scripts right off the bat, and the plumbing for test automation is built into each project. Each [modlet](#section=section_Modlets) contains a skeleton for unit tests. All that is left for the developer to do is write tests.
 
@@ -799,7 +799,7 @@ In combination with other DoneJS features, NPM module import and export make it 
 
 [Generators](#section=section_Generators) make it easy to bootstrap new modules of functionality quickly, and the [modlet pattern](#section_Modlets) makes it easy to organize small, self-contained modules. Its even easy to create tests and documentation for each module.
 
-DoneJS enables a modular workflow, where pieces of small, reusable functionality can be easily created, shared, and consumed. 
+DoneJS enables a modular workflow, where pieces of small, reusable functionality can be easily created, shared, and consumed.
 
  1. Use generators to create a modlet
  1. Develop rich functionality
@@ -935,7 +935,7 @@ DoneJS [Generators](#section_Generators) will create both of these types of cust
 
 ##### Data + visual elements = powerful templates
 
-The beauty and power of custom HTML elements is most apparent when visual widgets (like graphing) is combined with elements that express data. 
+The beauty and power of custom HTML elements is most apparent when visual widgets (like graphing) is combined with elements that express data.
 
 Back to our original example:
 
@@ -1201,7 +1201,7 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 
 #### How it works
 
-Other live reload servers watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time. 
+Other live reload servers watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time.
 
 The correct terminology is actually [hot swapping](https://en.wikipedia.org/wiki/Hot_swapping), not live reload. Regardless of what it's called, the result is a blazing fast development experience.
 
