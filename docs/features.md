@@ -720,11 +720,11 @@ _Modlets are a feature of DoneJS [generators](#section=section_Generators)._
 
 ### NPM Packages
 
-DoneJS makes it easier than ever to share and consume modules via package managers like NPM and Bower.
+DoneJS makes it easy to share and consume modules via package managers like NPM and Bower.
 
-You can import modules from any package manager in any format without any configuration. And you can export modules to any format.
+You can import modules from any package manager in any format - CommonJS, AMD, or ES6 - without any configuration. And you can convert modules to any other format.
 
-The goal of these features is to transform project workflows, making it easier to share and reuse ideas and mini projects across applications with less hassle.
+The goal of these features is to transform project workflows, making it easier to share and reuse ideas and modules of functionality across applications, with less hassle.
 
 
 <div class="maintainable wrapper">
@@ -740,26 +740,13 @@ The goal of these features is to transform project workflows, making it easier t
 
 #### How it works
 
-If publishing and consuming a JavaScript module is trivial, teams are enabled to design for reuse across their organization. This video introduces NPM import and export:
+DoneJS apps use [StealJS](http://stealjs.com/) to load modules and install packages. This video introduces NPM import and export in StealJS:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
 
-##### Microapplications
-
-Alongside [generators](#section=section_Generators) and the [modlet pattern](#section_Modlets), which make it easy to create mini pieces of UI functionality, NPM module import and export enables teams to design and share components easily.
-
-In the same way that the [microservices](http://microservices.io/patterns/microservices.html) architecture enabled reusable APIs, the following workflow enables a "microapplication" architecture (reusable component architecture).
-
- 1. Use generators to create a modlet
- 1. Develop rich functionality
- 1. Export and publish it - internally or externally
- 1. Consume it across applications
-
-Imagine an organization where every app is broken into many reusable pieces, each of which are independently tested, developed, and shared.
-
 ##### Zero config package installation
 
-DoneJS apps use StealJS to load modules and install packages. Unlike Browserify or Webpack, StealJS is a client side loader, so you don't have to run a build to load pages.
+Unlike Browserify or Webpack, StealJS is a client side loader, so you don't have to run a build to load pages.
 
 Installing a package in a DoneJS app via npm or bower involves no configuration. Install your package from the command line:
 
@@ -777,11 +764,11 @@ Using require.js or other client side loaders, you'd have to add pathing and oth
 
 You can import that package in any format: CommonJS, AMD, or ES6 module format.
 
-##### Export in any format
+##### Convert to any format
 
-DoneJS supports exporting a module in any format: CommonJS, AMD, or ES6 module format, or script and link tags.
+DoneJS supports converting a module to any other format: CommonJS, AMD, or ES6 module format, or script and link tags.
 
-The advantage of this is that you can publish your module and anyone writing a JavaScript application can use it, regardless of which script loader they are using (or if they aren't using a script loader).
+The advantage is that you can publish your module to a wider audience of users. Anyone writing JavaScript can use your module, regardless of which script loader they are using (or if they aren't using a script loader).
 
 Just create an [export script](http://stealjs.com/docs/steal-tools.export.html) that points to the output formats you want, along with some options:
 ```js
@@ -803,6 +790,24 @@ and run it from your command line:
 ```
 node myexport.js
 ```
+
+##### Modular workflow
+
+In combination with other DoneJS features, NPM module import and export make it possible for teams to design and share components easily.
+
+[Generators](#section=section_Generators) make it easy to bootstrap new modules of functionality quickly, and the [modlet pattern](#section_Modlets) makes it easy to organize small, self-contained modules. Its even easy to create tests and documentation for each module.
+
+DoneJS enables a modular workflow, where pieces of small, reusable functionality can be easily created, shared, and consumed. 
+
+ 1. Use generators to create a modlet
+ 1. Develop rich functionality
+ 1. Write tests and docs
+ 1. Export and publish it - internally or externally
+ 1. Consume it across applications
+
+Similar to the way that the [microservices](http://microservices.io/patterns/microservices.html) architecture encourages reuse of APIs across applications, the modular workflow encourages reuse of self-contained modules of JavaScript across applications.
+
+Imagine an organization where every app is broken into many reusable pieces, each of which are independently tested, developed, and shared. Over time, developers would be able to quickly spin up new applications, reusing previous functionality. DoneJS makes this a real possibility.
 
 <a class="btn" href="http://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
 <a class="btn" href="/place-my-order.html#section=section_Importingotherprojects"><span>View the Guide</span></a>
