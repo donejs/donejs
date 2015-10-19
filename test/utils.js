@@ -59,7 +59,10 @@ describe('DoneJS CLI tests', function() {
 		it("runCommand passes stdio for scripts that need a tty", function(done){
 			var script = __dirname + "/tests/needstty.js";
 			var makeAssert = function(val, msg){
-				return function(){
+				return function(err){
+          if(!val && err) {
+            console.error(err);
+          }
 					assert(val, msg);
 				};
 			};
