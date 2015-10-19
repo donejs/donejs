@@ -1,8 +1,8 @@
-@page OperatingSystems Operating Systems
+@page SettingUp Setting Up DoneJS
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description This page contains operating system specific information needed use DoneJS.
+@description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever install DoneJS and includes platform-specific pieces of information not covered in the Quick Start or In Depth guides.
 
 @body
 
