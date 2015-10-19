@@ -345,6 +345,25 @@ steal("./content_list.js",
             }
         });
 
+        $( "body:not(.donejs)" ).find( "h3, h4, h5" ).each( function () {
+            if ( !this.id ) {
+                var tag = this.tagName.toLowerCase();
+                var prevTag = "h" + ( parseInt( tag.replace( /h(\d)/, "$1" ) ) - 1 );
+                var prevId = $( this ).prevAll( prevTag ).get( 0 ).id;
+
+                this.id = prevId + "__" + $( this ).text().replace( /[^a-z0-9]/gi, "" );
+            }
+            var html = "<a class='linkToHeader' href='#section=" + this.id + "'>";
+            html += "<img src='static/img/link.svg' width='15px'>";
+            html += "</a>";
+            $( this ).prepend( html );
+            $( this ).find( "a" ).eq( 0 ).click( function () {
+                var offset = -55;
+                $( 'html, body' ).animate({
+                    scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
+                }, 500);
+            });
+        });
 
         //hijack guide page jumps, animate scroll
         $( function () {
@@ -374,7 +393,17 @@ steal("./content_list.js",
                 return true;
             });
 
-            if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
+            if ( jumpOnLoad ) {
+                clickFn.call( jumpOnLoad );
+            } else if ( hashOnLoad ) {
+                var jumpTo = hashOnLoad.replace( /.*?#section=/, "#" );
+                if ( $( jumpTo ).length ) {
+                    var offset = -55;
+                    $( 'html, body' ).animate({
+                        scrollTop: $( jumpTo ).offset().top + offset
+                    }, 500);
+                }
+            }
         });
 
 
@@ -468,4 +497,5 @@ steal("./content_list.js",
 
             if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
         });
+
     });

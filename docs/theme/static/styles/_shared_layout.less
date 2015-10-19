@@ -13,6 +13,38 @@ body:not(.donejs) {
 			max-width: 100%;
 		}
 	}
+	a.linkToHeader {
+		display: none;
+	}
+	@media(min-width: @screen-lg) {
+		h2, h3, h4, h5 {
+			position: relative;
+
+			a.linkToHeader {
+				display: none;
+				position: absolute;
+				left: -25px;
+				height: 100%;
+				padding-left: 5px;
+				width: 50px;
+
+				img {
+					margin: 0px !important;
+					padding: 0px;
+					position: relative;
+					top: 50%;
+					-ms-transform: translateY( -50% );
+					-webkit-transform: translateY( -50% );
+					-moz-transform: translateY( -50% );
+					-o-transform: translateY( -50% );
+					transform: translateY( -50% );
+				}
+			}
+			&:hover a.linkToHeader {
+				display: initial;
+			}
+		}
+	}
 	> .container-fluid {
 		display: block;
 		margin: 0 auto 50px;
