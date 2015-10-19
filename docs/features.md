@@ -542,6 +542,29 @@ fixture({
 export default store;
 ```
 
+##### Simple authoring
+
+Several DoneJS features converge to make authoring tests extremely simple. 
+
+Because of [ES6 Module](#section=section_ES6Modules) support, everything in a DoneJS app is a module, so a test can simply import the modules it needs - such as fixtues and module under test:
+
+```
+import restaurantStore from 'place-my-order/models/fixtures/restaurant';
+import { ViewModel } from './list';
+```
+
+This means the test is small, isolated, and simple. Tests themselves are modules too, so they can be collected easily into sets of tests.
+
+Because of the [modlet](#section=section_Modlets) pattern, each component contains its own working test script and test file, which can be worked on in isolation.
+
+Because of [live reload](#section=section_LiveReload), you can write, debug, and run tests without constantly reloading your page.
+
+Other frameworks require a build step before tests can be run. These builds concatenate dependencies and depend on specific order of tests running, which is a brittle and inefficient workflow.
+
+Because DoneJS uses a client side loader that makes it simple to start a new page that loads its own dependencies, there is no build script needed to compile and run tests.
+
+You just run the generator, load your modules, write your test, and run it - from the browser or CLI. 
+
 ##### More information
 
 The DoneJS testing layer involves many pieces, so if you want to learn more:
@@ -657,6 +680,33 @@ The biggest hurdle to getting projects using CI and CD is proper tests and autom
 <a class="btn" href="/place-my-order.html#section=section_Automatedtestsandcontinuousintegration"><span>View the CI Guide</span></a>
 <a class="btn" href="/place-my-order.html#section=section_ContinuousDeployment"><span>View the CD Guide</span></a>
 
+### Modlets
+
+The secret to building large apps is to never build large apps. Break up your application into small pieces. Then, assemble.
+
+DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
+
+#### How it works
+
+Large apps have a lot of files. There are two ways to organize them: by type or by module.
+
+<img src="/static/img/donejs-modlet-diagram.png" srcset="/static/img/donejs-modlet-diagram.png 1x, /static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" />
+
+Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. The benefits include:
+
+ * Each modlet contains its own demo page and its own test page. Getting a demo page running forces separation of concerns and isolated modules - hallmarks of good design. A standalone demo and test page makes it easy to work on pieces of your application in isolation.
+ * Developers are more likely to update tests and documentation if they are sitting right next to the module they are editing. The test is not hidden in a `tests` folder that is more easily ignored.
+ * You can develop the application without having to load the entire application and all of its tests on every change.
+
+An example modlet from the [in depth guide](/place-my-order.html) is the [order/new](https://github.com/donejs/place-my-order/tree/master/src/restaurant/list) component. It has its own [demo page](http://www.place-my-order.com/src/order/new/demo.html) and [test page](http://www.place-my-order.com/src/order/new/test.html).
+
+DoneJS generators create modlets to get you started quickly. To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/).
+
+<a class="btn" href="https://youtu.be/eIfUsPdKF4A?t=97"><span>View the Video</span></a>
+<a class="btn" href="/Guide.html#section=section_Generatecustomelements"><span>View the Guide</span></a>
+
+_Modlets are a feature of DoneJS [generators](#section=section_Generators)._
+
 ### NPM Packages
 
 DoneJS makes it easier than ever to share and consume modules via package managers like NPM and Bower.
@@ -770,33 +820,6 @@ A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet suppo
 <a class="btn" href="/place-my-order.html"><span>View the Guide</span></a>
 
 _Pretty URLs and routing are features of the [stealjs/transpile](https://github.com/stealjs/transpile) project._
-
-### Modlets
-
-The secret to building large apps is to never build large apps. Break up your application into small pieces. Then, assemble.
-
-DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
-
-#### How it works
-
-Large apps have a lot of files. There are two ways to organize them: by type or by module.
-
-<img src="/static/img/donejs-modlet-diagram.png" srcset="/static/img/donejs-modlet-diagram.png 1x, /static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" />
-
-Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. The benefits include:
-
- * Each modlet contains its own demo page and its own test page. Getting a demo page running forces separation of concerns and isolated modules - hallmarks of good design. A standalone demo and test page makes it easy to work on pieces of your application in isolation.
- * Developers are more likely to update tests and documentation if they are sitting right next to the module they are editing. The test is not hidden in a `tests` folder that is more easily ignored.
- * You can develop the application without having to load the entire application and all of its tests on every change.
-
-An example modlet from the [in depth guide](/place-my-order.html) is the [order/new](https://github.com/donejs/place-my-order/tree/master/src/restaurant/list) component. It has its own [demo page](http://www.place-my-order.com/src/order/new/demo.html) and [test page](http://www.place-my-order.com/src/order/new/test.html).
-
-DoneJS generators create modlets to get you started quickly. To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/).
-
-<a class="btn" href="https://youtu.be/eIfUsPdKF4A?t=97"><span>View the Video</span></a>
-<a class="btn" href="/Guide.html#section=section_Generatecustomelements"><span>View the Guide</span></a>
-
-_Modlets are a feature of DoneJS [generators](#section=section_Generators)._
 
 ### Custom HTML Elements
 
