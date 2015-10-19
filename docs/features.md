@@ -254,12 +254,12 @@ DoneJS makes it simple to deploy your static assets to a CDN (content delivery n
 CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne.
 
 <img class="img-with-caption" src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
-_Without a CDN requests will take longer to fulfill if the user is located further away from your servers._
+_Without a CDN, requests will take longer to fulfill if the user is located further away from your servers._
 <hr />
 
 
 <img class="img-with-caption" src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
-_With a CDN requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
+_With a CDN, requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
 
 #### How it works
 
