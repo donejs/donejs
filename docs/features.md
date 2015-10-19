@@ -803,12 +803,12 @@ One of the most important concepts in DoneJS is splitting up your application fu
 Consider the following example:
 
 ```html
-<order-model findAll="{previousWeek}" [previousWeekData]="{value}"/>
-<order-model findAll="{currentWeek}" [currentWeekData]="{value}"/>
+<order-model get-list="{previousWeek}" {*previous-week-data}="value"/>
+<order-model get-list="{currentWeek}" {*current-week-data}="value"/>
 
 <bit-graph title="Week over week">
-  <bit-series data="{../previousWeekData}" />
-  <bit-series data="{../currentWeekData}" color="Blue"/>
+  <bit-series data="{previousWeekData}" />
+  <bit-series data="{currentWeekData}" color="Blue"/>
 </bit-graph>
 ```
 This code demonstrates:
