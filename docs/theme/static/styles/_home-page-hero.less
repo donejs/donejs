@@ -6,6 +6,9 @@ body.donejs .hero {
   background-size: cover;
   background-attachment: fixed;
   padding: 0;
+  @media(max-width: @screen-xs-max){
+    background-size: auto;
+  }
 
   .transparency {
     background-color: rgba(33, 38, 40, .75);
