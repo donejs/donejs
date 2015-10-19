@@ -12,6 +12,10 @@ function fail(error) {
 
 describe('DoneJS CLI tests', function() {
   describe('utils', function() {
+    before(function () {
+      delete global.donejsTestPluginLoaded;
+    });
+
     it('installIfMissing', function(done) {
       Q.ninvoke(npm, 'load', { loaded: false })
         .then(utils.installIfMissing('day-seconds'))
@@ -21,6 +25,35 @@ describe('DoneJS CLI tests', function() {
           done();
         })
         .fail(fail);
+    });
+
+    describe('add', function() {
+      it('default generator', function(done) {
+        utils.add(path.join(process.cwd(), 'node_modules'), 'test-plugin', [])
+         .then(function () {
+           assert.equal(global.donejsTestPluginLoaded, 'default', 'donejs-test-plugin other generator is executed');
+           done();
+         })
+         .fail(fail);
+      });
+
+      it('non-default generator', function(done) {
+        utils.add(path.join(process.cwd(), 'node_modules'), 'test-plugin', [['other']])
+         .then(function () {
+           assert.equal(global.donejsTestPluginLoaded, 'other', 'donejs-test-plugin default generator is executed');
+           done();
+         })
+         .fail(fail);
+      });
+
+      it('non-default generator with params', function(done) {
+        utils.add(path.join(process.cwd(), 'node_modules'), 'test-plugin', [['other', 'foo']])
+         .then(function () {
+           assert.equal(global.donejsTestPluginLoaded, 'foo', 'donejs-test-plugin other generator is executed with correct params');
+           done();
+         })
+         .fail(fail);
+      });
     });
 
     it('runScript and runCommand', function(done) {
@@ -34,7 +67,7 @@ describe('DoneJS CLI tests', function() {
     it('generate .component', function(done) {
       var moduleName = 'dummy/component.component';
       var root = path.join(__dirname, '..', 'node_modules');
-      utils.generate(root, [
+      utils.generate(root, 'generator-donejs', [
           ['component', moduleName, 'dummy-component']
         ])
         .then(function() {

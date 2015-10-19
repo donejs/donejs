@@ -45,7 +45,8 @@
     "npm": "^2.13.1",
     "q": "^1.4.1",
     "steal-platform": "0.0.4",
-    "yeoman-environment": "^1.2.7"
+    "yeoman-environment": "^1.2.7",
+    "yeoman-generator": "^0.20.3"
   },
   "directories": {
     "doc": "docs"
