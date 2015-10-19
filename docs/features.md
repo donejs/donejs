@@ -555,9 +555,9 @@ The DoneJS testing layer involves many pieces, so if you want to learn more:
 
 ### Documentation
 
-Documentation is critical for maintainability of any complex application. When key team members leave, docs ensure minimal ramp up time and knowledge loss - this applies for code and styles.
+Documentation is critical for maintainability of any complex application. When your team adds developers, docs ensure minimal ramp up time and knowledge transfer.
 
-Yet most teams either don't write docs, or they'll do it "later" - a utoptian future period that is always just out of reach. Why? Because its extra work to set up a tool, configure it, create and maintain separate documentation files, etc.
+Yet most teams either don't write docs, or they'll do it "later" - a utoptian future period that is always just out of reach. Why? Because it's extra work to set up a tool, configure it, create and maintain separate documentation files.
 
 DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing docs, since all you have to do is comment your code (which most people already do) and run `donejs document`.
 
@@ -595,6 +595,8 @@ export default function(){ ... };
 ```
 
 Then run `donejs document`. A browsable documentation website will be generated.
+
+<img src="/static/img/docs.png" alt="A documentation website" />
 
 DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation. It lets you:
 
