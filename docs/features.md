@@ -631,11 +631,16 @@ _DoneJS Documentation is a feature of [DocumentJS](http://documentjs.com/)_
 
 ### Continuous Integration & Deployment
 
-Continuous Integration (CI) and Continuous Deployment (CD) are must have tools for any modern, efficient dev team.
+Continuous Integration (CI) and Continuous Deployment (CD) are must have tools for any modern development team.
 
 CI is a practice whereby all active development (i.e. a pull request) is checked against automated tests and builds, allowing problems to be detected early (before merging the code into the release branch).
 
-CD means that any release or merges to your release branch will trigger tests, builds and deployment.
+<img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
+_Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
+
+CD means that any release or merges to your release branch will trigger tests, builds and deployment. 
+
+Paired together, CI and CD enable automatic, frequent releases. CD isn't possible without CI. Good automated testing is a must to provide the confidence to release without introducing bugs.
 
 DoneJS provides support for simple integration into popular CI and CD tools, like TravisCI and Jenkins.
 
@@ -652,12 +657,27 @@ DoneJS provides support for simple integration into popular CI and CD tools, lik
 
 #### How it works
 
-<img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
-_Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
+Setting up continuous integration and deployment involves several steps:
+ 1. Writing tests
+ 1. Setting up a test harness that runs tests from the command line
+ 1. Creating simple scripts for running a build, test, and deploy
+ 1. Integrating with a service that runs the scripts at the proper times
 
-The trickiest aspect of setting up CI and CD systems is creating automated build, test, and deployment scripts. Every DoneJS app comes with a build, test, and deployment one-liner: `donejs build`, `donejs test`, and `donejs deploy`.
+Steps 1, 2, and 3 are the hard parts. Step 4 is simple. DoneJS supports  in two main ways: proper test support and simple CLI commands.
 
-Integrating with the tools that automatically runs these scripts is quite simple. For instance, setting up Travis CI involves signing up and adding a `.travis.yml` file to the project:
+##### Proper test support
+
+DoneJS comes with comprehensive support for testing. The [Testing](#section=section_ComprehensiveTesting) section contains much more detail about testing support. 
+
+[Generators](#section=section_Generators) create working test scripts right off the bat, and the plumbing for test automation is built into each project. Each [modlet](#section=section_Modlets) contains a skeleton for unit tests. All that is left for the developer to do is write tests.
+
+##### Simple CLI commands
+
+Another hurdle is creating automated build, test, and deployment scripts. Every DoneJS app comes with a build, test, and deployment one-liner: `donejs build`, `donejs test`, and `donejs deploy`.
+
+##### Tool integration
+
+Once the tests are written and the scripts are automated, integrating with the tools that automatically runs these scripts is quite simple. For instance, setting up Travis CI involves signing up and adding a `.travis.yml` file to the project:
 
 ```
 language: node_js
@@ -667,8 +687,6 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 ```
-
-The biggest hurdle to getting projects using CI and CD is proper tests and automation. DoneJS provides the plumbing for automation, as well as working [unit tests](#section_ComprehensiveTesting) via generators, making it easy to get started right at the beginning of any project.
 
 <a class="btn" href="/place-my-order.html#section=section_Automatedtestsandcontinuousintegration"><span>View the CI Guide</span></a>
 <a class="btn" href="/place-my-order.html#section=section_ContinuousDeployment"><span>View the CD Guide</span></a>
