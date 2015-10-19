@@ -5,7 +5,7 @@
 
 @description 
 
-DoneJS is a compilation of the best technology for every aspect of developing a complex JavaScript app, all working together seamlessly.
+DoneJS is a JavaScript framework compiling technology for every aspect of developing a complex JavaScript app, all working together seamlessly.
 
 Our mission is to enable the JavaScript community to make amazing apps - high performance, maintainable, and highly usable -  by default.
 
@@ -31,7 +31,7 @@ DoneJS has three primary goals:
 
 Building a modern application is increasingly difficult. There are many competing concerns to balance.
 
-It should be fast (that means many things). It should reach as many users as possible (run on every browser and platform).  It should provide a great user experience. 
+An amazing application needs to be fast, reach as many users as possible, and provide a great user experience.
 
 It should also be maintainable, otherwise it will be too expensive in the long run.
 
@@ -51,23 +51,25 @@ We aim to do this in three main ways:
 
 For any sufficiently complex application, there are many many layers of foundation needed. 
 
-There are a ton of options out there, and so much to learn. The rise of the [micro-library](http://microjs.com/#) era has led to a time when picking your stack involves picking from thousands of potential options, and infinite possible combinations that have to work together well.
+The rise of [micro-libraries](http://microjs.com/#), small single-purpose modules, has led to a time when picking your stack involves choosing from thousands of potential options, and infinite possible combinations that have to work together well.
 
-Having many small micro libraries to choose from sounds good in theory. In practice, we've found it presents more challenges than benefits.
+So many options sounds good in theory. In practice, we've found it presents more challenges than benefits.
 
-How do you choose? How do you know if they fit well together? What if the industry changes (it will) and a year from now your stack is no longer maintained? How do you find support for your unique combination of tools?
+How do you choose? How do you know if they fit well together? How do you find support for your unique combination of tools?
 
-More importantly, who has time for that?
+Most importantly, who has time for that?
 
 DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. Its our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app. 
 
 We've compiled best in class tools for every part of the JavaScript application lifecycle: from tooling, to application architecture, to production deployment.
 
-Just like Apple owning the whole stack from software to hardware to retails makes for a great experience: the whole DoneJS stack is greater than the sum of its parts. A few examples:
+Just like Apple owning the whole stack from software to hardware makes for a great experience: the whole DoneJS stack is greater than the sum of its parts. 
 
-* generators
-* can-import
-* server side rendering simplicity
+A few examples:
+
+* Generators span layers by helping bootstrap an entire projects or individual modules.
+* `<can-import>` brings dependency management into templates and hooks that simplify progressive loading - spanning several projects.
+* Server side rendering is made simple through the use of hooks within data components that tell the server to delay rendering - a feature that bridges can-connect, StealJS, and can-ssr.
 
 #### 2. Hard technical problems
 
@@ -86,17 +88,49 @@ To us, the `right thing` means doing the extra work that makes your code easier 
 
 Often, there is a barrier to doing the right thing: finding the right tools, learning about them, setting up, and configuring them. DoneJS aims to remove this barrier, making doing the `right thing` simply part of the normal dev cycle.
 
-- Tests and Documentation
+A few examples:
+
+- Tests
+- Documentation
 - Guides for CI and CD
 - Modlets
 - Generators
 
 ### Evolve
 
-Learn from others. Provide the ability to upgrade without having to rewrite everything.  Changes will happen,
-but stepwise.  
+Technology is always a moving target. If you follow the JavaScript JavaScript community, you'll know that the past 10 years have been a whirlwind of activity: evolving best practices, frameworks coming and going, browsers adding features.
 
-Provide examples of this.
+Our goal is to embrace the change. Our promise to DoneJS users is that we'll continue to evolve, while always providing an upgrade path.
+
+Applications often live for many years. Therefore, framework longevity is a critical ingredient, maybe THE critical ingredient, in project success. 
+
+If you pick a framework that abandons its users or stagnates, you'll be spending far too much time on rewrites or inefficient patterns that are solved in other frameworks.
+
+<img src="/static/img/evolve/badframework.png"  alt="Bad framework choice can kill long term velocity" />
+
+If you pick a framework that continues to innovate, your app lives long and prospers.
+
+<img src="/static/img/evolve/goodframework.png" alt="Good framework choice helps maintain increasing velocity" />
+
+It's far too easy to be seduced by the allure of popularity. But popularity doesn't predict longevity.
+
+<img src="/static/img/evolve/toohot.jpg" alt="Good framework choice helps maintain increasing velocity" />
+
+Many "hot" frameworks, even those backed by giant corporations, fizzle out.
+
+<img src="/static/img/evolve/graveyard.png" alt="Many frameworks fizzle out" />
+
+The only true predictor of framework longevity is past behavior. 
+
+DoneJS is the next generation of a long line of tools that have a long track record of continuous innovation (more on that story in the History section). Here are some highlights:
+
+<iframe src='https://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=1lBdurIQbbJkTZ8_kCQaXZtFaD06ulMFAlkqyEmXH4k0&font=Bevan-PotanoSans&maptype=toner&lang=en&start_at_slide=3&height=650&start_zoom_adjust=-2' width='100%' height='650' frameborder='0'></iframe> 
+
+Steady, consistent improvements since 2007, all while providing an upgrade path along the way. If your project chose JavaScriptMVC in 2007, you would have made a wise decision, giving your team an upgrade path to a modern application for the past 8.5 years.
+
+<img src="/static/img/evolve/bitovitech.png" alt="A graph showing Bitovi's continued releases" />
+
+Our goal is to provide steady progress into the future. DoneJS will keep evolving with the times.
 
 ### Community
 
