@@ -131,23 +131,6 @@ The homepage custom element (with the HTML tag name `chat-home`) won't be very b
 donejs generate component home.component chat-home
 ```
 
-Then move the content from the homepage into this component so that `src/home.component` looks like this:
-
-```html
-<can-component tag="chat-home">
-  <style type="less">
-    display: block;
-  </style>
-  <template>
-    <h1 class="page-header text-center">
-      <img src="http://donejs.com/static/img/donejs-logo-white.svg"
-        alt="DoneJS logo" style="width: 100%;" />
-      <br>Chat
-    </h1>
-  </template>
-</can-component>
-```
-
 The messages component (with the tag `chat-messages`) will be a little more complex, so we generate it using the [modlet file pattern](Features.html#section=section_Modlets).
 
 ```
@@ -164,7 +147,7 @@ DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL string
 
 To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
-First, let's update `src/home.component` with a link to the chat messages page:
+First, let's update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
 ```html
 <can-component tag="chat-home">
@@ -655,42 +638,10 @@ XCode can be downloaded via the AppStore. We will use it to create an iOS applic
 Now we can install the DoneJS Cordova tools with
 
 ```
-npm install steal-cordova --save-dev
+donejs add cordova
 ```
 
-And update `build.js` to:
-
-```js
-var stealTools = require("steal-tools");
-
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm"
-}, {
-  bundleAssets: true
-});
-
-var cordovaOptions = {
-  buildDir: "./build/cordova",
-  id: "com.donejs.chat",
-  name: "DoneJS chat",
-  platforms: ["<platform>"],
-  plugins: ["cordova-plugin-transport-security"],
-  index: __dirname + "/production.html",
-  glob: [
-    "node_modules/steal/steal.production.js"
-  ]
-};
-
-var stealCordova = require("steal-cordova")(cordovaOptions);
-// Check if the cordova option is passed.
-var buildCordova = process.argv.indexOf("cordova") > 0;
-
-if(buildCordova) {
-  buildPromise.then(stealCordova.build).then(stealCordova.<platform>.emulate);
-}
-```
-
-Replace `<platform>` with the platform you are building for; "ios" if on Mac and "android" if on Windows (or another OS).
+Depending on your operating system we can accept most of the defaults unless you would like to build for Android which needs to be selected from the checkbox list of platforms.
 
 To run the Cordova build and launch the simulator we can now run
 
@@ -698,85 +649,17 @@ To run the Cordova build and launch the simulator we can now run
 donejs build cordova
 ```
 
-If everything went well we should see the emulator running our application. If using Windows you'll get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then redo the build; this will only happen the first time you build for Cordova.
+If everything went well we should see the emulator running our application. When using Windows you'll get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then redo the build; this will only happen the first time you build for Cordova.
 
 ### NW.js
 
-To set up the desktop build, first we have to install the build tools:
+To set up the desktop build, we have to add it to our application like this:
 
 ```
-npm install steal-nw --save-dev
+donejs add nw
 ```
 
-We'll also update our `package.json`, changing `main` to `app.html` and addding information about the desktop window:
-
-```js
-"main": "production.html",
-...
-"window": {
-  "width": 1060,
-  "height": 625,
-  "toolbar": false
-}
-```
-
-And then update `build.js` to:
-
-```js
-var stealTools = require("steal-tools");
-
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm"
-}, {
-  bundleAssets: true
-});
-
-var cordovaOptions = {
-  buildDir: "./build/cordova",
-  id: "com.donejs.chat",
-  name: "DoneJS chat",
-  platforms: ["ios"],
-  plugins: ["cordova-plugin-transport-security"],
-  index: __dirname + "/production.html",
-  glob: [
-    "node_modules/steal/steal.production.js"
-  ]
-};
-
-var stealCordova = require("steal-cordova")(cordovaOptions);
-// Check if the cordova option is passed.
-var buildCordova = process.argv.indexOf("cordova") > 0;
-
-if(buildCordova) {
-  buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
-}
-
-var nwOptions = {
-  buildDir: "./build",
-  platforms: ["<platform>"],
-  files: [
-    "package.json",
-    "production.html",
-    "node_modules/steal/steal.production.js"
-  ],
-  version: "0.12.3"
-};
-
-var stealNw = require("steal-nw");
-
-// Check if the cordova option is passed.
-var buildNW = process.argv.indexOf("nw") > 0;
-
-if(buildNW) {
-  buildPromise = buildPromise.then(function(buildResult){
-    stealNw(nwOptions, buildResult);
-  });
-}
-```
-
-Like before, replace `<platform>` with "osx" if on a Mac and "windows" if on Windows.
-
-Now we can run the build with
+We can answer most prompts with the default except for the `version` which needs to be set to the latest stable version (currently `0.12.3`). To find the latest version, visit [dl.nwjs.io](http://dl.nwjs.io/). Then we can run the build like this:
 
 ```
 donejs build nw
