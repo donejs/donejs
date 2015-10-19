@@ -401,6 +401,8 @@ Wiring up these pretty URLs in your code is simple and intuitive.
 
 #### How it works
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/aHA504Vx0eU" frameborder="0" allowfullscreen></iframe>
+
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
 DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL patterns, like `/user/1`, to properties in our application state, like `{'userId': 1}`. In other words, our routes will just be a representation of the application state.
