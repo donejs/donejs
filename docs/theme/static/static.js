@@ -357,45 +357,27 @@ steal("./content_list.js",
             html += "<img src='static/img/link.svg'>";
             html += "</a>";
             $( this ).prepend( html );
-            $( this ).find( "a" ).eq( 0 ).click( function () {
-                var offset = -55;
-                $( 'html, body' ).animate({
-                    scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
-                }, 500);
-            });
         });
 
         //hijack guide page jumps, animate scroll
         $( function () {
             var clickFn = function () {
-                var offset = -55;
                 var thisLi = $( this ).closest( "li" );
                 if ( $( "section.contents" ).is( ".active" ) && thisLi.is( "ol > li > ol > li" ) ) {
                     $( ".scroll-spy-title" ).click();
                 }
-                $( 'html, body' ).animate({
-                    scrollTop: $( this.href.replace( /.*?#section=/, "#" ) ).offset().top + offset
-                }, 500);
             };
-
-            var hashOnLoad = window.location.hash;
-            var jumpOnLoad = null;
 
             $( "section.contents a" ).each( function () {
                 this.href = this.href.replace( "#", "#section=" );
-
-                if ( hashOnLoad && this.href.replace( /.*?#section=/, "#section=" ) === hashOnLoad ) {
-                    jumpOnLoad = this;
-                }
 
                 $( this ).on( "click", clickFn );
 
                 return true;
             });
 
-            if ( jumpOnLoad ) {
-                clickFn.call( jumpOnLoad );
-            } else if ( hashOnLoad ) {
+            var hashOnLoad = window.location.hash;
+            if ( hashOnLoad ) {
                 var jumpTo = hashOnLoad.replace( /.*?#section=/, "#" );
                 if ( $( jumpTo ).length ) {
                     var offset = -55;
@@ -405,6 +387,18 @@ steal("./content_list.js",
                 }
             }
         });
+
+        window.addEventListener( "hashchange", function ( hashChangeEvent ) {
+            var offset = -55;
+            var newHash = hashChangeEvent.newURL.replace( /.*?(#.*)/g, "$1" );
+
+            if ( newHash.indexOf( "#section=" ) === -1 ) return;
+
+            var jumpTo = newHash.replace( /.*?#section=/, "#" );
+            $( 'html, body' ).animate({
+                scrollTop: $( jumpTo ).offset().top + offset
+            }, 500);
+        }, false );
 
 
 
