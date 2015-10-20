@@ -354,7 +354,7 @@ steal("./content_list.js",
                 this.id = prevId + "__" + $( this ).text().replace( /[^a-z0-9]/gi, "" );
             }
             var html = "<a class='linkToHeader' href='#section=" + this.id + "'>";
-            html += "<img src='static/img/link.svg' width='15px'>";
+            html += "<img src='static/img/link.svg'>";
             html += "</a>";
             $( this ).prepend( html );
             $( this ).find( "a" ).eq( 0 ).click( function () {
