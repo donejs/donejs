@@ -36,11 +36,13 @@
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
     "documentjs": "^0.3.0",
+    "is-ci": "^1.0.7",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5"
   },
   "dependencies": {
     "commander": "^2.8.1",
+    "cross-spawn-async": "^2.0.0",
     "mkdirp": "^0.5.1",
     "npm": "^2.13.1",
     "q": "^1.4.1",
