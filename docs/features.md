@@ -439,15 +439,15 @@ Nothing increases the maintainability of an application more than good automated
 
 DoneJS provides tools for the entire testing lifecycle:
 
-* **Generators** - create boilerplate tests to get started quickly
-* **Unit testing** - assertion libraries to test your module interfaces
-* **Functional testing** - scripting the browser, simulating user actions, and testing your UI modules
-* **User action event simulation** - accurate event simulation for clicks, types, drags, and other user actions
-* **A command line test runner** - invoke the same tests from the CLI
-* **A browser launcher** - launch several browsers and target your tests against them
-* **A reporting tool** - report results, including code coverage, to the CLI, in various formats
-* **Simple integration with continuous integration tools** - one step to hook into TravisCI or other CI systems
-* **A mock layer** - mock out your server APIs so you can test your app in isolation from a server
+* [Generators](#section=section_ComprehensiveTesting__Howitworks__Generators) - create boilerplate tests to get started quickly
+* [Unit testing](#section=section_ComprehensiveTesting__Howitworks__Unittests) - assertion libraries to test your module interfaces
+* [Functional testing](#section=section_ComprehensiveTesting__Howitworks__Functionaltests) - scripting the browser, simulating user actions, and testing your UI modules
+* [User action event simulation](#section=section_ComprehensiveTesting__Howitworks__Eventsimulationaccuracy) - accurate event simulation for clicks, types, drags, and other user actions
+* [A command line test runner](#section=section_ComprehensiveTesting__Howitworks__Runningtestsfromthecommandline) - invoke the same tests from the CLI
+* [A browser launcher](#section=section_ComprehensiveTesting__Howitworks__Runningtestsfromthecommandline) - launch several browsers and target your tests against them
+* [A reporting tool](#section=section_ComprehensiveTesting__Howitworks__Runningtestsfromthecommandline) - report results, including code coverage, to the CLI, in various formats
+* [Simple integration with continuous integration tools](#section=section_ContinuousIntegration_Deployment) - one step to hook into TravisCI or other CI systems
+* [A mock layer](#section=section_ComprehensiveTesting__Howitworks__MockingserverAPIs) - mock out your server APIs so you can test your app in isolation from a server
 
 <div class="maintainable wrapper">
   <div class="background video">
