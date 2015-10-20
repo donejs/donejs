@@ -1304,7 +1304,7 @@ let Order = Map.extend({
   }
 });
 
-export const connection = superMap({
+export const serverConnection = superMap({
   url: '/api/orders',
   idProp: '_id',
   Map: Order,
@@ -1312,7 +1312,7 @@ export const connection = superMap({
   name: 'orders'
 });
 
-tag('order-model', connection);
+tag('order-model', serverConnection);
 
 export default Order;
 ```
@@ -1532,9 +1532,9 @@ import io from 'steal-socket.io';
 
 const socket = io();
 
-socket.on('orders created', order => connection.createInstance(order));
-socket.on('orders updated', order => connection.updateInstance(order));
-socket.on('orders removed', order => connection.destroyInstance(order));
+socket.on('orders created', order => serverConnection.createInstance(order));
+socket.on('orders updated', order => serverConnection.updateInstance(order));
+socket.on('orders removed', order => serverConnection.destroyInstance(order));
 ```
 
 ### Update the template
