@@ -58,6 +58,16 @@ set NODE_ENV=production
 $env:NODE_ENV="production"
 ```
 
+## Mac OS X
+
+### Prerequisites
+
+All that is needed to get DoneJS working on OS X is the Xcode command line tools which you can get by typing:
+
+```shell
+xcode-select --install
+```
+
 ## Debian / Ubuntu
 
 Installing in a Debian / Ubuntu environment takes a little extra work because the version of Node shipped is older than what is supported by DoneJS (and most other Node-based software).
