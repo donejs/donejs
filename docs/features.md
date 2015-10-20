@@ -841,7 +841,13 @@ _Pretty URLs and routing are features of the [stealjs/transpile](https://github.
 
 ### Custom HTML Elements
 
-One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules (modlets) based on custom HTML elements.
+One of the most important concepts in DoneJS is splitting up your application functionality into independent, isolated, reusable custom HTML elements.
+
+The major advantages of building applications based on custom HTML elements are:
+
+ 1. **Ease of page composition** - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.
+ 1. **Forced modularity** - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
+ 1. **Reuse** - Custom elements are designed to be reusable across pages and applications.
 
 Consider the following example:
 
@@ -869,23 +875,41 @@ Just like HTML’s natural advantages, composing entire applications from HTML b
 
 #### How it works
 
-First, some background on custom elements and why they're useful. Then, some details about creating powerful custom elements in DoneJS.
+First, it's important to understand the background of custom elements and their advantages. Then, we'll discuss the details of creating powerful custom elements in specifically DoneJS, and why they're special.
 
-##### History of custom elements
+##### Benefits of custom elements
 
 Before custom HTML elements existed, to add a datepicker to your page, you would:
 
  1. Load a datepicker script
- 1. Add a placeholder HTML element: <div class='datepicker' />
- 1. Add JavaScript code to instantiate your datepicker: $('.datepicker').datepicker()
- 1. Gather your stone tipped spears and forage for small animals to feed your family for the night.
+ 1. Add a placeholder HTML element
+
+```
+<div class='datepicker' />
+```
+ 3. Add JavaScript code to instantiate your datepicker
+
+```
+$('.datepicker').datepicker()
+```
+ 4. Gather your stone tipped spears and forage for small animals to feed your family for the night.
 
 With custom HTML elements, to add the same datepicker, you would:
 
  1. Load a datepicker script
- 1. Add the datepicker to your HTML or template: <datepicker value="{date}"/>
+ 1. Add the datepicker to your HTML or template: 
 
-[Web Components](http://webcomponents.org/) are a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers. DoneJS uses CanJS' can.Component to provide a modern take on web components.
+```
+<datepicker value="{date}"/>
+```
+
+That might seem like a subtle difference, but it is actually a major step forward. The custom HTML element syntax allows for instantiation, configuration, and location, all happening at the same time.
+
+Custom HTML elements are another name for [Web Components](http://webcomponents.org/), a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers. 
+
+##### Benefits of DoneJS custom elements
+
+DoneJS uses CanJS' [can.Component](http://canjs.com/docs/can.Component.html) to provide a modern take on web components.
 
 Components in DoneJS have three basic building blocks:
 
@@ -893,11 +917,11 @@ Components in DoneJS have three basic building blocks:
  * a viewModel object
  * event handlers
 
-The major advantages of building applications based on these custom HTML elements are:
+There are several unique benefits to DoneJS custom elements:
 
- 1. **Ease of page composition** - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.
- 1. **Forced modularity** - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
- 1. **Reuse** - Custom elements are designed to be reusable across pages and applications.
+ * [Easily construct custom elements](#section=section_CustomHTMLElements__Howitworks__Definingacustomelement) - you can define them within a single `.component` file, or a modlet
+ * [Load data from custom elements](#section=section_CustomHTMLElements__Howitworks__Dataelementsvisualelementsexpressivetemplates)
+ * [Simple progressive loading with can-import](#section=section_CustomHTMLElements__Howitworks__Intemplatedependencydeclarations)
 
 ##### Defining a custom element
 
@@ -929,11 +953,13 @@ One way to define a component is with a [web component](https://github.com/donej
 </can-component>
 ```
 
-Another way to organize a custom element is a [modlet](#section_Modlets) style file structure: a folder with the element broken into several independent pieces. In this pattern, the custom element's ViewModel, styles, template, event handlers, demo page, tests, and test page are all located in separate files.
+This simple form of custom elements is great for quick, small widgets, since everything is contained in one place.
+
+Another way to organize a custom element is a [modlet](#section_Modlets) style file structure: a folder with the element broken into several independent pieces. In this pattern, the custom element's ViewModel, styles, template, event handlers, demo page, tests, and test page are all located in separate files. This type of custom element is well suited for [export and reuse](#section=section_NPMPackages__Howitworks__Modularworkflow).
 
 DoneJS [Generators](#section_Generators) will create both of these types of custom elements so you can get started quickly.
 
-##### Data + visual elements = powerful templates
+##### Data elements + visual elements = expressive templates
 
 The beauty and power of custom HTML elements is most apparent when visual widgets (like graphing) is combined with elements that express data.
 
@@ -951,22 +977,23 @@ Back to our original example:
 
 This template combines a request for data with an element that expresses it. It's immediately obvious how you would add or remove features from this, allowing for quick changes and easy prototyping. Without custom elements, the same changes would require more difficult code changes and wiring those changes up with widget elements that display the data.
 
-Data custom elements are part of DoneJS via can-connect's [can/tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html).
+Data custom elements are part of DoneJS via can-connect's [can-tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html).
 
 ##### Custom element libraries
 
 Custom elements are designed to be easily shareable across your organization. DoneJS provides support for simple [NPM import and export](#section_NPMPackages) and creating [documentation](#section=section_Documentation) for elements. Together with custom element support, these features make it easier than ever to create reusable bits of functionality and share them.
 
 Some open source examples of DoneJS custom elements:
- * `<bit-c3>`: [website](http://bitovi-components.github.io/bit-c3/docs/index.html)
- * `<bit-tabs>`: [website](https://github.com/bitovi-components/bit-tabs) components
- * `<bit-autocomplete>`: [website](http://bitovi-components.github.io/bit-autocomplete/)
+
+<a class="btn" href="http://bitovi-components.github.io/bit-c3/docs/index.html"><span>bit-c3</span></a>
+<a class="btn" href="https://github.com/bitovi-components/bit-tabs"><span>bit-tabs</span></a>
+<a class="btn" href="http://bitovi-components.github.io/bit-autocomplete/"><span>bit-autocomplete</span></a>
 
 Check out [their source](https://github.com/bitovi-components/bit-tabs) for good examples of shareable, documented, and tested custom elements.
 
 ##### In-template dependency declarations
 
-[can-import](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements and other modules straight from a template file like:
+[can-import](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements, helpers, and other modules straight from a template file like:
 
 ```
 <can-import from="components/my_tabs"/>
