@@ -47,12 +47,90 @@ hr  {
 }
 /* site wide footer */
 footer {
+	padding: 30px 0;
+	height:auto;
+	text-align: inherit;
 	.clearfix;
 	background-color: @logoColor;
-	nav {
-		a.brand {
-			background-image: url( '/static/img/donejs-logo-final-02.svg' )!important;
-			margin: 13px auto;
+	.container {
+		height: auto;
+	}
+	.footer-brand {
+		width: 100px;
+		padding:0;
+		text-align: center;
+		@media(max-width: @screen-xs-max){
+			width: 100%;
+			img {
+				width: 100px;
+				text-align: center;
+			}
+		}
+	}
+	.footer-brand,
+	.footer-nav-main {
+		.pull-left;
+	}
+	.footer-nav-main,
+	.footer-nav-social {
+		position: static;
+		margin: 0;
+		padding:0;
+		text-align: left;
+		height: 20px;
+		@media(max-width: @screen-xs-max){
+			padding: 20px 0;
+			height: auto;
+		}
+		a {
+			height: auto;
+			color: #fff;
+			text-shadow: none;
+			line-height: normal;
+			border-right: 1px solid lighten(@logoColor, 15%);
+			padding: 0 10px;
+			@media(max-width: @screen-xs-max){
+				padding: 0 15px;
+			}
+		}
+		li:last-child a {
+			border: 0;
+		}
+		@media(max-width: @screen-xs-max){
+			float: none;
+			width: 100%;
+			text-align: center;
+			.clearfix;
+		}
+	}
+	.footer-copyright {
+		text-align: left;
+		color: #fff;
+		padding: 10px 15px;
+		@media(max-width: @screen-xs-max){
+			text-align: center;
+			padding: 20px 0;
+		}
+	}
+	.footer-nav-social {
+		.pull-right;
+		li {
+			width: auto;
+		}
+		a {
+			border-right: 0;
+			opacity: .5;
+			-webkit-transition: opacity 200ms linear;
+			-moz-transition: opacity 200ms linear;
+			-o-transition: opacity 200ms linear;
+			-ms-transition: opacity 200ms linear;
+			transition: opacity 200ms linear;
+			&:hover {
+				opacity: 1;
+			}
+		}
+		.footer-social-icon {
+			width: 30px;
 		}
 	}
 }
