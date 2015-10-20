@@ -590,9 +590,11 @@ body.donejs {
   h3 {
     font-size: 30px;
   }
-
   h2.trail {
     margin-top: 53px;
+  }
+  p {
+    color: #fff;
   }
   .lead-in {
     padding-top: 100px;
@@ -600,8 +602,12 @@ body.donejs {
       padding-top: 44px;
     }
   }
-  h4 {
+  h4,
+  p {
       font-weight: 300;
+  }
+  a {
+    color: lighten(@logoColor, 30%);
   }
   .links {
       text-align: center;
@@ -618,10 +624,8 @@ body.donejs {
       }
       p {
         margin-bottom: 5px;
-        color: #fff;
       }
       a {
-        color: lighten(@logoColor, 30%);
         font-weight: 700;
         text-decoration: none;
         @media(max-width: @screen-xs){
