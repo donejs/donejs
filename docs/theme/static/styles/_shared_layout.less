@@ -627,6 +627,15 @@ body:not(.donejs) {
 			border-right:0;
 		}
 	}
+	th {
+		font-weight: 700;
+	}
+	td {
+		background-color: #FCFEFD;
+	}
+	tr:last-child td {
+		border-bottom: 0;
+	}
 	.striped td {
 		background-color: #fff;
 	}
@@ -644,17 +653,21 @@ body:not(.donejs) {
 	.arrow:before {
 		display: none; // removes bootstrap triangle
 	}
+	.framework-logo {
+		max-width: 50px;
+		margin:0;
+	}
 }
 @media only screen and (max-width: 767px) {
 	.pinned {
     position: absolute;
     left: 0;
     top: 0;
-    background: #fff;
     width: 35%;
     overflow: hidden;
     overflow-x: scroll;
-    z-index: 1065
+    z-index: 1065;
+		border-right: 2px solid #ccc;
 	}
 	.pinned table {
     border-right: none;
@@ -665,6 +678,11 @@ body:not(.donejs) {
 	.pinned table th,
 	.pinned table td {
     white-space: nowrap;
+		border-right: 0;
+
+	}
+	.pinned table th {
+		background-color: #FCFEFD;
 	}
 	th,
 	td {
@@ -681,6 +699,11 @@ body:not(.donejs) {
 	div.table-wrapper div.scrollable table {
     margin-left: 35%;
     text-align: center;
+		margin-bottom:0;
+		.framework-logo {
+			margin-bottom: 0 !important;
+			margin-top: 0 !important;
+		}
 	}
 	div.table-wrapper div.scrollable {
     overflow: scroll;

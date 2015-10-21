@@ -14,7 +14,7 @@
             });
         }
     };
-    $(window).load(updateTables);
+    $(window).ready(updateTables);
     $(window).bind("resize", updateTables);
 
     function splitTable(original) {

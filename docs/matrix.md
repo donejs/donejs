@@ -2,21 +2,17 @@
 @parent DoneJS
 @hide sidebar
 
-@description Matrix Front End Design
-
-
 @body
 
-## Design ALL the things!!
 <div class="table-wrapper">
   <div class="scrollable">
     <table class="matrix-table responsive">
       <tr>
         <th class="features">FEATURES</th>
-        <th><img width="79" src="/static/img/donejs-logo-white.svg"></th>
-        <th><img src="/static/img/angular-logo.png"></th>
-        <th><img src="/static/img/backbone-logo.png"></th>
-        <th><img src="/static/img/ember-logo.png"></th>
+        <th><img class="framework-logo" src="/static/img/donejs-logo-matrix.png"></th>
+        <th><img class="framework-logo" src="/static/img/angular-logo.png"></th>
+        <th><img class="framework-logo" src="/static/img/backbone-logo.png"></th>
+        <th><img class="framework-logo" src="/static/img/ember-logo.png"></th>
       </tr>
       <tr class="striped">
         <td class="features">
