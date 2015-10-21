@@ -614,3 +614,87 @@ body:not(.donejs) {
 		}
 	}
 }
+.matrix-table {
+	background-color: transparent;
+	border:0;
+	position: relative;
+
+	td, tr, th {
+		background-color: transparent;
+	}
+	td, th {
+		&:last-child {
+			border-right:0;
+		}
+	}
+	.striped td {
+		background-color: #fff;
+	}
+	.features {
+		width: 285px;
+		text-align: left;
+	}
+	.matrix-rating-icon {
+		width: 20px;
+		height: 20px;
+		&[data-toggle="popover"] {
+			cursor: help;
+		}
+	}
+	.arrow:before {
+		display: none; // removes bootstrap triangle
+	}
+}
+@media only screen and (max-width: 767px) {
+	.pinned {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #fff;
+    width: 35%;
+    overflow: hidden;
+    overflow-x: scroll;
+    z-index: 1065
+	}
+	.pinned table {
+    border-right: none;
+    border-left: none;
+    width: 100%;
+    margin-left: 0 !important;
+	}
+	.pinned table th,
+	.pinned table td {
+    white-space: nowrap;
+	}
+	th,
+	td {
+    height: 70px;
+	}
+	.pinned td:last-child {
+    border-bottom: 0;
+	}
+	div.table-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    overflow: hidden;
+	}
+	div.table-wrapper div.scrollable table {
+    margin-left: 35%;
+    text-align: center;
+	}
+	div.table-wrapper div.scrollable {
+    overflow: scroll;
+    overflow-y: hidden;
+	}
+	table.responsive td,
+	table.responsive th {
+    position: relative;
+    white-space: nowrap;
+	}
+	table.responsive th:first-child,
+	table.responsive td:first-child,
+	table.responsive td:first-child,
+	table.responsive.pinned td {
+    display: none;
+	}
+}
