@@ -556,8 +556,15 @@ body.donejs {
       height: auto;
       margin-bottom: 15px;
       font-size: 14px;
+      display: inline-block;
+      + .btn {
+        margin-left: 20px;
+      }
       @media(max-width: @screen-xs){
         width: 100%;
+        + .btn {
+          margin-left: 0;
+        }
       }
       &:hover {
         text-decoration: none;
