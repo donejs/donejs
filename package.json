@@ -63,14 +63,14 @@
       "done-css": "~1.1.13",
       "generator-donejs": "^0.3.0",
       "jquery": "^2.1.4",
-      "steal": "^0.12.0-pre.7"
+      "steal": "^0.12.1"
     },
     "devDependencies": {
       "documentjs": "0.3.3",
       "donejs-deploy": "^0.2.0",
       "funcunit": "~3.0.0",
       "steal-qunit": "^0.1.1",
-      "steal-tools": "^0.12.0-pre.4",
+      "steal-tools": "^0.12.0",
       "testee": "^0.2.0"
     }
   }
