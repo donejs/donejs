@@ -165,13 +165,22 @@ DoneJS uses the following strategies to reduce the amount and size of data reque
 
 #### How it works
 
-DoneJS uses Super Models to implement these strategies. Super Model is a data layer of DoneJS app and is powered by `can-connect` (utility to assemble real-time, high performance, restful data connections).
+DoneJS uses [can-connect](http://connect.canjs.com/) as its model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
+
+It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests indepdently, and with little thought to performance, without actually creating a poorly performing application.
 
 ##### Fall through caching
 
-A "fall-through-cache" strategy checks available cache connection (e.g. memory cache, or local storage) for data and then in the background updates the instance or list with data retrieved using the base connection. If the cache has the data, it will be returned immediately.
+A fall through cache strategy serves cached data first, but still makes API requests to check for changes.
 
-For example. When user goes to a page the application is going to make requests for all data of the page. It’s going to hit Super Model (DoneJS’s data layer) which will check Local Storage. If data is there it will be used to render the page, and in the background it’s going to make a request to the server, get the data and use it to update items on the page (if necessary) and update Local Storage.
+Here's how the caching logic works:
+
+1. When the application loads, it checks for available cache connections (by default this looks for localStorage or memory). 
+1. When a request is made, it checks for a cache hit. 
+1. If there is a hit, the request is completed immediately with the cached data. *Note: even partial hits like subsets can be served by the cache.*
+1. Regardless of a hit or miss, a request is made in the background to the actual API endpoint. 
+1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
+1. Response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
 <video style="width:100%;" controls poster="static/img/donejs-fallthrough-caching.png" src="static/img/donejs-fallthrough-caching.mp4"></video>
 
