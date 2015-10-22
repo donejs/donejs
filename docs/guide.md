@@ -323,7 +323,7 @@ For the messages page, we will:
 
 ### Generate Message model
 
-To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermode like this:
+To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermodel like this:
 
 ```
 donejs generate supermodel message

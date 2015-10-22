@@ -148,15 +148,57 @@ _Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additio
 
 ### Caching and Minimal Data Requests
 
-DoneJS applications are able to do variety of performance improvements by intelligently managing the data
-layer.  Example techniques:
+DoneJS improves performance by intelligently managing the data layer, taking advantage of various forms of caching and request reduction techniques.
 
- - Fall through cache - Show data in localStorage cache immediately, but in the background, look for updates on the server.
- - Combine requests - Instead of making multiple, independent requests, combine them into a single request.
- - Request difference - Only request data that hasn't already loaded.
- - Inline cache - Provide response data for all initial JavaScript requests.
- - Service worker background caching - Use a service worker to load and cache data in the background so it is ready when the
-   user visits the page.
+Undoubtedly, the slowest part of any web application is round trips to the server. Especially now that [more than 50% of web traffic comes from mobile devices](http://searchengineland.com/its-official-google-says-more-searches-now-on-mobile-than-on-desktop-220369), where connections are notoriously slow and unreliable, applications must be smart about reducing network requests.
+
+Making matters worse, the concerns of maintainable architecture in single page applications are at odds with the concerns of minimizing network requests. This is because independent, isolated UI widgets, while easier to maintain, often make AJAX requests on page load. Without a layer that intelligently manages those requests, this architecture leads to too many AJAX requests before the user sees something useful. 
+
+No engineer should have to choose between maintainability and performance. With DoneJS, you won't have to.
+
+DoneJS uses the following strategies to reduce the amount and size of data requests:
+
+ - [Fall through caching](#section=section_CachingandMinimalDataRequests__Howitworks__Fallthroughcaching) - Cache data in localStorage. Automatically show cached data immediately, but look for updates on the server in the background and merge changes.
+ - [Combining requests](#section=section_CachingandMinimalDataRequests__Howitworks__Combiningrequests) - Instead of making multiple, independent requests to the same API, combine them into a single request.
+ - [Request caching](#section=section_CachingandMinimalDataRequests__Howitworks__Requestcaching) - Reduce the number and size of server requests by intelligently using cached datasets.
+ - [Inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) - Use data embedded in the page response instead of making duplicate requests.
+
+#### How it works
+
+DoneJS uses Super Models to implement these strategies. Super Model is a data layer of DoneJS app and is powered by `can-connect` (utility to assemble real-time, high performance, restful data connections).
+
+##### Fall through caching
+
+A "fall-through-cache" strategy checks available cache connection (e.g. memory cache, or local storage) for data and then in the background updates the instance or list with data retrieved using the base connection. If the cache has the data, it will be returned immediately.
+
+For example. When user goes to a page the application is going to make requests for all data of the page. It’s going to hit Super Model (DoneJS’s data layer) which will check Local Storage. If data is there it will be used to render the page, and in the background it’s going to make a request to the server, get the data and use it to update items on the page (if necessary) and update Local Storage.
+
+<video style="width:100%;" controls poster="static/img/donejs-fallthrough-caching.png" src="static/img/donejs-fallthrough-caching.mp4"></video>
+
+##### Combining requests
+
+A “data-combine-requests” strategy combines multiple incoming requests into one if possible. This becomes doable with the help of a set algebra. When we retrieve some filtered list, it is usually a subset of a whole list. E.g. completed todos and incompleted todos are subsets of todos. Both of them in combination are the whole todos list itself. By applying set logic to subsets of data we can do two things: reduce the amount of data transferred during a single request, and reduce the amount of requests themselves.
+
+<video style="width:100%;" controls src="static/img/donejs-combine-requests.m4v"></video>
+
+##### Request caching
+
+A “cache-request” strategy allows DoneJS application to retrieve data from Local Storage. If page makes a request, Super Model will look up data in cache, if any data matches the request (even partly) it will be returned immediately. In background a network request will be sent to revalidate the cache. This strategy should be combined with `memory-cache` or `localstorage-cache` to use either memory or Local Storage to store cached data.
+
+<video style="width:100%;" controls src="static/img/donejs-request-caching.mp4"></video>
+
+##### Inline cache
+
+A “data-inline-cache” strategy allows DoneJS application to use inline data that server sends along with HTML.
+
+When user loads a page, server can add a script tag with a global variable INLINE_CACHE that can contain any data to be used by the application. When page makes a request for the first time, Super Model will look up INLINE_CACHE for data, and if a match is found it will be used and no network call will be done. Then INLINE_CACHE will be cleared of the used data.
+
+<video style="width:100%;" controls src="static/img/donejs-inline-cache.m4v"></video>
+
+<a class="btn" href="http://connect.canjs.com/"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Messagespage"><span>View the Guide</span></a>
+
+_Caching and minimal data requests is a feature of [can-connect](https://github.com/canjs/can-connect)_
 
 ### Minimal DOM Updates
 
