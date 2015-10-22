@@ -171,6 +171,57 @@ body:not(.donejs) {
 						}
 					}
 				}
+				// funny quotes with videos
+				.fun-quotes {
+					padding: 20px 0;
+					color: #424a4e;
+					.fun-intro {
+						font-size: 18px;
+						font-weight: 400;
+						padding-bottom: 10px;
+					}
+					.fun-link {
+						color: #424a4e;
+						padding:0 20px 0 50px;
+						display: inline-block;
+						max-width: 80%;
+						text-align: right;
+					}
+					.fun-link, a {
+						font-family: 'Rock Salt', cursive;
+						font-size: 22px;
+					}
+					a {
+						color: @logoColor;
+					}
+					img {
+						display: inline-block;
+						margin: -20px 0 0 0 !important;
+						max-height: 80px;
+					}
+					.popover {
+						width: 400px;
+						max-width: 400px;
+						iframe {
+							margin-bottom: 0;
+						}
+					}
+					.arrow:before {
+						display: none;
+					}
+					@media(max-width:@screen-xs-max){
+						.fun-link {
+							max-width: 100%;
+						}
+						img {
+							margin: -85px 0 0 -30px !important;
+						}
+						.popover {
+							width: 300px;
+							max-width: 300px;
+						}
+					}
+				}
 			}
 		}
 		.sub-heading {
