@@ -171,7 +171,13 @@ It acts as a central hub for data requests, making decisions about how to best s
 
 ##### Fall through caching
 
-A fall through cache strategy serves cached data first, but still makes API requests to check for changes.
+Fall through caching is a technique that serves cached data first, but still makes API requests to check for changes.
+
+The major benefit of this technique is improved perceived performance. Users will see rendered content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
+
+This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less useful when using server side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
+
+By default, this is turned on, but can easily be deactivated for data that should not be cached.
 
 Here's how the caching logic works:
 
@@ -186,7 +192,13 @@ Here's how the caching logic works:
 
 ##### Combining requests
 
-A “data-combine-requests” strategy combines multiple incoming requests into one if possible. This becomes doable with the help of a set algebra. When we retrieve some filtered list, it is usually a subset of a whole list. E.g. completed todos and incompleted todos are subsets of todos. Both of them in combination are the whole todos list itself. By applying set logic to subsets of data we can do two things: reduce the amount of data transferred during a single request, and reduce the amount of requests themselves.
+Combining requests is a technique that combines multiple incoming requests into one, if possible. This is done with the help of set algebra. 
+
+DoneJS collects requests that are made within a few milliseconds of each other, and if they are pointed at the same API, tries to combine them into a single superset request.
+
+For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed todos and incomplete todos. Both are subsets of a larger set of data - the whole list of todos. 
+
+Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.
 
 <video style="width:100%;" controls src="static/img/donejs-combine-requests.m4v"></video>
 
