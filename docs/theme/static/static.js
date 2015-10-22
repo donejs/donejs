@@ -3,6 +3,10 @@ steal("./content_list.js",
     "./versions.js",
     "./js/collapse.js",
     "./js/dropdown.js",
+    "./js/tooltip.js",
+    "./js/popover.js",
+    "./js/responsive-tables.js",
+    "./js/affix.js",
     "./styles/styles.less!",
     "./prettify", function(ContentList, FrameHelper, Versions){
         var codes = document.getElementsByTagName("code");
@@ -491,5 +495,13 @@ steal("./content_list.js",
 
             if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
         });
+        $(function () {
+          $('[data-toggle="popover"]').popover();
+        })
+        $(function () {
+          $('#js-matrix-legend-affix').affix({
+            offset: { top: $('#js-matrix-legend-affix').offset().top }
+          });
+        })
 
     });
