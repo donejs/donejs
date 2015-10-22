@@ -584,10 +584,10 @@ You spend less time messing with Documentation generators, and more time [painti
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-documentation.mov" type="video/mp4">
-        <source src="static/img/donejs-documentation.mp4" type="video/mp4">
-        <source src="static/img/donejs-documentation.ogg" type="video/mp4">
-        <source src="static/img/donejs-documentation.webm" type="video/webm">
+        <source src="static/img/donejs-documentation-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
@@ -649,10 +649,10 @@ DoneJS provides support for simple integration into popular CI and CD tools, lik
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-continuous-integration0deployment.mov" type="video/mp4">
-        <source src="static/img/donejs-continuous-integration0deployment.mp4" type="video/mp4">
-        <source src="static/img/donejs-continuous-integration0deployment.ogg" type="video/mp4">
-        <source src="static/img/donejs-continuous-integration0deployment.webm" type="video/webm">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
@@ -732,10 +732,10 @@ The goal of these features is to transform project workflows, making it easier t
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-npm-packaging-custom-elements.mov" type="video/mp4">
-        <source src="static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4">
-        <source src="static/img/donejs-npm-packaging-custom-elements.ogg" type="video/mp4">
-        <source src="static/img/donejs-npm-packaging-custom-elements.webm" type="video/webm">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
@@ -1218,10 +1218,10 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-live-reload.mov" type="video/mp4">
-        <source src="static/img/donejs-live-reload.mp4" type="video/mp4">
-        <source src="static/img/donejs-live-reload.ogg" type="video/mp4">
-        <source src="static/img/donejs-live-reload.webm" type="video/webm">
+        <source src="static/img/donejs-live-reload-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
