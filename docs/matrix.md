@@ -131,7 +131,7 @@ _Server side rendering is a feature of [can-ssr](https://github.com/canjs/can-ss
           <th class="features">FEATURES</th>
           <th><img class="framework-logo" src="/static/img/donejs-logo-matrix.png"></th>
           <th><img class="framework-logo" src="/static/img/angular-logo.png"></th>
-          <th><img class="framework-logo" src="/static/img/backbone-logo.png"></th>
+          <th><img class="framework-logo" src="/static/img/react-logo.png"></th>
           <th><img class="framework-logo" src="/static/img/ember-logo.png"></th>
         </tr>
       </thead>
@@ -144,10 +144,10 @@ _Server side rendering is a feature of [can-ssr](https://github.com/canjs/can-ss
               <img data-toggle="popover" data-placement="right" data-html="true" data-content='<a href="http://www.donejs.com">Vivamus sagittis</a> lacus vel augue laoreet rutrum faucibus.' class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <img data-toggle="popover" data-placement="right" data-html="true" data-content='<a href="http://www.donejs.com">Vivamus sagittis</a> lacus vel augue laoreet rutrum faucibus.' class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+              <img data-toggle="popover" data-placement="right" data-html="true" data-content='<a href="http://www.donejs.com">Vivamus sagittis</a> lacus vel augue laoreet rutrum faucibus.' class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
