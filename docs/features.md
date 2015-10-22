@@ -26,7 +26,7 @@ Compared to other server side rendering systems, which require additional code a
 
 #### Page load performance
 
-Server side rendered SPAs can load pre-rendered HTML immediately. It can also cache HTML and serve it from a CDN.
+Server side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.
 
 Traditional SPAs must load the JS, execute, request data, and render before the user sees content.
 
