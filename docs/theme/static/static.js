@@ -4,7 +4,9 @@ steal("./content_list.js",
     "./js/collapse.js",
     "./js/dropdown.js",
     "./js/tooltip.js",
-     "./js/popover.js",
+    "./js/popover.js",
+    "./js/responsive-tables.js",
+    "./js/affix.js",
     "./styles/styles.less!",
     "./prettify", function(ContentList, FrameHelper, Versions){
         var codes = document.getElementsByTagName("code");
@@ -496,4 +498,19 @@ steal("./content_list.js",
         $(function () {
           $('[data-toggle="popover"]').popover();
         })
+        $('body').on('click', function (e) {
+          $('[data-toggle="popover"]').each(function () {
+              //the 'is' for buttons that trigger popups
+              //the 'has' for icons within a button that triggers a popup
+              if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                  $(this).popover('hide');
+              }
+          });
+        });
+        $(function () {
+          $('#js-matrix-legend-affix').affix({
+            offset: { top: $('#js-matrix-legend-affix').offset().top }
+          });
+        })
+
     });
