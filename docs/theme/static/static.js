@@ -3,6 +3,8 @@ steal("./content_list.js",
     "./versions.js",
     "./js/collapse.js",
     "./js/dropdown.js",
+    "./js/tooltip.js",
+     "./js/popover.js",
     "./styles/styles.less!",
     "./prettify", function(ContentList, FrameHelper, Versions){
         var codes = document.getElementsByTagName("code");
@@ -491,5 +493,7 @@ steal("./content_list.js",
 
             if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
         });
-
+        $(function () {
+          $('[data-toggle="popover"]').popover();
+        })
     });

@@ -210,7 +210,12 @@ Worker thread rendering increases the performance of your application. It essent
 
 Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
 
-You spend less time worrying about performance micro-optimizations, and more time [working on epic pool dunk videos](https://www.youtube.com/watch?v=vrgMUi8-7r4&feature=youtu.be&t=19).
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/vrgMUi8-7r4?start=28" frameborder="0" allowfullscreen></iframe>'>working on epic pool dunk videos.</a></div>
+    <img src="/static/img/funny-dunk.png">
+</blockquote>
 
 #### How it works
 
@@ -897,7 +902,7 @@ $('.datepicker').datepicker()
 With custom HTML elements, to add the same datepicker, you would:
 
  1. Load a datepicker script
- 1. Add the datepicker to your HTML or template: 
+ 1. Add the datepicker to your HTML or template:
 
 ```
 <datepicker value="{date}"/>
@@ -905,7 +910,7 @@ With custom HTML elements, to add the same datepicker, you would:
 
 That might seem like a subtle difference, but it is actually a major step forward. The custom HTML element syntax allows for instantiation, configuration, and location, all happening at the same time.
 
-Custom HTML elements are another name for [Web Components](http://webcomponents.org/), a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers. 
+Custom HTML elements are another name for [Web Components](http://webcomponents.org/), a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers.
 
 ##### Benefits of DoneJS custom elements
 
