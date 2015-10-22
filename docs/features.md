@@ -18,7 +18,7 @@ and are able to be rendered on the server by running the same code. This is know
 
 Server side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
 
-SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The difference to your users is a noticeable difference in perceived page load performance:
+SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The benefit to your users is a noticeable difference in perceived page load performance:
 
 <img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
@@ -34,11 +34,11 @@ Traditional SPAs must load the JS, execute, request data, and render before the 
 
 Search engines can't easily index SPAs. Server side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
 
-Since search engines see the HTML your server returns, if you want search engines finding your pages, you'll want Google and other search engines seeing fully rendered content, not the spinners that normally load after initial SPAs load.
+Since search engines see the HTML that your server returns (if you want search engines to find your pages) you'll want Google and other search engines seeing fully rendered content, not the spinners that normally show after initial SPAs load.
 
 #### How it works
 
-DoneJS implements SSR with a single context virtual DOM.
+DoneJS implements SSR with a single-context virtual DOM.
 
 **Single context** means every request to the server reuses the same context: including memory, modules, and even the same instance of the application.
 
