@@ -6,6 +6,7 @@ steal("./content_list.js",
     "./js/tooltip.js",
     "./js/popover.js",
     "./js/responsive-tables.js",
+    "./js/affix.js",
     "./styles/styles.less!",
     "./prettify", function(ContentList, FrameHelper, Versions){
         var codes = document.getElementsByTagName("code");
@@ -496,6 +497,11 @@ steal("./content_list.js",
         });
         $(function () {
           $('[data-toggle="popover"]').popover();
+        })
+        $(function () {
+          $('#js-matrix-legend-affix').affix({
+            offset: { top: $('#js-matrix-legend-affix').offset().top }
+          });
         })
 
     });

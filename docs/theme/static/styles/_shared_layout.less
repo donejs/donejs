@@ -463,7 +463,7 @@ body:not(.donejs) {
 			top: 55px;
 			background-color: @logoColor;
 			height: 50px;
-			z-index: 10;
+			z-index: 1070;
 			padding-top: 5px;
 
 			.menu-indicator {
@@ -614,6 +614,9 @@ body:not(.donejs) {
 		}
 	}
 }
+.matrix-wrapper {
+	position: static;
+}
 .matrix-table {
 	background-color: transparent;
 	border:0;
@@ -636,8 +639,8 @@ body:not(.donejs) {
 	tr:last-child td {
 		border-bottom: 0;
 	}
-	.striped td {
-		background-color: #fff;
+	tbody tr:nth-of-type(odd) td {
+		background-color: #FFF;
 	}
 	.features {
 		width: 285px;
@@ -658,7 +661,77 @@ body:not(.donejs) {
 		margin:0;
 	}
 }
-@media only screen and (max-width: 767px) {
+.matrix-legend {
+	background-color: #fff;
+	width:80px;
+	text-align: center;
+	z-index: 1060;
+	&.affix-top {
+		position: absolute;
+		right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
+	}
+	&.affix {
+		top: 100px;
+		right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
+		.fadeIn;
+	}
+	.title {
+		background-color: @logoColor;
+		color: #fff;
+		font-weight: 700;
+		font-size: 11px;
+		padding:10px 0;
+		margin-bottom: 10px;
+	}
+	ul {
+		list-style: none;
+		margin:0;
+		padding:0 !important;
+		li {
+			font-size: 10px;
+			color: @logoColor;
+		}
+		img {
+			width: 20px;
+			height: 20px;
+			display: block;
+			clear:both;
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+		}
+	}
+	@media(max-width: @screen-md-max){
+		width: 100%;
+		&.affix-top,
+		&.affix {
+			position: static;
+			right: inherit;
+			-webkit-animation-name: none;
+			animation-name: none;
+		}
+		ul > li {
+			width: 18%;
+			line-height: 1.5;
+		}
+		ul > li,
+		img  {
+			display: inline-block !important;
+		}
+		ul > li div {
+			padding: 5px 0 0 0;
+		}
+		.title {
+			font-size: 16px;
+		}
+	}
+	@media(max-width: 320px){
+		ul > li {
+			width: auto;
+			padding-right: 13px;
+		}
+	}
+}
+@media only screen and (max-width: 767px) { // responsive table with scrolling
 	.pinned {
     position: absolute;
     left: 0;
@@ -677,9 +750,7 @@ body:not(.donejs) {
 	}
 	.pinned table th,
 	.pinned table td {
-    white-space: nowrap;
 		border-right: 0;
-
 	}
 	.pinned table th {
 		background-color: #FCFEFD;
@@ -687,6 +758,12 @@ body:not(.donejs) {
 	th,
 	td {
     height: 70px;
+	}
+	.feature-description {
+		height: 60px;
+		max-width: 100%;
+		overflow-y: scroll;
+		overflow-x: hidden;
 	}
 	.pinned td:last-child {
     border-bottom: 0;
