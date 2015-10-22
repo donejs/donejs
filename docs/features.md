@@ -241,7 +241,7 @@ to
 <script src=”node_modules/steal/steal.js” main=”my-app!done-worker-autorender”></script>
 ```
 
-At this time, no other framework besides DoneJS, including Angular or React, support worker thread rendering out of the box.
+At this time, no other framework besides DoneJS, including Angular or React, supports worker thread rendering out of the box.
 
 <a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
 
