@@ -452,10 +452,10 @@ DoneJS provides tools for the entire testing lifecycle:
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-testing.mov" type="video/mp4">
-        <source src="static/img/donejs-testing.mp4" type="video/mp4">
-        <source src="static/img/donejs-testing.ogg" type="video/mp4">
-        <source src="static/img/donejs-testing.webm" type="video/webm">
+        <source src="static/img/donejs-testing-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
