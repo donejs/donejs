@@ -513,7 +513,7 @@ This architecture simplifies routes so that they can be managed entirely in simp
 
 _Pretty URLs and routing are features of the [CanJS](http://canjs.com/) project._
 
-## Maintainable features
+## Maintainability features
 
 DoneJS helps developers get things done quickly with an eye toward maintenance.
 
