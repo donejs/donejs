@@ -167,7 +167,7 @@ DoneJS uses the following strategies to reduce the amount and size of data reque
 
 DoneJS uses [can-connect](http://connect.canjs.com/) as its model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
 
-It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests indepdently, and with little thought to performance, without actually creating a poorly performing application.
+It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests independently, and with little thought to performance, without actually creating a poorly performing application.
 
 ##### Fall through caching
 
@@ -175,7 +175,7 @@ Fall through caching is a technique that serves cached data first, but still mak
 
 The major benefit of this technique is improved perceived performance. Users will see rendered content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
 
-This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less useful when using server side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
+This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
 
 By default, this is turned on, but can easily be deactivated for data that should not be cached.
 
@@ -183,7 +183,7 @@ Here's how the caching logic works:
 
 1. When the application loads, it checks for available cache connections (by default this looks for localStorage or memory). 
 1. When a request is made, it checks for a cache hit. 
-1. If there is a hit, the request is completed immediately with the cached data. *Note: even partial hits like subsets can be served by the cache.*
+1. If there is a hit, the request is completed immediately with the cached data.
 1. Regardless of a hit or miss, a request is made in the background to the actual API endpoint. 
 1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
 1. Response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
@@ -204,15 +204,31 @@ Combining these into a single request reduces the number of requests. This optim
 
 ##### Request caching
 
-A “cache-request” strategy allows DoneJS application to retrieve data from Local Storage. If page makes a request, Super Model will look up data in cache, if any data matches the request (even partly) it will be returned immediately. In background a network request will be sent to revalidate the cache. This strategy should be combined with `memory-cache` or `localstorage-cache` to use either memory or Local Storage to store cached data.
+Request caching is a type of caching that is more aggressive than fallthrough caching. It is meant for data that doesn't change very often. Its advantage is it reduces both the number of requests that are made, and the size of those requests.
+
+There are two differences between request and fallthrough caching:
+
+1. Cached data is not invalidated.
+
+Once data is in the cache, no more requests to the API for that same set of data are made. You can write code that invalidates the cache at certain times, or after a new build is released.
+
+2. The smallest possible request is made, based on the contents of the cache, and merged into a complete result set.
+
+The request logic is more aggressive in its attempts to find subsets of the data within the cache, and to only make an API request for the subset NOT found in the cache. In other words, partial cache hits are supported.
+
+The video below shows two example scenarios. The first shows the cache containing a supserset of the request. The second shows the cache containing a subset of the request.
 
 <video style="width:100%;" controls src="static/img/donejs-request-caching.mp4"></video>
 
 ##### Inline cache
 
-A “data-inline-cache” strategy allows DoneJS application to use inline data that server sends along with HTML.
+Server side rendered single page apps have a problem with wasteful duplicate requests. When the server rendered content loads, the single page app is loaded next. The SPA will want to make data requests for the same data that was already rendered.
 
-When user loads a page, server can add a script tag with a global variable INLINE_CACHE that can contain any data to be used by the application. When page makes a request for the first time, Super Model will look up INLINE_CACHE for data, and if a match is found it will be used and no network call will be done. Then INLINE_CACHE will be cleared of the used data.
+In other frameworks, a request is made for data that's already in the page, wasting bandwidth and performance. 
+
+DoneJS solves this problem with an inline cache: embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
+
+This video illustrates how it works.
 
 <video style="width:100%;" controls src="static/img/donejs-inline-cache.m4v"></video>
 
