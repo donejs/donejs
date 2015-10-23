@@ -148,15 +148,94 @@ _Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additio
 
 ### Caching and Minimal Data Requests
 
-DoneJS applications are able to do variety of performance improvements by intelligently managing the data
-layer.  Example techniques:
+DoneJS improves performance by intelligently managing the data layer, taking advantage of various forms of caching and request reduction techniques.
 
- - Fall through cache - Show data in localStorage cache immediately, but in the background, look for updates on the server.
- - Combine requests - Instead of making multiple, independent requests, combine them into a single request.
- - Request difference - Only request data that hasn't already loaded.
- - Inline cache - Provide response data for all initial JavaScript requests.
- - Service worker background caching - Use a service worker to load and cache data in the background so it is ready when the
-   user visits the page.
+Undoubtedly, the slowest part of any web application is round trips to the server. Especially now that [more than 50% of web traffic comes from mobile devices](http://searchengineland.com/its-official-google-says-more-searches-now-on-mobile-than-on-desktop-220369), where connections are notoriously slow and unreliable, applications must be smart about reducing network requests.
+
+Making matters worse, the concerns of maintainable architecture in single page applications are at odds with the concerns of minimizing network requests. This is because independent, isolated UI widgets, while easier to maintain, often make AJAX requests on page load. Without a layer that intelligently manages those requests, this architecture leads to too many AJAX requests before the user sees something useful. 
+
+No engineer should have to choose between maintainability and performance. With DoneJS, you won't have to.
+
+DoneJS uses the following strategies to reduce the amount and size of data requests:
+
+ - [Fall through caching](#section=section_CachingandMinimalDataRequests__Howitworks__Fallthroughcaching) - Cache data in localStorage. Automatically show cached data immediately, but look for updates on the server in the background and merge changes.
+ - [Combining requests](#section=section_CachingandMinimalDataRequests__Howitworks__Combiningrequests) - Instead of making multiple, independent requests to the same API, combine them into a single request.
+ - [Request caching](#section=section_CachingandMinimalDataRequests__Howitworks__Requestcaching) - Reduce the number and size of server requests by intelligently using cached datasets.
+ - [Inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) - Use data embedded in the page response instead of making duplicate requests.
+
+#### How it works
+
+DoneJS uses [can-connect](http://connect.canjs.com/) as its model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
+
+It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests independently, and with little thought to performance, without actually creating a poorly performing application.
+
+##### Fall through caching
+
+Fall through caching is a technique that serves cached data first, but still makes API requests to check for changes.
+
+The major benefit of this technique is improved perceived performance. Users will see rendered content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
+
+This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
+
+By default, this is turned on, but can easily be deactivated for data that should not be cached.
+
+Here's how the caching logic works:
+
+1. When the application loads, it checks for available cache connections (by default this looks for localStorage or memory). 
+1. When a request is made, it checks for a cache hit. 
+1. If there is a hit, the request is completed immediately with the cached data.
+1. Regardless of a hit or miss, a request is made in the background to the actual API endpoint. 
+1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
+1. Response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
+
+<video style="width:100%;" controls poster="static/img/donejs-fallthrough-caching.png" src="static/img/donejs-fallthrough-caching.mp4"></video>
+
+##### Combining requests
+
+Combining requests is a technique that combines multiple incoming requests into one, if possible. This is done with the help of set algebra. 
+
+DoneJS collects requests that are made within a few milliseconds of each other, and if they are pointed at the same API, tries to combine them into a single superset request.
+
+For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed todos and incomplete todos. Both are subsets of a larger set of data - the whole list of todos. 
+
+Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.
+
+<video style="width:100%;" controls src="static/img/donejs-combine-requests.m4v"></video>
+
+##### Request caching
+
+Request caching is a type of caching that is more aggressive than fallthrough caching. It is meant for data that doesn't change very often. Its advantage is it reduces both the number of requests that are made, and the size of those requests.
+
+There are two differences between request and fallthrough caching:
+
+1. Cached data is not invalidated.
+
+Once data is in the cache, no more requests to the API for that same set of data are made. You can write code that invalidates the cache at certain times, or after a new build is released.
+
+2. The smallest possible request is made, based on the contents of the cache, and merged into a complete result set.
+
+The request logic is more aggressive in its attempts to find subsets of the data within the cache, and to only make an API request for the subset NOT found in the cache. In other words, partial cache hits are supported.
+
+The video below shows two example scenarios. The first shows the cache containing a supserset of the request. The second shows the cache containing a subset of the request.
+
+<video style="width:100%;" controls src="static/img/donejs-request-caching.mp4"></video>
+
+##### Inline cache
+
+Server side rendered single page apps have a problem with wasteful duplicate requests. When the server rendered content loads, the single page app is loaded next. The SPA will want to make data requests for the same data that was already rendered.
+
+In other frameworks, a request is made for data that's already in the page, wasting bandwidth and performance. 
+
+DoneJS solves this problem with an inline cache: embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
+
+This video illustrates how it works.
+
+<video style="width:100%;" controls src="static/img/donejs-inline-cache.m4v"></video>
+
+<a class="btn" href="http://connect.canjs.com/"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Messagespage"><span>View the Guide</span></a>
+
+_Caching and minimal data requests is a feature of [can-connect](https://github.com/canjs/can-connect)_
 
 ### Minimal DOM Updates
 
