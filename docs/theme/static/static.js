@@ -508,9 +508,11 @@ steal("./content_list.js",
           });
         });
         $(function () {
-          $('#js-matrix-legend-affix').affix({
-            offset: { top: $('#js-matrix-legend-affix').offset().top }
-          });
+          if($('#js-matrix-legend-affix').length){
+            $('#js-matrix-legend-affix').affix({
+              offset: { top: $('#js-matrix-legend-affix').offset().top }
+            });  
+          }
         })
 
     });
