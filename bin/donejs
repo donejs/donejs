@@ -35,7 +35,7 @@ utils.projectRoot().then(function (root) {
       }
 
       root = path.join(process.cwd(), 'node_modules');
-      log(utils.generate(root, ['app', {
+      log(utils.generate(root, 'generator-donejs', ['app', {
           version: mypkg.version,
           packages: mypkg.donejs
         }
