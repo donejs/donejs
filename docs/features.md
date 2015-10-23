@@ -1116,171 +1116,127 @@ DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wik
 
 The introduction of a strong ViewModel has some key advantages for maintaining large applications:
 
- * **Decouples the presentation from its business logic** - A ViewModel is essentially an object and methods representing the state of a View. This separation of concerns lets the View powerfully express behavior with just HTML and data, while the ViewModel manages the complexities of business logic.
- * **Enables designer/developer cooperation** - Because the view is stripped of code and business logic, designers can safely and comfortably change the View without fear of breaking things.
- * **Enables easier testing** - ViewModels can be unit tested easily. Since they represent the view's state without any knowledge of the DOM, they provide a simple interface for testing.
+ * **Decouples the presentation from its business logic** - A ViewModel is essentially an object and methods representing the state of a View. This separation of concerns enables simple, dumb HTML-based Views containing no logic, while the ViewModel manages the complexities of application logic.
+ * **Enables designer/developer cooperation** - Because the view is stripped of code and application logic, designers can safely and comfortably change the View without fear of breaking things.
+ * **Enables easier [testing](#section=section_ComprehensiveTesting)** - ViewModels can be unit tested easily. Because they represent the view's state without any knowledge of the DOM, they provide a simple interface for testing.
 
 #### How it works
 
-DoneJS has a uniquely strong ViewModel layer compared to other frameworks. The foundation for this is three important layers: computed properties, data bound templates, and an observable data layer.
+DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works, compare it to other frameworks, and show an example.
 
-##### Computed properties
+##### Independent ViewModels
 
-Properties in ViewModels often compute their value from other properties.
+The first reason DoneJS ViewModels are unique is their independence. ViewModels and Views are completely decoupled, and can be developed completely isolated from a template.
 
-```
-fullName: {
-    get () {
-       return this.attr("first") + " " + this.attr("last");
-     }
-}
-```
-
-##### Data bound templates
-
-Those properties are then rendered in the view.
+For example, here's a typical ViewModel, which is often defined in its own separate file like `viewmodel.js` and exported as its own module:
 
 ```
-<div>{{fullName}}</div>
-```
-
-##### Observable data layer
-
-When a dependent property is changed, this sets off a cascade of events.
-
-```
-person.attr('first', 'Brian');
-
----> // triggers 'change'
-
-fullName: {
-    get () {
-       return this.attr("first") + " " + this.attr("last");
-     }
-}
-
----> // knows its dependent property changed, re-computes
-
-<div>{{fullName}}</div>
-
----> // changes value in the DOM
-```
- 1. `firstName` changes (could be due to a user entering data in an input field or a socket.io update).
- 1. Because of the observable data layer, changes to `firstName` triggers a `change` event.
- 1. Because of computed properties, that `change` event tells `fullName` to recompute its value.
- 1. Because of data bound templates, when `fullName` changes its value, that change is reflected in the DOM.
-
-##### Computed properties + Data bound templates + Observable data layer = Expressive Power
-
-The interplay of these three layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to their origin. The app then comes alive with rich functionality.
-
-Without these layers, achieving the fullName functionality would require code that communicates changes between modules, removing the isolation achieved above. Any change to `first` would need to notify `fullName` of a change. Any change to `fullName` would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.
-
-##### An example
-
-DoneJS ViewModels have special per-property hooks to define type, initial value, get, set, remove, and serialize behavior. The result is expressive ViewModels:
-
-```
-export var ViewModel = Map.extend({
+export const ViewModel = Map.extend({
   define: {
-    // Our list of states
-    states: {
-      get() {
-        return State.getList({});
+    fullName: {
+      get () {
+        return this.attr("first") + " " + this.attr("last");
       }
-    },
-    // The selected state
-    state: {
-      type: 'string',
-      value: null,
-      set() {
-        // Remove the city when the state changes
-        this.attr('city', null);
-      }
-    },
-    // The list of cities
-    cities: {
-      get() {
-        let state = this.attr('state');
-
-        if(!state) {
-          return null;
-        }
-
-        return City.getList({ state });
-      }
-    },
-    // The selected city
-    city: {
-      type: 'string',
-      value: null
     }
   }
+})
+```
+
+A view (template) that renders this ViewModel, in its own `template.stache` file, looks like this:
+
+```
+<div>{{fullName}}</div>
+```
+
+A component, also known as a [custom HTML element](#section=section_CustomHTMLElements), would be used to tie these layers together:
+
+```
+import ViewModel from "./viewmodel";
+import template from './template.stache!';
+
+Component.extend({
+  tag: 'my-component',
+  viewModel: ViewModel,
+  template
 });
 ```
 
-The example above defines the behavior in the state, city, restaurant selector seen in this page:
+The template lives in its own file, so a designer could easily modify it without touching any JavaScript.
 
-<img src="./static/img/pmo-picker.gif" alt="The place my order city and state picker." />
-
-A simple unit test for this ViewModel would look like:
+The ViewModel is defined as its own module and exported as an ES6 module, so it can be imported into a unit test, instantiated, and tested in isolation from the DOM:
 
 ```
-QUnit.asyncTest('setting a state loads its cities', function() {
+import ViewModel from "./viewmodel";
+
+QUnit.test('fullName works', function() {
   var vm = new ViewModel();
-  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
-
-  QUnit.equal(vm.attr('cities'), null, '');
-  vm.attr('state', 'CA');
-  vm.attr('cities').then(cities => {
-    QUnit.deepEqual(cities.attr(), expectedCities);
-    QUnit.start();
-  });
+  vm.attr('first', 'John');
+  vm.attr('last', 'Doe');
+  QUnit.equal(vm.attr('fullName'), 'John Doe');
 });
 ```
 
-For a more detailed walk through of this code, follow the [in depth guide](./place-my-order.html).
+In other frameworks, ViewModels don't enjoy this level of independence. Every React class has a render function, which is essentially a template. Every Angular directive has its own template. In DoneJS, the ViewModel lives in its own independent world, unaware of the DOM, or which templates, if any, are using it. In other frameworks it's harder to achieve the same unit testing simplicity or template isolation.
 
-##### Views
+##### Powerful observable data layer
 
-DoneJS Views are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
+A powerful observable data layer binds the layers together with very minimal code. 
 
-The View corresponding to the ViewModel example from above:
+DoneJS supports the following features:
+
+1. **Direct observable objects** - changes to a property in an object or array immediately and synchronously notify any event listeners.
+
+2. **Data bound templates** - templates bind to property changes and update the DOM as needed.
+
+3. **Computed properties** - ViewModels can define properties that depend on other properties, and they'll automatically recompute only when their dependent properties change.
 
 ```
-<label>State</label>
-<select can-value="{state}" {{#if states.isPending}}disabled{{/if}}>
-  {{#if states.isPending}}
-    <option value="">Loading...</option>
-  {{else}}
-    {{^if state}}
-    <option value="">Choose a state</option>
-    {{/if}}
-    {{#each states.value}}
-    <option value="{{short}}">{{name}}</option>
-    {{/each}}
-  {{/if}}
-</select>
-<label>City</label>
-<select can-value="city" {{^if state}}disabled{{/if}}>
-  {{#if cities.isPending}}
-    <option value="">Loading...</option>
-  {{else}}
-    {{^if city}}
-    <option value="">Choose a city</option>
-    {{/if}}
-    {{#each cities.value}}
-    <option>{{name}}</option>
-    {{/each}}
-  {{/if}}
-</select>
+export const ViewModel = Map.extend({
+  define: {
+    fullName: {
+      get () {
+        return this.attr("first") + " " + this.attr("last");
+      }
+    }
+  }
+})
 ```
 
-##### Models
+In this simple ViewModel, `fullName`'s value depends on `first` and `last`. If something in the application changes `first`, `fullName` will recompute.
 
-DoneJS Models wrap data services. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server.
+`fullName` is data bound to the view that renders it:
 
-DoneJS models are built with intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques.
+```
+<div>{{fullName}}</div>
+```
+
+If `first` is changed:
+
+```
+viewModel.attr('first', 'Jane');
+```
+
+`fullName` recomputes, then the DOM automatically changes to reflect the new value.
+
+The interplay of these layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to how the properties are computed. The app then comes alive with rich functionality.
+
+Without these layers, achieving the same `fullName` functionality would require code that communicates changes between modules, removing the isolation achieved above. Any change to `first` would need to notify `fullName` of a change. Any change to `fullName` would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.
+
+In Angular, there are no direct observables. It uses dirty checking with regular JavaScript objects, which means at the end of the current $digest cycle, it will run a diffing algorithm that determines what data has changed. This has performance drawbacks, as well as making it harder to write simple unit tests.
+
+In React, there is no observable data layer. You could define a `fullName` like we showed above, but it would be recomputed every time `render` is called, whether or not it has changed, and there would be no way to isolate and test its ViewModel object.
+
+##### MVVM overview
+
+Models in DoneJS wrap data services. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server. Models use intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques.
+
+Views in DoneJS are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
+
+ViewModels have already been covered in detail.
+
+The following video explains an in depth example of using a ViewModel in DoneJS.
+
+VIDEO
 
 ##### More information
 
