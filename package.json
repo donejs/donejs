@@ -57,7 +57,7 @@
     "dependencies": {
       "can": "^2.3.0-beta.5",
       "can-connect": "^0.3.0",
-      "can-ssr": "^0.9.1",
+      "can-ssr": "^0.10.0",
       "done-autorender": "^0.4.2",
       "done-component": "^0.3.0",
       "done-css": "~1.1.13",
