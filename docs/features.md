@@ -18,7 +18,7 @@ and are able to be rendered on the server by running the same code. This is know
 
 Server side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
 
-SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The difference to your users is a noticeable difference in perceived page load performance:
+SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The benefit to your users is a noticeable difference in perceived page load performance:
 
 <img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
@@ -26,7 +26,7 @@ Compared to other server side rendering systems, which require additional code a
 
 #### Page load performance
 
-Server side rendered SPAs can load pre-rendered HTML immediately. It can also cache HTML and serve it from a CDN.
+Server side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.
 
 Traditional SPAs must load the JS, execute, request data, and render before the user sees content.
 
@@ -34,11 +34,11 @@ Traditional SPAs must load the JS, execute, request data, and render before the 
 
 Search engines can't easily index SPAs. Server side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
 
-Since search engines see the HTML your server returns, if you want search engines finding your pages, you'll want Google and other search engines seeing fully rendered content, not the spinners that normally load after initial SPAs load.
+Since search engines see the HTML that your server returns (if you want search engines to find your pages) you'll want Google and other search engines seeing fully rendered content, not the spinners that normally show after initial SPAs load.
 
 #### How it works
 
-DoneJS implements SSR with a single context virtual DOM.
+DoneJS implements SSR with a single-context virtual DOM.
 
 **Single context** means every request to the server reuses the same context: including memory, modules, and even the same instance of the application.
 
@@ -273,7 +273,12 @@ Worker thread rendering increases the performance of your application. It essent
 
 Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
 
-You spend less time worrying about performance micro-optimizations, and more time [working on epic pool dunk videos](https://www.youtube.com/watch?v=vrgMUi8-7r4&feature=youtu.be&t=19).
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/vrgMUi8-7r4?start=28" frameborder="0" allowfullscreen></iframe>'>working on epic pool dunk videos.</a></div>
+    <img src="/static/img/funny-dunk.png">
+</blockquote>
 
 #### How it works
 
@@ -304,7 +309,7 @@ to
 <script src=”node_modules/steal/steal.js” main=”my-app!done-worker-autorender”></script>
 ```
 
-At this time, no other framework besides DoneJS, including Angular or React, support worker thread rendering out of the box.
+At this time, no other framework besides DoneJS, including Angular or React, supports worker thread rendering out of the box.
 
 <a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
 
@@ -515,10 +520,10 @@ DoneJS provides tools for the entire testing lifecycle:
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-testing.mov" type="video/mp4">
-        <source src="static/img/donejs-testing.mp4" type="video/mp4">
-        <source src="static/img/donejs-testing.ogg" type="video/mp4">
-        <source src="static/img/donejs-testing.webm" type="video/webm">
+        <source src="static/img/donejs-testing-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
@@ -647,10 +652,10 @@ You spend less time messing with Documentation generators, and more time [painti
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-documentation.mov" type="video/mp4">
-        <source src="static/img/donejs-documentation.mp4" type="video/mp4">
-        <source src="static/img/donejs-documentation.ogg" type="video/mp4">
-        <source src="static/img/donejs-documentation.webm" type="video/webm">
+        <source src="static/img/donejs-documentation-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
@@ -712,10 +717,10 @@ DoneJS provides support for simple integration into popular CI and CD tools, lik
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-continuous-integration0deployment.mov" type="video/mp4">
-        <source src="static/img/donejs-continuous-integration0deployment.mp4" type="video/mp4">
-        <source src="static/img/donejs-continuous-integration0deployment.ogg" type="video/mp4">
-        <source src="static/img/donejs-continuous-integration0deployment.webm" type="video/webm">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
@@ -795,10 +800,10 @@ The goal of these features is to transform project workflows, making it easier t
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-npm-packaging-custom-elements.mov" type="video/mp4">
-        <source src="static/img/donejs-npm-packaging-custom-elements.mp4" type="video/mp4">
-        <source src="static/img/donejs-npm-packaging-custom-elements.ogg" type="video/mp4">
-        <source src="static/img/donejs-npm-packaging-custom-elements.webm" type="video/webm">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>
@@ -960,7 +965,7 @@ $('.datepicker').datepicker()
 With custom HTML elements, to add the same datepicker, you would:
 
  1. Load a datepicker script
- 1. Add the datepicker to your HTML or template: 
+ 1. Add the datepicker to your HTML or template:
 
 ```
 <datepicker value="{date}"/>
@@ -968,7 +973,7 @@ With custom HTML elements, to add the same datepicker, you would:
 
 That might seem like a subtle difference, but it is actually a major step forward. The custom HTML element syntax allows for instantiation, configuration, and location, all happening at the same time.
 
-Custom HTML elements are another name for [Web Components](http://webcomponents.org/), a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers. 
+Custom HTML elements are another name for [Web Components](http://webcomponents.org/), a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers.
 
 ##### Benefits of DoneJS custom elements
 
@@ -1281,10 +1286,10 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 <div class="maintainable wrapper">
   <div class="background video">
     <video tabindex="0" preload="auto" class="img-responsive">
-        <source src="static/img/donejs-live-reload.mov" type="video/mp4">
-        <source src="static/img/donejs-live-reload.mp4" type="video/mp4">
-        <source src="static/img/donejs-live-reload.ogg" type="video/mp4">
-        <source src="static/img/donejs-live-reload.webm" type="video/webm">
+        <source src="static/img/donejs-live-reload-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.webm" type="video/webm">
     </video>
   </div>
 </div>

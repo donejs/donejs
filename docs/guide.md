@@ -561,15 +561,15 @@ npm install jquery@1.11.0 --save
 
 ## Deploy
 
-Now that we verified that our application works in production, we can deploy it to the web. For this guide we will use [Divshot](https://divshot.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support.
+Now that we verified that our application works in production, we can deploy it to the web. For this guide we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, among other things.
 
-### Setting up Divshot
+### Setting up Firebase
 
-Sign up for free at [divshot.com](https://divshot.com/). When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
+Sign up for free at [Firebase](https://www.firebase.com/). When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
 ### Configuring DoneJS
 
-Now we can add the Divshot deployment configuration to our `package.json` like this:
+Now we can add the Firebase deployment configuration to our `package.json` like this:
 
 ```js
 "donejs": {
@@ -577,14 +577,17 @@ Now we can add the Divshot deployment configuration to our `package.json` like t
     "root": "dist",
     "services": {
       "production": {
-        "type": "divshot",
+        "type": "firebase",
         "config": {
-          "name": "donejs-chat-<user>",
-          "headers": {
-            "/**": {
-              "Access-Control-Allow-Origin": "*"
-            }
-          }
+          "firebase": "donejs-chat-<user>",
+          "public": "./dist",
+          "headers": [{
+            "source": "/**",
+            "headers": [{
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }]
+          }]
         }
       }
     }
@@ -592,7 +595,7 @@ Now we can add the Divshot deployment configuration to our `package.json` like t
 }
 ```
 
-Change the `<user>` part in `"name": "donejs-chat-<user>"` to your GitHub username. This will be your Divshot application name (you can choose any other available name as well).
+Change the `<user>` part in `"name": "donejs-chat-<user>"` to your GitHub username. This will be your Firebase application name (you can choose any other available name as well).
 
 And also update the production `baseURL` in the `system` section:
 
@@ -602,13 +605,13 @@ And also update the production `baseURL` in the `system` section:
   ...
   "envs": {
     "server-production": {
-      "baseURL": "https://donejs-chat-<user>.divshot.io/"
+      "baseURL": "https://donejs-chat-<user>.firebaseapp.com/"
     }
   }
 }
 ```
 
-Again, make sure to replace the URL with your Divshot application name. Then we can deploy the application by running:
+Again, make sure to replace the URL with your Firebase application name. Then we can deploy the application by running:
 
 ```
 donejs build
@@ -623,7 +626,7 @@ NODE_ENV=production donejs start
 
 *note: if using Windows set the NODE_ENV variable as you did previously in the building section.*
 
-We should now see our assets being loaded from the Divshot CDN.
+We should now see our assets being loaded from the Firebase CDN.
 
 ## Desktop and mobile apps
 
