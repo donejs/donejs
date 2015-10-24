@@ -9,11 +9,11 @@
 
 ## All-in-one, integrated stack
 
-DoneJS has many features, but possibly its best feature is its completeness.
+DoneJS has many features, but possibly its best feature is completeness.
 
 Just like Apple owning the hardware and software for its devices, DoneJS owning the whole stack creates unique advantages.
 
-### All-in-one
+### All-in-one stack
 
 First, there's the obvious advantage: it has everything you'll need. 
 
@@ -43,19 +43,29 @@ DoneJS gives you a full solution: literally everything you need to build a compl
 
 And as, as we've proven [over the last 8 years](/About.html#section=section_Evolve), we'll keep updating the stack as the state of the art evolves over time.
 
-### Integrated
+### Integrated layers
 
-DoneJS features span technology layers, making things that are not possible, or at best DIY, with competitor frameworks, easy or automatic with DoneJS.
+Integration between layers provides unique advantages.
 
-Here are a couple examples of cross-layer features: 
+#### Cross layer features
 
-* [Server side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
+DoneJS features span technology layers, making things that are not possible or at best DIY with competitor frameworks, easy or automatic with DoneJS.
 
-Server side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tell the server to delay rendering - a feature that bridges can-connect, StealJS, and can-ssr.
+Here are a couple examples of cross-layer features.
 
-In React, another framework that supports SSR, solving the "tell my server to wait for data to finish loading before rendering" problem is DIY.
+1. [Server side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
 
-* [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks) 
+Server side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tell the server to delay rendering.
+
+React's SSR uses a synchronous render call, so data must be present prior to rendering, which means you're left to your own devices.
+
+DoneJS SSR uses the same live reload (hot module swapping) that takes place on the client. When you change a file, the server-side rendering code is updated so the next refresh shows html that is rendered with the latest code. No need to restart the server!
+
+And finally, the SSR code will group all the data used for content rendered on the server, and send it back in an inline cache, which the data layer then uses to populate a client cache that reduces AJAX requests.
+
+Support for SSR involves many layers - can-connect, can-ssr, CanJS, and StealJS.
+
+2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks) 
 
 You can mark a section of your template to be progressively loaded by wrapping it with `<can-import>`, like:
 
@@ -69,23 +79,29 @@ and then running `donejs build`.
 
 `<can-import>` has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.
 
+##### Story level solutions
+
 Another advantage of the integration between DoneJS' parts is the ability to solve development problems on the level of [**stories**](http://searchsoftwarequality.techtarget.com/definition/user-story) rather than just features.
 
 Solving a story means a packaged solution to a development problem, where several features across layers converge to solve the problem from start to finish. Here are several examples of stories that DoneJS solves:
 
-* [Modular workflow](section=section_NPMPackages__Howitworks__Modularworkflow) 
+1. [Modular workflow](section=section_NPMPackages__Howitworks__Modularworkflow) 
 
 DoneJS makes it possible for teams to design and share components easily.
 
-1. [Generators]()
-1. [Modlets]()
-1. [Custom elements]()
-1. [NPM import and export]()
-1. [Documentation]() and [testing]()
+* [Generators](#section=section_Generators) allow easy creation of components, with all their needed ingredients
+* [Modlet](#section=section_Modlets) organization encourages easy encapsulation of everything a reusable component needs
+* [Custom elements](#section=section_CustomHTMLElements) provide the ability to create modules that are easy to reuse
+* [NPM import and export](#section=section_NPMPackages) provide an easy way to share custom elements with other developers, using any module format, and then consume them without any configuration
+* [Documentation](#section=section_Documentation) and [testing](#section=section_ComprehensiveTesting) provide simple support for making these modules maintainable and easy to contribute to
 
-* [Performance]() - DoneJS was designed to solve performance from the start, packaging server side rendering, progressive loading, worker thread rendering, data layer caching, and more. If you build an application in DoneJS, its safe to say you'd be hard-pressed to not make it perform extremely well. These features span many layers and projects from StealJS, CanJS, can-ssr, can-connect, etc. To achieve similar results with other frameworks would not be possible, simply because they don't span as many layers.
+2. [Performance](#section=section_PerformanceFeatures)
 
-There are other user stories, including maintainability (testing, docs, MVVM) and developer efficiency (zero-config NPM imports, live reload, ES6 support), but you get the idea.
+DoneJS was designed from the start to solve the performance story - packaging [server side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof. If you build an application in DoneJS, its safe to say you'd be hard-pressed to **not** make it perform extremely well. 
+
+These features span many layers and projects, including StealJS, CanJS, can-ssr, can-connect, etc. To achieve similar results with competitor frameworks would not be easy, and would involve piecing together many disparate projects.
+
+There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [live reload](#section=section_LiveReload), [ES6 support](#section=section_ES6Modules)), but you get the idea.
 
 ## Performance Features
 
