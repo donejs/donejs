@@ -9,9 +9,9 @@
 
 ## All-in-one, integrated stack
 
-DoneJS has many features, but possibly its best feature is completeness.
+DoneJS has many features, but possibly its best feature is completeness. DoneJS offers everything you need to build a modern web app.
 
-Just like Apple owning the hardware and software for its devices, DoneJS owning the whole stack creates unique advantages.
+Just like Apple integrates the hardware and software for its devices, DoneJS integrates different technologies in a way that creates unique advantages that you can only get from using an integrated solution.
 
 ### All-in-one stack
 
@@ -23,7 +23,7 @@ Choosing a modern stack is not at all simple or straightforward.
 
 1. First, what types of tools do you want?
 
-Server side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
+Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
 
 2. Second, choose all your pieces.
 
@@ -39,23 +39,23 @@ Who has [time for all that](http://vignette1.wikia.nocookie.net/starpolar/images
 
 Somewhere along the line, with the rise of minimal micro-libraries, the dev community lost sight of the point of application development: getting to a working application. The point is not to tinker endlessly with creating the perfect stack. Your stack should get out of the way and make your job easy.
 
-DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. Its our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app.
+DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. It's our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app.
 
-And as, as we've proven [over the last 8 years](/About.html#section=section_Evolve), we'll keep updating the stack as the state of the art evolves over time.
+And as we've proven [over the last 8 years](/About.html#section=section_Evolve), we'll keep updating the stack as the state of the art evolves over time.
 
 ### Integrated layers
 
 Integration between layers provides unique advantages.
 
-#### Cross layer features
+#### Cross-layer features
 
-DoneJS features span technology layers, making things that are not possible or at best DIY with competitor frameworks, easy or automatic with DoneJS.
+DoneJS makes it easier to do things that are not possible, or at best DIY, with competitor frameworks, by spanning technology layers.
 
 Here are a couple examples of cross-layer features.
 
-1. [Server side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
+1. [Server-side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
 
-Server side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tell the server to delay rendering.
+Server-side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tells the server to delay rendering.
 
 React's SSR uses a synchronous render call, so data must be present prior to rendering, which means you're left to your own devices.
 
@@ -79,7 +79,7 @@ and then running `donejs build`.
 
 `<can-import>` has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.
 
-##### Story level solutions
+##### Story-level solutions
 
 Another advantage of the integration between DoneJS' parts is the ability to solve development problems on the level of [**stories**](http://searchsoftwarequality.techtarget.com/definition/user-story) rather than just features.
 
@@ -97,7 +97,7 @@ DoneJS makes it possible for teams to design and share components easily.
 
 2. [Performance](#section=section_PerformanceFeatures)
 
-DoneJS was designed from the start to solve the performance story - packaging [server side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof. If you build an application in DoneJS, its safe to say you'd be hard-pressed to **not** make it perform extremely well. 
+DoneJS was designed from the start to solve the performance story - packaging [server-side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof. If you build an application in DoneJS, it's safe to say you'd be hard-pressed to **not** make it perform extremely well. 
 
 These features span many layers and projects, including StealJS, CanJS, can-ssr, can-connect, etc. To achieve similar results with competitor frameworks would not be easy, and would involve piecing together many disparate projects.
 
@@ -107,28 +107,28 @@ There are other user stories, including [maintainability](#section=section_Maint
 
 DoneJS is configured for maximum performance right out of the box.
 
-### Server Side Rendered
+### Server-Side Rendered
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
 and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript), or [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9).
 
-Server side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
+Server-side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
 
 SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The benefit to your users is a noticeable difference in perceived page load performance:
 
 <img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
-Compared to other server side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
+Compared to other server-side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
 
 #### Page load performance
 
-Server side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.
+Server-side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.
 
 Traditional SPAs must load the JS, execute, request data, and render before the user sees content.
 
 #### SEO
 
-Search engines can't easily index SPAs. Server side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
+Search engines can't easily index SPAs. Server-side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
 
 Since search engines see the HTML that your server returns (if you want search engines to find your pages) you'll want Google and other search engines seeing fully rendered content, not the spinners that normally show after initial SPAs load.
 
@@ -196,7 +196,7 @@ can.Component.extend({
 <a class="btn" href="https://github.com/canjs/can-ssr"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html"><span>View the Guide</span></a>
 
-_Server side rendering is a feature of [can-ssr](https://github.com/canjs/can-ssr)_
+_Server-side rendering is a feature of [can-ssr](https://github.com/canjs/can-ssr)_
 
 ### Progressive Loading
 
@@ -271,7 +271,7 @@ Fall through caching is a technique that serves cached data first, but still mak
 
 The major benefit of this technique is improved perceived performance. Users will see rendered content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
 
-This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
+This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
 
 By default, this is turned on, but can easily be deactivated for data that should not be cached.
 
@@ -318,7 +318,7 @@ The video below shows two example scenarios. The first shows the cache containin
 
 ##### Inline cache
 
-Server side rendered single page apps have a problem with wasteful duplicate requests. When the server rendered content loads, the single page app is loaded next. The SPA will want to make data requests for the same data that was already rendered.
+Server-side rendered single page apps have a problem with wasteful duplicate requests. When the server rendered content loads, the single page app is loaded next. The SPA will want to make data requests for the same data that was already rendered.
 
 In other frameworks, a request is made for data that's already in the page, wasting bandwidth and performance. 
 
@@ -1426,7 +1426,7 @@ You'll be prompted for a project name, source folder, and other setup informatio
 ├── node_modules/
 ```
 
-You're now a command away from running application wide tests, generating documentation, and running a build. Start your server with `donejs develop`, open your browser, and you'll see a functioning, server side rendered hello world page.
+You're now a command away from running application wide tests, generating documentation, and running a build. Start your server with `donejs develop`, open your browser, and you'll see a functioning, server-side rendered hello world page.
 
 ##### Modlet component generator
 
