@@ -1481,3 +1481,329 @@ This will create:
 <a class="btn" href="/Guide.html#section=section_Generatetheapplication"><span>View the Guide</span></a>
 
 _Generators are provided by the [Generator DoneJS](https://github.com/donejs/generator-donejs) project with additional support via the [donejs](https://github.com/donejs/donejs) CLI_
+
+## Framework Comparison
+
+<div class="matrix-wrapper">
+  <div class="matrix-legend" id="js-matrix-legend-affix">
+    <div class="title">SOLUTION LEGEND</div>
+    <ul>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+        <div>EASY</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+        <div>EQUIVALENT</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+        <div>DIFFICULT</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+        <div>THIRD-PARTY</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+        <div>NO</div>
+      </li>
+    </ul>
+  </div>
+  <div class="table-wrapper">
+    <div class="scrollable">
+      <table id="js-matrix-table-affix" class="matrix-table responsive">
+      <thead>
+        <tr>
+          <th class="features">FEATURES</th>
+          <th><img class="framework-logo" src="/static/img/donejs-logo-matrix.png"></th>
+          <th><img class="framework-logo" src="/static/img/angular-logo.png"></th>
+          <th><img class="framework-logo" src="/static/img/react-logo.png"></th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Server_SideRendered">Server-side rendering</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img data-toggle="popover" data-placement="right" data-html="true" data-content='Requires some <a href="http://reactjsnews.com/isomorphic-javascript-with-react-node" target="_blank">manual setup</a>' class="matrix-rating-icon" src="/static/img/icon-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ProgressiveLoading">Progressive dependency loading</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_CachingandMinimalDataRequests">Caching & minimal data requests</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MinimalDOMUpdates">Minimal DOM updates</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_WorkerThreadRendering">Worker thread rendering</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_DeploytoaCDN">Deploy to a CDN</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_iOS_Android_andDesktopBuilds">Native app builds</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_SupportsAllBrowsers_EvenIE8">Browser support</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>' src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_RealTimeConnected">Real-time</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_PrettyURLswithPushstate">Pretty URLs</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ComprehensiveTesting">Comprehensive testing</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Documentation">Documentation</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ContinuousIntegration_Deployment">Continuous integration & deployment</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Modlets">Modlets</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_NPMPackages">NPM packages</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ES6Modules">ES6 modules</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='Coming in Angular 2' src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_CustomHTMLElements">Custom HTML elements</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MVVMArchitecture">MVVM architecture</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_LiveReload">Live reload</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Generators">Generators</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
