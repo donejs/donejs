@@ -7,6 +7,102 @@
 
 @body
 
+## All-in-one, integrated stack
+
+DoneJS has many features, but possibly its best feature is completeness.
+
+Just like Apple owning the hardware and software for its devices, DoneJS owning the whole stack creates unique advantages.
+
+### All-in-one stack
+
+First, there's the obvious advantage: it has everything you'll need. 
+
+There's no mixing and matching pieces of your stack. Just `npm install` and get started.
+
+Choosing a modern stack is not at all simple or straightforward. 
+
+1. First, what types of tools do you want?
+
+Server side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
+
+2. Second, choose all your pieces.
+
+The good news is, you have [many choices](http://microjs.com/#). The bad news is, you have many choices.
+
+React, Angular, or Backbone? Require.js, browserify, or jspm? Jasmine or QUnit? What tool will run my tests?
+
+3. Finally, you have to make sure your chosen tools work together effectively.
+
+Does require.js work well with Angular? Does Karma work with Browserify? What about React and Babel?
+
+Who has [time for all that](http://vignette1.wikia.nocookie.net/starpolar/images/6/6b/Notime.jpg/revision/latest?cb=20150225125846)?
+
+Somewhere along the line, with the rise of minimal micro-libraries, the dev community lost sight of the point of application development: getting to a working application. The point is not to tinker endlessly with creating the perfect stack. Your stack should get out of the way and make your job easy.
+
+DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. Its our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app.
+
+And as, as we've proven [over the last 8 years](/About.html#section=section_Evolve), we'll keep updating the stack as the state of the art evolves over time.
+
+### Integrated layers
+
+Integration between layers provides unique advantages.
+
+#### Cross layer features
+
+DoneJS features span technology layers, making things that are not possible or at best DIY with competitor frameworks, easy or automatic with DoneJS.
+
+Here are a couple examples of cross-layer features.
+
+1. [Server side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
+
+Server side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tell the server to delay rendering.
+
+React's SSR uses a synchronous render call, so data must be present prior to rendering, which means you're left to your own devices.
+
+DoneJS SSR uses the same live reload (hot module swapping) that takes place on the client. When you change a file, the server-side rendering code is updated so the next refresh shows html that is rendered with the latest code. No need to restart the server!
+
+And finally, the SSR code will group all the data used for content rendered on the server, and send it back in an inline cache, which the data layer then uses to populate a client cache that reduces AJAX requests.
+
+Support for SSR involves many layers - can-connect, can-ssr, CanJS, and StealJS.
+
+2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks) 
+
+You can mark a section of your template to be progressively loaded by wrapping it with `<can-import>`, like:
+
+```
+<can-import from="components/home">
+  <home-page/>
+</can-import>
+```
+
+and then running `donejs build`.
+
+`<can-import>` has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.
+
+##### Story level solutions
+
+Another advantage of the integration between DoneJS' parts is the ability to solve development problems on the level of [**stories**](http://searchsoftwarequality.techtarget.com/definition/user-story) rather than just features.
+
+Solving a story means a packaged solution to a development problem, where several features across layers converge to solve the problem from start to finish. Here are several examples of stories that DoneJS solves:
+
+1. [Modular workflow](section=section_NPMPackages__Howitworks__Modularworkflow) 
+
+DoneJS makes it possible for teams to design and share components easily.
+
+* [Generators](#section=section_Generators) allow easy creation of components, with all their needed ingredients
+* [Modlet](#section=section_Modlets) organization encourages easy encapsulation of everything a reusable component needs
+* [Custom elements](#section=section_CustomHTMLElements) provide the ability to create modules that are easy to reuse
+* [NPM import and export](#section=section_NPMPackages) provide an easy way to share custom elements with other developers, using any module format, and then consume them without any configuration
+* [Documentation](#section=section_Documentation) and [testing](#section=section_ComprehensiveTesting) provide simple support for making these modules maintainable and easy to contribute to
+
+2. [Performance](#section=section_PerformanceFeatures)
+
+DoneJS was designed from the start to solve the performance story - packaging [server side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof. If you build an application in DoneJS, its safe to say you'd be hard-pressed to **not** make it perform extremely well. 
+
+These features span many layers and projects, including StealJS, CanJS, can-ssr, can-connect, etc. To achieve similar results with competitor frameworks would not be easy, and would involve piecing together many disparate projects.
+
+There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [live reload](#section=section_LiveReload), [ES6 support](#section=section_ES6Modules)), but you get the idea.
+
 ## Performance Features
 
 DoneJS is configured for maximum performance right out of the box.
