@@ -250,9 +250,9 @@ Undoubtedly, the slowest part of any web application is round trips to the serve
 
 Making matters worse, the concerns of maintainable architecture in single page applications are at odds with the concerns of minimizing network requests. This is because independent, isolated UI widgets, while easier to maintain, often make AJAX requests on page load. Without a layer that intelligently manages those requests, this architecture leads to too many AJAX requests before the user sees something useful. 
 
-No engineer should have to choose between maintainability and performance. With DoneJS, you won't have to.
+With DoneJS, you don't have to choose between maintainability and performance.
 
-DoneJS uses the following strategies to reduce the amount and size of data requests:
+DoneJS uses the following strategies to improve perceived performance (reduce the amount of time before users see content rendered):
 
  - [Fall through caching](#section=section_CachingandMinimalDataRequests__Howitworks__Fallthroughcaching) - Cache data in localStorage. Automatically show cached data immediately, but look for updates on the server in the background and merge changes.
  - [Combining requests](#section=section_CachingandMinimalDataRequests__Howitworks__Combiningrequests) - Instead of making multiple, independent requests to the same API, combine them into a single request.
@@ -261,38 +261,38 @@ DoneJS uses the following strategies to reduce the amount and size of data reque
 
 #### How it works
 
-DoneJS uses [can-connect](http://connect.canjs.com/) as its model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
+[can-connect](http://connect.canjs.com/) makes up part of the DoneJS model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
 
 It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests independently, and with little thought to performance, without actually creating a poorly performing application.
 
 ##### Fall through caching
 
-Fall through caching is a technique that serves cached data first, but still makes API requests to check for changes.
+Fall through caching serves cached data first, but still makes API requests to check for changes.
 
-The major benefit of this technique is improved perceived performance. Users will see rendered content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
+The major benefit of this technique is improved perceived performance. Users will see content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
 
-This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
+This benefits two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
 
 By default, this is turned on, but can easily be deactivated for data that should not be cached.
 
 Here's how the caching logic works:
 
-1. When the application loads, it checks for available cache connections (by default this looks for localStorage or memory). 
+1. When the application loads, it checks for available cache connections. 
 1. When a request is made, it checks for a cache hit. 
 1. If there is a hit, the request is completed immediately with the cached data.
 1. Regardless of a hit or miss, a request is made in the background to the actual API endpoint. 
-1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
-1. Response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
+1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
+1. Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
 <video style="width:100%;" controls poster="static/img/donejs-fallthrough-caching.png" src="static/img/donejs-fallthrough-caching.mp4"></video>
 
 ##### Combining requests
 
-Combining requests is a technique that combines multiple incoming requests into one, if possible. This is done with the help of set algebra. 
+Combining requests combines multiple incoming requests into one, if possible. This is done with the help of [set algebra](https://en.wikipedia.org/wiki/Algebra_of_sets). 
 
 DoneJS collects requests that are made within a few milliseconds of each other, and if they are pointed at the same API, tries to combine them into a single superset request.
 
-For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed todos and incomplete todos. Both are subsets of a larger set of data - the whole list of todos. 
+For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed and incomplete todos. Both are subsets of a larger set of data - the entire list of todos. 
 
 Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.
 
@@ -318,11 +318,38 @@ The video below shows two example scenarios. The first shows the cache containin
 
 ##### Inline cache
 
-Server-side rendered single page apps have a problem with wasteful duplicate requests. When the server rendered content loads, the single page app is loaded next. The SPA will want to make data requests for the same data that was already rendered.
+Server-side rendered single page apps (SPAs) have a problem with wasteful duplicate requests. These can cause the browser to slow down, waste bandwidth, and reduce perceived performance.
 
-In other frameworks, a request is made for data that's already in the page, wasting bandwidth and performance. 
+1. When a page is rendered server-side, it makes data requests on the server to various APIs. 
+1. After the page's rendered HTML loads in the client, the SPA is loaded in the client, so that subsequent requests are handled within the SPA. 
+1. The SPA will want to re-request for the same data that was already requested on the server. 
 
-DoneJS solves this problem with an inline cache: embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
+DoneJS solves this problem with an inline cache - embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
+
+DoneJS uniquely makes populating and using the inline cache easy. `waitFor` is a method that:
+
+1. Tells the SSR server to wait for a promise to resolve before rendering.
+1. Collects data from each promise and uses it to populate the inline cache.
+
+For example:
+
+```
+can.Component.extend({
+  tag: "user-name",
+  template: can.stache( "{{user.name}}" ),
+  viewModel: {
+    init: function () {
+      var promise = User.getOne( { id: this.attr( "id" ) } );
+      this.attr( "%root" ).waitFor( promise );
+      promise.then( ( user ) => { this.attr( "user", user ); } );
+    }
+  }
+});
+```
+
+The model layer seamlesslly integrates the inline cache in client side requests, without any special configuration.
+
+While this flow would be possible in other SSR systems, it would require manually setting up all of these steps.
 
 This video illustrates how it works.
 
