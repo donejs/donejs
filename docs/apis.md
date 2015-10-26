@@ -872,26 +872,53 @@ Example
 
 ### can-ssr
 
+### can-ssr/app-map
+
 ### done-autorender
 
-[done-autorender](https://github.com/donejs/autorender) is the main entrypoint of a DoneJS application.
+[done-autorender](https://github.com/donejs/autorender) is a Steal plugin that
+enables using a [can.stache] template as your application's entry point. Create a template like:
 
-### can-ssr/app-map
+```handlebars
+<html>
+<head>
+  <title>app | {{page}}</title>
+</head>
+<body>
+  <can-import from="app/state" export-as="viewModel"/>
+
+  <div>Hello {{name}}</div>
+</body>
+</html>
+```
+
+**done-autorender** will insert this template on page load. The import specied with
+the `export-as="viewModel"` attribute is a [can.Map] that acts as the View Model
+(or application state) for the application.
+
+If you have [live-reload] enabled done-autorender will additionally use those
+APIs to re-render the application when any modules are reloaded.
+
+done-autorender handles requests when running in Node for server-side rendering and
+will wait for all asynchronous events to complete.
 
 ### can-simple-dom
 
+[can-simple-dom](https://github.com/canjs/can-simple-dom) is a minimal virtual DOM implementation used 
+for server-side and worker thread rendering. It contains enough of the DOM APIs to get basic 
+jQuery usage to work, as well as what is typical of CanJS applications. 
 
+**can-simple-dom** looks like a normal DOM, unlike most other virtual DOMs, 
+which means it can be used with jQuery plugins and other code that operates on a normal DOM.
 
+If you are working on an advanced plugin you might use can-simple-dom, in which case you would import it:
 
+```js
+import simpleDOM from "can-simple-dom";
 
+const document = new simpleDOM.Document();
+```
 
-
- 
-
-
-
-
-
-
+From here document has the normal DOM apis such as `document.createElement`.
 
 

@@ -3,11 +3,7 @@
 @hide sidebar
 @outline 2 ol
 
-@description Learn what DoneJS can do for your application and developers.
-
-@body
-
-## All-in-one, integrated stack
+@description 
 
 DoneJS has many features, but possibly its best feature is completeness. DoneJS offers everything you need to build a modern web app.
 
@@ -21,19 +17,11 @@ There's no mixing and matching pieces of your stack. Just `npm install` and get 
 
 Choosing a modern stack is not at all simple or straightforward. 
 
-1. First, what types of tools do you want?
+1. *What types of tools do you want?*  Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
 
-Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
+2. *Choose all your pieces.* The good news is, you have [many choices](http://microjs.com/#). The bad news is, you have many choices. React, Angular, or Backbone? Require.js, browserify, or jspm? Jasmine or QUnit? What tool will run my tests?
 
-2. Second, choose all your pieces.
-
-The good news is, you have [many choices](http://microjs.com/#). The bad news is, you have many choices.
-
-React, Angular, or Backbone? Require.js, browserify, or jspm? Jasmine or QUnit? What tool will run my tests?
-
-3. Finally, you have to make sure your chosen tools work together effectively.
-
-Does require.js work well with Angular? Does Karma work with Browserify? What about React and Babel?
+3. *Finally, you have to make sure your chosen tools work together effectively.* Does require.js work well with Angular? Does Karma work with Browserify? What about React and Babel?
 
 Who has [time for all that](http://vignette1.wikia.nocookie.net/starpolar/images/6/6b/Notime.jpg/revision/latest?cb=20150225125846)?
 
@@ -55,15 +43,11 @@ Here are a couple examples of cross-layer features.
 
 1. [Server-side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
 
-Server-side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tells the server to delay rendering.
+Server-side rendering (SSR), which you can read about in more detail in its [section](#section_Server_SideRendered) below, spans many layers to make setup and integration simple. 
 
-React's SSR uses a synchronous render call, so data must be present prior to rendering, which means you're left to your own devices.
+It uses hooks in data components to automatically notify the server to delay rendering, [live reload](#section_LiveReload) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.
 
-DoneJS SSR uses the same live reload (hot module swapping) that takes place on the client. When you change a file, the server-side rendering code is updated so the next refresh shows html that is rendered with the latest code. No need to restart the server!
-
-And finally, the SSR code will group all the data used for content rendered on the server, and send it back in an inline cache, which the data layer then uses to populate a client cache that reduces AJAX requests.
-
-Support for SSR involves many layers - can-connect, can-ssr, CanJS, and StealJS.
+By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, live reload, and inline caching.
 
 2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks) 
 
@@ -79,29 +63,345 @@ and then running `donejs build`.
 
 `<can-import>` has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.
 
-##### Story-level solutions
+#### Story-level solutions
 
 Another advantage of the integration between DoneJS' parts is the ability to solve development problems on the level of [**stories**](http://searchsoftwarequality.techtarget.com/definition/user-story) rather than just features.
 
 Solving a story means a packaged solution to a development problem, where several features across layers converge to solve the problem from start to finish. Here are several examples of stories that DoneJS solves:
 
-1. [Modular workflow](section=section_NPMPackages__Howitworks__Modularworkflow) 
+1. [Modular workflow](section=section_NPMPackages__Howitworks__Modularworkflow) - DoneJS makes it possible for teams to design and share components easily. Starting with [generators](#section=section_Generators), users can create [modlets](#section=section_Modlets) that encapsulate everything a [custom elements](#section=section_CustomHTMLElements) needs, easily add [documentation](#section=section_Documentation) and [testing](#section=section_ComprehensiveTesting), then use [NPM import and export](#section=section_NPMPackages) to easily share the modules with other developers, no matter what module format they're using.
 
-DoneJS makes it possible for teams to design and share components easily.
+2. [Performance](#section=section_PerformanceFeatures) - DoneJS was designed from the start to solve the performance story, packaging [server-side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof.
 
-* [Generators](#section=section_Generators) allow easy creation of components, with all their needed ingredients
-* [Modlet](#section=section_Modlets) organization encourages easy encapsulation of everything a reusable component needs
-* [Custom elements](#section=section_CustomHTMLElements) provide the ability to create modules that are easy to reuse
-* [NPM import and export](#section=section_NPMPackages) provide an easy way to share custom elements with other developers, using any module format, and then consume them without any configuration
-* [Documentation](#section=section_Documentation) and [testing](#section=section_ComprehensiveTesting) provide simple support for making these modules maintainable and easy to contribute to
+3. There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [live reload](#section=section_LiveReload), [ES6 support](#section=section_ES6Modules)), but you get the idea.
 
-2. [Performance](#section=section_PerformanceFeatures)
+### Feature comparison
 
-DoneJS was designed from the start to solve the performance story - packaging [server-side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof. If you build an application in DoneJS, it's safe to say you'd be hard-pressed to **not** make it perform extremely well. 
+<div class="matrix-wrapper">
+  <div class="matrix-legend" id="js-matrix-legend-affix">
+    <div class="title">SOLUTION LEGEND</div>
+    <ul>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+        <div>EASY</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+        <div>EQUIVALENT</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+        <div>DIFFICULT</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+        <div>THIRD-PARTY</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+        <div>NO</div>
+      </li>
+    </ul>
+  </div>
+  <div class="table-wrapper">
+    <div class="scrollable">
+      <table id="js-matrix-table-affix" class="matrix-table responsive">
+      <thead>
+        <tr>
+          <th class="features">FEATURES</th>
+          <th><img class="framework-logo" src="/static/img/donejs-logo-matrix.png"></th>
+          <th><img class="framework-logo" src="/static/img/angular-logo.png"></th>
+          <th><img class="framework-logo" src="/static/img/react-logo.png"></th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Server_SideRendered">Server-side rendering</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img data-toggle="popover" data-placement="right" data-html="true" data-content='Requires some <a href="http://reactjsnews.com/isomorphic-javascript-with-react-node" target="_blank">manual setup</a>' class="matrix-rating-icon" src="/static/img/icon-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ProgressiveLoading">Progressive dependency loading</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_CachingandMinimalDataRequests">Caching & minimal data requests</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MinimalDOMUpdates">Minimal DOM updates</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_WorkerThreadRendering">Worker thread rendering</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_DeploytoaCDN">Deploy to a CDN</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_iOS_Android_andDesktopBuilds">Native app builds</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_SupportsAllBrowsers_EvenIE8">Browser support</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>' src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_RealTimeConnected">Real-time</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_PrettyURLswithPushstate">Pretty URLs</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ComprehensiveTesting">Comprehensive testing</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Documentation">Documentation</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ContinuousIntegration_Deployment">Continuous integration & deployment</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Modlets">Modlets</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_NPMPackages">NPM packages</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ES6Modules">ES6 modules</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='Coming in Angular 2' src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_CustomHTMLElements">Custom HTML elements</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MVVMArchitecture">MVVM architecture</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_LiveReload">Live reload</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Generators">Generators</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-These features span many layers and projects, including StealJS, CanJS, can-ssr, can-connect, etc. To achieve similar results with competitor frameworks would not be easy, and would involve piecing together many disparate projects.
-
-There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [live reload](#section=section_LiveReload), [ES6 support](#section=section_ES6Modules)), but you get the idea.
+@body
 
 ## Performance Features
 
