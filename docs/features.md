@@ -1545,6 +1545,8 @@ The introduction of a strong ViewModel has some key advantages for maintaining l
 
 #### How it works
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kCM03jujKy4" frameborder="0" allowfullscreen></iframe>
+
 DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works, compare it to other frameworks, and show an example.
 
 ##### MVVM overview
