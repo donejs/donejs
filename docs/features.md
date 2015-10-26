@@ -1545,9 +1545,12 @@ The introduction of a strong ViewModel has some key advantages for maintaining l
 
 #### How it works
 
+The following video introduces MVVM in DoneJS, focusing on the strength of the ViewModel with an example.
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kCM03jujKy4" frameborder="0" allowfullscreen></iframe>
 
-DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works, compare it to other frameworks, and show an example.
+DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works and compare it to other frameworks.
+
 
 ##### MVVM overview
 
@@ -1556,10 +1559,6 @@ DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll
 **Views** in DoneJS are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
 
 **ViewModels** will be covered in detail below.
-
-The following video explains an in depth example of using a ViewModel in DoneJS.
-
-VIDEO
 
 ##### Independent ViewModels
 
