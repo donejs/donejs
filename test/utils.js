@@ -11,7 +11,7 @@ function fail(error) {
 describe('DoneJS CLI tests', function() {
   describe('utils', function() {
     it('mkdir recursively', function(done) {
-      var myPath = 'test/recursive/path';
+      var myPath = path.join('test', 'recursive', 'path');
 
       utils.mkdirp(myPath).then(function(name) {
         assert.equal(path.join(process.cwd(), myPath), name);
