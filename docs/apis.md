@@ -901,18 +901,16 @@ will wait for all asynchronous events to complete.
 
 ### can-simple-dom
 
+[can-simple-dom](https://github.com/canjs/can-simple-dom) is a minimal virtual DOM implementation used for server-side and worker thread rendering. It contains enough of the DOM APIs to get basic jQuery usage to work, as well as what is typical of CanJS applications. 
 
+**can-simple-dom** looks like a normal DOM, unlike most other virtual DOMs, which means it can be used with jQuery plugins and other code that operates on a normal DOM.
 
+If you are working on an advanced plugin you might use can-simple-dom, in which case you would import it:
 
+```js
+import simpleDOM from "can-simple-dom";
 
+const document = new simpleDOM.Document();
+```
 
-
- 
-
-
-
-
-
-
-
-
+From here document has the normal DOM apis such as `document.createElement`.
