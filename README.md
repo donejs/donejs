@@ -51,7 +51,7 @@ _Maintenance features:_
 - Custom HTML elements
 - MVVM single direction architecture
 - Multi Versioned Documentation
-- Live reload
+- Hot Module Swapping
 - Functional tests
 
 

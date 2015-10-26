@@ -10,7 +10,7 @@
 
 
 
-In the first part of this guide we will install DoneJS, [generate a newc application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
+In the first part of this guide we will install DoneJS, [generate a newc application](Features.html#section=section_Generators) and start a server that provides [hot module swapping](Features.html#section=section_HotModuleSwapping) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). We will conclude with creating a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
 
@@ -49,7 +49,7 @@ This will create a new folder called `donejs-chat` and in it generate our applic
 
 ### Development mode
 
-DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode starts the [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) server that automatically reloads files in the browser and on the server as they change. To start it let's go into the `donejs-chat` application directory:
+DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode enables [hot module swapping](Features.html#section=section_HotModuleSwapping) which automatically reloads files in the browser and on the server as they change. To start it let's go into the `donejs-chat` application directory:
 
 ```
 cd donejs-chat
@@ -65,7 +65,7 @@ The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to se
 
 ## Adding Bootstrap
 
-DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
+DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [hot module swapping](Features.html#section=section_HotModuleSwapping) in action.
 
 ### Installing the NPM package
 
@@ -77,7 +77,7 @@ npm install bootstrap --save
 
 ### Add it to the page
 
-To see live-reload in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. Update `src/index.stache` to look like this:
+To see hot module swapping in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. Update `src/index.stache` to look like this:
 
 ```html
 <html>
@@ -117,7 +117,7 @@ To see live-reload in action, let's update the main template to import Bootstrap
 </html>
 ```
 
-If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save it. Feel free to edit the HTML or `src/styles.less` to see how live-reload updates the page automatically.
+If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save it. Feel free to edit the HTML or `src/styles.less` to see how hot module swapping updates the page automatically.
 
 ## Routing and components
 
@@ -492,7 +492,7 @@ NODE_ENV=production donejs start
 
 If using Windows you first set the environmental variable, if using the **command prompt** you set with `set NODE_ENV=production` or if using **Powershell** you set it with `$env:NODE_ENV="production"` and then run your application afterwards with `donejs start`.
 
-If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production mode, we can only see about 10 requests and a significantly reduced file-size.
+If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to hot module swapping we only have to make those requests once). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
 ## Deploy
 

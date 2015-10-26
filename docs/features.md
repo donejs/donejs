@@ -45,9 +45,9 @@ Here are a couple examples of cross-layer features.
 
 Server-side rendering (SSR), which you can read about in more detail in its [section](#section_Server_SideRendered) below, spans many layers to make setup and integration simple. 
 
-It uses hooks in data components to automatically notify the server to delay rendering, [live reload](#section_LiveReload) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.
+It uses hooks in data components to automatically notify the server to delay rendering, [hot module swapping](#section=section_HotModuleSwapping) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.
 
-By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, live reload, and inline caching.
+By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, hot module swapping, and inline caching.
 
 2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks) 
 
@@ -73,7 +73,7 @@ Solving a story means a packaged solution to a development problem, where severa
 
 2. [Performance](#section=section_PerformanceFeatures) - DoneJS was designed from the start to solve the performance story, packaging [server-side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof.
 
-3. There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [live reload](#section=section_LiveReload), [ES6 support](#section=section_ES6Modules)), but you get the idea.
+3. There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [hot module swapping](#section=section_HotModuleSwapping), [ES6 support](#section=section_ES6Modules)), but you get the idea.
 
 ### Feature comparison
 
@@ -369,7 +369,7 @@ Solving a story means a packaged solution to a development problem, where severa
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_LiveReload">Live reload</a></div>
+              <div class="feature-description"><a href="#section=section_HotModuleSwapping">Hot Module Swapping</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
@@ -1059,7 +1059,7 @@ This means the test is small, isolated, and simple. Tests themselves are modules
 
 Because of the [modlet](#section=section_Modlets) pattern, each component contains its own working test script and test file, which can be worked on in isolation.
 
-Because of [live reload](#section=section_LiveReload), you can write, debug, and run tests without constantly reloading your page.
+Because of [hot module swapping](#section=section_HotModuleSwapping), you can write, debug, and run tests without constantly reloading your page.
 
 Other frameworks require a build step before tests can be run. These builds concatenate dependencies and depend on specific order of tests running, which is a brittle and inefficient workflow.
 
@@ -1674,7 +1674,7 @@ To learn more:
 
 _The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/)._
 
-### Live Reload
+### Hot Module Swapping
 
 Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
 
@@ -1691,7 +1691,7 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 
 #### How it works
 
-Other live reload servers watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time.
+Live reload servers generally watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time.
 
 The correct terminology is actually [hot swapping](https://en.wikipedia.org/wiki/Hot_swapping), not live reload. Regardless of what it's called, the result is a blazing fast development experience.
 
