@@ -349,7 +349,7 @@ steal("./content_list.js",
             }
         });
 
-        $( "body:not(.donejs)" ).find( "h3, h4, h5" ).each( function () {
+        $( "body:not(.donejs):not(.community)" ).find( "h3, h4, h5" ).each( function () {
             if ( !this.id ) {
                 var tag = this.tagName.toLowerCase();
                 var prevTag = "h" + ( parseInt( tag.replace( /h(\d)/, "$1" ) ) - 1 );
@@ -512,7 +512,7 @@ steal("./content_list.js",
           if($('#js-matrix-legend-affix').length){
             $('#js-matrix-legend-affix').affix({
               offset: { top: $('#js-matrix-legend-affix').offset().top }
-            });  
+            });
           }
         })
 
