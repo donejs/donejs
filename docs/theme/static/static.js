@@ -353,7 +353,8 @@ steal("./content_list.js",
             if ( !this.id ) {
                 var tag = this.tagName.toLowerCase();
                 var prevTag = "h" + ( parseInt( tag.replace( /h(\d)/, "$1" ) ) - 1 );
-                var prevId = $( this ).prevAll( prevTag ).get( 0 ).id;
+                var prevEl = $( this ).prevAll( prevTag ).get( 0 );
+                var prevId = (prevEl) ? prevEl.id : '';
 
                 this.id = prevId + "__" + $( this ).text().replace( /[^a-z0-9]/gi, "" );
             }
