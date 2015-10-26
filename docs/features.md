@@ -9,9 +9,9 @@
 
 ## All-in-one, integrated stack
 
-DoneJS has many features, but possibly its best feature is completeness.
+DoneJS has many features, but possibly its best feature is completeness. DoneJS offers everything you need to build a modern web app.
 
-Just like Apple owning the hardware and software for its devices, DoneJS owning the whole stack creates unique advantages.
+Just like Apple integrates the hardware and software for its devices, DoneJS integrates different technologies in a way that creates unique advantages that you can only get from using an integrated solution.
 
 ### All-in-one stack
 
@@ -23,7 +23,7 @@ Choosing a modern stack is not at all simple or straightforward.
 
 1. First, what types of tools do you want?
 
-Server side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
+Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
 
 2. Second, choose all your pieces.
 
@@ -39,23 +39,23 @@ Who has [time for all that](http://vignette1.wikia.nocookie.net/starpolar/images
 
 Somewhere along the line, with the rise of minimal micro-libraries, the dev community lost sight of the point of application development: getting to a working application. The point is not to tinker endlessly with creating the perfect stack. Your stack should get out of the way and make your job easy.
 
-DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. Its our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app.
+DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. It's our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app.
 
-And as, as we've proven [over the last 8 years](/About.html#section=section_Evolve), we'll keep updating the stack as the state of the art evolves over time.
+And as we've proven [over the last 8 years](/About.html#section=section_Evolve), we'll keep updating the stack as the state of the art evolves over time.
 
 ### Integrated layers
 
 Integration between layers provides unique advantages.
 
-#### Cross layer features
+#### Cross-layer features
 
-DoneJS features span technology layers, making things that are not possible or at best DIY with competitor frameworks, easy or automatic with DoneJS.
+DoneJS makes it easier to do things that are not possible, or at best DIY, with competitor frameworks, by spanning technology layers.
 
 Here are a couple examples of cross-layer features.
 
-1. [Server side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
+1. [Server-side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
 
-Server side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tell the server to delay rendering.
+Server-side rendering (SSR) is made simple through the use of hooks within data components. You load data with a data tag, like `<message-model get-list="{}">`, and that internally calls a method that tells the server to delay rendering.
 
 React's SSR uses a synchronous render call, so data must be present prior to rendering, which means you're left to your own devices.
 
@@ -79,7 +79,7 @@ and then running `donejs build`.
 
 `<can-import>` has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.
 
-##### Story level solutions
+##### Story-level solutions
 
 Another advantage of the integration between DoneJS' parts is the ability to solve development problems on the level of [**stories**](http://searchsoftwarequality.techtarget.com/definition/user-story) rather than just features.
 
@@ -97,7 +97,7 @@ DoneJS makes it possible for teams to design and share components easily.
 
 2. [Performance](#section=section_PerformanceFeatures)
 
-DoneJS was designed from the start to solve the performance story - packaging [server side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof. If you build an application in DoneJS, its safe to say you'd be hard-pressed to **not** make it perform extremely well. 
+DoneJS was designed from the start to solve the performance story - packaging [server-side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof. If you build an application in DoneJS, it's safe to say you'd be hard-pressed to **not** make it perform extremely well. 
 
 These features span many layers and projects, including StealJS, CanJS, can-ssr, can-connect, etc. To achieve similar results with competitor frameworks would not be easy, and would involve piecing together many disparate projects.
 
@@ -107,28 +107,28 @@ There are other user stories, including [maintainability](#section=section_Maint
 
 DoneJS is configured for maximum performance right out of the box.
 
-### Server Side Rendered
+### Server-Side Rendered
 
 DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
 and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript), or [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9).
 
-Server side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
+Server-side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
 
 SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The benefit to your users is a noticeable difference in perceived page load performance:
 
 <img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
-Compared to other server side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
+Compared to other server-side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
 
 #### Page load performance
 
-Server side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.
+Server-side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.
 
 Traditional SPAs must load the JS, execute, request data, and render before the user sees content.
 
 #### SEO
 
-Search engines can't easily index SPAs. Server side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
+Search engines can't easily index SPAs. Server-side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
 
 Since search engines see the HTML that your server returns (if you want search engines to find your pages) you'll want Google and other search engines seeing fully rendered content, not the spinners that normally show after initial SPAs load.
 
@@ -196,7 +196,7 @@ can.Component.extend({
 <a class="btn" href="https://github.com/canjs/can-ssr"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html"><span>View the Guide</span></a>
 
-_Server side rendering is a feature of [can-ssr](https://github.com/canjs/can-ssr)_
+_Server-side rendering is a feature of [can-ssr](https://github.com/canjs/can-ssr)_
 
 ### Progressive Loading
 
@@ -250,9 +250,9 @@ Undoubtedly, the slowest part of any web application is round trips to the serve
 
 Making matters worse, the concerns of maintainable architecture in single page applications are at odds with the concerns of minimizing network requests. This is because independent, isolated UI widgets, while easier to maintain, often make AJAX requests on page load. Without a layer that intelligently manages those requests, this architecture leads to too many AJAX requests before the user sees something useful. 
 
-No engineer should have to choose between maintainability and performance. With DoneJS, you won't have to.
+With DoneJS, you don't have to choose between maintainability and performance.
 
-DoneJS uses the following strategies to reduce the amount and size of data requests:
+DoneJS uses the following strategies to improve perceived performance (reduce the amount of time before users see content rendered):
 
  - [Fall through caching](#section=section_CachingandMinimalDataRequests__Howitworks__Fallthroughcaching) - Cache data in localStorage. Automatically show cached data immediately, but look for updates on the server in the background and merge changes.
  - [Combining requests](#section=section_CachingandMinimalDataRequests__Howitworks__Combiningrequests) - Instead of making multiple, independent requests to the same API, combine them into a single request.
@@ -261,38 +261,38 @@ DoneJS uses the following strategies to reduce the amount and size of data reque
 
 #### How it works
 
-DoneJS uses [can-connect](http://connect.canjs.com/) as its model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
+[can-connect](http://connect.canjs.com/) makes up part of the DoneJS model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
 
 It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests independently, and with little thought to performance, without actually creating a poorly performing application.
 
 ##### Fall through caching
 
-Fall through caching is a technique that serves cached data first, but still makes API requests to check for changes.
+Fall through caching serves cached data first, but still makes API requests to check for changes.
 
-The major benefit of this technique is improved perceived performance. Users will see rendered content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
+The major benefit of this technique is improved perceived performance. Users will see content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
 
-This will benefit two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
+This benefits two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
 
 By default, this is turned on, but can easily be deactivated for data that should not be cached.
 
 Here's how the caching logic works:
 
-1. When the application loads, it checks for available cache connections (by default this looks for localStorage or memory). 
+1. When the application loads, it checks for available cache connections. 
 1. When a request is made, it checks for a cache hit. 
 1. If there is a hit, the request is completed immediately with the cached data.
 1. Regardless of a hit or miss, a request is made in the background to the actual API endpoint. 
-1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
-1. Response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
+1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
+1. Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
 <video style="width:100%;" controls poster="static/img/donejs-fallthrough-caching.png" src="static/img/donejs-fallthrough-caching.mp4"></video>
 
 ##### Combining requests
 
-Combining requests is a technique that combines multiple incoming requests into one, if possible. This is done with the help of set algebra. 
+Combining requests combines multiple incoming requests into one, if possible. This is done with the help of [set algebra](https://en.wikipedia.org/wiki/Algebra_of_sets). 
 
 DoneJS collects requests that are made within a few milliseconds of each other, and if they are pointed at the same API, tries to combine them into a single superset request.
 
-For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed todos and incomplete todos. Both are subsets of a larger set of data - the whole list of todos. 
+For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed and incomplete todos. Both are subsets of a larger set of data - the entire list of todos. 
 
 Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.
 
@@ -318,11 +318,38 @@ The video below shows two example scenarios. The first shows the cache containin
 
 ##### Inline cache
 
-Server side rendered single page apps have a problem with wasteful duplicate requests. When the server rendered content loads, the single page app is loaded next. The SPA will want to make data requests for the same data that was already rendered.
+Server-side rendered single page apps (SPAs) have a problem with wasteful duplicate requests. These can cause the browser to slow down, waste bandwidth, and reduce perceived performance.
 
-In other frameworks, a request is made for data that's already in the page, wasting bandwidth and performance. 
+1. When a page is rendered server-side, it makes data requests on the server to various APIs. 
+1. After the page's rendered HTML loads in the client, the SPA is loaded in the client, so that subsequent requests are handled within the SPA. 
+1. The SPA will want to re-request for the same data that was already requested on the server. 
 
-DoneJS solves this problem with an inline cache: embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
+DoneJS solves this problem with an inline cache - embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
+
+DoneJS uniquely makes populating and using the inline cache easy. `waitFor` is a method that:
+
+1. Tells the SSR server to wait for a promise to resolve before rendering.
+1. Collects data from each promise and uses it to populate the inline cache.
+
+For example:
+
+```
+can.Component.extend({
+  tag: "user-name",
+  template: can.stache( "{{user.name}}" ),
+  viewModel: {
+    init: function () {
+      var promise = User.getOne( { id: this.attr( "id" ) } );
+      this.attr( "%root" ).waitFor( promise );
+      promise.then( ( user ) => { this.attr( "user", user ); } );
+    }
+  }
+});
+```
+
+The model layer seamlesslly integrates the inline cache in client side requests, without any special configuration.
+
+While this flow would be possible in other SSR systems, it would require manually setting up all of these steps.
 
 This video illustrates how it works.
 
@@ -1212,13 +1239,25 @@ DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wik
 
 The introduction of a strong ViewModel has some key advantages for maintaining large applications:
 
- * **Decouples the presentation from its business logic** - A ViewModel is essentially an object and methods representing the state of a View. This separation of concerns enables simple, dumb HTML-based Views containing no logic, while the ViewModel manages the complexities of application logic.
+ * **Decouples the presentation from its business logic** - A ViewModel is essentially an object and methods representing the state of a View. This separation of concerns enables simple, dumb HTML-based Views containing minimal logic, while the ViewModel manages the complexities of application logic.
  * **Enables designer/developer cooperation** - Because the view is stripped of code and application logic, designers can safely and comfortably change the View without fear of breaking things.
  * **Enables easier [testing](#section=section_ComprehensiveTesting)** - ViewModels can be unit tested easily. Because they represent the view's state without any knowledge of the DOM, they provide a simple interface for testing.
 
 #### How it works
 
 DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works, compare it to other frameworks, and show an example.
+
+##### MVVM overview
+
+**Models** in DoneJS are responsible for loading data from the server. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server. Models use intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques.
+
+**Views** in DoneJS are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
+
+**ViewModels** will be covered in detail below.
+
+The following video explains an in depth example of using a ViewModel in DoneJS.
+
+VIDEO
 
 ##### Independent ViewModels
 
@@ -1238,15 +1277,16 @@ export const ViewModel = Map.extend({
 })
 ```
 
-A view (template) that renders this ViewModel, in its own `template.stache` file, looks like this:
+The template (view) lives in its own file, so a designer could easily modify it without touching any JavaScript. This template renders the ViewModel property from above:
 
 ```
 <div>{{fullName}}</div>
 ```
 
-A component, also known as a [custom HTML element](#section=section_CustomHTMLElements), would be used to tie these layers together:
+A [custom HTML element](#section=section_CustomHTMLElements), also known as a component, would be used to tie these layers together:
 
 ```
+import Component from 'can/component/';
 import ViewModel from "./viewmodel";
 import template from './template.stache!';
 
@@ -1256,8 +1296,6 @@ Component.extend({
   template
 });
 ```
-
-The template lives in its own file, so a designer could easily modify it without touching any JavaScript.
 
 The ViewModel is defined as its own module and exported as an ES6 module, so it can be imported into a unit test, instantiated, and tested in isolation from the DOM:
 
@@ -1272,7 +1310,7 @@ QUnit.test('fullName works', function() {
 });
 ```
 
-In other frameworks, ViewModels don't enjoy this level of independence. Every React class has a render function, which is essentially a template. Every Angular directive has its own template. In DoneJS, the ViewModel lives in its own independent world, unaware of the DOM, or which templates, if any, are using it. In other frameworks it's harder to achieve the same unit testing simplicity or template isolation.
+In other frameworks, ViewModels don't enjoy this level of independence. Every React class has a render function, which is essentially a template, so the View, ViewModel, and component definition are typically part of the same module. Every Angular directive is a ViewModel. In DoneJS, separating the ViewModel, template, and custom element is encouraged, making each module more decoupled and easier to unit test.
 
 ##### Powerful observable data layer
 
@@ -1282,9 +1320,11 @@ DoneJS supports the following features:
 
 1. **Direct observable objects** - changes to a property in an object or array immediately and synchronously notify any event listeners.
 
-2. **Data bound templates** - templates bind to property changes and update the DOM as needed.
+1. **Computed properties** - ViewModels can define properties that depend on other properties, and they'll automatically recompute only when their dependent properties change.
 
-3. **Computed properties** - ViewModels can define properties that depend on other properties, and they'll automatically recompute only when their dependent properties change.
+1. **Data bound templates** - templates bind to property changes and update the DOM as needed.
+
+In the simple ViewModel example above, `fullName`'s value depends on `first` and `last`. If something in the application changes `first`, `fullName` will recompute.
 
 ```
 export const ViewModel = Map.extend({
@@ -1297,8 +1337,6 @@ export const ViewModel = Map.extend({
   }
 })
 ```
-
-In this simple ViewModel, `fullName`'s value depends on `first` and `last`. If something in the application changes `first`, `fullName` will recompute.
 
 `fullName` is data bound to the view that renders it:
 
@@ -1316,29 +1354,17 @@ viewModel.attr('first', 'Jane');
 
 The interplay of these layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to how the properties are computed. The app then comes alive with rich functionality.
 
-Without these layers, achieving the same `fullName` functionality would require code that communicates changes between modules, removing the isolation achieved above. Any change to `first` would need to notify `fullName` of a change. Any change to `fullName` would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.
+Without automatic ties connecting these layers, achieving the same `fullName` functionality would require more code explicitly performing these steps. There would need to be communication between layers, removing the isolation achieved above. Any change to `first` would need to notify ViewModel's `fullName` of a change. Any change to `fullName` would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.
 
-In Angular, there are no direct observables. It uses dirty checking with regular JavaScript objects, which means at the end of the current $digest cycle, it will run a diffing algorithm that determines what data has changed. This has performance drawbacks, as well as making it harder to write simple unit tests.
+In Angular, there are no direct observables. It uses dirty checking with regular JavaScript objects, which means at the end of the current $digest cycle, it will run an algorithm that determines what data has changed. This has performance drawbacks, as well as making it harder to write simple unit tests.
 
-In React, there is no observable data layer. You could define a `fullName` like we showed above, but it would be recomputed every time `render` is called, whether or not it has changed, and there would be no way to isolate and test its ViewModel object.
-
-##### MVVM overview
-
-Models in DoneJS wrap data services. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server. Models use intelligent set logic that enables [real time](#section=section_RealTimeConnected) integration and [caching](#section=section_CachingandMinimalDataRequests) techniques.
-
-Views in DoneJS are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
-
-ViewModels have already been covered in detail.
-
-The following video explains an in depth example of using a ViewModel in DoneJS.
-
-VIDEO
+In React, there is no observable data layer. You could define a `fullName` like we showed above, but it would be recomputed every time `render` is called, whether or not it has changed. Though it's possible to isolate and unit test its ViewModel, its not quite set up to make this easy.
 
 ##### More information
 
 To learn more:
 
- * Models - read about [can.connect](http://connect.canjs.com/)
+ * Models - read about [can.connect](http://connect.canjs.com/) and [can.Map](http://canjs.com/docs/can.Map.html)
  * Computed properties - read about [can.compute](http://canjs.com/docs/can.compute.html)
  * Observable data layer - read about [can.Map](http://canjs.com/docs/can.Map.html) and [can.List](http://canjs.com/docs/can.List.html)
  * ViewModels - read about [can.component](http://canjs.com/docs/can.Component.html), [can.Component.viewModel](http://canjs.com/docs/can.Component.prototype.viewModel.html), and [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html)
@@ -1426,7 +1452,7 @@ You'll be prompted for a project name, source folder, and other setup informatio
 ├── node_modules/
 ```
 
-You're now a command away from running application wide tests, generating documentation, and running a build. Start your server with `donejs develop`, open your browser, and you'll see a functioning, server side rendered hello world page.
+You're now a command away from running application wide tests, generating documentation, and running a build. Start your server with `donejs develop`, open your browser, and you'll see a functioning, server-side rendered hello world page.
 
 ##### Modlet component generator
 
