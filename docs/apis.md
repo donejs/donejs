@@ -873,7 +873,31 @@ Example
 
 ### done-autorender
 
-[done-autorender](https://github.com/donejs/autorender) is the main entrypoint of a DoneJS application.
+[done-autorender](https://github.com/donejs/autorender) is a Steal plugin that
+enables using a [can.stache] template as your application's entry point. Create a template like:
+
+```handlebars
+<html>
+<head>
+  <title>app | {{page}}</title>
+</head>
+<body>
+  <can-import from="app/state" export-as="viewModel"/>
+
+  <div>Hello {{name}}</div>
+</body>
+</html>
+```
+
+**done-autorender** will insert this template on page load. The import specied with
+the `export-as="viewModel"` attribute is a [can.Map] that acts as the View Model
+(or application state) for the application.
+
+If you have [live-reload] enabled done-autorender will additionally use those
+APIs to re-render the application when any modules are reloaded.
+
+done-autorender handles requests when running in Node for server-side rendering and
+will wait for all asynchronous events to complete.
 
 ### can-simple-dom
 
