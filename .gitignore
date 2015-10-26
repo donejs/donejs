@@ -31,5 +31,5 @@ tmp*
 .idea/
 
 site/
-test/dummy/
+test/recursive/
 *.DS_Store

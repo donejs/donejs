@@ -36,42 +36,14 @@
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
     "documentjs": "^0.3.0",
-    "is-ci": "^1.0.7",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5"
   },
   "dependencies": {
     "commander": "^2.8.1",
-    "cross-spawn-async": "^2.0.0",
-    "mkdirp": "^0.5.1",
-    "npm": "^2.13.1",
-    "q": "^1.4.1",
-    "steal-platform": "0.0.4",
-    "yeoman-environment": "^1.2.7",
-    "yeoman-generator": "^0.20.3"
+    "q": "^1.4.1"
   },
   "directories": {
     "doc": "docs"
-  },
-  "donejs": {
-    "dependencies": {
-      "can": "^2.3.0-beta.5",
-      "can-connect": "^0.3.0",
-      "can-ssr": "^0.10.0",
-      "done-autorender": "^0.4.2",
-      "done-component": "^0.3.0",
-      "done-css": "~1.1.13",
-      "generator-donejs": "^0.3.0",
-      "jquery": "^2.1.4",
-      "steal": "^0.12.1"
-    },
-    "devDependencies": {
-      "documentjs": "0.3.3",
-      "donejs-deploy": "^0.3.1",
-      "funcunit": "~3.0.0",
-      "steal-qunit": "^0.1.1",
-      "steal-tools": "^0.12.0",
-      "testee": "^0.2.0"
-    }
   }
 }

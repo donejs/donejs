@@ -1,123 +1,44 @@
 #!/usr/bin/env node
 
 var path = require('path');
-var fs = require('fs');
 var program = require('commander');
-var mkdirp = require('mkdirp');
 
 var utils = require('../lib/utils');
-var log = utils.log;
-
 var mypkg = require(path.join(__dirname, '..', 'package.json'));
-
-var commandList = ['init', 'generate'];
-var listSeparator = '\n\t• ';
 var initDescription = 'Initialize a new DoneJS application in a new folder or the current one';
-var generatorDescription = 'No generators available.';
 
-program.version(mypkg.version)
-  .description("The DoneJS command line utility lets you run generators, NPM scripts and binaries local to your project.");
+program.version(mypkg.version);
 
-utils.projectRoot().then(function (root) {
-  var generators = null;
-  var actions = {
-    init: function (folder) {
-      if (folder) {
-        var appDir = path.join(process.cwd(), folder);
-        if (fs.existsSync(appDir)) {
-          console.error('Folder `' + folder + '` already exists.');
-          return;
-        }
-
-        console.log('Creating folder ' + folder);
-        mkdirp.sync(appDir);
-        process.chdir(appDir);
-      }
-
-      root = path.join(process.cwd(), 'node_modules');
-      log(utils.generate(root, 'generator-donejs', ['app', {
-          version: mypkg.version,
-          packages: mypkg.donejs
-        }
-      ]));
-    },
-    generate: function (type, options) {
-      log(utils.generate(path.join(root, 'node_modules'), 'generator-donejs', [[type].concat(options)]));
-    },
-    catchAll: function (command) {
-      console.error('Could not run `' + command + '`');
-      program.help();
-    },
-    add: function(name, params) {
-      if(generators && generators[name]) {
-        return actions.generate(name, params);
-      }
-      log(utils.add(path.join(root, 'node_modules'), name, params));
-    }
-  };
-  // Lists all NPM scripts of the package.json in the current folder
-  var curpkg = {};
-  try {
-    curpkg = require(path.join(root, 'package.json'));
-  } catch (e) {
-    // otherwise no local package.json
-  }
-
-  try {
-    generators = require(path.join(root, 'node_modules', 'generator-donejs'));
-    generatorDescription = 'Run a generator. Available generators:';
-    generatorDescription += listSeparator +
-    Object.keys(generators).join(listSeparator);
-  } catch (e) {
-    // We can do this because `generatorDescription` is already set
-  }
-
+utils.projectRoot().then(function(root) {
   // donejs init
   program.command('init [folder]')
     .description(initDescription)
-    .action(actions.init);
+    .action(function(folder) {
+      var promise = utils.mkdirp(folder).then(function(fullPath) {
+        var options = { cwd: fullPath };
 
-  // donejs generate
-  program.command('generate <name> [options...]')
-    .description(generatorDescription)
-    .action(actions.generate);
-
-  // catchall
-  program.command('*')
-    .description('')
-    .action(actions.catchAll);
-
-  program.command('add <name> [params...]')
-    .description('Add functionality to your project')
-    .action(actions.add);
-
-  Object.keys(curpkg.scripts || {}).forEach(function (script) {
-    if (commandList.indexOf(script) === -1) {
-      commandList.push(script);
-      program.command(script + ' [...args]')
-        .description('`' + curpkg.scripts[script] + '` (package.json)')
-        .action(function (args) {
-          log(utils.runScript(script, args));
-        });
-    }
-  });
-
-  // List all other local binaries
-  var binPath = path.join(path.join(root, "node_modules"), '.bin');
-  if (fs.existsSync(binPath)) {
-    fs.readdirSync(binPath).forEach(function (name) {
-      if (commandList.indexOf(name) === -1) {
-        commandList.push(name);
-        program.command(name + ' [...args]')
-          .description('')
-          .action(function (args) {
-            log(utils.runCommand(path.join(binPath, name), args));
+        return utils.spawn('npm', [ 'install', 'donejs-cli' ], options)
+          .then(function() {
+            var init = path.join('node_modules', '.bin', 'donejs');
+            return utils.spawn(init, ['init'], options);
           });
-      }
+      });
+
+      utils.log(promise);
     });
-  }
+
+  // donejs <anything else>
+  program.command('*')
+    .description('Run DoneJS commands using the current DoneJS application')
+    .action(function() {
+      var args = program.rawArgs.slice(2);
+      var command = 'node ' + path.join(root, 'node_modules', '.bin', 'donejs');
+
+      utils.spawn(command, args, { cwd: root });
+    });
 
   program.parse(process.argv);
+
   if (!program.args.length) {
     program.help();
   }
