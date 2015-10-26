@@ -32,9 +32,9 @@ utils.projectRoot().then(function(root) {
     .description('Run DoneJS commands using the current DoneJS application')
     .action(function() {
       var args = program.rawArgs.slice(2);
-      var command = 'node ' + path.join(root, 'node_modules', '.bin', 'donejs');
 
-      utils.spawn(command, args, { cwd: root });
+      args.unshift(path.join(root, 'node_modules', '.bin', 'donejs'));
+      utils.spawn('node', args, { cwd: root });
     });
 
   program.parse(process.argv);
