@@ -2,4 +2,32 @@ body.community {
 	h1 {
 		font-weight: 300;
 	}
+	.quick-link-list {
+		margin:0;
+		padding:0;
+		li {
+			display: inline-block;
+			width:auto;
+			margin-right: 40px;
+			text-align: center;
+			&:last-child {
+				margin-right:0;
+			}
+			a {
+				display: inline-block;
+				.clearfix;
+				cursor: pointer;
+			}
+			a:hover {
+				text-decoration: none;
+			}
+		}
+		.quick-link-icon {
+			width: 40px;
+			margin: 0 auto;
+		}
+		.quick-link-label {
+			display: block;
+		}
+	}
 }
