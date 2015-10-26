@@ -863,7 +863,7 @@ And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS 
 
 ### Real Time Connected
 
-DoneJS is designed to make it easy to build applications that connects users in real-time.
+DoneJS is designed to add real-time behavior to applications using any backend technology stack.
 
 [Socket.io](https://socket.io) provides the basics to add real-time capabilities to any JavaScript application, but the challenge of integrating real-time updates into your code remains.
 
