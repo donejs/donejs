@@ -113,7 +113,49 @@ the chat application as an example in development.  We'll cover what happens whe
 
 ### Pushstate change
 
+1. A pushstate is triggered by user action, usually by clicking a link. Routes determine how the application will react to the change.
 
+   ```
+   can.route(':page', { page: 'home' });
+   ```
+
+2. [done-autorender](#section=section_done_autorender) previously bound the [can-ssr/app-map] to [can.route] which causes any change in the route to be reflected in the AppMap instance.
+
+3. Live binding causes the initial template to reflect in the change in route. If the new route is `/chat` it will cause the `page` to be **chat**:
+
+   ```
+   <html>
+   <head>
+     <title>My Site</title>
+   </head>
+   <body>
+     <can-import from="styles.less!"/>
+     <can-import from="donejs-chat/app" export-as="viewModel" />
+     {{#eq page "home"}}
+   
+       <can-import from="home/">
+         {{#if isResolved}}
+           <home-page></home-page>
+         {{/if}}
+       </can-import>
+   
+     {{/eq}}
+
+     {{#eq page "chat"}}
+       <can-import from="chat/">
+        {{#if isResolved}}
+          <chat-page></chat-page>
+        {{/if}}
+      </can-import>
+
+     {{/eq}}
+
+     <script src="node_modules/steal/steal.js" main="index.stache!done-autorender"></script>
+   </body>
+   </html>
+   ```
+
+3. [can-import] will progressively load the component for the new page with a [Promise] as it's view model. When the promise resolves the [can.Component] will be inserted.
 
 
 
