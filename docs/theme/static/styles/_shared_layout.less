@@ -717,7 +717,7 @@ body:not(.donejs) {
 	width:80px;
 	text-align: center;
 	z-index: 1060;
-	&.affix-top {
+	&.affix-top, &.affix-bottom {
 		position: absolute;
 		right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
 	}
@@ -754,6 +754,7 @@ body:not(.donejs) {
 	@media(max-width: @screen-md-max){
 		width: 100%;
 		&.affix-top,
+		&.affix-bottom,
 		&.affix {
 			position: static;
 			right: inherit;
