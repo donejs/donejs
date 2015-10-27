@@ -584,7 +584,7 @@ Here's how the caching logic works:
 1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
 1. Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
-<video style="width:100%;" controls poster="static/img/donejs-fallthrough-caching.png" src="static/img/donejs-fallthrough-caching.mp4"></video>
+<video style="width:100%;" controls src="static/img/donejs-fallthrough-caching.mp4"></video>
 
 ##### Combining requests
 
