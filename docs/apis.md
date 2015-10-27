@@ -262,6 +262,7 @@ modules to different formats.
 
 DoneJS comes with a `build.js` script that call's steal-tools' [build](http://stealjs.com/docs/steal-tools.build.html):
 
+```
 //build.js
 var stealTools = require("steal-tools");
 
@@ -273,6 +274,7 @@ var buildPromise = stealTools.build({
 }, {
   bundleAssets: true
 });
+```
 
 This is already configured to run with:
 
@@ -286,7 +288,7 @@ But you could also run it with:
 > node build.js
 ```
 
-Hot module swapping is done with [live-reload](https://github.com/stealjs/live-reload) which
+Hot module swapping is done with [live-reload](http://stealjs.com/docs/steal-tools.cmd.live-reload.html) which
 is bundled within steal-tools.  
 
 By default `donejs develop` starts the live-reload server.  However, you could start one
@@ -997,7 +999,7 @@ For more configuration options follow up in the [Testee documentation](https://g
 ### can-ssr
 
 [can-ssr](https://github.com/canjs/can-ssr) enables DoneJS applications to be
-server-side rendered. Paired with [done-autorender](#section_done_autorender) 
+server-side rendered. Paired with [done-autorender](#section=section_done_autorender) 
 it allows you to render the entire document from a single template.
 
 ```
@@ -1034,10 +1036,62 @@ can-serve --proxy http://localhost:7070 --port 8080
 
 ### can-ssr/app-map
 
+[can-ssr/app-map](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) is a [can.Map](#section=section_can_Map)
+that aids in rendering a template that performs asynchronous operations (like Ajax).
+
+The app-map is used as your application's View Model by extending it:
+
+```
+var AppMap = require("can-ssr/app-map");
+
+module.exports = AppMap.extend({
+  ...
+});
+```
+
+Within a [can.Component](#section=section_can_Component) View Model you can use the app-map
+to tell [can-ssr](#section=section_can_ssr) to wait for a request to finish:
+
+```
+exports.ViewModel = can.Map.extend({
+  define: {
+    orders: {
+      get: function() {
+        var params = {};
+        var orderPromise = Order.getList(params);
+        this.attr("%root").pageData("orders", params, orderPromise);
+        return orderPromise;
+      }
+    }
+  }
+});
+```
+
+Using `pageData` will result in the response data being inlined into the page when using the
+[inline-cache](http://canjs.github.io/can-ssr/doc/inline-cache.html) asset,
+preventing a request for the data in the browser.
+
+Additionally **can-ssr/app-map** contains a `statusCode` property that is useful for handling 404s
+and other non-200 conditions:
+
+```
+{{#switch statusCode}}
+    {{#case 404}}
+        These are not the Droids you are looking for.
+    {{/case}}
+    {{#case 500}}
+        Sorry, our API crashed.
+    {{/case}}
+    {{#default}}
+        {{! spin up your application here}}
+    {{/default}}
+{{/switch}}
+```
+
 ### done-autorender
 
 [done-autorender](https://github.com/donejs/autorender) is a Steal plugin that
-enables using a [can.stache] template as your application's entry point. Create a template like:
+enables using a [can.stache](#section=section_can_stache) template as your application's entry point. Create a template like:
 
 ```handlebars
 <html>
@@ -1053,7 +1107,7 @@ enables using a [can.stache] template as your application's entry point. Create 
 ```
 
 **done-autorender** will insert this template on page load. The import specied with
-the `export-as="viewModel"` attribute is a [can.Map] that acts as the View Model
+the `export-as="viewModel"` attribute is a [can.Map](#section=section_can_Map) that acts as the View Model
 for the application.
 
 If you have [live-reload](http://stealjs.com/docs/steal.live-reload.html#section_Use) enabled done-autorender will additionally use those APIs to re-render the
