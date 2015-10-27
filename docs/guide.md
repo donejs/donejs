@@ -69,7 +69,7 @@ DoneJS makes it easy to import other projects that are published on [NPM](https:
 
 ### Installing the NPM package
 
-Keep the server from `donejs develop` running and open a new terminal window to install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
+Open a new terminal window so we can keep the server from `donejs develop` running. Then, install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
 ```
 npm install bootstrap --save
