@@ -771,10 +771,10 @@ Create a template programmatically with `can.stache` like:
 var template = can.stache("<h1>{{first}} {{last}}</h1>");
 ```
 
-`template` is a __renderer__ function that when called with observable data,
-returns a [documentFragment] that is updated when the observable data changes.
+`template` is a __renderer__ function that, when called with observable data,
+returns a [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) that is updated when the observable data changes.
 
-Add those fragments to the page to see the result.
+Add those fragments to the page to see the result:
 
 ```
 var person = new can.Map({first: "Brian", last: "Moschel"})
@@ -791,11 +791,13 @@ document.body //-> <h1>Ramiya Meyer</h1>
 ```
 
 In a DoneJS application, templates are used primarily as part of
-a [can.Component] or as the [done-autorender]ed main template.  When used
-in a [can.Component], the templates are often put in their own file.  For
+a [can.Component](#section=section_can_Component) or as the [done-autorender](#section=section_done_autorender)ed main template.
+
+When used in a [can.Component](#section=section_can_Component), the templates are often put in their own file. For
 example, a `person_edit.js` component file might have a `person_edit.stache` file like:
 
 ```
+// person_edit.stache
 Update {{fullName}}:
 <input {($value)}='first'/>
 <input {($value)}='last'/>
@@ -823,58 +825,97 @@ There's too much to cover so we will highlight the important APIs.
 The different tag types:
 
  - [{{key}}](http://canjs.com/docs/can.stache.tags.escaped.html) -
-   inserts escaped value.
+   inserts an escaped value.
 
    ```
-   stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
+   can.stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
    ```
 
  - [{{{key}}}](http://canjs.com/docs/can.stache.tags.unescaped.html) -
-   inserts unescaped value.
+   inserts an unescaped value.
 
    ```
-   stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
+   can.stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
    ```
 
 - [{{#key}} ... {{/key}}](http://canjs.com/docs/can.stache.tags.section.html) -
-  renders the subsection depending on the value of the key.
+  renders a subsection depending on the value of the key.
 
   ```
-  stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
-  stache("{{#key}}A{{/key}}")({key: false}) //-> ``
-  stache("{{#key}}A{{/key}}")({key: [null,0]}) //-> `AA`
-  stache("{{#key}}A{{/key}}")({key: []}) //-> ``
+  // boolean values render the subsection or it's inverse
+  can.stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
+  can.stache("{{#key}}A{{/key}}")({key: false}) //-> ``
+  can.stache("{{#key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
 
-  stache("{{#key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
+  // iterative values render the subsection for each value
+  can.stache("{{#key}}A{{/key}}")({key: [null,0]}) //-> `AA`
+  can.stache("{{#key}}A{{/key}}")({key: []}) //-> ``
+
   ```
 
-  This also changes the [scope](http://canjs.com/docs/can.view.Scope.html):
+  The subsection is rendered with the `key` value as the top of the [scope](http://canjs.com/docs/can.view.Scope.html):
 
   ```
-  stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
+  can.stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
   ```
 
 - [{{^key}} ... {{/key}}](http://canjs.com/docs/can.stache.tags.inverse.html) -
   opposite of `{{#key}}`.
 
   ```
-  stache("{{^key}}A{{/key}}")({key: true}) //-> ``
-  stache("{{^key}}A{{/key}}")({key: false}) //-> `A`
-  stache("{{^key}}A{{/key}}")({key: [null,0]}) //-> ``
+  can.stache("{{^key}}A{{/key}}")({key: true}) //-> ``
+  can.stache("{{^key}}A{{/key}}")({key: false}) //-> `A`
+  can.stache("{{^key}}A{{/key}}")({key: [null,0]}) //-> ``
 
-  stache("{{^key}}A{{else}}B{{/key}}")({key: false}) //-> `A`
+  can.stache("{{^key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
   ```
 
 The following are stache's most commonly used helpers:
 
- - [{{#if}}] -
- - [{{#is}}] -
- - [{{#each}}] -
- - [{{routeUrl hashes}}] -
+ - [{{#if expr}} .. {{/if}}](http://canjs.com/docs/can.stache.helpers.if.html) - renders the subsection if the expr is truthy.
+
+   ```
+   can.stache("{{#if key}}A{{/if}}")({key: true}) //-> `A`
+   can.stache("{{#if key}}A{{/if}}")({key: false}) //-> ``
+
+   can.stache("{{#if key}}A{{else}}B{{/if}}")({key: false}) //-> `B`
+   ```
+
+ - [{{#is expr1 expr2}} ... {{/is}}](http://canjs.com/docs/can.stache.helpers.is.html) - compares two expressions and renders a subsection depending on the result.
+
+   ```
+   can.stache("{{#is page 'A'}}A{{/is}}")({page: 'A'}) //-> `A`
+   can.stache("{{#is page 'A'}}A{{/is}}")({page: 'B'}) //-> ``
+
+   can.stache("{{#is page 'A'}}A{{else}}C{{/is}}")({page: 'C'}) //-> `B`
+   ```
+
+ - [{{#each key}} ... {{/each}}](http://canjs.com/docs/can.stache.helpers.each.html) - renders a subsection for each item in a key's value.
+
+   ```
+   can.stache('{{#each hobbies}}<p>{{.}}</p>{{/each}}')(['Hockey', 'Hiking']) //-> `<p>Hockey</p><p>Hiking</p>`
+   ```
+
+    If the value of a key is a [can.List](#section=section_can_List) only the minimum amount of DOM updates occur when the list changes.
+
+ - [{{routeUrl hashes}}](http://canjs.com/docs/can.stache.helpers.routeUrl.html) - generates a url using [can.route](#section=section_can_route) for the provided hashes.
+
+   ```
+   can.stache("<a href="{{routeUrl page='details' id='23'}}">{{name}}</a>")({name: 'Item 23'}) //-> `<a href="#!&page=details&id=23">Item 23</a>`
+   ```
 
 [Call methods](http://canjs.com/docs/can.stache.expressions.html#section_Callexpression) in your scope like: `{{method(value)}}`
 
-Example
+```
+can.stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
+  pluralize: function(subject, howMany) {
+    if(howMany > 1) {
+      subject += 's';
+    }
+    return subject;
+  }
+}); //-> "<p>10 Baloons</p>"
+```
 
 ### can.view.bindings
 
