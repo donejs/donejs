@@ -128,13 +128,13 @@ In this part we will create our own custom HTML elements. One for the homepage a
 The homepage custom element (with the HTML tag name `chat-home`) won't be very big or complex, so we put everything into a single `.component` file. To generate it run:
 
 ```
-donejs generate component home.component chat-home
+donejs add component home.component chat-home
 ```
 
 The messages component (with the tag `chat-messages`) will be a little more complex, so we generate it using the [modlet file pattern](Features.html#section=section_Modlets).
 
 ```
-donejs generate component messages chat-messages
+donejs add component messages chat-messages
 ```
 
 Later we will update the generated files with the chat messages functionality.
@@ -326,7 +326,7 @@ For the messages page, we will:
 To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermodel like this:
 
 ```
-donejs generate supermodel message
+donejs add supermodel message
 ```
 
 When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
