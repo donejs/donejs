@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+var fs = require('fs');
 var path = require('path');
 var program = require('commander');
 
@@ -10,6 +10,16 @@ var initDescription = 'Initialize a new DoneJS application in a new folder or th
 program.version(mypkg.version);
 
 utils.projectRoot().then(function(root) {
+  var donejsBinary = path.join(root, 'node_modules', '.bin', 'donejs');
+  var runBinary = function(args) {
+    if(!fs.existsSync(donejsBinary)) {
+      console.error('Could not find local DoneJS binary (' + donejsBinary + ')');
+      return;
+    }
+    args.unshift(donejsBinary);
+    return utils.spawn('node', args, { cwd: root });
+  };
+
   // donejs init
   program.command('init [folder]')
     .description(initDescription)
@@ -27,14 +37,17 @@ utils.projectRoot().then(function(root) {
       utils.log(promise);
     });
 
+  program.command('help')
+    .description('Show all DoneJS commands available for this application')
+    .action(function() {
+      runBinary(['--help']);
+    });
+
   // donejs <anything else>
   program.command('*')
     .description('Run DoneJS commands using the current DoneJS application')
     .action(function() {
-      var args = program.rawArgs.slice(2);
-
-      args.unshift(path.join(root, 'node_modules', '.bin', 'donejs'));
-      utils.spawn('node', args, { cwd: root });
+      runBinary(program.rawArgs.slice(2));
     });
 
   program.parse(process.argv);

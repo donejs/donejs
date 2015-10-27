@@ -96,7 +96,7 @@ Let's have a quick look at the purpose of each:
 
 ### Development mode
 
-DoneJS comes with its own server, which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also start a [live-reload](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) server that automatically reloads files in the browser as they change. You can start both by running:
+DoneJS comes with its own server, which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also enable [hot module swapping](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) which automatically reloads files in the browser as they change. You can start it by running:
 
 ```
 donejs develop
@@ -245,7 +245,7 @@ There are two ways of creating components. For smaller components we can define 
 To generate a new component run:
 
 ```
-donejs generate component home.component pmo-home
+donejs add component home.component pmo-home
 ```
 
 This will create a file at `src/home.component` containing the basic ingredients of a component. We will update it to reflect the below content:
@@ -274,7 +274,7 @@ Here we created a [can.Component](http://canjs.com/docs/can.Component.html) name
 We'll create an initial version of order history that is very similar.
 
 ```
-donejs generate component order/history.component pmo-order-history
+donejs add component order/history.component pmo-order-history
 ```
 
 And update `src/order/history.component`:
@@ -301,7 +301,7 @@ The restaurant list will contain more functionality, which is why we will split 
 We can create a basic component like that by running:
 
 ```
-donejs generate component restaurant/list pmo-restaurant-list
+donejs add component restaurant/list pmo-restaurant-list
 ```
 
 The component's files are collected in a single folder so that components can be easily tested, moved, and re-used. The folder structure looks like this:
@@ -379,7 +379,7 @@ Its important to note that if any of these URLs are matched, AppViewModel, which
 Now is also a good time to add a header element that links to the different routes we just defined. We can run
 
 ```
-donejs generate component header.component pmo-header
+donejs add component header.component pmo-header
 ```
 
 and update `src/header.component` to:
@@ -417,7 +417,7 @@ We also use the Handlebars `eq` helper to make the appropriate link active.
 To show that something is currently loading, let's create a `pmo-loading` component:
 
 ```
-donejs generate component loading.component pmo-loading
+donejs add component loading.component pmo-loading
 ```
 
 Change `src/loading.component` to:
@@ -505,7 +505,7 @@ At the beginning of this guide we set up a REST API at [http://localhost:7070](h
 To manage the restaurant data located at [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants), we'll create a restaurant supermodel:
 
 ```js
-donejs generate supermodel restaurant
+donejs add supermodel restaurant
 ```
 
 Answer the question about the URL endpoint with `/api/restaurants` and the name of the id property with `_id`.
@@ -633,13 +633,13 @@ All asynchronous requests return a Promise, so the data structure will look like
 The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the corresponding models like we already did for Restaurants.
 
 ```
-donejs generate supermodel state
+donejs add supermodel state
 ```
 
 When prompted, set the URL to `/api/states` and the id property to `short`.
 
 ```
-donejs generate supermodel city
+donejs add supermodel city
 ```
 
 For city the URL is `/api/cities` and the id property is `name`. Now we can load a list of states and cities.
@@ -1057,7 +1057,7 @@ We want to support two additional routes:
 To make this happen, we need two more components. First, the `pmo-restaurant-details` component which loads the restaurant (based on the `slug`) and then displays its information.
 
 ```
-donejs generate component restaurant/details.component pmo-restaurant-details
+donejs add component restaurant/details.component pmo-restaurant-details
 ```
 
 And change `src/restaurant/details.component` to:
@@ -1115,7 +1115,7 @@ And change `src/restaurant/details.component` to:
 The order component will be a little more complex, which is why we will put it into its own folder:
 
 ```
-donejs generate component order/new pmo-order-new
+donejs add component order/new pmo-order-new
 ```
 
 For now, we will just use placeholder content and implement the functionality in
@@ -1253,7 +1253,7 @@ First, let's look at the restaurant data we get back from the server. It looks l
 We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new `order` model:
 
 ```
-donejs generate supermodel order
+donejs add supermodel order
 ```
 
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
@@ -1378,7 +1378,7 @@ Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder
 First, let's implement a small order confirmation component with
 
 ```
-donejs generate component order/details.component pmo-order-details
+donejs add component order/details.component pmo-order-details
 ```
 
 and changing `src/order/details.component` to:
@@ -1542,7 +1542,7 @@ socket.on('orders removed', order => connection.destroyInstance(order));
 That's all the JavaScript we need to implement real-time functionality. All the rest can be done by creating the `pmo-order-list` component with:
 
 ```
-donejs generate component order/list.component pmo-order-list
+donejs add component order/list.component pmo-order-list
 ```
 
 Changing `src/order/list.component` to:

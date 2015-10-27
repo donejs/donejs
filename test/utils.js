@@ -3,11 +3,6 @@ var path = require('path');
 var fs = require('fs');
 var utils = require('../lib/utils');
 
-function fail(error) {
-  console.error(error.stack);
-  throw error;
-}
-
 describe('DoneJS CLI tests', function() {
   describe('utils', function() {
     it('mkdir recursively', function(done) {
@@ -22,13 +17,29 @@ describe('DoneJS CLI tests', function() {
       });
     });
 
-    it('get project root', function(done) {
-        var pathFromTest = path.join(process.cwd(), 'node_modules');
-        utils.projectRoot().then(function(p) {
-            assert.equal(path.join(p, 'node_modules'), pathFromTest);
-            done();
-        })
-        .fail(fail);
+    describe('project root', function() {
+      it('get project root when it is current folder', function(done) {
+          var pathFromTest = process.cwd();
+          utils.projectRoot().then(function(p) {
+              assert.equal(p, pathFromTest);
+              done();
+          })
+          .fail(done);
+      });
+
+      it('return cwd when there is no package.json anywhere', function(done) {
+          var oldCwd = process.cwd();
+          var newCwd = path.join(process.cwd(), '..');
+
+          process.chdir(newCwd);
+
+          utils.projectRoot().then(function(p) {
+              assert.equal(p, newCwd);
+              process.chdir(oldCwd);
+              done();
+          })
+          .fail(done);
+      });
     });
   });
 });

@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "0.5.0-beta.2",
+  "version": "0.5.2",
   "description": "Your app is done",
   "main": "index.js",
   "bin": {
@@ -13,7 +13,7 @@
     "verify": "echo \"Script ran $1 $2\"",
     "document:watch": "documentjs --watch",
     "document": "documentjs -f && cp docs/theme/static/favicon.ico site/favicon.ico",
-    "publish": "git push origin --tags",
+    "publish": "git push origin && git push origin --tags",
     "release:prerelease": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",

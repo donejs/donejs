@@ -10,7 +10,7 @@
 
 
 
-In the first part of this guide we will install DoneJS, [generate a newc application](Features.html#section=section_Generators) and start a server that provides [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
+In the first part of this guide we will install DoneJS, [generate a newc application](Features.html#section=section_Generators) and start a server that provides [hot module swapping](Features.html#section=section_HotModuleSwapping) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](Features.html#section=section_Progressiveloading) and [deploy it to a CDN](Features.html#section=section_DeploytoaCDN). We will conclude with creating a [mobile and desktop](Features.html#section=section_iOS_Android_andDesktopBuilds) version of the application.
 
@@ -49,7 +49,7 @@ This will create a new folder called `donejs-chat` and in it generate our applic
 
 ### Development mode
 
-DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode starts the [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) server that automatically reloads files in the browser and on the server as they change. To start it let's go into the `donejs-chat` application directory:
+DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode enables [hot module swapping](Features.html#section=section_HotModuleSwapping) which automatically reloads files in the browser and on the server as they change. To start it let's go into the `donejs-chat` application directory:
 
 ```
 cd donejs-chat
@@ -65,11 +65,11 @@ The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to se
 
 ## Adding Bootstrap
 
-DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [live-reload](Features.html#section=section_HotModuleSwapping_LiveReload) (hot module swapping) in action.
+DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [hot module swapping](Features.html#section=section_HotModuleSwapping) in action.
 
 ### Installing the NPM package
 
-Keep the server from `donejs develop` running and open a new terminal window to install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
+Open a new terminal window so we can keep the server from `donejs develop` running. Then, install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
 ```
 npm install bootstrap --save
@@ -77,7 +77,7 @@ npm install bootstrap --save
 
 ### Add it to the page
 
-To see live-reload in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. Update `src/index.stache` to look like this:
+To see hot module swapping in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. Update `src/index.stache` to look like this:
 
 ```html
 <html>
@@ -117,7 +117,7 @@ To see live-reload in action, let's update the main template to import Bootstrap
 </html>
 ```
 
-If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save it. Feel free to edit the HTML or `src/styles.less` to see how live-reload updates the page automatically.
+If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save it. Feel free to edit the HTML or `src/styles.less` to see how hot module swapping updates the page automatically.
 
 ## Routing and components
 
@@ -128,13 +128,13 @@ In this part we will create our own custom HTML elements. One for the homepage a
 The homepage custom element (with the HTML tag name `chat-home`) won't be very big or complex, so we put everything into a single `.component` file. To generate it run:
 
 ```
-donejs generate component home.component chat-home
+donejs add component home.component chat-home
 ```
 
 The messages component (with the tag `chat-messages`) will be a little more complex, so we generate it using the [modlet file pattern](Features.html#section=section_Modlets).
 
 ```
-donejs generate component messages chat-messages
+donejs add component messages chat-messages
 ```
 
 Later we will update the generated files with the chat messages functionality.
@@ -143,7 +143,7 @@ Later we will update the generated files with the chat messages functionality.
 
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state.
 
 To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
@@ -171,7 +171,7 @@ First, let's update `src/home.component` with the original content from the home
 </can-component>
 ```
 
-When the "Start chat" button is clicked, `href="{{routeUrl page='chat'}}"` will make sure that our application view-model gets updated with that property. This property will also update the URL.
+When the "Start chat" button is clicked, `href="{{routeUrl page='chat'}}"` updates the URL in such a way that the application view-model's `page` property gets set to `"chat"`.
 
 Next, add a link to go back to the chat page by updating `messages/messages.stache` to:
 
@@ -326,7 +326,7 @@ For the messages page, we will:
 To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermodel like this:
 
 ```
-donejs generate supermodel message
+donejs add supermodel message
 ```
 
 When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
@@ -377,16 +377,19 @@ Now let's add the form to create new messages. The form two-way binds the `name`
     {{/each}}
   </div>
 </message-model>
-<div class="row">
+<form class="row" ($submit)="send(%event)">
   <div class="col-sm-3">
     <input type="text" class="form-control" placeholder="Your name"
            {($value)}="name">
   </div>
-  <div class="col-sm-9">
+  <div class="col-sm-6">
     <input type="text" class="form-control" placeholder="Your message"
-           {($value)}="message" ($enter)="send()">
+           {($value)}="message">
   </div>
-</div>
+  <div class="col-sm-3">
+      <input type="submit" class="btn btn-primary btn-block" value="Send"/>
+  </div>
+</form>
 ```
 
 Next we have to implement the `send()` method. Update `src/messages/messages.js` to this:
@@ -400,7 +403,9 @@ import template from './messages.stache!';
 import Message from '../models/message';
 
 export const ViewModel = Map.extend({
-  send() {
+  send(event) {
+    event.preventDefault();
+
     new Message({
       name: this.attr('name'),
       message: this.attr('message')
@@ -492,7 +497,7 @@ NODE_ENV=production donejs start
 
 If using Windows you first set the environmental variable, if using the **command prompt** you set with `set NODE_ENV=production` or if using **Powershell** you set it with `$env:NODE_ENV="production"` and then run your application afterwards with `donejs start`.
 
-If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to live-reload we have to make those requests only once though). In production mode, we can only see about 10 requests and a significantly reduced file-size.
+If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to hot module swapping we only have to make those requests once). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
 ## Deploy
 
@@ -500,7 +505,9 @@ Now that we verified that our application works in production, we can deploy it 
 
 ### Setting up Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
+Sign up for free at [Firebase](https://www.firebase.com/). After you haven an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. You'll get an error if your app name is too long so pick something shorter when that happens. Write down the name of your app because you'll need it in the next section.
+
+When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
 ### Configuring DoneJS
 
@@ -514,7 +521,7 @@ Now we can add the Firebase deployment configuration to our `package.json` like 
       "production": {
         "type": "firebase",
         "config": {
-          "firebase": "donejs-chat-<user>",
+          "firebase": "<appname>",
           "public": "./dist",
           "headers": [{
             "source": "/**",
@@ -530,7 +537,7 @@ Now we can add the Firebase deployment configuration to our `package.json` like 
 }
 ```
 
-Change the `<user>` part in `"name": "donejs-chat-<user>"` to your GitHub username. This will be your Firebase application name (you can choose any other available name as well).
+Change the `<appname>` to the name of the application created when you set up the Firebase app.
 
 And also update the production `baseURL` in the `system` section:
 
@@ -540,7 +547,7 @@ And also update the production `baseURL` in the `system` section:
   ...
   "envs": {
     "server-production": {
-      "baseURL": "https://donejs-chat-<user>.firebaseapp.com/"
+      "baseURL": "https://<appname>.firebaseapp.com/"
     }
   }
 }
@@ -597,7 +604,7 @@ To set up the desktop build, we have to add it to our application like this:
 donejs add nw
 ```
 
-We can answer most prompts with the default except for the `version` which needs to be set to the latest stable version (currently `0.12.3`). To find the latest version, visit [dl.nwjs.io](http://dl.nwjs.io/). Then we can run the build like this:
+We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`. Then we can run the build like this:
 
 ```
 donejs build nw
@@ -681,9 +688,29 @@ socket.on('messages removed',
 export default Message;
 ```
 
-Lastly DoneJS comes with jQuery 2.x by default, but if you need to support IE8 the 1.x branch is necessary. You can switch by installing the right version:
+DoneJS comes with jQuery 2.x by default, but if you need to support IE8 the 1.x branch is necessary. You can switch by installing the right version:
 
 ```
 npm install jquery@1.11.0 --save
 ```
 
+Update your `build.js` file to make the compiled output work in IE:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm",
+  babelOptions: {
+    loose: "es6.modules"
+  }
+}, {
+  bundleAssets: true
+});
+
+...
+```
+
+And rebuild to have a working IE copy:
+
+```
+donejs build
+```

@@ -15,7 +15,7 @@ wistles a modern developer needs, we created the following guides.
 
 In the [quick start guide](/Guide.html), we will build a small chat application - [http://chat.donejs.com/](http://chat.donejs.com/).  It demonstrates:
 
-- Live reload (aka Hot Module Swapping)
+- Hot Module Swapping
 - Server-side rendering
 - Progressive loading
 - Real time connections

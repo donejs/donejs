@@ -45,9 +45,9 @@ Here are a couple examples of cross-layer features.
 
 Server-side rendering (SSR), which you can read about in more detail in its [section](#section_Server_SideRendered) below, spans many layers to make setup and integration simple. 
 
-It uses hooks in data components to automatically notify the server to delay rendering, [live reload](#section_LiveReload) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.
+It uses hooks in data components to automatically notify the server to delay rendering, [hot module swapping](#section=section_HotModuleSwapping) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.
 
-By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, live reload, and inline caching.
+By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, hot module swapping, and inline caching.
 
 2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks) 
 
@@ -73,7 +73,7 @@ Solving a story means a packaged solution to a development problem, where severa
 
 2. [Performance](#section=section_PerformanceFeatures) - DoneJS was designed from the start to solve the performance story, packaging [server-side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof.
 
-3. There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [live reload](#section=section_LiveReload), [ES6 support](#section=section_ES6Modules)), but you get the idea.
+3. There are other user stories, including [maintainability](#section=section_Maintainabilityfeatures) ([testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)) and developer efficiency ([zero-config NPM imports](#section=section_NPMPackages), [hot module swapping](#section=section_HotModuleSwapping), [ES6 support](#section=section_ES6Modules)), but you get the idea.
 
 ### Feature comparison
 
@@ -126,7 +126,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
             </td>
             <td>
-              <img data-toggle="popover" data-placement="right" data-html="true" data-content='Requires some <a href="http://reactjsnews.com/isomorphic-javascript-with-react-node" target="_blank">manual setup</a>' class="matrix-rating-icon" src="/static/img/icon-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='Requires some <a href="http://reactjsnews.com/isomorphic-javascript-with-react-node" target="_blank">manual setup</a>'>
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+                <span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -221,7 +224,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>' src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>'>
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+                <span class="asterisk"></span>
+              </div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
@@ -333,7 +339,9 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='Coming in Angular 2' src="/static/img/icon-poor.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Coming in Angular 2">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
@@ -350,7 +358,9 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="JSX <em>only</em> supports <a href='https://facebook.github.io/react/docs/jsx-gotchas.html#custom-html-attributes' target='_bank'>native HTML elements.</a>">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -364,12 +374,14 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="React is just the view layer. You'll need to implement your own MVVM architecture.">
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_LiveReload">Live reload</a></div>
+              <div class="feature-description"><a href="#section=section_HotModuleSwapping">Hot Module Swapping</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
@@ -584,7 +596,7 @@ Here's how the caching logic works:
 1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
 1. Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
-<video style="width:100%;" controls poster="static/img/donejs-fallthrough-caching.png" src="static/img/donejs-fallthrough-caching.mp4"></video>
+<video style="width:100%;" controls src="static/img/donejs-fallthrough-caching.mp4"></video>
 
 ##### Combining requests
 
@@ -666,6 +678,13 @@ The rise of templates, data binding, and MV* separation, while boosting maintain
 
 DoneJS' view engine touches the DOM more minimally and specifically than competitor frameworks, providing better performance in large apps and a "closer to the metal" feel.
 
+Take the TodoMVC application as an example. If you measure how long it takes DoneJS and React to render the same number of todos you'll see the performance advantage of minimal DOM updates. In fact we did just that and here's the result:
+
+<img class="img-with-caption" src="./static/img/donejs-minimal-dom-updates-todomvc.png" alt="Measuring React and DoneJS using TodoMVC." />
+_For a small set of todos the difference is negligible but as the number increases the gap widens to the point where React is 6 times slower than DoneJS when rendering 1000 todos._
+
+You can run this test for yourself at <a href="http://output.jsbin.com/monoqagofa/1" target="_blank">JS Bin</a>.
+
 #### How it works
 
 Consider the following template:
@@ -699,6 +718,11 @@ In React, that would result in the virtual DOM being re-rendered. A diff algorit
 
 Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally.
 
+To see this in action run the test embedded below that shows how DoneJS, React and Angular compare when updating the DOM when a single property changes:
+<img src="./static/img/donejs-minimal-dom-updates-circles.png" alt="Measuring DoneJS, React and Angular rendering a simple property change." />
+
+You can run this test yourself at <a href="http://output.jsbin.com/giyobi/1" target="_blank">JS Bin</a>
+
 With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
 <a class="btn" href="http://canjs.com/docs/can.stache.html"><span>can.stache Documentation</span></a>
@@ -711,13 +735,6 @@ _Minimal DOM updates is a feature of [CanJS](http://canjs.com/)_
 Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM.
 
 Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
-
-
-<blockquote class="fun-quotes">
-  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/vrgMUi8-7r4?start=28" frameborder="0" allowfullscreen></iframe>'>working on epic pool dunk videos.</a></div>
-    <img src="/static/img/funny-dunk.png">
-</blockquote>
 
 #### How it works
 
@@ -749,6 +766,12 @@ to
 ```
 
 At this time, no other framework besides DoneJS, including Angular or React, supports worker thread rendering out of the box.
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/vrgMUi8-7r4?start=28" frameborder="0" allowfullscreen></iframe>'>working on epic pool dunk videos.</a></div>
+    <img src="/static/img/funny-dunk.png">
+</blockquote>
 
 <a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
 
@@ -969,7 +992,7 @@ DoneJS provides tools for the entire testing lifecycle:
 
 #### How it works
 
-Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack - so you can spend less time messing with test infrastructure, and more time [mud ridin'](https://youtu.be/s4faD0fox_s?t=261).
+Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack.
 
 ##### Generators
 
@@ -1059,13 +1082,19 @@ This means the test is small, isolated, and simple. Tests themselves are modules
 
 Because of the [modlet](#section=section_Modlets) pattern, each component contains its own working test script and test file, which can be worked on in isolation.
 
-Because of [live reload](#section=section_LiveReload), you can write, debug, and run tests without constantly reloading your page.
+Because of [hot module swapping](#section=section_HotModuleSwapping), you can write, debug, and run tests without constantly reloading your page.
 
 Other frameworks require a build step before tests can be run. These builds concatenate dependencies and depend on specific order of tests running, which is a brittle and inefficient workflow.
 
 Because DoneJS uses a client side loader that makes it simple to start a new page that loads its own dependencies, there is no build script needed to compile and run tests.
 
 You just run the generator, load your modules, write your test, and run it - from the browser or CLI.
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time messing with test infrastructure,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/s4faD0fox_s?start=261" frameborder="0" allowfullscreen></iframe>'>mud ridin'.</a></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Land_Rover_Series_III_mud_bogging.jpg">
+</blockquote>
 
 ##### More information
 
@@ -1085,8 +1114,6 @@ Documentation is critical for maintainability of any complex application. When y
 Yet most teams either don't write docs, or they'll do it "later" - a utoptian future period that is always just out of reach. Why? Because it's extra work to set up a tool, configure it, create and maintain separate documentation files.
 
 DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing docs, since all you have to do is comment your code (which most people already do) and run `donejs document`.
-
-You spend less time messing with Documentation generators, and more time [painting your truck camo](https://www.youtube.com/watch?v=DpJ_oPJgyPg).
 
 <div class="maintainable wrapper">
   <div class="background video">
@@ -1132,6 +1159,12 @@ DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-ver
 - Document CSS alongside JavaScript. You can even make a [live style guide](http://documentjs.com/examples/styles/index.html).
 
 You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](http://canjs.com/docs/index.html) site are generated using DocumentJS.
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time messing with Documentation generators,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/-7WaLCWaTo8" frameborder="0" allowfullscreen></iframe>'>perfecting your moonwalk.</a></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Michael_jackson_(el_rey_o_dios).jpg">
+</blockquote>
 
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
 <a class="btn" href="/place-my-order.html#section=section_Createdocumentation"><span>View the Guide</span></a>
@@ -1359,24 +1392,26 @@ The major advantages of building applications based on custom HTML elements are:
 Consider the following example:
 
 ```html
-<order-model get-list="{previousWeek}" {*previous-week-data}="value"/>
-<order-model get-list="{currentWeek}" {*current-week-data}="value"/>
+<order-model get-list="{ period='previous_week' }" {^value}="*previousWeek" />
+<order-model get-list="{ period='current_week' }" {^value}="*currentWeek" />
 
-<bit-graph title="Week over week">
-  <bit-series data="{previousWeekData}" />
-  <bit-series data="{currentWeekData}" color="Blue"/>
-</bit-graph>
+<bit-c3>
+  <bit-c3-data>
+    <bit-c3-data-column key="Last Week" {value}="*previousWeek.totals" />
+    <bit-c3-data-column key="This Week" {value}="*currentWeek.totals" />
+  </bit-c3-data>
+</bit-c3>
 ```
 This code demonstrates:
 
  1. An element that can load data
  1. Composable widget elements (a graph with a line-series)
 
-If our designer wanted to add another restaurant, all they would need to do is add another `<order-model>` and `<bit-series>` element.
+If our designer wanted to add another period, all they would need to do is add another `<order-model>` and `<bit-c3-data-column>` element.
 
 Here’s a working version of the same example in a JSBin.
 
-<a class="jsbin-embed" href="http://jsbin.com/zanadozize/1/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.0"></script>
+<a class="jsbin-embed" href="http://jsbin.com/puwesa/embed?html,output">Custom HTML Elements on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.2"></script>
 
 Just like HTML’s natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.
 
@@ -1545,9 +1580,12 @@ The introduction of a strong ViewModel has some key advantages for maintaining l
 
 #### How it works
 
+The following video introduces MVVM in DoneJS, focusing on the strength of the ViewModel with an example.
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kCM03jujKy4" frameborder="0" allowfullscreen></iframe>
 
-DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works, compare it to other frameworks, and show an example.
+DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works and compare it to other frameworks.
+
 
 ##### MVVM overview
 
@@ -1556,10 +1594,6 @@ DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll
 **Views** in DoneJS are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
 
 **ViewModels** will be covered in detail below.
-
-The following video explains an in depth example of using a ViewModel in DoneJS.
-
-VIDEO
 
 ##### Independent ViewModels
 
@@ -1675,9 +1709,9 @@ To learn more:
 
 _The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/)._
 
-### Live Reload
+### Hot Module Swapping
 
-Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
+Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh.
 
 <div class="maintainable wrapper">
   <div class="background video">
@@ -1692,7 +1726,7 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 
 #### How it works
 
-Other live reload servers watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time.
+Live reload servers generally watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time.
 
 The correct terminology is actually [hot swapping](https://en.wikipedia.org/wiki/Hot_swapping), not live reload. Regardless of what it's called, the result is a blazing fast development experience.
 
@@ -1701,6 +1735,12 @@ There is no configuration needed to enable this feature. Just start the dev serv
 ```
 donejs develop
 ```
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time waiting for refreshes and builds,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/LbVZs80WMWI" frameborder="0" allowfullscreen></iframe>'>doing trust falls with giant yellow M&Ms.</a></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/M%26m_joy.jpg">
+</blockquote>
 
 <a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
 
@@ -1712,8 +1752,6 @@ _Live reload is a feature of [StealJS](http://stealjs.com/)._
 DoneJS generators help you kickstart new projects and components. They'll save you time, eliminating boilerplate by scaffolding a working project, component, or module.
 
 Generator templates set up many of the best practices and features discussed in the rest of this page, without you even realizing it.
-
-You spend less time setting up your app, and more time [smashing cars at your local demolition derby](https://youtu.be/8GAKXeuRaDQ?t=790).
 
 #### How it works
 
@@ -1804,6 +1842,12 @@ This will create:
  - a working model in the application's `models` folder
  - a working fixture file for that model
  - a working test, and add the test as a dependency for the application's model test
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time setting up your app,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/xiE5AQHKj_Y?start=26" frameborder="0" allowfullscreen></iframe>'>searching for carrots.</a></div>
+    <img src="http://3stylelife.com/wp-content/uploads/2015/06/carrots.jpg">
+</blockquote>
 
 <a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html#section=section_Generatetheapplication"><span>View the Guide</span></a>

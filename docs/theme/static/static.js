@@ -91,7 +91,7 @@ steal("./content_list.js",
                 $(this).get(0).pause();
                 $(this).parent('div').removeClass('playing');
             };
-            $('video').hover( enterEv, leaveEv ).focusin( enterEv ).focusout( leaveEv );
+            $('body.donejs video, div.video video').hover( enterEv, leaveEv ).focusin( enterEv ).focusout( leaveEv );
         })();
 
         $( ".usability-dl-options" ).hover(
@@ -496,9 +496,11 @@ steal("./content_list.js",
 
             if ( jumpOnLoad ) clickFn.call( jumpOnLoad );
         });
+
         $(function () {
           $('[data-toggle="popover"]').popover();
-        })
+        });
+
         $('body').on('click', function (e) {
           $('[data-toggle="popover"]').each(function () {
               //the 'is' for buttons that trigger popups
@@ -508,12 +510,21 @@ steal("./content_list.js",
               }
           });
         });
+
         $(function () {
-          if($('#js-matrix-legend-affix').length){
-            $('#js-matrix-legend-affix').affix({
-              offset: { top: $('#js-matrix-legend-affix').offset().top }
-            });
-          }
+            if($('#js-matrix-legend-affix').length) {
+
+                var $el = $('.matrix-wrapper');
+                $('#js-matrix-legend-affix').affix({
+                    offset: {
+                        top: $el.offset().top,
+                        // about 46798.73px from the bottom
+                        bottom: function() {
+                            return $(document).height() - ($el.offset().top + $el.height() + 60)
+                        }
+                    }
+                });
+            }
         })
 
     });
