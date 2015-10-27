@@ -505,7 +505,9 @@ Now that we verified that our application works in production, we can deploy it 
 
 ### Setting up Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
+Sign up for free at [Firebase](https://www.firebase.com/). After you haven an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. You'll get an error if your app name is too long so pick something shorter when that happens. Write down the name of your app because you'll need it in the next section.
+
+When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
 ### Configuring DoneJS
 
@@ -519,7 +521,7 @@ Now we can add the Firebase deployment configuration to our `package.json` like 
       "production": {
         "type": "firebase",
         "config": {
-          "firebase": "donejs-chat-<user>",
+          "firebase": "<appname>",
           "public": "./dist",
           "headers": [{
             "source": "/**",
@@ -535,7 +537,7 @@ Now we can add the Firebase deployment configuration to our `package.json` like 
 }
 ```
 
-Change the `<user>` part in `"name": "donejs-chat-<user>"` to your GitHub username. This will be your Firebase application name (you can choose any other available name as well).
+Change the `<appname>` to the name of the application created when you set up the Firebase app.
 
 And also update the production `baseURL` in the `system` section:
 
@@ -545,7 +547,7 @@ And also update the production `baseURL` in the `system` section:
   ...
   "envs": {
     "server-production": {
-      "baseURL": "https://donejs-chat-<user>.firebaseapp.com/"
+      "baseURL": "https://<appname>.firebaseapp.com/"
     }
   }
 }
