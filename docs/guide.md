@@ -377,16 +377,19 @@ Now let's add the form to create new messages. The form two-way binds the `name`
     {{/each}}
   </div>
 </message-model>
-<div class="row">
+<form class="row" ($submit)="send(%event)">
   <div class="col-sm-3">
     <input type="text" class="form-control" placeholder="Your name"
            {($value)}="name">
   </div>
-  <div class="col-sm-9">
+  <div class="col-sm-6">
     <input type="text" class="form-control" placeholder="Your message"
-           {($value)}="message" ($enter)="send()">
+           {($value)}="message">
   </div>
-</div>
+  <div class="col-sm-3">
+      <input type="submit" class="btn btn-primary btn-block" value="Send"/>
+  </div>
+</form>
 ```
 
 Next we have to implement the `send()` method. Update `src/messages/messages.js` to this:
@@ -400,7 +403,9 @@ import template from './messages.stache!';
 import Message from '../models/message';
 
 export const ViewModel = Map.extend({
-  send() {
+  send(event) {
+    event.preventDefault();
+
     new Message({
       name: this.attr('name'),
       message: this.attr('message')
