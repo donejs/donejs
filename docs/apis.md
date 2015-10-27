@@ -15,7 +15,7 @@ APIs that go into making DoneJS and links to their official APIs.
 - [QUnit](#section_QUnit) - Default test assertion library. [api]
 - [FuncUnit](#section_FuncUnit) - Functional test utilities. [api]
 - [Testee](#section_Testee) - Browser launcher and test reporter. [api]
-- [DoumentJS] - Documentation engine. [api]
+- [DoumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)
 - [jQuery] - DOM utilities. [api]
 - [jQuery++] - Even more DOM utilities. [api]
 - [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
