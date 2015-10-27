@@ -135,6 +135,7 @@ body.community {
 		.event-item-wrapper {
 			background-color: lighten(@logoColor, 5%);
 			border-right: 20px solid #3B83A3;
+			position: relative;
 			&:last-child {
 				border:0;
 			}
@@ -172,7 +173,7 @@ body.community {
 		}
 		.event-description {
 			margin-left:0;
-			margin-bottom: 10px;
+			margin-bottom: 40px;
 			margin-top:10px;
 			font-weight: 400;
 			a {
@@ -182,8 +183,15 @@ body.community {
 		}
 		.event-details-btn {
 			text-decoration: none;
-			float: right;
 			background-color: lighten(@logoColor, 5%);
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			@media(max-width:@screen-xs-max){
+				position: static;
+				display: inherit;
+				text-align: left;
+			}
 		}
 		.meetup-locations {
 			background-color: lighten(@logoColor, 5%);
