@@ -890,6 +890,46 @@ Example
 
 ### can.route
 
+[can.route](http://canjs.com/docs/can.route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](http://canjs.com/docs/can.route.pushstate.html). Routes are defined and then bound to your application's View Model:
+
+```
+// Specifies 'home' as the default page
+can.route(":page", { page: 'home' }); 
+
+can.route(":page/:slug");
+can.route(":page/:slug/:action");
+```
+
+You can update the url by changing can.route:
+
+```
+can.route.attr("page", "restaurants");
+// location.href -> "/restaurants"
+```
+
+Or change can.route by modifying the url:
+
+```
+history.pushState(null, null, "/");
+// can.route.attr("page"); // -> "home"
+```
+
+In a DoneJS application can.route is bound to the [application View Model](#section=section_can_ssr_app_map), but you can also do this manually:
+
+```
+var Map = require("can/map/");
+
+var AppViewModel = Map.extend({
+ ...
+});
+
+var viewModel = new AppViewModel();
+
+can.route.map(viewModel);
+```
+
+Which will cause any changes in the route to reflect in the View Model instance, and any changes in the View Model instance to reflect in the route.
+
 ## Data Layer APIs
 
 ### can-set
