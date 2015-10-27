@@ -3,7 +3,7 @@
 @hide sidebar
 @outline 2 ol
 
-@description 
+@description
 
 DoneJS has many features, but possibly its best feature is completeness. DoneJS offers everything you need to build a modern web app.
 
@@ -11,11 +11,11 @@ Just like Apple integrates the hardware and software for its devices, DoneJS int
 
 ### All-in-one stack
 
-First, there's the obvious advantage: it has everything you'll need. 
+First, there's the obvious advantage: it has everything you'll need.
 
 There's no mixing and matching pieces of your stack. Just `npm install` and get started.
 
-Choosing a modern stack is not at all simple or straightforward. 
+Choosing a modern stack is not at all simple or straightforward.
 
 1. *What types of tools do you want?*  Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
 
@@ -43,13 +43,13 @@ Here are a couple examples of cross-layer features.
 
 1. [Server-side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)
 
-Server-side rendering (SSR), which you can read about in more detail in its [section](#section_Server_SideRendered) below, spans many layers to make setup and integration simple. 
+Server-side rendering (SSR), which you can read about in more detail in its [section](#section_Server_SideRendered) below, spans many layers to make setup and integration simple.
 
 It uses hooks in data components to automatically notify the server to delay rendering, [hot module swapping](#section=section_HotModuleSwapping) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.
 
 By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, hot module swapping, and inline caching.
 
-2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks) 
+2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks)
 
 You can mark a section of your template to be progressively loaded by wrapping it with `<can-import>`, like:
 
@@ -560,7 +560,7 @@ DoneJS improves performance by intelligently managing the data layer, taking adv
 
 Undoubtedly, the slowest part of any web application is round trips to the server. Especially now that [more than 50% of web traffic comes from mobile devices](http://searchengineland.com/its-official-google-says-more-searches-now-on-mobile-than-on-desktop-220369), where connections are notoriously slow and unreliable, applications must be smart about reducing network requests.
 
-Making matters worse, the concerns of maintainable architecture in single page applications are at odds with the concerns of minimizing network requests. This is because independent, isolated UI widgets, while easier to maintain, often make AJAX requests on page load. Without a layer that intelligently manages those requests, this architecture leads to too many AJAX requests before the user sees something useful. 
+Making matters worse, the concerns of maintainable architecture in single page applications are at odds with the concerns of minimizing network requests. This is because independent, isolated UI widgets, while easier to maintain, often make AJAX requests on page load. Without a layer that intelligently manages those requests, this architecture leads to too many AJAX requests before the user sees something useful.
 
 With DoneJS, you don't have to choose between maintainability and performance.
 
@@ -581,7 +581,7 @@ It acts as a central hub for data requests, making decisions about how to best s
 
 Fall through caching serves cached data first, but still makes API requests to check for changes.
 
-The major benefit of this technique is improved perceived performance. Users will see content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate. 
+The major benefit of this technique is improved perceived performance. Users will see content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate.
 
 This benefits two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
 
@@ -589,10 +589,10 @@ By default, this is turned on, but can easily be deactivated for data that shoul
 
 Here's how the caching logic works:
 
-1. When the application loads, it checks for available cache connections. 
-1. When a request is made, it checks for a cache hit. 
+1. When the application loads, it checks for available cache connections.
+1. When a request is made, it checks for a cache hit.
 1. If there is a hit, the request is completed immediately with the cached data.
-1. Regardless of a hit or miss, a request is made in the background to the actual API endpoint. 
+1. Regardless of a hit or miss, a request is made in the background to the actual API endpoint.
 1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
 1. Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
@@ -600,11 +600,11 @@ Here's how the caching logic works:
 
 ##### Combining requests
 
-Combining requests combines multiple incoming requests into one, if possible. This is done with the help of [set algebra](https://en.wikipedia.org/wiki/Algebra_of_sets). 
+Combining requests combines multiple incoming requests into one, if possible. This is done with the help of [set algebra](https://en.wikipedia.org/wiki/Algebra_of_sets).
 
 DoneJS collects requests that are made within a few milliseconds of each other, and if they are pointed at the same API, tries to combine them into a single superset request.
 
-For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed and incomplete todos. Both are subsets of a larger set of data - the entire list of todos. 
+For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed and incomplete todos. Both are subsets of a larger set of data - the entire list of todos.
 
 Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.
 
@@ -632,9 +632,9 @@ The video below shows two example scenarios. The first shows the cache containin
 
 Server-side rendered single page apps (SPAs) have a problem with wasteful duplicate requests. These can cause the browser to slow down, waste bandwidth, and reduce perceived performance.
 
-1. When a page is rendered server-side, it makes data requests on the server to various APIs. 
-1. After the page's rendered HTML loads in the client, the SPA is loaded in the client, so that subsequent requests are handled within the SPA. 
-1. The SPA will want to re-request for the same data that was already requested on the server. 
+1. When a page is rendered server-side, it makes data requests on the server to various APIs.
+1. After the page's rendered HTML loads in the client, the SPA is loaded in the client, so that subsequent requests are handled within the SPA.
+1. The SPA will want to re-request for the same data that was already requested on the server.
 
 DoneJS solves this problem with an inline cache - embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
 
@@ -1093,7 +1093,7 @@ You just run the generator, load your modules, write your test, and run it - fro
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with test infrastructure,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/s4faD0fox_s?start=261" frameborder="0" allowfullscreen></iframe>'>mud ridin'.</a></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Land_Rover_Series_III_mud_bogging.jpg">
+    <img src="/static/img/funny-muddin.png">
 </blockquote>
 
 ##### More information
@@ -1163,7 +1163,7 @@ You can keep it simple like the example above, or you can customize your docs wi
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with Documentation generators,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/-7WaLCWaTo8" frameborder="0" allowfullscreen></iframe>'>perfecting your moonwalk.</a></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Michael_jackson_(el_rey_o_dios).jpg">
+    <img src="/static/img/funny-moonwalk.png">
 </blockquote>
 
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
@@ -1650,7 +1650,7 @@ In other frameworks, ViewModels don't enjoy this level of independence. Every Re
 
 ##### Powerful observable data layer
 
-A powerful observable data layer binds the layers together with very minimal code. 
+A powerful observable data layer binds the layers together with very minimal code.
 
 DoneJS supports the following features:
 
@@ -1739,7 +1739,7 @@ donejs develop
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time waiting for refreshes and builds,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/LbVZs80WMWI" frameborder="0" allowfullscreen></iframe>'>doing trust falls with giant yellow M&Ms.</a></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/M%26m_joy.jpg">
+    <img src="/static/img/funny-mandm.png">
 </blockquote>
 
 <a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
@@ -1846,7 +1846,7 @@ This will create:
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time setting up your app,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/xiE5AQHKj_Y?start=26" frameborder="0" allowfullscreen></iframe>'>searching for carrots.</a></div>
-    <img src="http://3stylelife.com/wp-content/uploads/2015/06/carrots.jpg">
+    <img src="/static/img/funny-carrots.png">
 </blockquote>
 
 <a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
