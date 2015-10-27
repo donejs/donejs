@@ -2,14 +2,26 @@ body.community {
 	h1 {
 		font-weight: 300;
 	}
+	.hero,
+	.transparency {
+		@media(max-width: @screen-xs-max){
+			min-height: 835px;
+		}
+		@media(max-width: @screen-xs){
+			min-height: 720px;
+		}
+	}
 	.quick-link-list {
-		margin:0;
+		margin:0 0 45px 0;
 		padding:0;
 		li {
 			display: inline-block;
 			width:auto;
-			margin-right: 40px;
+			margin-right: 50px;
 			text-align: center;
+			@media(max-width: @screen-xs-max){
+				margin-right: 10px;
+			}
 			&:last-child {
 				margin-right:0;
 			}
@@ -23,11 +35,50 @@ body.community {
 			}
 		}
 		.quick-link-icon {
-			width: 40px;
+			width: 30px;
 			margin: 0 auto;
+			@media(max-width: @screen-xs){
+				width: 28px;
+			}
 		}
 		.quick-link-label {
 			display: block;
+			@media(max-width: @screen-xs-max){
+				display: none;
+			}
 		}
 	}
+	.overview-nav {
+		padding-top: 60px;
+		.overview-nav-fixed-btn {
+			display: none;
+		}
+		&.fixed {
+			top: -4px;
+			.overview-nav-fixed-btn {
+				display: inline-block;
+				font-weight: 900;
+			}
+			.light,
+			.heavy,
+			br {
+				display: none;
+			}
+		}
+	}
+	.hero {
+		.triptych {
+			.usability,
+			.performance,
+			.maintainable {
+				min-height: 210px;
+			}
+		}
+		.embed-responsive {
+			margin:40px 0;
+		}
+	}
+
+
+
 }
