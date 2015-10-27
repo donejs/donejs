@@ -15,7 +15,7 @@ APIs that go into making DoneJS and links to their official APIs.
 - [QUnit](#section_QUnit) - Default test assertion library. [api]
 - [FuncUnit](#section_FuncUnit) - Functional test utilities. [api]
 - [Testee](#section_Testee) - Browser launcher and test reporter. [api]
-- [DoumentJS] - Documentation engine. [api]
+- [DoumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)
 - [jQuery] - DOM utilities. [api]
 - [jQuery++] - Even more DOM utilities. [api]
 - [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
@@ -987,6 +987,122 @@ testee src/test.html --reporter XUnit > testresults.xml
 For more configuration options follow up in the [Testee documentation](https://github.com/bitovi/testee#testee).
 
 ## DocumentJS
+
+When working on large applications keeping updated documentation is critical. 
+[DocumentJS](http://documentjs.com/) generates API documentation for your
+application supporting [jsdoc](http://usejsdoc.org/) syntax that can be multi-versioned.
+
+### Configuration
+
+DocumentJS is configured with a [docConfig](http://documentjs.com/docs/DocumentJS.docConfig.html) specified
+in a **documentjs.json** file within your project:
+
+```
+{
+  "sites": {
+    "docs": {
+      "dest": "docs",
+      "glob" : "**/*.{js,md}"
+    }
+  }
+}
+```
+
+This specifies to look in JavaScript and Markdown files for jsdoc tags. When ran the documentation will be written to the **docs** folder.
+
+### Documenting
+
+DocumentJS includes most [tags](http://documentjs.com/docs/documentjs.tags.html) you need to document a web application and includes an API to create your own.
+
+Here's how you would document a [can.Component](#section=section_can_Component) View Model:
+
+```
+/**
+ * @add order/new
+ */
+export const ViewModel = Map.extend({
+  define: {
+    /**
+     * @property {String} slug
+     *
+     * The restaurants slug (short name). Will
+     * be used to request the actual restaurant.
+     */
+    slug: {
+      type: 'string'
+    },
+    /**
+     * @property {place-my-order/models/order} order
+     *
+     * The order that is being processed. Will
+     * be an empty new order inititally.
+     */
+    order: {
+      Value: Order
+    },
+    /**
+     * @property {can.Deferred} saveStatus
+     *
+     * A deferred that contains the status of the order when
+     * it is being saved.
+     */
+    saveStatus: {
+      Value: Object
+    },
+    /**
+     * @property {Boolean} canPlaceOrder
+     *
+     * A flag to enable / disable the "Place my order" button.
+     */
+    canPlaceOrder: {
+      get() {
+        let items = this.attr('order.items');
+        return items.attr('length');
+      }
+    }
+  },
+
+  /**
+   * @function placeOrder
+   *
+   * Save the current order and update the status Deferred.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  placeOrder() {
+    let order = this.attr('order');
+    this.attr('saveStatus', order.save());
+    return false;
+  },
+
+  /**
+   * @function startNewOrder
+   *
+   * Resets the order form, so a new order can be placed.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  startNewOrder: function() {
+    this.attr('order', new Order());
+    this.attr('saveStatus', null);
+    return false;
+  }
+});
+```
+
+### Generating
+
+DoneJS preconfigures your app to be documented with:
+
+```
+donejs document
+```
+
+Or you can run the [documentjs](http://documentjs.com/docs/DocumentJS.apis.generate.documentjs.html) command directly with:
+
+```
+node_modules/.bin/documentjs
+```
 
 ## DOM APIs
 
