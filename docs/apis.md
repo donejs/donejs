@@ -18,10 +18,10 @@ APIs that go into making DoneJS and links to their official APIs.
 - [DoumentJS] - Documentation engine. [api]
 - [jQuery] - DOM utilities. [api]
 - [jQuery++] - Even more DOM utilities. [api]
-- [can-ssr] - Server-side rendering for NodeJS. [api]
+- [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
 - [can-ssr/app-map] - An application's ViewModel. [api]
-- [done-autorender] - Processes templates so they can be server-side rendered. [api]
-- [can-simple-dom] - A lightweight virtual DOM. [api]
+- [done-autorender](#section=section_done_autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
+- [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api]
 
 
 
@@ -996,6 +996,42 @@ For more configuration options follow up in the [Testee documentation](https://g
 
 ### can-ssr
 
+[can-ssr](https://github.com/canjs/can-ssr) enables DoneJS applications to be
+server-side rendered. Paired with [done-autorender](#section_done_autorender) 
+it allows you to render the entire document from a single template.
+
+```
+var ssr = require("can-ssr");
+var render = ssr();
+
+render("/chat").then(function(response){
+  // response.html === <html> ..
+});
+```
+
+The render function is called with a string url to render and returns a response
+object that contains the html string that was rendered. Use any Node-based
+http framework with can-ssr.
+
+For convenience it also comes with [Express](http://expressjs.com/) middleware:
+
+```
+var ssr = require("can-ssr/middleware");
+var app = require("express")();
+
+app.use(ssr(
+  config: __dirname + "/package.json!npm"
+));
+```
+
+Additionally it comes with [can-serve](https://github.com/canjs/can-ssr#server)
+which acts as a rendering front-end for your application. It will host static
+content, render your application, and proxy requests to another back-end server.
+
+```
+can-serve --proxy http://localhost:7070 --port 8080
+```
+
 ### can-ssr/app-map
 
 ### done-autorender
@@ -1018,10 +1054,10 @@ enables using a [can.stache] template as your application's entry point. Create 
 
 **done-autorender** will insert this template on page load. The import specied with
 the `export-as="viewModel"` attribute is a [can.Map] that acts as the View Model
-(or application state) for the application.
+for the application.
 
-If you have [live-reload] enabled done-autorender will additionally use those
-APIs to re-render the application when any modules are reloaded.
+If you have [live-reload](http://stealjs.com/docs/steal.live-reload.html#section_Use) enabled done-autorender will additionally use those APIs to re-render the
+application when any modules are reloaded.
 
 done-autorender handles requests when running in Node for server-side rendering and
 will wait for all asynchronous events to complete.
@@ -1032,10 +1068,8 @@ will wait for all asynchronous events to complete.
 for server-side and worker thread rendering. It contains enough of the DOM APIs to get basic
 jQuery usage to work, as well as what is typical of CanJS applications.
 
-**can-simple-dom** looks like a normal DOM, unlike most other virtual DOMs,
-which means it can be used with jQuery plugins and other code that operates on a normal DOM.
-
-If you are working on an advanced plugin you might use can-simple-dom, in which case you would import it:
+If you are working on an advanced plugin you might use can-simple-dom directly,
+in which case you would import it:
 
 ```js
 import simpleDOM from "can-simple-dom";
