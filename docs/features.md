@@ -724,13 +724,6 @@ Worker thread rendering increases the performance of your application. It essent
 
 Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
 
-
-<blockquote class="fun-quotes">
-  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/vrgMUi8-7r4?start=28" frameborder="0" allowfullscreen></iframe>'>working on epic pool dunk videos.</a></div>
-    <img src="/static/img/funny-dunk.png">
-</blockquote>
-
 #### How it works
 
 Templates first render in a lightweight Virtual DOM in a [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). Changes are diffed and sent to the main thread to be applied to the real DOM. The main thread is only notified when there are changes to the DOM.
@@ -761,6 +754,12 @@ to
 ```
 
 At this time, no other framework besides DoneJS, including Angular or React, supports worker thread rendering out of the box.
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/vrgMUi8-7r4?start=28" frameborder="0" allowfullscreen></iframe>'>working on epic pool dunk videos.</a></div>
+    <img src="/static/img/funny-dunk.png">
+</blockquote>
 
 <a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
 
@@ -981,7 +980,7 @@ DoneJS provides tools for the entire testing lifecycle:
 
 #### How it works
 
-Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack - so you can spend less time messing with test infrastructure, and more time [mud ridin'](https://youtu.be/s4faD0fox_s?t=261).
+Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack.
 
 ##### Generators
 
@@ -1079,6 +1078,12 @@ Because DoneJS uses a client side loader that makes it simple to start a new pag
 
 You just run the generator, load your modules, write your test, and run it - from the browser or CLI.
 
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time messing with test infrastructure,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/s4faD0fox_s?start=261" frameborder="0" allowfullscreen></iframe>'>mud ridin'.</a></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Land_Rover_Series_III_mud_bogging.jpg">
+</blockquote>
+
 ##### More information
 
 The DoneJS testing layer involves many pieces, so if you want to learn more:
@@ -1097,8 +1102,6 @@ Documentation is critical for maintainability of any complex application. When y
 Yet most teams either don't write docs, or they'll do it "later" - a utoptian future period that is always just out of reach. Why? Because it's extra work to set up a tool, configure it, create and maintain separate documentation files.
 
 DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing docs, since all you have to do is comment your code (which most people already do) and run `donejs document`.
-
-You spend less time messing with Documentation generators, and more time [painting your truck camo](https://www.youtube.com/watch?v=DpJ_oPJgyPg).
 
 <div class="maintainable wrapper">
   <div class="background video">
@@ -1144,6 +1147,12 @@ DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-ver
 - Document CSS alongside JavaScript. You can even make a [live style guide](http://documentjs.com/examples/styles/index.html).
 
 You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](http://canjs.com/docs/index.html) site are generated using DocumentJS.
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time messing with Documentation generators,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/-7WaLCWaTo8" frameborder="0" allowfullscreen></iframe>'>perfecting your moonwalk.</a></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Michael_jackson_(el_rey_o_dios).jpg">
+</blockquote>
 
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
 <a class="btn" href="/place-my-order.html#section=section_Createdocumentation"><span>View the Guide</span></a>
@@ -1690,7 +1699,7 @@ _The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/)._
 
 ### Hot Module Swapping
 
-Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh. You spend less time waiting for refreshes and builds, and more time [sharpening your chainsaw](https://www.youtube.com/watch?v=PxrhQv6hyfY).
+Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh.
 
 <div class="maintainable wrapper">
   <div class="background video">
@@ -1715,6 +1724,12 @@ There is no configuration needed to enable this feature. Just start the dev serv
 donejs develop
 ```
 
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time waiting for refreshes and builds,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/LbVZs80WMWI" frameborder="0" allowfullscreen></iframe>'>doing trust falls with giant yellow M&Ms.</a></div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/M%26m_joy.jpg">
+</blockquote>
+
 <a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
 
 _Live reload is a feature of [StealJS](http://stealjs.com/)._
@@ -1725,8 +1740,6 @@ _Live reload is a feature of [StealJS](http://stealjs.com/)._
 DoneJS generators help you kickstart new projects and components. They'll save you time, eliminating boilerplate by scaffolding a working project, component, or module.
 
 Generator templates set up many of the best practices and features discussed in the rest of this page, without you even realizing it.
-
-You spend less time setting up your app, and more time [smashing cars at your local demolition derby](https://youtu.be/8GAKXeuRaDQ?t=790).
 
 #### How it works
 
@@ -1817,6 +1830,12 @@ This will create:
  - a working model in the application's `models` folder
  - a working fixture file for that model
  - a working test, and add the test as a dependency for the application's model test
+
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time setting up your app,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/xiE5AQHKj_Y?start=26" frameborder="0" allowfullscreen></iframe>'>searching for carrots.</a></div>
+    <img src="http://3stylelife.com/wp-content/uploads/2015/06/carrots.jpg">
+</blockquote>
 
 <a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html#section=section_Generatetheapplication"><span>View the Guide</span></a>
