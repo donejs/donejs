@@ -91,7 +91,7 @@ steal("./content_list.js",
                 $(this).get(0).pause();
                 $(this).parent('div').removeClass('playing');
             };
-            $('video').hover( enterEv, leaveEv ).focusin( enterEv ).focusout( leaveEv );
+            $('body.donejs video').hover( enterEv, leaveEv ).focusin( enterEv ).focusout( leaveEv );
         })();
 
         $( ".usability-dl-options" ).hover(
