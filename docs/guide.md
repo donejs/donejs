@@ -171,7 +171,7 @@ First, let's update `src/home.component` with the original content from the home
 </can-component>
 ```
 
-When the "Start chat" button is clicked, `href="{{routeUrl page='chat'}}"` will make sure that our application view-model gets updated with that property. This property will also update the URL.
+When the "Start chat" button is clicked, `href="{{routeUrl page='chat'}}"` updates the URL in such a way that the application view-model's `page` property gets set to `"chat"`.
 
 Next, add a link to go back to the chat page by updating `messages/messages.stache` to:
 
