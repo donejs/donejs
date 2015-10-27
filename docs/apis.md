@@ -262,6 +262,7 @@ modules to different formats.
 
 DoneJS comes with a `build.js` script that call's steal-tools' [build](http://stealjs.com/docs/steal-tools.build.html):
 
+```
 //build.js
 var stealTools = require("steal-tools");
 
@@ -273,6 +274,7 @@ var buildPromise = stealTools.build({
 }, {
   bundleAssets: true
 });
+```
 
 This is already configured to run with:
 
@@ -286,7 +288,7 @@ But you could also run it with:
 > node build.js
 ```
 
-Hot module swapping is done with [live-reload](https://github.com/stealjs/live-reload) which
+Hot module swapping is done with [live-reload](http://stealjs.com/docs/steal-tools.cmd.live-reload.html) which
 is bundled within steal-tools.  
 
 By default `donejs develop` starts the live-reload server.  However, you could start one
