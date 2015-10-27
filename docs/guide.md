@@ -602,7 +602,7 @@ To set up the desktop build, we have to add it to our application like this:
 donejs add nw
 ```
 
-We can answer most prompts with the default except for the `version` which needs to be set to the latest stable version (currently `0.12.3`). To find the latest version, visit [dl.nwjs.io](http://dl.nwjs.io/). Then we can run the build like this:
+We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`. Then we can run the build like this:
 
 ```
 donejs build nw
