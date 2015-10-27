@@ -1359,24 +1359,26 @@ The major advantages of building applications based on custom HTML elements are:
 Consider the following example:
 
 ```html
-<order-model get-list="{previousWeek}" {*previous-week-data}="value"/>
-<order-model get-list="{currentWeek}" {*current-week-data}="value"/>
+<order-model get-list="{ period='previous_week' }" {^value}="*previousWeek" />
+<order-model get-list="{ period='current_week' }" {^value}="*currentWeek" />
 
-<bit-graph title="Week over week">
-  <bit-series data="{previousWeekData}" />
-  <bit-series data="{currentWeekData}" color="Blue"/>
-</bit-graph>
+<bit-c3>
+  <bit-c3-data>
+    <bit-c3-data-column key="Last Week" {value}="*previousWeek.totals" />
+    <bit-c3-data-column key="This Week" {value}="*currentWeek.totals" />
+  </bit-c3-data>
+</bit-c3>
 ```
 This code demonstrates:
 
  1. An element that can load data
  1. Composable widget elements (a graph with a line-series)
 
-If our designer wanted to add another restaurant, all they would need to do is add another `<order-model>` and `<bit-series>` element.
+If our designer wanted to add another period, all they would need to do is add another `<order-model>` and `<bit-c3-data-column>` element.
 
 Here’s a working version of the same example in a JSBin.
 
-<a class="jsbin-embed" href="http://jsbin.com/zanadozize/1/embed?html,output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.0"></script>
+<a class="jsbin-embed" href="http://jsbin.com/puwesa/embed?html,output">Custom HTML Elements on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.2"></script>
 
 Just like HTML’s natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.
 
