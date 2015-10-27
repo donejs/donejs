@@ -990,7 +990,74 @@ For more configuration options follow up in the [Testee documentation](https://g
 
 ### jQuery
 
+[jQuery](http://jquery.com/) is the ubiquitous DOM manipulation 
+library. While you don't often need to write jQuery directly,
+[CanJS](#section=section_CanJS) is built making it safe to use jQuery when needed.
+
+For example, you can make your own custom elements that call jQuery
+plugins:
+
+```
+can.view.tag("tooltip", function(el){
+  $(el).tooltip({
+    content: el.getAttribute("content"), 
+    items: "tooltip"
+  });
+})
+```
+
+[can.view.bindings](#section=section_can_view_bindings) lets you listen 
+to [jQuery special events](http://benalman.com/news/2010/03/jquery-special-events/) like:
+
+```
+<div ($tripleclick)="doSomething()">
+```
+
+[can.Component](#section=section_can_Component)'s events object also supports this:  
+
+```
+can.Component.extend({
+  events: {
+    "li tripleclick": function(li, ev){ ... }
+  }
+})
+```
+
+
+CanJS adds special [inserted](http://canjs.com/docs/can.events.inserted.html), [removed](http://canjs.com/docs/can.events.removed.html), and [attributes](http://canjs.com/docs/can.events.attributes.html) events. This allows you to
+teardown any behavior when the DOM is modified:
+
+```
+$(el).bind("removed", function(){
+  $(el).tooltip("teardown");
+})
+```
+
+CanJS's live-binding also hooks into these same events.  So if you remove
+an element with jQuery, CanJS will also teardown its bindings.  This means that if
+you were to call:
+
+```
+$("body").empty();
+```
+
 ### jQuery++
+
+[jQuery++](http://jquerypp.com/) adds a bunch of special events and other DOM
+utilties to jQuery.  
+
+ - DOM utilities
+   - [animate](http://jquerypp.com/#animate) - Overwrites `jQuery.animate` to use CSS3 animations if possible.
+   - [compare](http://jquerypp.com/#compare) - Compare the position of two elements in the page.
+   - [range](http://jquerypp.com/#range) - Manipulate text ranges.
+   - [within](http://jquerypp.com/#within) - Get the elements within a specified area.
+ - Special events
+   - [drag / drop](http://jquerypp.com/#drag) - drag drop events.
+   - [hover](http://jquerypp.com/#hover) - hover events.
+   - [key](http://jquerypp.com/#key) - get a string representation of the key pressed.
+   - [resize](http://jquerypp.com/#resize) - listen to when an element changes size.
+   - [swipe](http://jquerypp.com/#swipe) - mobile swipe events.
+
 
 ## Server Side Rendering APIs
 

@@ -3,23 +3,23 @@
 @hide sidebar
 @outline 2 ol
 
-@description 
+@description DoneJS goal is to help the JavaScript community make, and continue to make, amazing applications. Amazing applications are fast, highly usable, and
+maintainable.  
 
-DoneJS is a JavaScript framework compiling technology for every aspect of developing a complex JavaScript app, all working together seamlessly.
+But times change and new techniques emerge. We strive to adopt these
+techniques, improve the stack, and provide a simple upgrade path along the way. 
 
-Our mission is to enable the JavaScript community to make amazing apps - high performance, maintainable, and highly usable -  by default.
+We are part of a community that helps developers of all skill levels and 
+backgrounds learn the technology, excell at it, and accomplish their
+goals.
 
-And as times change and new techniques emerge, we'll continue improving the stack, providing a simple upgrade path along the way.
-
-To us, enabling the community is about more than code - it means meeting, teaching, sharing ideas, and project collaboration. We want to make our community - those that use DoneJS and any of its pieces - stronger, through relationships, communication, and skills.
-
-DoneJS is rebuilt and rebranded from the 8+ year old [JavaScriptMVC](http://javascriptmvc.com) project. DoneJS is comprised of CanJS, StealJS, and many other sub-projects. 
-
-Learn about the goals, history, projects, and team behind DoneJS.
+Learn about the goals, history, roadmap, and team behind DoneJS.
 
 @body
 
 ## Goals
+
+
 
 DoneJS has three primary goals:
 
@@ -29,7 +29,11 @@ DoneJS has three primary goals:
 
 ### Amazing Applications
 
-Building a modern application is increasingly difficult. There are many competing concerns to balance.
+Building a modern application is increasingly difficult. There's 
+
+
+
+There are many competing concerns to balance.
 
 An amazing application needs to be fast, reach as many users as possible, and provide a great user experience.
 
