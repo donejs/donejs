@@ -681,9 +681,29 @@ socket.on('messages removed',
 export default Message;
 ```
 
-Lastly DoneJS comes with jQuery 2.x by default, but if you need to support IE8 the 1.x branch is necessary. You can switch by installing the right version:
+DoneJS comes with jQuery 2.x by default, but if you need to support IE8 the 1.x branch is necessary. You can switch by installing the right version:
 
 ```
 npm install jquery@1.11.0 --save
 ```
 
+Update your `build.js` file to make the compiled output work in IE:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm",
+  babelOptions: {
+    loose: "es6.modules"
+  }
+}, {
+  bundleAssets: true
+});
+
+...
+```
+
+And rebuild to have a working IE copy:
+
+```
+donejs build
+```
