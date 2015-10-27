@@ -358,7 +358,9 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="JSX <em>only</em> supports <a href='https://facebook.github.io/react/docs/jsx-gotchas.html#custom-html-attributes' target='_bank'>native HTML elements.</a>">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -372,7 +374,9 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="React is just the view layer. You'll need to implement your own MVVM architecture.">
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
