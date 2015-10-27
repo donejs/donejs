@@ -666,6 +666,13 @@ The rise of templates, data binding, and MV* separation, while boosting maintain
 
 DoneJS' view engine touches the DOM more minimally and specifically than competitor frameworks, providing better performance in large apps and a "closer to the metal" feel.
 
+Take the TodoMVC application as an example. If you measure how long it takes DoneJS and React to render the same number of todos you'll see the performance advantage of minimal DOM updates. In fact we did just that and here's the result:
+
+<img class="img-with-caption" src="./static/img/donejs-minimal-dom-updates-todomvc.png" alt="Measuring React and DoneJS using TodoMVC." />
+_For a small set of todos the difference is negligible but as the number increases the gap widens to the point where React is 6 times slower than DoneJS when rendering 1000 todos._
+
+You can run this test for yourself at <a href="http://output.jsbin.com/vorahipohi/1" target="_blank">JS Bin</a>.
+
 #### How it works
 
 Consider the following template:
@@ -698,6 +705,11 @@ In Angular, at the end of the current $digest cycle, that would result in an exp
 In React, that would result in the virtual DOM being re-rendered. A diff algorithm comparing the new and old virtual DOM would discover the changed node, and then the specific DOM node would be updated.
 
 Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally.
+
+To see this in action run the test embedded below that shows how DoneJS, React and Angular compare when updating the DOM when a single property changes:
+<img src="./static/img/donejs-minimal-dom-updates-circles.png" alt="Measuring DoneJS, React and Angular rendering a simple property change." />
+
+You can run this test yourself at <a href="http://output.jsbin.com/xabigerizu/1" target="_blank">JS Bin</a>
 
 With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
