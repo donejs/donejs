@@ -15,7 +15,7 @@ APIs that go into making DoneJS and links to their official APIs.
 - [QUnit](#section_QUnit) - Default test assertion library. [api]
 - [FuncUnit](#section_FuncUnit) - Functional test utilities. [api]
 - [Testee](#section_Testee) - Browser launcher and test reporter. [api]
-- [DoumentJS] - Documentation engine. [api]
+- [DoumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)
 - [jQuery] - DOM utilities. [api]
 - [jQuery++] - Even more DOM utilities. [api]
 - [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
@@ -262,6 +262,7 @@ modules to different formats.
 
 DoneJS comes with a `build.js` script that call's steal-tools' [build](http://stealjs.com/docs/steal-tools.build.html):
 
+```
 //build.js
 var stealTools = require("steal-tools");
 
@@ -273,6 +274,7 @@ var buildPromise = stealTools.build({
 }, {
   bundleAssets: true
 });
+```
 
 This is already configured to run with:
 
@@ -286,7 +288,7 @@ But you could also run it with:
 > node build.js
 ```
 
-Hot module swapping is done with [live-reload](https://github.com/stealjs/live-reload) which
+Hot module swapping is done with [live-reload](http://stealjs.com/docs/steal-tools.cmd.live-reload.html) which
 is bundled within steal-tools.  
 
 By default `donejs develop` starts the live-reload server.  However, you could start one
@@ -769,10 +771,10 @@ Create a template programmatically with `can.stache` like:
 var template = can.stache("<h1>{{first}} {{last}}</h1>");
 ```
 
-`template` is a __renderer__ function that when called with observable data,
-returns a [documentFragment] that is updated when the observable data changes.
+`template` is a __renderer__ function that, when called with observable data,
+returns a [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) that is updated when the observable data changes.
 
-Add those fragments to the page to see the result.
+Add those fragments to the page to see the result:
 
 ```
 var person = new can.Map({first: "Brian", last: "Moschel"})
@@ -789,11 +791,13 @@ document.body //-> <h1>Ramiya Meyer</h1>
 ```
 
 In a DoneJS application, templates are used primarily as part of
-a [can.Component] or as the [done-autorender]ed main template.  When used
-in a [can.Component], the templates are often put in their own file.  For
+a [can.Component](#section=section_can_Component) or as the [done-autorender](#section=section_done_autorender)ed main template.
+
+When used in a [can.Component](#section=section_can_Component), the templates are often put in their own file. For
 example, a `person_edit.js` component file might have a `person_edit.stache` file like:
 
 ```
+// person_edit.stache
 Update {{fullName}}:
 <input {($value)}='first'/>
 <input {($value)}='last'/>
@@ -821,58 +825,97 @@ There's too much to cover so we will highlight the important APIs.
 The different tag types:
 
  - [{{key}}](http://canjs.com/docs/can.stache.tags.escaped.html) -
-   inserts escaped value.
+   inserts an escaped value.
 
    ```
-   stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
+   can.stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
    ```
 
  - [{{{key}}}](http://canjs.com/docs/can.stache.tags.unescaped.html) -
-   inserts unescaped value.
+   inserts an unescaped value.
 
    ```
-   stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
+   can.stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
    ```
 
 - [{{#key}} ... {{/key}}](http://canjs.com/docs/can.stache.tags.section.html) -
-  renders the subsection depending on the value of the key.
+  renders a subsection depending on the value of the key.
 
   ```
-  stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
-  stache("{{#key}}A{{/key}}")({key: false}) //-> ``
-  stache("{{#key}}A{{/key}}")({key: [null,0]}) //-> `AA`
-  stache("{{#key}}A{{/key}}")({key: []}) //-> ``
+  // boolean values render the subsection or it's inverse
+  can.stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
+  can.stache("{{#key}}A{{/key}}")({key: false}) //-> ``
+  can.stache("{{#key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
 
-  stache("{{#key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
+  // iterative values render the subsection for each value
+  can.stache("{{#key}}A{{/key}}")({key: [null,0]}) //-> `AA`
+  can.stache("{{#key}}A{{/key}}")({key: []}) //-> ``
+
   ```
 
-  This also changes the [scope](http://canjs.com/docs/can.view.Scope.html):
+  The subsection is rendered with the `key` value as the top of the [scope](http://canjs.com/docs/can.view.Scope.html):
 
   ```
-  stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
+  can.stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
   ```
 
 - [{{^key}} ... {{/key}}](http://canjs.com/docs/can.stache.tags.inverse.html) -
   opposite of `{{#key}}`.
 
   ```
-  stache("{{^key}}A{{/key}}")({key: true}) //-> ``
-  stache("{{^key}}A{{/key}}")({key: false}) //-> `A`
-  stache("{{^key}}A{{/key}}")({key: [null,0]}) //-> ``
+  can.stache("{{^key}}A{{/key}}")({key: true}) //-> ``
+  can.stache("{{^key}}A{{/key}}")({key: false}) //-> `A`
+  can.stache("{{^key}}A{{/key}}")({key: [null,0]}) //-> ``
 
-  stache("{{^key}}A{{else}}B{{/key}}")({key: false}) //-> `A`
+  can.stache("{{^key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
   ```
 
 The following are stache's most commonly used helpers:
 
- - [{{#if}}] -
- - [{{#is}}] -
- - [{{#each}}] -
- - [{{routeUrl hashes}}] -
+ - [{{#if expr}} .. {{/if}}](http://canjs.com/docs/can.stache.helpers.if.html) - renders the subsection if the expr is truthy.
+
+   ```
+   can.stache("{{#if key}}A{{/if}}")({key: true}) //-> `A`
+   can.stache("{{#if key}}A{{/if}}")({key: false}) //-> ``
+
+   can.stache("{{#if key}}A{{else}}B{{/if}}")({key: false}) //-> `B`
+   ```
+
+ - [{{#is expr1 expr2}} ... {{/is}}](http://canjs.com/docs/can.stache.helpers.is.html) - compares two expressions and renders a subsection depending on the result.
+
+   ```
+   can.stache("{{#is page 'A'}}A{{/is}}")({page: 'A'}) //-> `A`
+   can.stache("{{#is page 'A'}}A{{/is}}")({page: 'B'}) //-> ``
+
+   can.stache("{{#is page 'A'}}A{{else}}C{{/is}}")({page: 'C'}) //-> `B`
+   ```
+
+ - [{{#each key}} ... {{/each}}](http://canjs.com/docs/can.stache.helpers.each.html) - renders a subsection for each item in a key's value.
+
+   ```
+   can.stache('{{#each hobbies}}<p>{{.}}</p>{{/each}}')(['Hockey', 'Hiking']) //-> `<p>Hockey</p><p>Hiking</p>`
+   ```
+
+    If the value of a key is a [can.List](#section=section_can_List) only the minimum amount of DOM updates occur when the list changes.
+
+ - [{{routeUrl hashes}}](http://canjs.com/docs/can.stache.helpers.routeUrl.html) - generates a url using [can.route](#section=section_can_route) for the provided hashes.
+
+   ```
+   can.stache("<a href="{{routeUrl page='details' id='23'}}">{{name}}</a>")({name: 'Item 23'}) //-> `<a href="#!&page=details&id=23">Item 23</a>`
+   ```
 
 [Call methods](http://canjs.com/docs/can.stache.expressions.html#section_Callexpression) in your scope like: `{{method(value)}}`
 
-Example
+```
+can.stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
+  pluralize: function(subject, howMany) {
+    if(howMany > 1) {
+      subject += 's';
+    }
+    return subject;
+  }
+}); //-> "<p>10 Baloons</p>"
+```
 
 ### can.view.bindings
 
@@ -887,6 +930,46 @@ Example
 ### can.Component
 
 ### can.route
+
+[can.route](http://canjs.com/docs/can.route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](http://canjs.com/docs/can.route.pushstate.html). Routes are defined and then bound to your application's View Model:
+
+```
+// Specifies 'home' as the default page
+can.route(":page", { page: 'home' }); 
+
+can.route(":page/:slug");
+can.route(":page/:slug/:action");
+```
+
+You can update the url by changing can.route:
+
+```
+can.route.attr("page", "restaurants");
+// location.href -> "/restaurants"
+```
+
+Or change can.route by modifying the url:
+
+```
+history.pushState(null, null, "/");
+// can.route.attr("page"); // -> "home"
+```
+
+In a DoneJS application can.route is bound to the [application View Model](#section=section_can_ssr_app_map), but you can also do this manually:
+
+```
+var Map = require("can/map/");
+
+var AppViewModel = Map.extend({
+ ...
+});
+
+var viewModel = new AppViewModel();
+
+can.route.map(viewModel);
+```
+
+Which will cause any changes in the route to reflect in the View Model instance, and any changes in the View Model instance to reflect in the route.
 
 ## Data Layer APIs
 
@@ -986,6 +1069,122 @@ For more configuration options follow up in the [Testee documentation](https://g
 
 ## DocumentJS
 
+When working on large applications keeping updated documentation is critical. 
+[DocumentJS](http://documentjs.com/) generates API documentation for your
+application supporting [jsdoc](http://usejsdoc.org/) syntax that can be multi-versioned.
+
+### Configuration
+
+DocumentJS is configured with a [docConfig](http://documentjs.com/docs/DocumentJS.docConfig.html) specified
+in a **documentjs.json** file within your project:
+
+```
+{
+  "sites": {
+    "docs": {
+      "dest": "docs",
+      "glob" : "**/*.{js,md}"
+    }
+  }
+}
+```
+
+This specifies to look in JavaScript and Markdown files for jsdoc tags. When ran the documentation will be written to the **docs** folder.
+
+### Documenting
+
+DocumentJS includes most [tags](http://documentjs.com/docs/documentjs.tags.html) you need to document a web application and includes an API to create your own.
+
+Here's how you would document a [can.Component](#section=section_can_Component) View Model:
+
+```
+/**
+ * @add order/new
+ */
+export const ViewModel = Map.extend({
+  define: {
+    /**
+     * @property {String} slug
+     *
+     * The restaurants slug (short name). Will
+     * be used to request the actual restaurant.
+     */
+    slug: {
+      type: 'string'
+    },
+    /**
+     * @property {place-my-order/models/order} order
+     *
+     * The order that is being processed. Will
+     * be an empty new order inititally.
+     */
+    order: {
+      Value: Order
+    },
+    /**
+     * @property {can.Deferred} saveStatus
+     *
+     * A deferred that contains the status of the order when
+     * it is being saved.
+     */
+    saveStatus: {
+      Value: Object
+    },
+    /**
+     * @property {Boolean} canPlaceOrder
+     *
+     * A flag to enable / disable the "Place my order" button.
+     */
+    canPlaceOrder: {
+      get() {
+        let items = this.attr('order.items');
+        return items.attr('length');
+      }
+    }
+  },
+
+  /**
+   * @function placeOrder
+   *
+   * Save the current order and update the status Deferred.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  placeOrder() {
+    let order = this.attr('order');
+    this.attr('saveStatus', order.save());
+    return false;
+  },
+
+  /**
+   * @function startNewOrder
+   *
+   * Resets the order form, so a new order can be placed.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  startNewOrder: function() {
+    this.attr('order', new Order());
+    this.attr('saveStatus', null);
+    return false;
+  }
+});
+```
+
+### Generating
+
+DoneJS preconfigures your app to be documented with:
+
+```
+donejs document
+```
+
+Or you can run the [documentjs](http://documentjs.com/docs/DocumentJS.apis.generate.documentjs.html) command directly with:
+
+```
+node_modules/.bin/documentjs
+```
+
 ## DOM APIs
 
 ### jQuery
@@ -1064,7 +1263,7 @@ utilties to jQuery.
 ### can-ssr
 
 [can-ssr](https://github.com/canjs/can-ssr) enables DoneJS applications to be
-server-side rendered. Paired with [done-autorender](#section_done_autorender) 
+server-side rendered. Paired with [done-autorender](#section=section_done_autorender) 
 it allows you to render the entire document from a single template.
 
 ```
@@ -1101,10 +1300,62 @@ can-serve --proxy http://localhost:7070 --port 8080
 
 ### can-ssr/app-map
 
+[can-ssr/app-map](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) is a [can.Map](#section=section_can_Map)
+that aids in rendering a template that performs asynchronous operations (like Ajax).
+
+The app-map is used as your application's View Model by extending it:
+
+```
+var AppMap = require("can-ssr/app-map");
+
+module.exports = AppMap.extend({
+  ...
+});
+```
+
+Within a [can.Component](#section=section_can_Component) View Model you can use the app-map
+to tell [can-ssr](#section=section_can_ssr) to wait for a request to finish:
+
+```
+exports.ViewModel = can.Map.extend({
+  define: {
+    orders: {
+      get: function() {
+        var params = {};
+        var orderPromise = Order.getList(params);
+        this.attr("%root").pageData("orders", params, orderPromise);
+        return orderPromise;
+      }
+    }
+  }
+});
+```
+
+Using `pageData` will result in the response data being inlined into the page when using the
+[inline-cache](http://canjs.github.io/can-ssr/doc/inline-cache.html) asset,
+preventing a request for the data in the browser.
+
+Additionally **can-ssr/app-map** contains a `statusCode` property that is useful for handling 404s
+and other non-200 conditions:
+
+```
+{{#switch statusCode}}
+    {{#case 404}}
+        These are not the Droids you are looking for.
+    {{/case}}
+    {{#case 500}}
+        Sorry, our API crashed.
+    {{/case}}
+    {{#default}}
+        {{! spin up your application here}}
+    {{/default}}
+{{/switch}}
+```
+
 ### done-autorender
 
 [done-autorender](https://github.com/donejs/autorender) is a Steal plugin that
-enables using a [can.stache] template as your application's entry point. Create a template like:
+enables using a [can.stache](#section=section_can_stache) template as your application's entry point. Create a template like:
 
 ```handlebars
 <html>
@@ -1120,7 +1371,7 @@ enables using a [can.stache] template as your application's entry point. Create 
 ```
 
 **done-autorender** will insert this template on page load. The import specied with
-the `export-as="viewModel"` attribute is a [can.Map] that acts as the View Model
+the `export-as="viewModel"` attribute is a [can.Map](#section=section_can_Map) that acts as the View Model
 for the application.
 
 If you have [live-reload](http://stealjs.com/docs/steal.live-reload.html#section_Use) enabled done-autorender will additionally use those APIs to re-render the
