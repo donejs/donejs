@@ -86,7 +86,7 @@ the chat application as an example in development.  We'll cover what happens whe
 3. Once [can-ssr] has the [done-autorender]'s `template` and `viewModel` export it:
 
    1. Creates a new instance of the [viewModel]\(can-ssr/can-map), setting properties on it
-   using [can.route]'s routing rules.  
+   using [can.route]'s routing rules.
    2. Creates a new [virtual dom]\(can-simple-dom) instance.
    3. Renders the [template]\(can.stache) with the `viewModel` into the `virtual dom` instance.
 
@@ -94,17 +94,17 @@ the chat application as an example in development.  We'll cover what happens whe
    before providing a final result.  Once the template is finished rendering, [can-ssr] converts it to a
    string and sends it back to the browser.
 
-5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal].  
+5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal].
 
    <script src="node_modules/steal/steal.js" main="index.stache!done-autorender"></script>
 
    In development, this loads `steal.js` which then loads `index.stache` and processes it with
-   the `done-autorender`.  
+   the `done-autorender`.
 
 6. In the browser, `done-autorender`:
 
    1. Creates a new instance of the [viewModel]\(can-ssr/can-map), setting properties on it
-   using [can.route]'s routing rules.  
+   using [can.route]'s routing rules.
    2. Renders the [template]\(can.stache) with the `viewModel` into a document fragment.
    3. Once all promises registered with [.waitsFor] and [.pageData] have resolved, it replaces
       the document with the rendered result.
@@ -189,7 +189,7 @@ the chat application as an example in development.  We'll cover what happens whe
 
 ## StealJS
 
-The base of any good JavaScript application is its depenency management system.  
+The base of any good JavaScript application is its depenency management system.
 DoneJS uses [StealJS](http://stealjs.com/) which
 itself  is split into two sub-projects:
 
@@ -262,7 +262,6 @@ modules to different formats.
 
 DoneJS comes with a `build.js` script that call's steal-tools' [build](http://stealjs.com/docs/steal-tools.build.html):
 
-```
 //build.js
 var stealTools = require("steal-tools");
 
@@ -274,7 +273,6 @@ var buildPromise = stealTools.build({
 }, {
   bundleAssets: true
 });
-```
 
 This is already configured to run with:
 
@@ -288,8 +286,8 @@ But you could also run it with:
 > node build.js
 ```
 
-Hot module swapping is done with [live-reload](http://stealjs.com/docs/steal-tools.cmd.live-reload.html) which
-is bundled within steal-tools.  
+Hot module swapping is done with [live-reload](https://github.com/stealjs/live-reload) which
+is bundled within steal-tools.
 
 By default `donejs develop` starts the live-reload server.  However, you could start one
 yourself with:
@@ -617,7 +615,7 @@ intramurals //-> can.List["intramural basketball",
 ```
 
 Listen to when a list changes by binding on `add` or `remove` or `length`
-events.  
+events.
 
 ```
 hobbies.bind("add", function(ev, newHobbies, index){
@@ -771,10 +769,10 @@ Create a template programmatically with `can.stache` like:
 var template = can.stache("<h1>{{first}} {{last}}</h1>");
 ```
 
-`template` is a __renderer__ function that when called with observable data,
-returns a [documentFragment] that is updated when the observable data changes.
+`template` is a __renderer__ function that, when called with observable data,
+returns a [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) that is updated when the observable data changes.
 
-Add those fragments to the page to see the result.
+Add those fragments to the page to see the result:
 
 ```
 var person = new can.Map({first: "Brian", last: "Moschel"})
@@ -791,11 +789,13 @@ document.body //-> <h1>Ramiya Meyer</h1>
 ```
 
 In a DoneJS application, templates are used primarily as part of
-a [can.Component] or as the [done-autorender]ed main template.  When used
-in a [can.Component], the templates are often put in their own file.  For
+a [can.Component](#section=section_can_Component) or as the [done-autorender](#section=section_done_autorender)ed main template.
+
+When used in a [can.Component](#section=section_can_Component), the templates are often put in their own file. For
 example, a `person_edit.js` component file might have a `person_edit.stache` file like:
 
 ```
+// person_edit.stache
 Update {{fullName}}:
 <input {($value)}='first'/>
 <input {($value)}='last'/>
@@ -823,58 +823,97 @@ There's too much to cover so we will highlight the important APIs.
 The different tag types:
 
  - [{{key}}](http://canjs.com/docs/can.stache.tags.escaped.html) -
-   inserts escaped value.
+   inserts an escaped value.
 
    ```
-   stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
+   can.stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
    ```
 
  - [{{{key}}}](http://canjs.com/docs/can.stache.tags.unescaped.html) -
-   inserts unescaped value.
+   inserts an unescaped value.
 
    ```
-   stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
+   can.stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
    ```
 
 - [{{#key}} ... {{/key}}](http://canjs.com/docs/can.stache.tags.section.html) -
-  renders the subsection depending on the value of the key.
+  renders a subsection depending on the value of the key.
 
   ```
-  stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
-  stache("{{#key}}A{{/key}}")({key: false}) //-> ``
-  stache("{{#key}}A{{/key}}")({key: [null,0]}) //-> `AA`
-  stache("{{#key}}A{{/key}}")({key: []}) //-> ``
+  // boolean values render the subsection or it's inverse
+  can.stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
+  can.stache("{{#key}}A{{/key}}")({key: false}) //-> ``
+  can.stache("{{#key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
 
-  stache("{{#key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
+  // iterative values render the subsection for each value
+  can.stache("{{#key}}A{{/key}}")({key: [null,0]}) //-> `AA`
+  can.stache("{{#key}}A{{/key}}")({key: []}) //-> ``
+
   ```
 
-  This also changes the [scope](http://canjs.com/docs/can.view.Scope.html):
+  The subsection is rendered with the `key` value as the top of the [scope](http://canjs.com/docs/can.view.Scope.html):
 
   ```
-  stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
+  can.stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
   ```
 
 - [{{^key}} ... {{/key}}](http://canjs.com/docs/can.stache.tags.inverse.html) -
   opposite of `{{#key}}`.
 
   ```
-  stache("{{^key}}A{{/key}}")({key: true}) //-> ``
-  stache("{{^key}}A{{/key}}")({key: false}) //-> `A`
-  stache("{{^key}}A{{/key}}")({key: [null,0]}) //-> ``
+  can.stache("{{^key}}A{{/key}}")({key: true}) //-> ``
+  can.stache("{{^key}}A{{/key}}")({key: false}) //-> `A`
+  can.stache("{{^key}}A{{/key}}")({key: [null,0]}) //-> ``
 
-  stache("{{^key}}A{{else}}B{{/key}}")({key: false}) //-> `A`
+  can.stache("{{^key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
   ```
 
 The following are stache's most commonly used helpers:
 
- - [{{#if}}] -
- - [{{#is}}] -
- - [{{#each}}] -
- - [{{routeUrl hashes}}] -
+ - [{{#if expr}} .. {{/if}}](http://canjs.com/docs/can.stache.helpers.if.html) - renders the subsection if the expr is truthy.
+
+   ```
+   can.stache("{{#if key}}A{{/if}}")({key: true}) //-> `A`
+   can.stache("{{#if key}}A{{/if}}")({key: false}) //-> ``
+
+   can.stache("{{#if key}}A{{else}}B{{/if}}")({key: false}) //-> `B`
+   ```
+
+ - [{{#is expr1 expr2}} ... {{/is}}](http://canjs.com/docs/can.stache.helpers.is.html) - compares two expressions and renders a subsection depending on the result.
+
+   ```
+   can.stache("{{#is page 'A'}}A{{/is}}")({page: 'A'}) //-> `A`
+   can.stache("{{#is page 'A'}}A{{/is}}")({page: 'B'}) //-> ``
+
+   can.stache("{{#is page 'A'}}A{{else}}C{{/is}}")({page: 'C'}) //-> `B`
+   ```
+
+ - [{{#each key}} ... {{/each}}](http://canjs.com/docs/can.stache.helpers.each.html) - renders a subsection for each item in a key's value.
+
+   ```
+   can.stache('{{#each hobbies}}<p>{{.}}</p>{{/each}}')(['Hockey', 'Hiking']) //-> `<p>Hockey</p><p>Hiking</p>`
+   ```
+
+    If the value of a key is a [can.List](#section=section_can_List) only the minimum amount of DOM updates occur when the list changes.
+
+ - [{{routeUrl hashes}}](http://canjs.com/docs/can.stache.helpers.routeUrl.html) - generates a url using [can.route](#section=section_can_route) for the provided hashes.
+
+   ```
+   can.stache("<a href="{{routeUrl page='details' id='23'}}">{{name}}</a>")({name: 'Item 23'}) //-> `<a href="#!&page=details&id=23">Item 23</a>`
+   ```
 
 [Call methods](http://canjs.com/docs/can.stache.expressions.html#section_Callexpression) in your scope like: `{{method(value)}}`
 
-Example
+```
+can.stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
+  pluralize: function(subject, howMany) {
+    if(howMany > 1) {
+      subject += 's';
+    }
+    return subject;
+  }
+}); //-> "<p>10 Baloons</p>"
+```
 
 ### can.view.bindings
 
@@ -1155,7 +1194,7 @@ node_modules/.bin/documentjs
 ### can-ssr
 
 [can-ssr](https://github.com/canjs/can-ssr) enables DoneJS applications to be
-server-side rendered. Paired with [done-autorender](#section=section_done_autorender) 
+server-side rendered. Paired with [done-autorender](#section_done_autorender)
 it allows you to render the entire document from a single template.
 
 ```
@@ -1192,62 +1231,10 @@ can-serve --proxy http://localhost:7070 --port 8080
 
 ### can-ssr/app-map
 
-[can-ssr/app-map](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) is a [can.Map](#section=section_can_Map)
-that aids in rendering a template that performs asynchronous operations (like Ajax).
-
-The app-map is used as your application's View Model by extending it:
-
-```
-var AppMap = require("can-ssr/app-map");
-
-module.exports = AppMap.extend({
-  ...
-});
-```
-
-Within a [can.Component](#section=section_can_Component) View Model you can use the app-map
-to tell [can-ssr](#section=section_can_ssr) to wait for a request to finish:
-
-```
-exports.ViewModel = can.Map.extend({
-  define: {
-    orders: {
-      get: function() {
-        var params = {};
-        var orderPromise = Order.getList(params);
-        this.attr("%root").pageData("orders", params, orderPromise);
-        return orderPromise;
-      }
-    }
-  }
-});
-```
-
-Using `pageData` will result in the response data being inlined into the page when using the
-[inline-cache](http://canjs.github.io/can-ssr/doc/inline-cache.html) asset,
-preventing a request for the data in the browser.
-
-Additionally **can-ssr/app-map** contains a `statusCode` property that is useful for handling 404s
-and other non-200 conditions:
-
-```
-{{#switch statusCode}}
-    {{#case 404}}
-        These are not the Droids you are looking for.
-    {{/case}}
-    {{#case 500}}
-        Sorry, our API crashed.
-    {{/case}}
-    {{#default}}
-        {{! spin up your application here}}
-    {{/default}}
-{{/switch}}
-```
-
 ### done-autorender
 
 [done-autorender](https://github.com/donejs/autorender) is a Steal plugin that
-enables using a [can.stache](#section=section_can_stache) template as your application's entry point. Create a template like:
+enables using a [can.stache] template as your application's entry point. Create a template like:
 
 ```handlebars
 <html>
@@ -1263,7 +1250,7 @@ enables using a [can.stache](#section=section_can_stache) template as your appli
 ```
 
 **done-autorender** will insert this template on page load. The import specied with
-the `export-as="viewModel"` attribute is a [can.Map](#section=section_can_Map) that acts as the View Model
+the `export-as="viewModel"` attribute is a [can.Map] that acts as the View Model
 for the application.
 
 If you have [live-reload](http://stealjs.com/docs/steal.live-reload.html#section_Use) enabled done-autorender will additionally use those APIs to re-render the
