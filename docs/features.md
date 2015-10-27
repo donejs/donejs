@@ -126,7 +126,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
             </td>
             <td>
-              <img data-toggle="popover" data-placement="right" data-html="true" data-content='Requires some <a href="http://reactjsnews.com/isomorphic-javascript-with-react-node" target="_blank">manual setup</a>' class="matrix-rating-icon" src="/static/img/icon-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='Requires some <a href="http://reactjsnews.com/isomorphic-javascript-with-react-node" target="_blank">manual setup</a>'>
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+                <span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -221,7 +224,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>' src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>'>
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+                <span class="asterisk"></span>
+              </div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
@@ -333,7 +339,9 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" data-toggle="popover" data-placement="right" data-html="true" data-content='Coming in Angular 2' src="/static/img/icon-poor.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Coming in Angular 2">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">

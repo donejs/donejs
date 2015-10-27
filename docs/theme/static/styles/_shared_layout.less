@@ -677,7 +677,7 @@ body:not(.donejs) {
 		background-color: transparent;
 	}
 	td, th {
-		&:last-child {
+		&:last-of-type {
 			border-right:0;
 		}
 	}
@@ -700,9 +700,6 @@ body:not(.donejs) {
 	.matrix-rating-icon {
 		width: 20px;
 		height: 20px;
-		&[data-toggle="popover"] {
-			cursor: help;
-		}
 	}
 	.arrow:before {
 		display: none; // removes bootstrap triangle
@@ -710,6 +707,24 @@ body:not(.donejs) {
 	.framework-logo {
 		max-width: 50px;
 		margin:0;
+	}
+	.has-popover {
+		cursor: help;
+		position: relative;
+		img.matrix-rating-icon {
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+		}
+	}
+	.asterisk::after {
+		position:absolute;
+		font-size: 1.6em;
+		left: 0; right: 0; top: -10px; bottom:0;
+		padding-left: 40px;
+		text-align: center;
+		content: '*';
+		color: @logoColor;
+		font-weight: bold;
 	}
 }
 .matrix-legend {
