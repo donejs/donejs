@@ -925,13 +925,63 @@ can.stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
 
 ### can.view.bindings
 
-`can.view.bindings` allow you to:
+`can.view.bindings` allows you to bind to viewModel or DOM events and create one-way or two-way bindings on element's properties/attributes, can.Component viewModels and `can.stache`'s scope.
 
- - pass data between element's properties, attributes, or View Model and `can.stache`'s scope.
- - bind to an element's events or an element's View Model's events.
+Create a one-way binding from the parent scope to a child's properties/attributes or viewModel:
 
+ - [{child-prop}="value"](http://canjs.com/docs/can.view.bindings.toChild.html) - One-way bind `value` in the scope to `childProp` in the viewModel.
 
+    ```
+    <my-component {user-name}="name"></my-component>
+    ```
 
+ - [{$child-prop}="value"](http://canjs.com/docs/can.view.bindings.toChild.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
+
+    ```
+    <input {$value}="name" type="text">
+    ```
+
+Create a one-way binding from the child's properties/attributes or viewModel to the parent scope:
+
+- [{^child-prop}="value"](http://canjs.com/docs/can.view.bindings.toParent.html) - One-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+
+    ```
+    <my-component {^user-name}="name"></my-component>
+    ```
+
+ - [{^$child-prop}="value"](http://canjs.com/docs/can.view.bindings.toParent.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
+
+    ```
+    <input {$value}="name" type="text">
+    ```
+
+Create two-way bindings between the parent scope and the child's viewModel or property/attributes:
+
+- [{(child-prop)}="value"](http://canjs.com/docs/can.view.bindings.twoWay.html) - Two-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+
+    ```
+    <my-component {(user-name)}="name"></my-component>
+    ```
+
+ - [{^$child-prop}="value"](http://canjs.com/docs/can.view.bindings.twoWay.html) - Two-way bind `value` in the scope to the `childProp` property or attribute of the element.
+
+    ```
+    <input {$value}="name" type="text">
+    ```
+
+Create bindings to viewModel or DOM events:
+
+ - [($EVENT)="handler()"](http://canjs.com/docs/can.view.bindings.event.html) - Listen to the DOM event `EVENT` and use `handler` as the event handler.
+
+    ```
+    <div ($click)="updateThing()"></my-component>
+    ```
+
+- [(EVENT)="handler()"](http://canjs.com/docs/can.view.bindings.event.html) - Listen to the viewModel event `EVENT` and use `handler()` as the event handler.
+
+    ```
+    <my-component (show)="showTheThing()"></my-component>
+    ```
 
 ### can.Component
 
