@@ -6,8 +6,8 @@
 @description DoneJS is comprised of many projects that are documented seperately. Get an overview of the project's
 APIs that go into making DoneJS and links to their official APIs.
 
-- [generator-donejs] - Default generators are bundled with DoneJS. [api]
-- [donejs-cli] - The commands available to the donejs command line interface. [api]
+- [donejs-cli](#section_CLIandGenerators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)
+- [generator-donejs](#section_CLIandGenerators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)
 - [StealJS](#section=section_StealJS) - Module loader and build system. [api](http://stealjs.com/docs/index.html).
 - [CanJS](#section=section_CanJS) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](http://canjs.com/docs/index.html)
 - [can-connect](#section=section_can_connect) - Data connection part of Models, real-time, fall-through cache. [api](https://connect.canjs.com)
@@ -156,35 +156,42 @@ the chat application as an example in development.  We'll cover what happens whe
 
 3. [can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) will progressively load the component for the new page with a [Promise] as it's view model. When the promise resolves the [can.Component](#section=section_can_Component) will be inserted.
 
+## CLI and Generators
 
-
-## generator-donejs
-
-```
-> donejs init
-```
+After installing DoneJS globally with `npm install donejs -g` you will have the `donejs` command available on the command line. It lets you initialize a new application and - when navigating within a DoneJS project - run scripts provided locally by your application. Within your application folder the `donejs` command is a convenience wrapper for the functionality described below and you can also get a list of all commands by running
 
 ```
-> donejs generate component <folder-path> <component-name>
+donejs help
 ```
 
-```
-> donejs generate component <file-name>.component <component-name>
-```
+### NPM scripts
+
+[NPM scripts](https://docs.npmjs.com/misc/scripts) are defined in the `scripts` section of your applications `package.json`. There are some standard scripts that every Node application uses (like `npm start` or `npm test` - both of which are already set up for you) and you can add your own which is what DoneJS does with commands like `npm run develop` or `npm run build`.
+The `donejs` command makes running those commands easier by allowing you to run them like `donejs start`, `donejs develop` or `donejs build`
+
+### Generators
+
+`donejs add` lets you run the [Yeoman](http://yeoman.io/) generators provided by [generator-donejs](https://github.com/donejs/generator-donejs/). Currently the following generators are available:
+
+- `donejs init` which will initialize a new application
+- `donejs add component <modulename> <tagname>` to create a new can.Component
+- `donejs add supermodel <modulename>` to generate a new model
+
+### Third party generators
+
+If `donejs add` can't find a built-in generator, e.g. when running `donejs add myplugin`, DoneJS will try to install the `donejs-myplugin` package from NPM and run the Yeoman generators it provides. This is how we can enable a desktop application build of the application by simply running
 
 ```
-> donejs generate supermodel <model-name>
+donejs add nw
 ```
 
-## donejs-cli
+Which will install the [donejs-nw](https://github.com/donejs/donejs-nw) package and then run its generator which initializes everything you need. This also works for adding a mobile application build using [donejs-cordova](https://github.com/donejs/donejs-cordova) like this:
 
-- donejs add ?
+```
+donejs add cordova
+```
 
-- donejs build
-- donejs deploy
-- donejs develop
-
-
+This way you can use DoneJS's growing list of plugins and generators without having to add anything to your application that you don't use.
 
 ## StealJS
 
@@ -918,13 +925,63 @@ can.stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
 
 ### can.view.bindings
 
-`can.view.bindings` allow you to:
+`can.view.bindings` allows you to bind to viewModel or DOM events and create one-way or two-way bindings on element's properties/attributes, can.Component viewModels and `can.stache`'s scope.
 
- - pass data between element's properties, attributes, or View Model and `can.stache`'s scope.
- - bind to an element's events or an element's View Model's events.
+Create a one-way binding from the parent scope to a child's properties/attributes or viewModel:
 
+ - [{child-prop}="value"](http://canjs.com/docs/can.view.bindings.toChild.html) - One-way bind `value` in the scope to `childProp` in the viewModel.
 
+    ```
+    <my-component {user-name}="name"></my-component>
+    ```
 
+ - [{$child-prop}="value"](http://canjs.com/docs/can.view.bindings.toChild.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
+
+    ```
+    <input {$value}="name" type="text">
+    ```
+
+Create a one-way binding from the child's properties/attributes or viewModel to the parent scope:
+
+- [{^child-prop}="value"](http://canjs.com/docs/can.view.bindings.toParent.html) - One-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+
+    ```
+    <my-component {^user-name}="name"></my-component>
+    ```
+
+ - [{^$child-prop}="value"](http://canjs.com/docs/can.view.bindings.toParent.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
+
+    ```
+    <input {$value}="name" type="text">
+    ```
+
+Create two-way bindings between the parent scope and the child's viewModel or property/attributes:
+
+- [{(child-prop)}="value"](http://canjs.com/docs/can.view.bindings.twoWay.html) - Two-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+
+    ```
+    <my-component {(user-name)}="name"></my-component>
+    ```
+
+ - [{^$child-prop}="value"](http://canjs.com/docs/can.view.bindings.twoWay.html) - Two-way bind `value` in the scope to the `childProp` property or attribute of the element.
+
+    ```
+    <input {$value}="name" type="text">
+    ```
+
+Create bindings to viewModel or DOM events:
+
+ - [($EVENT)="handler()"](http://canjs.com/docs/can.view.bindings.event.html) - Listen to the DOM event `EVENT` and use `handler` as the event handler.
+
+    ```
+    <div ($click)="updateThing()"></my-component>
+    ```
+
+- [(EVENT)="handler()"](http://canjs.com/docs/can.view.bindings.event.html) - Listen to the viewModel event `EVENT` and use `handler()` as the event handler.
+
+    ```
+    <my-component (show)="showTheThing()"></my-component>
+    ```
 
 ### can.Component
 

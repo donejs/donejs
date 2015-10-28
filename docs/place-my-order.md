@@ -729,7 +729,7 @@ View models that are decoupled from the presentation layer are easy to test. We 
 Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/state.js` to:
 
 ```js
-import fixture from 'can-connect/fixture/';
+import fixture from 'can-fixture';
 
 const store = fixture.store([
   { name: 'Calisota', short: 'CA' },
@@ -750,7 +750,7 @@ export default store;
 Update `src/models/fixtures/city.js` to look like:
 
 ```js
-import fixture from 'can-connect/fixture/';
+import fixture from 'can-fixture';
 
 const store = fixture.store([
   { state: 'CA', name: 'Casadina' },
@@ -771,7 +771,7 @@ export default store;
 And we also need to provide a restaurant list according to the selected city and state in `src/models/fixtures/restaurant.js`:
 
 ```js
-import fixture from 'can-connect/fixture/';
+import fixture from 'can-fixture';
 
 const store = fixture.store([{
   _id: 1,
