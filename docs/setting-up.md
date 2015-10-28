@@ -2,7 +2,15 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever install DoneJS and includes platform-specific pieces of information not covered in the Quick Start or In Depth guides.
+@description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever 
+install DoneJS and includes platform-specific pieces of information not covered in the Quick Start or In Depth guides.
+
+DoneJS officially supports:
+
+ - [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs
+ - [npm](https://www.npmjs.com/) 2.x
+
+We will have a [Node 4.0 and npm 3.0 version](https://github.com/donejs/donejs/issues/376) out ASAP.
 
 @body
 
@@ -62,10 +70,16 @@ $env:NODE_ENV="production"
 
 ### Prerequisites
 
-All that is needed to get DoneJS working on OS X is the Xcode command line tools which you can get by typing:
+To get DoneJS working on OS X you need Xcode command line tools which you can get by typing:
 
 ```shell
 xcode-select --install
+```
+
+And to build iOS apps, after installing Node, install the `ios-sim` package with:
+
+```
+npm install -g ios-sim
 ```
 
 ## Debian / Ubuntu

@@ -20,9 +20,15 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 ## Setup
 
-*Before getting started you might want to check out the [SettingUp] guide to make sure you have all of the prerequisites.*
+In this section, we will install DoneJS and generate a new application. 
 
-In this section, we will install DoneJS and generate a new application. To get started, let's install the DoneJS command line utility globally:
+Before getting started, check out the [SettingUp] guide to make sure you have all of the prerequisites. DoneJS
+officially supports [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs, and 
+[npm](https://www.npmjs.com/) 2.x.  If you find errors, check your version with `node -v` and `npm -v`.
+
+### Install
+
+To get started, let's install the DoneJS command line utility globally:
 
 ```
 npm install -g donejs
@@ -575,11 +581,20 @@ In the last part of this guide we will make mobile and desktop builds of our cha
 
 ### Cordova
 
-To build the application as a Cordova based mobile application, you need to have each platform's SDK installed. We'll be building an iOS app if you are a Mac user; an Andriod app if you're a Windows user.
+To build the application as a Cordova based mobile application, you need to have each platform's SDK installed. 
+We'll be building an iOS app if you are a Mac user; an Andriod app if you're a Windows user.
 
-Mac users should download XCode from the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator. Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html) which gives all of the tools we need.
+Mac users should download XCode from the AppStore and install the `ios-sim` package globally with:
 
-Now we can install the DoneJS Cordova tools with
+```
+npm install -g ios-sim
+```
+
+We will use them to create an iOS application that can be tested in the iOS simulator.
+
+Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html) which gives all of the tools we need.
+
+Now we can install the DoneJS Cordova tools with:
 
 ```
 donejs add cordova
