@@ -3,17 +3,15 @@
 @hide sidebar
 @outline 2 ol
 
-@description 
-
-<img src="http://blog.bitovi.com/wp-content/uploads/2015/10/donejs-logo-ie.png"/>
+@description
 
 DoneJS' goal is to help the JavaScript community get amazing applications done fast.
 Amazing applications are fast, sublimely usable, and maintainable.
 
 But times change and new techniques emerge. We strive to adopt these
-techniques, improve the stack, and provide a simple upgrade path along the way. 
+techniques, improve the stack, and provide a simple upgrade path along the way.
 
-We are part of a community that helps developers of all skill levels and 
+We are part of a community that helps developers of all skill levels and
 backgrounds learn the technology, excel at it, and accomplish their
 goals.
 
@@ -34,14 +32,14 @@ DoneJS has three primary goals:
 ### Amazing Applications
 
 Building a modern application is increasingly difficult. Your app
-needs to look good and run fast on every 
-platform and browser.  And, you need to get your app done yesterday. 
+needs to look good and run fast on every
+platform and browser.  And, you need to get your app done yesterday.
 Not kinda done.  Done done.
 
 Helping you get a high performance, sublimely usable, and maintainable application
 done fast is DoneJS's primary goal. This is why our logo
 is a browser that looks like a checkered flag. We're committed
-to your release. 
+to your release.
 
 We aim to help in three main ways:
 
@@ -71,7 +69,7 @@ DoneJS with alternatives._
 #### 3. Doing the right thing
 
 Writing tests and documentation, setting up continuous integration and deployment
-isn't fun or easy.  DoneJS tries to lower the barrier enough to 
+isn't fun or easy.  DoneJS tries to lower the barrier enough to
 making doing the `right thing` simply part of the normal dev cycle.
 
 Check out what DoneJS does for:
@@ -84,12 +82,12 @@ Check out what DoneJS does for:
 
 ### Evolve
 
-Application development and maintenence often 
+Application development and maintenence often
 lasts many years. Stability is needed to release complex applications. However,
 new techniques and best practices are constantly evolving.
 
 DoneJS's goal is to strike a balance between immovable stability and irresistable
-progress.  We do this by evolving frequently, while maintaining backward compatability between major releases. 
+progress.  We do this by evolving frequently, while maintaining backward compatability between major releases.
 
 It can be a bumpy road, with lots of little changes. But it
 avoids rewrites, resulting in greater productivity:  
@@ -110,7 +108,7 @@ teaching, exploring and innovating.
 #### Teaching
 
 Technology is worth nothing if people don't know how to use it. We want
-to create great learning material, but also create an environment 
+to create great learning material, but also create an environment
 where people feel comfortable getting help.  
 
 The core team is always available on [gitter](https://gitter.im/donejs/donejs)
@@ -119,7 +117,7 @@ city and teach you DoneJS!
 
 
 #### Exploring
-   
+
 DoneJS has benefited greatly from other projects ideas and technology. It should continue to enhance other communities.  
 
 You can already use many of DoneJS parts with other projects:
@@ -128,12 +126,12 @@ You can already use many of DoneJS parts with other projects:
  - CanJS works with RequireJS or Browserify.  
  - can-connect works on its own.  
 
-We should always seek to cooperate with others. 
+We should always seek to cooperate with others.
 
 #### Attract
-   
+
 If you have the next great JS idea, we want to encourage you to help build it as part of the DoneJS
-family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full time devs to build out your idea. Reach out to us on 
+family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full time devs to build out your idea. Reach out to us on
 [gitter](https://gitter.im/donejs/donejs) or create an issue.
 
 
@@ -141,7 +139,7 @@ family.  You'll find DoneJS a supportive environment to nurture your ideas.  You
 
 DoneJS's history goes back more than 8 years!  Learn why JavaScriptMVC was started, and how it evolved into DoneJS.
 
-### Beginning Steps 
+### Beginning Steps
 
 _This section will be complete by Nov 1st. Stay tuned._
 
@@ -173,38 +171,40 @@ To become a contributor to DoneJS or its sub-projects, you simply have to:
 
 There are currently 3 fulltime contributors to DoneJS and its subprojects:
 
-#### Justin Meyer
-
-<img src="https://avatars3.githubusercontent.com/u/78602?v=3&s=300"/>
-
+<div class="core-team-member">
+<img class="member-avatar" src="https://avatars3.githubusercontent.com/u/78602?v=3&s=300"/>
+<h4>Justin Meyer</h4>
+<p>
 Justin dances and plays basketball in Chicago. He created JavaScriptMVC and manages the
 DoneJS project, and shouldn't code on it as much as he does.
+</p>
+<a href="https://twitter.com/justinbmeyer" target="_blank">@justinbmeyer</a>
+<a href="https://github.com/justinbmeyer" target="_blank">github</a>
+</div>
 
-- [@justinbmeyer](https://twitter.com/justinbmeyer)
-- [github](https://github.com/justinbmeyer)
-
-#### David Luecke
-
-<img src="https://avatars3.githubusercontent.com/u/338316?v=3&s=300"/>
-
+<div class="core-team-member">
+<img class="member-avatar" src="https://avatars3.githubusercontent.com/u/338316?v=3&s=300"/>
+<h4>David Luecke</h4>
+<p>
 David is a Canadian by way of Germany. His focus is on CanJS and
 DoneJS's testing stack.
+</p>
+<a href="https://twitter.com/daffl" target="_blank">@daffl</a>
+<a href="https://github.com/daffl" target="_blank">github</a>
+</div>
 
- - [@daffl](https://twitter.com/daffl)
- - [github](https://github.com/daffl)
-
-#### Matthew Phillips
-
-<img src="https://avatars2.githubusercontent.com/u/361671?v=3&s=300"/>
-
+<div class="core-team-member">
+<img class="member-avatar" src="https://avatars2.githubusercontent.com/u/361671?v=3&s=300"/>
+<h4>Matthew Phillips</h4>
+<p>
 Matthew, keeper of beards, is the lead maintainer of StealJS and its related tools.
+</p>
+<a href="https://twitter.com/matthewcp" target="_blank">@matthewcp</a>
+<a href="https://github.com/matthewp" target="_blank">github</a>
+</div>
 
-- [@matthewcp](https://twitter.com/matthewcp)
-- [github](https://github.com/matthewp)
 
 ### Bitovi
 
 Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS. If you would
 like to sponsor development, please [contact](mailto:contact@bitovi.com).
-
-
