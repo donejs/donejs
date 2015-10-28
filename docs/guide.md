@@ -338,19 +338,18 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 ```html
 <can-import from="donejs-chat/models/message" />
 <h5><a href="{{routeUrl page='home'}}">Home</a></h5>
+
 <message-model get-list="{}" class="list-group">
-  <div class="list-group">
-    {{#each ./value}}
-      <div class="list-group-item">
-        <h4 class="list-group-item-heading">{{name}}</h4>
-        <p class="list-group-item-text">{{message}}</p>
-      </div>
-    {{else}}
-      <div class="list-group-item">
-        <h4 class="list-group-item-heading">No messages</h4>
-      </div>
-    {{/each}}
-  </div>
+  {{#each ./value}}
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">{{name}}</h4>
+      <p class="list-group-item-text">{{message}}</p>
+    </div>
+  {{else}}
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">No messages</h4>
+    </div>
+  {{/each}}
 </message-model>
 ```
 
@@ -363,31 +362,31 @@ Now let's add the form to create new messages. The form two-way binds the `name`
 ```html
 <can-import from="donejs-chat/models/message" />
 <h5><a href="{{routeUrl page='home'}}">Home</a></h5>
+
 <message-model get-list="{}" class="list-group">
-  <div class="list-group">
-    {{#each ./value}}
-      <div class="list-group-item">
-        <h4 class="list-group-item-heading">{{name}}</h4>
-        <p class="list-group-item-text">{{message}}</p>
-      </div>
-    {{else}}
-      <div class="list-group-item">
-        <h4 class="list-group-item-heading">No messages</h4>
-      </div>
-    {{/each}}
-  </div>
+  {{#each ./value}}
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">{{name}}</h4>
+      <p class="list-group-item-text">{{message}}</p>
+    </div>
+  {{else}}
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">No messages</h4>
+    </div>
+  {{/each}}
 </message-model>
+
 <form class="row" ($submit)="send(%event)">
   <div class="col-sm-3">
     <input type="text" class="form-control" placeholder="Your name"
-           {($value)}="name">
+           {($value)}="name"/>
   </div>
   <div class="col-sm-6">
     <input type="text" class="form-control" placeholder="Your message"
-           {($value)}="message">
+           {($value)}="message"/>
   </div>
   <div class="col-sm-3">
-      <input type="submit" class="btn btn-primary btn-block" value="Send"/>
+    <input type="submit" class="btn btn-primary btn-block" value="Send"/>
   </div>
 </form>
 ```
@@ -462,11 +461,11 @@ tag('message-model', messageConnection);
 const socket = io('http://chat.donejs.com');
 
 socket.on('messages created',
-  order => messageConnection.createInstance(order));
+  message => messageConnection.createInstance(message));
 socket.on('messages updated',
-  order => messageConnection.updateInstance(order));
+  message => messageConnection.updateInstance(message));
 socket.on('messages removed',
-  order => messageConnection.destroyInstance(order));
+  message => messageConnection.destroyInstance(message));
 
 export default Message;
 ```
