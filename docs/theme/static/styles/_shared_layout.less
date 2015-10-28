@@ -769,14 +769,13 @@ body:not(.donejs):not(.community) {
 	width:80px;
 	text-align: center;
 	z-index: 1060;
-	&.affix-top, &.affix-bottom {
-		position: absolute;
-		right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
-	}
+	position: absolute;
+	right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
+
 	&.affix {
 		top: 100px;
 		right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
-		.fadeIn;
+		position: fixed;
 	}
 	.title {
 		background-color: @logoColor;
