@@ -514,6 +514,8 @@ steal("./content_list.js",
         $(function () {
             if($('#js-matrix-legend-affix').length) {
 
+                $('.has-popover').removeAttr('title data-original-title');
+
                 var $el = $('.matrix-wrapper');
                 $('#js-matrix-legend-affix').affix({
                     offset: {
