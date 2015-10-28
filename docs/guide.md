@@ -576,9 +576,9 @@ In the last part of this guide we will make mobile and desktop builds of our cha
 
 ### Cordova
 
-To build the application as a Cordova based mobile application you need to have each platform's SDK installed. We'll be building an iOS app if you are a Mac user; Windows users follow the Android instructions
+To build the application as a Cordova based mobile application, you need to have each platform's SDK installed. We'll be building an iOS app if you are a Mac user; an Andriod app if you're a Windows user.
 
-XCode can be downloaded via the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator. For Windows users will will install the [Android Studio](https://developer.android.com/sdk/index.html) which gives us all of the tools we need.
+Mac users should download XCode from the AppStore. We will use it to create an iOS application that can be tested in the iOS simulator. Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html) which gives all of the tools we need.
 
 Now we can install the DoneJS Cordova tools with
 
@@ -586,7 +586,7 @@ Now we can install the DoneJS Cordova tools with
 donejs add cordova
 ```
 
-Depending on your operating system we can accept most of the defaults unless you would like to build for Android which needs to be selected from the checkbox list of platforms.
+Depending on your operating system you can accept most of the defaults unless you would like to build for Android which needs to be selected from the checkbox list of platforms.
 
 To run the Cordova build and launch the simulator we can now run
 

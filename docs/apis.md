@@ -19,7 +19,7 @@ APIs that go into making DoneJS and links to their official APIs.
 - [jQuery] - DOM utilities. [api]
 - [jQuery++] - Even more DOM utilities. [api]
 - [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
-- [can-ssr/app-map] - An application's ViewModel. [api]
+- [can-ssr/app-map](#section=section_can_ssr_app_map) - An application's ViewModel. [api](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html)
 - [done-autorender](#section=section_done_autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
 - [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api]
 
