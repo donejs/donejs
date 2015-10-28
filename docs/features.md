@@ -87,7 +87,7 @@ Solving a story means a packaged solution to a development problem, where severa
       </li>
       <li>
         <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
-        <div>EQUIVALENT</div>
+        <div>GOOD</div>
       </li>
       <li>
         <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
@@ -101,6 +101,12 @@ Solving a story means a packaged solution to a development problem, where severa
         <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
         <div>NO</div>
       </li>
+      <!-- <li>
+        <div class="asterisk-legend">
+          <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+        </div>
+        <div>TOOLTIP</div>
+      </li> -->
     </ul>
   </div>
   <div class="table-wrapper">
@@ -117,66 +123,25 @@ Solving a story means a packaged solution to a development problem, where severa
         <tbody>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_Server_SideRendered">Server-side rendering</a></div>
+              <div class="feature-description"><a href="#section=section_Server_SideRendered">Server-Side Rendering</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Angular doesn't support a virtual dom. No third-party library support would be equivilant.">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='Requires some <a href="http://reactjsnews.com/isomorphic-javascript-with-react-node" target="_blank">manual setup</a>'>
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
-                <span class="asterisk"></span>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='http://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has.">
+                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_ProgressiveLoading">Progressive dependency loading</a></div>
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
-            </td>
-          </tr>
-          <tr>
-            <td class="features">
-              <div class="feature-description"><a href="#section=section_CachingandMinimalDataRequests">Caching & minimal data requests</a></div>
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
-            </td>
-          </tr>
-          <tr>
-            <td class="features">
-              <div class="feature-description"><a href="#section=section_MinimalDOMUpdates">Minimal DOM updates</a></div>
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
-            </td>
-          </tr>
-          <tr>
-            <td class="features">
-              <div class="feature-description"><a href="#section=section_WorkerThreadRendering">Worker thread rendering</a></div>
+              <div class="feature-description"><a href="#section=section_ProgressiveLoading">Progressive Dependency Loading</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
@@ -185,7 +150,53 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_CachingandMinimalDataRequests">Caching & Minimal Data Requests</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MinimalDOMUpdates">Minimal DOM Updates</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Updates DOM quickly, but only after expensive dirty check calculation.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_WorkerThreadRendering">Worker Thread Rendering</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="There is a virtual dom. So, Its possible, but there is no support out of the box.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -196,37 +207,40 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_iOS_Android_andDesktopBuilds">Native app builds</a></div>
+              <div class="feature-description"><a href="#section=section_iOS_Android_andDesktopBuilds">iOS, Android, and Desktop Builds</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, there's no infrastructure to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, there's no infrastructure to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_SupportsAllBrowsers_EvenIE8">Browser support</a></div>
+              <div class="feature-description"><a href="#section=section_SupportsAllBrowsers_EvenIE8">Browser Support</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>'>
-                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
-                <span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
@@ -235,16 +249,20 @@ Solving a story means a packaged solution to a development problem, where severa
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_RealTimeConnected">Real-time</a></div>
+              <div class="feature-description"><a href="#section=section_RealTimeConnected">Real-Time</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While connecting to real time data is possible, there is no built in support to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While connecting to real time data is possible, there is no built in support to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -255,24 +273,35 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Built-in routing is difficult to configure and maintain.">
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="React-router supports this, but is not part of the core library.">
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_ComprehensiveTesting">Comprehensive testing</a></div>
+              <div class="feature-description"><a href="#section=section_ComprehensiveTesting">Comprehensive Testing</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Includes built-in support for every part of the testing lifecycle">
+                <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supports dependency injection, but offers poor support for end-to-end testing.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Includes some basic test utilities and mocks, but no support for other parts of the testing lifecycle.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+                <span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -283,24 +312,24 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_ContinuousIntegration_Deployment">Continuous integration & deployment</a></div>
+              <div class="feature-description"><a href="#section=section_ContinuousIntegration_Deployment">Continuous Integration & Deployment</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -319,16 +348,16 @@ Solving a story means a packaged solution to a development problem, where severa
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_NPMPackages">NPM packages</a></div>
+              <div class="feature-description"><a href="#section=section_NPMPackages">NPM Packages - Imports & Exports</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -344,38 +373,40 @@ Solving a story means a packaged solution to a development problem, where severa
               </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
-            </td>
-          </tr>
-          <tr>
-            <td class="features">
-              <div class="feature-description"><a href="#section=section_CustomHTMLElements">Custom HTML elements</a></div>
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
-            </td>
-            <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="JSX <em>only</em> supports <a href='https://facebook.github.io/react/docs/jsx-gotchas.html#custom-html-attributes' target='_bank'>native HTML elements.</a>">
-                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supported through transpiler included with react-tools.">
+                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_MVVMArchitecture">MVVM architecture</a></div>
+              <div class="feature-description"><a href="#section=section_CustomHTMLElements">Custom HTML Elements</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MVVMArchitecture">MVVM Architecture</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+            <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Not explicitly MVVM, but could be implemented">
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="React is just the view layer. You'll need to implement your own MVVM architecture.">
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -387,10 +418,12 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Third-party libraries available for some support.">
+                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
             </td>
           </tr>
           <tr>
@@ -401,7 +434,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
             </td>
             <td>
               <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
