@@ -36,7 +36,7 @@ Then we create a new DoneJS application called `donejs-chat`:
 donejs init donejs-chat
 ```
 
-This will create a new folder called `donejs-chat` and in it generate our application. The initialization process will ask questions like the name of your application, the source folder, etc. We can answer these with the default settings by hitting enter. This will install all of DoneJS's dependencies, including the following:
+This will create a new folder called `donejs-chat` and in it generate our application. The initialization process will ask questions like the name of your application, the source folder, etc. We should answer these with the default settings by hitting enter. This will install all of DoneJS's dependencies, including the following:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities

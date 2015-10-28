@@ -3,8 +3,12 @@
 @hide sidebar
 @outline 2 ol
 
-@description DoneJS goal is to help the JavaScript community make, and continue to make, amazing applications. Amazing applications are fast, highly usable, and
-maintainable.  
+@description 
+
+<img src="http://blog.bitovi.com/wp-content/uploads/2015/10/donejs-logo-ie.png"/>
+
+DoneJS' goal is to help the JavaScript community get amazing applications done fast.
+Amazing applications are fast, sublimely usable, and maintainable.
 
 But times change and new techniques emerge. We strive to adopt these
 techniques, improve the stack, and provide a simple upgrade path along the way. 
@@ -29,168 +33,128 @@ DoneJS has three primary goals:
 
 ### Amazing Applications
 
-Building a modern application is increasingly difficult. There's 
+Building a modern application is increasingly difficult. Your app
+needs to look good and run fast on every 
+platform and browser.  And, you need to get your app done yesterday. 
+Not kinda done.  Done done.
 
+Helping you get a high performance, sublimely usable, and maintainable application
+done fast is DoneJS's primary goal. This is why our logo
+is a browser that looks like a checkered flag. We're committed
+to your release. 
 
+We aim to help in three main ways:
 
-There are many competing concerns to balance.
+#### 1. Solving difficult technical problems
 
-An amazing application needs to be fast, reach as many users as possible, and provide a great user experience.
+DoneJS has good solutions for:
 
-It should also be maintainable, otherwise it will be too expensive in the long run.
+ - [Builds to mobile and desktop](#section=section_iOS_Android_andDesktopBuilds)
+ - [Server Side Rendering](#section=section_Server_SideRendered)
+ - [Automatic real-time updates](#section=section_RealTimeConnected)
+ - [Fast download times](##section=section_ProgressiveLoading)
 
-And yet it needs to be done on time, making the previous requirements hard to fit in.
+These are just a few examples from our [features page](/Features.html). If
+there's a hard problem that you keep finding, we want to solve it.
 
-DoneJS aims to guide developers down a yellow brick road towards a successful JavaScript application: making every step towards an amazing application well lit and simple.
+#### 2. Provide an integrated solution
 
-Our goal is to make it hard to NOT make an amazing application using DoneJS.
+Too many choices can make decision making difficult.  DoneJS simplifies
+matters by providing a full stack of frontend tooling tested to work
+great together.  The start of the [features page](/Features.html)
+goes into detail with examples of this benefit.
 
-We aim to do this in three main ways:
+_Note: Despite being an integrated solution, you can replace parts of
+DoneJS with alternatives._
 
-1. Providing a full, integrated solution: literally everything you need to build a complex app.
-1. Solving hard technical problems.
-2. Providing tools that eliminate any barrier to "doing the right thing"
-
-#### 1. Full stack
-
-For any sufficiently complex application, there are many many layers of foundation needed. 
-
-The rise of [micro-libraries](http://microjs.com/#), small single-purpose modules, has led to a time when picking your stack involves choosing from thousands of potential options, and infinite possible combinations that have to work together well.
-
-So many options sounds good in theory. In practice, we've found it presents more challenges than benefits.
-
-How do you choose? How do you know if they fit well together? How do you find support for your unique combination of tools?
-
-Most importantly, who has time for that?
-
-DoneJS gives you a full solution: literally everything you need to build a complex app, working together seamlessly. Its our mission to eliminate any ambiguity around choosing technology for building an app, so you can spend time actually building your app. 
-
-We've compiled best in class tools for every part of the JavaScript application lifecycle: from tooling, to application architecture, to production deployment.
-
-Just like Apple owning the whole stack from software to hardware makes for a great experience: the whole DoneJS stack is greater than the sum of its parts. 
-
-A few examples:
-
-* Generators span layers by helping bootstrap an entire projects or individual modules.
-* `<can-import>` brings dependency management into templates and hooks that simplify progressive loading - spanning several projects.
-* Server side rendering is made simple through the use of hooks within data components that tell the server to delay rendering - a feature that bridges can-connect, StealJS, and can-ssr.
-
-#### 2. Hard technical problems
-
-DoneJS aims to identify the hard parts of front-end development, and solve them, or at least make them as simple for developers as possible.
-
-A few examples:
-
-- Server Side Rendering
-- Automatic real-time updates
-- Builds to mobile and desktop
-- Optimal builds deployed to a CDN
 
 #### 3. Doing the right thing
 
-To us, the `right thing` means doing the extra work that makes your code easier to debug and maintain: things like tests, docs, continuous integration, and deployment automation.
+Writing tests and documentation, setting up continuous integration and deployment
+isn't fun or easy.  DoneJS tries to lower the barrier enough to 
+making doing the `right thing` simply part of the normal dev cycle.
 
-Often, there is a barrier to doing the right thing: finding the right tools, learning about them, setting up, and configuring them. DoneJS aims to remove this barrier, making doing the `right thing` simply part of the normal dev cycle.
+Checkout what DoneJS does for:
 
-A few examples:
-
-- Tests
-- Documentation
-- Guides for CI and CD
-- Modlets
-- Generators
+- [Tests](#section=section_ComprehensiveTesting)
+- [Documentation](#section=section_Documentation)
+- [Guides for CI and CD](#section=section_ContinuousIntegration_Deployment)
+- [Modlets](#section=section_Modlets)
+- [Generators](#section=section_Generators)
 
 ### Evolve
 
-Technology is always a moving target. If you follow the JavaScript JavaScript community, you'll know that the past 10 years have been a whirlwind of activity: evolving best practices, frameworks coming and going, browsers adding features.
+Application development and maintenence often 
+lasts many years. Stability is needed to release complex applications. However,
+new techniques and best practices are constantly evolving.
 
-Our goal is to embrace the change. Our promise to DoneJS users is that we'll continue to evolve, while always providing an upgrade path.
+DoneJS's goal is to strike a balance between immovable stability and irresistable
+progress.  We do this by evolving frequently, while maintaining backward compatability between major releases. 
 
-Applications often live for many years. Therefore, framework longevity is a critical ingredient, maybe THE critical ingredient, in project success. 
+It can be a bumpy road, with lots of little changes. But it
+avoids rewrites, resulting in greater productivity:  
 
-If you pick a framework that abandons its users or stagnates, you'll be spending far too much time on rewrites or inefficient patterns that are solved in other frameworks.
+<img src="http://blog.bitovi.com/wp-content/uploads/2015/10/mountain-climb1.jpg"/>
 
-<img src="/static/img/evolve/badframework.png"  alt="Bad framework choice can kill long term velocity" />
 
-If you pick a framework that continues to innovate, your app lives long and prospers.
+DoneJS is the successor to JavaScriptMVC. If your project chose JavaScriptMVC in 2007, you would have made a wise decision, giving your team an upgrade path to a modern application for the past 8 years.
 
-<img src="/static/img/evolve/goodframework.png" alt="Good framework choice helps maintain increasing velocity" />
-
-It's far too easy to be seduced by the allure of popularity. But popularity doesn't predict longevity.
-
-<img src="/static/img/evolve/toohot.jpg" alt="Good framework choice helps maintain increasing velocity" />
-
-Many "hot" frameworks, even those backed by giant corporations, fizzle out.
-
-<img src="/static/img/evolve/graveyard.png" alt="Many frameworks fizzle out" />
-
-The only true predictor of framework longevity is past behavior. 
-
-DoneJS is the next generation of a long line of tools that have a long track record of continuous innovation (more on that story in the History section). Here are some highlights:
-
-<iframe src='https://cdn.knightlab.com/libs/timeline/latest/embed/index.html?source=1lBdurIQbbJkTZ8_kCQaXZtFaD06ulMFAlkqyEmXH4k0&font=Bevan-PotanoSans&maptype=toner&lang=en&start_at_slide=3&height=650&start_zoom_adjust=-2' width='100%' height='650' frameborder='0'></iframe> 
-
-Steady, consistent improvements since 2007, all while providing an upgrade path along the way. If your project chose JavaScriptMVC in 2007, you would have made a wise decision, giving your team an upgrade path to a modern application for the past 8.5 years.
-
-<img src="/static/img/evolve/bitovitech.png" alt="A graph showing Bitovi's continued releases" />
-
-Our goal is to provide steady progress into the future. DoneJS will keep evolving with the times.
+We hope to continue this trend until programs start writing themselves.
 
 ### Community
 
- - Teach - Our tech is worth nothing if people don't know how to use it.  We have a weekly training, and post
-   training videos.  We also have "free" single trainings anywhere people can assemble 10 people.  If you'd
-   like a free DoneJS training please email. Our full time team is always available to chat on gitter.
+Software is better with friends.  Our goal is to establish a world-wide
+community with people of all backgrounds and skill levels dedicated to
+teaching, exploring and innovating.
+
+#### Teaching
+
+Technology is worth nothing if people don't know how to use it. We want
+to create great learning material, but also create an environment 
+where people feel comfortable getting help.  
+
+The core team is always available on [gitter](https://gitter.im/donejs/donejs)
+and provides [weekly trainings](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](/community.html) and we will come to your
+city and teach you DoneJS!
+
+
+#### Exploring
    
- - Explore - DoneJS's parts should work with everything.  StealJS works great with ReactJS.  CanJS works
-   with RequireJS or Browserify.  can-connect works on its own.  Different combinations suite people differently.  
-   Our goal is to enhance other communities with DoneJS's technology.
+DoneJS has benefited greatly from other projects ideas and technology. It should continue to enhance other communities.  
+
+You can already use many of DoneJS parts with other projects:
+
+ - StealJS works great with ReactJS.  
+ - CanJS works with RequireJS or Browserify.  
+ - can-connect works on its own.  
+
+We should always seek to cooperate with others. 
+
+#### Attract
    
- - Attract - If you have the next great JS idea, we want to encourage you to help build it as part of the DoneJS
-   family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full
-   time devs to build out your idea.
+If you have the next great JS idea, we want to encourage you to help build it as part of the DoneJS
+family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full time devs to build out your idea. Reach out to us on 
+[gitter](https://gitter.im/donejs/donejs) or create an issue.
 
 
 ## History
 
-DoneJS's history goes back more than 8 years!  Learn why JavaScriptMVC was started, and how it
-evolved into DoneJS.
+DoneJS's history goes back more than 8 years!  Learn why JavaScriptMVC was started, and how it evolved into DoneJS.
 
-### Beginning Insipration
+### Beginning Steps 
 
-Brian and Justin were trying to make something like Filemaker pro, but for the web. They
-were young and stupid.  To make something so complex, as a SPA, they need things like:
-
-- Templates
-- A build system
-- Event delegation
-- A model
-- Testing
-
-### Middle Challenges
-
-Maintaining all these projects was too much. And it was a big pill to swallow. So we started to break out our tech.
-
-And, these projects were based on Rhino, not node.  So we set out to update EVERYTHING and
-solve some of the biggest remaining struggles - real-time, ssr, different builds.
-
-
-### Today's Effort
-
-After releasing DoneJS, our team will be almost exclusively focused on 
-DoneJS's community, training, and documentation. DoneJS is amazing, but without getting
-people the skills they need to effecitvely use it, it will go to waste.
-
-- How can people get involved?
-- 
+_This section will be complete by Nov 1st. Stay tuned._
 
 ### Tomorrow's Roadmap
 
-- StealJS's dependency injection
-- DirtyChecking 
-- can-connect supporting other frameworks
-- Other MV*\ support?
-- Animation utilities
+The following are our highest priority, non bug fix features:
+
+- [can-set support sort](https://github.com/canjs/can-set/pull/10)
+- [documentjs configured in package.json](https://github.com/bitovi/documentjs/issues/202)
+- [StealJS dependency injection](https://github.com/stealjs/steal/issues/509)
+- [can-connect supporting other frameworks](https://github.com/canjs/can-connect/issues/42)
+- [Animation utilities](https://github.com/canjs/can-animate)
+- [O(log n) derived list modification](https://github.com/canjs/can-derive)
 
 ## Team
 
@@ -201,19 +165,46 @@ The DoneJS family of technologies is built by 100s of contributors:
 
 To become a contributor to DoneJS or its sub-projects, you simply have to:
 
-- email the core team expressing your interest.
-- attend a monthly meeting
+- [email](mailto:contact@bitovi.com) the core team expressing your interest.
+- attend a weekly meeting at least twice a month.
 - make one small contribution, even a spelling correction, a month.
 
 ### Fulltime team
 
- - David
- - Matthew
- - Justin
+There are currently 3 fulltime contributors to DoneJS and its subprojects:
+
+#### Justin Meyer
+
+<img src="https://avatars3.githubusercontent.com/u/78602?v=3&s=300"/>
+
+Justin dances and plays basketball in Chicago. He created JavaScriptMVC and manages the
+DoneJS project, and shouldn't code on it as much as he does.
+
+- [@justinbmeyer](https://twitter.com/justinbmeyer)
+- [github](https://github.com/justinbmeyer)
+
+#### David Luecke
+
+<img src="https://avatars3.githubusercontent.com/u/338316?v=3&s=300"/>
+
+David is a Canadian by way of Germany. His focus is on CanJS and
+DoneJS's testing stack.
+
+ - [@daffl](https://twitter.com/daffl)
+ - [github](https://github.com/daffl)
+
+#### Matthew Phillips
+
+<img src="https://avatars2.githubusercontent.com/u/361671?v=3&s=300"/>
+
+Matthew, keeper of beards, is the lead maintainer of StealJS and its related tools.
+
+- [@matthewcp](https://twitter.com/matthewcp)
+- [github](https://github.com/matthewp)
 
 ### Bitovi
 
 Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS. If you would
-like to sponsor development, please contact.
+like to sponsor development, please [contact](mailto:contact@bitovi.com).
 
 
