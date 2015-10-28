@@ -5,7 +5,7 @@
 
 @description DoneJS is about getting your application ... __done__ ... so you can spend time with
 your friends and family.  To demonstrate how easy it is to make something amazing with all the bells and
-wistles a modern developer needs, we created the following guides.
+whistles a modern developer needs, we created the following guides.
 
 
 @body
