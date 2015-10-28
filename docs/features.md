@@ -609,7 +609,11 @@ Here's how the caching logic works:
 1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
 1. Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
-<video style="width:100%;" controls src="static/img/donejs-fallthrough-caching.mp4"></video>
+<video style="width:100%;" controls poster="/static/img/poster-fall-thru-caching.jpg" preload="none">
+    <source src="/static/img/donejs-fallthrough-caching.webm" type="video/webm">
+    <source src="/static/img/donejs-fallthrough-caching.ogg" type="video/ogg">
+    <source src="/static/img/donejs-fallthrough-caching.mp4" type="video/mp4">
+</video>
 
 ##### Combining requests
 
@@ -621,7 +625,11 @@ For example, the video below shows an application that shows two filtered lists 
 
 Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.
 
-<video style="width:100%;" controls src="static/img/donejs-combine-requests.m4v"></video>
+<video style="width:100%;" controls poster="/static/img/poster-combine-requests.jpg" preload="none">
+    <source src="/static/img/donejs-combine-requests.webm" type="video/webm">
+    <source src="/static/img/donejs-combine-requests.ogg" type="video/ogg">
+    <source src="/static/img/donejs-combine-requests.mp4" type="video/mp4">
+</video>
 
 ##### Request caching
 
@@ -639,7 +647,12 @@ The request logic is more aggressive in its attempts to find subsets of the data
 
 The video below shows two example scenarios. The first shows the cache containing a supserset of the request. The second shows the cache containing a subset of the request.
 
-<video style="width:100%;" controls src="static/img/donejs-request-caching.mp4"></video>
+<video style="width:100%;" controls poster="/static/img/poster-request-caching.jpg" preload="none">
+    <source src="/static/img/donejs-request-caching.webm" type="video/webm">
+    <source src="/static/img/donejs-request-caching.ogg" type="video/ogg">
+    <source src="/static/img/donejs-request-caching.mp4" type="video/mp4">
+</video>
+
 
 ##### Inline cache
 
@@ -678,7 +691,14 @@ While this flow would be possible in other SSR systems, it would require manuall
 
 This video illustrates how it works.
 
-<video style="width:100%;" controls src="static/img/donejs-inline-cache.m4v"></video>
+<video style="width:100%;" controls poster="/static/img/poster-inline-cach.jpg" preload="none">
+    <source src="/static/img/donejs-inline-cache.webm" type="video/webm">
+    <source src="/static/img/donejs-inline-cache.ogg" type="video/ogg">
+    <source src="/static/img/donejs-inline-cache.mp4" type="video/mp4">
+</video>
+
+
+
 
 <a class="btn" href="http://connect.canjs.com/"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html#section=section_Messagespage"><span>View the Guide</span></a>
@@ -994,7 +1014,7 @@ DoneJS provides tools for the entire testing lifecycle:
 
 <div class="maintainable wrapper">
   <div class="background video">
-    <video tabindex="0" preload="auto" class="img-responsive">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/donejs-testing.jpg">
         <source src="static/img/donejs-testing-no-fade-in.mov" type="video/mp4">
         <source src="static/img/donejs-testing-no-fade-in.mp4" type="video/mp4">
         <source src="static/img/donejs-testing-no-fade-in.ogg" type="video/mp4">
@@ -1130,7 +1150,7 @@ DoneJS comes with a documentation tool built in, and it generates multi-versione
 
 <div class="maintainable wrapper">
   <div class="background video">
-    <video tabindex="0" preload="auto" class="img-responsive">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/done-js-documentation.jpg">
         <source src="static/img/donejs-documentation-no-fade-in.mov" type="video/mp4">
         <source src="static/img/donejs-documentation-no-fade-in.mp4" type="video/mp4">
         <source src="static/img/donejs-documentation-no-fade-in.ogg" type="video/mp4">
@@ -1201,7 +1221,7 @@ DoneJS provides support for simple integration into popular CI and CD tools, lik
 
 <div class="maintainable wrapper">
   <div class="background video">
-    <video tabindex="0" preload="auto" class="img-responsive">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/continuous-integration0deployment.jpg">
         <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mov" type="video/mp4">
         <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mp4" type="video/mp4">
         <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.ogg" type="video/mp4">
@@ -1284,7 +1304,7 @@ The goal of these features is to transform project workflows, making it easier t
 
 <div class="maintainable wrapper">
   <div class="background video">
-    <video tabindex="0" preload="auto" class="img-responsive">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/donejs-npm-packaging-custom-elements.jpg">
         <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mov" type="video/mp4">
         <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mp4" type="video/mp4">
         <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.ogg" type="video/mp4">
@@ -1728,7 +1748,7 @@ Getting and staying in [flow](https://en.wikipedia.org/wiki/Flow_(psychology)) i
 
 <div class="maintainable wrapper">
   <div class="background video">
-    <video tabindex="0" preload="auto" class="img-responsive">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/donejs-live-reload.jpg">
         <source src="static/img/donejs-live-reload-no-fade-in.mov" type="video/mp4">
         <source src="static/img/donejs-live-reload-no-fade-in.mp4" type="video/mp4">
         <source src="static/img/donejs-live-reload-no-fade-in.ogg" type="video/mp4">
