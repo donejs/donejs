@@ -10,18 +10,18 @@ APIs that go into making DoneJS and links to their official APIs.
 - [donejs-cli] - The commands available to the donejs command line interface. [api]
 - [StealJS](#section=section_StealJS) - Module loader and build system. [api](http://stealjs.com/docs/index.html).
 - [CanJS](#section=section_CanJS) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](http://canjs.com/docs/index.html)
-- [can-connect] - Data connection part of Models, real-time, fall-through cache. [api]
-- [can-set] - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)
-- [QUnit](#section_QUnit) - Default test assertion library. [api]
-- [FuncUnit](#section_FuncUnit) - Functional test utilities. [api]
-- [Testee](#section_Testee) - Browser launcher and test reporter. [api]
+- [can-connect](#section=section_can_connect) - Data connection part of Models, real-time, fall-through cache. [api](https://connect.canjs.com)
+- [can-set](#section=section_can_set) - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)
+- [QUnit](#section_QUnit) - Default test assertion library. [api](http://qunitjs.com/)
+- [FuncUnit](#section_FuncUnit) - Functional test utilities. [api](http://funcunit.com/)
+- [Testee](#section_Testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)
 - [DoumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)
-- [jQuery] - DOM utilities. [api]
-- [jQuery++] - Even more DOM utilities. [api]
+- [jQuery](#section=section_jQuery) - DOM utilities. [api](http://jquery.com/)
+- [jQuery++](#section=section_jQuery__) - Even more DOM utilities. [api](http://jquerypp.com/)
 - [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
 - [can-ssr/app-map](#section=section_can_ssr_app_map) - An application's ViewModel. [api](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html)
 - [done-autorender](#section=section_done_autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
-- [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api]
+- [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)
 
 
 
@@ -1087,9 +1087,180 @@ Which will cause any changes in the route to reflect in the View Model instance,
 
 ## Data Layer APIs
 
-### can-set
 
 ### can-connect
+
+[can-connect](https://connect.canjs.com) is used to connect typed 
+data to backend services.  In a DoneJS application, that typed data is a 
+[can.Map](#section=section_can_Map) and [can.Map](#section=section_can_List) type.  
+
+To make a simple connection to a restful interface:
+
+```
+// First, create custom Map and List type 
+var Todo = Map.extend({
+  canComplete: function(ownerId) {
+    return this.attr("ownerId") === ownerId;
+  }
+});
+
+var TodoList = List.extend({
+  Map: Todo
+},{
+  incomplete: function(){
+    return this.filter(function(todo){
+      return !todo.attr("complete")
+    });
+  }
+});
+
+// Then, make a connection with the right behaviors and options.
+var todoConnection = connect(["data-url","constructor","can/map"],{
+  Map: Todo,
+  List: TodoList,
+  url: "/services/todos"
+});
+```
+
+This adds a [getList](http://connect.canjs.com/doc/can.Map.getList.html), 
+[.get](http://connect.canjs.com/doc/can.Map.get.html), 
+[.save](http://connect.canjs.com/doc/can.Map.prototype.save.html) and 
+[.destroy](http://connect.canjs.com/doc/can.Map.prototype.destroy.html) methods to
+`Todo` allowing you to CRUD `Todo`s and `TodoList`s from the service layer like:
+
+```
+// Get a list of todos
+Todo.getList({due: "today"}).then(function(todos){ ... });
+
+// Get a single todo
+Todo.get({id: 5}).then(function(todo){ ... });
+
+// Create a todo
+var todo = new Todo({name: "dishes"})
+
+// Create it on the server 
+todo.save().then(function(todo){
+
+  // Update it's properties
+  todo.attr({
+    name: "Do the dishes"
+  })
+  // Update the service layer with changes
+  .save().then(function(todo){
+    
+    // Delete the todo on  the service layer
+    todo.destroy();
+  });
+});
+```
+
+`can-connect` comes with a wide variety of behaviors that
+can be mixed into a connection.  Examples include:
+
+ - [real-time](http://connect.canjs.com/doc/can-connect%7Creal-time.html) keeps `can.List`s updated with changes.
+ - [fall-through-cache](http://connect.canjs.com/doc/can-connect%7Cfall-through-cache.html)
+
+To make the process of creating `can.Map` based connections easier,
+DoneJS comes with a [supermodel generator](#section=section_generator_donejs)
+creates a [super-map](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).
+
+A super-map is just a connection with a bunch of the mostly commonly used
+behaviors.  Create one with the `superMap` function like:
+
+```
+export const messageConnection = superMap({
+  url: "/services/todos",
+  Map: Todo,
+  List: TodoList,
+  name: 'todo'
+});
+```
+
+### can-set
+
+[can-set](https://github.com/canjs/can-set) is used to compare
+set objects that are represented by the parameters commonly passed 
+to service requests.  
+
+For example, if you want all todos for user `5` that are complete, you
+might call:
+
+```
+Todo.getList({userId: 5, complete: true})
+```
+
+`{userId: 5, complete: true}` represents a set.  Using
+`can-set` we can compare it to other sets. The following
+returns `true` because `{userId: 5, complete: true}` represents
+a subset of `{userId: 5}`.
+
+```
+set.subset({userId: 5, complete: true},{userId: 5}) //-> true
+```
+
+`can-set` can perform more complex logic with custom [set Algebras](https://github.com/canjs/can-set#setalgebra).
+
+The following creates a set-algebra that is able to combine ranges:
+
+```
+// Create a set Algebra
+var algebra = new set.Algebra(
+  set.comparators.rangeInclusive("start","end"));
+
+// use it
+algebra.union({start: 1, end: 10},
+              {start: 11, end: 20}) //-> {start: 1, end: 20}
+``` 
+
+In a DoneJS application, you create custom algebras to pass
+to [can-connect](#section=section_can_connect) connections. The
+connection's behaviors use that [algebra](http://connect.canjs.com/doc/connect.base.algebra.html) to their optimizations.
+
+For example, if the `Todo` type in the [can-connect section](#section=section_can_connect) has the following property behaviors:
+
+ - `complete` can be true or false
+ - `type` can be one of "dev", "design", or "QA"
+
+... and the service layer supports queries like:
+
+```
+//-> gets all incomplete todos
+/services/todos?complete=false 
+
+// -> gets all todos that are for design and dev
+/services/todos?type[]=dev&type[]=design
+```
+
+You'd want to create an algebra for the `superMap` as follows:
+
+```
+var algebra = new set.Algebra(
+  set.comparators.boolean("complete"),
+  set.comparators.enum("type", ["dev", "design", "QA"])
+);
+
+export const messageConnection = superMap({
+  url: "/services/todos",
+  Map: Todo,
+  List: TodoList,
+  name: 'todo',
+  algebra: algebra
+});
+```
+
+This allows a `superMap` to combine requests like:
+
+```
+  Todo.getList({complete: true})
++ Todo.getList({complete: true})
+================================
+  Todo.getList({})
+```
+
+And know that if `Todo.getList({type: ["dev","design"]})` has already been 
+retrieved, there's no need to make a request for 
+`Todo.getList({type: ["dev"]})`.
+
 
 ## Testing APIs
 
