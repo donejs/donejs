@@ -86,6 +86,27 @@ body:not(.donejs):not(.community) {
 			}
 			.description,
 			.comment {
+				a[href*='//']:not([href*='donejs.com']) {
+					position: relative;
+					padding-right: 20px;
+					&:after {
+						content:'';
+						background-image: url(/static/img/icon-open-in-new.svg);
+						background-size: 12px 12px;
+						background-repeat: no-repeat;
+						width: 12px;
+						height: 12px;
+						position: absolute;
+						right: 4px;
+						top: 50%;
+						transform: translateY(-50%);
+					}
+				}
+				.popover {
+					a:after {
+						display: none;
+					}
+				}
 				@media(min-width: @screen-sm){
 					margin-left: 0px
 				}
