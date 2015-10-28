@@ -667,6 +667,12 @@ body:not(.donejs):not(.community) {
 }
 .matrix-wrapper {
 	position: static;
+	.asterisk::after {
+		font-size: 1.6em;
+		content: '*';
+		color: @logoColor;
+		font-weight: bold;
+	}
 }
 .matrix-table {
 	background-color: transparent;
@@ -711,6 +717,8 @@ body:not(.donejs):not(.community) {
 	.has-popover {
 		cursor: help;
 		position: relative;
+		margin-top:20px;
+		margin-bottom:20px;
 		img.matrix-rating-icon {
 			margin-top: 0 !important;
 			margin-bottom: 0 !important;
@@ -718,13 +726,9 @@ body:not(.donejs):not(.community) {
 	}
 	.asterisk::after {
 		position:absolute;
-		font-size: 1.6em;
 		left: 0; right: 0; top: -10px; bottom:0;
 		padding-left: 40px;
 		text-align: center;
-		content: '*';
-		color: @logoColor;
-		font-weight: bold;
 	}
 }
 .matrix-legend {
@@ -748,6 +752,16 @@ body:not(.donejs):not(.community) {
 		font-size: 11px;
 		padding:10px 0;
 		margin-bottom: 10px;
+	}
+	.asterisk-legend {
+		position: relative;
+		.asterisk::after {
+			position:absolute;
+			left: 0; right: 0; top: -8px; bottom:0;
+			font-size: 2em;
+			padding-left: 35px;
+			text-align: center;
+		}
 	}
 	ul {
 		list-style: none;
