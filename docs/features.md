@@ -1126,7 +1126,7 @@ You just run the generator, load your modules, write your test, and run it - fro
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with test infrastructure,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/s4faD0fox_s?start=261" frameborder="0" allowfullscreen></iframe>'>mud ridin'.</a></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Land_Rover_Series_III_mud_bogging.jpg">
+    <img src="/static/img/funny-muddin.png">
 </blockquote>
 
 ##### More information
@@ -1196,7 +1196,7 @@ You can keep it simple like the example above, or you can customize your docs wi
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with Documentation generators,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/-7WaLCWaTo8" frameborder="0" allowfullscreen></iframe>'>perfecting your moonwalk.</a></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Michael_jackson_(el_rey_o_dios).jpg">
+    <img src="/static/img/funny-moonwalk.png">
 </blockquote>
 
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
@@ -1772,7 +1772,7 @@ donejs develop
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time waiting for refreshes and builds,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/LbVZs80WMWI" frameborder="0" allowfullscreen></iframe>'>doing trust falls with giant yellow M&Ms.</a></div>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/10/M%26m_joy.jpg">
+    <img src="/static/img/funny-mandm.png">
 </blockquote>
 
 <a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
@@ -1879,7 +1879,7 @@ This will create:
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time setting up your app,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/xiE5AQHKj_Y?start=26" frameborder="0" allowfullscreen></iframe>'>searching for carrots.</a></div>
-    <img src="http://3stylelife.com/wp-content/uploads/2015/06/carrots.jpg">
+    <img src="/static/img/funny-carrots.png">
 </blockquote>
 
 <a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
