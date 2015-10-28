@@ -20,10 +20,10 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 ## Setup
 
-In this section, we will install DoneJS and generate a new application. 
+In this section, we will install DoneJS and generate a new application.
 
 Before getting started, check out the [SettingUp] guide to make sure you have all of the prerequisites. DoneJS
-officially supports [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs, and 
+officially supports [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs, and
 [npm](https://www.npmjs.com/) 2.x.  If you find errors, check your version with `node -v` and `npm -v`.
 
 ### Install
@@ -349,7 +349,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
   {{#each ./value}}
     <div class="list-group-item">
       <h4 class="list-group-item-heading">{{name}}</h4>
-      <p class="list-group-item-text">{{message}}</p>
+      <p class="list-group-item-text">{{body}}</p>
     </div>
   {{else}}
     <div class="list-group-item">
@@ -373,7 +373,7 @@ Now let's add the form to create new messages. The form two-way binds the `name`
   {{#each ./value}}
     <div class="list-group-item">
       <h4 class="list-group-item-heading">{{name}}</h4>
-      <p class="list-group-item-text">{{message}}</p>
+      <p class="list-group-item-text">{{body}}</p>
     </div>
   {{else}}
     <div class="list-group-item">
@@ -389,7 +389,7 @@ Now let's add the form to create new messages. The form two-way binds the `name`
   </div>
   <div class="col-sm-6">
     <input type="text" class="form-control" placeholder="Your message"
-           {($value)}="message"/>
+           {($value)}="body"/>
   </div>
   <div class="col-sm-3">
     <input type="submit" class="btn btn-primary btn-block" value="Send"/>
@@ -413,8 +413,8 @@ export const ViewModel = Map.extend({
 
     new Message({
       name: this.attr('name'),
-      message: this.attr('message')
-    }).save().then(msg => this.attr('message', ''));
+      body: this.attr('body')
+    }).save().then(msg => this.attr('body', ''));
   }
 });
 
@@ -581,7 +581,7 @@ In the last part of this guide we will make mobile and desktop builds of our cha
 
 ### Cordova
 
-To build the application as a Cordova based mobile application, you need to have each platform's SDK installed. 
+To build the application as a Cordova based mobile application, you need to have each platform's SDK installed.
 We'll be building an iOS app if you are a Mac user; an Andriod app if you're a Windows user.
 
 Mac users should download XCode from the AppStore and install the `ios-sim` package globally with:
