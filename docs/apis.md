@@ -50,11 +50,11 @@ the chat application as an example in development.  We'll cover what happens whe
    }));
    ```
 
-2. [can-ssr] uses [steal] to load the application's main module which results in loading the
+2. [can-ssr](#section=section_can_ssr) uses [steal](section=section_steal) to load the application's main module which results in loading the
    entire application. Loading the application only happens once for all page requests.
 
    A DoneJS's main module is specified where all configuration of a DoneJS application happens, its `package.json`.
-   The main module is usually a [can.stache] template processed with the [done-autorender]
+   The main module is usually a [can.stache](section=section_can_stache) template processed with the [done-autorender](section=section_done_autorender)
    plugin. The module name is specified like: `index.stache!done-autorender`. `index.stache` might look like:
 
    ```
@@ -79,22 +79,22 @@ the chat application as an example in development.  We'll cover what happens whe
    </html>
    ```
 
-   The [done-autorender] plugin, in NodeJS, exports this template so it can be rendered. It also exports
+   The [done-autorender](section=section_done_autorender) plugin, in NodeJS, exports this template so it can be rendered. It also exports
    any modules it imports with `<can-import>` that are labeled with `export-as="EXPORT_NAME"`. Exporting
-   the [viewModel]\(can-ssr/can-map) is important for [can-ssr]
+   the [viewModel](#section=section_can_ssr_app_map) is important for [can-ssr](#section=section_can_ssr)
 
-3. Once [can-ssr] has the [done-autorender]'s `template` and `viewModel` export it:
+3. Once [can-ssr] has the [done-autorender](#section=section_done_autorender)'s `template` and `viewModel` export it:
 
-   1. Creates a new instance of the [viewModel]\(can-ssr/can-map), setting properties on it
-   using [can.route]'s routing rules.  
-   2. Creates a new [virtual dom]\(can-simple-dom) instance.
-   3. Renders the [template]\(can.stache) with the `viewModel` into the `virtual dom` instance.
+   1. Creates a new instance of the [viewModel](#section=section_can_ssr_app_map), setting properties on it
+   using [can.route](#section=section_can_route)'s routing rules.  
+   2. Creates a new [virtual dom](#section=section_can_simple_dom) instance.
+   3. Renders the [template](#section=section_can_stache) with the `viewModel` into the `virtual dom` instance.
 
-4. [done-autorender] templates waits for all promises registered with [.waitsFor] and [.pageData] to complete
-   before providing a final result.  Once the template is finished rendering, [can-ssr] converts it to a
+4. [done-autorender](#section=section_done_autorender) templates waits for all promises registered with [.waitFor](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.waitFor.html) and [.pageData](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.pageData.html) to complete
+   before providing a final result.  Once the template is finished rendering, [can-ssr](#section=section_can_ssr) converts it to a
    string and sends it back to the browser.
 
-5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal].  
+5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal](#section=section_steal).  
 
    <script src="node_modules/steal/steal.js" main="index.stache!done-autorender"></script>
 
@@ -103,17 +103,16 @@ the chat application as an example in development.  We'll cover what happens whe
 
 6. In the browser, `done-autorender`:
 
-   1. Creates a new instance of the [viewModel]\(can-ssr/can-map), setting properties on it
-   using [can.route]'s routing rules.  
-   2. Renders the [template]\(can.stache) with the `viewModel` into a document fragment.
-   3. Once all promises registered with [.waitsFor] and [.pageData] have resolved, it replaces
-      the document with the rendered result.
+   1. Creates a new instance of the [viewModel](#section=section_can_ssr_app_map), setting properties on it
+   using [can.route](#section=section_can_route)'s routing rules.  
+   2. Renders the [template](#section=section_can_stache) with the `viewModel` into a document fragment.
+   3. Once all promises registered with [.waitFor](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.waitFor.html) and [.pageData](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.pageData.html) have resolved, it replaces the document with the rendered result.
 
 
 
 ### Pushstate change
 
-1. A pushstate is triggered by user action, usually by clicking a link. Routes determine how the application will react to the change.
+1. A pushstate is triggered by user action, usually by clicking a link. [can.route](#section=section_can_route)'s routing rules determines the properties set on the application [viewModel](#section=section_can_ssr_app_map).
 
    ```
    can.route(':page', { page: 'home' });
@@ -155,7 +154,7 @@ the chat application as an example in development.  We'll cover what happens whe
    </html>
    ```
 
-3. [can-import] will progressively load the component for the new page with a [Promise] as it's view model. When the promise resolves the [can.Component] will be inserted.
+3. [can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) will progressively load the component for the new page with a [Promise] as it's view model. When the promise resolves the [can.Component](#section=section_can_Component) will be inserted.
 
 
 
@@ -929,33 +928,148 @@ can.stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
 
 ### can.Component
 
-### can.route
+[can.Component](http://canjs.com/docs/can.Component.html) lets you 
+create widgets with well-defined View Models and are instantiated with
+custom elements.
 
-[can.route](http://canjs.com/docs/can.route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](http://canjs.com/docs/can.route.pushstate.html). Routes are defined and then bound to your application's View Model:
+Define a `can.Component` by extending one with a `tag` name, [can.Map](#section=section_can_Map) `viewModel` and 
+[can.stache template](#section=section_can_stache) like:
 
 ```
-// Specifies 'home' as the default page
-can.route(":page", { page: 'home' }); 
+// Define the view model
+var HelloViewModel = can.Map.extend({
+  excitedMessage: function(){
+    return this.attr("message")+"!"
+  }
+});
 
+can.Component.extend({
+  tag: "hello-world",
+  viewModel: HelloViewModel,
+  template: can.stache("<h1>{{excitedMessage}}</h1>")
+});
+```
+
+To instantiate this component so it says `Hello World!`, add
+a `<hello-world>` element to the page like:
+
+```
+<hello-world message="Hello World"/>
+```
+
+Use [can.view.bindings](#section=section_can_view_bindings)
+to send a value from the `can.stache` scope like:
+
+```
+// a `can.Map` that will be available in the scope
+var appViewModel = new can.Map({
+  greeting: "Howdy Planet"
+});
+
+var template = can.stache('<hello-world {message}="greeting"/>');
+
+var frag = template(appViewModel);
+
+frag //-> <hello-world {message}="greeting">
+     //      <h1>Howdy Planet!</h1>
+     //   </hello-world>
+```
+
+`can.Component`s are usually built as [modlets](/Features.html#section_Modlets),
+meaning their template and styles are another file and imported:
+
+```
+// hello-world.js
+import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import './hello-world.less!';
+import template from './hello-world.stache!';
+
+export const ViewModel = Map.extend({
+  excitedMessage: function(){
+    return this.attr("message")+"!"
+  } 
+});
+
+export default Component.extend({
+  tag: "hello-world",
+  viewModel: ViewModel,
+  template
+});
+```
+
+Some components are so small, they they don't require three
+seperate files. For these, you can use a `.component` file:
+
+```
+<!-- hello-world.component -->
+<can-component tag="<%= tag %>">
+  <style type="less">
+    display: block;
+  </style>
+  <template>
+    <h1>{{excitedMessage}}</h1>
+  </template>
+  <view-model>
+    import Map from 'can/map/';
+    import 'can/map/define/';
+
+    export default Map.extend({
+      excitedMessage: function(){
+        return this.attr("message")+"!"
+      }
+    });
+  </view-model>
+</can-component>
+```
+
+### can.route
+
+[can.route](http://canjs.com/docs/can.route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](http://canjs.com/docs/can.route.pushstate.html). 
+
+Configure routing rules to define property values on your application's 
+View Model when a url is matched.
+
+
+The following sets the application ViewModel's `page` property
+to `"chat"` when the url looks like `/chat`:
+
+```
+can.route(":page");
+```
+
+You can define defaults that get set when `:page` is empty. The
+following sets the default `page` property to `"home"`.
+
+```
+can.route(":page", { page: "home" }); 
+```
+
+You can specify multiple properties to set for a given url: 
+
+```
 can.route(":page/:slug");
 can.route(":page/:slug/:action");
 ```
 
-You can update the url by changing can.route:
+
+Update the url by changing `can.route`:
 
 ```
 can.route.attr("page", "restaurants");
 // location.href -> "/restaurants"
 ```
 
-Or change can.route by modifying the url:
+Or change `can.route` by modifying the url:
 
 ```
 history.pushState(null, null, "/");
 // can.route.attr("page"); // -> "home"
 ```
 
-In a DoneJS application can.route is bound to the [application View Model](#section=section_can_ssr_app_map), but you can also do this manually:
+In a DoneJS application can.route is bound to the [application View Model](#section=section_can_ssr_app_map), but you can connect `can.route` to other
+maps:
 
 ```
 var Map = require("can/map/");
