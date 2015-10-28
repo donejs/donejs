@@ -1865,4 +1865,4 @@ This will create:
 <a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html#section=section_Generatetheapplication"><span>View the Guide</span></a>
 
-_Generators are provided by the [Generator DoneJS](https://github.com/donejs/generator-donejs) project with additional support via the [donejs](https://github.com/donejs/donejs) CLI_
+_Generators are provided by the [Generator DoneJS](https://github.com/donejs/generator-donejs) project with additional support via the [donejs-cli](https://github.com/donejs/cli) project_
