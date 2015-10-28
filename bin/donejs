@@ -27,10 +27,21 @@ utils.projectRoot().then(function(root) {
       var promise = utils.mkdirp(folder).then(function(fullPath) {
         var options = { cwd: fullPath };
 
+        console.log('Initializing new DoneJS application at', fullPath);
+        console.log('Installing donejs-cli');
+
         return utils.spawn('npm', [ 'install', 'donejs-cli' ], options)
           .then(function() {
-            var init = path.join('node_modules', '.bin', 'donejs');
-            return utils.spawn(init, ['init'], options);
+            var args = [ 'node_modules', '.bin', 'donejs' ];
+            var binary = path.join.apply(path, [fullPath].concat(args));
+
+            if(!fs.existsSync(binary)) {
+              // If donejs-cli wasn't installed in this folder, it is the root
+              binary = path.join.apply(path, [root].concat(args));
+            }
+            console.log(root, fullPath, binary, fs.existsSync(binary));
+
+            return utils.spawn('node', [binary, 'init'], options);
           });
       });
 
