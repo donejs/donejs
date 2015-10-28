@@ -334,20 +334,6 @@ Solving a story means a packaged solution to a development problem, where severa
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#section=section_Modlets">Modlets</a></div>
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
-            </td>
-            <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
-            </td>
-          </tr>
-          <tr>
-            <td class="features">
               <div class="feature-description"><a href="#section=section_NPMPackages">NPM Packages - Imports & Exports</a></div>
             </td>
             <td>

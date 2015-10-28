@@ -14,7 +14,7 @@ But times change and new techniques emerge. We strive to adopt these
 techniques, improve the stack, and provide a simple upgrade path along the way. 
 
 We are part of a community that helps developers of all skill levels and 
-backgrounds learn the technology, excell at it, and accomplish their
+backgrounds learn the technology, excel at it, and accomplish their
 goals.
 
 Learn about the goals, history, roadmap, and team behind DoneJS.
@@ -55,7 +55,7 @@ DoneJS has good solutions for:
  - [Fast download times](##section=section_ProgressiveLoading)
 
 These are just a few examples from our [features page](/Features.html). If
-there's a hard problem that you keep finding, we want to solve it.
+there's a hard problem that you keep running into, we want to solve it.
 
 #### 2. Provide an integrated solution
 
@@ -74,7 +74,7 @@ Writing tests and documentation, setting up continuous integration and deploymen
 isn't fun or easy.  DoneJS tries to lower the barrier enough to 
 making doing the `right thing` simply part of the normal dev cycle.
 
-Checkout what DoneJS does for:
+Check out what DoneJS does for:
 
 - [Tests](#section=section_ComprehensiveTesting)
 - [Documentation](#section=section_Documentation)
