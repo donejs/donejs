@@ -337,6 +337,33 @@ body.community {
     }
     .col.donejs {
       text-align: right;
+      img {
+        z-index: 1;
+      }
+    }
+    .col.donejs .svg-links a {
+      z-index:10;
+      opacity: 0;
+      display: block;
+      position: absolute;
+      &#ssr {
+        right: 360px;
+        top: 188px;
+        width: 205px;
+        height: 60px;
+      }
+      &#progressiveLoading {
+        right: 360px;
+        top: 340px;
+        width: 215px;
+        height: 76px;
+      }
+      &#cdn {
+        right: 360px;
+        top: 416px;
+        width: 195px;
+        height: 76px;
+      }
     }
     .col.naive {
       text-align: left;
