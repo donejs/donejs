@@ -6,6 +6,7 @@ steal("./content_list.js",
     "./js/tooltip.js",
     "./js/popover.js",
     "./js/responsive-tables.js",
+    "./js/lazy-youtube.js",
     "./js/affix.js",
     "./styles/styles.less!",
     "./prettify", function(ContentList, FrameHelper, Versions){
@@ -92,6 +93,10 @@ steal("./content_list.js",
                 $(this).parent('div').removeClass('playing');
             };
             $('body.donejs video, div.video video').hover( enterEv, leaveEv ).focusin( enterEv ).focusout( leaveEv );
+        })();
+
+        (function () {
+            $('.youtube-player').lazyYoutube();
         })();
 
         $( ".usability-dl-options" ).hover(
@@ -498,17 +503,22 @@ steal("./content_list.js",
         });
 
         $(function () {
-          $('[data-toggle="popover"]').popover();
+          $('[data-toggle="popover"]').popover()
+            .on('shown.bs.popover', function(ev){
+                var popoverId = $(this).attr('aria-describedby');
+                $('#' + popoverId).find('.youtube-player').lazyYoutube();
+            });
         });
 
+        // Only show one popover at a time
         $('body').on('click', function (e) {
-          $('[data-toggle="popover"]').each(function () {
-              //the 'is' for buttons that trigger popups
-              //the 'has' for icons within a button that triggers a popup
-              if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                  $(this).popover('hide');
-              }
-          });
+            $('[data-toggle="popover"]').each(function () {
+                //the 'is' for buttons that trigger popups
+                //the 'has' for icons within a button that triggers a popup
+                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+                    $(this).popover('hide');
+                }
+            })
         });
 
         $(function () {
