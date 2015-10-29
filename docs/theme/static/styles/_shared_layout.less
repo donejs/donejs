@@ -725,6 +725,7 @@ body:not(.donejs):not(.community) {
 	}
 	td {
 		background-color: #FCFEFD;
+		padding: 0 6px;
 	}
 	tr:last-child td {
 		border-bottom: 0;
@@ -739,6 +740,8 @@ body:not(.donejs):not(.community) {
 	.matrix-rating-icon {
 		width: 20px;
 		height: 20px;
+		margin-top: 10px !important;
+		margin-bottom: 10px !important;
 	}
 	.arrow:before {
 		display: none; // removes bootstrap triangle
@@ -750,8 +753,8 @@ body:not(.donejs):not(.community) {
 	.has-popover {
 		cursor: help;
 		position: relative;
-		margin-top:20px;
-		margin-bottom:20px;
+		margin-top:10px;
+		margin-bottom:10px;
 		img.matrix-rating-icon {
 			margin-top: 0 !important;
 			margin-bottom: 0 !important;
@@ -870,10 +873,10 @@ body:not(.donejs):not(.community) {
 	}
 	th,
 	td {
-    height: 70px;
+    height: 62px;
 	}
 	.feature-description {
-		height: 60px;
+		max-height: 60px;
 		max-width: 100%;
 		overflow-y: auto;
 		overflow-x: hidden;
