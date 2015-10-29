@@ -512,13 +512,31 @@ steal("./content_list.js",
 
         // Only show one popover at a time
         $('body').on('click', function (e) {
-            $('[data-toggle="popover"]').each(function () {
-                //the 'is' for buttons that trigger popups
-                //the 'has' for icons within a button that triggers a popup
-                if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-                    $(this).popover('hide');
-                }
-            })
+          $('[data-toggle="popover"][aria-describedby]').each(function () {
+            var $trigger = $(this);
+            var $target = $(e.target);
+            var popoverId = $trigger.attr('aria-describedby');
+            var $popover = $('#' + popoverId);
+
+            var isTrigger = $target.is($trigger);
+            var isWithinTrigger = $target.parents('[aria-describedby="' + popoverId + '"]').length !== 0;
+            var isWithinPopup = $target.parents('#' + popoverId).length !== 0;
+
+            // Hide a popover if the click is outside of the current popover
+            // Where outside means the click:
+            // - is not on the trigger
+            // - is not on an element inside the trigger (for complex triggers)
+            // - is not on an element inside the open popover
+            if(!(isTrigger || isWithinTrigger || isWithinPopup)) {
+                // There is a bug in Bootstrap where calling `hide` does not
+                // reset the inState object so the next click on a trigger does
+                // not show a popup. https://github.com/twbs/bootstrap/issues/16732
+                // So we dig into the popover instance and do that ourselves
+                $trigger.one('hidden.bs.popover', function(){
+                    $(this).data('bs.popover').inState.click = false;
+                }).popover('hide');
+            }
+          });
         });
 
         $(function () {
