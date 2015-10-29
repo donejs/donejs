@@ -17,13 +17,19 @@ body.community {
 		max-width: 900px;
 		margin:0 auto;
 	}
+	.community-quick-links {
+		@media(max-width: @screen-xs-max){
+			padding-left:0 !important;
+			padding-right:0 !important;
+		}
+	}
 	.quick-link-list {
 		margin:0 0 45px 0;
 		padding:0;
 		li {
 			display: inline-block;
 			width:auto;
-			margin-right: 50px;
+			margin-right: 35px;
 			text-align: center;
 			@media(max-width: @screen-xs-max){
 				margin-right: 10px;
