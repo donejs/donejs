@@ -533,7 +533,7 @@ There is no configuration needed to enable this feature, and wiring up progressi
 
 #### How it works
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/C-kM0v9L9UY" frameborder="0" allowfullscreen></iframe>
+<div class="youtube-container"><div class="youtube-player" data-videoid="C-kM0v9L9UY"></div></div>
 
 Other build tools require you to manually configure bundles, which doesn't scale with large applications.
 
@@ -802,9 +802,10 @@ At this time, no other framework besides DoneJS, including Angular or React, sup
 
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/vrgMUi8-7r4?start=28" frameborder="0" allowfullscreen></iframe>'>working on epic pool dunk videos.</a></div>
-    <img src="/static/img/funny-dunk.png">
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="vrgMUi8-7r4" data-params="start=28"></div></div>'>working on epic pool dunk videos.</a></div>
+    <img class="fun-img" src="/static/img/funny-dunk.png">
 </blockquote>
+
 
 <a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
 
@@ -929,7 +930,7 @@ DoneJS makes weaving Socket.io backends into your UI simple and automatic.
 
 #### How it works
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/w4mp4oSb6BQ" frameborder="0" allowfullscreen></iframe>
+<div class="youtube-container"><div class="youtube-player" data-videoid="w4mp4oSb6BQ"></div></div>
 
 DoneJS' model layer uses set logic to maintain lists of data represented by JSON properties, like a list of todos with `{'ownerId': 2}`. These lists are rendered to the UI via data bound templates.
 
@@ -964,7 +965,7 @@ Wiring up these pretty URLs in your code is simple and intuitive.
 
 #### How it works
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/aHA504Vx0eU" frameborder="0" allowfullscreen></iframe>
+<div class="youtube-container"><div class="youtube-player" data-videoid="aHA504Vx0eU"></div></div>
 
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
@@ -1125,8 +1126,8 @@ You just run the generator, load your modules, write your test, and run it - fro
 
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with test infrastructure,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/s4faD0fox_s?start=261" frameborder="0" allowfullscreen></iframe>'>mud ridin'.</a></div>
-    <img src="/static/img/funny-muddin.png">
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="s4faD0fox_s" data-params="start=261"></div></div>'>mud ridin'.</a></div>
+    <img class="fun-img" src="/static/img/funny-muddin.png">
 </blockquote>
 
 ##### More information
@@ -1195,8 +1196,8 @@ You can keep it simple like the example above, or you can customize your docs wi
 
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with Documentation generators,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/-7WaLCWaTo8" frameborder="0" allowfullscreen></iframe>'>perfecting your moonwalk.</a></div>
-    <img src="/static/img/funny-moonwalk.png">
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="7WaLCWaTo8"></div></div>'>perfecting your moonwalk.</a></div>
+    <img class="fun-img" src="/static/img/funny-moonwalk.png">
 </blockquote>
 
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
@@ -1317,7 +1318,7 @@ The goal of these features is to transform project workflows, making it easier t
 
 DoneJS apps use [StealJS](http://stealjs.com/) to load modules and install packages. This video introduces NPM import and export in StealJS:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/eIfUsPdKF4A" frameborder="0" allowfullscreen></iframe>
+<div class="youtube-container"><div class="youtube-player" data-videoid="eIfUsPdKF4A"></div></div>
 
 ##### Zero config package installation
 
@@ -1615,7 +1616,7 @@ The introduction of a strong ViewModel has some key advantages for maintaining l
 
 The following video introduces MVVM in DoneJS, focusing on the strength of the ViewModel with an example.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kCM03jujKy4" frameborder="0" allowfullscreen></iframe>
+<div class="youtube-container"><div class="youtube-player" data-videoid="kCM03jujKy4"></div></div>
 
 DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works and compare it to other frameworks.
 
@@ -1771,8 +1772,8 @@ donejs develop
 
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time waiting for refreshes and builds,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/LbVZs80WMWI" frameborder="0" allowfullscreen></iframe>'>doing trust falls with giant yellow M&Ms.</a></div>
-    <img src="/static/img/funny-mandm.png">
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="LbVZs80WMWI"></div></div>'>doing trust falls with giant yellow M&Ms.</a></div>
+    <img class="fun-img" src="/static/img/funny-mandm.png">
 </blockquote>
 
 <a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
@@ -1878,8 +1879,8 @@ This will create:
 
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time setting up your app,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<iframe width="560" height="315" src="https://www.youtube.com/embed/xiE5AQHKj_Y?start=26" frameborder="0" allowfullscreen></iframe>'>searching for carrots.</a></div>
-    <img src="/static/img/funny-carrots.png">
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="xiE5AQHKj_Y" data-params="start=26"></div></div>'>searching for carrots.</a></div>
+    <img class="fun-img" src="/static/img/funny-carrots.png">
 </blockquote>
 
 <a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
