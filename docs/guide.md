@@ -141,7 +141,7 @@ Feel free to edit the HTML or `src/styles.less` to see how hot module swapping u
 
 ## Routing and components
 
-In this part we will create our own custom HTML elements. One for the homepage and another to display the chat messages. Then we will create routes to navigate between those two pages.
+In this part we will create our own custom HTML elements - one for the homepage and another to display the chat messages. Then we will create routes to navigate between these two pages.
 
 ### Generate custom elements
 
@@ -233,7 +233,7 @@ export default AppViewModel;
 
 ### Switch between pages
 
-Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `chat/messages/` components and showing each import based on the `page` property.
+Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `messages/` components and showing each import based on the `page` property.
 
 Update `src/index.stache` to:
 
