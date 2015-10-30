@@ -206,8 +206,9 @@ Next, add a link to go back to the chat page by updating `src/messages/messages.
 
 ```html
 <h5><a href="{{routeUrl page='home'}}">Home</a></h5>
-<p>{{message}}</p>
+    <p>{{message}}</p>
 ```
+@highlight 1-5,6
 
 Then, add a routing rule for the `page` property in `src/app.js`:
 
