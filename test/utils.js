@@ -17,6 +17,13 @@ describe('DoneJS CLI tests', function() {
       });
     });
 
+    it('spawns successfully', function(done) {
+      utils.spawn('npm', ['run', 'verify'], {}).then(function(child) {
+        assert.equal(child.exitCode, 0);
+        done();
+      });
+    });
+
     describe('project root', function() {
       it('get project root when it is current folder', function(done) {
           var pathFromTest = process.cwd();
