@@ -16,8 +16,8 @@ utils.projectRoot().then(function(root) {
       console.error('Could not find local DoneJS binary (' + donejsBinary + ')');
       return;
     }
-    args.unshift(donejsBinary);
-    return utils.spawn('node', args, { cwd: root });
+    
+    return utils.spawn(donejsBinary, args, { cwd: root });
   };
 
   // donejs init
