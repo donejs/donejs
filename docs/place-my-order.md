@@ -1858,7 +1858,7 @@ Unlike your web app which runs from a server, Cordova (and NW.js) apps need a ht
 Now we can build a Cordova app with:
 
 ```shell
-node build cordova
+donejs build cordova
 ```
 
 Which will launch the iOS emulator after a successful build. emulator.
@@ -1958,7 +1958,7 @@ And finally update package.json. There are two things we need to change:
 Now we can build to NW.js with
 
 ```
-node build nw
+donejs build nw
 ```
 
 Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
@@ -2058,7 +2058,7 @@ Next, update your package.json to set the baseURL that will be used in productio
 **Note**: Your baseURL will be something different, it will include the **name** you gave to your app in the previous section. Now your assets will live on a CDN. Make one last build and deploy your code, which is finally ready to run on Divshot:
 
 ```
-node build
+donejs build
 donejs deploy
 ```
 
