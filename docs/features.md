@@ -948,10 +948,10 @@ socket.on('messages removed',
   order => messageConnection.destroyInstance(order));
 ```
 
-[Follow the guide](./Guide.html#section=section_Real_timeconnection) to see an example in action. View the can-connect real-time documentation [here](http://connect.canjs.com/doc/can-connect%7Creal-time.html).
+[Follow the guide](./Guide.html#section=section_Enableareal_timeconnection) to see an example in action. View the can-connect real-time documentation [here](http://connect.canjs.com/doc/can-connect%7Creal-time.html).
 
 <a class="btn" href="http://connect.canjs.com/doc/can-connect%7Creal-time.html"><span>View the Documentation</span></a>
-<a class="btn" href="/Guide.html#section=section_Real_timeconnection"><span>View the Guide</span></a>
+<a class="btn" href="/Guide.html#section=section_Enableareal_timeconnection"><span>View the Guide</span></a>
 
 _Real time connections is a feature of the [can-connect](http://connect.canjs.com) project._
 
