@@ -1034,7 +1034,7 @@ The DoneJS app generator command `donejs init` creates a working project-level t
 
 ##### Unit tests
 
-Unit tests are used to test the interface for modules like models and view models. You can choose between BDD style unit tests with Jasmine or Mocha, or more functional unit tests with QUnit.
+Unit tests are used to test the interface for modules like models and view models. You can choose between BDD style unit tests with Jasmine or Mocha, or a more traditional TDD assertion style with QUnit.
 
 ##### Functional tests
 
