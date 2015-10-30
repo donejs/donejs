@@ -1,13 +1,39 @@
 var $ = require('jquery');
-module.exports = function(){
+
+var getLines = function (lineString) {
+	var lineArray = lineString.split(',');
+	var result = {};
+
+	for (var i = 0; i < lineArray.length; i++) {
+		var val = lineArray[i];
+		if(/-/.test(val)) {
+			var values = val.split('-'),
+				start = (values[0] - 1),
+				finish = (values[1] - 1);
+
+			for (var j = start; finish >= j; j++) {
+				result[j] = true;
+			}
+
+		} else {
+			result[val - 1] = true;
+		}
+
+	}
+
+	return result;
+};
+
+module.exports = function() {
 	$('span[line-highlight]').each(function(i, el){
 
 		var $el = $(el);
-		var lines = $el.attr('line-highlight');
+		var lines = getLines($el.attr('line-highlight'));
 		var codeBlock = $el.parent().prev('pre').children('code');
+
+
 		var lineMap = { 0: [] };
 		var k = 0;
-
 
 		codeBlock.children().each(function(i, el){
 			var nodeText = $(el).text();
@@ -15,20 +41,34 @@ module.exports = function(){
 			if (/\n/.test(nodeText)) {
 				var cNames = $(el).attr('class');
 				var str = nodeText.split('\n');
+				var l = str.length
 
-				for (var j = 0; j < str.length; j++) {
-					var text = j === (str.length - 1) ? str[j] : str[j] + '\n';
+				for (var j = 0; j < l; j++) {
+					var text = j === (l - 1) ? str[j] : str[j] + '\n';
 					var newNode = document.createElement('span');
 					newNode.className = cNames;
 					$(newNode).text(text);
 					lineMap[k].push(newNode);
-					k++;
+					
+					if(j !== (l - 1)) {
+						k++;
+						lineMap[k] = [];
+					}
 				}
 			} else {
 				lineMap[k].push(el);
 			}
 		});
 
-		console.log(lineMap);
-	})
+		codeBlock.empty();
+
+		for (var key in lineMap) {
+		   if (lineMap.hasOwnProperty(key)) {
+			   	var newNode = document.createElement('span');
+					newNode.className = lines[key] ? 'line highlight': 'line' ;
+					$(newNode).append(lineMap[key]);
+					codeBlock.append(newNode);
+		   }
+		 }
+	});
 }
