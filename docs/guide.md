@@ -575,11 +575,13 @@ All DoneJS projects are extremely modular, which is why in development mode, you
 
 ## Deploy
 
-Now that we verified that our application works in production, we can deploy it to the web. For this guide we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, among other things.
+Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN.
 
 ### Set up Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). After you haven an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. You'll get an error if your app name is too long so pick something shorter when that happens. Write down the name of your app because you'll need it in the next section.
+Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
+
+*Note: You'll get an error if your app name is too long, so pick something on the shorter side.*
 
 When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
@@ -634,7 +636,11 @@ donejs build
 donejs deploy
 ```
 
-And verify that the application is loading from the CDN by loading it after running
+Static files are deployed to Firebase.
+
+<img src="static/img/donejs-firebase.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+And verify that the application is loading from the CDN by loading it after running:
 
 ```
 NODE_ENV=production donejs start
@@ -644,7 +650,7 @@ NODE_ENV=production donejs start
 
 We should now see our assets being loaded from the Firebase CDN.
 
-IMAGE
+<img src="static/img/donejs-deploy.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## Desktop and mobile apps
 
@@ -653,7 +659,7 @@ In the last part of this guide we will make mobile and desktop builds of our cha
 ### Cordova
 
 To build the application as a Cordova based mobile application, you need to have each platform's SDK installed.
-We'll be building an iOS app if you are a Mac user; an Andriod app if you're a Windows user.
+We'll be building an iOS app if you are a Mac user, and an Android app if you're a Windows user.
 
 Mac users should download XCode from the AppStore and install the `ios-sim` package globally with:
 
@@ -661,9 +667,9 @@ Mac users should download XCode from the AppStore and install the `ios-sim` pack
 npm install -g ios-sim
 ```
 
-We will use them to create an iOS application that can be tested in the iOS simulator.
+We will use these tools to create an iOS application that can be tested in the iOS simulator.
 
-Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html) which gives all of the tools we need.
+Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html), which gives all of the tools we need.
 
 Now we can install the DoneJS Cordova tools with:
 
@@ -671,15 +677,17 @@ Now we can install the DoneJS Cordova tools with:
 donejs add cordova
 ```
 
-Depending on your operating system you can accept most of the defaults unless you would like to build for Android which needs to be selected from the checkbox list of platforms.
+Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
 
-To run the Cordova build and launch the simulator we can now run
+To run the Cordova build and launch the simulator we can now run:
 
 ```
 donejs build cordova
 ```
 
-If everything went well we should see the emulator running our application. When using Windows you'll get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then redo the build; this will only happen the first time you build for Cordova.
+If everything went well, we should see the emulator running our application. 
+
+Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.
 
 ### NW.js
 
@@ -710,11 +718,15 @@ The Windows application can be opened with
 
 ## What's next?
 
-In this guide we created a small chat application that connects to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We built an optimized bundle for production and deployed it to a static file host and CDN. Last we made builds of the application as a mobile and desktop application.
+In this guide we have created a small chat application that connects to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We built an optimized bundle for production and deployed it to a static file host and CDN. Last, we made builds of the application as a mobile and desktop application.
 
 If you want to learn more about DoneJS - like how to create more complex custom elements and routes, write and automatically run tests, Continuous Integration and Continuous Deployment - head over to the [place-my-order Guide](./place-my-order.html).
 
-### IE8 Support
+## IE8 Support
+
+This section is optional. Follow it only if you're interested in making applications that are compatible with IE8.
+
+### Support CORS
 
 Since our application uses cross domain requests we need to make a couple of changes to make it work in IE8 which doesn't support CORS. The first is to create a [jQuery prefilter](http://api.jquery.com/jquery.ajaxprefilter/) so all HTTP requests are marked as being cross domain. Create `src/prefilter.js`:
 
@@ -773,6 +785,8 @@ socket.on('messages removed',
 export default Message;
 ```
 
+### Install jQuery 1.x
+
 DoneJS comes with jQuery 2.x by default, but if you need to support IE8 the 1.x branch is necessary. You can switch by installing the right version:
 
 ```
@@ -794,8 +808,10 @@ var buildPromise = stealTools.build({
 ...
 ```
 
-And rebuild to have a working IE copy:
+And rebuild:
 
 ```
 donejs build
 ```
+
+The application will now work in IE8.
