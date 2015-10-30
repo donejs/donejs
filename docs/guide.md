@@ -26,7 +26,7 @@ Before getting started, check out the [SettingUp] guide to make sure you have al
 officially supports [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs, and
 [npm](https://www.npmjs.com/) 2.x.  If you find errors, check your version with `node -v` and `npm -v`.
 
-### Install
+### Install DoneJS
 
 To get started, let's install the DoneJS command line utility globally:
 
@@ -36,13 +36,19 @@ npm install -g donejs
 
 ### Generate the application
 
-Then we create a new DoneJS application called `donejs-chat`:
+Then we'll create a new DoneJS application called `donejs-chat`:
 
 ```
 donejs init donejs-chat
 ```
 
-This will create a new folder called `donejs-chat` and in it generate our application. The initialization process will ask questions like the name of your application, the source folder, etc. We should answer these with the default settings by hitting enter. This will install all of DoneJS's dependencies, including the following:
+This will create a new folder called `donejs-chat` and in it generate our application. 
+
+The initialization process will ask questions like the name of your application, the source folder, etc. We'll answer these with the default settings by hitting enter. 
+
+<img src="static/img/donejs-init.png" alt="donejs init" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+This will install all of DoneJS's dependencies, including the following:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
@@ -53,9 +59,11 @@ This will create a new folder called `donejs-chat` and in it generate our applic
 - [Testee](https://github.com/bitovi/testee) - JavaScript Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
-### Development mode
+### Turn on development mode
 
-DoneJS comes with its own development server which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode enables [hot module swapping](Features.html#section=section_HotModuleSwapping) which automatically reloads files in the browser and on the server as they change. To start it let's go into the `donejs-chat` application directory:
+DoneJS comes with its own development server, which hosts your development files and automatically [renders the application on the server](Features.html#section=section_ServerSideRendered). Development mode enables [hot module swapping](Features.html#section=section_HotModuleSwapping), which automatically reloads files in the browser and on the server as they change. 
+
+To start it let's go into the `donejs-chat` application directory:
 
 ```
 cd donejs-chat
@@ -67,15 +75,19 @@ We can start development mode by running:
 donejs develop
 ```
 
-The default port is `8080`. Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage.
+The default port is `8080`. 
+
+Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage.
+
+<img src="static/img/donejs-helloworld.png" alt="hello world" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## Adding Bootstrap
 
 DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [hot module swapping](Features.html#section=section_HotModuleSwapping) in action.
 
-### Installing the NPM package
+### Install the NPM package
 
-Open a new terminal window so we can keep the server from `donejs develop` running. Then, install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
+Open a new terminal window so we can keep the DoneJS development server running. Then, install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
 ```
 npm install bootstrap --save
@@ -83,7 +95,9 @@ npm install bootstrap --save
 
 ### Add it to the page
 
-To see hot module swapping in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. Update `src/index.stache` to look like this:
+To see hot module swapping in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles. 
+
+Update `src/index.stache` to look like this:
 
 ```html
 <html>
@@ -123,7 +137,11 @@ To see hot module swapping in action, let's update the main template to import B
 </html>
 ```
 
-If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save it. Feel free to edit the HTML or `src/styles.less` to see how hot module swapping updates the page automatically.
+If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file. 
+
+
+
+Feel free to edit the HTML or `src/styles.less` to see how hot module swapping updates the page automatically.
 
 ## Routing and components
 
@@ -179,7 +197,7 @@ First, let's update `src/home.component` with the original content from the home
 
 When the "Start chat" button is clicked, `href="{{routeUrl page='chat'}}"` updates the URL in such a way that the application view-model's `page` property gets set to `"chat"`.
 
-Next, add a link to go back to the chat page by updating `messages/messages.stache` to:
+Next, add a link to go back to the chat page by updating `src/messages/messages.stache` to:
 
 ```html
 <h5><a href="{{routeUrl page='home'}}">Home</a></h5>
@@ -273,7 +291,7 @@ Also, everything is [rendered on the server](Features.html#section=section_Serve
 Now that we can navigate between pages, we will finish implementing their functionality, starting with the homepage.
 
 
-### Installing bit-tabs
+### Install bit-tabs
 
 On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
 
@@ -337,7 +355,7 @@ donejs add supermodel message
 
 When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
 
-### Using the connection
+### Use the connection
 
 The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages with the `<message-model>` custom element. Update  `src/messages/messages.stache` to:
 
@@ -361,7 +379,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
-### Creating messages
+### Create messages
 
 Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. Update `src/messages/messages.stache` to look like this:
 
@@ -429,9 +447,9 @@ The `send()` method takes the `name` and `message` properties from the view-mode
 
 You can now enter your name and a message! It will automatically appear in our messages list. In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimized data requests](Features.html#section=section_Cachingandminimaldatarequests).
 
-### Real-time connection
+### Enable a real-time connection
 
-Right now our chat's mesages update automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
+Right now our chat's messages update automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
 
 ```
 npm install steal-socket.io --save
@@ -508,13 +526,13 @@ If we now open [localhost:8080](http://localhost:8080/) again we can see the pro
 
 Now that we verified that our application works in production, we can deploy it to the web. For this guide we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, among other things.
 
-### Setting up Firebase
+### Set up Firebase
 
 Sign up for free at [Firebase](https://www.firebase.com/). After you haven an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. You'll get an error if your app name is too long so pick something shorter when that happens. Write down the name of your app because you'll need it in the next section.
 
 When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
-### Configuring DoneJS
+### Configure DoneJS
 
 Now we can add the Firebase deployment configuration to our `package.json` like this:
 
