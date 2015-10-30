@@ -687,6 +687,8 @@ donejs build cordova
 
 If everything went well, we should see the emulator running our application. 
 
+<img src="static/img/donejs-ios.png" alt="ios build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
 Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.
 
 ### NW.js
@@ -697,7 +699,11 @@ To set up the desktop build, we have to add it to our application like this:
 donejs add nw
 ```
 
-We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`. Then we can run the build like this:
+We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`. 
+
+<img src="static/img/donejs-nw1.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+Then we can run the build like this:
 
 ```
 donejs build nw
@@ -715,6 +721,8 @@ The Windows application can be opened with
 ```
 .\build\donejs-chat\win64\donejs-chat.exe
 ```
+
+<img src="static/img/donejs-nw2.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## What's next?
 
