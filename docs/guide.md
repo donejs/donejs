@@ -230,7 +230,6 @@ route('/:page', { page: 'home' });
 
 export default AppViewModel;
 ```
-@highlight 1,4,7-9
 
 ### Switch between pages
 
