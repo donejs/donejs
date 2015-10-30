@@ -350,6 +350,7 @@ Update `src/home.component` to:
   </template>
 </can-component>
 ```
+@highlight 17-24
 
 You'll notice tabs appear in the browser:
 
