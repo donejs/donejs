@@ -4,11 +4,7 @@
 @outline 2 ol
 @description In this guide, we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 
-
-
 <img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
-
-
 
 In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [hot module swapping](Features.html#section=section_HotModuleSwapping) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
 
@@ -139,7 +135,7 @@ Update `src/index.stache` to look like this:
 
 If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file. 
 
-
+<img src="static/img/donejs-bootstrap.png" alt="donejs init" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Feel free to edit the HTML or `src/styles.less` to see how hot module swapping updates the page automatically.
 
@@ -149,17 +145,26 @@ In this part we will create our own custom HTML elements. One for the homepage a
 
 ### Generate custom elements
 
-The homepage custom element (with the HTML tag name `chat-home`) won't be very big or complex, so we put everything into a single `.component` file. To generate it run:
+We'll use a DoneJS [generator](/Features.html#section=section_Generators) to create custom components. The component generator is run by typing `donejs add component <file-or-folder> <component-name>`.
+
+The homepage custom element (with the HTML tag name `chat-home`) won't be very big or complex, so we'll put everything into a single `.component` file. 
+
+To generate it, run:
 
 ```
 donejs add component home.component chat-home
 ```
 
-The messages component (with the tag `chat-messages`) will be a little more complex, so we generate it using the [modlet file pattern](Features.html#section=section_Modlets).
+The messages component (with the tag `chat-messages`) will be a little more complex, so we'll generate it using the [modlet file pattern](Features.html#section=section_Modlets).
+
+
+Now run:
 
 ```
 donejs add component messages chat-messages
 ```
+
+<img src="static/img/donejs-generator.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Later we will update the generated files with the chat messages functionality.
 
@@ -195,7 +200,7 @@ First, let's update `src/home.component` with the original content from the home
 </can-component>
 ```
 
-When the "Start chat" button is clicked, `href="{{routeUrl page='chat'}}"` updates the URL in such a way that the application view-model's `page` property gets set to `"chat"`.
+[`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` param to `"chat"`. The AppViewModel is shown below.
 
 Next, add a link to go back to the chat page by updating `src/messages/messages.stache` to:
 
@@ -228,8 +233,9 @@ export default AppViewModel;
 
 ### Switch between pages
 
-Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `chat/messages/` components and showing each import based on the `page` property.  Update `src/index.stache` to:
+Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `chat/messages/` components and showing each import based on the `page` property.
 
+Update `src/index.stache` to:
 
 ```html
 <html>
@@ -283,7 +289,11 @@ Finally, we'll glue both components together as separate pages in `src/index.sta
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
-Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the pages content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
+<img src="static/img/donejs-chat1.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the page's content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
+
+<img src="static/img/donejs-viewsource.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 
 ## Homepage
@@ -295,13 +305,17 @@ Now that we can navigate between pages, we will finish implementing their functi
 
 On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-components/bit-tabs), a simple declarative tabs widget.
 
+Run:
+
 ```
 npm install bit-tabs --save
 ```
 
 ### Update the page
 
-Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled because we will use Bootstrap's styles) and add `<bit-tabs>` and `<bit-panel>` elements to the template. Update `src/home.component` to:
+Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled because we will use Bootstrap's styles) and add `<bit-tabs>` and `<bit-panel>` elements to the template. 
+
+Update `src/home.component` to:
 
 ```html
 <can-component tag="chat-home">
@@ -337,9 +351,13 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
 </can-component>
 ```
 
+You'll notice tabs appear in the browser:
+
+<img src="static/img/donejs-tabs.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
 ## Messages page
 
-For the messages page, we will:
+In this section we add live chat functionality to the messages page. We'll need to:
 
  * Create a messages model that connects to a RESTful API.
  * Add the ability to retrieve and list messages and create new messages.
@@ -347,7 +365,9 @@ For the messages page, we will:
 
 ### Generate Message model
 
-To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). Generate a `message` supermodel like this:
+To load messages from the server, we will use [can-connect's supermodel](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html). 
+
+Generate a `message` supermodel like this:
 
 ```
 donejs add supermodel message
@@ -355,9 +375,13 @@ donejs add supermodel message
 
 When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
 
+<img src="static/img/donejs-model-generator.png" alt="model generator" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
 ### Use the connection
 
-The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages with the `<message-model>` custom element. Update  `src/messages/messages.stache` to:
+The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages with the `<message-model>` custom element. 
+
+Update `src/messages/messages.stache` to:
 
 ```html
 <can-import from="donejs-chat/models/message" />
@@ -379,9 +403,13 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
+<img src="static/img/donejs-chat2.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
 ### Create messages
 
-Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. Update `src/messages/messages.stache` to look like this:
+Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. 
+
+Update `src/messages/messages.stache` to look like this:
 
 ```html
 <can-import from="donejs-chat/models/message" />
@@ -443,19 +471,29 @@ export default Component.extend({
 });
 ```
 
-The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance and saves it to the server. Once saved successfully it sets the message to an empty string to reset the input field.
+The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
 
-You can now enter your name and a message! It will automatically appear in our messages list. In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimized data requests](Features.html#section=section_Cachingandminimaldatarequests).
+You can now enter your name and a message! It will automatically appear in our messages list.
+
+<img src="static/img/donejs-chat3.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimized data requests](Features.html#section=section_Cachingandminimaldatarequests).
+
+You can see from your console that the localStorage cache is already populated with data:
+
+<img src="static/img/donejs-localstorage.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ### Enable a real-time connection
 
-Right now our chat's messages update automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. To connect to it we install:
+Right now our chat's messages update automatically with our own messages, but not with messages from other clients. The API server ([chat.donejs.com/api/messages](http://chat.donejs.com/api/messages)) provides a [Socket.io](http://socket.io/) server that sends out real-time updates for new, updated and deleted chat messages. 
+
+To connect to it, first we'll install a socket.io connector, by running:
 
 ```
 npm install steal-socket.io --save
 ```
 
-And update `src/models/message.js` to look like this:
+Update `src/models/message.js` to:
 
 ```js
 import can from 'can';
@@ -496,13 +534,17 @@ export default Message;
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
+<img src="static/img/donejs-twobrowsers.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
 ## Production build
 
 Now that we implemented the complete chat functionality we can get our application ready for production.
 
 ### Run build
 
-We can find the build configuration in `build.js` in the application folder. Everything is already set up so we can simply make a build by running
+We can find the build configuration in `build.js` in the application folder. 
+
+Everything is already set up, so we can simply make a build by running:
 
 ```
 donejs build
@@ -518,9 +560,18 @@ To test the production build, close the current server (with `CTRL + C`) and sta
 NODE_ENV=production donejs start
 ```
 
-If using Windows you first set the environmental variable, if using the **command prompt** you set with `set NODE_ENV=production` or if using **Powershell** you set it with `$env:NODE_ENV="production"` and then run your application afterwards with `donejs start`.
+If you're using Windows, you must first set the environmental variable:
 
-If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. All of DoneJS is extremely modular, which is why development mode makes 200 or more requests when loading the page (thanks to hot module swapping we only have to make those requests once). In production mode, we can only see about 10 requests and a significantly reduced file-size.
+1. For Windows **command prompt** you set with `set NODE_ENV=production`
+1. For Windows **Powershell** you set it with `$env:NODE_ENV="production"`
+
+Then run your application with `donejs start`.
+
+If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools. 
+
+<img src="static/img/donejs-prodmode.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+
+All DoneJS projects are extremely modular, which is why in development mode, you see 200 or more requests when loading the page (thanks to hot module swapping we only have to make those requests once). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
 ## Deploy
 
@@ -589,9 +640,11 @@ And verify that the application is loading from the CDN by loading it after runn
 NODE_ENV=production donejs start
 ```
 
-*note: if using Windows set the NODE_ENV variable as you did previously in the building section.*
+*Note: If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.*
 
 We should now see our assets being loaded from the Firebase CDN.
+
+IMAGE
 
 ## Desktop and mobile apps
 
