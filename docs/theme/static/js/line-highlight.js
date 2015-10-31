@@ -6,7 +6,10 @@ var getLines = function (lineString) {
 
 	for (var i = 0; i < lineArray.length; i++) {
 		var val = lineArray[i];
-		if(/-/.test(val)) {
+
+		// Matches any string with 1+ digits dash 1+ digits
+		// will ignore non matching strings
+		if(/^([\d]+-[\d]+)$/.test(val)) {
 			var values = val.split('-'),
 				start = (values[0] - 1),
 				finish = (values[1] - 1);
@@ -14,13 +17,12 @@ var getLines = function (lineString) {
 			for (var j = start; finish >= j; j++) {
 				result[j] = true;
 			}
-
-		} else {
+		//matches one or more digits
+		} else if (/^[\d]+$/.test(val)) {
 			result[val - 1] = true;
 		}
 
 	}
-
 	return result;
 };
 
@@ -38,7 +40,7 @@ module.exports = function() {
 		codeBlock.children().each(function(i, el){
 			var nodeText = $(el).text();
 
-			if (/\n/.test(nodeText)) {
+			if (/\n/gm.test(nodeText)) {
 				var cNames = $(el).attr('class');
 				var str = nodeText.split('\n');
 				var l = str.length

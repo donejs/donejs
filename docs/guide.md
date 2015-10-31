@@ -182,7 +182,6 @@ First, let's update `src/home.component` with the original content from the home
 <can-component tag="chat-home">
   <style type="less">
     display: block;
-
     h1.page-header { margin-top: 0; }
   </style>
   <template>
@@ -199,6 +198,7 @@ First, let's update `src/home.component` with the original content from the home
   </template>
 </can-component>
 ```
+@highlight 4,7-16
 
 [`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
 
@@ -208,6 +208,7 @@ Next, add a link to go back to the chat page by updating `src/messages/messages.
 <h5><a href="{{routeUrl page='home'}}">Home</a></h5>
 <p>{{message}}</p>
 ```
+@highlight 1
 
 Then, add a routing rule for the `page` property in `src/app.js`:
 
@@ -230,6 +231,7 @@ route('/:page', { page: 'home' });
 
 export default AppViewModel;
 ```
+@highlight 15
 
 ### Switch between pages
 
@@ -286,6 +288,7 @@ Update `src/index.stache` to:
   </body>
 </html>
 ```
+@highlight 15-31
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
@@ -350,7 +353,7 @@ Update `src/home.component` to:
   </template>
 </can-component>
 ```
-@highlight 17-24
+@highlight 5-7,10,17-24
 
 You'll notice tabs appear in the browser:
 
@@ -401,6 +404,7 @@ Update `src/messages/messages.stache` to:
   {{/each}}
 </message-model>
 ```
+@highlight 1,4-15
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
@@ -443,6 +447,7 @@ Update `src/messages/messages.stache` to look like this:
   </div>
 </form>
 ```
+@highlight 17-29
 
 Next we have to implement the `send()` method. Update `src/messages/messages.js` to this:
 
@@ -471,6 +476,7 @@ export default Component.extend({
   template
 });
 ```
+@highlight 9-15
 
 The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
 
