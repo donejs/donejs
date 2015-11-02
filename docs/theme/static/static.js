@@ -1,6 +1,7 @@
 steal("./content_list.js",
     "./frame_helper.js",
     "./versions.js",
+    "./js/line-highlight",
     "./js/collapse.js",
     "./js/dropdown.js",
     "./js/tooltip.js",
@@ -9,7 +10,7 @@ steal("./content_list.js",
     "./js/lazy-youtube.js",
     "./js/affix.js",
     "./styles/styles.less!",
-    "./prettify", function(ContentList, FrameHelper, Versions){
+    "./prettify", function(ContentList, FrameHelper, Versions, Highlighter){
         var codes = document.getElementsByTagName("code");
         for (var i = 0; i < codes.length; i++) {
             var code = codes[i];
@@ -18,6 +19,7 @@ steal("./content_list.js",
             }
         }
         prettyPrint();
+        Highlighter();
 
         new ContentList(".contents");
         new FrameHelper(".docs");

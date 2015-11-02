@@ -829,42 +829,45 @@ _With a CDN, requests can be fulfilled much quicker. Users are served content fr
 
 It's widely known that CDNs offer the best performance for static assets, but most apps don't use them, mainly because its annoying: annoying to automate, configure, and integrate with your build process.
 
-DoneJS comes with integrations with [S3](https://aws.amazon.com/s3/) and [Divshot](https://divshot.com/) (popular CDN services) that make configuring and deploying to a CDN dirt simple.
+DoneJS comes with integrations with [S3](https://aws.amazon.com/s3/) and [Firebase](https://www.firebase.com) (popular CDN services) that make configuring and deploying to a CDN dirt simple.
 
- 1. You sign up for S3 or Divshot.
+ 1. You sign up for S3 or Firebase.
  2. You paste a few lines of config into your `package.json` that point to the right CDN service.
 
-   ```
-    "donejs": {
-      "deploy": {
-        "root": "dist",
-        "services": {
-          "production": {
-            "type": "divshot",
-            "config": {
-              "name": "place-my-order",
-              "headers": {
-                "/**": {
-                  "Access-Control-Allow-Origin": "*"
-                }
-              }
-            }
-          }
+```
+"donejs": {
+  "deploy": {
+    "root": "dist",
+    "services": {
+      "production": {
+        "type": "firebase",
+        "config": {
+          "firebase": "place-my-order",
+          "public": "./dist",
+          "headers": [{
+            "source": "/**",
+            "headers": [{
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }]
+          }]
         }
       }
     }
-   ```
+  }
+}
+```
  3. You paste a few more lines that tell your production server to serve static assets from the CDN.
 
-   ```
-   {
-     "system": {
-       "envs": {
-         "production": {
-           "baseURL": "https://place-my-order.divshot.io/"
-         }
-       },
-   ```
+```
+{
+ "system": {
+   "envs": {
+     "production": {
+       "baseURL": "https://place-my-order.firebaseapp.com/"
+     }
+   },
+```
  4. You run `donejs deploy`.
 
 That's it. Now when you run your server in production mode, all static assets (CSS, JS, images, etc) are served from the CDN.
@@ -910,13 +913,15 @@ _Cordova and nw.js integration are features of the [steal-cordova](https://githu
 
 ### Supports All Browsers, Even IE8
 
-DoneJS applications support Internet Explorer 8 without any additional effort. You can even write applications using [most ES6 features](http://babeljs.io/docs/advanced/caveats/) that run on IE8, using the built-in babel integration.
+DoneJS applications support Internet Explorer 8 minimal additional configuration. You can even write applications using [most ES6 features](http://babeljs.io/docs/advanced/caveats/) that run on IE8, using the built-in babel integration.
 
-Many people don't care about this because IE8 is on its way out, which is a very good thing!
+Many people won't care about this because IE8 is on its way out, which is a very good thing!
 
 But it's [not quite dead yet](https://youtu.be/grbSQ6O6kbs?t=61). For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats.
 
 And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS makes it easy to write one app that runs everywhere.
+
+<a class="btn" href="/Guide.html#section=section_IE8Support"><span>View the Guide</span></a>
 
 ### Real Time Connected
 

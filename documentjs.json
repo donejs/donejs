@@ -8,7 +8,8 @@
       "dest": "site",
       "ignoreTemplateRender": true,
       "templates": "docs/theme/templates",
-      "static": "docs/theme/static"
+      "static": "docs/theme/static",
+      "tags": "docs/theme/tags"
     }
   }
 }
