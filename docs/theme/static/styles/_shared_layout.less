@@ -818,10 +818,12 @@ body:not(.donejs):not(.community) {
 	}
 	@media(max-width: @screen-md-max){
 		width: 100%;
+		position: relative;
+		right: inherit;
 		&.affix-top,
 		&.affix-bottom,
 		&.affix {
-			position: static;
+			position: relative;
 			right: inherit;
 			-webkit-animation-name: none;
 			animation-name: none;
