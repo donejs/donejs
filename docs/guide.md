@@ -95,6 +95,8 @@ To see hot module swapping in action, let's update the main template to import B
 
 Update `src/index.stache` to look like this:
 
+*Note: The highlighted lines have been added or changed.*
+
 ```html
 <html>
   <head>
@@ -132,6 +134,7 @@ Update `src/index.stache` to look like this:
   </body>
 </html>
 ```
+@highlight 8,12-22
 
 If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file. 
 
@@ -476,7 +479,7 @@ export default Component.extend({
   template
 });
 ```
-@highlight 9-15
+@highlight 6,9-15
 
 The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
 
@@ -538,6 +541,7 @@ socket.on('messages removed',
 
 export default Message;
 ```
+@highlight 5,25-32
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
@@ -799,6 +803,7 @@ socket.on('messages removed',
 
 export default Message;
 ```
+@highlight 6,7
 
 ### Install jQuery 1.x
 
@@ -819,9 +824,9 @@ var buildPromise = stealTools.build({
 }, {
   bundleAssets: true
 });
-
 ...
 ```
+@highlight 2-5
 
 And rebuild:
 
