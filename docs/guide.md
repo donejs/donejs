@@ -18,7 +18,7 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 In this section, we will install DoneJS and generate a new application.
 
-Before getting started, check out the [SettingUp] guide to make sure you have all of the prerequisites. DoneJS
+> Before getting started, check out the [SettingUp] guide to make sure you have all of the prerequisites. DoneJS
 officially supports [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs, and
 [npm](https://www.npmjs.com/) 2.x.  If you find errors, check your version with `node -v` and `npm -v`.
 
@@ -95,7 +95,7 @@ To see hot module swapping in action, let's update the main template to import B
 
 Update `src/index.stache` to look like this:
 
-*Note: The highlighted lines have been added or changed.*
+> The highlighted lines have been added or changed.
 
 ```html
 <html>
@@ -173,11 +173,7 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
-
-DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state.
-
-To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
+> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/2.3-pre/guides/AppStateAndRouting.html).
 
 First, let's update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
@@ -203,7 +199,7 @@ First, let's update `src/home.component` with the original content from the home
 ```
 @highlight 4,7-16
 
-[`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
+> [`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
 
 Next, add a link to go back to the chat page by updating `src/messages/messages.stache` to:
 
@@ -592,7 +588,7 @@ Now that we verified that our application works in production, we can deploy it 
 
 Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
 
-*Note: You'll get an error if your app name is too long, so pick something on the shorter side.*
+> You'll get an error if your app name is too long, so pick something on the shorter side.
 
 When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
@@ -657,7 +653,7 @@ And verify that the application is loading from the CDN by loading it after runn
 NODE_ENV=production donejs start
 ```
 
-*Note: If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.*
+> If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.
 
 We should now see our assets being loaded from the Firebase CDN.
 
