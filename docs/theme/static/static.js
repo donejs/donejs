@@ -514,8 +514,14 @@ steal("./content_list.js",
         });
 
         $(function () {
-          $('[data-toggle="popover"]').popover()
-            .on('shown.bs.popover', function(ev){
+          $('.matrix-table [data-toggle="popover"]').popover({
+            viewport: {
+              selector: '.matrix-table'
+            },
+            container: '.table-wrapper'
+          });
+          $('[data-toggle="popover"]:not(.matrix-table [data-toggle="popover"])').popover();
+          $('[data-toggle="popover"]').on('shown.bs.popover', function(ev){
                 var popoverId = $(this).attr('aria-describedby');
                 $('#' + popoverId).find('.youtube-player').lazyYoutube();
             });
