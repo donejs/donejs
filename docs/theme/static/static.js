@@ -516,7 +516,7 @@ steal("./content_list.js",
         $(function () {
           $('.matrix-table [data-toggle="popover"]').popover({
             viewport: {
-              selector: '.matrix-table'
+              selector: '.table-wrapper'
             },
             container: '.table-wrapper'
           });

@@ -707,6 +707,16 @@ body:not(.donejs):not(.community) {
 		color: @logoColor;
 		font-weight: bold;
 	}
+	.popover {
+		@media(max-width: @screen-sm){
+			max-width: 200px
+		}
+	}
+	.arrow {
+		&:before {
+			display: none;
+		}
+	}
 }
 .matrix-table {
 	background-color: transparent;
@@ -911,7 +921,7 @@ body:not(.donejs):not(.community) {
     overflow-y: hidden;
 	}
 	table.responsive {
-		@media(max-width:@screen-xs){
+		@media(max-width:@screen-sm){
 			width: 64%;
 		}
 	}
