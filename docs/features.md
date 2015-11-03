@@ -123,12 +123,12 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Angular doesn't support a virtual dom. No third-party library support would be equivilant." title="Angular doesn't support a virtual dom. No third-party library support would be equivilant.">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Angular doesn't support a virtual dom. No third-party library support would be equivalent." title="Angular doesn't support a virtual dom. No third-party library support would be equivalent.">
                 <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='http://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has." title="Requires some manual setup and lacks most of the features/support DoneJS has.">
+              <div class="has-popover" data-container="matrix-wrapper" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='http://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has." title="Requires some manual setup and lacks most of the features/support DoneJS has.">
                 <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
@@ -380,12 +380,12 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
             </td>
             <td>
-            <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Not explicitly MVVM, but could be implemented" title="Not explicitly MVVM, but could be implemented">
+            <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Not explicitly MVVM, but could be implemented" title="Not explicitly MVVM, but could be implemented">
                 <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="React is just the view layer. You'll need to implement your own MVVM architecture." title="React is just the view layer. You'll need to implement your own MVVM architecture.">
+              <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="React is just the view layer. You'll need to implement your own MVVM architecture." title="React is just the view layer. You'll need to implement your own MVVM architecture.">
                 <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
@@ -401,7 +401,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Third-party libraries available for some support." title="Third-party libraries available for some support.">
+              <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Third-party libraries available for some support." title="Third-party libraries available for some support.">
                 <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>

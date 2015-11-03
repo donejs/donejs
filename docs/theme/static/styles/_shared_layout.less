@@ -208,6 +208,8 @@ body:not(.donejs):not(.community) {
 				.fun-quotes {
 					padding: 20px 0;
 					color: #424a4e;
+					background: none;
+					border:0;
 					.fun-intro {
 						font-size: 18px;
 						font-weight: 400;
@@ -707,6 +709,16 @@ body:not(.donejs):not(.community) {
 		color: @logoColor;
 		font-weight: bold;
 	}
+	.popover {
+		@media(max-width: @screen-sm){
+			max-width: 200px
+		}
+	}
+	.arrow {
+		&:before {
+			display: none;
+		}
+	}
 }
 .matrix-table {
 	background-color: transparent;
@@ -775,11 +787,13 @@ body:not(.donejs):not(.community) {
 	z-index: 1060;
 	position: absolute;
 	right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
-
 	&.affix {
 		top: 100px;
 		right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
 		position: fixed;
+		@media(max-width:@screen-xs){
+			top: inherit;
+		}
 	}
 	.title {
 		background-color: @logoColor;
@@ -907,6 +921,11 @@ body:not(.donejs):not(.community) {
 	div.table-wrapper div.scrollable {
     overflow: scroll;
     overflow-y: hidden;
+	}
+	table.responsive {
+		@media(max-width:@screen-sm){
+			width: 64%;
+		}
 	}
 	table.responsive td,
 	table.responsive th {
