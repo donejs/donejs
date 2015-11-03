@@ -775,11 +775,13 @@ body:not(.donejs):not(.community) {
 	z-index: 1060;
 	position: absolute;
 	right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
-
 	&.affix {
 		top: 100px;
 		right: ~"calc( ( 80% - " @containerWidth ~" ) / 2)";
 		position: fixed;
+		@media(max-width:@screen-xs){
+			top: inherit;
+		}
 	}
 	.title {
 		background-color: @logoColor;
@@ -907,6 +909,11 @@ body:not(.donejs):not(.community) {
 	div.table-wrapper div.scrollable {
     overflow: scroll;
     overflow-y: hidden;
+	}
+	table.responsive {
+		@media(max-width:@screen-xs){
+			width: 64%;
+		}
 	}
 	table.responsive td,
 	table.responsive th {
