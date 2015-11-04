@@ -401,10 +401,12 @@ steal("./content_list.js",
             if ( newHash.indexOf( "#section=" ) === -1 ) return;
 
             var jumpTo = newHash.replace( /.*?#section=/, "#" );
+            var distance = Math.abs($('body').scrollTop() - ($( jumpTo ).offset().top + offset));
+            var duration = Math.max(500, (distance / 6000) * 250);
 
             $( 'html, body' ).animate({
                 scrollTop: $( jumpTo ).offset().top + offset
-            }, 500);
+            }, duration);
         }, false );
 
 
