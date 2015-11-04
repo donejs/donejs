@@ -44,7 +44,7 @@ The initialization process will ask you questions like the name of your applicat
 - [jQuery++](http://jquerypp.com) - Extended DOM helpers
 - [QUnit](https://qunitjs.com/) or Mocha - Assertion library
 - [FuncUnit](http://funcunit.com) - Functional tests
-- Testee or Karma - Test runner
+- [Testee](https://github.com/bitovi/testee) - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
 If we now go into the `place-my-order` folder with
@@ -127,7 +127,37 @@ Which allows us to start the server like:
 donejs api
 ```
 
-The first time it starts, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants), where we can see a JSON list of restaurant data. Keep this server running during development.
+The first time it starts, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to [http://localhost:7070/restaurants](http://localhost:7070/restaurants), where we can see a JSON list of restaurant data.
+
+### Starting the application
+
+Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid violating the same origin policy. This means that we need to modify the `start` script in our `package.json` from:
+
+```js
+"scripts": {
+  "api": "place-my-order-api --port 7070",
+  "test": "testee src/test.html --browsers firefox --reporter Spec",
+  "start": "can-serve --port 8080",
+  "develop": "can-serve --develop --port 8080",
+```
+
+To:
+
+```js
+"scripts": {
+  "api": "place-my-order-api --port 7070",
+  "test": "testee src/test.html --browsers firefox --reporter Spec",
+  "start": "can-serve --proxy http://localhost:7070 --port 8080",
+  "develop": "can-serve --develop --proxy http://localhost:7070 --port 8080",
+```
+
+Then we can start the application with
+
+```
+donejs develop
+```
+
+Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" message with the application styles loaded.
 
 ### Loading assets
 
@@ -162,7 +192,10 @@ Every DoneJS application consists of at least two files:
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="place-my-order/index.stache!done-autorender"></script>
+        <script
+          src="{{joinBase 'node_modules/steal/steal.production.js'}}"  
+          main="place-my-order/index.stache!done-autorender">
+        </script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -206,33 +239,6 @@ export default AppViewModel;
 ```
 
 This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
-
-### Starting the application
-
-Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid violating the same origin policy. This means that we need to modify the `start` script in our `package.json` from:
-
-```js
-"scripts": {
-  "api": "place-my-order-api --port 7070",
-  "start": "can-serve --port 8080",
-```
-
-To:
-
-```js
-"scripts": {
-  "api": "place-my-order-api --port 7070",
-  "start": "can-serve --proxy http://localhost:7070 --port 8080",
-  "develop": "can-serve --develop --proxy http://localhost:7070 --port 8080",
-```
-
-Then we can start the application with
-
-```
-donejs develop
-```
-
-Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" message with the application styles loaded.
 
 ## Creating custom elements
 
@@ -372,8 +378,6 @@ Now we have three routes available:
 
 Its important to note that if any of these URLs are matched, AppViewModel, which is the application's global state, will contain these properties, even though they aren't present in the AppViewModel definition directly. Properties can be set on AppViewModel that aren't explicitly defined.
 
-**Note**: Whenever we create new routes we also need to restart the development server. While the browser knows about the new routes as soon as you save the file, the server does not, so a restart is needed for them to work.
-
 ### Adding a header element
 
 Now is also a good time to add a header element that links to the different routes we just defined. We can run
@@ -458,17 +462,20 @@ Update `src/index.stache` to:
 
     {{#switch page}}
       {{#case "home"}}
-        <can-import from="place-my-order/home.component!" can-tag="pmo-loading">
+        <can-import from="place-my-order/home.component!"
+            can-tag="pmo-loading">
           <pmo-home></pmo-home>
         </can-import>
       {{/case}}
       {{#case "restaurants"}}
-        <can-import from="place-my-order/restaurant/list/" can-tag="pmo-loading">
+        <can-import from="place-my-order/restaurant/list/"
+            can-tag="pmo-loading">
           <pmo-restaurant-list></pmo-restaurant-list>
         </can-import>
       {{/case}}
       {{#case "order-history"}}
-        <can-import from="place-my-order/order/history.component!" can-tag="pmo-loading">
+        <can-import from="place-my-order/order/history.component!"
+            can-tag="pmo-loading">
           <pmo-order-history></pmo-order-history>
         </can-import>
       {{/case}}
@@ -478,7 +485,10 @@ Update `src/index.stache` to:
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="place-my-order/index.stache!done-autorender"></script>
+        <script
+          src="{{joinBase 'node_modules/steal/steal.production.js'}}"  
+          main="place-my-order/index.stache!done-autorender">
+        </script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
@@ -492,7 +502,7 @@ Here we make a `switch` statement that checks for the current `page` property (p
 
 Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its `state` property to `resolved`.
 
-Now if we reload [http://localhost:8080/](http://localhost:8080/), we can see the header and the home component and be able to navigate to the different pages through the header.
+Now we can see the header and the home component and be able to navigate to the different pages through the header.
 
 ## Getting Data from the Server
 
@@ -578,7 +588,8 @@ And update the template at `src/restaurant/list/list.stache` to use the [Promise
   {{#if restaurants.isResolved}}
     {{#each restaurants.value}}
       <div class="restaurant">
-        <img src="{{joinBase images.thumbnail}}" width="100" height="100">
+        <img src="{{joinBase images.thumbnail}}"
+          width="100" height="100">
         <h3>{{name}}</h3>
         {{#address}}
         <div class="address">
@@ -592,7 +603,9 @@ And update the template at `src/restaurant/list/list.stache` to use the [Promise
           <span class="open-now">Open Now</span>
         </div>
 
-        <a class="btn" can-href="{ page='restaurants' slug=slug }">Details</a>
+        <a class="btn" href="{{routeUrl page='restaurants' slug=slug}}">
+          Details
+        </a>
         <br />
       </div>
     {{/each}}
@@ -953,7 +966,9 @@ Update `src/restaurant/list/list.stache` to:
         <span class="open-now">Open Now</span>
       </div>
 
-      <a class="btn" can-href="{ page='restaurants' slug=slug }">Place My Order</a>
+      <a class="btn" href="{{routeUrl page='restaurants' slug=slug}}">
+        Place My Order
+      </a>
       <br />
     </div>
     {{/each}}
@@ -996,7 +1011,9 @@ We already worked with an individual component test page in [src/restaurant/list
 ```js
 import QUnit from 'steal-qunit';
 
-import 'src/restaurant/list/list_test';
+import 'place-my-order/test/functional';
+
+import 'place-my-order/restaurant/list/list_test';
 ```
 
 If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src/test.html) we still see all restaurant list tests passing but we will add more here later on.
@@ -1020,13 +1037,12 @@ We will use TravisCI as our hosted solution because it is free for open source p
 ```
 language: node_js
 node_js: node
-script: npm start & npm test
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 ```
 
-By default Travis CI runs `npm test` but we will also need our server running (for the functional tests) so we set it in the `script` section. `before_install` sets up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
+By default Travis CI runs `npm tests` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
 
 ## Nested routes
 
@@ -1100,7 +1116,7 @@ And change `src/restaurant/details.component` to:
           Description for {{name}}
         </p>
         <p class="order-link">
-          <a class="btn" can-href="{ page='restaurants' slug=slug action='order'}">
+          <a class="btn" href="{{routeUrl page='restaurants' slug=slug action='order'}}">
             Order from {{name}}
           </a>
         </p>
@@ -1140,19 +1156,22 @@ To:
   {{#if slug}}
     {{#switch action}}
       {{#case 'order'}}
-        <can-import from="place-my-order/order/new/" can-tag="pmo-loading">
+        <can-import from="place-my-order/order/new/"
+            can-tag="pmo-loading">
           <pmo-order-new slug="{slug}"></pmo-order-new>
         </can-import>
       {{/case}}
 
       {{#default}}
-        <can-import from="place-my-order/restaurant/details.component!" can-tag="pmo-loading">
+        <can-import from="place-my-order/restaurant/details.component!"
+            can-tag="pmo-loading">
           <pmo-restaurant-details></pmo-restaurant-details>
         </can-import>
       {{/default}}
     {{/switch}}
   {{else}}
-    <can-import from="place-my-order/restaurant/list/" can-tag="pmo-loading">
+    <can-import from="place-my-order/restaurant/list/"
+        can-tag="pmo-loading">
       <pmo-restaurant-list></pmo-restaurant-list>
     </can-import>
   {{/if}}
@@ -1197,7 +1216,7 @@ Here we just import the `unstyled` module from the `bit-tabs` package using `can
 
 In this section, we will update the order component to be able to select restaurant menu items and submit a new order for a restaurant.
 
-### Updating the order model
+### Creating the order model
 
 First, let's look at the restaurant data we get back from the server. It looks like this:
 
@@ -1292,7 +1311,8 @@ let Order = Map.extend({
     total: {
       get() {
         let total = 0.0;
-        this.attr('items').forEach(item => total += parseFloat(item.attr('price')));
+        this.attr('items').forEach(item =>
+            total += parseFloat(item.attr('price')));
         return total.toFixed(2);
       }
     }
@@ -1388,7 +1408,9 @@ and changing `src/order/details.component` to:
   <template>
     {{#order}}
       <h3>Thanks for your order {{name}}!</h3>
-      <div><label class="control-label">Confirmation Number: {{_id}}</label></div>
+      <div><label class="control-label">
+        Confirmation Number: {{_id}}</label>
+      </div>
 
       <h4>Items ordered:</h4>
       <ul class="list-group panel">
@@ -1401,12 +1423,18 @@ and changing `src/order/details.component` to:
         {{/each}}
 
         <li class="list-group-item">
-          <label>Total <span class="badge">${{total}}</span></label>
+          <label>
+            Total <span class="badge">${{total}}</span>
+          </label>
         </li>
       </ul>
 
-      <div><label class="control-label">Phone: {{phone}}</label></div>
-      <div><label class="control-label">Address: {{address}}</label></div>
+      <div><label class="control-label">
+        Phone: {{phone}}
+      </label></div>
+      <div><label class="control-label">
+        Address: {{address}}
+      </label></div>
     {{/order}}
   </template>
 </can-component>
@@ -1426,7 +1454,9 @@ Now we can import that component and update `src/order/new/new.stache` to:
       {{#value}}
         {{#if saveStatus.isResolved}}
           <pmo-order-details order="{saveStatus.value}"></pmo-order-details>
-          <p><a href="javascript://" ($click)="startNewOrder">Place another order</a></p>
+          <p><a href="javascript://" ($click)="startNewOrder">
+            Place another order
+          </a></p>
         {{else}}
           <h3>Order from {{name}}</h3>
 
@@ -1471,17 +1501,20 @@ Now we can import that component and update `src/order/new/new.stache` to:
 
             <div class="form-group">
               <label class="control-label">Name:</label>
-              <input name="name" type="text" class="form-control" {($value)}="order.name">
+              <input name="name" type="text" class="form-control"
+                {($value)}="order.name">
               <p>Please enter your name.</p>
             </div>
             <div class="form-group">
               <label class="control-label">Address:</label>
-              <input name="address" type="text" class="form-control" {($value)}="order.address">
+              <input name="address" type="text" class="form-control"
+                {($value)}="order.address">
               <p class="help-text">Please enter your address.</p>
             </div>
             <div class="form-group">
               <label class="control-label">Phone:</label>
-              <input name="phone" type="text" class="form-control" {($value)}="order.phone">
+              <input name="phone" type="text" class="form-control"
+                {($value)}="order.phone">
               <p class="help-text">Please enter your phone number.</p>
             </div>
             <div class="submit">
@@ -1489,7 +1522,10 @@ Now we can import that component and update `src/order/new/new.stache` to:
               {{#if saveStatus.isPending}}
                 <div class="loading"></div>
               {{else}}
-                <button type="submit" {{^if canPlaceOrder}}disabled{{/if}} class="btn">Place My Order!</button>
+                <button type="submit"
+                    {{^if canPlaceOrder}}disabled{{/if}} class="btn">
+                  Place My Order!
+                </button>
               {{/if}}
             </div>
           </form>
@@ -1634,7 +1670,8 @@ And in the order history template by updating `src/order/history.component` to:
         <div class="actions">Action</div>
       </div>
 
-      <can-import from="place-my-order/order/list.component!" can-tag="pmo-loading">
+      <can-import from="place-my-order/order/list.component!"
+          can-tag="pmo-loading">
         <order-model getList="{status='new'}">
           <pmo-order-list
             orders="{.}"
@@ -1810,217 +1847,101 @@ NODE_ENV=production donejs start
 
 Refresh your browser to see the application load in production.
 
+## Desktop and mobile apps
+
 ### Building to iOS and Android
 
-Using [steal-cordova](https://www.npmjs.com/package/steal-cordova) we can easily turn our web application into a [Cordova](https://cordova.apache.org/) app that runs in iOS and Android.
+To build the application as a Cordova based mobile application, you need to have each platform's SDK installed.
+We'll be building an iOS app if you are a Mac user, and an Android app if you're a Windows user.
 
-First install steal-cordova as a devDependency:
+Mac users should download XCode from the AppStore and install the `ios-sim` package globally with:
 
-```shell
-npm install steal-cordova --save-dev
+```
+npm install -g ios-sim
 ```
 
-Then update `build.js` to make Cordova builds when provided the **cordova** argument:
+We will use these tools to create an iOS application that can be tested in the iOS simulator.
 
-```js
-var stealTools = require("steal-tools");
+Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html), which gives all of the tools we need.
 
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm"
-});
+Now we can install the DoneJS Cordova tools with:
 
-var cordovaOptions = {
-  buildDir: "./build/cordova",
-  id: "com.donejs.placemyorder",
-  name: "PlaceMyOrder",
-  platforms: ["ios", "android"],
-  index: __dirname + "/production.html",
-  glob: [
-    "node_modules/steal/steal.production.js",
-    "node_modules/place-my-order-assets/images/**/*"
-  ]
-};
-
-var stealCordova = require("steal-cordova")(cordovaOptions);
-
-// Check if the cordova option is passed.
-var buildCordova = process.argv.indexOf("cordova") > 0;
-
-if(buildCordova) {
-
-  buildPromise.then(stealCordova.build).then(stealCordova.ios.emulate);
-
-}
+```
+donejs add cordova
 ```
 
-Unlike your web app which runs from a server, Cordova (and NW.js) apps need a html file which is why we will use `production.html`.
+Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
 
-Now we can build a Cordova app with:
+To run the Cordova build and launch the simulator we can now run:
 
-```shell
+```
 donejs build cordova
 ```
 
-Which will launch the iOS emulator after a successful build. emulator.
-
-#### AJAX
-
-When not running in a traditional browser environment, AJAX requests need to be made
-to an external URL. The module `steal-platform` aids in detecting environments like Cordova
-so special behavior can be added.  Install the module:
-
-```
-npm install steal-platform --save
-```
-
-Create a file: `src/service-base-url.js` and place this code:
-
-```js
-import platform from "steal-platform";
-
-let baseUrl = '';
-
-if(platform.isCordova || platform.isNW) {
-  baseUrl = 'http://place-my-order.com';
-}
-
-export default baseUrl;
-```
-
-This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be made there.
-
-Our models will also need to be updated to use the baseUrl. For example in `src/models/state` do:
-
-```js
-import baseUrl from '../service-base-url';
-
-superMap({
-  url: baseUrl + '/api/states',
-  ...
-});
-```
+If everything went well, we should see the emulator running our application.
 
 ### Building to NW.js
 
-[steal-nw](https://github.com/stealjs/steal-nw) is a module that makes it easy to create [NW.js](http://nwjs.io/) applications.
+To set up the desktop build, we have to add it to our application like this:
 
-Install steal-nw as a devDependency:
-
-```shell
-npm install steal-nw --save-dev
+```
+donejs add nw
 ```
 
-Update build.js [created above](#section_Bundlingyourapp) to include building a NW.js package:
+We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
 
-```js
-var nwOptions = {
-  buildDir: "./build",
-  platforms: ["osx"],
-  files: [
-    "package.json",
-    "production.html",
-    "node_modules/steal/steal.production.js",
-    "node_modules/place-my-order-assets/images/**/*"
-  ]
-};
-
-var stealNw = require("steal-nw");
-
-// Check if the cordova option is passed.
-var buildNW = process.argv.indexOf("nw") > 0;
-
-if(buildNW) {
-  buildPromise = buildPromise.then(function(buildResult){
-    stealNw(nwOptions, buildResult);
-  });
-}
-```
-
-And finally update package.json. There are two things we need to change:
-
-1. The "main" must be "app.html". This is the same `.html` file we created for the Cordova build.
-
-2. We can set "window" options to match the application layout. Let's update the size of the window:
-
-```json
-{
-  "main": "production.html",
-
-  ...
-
-  "window": {
-    "width": 1060,
-    "height": 625
-  }
-}
-```
-
-Now we can build to NW.js with
+Then we can run the build like this:
 
 ```
 donejs build nw
 ```
 
-Once the build is complete the binaries for each platform are available at `build/place-my-order/`.
+The OS X application can be opened with
 
-
-## Deploying
-
-### Bundling assets
-
-Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at `node_modules/place-my-order-assets/images`.
-
-StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.
-
-To use this capability add an option to your build script to enable it. Change:
-
-```js
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm"
-});
+```
+cd build/place-my-order/osx64
+open place-my-order.app
 ```
 
-to:
+The Windows application can be opened with
 
-```js
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm"
-}, {
-  bundleAssets: {
-    infer: false,
-    glob: "node_modules/place-my-order-assets/images/**/*"
-  }
-});
+```
+.\build\donejs-chat\win64\place-my-order.exe
 ```
 
-StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
+## Deploy
 
-### Deploy to a CDN
+Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN.
 
-The __donejs__ command supports deploying your assets to [AWS S3](http://aws.amazon.com/s3/) and [Divshot](https://divshot.com/). For this example, we are going to deploy to Divshot.  This requires you to first create a free account on [Divshot](https://divshot.com). Divshot allows Github or Google to authenticate your account, but we recommend you take the email and password route.  This will make it easier to create an Divshot API token.
+### Static hosting on Firebase
 
-After you've created a free account, next edit your package.json to add Divshot as a deployment target. You will give your application a unique name that will act as the subdomain. You can name it anything you want, but we'll use "place-my-order" here. You might call yours "place-my-order-tom" if your name's Tom. Name it whatever you want, just remember what you chose because you'll have to know this later.
+Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
 
-```json
-{
-  "name": "place-my-order"
+> You'll get an error if your app name is too long, so pick something on the shorter side.
 
-  ...
+When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
-  "donejs": {
-    "deploy": {
-      "root": "dist",
-      "services": {
-        "production": {
-          "type": "divshot",
-          "config": {
-            "name": "place-my-order",
-            "headers": {
-              "/**": {
-                "Access-Control-Allow-Origin": "*"
-              }
-            }
-          }
+#### Configuring DoneJS
+
+Now we can add the Firebase deployment configuration to our `package.json` like this:
+
+```js
+"donejs": {
+  "deploy": {
+    "root": "dist",
+    "services": {
+      "production": {
+        "type": "firebase",
+        "config": {
+          "firebase": "<appname>",
+          "public": "./dist",
+          "headers": [{
+            "source": "/**",
+            "headers": [{
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }]
+          }]
         }
       }
     }
@@ -2028,39 +1949,42 @@ After you've created a free account, next edit your package.json to add Divshot 
 }
 ```
 
-The `services` property is a list of deploy targets. You can name these whatever you like but we will use "production". The `config.name` specifies the Divshot application name. With regards to Divshot, the "environment" property is not provided, so the name of the service is used in its stead. If the name of a Divshot service is not equal to "development", "staging", or "production" you will be warned, and the environment will default to "development".
+Change the `<appname>` to the name of the application created when you set up the Firebase app.
 
-Now do your first deployment with the donejs command:
+And also update the production `baseURL` in the `system` section:
 
 ```
-donejs deploy
-```
-
-The command-line interface will walk you through getting an access token that will be saved to your user's home directory and deploy your static assets.
-
-The `production` service will be selected whether or not you provide the name of the service as an argument because there is only one service configured.  Optionally, if you have more than one service configured, you could add a `"default": true` property to a particular service to specify it as the default service selected when an argument is not provided.
-
-Next, update your package.json to set the baseURL that will be used in production, by setting the "envs" config, it should be something like:
-
-```json
-{
-  "system": {
-    "envs": {
-      "production": {
-        "baseURL": "https://place-my-order.divshot.io/"
-      }
-    },
-    ...
+...
+"system": {
+  ...
+  "envs": {
+    "server-production": {
+      "baseURL": "https://<appname>.firebaseapp.com/"
+    }
   }
 }
 ```
 
-**Note**: Your baseURL will be something different, it will include the **name** you gave to your app in the previous section. Now your assets will live on a CDN. Make one last build and deploy your code, which is finally ready to run on Divshot:
+Again, make sure to replace the URL with your Firebase application name.
+
+#### Run deploy
+
+we can deploy the application by running:
 
 ```
 donejs build
 donejs deploy
 ```
+
+Static files are deployed to Firebase and verify that the application is loading from the CDN by loading it after running:
+
+```
+NODE_ENV=production donejs start
+```
+
+> If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.
+
+We should now see our assets being loaded from the Firebase CDN.
 
 ### Deploy your Node code
 
