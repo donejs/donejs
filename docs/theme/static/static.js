@@ -230,7 +230,6 @@ steal("./content_list.js",
         var scrollSpyCurrentH3 = $( "#scrollSpyCurrentH3" );
         var activeH2Li = $();
         var doJQCollapsing = $( "body.Guide, body.place-my-order, body.Apis" ).length ? true : false;
-        var isIOS = /iPad|iPhone|iPod/.test(navigator.platform);
 
         if ( doJQCollapsing ) {
             $( "section.contents ol ol" ).hide();
@@ -244,15 +243,9 @@ steal("./content_list.js",
             }
             if ( doDisable ) {
                 document.body.style.overflow = "hidden";
-                if ( isIOS ) {
-                    document.body.style.position = "fixed";
-                }
                 $( "#greyOutUnderNav" ).show();
             } else {
                 document.body.style.overflow = "";
-                if ( isIOS ) {
-                    document.body.style.position = "";
-                }
                 $( "#greyOutUnderNav" ).hide();
             }
         };
@@ -409,16 +402,9 @@ steal("./content_list.js",
 
             var jumpTo = newHash.replace( /.*?#section=/, "#" );
 
-            if ( isIOS ) {
-                document.body.style.position = "";
-            }
             $( 'html, body' ).animate({
                 scrollTop: $( jumpTo ).offset().top + offset
-            }, 500, function () {
-                if ($( "section.contents" ).is( ".active" ) && isIOS ) {
-                    document.body.style.position = "fixed";
-                }
-            });
+            }, 500);
         }, false );
 
 
