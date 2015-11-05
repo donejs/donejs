@@ -40,7 +40,7 @@ the chat application as an example in development.  We'll cover what happens whe
 ### First page load
 
 1. An http request for `http://donejs-chat.com/` is sent to a node server. The node server is configured,
-   in this case with express, to use [can-ssr] to render a DoneJS application:
+   in this case with express, to use [can-ssr](#section=section_can_ssr) to render a DoneJS application:
 
    ```
    var ssr = require('can-ssr/middleware');
@@ -50,11 +50,11 @@ the chat application as an example in development.  We'll cover what happens whe
    }));
    ```
 
-2. [can-ssr](#section=section_can_ssr) uses [steal](section=section_steal) to load the application's main module which results in loading the
+2. [can-ssr](#section=section_can_ssr) uses [steal](#section=section_steal) to load the application's main module which results in loading the
    entire application. Loading the application only happens once for all page requests.
 
    A DoneJS's main module is specified where all configuration of a DoneJS application happens, its `package.json`.
-   The main module is usually a [can.stache](section=section_can_stache) template processed with the [done-autorender](section=section_done_autorender)
+   The main module is usually a [can.stache](#section=section_can_stache) template processed with the [done-autorender](#section=section_done_autorender)
    plugin. The module name is specified like: `index.stache!done-autorender`. `index.stache` might look like:
 
    ```
@@ -79,11 +79,11 @@ the chat application as an example in development.  We'll cover what happens whe
    </html>
    ```
 
-   The [done-autorender](section=section_done_autorender) plugin, in NodeJS, exports this template so it can be rendered. It also exports
+   The [done-autorender](#section=section_done_autorender) plugin, in NodeJS, exports this template so it can be rendered. It also exports
    any modules it imports with `<can-import>` that are labeled with `export-as="EXPORT_NAME"`. Exporting
    the [viewModel](#section=section_can_ssr_app_map) is important for [can-ssr](#section=section_can_ssr)
 
-3. Once [can-ssr] has the [done-autorender](#section=section_done_autorender)'s `template` and `viewModel` export it:
+3. Once [can-ssr](#section=section_can_ssr) has the [done-autorender](#section=section_done_autorender)'s `template` and `viewModel` export it:
 
    1. Creates a new instance of the [viewModel](#section=section_can_ssr_app_map), setting properties on it
    using [can.route](#section=section_can_route)'s routing rules.  
@@ -118,7 +118,7 @@ the chat application as an example in development.  We'll cover what happens whe
    can.route(':page', { page: 'home' });
    ```
 
-2. [done-autorender](#section=section_done_autorender) previously bound the [can-ssr/app-map] to [can.route] which causes any change in the route to be reflected in the AppMap instance.
+2. [done-autorender](#section=section_done_autorender) previously bound the [can-ssr/app-map](#section=section_can_ssr_app_map) to [can.route](#section=section_can_route) which causes any change in the route to be reflected in the AppMap instance.
 
 3. Live binding causes the initial template to reflect in the change in route. If the new route is `/chat` it will cause the `page` to be **chat**:
 
@@ -154,7 +154,7 @@ the chat application as an example in development.  We'll cover what happens whe
    </html>
    ```
 
-3. [can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) will progressively load the component for the new page with a [Promise] as it's view model. When the promise resolves the [can.Component](#section=section_can_Component) will be inserted.
+3. [can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) will progressively load the component for the new page with a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) as its view model. When the promise resolves the [can.Component](#section=section_can_Component) will be inserted.
 
 ## CLI and Generators
 
@@ -205,7 +205,7 @@ itself  is split into two sub-projects:
 ### steal
 
 To use [steal](http://stealjs.com/docs/steal.html), simply add a script tag to `steal.js`
-in an HTML page or in a [done-autorender template] and
+in an HTML page or in a [done-autorender](#section=section_done_autorender) `template` and
 point the `main` attribute to a module to load like:
 
 ```
@@ -309,15 +309,15 @@ yourself with:
 CanJS provides:
 
 - __observables__ with [can.Map](#section=section_can_Map), [can.List](#section=section_can_List), and [can.compute](#section=section_can_compute).
-- __one-way and two-way binding templates__ with [can.stache] and [can.view.bindings].
+- __one-way and two-way binding templates__ with [can.stache](#section=section_can_stache) and [can.view.bindings](#section=section_can_view_bindings).
 - __custom elements__ with [can.Component](#section=section_can_Component).
-- __routing__ with [can.route].
+- __routing__ with [can.route](#section=section_can_route).
 
 Observables act as the `ViewModel` and part of the `Model`.
 
 One-way and two-way binding templates act as the `View`.
 
-[can.Component] is used to combine `View` and `ViewModel` into
+[can.Component](#section=section_can_Component) is used to combine `View` and `ViewModel` into
 easy to instantiate and assemble custom elements.
 
 Checkout the following quick examples of their use:
@@ -424,9 +424,9 @@ document.body.appendChild(frag);
 ### can.Construct
 
 [can.Construct](http://canjs.com/docs/can.Construct.html) allows you to define constructor functions that are easy to inherit
-from.  It's used by [can.Map], [can.List], and [can.Component].
+from.  It's used by [can.Map](#section=section_can_Map), [can.List](#section=section_can_List), and [can.Component](#section=section_can_Component).
 
-To create your own constructor function, [extend] `can.Construct`
+To create your own constructor function, [extend](http://canjs.com/docs/can.Construct.extend.html) `can.Construct`
 with prototype methods like:
 
 ```
@@ -453,7 +453,7 @@ todo.name //-> "dishes";
 todo.allowedToEdit() //-> true;
 ```
 
-You can extend `Todo` with [extend] too:
+You can extend `Todo` with [extend](http://canjs.com/docs/can.Construct.extend.html) too:
 
 ```
 var PrivateTodo = Todo.extend({
@@ -463,7 +463,7 @@ var PrivateTodo = Todo.extend({
 });
 ```
 
-`can.Construct` comes with a [super] plugin that allows you to easily
+`can.Construct` comes with a [super](http://canjs.com/docs/can.Construct.super.html) plugin that allows you to easily
 call base behavior like:
 
 ```
@@ -589,7 +589,7 @@ base `can.List` like:
 var hobbies = new can.List(["basketball","dancing"]);
 ```
 
-Use [.attr] to read and write items from the list or to read the length:
+Use [.attr](http://canjs.com/docs/can.List.prototype.attr.html) to read and write items from the list or to read the length:
 
 ```
 for(var i = 0, len = hobbies.attr("length"); i < len; i++){
@@ -599,7 +599,7 @@ hobbies.attr(1, "hip hop dancing");
 hobbies.attr() //-> ["basketball", "dancing"]
 ```
 
-Use array methods like [.push], [.pop], and [.splice] to modify the array:
+Use array methods like [.push](http://canjs.com/docs/can.List.prototype.push.html), [.pop](http://canjs.com/docs/can.List.prototype.pop.html), and [.splice](http://canjs.com/docs/can.List.prototype.splice.html) to modify the array:
 
 ```
 hobbies.pop();
@@ -611,7 +611,7 @@ hobbies.push("football");
 hobbies //-> can.List["basketball","football"]
 ```
 
-Use [.forEach], [.map], or [.filter] to loop through the array.  All
+Use [.forEach](http://canjs.com/docs/can.List.prototype.forEach.html), [.map](http://canjs.com/docs/can.List.prototype.map.html), or [.filter](http://canjs.com/docs/can.List.prototype.filter.html) to loop through the array.  All
 these methods return a `can.List`
 
 ```
@@ -711,7 +711,7 @@ people.attr(0).fullName() //-> "Justin Meyer"
 ### can.compute
 
 [can.compute](http://canjs.com/docs/can.compute.html) isn't used
-directly much anymore. However, it's used heavily in [can.Map]
+directly much anymore. However, it's used heavily in [can.Map](#section=section_can_Map)
 [getters](http://canjs.com/docs/can.Map.prototype.define.get.html) and live binding
 so it's worth understanding the basics.
 
@@ -848,7 +848,7 @@ The different tag types:
   renders a subsection depending on the value of the key.
 
   ```
-  // boolean values render the subsection or it's inverse
+  // boolean values render the subsection or its inverse
   can.stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
   can.stache("{{#key}}A{{/key}}")({key: false}) //-> ``
   can.stache("{{#key}}A{{else}}B{{/key}}")({key: false}) //-> `B`
@@ -1198,7 +1198,7 @@ var todo = new Todo({name: "dishes"})
 // Create it on the server 
 todo.save().then(function(todo){
 
-  // Update it's properties
+  // Update its properties
   todo.attr({
     name: "Do the dishes"
   })
