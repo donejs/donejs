@@ -16,7 +16,7 @@ utils.projectRoot().then(function(root) {
       console.error('Could not find local DoneJS binary (' + donejsBinary + ')');
       return;
     }
-    
+
     return utils.spawn(donejsBinary, args, { cwd: root });
   };
 
@@ -39,9 +39,8 @@ utils.projectRoot().then(function(root) {
               // If donejs-cli wasn't installed in this folder, it is the root
               binary = path.join.apply(path, [root].concat(args));
             }
-            console.log(root, fullPath, binary, fs.existsSync(binary));
 
-            return utils.spawn('node', [binary, 'init'], options);
+            return utils.spawn(binary, ['init'], options);
           });
       });
 
