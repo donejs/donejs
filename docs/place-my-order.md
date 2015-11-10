@@ -1670,45 +1670,42 @@ And in the order history template by updating `src/order/history.component` to:
         <div class="actions">Action</div>
       </div>
 
-      <can-import from="place-my-order/order/list.component!"
-          can-tag="pmo-loading">
-        <order-model getList="{status='new'}">
-          <pmo-order-list
-            orders="{.}"
-            status="new"
-            title="New Orders"
-            empty-message="No new orders">
-          </pmo-order-list>
-        </order-model>
+      <can-import from="place-my-order/order/list.component!" />
+      <order-model getList="{status='new'}">
+        <pmo-order-list
+          orders="{.}"
+          status="new"
+          title="New Orders"
+          empty-message="No new orders">
+        </pmo-order-list>
+      </order-model>
 
-        <order-model getList="{status='preparing'}">
-          <pmo-order-list
-            orders="{.}"
-            status="preparing"
-            title="Preparing"
-            empty-message="No orders preparing">
-          </pmo-order-list>
-        </order-model>
+      <order-model getList="{status='preparing'}">
+        <pmo-order-list
+          orders="{.}"
+          status="preparing"
+          title="Preparing"
+          empty-message="No orders preparing">
+        </pmo-order-list>
+      </order-model>
 
-        <order-model getList="{status='delivery'}">
-          <pmo-order-list
-            orders="{.}"
-            status="delivery"
-            title="In delivery"
-            empty-message="No orders in delivery">
-          </pmo-order-list>
-        </order-model>
+      <order-model getList="{status='delivery'}">
+        <pmo-order-list
+          orders="{.}"
+          status="delivery"
+          title="In delivery"
+          empty-message="No orders in delivery">
+        </pmo-order-list>
+      </order-model>
 
-        <order-model getList="{status='delivered'}">
-          <pmo-order-list
-            orders="{.}"
-            status="delivered"
-            title="Delivered"
-            empty-message="No delivered orders">
-          </pmo-order-list>
-        </order-model>
-      </can-import>
-
+      <order-model getList="{status='delivered'}">
+        <pmo-order-list
+          orders="{.}"
+          status="delivered"
+          title="Delivered"
+          empty-message="No delivered orders">
+        </pmo-order-list>
+      </order-model>
     </div>
   </template>
 </can-component>
