@@ -391,23 +391,22 @@ and update `src/header.component` to:
 ```html
 <can-component tag="pmo-header">
   <template>
-     <can-import from="can/view/href/"/>
-     <header>
-       <nav>
-         <h1>place-my-order.com</h1>
-         <ul>
-           <li class="{{#eq page 'home'}}active{{/eq}}">
-             <a can-href="{page='home'}">Home</a>
-           </li>
-           <li class="{{#eq page 'restaurants'}}active{{/eq}}">
-             <a can-href="{page='restaurants'}">Restaurants</a>
-           </li>
-           <li class="{{#eq page 'order-history'}}active{{/eq}}">
-             <a can-href="{page='order-history'}">Order History</a>
-           </li>
-         </ul>
-       </nav>
-     </header>
+    <header>
+      <nav>
+       <h1>place-my-order.com</h1>
+       <ul>
+         <li class="{{#eq page 'home'}}active{{/eq}}">
+           <a href="{{routeUrl page='home'}}">Home</a>
+         </li>
+         <li class="{{#eq page 'restaurants'}}active{{/eq}}">
+           <a href="{{routeUrl page='restaurants'}}">Restaurants</a>
+         </li>
+         <li class="{{#eq page 'order-history'}}active{{/eq}}">
+           <a href="{{routeUrl page='order-history'}}">Order History</a>
+         </li>
+       </ul>
+      </nav>
+    </header>
   </template>
 </can-component>
 ```
