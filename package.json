@@ -10,7 +10,7 @@
     "test": "npm run jshint && npm run mocha",
     "jshint": "jshint lib/. bin/donejs test/. --config",
     "mocha": "mocha test/ --timeout 120000",
-    "verify": "echo \"Script ran $1 $2\"",
+    "verify": "echo \"Script ran\"",
     "document:watch": "documentjs --watch",
     "document": "documentjs -f && cp docs/theme/static/favicon.ico site/favicon.ico",
     "publish": "git push origin && git push origin --tags",
