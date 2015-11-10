@@ -2050,18 +2050,16 @@ deploy:
 
 You can find the name of the app by running `heroku apps:info`.
 
-In order to deploy to Heroku you need to provide Travis with your Heroku API key. From the cli:
+In order to deploy to Heroku you need to provide Travis with your Heroku API key. Install the [TravisCI cli](https://github.com/travis-ci/travis.rb#readme) which will generated encrypted environment variables that can be set on Travis and then:
 
 ```
 travis encrypt $(heroku auth:token) --add deploy.api_key
 ```
 
-In order for Travis to be able to deploy your static assets you need to provide it the access token you generated before. This token will be stored in `~/.divshot/config/user.json`.  Install the [TravisCI cli](https://github.com/travis-ci/travis.rb#readme) which will generated encrypted environment variables that can be set on Travis. Run the command:
+To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `token` in the following command:
 
 ```
-travis encrypt DIVSHOT_TOKEN=token --add
+travis encrypt FIREBASE_TOKEN=token --add
 ```
-
-Where `token` is found in `~/.divshot/config/user.json`. This will add an encrypted version of the token to your .travis.yml file.
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Divshot's CDN.
