@@ -169,6 +169,19 @@ To become a contributor to DoneJS or its sub-projects, you simply have to:
 - attend a weekly meeting at least twice a month.
 - make one small contribution, even a spelling correction, a month.
 
+Core team:
+
+<div class="core-team-member">
+<img class="member-avatar" src="https://avatars3.githubusercontent.com/u/4830283?v=3&s=300"/>
+<h4>Prashant Sharma</h4>
+<p>
+Prashant is based in Bangalore, India. He likes the understated elegance of CanJS. I also believe DoneJS is a great framework in the making, since it makes technology selection a no brainer by uniquely offering developers an all-in-one technology stack.
+</p>
+<a href="https://github.com/prashantsharmain" target="_blank">github</a>
+</div>
+
+
+
 ### Fulltime team
 
 There are currently 3 fulltime contributors to DoneJS and its subprojects:
