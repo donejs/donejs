@@ -1737,7 +1737,7 @@ import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
 /**
- * @add order/new
+ * @add place-my-order/order/new
  */
 export const ViewModel = Map.extend({
   define: {
