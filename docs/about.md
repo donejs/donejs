@@ -137,25 +137,6 @@ family.  You'll find DoneJS a supportive environment to nurture your ideas.  You
 [gitter](https://gitter.im/donejs/donejs) or create an issue.
 
 
-## History
-
-DoneJS's history goes back more than 8 years!  Learn why JavaScriptMVC was started, and how it evolved into DoneJS.
-
-### Beginning Steps
-
-_This section will be complete by Nov 1st. Stay tuned._
-
-### Tomorrow's Roadmap
-
-The following are our highest priority, non bug fix features:
-
-- [can-set support sort](https://github.com/canjs/can-set/pull/10)
-- [documentjs configured in package.json](https://github.com/bitovi/documentjs/issues/202)
-- [StealJS dependency injection](https://github.com/stealjs/steal/issues/509)
-- [can-connect supporting other frameworks](https://github.com/canjs/can-connect/issues/42)
-- [Animation utilities](https://github.com/canjs/can-animate)
-- [O(log n) derived list modification](https://github.com/canjs/can-derive)
-
 ## Team
 
 The DoneJS family of technologies is built by 100s of contributors:
