@@ -565,7 +565,7 @@ That's it! No need for additional configuration in your JavaScript.
 <a class="btn" href="http://stealjs.com/docs/steal-tools.guides.progressive_loading.html"><span>View the Documentation</span></a>
 <a class="btn" href="/Guide.html#section=section_Switchbetweenpages"><span>View the Guide</span></a>
 
-_Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additional support via the [`<can-import>` tag](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](http://canjs.com/)_
+_Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additional support via the [`<can-import>` tag](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](http://canjs.com/)_
 
 ### Caching and Minimal Data Requests
 
@@ -993,7 +993,7 @@ This architecture simplifies routes so that they can be managed entirely in simp
 {{/switch}}
 ```
 
-<a class="btn" href="http://canjs.com/2.3-pre/guides/AppStateAndRouting.html"><span>View the Documentation</span></a>
+<a class="btn" href="http://canjs.com/guides/AppStateAndRouting.html"><span>View the Documentation</span></a>
 <a class="btn" href="/place-my-order.html#section=section_Settinguprouting"><span>View the Guide</span></a>
 
 _Pretty URLs and routing are features of the [CanJS](http://canjs.com/) project._
@@ -1574,7 +1574,7 @@ Check out [their source](https://github.com/bitovi-components/bit-tabs) for good
 
 ##### In-template dependency declarations
 
-[can-import](http://canjs.com/2.3-pre/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements, helpers, and other modules straight from a template file like:
+[can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements, helpers, and other modules straight from a template file like:
 
 ```
 <can-import from="components/my_tabs"/>
