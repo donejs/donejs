@@ -189,6 +189,16 @@ A 29 old guy from Germany, Julian started coding at the age of 16. Now he freela
 <a href="https://twitter.com/22_Solutions" target="_blank">@22_Solutions</a>
 </div>
 
+<div class="core-team-member">
+<img class="member-avatar" src="https://avatars1.githubusercontent.com/u/109013?v=3&s=300"/>
+<h4>Mohamed Cherif Bouchelaghem</h4>
+<p>
+Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, senior web developer in an advertising company, almost a server side developer in day work using PHP with WordPress or frameworks (Yii/Laravel), JavaScript developer after work hours specialy using DoneJS/CanJS. He likes to help people to learn and find solutions to issues with DoneJS framework and build applications and code samples that help to show the best from DoneJS/Canjs and learn it faster.
+</p>
+<a href="https://twitter.com/Cherif_b" target="_blank">@Cherif_b</a>
+<a href="https://github.com/cherifGsoul" target="_blank">Github</a>
+
+</div>
 
 ### Fulltime team
 
