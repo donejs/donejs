@@ -180,6 +180,14 @@ Prashant is based in Bangalore, India. He likes the understated elegance of CanJ
 <a href="https://github.com/prashantsharmain" target="_blank">github</a>
 </div>
 
+<div class="core-team-member">
+<img class="member-avatar" src="https://lh3.googleusercontent.com/-UOTrK62q0fM/AAAAAAAAAAI/AAAAAAAAADc/1_BqFteAC4Y/s300-p-rw-no/photo.jpg"/>
+<h4>Julian Kern</h4>
+<p>
+A 29 old guy from Germany, Julian started coding at the age of 16. Now he freelances with CanJS. He likes the clean structure of Model, Views, and ViewModels.
+</p>
+<a href="https://twitter.com/22_Solutions" target="_blank">@22_Solutions</a>
+</div>
 
 
 ### Fulltime team
