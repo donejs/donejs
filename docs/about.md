@@ -227,7 +227,10 @@ Matthew, keeper of beards, is the lead maintainer of StealJS and its related too
 </div>
 
 
-### Bitovi
+### Sponsors
 
-Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS. If you would
-like to sponsor development, please [contact](mailto:contact@bitovi.com).
+If you'd like to support the development of DoneJS, please find available options on our [Patreon page](https://www.patreon.com/donejs).  If you have other ideas, or would like to customize your support, 
+please [email us](mailto:contact@bitovi.com).
+
+
+Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS. 
