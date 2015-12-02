@@ -10,7 +10,8 @@ var initDescription = 'Initialize a new DoneJS application in a new folder or th
 program.version(mypkg.version);
 
 utils.projectRoot().then(function(root) {
-  var donejsBinary = path.join(root, 'node_modules', '.bin', 'donejs');
+  var doneScript = process.platform === 'win32' ? 'donejs.cmd' : 'donejs';
+  var donejsBinary = path.join(root, 'node_modules', '.bin', doneScript);
   var runBinary = function(args) {
     if(!fs.existsSync(donejsBinary)) {
       console.error('Could not find local DoneJS binary (' + donejsBinary + ')');
@@ -32,7 +33,7 @@ utils.projectRoot().then(function(root) {
 
         return utils.spawn('npm', [ 'install', 'donejs-cli' ], options)
           .then(function() {
-            var args = [ 'node_modules', '.bin', 'donejs' ];
+            var args = [ 'node_modules', '.bin', doneScript ];
             var binary = path.join.apply(path, [fullPath].concat(args));
 
             if(!fs.existsSync(binary)) {
