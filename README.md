@@ -2,7 +2,7 @@
 @hide title
 @hide sidebar
 
-![DoneJS logo](http://donejs.com/img/donejs-logo-black.svg)
+![DoneJS logo](http://donejs.com/static/img/donejs-logo-black.svg)
 
 DoneJS is easiest way to get a high performance, real time, web and mobile application
 done! The framework provides a nearly comprehensive combination of technologies for
