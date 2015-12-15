@@ -23,8 +23,9 @@ utils.projectRoot().then(function(root) {
 
   // donejs init
   program.command('init [folder]')
+    .option('-S, --skip-install')
     .description(initDescription)
-    .action(function(folder) {
+    .action(function(folder, opts) {
       var promise = utils.mkdirp(folder).then(function(fullPath) {
         var options = { cwd: fullPath };
 
@@ -35,13 +36,18 @@ utils.projectRoot().then(function(root) {
           .then(function() {
             var args = [ 'node_modules', '.bin', doneScript ];
             var binary = path.join.apply(path, [fullPath].concat(args));
+            var initArgs = ['init'];
 
             if(!fs.existsSync(binary)) {
               // If donejs-cli wasn't installed in this folder, it is the root
               binary = path.join.apply(path, [root].concat(args));
             }
 
-            return utils.spawn(binary, ['init'], options);
+            if(opts.skipInstall) {
+              args.push('--skip-install');
+            }
+
+            return utils.spawn(binary, initArgs, options);
           });
       });
 
