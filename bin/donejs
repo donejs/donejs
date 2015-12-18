@@ -32,7 +32,9 @@ utils.projectRoot().then(function(root) {
         console.log('Initializing new DoneJS application at', fullPath);
         console.log('Installing donejs-cli');
 
-        return utils.spawn('npm', [ 'install', 'donejs-cli' ], options)
+        var cliArg = 'donejs-cli@' + utils.versionRange(mypkg.version);
+
+        return utils.spawn('npm', [ 'install', cliArg ], options)
           .then(function() {
             var args = [ 'node_modules', '.bin', doneScript ];
             var binary = path.join.apply(path, [fullPath].concat(args));
