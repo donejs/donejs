@@ -36,7 +36,7 @@ choco install python2 -y
 
 #### Windows SDK
 
-Next we need the Windows SDK. We're going to assume Windows 7, but adjust this command to the version of Windows you use:
+Next we need the Windows SDK. We're going to assume Windows 7, but adjust this command to the version of Windows you use (for Windows 10 it is windows-sdk-10.0):
 
 ```shell
 choco install windows-sdk-7.1 -y
@@ -44,7 +44,7 @@ choco install windows-sdk-7.1 -y
 
 #### Visual Studio Express
 
-Installing Visual Studio Express gives us the C++ compiler we need:
+Installing Visual Studio Express gives us the C++ compiler we need. If you are using Windows 10 or get an error with this command you can also download Visual Studio Express [here](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx):
 
 ```shell
 choco install visualstudioexpress2013windowsdesktop -y
