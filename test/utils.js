@@ -48,5 +48,15 @@ describe('DoneJS CLI tests', function() {
           .fail(done);
       });
     });
+
+    describe('versionRange', function() {
+      it('gives a semver range compatible with the latest of a given version', function(){
+        assert.equal(
+          "^0.5.0",
+          utils.versionRange("0.5.12"),
+          "^0.5.0 is what you want if the current version of 0.5.12"
+        );
+      });
+    });
   });
 });

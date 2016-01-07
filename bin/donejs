@@ -32,22 +32,24 @@ utils.projectRoot().then(function(root) {
         console.log('Initializing new DoneJS application at', fullPath);
         console.log('Installing donejs-cli');
 
-        return utils.spawn('npm', [ 'install', 'donejs-cli' ], options)
-          .then(function() {
-            var args = [ 'node_modules', '.bin', doneScript ];
-            var binary = path.join.apply(path, [fullPath].concat(args));
-            var initArgs = ['init'];
+        var cliArg = 'donejs-cli@' + utils.versionRange(mypkg.version);
 
+        return utils.spawn('npm', [ 'install', cliArg ], options)
+          .then(function() {
+            var args = [ 'node_modules', 'donejs-cli', 'bin', 'donejs' ];
+            var binary = path.join.apply(path, [fullPath].concat(args));
+            
             if(!fs.existsSync(binary)) {
               // If donejs-cli wasn't installed in this folder, it is the root
               binary = path.join.apply(path, [root].concat(args));
             }
+            var initArgs = [binary, 'init'];
 
             if(opts.skipInstall) {
               args.push('--skip-install');
             }
 
-            return utils.spawn(binary, initArgs, options);
+            return utils.spawn('node', initArgs, options);
           });
       });
 
