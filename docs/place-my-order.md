@@ -1446,7 +1446,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
 <can-import from="place-my-order/order/details.component!" />
 
 <div class="order-form">
-  <restaurant-model get="{ _id=slug }" #restaurant="{value}">
+  <restaurant-model get="{ _id=slug }">
     {{#if isPending}}
       <div class="loading"></div>
     {{else}}
@@ -1474,8 +1474,8 @@ Now we can import that component and update `src/order/new/new.stache` to:
                     <li class="list-group-item">
                       <label>
                         <input type="checkbox"
-                          ($change)="{order.items.toggle this}"
-                          {{#if order.items.has}}checked{{/if}}>
+                          ($change)="order.items.toggle(.)"
+                          {{#if order.items.has(.)}}checked{{/if}}>
                         {{name}} <span class="badge">${{price}}</span>
                       </label>
                     </li>
@@ -1488,8 +1488,8 @@ Now we can import that component and update `src/order/new/new.stache` to:
                     <li class="list-group-item">
                       <label>
                         <input type="checkbox"
-                          ($change)="{order.items.toggle this}"
-                          {{#if order.items.has}}checked{{/if}}>
+                          ($change)="order.items.toggle(this)"
+                          {{#if order.items.has(.)}}checked{{/if}}>
                         {{name}} <span class="badge">${{price}}</span>
                       </label>
                     </li>
