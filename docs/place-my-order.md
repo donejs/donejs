@@ -1585,7 +1585,7 @@ Changing `src/order/list.component` to:
 ```html
 <can-component tag="pmo-order-list">
   <template>
-    <h4>{{title}}</h4>
+    <h4>{{listTitle}}</h4>
 
     {{#if orders.isPending}}
      <div class="loading"></div>
@@ -1605,50 +1605,24 @@ Changing `src/order/list.component` to:
         <div class="total">${{total}}</div>
 
         <div class="actions">
-          {{#eq status 'new'}}
-          <span class="badge">New Order!</span>
-          <p class="action">
-            Mark as:
-            <a href="javascript://" can-click="{markAs 'preparing'}">
-              Preparing
-            </a>
-          </p>
-          {{/eq}}
-
-          {{#eq status 'preparing'}}
-          <span class="badge">Preparing</span>
-          <p class="action">
-            Mark as:
-            <a href="javascript://"  can-click="{markAs 'delivery'}">
-              Out for delivery
-            </a>
-          </p>
-          {{/eq}}
-
-          {{#eq status 'delivery'}}
-          <span class="badge">Out for delivery</span>
-          <p class="action">
-            Mark as:
-            <a href="javascript://"  can-click="{markAs 'delivered'}">
-              Delivered
-            </a>
-          </p>
-          {{/eq}}
-
-          {{#eq status 'delivered'}}
-          <span class="badge">Delivered</span>
-          {{/eq}}
+          <span class="badge">{{statusTitle}}</span>
+          {{#if action}}
+            <p class="action">
+              Mark as:
+              <a href="javascript://" ($click)="markAs(action)">
+                {{actionTitle}}
+              </a>
+            </p>
+          {{/if}}
 
           <p class="action">
-            <a href="javascript://"  can-click="{destroy}">Delete</a>
+            <a href="javascript://"  ($click)="destroy()">Delete</a>
           </p>
         </div>
       </div>
+      {{else}}
+        <div class="order empty">{{emptyMessage}}</div>
       {{/each}}
-
-      {{^if orders.value.length}}
-      <div class="order empty">{{emptyMessage}}</div>
-      {{/if}}
     {{/if}}
   </template>
 </can-component>
@@ -1672,38 +1646,44 @@ And in the order history template by updating `src/order/history.component` to:
       <can-import from="place-my-order/order/list.component!" />
       <order-model getList="{status='new'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="New Orders"
           status="new"
-          title="New Orders"
-          empty-message="No new orders">
-        </pmo-order-list>
+          status-title="New Order!"
+          action="preparing"
+          action-title="Preparing"
+          empty-message="No new orders"/>
       </order-model>
 
       <order-model getList="{status='preparing'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="Preparing"
           status="preparing"
-          title="Preparing"
-          empty-message="No orders preparing">
-        </pmo-order-list>
+          status-title="Preparing"
+          action="delivery"
+          action-title="Out for delivery"
+          empty-message="No orders preparing"/>
       </order-model>
 
       <order-model getList="{status='delivery'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="Out for delivery"
           status="delivery"
-          title="In delivery"
-          empty-message="No orders in delivery">
-        </pmo-order-list>
+          status-title="Out for delivery"
+          action="delivered"
+          action-title="Delivered"
+          empty-message="No orders are being delivered"/>
       </order-model>
 
       <order-model getList="{status='delivered'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="Delivered"
           status="delivered"
-          title="Delivered"
-          empty-message="No delivered orders">
-        </pmo-order-list>
+          status-title="Delivered"
+          empty-message="No delivered orders"/>
       </order-model>
     </div>
   </template>
