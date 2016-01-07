@@ -36,20 +36,20 @@ utils.projectRoot().then(function(root) {
 
         return utils.spawn('npm', [ 'install', cliArg ], options)
           .then(function() {
-            var args = [ 'node_modules', '.bin', doneScript ];
+            var args = [ 'node_modules', 'donejs-cli', 'bin', 'donejs' ];
             var binary = path.join.apply(path, [fullPath].concat(args));
-            var initArgs = ['init'];
-
+            
             if(!fs.existsSync(binary)) {
               // If donejs-cli wasn't installed in this folder, it is the root
               binary = path.join.apply(path, [root].concat(args));
             }
+            var initArgs = [binary, 'init'];
 
             if(opts.skipInstall) {
               args.push('--skip-install');
             }
 
-            return utils.spawn(binary, initArgs, options);
+            return utils.spawn('node', initArgs, options);
           });
       });
 
