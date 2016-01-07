@@ -7,10 +7,8 @@ install DoneJS and includes platform-specific pieces of information not covered 
 
 DoneJS officially supports:
 
- - [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs
- - [npm](https://www.npmjs.com/) 2.x
-
-We will have a [Node 4.0 and npm 3.0 version](https://github.com/donejs/donejs/issues/376) out ASAP.
+ - [Node](https://nodejs.org) 0.10.x, 0.12.x, and Node 4/5
+ - [npm](https://www.npmjs.com/) 2.x, 3.x
 
 @body
 
@@ -18,7 +16,7 @@ We will have a [Node 4.0 and npm 3.0 version](https://github.com/donejs/donejs/i
 
 ### Prerequisites
 
-This will help you get set up with DoneJS on Windows. To use DoneJS you need a C++ compiler (for native dependencies). First you need a recent version of [Node.js](https://nodejs.org/en/). DoneJS officially supports Node 0.10.x, 0.12.x, and IOjs, but more recent versions will likely work as well.
+This will help you get set up with DoneJS on Windows. To use DoneJS you need a C++ compiler (for native dependencies). First you need a recent version of [Node.js](https://nodejs.org/en/).
 
 #### Package Management
 

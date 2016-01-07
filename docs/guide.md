@@ -18,10 +18,6 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 In this section, we will install DoneJS and generate a new application.
 
-> Before getting started, check out the [SettingUp] guide to make sure you have all of the prerequisites. DoneJS
-officially supports [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs, and
-[npm](https://www.npmjs.com/) 2.x.  If you find errors, check your version with `node -v` and `npm -v`.
-
 ### Install DoneJS
 
 To get started, let's install the DoneJS command line utility globally:
