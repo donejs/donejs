@@ -999,9 +999,9 @@ We already have an existing demo page at [src/restaurant/list/list.html](http://
 
 View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
 
-## Automated tests and continuous integration
+## Automated tests
 
-In this chapter we will automate running the tests so that they can be used in a [continuous integration]() environment. We will use [TravisCI](https://travis-ci.org/) as the CI server.
+In this chapter we will automate running the tests so that they can be run from from the command line.
 
 ### Using the global test page
 
@@ -1019,7 +1019,7 @@ If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src
 
 ### Using a test runner
 
-The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee]() which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
+The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee](https://github.com/bitovi/testee) which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
 
 ```
 donejs test
@@ -1027,11 +1027,48 @@ donejs test
 
 To see the tests passing on the command line.
 
-### Setting up continuous integration (Travis CI)
+## Continuous integration
 
-The way our application is set up, all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers, the most popular one probably [Jenkins](https://jenkins-ci.org/), and many hosted solutions like [Travis](https://travis-ci.org/).
+Now that the tests can be run from the command line we can automate it in a [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) environment to run all tests whenever a code change is made. We will use [GitHub](https://github.com) to host our code and [TravisCI](https://travis-ci.org/) as the CI server.
 
-We will use TravisCI as our hosted solution because it is free for open source projects. After signing up with GitHub, we have to enable the place-my-order repository in the Travis CI account settings and add the following `.travis.yml` to our project root:
+### Creating a GitHub account and repository
+
+If you don't have an account yet, go to [GitHub](https://github.com) to sign up and follow [the help](https://help.github.com/articles/set-up-git/) on how to set it up for use with the command-line `git`. Once completed, you can create a new repository from your dashboard. Calling the repository `place-my-order` and initializing it empty (without any of the default files) looks like this:
+
+![Creating a new repository on GitHub](static/img/guide-create-repo.png)
+
+Now we have to initialize Git in our project folder and add the GitHub repository we created as the origin remote (replace `<your-username>` with your GitHub username):
+
+```
+git init
+git remote add origin git@github.com:<your-username>/place-my-order.git
+```
+
+Then we can add all files and push to origin like this:
+
+```
+git add . --all
+git commit -am "Initial commit"
+git push origin master
+```
+
+If you now go to [github.com/<your-username>/place-my-order](https://github.com/<your-username>/place-my-order) you will see the project files in the repository.
+
+### Setting up Travis CI
+
+The way our application is set up, now all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers, the most popular one probably [Jenkins](https://jenkins-ci.org/), and many hosted solutions like [Travis CI](https://travis-ci.org/).
+
+We will use Travis as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `place-my-order` repository:
+
+![Enabling the repository on Travis CI](static/img/guide-travis-ci.png)
+
+Continuous integration on GitHub is most useful when using [branches and pull requests](https://help.github.com/categories/collaborating-on-projects-using-pull-requests/). That way your main branch (master) will only get new code changes if all tests pass. Let's create a new branch with
+
+```
+git checkout -b travis-ci
+```
+
+And add a `.travis.yml` file to our project root:
 
 ```
 language: node_js
@@ -1041,7 +1078,29 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 ```
 
-By default Travis CI runs `npm tests` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
+By default Travis CI runs `npm tests` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. We can also add a *Build Passing* badge to `readme.md`:
+
+```
+[![Build Status](https://travis-ci.org/<your-username>/place-my-order.png?branch=master)](https://travis-ci.org/<your-username>/place-my-order)
+```
+
+To see Travis run, let's add all changes and push to the branch:
+
+```
+git add readme.md .travis.yml
+git commit -am "Enabling Travis CI"
+git push origin travis-ci
+```
+
+And then create a new pull request by going to [github.com/<your-username>/place-my-order](https://github.com/<your-username>/place-my-order) which will now show an option for it:
+
+![Creating a new pull request on GitHub](static/img/guide-github-pr.png)
+
+Once you created the pull request, you will see a `Some checks haven’t completed yet` message that will eventually turn green like this:
+
+![Merging a pull request with all tests passed](static/img/guide-merge-pr.png)
+
+This is the time to merge our first pull request.
 
 ## Nested routes
 
