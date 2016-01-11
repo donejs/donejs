@@ -411,9 +411,9 @@ and update `src/header.component` to:
 </can-component>
 ```
 
-Here we use [can-href](http://canjs.com/docs/can.view.href.html) to create links that will set values in the application state. For example, the first usage of can-href above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
+Here we use [routeUrl](http://canjs.com/docs/can.stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
-We also use the Handlebars `eq` helper to make the appropriate link active.
+We also use the Stache `eq` helper to make the appropriate link active.
 
 ### Create a loading indicator
 
