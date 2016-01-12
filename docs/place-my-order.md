@@ -1880,6 +1880,11 @@ From here your application is ready to be used in production. Enable production 
 NODE_ENV=production donejs start
 ```
 
+If you're using Windows, you must first set the environmental variable:
+
+1. For Windows **command prompt** you set with `set NODE_ENV=production`
+1. For Windows **Powershell** you set it with `$env:NODE_ENV="production"`
+
 Refresh your browser to see the application load in production.
 
 ## Desktop and mobile apps
