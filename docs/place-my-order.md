@@ -2010,6 +2010,37 @@ The Windows application can be opened with
 
 Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN.
 
+### Bundling assets
+
+Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at `node_modules/place-my-order-assets/images`.
+
+StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.
+
+To use this capability add an option to your build script to enable it. Change:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: true
+});
+```
+
+to:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: {
+    infer: false,
+    glob: "node_modules/place-my-order-assets/images/**/*"
+  }
+});
+```
+
+StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
+
 ### Static hosting on Firebase
 
 Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
