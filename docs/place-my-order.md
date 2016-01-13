@@ -1880,10 +1880,7 @@ From here your application is ready to be used in production. Enable production 
 NODE_ENV=production donejs start
 ```
 
-If you're using Windows, you must first set the environmental variable:
-
-1. For Windows **command prompt** you set with `set NODE_ENV=production`
-1. For Windows **Powershell** you set it with `$env:NODE_ENV="production"`
+If you're using Windows omit the NODE_ENV=production in the command, and instead see the [setting up guide](SettingUp.html#section=section_EnvironmentalVariables) on how to set environment variables.
 
 Refresh your browser to see the application load in production.
 
@@ -1902,7 +1899,7 @@ npm install -g ios-sim
 
 We will use these tools to create an iOS application that can be tested in the iOS simulator.
 
-Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html), which gives all of the tools we need.
+Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html), which gives all of the tools we need. See the [setting up guide](SettingUp.html#section=section_AndroidDevelopment) for full instructions on setting up your Android emulator.
 
 Now we can install the DoneJS Cordova tools with:
 

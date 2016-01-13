@@ -64,6 +64,62 @@ set NODE_ENV=production
 $env:NODE_ENV="production"
 ```
 
+To later remove these environment variables:
+
+**Command Prompt**
+
+```
+set NODE_ENV=
+```
+
+**Powershell**
+
+```
+$env:NODE_ENV=""
+```
+
+
+### Android Development
+
+In order to develop an Android application you need to install the [Android Studio](https://developer.android.com/sdk/index.html). The installer will prompt you to also install Java if you don't already have it.
+
+#### Platform and Build Tools
+
+Once you've installed Android Studio you still have a few things to do. You need to install the Android SDK Platform and Build tools. From the command-line run:
+
+```
+C:\Users\YOURNAME\AppData\Local\Android\sdk\tools\android.bat
+```
+
+This starts the Android SDK Manager. From this screen you can select:
+
+* Android 6.0
+* Android SDK Build-tools (23+)
+* Intel x86 Emulator Accelerator (this will improve the emulator start time)
+
+Click all of these and anything else you need and click Install packages.
+
+#### Virtual Device Manager
+
+From the command-line run:
+
+```
+C:\Users\YOURNAME\AppData\Local\Android\sdk\tools\android.bat avd
+```
+
+This starts the Android Virtual Device (AVD) Manager. This is used to manager virtual devices that will run in the emulator.
+
+Click **Create** and make sure to fill out:
+
+* AVD Name (this can be whatever you want)
+* Device
+* Target (the API level you installed)
+* CPU (try an Intel CPU if possible)
+
+Then click **OK** to create the device.
+
+Close the AVD Manager and you should have everything you need for Android development.
+
 ## Mac OS X
 
 ### Prerequisites
