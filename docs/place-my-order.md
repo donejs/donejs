@@ -951,7 +951,7 @@ Update `src/restaurant/list/list.stache` to:
   {{#if restaurants.isResolved}}
     {{#each restaurants.value}}
     <div class="restaurant">
-      <img src="/{{images.thumbnail}}" width="100" height="100">
+      <img src="{{joinBase images.thumbnail}}" width="100" height="100">
       <h3>{{name}}</h3>
       {{#address}}
       <div class="address">
@@ -1146,7 +1146,7 @@ And change `src/restaurant/details.component` to:
       {{else}}
       {{#value}}
       <div class="restaurant-header"
-          style="background-image: url(/{{images.banner}});">
+          style="background-image: url({{joinBase images.banner}});">
         <div class="background">
           <h2>{{name}}</h2>
 
@@ -1170,7 +1170,7 @@ And change `src/restaurant/details.component` to:
         <h3>The best food this side of the Mississippi</h3>
 
         <p class="description">
-          <img src="/{{images.owner}}" />
+          <img src="{{joinBase images.owner}}" />
           Description for {{name}}
         </p>
         <p class="order-link">
@@ -1912,6 +1912,52 @@ donejs add cordova
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
 
+This will change your `build.js` script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the **glob** property:
+
+```
+glob: [
+  "node_modules/steal/steal.production.js",
+  "node_modules/place-my-order-assets/images/**/*"
+]
+```
+
+#### AJAX
+
+When not running in a traditional browser environment, AJAX requests need to be made
+to an external URL. The module `steal-platform` aids in detecting environments like Cordova
+so special behavior can be added.  Install the module:
+
+```
+npm install steal-platform --save
+```
+
+Create a file: `src/service-base-url.js` and place this code:
+
+```js
+import platform from "steal-platform";
+
+let baseUrl = '';
+
+if(platform.isCordova || platform.isNW) {
+  baseUrl = 'http://place-my-order.com';
+}
+
+export default baseUrl;
+```
+
+This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be made there.
+
+Our models will also need to be updated to use the baseUrl. For example in `src/models/state` do:
+
+```js
+import baseUrl from '../service-base-url';
+
+superMap({
+  url: baseUrl + '/api/states',
+  ...
+});
+```
+
 To run the Cordova build and launch the simulator we can now run:
 
 ```
@@ -1930,6 +1976,17 @@ donejs add nw
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
 
+Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **files** property to reflect:
+
+```
+files: [
+  "package.json",
+  "production.html",
+  "node_modules/steal/steal.production.js",
+  "node_modules/place-my-order-assets/images/**/*"
+]
+```
+
 Then we can run the build like this:
 
 ```
@@ -1946,7 +2003,7 @@ open place-my-order.app
 The Windows application can be opened with
 
 ```
-.\build\donejs-chat\win64\place-my-order.exe
+.\build\place-my-order\win64\place-my-order.exe
 ```
 
 ## Deploy
