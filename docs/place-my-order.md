@@ -2141,7 +2141,7 @@ heroku config:set NODE_ENV=production
 Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using can-serve our Procfile just looks like this:
 
 ```
-web: node_modules/.bin/can-serve --proxy http://place-my-order.com/api
+web: node_modules/.bin/can-serve --proxy http://www.place-my-order.com/api
 ```
 
 Since Heroku needs the build artifacts we need to commit those before pushing to Heroku, I always do this in a separate branch:
