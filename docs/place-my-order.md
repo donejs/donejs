@@ -2150,6 +2150,8 @@ web: node_modules/.bin/can-serve --proxy http://www.place-my-order.com/api
 Since Heroku needs the build artifacts we need to commit those before pushing to Heroku, I always do this in a separate branch:
 
 ```
+git add -A
+git commit -m "Finishing place-my-order"
 git checkout -b deploy
 git add -f dist
 git commit -m "Deploying to Heroku"
@@ -2161,7 +2163,11 @@ And finally do an initial deploy.
 git push heroku deploy:master
 ```
 
-Any time in the future you want to deploy simply push to the heroku remote.
+Any time in the future you want to deploy simply push to the heroku remote. Once the deploy is finished you can open the link provided in your browser, then checkout the _master_ branch:
+
+```
+git checkout master
+```
 
 ### Continuous Deployment
 
@@ -2188,13 +2194,30 @@ You can find the name of the app by running `heroku apps:info`.
 In order to deploy to Heroku you need to provide Travis with your Heroku API key. Install the [TravisCI cli](https://github.com/travis-ci/travis.rb#readme) which will generated encrypted environment variables that can be set on Travis and then:
 
 ```
-travis encrypt $(heroku auth:token) --add deploy.api_key
+heroku auth:token
 ```
 
-To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `token` in the following command:
+Copy the token printed and paste it as `<token>` in the following command:
 
 ```
-travis encrypt FIREBASE_TOKEN=token --add
+travis encrypt <token> --add deploy.api_key
+```
+
+To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `<token>` in the following command:
+
+```
+travis encrypt FIREBASE_TOKEN=<token> --add
 ```
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Divshot's CDN.
+
+To test this out checkout a new branch:
+
+```
+git checkout -b continuous
+git add -A
+git commit -m "Trying out continuous deployment"
+git push origin continuous
+```
+
+Visit your GitHub page, create a pull-request, wait for tests to pass and then merge. Visit your Travis CI build page at [https://travis-ci.org/<your-username>/place-my-order](https://travis-ci.org/<your-username>/place-my-order) to see the deployment happening in real time.
