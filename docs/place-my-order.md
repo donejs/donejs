@@ -1100,7 +1100,13 @@ Once you created the pull request, you will see a `Some checks haven’t complet
 
 ![Merging a pull request with all tests passed](static/img/guide-merge-pr.png)
 
-This is the time to merge our first pull request.
+Once everything turns green, click the "Merge pull request" button.  Then in your console, checkout the _master_ branch and pull down it's latest with:
+
+```
+git checkout master
+git pull origin master
+```
+
 
 ## Nested routes
 
