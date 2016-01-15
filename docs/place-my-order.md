@@ -2011,7 +2011,7 @@ The Windows application can be opened with
 
 ## Deploy
 
-Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN.
+Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN and [Heroku](https://heroku.com) to provide server-side rendering.
 
 ### Bundling assets
 
@@ -2046,15 +2046,19 @@ StealTools will find all of the assets you reference in your CSS and copy them t
 
 ### Static hosting on Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
+Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username:
 
-> You'll get an error if your app name is too long, so pick something on the shorter side.
+![Settting up a Firebase project](static/img/guide-firebase-setup.png)
 
-When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
+Write down the name of your app because you'll need it in the next section.
+
+> You will get an error if your app name is too long, so pick something on the shorter side, for example `pmo-<user>`.
+
+When you deploy for the first time it will ask you to authorize with your login information, but first we need to configure the project.
 
 #### Configuring DoneJS
 
-Now we can add the Firebase deployment configuration to our `package.json` like this:
+With the Firebase account and application in place we can add the deployment configuration to our `package.json` like this:
 
 ```js
 "donejs": {
@@ -2096,18 +2100,18 @@ And also update the production `baseURL` in the `system` section:
 }
 ```
 
-Again, make sure to replace the URL with your Firebase application name.
+Again, make sure to replace the `<appname>` with your Firebase application name.
 
 #### Run deploy
 
-we can deploy the application by running:
+We can now deploy the application by running:
 
 ```
 donejs build
 donejs deploy
 ```
 
-Static files are deployed to Firebase and verify that the application is loading from the CDN by loading it after running:
+Static files are deployed to Firebase and we can verify that the application is loading from the CDN by loading it running:
 
 ```
 NODE_ENV=production donejs start
@@ -2115,23 +2119,20 @@ NODE_ENV=production donejs start
 
 > If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.
 
-We should now see our assets being loaded from the Firebase CDN.
+We should now see our assets being loaded from the Firebase CDN like this:
+
+![A network tab when using the CDN](static/img/guide-firebase-network.png)
 
 ### Deploy your Node code
 
-At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to gain the benefit of server-side rendering.
+At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to get the benefit of server-side rendering.
 
-Download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
+If you do not have an account yet, sign up for Heroku at [signup.heroku.com](https://signup.heroku.com/). Then download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
 
-After you've installed it, login by running:
+After installing we can initialize the application via
 
 ```
 heroku login
-```
-
-Create a new app by running:
-
-```
 heroku create
 ```
 
@@ -2147,11 +2148,17 @@ Add a new `Procfile` that tells Heroku what to launch as the app's server. Since
 web: node_modules/.bin/can-serve --proxy http://www.place-my-order.com/api
 ```
 
-Since Heroku needs the build artifacts we need to commit those before pushing to Heroku, I always do this in a separate branch:
+First let's save our current status:
 
 ```
 git add -A
 git commit -m "Finishing place-my-order"
+git push origin master
+```
+
+Since Heroku needs the build artifacts we need to commit those before pushing to Heroku. We recommend doing this in a separate branch.
+
+```
 git checkout -b deploy
 git add -f dist
 git commit -m "Deploying to Heroku"
@@ -2163,7 +2170,7 @@ And finally do an initial deploy.
 git push heroku deploy:master
 ```
 
-Any time in the future you want to deploy simply push to the heroku remote. Once the deploy is finished you can open the link provided in your browser, then checkout the _master_ branch:
+Any time in the future you want to deploy simply push to the Heroku remote. Once the deploy is finished you can open the link provided in your browser. If successful we can checkout the _master_ branch:
 
 ```
 git checkout master
@@ -2171,7 +2178,7 @@ git checkout master
 
 ### Continuous Deployment
 
-Previously we set up Travis CI [for automated testing](http://donejs.com/Guide.html#section_Settingcontinuousintegration_TravisCI_) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy your code to production once tests have passed.
+Previously we set up Travis CI [for automated testing](#section=section_Continuousintegration) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.
 
 Open your `.travis.yml` file and add a new `deploy` key that looks like this:
 
@@ -2220,4 +2227,31 @@ git commit -m "Trying out continuous deployment"
 git push origin continuous
 ```
 
-Visit your GitHub page, create a pull-request, wait for tests to pass and then merge. Visit your Travis CI build page at [https://travis-ci.org/<your-username>/place-my-order](https://travis-ci.org/<your-username>/place-my-order) to see the deployment happening in real time.
+Visit your GitHub page, create a pull-request, wait for tests to pass and then merge. Visit your Travis CI build page at [https://travis-ci.org/<your-username>/place-my-order](https://travis-ci.org/<your-username>/place-my-order) to see the deployment happening in real time like this:
+
+![The Travis CI deploy](static/img/guide-travis-deploy.png)
+
+## What's next?
+
+In this final short chapter, let's quickly look at what we did in this guide and where to follow up for any questions.
+
+### Recap
+
+In this in-depth guide we created and deployed a fully tested restaurant menu ordering application called [place-my-order](http://www.place-my-order.com/) with DoneJS. We learned how to set up a DoneJS project, create custom elements and retrieve data from the server. Then we implemented a unit-tested view-model, ran those tests automatically from the command line and on a continuous integration server.
+
+We went into more detail on how to create nested routes and importing other projects from NPM. Then we created new orders and made it real-time, added and built documentation and made a production build. Finally we turned that same application into a desktop- and mobile application and deployed it to a CDN and the web.
+
+### Following up
+
+You can learn more about each of the individual projects that DoneJS includes at:
+
+- [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
+- [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
+- [jQuery](http://jquery.com) - DOM helpers
+- [jQuery++](http://jquerypp.com) - Extended DOM helpers
+- [QUnit](https://qunitjs.com/) or Mocha - Assertion library
+- [FuncUnit](http://funcunit.com) - Functional tests
+- [Testee](https://github.com/bitovi/testee) - Test runner
+- [DocumentJS](http://documentjs.com) - Documentation
+
+If you have any questions, do not hesitate to ask us on [Gitter](https://gitter.im/donejs/donejs) or the [forums](forums.donejs.com)!
