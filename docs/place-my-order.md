@@ -1769,6 +1769,8 @@ When we initialized the application all the infrastructure necessary to generate
 donejs document
 ```
 
+This produces documentation at [http://localhost:8080/docs/](http://localhost:8080/docs/).
+
 ### Documenting a module
 
 Let's add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
