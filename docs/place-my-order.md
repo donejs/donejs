@@ -2191,7 +2191,7 @@ before_deploy:
   - "node build"
   - "git add dist/ --force"
   - "git commit -m \"Updating build.\""
-  - "node_modules/.bin/donejs-deploy"
+  - "node_modules/.bin/deploy"
 deploy:
   skip_cleanup: true
   provider: "heroku"
@@ -2200,7 +2200,13 @@ deploy:
 
 You can find the name of the app by running `heroku apps:info`.
 
-In order to deploy to Heroku you need to provide Travis with your Heroku API key. Install the [TravisCI cli](https://github.com/travis-ci/travis.rb#readme) which will generated encrypted environment variables that can be set on Travis and then:
+In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our `.travis.yml` should always be encrypted for which we install the [travis-encrypt](https://www.npmjs.com/package/travis-encrypt) module:
+
+```
+npm install travis-encrypt -g
+```
+
+Now we can get the Heroku authentication token with:
 
 ```
 heroku auth:token
@@ -2209,13 +2215,15 @@ heroku auth:token
 Copy the token printed and paste it as `<token>` in the following command:
 
 ```
-travis encrypt <token> --add deploy.api_key
+travis-encrypt --add deploy.api_key -r <your-username>/<your-repository> <token>
 ```
+
+Replace `<your-username>` and `<your-repository>` with the name of your GitHub account and repository respecitvely.
 
 To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `<token>` in the following command:
 
 ```
-travis encrypt FIREBASE_TOKEN=<token> --add
+travis-encrypt --add -r <your-username>/<your-repository> FIREBASE_TOKEN=<token>
 ```
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Divshot's CDN.
