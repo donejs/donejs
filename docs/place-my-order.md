@@ -1944,7 +1944,7 @@ import platform from "steal-platform";
 let baseUrl = '';
 
 if(platform.isCordova || platform.isNW) {
-  baseUrl = 'http://place-my-order.com';
+  baseUrl = 'http://www.place-my-order.com';
 }
 
 export default baseUrl;
@@ -1957,10 +1957,27 @@ Our models will also need to be updated to use the baseUrl. For example in `src/
 ```js
 import baseUrl from '../service-base-url';
 
-superMap({
+export const stateConnection = superMap({
   url: baseUrl + '/api/states',
   ...
 });
+```
+
+For real-time connected models, such as in `src/models/order` also update the socket connection:
+
+```js
+import baseUrl from '../service-base-url';
+
+export const connection = superMap({
+  url: baseUrl + '/api/orders',
+  ...
+});
+
+...
+
+const socket = io(baseUrl);
+
+...
 ```
 
 To run the Cordova build and launch the simulator we can now run:
