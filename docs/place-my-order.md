@@ -178,6 +178,7 @@ Every DoneJS application consists of at least two files:
 <html>
   <head>
     <title>{{title}}</title>
+    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     {{asset "css"}}
     {{asset "html5shiv"}}
   </head>
@@ -447,6 +448,8 @@ Update `src/index.stache` to:
 <html>
   <head>
     <title>{{title}}</title>
+    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     {{asset "css"}}
     {{asset "html5shiv"}}
   </head>
