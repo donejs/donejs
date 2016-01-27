@@ -165,3 +165,69 @@ It's important to also install the `build-essential` package afterwards. This wi
 ```
 sudo apt-get install build-essential
 ```
+
+### Android Development
+
+In order to develop an Android application you need to install the [Android Studio](https://developer.android.com/sdk/index.html). Once download untar/gzip it:
+
+```
+tar xvf android-sdk.X-linux.tgz
+```
+
+This will create an `android-sdk-linux` folder. At this point you might want to move it somewhere else, `$HOME/lib/android-sdk-linux` is a good place.
+
+Add the android-sdk-linux/tools folder to your `PATH` with: `export PATH="path/to/android-sdk-linux/tools`. Add this to your `~/.bashrc` or `~/.zshrc` config so it will persist.
+
+Additionally the `ANDROID_HOME` environmental variable needs to be set. Set it with:
+
+```
+export ANDROID_HOME="/home/name/lib/android-sdk-linux"
+```
+
+This too should be added to your `~/.bashrc` or `~/.zshrc`.
+
+#### Java
+
+If you don't already have a Java JDK installed you can do so with:
+
+```
+sudo apt-get install default-jdk
+```
+
+#### Platform and Build Tools
+
+Once you've installed Android Studio you still have a few things to do. You need to install the Android SDK Platform and Build tools. From the command-line run:
+
+```
+$ANDROID_HOME/tools/android
+```
+
+This starts the Android SDK Manager. From this screen you can select:
+
+* Android 6.0
+* Android SDK Build-tools (23+)
+* Intel x86 Emulator Accelerator (this will improve the emulator start time)
+
+Click all of these and anything else you need and click Install packages.
+
+#### Virtual Device Manager
+
+From the command-line run:
+
+```
+$ANDROID_HOME/tools/android avd
+```
+
+This starts the Android Virtual Device (AVD) Manager. This is used to manager virtual devices that will run in the emulator.
+
+Click **Create** and make sure to fill out:
+
+* AVD Name (this can be whatever you want)
+* Device
+* Target (the API level you installed)
+* CPU (try an Intel CPU if possible)
+
+Then click **OK** to create the device.
+
+Close the AVD Manager and you should have everything you need for Android development.
+
