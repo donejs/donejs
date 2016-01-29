@@ -197,7 +197,7 @@ First, let's update `src/home.component` with the original content from the home
 
 > [`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
 
-Next, add a link to go back to the chat page by updating `src/messages/messages.stache` to:
+Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
 
 ```html
 <h5><a href="{{routeUrl page='home'}}">Home</a></h5>
@@ -407,7 +407,7 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 
 ### Create messages
 
-Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. 
+Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. 
 
 Update `src/messages/messages.stache` to look like this:
 
