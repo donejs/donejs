@@ -18,10 +18,6 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 In this section, we will install DoneJS and generate a new application.
 
-> Before getting started, check out the [SettingUp] guide to make sure you have all of the prerequisites. DoneJS
-officially supports [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs, and
-[npm](https://www.npmjs.com/) 2.x.  If you find errors, check your version with `node -v` and `npm -v`.
-
 ### Install DoneJS
 
 To get started, let's install the DoneJS command line utility globally:
@@ -146,7 +142,7 @@ First, let's update `src/home.component` with the original content from the home
 
 > [`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
 
-Next, add a link to go back to the chat page by updating `src/messages/messages.stache` to:
+Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
 
 @sourceref guides/guide/steps/7-navigate/messages.stache
 @highlight 1
@@ -239,7 +235,7 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 
 ### Create messages
 
-Now let's add the form to create new messages. The form two-way binds the `name` and `message` properties to the component's view-model and calls `send()` when hitting the enter key in the message input.
+Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. 
 
 Update `src/messages/messages.stache` to look like this:
 

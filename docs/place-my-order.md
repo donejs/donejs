@@ -178,6 +178,7 @@ Every DoneJS application consists of at least two files:
 <html>
   <head>
     <title>{{title}}</title>
+    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     {{asset "css"}}
     {{asset "html5shiv"}}
   </head>
@@ -411,9 +412,9 @@ and update `src/header.component` to:
 </can-component>
 ```
 
-Here we use [can-href](http://canjs.com/docs/can.view.href.html) to create links that will set values in the application state. For example, the first usage of can-href above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
+Here we use [routeUrl](http://canjs.com/docs/can.stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
-We also use the Handlebars `eq` helper to make the appropriate link active.
+We also use the Stache `eq` helper to make the appropriate link active.
 
 ### Create a loading indicator
 
@@ -447,6 +448,8 @@ Update `src/index.stache` to:
 <html>
   <head>
     <title>{{title}}</title>
+    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
     {{asset "css"}}
     {{asset "html5shiv"}}
   </head>
@@ -614,7 +617,7 @@ And update the template at `src/restaurant/list/list.stache` to use the [Promise
 
 By checking for `restaurants.isPending` and `restaurants.isResolved` we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at `restaurants.value`. When navigating to the restaurants page now we can see a list of all restaurants.
 
-Note the usage of `can-href` to set up a link that points to each restaurant. `slug=slug` is not wrapped in quotes because the helper will populate each restaurant's individual `slug` property in the URL created.
+Note the usage of `routeUrl` to set up a link that points to each restaurant. `slug=slug` is not wrapped in quotes because the helper will populate each restaurant's individual `slug` property in the URL created.
 
 ## Creating a unit-tested view model
 
@@ -951,7 +954,7 @@ Update `src/restaurant/list/list.stache` to:
   {{#if restaurants.isResolved}}
     {{#each restaurants.value}}
     <div class="restaurant">
-      <img src="/{{images.thumbnail}}" width="100" height="100">
+      <img src="{{joinBase images.thumbnail}}" width="100" height="100">
       <h3>{{name}}</h3>
       {{#address}}
       <div class="address">
@@ -999,9 +1002,9 @@ We already have an existing demo page at [src/restaurant/list/list.html](http://
 
 View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
 
-## Automated tests and continuous integration
+## Automated tests
 
-In this chapter we will automate running the tests so that they can be used in a [continuous integration]() environment. We will use [TravisCI](https://travis-ci.org/) as the CI server.
+In this chapter we will automate running the tests so that they can be run from from the command line.
 
 ### Using the global test page
 
@@ -1019,7 +1022,7 @@ If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src
 
 ### Using a test runner
 
-The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee]() which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
+The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee](https://github.com/bitovi/testee) which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
 
 ```
 donejs test
@@ -1027,11 +1030,48 @@ donejs test
 
 To see the tests passing on the command line.
 
-### Setting up continuous integration (Travis CI)
+## Continuous integration
 
-The way our application is set up, all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers, the most popular one probably [Jenkins](https://jenkins-ci.org/), and many hosted solutions like [Travis](https://travis-ci.org/).
+Now that the tests can be run from the command line we can automate it in a [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration) (CI) environment to run all tests whenever a code change is made. We will use [GitHub](https://github.com) to host our code and [TravisCI](https://travis-ci.org/) as the CI server.
 
-We will use TravisCI as our hosted solution because it is free for open source projects. After signing up with GitHub, we have to enable the place-my-order repository in the Travis CI account settings and add the following `.travis.yml` to our project root:
+### Creating a GitHub account and repository
+
+If you don't have an account yet, go to [GitHub](https://github.com) to sign up and follow [the help](https://help.github.com/articles/set-up-git/) on how to set it up for use with the command-line `git`. Once completed, you can create a new repository from your dashboard. Calling the repository `place-my-order` and initializing it empty (without any of the default files) looks like this:
+
+![Creating a new repository on GitHub](static/img/guide-create-repo.png)
+
+Now we have to initialize Git in our project folder and add the GitHub repository we created as the origin remote (replace `<your-username>` with your GitHub username):
+
+```
+git init
+git remote add origin git@github.com:<your-username>/place-my-order.git
+```
+
+Then we can add all files and push to origin like this:
+
+```
+git add . --all
+git commit -am "Initial commit"
+git push origin master
+```
+
+If you now go to [github.com/<your-username>/place-my-order](https://github.com/<your-username>/place-my-order) you will see the project files in the repository.
+
+### Setting up Travis CI
+
+The way our application is set up, now all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers, the most popular one probably [Jenkins](https://jenkins-ci.org/), and many hosted solutions like [Travis CI](https://travis-ci.org/).
+
+We will use Travis as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `place-my-order` repository:
+
+![Enabling the repository on Travis CI](static/img/guide-travis-ci.png)
+
+Continuous integration on GitHub is most useful when using [branches and pull requests](https://help.github.com/categories/collaborating-on-projects-using-pull-requests/). That way your main branch (master) will only get new code changes if all tests pass. Let's create a new branch with
+
+```
+git checkout -b travis-ci
+```
+
+And add a `.travis.yml` file to our project root:
 
 ```
 language: node_js
@@ -1041,7 +1081,35 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 ```
 
-By default Travis CI runs `npm tests` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. Now every time we push to our repository on GitHub, the tests will be run automatically.
+By default Travis CI runs `npm tests` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. We can also add a *Build Passing* badge to `readme.md`:
+
+```
+[![Build Status](https://travis-ci.org/<your-username>/place-my-order.png?branch=master)](https://travis-ci.org/<your-username>/place-my-order)
+```
+
+To see Travis run, let's add all changes and push to the branch:
+
+```
+git add readme.md .travis.yml
+git commit -am "Enabling Travis CI"
+git push origin travis-ci
+```
+
+And then create a new pull request by going to [github.com/<your-username>/place-my-order](https://github.com/<your-username>/place-my-order) which will now show an option for it:
+
+![Creating a new pull request on GitHub](static/img/guide-github-pr.png)
+
+Once you created the pull request, you will see a `Some checks haven’t completed yet` message that will eventually turn green like this:
+
+![Merging a pull request with all tests passed](static/img/guide-merge-pr.png)
+
+Once everything turns green, click the "Merge pull request" button.  Then in your console, checkout the _master_ branch and pull down it's latest with:
+
+```
+git checkout master
+git pull origin master
+```
+
 
 ## Nested routes
 
@@ -1087,7 +1155,7 @@ And change `src/restaurant/details.component` to:
       {{else}}
       {{#value}}
       <div class="restaurant-header"
-          style="background-image: url(/{{images.banner}});">
+          style="background-image: url({{joinBase images.banner}});">
         <div class="background">
           <h2>{{name}}</h2>
 
@@ -1111,7 +1179,7 @@ And change `src/restaurant/details.component` to:
         <h3>The best food this side of the Mississippi</h3>
 
         <p class="description">
-          <img src="/{{images.owner}}" />
+          <img src="{{joinBase images.owner}}" />
           Description for {{name}}
         </p>
         <p class="order-link">
@@ -1446,7 +1514,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
 <can-import from="place-my-order/order/details.component!" />
 
 <div class="order-form">
-  <restaurant-model get="{ _id=slug }" #restaurant="{value}">
+  <restaurant-model get="{ _id=slug }">
     {{#if isPending}}
       <div class="loading"></div>
     {{else}}
@@ -1474,8 +1542,8 @@ Now we can import that component and update `src/order/new/new.stache` to:
                     <li class="list-group-item">
                       <label>
                         <input type="checkbox"
-                          ($change)="{order.items.toggle this}"
-                          {{#if order.items.has}}checked{{/if}}>
+                          ($change)="order.items.toggle(.)"
+                          {{#if order.items.has(.)}}checked{{/if}}>
                         {{name}} <span class="badge">${{price}}</span>
                       </label>
                     </li>
@@ -1488,8 +1556,8 @@ Now we can import that component and update `src/order/new/new.stache` to:
                     <li class="list-group-item">
                       <label>
                         <input type="checkbox"
-                          ($change)="{order.items.toggle this}"
-                          {{#if order.items.has}}checked{{/if}}>
+                          ($change)="order.items.toggle(this)"
+                          {{#if order.items.has(.)}}checked{{/if}}>
                         {{name}} <span class="badge">${{price}}</span>
                       </label>
                     </li>
@@ -1585,7 +1653,7 @@ Changing `src/order/list.component` to:
 ```html
 <can-component tag="pmo-order-list">
   <template>
-    <h4>{{title}}</h4>
+    <h4>{{listTitle}}</h4>
 
     {{#if orders.isPending}}
      <div class="loading"></div>
@@ -1605,50 +1673,24 @@ Changing `src/order/list.component` to:
         <div class="total">${{total}}</div>
 
         <div class="actions">
-          {{#eq status 'new'}}
-          <span class="badge">New Order!</span>
-          <p class="action">
-            Mark as:
-            <a href="javascript://" can-click="{markAs 'preparing'}">
-              Preparing
-            </a>
-          </p>
-          {{/eq}}
-
-          {{#eq status 'preparing'}}
-          <span class="badge">Preparing</span>
-          <p class="action">
-            Mark as:
-            <a href="javascript://"  can-click="{markAs 'delivery'}">
-              Out for delivery
-            </a>
-          </p>
-          {{/eq}}
-
-          {{#eq status 'delivery'}}
-          <span class="badge">Out for delivery</span>
-          <p class="action">
-            Mark as:
-            <a href="javascript://"  can-click="{markAs 'delivered'}">
-              Delivered
-            </a>
-          </p>
-          {{/eq}}
-
-          {{#eq status 'delivered'}}
-          <span class="badge">Delivered</span>
-          {{/eq}}
+          <span class="badge">{{statusTitle}}</span>
+          {{#if action}}
+            <p class="action">
+              Mark as:
+              <a href="javascript://" ($click)="markAs(action)">
+                {{actionTitle}}
+              </a>
+            </p>
+          {{/if}}
 
           <p class="action">
-            <a href="javascript://"  can-click="{destroy}">Delete</a>
+            <a href="javascript://"  ($click)="destroy()">Delete</a>
           </p>
         </div>
       </div>
+      {{else}}
+        <div class="order empty">{{emptyMessage}}</div>
       {{/each}}
-
-      {{^if orders.value.length}}
-      <div class="order empty">{{emptyMessage}}</div>
-      {{/if}}
     {{/if}}
   </template>
 </can-component>
@@ -1672,38 +1714,44 @@ And in the order history template by updating `src/order/history.component` to:
       <can-import from="place-my-order/order/list.component!" />
       <order-model getList="{status='new'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="New Orders"
           status="new"
-          title="New Orders"
-          empty-message="No new orders">
-        </pmo-order-list>
+          status-title="New Order!"
+          action="preparing"
+          action-title="Preparing"
+          empty-message="No new orders"/>
       </order-model>
 
       <order-model getList="{status='preparing'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="Preparing"
           status="preparing"
-          title="Preparing"
-          empty-message="No orders preparing">
-        </pmo-order-list>
+          status-title="Preparing"
+          action="delivery"
+          action-title="Out for delivery"
+          empty-message="No orders preparing"/>
       </order-model>
 
       <order-model getList="{status='delivery'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="Out for delivery"
           status="delivery"
-          title="In delivery"
-          empty-message="No orders in delivery">
-        </pmo-order-list>
+          status-title="Out for delivery"
+          action="delivered"
+          action-title="Delivered"
+          empty-message="No orders are being delivered"/>
       </order-model>
 
       <order-model getList="{status='delivered'}">
         <pmo-order-list
-          orders="{.}"
+          {orders}="."
+          list-title="Delivered"
           status="delivered"
-          title="Delivered"
-          empty-message="No delivered orders">
-        </pmo-order-list>
+          status-title="Delivered"
+          empty-message="No delivered orders"/>
       </order-model>
     </div>
   </template>
@@ -1723,6 +1771,8 @@ When we initialized the application all the infrastructure necessary to generate
 ```
 donejs document
 ```
+
+This produces documentation at [http://localhost:8080/docs/](http://localhost:8080/docs/).
 
 ### Documenting a module
 
@@ -1841,6 +1891,8 @@ From here your application is ready to be used in production. Enable production 
 NODE_ENV=production donejs start
 ```
 
+If you're using Windows omit the NODE_ENV=production in the command, and instead see the [setting up guide](SettingUp.html#section=section_EnvironmentalVariables) on how to set environment variables.
+
 Refresh your browser to see the application load in production.
 
 ## Desktop and mobile apps
@@ -1858,7 +1910,7 @@ npm install -g ios-sim
 
 We will use these tools to create an iOS application that can be tested in the iOS simulator.
 
-Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html), which gives all of the tools we need.
+Windows users should install the [Android Studio](https://developer.android.com/sdk/index.html), which gives all of the tools we need. See the [setting up guide](SettingUp.html#section=section_AndroidDevelopment) for full instructions on setting up your Android emulator.
 
 Now we can install the DoneJS Cordova tools with:
 
@@ -1867,6 +1919,69 @@ donejs add cordova
 ```
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
+
+This will change your `build.js` script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the **glob** property:
+
+```
+glob: [
+  "node_modules/steal/steal.production.js",
+  "node_modules/place-my-order-assets/images/**/*"
+]
+```
+
+#### AJAX
+
+When not running in a traditional browser environment, AJAX requests need to be made
+to an external URL. The module `steal-platform` aids in detecting environments like Cordova
+so special behavior can be added.  Install the module:
+
+```
+npm install steal-platform --save
+```
+
+Create a file: `src/service-base-url.js` and place this code:
+
+```js
+import platform from "steal-platform";
+
+let baseUrl = '';
+
+if(platform.isCordova || platform.isNW) {
+  baseUrl = 'http://www.place-my-order.com';
+}
+
+export default baseUrl;
+```
+
+This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be made there.
+
+Our models will also need to be updated to use the baseUrl. For example in `src/models/state` do:
+
+```js
+import baseUrl from '../service-base-url';
+
+export const stateConnection = superMap({
+  url: baseUrl + '/api/states',
+  ...
+});
+```
+
+For real-time connected models, such as in `src/models/order` also update the socket connection:
+
+```js
+import baseUrl from '../service-base-url';
+
+export const connection = superMap({
+  url: baseUrl + '/api/orders',
+  ...
+});
+
+...
+
+const socket = io(baseUrl);
+
+...
+```
 
 To run the Cordova build and launch the simulator we can now run:
 
@@ -1886,6 +2001,17 @@ donejs add nw
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
 
+Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **files** property to reflect:
+
+```
+files: [
+  "package.json",
+  "production.html",
+  "node_modules/steal/steal.production.js",
+  "node_modules/place-my-order-assets/images/**/*"
+]
+```
+
 Then we can run the build like this:
 
 ```
@@ -1902,24 +2028,59 @@ open place-my-order.app
 The Windows application can be opened with
 
 ```
-.\build\donejs-chat\win64\place-my-order.exe
+.\build\place-my-order\win64\place-my-order.exe
 ```
 
 ## Deploy
 
-Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN.
+Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN and [Heroku](https://heroku.com) to provide server-side rendering.
+
+### Bundling assets
+
+Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at `node_modules/place-my-order-assets/images`.
+
+StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.
+
+To use this capability add an option to your build script to enable it. Change:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: true
+});
+```
+
+to:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: {
+    infer: false,
+    glob: "node_modules/place-my-order-assets/images/**/*"
+  }
+});
+```
+
+StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
 
 ### Static hosting on Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
+Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username:
 
-> You'll get an error if your app name is too long, so pick something on the shorter side.
+![Settting up a Firebase project](static/img/guide-firebase-setup.png)
 
-When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
+Write down the name of your app because you'll need it in the next section.
+
+> You will get an error if your app name is too long, so pick something on the shorter side, for example `pmo-<user>`.
+
+When you deploy for the first time it will ask you to authorize with your login information, but first we need to configure the project.
 
 #### Configuring DoneJS
 
-Now we can add the Firebase deployment configuration to our `package.json` like this:
+With the Firebase account and application in place we can add the deployment configuration to our `package.json` like this:
 
 ```js
 "donejs": {
@@ -1961,18 +2122,18 @@ And also update the production `baseURL` in the `system` section:
 }
 ```
 
-Again, make sure to replace the URL with your Firebase application name.
+Again, make sure to replace the `<appname>` with your Firebase application name.
 
 #### Run deploy
 
-we can deploy the application by running:
+We can now deploy the application by running:
 
 ```
 donejs build
 donejs deploy
 ```
 
-Static files are deployed to Firebase and verify that the application is loading from the CDN by loading it after running:
+Static files are deployed to Firebase and we can verify that the application is loading from the CDN by loading it running:
 
 ```
 NODE_ENV=production donejs start
@@ -1980,23 +2141,20 @@ NODE_ENV=production donejs start
 
 > If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.
 
-We should now see our assets being loaded from the Firebase CDN.
+We should now see our assets being loaded from the Firebase CDN like this:
+
+![A network tab when using the CDN](static/img/guide-firebase-network.png)
 
 ### Deploy your Node code
 
-At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to gain the benefit of server-side rendering.
+At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to get the benefit of server-side rendering.
 
-Download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
+If you do not have an account yet, sign up for Heroku at [signup.heroku.com](https://signup.heroku.com/). Then download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
 
-After you've installed it, login by running:
+After installing we can initialize the application via
 
 ```
 heroku login
-```
-
-Create a new app by running:
-
-```
 heroku create
 ```
 
@@ -2009,10 +2167,18 @@ heroku config:set NODE_ENV=production
 Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using can-serve our Procfile just looks like this:
 
 ```
-web: node_modules/.bin/can-serve --proxy http://place-my-order.com/api
+web: node_modules/.bin/can-serve --proxy http://www.place-my-order.com/api
 ```
 
-Since Heroku needs the build artifacts we need to commit those before pushing to Heroku, I always do this in a separate branch:
+First let's save our current status:
+
+```
+git add -A
+git commit -m "Finishing place-my-order"
+git push origin master
+```
+
+Since Heroku needs the build artifacts we need to commit those before pushing to Heroku. We recommend doing this in a separate branch.
 
 ```
 git checkout -b deploy
@@ -2026,11 +2192,15 @@ And finally do an initial deploy.
 git push heroku deploy:master
 ```
 
-Any time in the future you want to deploy simply push to the heroku remote.
+Any time in the future you want to deploy simply push to the Heroku remote. Once the deploy is finished you can open the link provided in your browser. If successful we can checkout the _master_ branch:
+
+```
+git checkout master
+```
 
 ### Continuous Deployment
 
-Previously we set up Travis CI [for automated testing](http://donejs.com/Guide.html#section_Settingcontinuousintegration_TravisCI_) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy your code to production once tests have passed.
+Previously we set up Travis CI [for automated testing](#section=section_Continuousintegration) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.
 
 Open your `.travis.yml` file and add a new `deploy` key that looks like this:
 
@@ -2041,7 +2211,7 @@ before_deploy:
   - "node build"
   - "git add dist/ --force"
   - "git commit -m \"Updating build.\""
-  - "node_modules/.bin/donejs-deploy"
+  - "node_modules/.bin/deploy"
 deploy:
   skip_cleanup: true
   provider: "heroku"
@@ -2050,16 +2220,68 @@ deploy:
 
 You can find the name of the app by running `heroku apps:info`.
 
-In order to deploy to Heroku you need to provide Travis with your Heroku API key. Install the [TravisCI cli](https://github.com/travis-ci/travis.rb#readme) which will generated encrypted environment variables that can be set on Travis and then:
+In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our `.travis.yml` should always be encrypted for which we install the [travis-encrypt](https://www.npmjs.com/package/travis-encrypt) module:
 
 ```
-travis encrypt $(heroku auth:token) --add deploy.api_key
+npm install travis-encrypt -g
 ```
 
-To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `token` in the following command:
+Now we can get the Heroku authentication token with:
 
 ```
-travis encrypt FIREBASE_TOKEN=token --add
+heroku auth:token
+```
+
+Copy the token printed and paste it as `<token>` in the following command:
+
+```
+travis-encrypt --add deploy.api_key -r <your-username>/<your-repository> <token>
+```
+
+Replace `<your-username>` and `<your-repository>` with the name of your GitHub account and repository respecitvely.
+
+To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `<token>` in the following command:
+
+```
+travis-encrypt --add -r <your-username>/<your-repository> FIREBASE_TOKEN=<token>
 ```
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Divshot's CDN.
+
+To test this out checkout a new branch:
+
+```
+git checkout -b continuous
+git add -A
+git commit -m "Trying out continuous deployment"
+git push origin continuous
+```
+
+Visit your GitHub page, create a pull-request, wait for tests to pass and then merge. Visit your Travis CI build page at [https://travis-ci.org/<your-username>/place-my-order](https://travis-ci.org/<your-username>/place-my-order) to see the deployment happening in real time like this:
+
+![The Travis CI deploy](static/img/guide-travis-deploy.png)
+
+## What's next?
+
+In this final short chapter, let's quickly look at what we did in this guide and where to follow up for any questions.
+
+### Recap
+
+In this in-depth guide we created and deployed a fully tested restaurant menu ordering application called [place-my-order](http://www.place-my-order.com/) with DoneJS. We learned how to set up a DoneJS project, create custom elements and retrieve data from the server. Then we implemented a unit-tested view-model, ran those tests automatically from the command line and on a continuous integration server.
+
+We went into more detail on how to create nested routes and importing other projects from NPM. Then we created new orders and made it real-time, added and built documentation and made a production build. Finally we turned that same application into a desktop- and mobile application and deployed it to a CDN and the web.
+
+### Following up
+
+You can learn more about each of the individual projects that DoneJS includes at:
+
+- [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
+- [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
+- [jQuery](http://jquery.com) - DOM helpers
+- [jQuery++](http://jquerypp.com) - Extended DOM helpers
+- [QUnit](https://qunitjs.com/) or Mocha - Assertion library
+- [FuncUnit](http://funcunit.com) - Functional tests
+- [Testee](https://github.com/bitovi/testee) - Test runner
+- [DocumentJS](http://documentjs.com) - Documentation
+
+If you have any questions, do not hesitate to ask us on [Gitter](https://gitter.im/donejs/donejs) or the [forums](forums.donejs.com)!

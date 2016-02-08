@@ -7,10 +7,8 @@ install DoneJS and includes platform-specific pieces of information not covered 
 
 DoneJS officially supports:
 
- - [Node](https://nodejs.org) 0.10.x, 0.12.x, and IOjs
- - [npm](https://www.npmjs.com/) 2.x
-
-We will have a [Node 4.0 and npm 3.0 version](https://github.com/donejs/donejs/issues/376) out ASAP.
+ - [Node](https://nodejs.org) 0.10.x, 0.12.x, and Node 4/5
+ - [npm](https://www.npmjs.com/) 2.x, 3.x
 
 @body
 
@@ -18,7 +16,7 @@ We will have a [Node 4.0 and npm 3.0 version](https://github.com/donejs/donejs/i
 
 ### Prerequisites
 
-This will help you get set up with DoneJS on Windows. To use DoneJS you need a C++ compiler (for native dependencies). First you need a recent version of [Node.js](https://nodejs.org/en/). DoneJS officially supports Node 0.10.x, 0.12.x, and IOjs, but more recent versions will likely work as well.
+This will help you get set up with DoneJS on Windows. To use DoneJS you need a C++ compiler (for native dependencies). First you need a recent version of [Node.js](https://nodejs.org/en/).
 
 #### Package Management
 
@@ -36,7 +34,7 @@ choco install python2 -y
 
 #### Windows SDK
 
-Next we need the Windows SDK. We're going to assume Windows 7, but adjust this command to the version of Windows you use:
+Next we need the Windows SDK. We're going to assume Windows 7, but adjust this command to the version of Windows you use (for Windows 10 it is windows-sdk-10.0):
 
 ```shell
 choco install windows-sdk-7.1 -y
@@ -44,7 +42,7 @@ choco install windows-sdk-7.1 -y
 
 #### Visual Studio Express
 
-Installing Visual Studio Express gives us the C++ compiler we need:
+Installing Visual Studio Express gives us the C++ compiler we need. If you are using Windows 10 or get an error with this command you can also download Visual Studio Express [here](https://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx):
 
 ```shell
 choco install visualstudioexpress2013windowsdesktop -y
@@ -65,6 +63,62 @@ set NODE_ENV=production
 ```
 $env:NODE_ENV="production"
 ```
+
+To later remove these environment variables:
+
+**Command Prompt**
+
+```
+set NODE_ENV=
+```
+
+**Powershell**
+
+```
+$env:NODE_ENV=""
+```
+
+
+### Android Development
+
+In order to develop an Android application you need to install the [Android Studio](https://developer.android.com/sdk/index.html). The installer will prompt you to also install Java if you don't already have it.
+
+#### Platform and Build Tools
+
+Once you've installed Android Studio you still have a few things to do. You need to install the Android SDK Platform and Build tools. From the command-line run:
+
+```
+C:\Users\YOURNAME\AppData\Local\Android\sdk\tools\android.bat
+```
+
+This starts the Android SDK Manager. From this screen you can select:
+
+* Android 6.0
+* Android SDK Build-tools (23+)
+* Intel x86 Emulator Accelerator (this will improve the emulator start time)
+
+Click all of these and anything else you need and click Install packages.
+
+#### Virtual Device Manager
+
+From the command-line run:
+
+```
+C:\Users\YOURNAME\AppData\Local\Android\sdk\tools\android.bat avd
+```
+
+This starts the Android Virtual Device (AVD) Manager. This is used to manager virtual devices that will run in the emulator.
+
+Click **Create** and make sure to fill out:
+
+* AVD Name (this can be whatever you want)
+* Device
+* Target (the API level you installed)
+* CPU (try an Intel CPU if possible)
+
+Then click **OK** to create the device.
+
+Close the AVD Manager and you should have everything you need for Android development.
 
 ## Mac OS X
 
@@ -111,3 +165,69 @@ It's important to also install the `build-essential` package afterwards. This wi
 ```
 sudo apt-get install build-essential
 ```
+
+### Android Development
+
+In order to develop an Android application you need to install the [Android Studio](https://developer.android.com/sdk/index.html). Once download untar/gzip it:
+
+```
+tar xvf android-sdk.X-linux.tgz
+```
+
+This will create an `android-sdk-linux` folder. At this point you might want to move it somewhere else, `$HOME/lib/android-sdk-linux` is a good place.
+
+Add the android-sdk-linux/tools folder to your `PATH` with: `export PATH="path/to/android-sdk-linux/tools`. Add this to your `~/.bashrc` or `~/.zshrc` config so it will persist.
+
+Additionally the `ANDROID_HOME` environmental variable needs to be set. Set it with:
+
+```
+export ANDROID_HOME="/home/name/lib/android-sdk-linux"
+```
+
+This too should be added to your `~/.bashrc` or `~/.zshrc`.
+
+#### Java
+
+If you don't already have a Java JDK installed you can do so with:
+
+```
+sudo apt-get install default-jdk
+```
+
+#### Platform and Build Tools
+
+Once you've installed Android Studio you still have a few things to do. You need to install the Android SDK Platform and Build tools. From the command-line run:
+
+```
+$ANDROID_HOME/tools/android
+```
+
+This starts the Android SDK Manager. From this screen you can select:
+
+* Android 6.0
+* Android SDK Build-tools (23+)
+* Intel x86 Emulator Accelerator (this will improve the emulator start time)
+
+Click all of these and anything else you need and click Install packages.
+
+#### Virtual Device Manager
+
+From the command-line run:
+
+```
+$ANDROID_HOME/tools/android avd
+```
+
+This starts the Android Virtual Device (AVD) Manager. This is used to manager virtual devices that will run in the emulator.
+
+Click **Create** and make sure to fill out:
+
+* AVD Name (this can be whatever you want)
+* Device
+* Target (the API level you installed)
+* CPU (try an Intel CPU if possible)
+
+Then click **OK** to create the device.
+
+Close the AVD Manager and you should have everything you need for Android development.
+

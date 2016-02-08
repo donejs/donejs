@@ -3,19 +3,18 @@
 @hide sidebar
 @outline 2 ol
 
-@description DoneJS is comprised of many projects that are documented seperately. Get an overview of the project's
-APIs that go into making DoneJS and links to their official APIs.
+@description DoneJS is comprised of many projects that are documented seperately. This page contains overviews of each project and links to their official APIs.
 
-- [donejs-cli](#section_CLIandGenerators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)
-- [generator-donejs](#section_CLIandGenerators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)
+### Application Infrastructure
+
+The blue boxes in the following architecture diagram represent modules provided by DoneJS.
+
+<object type="image/svg+xml" data="static/img/donejs-stack-app.svg"></object>
+
 - [StealJS](#section=section_StealJS) - Module loader and build system. [api](http://stealjs.com/docs/index.html).
 - [CanJS](#section=section_CanJS) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](http://canjs.com/docs/index.html)
 - [can-connect](#section=section_can_connect) - Data connection part of Models, real-time, fall-through cache. [api](https://connect.canjs.com)
 - [can-set](#section=section_can_set) - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)
-- [QUnit](#section_QUnit) - Default test assertion library. [api](http://qunitjs.com/)
-- [FuncUnit](#section_FuncUnit) - Functional test utilities. [api](http://funcunit.com/)
-- [Testee](#section_Testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)
-- [DoumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)
 - [jQuery](#section=section_jQuery) - DOM utilities. [api](http://jquery.com/)
 - [jQuery++](#section=section_jQuery__) - Even more DOM utilities. [api](http://jquerypp.com/)
 - [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
@@ -23,8 +22,18 @@ APIs that go into making DoneJS and links to their official APIs.
 - [done-autorender](#section=section_done_autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
 - [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)
 
+### Tooling
 
+DoneJS provides many aspects of JavaScript application tooling, shown in the diagram below.
 
+<object type="image/svg+xml" data="static/img/donejs-stack-tooling.svg"></object>
+
+- [donejs-cli](#section_CLIandGenerators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)
+- [generator-donejs](#section_CLIandGenerators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)
+- [QUnit](#section_QUnit) - Default test assertion library. [api](http://qunitjs.com/)
+- [FuncUnit](#section_FuncUnit) - Functional test utilities. [api](http://funcunit.com/)
+- [Testee](#section_Testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)
+- [DocumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)
 
 @body
 
