@@ -39,13 +39,14 @@
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
     "documentjs": "^0.3.0",
+    "dotdotdot": "^1.7.0",
     "es6-promise": "^3.0.2",
     "guide-automation": "0.1.2",
+    "is-appveyor": "^1.0.0",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5",
     "node-fetch": "^1.3.3",
-    "stream-when": "^1.0.0",
-    "dotdotdot": "^1.7.0"
+    "stream-when": "^1.0.0"
   },
   "dependencies": {
     "commander": "^2.8.1",
