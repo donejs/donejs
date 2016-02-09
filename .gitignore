@@ -33,3 +33,4 @@ tmp*
 site/
 test/recursive/
 *.DS_Store
+donejs-chat/

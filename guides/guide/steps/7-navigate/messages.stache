@@ -1,0 +1,2 @@
+<h5><a href="{{routeUrl page='home'}}">Home</a></h5>
+<p>{{message}}</p>
