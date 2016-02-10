@@ -231,3 +231,69 @@ Then click **OK** to create the device.
 
 Close the AVD Manager and you should have everything you need for Android development.
 
+
+## Vagrant & VritualBox 
+
+### Prerequisites
+
+First at all, download and install [**VirtualBox**](https://www.virtualbox.org/) and [**Vagrant**](https://www.vagrantup.com/). Once VirtualBox and Vagrant have been installed, you should add the DoneJS box to your Vagrant installation.
+
+### Installing the DoneJS Vagrant Box
+Open your command prompt and type
+```
+vagrant --version
+```
+to see if Vagrant is available in your terminal.
+
+Within your terminal change to the folder you would like to install the Vagrant Box. Using the following command for adding the box:
+```
+vagrant box add Juke/DoneJS
+```
+
+Vagrant will ask you for which provider you will adding the box. Choose: **Virtualbox**
+Vagrant will now downloading the latest version of the DoneJS development environment. It will take a few minutes, depending on your Internet connection speed.
+
+Once Vagrant has successfully finished downloading all the file, you can now initialize the DoneJS Box by typing
+```
+vagrant init Juke/DoneJS
+```
+
+Vagrant is creating a **Vagrantfile** in your folder. Your custom configuration for the machine can be done in this file.
+For more information check out https://www.vagrantup.com/docs/vagrantfile/
+
+
+### Configure your shared folders
+Before you start the Vagrant Box, you have to specified which folder you would like to sync from your local machine to the virtual machine.
+For that, open the **Vagrantfile** in that folder you initialized Vagrant. Scroll down to:
+```
+# Share an additional folder to the guest VM. The first argument is
+# the path on the host to the actual folder. The second argument is
+# the path on the guest to mount the folder. And the optional third
+# argument is a set of non-required options.
+# config.vm.synced_folder "../data", "/vagrant_data"
+```
+add a new Synced Folder configuration below that may look like this
+```
+config.vm.synced_folder "C:/www/donejs", "/home/vagrant/donejs"
+```
+
+Make sure that `C:/www/donejs` is a valid directory.
+
+For more information check the documentation on https://www.vagrantup.com/docs/synced-folders/basic_usage.html
+
+### Launching the Vagrant Box
+Once you have done all the configuration run 
+```
+vagrant up
+```
+command from your DoneJS Vagrant Box directory
+
+### Connecting via SSH
+To connect to your DoneJS environment via SSH, enter the
+```
+vagrant ssh
+```
+command in your terminal.
+
+### Further information
+For further information what is pre-installed on the Vagrant Box and which ports are forwarding to your host please check out the Github repository [DoneJS Vagrant](https://github.com/donejs/donejs-vagrant)
