@@ -2,6 +2,12 @@ var automate = require("guide-automation");
 var join = require("path").join;
 var streamWhen = require("stream-when");
 var isWindowsCI = require("is-appveyor");
+var nodeVersion = +process.version.substr(1).split(".")[0];
+
+// Only run in AppVeyor if version >= 4
+if(isWindowsCI && nodeVersion < 4) {
+    process.exit(0);
+}
 
 var guide = automate({ spinner: true, log: true });
 var wait = function(){
@@ -50,7 +56,7 @@ guide.step("Move to donejs-chat folder", function(){
 });
 
 guide.step("Run NPM install", function() {
-	return guide.executeCommand("npm", ["install"]).then(wait);
+	return guide.executeCommand("npm", ["install"]).then(guide.wait(10000));
 });
 
 /**
@@ -58,7 +64,7 @@ guide.step("Run NPM install", function() {
  */
 guide.step("Start donejs develop", function(){
 	var child = guide.canServe = guide.executeCommand("donejs", ["develop"]).childProcess;
-
+ 
 	var server = streamWhen(child.stdout, /can-serve starting on/);
 	var liveReload = streamWhen(child.stderr, /Live-reload server/);
 	return Promise.all([server, liveReload]).then(wait);

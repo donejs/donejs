@@ -1,7 +1,9 @@
 var assert = require("assert");
 var fetch = require("node-fetch");
 
-describe("donejs develop after init", function(){
+describe("development server after generating components", function(){
+    this.timeout(20000);
+    
 	before(function(done){
 		var test = this;
 		fetch("http://localhost:8080").then(function(res){
