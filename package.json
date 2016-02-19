@@ -41,7 +41,7 @@
     "documentjs": "^0.3.0",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^3.0.2",
-    "guide-automation": "0.1.2",
+    "guide-automation": "^0.1.5",
     "is-appveyor": "^1.0.0",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5",

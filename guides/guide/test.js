@@ -2,15 +2,17 @@ var automate = require("guide-automation");
 var join = require("path").join;
 var streamWhen = require("stream-when");
 var isWindowsCI = require("is-appveyor");
+var nodeVersion = +process.version.substr(1).split(".")[0];
 
-// Temporarily disabling running in Windows CI until we get it working
-if(isWindowsCI) {
-  process.exit(0);
+// Only run in AppVeyor if version >= 5
+if(isWindowsCI && nodeVersion < 5) {
+    process.exit(0);
 }
 
 var guide = automate({ spinner: true, log: true });
 var wait = function(){
-	return guide.wait(2000);
+    var ms = isWindowsCI ? 5000 : 2000;
+	return guide.wait(ms);
 };
 
 /**
@@ -54,7 +56,7 @@ guide.step("Move to donejs-chat folder", function(){
 });
 
 guide.step("Run NPM install", function() {
-	return guide.executeCommand("npm", ["install"]).then(wait);
+	return guide.executeCommand("npm", ["install"]).then(guide.wait(10000));
 });
 
 /**
@@ -84,10 +86,15 @@ guide.step("Install bootstrap", function(){
 			return guide.replaceFile(join("src", "index.stache"),
 									 join(__dirname, "steps", "4-bootstrap", "index.stache"));
 		})
+    .then(function(){
+      return guide.injectSpy("src/index.stache");
+    })
+    .then(wait)
 		.then(wait);
 });
 
 guide.test(function(){
+  console.log("Running bootstrap tests");
 	return guide.functionalTest(join(__dirname, "steps", "4-bootstrap", "test.js"))
 		.then(wait);
 });
@@ -120,7 +127,11 @@ guide.step("Navigate between pages", function(){
 		.then(function(){
 			return guide.replaceFile(join("src", "index.stache"),
 							   join(__dirname, "steps", "7-navigate", "index.stache"));
-		}).then(wait);
+		})
+    .then(function(){
+      return guide.injectSpy("src/index.stache");
+    })
+    .then(wait);
 });
 
 
@@ -139,6 +150,7 @@ guide.test(function(){
 guide.step("Install and use bit-tabs", function(){
 	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
 		.then(wait)
+    .then(wait)
 		.then(function(){
 			return guide.replaceFile(join("src", "home.component"),
 									 join(__dirname, "steps", "8-bit-tabs", "home.component"));
@@ -147,6 +159,7 @@ guide.step("Install and use bit-tabs", function(){
 });
 
 guide.test(function(){
+  console.log("Running bit-tabs tests");
 	// Check that the tabs have appeared.
 	return guide.functionalTest(join(__dirname, "steps", "8-bit-tabs", "tabs_test.js"))
 		.then(wait);
