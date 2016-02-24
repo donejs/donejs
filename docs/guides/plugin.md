@@ -6,8 +6,6 @@
 
 @body
 
-DoneJS doesn't just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this article we will create a reusable number input widget using [Bootstrap][2] styles. 
-
 We will create the project on [GitHub](https://github.com), initialize the repository as a new DoneJS plugin and then set up continuous integration with Travis CI. After running development mode we will implement the component functionality and tests and submit it as a pull request to the repository. Finally we will make a build and publish the plugin to [NPM](http://npmjs.org) as well as look how to use the published module in other projects.
 
 You can find the code in the [donejs-number-input](https://github.com/donejs/donejs-number-input) repository. The final result looks like this:
@@ -113,7 +111,7 @@ A plugin can contain anything from shared utility functions to model- or compone
 $ donejs add component <username>-number-input
 ```
 
-This creates a complete component using the `<username>-number-input` tag with tests and documentation. Because the module name is the same as the plugin name (`<username>-number-input`), the generator will put the component files directly in the `src/` folder (instead of a subfolder). Confirm the default tag name and and the prompts to overwrite the existing files by pressing enter. The initialized component can now be viewed at [localhost:8080/src/<username>-number-input.html][14]. The component tests are available at [localhost:8080/src/test.html][15].
+This creates a complete component using the `<username>-number-input` tag with tests and documentation. Because the module name is the same as the plugin name (`<username>-number-input`), the generator will put the component files directly in the `src/` folder (instead of a subfolder). Confirm the default tag name and and the prompts to overwrite the existing files by pressing enter. The initialized component can now be viewed at `http://localhost:8080/src/<username>-number-input.html`. The component tests are available at [localhost:8080/src/test.html][15].
 
 ### Creating and testing the view-model
 
@@ -125,6 +123,12 @@ Our number input view-model should provide the following functionality:
 We can use the [define plugin][16] to define a `min` and `max` value and [a setter][17] for the `value` to make sure that it always is within those constraints. We will also add an `increment` and `decrement` method that will modify the value by 1. The component view-model (in `src/<username>-number-input.js`) then looks like this:
 
 ```js
+import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import './<username>-number-input.less!';
+import template from './<username>-number-input.stache!';
+
 export const ViewModel = Map.extend({
   define: {
     value: {
@@ -143,22 +147,28 @@ export const ViewModel = Map.extend({
       }
     },
     max: {
-      value: Infinity,
+      value: Number.MAX_VALUE,
       type: 'number'
     },
     min: {
-        value: 0,
-        type: 'number'
+      value: 0,
+      type: 'number'
     }
   },
 
   increment() {
-      this.attr('value', this.attr('value') + 1);
+    this.attr('value', this.attr('value') + 1);
   },
 
   decrement() {
-      this.attr('value', this.attr('value') - 1);
+    this.attr('value', this.attr('value') - 1);
   }
+});
+
+export default Component.extend({
+  tag: '<username>-number-input',
+  viewModel: ViewModel,
+  template
 });
 ```
 
