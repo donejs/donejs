@@ -2,7 +2,7 @@
   "sites": {
     "guides": {
       "glob": {
-        "pattern": "docs/**.{md,mustache}"
+        "pattern": "docs/**/*.{md,mustache}"
       },
       "parent": "donejs",
       "dest": "site",
