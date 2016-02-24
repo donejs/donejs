@@ -2,9 +2,9 @@
 @hide title
 @hide sidebar
 
-![DoneJS logo](http://donejs.com/static/img/donejs-logo-black.svg)
+![DoneJS logo](https://donejs.com/static/img/donejs-logo-black.svg)
 
-DoneJS is easiest way to get a high performance, real time, web and mobile application
+DoneJS is the easiest way to get a high performance, real time, web and mobile application
 done! The framework provides a nearly comprehensive combination of technologies for
 building complex JavaScript applications.
 
@@ -14,14 +14,14 @@ and produce a lightning fast application, you've come to the right place.
 DoneJS is a combination of the following technologies:
 
 - [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
-- [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
-- [jQuery](http://jquery.com) - DOM helpers
+- [CanJS](https://canjs.com) - Custom elements and model-view-viewmodel (MVVM) utilities
+- [jQuery](https://jquery.com/) - DOM helpers
 - [jQuery++](http://jquerypp.com) - Extended DOM helpers
-- [QUnit](https://qunitjs.com/) or Mocha - Assertion library
-- [FuncUnit](http://funcunit.com) - Functional tests
-- Testee or Karma - Test runner
+- [QUnit](https://qunitjs.com/) or [Mocha](https://mochajs.org/) - Assertion library
+- [FuncUnit](https://funcunit.com/) - Functional tests
+- [Testee](https://github.com/bitovi/testee) or [Karma](https://karma-runner.github.io/) - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
-- [can-ssr](http://github.com/canjs/ssr) - Server-Side Rendering Utilities for CanJS
+- [can-ssr](https://github.com/canjs/ssr) - Server-side rendering utilities for CanJS
 
 DoneJS is a `npm` package that simply installs all the previous
 technologies.  This site exists to explain the collective benefits of these technologies
@@ -34,7 +34,7 @@ _Application features:_
 
 - Isomorphic (same code on server and client).
 - Pushstate routing
-- Real Time
+- Real time
 - Run everywhere ( IE9+, Android, iOS, node-webkit )
 
 _Performance features:_
@@ -50,19 +50,19 @@ _Maintenance features:_
 - Use and create NPM packages
 - Custom HTML elements
 - MVVM single direction architecture
-- Multi Versioned Documentation
-- Hot Module Swapping
+- Multi-versioned documentation
+- Hot module swapping
 - Functional tests
 
 
 
 #### Getting Started Guide ([Guide main article])
 
-The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http://place-my-order.com) application.
+The DoneJS Getting Started Guide walks you through creating a [PlaceMyOrder](http://place-my-order.com) application.
 
 1. Install
-   1. Setup Server
-   2. Setup Client
+   1. Set up server
+   2. Set up client
 2. Setting up server side rendering
    1. Create the main template
    2. [Create the application view model](docs/getting_started_outline.md#create-the-application-view-model)
@@ -96,7 +96,7 @@ The DoneJS Getting Started Guide walk you through creating a [PlaceMyOrder](http
 7. Importing other projects
 8. Creating data
 9. Setup up a real-time connection
-10. Production Builds
+10. Production builds
     1. Bundling your app
     2. Building to iOS and Android
     3. Building to NW.js
