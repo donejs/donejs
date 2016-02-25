@@ -33,3 +33,19 @@ In the [place-my-order guide](/place-my-order.html), we will go into detail, cre
 - Nested routing
 - Continous integration continous depolyment
 - Documentation
+
+## [Creating a plugin](/plugin.html)
+<a href="/plugin.html"><img class="app-thumbs" src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" style="width: 240px;"></a>
+
+
+In the [plugin guide](/plugin.html), we will create a reusable number input widget using [Bootstrap](http://getbootstrap.com) styles. We will cover:
+
+- Create the project on GitHub
+- Initialize the repository as a new DoneJS plugin
+- Set up continuous integration with Travis CI
+- Start development mode
+- Implement the component functionality and tests
+- Make a pull request to the repository
+- Make a build
+- Publish to NPM
+- Use the plugin in other projects

@@ -2,11 +2,11 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description DoneJS doesn't just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this article we will create a reusable number input widget using [Bootstrap](http://getbootstrap.com) styles.
+@description DoneJS doesn't just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this guide we will create a reusable number input widget using [Bootstrap](http://getbootstrap.com) styles.
 
 @body
 
-We will create the project on [GitHub](https://github.com), initialize the repository as a new DoneJS plugin and then set up continuous integration with Travis CI. After running development mode we will implement the component functionality and tests and submit it as a pull request to the repository. Finally we will make a build and publish the plugin to [NPM](http://npmjs.org) as well as look how to use the published module in other projects.
+We will create the project on [GitHub](https://github.com), initialize the repository as a new DoneJS plugin and then set up continuous integration with Travis CI. After running development mode we will implement the component functionality and tests and submit it as a pull request to the repository. Finally we will make a build and publish the plugin to [npm](http://npmjs.org) as well as look how to use the published module in other projects.
 
 You can find the code in the [donejs-number-input](https://github.com/donejs/donejs-number-input) repository. The final result looks like this:
 
@@ -20,7 +20,7 @@ We will use [GitHub][3] to host the code for the project which makes it easy for
 
 If you don't have an account yet, go to [GitHub][6] to sign up and follow [the help][7] on how to set it up for the command-line `git`. Once completed, you can create a new repository from your dashboard.
 
-> **Important:** In the remainder of the article the plugin name will be `<username>-number-input`. You will have to replace `<username>` with your GitHub username to get a unique module name that can be published to NPM.
+> **Important:** In the remainder of the article the plugin name will be `<username>-number-input`. You will have to replace `<username>` with your GitHub username to get a unique module name that can be published to npm.
 
 Calling the repository `<username>-number-input` and initializing it empty (without any of the default files) looks like this:
 
@@ -291,9 +291,9 @@ $ donejs build
 
 Will create a `dist/` folder with the `global`, `amd` and `commonjs` version of our plugin.
 
-### Publishing to NPM
+### Publishing to npm
 
-[NPM][4] is the best way to share modules and make them easily installable without having to manage dependencies manually. To be able to publish your own modules, [create a new account][21] and then run
+[npm][4] is the best way to share modules and make them easily installable without having to manage dependencies manually. To be able to publish your own modules, [create a new account][21] and then run
 
 ```
 $ npm login
@@ -305,7 +305,7 @@ $ npm login
 $ donejs release:minor
 ```
 
-Now version `0.1.0` of our plugin is available on NPM.
+Now version `0.1.0` of our plugin is available on npm.
 
 ### Usage in other projects
 
