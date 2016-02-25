@@ -312,19 +312,18 @@ Now version `0.1.0` of our plugin is available on NPM.
 In another DoneJS application we can now install the plugin with
 
 ```
-$ npm install <username>-number-input --save
+$ npm install donejs-number-input --save
 ```
+
+> For your own published plugin you would use `<username>-number-import` of course.
 
 Then import it in a template and load it with:
 
 ```html
 <can-import from="<username>-number-input" />
-<<username>-number-input></<username>-number-input>
+<donejs-number-input></donejs-number-input>
 ```
 
-## Conclusion
-
-In this article we created a reusable number spinner plugin for DoneJS with the code on GitHub and the tests running in continuous integration. We published a version for different module loaders on NPM, making it installable and usable in other DoneJS applications.
 
  [1]: https://donejs.com/
  [2]: http://getbootstrap.com/
