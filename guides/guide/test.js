@@ -148,9 +148,12 @@ guide.test(function(){
  * @Step 8
  */
 guide.step("Install and use bit-tabs", function(){
+  function installWait(){
+    return guide.wait(10000);
+  }
+
 	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
-		.then(wait)
-    .then(wait)
+    .then(installWait)
 		.then(function(){
 			return guide.replaceFile(join("src", "home.component"),
 									 join(__dirname, "steps", "8-bit-tabs", "home.component"));
