@@ -147,7 +147,7 @@ export const ViewModel = Map.extend({
       }
     },
     max: {
-      value: Number.MAX_VALUE,
+      value: Infinity,
       type: 'number'
     },
     min: {
