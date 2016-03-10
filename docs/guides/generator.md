@@ -6,9 +6,9 @@
 
 @body
 
-If you have used `donejs add nw` or `donejs add cordova` to create a [desktop- or mobile version](https://donejs.com/Features.html#section=section_iOS_Android_andDesktopBuilds) of your application you already used a DoneJS generator. Generators are [npm](https://www.npmjs.com/) modules with a name starting with `donejs-` (e.g. [donejs-cordova](https://www.npmjs.com/package/donejs-cordova) for `donejs add cordova`) that provide a [Yeoman](http://yeoman.io/) generator.
+If you have used `donejs add nw` or `donejs add cordova` to create a [desktop- or mobile version](https://donejs.com/Features.html#section=section_iOS_Android_andDesktopBuilds) of your application you already used a DoneJS generator. Generators are [npm](https://www.npmjs.com/) modules that provide a [Yeoman](http://yeoman.io/) generator that adds functionality to your application.
 
-In this guide we will create [donejs-jshint](https://www.npmjs.com/package/donejs-jshint), a DoneJS generator that adds [JSHint](http://jshint.com/), a JavaScript code quality tool and an [.editorconfig](http://editorconfig.org/) file which helps text editors and IDEs to define and maintain a consistent coding style. Once published to NPM we will be able to run:
+In this guide we will create [donejs-jshint](https://www.npmjs.com/package/donejs-jshint), a DoneJS generator that adds [JSHint](http://jshint.com/), a JavaScript code quality tool and an [.editorconfig](http://editorconfig.org/) file which helps text editors and IDEs to define and maintain a consistent coding style. It will also update the `npm test` script to run JSHint with our tests. We can run the generator with:
 
 ```
 $ donejs add jshint
@@ -29,7 +29,7 @@ This will create a `donejs-jshint` folder with a basic generator, tests and ever
 
 > __Note:__ If you want to make your plugin usable via `donejs add <generatorname>` the name has to be prefixed with `donejs-` so the full name will be `donejs-<generatorname>`.
 
-We can run the basic generator and its tests already via
+Now we can run the basic generator and its tests already via
 
 ```
 $ npm test
@@ -68,7 +68,7 @@ First, we will add a `default/templates/.jshintrc` file which contains [options 
 
 ### .editorconfig
 
-Next we add `default/templates/.editorconfig` file like this:
+Next we add a `default/templates/.editorconfig` file like this:
 
 ```
 ; Unix-style newlines
@@ -78,16 +78,16 @@ indent_style = <%= indent_style %>
 trim_trailing_whitespace = true
 ```
 
-All files support [EJS](http://www.embeddedjs.com/) placeholders. `<%= indent_style %>` will be used for the user choice whether to use whitespaces or tabs. Finally, we can also remove `defaults/templates/file.js` since we won't be using it.
+All files support [EJS](http://www.embeddedjs.com/) placeholders. Here, `<%= indent_style %>` will be used for the user choice of using whitespaces or tabs. Finally, we can also remove `defaults/templates/file.js` since we won't be using it.
 
 
 ## Implementing the generator
 
-For the most part, DoneJS generators are simply [Yeoman](http://yeoman.io/) generators so everything documented there for [writing your own Yeoman generator](http://yeoman.io/authoring/) also applies here. For the user choice of tabs vs. spaces also refer to the chapter about [interacting with the user](http://yeoman.io/authoring/user-interactions.html).
+For the most part, DoneJS generators are simply [Yeoman](http://yeoman.io/) generators so everything documented for [writing your own Yeoman generator](http://yeoman.io/authoring/) also applies here. For the user choice of tabs vs. spaces also refer to the chapter about [interacting with the user](http://yeoman.io/authoring/user-interactions.html).
 
 ### Adding the generator functionality
 
-Our generator needs ask if we want to use spaces or tabs and then copy the `.jshintrc` and `.editorconfig` files over to the destination. We also want to add an `npm run jshint` script to the `package.json` and also make sure that JSHint is run during `npm test`. The complete generator at `default/index.js` looks like this:
+Our generator needs to ask if we want to use spaces or tabs and then copy the `.jshintrc` and `.editorconfig` files over to the destination. We also want to add an `npm run jshint` script to the `package.json` and make sure that JSHint runs during `npm test`. The complete generator at `default/index.js` looks like this:
 
 
 ```js
@@ -174,7 +174,7 @@ When running `donejs add <generatorname>` DoneJS will
 - If not install it from NPM
 - Then run the generator at `default/index.js`
 
-If we want to test our generator without publishing it to first NPM we can link it instead. In the generator folder run:
+If we want to test our generator without publishing it to npm first we can link it instead. In the generator folder run:
 
 ```
 $ npm link
@@ -195,7 +195,7 @@ $ donejs add jshint
 
 ### Writing a unit test
 
-Yeoman also comes with some tools for [testing generators](http://yeoman.io/authoring/testing.html). The test we initially ran with `npm test` makes sure that `default/templates/file.js` gets written Since we deleted that file we have to update our test to test that it wrote the files we want with the content we expect:
+Yeoman also comes with some tools for [testing generators](http://yeoman.io/authoring/testing.html). The test we initially ran with `npm test` makes sure that `default/templates/file.js` gets written. Since we deleted that file we have to update the test at `test/index.js` to verify that it wrote the files we want with the content we expect:
 
 ```js
 var path = require('path');
@@ -225,7 +225,7 @@ describe('donejs-jshint', function() {
     assert.fileContent('.editorconfig', /indent_style = tab/);
   });
   
-  // Make sure that `package.json` got update with the `jshint` npm script
+  // Make sure that `package.json` got updated with the `jshint` npm script
   it('update package.json', function() {
     assert.jsonFileContent('package.json', {
       scripts: {
@@ -236,7 +236,7 @@ describe('donejs-jshint', function() {
 });
 ```
 
-Now we will see all tests passing when running:
+Now we can see all tests passing when running:
 
 ```
 $ npm test
@@ -244,7 +244,7 @@ $ npm test
 
 ## Publishing to npm
 
-[npm](http://npmjs.org) is the best way to share modules and make them easily installable without having to manage dependencies manually. To be able to publish your own modules, [create a new account](https://www.npmjs.com/signup) and then run
+For others to be able to use your generator via `donejs add <generatorname>` have to pulish it to [npm](http://npmjs.org). [Create a new account](https://www.npmjs.com/signup) and then log in via
 
 ```
 $ npm login
@@ -255,6 +255,8 @@ $ npm login
 ```
 $ donejs release:minor
 ```
+
+> __Note:__ The `donejs-jshint` module we created here is already [published on npm](https://www.npmjs.com/package/donejs-jshint). If you would like to publish your own you will have to do so under a different module name.
 
 Now version `0.1.0` of the generator is available and everybody can use it through
 
