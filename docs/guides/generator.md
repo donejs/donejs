@@ -14,8 +14,9 @@ In this guide we will create [donejs-jshint](https://www.npmjs.com/package/donej
 $ donejs add jshint
 ```
 
-Currently it will only ask if we want to use spaces or tabs:
+Currently it will only ask if we want to use spaces or tabs and to overwrite the `package.json` to add the npm scripts for JSHint:
 
+<img src="http://blog.bitovi.com/wp-content/uploads/2016/03/Screen-Shot-2016-03-09-at-2.47.43-PM.png" alt="DoneJS generator" style="width: 100%;" class="alignnone size-full wp-image-3023" />
 
 ## Initializing a new generator
 
