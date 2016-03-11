@@ -1,4 +1,4 @@
-@page About
+@page About-ru
 @parent DoneJS
 @hide sidebar
 @outline 2 ol

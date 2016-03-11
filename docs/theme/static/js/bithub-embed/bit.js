@@ -6,7 +6,7 @@ import 'can/map/define/';
 import 'can/list/promise/';
 
 export const Bit = can.Model.extend({
-  findAll: 'GET http://bithub.com/api/v3/embeds/{hubId}/entities'
+  findAll: 'GET //bithub.com/api/v3/embeds/{hubId}/entities'
 }, {
   define: {
     thread_updated_at: {

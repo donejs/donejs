@@ -1,4 +1,4 @@
-@page SettingUp Setting Up DoneJS
+@page SettingUp-ru Setting Up DoneJS
 @parent DoneJS
 @hide sidebar
 @outline 2 ol

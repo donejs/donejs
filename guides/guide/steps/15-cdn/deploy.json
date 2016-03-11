@@ -1,0 +1,23 @@
+{
+    "donejs": {
+      "deploy": {
+        "root": "dist",
+        "services": {
+          "production": {
+            "type": "firebase",
+            "config": {
+              "firebase": "<appname>",
+              "public": "./dist",
+              "headers": [{
+                "source": "/**",
+                "headers": [{
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "*"
+                }]
+              }]
+            }
+          }
+        }
+      }
+    }
+}
