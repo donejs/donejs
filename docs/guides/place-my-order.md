@@ -2240,10 +2240,16 @@ travis-encrypt --add deploy.api_key -r <your-username>/<your-repository> <token>
 
 Replace `<your-username>` and `<your-repository>` with the name of your GitHub account and repository respectively.
 
-To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `<token>` in the following command:
+To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:
 
 ```
-travis-encrypt --add -r <your-username>/<your-repository> FIREBASE_TOKEN=<token>
+node_modules/.bin/firebase login:ci
+```
+
+In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the `<token>` in the following command:
+
+```
+travis-encrypt --add -r <your-username>/<your-repository> "FIREBASE_TOKEN=\"<token>\""
 ```
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Firebase's CDN.
