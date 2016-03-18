@@ -7,6 +7,7 @@
 
 <img src="http://blog.bitovi.com/wp-content/uploads/2015/10/donejs-logo-ie.png"/>
 
+
 DoneJS' goal is to help the JavaScript community get amazing applications done fast.
 Amazing applications are fast, sublimely usable, and maintainable.
 
