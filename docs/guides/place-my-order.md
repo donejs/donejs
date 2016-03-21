@@ -135,8 +135,8 @@ Now our application is good to go and we can start the server. We need to proxy 
 "scripts": {
   "api": "place-my-order-api --port 7070",
   "test": "testee src/test.html --browsers firefox --reporter Spec",
-  "start": "can-serve --port 8080",
-  "develop": "can-serve --develop --port 8080",
+  "start": "done-serve --port 8080",
+  "develop": "done-serve --develop --port 8080",
 ```
 
 To:
@@ -145,8 +145,8 @@ To:
 "scripts": {
   "api": "place-my-order-api --port 7070",
   "test": "testee src/test.html --browsers firefox --reporter Spec",
-  "start": "can-serve --proxy http://localhost:7070 --port 8080",
-  "develop": "can-serve --develop --proxy http://localhost:7070 --port 8080",
+  "start": "done-serve --proxy http://localhost:7070 --port 8080",
+  "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
 ```
 
 Then we can start the application with
@@ -510,7 +510,7 @@ In this next part, we'll connect to the RESTful API that we set up with `place-m
 
 ### Creating a restaurants connection
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api).
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `done-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api).
 
 To manage the restaurant data located at [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants), we'll create a restaurant supermodel:
 
@@ -2162,10 +2162,10 @@ This will return the url where your app can be viewed. Before you open it you'll
 heroku config:set NODE_ENV=production
 ```
 
-Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using can-serve our Procfile just looks like this:
+Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using done-serve our Procfile just looks like this:
 
 ```
-web: node_modules/.bin/can-serve --proxy http://www.place-my-order.com/api
+web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
 ```
 
 First let's save our current status:
