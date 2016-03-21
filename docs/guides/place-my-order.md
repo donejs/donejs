@@ -210,12 +210,12 @@ The main application file at `src/app.js` looks like this:
 
 ```
 // src/app.js
-import AppMap from "can-ssr/app-map";
+import Map from "can/map/";
 import route from "can/route/";
 import 'can/map/define/';
 import 'can/route/pushstate/';
 
-const AppViewModel = AppMap.extend({
+const AppViewModel = Map.extend({
   define: {
     message: {
       value: 'Hello World!',
@@ -231,7 +231,7 @@ const AppViewModel = AppMap.extend({
 export default AppViewModel;
 ```
 
-This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
+This initializes a [can.Map](https://canjs.com/docs/can.Map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
 
 ## Creating custom elements
 
@@ -342,12 +342,12 @@ To learn more about routing visit the CanJS guide on [Application State and Rout
 To add our routes, change `src/app.js` to:
 
 ```js
-import AppMap from 'can-ssr/app-map';
+import Map from 'can/map/';
 import route from 'can/route/';
 import 'can/route/pushstate/';
 import 'can/map/define/';
 
-const AppViewModel = AppMap.extend({
+const AppViewModel = Map.extend({
   define: {
     title: {
       serialize: false,
