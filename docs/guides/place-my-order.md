@@ -853,10 +853,10 @@ QUnit.module('place-my-order/restaurant/list', {
 
 QUnit.asyncTest('loads all states', function() {
   var vm = new ViewModel();
-  var expectedSates = stateStore.findAll({});
+  var expectedStates = stateStore.findAll({});
 
   vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), expectedSates.data, 'Got all states');
+    QUnit.deepEqual(states.attr(), expectedStates.data, 'Got all states');
     QUnit.start();
   });
 });
@@ -1081,7 +1081,7 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 ```
 
-By default Travis CI runs `npm tests` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. We can also add a *Build Passing* badge to `readme.md`:
+By default Travis CI runs `npm test` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. We can also add a *Build Passing* badge to `readme.md`:
 
 ```
 [![Build Status](https://travis-ci.org/<your-username>/place-my-order.png?branch=master)](https://travis-ci.org/<your-username>/place-my-order)
