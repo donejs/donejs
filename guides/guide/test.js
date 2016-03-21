@@ -64,6 +64,7 @@ guide.step("Run NPM install", function() {
  */
 guide.step("Start donejs develop", function(){
 	var child = guide.canServe = guide.executeCommand("donejs", ["develop"]).childProcess;
+  console.log("can-serve running as", child.pid);
 
 	var server = streamWhen(child.stdout, /can-serve starting on/);
 	var liveReload = streamWhen(child.stderr, /Live-reload server/);
@@ -229,10 +230,11 @@ guide.step("Enable a real-time connection", function(){
 guide.closeBrowser();
 
 guide.step("Stop development mode", function(){
-	var canServe = guide.canServe;
-	canServe.kill("SIGTERM");
-	guide.canServe = undefined;
-	return guide.wait(2000);
+  return guide.kill(guide.canServe)
+    .then(function(){
+      guide.canServe = null;
+      return guide.wait(2000);
+    });
 });
 
 /**
@@ -244,7 +246,36 @@ guide.step("Production build", function(){
 });
 
 /**
- * @Step 15
+ * @ Step 15
+ */
+// Cannot kill the server on Linux. The `pid` is incorrect and the port
+// remains open. So cannot test this.
+if(isWindowsCI) {
+  guide.step("Open in production", function(){
+    process.env["NODE_ENV"] = "production";
+
+    var child = guide.canServe = guide.executeCommand("donejs", ["start"])
+      .childProcess;
+
+    var server = streamWhen(child.stdout, /can-serve starting on/);
+    return server.then(wait);
+  });
+
+  guide.test(function(){
+    return guide.nodeTest(join(__dirname, "steps", "15-production", "test.js"));
+  });
+
+  guide.step("Stop production mode", function(){
+    return guide.kill(guide.canServe)
+      .then(function(){
+        guide.canServe = null;
+        return guide.wait(2000);
+      });
+  });
+}
+
+/**
+ * @Step 16
  */
 guide.stepIf("Deploy to CDN", function() {
 	return !!guide.options.app;
@@ -265,7 +296,7 @@ guide.stepIf("Deploy to CDN", function() {
 		return pkg;
 	};
 	return guide.replaceJson("package.json",
-							 join(__dirname, "steps", "15-cdn", "deploy.json"), setConfig)
+							 join(__dirname, "steps", "16-cdn", "deploy.json"), setConfig)
 		.then(function(){
 			return guide.executeCommand("donejs", ["build"]);
 		})
@@ -275,7 +306,7 @@ guide.stepIf("Deploy to CDN", function() {
 });
 
 /**
- * @Step 16
+ * @Step 17
  */
 guide.stepIf("Desktop and mobile apps: Cordova", function() {
 	return process.platform === 'darwin';
@@ -297,7 +328,7 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 });
 
 /**
- * @Step 17
+ * @Step 18
  */
 guide.step("Desktop and mobile apps: NW.js", function(){
 	var proc = guide.answerPrompts("donejs", ["add", "nw"]);

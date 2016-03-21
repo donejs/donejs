@@ -76,7 +76,7 @@ __Server and Services__
 - Object Relational Model: Bookshelf
 - Migrations: DBMigrate
 - Service Middleware: Express
-- Server Side Rendering: can-ssr's express middelware
+- Server Side Rendering: can-ssr's express middleware
 - Session Management: passport
 
 __Client__

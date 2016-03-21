@@ -853,10 +853,10 @@ QUnit.module('place-my-order/restaurant/list', {
 
 QUnit.asyncTest('loads all states', function() {
   var vm = new ViewModel();
-  var expectedSates = stateStore.findAll({});
+  var expectedStates = stateStore.findAll({});
 
   vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), expectedSates.data, 'Got all states');
+    QUnit.deepEqual(states.attr(), expectedStates.data, 'Got all states');
     QUnit.start();
   });
 });
@@ -1081,7 +1081,7 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 ```
 
-By default Travis CI runs `npm tests` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. We can also add a *Build Passing* badge to `readme.md`:
+By default Travis CI runs `npm test` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. We can also add a *Build Passing* badge to `readme.md`:
 
 ```
 [![Build Status](https://travis-ci.org/<your-username>/place-my-order.png?branch=master)](https://travis-ci.org/<your-username>/place-my-order)
@@ -2238,15 +2238,21 @@ Copy the token printed and paste it as `<token>` in the following command:
 travis-encrypt --add deploy.api_key -r <your-username>/<your-repository> <token>
 ```
 
-Replace `<your-username>` and `<your-repository>` with the name of your GitHub account and repository respecitvely.
+Replace `<your-username>` and `<your-repository>` with the name of your GitHub account and repository respectively.
 
-To automate the deploy to Firebase you need to provide the Firebase token which can be found in the `Secret` section of your Firebase app. Copy it and use it as the `<token>` in the following command:
+To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:
 
 ```
-travis-encrypt --add -r <your-username>/<your-repository> FIREBASE_TOKEN=<token>
+node_modules/.bin/firebase login:ci
 ```
 
-Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Divshot's CDN.
+In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the `<token>` in the following command:
+
+```
+travis-encrypt --add -r <your-username>/<your-repository> "FIREBASE_TOKEN=\"<token>\""
+```
+
+Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Firebase's CDN.
 
 To test this out checkout a new branch:
 

@@ -331,7 +331,7 @@ When you deploy for the first time it will ask you to authorize, but first we ne
 
 Now we can add the Firebase deployment configuration to our `package.json` like this:
 
-@sourceref guides/guide/steps/15-cdn/deploy.json
+@sourceref guides/guide/steps/16-cdn/deploy.json
 
 Change the `<appname>` to the name of the application created when you set up the Firebase app.
 
