@@ -8,4 +8,4 @@ before_install:
 node_js:
   - "0.12"
   - "4.2.2"
-  - "iojs"
+  - "node"
