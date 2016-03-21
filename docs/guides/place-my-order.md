@@ -177,8 +177,6 @@ Every DoneJS application consists of at least two files:
   <head>
     <title>{{title}}</title>
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    {{asset "css"}}
-    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="place-my-order-assets" />
@@ -186,8 +184,6 @@ Every DoneJS application consists of at least two files:
     <can-import from="place-my-order/app" export-as="viewModel" />
 
     <h1>{{message}}</h1>
-
-    {{asset "inline-cache"}}
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
@@ -209,8 +205,6 @@ This is an HTML5 template that uses [can.stache](http://canjs.com/docs/can.stach
 `can-import` loads the template's dependencies:
  1. The `place-my-order-assets` package, which loads the LESS styles for the application
  1. `place-my-order/app`, which is the main application file
-
-The [asset](http://canjs.github.io/can-ssr/doc/can-ssr.helpers.asset.html) helper loads assets like CSS, cached data, and scripts, regardless of the current environment (development or production).
 
 The main application file at `src/app.js` looks like this:
 
@@ -447,9 +441,6 @@ Update `src/index.stache` to:
   <head>
     <title>{{title}}</title>
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    {{asset "css"}}
-    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="place-my-order-assets" />
@@ -480,8 +471,6 @@ Update `src/index.stache` to:
         </can-import>
       {{/case}}
     {{/switch}}
-
-    {{asset "inline-cache"}}
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
