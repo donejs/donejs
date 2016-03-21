@@ -56,7 +56,6 @@ cd place-my-order
 We can see the following files:
 
 ```
-├── .yo-rc.json
 ├── build.js
 ├── development.html
 ├── documentjs.json
@@ -80,7 +79,6 @@ We can see the following files:
 
 Let's have a quick look at the purpose of each:
 
-- `.yo-rc.json` contains information for running the generators.
 - `development.html`, `production.html` those pages can run the DoneJS application in development or production mode without a server
 - `package.json` is the main configuration file that defines all our application dependencies and other settings.
 - `test.html` is used to run all our tests.
