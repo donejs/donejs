@@ -2008,8 +2008,7 @@ donejs build nw
 The OS X application can be opened with
 
 ```
-cd build/place-my-order/osx64
-open place-my-order.app
+open build/place-my-order/osx64/place-my-order.app
 ```
 
 The Windows application can be opened with
