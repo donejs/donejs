@@ -180,7 +180,7 @@ Every DoneJS application consists of at least two files:
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less!" />
+    <can-import from="place-my-order/styles.less" />
     <can-import from="place-my-order/app" export-as="viewModel" />
 
     <h1>{{message}}</h1>
@@ -444,16 +444,16 @@ Update `src/index.stache` to:
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less!" />
+    <can-import from="place-my-order/styles.less" />
     <can-import from="place-my-order/app" export-as="viewModel" />
 
-    <can-import from="place-my-order/loading.component!" />
-    <can-import from="place-my-order/header.component!" />
+    <can-import from="place-my-order/loading.component" />
+    <can-import from="place-my-order/header.component" />
     <pmo-header page="{page}"></pmo-header>
 
     {{#switch page}}
       {{#case "home"}}
-        <can-import from="place-my-order/home.component!"
+        <can-import from="place-my-order/home.component"
             can-tag="pmo-loading">
           <pmo-home></pmo-home>
         </can-import>
@@ -465,7 +465,7 @@ Update `src/index.stache` to:
         </can-import>
       {{/case}}
       {{#case "order-history"}}
-        <can-import from="place-my-order/order/history.component!"
+        <can-import from="place-my-order/order/history.component"
             can-tag="pmo-loading">
           <pmo-order-history></pmo-order-history>
         </can-import>
@@ -546,7 +546,7 @@ Now we can update the `ViewModel` in `src/restaurant/list/list.js` to use [can.M
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './list.stache!';
+import template from './list.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 
 export var ViewModel = Map.extend({
@@ -654,7 +654,7 @@ Now that we have identified the view model properties needed and have created th
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './list.stache!';
+import template from './list.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import State from 'place-my-order/models/state';
 import City from 'place-my-order/models/city';
@@ -1217,7 +1217,7 @@ To:
       {{/case}}
 
       {{#default}}
-        <can-import from="place-my-order/restaurant/details.component!"
+        <can-import from="place-my-order/restaurant/details.component"
             can-tag="pmo-loading">
           <pmo-restaurant-details></pmo-restaurant-details>
         </can-import>
@@ -1401,7 +1401,7 @@ Now we can update the view model in `src/order/new/new.js`:
 import Component from 'can/component/component';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './new.stache!';
+import template from './new.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
@@ -1498,7 +1498,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
 
 ```html
 <can-import from="bit-tabs/unstyled"/>
-<can-import from="place-my-order/order/details.component!" />
+<can-import from="place-my-order/order/details.component" />
 
 <div class="order-form">
   <restaurant-model get="{ _id=slug }">
@@ -1592,7 +1592,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
 
 This is a longer template so lets walk through it:
 
-- `<can-import from="place-my-order/order/details.component!" />` loads the order details component we previously created
+- `<can-import from="place-my-order/order/details.component" />` loads the order details component we previously created
 - `<restaurant-model get="{ _id=slug }">` loads a restaurant based on the slug value passed to the component
 - If the `saveStatus` deferred is resolved we show the `pmo-order-details` component with that order
 - Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item]
@@ -1698,7 +1698,7 @@ And in the order history template by updating `src/order/history.component` to:
         <div class="actions">Action</div>
       </div>
 
-      <can-import from="place-my-order/order/list.component!" />
+      <can-import from="place-my-order/order/list.component" />
       <order-model getList="{status='new'}">
         <pmo-order-list
           {orders}="."
@@ -1769,7 +1769,7 @@ Let's add the documentation for a module. Let's use `src/order/new/new.js` and u
 import Component from 'can/component/component';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './new.stache!';
+import template from './new.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
