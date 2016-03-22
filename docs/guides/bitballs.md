@@ -2,40 +2,46 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description 
+@description
 
 __NOTE: This guide and application are a work in progress. We plan on completing it by the
 end of March 2016.  We are publishing the guide early because we think it will still be
 a useful learning tool.__
 
-In this guide, you'll learn how [Bitballs](http://bitballs.herokuapp.com) - a charity basketball tournament management application - works. 
+In this guide, you'll learn how [Bitballs](http://bitballs.herokuapp.com) - a charity basketball tournament management application - works.
 Specifically, this guide will walk through the implementation of the following behaviors or functionality:
 
  - Registration, login, user sessions, and access rights.
  - Handling relationships between model types.
  - Setup node services and server-side rendering on the same process.
  - How to turn off parts of the app that should not be server-side rendered.
- 
-The code for Bitballs can be found [on github](http://github.com/donejs/bitballs). 
-To install and run it locally, follow its 
+
+The code for Bitballs can be found [on github](http://github.com/donejs/bitballs).
+To install and run it locally, follow its
 [development setup instructions](https://github.com/donejs/bitballs#development-setup).
 
-Bitballs was written to help organize Bitovi's yearly charity basketball tournement 
+Bitballs was written to help organize Bitovi's yearly charity basketball tournement
 for the American Heart and Stroke Association.  Justin Meyer, one of Bitovi's founders,
 and DoneJS core contributor had a stoke. Read about his experience and the purpose of
 the tournament [here](http://blog.bitovi.com/bitovi-hoops-for-heart-with-the-american-stroke-association/).
 
-The application allows __admins__, who manage the tournment, to:
+The application allows __admins__, who manage the tournament, to:
+
+Create an account (and verify their email address):
+
+<img src="/static/img/bitballs/functionality-1_create_account.png"/>
 
 Login:
 
-_image of login_
+<img src="/static/img/bitballs/functionality-2_login.png"/>
 
 Create, edit, and delete players:
 
-_image of creating a player_
+<img src="/static/img/bitballs/functionality-3_players.png"/>
 
 Create, edit, and delete tournaments:
+
+<img src="/static/img/bitballs/functionality-4_tournaments.png"/>
 
 Create teams of players for a tournament:
 
@@ -62,7 +68,7 @@ _image of game details_
 
 ## High Level Architecture
 
-Bitballs uses the following technology organized by 
+Bitballs uses the following technology organized by
 technology layers:
 
 
@@ -153,7 +159,7 @@ Now, lets checkout the contents of the `/public` folder:
 ├── test.js      - Main entrypoint for loading all tests
 ├── test.html    - Runs all tests in the browser.
 
-├── models/        - can-connect models 
+├── models/        - can-connect models
 |   ├── player.js
 |   ├── session.js
 |   ├── state.js
@@ -177,7 +183,7 @@ Now, lets checkout the contents of the `/public` folder:
 |   |   ├── list/     - Tournaments list page
 |   ├── user/
 |   |   ├── register/ - Register a user or edit their password page
-``` 
+```
 
 ### Data Model and Service layer
 
@@ -196,7 +202,7 @@ can be thought of as having a User.
 _Picture of data model_.
 
 
-The restful service layer provides the following urls 
+The restful service layer provides the following urls
 (each links to their corresponding docs):
 
 - [`/services/tournaments`]
@@ -207,8 +213,8 @@ The restful service layer provides the following urls
 - `/services/users`
 - `/services/session`
 
-The database-backed services, like `/services/teams` follow a subset of 
-[Rest relational algebra]. 
+The database-backed services, like `/services/teams` follow a subset of
+[Rest relational algebra].
 
 - To get a list of items, `GET /services/{plural_type}?...`
 - To get a single item, `GET /services/{plural_type}/{id}`
@@ -219,16 +225,16 @@ The database-backed services, like `/services/teams` follow a subset of
 This means that you can get all Teams like:
 
 ```
-REQUEST: 
+REQUEST:
   GET /services/teams
 RESPONSE:
   {
     data: [
-      { 
+      {
         id: 5, color: "Orange", name: "Orange Crush",
         player1Id: 57, player2Id: 12, player3Id: 99, player4Id: 1,
         gameId: 3
-      }, 
+      },
       ...
     ]
   }
@@ -237,16 +243,16 @@ RESPONSE:
 Or get list of teams for a particular tournament like:
 
 ```
-REQUEST: 
+REQUEST:
   GET /services/teams?gameId=7
 RESPONSE:
   {
     data: [
-      { 
+      {
         id: 5, color: "Red", name: "Red Dragons",
         player1Id: 15, player2Id: 16, player3Id: 17, player4Id: 18,
         gameId: 7
-      }, 
+      },
       ...
     ]
   }
@@ -256,7 +262,7 @@ But critically for handling data relationships, you can tell the
 server to bring in related data like:
 
 ```
-REQUEST: 
+REQUEST:
   GET /services/teams?gameId=7\
                       &withRelated[]=player1\
                       &withRelated[]=player2\
@@ -265,18 +271,18 @@ REQUEST:
 RESPONSE:
   {
     data: [
-      { 
+      {
         id: 5, color: "Red", name: "Red Dragons",
-        player1Id: 15, 
+        player1Id: 15,
         player1: {id: 15, name: "Justin M."}
-        player2Id: 16, 
+        player2Id: 16,
         player2: {id: 16, name: "Matt P."}
-        player3Id: 17, 
+        player3Id: 17,
         player3: {id: 17, name: "Lela P."}
         player4Id: 18,
         player4: {id: 18, name: "David L."}
         gameId: 7
-      }, 
+      },
       ...
     ]
   }
@@ -285,68 +291,68 @@ RESPONSE:
 Get a single Team like:
 
 ```
-REQUEST: 
+REQUEST:
   GET /services/teams/5
-  
+
 RESPONSE:
-  { 
+  {
     id: 5, color: "Red", name: "Red Dragons",
     player1Id: 15, player2Id: 16, player3Id: 17, player4Id: 18,
-    gameId: 7 
+    gameId: 7
   }
 ```
 
 Create a team like:
 
 ```
-REQUEST: 
+REQUEST:
   POST /services/teams
   {
     color: "Red", name: "Red Dragons",
     gameId: 7
   }
-  
+
 RESPONSE:
-  { 
+  {
     id: 5, color: "Red", name: "Red Dragons",
-    gameId: 7 
+    gameId: 7
   }
 ```
 
 Update a team like:
 
 ```
-REQUEST: 
+REQUEST:
   PUT /services/teams/5
-  { 
+  {
     color: "Red", name: "Red Dragons",
     player1Id: 15, player2Id: 16, player3Id: 17, player4Id: 18,
-    gameId: 7 
+    gameId: 7
   }
-  
+
 RESPONSE:
-  { 
+  {
     id: 5, color: "Red", name: "Red Dragons",
     player1Id: 15, player2Id: 16, player3Id: 17, player4Id: 18,
-    gameId: 7 
+    gameId: 7
   }
 ```
 
 Destroy a team like:
 
 ```
-REQUEST: 
+REQUEST:
   DELETE /services/teams/5
-  
+
 RESPONSE:
   {}
 ```
 
 
 
-The `/services/session` is singular because there can only be 
+The `/services/session` is singular because there can only be
 one session available to a particular user. We'll discuss
-this more in the [Users, Sessions, and Access section](#section=section_Users_Sessions_andAccess) 
+this more in the [Users, Sessions, and Access section](#section=section_Users_Sessions_andAccess)
 
 
 
@@ -357,7 +363,7 @@ this more in the [Users, Sessions, and Access section](#section=section_Users_Se
   demo page.
 
 ## Users, Sessions, and Access
- 
+
 This section details Bitballs' access rights system. Learn
 how users are created, sessions are established, and access
 rights are handled.
@@ -374,7 +380,7 @@ Non-admin users can read data.
 
 _PIC:non-admin view of game details_
 
-Non-admins only create new users by registering 
+Non-admins only create new users by registering
 and verify their email address.
 
 _PIC:register page_
@@ -391,7 +397,7 @@ The `/services/users` service handles creating, reading, updating and deleting (
 of users.
 
 The `/services/session` service handles establishing a cookie-based session
-for a particular user. This will add a `req.user` property to all 
+for a particular user. This will add a `req.user` property to all
 server request objects when there is a logged in user.
 
 All other services use `req.user.isAdmin` to determine if the current user has
@@ -404,7 +410,7 @@ The `<user-list>` component allows an admin user to set
 other users as admin.
 
 The [AppViewModel] has a `session` property that uses the [Session] model
-to request and store the available 
+to request and store the available
 session. You can read the session's user and if they are an admin like:
 
 ```
@@ -429,7 +435,7 @@ email to verify their email address.
 
 #### Getting the session
 
-When the client application starts, the app should immediately check if 
+When the client application starts, the app should immediately check if
 it has a session.  
 
 This is done by defining a `session` property that will use the [Session]
@@ -450,8 +456,8 @@ session: {
 The [Session] model makes a request to `GET /services/session`. By default,
 AJAX requests are sent with the user's cookies.  
 
-Passport is used and configured to add a `req.user` property to every 
-request object when a 
+Passport is used and configured to add a `req.user` property to every
+request object when a
 user logs in.  That user object is returned as assocated data on the session:
 
 ```
@@ -476,7 +482,7 @@ an object like:
 ```
 
 We like to keep session data distinct from User data.  In a more complex application,
-additional session information could be returned that does not belong on the 
+additional session information could be returned that does not belong on the
 user. For example:
 
 ```
@@ -507,14 +513,14 @@ var Session = Map.extend({
 });
 ```
 
-The session, its user, or the result of `isAdmin` is then [passed to 
+The session, its user, or the result of `isAdmin` is then [passed to
 sub components] depending on their needs:
 
 ```
 tournament-details {editable}='session.isAdmin'
 ```
 
-Finally, those components use that information to control what is 
+Finally, those components use that information to control what is
 shown on the page:
 
 ```
@@ -536,7 +542,7 @@ which might include methods to check access rights:
 
 #### Creating a session
 
-Creating a session is done with the [<bitballs-navigation>] component. It builds a 
+Creating a session is done with the [<bitballs-navigation>] component. It builds a
 [login form](LINK_TO:navigation.stache's form) that takes an email and password:
 
 ```
@@ -544,7 +550,7 @@ Creating a session is done with the [<bitballs-navigation>] component. It builds
     <input  
         placeholder="email"
     	{($value)}="loginSession.user.email"/>
-	    
+
     <input  
         placeholder="password"
     	type="password"
@@ -555,12 +561,12 @@ Creating a session is done with the [<bitballs-navigation>] component. It builds
 ```
 
 
-When a user submits the login form its 
-[ViewModel](LINK_TO:createSession) will save an instance of the 
+When a user submits the login form its
+[ViewModel](LINK_TO:createSession) will save an instance of the
 Session model. When the save is successful, it will update the AppViewModel with
 the new session instance.
 
-Saving a session calls [`POST /services/session`] to create a session server side. The service 
+Saving a session calls [`POST /services/session`] to create a session server side. The service
 should operate on similar data as `GET /services/session`, so it's passed data like:
 
 ```
@@ -570,7 +576,7 @@ should operate on similar data as `GET /services/session`, so it's passed data l
 ```
 
 The application looks up the user, makes sure the encrypted passwords
-match, and then calls `req.logIn()` to set `req.user` and then 
+match, and then calls `req.logIn()` to set `req.user` and then
 responds with the Session data.
 
 ```
@@ -583,8 +589,8 @@ new User({
 			res.status(401).json({message: "wrong password"});
 		} else {
 			req.logIn(user, function(err) {
-				if (err) { 
-					return next(err); 
+				if (err) {
+					return next(err);
 				}
 				return res.json({user: _.omit(req.user.toJSON(), "password")});
 			});
@@ -628,25 +634,25 @@ app['delete']("/services/session", function(req, res){
 
 ### Server side rendering
 
-DoneJS is able to automatically server-side render pages that use 
+DoneJS is able to automatically server-side render pages that use
 cookie based sessions.  For example, if an admin logs into Bitballs
 and refreshes the [tournament details] page, they will be
 served a page with all of the additional forms an admin user can see.  
 Furthermore, they will be served a "Logout" link instead of "Login".
 
-This works because when a browser navigates to `tournaments/5`, 
+This works because when a browser navigates to `tournaments/5`,
 the cookie is passed to DoneJS's server-side rendering.  It adds
 this cookie to the virtual document used to render that page
-and it makes sure any AJAX requests the client makes 
+and it makes sure any AJAX requests the client makes
 also includes that cookie.
 
 This means that when `Session.get()` is called by the AppViewModel
 to get the session, the right cookie information is passes to the `GET /services/session`
 service and a session is established in the client.
-	
+
 ## Data Relationships
 
-In this section, we'll learn about how to manage related data in a 
+In this section, we'll learn about how to manage related data in a
 DoneJS application. We'll describe our approach that balances performance and
 maintainability concerns that are vital for making high performance apps that
 can quickly respond to changes in design.
@@ -668,18 +674,18 @@ RESTful service layer, the client might have to do the following to load a __gam
 page:
 
 ```
-GET /services/games/5 
+GET /services/games/5
  -> {id: 5, homeTeamId: 16, awayTeamId: 17, videoUrl: "X1Ha9d8fE", ...}
- 
+
 GET /services/stats?gameId=5
  -> {data: [{id: 99, gameId: 5, playerId: 61, type: "orb"}, ...]}
- 
+
 GET /services/teams/16
  -> {id: 16, player1Id: 61, player2Id: 62, player3Id: 63, player4Id: 64,...}
 
 GET /services/teams/17
  -> {id: 17, player1Id: 71, player2Id: 72, player3Id: 73, player4Id: 74,...}
- 
+
 GET /services/players/61 -> {id: 61, name: "Justin M", ...}
 GET /services/players/62 -> {id: 61, name: "Matt P", ...}
 GET /services/players/63 -> {id: 61, name: "David L", ...}
@@ -695,24 +701,24 @@ GET /services/players/74 -> {id: 61, name: "James A", ...}
 
 That's 12 requests! But that's not the worst part.  The worst part is that
 at least 3 _serial_ batches of requests must happen.  We can't load
-players until we have teams.  We can load teams until we 
+players until we have teams.  We can load teams until we
 have the game.
 
 Instead, we'd want to load a game and get back its data with its
 nested teams and players and stats like:
 
 ```
-GET /services/games/5 
+GET /services/games/5
  -> {
- id: 5, 
- homeTeamId: 16, 
+ id: 5,
+ homeTeamId: 16,
  homeTeam: {
-   id: 16, 
-   player1Id: 61, 
+   id: 16,
+   player1Id: 61,
    player1: {id: 61, name: "Justin M", ...},
-   player2Id: 62, 
+   player2Id: 62,
    player2: {id: 61, name: "Matt P", ...}
-   player3Id: 63, 
+   player3Id: 63,
    player3: {id: 61, name: "David L", ...}
    player4Id: 64,
    player4: {id: 61, name: "Julia P", ...}
@@ -720,26 +726,26 @@ GET /services/games/5
  },
  awayTeamId: 17,
  awayTeam: {
-   id: 17, 
-   player1Id: 71, 
+   id: 17,
+   player1Id: 71,
    player1: {id: 61, name: "Paula P", ...}
-   player2Id: 72, 
+   player2Id: 72,
    player2: {id: 61, name: "Chris G", ...}
-   player3Id: 73, 
+   player3Id: 73,
    player3: {id: 61, name: "Jan J", ...}
    player4Id: 74,
    player4: {id: 61, name: "James A", ...}
    ...
- }, 
+ },
  stats: [{id: 99, gameId: 5, playerId: 61, type: "orb"}, ...],
- videoUrl: "X1Ha9d8fE", 
+ videoUrl: "X1Ha9d8fE",
  ...
 }
 ```
 
 > Note: Including stats is optional because stats can be requested in parallel
 to the game and its teams and players.  In some apps, it might be a better
-user experience to make two requests, allowing the client to show 
+user experience to make two requests, allowing the client to show
 something when it has some data instead of all of it.
 
 What you __don't__ want to do, is make `/services/games/{id}` always
@@ -756,7 +762,7 @@ that are able to work with them.
 
 ### Expressive services
 
-Expressive services allow the client to specify some of the raw behavior that 
+Expressive services allow the client to specify some of the raw behavior that
 normally goes into database requests while being adaptive to changes in the database.
 
 They are normally built by mapping parts of the query string to clauses in a
@@ -851,8 +857,8 @@ app.get('/services/games/:id', function(req, res){
 });
 ```
 
-This setup also lets us be very adaptive to changes in the 
-database. For instance, if a game suddenly has 
+This setup also lets us be very adaptive to changes in the
+database. For instance, if a game suddenly has
 comments, we could make the following work:
 
 ```
@@ -863,7 +869,7 @@ Game.get({
 ```
 
 By creating a `Comment` model and changing `Game` to
-look like: 
+look like:
 
 ```
 var Game = bookshelf.Model.extend({
@@ -888,7 +894,7 @@ you should be changing your ORMs and the service code adapts to them.  In
 Bitballs case this means we shouldn't be changing what's in `/services`,
 instead changing what's in `/models` as the database changes.
 
-Related data is not the only behavior that your expressive 
+Related data is not the only behavior that your expressive
 service layer should provide:
 
  - filter (`WHERE`)
@@ -925,7 +931,7 @@ to create a relational algebra that understands the service API.
 
 #### Connecting to a service
 
-Bitball's client Models are [can-connect supermodels].  So a 
+Bitball's client Models are [can-connect supermodels].  So a
 type and list type is defined:
 
 ```
@@ -950,7 +956,7 @@ var gameConnection = superMap({
 
 #### Relational Algebra
 
-To match the query parameters our service and eventually Bookshelf 
+To match the query parameters our service and eventually Bookshelf
 expects, we need to define a custom set algebra. For Bookshelf, it looks like this:
 
 ```
@@ -978,19 +984,19 @@ var Game = Map.extend({
 			newVal.__listSet = {where: {gameId: this.attr("id")}};
 			return newVal;
 		}
-	} 
+	}
   },
   ...
 });
 ```
 
-Notice that `stats.set` is setting the `__listSet` property of the 
-stats.  This is necessary for [can-connect's real-time] behavior. 
+Notice that `stats.set` is setting the `__listSet` property of the
+stats.  This is necessary for [can-connect's real-time] behavior.
 When stats are created for this game, they will automatically appear in this list.
 
 #### Defining computed properties
 
-`Game` also has `teams` and `players` computed properties that 
+`Game` also has `teams` and `players` computed properties that
 derive their value from related fields:
 
 ```
@@ -1086,7 +1092,7 @@ playerIdMap: {
 		return map;
 	},
 	type: "*"
-}, 
+},
 ```
 
 And make a `playerById` method on the view model that uses this:
@@ -1106,16 +1112,16 @@ It's used in the template like:
 <td>{{#playerById(player4Id)}} {{name}} {{/playerById}}</td>
 ```
 
-The good thing about this is `playerIdMap` will only ever 
+The good thing about this is `playerIdMap` will only ever
 be calculated once.
 
 
 
 
 ## SSR and node services
- 		
+
 _coming soon_.
- 		
+
 - Why do this?
 	- mostly because if you are using node as a frontend server, you probably want it able to do other things besides can-serve
 - How to do this.
@@ -1128,6 +1134,5 @@ _coming soon_.
 ## Turn off SSR
 
 _coming soon_.
- 
+
 - How to make youtube embed not SSR.
-	
