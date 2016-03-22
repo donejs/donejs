@@ -189,12 +189,12 @@ Now, lets checkout the contents of the `/public` folder:
 
 Bitballs has the following tables and therefore data types:
 
-- Tournament - A scheduled date of a basketball tournament.
-- Player - A person with an age, height, and weight.
-- Team - A team of 4 Players for a Tournament.
-- Game - A match between two Teams for a Tournament.
-- Stat - A record of some activity for a Game and Player.
-- User - Someone who can log into the application with an email and password.
+- [Tournament](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Ctournament.html) - A scheduled date of a basketball tournament.
+- [Player](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cplayer.html) - A person with an age, height, and weight.
+- [Team](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cteam.html) - A team of 4 Players for a Tournament.
+- [Game](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cgame.html) - A match between two Teams for a Tournament.
+- [Stat](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cstat.html) - A record of some activity for a Game and Player.
+- [User](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cuser.html) - Someone who can log into the application with an email and password.
 
 The server also has a concept of a Session.  The Session
 can be thought of as having a User.
@@ -205,13 +205,13 @@ _Picture of data model_.
 The restful service layer provides the following urls
 (each links to their corresponding docs):
 
-- [`/services/tournaments`]
-- `/services/players`
-- `/services/teams`
-- `/services/games`
-- `/services/stats`
-- `/services/users`
-- `/services/session`
+- [`/services/tournaments`](http://donejs.github.io/bitballs/docs/services%7Ctournaments.html)
+- [`/services/players`](http://donejs.github.io/bitballs/docs/services%7Cplayers.html)
+- [`/services/teams`](http://donejs.github.io/bitballs/docs/services%7Cteams.html)
+- [`/services/games`](http://donejs.github.io/bitballs/docs/services%7Cgames.html)
+- [`/services/stats`](http://donejs.github.io/bitballs/docs/services%7Cstats.html)
+- [`/services/users`](http://donejs.github.io/bitballs/docs/services%7Cusers.html)
+- [`/services/session`](http://donejs.github.io/bitballs/docs/services%7Csession.html)
 
 The database-backed services, like `/services/teams` follow a subset of
 [Rest relational algebra].
