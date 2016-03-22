@@ -1988,10 +1988,10 @@ donejs add nw
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
 
-Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **files** property to reflect:
+Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **glob** property to reflect:
 
 ```
-files: [
+glob: [
   "package.json",
   "production.html",
   "node_modules/steal/steal.production.js",
