@@ -29,37 +29,36 @@ The application allows __admins__, who manage the tournament, to:
 
 Create an account (and verify their email address):
 
-<img src="/static/img/bitballs/functionality-1_create_account.png"/>
+<img src="/static/img/bitballs/create-user.png" srcset="/static/img/bitballs/create-user.png 1x, /static/img/bitballs/create-user-2x.png 2x">
 
 Login:
 
-<img src="/static/img/bitballs/functionality-2_login.png"/>
+<img src="/static/img/bitballs/login.png" srcset="/static/img/bitballs/login.png 1x, /static/img/bitballs/login-2x.png 2x">
 
 Create, edit, and delete players:
 
-<img src="/static/img/bitballs/functionality-3_players.png"/>
+<img src="/static/img/bitballs/create-player.png" srcset="/static/img/bitballs/create-player.png 1x, /static/img/bitballs/create-player-2x.png 2x">
 
 Create, edit, and delete tournaments:
 
-<img src="/static/img/bitballs/functionality-4_tournaments.png"/>
+<img src="/static/img/bitballs/create-tournament.png" srcset="/static/img/bitballs/create-tournament.png 1x, /static/img/bitballs/create-tournament-2x.png 2x">
 
 Create teams of players for a tournament:
 
-_image of creating a team_
+<img src="/static/img/bitballs/create-team.png" srcset="/static/img/bitballs/create-team.png 1x, /static/img/bitballs/create-team-2x.png 2x">
 
 Create and delete games for a tournament:
 
-_image of creating a game_
+<img src="/static/img/bitballs/new-game.png" srcset="/static/img/bitballs/new-game.png 1x, /static/img/bitballs/new-game-2x.png 2x">
 
 Add and remove stats for a game while watching it on youtube:
 
-_image of adding a stat_
+<img src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/5-add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x">
 
 Visitors who are not logged in admins are currently only able to
 view the list of players, tournaments, and game details:
 
-_image of game details_
-
+<img src="/static/img/bitballs/public-view.png" srcset="/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x">
 
 @body
 
