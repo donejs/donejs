@@ -74,44 +74,44 @@ technology layers:
 
 __Storage__
 
-- Database: Postgres
+- Database: [Postgres](http://www.postgresql.org/)
 
 __Server and Services__
 
-- Language: JavaScript/Node 5
-- Object Relational Model: Bookshelf
-- Migrations: DBMigrate
-- Service Middleware: Express
-- Server Side Rendering: can-ssr's express middleware
-- Session Management: passport
+- Language: JavaScript/[Node 5](https://nodejs.org/)
+- Object Relational Model: [Bookshelf](http://bookshelfjs.org/)
+- Migrations: [DBMigrate](http://umigrate.readthedocs.org/projects/db-migrate/en/v0.9.x/)
+- Service Middleware: [Express](http://expressjs.com/)
+- Server Side Rendering: [done-ssr's express middleware](https://www.npmjs.com/package/done-ssr-middleware)
+- Session Management: [passport](http://passportjs.org/)
 
 __Client__
 
-- Dependency Management: StealJS with mixed use of CJS and ES6.
-- Model: can-connect
-- ViewModel: can.Map and can.List
-- View: can.stache
-- Custom Elements: can.Component
-- Routing: can.route
+- Dependency Management: [StealJS](http://stealjs.com/) with mixed use of [CommonJS](http://stealjs.com/docs/syntax.CommonJS.html) and [ES6](http://stealjs.com/docs/syntax.es6.html).
+- Model: [can-connect](https://connect.canjs.com/)
+- ViewModel: [can.Map](https://canjs.com/docs/can.Map.html) and [can.List](https://canjs.com/docs/can.List.html)
+- View: [can.stache](https://canjs.com/docs/can.stache.html)
+- Custom Elements: [can.Component](https://canjs.com/docs/can.Component.html)
+- Routing: [can.route](https://canjs.com/docs/can.route.html)
 
 __Testing__
 
-- Assertion Library: QUnit
-- Ajax Fixtures: can-fixture
-- Functional Testing: FuncUnit
-- Test Runner: Testee
-- Continuous Integation and Deployment: Travis CI
+- Assertion Library: [QUnit](https://qunitjs.com/)
+- Ajax Fixtures: [can-fixture](https://www.npmjs.com/package/can-fixture)
+- Functional Testing: [FuncUnit](https://www.npmjs.com/package/funcunit)
+- Test Runner: [Testee](https://www.npmjs.com/package/testee)
+- Continuous Integation and Deployment: [Travis CI](https://travis-ci.org/)
 
 
 __Hosting__
 
-- Database and Server: Heroku
-- Static Content: Firebase
+- Database and Server: [Heroku](https://www.heroku.com/)
+- Static Content: [Firebase](https://www.firebase.com/)
 
 
 __Documentation__
 
-- Engine: DocumentJS
+- Engine: [DocumentJS](http://documentjs.com/)
 
 ### Folder organization
 
