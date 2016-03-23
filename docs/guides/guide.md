@@ -343,7 +343,7 @@ And also update the production `baseURL` in the `system` section:
   ...
   "envs": {
     "server-production": {
-      "baseURL": "https://<appname>.firebaseapp.com/"
+      "renderingBaseURL": "https://<appname>.firebaseapp.com/"
     }
   }
 }
