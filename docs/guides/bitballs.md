@@ -1,4 +1,4 @@
-@page bitballs Bitballs App
+@page bitballs Example: Bitballs
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
