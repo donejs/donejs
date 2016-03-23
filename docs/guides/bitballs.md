@@ -53,7 +53,7 @@ Create and delete games for a tournament:
 
 Add and remove stats for a game while watching it on youtube:
 
-<img src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/5-add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x">
+<img src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x">
 
 Visitors who are not logged in admins are currently only able to
 view the list of players, tournaments, and game details:
