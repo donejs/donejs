@@ -373,16 +373,16 @@ Bitballs has a very simple access rights system.  Only
 admin users can manipulate tournament data. And only admin users
 can set another user as an admin user.
 
-_PIC:admin view of game details_
+<img src="/static/img/bitballs/new-game.png" srcset="/static/img/bitballs/new-game.png 1x, /static/img/bitballs/new-game-2x.png 2x">
 
 Non-admin users can read data.  
 
-_PIC:non-admin view of game details_
+<img src="/static/img/bitballs/nonadmin-games.png" srcset="/static/img/bitballs/nonadmin-games.png 1x, /static/img/bitballs/nonadmin-games-2x.png 2x">
 
 Non-admins only create new users by registering
 and verify their email address.
 
-_PIC:register page_
+<img src="/static/img/bitballs/register.png" srcset="/static/img/bitballs/register.png 1x, /static/img/bitballs/register-2x.png 2x">
 
 The only exception is when there are no users.  In this situation,
 the first created user will be automatically set as the admin user.
