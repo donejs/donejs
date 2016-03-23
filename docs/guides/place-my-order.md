@@ -1445,7 +1445,24 @@ export default Component.extend({
 });
 ```
 
-Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
+Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order. 
+
+While we're here we can also update our test to get it passing again, replace `src/order/new/new_test.js` with:
+
+```
+import QUnit from 'steal-qunit';
+import { ViewModel } from './new';
+
+// ViewModel unit tests
+QUnit.module('place-my-order/order/new');
+
+QUnit.test('canPlaceOrder', function(){
+  var vm = new ViewModel({
+    order: { items: [1] }
+  });
+  QUnit.equal(vm.attr('canPlaceOrder'), true, 'can place an order');
+});
+```
 
 ### Write the template
 
