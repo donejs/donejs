@@ -2208,6 +2208,8 @@ You can find the name of the app by running `heroku apps:info`.
 
 In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our `.travis.yml` should always be encrypted for which we install the [travis-encrypt](https://www.npmjs.com/package/travis-encrypt) module:
 
+*Note: if using Windows, first install the OpenSSL package as described in the [Setting Up](https://donejs.com/SettingUp.html) guide.*
+
 ```
 npm install travis-encrypt -g
 ```
@@ -2235,7 +2237,7 @@ node_modules/.bin/firebase login:ci
 In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the `<token>` in the following command:
 
 ```
-travis-encrypt --add -r <your-username>/<your-repository> "FIREBASE_TOKEN=\"<token>\""
+travis-encrypt --add -r <your-username>/<your-repository> 'FIREBASE_TOKEN="<token>"'
 ```
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Firebase's CDN.

@@ -48,6 +48,10 @@ Installing Visual Studio Express gives us the C++ compiler we need. If you are u
 choco install visualstudioexpress2013windowsdesktop -y
 ```
 
+#### OpenSSL
+
+If you plan on using Continuous Deployment with Travis CI, the [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html) software is needed to encrypt your CDN API key.
+
 ### Environmental Variables
 
 In order to switch to production mode you need to set the environmental variable `NODE_ENV`. Depending on which console you use this can be done in one of two ways:
