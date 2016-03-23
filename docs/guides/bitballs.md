@@ -182,7 +182,8 @@ Now, lets checkout the contents of the `/public` folder:
 |   |   ├── details/  - Tournament details page
 |   |   ├── list/     - Tournaments list page
 |   ├── user/
-|   |   ├── register/ - Register a user or edit their password page
+|   |   ├── details/ - Register a user or edit their password page
+|   |   ├── list/    - Make admin users.
 ```
 
 ### Data Model and Service layer
@@ -196,7 +197,7 @@ Bitballs has the following tables and therefore data types:
 - [Stat](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cstat.html) - A record of some activity for a Game and Player.
 - [User](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cuser.html) - Someone who can log into the application with an email and password.
 
-The server also has a concept of a Session.  The Session
+The server also has a concept of a [Session](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Csession.html).  The Session
 can be thought of as having a User.
 
 _Picture of data model_.
@@ -214,7 +215,7 @@ The restful service layer provides the following urls
 - [`/services/session`](http://donejs.github.io/bitballs/docs/services%7Csession.html)
 
 The database-backed services, like `/services/teams` follow a subset of
-[Rest relational algebra].
+[Rest relational algebra](https://gist.github.com/justinbmeyer/3753564).
 
 - To get a list of items, `GET /services/{plural_type}?...`
 - To get a single item, `GET /services/{plural_type}/{id}`
@@ -244,7 +245,7 @@ Or get list of teams for a particular tournament like:
 
 ```
 REQUEST:
-  GET /services/teams?gameId=7
+  GET /services/teams?where[gameId]=7
 RESPONSE:
   {
     data: [
@@ -263,7 +264,7 @@ server to bring in related data like:
 
 ```
 REQUEST:
-  GET /services/teams?gameId=7\
+  GET /services/teams?where[gameId]=7\
                       &withRelated[]=player1\
                       &withRelated[]=player2\
                       &withRelated[]=player3\
@@ -348,12 +349,9 @@ RESPONSE:
   {}
 ```
 
-
-
-The `/services/session` is singular because there can only be
+The [`/services/session`](http://donejs.github.io/bitballs/docs/services%7Csession.html) api is singular because there can only be
 one session available to a particular user. We'll discuss
 this more in the [Users, Sessions, and Access section](#section=section_Users_Sessions_andAccess)
-
 
 
 ### Component map
