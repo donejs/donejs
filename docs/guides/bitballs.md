@@ -55,7 +55,7 @@ Add and remove stats for a game while watching it on youtube:
 
 <img src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/5-add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x">
 
-Visitors who are not logged in admins are currently only able to
+Visitors who are not admins are only able to
 view the list of players, tournaments, and game details:
 
 <img src="/static/img/bitballs/public-view.png" srcset="/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x">
@@ -368,19 +368,21 @@ rights are handled.
 ### Behavior
 
 Bitballs has a very simple access rights system.  Only
-admin users can manipulate tournament data. And only admin users
-can set another user as an admin user.
+admin users can manipulate tournament data.
 
-_PIC:admin view of game details_
+<img src="/static/img/bitballs/create-team.png" srcset="/static/img/bitballs/create-team.png 1x, /static/img/bitballs/create-team-2x.png 2x">
+
+And only admin users can set another user as an admin user.
+
+_PIC:admin view of users page_
 
 Non-admin users can read data.  
 
-_PIC:non-admin view of game details_
+<img src="/static/img/bitballs/public-view.png" srcset="/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x">
 
-Non-admins only create new users by registering
-and verify their email address.
+Non-admins can register themselves and verify their email address.
 
-_PIC:register page_
+<img src="/static/img/bitballs/create-user.png" srcset="/static/img/bitballs/create-user.png 1x, /static/img/bitballs/create-user-2x.png 2x">
 
 The only exception is when there are no users.  In this situation,
 the first created user will be automatically set as the admin user.
@@ -390,23 +392,23 @@ the first created user will be automatically set as the admin user.
 The following breaks down what parts of the app perform which parts
 of managing users, sessions and access rights:
 
-The `/services/users` service handles creating, reading, updating and deleting (CRUDing)
+The [`/services/users`](http://donejs.github.io/bitballs/docs/services%7Cusers.html) service handles creating, reading, updating and deleting (CRUDing)
 of users.
 
-The `/services/session` service handles establishing a cookie-based session
+The [`/services/session`](http://donejs.github.io/bitballs/docs/services%7Csession.html) service handles establishing a cookie-based session
 for a particular user. This will add a `req.user` property to all
 server request objects when there is a logged in user.
 
 All other services use `req.user.isAdmin` to determine if the current user has
 access rights for the given service.
 
-The `<user-register>` component handles creating a
+The [`<user-details>`](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Cdetails.html) component handles creating a
 new user.
 
-The `<user-list>` component allows an admin user to set
+The [`<user-list>`](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Clist.html) component allows an admin user to set
 other users as admin.
 
-The [AppViewModel] has a `session` property that uses the [Session] model
+The [AppViewModel](http://donejs.github.io/bitballs/docs/bitballs%7Capp.html) has a `session` property that uses the [Session] model
 to request and store the available
 session. You can read the session's user and if they are an admin like:
 
@@ -414,32 +416,104 @@ session. You can read the session's user and if they are an admin like:
 appViewModel.attr('user').attr('isAdmin')
 ```
 
-The `<bitballs-navigation>` component allows someone to login and change
+The [`<bitballs-navigation>`](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html) component allows someone to login and change
 the `AppViewModel`'s session.
 
-All other page-level components get passed the `AppViewModel`'s `session`. They
+All other page-level components get passed the `AppViewModel`'s `isAdmin` property. They
 use it to determine which functionality should be displayed.
 
 ### Creating a user
 
-When a user navigates to `/users/regsiter`, the [`<users-register>`] component
-creates a form that takes a user's email and password.  When the [form is
-submitted], an instance of the client `User` model is created and sent to the
-[/services/users] service. This creates a user and sends them an
+When a user navigates to `/register`, the [`<user-details>`](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Cdetails.html) component
+creates a form that takes a user's email and password.  
+
+```
+<form ($submit)="saveUser(%event)" action="">
+    <div class="form-group">
+        <label for="user-email">
+            Email
+        </label>
+        {{#is userStatus "verified"}}
+            <div class="input-group has-success has-feedback">
+                <span class="input-group-addon">verified!</span>
+                <input
+                    class="form-control"
+                    id="user-email"
+                    {{^if user.isNew}}disabled{{/if}}
+                    {($value)}="user.email" />
+            </div>
+        {{else}}
+            <input
+                class="form-control"
+                id="user-email"
+                {{^if user.isNew}}disabled{{/if}}
+                {($value)}="user.email" />
+        {{/is}}
+    </div>
+    ...
+</form>
+```
+
+When the form is submitted, an instance of the client `User` model is created and sent to the
+[`/services/users`](http://donejs.github.io/bitballs/docs/services%7Cusers.html) service.
+
+```js
+saveUser: function(ev) {
+    if(ev) {
+        ev.preventDefault();
+    }
+    var self = this,
+        promise = this.attr("user").save().then(function(user) {
+            ...
+        });
+    ...
+},
+```
+
+The service creates a user and sends the user an
 email to verify their email address.
+
+```js
+app.post('/services/users',
+	function ( req, res, next ){
+        // validates request ...
+	},
+	passport.authenticate( 'signup' ),
+	function ( req, res ) {
+		var user = req.user.toJSON();
+		var hash = encodeURIComponent( user.verificationHash );
+		var subject = "Complete your registration at bitballs";
+		var htmlbody = // create email body ...
+
+		nodeMail( user.email,
+            'bitballs@bitovi.com',
+            subject,
+            htmlbody, function ( err, info ) {
+			...
+			res.send( omitSensitive( user ) );
+		});
+	}
+);
+```
 
 ### Getting, creating, or destroying a session
 
+The following details how Bitballs:
+
+- Knows if a user is logged in.
+- Logs in a user.
+- Logs out a user.
+
 #### Getting the session
 
-When the client application starts, the app should immediately check if
+When the client application starts, the app checks if
 it has a session.  
 
-This is done by defining a `session` property that will use the [Session]
+This is done by defining a `session` property that will use the Session
 model to retrieve the current session.  If there is a session, it will
 be stored on the AppViewModel.
 
-```
+```js
 session: {
   serialize: false,
   value: function() {
@@ -450,14 +524,14 @@ session: {
 },
 ```
 
-The [Session] model makes a request to `GET /services/session`. By default,
+The [Session](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Csession.html) model makes a request to `GET /services/session`. By default,
 AJAX requests are sent with the user's cookies.  
 
 Passport is used and configured to add a `req.user` property to every
 request object when a
-user logs in.  That user object is returned as assocated data on the session:
+user logs in.  That user object is returned, minus any private data, as associated data on the session:
 
-```
+```js
 app.get('/services/session', function(req, res) {
 	if (req.user) {
 		res.send({user: _.omit(req.user.toJSON(), "password")});
@@ -474,7 +548,7 @@ an object like:
 
 ```
 {
-  user: {email: "justin@bitovi.com"}
+  user: {email: "justin@bitovi.com", isAdmin: true}
 }
 ```
 
@@ -486,18 +560,18 @@ user. For example:
 {
   createdAt: 1456512713012,
   expiresAt: 14565123013012,
-  user: {email: "justin@bitovi.com"},
+  user: {email: "justin@bitovi.com", isAdmin: true},
 }
 ```
 
-Once the reponse data comes back, a `session` object with its associated `session.user`
+Once the response data comes back, a `session` object with its associated `session.user`
 object will be available on the AppViewModel.
 
-The [`Session` client model] makes sure that `user` is converted into a [User model]
+The [`Session` client model](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Csession.html) makes sure that `user` is converted into a [User model](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cuser.html)
 and also provides an `isAdmin` method that returns if admin functionality should
 be available:
 
-```
+```js
 var Session = Map.extend({
 	define: {
 		user: {
@@ -510,24 +584,24 @@ var Session = Map.extend({
 });
 ```
 
-The session, its user, or the result of `isAdmin` is then [passed to
-sub components] depending on their needs:
+The session, its user, or the result of `isAdmin` is then passed to
+sub components depending on their needs:
 
-```
-tournament-details {editable}='session.isAdmin'
+```html
+<tournament-details {is-admin}='session.isAdmin'/>
 ```
 
 Finally, those components use that information to control what is
 shown on the page:
 
 ```
-{{#if editable}}
+{{#if isAdmin}}
 <h4>New Game</h4>
 <form ($submit)="createGame(%event)">...</form>
 {{/if}}
 ```
 
-In more complex apps, the `user` object might include an [Access Contol List]
+In more complex apps, the `user` object might include an [Access Control List](https://en.wikipedia.org/wiki/Access_control_list)
 which might include methods to check access rights:
 
 ```
@@ -539,10 +613,10 @@ which might include methods to check access rights:
 
 #### Creating a session
 
-Creating a session is done with the [<bitballs-navigation>] component. It builds a
-[login form](LINK_TO:navigation.stache's form) that takes an email and password:
+Creating a session is done with the [<bitballs-navigation>](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html) component. It builds a
+login form that takes an email and password:
 
-```
+```html
 <form ($submit)="createSession(%event)" action="">
     <input  
         placeholder="email"
@@ -559,14 +633,29 @@ Creating a session is done with the [<bitballs-navigation>] component. It builds
 
 
 When a user submits the login form its
-[ViewModel](LINK_TO:createSession) will save an instance of the
+ViewModel will save an instance of the
 Session model. When the save is successful, it will update the AppViewModel with
 the new session instance.
 
-Saving a session calls [`POST /services/session`] to create a session server side. The service
-should operate on similar data as `GET /services/session`, so it's passed data like:
+```js
+createSession: function(ev){
+    if(ev) {
+        ev.preventDefault();
+    }
+    var self = this;
+    this.attr("loginSession").save().then(function(session){
+        // create placeholder session for next login.
+        self.attr("loginSession", new Session({user: new User()}));
+        // update AppViewModel with new session
+        self.attr("app").attr("session", session);
 
+    });
+},
 ```
+
+Saving a session calls `POST /services/session` to create a session server side. The service should operate on similar data as `GET /services/session`, so it's passed data like:
+
+```ks
 {
   user: {email: "justin@bitovi.com", password: "pass1234"}
 }
@@ -576,7 +665,7 @@ The application looks up the user, makes sure the encrypted passwords
 match, and then calls `req.logIn()` to set `req.user` and then
 responds with the Session data.
 
-```
+```js
 new User({
 	'email': email
 }).fetch().then(function(user) {
@@ -589,7 +678,9 @@ new User({
 				if (err) {
 					return next(err);
 				}
-				return res.json({user: _.omit(req.user.toJSON(), "password")});
+				return res.json({
+                    user: _.omit(req.user.toJSON(), "password")
+                });
 			});
 		}
 	} else {
@@ -601,16 +692,16 @@ new User({
 
 #### Destroy the session
 
-The [`<bitballs-navigation>`] component's [template](LINK_TO:logout part) as a link that
+The [`<bitballs-navigation>`](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html) component's [template](https://github.com/donejs/bitballs/blob/master/public/components/navigation/navigation.stache) as a link that
 calls `logout()` on its ViewModel:
 
-```
+```html
 <a href="javascript://" ($click)="logout()">Logout</a>
 ```
 
 `logout` calls destroy on the session and then removes the session from the AppViewModel:
 
-```
+```js
 logout: function(){
   this.attr("session").destroy().then(()=>{
     this.attr("session", null);
@@ -618,11 +709,11 @@ logout: function(){
 }
 ```
 
-Destroying a session calls [`DELETE /services/session`] to destroy a session server side. No
+Destroying a session calls `DELETE /services/session` to destroy a session server side. No
 data is needed to be passed. The server simply calls passport's `logout()` and responds
 with an empty JSON object.
 
-```
+```js
 app['delete']("/services/session", function(req, res){
 	req.logout();
 	res.json({});
@@ -633,7 +724,7 @@ app['delete']("/services/session", function(req, res){
 
 DoneJS is able to automatically server-side render pages that use
 cookie based sessions.  For example, if an admin logs into Bitballs
-and refreshes the [tournament details] page, they will be
+and refreshes the [tournament details](https://bitballs.herokuapp.com/tournaments/2) page, they will be
 served a page with all of the additional forms an admin user can see.  
 Furthermore, they will be served a "Logout" link instead of "Login".
 
