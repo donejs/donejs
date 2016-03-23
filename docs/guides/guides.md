@@ -10,7 +10,7 @@ whistles a modern developer needs, we created the following guides.
 
 @body
 
-## [Quick start (donejs-chat)](/Guide.html)
+## [Quick start: donejs-chat](/Guide.html)
 <a href="/Guide.html"><img class="app-thumbs" src="/static/img/thumb-chat.png" srcset="/static/img/thumb-chat.png 1x, /static/img/thumb-chat-2x.png 2x"></a>
 
 In the [quick start guide](/Guide.html), we will build a small chat application - [http://chat.donejs.com/](http://chat.donejs.com/).  You'll learn about:
@@ -22,7 +22,7 @@ In the [quick start guide](/Guide.html), we will build a small chat application 
 - Building and deploying to a CDN.
 - Builds to Codova (mobile) and NW.js (desktop).
 
-## [In-depth (place-my-order)](/place-my-order.html)
+## [In-depth: place-my-order](/place-my-order.html)
 <a href="/place-my-order.html"><img class="app-thumbs" src="/static/img/thumb-pmo.png" srcset="/static/img/thumb-pmo.png 1x, /static/img/thumb-pmo-2x.png 2x"></a>
 
 
@@ -31,7 +31,7 @@ In the [place-my-order guide](/place-my-order.html), we will go into detail, cre
 - MVVM architecture
 - Testing
 - Nested routing
-- Continous integration continous depolyment
+- Continuous integration and continuous deployment
 - Documentation
 
 ## [Creating a plugin](/plugin.html)
@@ -49,3 +49,15 @@ In the [plugin guide](/plugin.html), we will create a reusable number input widg
 - Make a build
 - Publish to NPM
 - Use the plugin in other projects
+
+## [Example App: Bitballs](/bitballs.html)
+
+<a href="/bitballs.html"><img class="app-thumbs" src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/5-add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x"/></a>
+
+In this guide, you'll learn how [Bitballs](http://bitballs.herokuapp.com) - a charity basketball tournament management application - works.
+Specifically, this guide will walk through the implementation of the following behaviors or functionality:
+
+ - Registration, login, user sessions, and access rights.
+ - Handling relationships between model types.
+ - Setup node services and server-side rendering on the same process.
+ - How to turn off parts of the app that should not be server-side rendered.
