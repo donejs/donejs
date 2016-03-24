@@ -64,9 +64,9 @@ guide.step("Run NPM install", function() {
  */
 guide.step("Start donejs develop", function(){
 	var child = guide.canServe = guide.executeCommand("donejs", ["develop"]).childProcess;
-  console.log("can-serve running as", child.pid);
+  console.log("done-serve running as", child.pid);
 
-	var server = streamWhen(child.stdout, /can-serve starting on/);
+	var server = streamWhen(child.stdout, /done-serve starting on/);
 	var liveReload = streamWhen(child.stderr, /Live-reload server/);
 	return Promise.all([server, liveReload]).then(wait);
 });

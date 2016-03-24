@@ -17,8 +17,7 @@ The blue boxes in the following architecture diagram represent modules provided 
 - [can-set](#section=section_can_set) - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)
 - [jQuery](#section=section_jQuery) - DOM utilities. [api](http://jquery.com/)
 - [jQuery++](#section=section_jQuery__) - Even more DOM utilities. [api](http://jquerypp.com/)
-- [can-ssr](#section=section_can_ssr) - Server-side rendering for NodeJS. [api](http://canjs.github.io/can-ssr/doc/)
-- [can-ssr/app-map](#section=section_can_ssr_app_map) - An application's ViewModel. [api](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html)
+- [done-ssr](#section=section_done_ssr) - Server-side rendering for NodeJS. [api](https://github.com/donejs/done-ssr)
 - [done-autorender](#section=section_done_autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
 - [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)
 
@@ -49,17 +48,17 @@ the chat application as an example in development.  We'll cover what happens whe
 ### First page load
 
 1. An http request for `http://donejs-chat.com/` is sent to a node server. The node server is configured,
-   in this case with express, to use [can-ssr](#section=section_can_ssr) to render a DoneJS application:
+   in this case with express, to use [done-ssr-middleware](#section=section_done_ssr) to render a DoneJS application:
 
    ```
-   var ssr = require('can-ssr/middleware');
+   var ssr = require('done-ssr-middleware');
 
    app.use('/', ssr({
      config: __dirname + '/public/package.json!npm'
    }));
    ```
 
-2. [can-ssr](#section=section_can_ssr) uses [steal](#section=section_steal) to load the application's main module which results in loading the
+2. [done-ssr](#section=section_done_ssr) uses [steal](#section=section_steal) to load the application's main module which results in loading the
    entire application. Loading the application only happens once for all page requests.
 
    A DoneJS's main module is specified where all configuration of a DoneJS application happens, its `package.json`.
@@ -90,17 +89,17 @@ the chat application as an example in development.  We'll cover what happens whe
 
    The [done-autorender](#section=section_done_autorender) plugin, in NodeJS, exports this template so it can be rendered. It also exports
    any modules it imports with `<can-import>` that are labeled with `export-as="EXPORT_NAME"`. Exporting
-   the [viewModel](#section=section_can_ssr_app_map) is important for [can-ssr](#section=section_can_ssr)
+   the viewModel is important for [done-ssr](#section=section_done_ssr)
 
-3. Once [can-ssr](#section=section_can_ssr) has the [done-autorender](#section=section_done_autorender)'s `template` and `viewModel` export it:
+3. Once [done-ssr](#section=section_done_ssr) has the [done-autorender](#section=section_done_autorender)'s `template` and `viewModel` export it:
 
-   1. Creates a new instance of the [viewModel](#section=section_can_ssr_app_map), setting properties on it
+   1. Creates a new instance of the viewModel, setting properties on it
    using [can.route](#section=section_can_route)'s routing rules.  
    2. Creates a new [virtual dom](#section=section_can_simple_dom) instance.
    3. Renders the [template](#section=section_can_stache) with the `viewModel` into the `virtual dom` instance.
 
-4. [done-autorender](#section=section_done_autorender) templates waits for all promises registered with [.waitFor](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.waitFor.html) and [.pageData](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.pageData.html) to complete
-   before providing a final result.  Once the template is finished rendering, [can-ssr](#section=section_can_ssr) converts it to a
+4. [done-autorender](#section=section_done_autorender) templates waits for all promises to complete
+   before providing a final result.  Once the template is finished rendering, [done-ssr](#section=section_done_ssr) converts it to a
    string and sends it back to the browser.
 
 5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal](#section=section_steal).  
@@ -115,7 +114,7 @@ the chat application as an example in development.  We'll cover what happens whe
    1. Creates a new instance of the [viewModel](#section=section_can_ssr_app_map), setting properties on it
    using [can.route](#section=section_can_route)'s routing rules.  
    2. Renders the [template](#section=section_can_stache) with the `viewModel` into a document fragment.
-   3. Once all promises registered with [.waitFor](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.waitFor.html) and [.pageData](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.prototype.pageData.html) have resolved, it replaces the document with the rendered result.
+   3. Once all asynchronous activity has completed, it replaces the document with the rendered result.
 
 
 
@@ -127,7 +126,7 @@ the chat application as an example in development.  We'll cover what happens whe
    can.route(':page', { page: 'home' });
    ```
 
-2. [done-autorender](#section=section_done_autorender) previously bound the [can-ssr/app-map](#section=section_can_ssr_app_map) to [can.route](#section=section_can_route) which causes any change in the route to be reflected in the AppMap instance.
+2. [done-autorender](#section=section_done_autorender) previously bound the AppViewModel to [can.route](#section=section_can_route) which causes any change in the route to be reflected in the AppMap instance.
 
 3. Live binding causes the initial template to reflect in the change in route. If the new route is `/chat` it will cause the `page` to be **chat**:
 
@@ -1611,29 +1610,32 @@ utilties to jQuery.
 
 ## Server Side Rendering APIs
 
-### can-ssr
+### done-ssr
 
-[can-ssr](https://github.com/canjs/can-ssr) enables DoneJS applications to be
+[done-ssr](https://github.com/donejs/done-ssr) enables DoneJS applications to be
 server-side rendered. Paired with [done-autorender](#section=section_done_autorender) 
 it allows you to render the entire document from a single template.
 
 ```
-var ssr = require("can-ssr");
+var http = require("http");
+var ssr = require("done-ssr");
 var render = ssr();
 
-render("/chat").then(function(response){
-  // response.html === <html> ..
+var server = http.createServer(function(request, response){
+    render(request).pipe(response);
 });
+
+server.listen(8080);
 ```
 
 The render function is called with a string url to render and returns a response
 object that contains the html string that was rendered. Use any Node-based
-http framework with can-ssr.
+http framework with done-ssr.
 
-For convenience it also comes with [Express](http://expressjs.com/) middleware:
+For convenience we have published an [Express](http://expressjs.com/) middleware:
 
 ```
-var ssr = require("can-ssr/middleware");
+var ssr = require("done-ssr-middleware");
 var app = require("express")();
 
 app.use(ssr(
@@ -1641,66 +1643,12 @@ app.use(ssr(
 ));
 ```
 
-Additionally it comes with [can-serve](https://github.com/canjs/can-ssr#server)
+Additionally DoneJS has [done-serve](https://github.com/donejs/done-serve)
 which acts as a rendering front-end for your application. It will host static
 content, render your application, and proxy requests to another back-end server.
 
 ```
-can-serve --proxy http://localhost:7070 --port 8080
-```
-
-### can-ssr/app-map
-
-[can-ssr/app-map](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html) is a [can.Map](#section=section_can_Map)
-that aids in rendering a template that performs asynchronous operations (like Ajax).
-
-The app-map is used as your application's View Model by extending it:
-
-```
-var AppMap = require("can-ssr/app-map");
-
-module.exports = AppMap.extend({
-  ...
-});
-```
-
-Within a [can.Component](#section=section_can_Component) View Model you can use the app-map
-to tell [can-ssr](#section=section_can_ssr) to wait for a request to finish:
-
-```
-exports.ViewModel = can.Map.extend({
-  define: {
-    orders: {
-      get: function() {
-        var params = {};
-        var orderPromise = Order.getList(params);
-        this.attr("%root").pageData("orders", params, orderPromise);
-        return orderPromise;
-      }
-    }
-  }
-});
-```
-
-Using `pageData` will result in the response data being inlined into the page when using the
-[inline-cache](http://canjs.github.io/can-ssr/doc/inline-cache.html) asset,
-preventing a request for the data in the browser.
-
-Additionally **can-ssr/app-map** contains a `statusCode` property that is useful for handling 404s
-and other non-200 conditions:
-
-```
-{{#switch statusCode}}
-    {{#case 404}}
-        These are not the Droids you are looking for.
-    {{/case}}
-    {{#case 500}}
-        Sorry, our API crashed.
-    {{/case}}
-    {{#default}}
-        {{! spin up your application here}}
-    {{/default}}
-{{/switch}}
+done-serve --proxy http://localhost:7070 --port 8080
 ```
 
 ### done-autorender

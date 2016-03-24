@@ -56,7 +56,6 @@ cd place-my-order
 We can see the following files:
 
 ```
-├── .yo-rc.json
 ├── build.js
 ├── development.html
 ├── documentjs.json
@@ -80,7 +79,6 @@ We can see the following files:
 
 Let's have a quick look at the purpose of each:
 
-- `.yo-rc.json` contains information for running the generators.
 - `development.html`, `production.html` those pages can run the DoneJS application in development or production mode without a server
 - `package.json` is the main configuration file that defines all our application dependencies and other settings.
 - `test.html` is used to run all our tests.
@@ -137,8 +135,8 @@ Now our application is good to go and we can start the server. We need to proxy 
 "scripts": {
   "api": "place-my-order-api --port 7070",
   "test": "testee src/test.html --browsers firefox --reporter Spec",
-  "start": "can-serve --port 8080",
-  "develop": "can-serve --develop --port 8080",
+  "start": "done-serve --port 8080",
+  "develop": "done-serve --develop --port 8080",
 ```
 
 To:
@@ -147,8 +145,8 @@ To:
 "scripts": {
   "api": "place-my-order-api --port 7070",
   "test": "testee src/test.html --browsers firefox --reporter Spec",
-  "start": "can-serve --proxy http://localhost:7070 --port 8080",
-  "develop": "can-serve --develop --proxy http://localhost:7070 --port 8080",
+  "start": "done-serve --proxy http://localhost:7070 --port 8080",
+  "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
 ```
 
 Then we can start the application with
@@ -179,17 +177,13 @@ Every DoneJS application consists of at least two files:
   <head>
     <title>{{title}}</title>
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    {{asset "css"}}
-    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less!" />
+    <can-import from="place-my-order/styles.less" />
     <can-import from="place-my-order/app" export-as="viewModel" />
 
     <h1>{{message}}</h1>
-
-    {{asset "inline-cache"}}
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
@@ -212,18 +206,16 @@ This is an HTML5 template that uses [can.stache](http://canjs.com/docs/can.stach
  1. The `place-my-order-assets` package, which loads the LESS styles for the application
  1. `place-my-order/app`, which is the main application file
 
-The [asset](http://canjs.github.io/can-ssr/doc/can-ssr.helpers.asset.html) helper loads assets like CSS, cached data, and scripts, regardless of the current environment (development or production).
-
 The main application file at `src/app.js` looks like this:
 
 ```
 // src/app.js
-import AppMap from "can-ssr/app-map";
+import Map from "can/map/";
 import route from "can/route/";
 import 'can/map/define/';
 import 'can/route/pushstate/';
 
-const AppViewModel = AppMap.extend({
+const AppViewModel = Map.extend({
   define: {
     message: {
       value: 'Hello World!',
@@ -239,7 +231,7 @@ const AppViewModel = AppMap.extend({
 export default AppViewModel;
 ```
 
-This initializes an [AppMap](http://canjs.github.io/can-ssr/doc/can-ssr.AppMap.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
+This initializes a [can.Map](https://canjs.com/docs/can.Map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
 
 ## Creating custom elements
 
@@ -350,12 +342,12 @@ To learn more about routing visit the CanJS guide on [Application State and Rout
 To add our routes, change `src/app.js` to:
 
 ```js
-import AppMap from 'can-ssr/app-map';
+import Map from 'can/map/';
 import route from 'can/route/';
 import 'can/route/pushstate/';
 import 'can/map/define/';
 
-const AppViewModel = AppMap.extend({
+const AppViewModel = Map.extend({
   define: {
     title: {
       serialize: false,
@@ -449,22 +441,19 @@ Update `src/index.stache` to:
   <head>
     <title>{{title}}</title>
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    {{asset "css"}}
-    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less!" />
+    <can-import from="place-my-order/styles.less" />
     <can-import from="place-my-order/app" export-as="viewModel" />
 
-    <can-import from="place-my-order/loading.component!" />
-    <can-import from="place-my-order/header.component!" />
+    <can-import from="place-my-order/loading.component" />
+    <can-import from="place-my-order/header.component" />
     <pmo-header page="{page}"></pmo-header>
 
     {{#switch page}}
       {{#case "home"}}
-        <can-import from="place-my-order/home.component!"
+        <can-import from="place-my-order/home.component"
             can-tag="pmo-loading">
           <pmo-home></pmo-home>
         </can-import>
@@ -476,14 +465,12 @@ Update `src/index.stache` to:
         </can-import>
       {{/case}}
       {{#case "order-history"}}
-        <can-import from="place-my-order/order/history.component!"
+        <can-import from="place-my-order/order/history.component"
             can-tag="pmo-loading">
           <pmo-order-history></pmo-order-history>
         </can-import>
       {{/case}}
     {{/switch}}
-
-    {{asset "inline-cache"}}
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
@@ -512,7 +499,7 @@ In this next part, we'll connect to the RESTful API that we set up with `place-m
 
 ### Creating a restaurants connection
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `can-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api).
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `done-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api).
 
 To manage the restaurant data located at [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants), we'll create a restaurant supermodel:
 
@@ -559,7 +546,7 @@ Now we can update the `ViewModel` in `src/restaurant/list/list.js` to use [can.M
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './list.stache!';
+import template from './list.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 
 export var ViewModel = Map.extend({
@@ -667,7 +654,7 @@ Now that we have identified the view model properties needed and have created th
 import Component from 'can/component/';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './list.stache!';
+import template from './list.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import State from 'place-my-order/models/state';
 import City from 'place-my-order/models/city';
@@ -1146,9 +1133,9 @@ donejs add component restaurant/details.component pmo-restaurant-details
 And change `src/restaurant/details.component` to:
 
 ```html
-<can-import from="place-my-order/models/restaurant"/>
 <can-component tag="pmo-restaurant-details">
   <template>
+    <can-import from="place-my-order/models/restaurant"/>  
     <restaurant-model get="{ _id=slug }">
       {{#if isPending}}
         <div class="loading"></div>
@@ -1230,7 +1217,7 @@ To:
       {{/case}}
 
       {{#default}}
-        <can-import from="place-my-order/restaurant/details.component!"
+        <can-import from="place-my-order/restaurant/details.component"
             can-tag="pmo-loading">
           <pmo-restaurant-details></pmo-restaurant-details>
         </can-import>
@@ -1414,7 +1401,7 @@ Now we can update the view model in `src/order/new/new.js`:
 import Component from 'can/component/component';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './new.stache!';
+import template from './new.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
@@ -1458,7 +1445,24 @@ export default Component.extend({
 });
 ```
 
-Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
+Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order. 
+
+While we're here we can also update our test to get it passing again, replace `src/order/new/new_test.js` with:
+
+```
+import QUnit from 'steal-qunit';
+import { ViewModel } from './new';
+
+// ViewModel unit tests
+QUnit.module('place-my-order/order/new');
+
+QUnit.test('canPlaceOrder', function(){
+  var vm = new ViewModel({
+    order: { items: [1] }
+  });
+  QUnit.equal(vm.attr('canPlaceOrder'), true, 'can place an order');
+});
+```
 
 ### Write the template
 
@@ -1511,7 +1515,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
 
 ```html
 <can-import from="bit-tabs/unstyled"/>
-<can-import from="place-my-order/order/details.component!" />
+<can-import from="place-my-order/order/details.component" />
 
 <div class="order-form">
   <restaurant-model get="{ _id=slug }">
@@ -1605,7 +1609,7 @@ Now we can import that component and update `src/order/new/new.stache` to:
 
 This is a longer template so lets walk through it:
 
-- `<can-import from="place-my-order/order/details.component!" />` loads the order details component we previously created
+- `<can-import from="place-my-order/order/details.component" />` loads the order details component we previously created
 - `<restaurant-model get="{ _id=slug }">` loads a restaurant based on the slug value passed to the component
 - If the `saveStatus` deferred is resolved we show the `pmo-order-details` component with that order
 - Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item]
@@ -1711,7 +1715,7 @@ And in the order history template by updating `src/order/history.component` to:
         <div class="actions">Action</div>
       </div>
 
-      <can-import from="place-my-order/order/list.component!" />
+      <can-import from="place-my-order/order/list.component" />
       <order-model getList="{status='new'}">
         <pmo-order-list
           {orders}="."
@@ -1782,7 +1786,7 @@ Let's add the documentation for a module. Let's use `src/order/new/new.js` and u
 import Component from 'can/component/component';
 import Map from 'can/map/';
 import 'can/map/define/';
-import template from './new.stache!';
+import template from './new.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
@@ -2001,10 +2005,10 @@ donejs add nw
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
 
-Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **files** property to reflect:
+Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **glob** property to reflect:
 
 ```
-files: [
+glob: [
   "package.json",
   "production.html",
   "node_modules/steal/steal.production.js",
@@ -2021,8 +2025,7 @@ donejs build nw
 The OS X application can be opened with
 
 ```
-cd build/place-my-order/osx64
-open place-my-order.app
+open build/place-my-order/osx64/place-my-order.app
 ```
 
 The Windows application can be opened with
@@ -2116,7 +2119,7 @@ And also update the production `baseURL` in the `system` section:
   ...
   "envs": {
     "server-production": {
-      "baseURL": "https://<appname>.firebaseapp.com/"
+      "renderingBaseURL": "https://<appname>.firebaseapp.com/"
     }
   }
 }
@@ -2164,10 +2167,10 @@ This will return the url where your app can be viewed. Before you open it you'll
 heroku config:set NODE_ENV=production
 ```
 
-Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using can-serve our Procfile just looks like this:
+Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using done-serve our Procfile just looks like this:
 
 ```
-web: node_modules/.bin/can-serve --proxy http://www.place-my-order.com/api
+web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
 ```
 
 First let's save our current status:
@@ -2222,6 +2225,8 @@ You can find the name of the app by running `heroku apps:info`.
 
 In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our `.travis.yml` should always be encrypted for which we install the [travis-encrypt](https://www.npmjs.com/package/travis-encrypt) module:
 
+*Note: if using Windows, first install the OpenSSL package as described in the [Setting Up](https://donejs.com/SettingUp.html) guide.*
+
 ```
 npm install travis-encrypt -g
 ```
@@ -2249,7 +2254,7 @@ node_modules/.bin/firebase login:ci
 In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the `<token>` in the following command:
 
 ```
-travis-encrypt --add -r <your-username>/<your-repository> "FIREBASE_TOKEN=\"<token>\""
+travis-encrypt --add -r <your-username>/<your-repository> 'FIREBASE_TOKEN="<token>"'
 ```
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Firebase's CDN.

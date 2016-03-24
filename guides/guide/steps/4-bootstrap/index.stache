@@ -1,8 +1,6 @@
 <html>
   <head>
     <title>{{title}}</title>
-    {{asset "css"}}
-    {{asset "html5shiv"}}
   </head>
   <body>
     <can-import from="bootstrap/less/bootstrap.less!" />
@@ -20,8 +18,6 @@
         </div>
       </div>
     </div>
-
-    {{asset "inline-cache"}}
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
