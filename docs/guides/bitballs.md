@@ -20,7 +20,7 @@ The code for Bitballs can be found [on github](http://github.com/donejs/bitballs
 To install and run it locally, follow its
 [development setup instructions](https://github.com/donejs/bitballs#development-setup).
 
-Bitballs was written to help organize Bitovi's yearly charity basketball tournement
+Bitballs was written to help organize Bitovi's yearly charity basketball tournament
 for the American Heart and Stroke Association.  Justin Meyer, one of Bitovi's founders,
 and DoneJS core contributor had a stoke. Read about his experience and the purpose of
 the tournament [here](http://blog.bitovi.com/bitovi-hoops-for-heart-with-the-american-stroke-association/).
@@ -60,6 +60,7 @@ view the list of players, tournaments, and game details:
 
 <img src="/static/img/bitballs/public-view.png" srcset="/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x">
 
+
 @body
 
 
@@ -75,14 +76,19 @@ __Storage__
 
 - Database: [Postgres](http://www.postgresql.org/)
 
+> NOTE: DoneJS works perfectly fine with NOSQL approaches and other databases. We don't
+> endorse any backend storage technology.  
+
 __Server and Services__
 
 - Language: JavaScript/[Node 5](https://nodejs.org/)
-- Object Relational Model: [Bookshelf](http://bookshelfjs.org/)
+- Object Relational Mapper: [Bookshelf](http://bookshelfjs.org/)
 - Migrations: [DBMigrate](http://umigrate.readthedocs.org/projects/db-migrate/en/v0.9.x/)
 - Service Middleware: [Express](http://expressjs.com/)
 - Server Side Rendering: [done-ssr's express middleware](https://www.npmjs.com/package/done-ssr-middleware)
 - Session Management: [passport](http://passportjs.org/)
+
+> NOTE: DoneJS works with any service technology.  Furthermore, Bitballs' server-side code was not created by server-side NodeJS experts.  There are likely many improvements that could be made.  Don't learn NodeJS/Express from us.  With respect to the server, our only goal with this example is to introduce service APIs that work well DoneJS clients and give an example of how to create them.
 
 __Client__
 
@@ -111,6 +117,9 @@ __Hosting__
 __Documentation__
 
 - Engine: [DocumentJS](http://documentjs.com/)
+
+.
+
 
 ### Folder organization
 
@@ -854,7 +863,7 @@ Expressive services allow the client to specify some of the raw behavior that
 normally goes into database requests while being adaptive to changes in the database.
 
 They are normally built by mapping parts of the query string to clauses in a
-backend [Object Relational Model].
+backend [Object Relational Mapper](https://en.wikipedia.org/wiki/Object-relational_mapping) (ORM).
 
 For instance, the __game details__ page requests a game with its
 related fields like:
@@ -896,7 +905,7 @@ clause.
 Instead of processing the querystring ourselves and build the corresponding
 Database request, most ORMs make it easy to do the expected thing.
 
-Bitballs uses [Bookshelf] as its ORM.  It allows us
+Bitballs uses [Bookshelf](http://bookshelfjs.org/) as its ORM.  It allows us
 to define relationships between a `Game` and other server-side models:
 
 ```
@@ -996,7 +1005,7 @@ For example, I can get all of team 5's games like:
 GET /services/games?where[teamId]=5
 ```
 
-This happens for free because we pass the querystirng directly to bookshelf:
+This happens for free because we pass the querystrng directly to bookshelf:
 
 ```
 app.get('/services/games', function(req, res){
@@ -1014,13 +1023,12 @@ matches closely the API of your ORM.
 
 Once you've settled on an expressive service API, you need
 to make Model's that connect to it and handle associated data. And if you want
-any of the advanced behavior of [can-connect], you have
+any of the advanced behavior of [can-connect](connect.canjs.com), you have
 to create a relational algebra that understands the service API.
 
 #### Connecting to a service
 
-Bitball's client Models are [can-connect supermodels].  So a
-type and list type is defined:
+Bitball's client Models are [can-connect supermodels](https://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).  So a type and list type is defined:
 
 ```
 var Game = Map.extend({
@@ -1038,17 +1046,20 @@ var gameConnection = superMap({
   List: Game.List,
   url: "/services/games",
   name: "game",
-  algebra: ...
+  algebra: Game.algebra
 });
 ```
 
 #### Relational Algebra
 
 To match the query parameters our service and eventually Bookshelf
-expects, we need to define a custom set algebra. For Bookshelf, it looks like this:
+expects, we need to define a custom set algebra. For `Game`, it looks like this:
 
-```
-new set.Algebra(new set.clause.Where("where"));
+```js
+Game.algebra = new set.Algebra(
+	new set.Translate("where","where"),
+	set.comparators.sort('sortBy')
+);
 ```
 
 #### Defining related properties
@@ -1078,16 +1089,14 @@ var Game = Map.extend({
 });
 ```
 
-Notice that `stats.set` is setting the `__listSet` property of the
-stats.  This is necessary for [can-connect's real-time] behavior.
-When stats are created for this game, they will automatically appear in this list.
+Notice that `stats.set` is setting the [__listSet](https://connect.canjs.com/doc/connect.base.listSetProp.html) property of the stats.  This is necessary for [can-connect's real-time](https://connect.canjs.com/doc/can-connect%7Creal-time.html) behavior. When stats are created for this game, they will automatically appear in this list.
 
 #### Defining computed properties
 
 `Game` also has `teams` and `players` computed properties that
 derive their value from related fields:
 
-```
+```js
 var Game = Map.extend({
   define: {
     ...
@@ -1121,7 +1130,7 @@ var Game = Map.extend({
 ```
 
 In `players`, `team.attr("players")` is actually making use of a similar computed
-`players` property in [`/public/models/team`].
+[`players` property](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cteam.html)  in the Team client model.
 
 #### Defining intermediate computed properties to avoid recomputing.
 
@@ -1146,11 +1155,11 @@ all we have are player ids on each team:
 
 _image of teams list_
 
-A nieve solution would be to make a `findById` method on `Player.List` like:
+A naive solution would be to make a `getById` method on `Player.List` like:
 
 ```
 Player.List = can.List.extend({Map: Player},{
-  findById: function(id){
+  getById: function(id){
     return this.filter(function(player){
       return team.attr("id") === id;
     }).attr(0);
@@ -1158,32 +1167,40 @@ Player.List = can.List.extend({Map: Player},{
 });
 ```
 
-And then use that in the template to look up the player
+And then use that in the template to look up the player:
 
 ```
-<td>{{#players.findById(team.player1Id)}}{{name}}{{/playerById}}</td>
-<td>{{#players.findById(team.player2Id)}}{{name}}{{/playerById}}</td>
-<td>{{#players.findById(team.player3Id)}}{{name}}{{/playerById}}</td>
-<td>{{#players.findById(team.player4Id)}}{{name}}{{/playerById}}</td>
+{{#each teams}}
+    ...
+    <td>{{#../players.getById(player1Id)}}{{name}}{{/}}</td>
+    <td>{{#../players.getById(player2Id)}}{{name}}{{/}}</td>
+    <td>{{#../players.getById(player3Id)}}{{name}}{{/}}</td>
+    <td>{{#../players.getById(player4Id)}}{{name}}{{/}}</td>
+{{/each}}
 ```
 
-The problem with this is that each `.findById` is linear.  Instead,
+> NOTE: The `../` is needed to use the [tournaments/details](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Ctournament%7Cdetails.ViewModel.html)'s `players` property instead of the [players property on the client Game model](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cgame.properties.players.html).
+
+The problem with this is that each `.getById` call is linear search.  Instead,
 we can keep a mapping of player ids to players like:
 
 ```
-playerIdMap: {
-	get: function(){
-		var map = {};
-		this.attr("players").each(function(player){
-			map[player.attr("id")] = player;
-		});
-		return map;
-	},
-	type: "*"
+idMap: {
+    type: "*",
+    get: function(){
+
+        var map = {};
+
+        this.each(function(player){
+            map[player.attr("id")] = player;
+        });
+
+        return map;
+    }
 },
 ```
 
-And make a `playerById` method on the view model that uses this:
+And make a `getById` use `idMap` like:
 
 ```
 playerById: function(id){
@@ -1191,19 +1208,8 @@ playerById: function(id){
 },
 ```
 
-It's used in the template like:
-
-```
-<td>{{#playerById(player1Id)}} {{name}} {{/playerById}}</td>
-<td>{{#playerById(player2Id)}} {{name}} {{/playerById}}</td>
-<td>{{#playerById(player3Id)}} {{name}} {{/playerById}}</td>
-<td>{{#playerById(player4Id)}} {{name}} {{/playerById}}</td>
-```
-
-The good thing about this is `playerIdMap` will only ever
+Now when `.getById` is used in the template `playerIdMap` will only ever
 be calculated once.
-
-
 
 
 ## SSR and node services
