@@ -53,7 +53,7 @@ Create and delete games for a tournament:
 
 Add and remove stats for a game while watching it on youtube:
 
-<img src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/5-add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x">
+<img src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x">
 
 Visitors who are not admins are only able to
 view the list of players, tournaments, and game details:
@@ -379,7 +379,7 @@ rights are handled.
 Bitballs has a very simple access rights system.  Only
 admin users can manipulate tournament data.
 
-<img src="/static/img/bitballs/create-team.png" srcset="/static/img/bitballs/create-team.png 1x, /static/img/bitballs/create-team-2x.png 2x">
+<img src="/static/img/bitballs/new-game.png" srcset="/static/img/bitballs/new-game.png 1x, /static/img/bitballs/new-game-2x.png 2x">
 
 And only admin users can set another user as an admin user.
 
@@ -387,11 +387,11 @@ _PIC:admin view of users page_
 
 Non-admin users can read data.  
 
-<img src="/static/img/bitballs/public-view.png" srcset="/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x">
+<img src="/static/img/bitballs/nonadmin-games.png" srcset="/static/img/bitballs/nonadmin-games.png 1x, /static/img/bitballs/nonadmin-games-2x.png 2x">
 
 Non-admins can register themselves and verify their email address.
 
-<img src="/static/img/bitballs/create-user.png" srcset="/static/img/bitballs/create-user.png 1x, /static/img/bitballs/create-user-2x.png 2x">
+<img src="/static/img/bitballs/register.png" srcset="/static/img/bitballs/register.png 1x, /static/img/bitballs/register-2x.png 2x">
 
 The only exception is when there are no users.  In this situation,
 the first created user will be automatically set as the admin user.
