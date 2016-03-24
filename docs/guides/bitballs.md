@@ -370,6 +370,14 @@ this more in the [Users, Sessions, and Access section](#section=section_Users_Se
 
 <div class="row">
   <div class="col-sm-6">
+    <img class="img-responsive" src="/static/img/bitballs/map-navlogin.png" srcset="/static/img/bitballs/map-navlogin.png 1x, /static/img/bitballs/map-navlogin-2x.png 2x">
+  </div>
+  <div class="col-sm-6">
+    <img class="img-responsive" src="/static/img/bitballs/map-nav.png" srcset="/static/img/bitballs/map-nav.png 1x, /static/img/bitballs/map-nav-2x.png 2x">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
     <img class="img-responsive" src="/static/img/bitballs/map-tournamentlist.png" srcset="/static/img/bitballs/map-tournamentlist.png 1x, /static/img/bitballs/map-tournamentlist-2x.png 2x">
   </div>
   <div class="col-sm-6">
@@ -378,18 +386,18 @@ this more in the [Users, Sessions, and Access section](#section=section_Users_Se
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <img class="img-responsive" src="/static/img/bitballs/map-userdetails.png" srcset="/static/img/bitballs/map-userdetails.png 1x, /static/img/bitballs/map-userdetails-2x.png 2x">
-  </div>
-  <div class="col-sm-6">
-    <img class="img-responsive" src="/static/img/bitballs/map-userlist.png" srcset="/static/img/bitballs/map-userlist.png 1x, /static/img/bitballs/map-userlist-2x.png 2x">
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
     <img class="img-responsive" src="/static/img/bitballs/map-tournamentdetails.png" srcset="/static/img/bitballs/map-tournamentdetails.png 1x, /static/img/bitballs/map-tournamentdetails-2x.png 2x">
   </div>
   <div class="col-sm-6">
     <img class="img-responsive" src="/static/img/bitballs/map-gamedetails.png" srcset="/static/img/bitballs/map-gamedetails.png 1x, /static/img/bitballs/map-gamedetails-2x.png 2x">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <img class="img-responsive" src="/static/img/bitballs/map-userdetails.png" srcset="/static/img/bitballs/map-userdetails.png 1x, /static/img/bitballs/map-userdetails-2x.png 2x">
+  </div>
+  <div class="col-sm-6">
+    <img class="img-responsive" src="/static/img/bitballs/map-userlist.png" srcset="/static/img/bitballs/map-userlist.png 1x, /static/img/bitballs/map-userlist-2x.png 2x">
   </div>
 </div>
 
