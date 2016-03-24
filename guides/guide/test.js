@@ -257,7 +257,7 @@ if(isWindowsCI) {
     var child = guide.canServe = guide.executeCommand("donejs", ["start"])
       .childProcess;
 
-    var server = streamWhen(child.stdout, /can-serve starting on/);
+    var server = streamWhen(child.stdout, /done-serve starting on/);
     return server.then(wait);
   });
 
