@@ -34,17 +34,6 @@ In the [place-my-order guide](/place-my-order.html), we will go into detail, cre
 - Continuous integration and continuous deployment
 - Documentation
 
-## [In-depth (BitBalls)](/bitballs.html)
-<a href="/bitballs.html"><img class="app-thumbs" src="/static/img/thumb-bitballs.png" srcset="/static/img/thumb-bitballs.png 1x, /static/img/thumb-bitballs-2x.png 2x"></a>
-
-
-In the [BitBalls guide](/bitballs.html), we will go into detail, creating [http://bitballs.herokuapp.com](http://bitballs.herokuapp.com), a web application about bits and balls. You'll learn everything covered in the "Quick start", plus more:
-
-- Making monkeys dance
-- Learning wood working techniques
-- Easy lawn maintenance
-- Washing hands before handling food
-
 ## [Creating a plugin](/plugin.html)
 <a href="/plugin.html"><img class="app-thumbs" src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" style="width: 240px;"></a>
 
