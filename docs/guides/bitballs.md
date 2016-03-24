@@ -1183,10 +1183,10 @@ are needed to allow the admin to pick teams. This means
 it would be wasteful to use `withRelated: ["player1","player2",...]` on the
 Team request because all players are already loading.
 
-But this makes it tricky to list a teams players because
+But this makes it tricky to list a team's players because
 all we have are player ids on each team:
 
-_image of teams list_
+<img class="img-responsive" src="/static/img/bitballs/team-list.png" srcset="/static/img/bitballs/team-list.png 1x, /static/img/bitballs/team-list-2x.png 2x">
 
 A naive solution would be to make a `getById` method on `Player.List` like:
 
