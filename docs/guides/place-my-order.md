@@ -2295,4 +2295,4 @@ You can learn more about each of the individual projects that DoneJS includes at
 - [Testee](https://github.com/bitovi/testee) - Test runner
 - [DocumentJS](http://documentjs.com) - Documentation
 
-If you have any questions, do not hesitate to ask us on [Gitter](https://gitter.im/donejs/donejs) or the [forums](forums.donejs.com)!
+If you have any questions, do not hesitate to ask us on [Gitter](https://gitter.im/donejs/donejs) or the [forums](http://forums.donejs.com)!
