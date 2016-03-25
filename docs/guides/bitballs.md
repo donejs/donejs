@@ -1153,7 +1153,7 @@ Team request because all players are already loading.
 But this makes it tricky to list a teams players because
 all we have are player ids on each team:
 
-_image of teams list_
+_PIC: image of teams list_
 
 A naive solution would be to make a `getById` method on `Player.List` like:
 
@@ -1214,19 +1214,253 @@ be calculated once.
 
 ## SSR and node services
 
-_coming soon_.
+In this section, we'll learn about how to setup DoneJS's server-side rendering in the same process
+as other NodeJS services. We'll also detail how 404s and other HTTP response codes can be communicated
+from your client app to DoneJS's server-side rendering.
 
-- Why do this?
-	- mostly because if you are using node as a frontend server, you probably want it able to do other things besides can-serve
-- How to do this.
-	- ssr
-	- live reload
-	- apis
-	- 404s
-	- static resources?
+> NOTE: DoneJS works with any service technology, for example Ruby on Rails, PHP,
+Java, etc.  In applications where services are built without NodeJS,
+server-side rendering is run as a separate NodeJS process.  However, if your application's services
+are written in NodeJS, you can host server-side rendering in the same process as the rest of your
+NodeJS application.  This is the only, relatively minor, advantage of writing backend services in NodeJS.
+
+### Setup
+
+Bitballs is written using [Express middleware](http://expressjs.com/en/guide/using-middleware.html).
+With express you order middleware functions to handle different requests. Bitballs sets up its middleware in [/index.js](https://github.com/donejs/bitballs/blob/master/index.js). The middleware is setup in the
+following order:
+
+1. Static assets in the `/public` folder.
+2. Services in the `/services` folder.
+3. Server-side rendering in `public/service.js`
+
+In general, server-side should be last in the line of middleware handlers.  Static assets
+and services should be the first to respond to a given URL.
+
+[`public/service.js`](https://github.com/donejs/bitballs/blob/master/public/service.js) uses
+[done-ssr-middleware](https://github.com/donejs/done-ssr-middleware) to export a middleware handler like:
+
+```js
+var ssr = require('done-ssr-middleware');
+
+module.exports = ssr({
+  config: __dirname + "/package.json!npm",
+  main: "bitballs/index.stache!done-autorender",
+  liveReload: true
+});
+```
+
+This passes what is needed for StealJS to load the client app to `ssr`.  `ssr` uses
+StealJS to load the app, and returns an express handler that renders the client app.
+That express handler is assigned to the `"/"` route in `index.js`:
+
+```js
+app.use( "/", require('./public/service') );
+```
+
+### 404s
+
+In general, there are two situations where server-side rendering should respond with a 404
+status code:
+
+- When a user navigates to a url not matched by routing like `/total-mistake`.
+- When a user navigates to a url for an item that doesn't exist like: `/tournaments/999`.
+
+[done-ssr-middleware](https://github.com/donejs/done-ssr-middleware) uses the `statusCode` property
+on the [AppViewModel](http://donejs.github.io/bitballs/docs/bitballs%7Capp.html) as the status of the http response.
+
+For Bitballs, we implemented `statusCode` as a [define getter](https://canjs.com/docs/can.Map.prototype.define.get.html) as follows:
+
+```
+statusCode: {
+    get: function(lastSet, resolve){
+        var pageConfig = this.attr("pageComponentConfig");
+
+        if(pageConfig.statusCode) {
+            return pageConfig.statusCode;
+        }
+
+        var pagePromise = this.attr('pagePromise');
+        if(pagePromise){
+            pagePromise.then(function(){
+                resolve(200);
+            }, function(){
+                resolve(404);
+            });
+        }else{
+            return 200;
+        }
+    }
+}
+```
+
+`statusCode` derives its value from two places that reflect the two common `404`
+situations.
+
+#### 404 when URL doesn't match a routing rule
+
+`statusCode` first checks if the `pageComponentConfig` is specifying a specific `statusCode`
+to be given.  `pageComponentConfig` only specifies a `statusCode` when its state
+doesn't match a valid route:
+
+```
+pageComponentConfig: {
+    get: function(){
+        var page = this.attr("page");
+        if(this.attr("gameId")) {
+            return {...};
+        } else if(this.attr("tournamentId")) {
+            return {...};
+        } else if(page === "tournaments") {
+            return {...};
+        } else if(page === "users") {
+            return {...};
+        } else if(page === "register" || page === "account") {
+            return {...};
+        } else if(page === "players"){
+            return {...};
+        } else {
+
+            return {
+                title: "Page Not Found",
+                componentName: "four-0-four",
+                attributes: "",
+                moduleName: "404.component!",
+                statusCode: 404
+            };
+        }
+    }
+},
+```
+
+When the state doesn't match a valid route, users will see the contents of the
+`404.component`.
+
+With this setup, we could also check the session and include `401 Unauthorized`
+status codes for pages that are only visible to an authenticated user.
+
+#### 404 when an item doesn't exist.
+
+Next, `statusCode` checks the `pagePromise` property.  If the `pagePromise` resolves
+successfully, a `200` status code is returned.  If the `pagePromise` is rejected,
+a `404` status code is returned.
+
+`pagePromise` is a promise that is passed by a child component up to the
+`AppViewModel`.  Notice how [<game-details>](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cgame%7Cdetails.html) passes its `gamePromise`
+as the `pagePromise` like `{^game-promise}='./pagePromise'`:
+
+
+```js
+pageComponentConfig: {
+    get: function(){
+        var page = this.attr("page");
+        if(this.attr("gameId")) {
+            return {
+                title: "Game",
+                componentName: "game-details",
+                attributes: "{^game-promise}='./pagePromise' {game-id}='./gameId' {session}='./session'",
+                moduleName: "game/details/"
+            };
+
+        } else if(this.attr("tournamentId")) {
+            return {
+                title: "Tournament",
+                componentName: "tournament-details",
+                attributes: "{^tournament-promise}='./pagePromise' {tournament-id}='./tournamentId' {is-admin}='./isAdmin'",
+                moduleName: "tournament/details/"
+            };
+
+        } else if(page === "tournaments") {
+            return {...};
+        } else if(page === "users") {
+            return {...};
+        } else if(page === "register" || page === "account") {
+            return {...};
+        } else if(page === "players"){
+            return {...};
+        } else {
+            return {...};
+        }
+    }
+},
+```
+
+[<game-details>](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cgame%7Cdetails.html)'s `gamePromise` property is used to load the game's data:
+
+```js
+gamePromise: {
+    get: function() {
+        return Game.get({
+            id: this.attr("gameId"),
+            withRelated: [...]
+        });
+    }
+}
+```
+
+If there is no game at `gameId`, the promise will be rejected and `statusCode` will be
+set to `404`.
+
 
 ## Turn off SSR
 
-_coming soon_.
+In this section, we'll learn about how prevent code from running during server-side rendering.
 
-- How to make youtube embed not SSR.
+<div class='here-to-turn-off-highlighting'>
+
+While DoneJS's virtual DOM approximates a real DOM and browser, there is much that it
+can not do such as provide element dimension information.
+
+</div>
+
+Typically, this doesn't effect the code you write because server-side rendering only runs code involved
+in the initial render of a page.
+
+However, in Bitballs case, the [game details](https://bitballs.herokuapp.com/games/9) page
+has an embedded YouTube player.  The YouTube API code needed to load
+a player will not work in DoneJS's default server-side environment.
+
+To detect if your code is running in `NodeJS` and therefore being server-side rendered,
+you can use [steal-platform](https://github.com/stealjs/platform) like:
+
+```js
+var platform = require("steal-platform" );
+if (platform.isNode ) {
+    // do one thing
+} else {
+    // do something else
+}
+```
+
+To prevent loading YouTube's API in node, we reject the promise
+that would normally resolve to YouTube's API as follows:
+
+```js
+var platform = require("steal-platform" );
+
+var promise;
+
+module.exports = function(){
+	if(promise) {
+		return promise;
+	} else {
+		return promise = new Promise(function(resolve, reject){
+			if ( platform.isNode ) {
+				reject({});
+				return;
+			}
+			window.onYouTubeIframeAPIReady = function(){
+				resolve(YT);
+			};
+			var tag = document.createElement('script');
+
+			tag.src = "https://www.youtube.com/iframe_api";
+			document.head.appendChild(tag);
+		});
+
+	}
+};
+```
+
+> NOTE: If you plan on supporting NW.js, know that `platform.isNode`
+will also be true.
