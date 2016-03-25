@@ -11,7 +11,7 @@ whistles a modern developer needs, we created the following guides.
 @body
 
 ## [Quick start: donejs-chat](/Guide.html)
-<a href="/Guide.html"><img class="app-thumbs" src="/static/img/thumb-chat.png" srcset="/static/img/thumb-chat.png 1x, /static/img/thumb-chat-2x.png 2x"></a>
+<a href="/Guide.html"><img class="app-thumbs" src="/static/img/donejs-chat.gif" width="500" style="border: 1px solid #000"></a>
 
 In the [quick start guide](/Guide.html), we will build a small chat application - [http://chat.donejs.com/](http://chat.donejs.com/).  You'll learn about:
 
@@ -35,7 +35,7 @@ In the [place-my-order guide](/place-my-order.html), we will go into detail, cre
 - Documentation
 
 ## [Creating a plugin](/plugin.html)
-<a href="/plugin.html"><img class="app-thumbs" src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" style="width: 240px;"></a>
+<a href="/plugin.html"><img class="app-thumbs" src="/static/img/thumb-plugin.png" srcset="/static/img/thumb-plugin.png 1x, /static/img/thumb-plugin-2x.png 2x"></a>
 
 
 In the [plugin guide](/plugin.html), we will create a reusable number input widget using [Bootstrap](http://getbootstrap.com) styles. We will cover:
@@ -52,7 +52,7 @@ In the [plugin guide](/plugin.html), we will create a reusable number input widg
 
 ## [Example App: Bitballs](/bitballs.html)
 
-<a href="/bitballs.html"><img class="app-thumbs" src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/5-add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x"/></a>
+<a href="/bitballs.html"><img class="app-thumbs" src="/static/img/bitballs/bitballs-video.png" srcset="/static/img/bitballs/bitballs-video.png 1x, /static/img/bitballs/bitballs-video-2x.png 2x"></a>
 
 In this guide, you'll learn how [Bitballs](http://bitballs.herokuapp.com) - a charity basketball tournament management application - works.
 Specifically, this guide will walk through the implementation of the following behaviors or functionality:

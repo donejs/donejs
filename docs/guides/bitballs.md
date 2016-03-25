@@ -190,8 +190,9 @@ Now, lets checkout the contents of the `/public` folder:
 |   |   ├── details/  - Tournament details page
 |   |   ├── list/     - Tournaments list page
 |   ├── user/
-|   |   ├── details/ - Register a user or edit their password page
-|   |   ├── list/    - Make admin users.
+|   |   ├── details/  - Register a user or edit their password page
+|   |   ├── list/     - Make admin users.
+|   ├── 404.component - 404 response page.
 ```
 
 ### Data Model and Service layer
@@ -208,7 +209,7 @@ Bitballs has the following tables and therefore data types:
 The server also has a concept of a [Session](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Csession.html).  The Session
 can be thought of as having a User.
 
-_Picture of data model_.
+<img class="img-responsive" src="/static/img/bitballs/data-model.png">
 
 
 The restful service layer provides the following urls
@@ -364,9 +365,57 @@ this more in the [Users, Sessions, and Access section](#section=section_Users_Se
 
 ### Component map
 
-- Visually highlight each custom element on each page.
-- Detail its responsibility. Link to its docs with embedded
-  demo page.
+The following diagrams the component responsible for each part of the application:
+
+<div class="row">
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html">
+    <img class="img-responsive" src="/static/img/bitballs/map-navlogin.png" srcset="/static/img/bitballs/map-navlogin.png 1x, /static/img/bitballs/map-navlogin-2x.png 2x">
+    </a>
+  </div>
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html">
+    <img class="img-responsive" src="/static/img/bitballs/map-nav.png" srcset="/static/img/bitballs/map-nav.png 1x, /static/img/bitballs/map-nav-2x.png 2x">
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Ctournament%7Clist.html">
+        <img class="img-responsive" src="/static/img/bitballs/map-tournamentlist.png" srcset="/static/img/bitballs/map-tournamentlist.png 1x, /static/img/bitballs/map-tournamentlist-2x.png 2x">
+    </a>
+  </div>
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cplayer%7Clist.html">
+    <img class="img-responsive" src="/static/img/bitballs/map-playerlist.png" srcset="/static/img/bitballs/map-playerlist.png 1x, /static/img/bitballs/map-playerlist-2x.png 2x">
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Ctournament%7Cdetails.html">
+    <img class="img-responsive" src="/static/img/bitballs/map-tournamentdetails.png" srcset="/static/img/bitballs/map-tournamentdetails.png 1x, /static/img/bitballs/map-tournamentdetails-2x.png 2x">
+    </a>
+  </div>
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cgame%7Cdetails.html">
+        <img class="img-responsive" src="/static/img/bitballs/map-gamedetails.png"  
+        srcset="/static/img/bitballs/map-gamedetails.png 1x, /static/img/bitballs/map-gamedetails-2x.png 2x">
+    </a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Cdetails.html">
+    <img class="img-responsive" src="/static/img/bitballs/map-userdetails.png" srcset="/static/img/bitballs/map-userdetails.png 1x, /static/img/bitballs/map-userdetails-2x.png 2x">
+    </a>
+  </div>
+  <div class="col-sm-6">
+    <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Clist.html">
+        <img class="img-responsive" src="/static/img/bitballs/map-userlist.png" srcset="/static/img/bitballs/map-userlist.png 1x, /static/img/bitballs/map-userlist-2x.png 2x">
+    </a>
+  </div>
+</div>
 
 ## Users, Sessions, and Access
 
@@ -1150,10 +1199,10 @@ are needed to allow the admin to pick teams. This means
 it would be wasteful to use `withRelated: ["player1","player2",...]` on the
 Team request because all players are already loading.
 
-But this makes it tricky to list a teams players because
+But this makes it tricky to list a team's players because
 all we have are player ids on each team:
 
-_PIC: image of teams list_
+<img class="img-responsive" src="/static/img/bitballs/team-list.png" srcset="/static/img/bitballs/team-list.png 1x, /static/img/bitballs/team-list-2x.png 2x">
 
 A naive solution would be to make a `getById` method on `Player.List` like:
 
