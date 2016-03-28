@@ -8,9 +8,10 @@
   },
   "scripts": {
     "test": "npm run jshint && npm run mocha && npm run document && npm run test-guides",
-    "test-guides": "npm run test-quickstart",
+    "test-guides": "npm run test-pmo",
     "test-quickstart": "guide guides/guide/test.js --local",
     "test-pmo": "guide guides/place-my-order/test.js --local",
+    "clean": "rimraf node_modules/donejs-cli node_modules/generator-donejs",
     "jshint": "jshint lib/. bin/donejs test/. --config",
     "mocha": "mocha test/ --timeout 120000",
     "verify": "echo \"Script ran\"",
@@ -41,11 +42,12 @@
     "documentjs": "^0.4.3",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^3.0.2",
-    "guide-automation": "^0.2.0",
+    "guide-automation": "^0.3.0",
     "is-appveyor": "^1.0.0",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5",
     "node-fetch": "^1.3.3",
+    "rimraf": "^2.5.2",
     "stream-when": "^1.0.0"
   },
   "dependencies": {

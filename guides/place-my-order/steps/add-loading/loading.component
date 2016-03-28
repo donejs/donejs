@@ -1,0 +1,9 @@
+<can-component tag="pmo-loading">
+  <template>
+    {{#eq state "resolved"}}
+      <content></content>
+    {{else}}
+      <div class="loading"></div>
+    {{/eq}}
+  </template>
+</can-component>

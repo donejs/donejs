@@ -1,0 +1,31 @@
+<div class="restaurants">
+  <h2 class="page-header">Restaurants</h2>
+  {{#if restaurants.isPending}}
+    <div class="restaurant loading"></div>
+  {{/if}}
+  {{#if restaurants.isResolved}}
+    {{#each restaurants.value}}
+      <div class="restaurant">
+        <img src="{{joinBase images.thumbnail}}"
+          width="100" height="100">
+        <h3>{{name}}</h3>
+        {{#address}}
+        <div class="address">
+          {{street}}<br />{{city}}, {{state}} {{zip}}
+        </div>
+        {{/address}}
+
+        <div class="hours-price">
+          $$$<br />
+          Hours: M-F 10am-11pm
+          <span class="open-now">Open Now</span>
+        </div>
+
+        <a class="btn" href="{{routeUrl page='restaurants' slug=slug}}">
+          Details
+        </a>
+        <br />
+      </div>
+    {{/each}}
+  {{/if}}
+</div>

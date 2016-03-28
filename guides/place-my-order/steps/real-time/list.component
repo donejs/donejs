@@ -1,0 +1,43 @@
+<can-component tag="pmo-order-list">
+  <template>
+    <h4>{{listTitle}}</h4>
+
+    {{#if orders.isPending}}
+     <div class="loading"></div>
+    {{else}}
+      {{#each orders.value}}
+      <div class="order {{status}}">
+        <address>
+          {{name}} <br />{{address}} <br />{{phone}}
+        </address>
+
+        <div class="items">
+          <ul>
+            {{#each items}}<li>{{name}}</li>{{/each}}
+          </ul>
+        </div>
+
+        <div class="total">${{total}}</div>
+
+        <div class="actions">
+          <span class="badge">{{statusTitle}}</span>
+          {{#if action}}
+            <p class="action">
+              Mark as:
+              <a href="javascript://" ($click)="markAs(action)">
+                {{actionTitle}}
+              </a>
+            </p>
+          {{/if}}
+
+          <p class="action">
+            <a href="javascript://"  ($click)="destroy()">Delete</a>
+          </p>
+        </div>
+      </div>
+      {{else}}
+        <div class="order empty">{{emptyMessage}}</div>
+      {{/each}}
+    {{/if}}
+  </template>
+</can-component>

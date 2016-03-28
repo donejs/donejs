@@ -34,3 +34,5 @@ site/
 test/recursive/
 *.DS_Store
 donejs-chat/
+place-my-order/
+!guides/place-my-order

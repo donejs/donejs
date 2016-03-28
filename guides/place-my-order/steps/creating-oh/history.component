@@ -1,0 +1,12 @@
+<can-component tag="pmo-order-history">
+  <template>
+    <div class="order-history">
+      <div class="order header">
+        <address>Name / Address / Phone</address>
+        <div class="items">Order</div>
+        <div class="total">Total</div>
+        <div class="actions">Action</div>
+      </div>
+    </div>
+  </template>
+</can-component>
