@@ -4,6 +4,11 @@ var streamWhen = require("stream-when");
 var isWindowsCI = require("is-appveyor");
 var nodeVersion = +process.version.substr(1).split(".")[0];
 
+// Only run in AppVeyor if version >= 5
+if(isWindowsCI && nodeVersion < 5) {
+    process.exit(0);
+}
+
 var guide = automate({ spinner: true, log: true });
 var wait = function(){
 	var ms = isWindowsCI ? 5000 : 2000;
@@ -464,9 +469,7 @@ if(isWindowsCI) {
     return guide.kill(guide.doneServe)
       .then(function(){
         guide.doneServe = null;
-				return guide.kill(guide.doneApi);
 			}).then(function(){
-				guide.doneApi = null;
         return guide.wait(2000);
       })
   });
