@@ -7,7 +7,7 @@
     "donejs": "./bin/donejs"
   },
   "scripts": {
-    "test": "npm run jshint && npm run mocha && npm run test-guides",
+    "test": "npm run jshint && npm run mocha && npm run document && npm run test-guides",
     "test-guides": "npm run test-quickstart",
     "test-quickstart": "guide guides/guide/test.js --local",
     "test-pmo": "guide guides/place-my-order/test.js --local",
@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
-    "documentjs": "^0.3.0",
+    "documentjs": "^0.4.3",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^3.0.2",
     "guide-automation": "^0.2.0",
