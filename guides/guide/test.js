@@ -1,7 +1,8 @@
 var automate = require("guide-automation");
-var join = require("path").join;
-var streamWhen = require("stream-when");
 var isWindowsCI = require("is-appveyor");
+var join = require("path").join;
+var rimraf = require("rimraf").sync;
+var streamWhen = require("stream-when");
 var nodeVersion = +process.version.substr(1).split(".")[0];
 
 // Only run in AppVeyor if version >= 5
@@ -18,6 +19,10 @@ var wait = function(){
 /**
  * @Step 1
  */
+guide.step("Remove existing dependencies", function(){
+  rimraf(join("node_modules", "donejs-cli"));
+  rimraf(join("node_modules", "generator-donejs"));
+});
 
 guide.step("Install donejs", function(){
 	return guide.executeCommand("npm", ["install", "donejs", "-g"]);
