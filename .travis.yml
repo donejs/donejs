@@ -19,3 +19,4 @@ notifications:
       - matthew@bitovi.com
     on_success: change
     on_failure: change
+script: npm run coverage:upload

@@ -1,93 +1,9 @@
 #!/usr/bin/env node
-var fs = require('fs');
-var path = require('path');
-var program = require('commander');
 
-var utils = require('../lib/utils');
-var mypkg = require(path.join(__dirname, '..', 'package.json'));
+var program = require('../lib/cli');
 
-program.version(mypkg.version);
+program.parse(process.argv);
 
-utils.projectRoot().then(function(root) {
-  var doneScript = process.platform === 'win32' ? 'donejs.cmd' : 'donejs';
-  var donejsBinary = path.join(root, 'node_modules', '.bin', doneScript);
-  var runBinary = function(args) {
-    if(!fs.existsSync(donejsBinary)) {
-      console.error('Could not find local DoneJS binary (' + donejsBinary + ')');
-      return;
-    }
-
-    return utils.spawn(donejsBinary, args, { cwd: root });
-  };
-  var runInit = function(folder, opts) {
-    var promise = utils.mkdirp(folder).then(function(fullPath) {
-      var options = { cwd: fullPath };
-
-      console.log('Initializing new DoneJS application at', fullPath);
-      console.log('Installing donejs-cli');
-
-      var cliArg = 'donejs-cli@' + utils.versionRange(mypkg.version);
-
-      return utils.spawn('npm', [ 'install', cliArg, '--loglevel', 'error' ], options)
-        .then(function() {
-          var args = [ 'node_modules', 'donejs-cli', 'bin', 'donejs' ];
-          var binary = path.join.apply(path, [fullPath].concat(args));
-
-          if(!fs.existsSync(binary)) {
-            // If donejs-cli wasn't installed in this folder, it is the root
-            binary = path.join.apply(path, [root].concat(args));
-          }
-          var initArgs = [binary, 'init'];
-
-          if(opts.skipInstall) {
-            initArgs.push('--skip-install');
-          }
-          
-          if(opts.type) {
-            initArgs.push('--type', opts.type);
-          }
-
-          return utils.spawn('node', initArgs, options);
-        });
-    });
-
-    utils.log(promise);
-  };
-
-  // donejs init
-  program.command('init [folder]')
-    .option('-S, --skip-install')
-    .option('-T, --type [type]')
-    .description('Initialize a new DoneJS application in a new folder or the current one')
-    .action(runInit);
-    
-  // DoneJS plugin
-  program.command('plugin [folder]')
-    .option('-S, --skip-install')
-    .description('Initialize a new DoneJS plugin in a new folder or the current one')
-    .action(function(folder, opts) {
-      opts.type = 'plugin';
-      runInit(folder, opts);
-    });
-    
-  program.command('help')
-    .description('Show all DoneJS commands available for this application')
-    .action(function() {
-      runBinary(['--help']);
-    });
-
-  // donejs <anything else>
-  program.command('*')
-    .description('Run DoneJS commands using the current DoneJS application')
-    .action(function() {
-      runBinary(program.rawArgs.slice(2));
-    });
-
-  program.parse(process.argv);
-
-  if (!program.args.length) {
-    program.help();
-  }
-});
-
-exports.program = program;
+if (!program.args.length) {
+  program.help();
+}
