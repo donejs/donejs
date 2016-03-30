@@ -253,31 +253,27 @@ guide.step("Production build", function(){
 /**
  * @ Step 15
  */
-// Cannot kill the server on Linux. The `pid` is incorrect and the port
-// remains open. So cannot test this.
-if(isWindowsCI) {
-  guide.step("Open in production", function(){
-    process.env["NODE_ENV"] = "production";
+guide.step("Open in production", function(){
+	process.env["NODE_ENV"] = "production";
 
-    var child = guide.canServe = guide.executeCommand("donejs", ["start"])
-      .childProcess;
+	var child = guide.canServe = guide.executeCommand("donejs", ["start"])
+		.childProcess;
 
-    var server = streamWhen(child.stdout, /done-serve starting on/);
-    return server.then(wait);
-  });
+	var server = streamWhen(child.stdout, /done-serve starting on/);
+	return server.then(wait);
+});
 
-  guide.test(function(){
-    return guide.nodeTest(join(__dirname, "steps", "15-production", "test.js"));
-  });
+guide.test(function(){
+	return guide.nodeTest(join(__dirname, "steps", "15-production", "test.js"));
+});
 
-  guide.step("Stop production mode", function(){
-    return guide.kill(guide.canServe)
-      .then(function(){
-        guide.canServe = null;
-        return guide.wait(2000);
-      });
-  });
-}
+guide.step("Stop production mode", function(){
+	return guide.kill(guide.canServe)
+		.then(function(){
+			guide.canServe = null;
+			return guide.wait(2000);
+		});
+});
 
 /**
  * @Step 16

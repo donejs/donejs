@@ -457,30 +457,28 @@ guide.step("Bundling your app", function(){
 	return guide.executeCommand("donejs", ["build"]);
 });
 
-if(isWindowsCI) {
-  guide.step("Open in production", function(){
+guide.step("Open in production", function(){
 	process.env["NODE_ENV"] = "production";
 
 	var child = guide.doneServe = guide.executeCommand("donejs", ["start"])
-	  .childProcess;
+		.childProcess;
 
 	var server = streamWhen(child.stdout, /done-serve starting on/);
 	return server.then(wait);
-  });
+});
 
-  guide.test(function(){
-	return guide.nodeTest(join(__dirname, "steps", "production", "test.js"));
-  });
+guide.test(function(){
+return guide.nodeTest(join(__dirname, "steps", "production", "test.js"));
+});
 
-  guide.step("Stop production mode", function(){
-	return guide.kill(guide.doneServe)
-	  .then(function(){
-		guide.doneServe = null;
-			}).then(function(){
-		return guide.wait(2000);
-	  })
-  });
-}
+guide.step("Stop production mode", function(){
+return guide.kill(guide.doneServe)
+	.then(function(){
+	guide.doneServe = null;
+		}).then(function(){
+	return guide.wait(2000);
+	})
+});
 
 /**
  * Run the test
