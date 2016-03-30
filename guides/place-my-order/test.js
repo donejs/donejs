@@ -7,7 +7,7 @@ var nodeVersion = +process.version.substr(1).split(".")[0];
 
 // Only run in AppVeyor if version >= 5
 if(isWindowsCI && nodeVersion < 5) {
-    process.exit(0);
+	process.exit(0);
 }
 
 var guide = automate({ spinner: true, log: true });
@@ -31,8 +31,10 @@ function supermodel(name, endpoint, id){
  * Set up the project
  */
 guide.step("Remove existing dependencies", function(){
-  rimraf(join("node_modules", "donejs-cli"));
-  rimraf(join("node_modules", "generator-donejs"));
+	rimraf(join("node_modules", ".bin", "donejs"));
+	rimraf(join("node_modules", ".bin", "donejs.cmd"));
+	rimraf(join("node_modules", "donejs-cli"));
+	rimraf(join("node_modules", "generator-donejs"));
 });
 
 guide.step("Install donejs", function(){
@@ -259,9 +261,9 @@ guide.step("Create a test", function(){
 													 join(__dirname, "steps", "create-test", "list_test.js"));
 
 		})
-    .then(function(){
+	.then(function(){
 			return guide.injectSpy("src/restaurant/list/test.html");
-    })
+	})
 		.then(wait)
 		.then(wait);
 });
@@ -442,10 +444,10 @@ guide.test(function(){
 
 guide.step("Stop development mode", function(){
   return guide.kill(guide.doneServe)
-    .then(function(){
-      guide.doneServe = null;
-      return guide.wait(2000);
-    });
+	.then(function(){
+	  guide.doneServe = null;
+	  return guide.wait(2000);
+	});
 });
 
 /**
@@ -457,26 +459,26 @@ guide.step("Bundling your app", function(){
 
 if(isWindowsCI) {
   guide.step("Open in production", function(){
-    process.env["NODE_ENV"] = "production";
+	process.env["NODE_ENV"] = "production";
 
-    var child = guide.doneServe = guide.executeCommand("donejs", ["start"])
-      .childProcess;
+	var child = guide.doneServe = guide.executeCommand("donejs", ["start"])
+	  .childProcess;
 
-    var server = streamWhen(child.stdout, /done-serve starting on/);
-    return server.then(wait);
+	var server = streamWhen(child.stdout, /done-serve starting on/);
+	return server.then(wait);
   });
 
   guide.test(function(){
-    return guide.nodeTest(join(__dirname, "steps", "production", "test.js"));
+	return guide.nodeTest(join(__dirname, "steps", "production", "test.js"));
   });
 
   guide.step("Stop production mode", function(){
-    return guide.kill(guide.doneServe)
-      .then(function(){
-        guide.doneServe = null;
+	return guide.kill(guide.doneServe)
+	  .then(function(){
+		guide.doneServe = null;
 			}).then(function(){
-        return guide.wait(2000);
-      })
+		return guide.wait(2000);
+	  })
   });
 }
 
