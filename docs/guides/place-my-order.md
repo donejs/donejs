@@ -172,33 +172,8 @@ Every DoneJS application consists of at least two files:
 
 `src/index.stache` was already created for us when we ran `donejs init`, so we can update it to reflect the below content:
 
-```handlebars
-<html>
-  <head>
-    <title>{{title}}</title>
-    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  </head>
-  <body>
-    <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less" />
-    <can-import from="place-my-order/app" export-as="viewModel" />
-
-    <h1>{{message}}</h1>
-
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script
-          src="{{joinBase 'node_modules/steal/steal.production.js'}}"  
-          main="place-my-order/index.stache!done-autorender">
-        </script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
-  </body>
-</html>
-```
+@sourceref guides/place-my-order/steps/loading-assets/index.stache
+@highlight 4,7
 
 This is an HTML5 template that uses [can.stache](http://canjs.com/docs/can.stache.html) - a [Handlebars syntax](http://handlebarsjs.com/)-compatible view engine. It renders a `message` property from the application state.
 
@@ -249,22 +224,8 @@ donejs add component home.component pmo-home
 
 This will create a file at `src/home.component` containing the basic ingredients of a component. We will update it to reflect the below content:
 
-```html
-<can-component tag="pmo-home">
-  <template>
-     <div class="homepage">
-      <img src="{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}"
-          width="250" height="380" />
-      <h1>Ordering food has never been easier</h1>
-      <p>
-        We make it easier than ever to order gourmet food
-        from your favorite local restaurants.
-      </p>
-      <p><a class="btn" href="/restaurants" role="button">Choose a Restaurant</a></p>
-     </div>
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/creating-homepage/home.component
+@highlight 3-12
 
 Here we created a [can.Component](http://canjs.com/docs/can.Component.html) named `pmo-home` using a [web-component](http://webcomponents.org/) style declaration. This particular component is just a basic template, it does not have much in the way of styles or functionality.
 
@@ -278,20 +239,8 @@ donejs add component order/history.component pmo-order-history
 
 And update `src/order/history.component`:
 
-```
-<can-component tag="pmo-order-history">
-  <template>
-    <div class="order-history">
-      <div class="order header">
-        <address>Name / Address / Phone</address>
-        <div class="items">Order</div>
-        <div class="total">Total</div>
-        <div class="actions">Action</div>
-      </div>
-    </div>
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/creating-oh/history.component
+@highlight 3-10
 
 ### Creating a restaurant list element
 
@@ -341,27 +290,8 @@ To learn more about routing visit the CanJS guide on [Application State and Rout
 
 To add our routes, change `src/app.js` to:
 
-```js
-import Map from 'can/map/';
-import route from 'can/route/';
-import 'can/route/pushstate/';
-import 'can/map/define/';
-
-const AppViewModel = Map.extend({
-  define: {
-    title: {
-      serialize: false,
-      value: 'place-my-order'
-    }
-  }
-});
-
-route(':page', { page: 'home' });
-route(':page/:slug', { slug: null });
-route(':page/:slug/:action', { slug: null, action: null });
-
-export default AppViewModel;
-```
+@sourceref guides/place-my-order/steps/create-routes/app.js
+@highlight 15-17
 
 Now we have three routes available:
 
@@ -381,28 +311,8 @@ donejs add component header.component pmo-header
 
 and update `src/header.component` to:
 
-```html
-<can-component tag="pmo-header">
-  <template>
-    <header>
-      <nav>
-       <h1>place-my-order.com</h1>
-       <ul>
-         <li class="{{#eq page 'home'}}active{{/eq}}">
-           <a href="{{routeUrl page='home'}}">Home</a>
-         </li>
-         <li class="{{#eq page 'restaurants'}}active{{/eq}}">
-           <a href="{{routeUrl page='restaurants'}}">Restaurants</a>
-         </li>
-         <li class="{{#eq page 'order-history'}}active{{/eq}}">
-           <a href="{{routeUrl page='order-history'}}">Order History</a>
-         </li>
-       </ul>
-      </nav>
-    </header>
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/add-header/header.component
+@highlight 3-18
 
 Here we use [routeUrl](http://canjs.com/docs/can.stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
@@ -418,17 +328,8 @@ donejs add component loading.component pmo-loading
 
 Change `src/loading.component` to:
 
-```html
-<can-component tag="pmo-loading">
-  <template>
-    {{#eq state "resolved"}}
-      <content></content>
-    {{else}}
-      <div class="loading"></div>
-    {{/eq}}
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/add-loading/loading.component
+@highlight 3-7
 
 ### Switch between components
 
@@ -436,56 +337,8 @@ Now we can glue all those individual components together in `src/index.stache`. 
 
 Update `src/index.stache` to:
 
-```html
-<html>
-  <head>
-    <title>{{title}}</title>
-    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  </head>
-  <body>
-    <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less" />
-    <can-import from="place-my-order/app" export-as="viewModel" />
-
-    <can-import from="place-my-order/loading.component" />
-    <can-import from="place-my-order/header.component" />
-    <pmo-header page="{page}"></pmo-header>
-
-    {{#switch page}}
-      {{#case "home"}}
-        <can-import from="place-my-order/home.component"
-            can-tag="pmo-loading">
-          <pmo-home></pmo-home>
-        </can-import>
-      {{/case}}
-      {{#case "restaurants"}}
-        <can-import from="place-my-order/restaurant/list/"
-            can-tag="pmo-loading">
-          <pmo-restaurant-list></pmo-restaurant-list>
-        </can-import>
-      {{/case}}
-      {{#case "order-history"}}
-        <can-import from="place-my-order/order/history.component"
-            can-tag="pmo-loading">
-          <pmo-order-history></pmo-order-history>
-        </can-import>
-      {{/case}}
-    {{/switch}}
-
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script
-          src="{{joinBase 'node_modules/steal/steal.production.js'}}"  
-          main="place-my-order/index.stache!done-autorender">
-        </script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
-  </body>
-</html>
-```
+@sourceref guides/place-my-order/steps/switch-between/index.stache
+@highlight 11-13,15-34
 
 Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) and initializes it.
 
@@ -542,29 +395,8 @@ After reloading the homepage you should see the restaurant information logged in
 
 Now we can update the `ViewModel` in `src/restaurant/list/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
 
-```js
-import Component from 'can/component/';
-import Map from 'can/map/';
-import 'can/map/define/';
-import template from './list.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-
-export var ViewModel = Map.extend({
-  define: {
-    restaurants: {
-      value() {
-        return Restaurant.getList({});
-      }
-    }
-  }
-});
-
-export default Component.extend({
-  tag: 'pmo-restaurant-list',
-  viewModel: ViewModel,
-  template: template
-});
-```
+@sourceref guides/place-my-order/steps/add-data/list.js
+@highlight 5,9-13
 
 And update the template at `src/restaurant/list/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
 
@@ -650,69 +482,8 @@ For city the URL is `/api/cities` and the id property is `name`. Now we can load
 
 Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
 
-```js
-import Component from 'can/component/';
-import Map from 'can/map/';
-import 'can/map/define/';
-import template from './list.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import State from 'place-my-order/models/state';
-import City from 'place-my-order/models/city';
-
-export var ViewModel = Map.extend({
-  define: {
-    states: {
-      get() {
-        return State.getList({});
-      }
-    },
-    state: {
-      type: 'string',
-      value: null,
-      set() {
-        // Remove the city when the state changes
-        this.attr('city', null);
-      }
-    },
-    cities: {
-      get() {
-        let state = this.attr('state');
-
-        if(!state) {
-          return null;
-        }
-
-        return City.getList({ state });
-      }
-    },
-    city: {
-      type: 'string',
-      value: null
-    },
-    restaurants: {
-      get() {
-        let state = this.attr('state');
-        let city = this.attr('city');
-
-        if(state && city) {
-          return Restaurant.getList({
-            'address.state': state,
-            'address.city': city
-          });
-        }
-
-        return null;
-      }
-    }
-  }
-});
-
-export default Component.extend({
-  tag: 'pmo-restaurant-list',
-  viewModel: ViewModel,
-  template: template
-});
-```
+@sourceref guides/place-my-order/steps/create-dependent/list.js
+@highlight 6-7,11-53
 
 Let's take a closer look at those properties:
 
@@ -730,165 +501,24 @@ View models that are decoupled from the presentation layer are easy to test. We 
 
 Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/state.js` to:
 
-```js
-import fixture from 'can-fixture';
-
-const store = fixture.store([
-  { name: 'Calisota', short: 'CA' },
-  { name: 'New Troy', short: 'NT'}
-],{});
-
-fixture({
-  'GET /api/states': store.findAll,
-  'GET /api/states/{short}': store.findOne,
-  'POST /api/states': store.create,
-  'PUT /api/states/{short}': store.update,
-  'DELETE /api/states/{short}': store.destroy
-});
-
-export default store;
-```
+@sourceref guides/place-my-order/steps/create-test/state.js
+@highlight 3-6
 
 Update `src/models/fixtures/city.js` to look like:
 
-```js
-import fixture from 'can-fixture';
-
-const store = fixture.store([
-  { state: 'CA', name: 'Casadina' },
-  { state: 'NT', name: 'Alberny' }
-],{});
-
-fixture({
-  'GET /api/cities': store.findAll,
-  'GET /api/cities/{name}': store.findOne,
-  'POST /api/cities': store.create,
-  'PUT /api/cities/{name}': store.update,
-  'DELETE /api/cities/{name}': store.destroy
-});
-
-export default store;
-```
+@sourceref guides/place-my-order/steps/create-test/city.js
+@highlight 3-6
 
 And we also need to provide a restaurant list according to the selected city and state in `src/models/fixtures/restaurant.js`:
 
-```js
-import fixture from 'can-fixture';
-
-const store = fixture.store([{
-  _id: 1,
-  name: 'Cheese City',
-  slug:'cheese-city',
-  address: {
-    city: 'Casadina',
-    state: 'CA'
-  },
-  images: {
-    banner: "node_modules/place-my-order-assets/images/1-banner.jpg",
-    owner: "node_modules/place-my-order-assets/images/2-owner.jpg",
-    thumbnail: "node_modules/place-my-order-assets/images/3-thumbnail.jpg"
-  }
-}, {
-  _id: 2,
-  name: 'Crab Barn',
-  slug:'crab-barn',
-  address: {
-    city: 'Alberny',
-    state: 'NT'
-  },
-  images: {
-    banner: "node_modules/place-my-order-assets/images/2-banner.jpg",
-    owner: "node_modules/place-my-order-assets/images/3-owner.jpg",
-    thumbnail: "node_modules/place-my-order-assets/images/2-thumbnail.jpg"
-  }
-}],{
-  "address.city": function(restaurantValue, paramValue, restaurant){
-    return restaurant.address.city === paramValue;
-  },
-  "address.state": function(restaurantValue, paramValue, restaurant){
-    return restaurant.address.state === paramValue;
-  }
-});
-
-fixture({
-  'GET /api/restaurants': store.findAll,
-  'GET /api/restaurants/{id}': store.findOne,
-  'POST /api/restaurants': store.create,
-  'PUT /api/restaurants/{id}': store.update,
-  'DELETE /api/restaurants/{id}': store.destroy
-});
-
-export default store;
-```
+@sourceref guides/place-my-order/steps/create-test/restaurant.js
+@highlight 3-36
 
 #### Test the view model
 
 With fake data in place, we can test our view model by changing `src/restaurant/list/list_test.js` to:
 
-```
-import QUnit from 'steal-qunit';
-import cityStore from 'place-my-order/models/fixtures/city';
-import stateStore from 'place-my-order/models/fixtures/state';
-import restaurantStore from 'place-my-order/models/fixtures/restaurant';
-import { ViewModel } from './list';
-
-QUnit.module('place-my-order/restaurant/list', {
-  beforeEach() {
-    localStorage.clear();
-  }
-});
-
-QUnit.asyncTest('loads all states', function() {
-  var vm = new ViewModel();
-  var expectedStates = stateStore.findAll({});
-
-  vm.attr('states').then(states => {
-    QUnit.deepEqual(states.attr(), expectedStates.data, 'Got all states');
-    QUnit.start();
-  });
-});
-
-QUnit.asyncTest('setting a state loads its cities', function() {
-  var vm = new ViewModel();
-  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
-
-  QUnit.equal(vm.attr('cities'), null, '');
-  vm.attr('state', 'CA');
-  vm.attr('cities').then(cities => {
-    QUnit.deepEqual(cities.attr(), expectedCities);
-    QUnit.start();
-  });
-});
-
-QUnit.asyncTest('changing a state resets city', function() {
-  var vm = new ViewModel();
-  var expectedCities = cityStore.findAll({data: {state: "CA"}}).data;
-
-  QUnit.equal(vm.attr('cities'), null, '');
-  vm.attr('state', 'CA');
-  vm.attr('cities').then(cities => {
-    QUnit.deepEqual(cities.attr(), expectedCities);
-    vm.attr('state', 'NT');
-    QUnit.equal(vm.attr('city'), null);
-    QUnit.start();
-  });
-});
-
-QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
-  var vm = new ViewModel();
-  var expectedRestaurants = restaurantStore.findAll({
-    data: {"address.city": "Alberny"}
-  }).data;
-
-  vm.attr('state', 'NT');
-  vm.attr('city', 'Alberny');
-
-  vm.attr('restaurants').then(restaurants => {
-    QUnit.deepEqual(restaurants.attr(), expectedRestaurants);
-    QUnit.start();
-  });
-});
-```
+@sourceref guides/place-my-order/steps/create-test/list_test.js
 
 These unit tests are comparing expected data (what we we defined in the fixtures) with actual data (how the view model methods are behaving). Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
 
@@ -898,72 +528,9 @@ Now that our view model is implemented and tested, we'll update the restaurant l
 
 Update `src/restaurant/list/list.stache` to:
 
-```
-<div class="restaurants">
-  <h2 class="page-header">Restaurants</h2>
-  <form class="form">
-    <div class="form-group">
-      <label>State</label>
-      <select {($value)}="state" {{#if states.isPending}}disabled{{/if}}>
-        {{#if states.isPending}}
-          <option value="">Loading...</option>
-        {{else}}
-          {{^if state}}
-          <option value="">Choose a state</option>
-          {{/if}}
-          {{#each states.value}}
-          <option value="{{short}}">{{name}}</option>
-          {{/each}}
-        {{/if}}
-      </select>
-    </div>
-    <div class="form-group">
-      <label>City</label>
-      <select {($value)}="city"{{^if state}}disabled{{/if}}>
-        {{#if cities.isPending}}
-          <option value="">Loading...</option>
-        {{else}}
-          {{^if city}}
-          <option value="">Choose a city</option>
-          {{/if}}
-          {{#each cities.value}}
-          <option>{{name}}</option>
-          {{/each}}
-        {{/if}}
-      </select>
-    </div>
-  </form>
+@sourceref guides/place-my-order/steps/write-template/list.stache
+@highlight 3-34
 
-  {{#if restaurants.isPending}}
-  <div class="restaurant loading"></div>
-  {{/if}}
-
-  {{#if restaurants.isResolved}}
-    {{#each restaurants.value}}
-    <div class="restaurant">
-      <img src="{{joinBase images.thumbnail}}" width="100" height="100">
-      <h3>{{name}}</h3>
-      {{#address}}
-      <div class="address">
-        {{street}}<br />{{city}}, {{state}} {{zip}}
-      </div>
-      {{/address}}
-
-      <div class="hours-price">
-        $$$<br />
-        Hours: M-F 10am-11pm
-        <span class="open-now">Open Now</span>
-      </div>
-
-      <a class="btn" href="{{routeUrl page='restaurants' slug=slug}}">
-        Place My Order
-      </a>
-      <br />
-    </div>
-    {{/each}}
-  {{/if}}
-</div>
-```
 
 Some things worth pointing out:
 
@@ -976,16 +543,7 @@ Now we have a component that lets us select state and city and displays the appr
 
 We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
 
-```html
-<script type="text/stache" can-autorender>
-  <can-import from="place-my-order-assets" />
-  <can-import from="place-my-order/models/fixtures/" />
-  <can-import from="place-my-order/restaurant/list/" />
-  <pmo-restaurant-list></pmo-restaurant-list>
-</script>
-<script src="../../../node_modules/steal/steal.js"
-        main="can/view/autorender/"></script>
-```
+@sourceref guides/place-my-order/steps/write-template/list.html
 
 View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
 
@@ -997,13 +555,8 @@ In this chapter we will automate running the tests so that they can be run from 
 
 We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [src/test.html](http://localhost:8080/src/test.html). All tests are being loaded in `src/test/test.js`. Since we do not tests our models at the moment, let's remove the `import 'src/models/test'` part so that `src/test/test.js` looks like this:
 
-```js
-import QUnit from 'steal-qunit';
-
-import 'place-my-order/test/functional';
-
-import 'place-my-order/restaurant/list/list_test';
-```
+@sourceref guides/place-my-order/steps/test-runner/test.js
+@highlight 1
 
 If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src/test.html) we still see all restaurant list tests passing but we will add more here later on.
 
@@ -1132,55 +685,7 @@ donejs add component restaurant/details.component pmo-restaurant-details
 
 And change `src/restaurant/details.component` to:
 
-```html
-<can-component tag="pmo-restaurant-details">
-  <template>
-    <can-import from="place-my-order/models/restaurant"/>  
-    <restaurant-model get="{ _id=slug }">
-      {{#if isPending}}
-        <div class="loading"></div>
-      {{else}}
-      {{#value}}
-      <div class="restaurant-header"
-          style="background-image: url({{joinBase images.banner}});">
-        <div class="background">
-          <h2>{{name}}</h2>
-
-          {{#address}}
-          <div class="address">
-            {{street}}<br />{{city}}, {{state}} {{zip}}
-          </div>
-          {{/address}}
-
-          <div class="hours-price">
-            $$$<br />
-            Hours: M-F 10am-11pm
-            <span class="open-now">Open Now</span>
-          </div>
-
-          <br />
-        </div>
-      </div>
-
-      <div class="restaurant-content">
-        <h3>The best food this side of the Mississippi</h3>
-
-        <p class="description">
-          <img src="{{joinBase images.owner}}" />
-          Description for {{name}}
-        </p>
-        <p class="order-link">
-          <a class="btn" href="{{routeUrl page='restaurants' slug=slug action='order'}}">
-            Order from {{name}}
-          </a>
-        </p>
-      </div>
-      {{/value}}
-      {{/if}}
-    </restaurant-model>
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/additional/details.component
 
 The order component will be a little more complex, which is why we will put it into its own folder:
 
@@ -1205,32 +710,7 @@ Now we can add those components to the main template (at `src/index.stache`) wit
 
 To:
 
-```html
-{{#case "restaurants"}}
-  {{#if slug}}
-    {{#switch action}}
-      {{#case 'order'}}
-        <can-import from="place-my-order/order/new/"
-            can-tag="pmo-loading">
-          <pmo-order-new slug="{slug}"></pmo-order-new>
-        </can-import>
-      {{/case}}
-
-      {{#default}}
-        <can-import from="place-my-order/restaurant/details.component"
-            can-tag="pmo-loading">
-          <pmo-restaurant-details></pmo-restaurant-details>
-        </can-import>
-      {{/default}}
-    {{/switch}}
-  {{else}}
-    <can-import from="place-my-order/restaurant/list/"
-        can-tag="pmo-loading">
-      <pmo-restaurant-list></pmo-restaurant-list>
-    </can-import>
-  {{/if}}
-{{/case}}
-```
+@sourceref guides/place-my-order/steps/additional/addition.stache
 
 Here we are adding some more conditions if `page` is set to `restaurants`:
 
@@ -1248,21 +728,7 @@ npm install bit-tabs --save
 
 And then integrate it into `src/order/new/new.stache`:
 
-```html
-<div class="order-form">
-  <h2>Order here</h2>
-  <can-import from="bit-tabs/unstyled"/>
-
-  <bit-tabs tabs-class="nav nav-tabs">
-    <bit-panel title="Lunch menu">
-      This is the lunch menu
-    </bit-panel>
-    <bit-panel title="Dinner menu">
-      This is the dinner menu
-    </bit-panel>
-  </bit-tabs>
-</div>
-```
+@sourceref guides/place-my-order/steps/bit-tabs/new.stache
 
 Here we just import the `unstyled` module from the `bit-tabs` package using `can-import` which will then provide the `bit-tabs` and `bit-panel` custom elements.
 
@@ -1331,65 +797,8 @@ donejs add supermodel order
 
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
-```js
-import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
-import List from 'can/list/';
-import Map from 'can/map/';
-import 'can/map/define/';
-
-const ItemsList = List.extend({}, {
-  has: function(item) {
-    return this.indexOf(item) !== -1;
-  },
-
-  toggle: function(item) {
-    var index = this.indexOf(item);
-
-    if (index !== -1) {
-      this.splice(index, 1);
-    } else {
-      this.push(item);
-    }
-  }
-});
-
-let Order = Map.extend({
-  define: {
-    status: {
-      value: 'new'
-    },
-    items: {
-      Value: ItemsList
-    },
-    total: {
-      get() {
-        let total = 0.0;
-        this.attr('items').forEach(item =>
-            total += parseFloat(item.attr('price')));
-        return total.toFixed(2);
-      }
-    }
-  },
-
-  markAs(status) {
-    this.attr('status', status);
-    this.save();
-  }
-});
-
-export const connection = superMap({
-  url: '/api/orders',
-  idProp: '_id',
-  Map: Order,
-  List: Order.List,
-  name: 'orders'
-});
-
-tag('order-model', connection);
-
-export default Order;
-```
+@sourceref guides/place-my-order/steps/create-data/order.js
+@highlight 3-4,7-21,25-38,41-44
 
 Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
@@ -1397,72 +806,15 @@ Here we define an `ItemsList` which allows us to toggle menu items and check if 
 
 Now we can update the view model in `src/order/new/new.js`:
 
-```js
-import Component from 'can/component/component';
-import Map from 'can/map/';
-import 'can/map/define/';
-import template from './new.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import Order from 'place-my-order/models/order';
-
-export const ViewModel = Map.extend({
-  define: {
-    slug: {
-      type: 'string'
-    },
-    order: {
-      Value: Order
-    },
-    saveStatus: {
-      Value: Object
-    },
-    canPlaceOrder: {
-      get() {
-        let items = this.attr('order.items');
-        return items.attr('length');
-      }
-    }
-  },
-
-  placeOrder() {
-    let order = this.attr('order');
-    order.attr('restaurant', this.attr('restaurant._id'));
-    this.attr('saveStatus', order.save());
-    return false;
-  },
-
-  startNewOrder() {
-    this.attr('order', new Order());
-    this.attr('saveStatus', null);
-    return false;
-  }
-});
-
-export default Component.extend({
-  tag: 'pmo-order-new',
-  viewModel: ViewModel,
-  template
-});
-```
+@sourceref guides/place-my-order/steps/create-data/new.js
+@highlight 5-6,9-25,27-32,34-38
 
 Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order. 
 
 While we're here we can also update our test to get it passing again, replace `src/order/new/new_test.js` with:
 
-```
-import QUnit from 'steal-qunit';
-import { ViewModel } from './new';
-
-// ViewModel unit tests
-QUnit.module('place-my-order/order/new');
-
-QUnit.test('canPlaceOrder', function(){
-  var vm = new ViewModel({
-    order: { items: [1] }
-  });
-  QUnit.equal(vm.attr('canPlaceOrder'), true, 'can place an order');
-});
-```
+@sourceref guides/place-my-order/steps/create-data/new_test.js
+@highlight 7-12
 
 ### Write the template
 
@@ -1474,138 +826,11 @@ donejs add component order/details.component pmo-order-details
 
 and changing `src/order/details.component` to:
 
-```html
-<can-component tag="pmo-order-details">
-  <template>
-    {{#order}}
-      <h3>Thanks for your order {{name}}!</h3>
-      <div><label class="control-label">
-        Confirmation Number: {{_id}}</label>
-      </div>
-
-      <h4>Items ordered:</h4>
-      <ul class="list-group panel">
-        {{#each items}}
-          <li class="list-group-item">
-            <label>
-              {{name}} <span class="badge">${{price}}</span>
-            </label>
-          </li>
-        {{/each}}
-
-        <li class="list-group-item">
-          <label>
-            Total <span class="badge">${{total}}</span>
-          </label>
-        </li>
-      </ul>
-
-      <div><label class="control-label">
-        Phone: {{phone}}
-      </label></div>
-      <div><label class="control-label">
-        Address: {{address}}
-      </label></div>
-    {{/order}}
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/create-data/details.component
 
 Now we can import that component and update `src/order/new/new.stache` to:
 
-```html
-<can-import from="bit-tabs/unstyled"/>
-<can-import from="place-my-order/order/details.component" />
-
-<div class="order-form">
-  <restaurant-model get="{ _id=slug }">
-    {{#if isPending}}
-      <div class="loading"></div>
-    {{else}}
-      {{#value}}
-        {{#if saveStatus.isResolved}}
-          <pmo-order-details order="{saveStatus.value}"></pmo-order-details>
-          <p><a href="javascript://" ($click)="startNewOrder">
-            Place another order
-          </a></p>
-        {{else}}
-          <h3>Order from {{name}}</h3>
-
-          <form ($submit)="placeOrder">
-            <bit-tabs tabs-class="nav nav-tabs">
-              <p class="info {{^if order.items.length}}text-error{{else}}text-success{{/if}}">
-                {{^if order.items.length}}
-                  Please choose an item
-                {{else}}
-                  {{order.items.length}} selected
-                {{/if}}
-              </p>
-              <bit-panel title="Lunch menu">
-                <ul class="list-group">
-                  {{#each menu.lunch}}
-                    <li class="list-group-item">
-                      <label>
-                        <input type="checkbox"
-                          ($change)="order.items.toggle(.)"
-                          {{#if order.items.has(.)}}checked{{/if}}>
-                        {{name}} <span class="badge">${{price}}</span>
-                      </label>
-                    </li>
-                  {{/each}}
-                </ul>
-              </bit-panel>
-              <bit-panel title="Dinner menu">
-                <ul class="list-group">
-                  {{#each menu.dinner}}
-                    <li class="list-group-item">
-                      <label>
-                        <input type="checkbox"
-                          ($change)="order.items.toggle(this)"
-                          {{#if order.items.has(.)}}checked{{/if}}>
-                        {{name}} <span class="badge">${{price}}</span>
-                      </label>
-                    </li>
-                  {{/each}}
-                </ul>
-              </bit-panel>
-            </bit-tabs>
-
-            <div class="form-group">
-              <label class="control-label">Name:</label>
-              <input name="name" type="text" class="form-control"
-                {($value)}="order.name">
-              <p>Please enter your name.</p>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Address:</label>
-              <input name="address" type="text" class="form-control"
-                {($value)}="order.address">
-              <p class="help-text">Please enter your address.</p>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Phone:</label>
-              <input name="phone" type="text" class="form-control"
-                {($value)}="order.phone">
-              <p class="help-text">Please enter your phone number.</p>
-            </div>
-            <div class="submit">
-              <h4>Total: ${{order.total}}</h4>
-              {{#if saveStatus.isPending}}
-                <div class="loading"></div>
-              {{else}}
-                <button type="submit"
-                    {{^if canPlaceOrder}}disabled{{/if}} class="btn">
-                  Place My Order!
-                </button>
-              {{/if}}
-            </div>
-          </form>
-        {{/if}}
-      {{/value}}
-    {{/if}}
-  </restaurant-model>
-</div>
-```
+@sourceref guides/place-my-order/steps/create-data/new.stache
 
 This is a longer template so lets walk through it:
 
@@ -1632,17 +857,10 @@ The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) Node
 npm install steal-socket.io --save
 ```
 
-In `src/models/order.js` add:
+In `src/models/order.js` replace with:
 
-```js
-import io from 'steal-socket.io';
-
-const socket = io();
-
-socket.on('orders created', order => connection.createInstance(order));
-socket.on('orders updated', order => connection.updateInstance(order));
-socket.on('orders removed', order => connection.destroyInstance(order));
-```
+@sourceref guides/place-my-order/steps/real-time/order.js
+@highlight 6,56-60
 
 ### Update the template
 
@@ -1654,113 +872,11 @@ donejs add component order/list.component pmo-order-list
 
 Changing `src/order/list.component` to:
 
-```html
-<can-component tag="pmo-order-list">
-  <template>
-    <h4>{{listTitle}}</h4>
-
-    {{#if orders.isPending}}
-     <div class="loading"></div>
-    {{else}}
-      {{#each orders.value}}
-      <div class="order {{status}}">
-        <address>
-          {{name}} <br />{{address}} <br />{{phone}}
-        </address>
-
-        <div class="items">
-          <ul>
-            {{#each items}}<li>{{name}}</li>{{/each}}
-          </ul>
-        </div>
-
-        <div class="total">${{total}}</div>
-
-        <div class="actions">
-          <span class="badge">{{statusTitle}}</span>
-          {{#if action}}
-            <p class="action">
-              Mark as:
-              <a href="javascript://" ($click)="markAs(action)">
-                {{actionTitle}}
-              </a>
-            </p>
-          {{/if}}
-
-          <p class="action">
-            <a href="javascript://"  ($click)="destroy()">Delete</a>
-          </p>
-        </div>
-      </div>
-      {{else}}
-        <div class="order empty">{{emptyMessage}}</div>
-      {{/each}}
-    {{/if}}
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/real-time/list.component
 
 And in the order history template by updating `src/order/history.component` to:
 
-```html
-<can-component tag="pmo-order-history">
-  <template>
-    <can-import from="place-my-order/models/order" />
-
-    <div class="order-history">
-      <div class="order header">
-        <address>Name / Address / Phone</address>
-        <div class="items">Order</div>
-        <div class="total">Total</div>
-        <div class="actions">Action</div>
-      </div>
-
-      <can-import from="place-my-order/order/list.component" />
-      <order-model getList="{status='new'}">
-        <pmo-order-list
-          {orders}="."
-          list-title="New Orders"
-          status="new"
-          status-title="New Order!"
-          action="preparing"
-          action-title="Preparing"
-          empty-message="No new orders"/>
-      </order-model>
-
-      <order-model getList="{status='preparing'}">
-        <pmo-order-list
-          {orders}="."
-          list-title="Preparing"
-          status="preparing"
-          status-title="Preparing"
-          action="delivery"
-          action-title="Out for delivery"
-          empty-message="No orders preparing"/>
-      </order-model>
-
-      <order-model getList="{status='delivery'}">
-        <pmo-order-list
-          {orders}="."
-          list-title="Out for delivery"
-          status="delivery"
-          status-title="Out for delivery"
-          action="delivered"
-          action-title="Delivered"
-          empty-message="No orders are being delivered"/>
-      </order-model>
-
-      <order-model getList="{status='delivered'}">
-        <pmo-order-list
-          {orders}="."
-          list-title="Delivered"
-          status="delivered"
-          status-title="Delivered"
-          empty-message="No delivered orders"/>
-      </order-model>
-    </div>
-  </template>
-</can-component>
-```
+@sourceref guides/place-my-order/steps/real-time/history.component
 
 First we import the order model and then just call `<order-model getList="{status='<status>'}">` for each order status. That's it. If we now open the order page we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
@@ -1782,92 +898,8 @@ This produces documentation at [http://localhost:8080/docs/](http://localhost:80
 
 Let's add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
 
-```js
-import Component from 'can/component/component';
-import Map from 'can/map/';
-import 'can/map/define/';
-import template from './new.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import Order from 'place-my-order/models/order';
-
-/**
- * @add place-my-order/order/new
- */
-export const ViewModel = Map.extend({
-  define: {
-    /**
-     * @property {String} slug
-     *
-     * The restaurants slug (short name). Will
-     * be used to request the actual restaurant.
-     */
-    slug: {
-      type: 'string'
-    },
-    /**
-     * @property {place-my-order/models/order} order
-     *
-     * The order that is being processed. Will
-     * be an empty new order inititally.
-     */
-    order: {
-      Value: Order
-    },
-    /**
-     * @property {can.Deferred} saveStatus
-     *
-     * A deferred that contains the status of the order when
-     * it is being saved.
-     */
-    saveStatus: {
-      Value: Object
-    },
-    /**
-     * @property {Boolean} canPlaceOrder
-     *
-     * A flag to enable / disable the "Place my order" button.
-     */
-    canPlaceOrder: {
-      get() {
-        let items = this.attr('order.items');
-        return items.attr('length');
-      }
-    }
-  },
-
-  /**
-   * @function placeOrder
-   *
-   * Save the current order and update the status Deferred.
-   *
-   * @return {boolean} false to prevent the form submission
-   */
-  placeOrder() {
-    let order = this.attr('order');
-    this.attr('saveStatus', order.save());
-    return false;
-  },
-
-  /**
-   * @function startNewOrder
-   *
-   * Resets the order form, so a new order can be placed.
-   *
-   * @return {boolean} false to prevent the form submission
-   */
-  startNewOrder: function() {
-    this.attr('order', new Order());
-    this.attr('saveStatus', null);
-    return false;
-  }
-});
-
-export default Component.extend({
-  tag: 'pmo-order-new',
-  viewModel: ViewModel,
-  template
-});
-```
+@sourceref guides/place-my-order/steps/document/new.js
+@highlight 8-10,13-18,22-27,31-36,40-44,53-59,66-72
 
 If we now run `donejs document` again, we will see the module show up in the menu bar and will be able to navigate through the different properties.
 

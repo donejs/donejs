@@ -1,7 +1,8 @@
 var automate = require("guide-automation");
-var join = require("path").join;
-var streamWhen = require("stream-when");
 var isWindowsCI = require("is-appveyor");
+var join = require("path").join;
+var rimraf = require("rimraf").sync;
+var streamWhen = require("stream-when");
 var nodeVersion = +process.version.substr(1).split(".")[0];
 
 // Only run in AppVeyor if version >= 5
@@ -18,6 +19,10 @@ var wait = function(){
 /**
  * @Step 1
  */
+guide.step("Remove existing dependencies", function(){
+  rimraf(join("node_modules", "donejs-cli"));
+  rimraf(join("node_modules", "generator-donejs"));
+});
 
 guide.step("Install donejs", function(){
 	return guide.executeCommand("npm", ["install", "donejs", "-g"]);
@@ -248,31 +253,27 @@ guide.step("Production build", function(){
 /**
  * @ Step 15
  */
-// Cannot kill the server on Linux. The `pid` is incorrect and the port
-// remains open. So cannot test this.
-if(isWindowsCI) {
-  guide.step("Open in production", function(){
-    process.env["NODE_ENV"] = "production";
+guide.step("Open in production", function(){
+	process.env["NODE_ENV"] = "production";
 
-    var child = guide.canServe = guide.executeCommand("donejs", ["start"])
-      .childProcess;
+	var child = guide.canServe = guide.executeCommand("donejs", ["start"])
+		.childProcess;
 
-    var server = streamWhen(child.stdout, /done-serve starting on/);
-    return server.then(wait);
-  });
+	var server = streamWhen(child.stdout, /done-serve starting on/);
+	return server.then(wait);
+});
 
-  guide.test(function(){
-    return guide.nodeTest(join(__dirname, "steps", "15-production", "test.js"));
-  });
+guide.test(function(){
+	return guide.nodeTest(join(__dirname, "steps", "15-production", "test.js"));
+});
 
-  guide.step("Stop production mode", function(){
-    return guide.kill(guide.canServe)
-      .then(function(){
-        guide.canServe = null;
-        return guide.wait(2000);
-      });
-  });
-}
+guide.step("Stop production mode", function(){
+	return guide.kill(guide.canServe)
+		.then(function(){
+			guide.canServe = null;
+			return guide.wait(2000);
+		});
+});
 
 /**
  * @Step 16
