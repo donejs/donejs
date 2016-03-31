@@ -29,24 +29,10 @@ describe('cmd add test', function() {
     mockery.deregisterAll();
   });
 
-  it('rejects when [type] value is invalid', function(done) {
-    var folder;
-
-    add('foo', folder, {})
-      .then(function() {
-        assert(false, 'should have failed!');
-        done();
-      })
-      .catch(function(err) {
-        assert(err.message, 'Invalid [type] value `foo`');
-        done();
-      });
-  });
-
   it('when type is "app", runs binary with the right args', function() {
     var folder = 'my-awesome-app';
 
-    return add('app', folder, {})
+    return add('app', [folder], {})
       .then(function() {
         assert.deepEqual(binaryArgs[0], ['init', folder]);
       });
@@ -55,7 +41,7 @@ describe('cmd add test', function() {
   it('when type is "plugin", runs binary with the right args', function() {
     var folder = 'my-awesome-app';
 
-    return add('plugin', folder, {})
+    return add('plugin', [folder], {})
       .then(function() {
         assert.deepEqual(binaryArgs[0], ['init', folder]);
         assert.deepEqual(binaryArgs[1].type, 'plugin');
@@ -65,11 +51,17 @@ describe('cmd add test', function() {
   it('when type is "generator", runs binary with the right args', function() {
     var name = 'donejs-jshint';
 
-    return add('generator', name, {})
+    return add('generator', [name], {})
       .then(function() {
         assert.deepEqual(binaryArgs[0], ['init', name]);
         assert.deepEqual(binaryArgs[1].type, 'generator');
       });
   });
 
+  it('calls the "donejs-cli add" for other [type] values', function() {
+    return add('component', ['my-component', '0.0.1'], {})
+      .then(function() {
+        assert.deepEqual(binaryArgs[0], ['add', 'my-component', '0.0.1']);
+      });
+  });
 });
