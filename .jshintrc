@@ -22,6 +22,8 @@
     "describe": true,
     "before": true,
     "after": true,
-    "exports": true
+    "exports": true,
+    "beforeEach": true,
+    "afterEach": true
   }
 }

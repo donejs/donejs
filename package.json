@@ -12,7 +12,7 @@
     "test-quickstart": "guide guides/guide/test.js --local",
     "test-pmo": "guide guides/place-my-order/test.js --local",
     "jshint": "jshint lib/. bin/donejs test/. --config",
-    "mocha": "mocha test/ --timeout 120000",
+    "mocha": "mocha test/test --timeout 120000",
     "verify": "echo \"Script ran\"",
     "document:watch": "documentjs --watch",
     "document": "documentjs -f && cp docs/theme/static/favicon.ico site/favicon.ico",
@@ -20,7 +20,9 @@
     "release:prerelease": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
-    "release:major": "npm version major && npm publish"
+    "release:major": "npm version major && npm publish",
+    "coverage": "istanbul cover _mocha -- test/test --timeout 120000",
+    "coverage:upload": "istanbul cover _mocha --report lcovonly -- test/ --timeout 600000 && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {
     "type": "git",
@@ -38,18 +40,23 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
+    "coveralls": "^2.11.9",
     "documentjs": "^0.4.3",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^3.0.2",
     "guide-automation": "^0.3.0",
     "is-appveyor": "^1.0.0",
+    "istanbul": "^0.4.2",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5",
+    "mocha-lcov-reporter": "^1.2.0",
+    "mockery": "^1.4.1",
     "node-fetch": "^1.3.3",
     "rimraf": "^2.5.2",
     "stream-when": "^1.0.0"
   },
   "dependencies": {
+    "chalk": "^1.1.3",
     "commander": "^2.8.1",
     "cross-spawn-async": "^2.0.0",
     "q": "^1.4.1"
