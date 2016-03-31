@@ -9,11 +9,14 @@ var utils = require('../lib/utils');
 describe('cli init cmd', function() {
   var init;
   var spawnCalls;
+  var runBinaryCall;
   var folder = 'test-project';
   var cmdInitPath = '../lib/cli/cmd-init';
 
   beforeEach(function() {
     spawnCalls = [];
+    runBinaryCall = {};
+
     deleteFolder();
 
     mockery.enable({
@@ -22,6 +25,11 @@ describe('cli init cmd', function() {
     });
 
     mockery.registerAllowable(cmdInitPath);
+
+    mockery.registerMock('./run-binary', function() {
+      runBinaryCall.args = arguments[0];
+      runBinaryCall.options = arguments[1];
+    });
 
     mockery.registerMock('../utils', {
       mkdirp: utils.mkdirp,
@@ -73,16 +81,19 @@ describe('cli init cmd', function() {
     init(folder, {})
       .then(function() {
         var installCliCall = spawnCalls[0];
-        var cliInitCall = spawnCalls[1];
+        var folderPath = path.join(process.cwd(), folder);
 
         assert.equal(installCliCall.binary, 'npm');
         assert.deepEqual(installCliCall.args, [
           'install', 'donejs-cli@latest', '--loglevel', 'error'
         ]);
 
-        assert.equal(cliInitCall.binary, 'node');
-        assert(cliInitCall.args[0].indexOf('donejs-cli/') !== -1);
-        assert.equal(cliInitCall.args[1], 'init');
+        assert.deepEqual(runBinaryCall.args, ['init']);
+        assert.deepEqual(
+          runBinaryCall.options,
+          { cwd: folderPath },
+          'it should set cwd to folderPath so init puts files in {folder}'
+        );
 
         done();
       })

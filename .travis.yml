@@ -19,4 +19,4 @@ notifications:
       - matthew@bitovi.com
     on_success: change
     on_failure: change
-script: npm run jshint && npm run coverage:upload && npm run document && npm run test-guides
+script: npm run jshint && npm run document && npm run test-guides && npm run coverage:upload

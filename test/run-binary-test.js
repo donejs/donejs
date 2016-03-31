@@ -62,17 +62,18 @@ describe('runBinary', function() {
   });
 
   it('spawns process with provided arguments', function(done) {
-    var binary = path.join(root, 'node_modules', '.bin', 'donejs');
+    var binaryPath;
 
-    utils.mkdirp(binary)
-      .then(function() {
+    createDoneJSBinary()
+      .then(function(binary) {
+        binaryPath = binary;
         return runBinary(['--help']);
       })
       .then(function() {
         assert.equal(spawnCalls.length, 1, 'should spawn process');
         var call = spawnCalls[0];
 
-        assert.equal(call.binary, binary);
+        assert.equal(call.binary, binaryPath);
         assert.deepEqual(call.args, ['--help']);
         assert.deepEqual(call.options, { cwd: root });
 
@@ -85,5 +86,20 @@ describe('runBinary', function() {
     if (fs.existsSync(root)) {
       rimraf.sync(root);
     }
+  }
+
+  function createDoneJSBinary() {
+    var binary = path.join(root, 'node_modules', '.bin');
+    var doneScript = process.platform === 'win32' ? 'donejs.cmd' : 'donejs';
+    var binaryPath = path.join(binary, doneScript);
+
+    return utils.mkdirp(binary)
+      .then(function() {
+        var writeFile = Q.denodeify(fs.writeFile);
+        return writeFile(binaryPath);
+      })
+      .then(function() {
+        return binaryPath;
+      });
   }
 });
