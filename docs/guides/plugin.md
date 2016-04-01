@@ -61,7 +61,7 @@ The plugin generator will ask several question that should be answered as follow
 
 Once all done, the final prompt looks similar to this:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS init plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
+[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
 
 Now the generator will initialize the default plugin layout and install all its dependencies.
 

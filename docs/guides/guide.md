@@ -31,14 +31,14 @@ npm install -g donejs
 Then we'll create a new DoneJS application called `donejs-chat`:
 
 ```
-donejs init donejs-chat
+donejs add app donejs-chat
 ```
 
 This will create a new folder called `donejs-chat` and in it generate our application.
 
 The initialization process will ask questions like the name of your application, the source folder, etc. We'll answer these with the default settings by hitting enter.
 
-<img src="static/img/donejs-init.png" alt="donejs init" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-init.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 This will install all of DoneJS's dependencies, including the following:
 
@@ -98,7 +98,7 @@ Update `src/index.stache` to look like this:
 
 If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file.
 
-<img src="static/img/donejs-bootstrap.png" alt="donejs init" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-bootstrap.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Feel free to edit the HTML or `src/styles.less` to see how hot module swapping updates the page automatically.
 

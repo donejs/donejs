@@ -46,8 +46,8 @@ guide.step("Install donejs", function(){
 // Move to a temp folder for the rest of the guide
 guide.moveToTmp();
 
-guide.step("Run donejs init", function(){
-	var init = guide.answerPrompts("donejs", ["init", "place-my-order",
+guide.step("Run donejs add app", function(){
+	var init = guide.answerPrompts("donejs", ["add", "app", "place-my-order",
 		"--skip-install"]);
 	var answer = init.answer;
 
