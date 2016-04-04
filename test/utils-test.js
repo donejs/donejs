@@ -1,6 +1,7 @@
-var assert = require('assert');
-var path = require('path');
+var Q = require('q');
 var fs = require('fs');
+var path = require('path');
+var assert = require('assert');
 var utils = require('../lib/utils');
 
 describe('utils tests', function() {
@@ -16,6 +17,13 @@ describe('utils tests', function() {
     });
   });
 
+  it('mkdirp returns cwd if folder is not provided', function() {
+    return utils.mkdirp()
+      .then(function(folderPath) {
+        assert.equal(folderPath, process.cwd());
+      });
+  });
+
   it('spawns successfully', function(done) {
     var cwd = path.join(__dirname, '..');
 
@@ -25,6 +33,54 @@ describe('utils tests', function() {
         done();
       })
       .catch(done);
+  });
+
+  it('spawns rejects if cannot execute command', function(done) {
+    var cwd = path.join(__dirname, '..');
+
+    utils.spawn('npm', ['run', 'invalid-script'], { cwd: cwd })
+      .then(function() {
+        assert(false, 'should reject promise');
+        done();
+      })
+      .catch(function(err) {
+        assert.equal(err.message, 'Command `npm` did not complete successfully');
+        done();
+      });
+  });
+
+  describe('utils.log', function() {
+    var _exit;
+    var exitCode;
+
+    beforeEach(function() {
+      _exit = process.exit;
+
+      Object.defineProperty(process, 'exit', {
+        value: function(code) {
+          exitCode = code;
+        }
+      });
+    });
+
+    afterEach(function() {
+      Object.defineProperty(process, 'exit', { value: _exit });
+    });
+
+    it('ends process successfully if promise resolves', function() {
+      return utils.log(Q(true))
+        .then(function() {
+          assert.equal(exitCode, 0);
+        });
+    });
+
+    it('ends process with error if promise rejects', function(done) {
+      utils.log(Q.reject(new Error('foobar')))
+        .finally(function() {
+          assert.equal(exitCode, 1);
+          done();
+        });
+    });
   });
 
   describe('project root', function() {

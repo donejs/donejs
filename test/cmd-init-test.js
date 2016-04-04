@@ -104,6 +104,17 @@ describe('cli init cmd', function() {
       .catch(done);
   });
 
+  it('passes options to donejs-init properly', function(done) {
+    init(folder, { skipInstall: true, type: 'foobar' })
+      .then(function() {
+        assert.deepEqual(runBinaryCall.args, [
+          'init', '--skip-install', '--type', 'foobar'
+        ]);
+        done();
+      })
+      .catch(done);
+  });
+
   function deleteFolder() {
     if (fs.existsSync(folder)) {
       rimraf.sync(folder);
