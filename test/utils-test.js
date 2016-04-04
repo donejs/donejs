@@ -17,10 +17,14 @@ describe('utils tests', function() {
   });
 
   it('spawns successfully', function(done) {
-    utils.spawn('npm', ['run', 'verify'], {}).then(function(child) {
-      assert.equal(child.exitCode, 0);
-      done();
-    });
+    var cwd = path.join(__dirname, '..');
+
+    utils.spawn('npm', ['run', 'verify'], { cwd: cwd })
+      .then(function(child) {
+        assert.equal(child.exitCode, 0);
+        done();
+      })
+      .catch(done);
   });
 
   describe('project root', function() {
