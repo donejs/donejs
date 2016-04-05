@@ -7,6 +7,7 @@ var mockery = require('mockery');
 var utils = require('../lib/utils');
 
 describe('cli init cmd', function() {
+  var cwd;
   var init;
   var spawnCalls;
   var runBinaryCall;
@@ -16,6 +17,7 @@ describe('cli init cmd', function() {
   beforeEach(function() {
     spawnCalls = [];
     runBinaryCall = {};
+    cwd = process.cwd();
 
     deleteFolder();
 
@@ -58,6 +60,7 @@ describe('cli init cmd', function() {
 
     init(folder, {})
       .then(function() {
+        process.chdir(cwd);
         assert(fs.existsSync(folder), 'should create folder');
         done();
       })
@@ -70,6 +73,7 @@ describe('cli init cmd', function() {
   it('creates {folder}/node_modules for deps to be installed', function(done) {
     init(folder, {})
       .then(function() {
+        process.chdir(cwd);
         var folderModules = path.join(folder, 'node_modules');
         assert(fs.existsSync(folderModules), 'should create node_modules');
         done();
@@ -81,7 +85,7 @@ describe('cli init cmd', function() {
     init(folder, {})
       .then(function() {
         var installCliCall = spawnCalls[0];
-        var folderPath = path.join(process.cwd(), folder);
+        var folderPath = path.join(cwd, folder);
 
         assert.equal(installCliCall.binary, 'npm');
         assert.deepEqual(installCliCall.args, [
@@ -95,6 +99,17 @@ describe('cli init cmd', function() {
           'it should set cwd to folderPath so init puts files in {folder}'
         );
 
+        done();
+      })
+      .catch(done);
+  });
+
+  it('passes options to donejs-init properly', function(done) {
+    init(folder, { skipInstall: true, type: 'foobar' })
+      .then(function() {
+        assert.deepEqual(runBinaryCall.args, [
+          'init', '--skip-install', '--type', 'foobar'
+        ]);
         done();
       })
       .catch(done);
