@@ -46,8 +46,8 @@ describe('runBinary', function() {
     mockery.deregisterAll();
   });
 
-  it('rejects if binary does not exist', function(done) {
-    runBinary()
+  it('rejects if binary does not exist and adds additional info if the command is `donejs add`', function(done) {
+    runBinary(['add'])
       .then(function() {
         assert(false, 'should have failed');
         done();
@@ -57,6 +57,12 @@ describe('runBinary', function() {
           /Could not find local DoneJS/.test(err.message),
           'it should reject with error'
         );
+
+        assert(
+          /Allowed types for a new project are/.test(err.message),
+          'it should reject with error'
+        );
+        
         done();
       });
   });
