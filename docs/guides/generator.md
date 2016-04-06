@@ -68,7 +68,6 @@ The plugin generator will ask several question that should be answered as follow
 
 Once all done, the final prompt looks similar to this:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
 
 Now the generator will initialize the default layout and install all its dependencies.
 
@@ -82,11 +81,10 @@ $ npm test
 
 This will open a Firefox browser, run two tests and output the result on the console.
 
-This command can also be used to automatically run the tests on a [continuous integration][5] server. There are many open source CI servers, the most popular being [Jenkins][10], and many hosted solutions like [Travis CI][11].
+This command can also be used to automatically run the tests on a [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration) server. There are many open source CI servers, the most popular being [Jenkins](https://jenkins-ci.org/), and many hosted solutions like [Travis CI](https://travis-ci.org/).
 
-We will use Travis CI as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `<username>-number-input` repository:
+We will use Travis CI as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `donejs-<username>-jshint` repository:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-2.03.56-PM.png" alt="Enabling on Travis CI" style="width: 100%;" class="alignnone size-full wp-image-2669" />][12]
 
 You may have to click the *"Sync account"* button for the repository to show up. Now, every time we push to GitHub the tests will run automatically. We can do so with our initial commit:
 
@@ -96,7 +94,7 @@ $ git commit -am "Initial commit"
 $ git push origin master
 ```
 
-If you now go `https://travis-ci.org/<your-username>/<username>-number-input/builds` you will see the build running and eventually turn green (which will update the badge that got added in the `readme.md` file).
+If you now go `https://travis-ci.org/<your-username>/donejs-<username>-jshint/builds` you will see the build running and eventually turn green (which will update the badge that got added in the `readme.md` file).
 
 
 ## Adding the configuration files
@@ -306,7 +304,35 @@ Now we can see all tests passing when running:
 $ npm test
 ```
 
-## Publishing to npm
+
+## Publishing the plugin
+
+### Making a pull request
+
+Although we are working on the generator by ourselves for now, [GitHub pull requests](https://help.github.com/articles/using-pull-requests/) are a great way to keep track of our progress and to make sure that all tests are passing. In the plugin folder we can run:
+
+```
+$ git checkout -b generator-functionality
+$ git add . --all
+$ git commit -m "Implementing JSHint and editorconfig generator"
+$ git push origin generator-functionality
+```
+
+And then create a new pull request by going to `https://github.com/<username>/donejs-<username>-jshint` which will now show an option like this:
+
+
+Once you created the pull request, you will see a `Some checks haven’t completed yet` message that will eventually turn green:
+
+
+Now you can click the "Merge pull request" button. Then in the console, checkout the *master* branch and pull down the latest changes with:
+
+```
+$ git checkout master
+$ git pull origin master
+```
+
+
+### Publishing to npm
 
 For others to be able to use your generator via `donejs add <generatorname>` have to pulish it to [npm](http://npmjs.org). [Create a new account](https://www.npmjs.com/signup) and then log in via
 
@@ -320,11 +346,8 @@ $ npm login
 $ donejs release:minor
 ```
 
-> __Note:__ The `donejs-jshint` module we created here is already [published on npm](https://www.npmjs.com/package/donejs-jshint). If you would like to publish your own you will have to do so under a different module name.
-
 Now version `0.1.0` of the generator is available and everybody can use it through
 
 ```
-donejs add jshint
+donejs add <username>-jshint
 ```
-
