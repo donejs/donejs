@@ -1,14 +1,14 @@
-@page generator DoneJS generators
+@page generator Creating a generator
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description DoneJS applications can be extended with additional functionality with installable generators. In this guide will create a generator that adds JSHint and an `.editorconfig` file to our application.
+@description DoneJS applications can be extended with additional functionality with installable generators. In this guide will create a generator that adds JSHint and an `.editorconfig` file to a DoneJS application.
 
 @body
 
 If you have used `donejs add nw` or `donejs add cordova` to create a [desktop- or mobile version](https://donejs.com/Features.html#section=section_iOS_Android_andDesktopBuilds) of your application you already used a DoneJS generator. Generators are [npm](https://www.npmjs.com/) modules that provide a [Yeoman](http://yeoman.io/) generator that adds functionality to your application.
 
-In this guide we will create [donejs-jshint](https://www.npmjs.com/package/donejs-jshint), a DoneJS generator that adds [JSHint](http://jshint.com/), a JavaScript code quality tool and an [.editorconfig](http://editorconfig.org/) file which helps text editors and IDEs to define and maintain a consistent coding style. It will also update the `npm test` script to run JSHint with our tests. We can run the generator with:
+In this guide we will create [donejs-jshint](https://www.npmjs.com/package/donejs-jshint), a DoneJS generator that adds [JSHint](http://jshint.com/), a JavaScript code quality tool and an [.editorconfig](http://editorconfig.org/) file which helps text editors and IDEs to define and maintain a consistent coding style. It will also update the `npm test` script to run JSHint with our tests. You can find the code in the [donejs-jshint](https://github.com/donejs/donejs-jshint) repository. We can run the generator with:
 
 ```
 $ donejs add jshint
@@ -18,23 +18,86 @@ Currently it will only ask if we want to use spaces or tabs and to overwrite the
 
 <img src="http://blog.bitovi.com/wp-content/uploads/2016/03/Screen-Shot-2016-03-09-at-2.47.43-PM.png" alt="DoneJS generator" style="width: 100%;" class="alignnone size-full wp-image-3023" />
 
-## Initializing a new generator
+> __Note:__ Since `donejs-jshint` already exists we will use `donejs-<username>-jshint` with `<username>` being your GitHub username for the remainder of this article. Once published it can then be used as `donejs add <username>-jshint`.
 
-Generators can be initialized similar to a new application with `donejs init` and specifying the `type` as `generator`:
+
+## Setting up
+
+### Creating the project on GitHub
+
+We will use [GitHub](https://github.com) to host the code for the project which makes it easy for others to contribute and to automatically run the tests in [continuous integration](https://en.wikipedia.org/wiki/Continuous_integration) which we will enable later.
+
+If you don't have an account yet, go to [GitHub](https://github.com/join) to sign up and follow [the help](https://help.github.com/articles/set-up-git/) on how to set it up for the command-line `git`. Once completed, you can create a new repository from your dashboard.
+
+Calling the repository `donejs-<username>-jshint` and initializing it empty (without any of the default files) looks like this:
+
+
+
+After creating the repository, we can clone it into a new folder:
 
 ```
-$ donejs init donejs-jshint --type generator
+$ git clone git@github.com:<username>/donejs-<username>-jshint.git
+$ cd donejs-<username>-jshint
+```  
+
+### Initializing the project
+
+To initialize a new generator you will need DoneJS version 0.9.0+ installed globally. To check your DoneJS version run
+
+```
+$ donejs --version
 ```
 
-This will create a `donejs-jshint` folder with a basic generator, tests and everything else you need.
+To install DoneJS or to get the latest version run:
 
-> __Note:__ If you want to make your plugin usable via `donejs add <generatorname>` the name has to be prefixed with `donejs-` so the full name will be `donejs-<generatorname>`.
+```
+$ npm install donejs -g    
+```
 
-Now we can run the basic generator and its tests already via
+In the `donejs-<username>-jshint` folder we can now initialize a new generator, very similar to a new DoneJS application, like this:
+
+```
+$ donejs add generator
+```
+
+The plugin generator will ask several question that should be answered as follows:
+
+*   For the project name you can just confirm the default by pressing enter
+*   For the GitHub username or organization enter the GitHub username where the repository has been created
+*   All other fields can also be answered with the default
+
+Once all done, the final prompt looks similar to this:
+
+[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
+
+Now the generator will initialize the default layout and install all its dependencies.
+
+### Setting up Travis CI
+
+When the installation has completed, we can make sure everything got set up properly by running:
 
 ```
 $ npm test
 ```
+
+This will open a Firefox browser, run two tests and output the result on the console.
+
+This command can also be used to automatically run the tests on a [continuous integration][5] server. There are many open source CI servers, the most popular being [Jenkins][10], and many hosted solutions like [Travis CI][11].
+
+We will use Travis CI as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `<username>-number-input` repository:
+
+[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-2.03.56-PM.png" alt="Enabling on Travis CI" style="width: 100%;" class="alignnone size-full wp-image-2669" />][12]
+
+You may have to click the *"Sync account"* button for the repository to show up. Now, every time we push to GitHub the tests will run automatically. We can do so with our initial commit:
+
+```
+$ git add . --all
+$ git commit -am "Initial commit"
+$ git push origin master
+```
+
+If you now go `https://travis-ci.org/<your-username>/<username>-number-input/builds` you will see the build running and eventually turn green (which will update the badge that got added in the `readme.md` file).
+
 
 ## Adding the configuration files
 
