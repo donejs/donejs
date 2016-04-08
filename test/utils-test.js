@@ -109,12 +109,10 @@ describe('utils tests', function() {
   });
 
   describe('versionRange', function() {
-    it('gives a semver range compatible with the latest of a given version', function(){
-      assert.equal(
-        "^0.5.0",
-        utils.versionRange("0.5.12"),
-        "^0.5.0 is what you want if the current version of 0.5.12"
-      );
+    it('gives a semver range compatible with given version', function(){
+      assert.equal(utils.versionRange("0.5"), "0.x");
+      assert.equal(utils.versionRange("0.5.1"), "0.5.x");
+      assert.equal(utils.versionRange("0.5.1-beta.1"), "0.5.1-beta.x");
     });
   });
 });
