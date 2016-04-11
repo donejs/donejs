@@ -324,6 +324,9 @@ Then import it in a template and load it with:
 <donejs-number-input></donejs-number-input>
 ```
 
+## Show it off
+
+Once you published your plugin, let the world know about it. [Tweet @donejs](https://twitter.com/donejs) and post it in the [DoneJS forums](http://forums.donejs.com/) and the [DoneJS chat](https://gitter.im/donejs/donejs). Those are also great places to get quick help with any questions.
 
  [1]: https://donejs.com/
  [2]: http://getbootstrap.com/

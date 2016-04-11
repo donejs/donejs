@@ -4,10 +4,6 @@
 @outline 2 ol
 @description
 
-__NOTE: This guide and application are a work in progress. We plan on completing it by the
-end of March 2016.  We are publishing the guide early because we think it will still be
-a useful learning tool.__
-
 In this guide, you'll learn how [Bitballs](http://bitballs.herokuapp.com) - a charity basketball tournament management application - works.
 Specifically, this guide will walk through the implementation of the following behaviors or functionality:
 
