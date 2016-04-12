@@ -313,7 +313,7 @@ guide.stepIf("Deploy to CDN", function() {
  */
 guide.stepIf("Desktop and mobile apps: Cordova", function() {
 	return process.platform === 'darwin';
-},function(){
+}, function(){
 	return guide.executeCommand("npm", ["install", "-g", "ios-sim"])
 		.then(function(){
 			var proc = guide.answerPrompts("donejs", ["add", "cordova"]);
@@ -333,7 +333,9 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 /**
  * @Step 18
  */
-guide.step("Desktop and mobile apps: NW.js", function(){
+guide.stepIf("Desktop and mobile apps: NW.js", function() {
+  return process.platform !== 'win32';
+}, function(){
 	var proc = guide.answerPrompts("donejs", ["add", "nw"]);
 	var answer = proc.answer;
 
