@@ -226,7 +226,7 @@ The database-backed services, like `/services/teams` follow a subset of
 - To get a single item, `GET /services/{plural_type}/{id}`
 - To create an item, `POST /services/{plural_type}s`
 - To update an item, `PUT /services/{plural_type}/{id}`
-- To destroy an item, `DESTROY /services/{plural_type}/{id}`
+- To destroy an item, `DELETE /services/{plural_type}/{id}`
 
 This means that you can get all Teams like:
 
