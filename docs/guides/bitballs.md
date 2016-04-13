@@ -14,7 +14,7 @@ Specifically, this guide will walk through the implementation of the following b
 
 The code for Bitballs can be found [on github](http://github.com/donejs/bitballs).
 To install and run it locally, follow its
-[development setup instructions](https://github.com/donejs/bitballs#development-setup).
+[development setup instructions](https://github.com/donejs/bitballs#setup-environment).
 
 Bitballs was written to help organize Bitovi's yearly charity basketball tournament
 for the American Heart and Stroke Association.  Justin Meyer, one of Bitovi's founders,
