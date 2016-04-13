@@ -36,8 +36,8 @@ guide.moveToTmp();
 /**
  * @Step 2
  */
-guide.step("Run donejs init", function(){
-	var init = guide.answerPrompts("donejs", ["init", "donejs-chat", "--skip-install"]);
+guide.step("Run donejs add app", function(){
+	var init = guide.answerPrompts("donejs", ["add", "app", "donejs-chat", "--skip-install"]);
 	var answer = init.answer;
 
 	answer(/Project name/, "\n");

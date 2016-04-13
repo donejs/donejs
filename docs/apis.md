@@ -181,7 +181,7 @@ The `donejs` command makes running those commands easier by allowing you to run 
 
 `donejs add` lets you run the [Yeoman](http://yeoman.io/) generators provided by [generator-donejs](https://github.com/donejs/generator-donejs/). Currently the following generators are available:
 
-- `donejs init` which will initialize a new application
+- `donejs add app [folder]` which will initialize a new application (optionally within the given folder)
 - `donejs add component <modulename> <tagname>` to create a new can.Component
 - `donejs add supermodel <modulename>` to generate a new model
 

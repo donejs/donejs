@@ -33,7 +33,7 @@ npm install -g donejs
 Then we can create a new DoneJS application:
 
 ```
-donejs init place-my-order
+donejs add app place-my-order
 ```
 
 The initialization process will ask you questions like the name of your application (set to `place-my-order`) and the source folder (set to `src`). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:
@@ -170,7 +170,7 @@ Every DoneJS application consists of at least two files:
  1. **A main template** (in this case `src/index.stache`) which contains the main template and links to the development or production assets
  1. **A main application view-model** (`src/app.js`) that initializes the application state and routes
 
-`src/index.stache` was already created for us when we ran `donejs init`, so we can update it to reflect the below content:
+`src/index.stache` was already created for us when we ran `donejs add app`, so we can update it to reflect the below content:
 
 @sourceref guides/place-my-order/steps/loading-assets/index.stache
 @highlight 4,7

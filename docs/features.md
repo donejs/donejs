@@ -1035,7 +1035,7 @@ Testing JavaScript apps is complex unto itself. To do it right, you need many to
 
 ##### Generators
 
-The DoneJS app generator command `donejs init` creates a working project-level test HTML and JS file. Component generators via `donejs generate component cart` create a test script and individual test page for each test.
+The DoneJS app generator command `donejs add app` creates a working project-level test HTML and JS file. Component generators via `donejs add component cart` create a test script and individual test page for each test.
 
 ##### Unit tests
 
@@ -1803,7 +1803,7 @@ There are four generators by default (and you can easily create your own).
 From the command line, run:
 
 ```
-donejs init
+donejs add app
 ```
 
 You'll be prompted for a project name, source folder, and other setup information. DoneJS' project dependencies will be installed, like StealJS and CanJS. In the folder that was created, you'll see:
@@ -1838,7 +1838,7 @@ You're now a command away from running application wide tests, generating docume
 To create a [component](http://canjs.com/docs/can.Component.html) organized with the [modlet](#section_Modlets) file organization pattern:
 
 ```
-donejs generate component <folder-path> <component-name>
+donejs add component <folder-path> <component-name>
 ```
 
 It will create the following files:
@@ -1863,7 +1863,7 @@ This folder contains everything a properly maintained component needs: a working
 For simple, standalone components:
 
 ```
-donejs generate component <file-name>.component <component-name>
+donejs add component <file-name>.component <component-name>
 ```
 
 Which will generate a working component in a single file.
@@ -1873,7 +1873,7 @@ Which will generate a working component in a single file.
 To create a new [model](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html):
 
 ```
-donejs generate supermodel <model-name>
+donejs add supermodel <model-name>
 ```
 
 This will create:
