@@ -388,19 +388,23 @@ We have now created a model and fixtures (for testing without an API) with a fol
 
 ### Test the connection
 
-To test the connection you can temporarily add the following to `src/app.js`:
+To test the connection you can run the following in the console:
 
 ```js
-import Restaurant from './models/restaurant';
-
-Restaurant.getList({}).then(restaurants => console.log(restaurants.attr()));
+System.import("place-my-order/models/restaurant").then(function(module){
+  var Restaurant = module["default"];
+  return Restaurant.getList({});
+}).then(function(restaurants){
+  console.log( restaurants.attr() );
+})
 ```
 
-After reloading the homepage you should see the restaurant information logged in the console. Once you've verified, you can remove the test code.
+This programmatically imports the `Restaurant` model and uses it to get a list
+of all restaurants on the server and log them to the console.
 
 ### Add data to the page
 
-Now we can update the `ViewModel` in `src/restaurant/list/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
+Now, update the `ViewModel` in `src/restaurant/list/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
 
 @sourceref guides/place-my-order/steps/add-data/list.js
 @highlight 5,9-13
@@ -462,16 +466,18 @@ All asynchronous requests return a Promise, so the data structure will look like
 ```js
 {
  states: Promise<[State]>
- state: String "IL”,
+ state: String "IL",
  cities: Promise<[City]>,
- city: String "Chicago”,
+ city: String "Chicago",
  restaurants: Promise<[Restaurant]>
 }
 ```
 
 ### Create dependent models
 
-The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities) (`api/cities`). To load them we can create the corresponding models like we already did for Restaurants.
+The API already provides a list of available [states](http://localhost:8080/api/states) and [cities](http://localhost:8080/api/cities). To load them we can create the corresponding models like we already did for Restaurants.
+
+Run:
 
 ```
 donejs add supermodel state
@@ -479,11 +485,15 @@ donejs add supermodel state
 
 When prompted, set the URL to `/api/states` and the id property to `short`.
 
+Run:
+
 ```
 donejs add supermodel city
 ```
 
-For city the URL is `/api/cities` and the id property is `name`. Now we can load a list of states and cities.
+When prompted, set the URL to `/api/cities` and the id property to `name`.
+
+Now we can load a list of states and cities.
 
 ### Implement view model behavior
 
@@ -560,10 +570,9 @@ In this chapter we will automate running the tests so that they can be run from 
 
 ### Using the global test page
 
-We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [src/test.html](http://localhost:8080/src/test.html). All tests are being loaded in `src/test/test.js`. Since we do not tests our models at the moment, let's remove the `import 'src/models/test'` part so that `src/test/test.js` looks like this:
+We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [src/test.html](http://localhost:8080/src/test.html). All tests are being loaded in `src/test/test.js`. Since we do not tests our models at the moment, let's remove the `import 'place-my-order/models/test';` part so that `src/test/test.js` looks like this:
 
 @sourceref guides/place-my-order/steps/test-runner/test.js
-@highlight 1
 
 If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src/test.html) we still see all restaurant list tests passing but we will add more here later on.
 
@@ -608,7 +617,7 @@ If you now go to [github.com/<your-username>/place-my-order](https://github.com/
 
 The way our application is set up, now all a continuous integration server has to do is clone the application repository, run `npm install`, and then run `npm test`. There are many open source CI servers, the most popular one probably [Jenkins](https://jenkins-ci.org/), and many hosted solutions like [Travis CI](https://travis-ci.org/).
 
-We will use Travis as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `place-my-order` repository:
+We will use Travis as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. First, [sign up](https://travis-ci.org/), then go to `Accounts` (in the dropdown under you name) to enable the `place-my-order` repository:
 
 ![Enabling the repository on Travis CI](static/img/guide-travis-ci.png)
 
@@ -628,11 +637,16 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 ```
 
-By default Travis CI runs `npm test` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox. We can also add a *Build Passing* badge to `readme.md`:
+By default Travis CI runs `npm test` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox.
+
+We can also add a *Build Passing* badge to the top `readme.md`:
 
 ```
 [![Build Status](https://travis-ci.org/<your-username>/place-my-order.png?branch=master)](https://travis-ci.org/<your-username>/place-my-order)
+
+# place-my-order
 ```
+@highlight 1
 
 To see Travis run, let's add all changes and push to the branch:
 
@@ -660,6 +674,10 @@ git pull origin master
 
 ## Nested routes
 
+In this section, we will add additional pages that are show under nested urls such as `restaurants/cheese-curd-city/order`.
+
+<div></div>
+
 Until now we've used three top level routes: `home`, `restaurants` and `order-history`. We did however also define two additional routes in `src/app.js` which looked like:
 
 ```js
@@ -672,7 +690,7 @@ We want to use those routes when we are in the `restaurants` page. The relevant 
 ```html
 {{#case "restaurants"}}
   <can-import from="src/restaurant/list/">
-    <pmo-restaurant-list></pmo-restaurant-list>
+    <pmo-restaurant-list/>
   </can-import>
 {{/case}}
 ```
@@ -684,7 +702,7 @@ We want to support two additional routes:
 
 ### Create additional components
 
-To make this happen, we need two more components. First, the `pmo-restaurant-details` component which loads the restaurant (based on the `slug`) and then displays its information.
+To make this happen, we need two more components. First, the `pmo-restaurant-details` component which loads the restaurant (based on the `slug`) and displays its information.
 
 ```
 donejs add component restaurant/details.component pmo-restaurant-details
@@ -705,12 +723,12 @@ the following chapters.
 
 ### Add to the main template
 
-Now we can add those components to the main template (at `src/index.stache`) with conditions based on the routes that we want to match. Change the section which contains
+Now we can add those components to the main template (at `src/index.stache`) with conditions based on the routes that we want to match. Change the section which contains:
 
 ```html
 {{#case "restaurants"}}
   <can-import from="place-my-order/restaurant/list/">
-    <pmo-restaurant-list></pmo-restaurant-list>
+    <pmo-restaurant-list/>
   </can-import>
 {{/case}}
 ```
