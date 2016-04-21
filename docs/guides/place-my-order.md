@@ -115,9 +115,17 @@ npm install place-my-order-api --save
 Now we can add an API server start script into the `scripts` section of our `package.json` like this:
 
 ```js
-"scripts": {
+  "scripts": {
     "api": "place-my-order-api --port 7070",
+    "test": "testee src/test.html --browsers firefox --reporter Spec",
+    "start": "done-serve --port 8080",
+    "develop": "done-serve --develop --port 8080",
+    "document": "documentjs",
+    "build": "node build"
+  },
 ```
+
+@highlight 2,2
 
 Which allows us to start the server like:
 
@@ -129,17 +137,7 @@ The first time it starts, the server will initialize some default data (restaura
 
 ### Starting the application
 
-Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid violating the same origin policy. This means that we need to modify the `start` script in our `package.json` from:
-
-```js
-"scripts": {
-  "api": "place-my-order-api --port 7070",
-  "test": "testee src/test.html --browsers firefox --reporter Spec",
-  "start": "done-serve --port 8080",
-  "develop": "done-serve --develop --port 8080",
-```
-
-To:
+Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid violating the same origin policy. This means that we need to modify the `start` and `develop` script in our `package.json` to:
 
 ```js
 "scripts": {
@@ -147,15 +145,20 @@ To:
   "test": "testee src/test.html --browsers firefox --reporter Spec",
   "start": "done-serve --proxy http://localhost:7070 --port 8080",
   "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
+  "document": "documentjs",
+  "build": "node build"
+},
 ```
 
-Then we can start the application with
+@highlight 4,5
+
+Now we can start the application with:
 
 ```
 donejs develop
 ```
 
-Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" message with the application styles loaded.
+Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" message again.
 
 ### Loading assets
 
@@ -167,10 +170,11 @@ npm install place-my-order-assets --save
 
 Every DoneJS application consists of at least two files:
 
- 1. **A main template** (in this case `src/index.stache`) which contains the main template and links to the development or production assets
- 1. **A main application view-model** (`src/app.js`) that initializes the application state and routes
+ 1. **A main template** (in this case `src/index.stache`) which contains the main template and links to the development or production assets.
+ 1. **A main application view-model** (`src/app.js`) that initializes the application state and routes.
 
-`src/index.stache` was already created for us when we ran `donejs add app`, so we can update it to reflect the below content:
+`src/index.stache` was already created for us when we ran `donejs add app`, so update it to
+load the static assets and set a `<meta>` tag to support a responsive design:
 
 @sourceref guides/place-my-order/steps/loading-assets/index.stache
 @highlight 4,7
@@ -292,6 +296,9 @@ To add our routes, change `src/app.js` to:
 
 @sourceref guides/place-my-order/steps/create-routes/app.js
 @highlight 15-17
+
+> Notice: We also removed the `message` property in `AppViewModel`.  This is because
+> it is not needed.
 
 Now we have three routes available:
 
@@ -809,7 +816,7 @@ Now we can update the view model in `src/order/new/new.js`:
 @sourceref guides/place-my-order/steps/create-data/new.js
 @highlight 5-6,9-25,27-32,34-38
 
-Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order. 
+Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
 While we're here we can also update our test to get it passing again, replace `src/order/new/new_test.js` with:
 
