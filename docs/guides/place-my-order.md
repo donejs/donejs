@@ -984,11 +984,21 @@ Depending on your operating system you can accept most of the defaults, unless y
 This will change your `build.js` script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the **glob** property:
 
 ```
-glob: [
-  "node_modules/steal/steal.production.js",
-  "node_modules/place-my-order-assets/images/**/*"
-]
+var cordovaOptions = {
+  buildDir: "./build/cordova",
+  id: "com.donejs.placemyorder",
+  name: "place my order",
+  platforms: ["ios"],
+  plugins: ["cordova-plugin-transport-security"],
+  index: __dirname + "/production.html",
+  glob: [
+    "node_modules/steal/steal.production.js",
+    "node_modules/place-my-order-assets/images/**/*"
+  ]
+};
 ```
+
+@highlight 10
 
 #### AJAX
 
@@ -1019,30 +1029,107 @@ This detects if the environment running your app is either Cordova or NW.js and 
 Our models will also need to be updated to use the baseUrl. For example in `src/models/state` do:
 
 ```js
+import can from 'can';
+import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import 'can/map/define/define';
 import baseUrl from '../service-base-url';
+
+export const State = can.Map.extend({
+  define: {}
+});
+
+State.List = can.List.extend({
+  Map: State
+}, {});
 
 export const stateConnection = superMap({
   url: baseUrl + '/api/states',
-  ...
+  idProp: 'short',
+  Map: State,
+  List: State.List,
+  name: 'state'
 });
-```
 
-For real-time connected models, such as in `src/models/order` also update the socket connection:
+tag('state-model', stateConnection);
+
+export default State;
+```
+@highlight 5,16
+
+Make this same change in `src/models/city.js` and `src/models/restaurant.js`.
+
+For `src/models/order`, you must also update the socket connection:
 
 ```js
+import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import List from 'can/list/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import io from 'steal-socket.io';
 import baseUrl from '../service-base-url';
+
+const ItemsList = List.extend({}, {
+  has: function(item) {
+    return this.indexOf(item) !== -1;
+  },
+
+  toggle: function(item) {
+    var index = this.indexOf(item);
+
+    if (index !== -1) {
+      this.splice(index, 1);
+    } else {
+      this.push(item);
+    }
+  }
+});
+
+let Order = Map.extend({
+  define: {
+    status: {
+      value: 'new'
+    },
+    items: {
+      Value: ItemsList
+    },
+    total: {
+      get() {
+        let total = 0.0;
+        this.attr('items').forEach(item =>
+            total += parseFloat(item.attr('price')));
+        return total.toFixed(2);
+      }
+    }
+  },
+
+  markAs(status) {
+    this.attr('status', status);
+    this.save();
+  }
+});
 
 export const connection = superMap({
   url: baseUrl + '/api/orders',
-  ...
+  idProp: '_id',
+  Map: Order,
+  List: Order.List,
+  name: 'orders'
 });
-
-...
 
 const socket = io(baseUrl);
 
-...
+socket.on('orders created', order => connection.createInstance(order));
+socket.on('orders updated', order => connection.updateInstance(order));
+socket.on('orders removed', order => connection.destroyInstance(order));
+
+tag('order-model', connection);
+window.orderConnection = connection;
+export default Order;
 ```
+
+@highlight 7,50,57
 
 To run the Cordova build and launch the simulator we can now run:
 
@@ -1064,14 +1151,20 @@ We can answer most prompts with the default except for the version which needs t
 
 Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **glob** property to reflect:
 
+```js
+var nwOptions = {
+  buildDir: "./build",
+  version: "0.12.3",
+  platforms: ["osx32","osx64"],
+  glob: [
+    "package.json",
+    "production.html",
+    "node_modules/steal/steal.production.js",
+    "node_modules/place-my-order-assets/images/**/*"
+  ]
+};
 ```
-glob: [
-  "package.json",
-  "production.html",
-  "node_modules/steal/steal.production.js",
-  "node_modules/place-my-order-assets/images/**/*"
-]
-```
+@highlight 9
 
 Then we can run the build like this:
 
@@ -1124,6 +1217,8 @@ var buildPromise = stealTools.build({
 });
 ```
 
+@highlight 4-7
+
 StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
 
 ### Static hosting on Firebase
@@ -1143,22 +1238,96 @@ When you deploy for the first time it will ask you to authorize with your login 
 With the Firebase account and application in place we can add the deployment configuration to our `package.json` like this:
 
 ```js
-"donejs": {
-  "deploy": {
-    "root": "dist",
-    "services": {
-      "production": {
-        "type": "firebase",
-        "config": {
-          "firebase": "<appname>",
-          "public": "./dist",
-          "headers": [{
-            "source": "/**",
+{
+  "name": "place-my-order",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "scripts": {
+    "api": "place-my-order-api --port 7070",
+    "test": "testee src/test.html --browsers firefox --reporter Spec",
+    "start": "done-serve --proxy http://localhost:7070 --port 8080",
+    "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
+    "document": "documentjs",
+    "build": "node build"
+  },
+  "main": "production.html",
+  "files": [
+    "src"
+  ],
+  "keywords": [],
+  "system": {
+    "envs": {
+      "server-production": {
+        "renderingBaseURL": "https://<appname>.firebaseapp.com/"
+      }
+    },
+    "main": "place-my-order/index.stache!done-autorender",
+    "directories": {
+      "lib": "src"
+    },
+    "configDependencies": [
+      "live-reload",
+      "node_modules/can-zone/register"
+    ],
+    "npmAlgorithm": "flat"
+  },
+  "dependencies": {
+    "bit-tabs": "^0.2.0",
+    "can": "^2.3.16",
+    "can-connect": "^0.5.0",
+    "can-zone": "^0.4.4",
+    "done-autorender": "^0.8.0",
+    "done-component": "^0.4.0",
+    "done-css": "~2.0.2",
+    "done-serve": "^0.2.0",
+    "generator-donejs": "^0.9.0",
+    "jquery": "~2.2.1",
+    "place-my-order-api": "^0.4.4",
+    "place-my-order-assets": "^0.1.7",
+    "steal": "^0.16.0",
+    "steal-platform": "0.0.4",
+    "steal-socket.io": "^2.0.0"
+  },
+  "devDependencies": {
+    "can-fixture": "^0.1.2",
+    "documentjs": "^0.4.2",
+    "donejs-cli": "^0.8.0",
+    "donejs-deploy": "^0.4.0",
+    "funcunit": "~3.0.0",
+    "steal-cordova": "^0.1.3",
+    "steal-nw": "^0.1.4",
+    "steal-qunit": "^0.1.1",
+    "steal-tools": "^0.16.0",
+    "testee": "^0.2.4"
+  },
+  "window": {
+    "width": 1000,
+    "height": 600,
+    "toolbar": true
+  },
+  "donejs": {
+    "deploy": {
+      "root": "dist",
+      "services": {
+        "production": {
+          "type": "firebase",
+          "config": {
+            "firebase": "<appname>",
+            "public": "./dist",
             "headers": [{
-              "key": "Access-Control-Allow-Origin",
-              "value": "*"
+              "source": "/**",
+              "headers": [{
+                "key": "Access-Control-Allow-Origin",
+                "value": "*"
+              }]
             }]
-          }]
+          }
         }
       }
     }
@@ -1166,23 +1335,9 @@ With the Firebase account and application in place we can add the deployment con
 }
 ```
 
+@highlight 25-29,74-94
+
 Change the `<appname>` to the name of the application created when you set up the Firebase app.
-
-And also update the production `baseURL` in the `system` section:
-
-```
-...
-"system": {
-  ...
-  "envs": {
-    "server-production": {
-      "renderingBaseURL": "https://<appname>.firebaseapp.com/"
-    }
-  }
-}
-```
-
-Again, make sure to replace the `<appname>` with your Firebase application name.
 
 #### Run deploy
 
@@ -1262,9 +1417,14 @@ git checkout master
 
 Previously we set up Travis CI [for automated testing](#section=section_Continuousintegration) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.
 
-Open your `.travis.yml` file and add a new `deploy` key that looks like this:
+Open your `.travis.yml` file and add `before_deploy` and `deploy` keys that look like this:
 
 ```yaml
+language: node_js
+node_js: node
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 before_deploy:
   - "git config --global user.email \"me@example.com\""
   - "git config --global user.name \"PMO deploy bot\""
@@ -1275,8 +1435,10 @@ before_deploy:
 deploy:
   skip_cleanup: true
   provider: "heroku"
-  app: my-app
+  app: <my-app>
 ```
+
+@highlight 6-16
 
 You can find the name of the app by running `heroku apps:info`.
 
@@ -1297,10 +1459,10 @@ heroku auth:token
 Copy the token printed and paste it as `<token>` in the following command:
 
 ```
-travis-encrypt --add deploy.api_key -r <your-username>/<your-repository> <token>
+travis-encrypt --add deploy.api_key -r <your-username>/place-my-order <token>
 ```
 
-Replace `<your-username>` and `<your-repository>` with the name of your GitHub account and repository respectively.
+Replace `<your-username>` with the name of your GitHub account.
 
 To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:
 
@@ -1311,7 +1473,7 @@ node_modules/.bin/firebase login:ci
 In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the `<token>` in the following command:
 
 ```
-travis-encrypt --add -r <your-username>/<your-repository> 'FIREBASE_TOKEN="<token>"'
+travis-encrypt --add -r <your-username>/place-my-order 'FIREBASE_TOKEN="<token>"'
 ```
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Firebase's CDN.
