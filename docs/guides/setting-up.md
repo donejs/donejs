@@ -236,7 +236,7 @@ Then click **OK** to create the device.
 Close the AVD Manager and you should have everything you need for Android development.
 
 
-## Vagrant & VritualBox 
+## Vagrant & VirtualBox 
 
 ### Prerequisites
 
