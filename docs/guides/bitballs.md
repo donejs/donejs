@@ -18,7 +18,7 @@ To install and run it locally, follow its
 
 Bitballs was written to help organize Bitovi's yearly charity basketball tournament
 for the American Heart and Stroke Association.  Justin Meyer, one of Bitovi's founders,
-and DoneJS core contributor had a stoke. Read about his experience and the purpose of
+and DoneJS core contributor had a stroke. Read about his experience and the purpose of
 the tournament [here](http://blog.bitovi.com/bitovi-hoops-for-heart-with-the-american-stroke-association/).
 
 The application allows __admins__, who manage the tournament, to:
