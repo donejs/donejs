@@ -27,50 +27,48 @@ var getLines = function (lineString) {
 };
 
 module.exports = function() {
-  $(function() {
-    $('span[line-highlight]').each(function(i, el){
-      var $el = $(el);
-      var lines = getLines($el.attr('line-highlight'));
-      var codeBlock = $el.parent().prev('pre').children('code');
+  $('span[line-highlight]').each(function(i, el){
+    var $el = $(el);
+    var lines = getLines($el.attr('line-highlight'));
+    var codeBlock = $el.parent().prev('pre').children('code');
 
-      var lineMap = { 0: [] };
-      var k = 0;
+    var lineMap = { 0: [] };
+    var k = 0;
 
-      codeBlock.children().each(function(i, el){
-        var nodeText = $(el).text();
+    codeBlock.children().each(function(i, el){
+      var nodeText = $(el).text();
 
-        if (/\n/gm.test(nodeText)) {
-          var cNames = $(el).attr('class');
-          var str = nodeText.split('\n');
-          var l = str.length
+      if (/\n/gm.test(nodeText)) {
+        var cNames = $(el).attr('class');
+        var str = nodeText.split('\n');
+        var l = str.length
 
-          for (var j = 0; j < l; j++) {
-            var text = j === (l - 1) ? str[j] : str[j] + '\n';
-            var newNode = document.createElement('span');
-            newNode.className = cNames;
-            $(newNode).text(text);
-            lineMap[k].push(newNode);
-            
-            if(j !== (l - 1)) {
-              k++;
-              lineMap[k] = [];
-            }
+        for (var j = 0; j < l; j++) {
+          var text = j === (l - 1) ? str[j] : str[j] + '\n';
+          var newNode = document.createElement('span');
+          newNode.className = cNames;
+          $(newNode).text(text);
+          lineMap[k].push(newNode);
+          
+          if(j !== (l - 1)) {
+            k++;
+            lineMap[k] = [];
           }
-        } else {
-          lineMap[k].push(el);
         }
-      });
-
-      codeBlock.empty();
-
-      for (var key in lineMap) {
-         if (lineMap.hasOwnProperty(key)) {
-            var newNode = document.createElement('span');
-            newNode.className = lines[key] ? 'line highlight': 'line' ;
-            $(newNode).append(lineMap[key]);
-            codeBlock.append(newNode);
-         }
-       }
+      } else {
+        lineMap[k].push(el);
+      }
     });
+
+    codeBlock.empty();
+
+    for (var key in lineMap) {
+       if (lineMap.hasOwnProperty(key)) {
+          var newNode = document.createElement('span');
+          newNode.className = lines[key] ? 'line highlight': 'line' ;
+          $(newNode).append(lineMap[key]);
+          codeBlock.append(newNode);
+       }
+     }
   });
 }

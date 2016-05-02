@@ -22,7 +22,6 @@ steal(
             }
         }
         prettyPrint();
-        Highlighter();
 
         new ContentList(".contents");
         new FrameHelper(".docs");
@@ -563,6 +562,8 @@ steal(
                     }
                 });
             }
+
+            Highlighter();
         })
 
 
