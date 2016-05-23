@@ -1237,107 +1237,11 @@ When you deploy for the first time it will ask you to authorize with your login 
 
 With the Firebase account and application in place we can add the deployment configuration to our `package.json` like this:
 
-```js
-{
-  "name": "place-my-order",
-  "version": "0.0.0",
-  "description": "",
-  "homepage": "",
-  "author": {
-    "name": "",
-    "email": "",
-    "url": ""
-  },
-  "scripts": {
-    "api": "place-my-order-api --port 7070",
-    "test": "testee src/test.html --browsers firefox --reporter Spec",
-    "start": "done-serve --proxy http://localhost:7070 --port 8080",
-    "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
-    "document": "documentjs",
-    "build": "node build"
-  },
-  "main": "production.html",
-  "files": [
-    "src"
-  ],
-  "keywords": [],
-  "system": {
-    "envs": {
-      "server-production": {
-        "renderingBaseURL": "https://<appname>.firebaseapp.com/"
-      }
-    },
-    "main": "place-my-order/index.stache!done-autorender",
-    "directories": {
-      "lib": "src"
-    },
-    "configDependencies": [
-      "live-reload",
-      "node_modules/can-zone/register"
-    ],
-    "npmAlgorithm": "flat"
-  },
-  "dependencies": {
-    "bit-tabs": "^0.2.0",
-    "can": "^2.3.16",
-    "can-connect": "^0.5.0",
-    "can-zone": "^0.4.4",
-    "done-autorender": "^0.8.0",
-    "done-component": "^0.4.0",
-    "done-css": "~2.0.2",
-    "done-serve": "^0.2.0",
-    "generator-donejs": "^0.9.0",
-    "jquery": "~2.2.1",
-    "place-my-order-api": "^0.4.4",
-    "place-my-order-assets": "^0.1.7",
-    "steal": "^0.16.0",
-    "steal-platform": "0.0.4",
-    "steal-socket.io": "^2.0.0"
-  },
-  "devDependencies": {
-    "can-fixture": "^0.1.2",
-    "documentjs": "^0.4.2",
-    "donejs-cli": "^0.8.0",
-    "donejs-deploy": "^0.4.0",
-    "funcunit": "~3.0.0",
-    "steal-cordova": "^0.1.3",
-    "steal-nw": "^0.1.4",
-    "steal-qunit": "^0.1.1",
-    "steal-tools": "^0.16.0",
-    "testee": "^0.2.4"
-  },
-  "window": {
-    "width": 1000,
-    "height": 600,
-    "toolbar": true
-  },
-  "donejs": {
-    "deploy": {
-      "root": "dist",
-      "services": {
-        "production": {
-          "type": "firebase",
-          "config": {
-            "firebase": "<appname>",
-            "public": "./dist",
-            "headers": [{
-              "source": "/**",
-              "headers": [{
-                "key": "Access-Control-Allow-Origin",
-                "value": "*"
-              }]
-            }]
-          }
-        }
-      }
-    }
-  }
-}
+```
+donejs add firebase
 ```
 
-@highlight 25-29,74-94
-
-Change the `<appname>` to the name of the application created when you set up the Firebase app.
+When prompted, enter the name of the application created when you set up the Firebase app.
 
 #### Run deploy
 

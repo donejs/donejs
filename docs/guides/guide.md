@@ -331,25 +331,13 @@ When you deploy for the first time it will ask you to authorize, but first we ne
 
 Now we can add the Firebase deployment configuration to our `package.json` like this:
 
-@sourceref guides/guide/steps/16-cdn/deploy.json
-
-Change the `<appname>` to the name of the application created when you set up the Firebase app.
-
-And also update the production `baseURL` in the `system` section:
-
 ```
-...
-"system": {
-  ...
-  "envs": {
-    "server-production": {
-      "renderingBaseURL": "https://<appname>.firebaseapp.com/"
-    }
-  }
-}
+donejs add firebase
 ```
 
-Again, make sure to replace the URL with your Firebase application name. Then we can deploy the application by running:
+When prompted, enter the name of the application created when you set up the Firebase app.
+
+Then we can deploy the application by running:
 
 ```
 donejs build
