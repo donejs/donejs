@@ -806,7 +806,7 @@ its data types.  For example, Tournaments have many Games and have many Teams.  
 have Teams and Stats.  And Teams have Players.
 
 The __tournament details__ page not only needs to load a tournament, it needs to load
-that tournaments games, teams, and all players.
+that tournament's games, teams, and all players.
 
 The __game details__ page needs to load the game, all of the game's stats, teams, and the teams
 players.
@@ -843,7 +843,7 @@ GET /services/players/74 -> {id: 61, name: "James A", ...}
 
 That's 12 requests! But that's not the worst part.  The worst part is that
 at least 3 _serial_ batches of requests must happen.  We can't load
-players until we have teams.  We can load teams until we
+players until we have teams.  We can't load teams until we
 have the game.
 
 Instead, we'd want to load a game and get back its data with its
@@ -1033,8 +1033,8 @@ var Game = bookshelf.Model.extend({
 
 The goal should be changing your service code as little as possible. Instead,
 you should be changing your ORMs and the service code adapts to them.  In
-Bitballs case this means we shouldn't be changing what's in `/services`,
-instead changing what's in `/models` as the database changes.
+Bitballs' case this means we shouldn't be changing what's in `/services`,
+instead we should be changing what's in `/models` as the database changes.
 
 Related data is not the only behavior that your expressive
 service layer should provide:
@@ -1060,20 +1060,20 @@ app.get('/services/games', function(req, res){
 });
 ```
 
-Most server technologies have a ORM that can make this process
+Most server technologies have an ORM that can make this process
 straightforward.  It's generally best to use a service API that
-matches closely the API of your ORM.
+closely matches the API of your ORM.
 
 ### Models and ViewModels
 
 Once you've settled on an expressive service API, you need
-to make Model's that connect to it and handle associated data. And if you want
+to make Models that connect to it and handle associated data. And if you want
 any of the advanced behavior of [can-connect](connect.canjs.com), you have
 to create a relational algebra that understands the service API.
 
 #### Connecting to a service
 
-Bitball's client Models are [can-connect supermodels](https://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).  So a type and list type is defined:
+Bitballs' client Models are [can-connect supermodels](https://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).  So a type and list type is defined:
 
 ```
 var Game = Map.extend({
@@ -1454,11 +1454,11 @@ In this section, we'll learn about how prevent code from running during server-s
 <div class='here-to-turn-off-highlighting'>
 
 While DoneJS's virtual DOM approximates a real DOM and browser, there is much that it
-can not do such as provide element dimension information.
+cannot do such as provide element dimension information.
 
 </div>
 
-Typically, this doesn't effect the code you write because server-side rendering only runs code involved
+Typically, this doesn't affect the code you write because server-side rendering only runs code involved
 in the initial render of a page.
 
 However, in Bitballs case, the [game details](https://bitballs.herokuapp.com/games/9) page
