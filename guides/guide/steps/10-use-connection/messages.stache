@@ -1,3 +1,4 @@
+<can-import from="can-stache/helpers/route" />
 <can-import from="donejs-chat/models/message" />
 <h5><a href="{{routeUrl page='home'}}">Home</a></h5>
 

@@ -2,7 +2,6 @@ import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import io from 'steal-socket.io';
 
 export const Message = DefineMap.extend({
   seal: false
@@ -17,7 +16,7 @@ Message.List = DefineList.extend({
 });
 
 export const messageConnection = superMap({
-  url: 'http://chat.donejs.com/api/messages',
+  url: '/message',
   idProp: 'id',
   Map: Message,
   List: Message.List,
@@ -25,14 +24,5 @@ export const messageConnection = superMap({
 });
 
 tag('message-model', messageConnection);
-
-const socket = io('http://chat.donejs.com');
-
-socket.on('messages created',
-  message => messageConnection.createInstance(message));
-socket.on('messages updated',
-  message => messageConnection.updateInstance(message));
-socket.on('messages removed',
-  message => messageConnection.destroyInstance(message));
 
 export default Message;
