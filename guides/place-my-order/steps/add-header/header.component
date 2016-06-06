@@ -1,5 +1,6 @@
 <can-component tag="pmo-header">
   <template>
+    <can-import from="can-stache/helpers/route" />
     <header>
       <nav>
        <h1>place-my-order.com</h1>

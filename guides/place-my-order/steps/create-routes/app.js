@@ -1,14 +1,20 @@
-import Map from 'can/map/';
-import route from 'can/route/';
-import 'can/route/pushstate/';
-import 'can/map/define/';
+import DefineMap from 'can-define/map/';
+import route from 'can-route';
+import 'can-route-pushstate';
 
-const AppViewModel = Map.extend({
-  define: {
-    title: {
-      serialize: false,
-      value: 'place-my-order'
-    }
+const AppViewModel = DefineMap.extend({
+  route: "string",
+  page: "string",
+  slug: "string",
+  action: "string",
+
+  message: {
+    value: 'Hello World!',
+    serialize: false
+  },
+  title: {
+    value: 'place-my-order',
+    serialize: false
   }
 });
 
