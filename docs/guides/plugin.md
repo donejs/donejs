@@ -50,7 +50,7 @@ $ npm install donejs -g
 In the `<username>-number-input` folder we can now initialize a new plugin like this:
 
 ```
-$ donejs plugin
+$ donejs add plugin
 ```
 
 The plugin generator will ask several question that should be answered as follows:
