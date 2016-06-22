@@ -94,7 +94,7 @@ Update `src/index.stache` to look like this:
 > The highlighted lines have been added or changed.
 
 @sourceref guides/guide/steps/4-bootstrap/index.stache
-@highlight 8,12-22
+@highlight 6,10-20
 
 If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file.
 
