@@ -106,7 +106,7 @@ The default port is 8080, so if we now go to [http://localhost:8080/](localhost:
 
 Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we'll just install and start an existing service API created specifically for use with this tutorial:
 
-**Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows, cmd+c on Mac).
+**Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows and Mac).
 
 ```
 npm install place-my-order-api --save
