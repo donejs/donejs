@@ -335,7 +335,11 @@ Now we can add the Firebase deployment configuration to our `package.json` like 
 donejs add firebase
 ```
 
-When prompted, enter the name of the application created when you set up the Firebase app.
+When prompted, enter the name of the application created when you set up the Firebase app. Before you can deploy your app you need to login and authorize the Firebase tools, which you can do with:
+
+```
+node node_modules/.bin/firebase login
+```
 
 Then we can deploy the application by running:
 
