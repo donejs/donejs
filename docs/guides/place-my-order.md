@@ -1235,13 +1235,19 @@ When you deploy for the first time it will ask you to authorize with your login 
 
 #### Configuring DoneJS
 
-With the Firebase account and application in place we can add the deployment configuration to our `package.json` like this:
+With the Firebase account and application in place we can add the deployment configuration to our project like this:
 
 ```
 donejs add firebase
 ```
 
-When prompted, enter the name of the application created when you set up the Firebase app.
+When prompted, enter the name of the application created when you set up the Firebase app. Next, login to the firebase app for the first time by running:
+
+```
+node node_modules/.bin/firebase login
+```
+
+And authorize your application.
 
 #### Run deploy
 
@@ -1335,7 +1341,7 @@ before_deploy:
   - "node build"
   - "git add dist/ --force"
   - "git commit -m \"Updating build.\""
-  - "node_modules/.bin/deploy"
+  - "node_modules/.bin/firebase deploy --token \"$FIREBASE_TOKEN\""
 deploy:
   skip_cleanup: true
   provider: "heroku"
