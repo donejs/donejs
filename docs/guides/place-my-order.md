@@ -1244,7 +1244,7 @@ donejs add firebase
 When prompted, enter the name of the application created when you set up the Firebase app. Next, login to the firebase app for the first time by running:
 
 ```
-node node_modules/.bin/firebase login
+node_modules/.bin/firebase login
 ```
 
 And authorize your application.
