@@ -1223,9 +1223,9 @@ StealTools will find all of the assets you reference in your CSS and copy them t
 
 ### Static hosting on Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username:
+Sign up for free at [Firebase](https://firebase.google.com/). After you have an account go to [Firebase console](https://console.firebase.google.com/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username:
 
-![Settting up a Firebase project](static/img/guide-firebase-setup.png)
+<img src="static/img/guide-firebase-setup.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid; max-width: 400px;" />
 
 Write down the name of your app because you'll need it in the next section.
 

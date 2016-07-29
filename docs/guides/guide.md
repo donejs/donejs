@@ -321,7 +321,7 @@ Now that we verified that our application works in production, we can deploy it 
 
 ### Set up Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
+Sign up for free at [Firebase](https://firebase.google.com/). After you have an account go to [Firebase console](https://console.firebase.google.com/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
 
 > You'll get an error if your app name is too long, so pick something on the shorter side.
 
@@ -338,7 +338,7 @@ donejs add firebase
 When prompted, enter the name of the application created when you set up the Firebase app. Before you can deploy your app you need to login and authorize the Firebase tools, which you can do with:
 
 ```
-node node_modules/.bin/firebase login
+node_modules/.bin/firebase login
 ```
 
 Then we can deploy the application by running:
@@ -350,7 +350,7 @@ donejs deploy
 
 Static files are deployed to Firebase.
 
-<img src="static/img/donejs-firebase.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-firebase.png" alt="two browsers" />
 
 And verify that the application is loading from the CDN by loading it after running:
 
