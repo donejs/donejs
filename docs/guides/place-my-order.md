@@ -690,7 +690,8 @@ We want to use those routes when we are in the `restaurants` page. The relevant 
 
 ```html
 {{#case "restaurants"}}
-  <can-import from="src/restaurant/list/">
+  <can-import from="src/restaurant/list/"
+      can-tag="pmo-loading">
     <pmo-restaurant-list/>
   </can-import>
 {{/case}}
@@ -728,7 +729,8 @@ Now we can add those components to the main template (at `src/index.stache`) wit
 
 ```html
 {{#case "restaurants"}}
-  <can-import from="place-my-order/restaurant/list/">
+  <can-import from="place-my-order/restaurant/list/"
+      can-tag="pmo-loading">
     <pmo-restaurant-list/>
   </can-import>
 {{/case}}
