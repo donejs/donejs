@@ -561,6 +561,7 @@ Now we have a component that lets us select state and city and displays the appr
 We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
 
 @sourceref guides/place-my-order/steps/write-template/list.html
+@highlight 2-3
 
 View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
 
@@ -689,7 +690,8 @@ We want to use those routes when we are in the `restaurants` page. The relevant 
 
 ```html
 {{#case "restaurants"}}
-  <can-import from="src/restaurant/list/">
+  <can-import from="src/restaurant/list/"
+      can-tag="pmo-loading">
     <pmo-restaurant-list/>
   </can-import>
 {{/case}}
@@ -727,7 +729,8 @@ Now we can add those components to the main template (at `src/index.stache`) wit
 
 ```html
 {{#case "restaurants"}}
-  <can-import from="place-my-order/restaurant/list/">
+  <can-import from="place-my-order/restaurant/list/"
+      can-tag="pmo-loading">
     <pmo-restaurant-list/>
   </can-import>
 {{/case}}
