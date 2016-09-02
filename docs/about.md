@@ -202,6 +202,18 @@ Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side develope
 
 </div>
 
+
+<div class="core-team-member">
+<img class="member-avatar" src="https://avatars1.githubusercontent.com/u/5851984?v=3&s=300"/>
+<h4>Kevin Phillips</h4>
+<p>
+Kevin is based in Chicago (well, close enough). He wants to make it easy for anyone to get started with DoneJS and will work on features that help solve complex problems.
+</p>
+<a href="https://twitter.com/kdotphil" target="_blank">@kdotphil</a>
+<a href="https://github.com/phillipskevin" target="_blank">Github</a>
+
+</div>
+
 ### Fulltime team
 
 There are currently 3 fulltime contributors to DoneJS and its subprojects:
@@ -241,8 +253,8 @@ Matthew, keeper of beards, is the lead maintainer of StealJS and its related too
 
 ### Sponsors
 
-If you'd like to support the development of DoneJS, please find available options on our [Patreon page](https://www.patreon.com/donejs).  If you have other ideas, or would like to customize your support, 
+If you'd like to support the development of DoneJS, please find available options on our [Patreon page](https://www.patreon.com/donejs).  If you have other ideas, or would like to customize your support,
 please [email us](mailto:contact@bitovi.com).
 
 
-Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS. 
+Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS.
