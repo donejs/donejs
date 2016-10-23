@@ -21,7 +21,7 @@ It will also update the `npm test` script to run JSHint with our tests. You can 
 
 Currently it will only ask if we want to use spaces or tabs and to overwrite the `package.json` to add the npm scripts for JSHint:
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2016/03/Screen-Shot-2016-03-09-at-2.47.43-PM.png" alt="DoneJS generator" style="width: 100%;" class="alignnone size-full wp-image-3023" />
+<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-03-09-at-2.47.43-PM.png" alt="DoneJS generator" style="width: 100%;" class="alignnone size-full wp-image-3023" />
 
 > __Note:__ Since `donejs-jshint` already exists we will use `donejs-<username>-jshint` with `<username>` being your GitHub username for the remainder of this article. Once published it can then be used as `donejs add <username>-jshint`.
 
@@ -36,7 +36,7 @@ If you don't have an account yet, go to [GitHub](https://github.com/join) to sig
 
 Calling the repository `donejs-<username>-jshint` and initializing it empty (without any of the default files) looks like this:
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2016/04/generator-repository1.png" alt="generator-repository" style="width: 100%;" class="alignnone size-full wp-image-3077" />
+<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-repository1.png" alt="generator-repository" style="width: 100%;" class="alignnone size-full wp-image-3077" />
 
 After creating the repository, clone it into a new folder:
 
@@ -73,7 +73,7 @@ The generator will ask several question that should be answered as follows:
 
 Once all done, the final prompt looks similar to this:
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2016/04/generator-init.png" alt="generator-init" style="width: 100%;" class="alignnone size-full wp-image-3050" />
+<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-init.png" alt="generator-init" style="width: 100%;" class="alignnone size-full wp-image-3050" />
 
 Now the generator will initialize the default layout and install all its dependencies.
 
@@ -91,7 +91,7 @@ This command can also be used to automatically run the tests on a [continuous in
 
 We will use Travis CI as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `donejs-<username>-jshint` repository:
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2016/04/generator-travis.png" alt="generator-travis" style="width: 100%;" class="alignnone size-full wp-image-3054" />
+<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-travis.png" alt="generator-travis" style="width: 100%;" class="alignnone size-full wp-image-3054" />
 
 You may have to click the *"Sync account"* button for the repository to show up. Now, every time we push to GitHub the tests will run automatically. We can do so with our initial commit:
 
@@ -338,11 +338,11 @@ Although we are working on the generator by ourselves for now, [GitHub pull requ
 
 And then create a new pull request by going to `https://github.com/<username>/donejs-<username>-jshint` which will now show an option like this:
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2016/04/generator-pr.png" alt="generator-pr" style="width: 100%;" class="alignnone size-full wp-image-3055" />
+<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-pr.png" alt="generator-pr" style="width: 100%;" class="alignnone size-full wp-image-3055" />
 
 Once you created the pull request, you will see a `Some checks haven’t completed yet` message that will eventually turn green:
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2016/04/generator-pull-request.png" alt="generator-pull-request" style="width: 100%;" class="alignnone size-full wp-image-3056" />
+<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-pull-request.png" alt="generator-pull-request" style="width: 100%;" class="alignnone size-full wp-image-3056" />
 
 Now you can click the "Merge pull request" button. Then in the console, checkout the *master* branch and pull down the latest changes with:
 
