@@ -21,7 +21,7 @@ It will also update the `npm test` script to run JSHint with our tests. You can 
 
 Currently it will only ask if we want to use spaces or tabs and to overwrite the `package.json` to add the npm scripts for JSHint:
 
-<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-03-09-at-2.47.43-PM.png" alt="DoneJS generator" style="width: 100%;" class="alignnone size-full wp-image-3023" />
+<img src="https://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-03-09-at-2_47_43-PM.png" alt="DoneJS generator" style="width: 100%;" class="alignnone size-full wp-image-3023" />
 
 > __Note:__ Since `donejs-jshint` already exists we will use `donejs-<username>-jshint` with `<username>` being your GitHub username for the remainder of this article. Once published it can then be used as `donejs add <username>-jshint`.
 
