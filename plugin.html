@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>donejs - Creating a plugin </title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<!--<![endif]-->
+</head>
+<body class="docs plugin">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li >
+								<a href="./index.html">Home</a>
+							</li>
+							<li >
+								<a href="./Features.html">Features</a>
+							</li>
+							<li >
+								<a href="./About.html">About</a>
+							</li>
+							<li >
+								<a href="./Apis.html">Apis</a>
+							</li>
+							<li class="guides-menu">
+									<a href="/Guides.html">Guides</a>
+									<ul class="dropdown-menu">
+                      <li ><a href="./SettingUp.html">Setting Up</a></li>
+											<li ><a href="./Guide.html">Quick Start</a></li>
+											<li><a  href="./place-my-order.html">In-depth</a></li>
+											<li><a class="active" href="./plugin.html">Creating a plugin</a></li>
+											<li><a  href="./generator.html">Creating a generator</a></li>
+											<li><a  href="./bitballs.html">Example App: Bitballs</a></li>
+									</ul>
+							</li>
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="/static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="/static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="/static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">kQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="/static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="/static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+		<span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+<div class="container-fluid api">
+	<div class="row">
+
+	
+
+	
+	<article class="content docs col-xs-12 ">
+	
+
+		
+		<section class="title">
+			<div class="heading">
+<h1>Creating a plugin</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">plugin</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+
+		
+		<section class="contents">
+		</section>
+		
+
+		
+
+		
+		<section class="description">
+			<p>DoneJS doesn't just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this guide we will create a reusable number input widget using <a href="http://getbootstrap.com">Bootstrap</a> styles.</p>
+
+		</section>
+		
+
+		
+			
+		
+
+		
+
+
+		
+		<section class="comment">
+			<p>We will create the project on <a href="https://github.com">GitHub</a>, initialize the repository as a new DoneJS plugin and then set up continuous integration with Travis CI. After running development mode we will implement the component functionality and tests and submit it as a pull request to the repository. Finally we will make a build and publish the plugin to <a href="http://npmjs.org">npm</a> as well as look how to use the published module in other projects.</p>
+<p>You can find the code in the <a href="https://github.com/donejs/donejs-number-input">donejs-number-input</a> repository. The final result looks like this:</p>
+<p><a class="jsbin-embed" href="http://jsbin.com/cihawi/embed?output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.9"></script></p>
+<h2>Setting up</h2>
+<h3>Creating the project on GitHub</h3>
+<p>We will use <a href="https://github.com">GitHub</a> to host the code for the project which makes it easy for others to contribute and to automatically run the tests in <a href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> which we will enable later.</p>
+<p>If you don't have an account yet, go to <a href="https://github.com/join?source=header-home">GitHub</a> to sign up and follow <a href="https://help.github.com/articles/set-up-git/">the help</a> on how to set it up for the command-line <code>git</code>. Once completed, you can create a new repository from your dashboard.</p>
+<blockquote>
+<p><strong>Important:</strong> In the remainder of the article the plugin name will be <code>&lt;username&gt;-number-input</code>. You will have to replace <code>&lt;username&gt;</code> with your GitHub username to get a unique module name that can be published to npm.</p>
+</blockquote>
+<p>Calling the repository <code>&lt;username&gt;-number-input</code> and initializing it empty (without any of the default files) looks like this:</p>
+<p><a href="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-1.53.10-PM.png"><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-1.53.10-PM.png" alt="Screen Shot 2016-02-16 at 1.53.10 PM" style="width: 100%;" class="alignnone size-full wp-image-2665" /></a></p>
+<p>After creating the repository, we can clone it into a new folder:</p>
+<pre><code>$ git clone git@github.com:&lt;username&gt;/&lt;username&gt;-number-input.git
+$ cd &lt;username&gt;-number-input
+</code></pre>
+<h3>Initializing the plugin</h3>
+<p>To initialize a new plugin you will need DoneJS version 0.7.0+ installed globally. To check your DoneJS version run</p>
+<pre><code>$ donejs --version
+</code></pre>
+<p>To install DoneJS or to get the latest version run:</p>
+<pre><code>$ npm install donejs -g    
+</code></pre>
+<p>In the <code>&lt;username&gt;-number-input</code> folder we can now initialize a new plugin like this:</p>
+<pre><code>$ donejs add plugin
+</code></pre>
+<p>The plugin generator will ask several question that should be answered as follows:</p>
+<ul>
+<li>For the project name you can just confirm the default by pressing enter</li>
+<li>For the GitHub username or organization enter the GitHub username where the repository has been created</li>
+<li>All other fields can also be answered with the default</li>
+</ul>
+<p>Once all done, the final prompt looks similar to this:</p>
+<p><a href="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-7.55.03-AM.png"><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" /></a></p>
+<p>Now the generator will initialize the default plugin layout and install all its dependencies.</p>
+<h3>Setting up Travis CI</h3>
+<p>When the installation has completed, we can make sure everything got set up properly by running:</p>
+<pre><code>$ npm test
+</code></pre>
+<p>This will open a Firefox browser, run two tests and output the result on the console.</p>
+<p>This command can also be used to automatically run the tests on a <a href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> server. There are many open source CI servers, the most popular being <a href="https://jenkins-ci.org/">Jenkins</a>, and many hosted solutions like <a href="https://travis-ci.org/">Travis CI</a>.</p>
+<p>We will use Travis CI as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to <code>Accounts</code> (in the dropdown under you name) to enable the <code>&lt;username&gt;-number-input</code> repository:</p>
+<p><a href="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-2.03.56-PM.png"><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-2.03.56-PM.png" alt="Enabling on Travis CI" style="width: 100%;" class="alignnone size-full wp-image-2669" /></a></p>
+<p>You may have to click the <em>&quot;Sync account&quot;</em> button for the repository to show up. Now, every time we push to GitHub the tests will run automatically. We can do so with our initial commit:</p>
+<pre><code>$ git add . --all
+$ git commit -am &quot;Initial commit&quot;
+$ git push origin master
+</code></pre>
+<p>If you now go <code>https://travis-ci.org/&lt;your-username&gt;/&lt;username&gt;-number-input/builds</code> you will see the build running and eventually turn green (which will update the badge that got added in the <code>readme.md</code> file).</p>
+<h2>Implementing functionality</h2>
+<h3>Development mode</h3>
+<p>Like a DoneJS application, a DoneJS plugin provides a development mode that starts a server and enables live-reload by running:</p>
+<pre><code>$ donejs develop
+</code></pre>
+<p>The server will run at <code>http://localhost:8080</code>. You can view the main test page at <a href="http://localhost:8080/src/test/test.html">localhost:8080/src/test/test.html</a>. Any changes to the test file or module will re-run the tests right away thanks to hot-module-swapping.</p>
+<h3>Creating the component</h3>
+<p>A plugin can contain anything from shared utility functions to model- or component collections. Just like in a DoneJS application it is possible to add components and models. In our case we want to create a new component which we can do like this:</p>
+<pre><code>$ donejs add component &lt;username&gt;-number-input
+</code></pre>
+<p>This creates a complete component using the <code>&lt;username&gt;-number-input</code> tag with tests and documentation. Because the module name is the same as the plugin name (<code>&lt;username&gt;-number-input</code>), the generator will put the component files directly in the <code>src/</code> folder (instead of a subfolder). Confirm the default tag name and and the prompts to overwrite the existing files by pressing enter. The initialized component can now be viewed at <code>http://localhost:8080/src/&lt;username&gt;-number-input.html</code>. The component tests are available at <a href="http://localhost:8080/src/test.html">localhost:8080/src/test.html</a>.</p>
+<h3>Creating and testing the view-model</h3>
+<p>Our number input view-model should provide the following functionality:</p>
+<ul>
+<li>Update its value either through a number input field or +/- buttons</li>
+<li>Have a maximum and minimum value (which will also disable the proper button)</li>
+</ul>
+<p>We can use the <a href="https://canjs.com/docs/can.Map.prototype.define.html">define plugin</a> to define a <code>min</code> and <code>max</code> value and <a href="https://canjs.com/docs/can.Map.prototype.define.set.html">a setter</a> for the <code>value</code> to make sure that it always is within those constraints. We will also add an <code>increment</code> and <code>decrement</code> method that will modify the value by 1. The component view-model (in <code>src/&lt;username&gt;-number-input.js</code>) then looks like this:</p>
+<pre><code class="language-js">import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import './&lt;username&gt;-number-input.less!';
+import template from './&lt;username&gt;-number-input.stache!';
+
+export const ViewModel = Map.extend({
+  define: {
+    value: {
+      value: 0,
+      type: 'number',
+      set(value) {
+        if(value &gt; this.attr('max')) {
+          return this.attr('max');
+        }
+
+        if(value &lt; this.attr('min')) {
+          return this.attr('min');
+        }
+
+        return value;
+      }
+    },
+    max: {
+      value: Infinity,
+      type: 'number'
+    },
+    min: {
+      value: 0,
+      type: 'number'
+    }
+  },
+
+  increment() {
+    this.attr('value', this.attr('value') + 1);
+  },
+
+  decrement() {
+    this.attr('value', this.attr('value') - 1);
+  }
+});
+
+export default Component.extend({
+  tag: '&lt;username&gt;-number-input',
+  viewModel: ViewModel,
+  template
+});
+</code></pre>
+<p>To test this functionality we can change the tests in <code>src/&lt;username&gt;-number-input_test.js</code> to look like this:</p>
+<pre><code class="language-html">import QUnit from 'steal-qunit';
+import { ViewModel } from './&lt;username&gt;-number-input.js';
+
+// ViewModel unit tests
+QUnit.module('&lt;username&gt;-number-input/component');
+
+QUnit.test('Initializes the ViewModel', function(){
+  var vm = new ViewModel();
+  
+  QUnit.equal(vm.attr('value'), 0,
+    'Default value is 0');
+  QUnit.equal(vm.attr('max'), Infinity,
+    'Max value is infinity');
+  QUnit.equal(vm.attr('min'), 0,
+    'Max value is number max value');
+});
+
+QUnit.test('.increment', function(){
+  var vm = new ViewModel();
+
+  vm.increment();
+  QUnit.equal(vm.attr('value'), 1, 'Value incremented');
+});
+
+QUnit.test('.decrement', function(){
+  var vm = new ViewModel();
+
+  vm.increment();
+  vm.increment();
+  vm.decrement();
+  QUnit.equal(vm.attr('value'), 1, 'Value updated');
+});
+</code></pre>
+<p>You can run all tests either by going to <a href="http://localhost:8080/src/test/test.html">localhost:8080/src/test/test.html</a> in the browser or via</p>
+<pre><code>$ npm test
+</code></pre>
+<h3>Adding the template</h3>
+<p>In the template we will use <a href="http://getbootstrap.com/">Bootstrap</a> which we first have to install as a dependency of the plugin:</p>
+<pre><code>$ npm install bootstrap --save
+</code></pre>
+<p>Then we can update <code>src/&lt;username&gt;-number-input.stache</code> to look like this:</p>
+<pre><code class="language-html">&lt;can-import from=&quot;bootstrap/less/bootstrap.less!&quot; /&gt;
+&lt;form class=&quot;form-inline&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;div class=&quot;input-group&quot;&gt;
+      &lt;div class=&quot;input-group-btn&quot;&gt;
+        &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot;
+          {{#eq value min}}disabled{{/eq}}
+          ($click)=&quot;decrement&quot;&gt;
+            -
+          &lt;/button&gt;
+      &lt;/div&gt;
+      &lt;input type=&quot;number&quot; class=&quot;form-control&quot;
+        {($value)}=&quot;value&quot;&gt;
+      &lt;div class=&quot;input-group-btn&quot;&gt;
+        &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot;
+          {{#eq value max}}disabled{{/eq}}
+          ($click)=&quot;increment&quot;&gt;
+            +
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+<p>This template first imports the Bootstrap LESS. Then we create a button group with a <code>-</code> button on the left, a number input in the middle and a <code>+</code> button on the right. When the buttons are clicked the <code>increment</code> or <code>decrement</code> view-model methods are being called. The value of the input field is two-way bound with the <code>value</code> property of the view-model. When the value is either <code>min</code> or <code>max</code>, the <code>-</code> or <code>+</code> buttons will be disabled.</p>
+<h2>Publishing the plugin</h2>
+<h3>Making a pull request</h3>
+<p>Although we are working on the plugin by ourselves for now, <a href="https://help.github.com/articles/using-pull-requests/">GitHub pull requests</a> are a great way to keep track of our progress and to make sure that all tests are passing. In the plugin folder we can run:</p>
+<pre><code>$ git checkout -b number-input-component
+$ git add . --all
+$ git commit -m &quot;Implementing number-input component functionality, template and tests&quot;
+$ git push origin number-input-component
+</code></pre>
+<p>And then create a new pull request by going to <code>https://github.com/&lt;your-username&gt;/&lt;username&gt;-number-input</code> which will now show an option like this:</p>
+<p><a href="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.17.50-AM.png"><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.17.50-AM.png" alt="Screen Shot 2016-02-16 at 8.17.50 AM" class="alignnone size-full wp-image-2658" /></a></p>
+<p>Once you created the pull request, you will see a <code>Some checks haven’t completed yet</code> message that will eventually turn green:</p>
+<p><a href="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.30.41-AM.png"><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.30.41-AM.png" alt="Screen Shot 2016-02-16 at 8.30.41 AM" style="width: 100%;" class="alignnone size-full wp-image-2662" /></a></p>
+<p>Now you can click the &quot;Merge pull request&quot; button. Then in the console, checkout the <em>master</em> branch and pull down the latest changes with:</p>
+<pre><code>$ git checkout master
+$ git pull origin master
+</code></pre>
+<h3>Making a build</h3>
+<p>Now that we implemented the number input functionality and have all tests passing we can make a build of our plugin that is usable standalone in the Browser, with an AMD module loader like <a href="http://requirejs.org/">RequireJS</a> or as a CommonJS module which works e.g. with <a href="http://browserify.org/">Browserify</a>.</p>
+<pre><code>$ donejs build
+</code></pre>
+<p>Will create a <code>dist/</code> folder with the <code>global</code>, <code>amd</code> and <code>commonjs</code> version of our plugin.</p>
+<h3>Publishing to npm</h3>
+<p><a href="https://www.npmjs.com/">npm</a> is the best way to share modules and make them easily installable without having to manage dependencies manually. To be able to publish your own modules, <a href="https://www.npmjs.com/signup">create a new account</a> and then run</p>
+<pre><code>$ npm login
+</code></pre>
+<p><a href="http://semver.org/">Semantic versioning</a> is a great way to communicate new features and breaking changes. The generated plugin already comes with the release scripts to publish new versions according to the <code>major.minor.patch</code> schema. In our case to publish an initial version <code>0.1.0</code> we can run</p>
+<pre><code>$ donejs release:minor
+</code></pre>
+<p>Now version <code>0.1.0</code> of our plugin is available on npm.</p>
+<h3>Usage in other projects</h3>
+<p>In another DoneJS application we can now install the plugin with</p>
+<pre><code>$ npm install donejs-number-input --save
+</code></pre>
+<blockquote>
+<p>For your own published plugin you would use <code>&lt;username&gt;-number-import</code> of course.</p>
+</blockquote>
+<p>Then import it in a template and load it with:</p>
+<pre><code class="language-html">&lt;can-import from=&quot;&lt;username&gt;-number-input&quot; /&gt;
+&lt;donejs-number-input&gt;&lt;/donejs-number-input&gt;
+</code></pre>
+<h2>Show it off</h2>
+<p>Once you published your plugin, let the world know about it. <a href="https://twitter.com/donejs">Tweet @donejs</a> and post it in the <a href="http://forums.donejs.com/">DoneJS forums</a> and the <a href="https://gitter.im/donejs/donejs">DoneJS chat</a>. Those are also great places to get quick help with any questions.</p>
+
+		</section>
+		
+		
+
+		
+
+		
+
+	
+	</article>
+	
+
+
+	</div>
+</div>
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="/static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="/Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="/About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="/Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="/Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="/community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-github-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-twitter-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="/static/img/icon-googleplus-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">
+								<img class="footer-social-icon" src="/static/img/icon-youtube-white.svg">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="http://www.bitovi.com">2015 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"type":"page","name":"plugin","src":"docs/guides/plugin.md","description":"DoneJS doesn't just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this guide we will create a reusable number input widget using [Bootstrap](http://getbootstrap.com) styles.","title":"Creating a plugin","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/daffl/Jupiter/donejs/donejs"},"dest":"/Users/daffl/Jupiter/donejs/donejs/site","ignoreTemplateRender":true,"templates":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/templates","static":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+			steal = {
+			instantiated: {
+				"bundles/static.css!$css" : null
+			}
+			}
+		</script>
+		<script type='text/javascript'
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+				bundles-path="bundles"></script>
+	
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+
+
+
+</html>

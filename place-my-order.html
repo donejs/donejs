@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>donejs - In depth guide </title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<!--<![endif]-->
+</head>
+<body class="docs place-my-order">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li >
+								<a href="./index.html">Home</a>
+							</li>
+							<li >
+								<a href="./Features.html">Features</a>
+							</li>
+							<li >
+								<a href="./About.html">About</a>
+							</li>
+							<li >
+								<a href="./Apis.html">Apis</a>
+							</li>
+							<li class="guides-menu">
+									<a href="/Guides.html">Guides</a>
+									<ul class="dropdown-menu">
+                      <li ><a href="./SettingUp.html">Setting Up</a></li>
+											<li ><a href="./Guide.html">Quick Start</a></li>
+											<li><a class="active" href="./place-my-order.html">In-depth</a></li>
+											<li><a  href="./plugin.html">Creating a plugin</a></li>
+											<li><a  href="./generator.html">Creating a generator</a></li>
+											<li><a  href="./bitballs.html">Example App: Bitballs</a></li>
+									</ul>
+							</li>
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="/static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="/static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="/static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">kQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="/static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="/static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+		<span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+<div class="container-fluid api">
+	<div class="row">
+
+	
+
+	
+	<article class="content docs col-xs-12 ">
+	
+
+		
+		<section class="title">
+			<div class="heading">
+<h1>In depth guide</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">place-my-order</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+
+		
+		<section class="contents">
+		</section>
+		
+
+		
+
+		
+		<section class="description">
+			<p>In this guide you will learn about all of <a href="">DoneJS' features</a> by creating, testing, documenting, building and deploying <a href="http://place-my-order.com">place-my-order.com</a>, a restaurant menu and ordering application. The final result will look like this:</p>
+<p><img src="/static/img/place-my-order.png" srcset="/static/img/place-my-order.png 1x, /static/img/place-my-order-2x.png 2x"></p>
+<p>After the initial application setup, which includes a server that hosts and pre-renders the application, we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.</p>
+<p>After that we will talk about what a view model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser, we will automate running them locally from the command line and also on a continuous integration server. In the subsequent chapters, we will show how to easily import other modules into our application and how to set up a real-time connection.</p>
+<p>Finally, we will describe how to build and deploy our application to the web, as a desktop application with nw.js, and as a mobile app with Cordova.</p>
+
+		</section>
+		
+
+		
+			
+		
+
+		
+
+
+		
+		<section class="comment">
+			<h2>Set up the project</h2>
+<p>In this section we will create our DoneJS project and set up a RESTful API for the application to use.
+You will need <a href="http://nodejs.org">NodeJS</a> or <a href="https://iojs.org/en/index.html">io.js</a> installed and your code editor of choice.</p>
+<h3>Create the project</h3>
+<p>To get started, let's install the DoneJS command line utility globally:</p>
+<pre><code>npm install -g donejs
+</code></pre>
+<p>Then we can create a new DoneJS application:</p>
+<pre><code>donejs add app place-my-order
+</code></pre>
+<p>The initialization process will ask you questions like the name of your application (set to <code>place-my-order</code>) and the source folder (set to <code>src</code>). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:</p>
+<ul>
+<li><a href="http://stealjs.com">StealJS</a> - ES6, CJS, and AMD module loader and builder</li>
+<li><a href="http://canjs.com">CanJS</a> - Custom elements and Model-View-ViewModel utilities</li>
+<li><a href="http://jquery.com">jQuery</a> - DOM helpers</li>
+<li><a href="http://jquerypp.com">jQuery++</a> - Extended DOM helpers</li>
+<li><a href="https://qunitjs.com/">QUnit</a> or Mocha - Assertion library</li>
+<li><a href="http://funcunit.com">FuncUnit</a> - Functional tests</li>
+<li><a href="https://github.com/bitovi/testee">Testee</a> - Test runner</li>
+<li><a href="http://documentjs.com">DocumentJS</a> - Documentation</li>
+</ul>
+<p>If we now go into the <code>place-my-order</code> folder with</p>
+<pre><code>cd place-my-order
+</code></pre>
+<p>We can see the following files:</p>
+<pre><code>├── build.js
+├── development.html
+├── documentjs.json
+├── package.json
+├── production.html
+├── readme.md
+├── src/
+|   ├── app.js
+|   ├── index.stache
+|   ├── models/
+|   |   ├── fixtures
+|   |   |   ├── fixtures.js
+|   |   ├── test.js
+|   ├── styles.less
+|   ├── test.html
+|   ├── test/
+|   |   ├── test.js
+|   |   ├── functional.js
+├── node_modules/
+</code></pre>
+<p>Let's have a quick look at the purpose of each:</p>
+<ul>
+<li><code>development.html</code>, <code>production.html</code> those pages can run the DoneJS application in development or production mode without a server</li>
+<li><code>package.json</code> is the main configuration file that defines all our application dependencies and other settings.</li>
+<li><code>test.html</code> is used to run all our tests.</li>
+<li><code>documentjs.json</code> is the configuration file for generating documentation.</li>
+<li><code>readme.md</code> is the readme file for your repository.</li>
+<li><code>src</code> is the folder where all our development assets live in their own modlets (more about that later).</li>
+<li><code>src/app.js</code> is the main application file, which exports the main application state.</li>
+<li><code>src/index.stache</code> is the main client template that includes server-side rendering.</li>
+<li><code>src/models/</code> is the folder where models for the API connection will be put. It currently contains <code>fixtures/fixtures.js</code> which will reference all the specific models fixtures files (so that we can run model tests without the need for a running API server) and <code>test.js</code> which will later gather all the individual model test files.</li>
+<li><code>src/styles.less</code> is the main application styles.</li>
+<li><code>src/test/test.js</code> collects all individual component and model tests we will create throughout this guide and is loaded by <code>test.html</code>.</li>
+<li><code>src/test/functional.js</code> will contain functional smoke tests for our application.</li>
+</ul>
+<h3>Development mode</h3>
+<p>DoneJS comes with its own server, which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also enable <a href="http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/">hot module swapping</a> which automatically reloads files in the browser as they change. You can start it by running:</p>
+<pre><code>donejs develop
+</code></pre>
+<p>The default port is 8080, so if we now go to <a href="localhost:8080">http://localhost:8080/</a> we can see our application with a default homepage. If we change <code>src/index.stache</code> or <code>src/app.js</code> all changes will show up right away in the browser. Try it by changing the <code>message</code> property in <code>src/app.js</code>.</p>
+<h3>Setup a service API</h3>
+<p>Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we'll just install and start an existing service API created specifically for use with this tutorial:</p>
+<p><strong>Note</strong>: Kill the server for now while we install a few dependencies (ctrl+c on Windows and Mac).</p>
+<pre><code>npm install place-my-order-api --save
+</code></pre>
+<p>Now we can add an API server start script into the <code>scripts</code> section of our <code>package.json</code> like this:</p>
+<pre><code class="language-js">  &quot;scripts&quot;: {
+    &quot;api&quot;: &quot;place-my-order-api --port 7070&quot;,
+    &quot;test&quot;: &quot;testee src/test.html --browsers firefox --reporter Spec&quot;,
+    &quot;start&quot;: &quot;done-serve --port 8080&quot;,
+    &quot;develop&quot;: &quot;done-serve --develop --port 8080&quot;,
+    &quot;document&quot;: &quot;documentjs&quot;,
+    &quot;build&quot;: &quot;node build&quot;
+  },
+</code></pre>
+<p><span line-highlight='2,2'></span>
+Which allows us to start the server like:</p>
+<pre><code>donejs api
+</code></pre>
+<p>The first time it starts, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to <a href="http://localhost:7070/restaurants">http://localhost:7070/restaurants</a>, where we can see a JSON list of restaurant data.</p>
+<h3>Starting the application</h3>
+<p>Now our application is good to go and we can start the server. We need to proxy the <code>place-my-order-api</code> server to <code>/api</code> on our server in order to avoid violating the same origin policy. This means that we need to modify the <code>start</code> and <code>develop</code> script in our <code>package.json</code> to:</p>
+<pre><code class="language-js">&quot;scripts&quot;: {
+  &quot;api&quot;: &quot;place-my-order-api --port 7070&quot;,
+  &quot;test&quot;: &quot;testee src/test.html --browsers firefox --reporter Spec&quot;,
+  &quot;start&quot;: &quot;done-serve --proxy http://localhost:7070 --port 8080&quot;,
+  &quot;develop&quot;: &quot;done-serve --develop --proxy http://localhost:7070 --port 8080&quot;,
+  &quot;document&quot;: &quot;documentjs&quot;,
+  &quot;build&quot;: &quot;node build&quot;
+},
+</code></pre>
+<p><span line-highlight='4,5'></span>
+Now we can start the application with:</p>
+<pre><code>donejs develop
+</code></pre>
+<p>Go to <a href="http://localhost:8080">http://localhost:8080</a> to see the &quot;hello world&quot; message again.</p>
+<h3>Loading assets</h3>
+<p>Before we get to the code, we also need to install the <code>place-my-order-assets</code> package which contains the images and styles specifically for this tutorial's application:</p>
+<pre><code>npm install place-my-order-assets --save
+</code></pre>
+<p>Every DoneJS application consists of at least two files:</p>
+<ol>
+<li><strong>A main template</strong> (in this case <code>src/index.stache</code>) which contains the main template and links to the development or production assets.</li>
+<li><strong>A main application view-model</strong> (<code>src/app.js</code>) that initializes the application state and routes.</li>
+</ol>
+<p><code>src/index.stache</code> was already created for us when we ran <code>donejs add app</code>, so update it to
+load the static assets and set a <code>&lt;meta&gt;</code> tag to support a responsive design:</p>
+<pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;{{title}}&lt;/title&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;can-import from=&quot;place-my-order-assets&quot; /&gt;
+    &lt;can-import from=&quot;place-my-order/styles.less&quot; /&gt;
+    &lt;can-import from=&quot;place-my-order/app&quot; export-as=&quot;viewModel&quot; /&gt;
+
+    &lt;h1&gt;{{message}}&lt;/h1&gt;
+
+    {{#switch env.NODE_ENV}}
+      {{#case &quot;production&quot;}}
+        &lt;script
+          src=&quot;{{joinBase 'node_modules/steal/steal.production.js'}}&quot;
+          main=&quot;place-my-order/index.stache!done-autorender&quot;&gt;
+        &lt;/script&gt;
+      {{/case}}
+      {{#default}}
+        &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
+      {{/default}}
+    {{/switch}}
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<p><span line-highlight='4,7'></span>
+This is an HTML5 template that uses <a href="http://canjs.com/docs/can.stache.html">can.stache</a> - a <a href="http://handlebarsjs.com/">Handlebars syntax</a>-compatible view engine. It renders a <code>message</code> property from the application state.</p>
+<p><code>can-import</code> loads the template's dependencies:</p>
+<ol>
+<li>The <code>place-my-order-assets</code> package, which loads the LESS styles for the application</li>
+<li><code>place-my-order/app</code>, which is the main application file</li>
+</ol>
+<p>The main application file at <code>src/app.js</code> looks like this:</p>
+<pre><code>// src/app.js
+import Map from &quot;can/map/&quot;;
+import route from &quot;can/route/&quot;;
+import 'can/map/define/';
+import 'can/route/pushstate/';
+
+const AppViewModel = Map.extend({
+  define: {
+    message: {
+      value: 'Hello World!',
+      serialize: false
+    },
+    title: {
+      value: 'place-my-order',
+      serialize: false
+    }
+  }
+});
+
+export default AppViewModel;
+</code></pre>
+<p>This initializes a <a href="https://canjs.com/docs/can.Map.html">can.Map</a>: a special object that acts as the application global state (with a default <code>message</code> property) and also plays a key role in enabling server side rendering.</p>
+<h2>Creating custom elements</h2>
+<p>One of the most important concepts in DoneJS is splitting up your application functionality into individual, self-contained modules. In the following section we will create separate components for the homepage, the restaurant list, and the order history page. After that, we will glue them all together using routes and the global application state.</p>
+<p>There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single <code>.component</code> file (to learn more see <a href="https://github.com/donejs/done-component">done-component</a>). Larger components can be split up into several separate files.</p>
+<h3>Creating a homepage element</h3>
+<p>To generate a new component run:</p>
+<pre><code>donejs add component home.component pmo-home
+</code></pre>
+<p>This will create a file at <code>src/home.component</code> containing the basic ingredients of a component. We will update it to reflect the below content:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-home&quot;&gt;
+  &lt;template&gt;
+     &lt;div class=&quot;homepage&quot;&gt;
+      &lt;img src=&quot;{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}&quot;
+          width=&quot;250&quot; height=&quot;380&quot; /&gt;
+      &lt;h1&gt;Ordering food has never been easier&lt;/h1&gt;
+      &lt;p&gt;
+        We make it easier than ever to order gourmet food
+        from your favorite local restaurants.
+      &lt;/p&gt;
+      &lt;p&gt;&lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants'}}&quot; role=&quot;button&quot;&gt;Choose a Restaurant&lt;/a&gt;&lt;/p&gt;
+     &lt;/div&gt;
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p><span line-highlight='3-12'></span>
+Here we created a <a href="http://canjs.com/docs/can.Component.html">can.Component</a> named <code>pmo-home</code> using a <a href="http://webcomponents.org/">web-component</a> style declaration. This particular component is just a basic template, it does not have much in the way of styles or functionality.</p>
+<h3>Create the order history element</h3>
+<p>We'll create an initial version of order history that is very similar.</p>
+<pre><code>donejs add component order/history.component pmo-order-history
+</code></pre>
+<p>And update <code>src/order/history.component</code>:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-history&quot;&gt;
+  &lt;template&gt;
+    &lt;div class=&quot;order-history&quot;&gt;
+      &lt;div class=&quot;order header&quot;&gt;
+        &lt;address&gt;Name / Address / Phone&lt;/address&gt;
+        &lt;div class=&quot;items&quot;&gt;Order&lt;/div&gt;
+        &lt;div class=&quot;total&quot;&gt;Total&lt;/div&gt;
+        &lt;div class=&quot;actions&quot;&gt;Action&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p><span line-highlight='3-10'></span></p>
+<h3>Creating a restaurant list element</h3>
+<p>The restaurant list will contain more functionality, which is why we will split its template and component logic into separate files.</p>
+<p>We can create a basic component like that by running:</p>
+<pre><code>donejs add component restaurant/list pmo-restaurant-list
+</code></pre>
+<p>The component's files are collected in a single folder so that components can be easily tested, moved, and re-used. The folder structure looks like this:</p>
+<pre><code>├── node_modules
+├── package.json
+├── src/
+|   ├── app.js
+|   └── index.stache
+|   ├── models
+|   ├── order/
+|   |   ├── history.component
+|   ├── restaurant/
+|   |   ├── list/
+|   |   |   ├── list.html
+|   |   |   ├── list.js
+|   |   |   ├── list.less
+|   |   |   ├── list.md
+|   |   |   ├── list.stache
+|   |   |   ├── list_test.js
+|   |   |   ├── test.html
+</code></pre>
+<p>We will learn more about those files and add more functionality to this element later, but it already contains a fully functional component with a demo page (see <a href="http://localhost:8080/src/restaurant/list/list.html">localhost:8080/src/restaurant/list/list.html</a>), a basic test (at <a href="http://localhost:8080/src/restaurant/list/test.html">localhost:8080/src/restaurant/list/test.html</a>) and documentation placeholders.</p>
+<h2>Setting up routing</h2>
+<p>In this part, we will create routes - URL patterns that load specific parts of our single page app. We'll also dynamically load the custom elements we created and integrate them in the application's main page.</p>
+<h3>Create Routes</h3>
+<p>Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.</p>
+<p>DoneJS application <a href="http://canjs.com/docs/can.route.html">routes</a> map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.</p>
+<p>To learn more about routing visit the CanJS guide on <a href="http://canjs.com/guides/AppStateAndRouting.html">Application State and Routing</a>.</p>
+<p>To add our routes, change <code>src/app.js</code> to:</p>
+<pre><code class="language-js">import Map from 'can/map/';
+import route from 'can/route/';
+import 'can/route/pushstate/';
+import 'can/map/define/';
+
+const AppViewModel = Map.extend({
+  define: {
+    title: {
+      serialize: false,
+      value: 'place-my-order'
+    }
+  }
+});
+
+route(':page', { page: 'home' });
+route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+
+export default AppViewModel;
+
+</code></pre>
+<p><span line-highlight='15-17'></span></p>
+<blockquote>
+<p>Notice: We also removed the <code>message</code> property in <code>AppViewModel</code>.  This is because
+it is not needed.</p>
+</blockquote>
+<p>Now we have three routes available:</p>
+<ul>
+<li><code>:page</code> captures urls like <a href="http://localhost:8080/home">http://localhost:8080/home</a> and sets the <code>page</code> property on <code>AppViewModel</code> to <code>home</code> (which is also the default when visiting <a href="http://localhost:8080/">http://localhost:8080/</a>)</li>
+<li><code>:page/:slug</code> matches restaurant links like <a href="http://localhost:8080/restaurants/spago">http://localhost:8080/restaurants/spago</a> and sets <code>page</code> and <code>slug</code> (a URL friendly restaurant short name)</li>
+<li><code>:page/:slug/:action</code> will be used to show the order page for a specific restaurant e.g. <a href="http://localhost:8080/restaurants/spago/order">http://localhost:8080/restaurants/spago/order</a></li>
+</ul>
+<p>Its important to note that if any of these URLs are matched, AppViewModel, which is the application's global state, will contain these properties, even though they aren't present in the AppViewModel definition directly. Properties can be set on AppViewModel that aren't explicitly defined.</p>
+<h3>Adding a header element</h3>
+<p>Now is also a good time to add a header element that links to the different routes we just defined. We can run</p>
+<pre><code>donejs add component header.component pmo-header
+</code></pre>
+<p>and update <code>src/header.component</code> to:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-header&quot;&gt;
+  &lt;template&gt;
+    &lt;header&gt;
+      &lt;nav&gt;
+       &lt;h1&gt;place-my-order.com&lt;/h1&gt;
+       &lt;ul&gt;
+         &lt;li class=&quot;{{#eq page 'home'}}active{{/eq}}&quot;&gt;
+           &lt;a href=&quot;{{routeUrl page='home'}}&quot;&gt;Home&lt;/a&gt;
+         &lt;/li&gt;
+         &lt;li class=&quot;{{#eq page 'restaurants'}}active{{/eq}}&quot;&gt;
+           &lt;a href=&quot;{{routeUrl page='restaurants'}}&quot;&gt;Restaurants&lt;/a&gt;
+         &lt;/li&gt;
+         &lt;li class=&quot;{{#eq page 'order-history'}}active{{/eq}}&quot;&gt;
+           &lt;a href=&quot;{{routeUrl page='order-history'}}&quot;&gt;Order History&lt;/a&gt;
+         &lt;/li&gt;
+       &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p><span line-highlight='3-18'></span>
+Here we use <a href="http://canjs.com/docs/can.stache.helpers.routeUrl.html">routeUrl</a> to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules (<a href="http://localhost:8080/home">http://localhost:8080/home</a> in this case) that sets the <code>page</code> property to <code>home</code> when clicked.</p>
+<p>We also use the Stache <code>eq</code> helper to make the appropriate link active.</p>
+<h3>Create a loading indicator</h3>
+<p>To show that something is currently loading, let's create a <code>pmo-loading</code> component:</p>
+<pre><code>donejs add component loading.component pmo-loading
+</code></pre>
+<p>Change <code>src/loading.component</code> to:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-loading&quot;&gt;
+  &lt;template&gt;
+    {{#eq state &quot;resolved&quot;}}
+      &lt;content&gt;&lt;/content&gt;
+    {{else}}
+      &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
+    {{/eq}}
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p><span line-highlight='3-7'></span></p>
+<h3>Switch between components</h3>
+<p>Now we can glue all those individual components together in <code>src/index.stache</code>. What we want to do is - based on the current page (<code>home</code>, <code>restaurants</code> or <code>order-history</code>) - load the correct component and then initialize it.</p>
+<p>Update <code>src/index.stache</code> to:</p>
+<pre><code class="language-html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;{{title}}&lt;/title&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;can-import from=&quot;place-my-order-assets&quot; /&gt;
+    &lt;can-import from=&quot;place-my-order/styles.less&quot; /&gt;
+    &lt;can-import from=&quot;place-my-order/app&quot; export-as=&quot;viewModel&quot; /&gt;
+
+    &lt;can-import from=&quot;place-my-order/loading.component&quot; /&gt;
+    &lt;can-import from=&quot;place-my-order/header.component&quot; /&gt;
+    &lt;pmo-header {page}=&quot;page&quot;/&gt;
+
+    {{#switch page}}
+      {{#case &quot;home&quot;}}
+        &lt;can-import from=&quot;place-my-order/home.component&quot;
+            can-tag=&quot;pmo-loading&quot;&gt;
+          &lt;pmo-home/&gt;
+        &lt;/can-import&gt;
+      {{/case}}
+      {{#case &quot;restaurants&quot;}}
+        &lt;can-import from=&quot;place-my-order/restaurant/list/&quot;
+            can-tag=&quot;pmo-loading&quot;&gt;
+          &lt;pmo-restaurant-list/&gt;
+        &lt;/can-import&gt;
+      {{/case}}
+      {{#case &quot;order-history&quot;}}
+        &lt;can-import from=&quot;place-my-order/order/history.component&quot;
+            can-tag=&quot;pmo-loading&quot;&gt;
+          &lt;pmo-order-history/&gt;
+        &lt;/can-import&gt;
+      {{/case}}
+    {{/switch}}
+
+    {{#switch env.NODE_ENV}}
+      {{#case &quot;production&quot;}}
+        &lt;script
+          src=&quot;{{joinBase 'node_modules/steal/steal.production.js'}}&quot;
+          main=&quot;place-my-order/index.stache!done-autorender&quot;&gt;
+        &lt;/script&gt;
+      {{/case}}
+      {{#default}}
+        &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
+      {{/default}}
+    {{/switch}}
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<p><span line-highlight='11-13,15-34'></span>
+Here we make a <code>switch</code> statement that checks for the current <code>page</code> property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with <a href="http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html">can-import</a> and initializes it.</p>
+<p>Setting <code>can-tag=&quot;pmo-loading&quot;</code> inserts a <code>&lt;pmo-loading&gt;</code> loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its <code>state</code> property to <code>resolved</code>.</p>
+<p>Now we can see the header and the home component and be able to navigate to the different pages through the header.</p>
+<h2>Getting Data from the Server</h2>
+<p>In this next part, we'll connect to the RESTful API that we set up with <code>place-my-order-api</code>, using the powerful data layer provided by <a href="http://connect.canjs.com/">can-connect</a>.</p>
+<h3>Creating a restaurants connection</h3>
+<p>At the beginning of this guide we set up a REST API at <a href="http://localhost:7070">http://localhost:7070</a> and told <code>done-serve</code> to proxy it to <a href="http://localhost:8080/api">http://localhost:8080/api</a>.</p>
+<p>To manage the restaurant data located at <a href="http://localhost:8080/api/restaurants">http://localhost:8080/api/restaurants</a>, we'll create a restaurant supermodel:</p>
+<pre><code class="language-js">donejs add supermodel restaurant
+</code></pre>
+<p>Answer the question about the URL endpoint with <code>/api/restaurants</code> and the name of the id property with <code>_id</code>.</p>
+<p>We have now created a model and fixtures (for testing without an API) with a folder structure like this:</p>
+<pre><code>├── node_modules
+├── package.json
+├── src/
+|   ├── app.js
+|   └── index.stache
+|   ├── models/
+|   |   ├── fixtures/
+|   |   |   ├── restaurant.js
+|   |   ├── fixtures.js
+|   |   ├── restaurant.js
+|   |   ├── restaurant_test.js
+|   |   ├── test.js
+</code></pre>
+<h3>Test the connection</h3>
+<p>To test the connection you can run the following in the console:</p>
+<pre><code class="language-js">System.import(&quot;place-my-order/models/restaurant&quot;).then(function(module){
+  var Restaurant = module[&quot;default&quot;];
+  return Restaurant.getList({});
+}).then(function(restaurants){
+  console.log( restaurants.attr() );
+})
+</code></pre>
+<p>This programmatically imports the <code>Restaurant</code> model and uses it to get a list
+of all restaurants on the server and log them to the console.</p>
+<h3>Add data to the page</h3>
+<p>Now, update the <code>ViewModel</code> in <code>src/restaurant/list/list.js</code> to use <a href="http://canjs.com/docs/can.Map.prototype.define.html">can.Map.define</a> to load all restaurants from the restaurant connection:</p>
+<pre><code class="language-js">import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import template from './list.stache';
+import Restaurant from 'place-my-order/models/restaurant';
+
+export var ViewModel = Map.extend({
+  define: {
+    restaurants: {
+      value() {
+        return Restaurant.getList({});
+      }
+    }
+  }
+});
+
+export default Component.extend({
+  tag: 'pmo-restaurant-list',
+  viewModel: ViewModel,
+  template: template
+});
+
+</code></pre>
+<p><span line-highlight='5,9-13'></span>
+And update the template at <code>src/restaurant/list/list.stache</code> to use the <a href="http://canjs.com/docs/can.Deferred.html">Promise</a> returned for the <code>restaurants</code> property to render the template:</p>
+<pre><code class="language-html">&lt;div class=&quot;restaurants&quot;&gt;
+  &lt;h2 class=&quot;page-header&quot;&gt;Restaurants&lt;/h2&gt;
+  {{#if restaurants.isPending}}
+    &lt;div class=&quot;restaurant loading&quot;&gt;&lt;/div&gt;
+  {{/if}}
+  {{#if restaurants.isResolved}}
+    {{#each restaurants.value}}
+      &lt;div class=&quot;restaurant&quot;&gt;
+        &lt;img src=&quot;{{joinBase images.thumbnail}}&quot;
+          width=&quot;100&quot; height=&quot;100&quot;&gt;
+        &lt;h3&gt;{{name}}&lt;/h3&gt;
+        {{#address}}
+        &lt;div class=&quot;address&quot;&gt;
+          {{street}}&lt;br /&gt;{{city}}, {{state}} {{zip}}
+        &lt;/div&gt;
+        {{/address}}
+
+        &lt;div class=&quot;hours-price&quot;&gt;
+          $$$&lt;br /&gt;
+          Hours: M-F 10am-11pm
+          &lt;span class=&quot;open-now&quot;&gt;Open Now&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants' slug=slug}}&quot;&gt;
+          Details
+        &lt;/a&gt;
+        &lt;br /&gt;
+      &lt;/div&gt;
+    {{/each}}
+  {{/if}}
+&lt;/div&gt;
+</code></pre>
+<p>By checking for <code>restaurants.isPending</code> and <code>restaurants.isResolved</code> we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at <code>restaurants.value</code>. When navigating to the restaurants page now we can see a list of all restaurants.</p>
+<p>Note the usage of <code>routeUrl</code> to set up a link that points to each restaurant. <code>slug=slug</code> is not wrapped in quotes because the helper will populate each restaurant's individual <code>slug</code> property in the URL created.</p>
+<h2>Creating a unit-tested view model</h2>
+<p>In this section we will create a view model for the restaurant list functionality.</p>
+<p>We'll show a dropdown of all available US states. When the user selects a state, we'll show a list of cities. Once a city is selected, we'll load a list of all restaurants for that city. The end result will look like this:</p>
+<p><img src="static/img/restaurant-list.png" alt="Restaurant list" /></p>
+<h3>Identify view model state</h3>
+<p>First we need to identify the properties that our view model needs to provide. We want to load a list of states from the server and let the user select a single state. Then we do the same for cities and finally load the restaurant list for that selection.</p>
+<p>All asynchronous requests return a Promise, so the data structure will look like this:</p>
+<pre><code class="language-js">{
+ states: Promise&lt;[State]&gt;
+ state: String &quot;IL&quot;,
+ cities: Promise&lt;[City]&gt;,
+ city: String &quot;Chicago&quot;,
+ restaurants: Promise&lt;[Restaurant]&gt;
+}
+</code></pre>
+<h3>Create dependent models</h3>
+<p>The API already provides a list of available <a href="http://localhost:8080/api/states">states</a> and <a href="http://localhost:8080/api/cities">cities</a>. To load them we can create the corresponding models like we already did for Restaurants.</p>
+<p>Run:</p>
+<pre><code>donejs add supermodel state
+</code></pre>
+<p>When prompted, set the URL to <code>/api/states</code> and the id property to <code>short</code>.</p>
+<p>Run:</p>
+<pre><code>donejs add supermodel city
+</code></pre>
+<p>When prompted, set the URL to <code>/api/cities</code> and the id property to <code>name</code>.</p>
+<p>Now we can load a list of states and cities.</p>
+<h3>Implement view model behavior</h3>
+<p>Now that we have identified the view model properties needed and have created the models necessary to load them, we can <a href="http://canjs.com/docs/can.Map.prototype.define.html">define</a> the <code>states</code>, <code>state</code>, <code>cities</code> and <code>city</code> properties in the view model at <code>src/restaurant/list/list.js</code>:</p>
+<pre><code class="language-js">import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import template from './list.stache';
+import Restaurant from 'place-my-order/models/restaurant';
+import State from 'place-my-order/models/state';
+import City from 'place-my-order/models/city';
+
+export var ViewModel = Map.extend({
+  define: {
+    states: {
+      get() {
+        return State.getList({});
+      }
+    },
+    state: {
+      type: 'string',
+      value: null,
+      set() {
+        // Remove the city when the state changes
+        this.attr('city', null);
+      }
+    },
+    cities: {
+      get() {
+        let state = this.attr('state');
+
+        if(!state) {
+          return null;
+        }
+
+        return City.getList({ state });
+      }
+    },
+    city: {
+      type: 'string',
+      value: null
+    },
+    restaurants: {
+      get() {
+        let state = this.attr('state');
+        let city = this.attr('city');
+
+        if(state &amp;&amp; city) {
+          return Restaurant.getList({
+            'address.state': state,
+            'address.city': city
+          });
+        }
+
+        return null;
+      }
+    }
+  }
+});
+
+export default Component.extend({
+  tag: 'pmo-restaurant-list',
+  viewModel: ViewModel,
+  template: template
+});
+
+</code></pre>
+<p><span line-highlight='6-7,11-53'></span>
+Let's take a closer look at those properties:</p>
+<ul>
+<li><code>states</code> will return a list of all available states by calling <code>State.getList({})</code></li>
+<li><code>state</code> is a string property set to <code>null</code> by default (no selection). Additionally, when <code>state</code> is changed we will remove the dependent <code>city</code> selection.</li>
+<li><code>cities</code> will return <code>null</code> if no state has been selected. Otherwise, it will load all the cities for a given state by sending <code>state</code> as a query paramater (which will make a request like <a href="ttp://localhost:8080/api/cities?state=IL">http://localhost:8080/api/cities?state=IL</a>)</li>
+<li><code>city</code> is a simple string, set to <code>null</code> by default</li>
+<li><code>restaurants</code> will always be <code>null</code> unless both a <code>city</code> and a <code>state</code> are selected. If both are selected, it will set the <code>address.state</code> and <code>address.city</code> query parameters which will return a list of all restaurants whose address matches those parameters.</li>
+</ul>
+<h3>Create a test</h3>
+<p>View models that are decoupled from the presentation layer are easy to test. We will use <a href="http://qunitjs.com/">QUnit</a> as the testing framework by loading a StealJS-friendly wrapper (<code>steal-qunit</code>). The component generator created a fully working test page for the component, which can be opened at <a href="http://localhost:8080/src/restaurant/list/test.html">http://localhost:8080/pmo/restaurant/list/test.html</a>. Currently, the tests will fail because we changed the view model, but in this section we will create some unit tests for the new functionality.</p>
+<h4>Fixtures: Create fake data</h4>
+<p>Unit tests should be able to run by themselves without the need for an API server. This is where <a href="http://canjs.com/docs/can.fixture.html">fixtures</a> come in. Fixtures allow us to mock requests to the REST API with data that we can use tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating <code>src/models/fixtures/state.js</code> to:</p>
+<pre><code class="language-js">import fixture from 'can-fixture';
+
+const store = fixture.store([
+  { name: 'Calisota', short: 'CA' },
+  { name: 'New Troy', short: 'NT'}
+],{});
+
+fixture({
+  'GET /api/states': store.findAll,
+  'GET /api/states/{short}': store.findOne,
+  'POST /api/states': store.create,
+  'PUT /api/states/{short}': store.update,
+  'DELETE /api/states/{short}': store.destroy
+});
+
+export default store;
+
+</code></pre>
+<p><span line-highlight='3-6'></span>
+Update <code>src/models/fixtures/city.js</code> to look like:</p>
+<pre><code class="language-js">import fixture from 'can-fixture';
+
+const store = fixture.store([
+  { state: 'CA', name: 'Casadina' },
+  { state: 'NT', name: 'Alberny' }
+],{});
+
+fixture({
+  'GET /api/cities': store.findAll,
+  'GET /api/cities/{name}': store.findOne,
+  'POST /api/cities': store.create,
+  'PUT /api/cities/{name}': store.update,
+  'DELETE /api/cities/{name}': store.destroy
+});
+
+export default store;
+
+</code></pre>
+<p><span line-highlight='3-6'></span>
+And we also need to provide a restaurant list according to the selected city and state in <code>src/models/fixtures/restaurant.js</code>:</p>
+<pre><code class="language-js">import fixture from 'can-fixture';
+
+const store = fixture.store([{
+  _id: 1,
+  name: 'Cheese City',
+  slug:'cheese-city',
+  address: {
+    city: 'Casadina',
+    state: 'CA'
+  },
+  images: {
+    banner: &quot;node_modules/place-my-order-assets/images/1-banner.jpg&quot;,
+    owner: &quot;node_modules/place-my-order-assets/images/2-owner.jpg&quot;,
+    thumbnail: &quot;node_modules/place-my-order-assets/images/3-thumbnail.jpg&quot;
+  }
+}, {
+  _id: 2,
+  name: 'Crab Barn',
+  slug:'crab-barn',
+  address: {
+    city: 'Alberny',
+    state: 'NT'
+  },
+  images: {
+    banner: &quot;node_modules/place-my-order-assets/images/2-banner.jpg&quot;,
+    owner: &quot;node_modules/place-my-order-assets/images/3-owner.jpg&quot;,
+    thumbnail: &quot;node_modules/place-my-order-assets/images/2-thumbnail.jpg&quot;
+  }
+}],{
+  &quot;address.city&quot;: function(restaurantValue, paramValue, restaurant){
+    return restaurant.address.city === paramValue;
+  },
+  &quot;address.state&quot;: function(restaurantValue, paramValue, restaurant){
+    return restaurant.address.state === paramValue;
+  }
+});
+
+fixture({
+  'GET /api/restaurants': store.findAll,
+  'GET /api/restaurants/{id}': store.findOne,
+  'POST /api/restaurants': store.create,
+  'PUT /api/restaurants/{id}': store.update,
+  'DELETE /api/restaurants/{id}': store.destroy
+});
+
+export default store;
+
+</code></pre>
+<p><span line-highlight='3-36'></span></p>
+<h4>Test the view model</h4>
+<p>With fake data in place, we can test our view model by changing <code>src/restaurant/list/list_test.js</code> to:</p>
+<pre><code class="language-js">import QUnit from 'steal-qunit';
+import cityStore from 'place-my-order/models/fixtures/city';
+import stateStore from 'place-my-order/models/fixtures/state';
+import restaurantStore from 'place-my-order/models/fixtures/restaurant';
+import { ViewModel } from './list';
+
+QUnit.module('place-my-order/restaurant/list', {
+  beforeEach() {
+    localStorage.clear();
+  }
+});
+
+QUnit.asyncTest('loads all states', function() {
+  var vm = new ViewModel();
+  var expectedStates = stateStore.findAll({});
+
+  vm.attr('states').then(states =&gt; {
+    QUnit.deepEqual(states.attr(), expectedStates.data, 'Got all states');
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('setting a state loads its cities', function() {
+  var vm = new ViewModel();
+  var expectedCities = cityStore.findAll({data: {state: &quot;CA&quot;}}).data;
+
+  QUnit.equal(vm.attr('cities'), null, '');
+  vm.attr('state', 'CA');
+  vm.attr('cities').then(cities =&gt; {
+    QUnit.deepEqual(cities.attr(), expectedCities);
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('changing a state resets city', function() {
+  var vm = new ViewModel();
+  var expectedCities = cityStore.findAll({data: {state: &quot;CA&quot;}}).data;
+
+  QUnit.equal(vm.attr('cities'), null, '');
+  vm.attr('state', 'CA');
+  vm.attr('cities').then(cities =&gt; {
+    QUnit.deepEqual(cities.attr(), expectedCities);
+    vm.attr('state', 'NT');
+    QUnit.equal(vm.attr('city'), null);
+    QUnit.start();
+  });
+});
+
+QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
+  var vm = new ViewModel();
+  var expectedRestaurants = restaurantStore.findAll({
+    data: {&quot;address.city&quot;: &quot;Alberny&quot;}
+  }).data;
+
+  vm.attr('state', 'NT');
+  vm.attr('city', 'Alberny');
+
+  vm.attr('restaurants').then(restaurants =&gt; {
+    QUnit.deepEqual(restaurants.attr(), expectedRestaurants);
+    QUnit.start();
+  });
+});
+
+</code></pre>
+<p>These unit tests are comparing expected data (what we we defined in the fixtures) with actual data (how the view model methods are behaving). Visit <a href="http://localhost:8080/src/restaurant/list/test.html">http://localhost:8080/src/restaurant/list/test.html</a> to see all tests passing.</p>
+<h3>Write the template</h3>
+<p>Now that our view model is implemented and tested, we'll update the restaurant list template to support the city/state selection functionality.</p>
+<p>Update <code>src/restaurant/list/list.stache</code> to:</p>
+<pre><code class="language-html">&lt;div class=&quot;restaurants&quot;&gt;
+  &lt;h2 class=&quot;page-header&quot;&gt;Restaurants&lt;/h2&gt;
+  &lt;form class=&quot;form&quot;&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label&gt;State&lt;/label&gt;
+      &lt;select {($value)}=&quot;state&quot; {{#if states.isPending}}disabled{{/if}}&gt;
+        {{#if states.isPending}}
+          &lt;option value=&quot;&quot;&gt;Loading...&lt;/option&gt;
+        {{else}}
+          {{^if state}}
+          &lt;option value=&quot;&quot;&gt;Choose a state&lt;/option&gt;
+          {{/if}}
+          {{#each states.value}}
+          &lt;option value=&quot;{{short}}&quot;&gt;{{name}}&lt;/option&gt;
+          {{/each}}
+        {{/if}}
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label&gt;City&lt;/label&gt;
+      &lt;select {($value)}=&quot;city&quot;{{^if state}}disabled{{/if}}&gt;
+        {{#if cities.isPending}}
+          &lt;option value=&quot;&quot;&gt;Loading...&lt;/option&gt;
+        {{else}}
+          {{^if city}}
+          &lt;option value=&quot;&quot;&gt;Choose a city&lt;/option&gt;
+          {{/if}}
+          {{#each cities.value}}
+          &lt;option&gt;{{name}}&lt;/option&gt;
+          {{/each}}
+        {{/if}}
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/form&gt;
+
+  {{#if restaurants.isPending}}
+  &lt;div class=&quot;restaurant loading&quot;&gt;&lt;/div&gt;
+  {{/if}}
+
+  {{#if restaurants.isResolved}}
+    {{#each restaurants.value}}
+    &lt;div class=&quot;restaurant&quot;&gt;
+      &lt;img src=&quot;{{joinBase images.thumbnail}}&quot;
+        width=&quot;100&quot; height=&quot;100&quot;&gt;
+      &lt;h3&gt;{{name}}&lt;/h3&gt;
+      {{#address}}
+      &lt;div class=&quot;address&quot;&gt;
+        {{street}}&lt;br /&gt;{{city}}, {{state}} {{zip}}
+      &lt;/div&gt;
+      {{/address}}
+
+      &lt;div class=&quot;hours-price&quot;&gt;
+        $$$&lt;br /&gt;
+        Hours: M-F 10am-11pm
+        &lt;span class=&quot;open-now&quot;&gt;Open Now&lt;/span&gt;
+      &lt;/div&gt;
+
+      &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants' slug=slug}}&quot;&gt;
+        Place My Order
+      &lt;/a&gt;
+      &lt;br /&gt;
+    &lt;/div&gt;
+    {{/each}}
+  {{/if}}
+&lt;/div&gt;
+
+</code></pre>
+<p><span line-highlight='3-34'></span></p>
+<p>Some things worth pointing out:</p>
+<ul>
+<li>Since <code>states</code> and <code>cities</code> return a promise, we can check the promise's status via <code>isResolved</code> and <code>isPending</code> and once resolved get the actual value with <code>states.value</code> and <code>cities.value</code>. This also allows us to easily show loading indicators and disable the select fields while loading data.</li>
+<li>The <code>state</code> and <code>city</code> properties are two-way bound to their select fields via <a href="http://canjs.com/docs/can.view.bindings.can-value.html">{($value)}</a></li>
+</ul>
+<p>Now we have a component that lets us select state and city and displays the appropriate restaurant list.</p>
+<h3>Update the demo page</h3>
+<p>We already have an existing demo page at <a href="http://localhost:8080/src/restaurant/list/list.html">src/restaurant/list/list.html</a>. We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:</p>
+<pre><code class="language-html">&lt;script type=&quot;text/stache&quot; can-autorender&gt;
+  &lt;can-import from=&quot;place-my-order-assets&quot; /&gt;
+  &lt;can-import from=&quot;place-my-order/models/fixtures/&quot; /&gt;
+  &lt;can-import from=&quot;place-my-order/restaurant/list/&quot; /&gt;
+  &lt;pmo-restaurant-list/&gt;
+&lt;/script&gt;
+&lt;script src=&quot;../../../node_modules/steal/steal.js&quot;
+        main=&quot;can/view/autorender/&quot;&gt;&lt;/script&gt;
+
+</code></pre>
+<p><span line-highlight='2-3'></span>
+View the demo page at <a href="http://localhost:8080/src/restaurant/list/list.html">http://localhost:8080/src/restaurant/list/list.html</a> .</p>
+<h2>Automated tests</h2>
+<p>In this chapter we will automate running the tests so that they can be run from from the command line.</p>
+<h3>Using the global test page</h3>
+<p>We already worked with an individual component test page in <a href="http://localhost:8080/src/restaurant/list/test.html">src/restaurant/list/test.html</a> but we also have a global test page available at <a href="http://localhost:8080/src/test.html">src/test.html</a>. All tests are being loaded in <code>src/test/test.js</code>. Since we do not tests our models at the moment, let's remove the <code>import 'place-my-order/models/test';</code> part so that <code>src/test/test.js</code> looks like this:</p>
+<pre><code class="language-js">import 'place-my-order/test/functional';
+
+import 'place-my-order/restaurant/list/list_test';
+
+</code></pre>
+<p>If you now go to <a href="http://localhost:8080/src/test.html">http://localhost:8080/src/test.html</a> we still see all restaurant list tests passing but we will add more here later on.</p>
+<h3>Using a test runner</h3>
+<p>The tests can be automated with any test runner that supports running QUnit tests. We will use <a href="https://github.com/bitovi/testee">Testee</a> which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the <code>src/test.html</code> page in Firefox is already set up and we can launch the tests by running:</p>
+<pre><code>donejs test
+</code></pre>
+<p>To see the tests passing on the command line.</p>
+<h2>Continuous integration</h2>
+<p>Now that the tests can be run from the command line we can automate it in a <a href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> (CI) environment to run all tests whenever a code change is made. We will use <a href="https://github.com">GitHub</a> to host our code and <a href="https://travis-ci.org/">TravisCI</a> as the CI server.</p>
+<h3>Creating a GitHub account and repository</h3>
+<p>If you don't have an account yet, go to <a href="https://github.com">GitHub</a> to sign up and follow <a href="https://help.github.com/articles/set-up-git/">the help</a> on how to set it up for use with the command-line <code>git</code>. Once completed, you can create a new repository from your dashboard. Calling the repository <code>place-my-order</code> and initializing it empty (without any of the default files) looks like this:</p>
+<p><img src="static/img/guide-create-repo.png" alt="Creating a new repository on GitHub" /></p>
+<p>Now we have to initialize Git in our project folder and add the GitHub repository we created as the origin remote (replace <code>&lt;your-username&gt;</code> with your GitHub username):</p>
+<pre><code>git init
+git remote add origin git@github.com:&lt;your-username&gt;/place-my-order.git
+</code></pre>
+<p>Then we can add all files and push to origin like this:</p>
+<pre><code>git add . --all
+git commit -am &quot;Initial commit&quot;
+git push origin master
+</code></pre>
+<p>If you now go to <a href="https://github.com/&lt;your-username&gt;/place-my-order">github.com/&lt;your-username&gt;/place-my-order</a> you will see the project files in the repository.</p>
+<h3>Setting up Travis CI</h3>
+<p>The way our application is set up, now all a continuous integration server has to do is clone the application repository, run <code>npm install</code>, and then run <code>npm test</code>. There are many open source CI servers, the most popular one probably <a href="https://jenkins-ci.org/">Jenkins</a>, and many hosted solutions like <a href="https://travis-ci.org/">Travis CI</a>.</p>
+<p>We will use Travis as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. First, <a href="https://travis-ci.org/">sign up</a>, then go to <code>Accounts</code> (in the dropdown under you name) to enable the <code>place-my-order</code> repository:</p>
+<p><img src="static/img/guide-travis-ci.png" alt="Enabling the repository on Travis CI" /></p>
+<p>Continuous integration on GitHub is most useful when using <a href="https://help.github.com/categories/collaborating-on-projects-using-pull-requests/">branches and pull requests</a>. That way your main branch (master) will only get new code changes if all tests pass. Let's create a new branch with</p>
+<pre><code>git checkout -b travis-ci
+</code></pre>
+<p>And add a <code>.travis.yml</code> file to our project root:</p>
+<pre><code>language: node_js
+node_js: node
+before_install:
+  - &quot;export DISPLAY=:99.0&quot;
+  - &quot;sh -e /etc/init.d/xvfb start&quot;
+</code></pre>
+<p>By default Travis CI runs <code>npm test</code> for NodeJS projects which is what we want. <code>before_install</code> sets up a window system to run Firefox.</p>
+<p>We can also add a <em>Build Passing</em> badge to the top <code>readme.md</code>:</p>
+<pre><code>[![Build Status](https://travis-ci.org/&lt;your-username&gt;/place-my-order.png?branch=master)](https://travis-ci.org/&lt;your-username&gt;/place-my-order)
+
+# place-my-order
+</code></pre>
+<p><span line-highlight='1'></span>
+To see Travis run, let's add all changes and push to the branch:</p>
+<pre><code>git add readme.md .travis.yml
+git commit -am &quot;Enabling Travis CI&quot;
+git push origin travis-ci
+</code></pre>
+<p>And then create a new pull request by going to <a href="https://github.com/&lt;your-username&gt;/place-my-order">github.com/&lt;your-username&gt;/place-my-order</a> which will now show an option for it:</p>
+<p><img src="static/img/guide-github-pr.png" alt="Creating a new pull request on GitHub" /></p>
+<p>Once you created the pull request, you will see a <code>Some checks haven’t completed yet</code> message that will eventually turn green like this:</p>
+<p><img src="static/img/guide-merge-pr.png" alt="Merging a pull request with all tests passed" /></p>
+<p>Once everything turns green, click the &quot;Merge pull request&quot; button.  Then in your console, checkout the <em>master</em> branch and pull down it's latest with:</p>
+<pre><code>git checkout master
+git pull origin master
+</code></pre>
+<h2>Nested routes</h2>
+<p>In this section, we will add additional pages that are show under nested urls such as <code>restaurants/cheese-curd-city/order</code>.</p>
+<div></div>
+<p>Until now we've used three top level routes: <code>home</code>, <code>restaurants</code> and <code>order-history</code>. We did however also define two additional routes in <code>src/app.js</code> which looked like:</p>
+<pre><code class="language-js">route(':page/:slug', { slug: null });
+route(':page/:slug/:action', { slug: null, action: null });
+</code></pre>
+<p>We want to use those routes when we are in the <code>restaurants</code> page. The relevant section in <code>src/index.stache</code> currently looks like this:</p>
+<pre><code class="language-html">{{#case &quot;restaurants&quot;}}
+  &lt;can-import from=&quot;src/restaurant/list/&quot;
+      can-tag=&quot;pmo-loading&quot;&gt;
+    &lt;pmo-restaurant-list/&gt;
+  &lt;/can-import&gt;
+{{/case}}
+</code></pre>
+<p>We want to support two additional routes:</p>
+<ul>
+<li><code>restaurants/:slug</code>, which shows a details page for the restaurant with <code>slug</code> being a URL friendly short name for the restaurant</li>
+<li><code>restaurants/:slug/order</code>, which shows the menu of the current restaurant and allows us to make a selection and then send our order.</li>
+</ul>
+<h3>Create additional components</h3>
+<p>To make this happen, we need two more components. First, the <code>pmo-restaurant-details</code> component which loads the restaurant (based on the <code>slug</code>) and displays its information.</p>
+<pre><code>donejs add component restaurant/details.component pmo-restaurant-details
+</code></pre>
+<p>And change <code>src/restaurant/details.component</code> to:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-restaurant-details&quot;&gt;
+  &lt;template&gt;
+    &lt;can-import from=&quot;place-my-order/models/restaurant&quot;/&gt;
+    &lt;restaurant-model get=&quot;{ _id=slug }&quot;&gt;
+      {{#if isPending}}
+        &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
+      {{else}}
+      {{#value}}
+      &lt;div class=&quot;restaurant-header&quot;
+          style=&quot;background-image: url({{joinBase images.banner}});&quot;&gt;
+        &lt;div class=&quot;background&quot;&gt;
+          &lt;h2&gt;{{name}}&lt;/h2&gt;
+
+          {{#address}}
+          &lt;div class=&quot;address&quot;&gt;
+            {{street}}&lt;br /&gt;{{city}}, {{state}} {{zip}}
+          &lt;/div&gt;
+          {{/address}}
+
+          &lt;div class=&quot;hours-price&quot;&gt;
+            $$$&lt;br /&gt;
+            Hours: M-F 10am-11pm
+            &lt;span class=&quot;open-now&quot;&gt;Open Now&lt;/span&gt;
+          &lt;/div&gt;
+
+          &lt;br /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;restaurant-content&quot;&gt;
+        &lt;h3&gt;The best food this side of the Mississippi&lt;/h3&gt;
+
+        &lt;p class=&quot;description&quot;&gt;
+          &lt;img src=&quot;{{joinBase images.owner}}&quot; /&gt;
+          Description for {{name}}
+        &lt;/p&gt;
+        &lt;p class=&quot;order-link&quot;&gt;
+          &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants' slug=slug action='order'}}&quot;&gt;
+            Order from {{name}}
+          &lt;/a&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
+      {{/value}}
+      {{/if}}
+    &lt;/restaurant-model&gt;
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p>The order component will be a little more complex, which is why we will put it into its own folder:</p>
+<pre><code>donejs add component order/new pmo-order-new
+</code></pre>
+<p>For now, we will just use placeholder content and implement the functionality in
+the following chapters.</p>
+<h3>Add to the main template</h3>
+<p>Now we can add those components to the main template (at <code>src/index.stache</code>) with conditions based on the routes that we want to match. Change the section which contains:</p>
+<pre><code class="language-html">{{#case &quot;restaurants&quot;}}
+  &lt;can-import from=&quot;place-my-order/restaurant/list/&quot;
+      can-tag=&quot;pmo-loading&quot;&gt;
+    &lt;pmo-restaurant-list/&gt;
+  &lt;/can-import&gt;
+{{/case}}
+</code></pre>
+<p>To:</p>
+<pre><code class="language-html">{{#case &quot;restaurants&quot;}}
+  {{#if slug}}
+    {{#switch action}}
+      {{#case 'order'}}
+        &lt;can-import from=&quot;place-my-order/order/new/&quot;
+            can-tag=&quot;pmo-loading&quot;&gt;
+          &lt;pmo-order-new slug=&quot;{slug}&quot;/&gt;
+        &lt;/can-import&gt;
+      {{/case}}
+
+      {{#default}}
+        &lt;can-import from=&quot;place-my-order/restaurant/details.component&quot;
+            can-tag=&quot;pmo-loading&quot;&gt;
+          &lt;pmo-restaurant-details/&gt;
+        &lt;/can-import&gt;
+      {{/default}}
+    {{/switch}}
+  {{else}}
+    &lt;can-import from=&quot;place-my-order/restaurant/list/&quot;
+        can-tag=&quot;pmo-loading&quot;&gt;
+      &lt;pmo-restaurant-list/&gt;
+    &lt;/can-import&gt;
+  {{/if}}
+{{/case}}
+
+</code></pre>
+<p>Here we are adding some more conditions if <code>page</code> is set to <code>restaurants</code>:</p>
+<ul>
+<li>When there is no <code>slug</code> set, show the original restaurant list</li>
+<li>When <code>slug</code> is set but no <code>action</code>, show the restaurant details</li>
+<li>When <code>slug</code> is set and <code>action</code> is <code>order</code>, show the order component for that restaurant</li>
+</ul>
+<h2>Importing other projects</h2>
+<p>The NPM integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the <code>pmo-order-new</code> component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a <a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a> component which does exactly that. Let's add it as a project dependency with:</p>
+<pre><code>npm install bit-tabs --save
+</code></pre>
+<p>And then integrate it into <code>src/order/new/new.stache</code>:</p>
+<pre><code class="language-html">&lt;can-import from=&quot;bit-tabs/unstyled&quot;/&gt;
+&lt;div class=&quot;order-form&quot;&gt;
+  &lt;h2&gt;Order here&lt;/h2&gt;
+
+  &lt;bit-tabs tabs-class=&quot;nav nav-tabs&quot;&gt;
+    &lt;bit-panel title=&quot;Lunch menu&quot;&gt;
+      This is the lunch menu
+    &lt;/bit-panel&gt;
+    &lt;bit-panel title=&quot;Dinner menu&quot;&gt;
+      This is the dinner menu
+    &lt;/bit-panel&gt;
+  &lt;/bit-tabs&gt;
+&lt;/div&gt;
+
+</code></pre>
+<p>Here we just import the <code>unstyled</code> module from the <code>bit-tabs</code> package using <code>can-import</code> which will then provide the <code>bit-tabs</code> and <code>bit-panel</code> custom elements.</p>
+<h2>Creating data</h2>
+<p>In this section, we will update the order component to be able to select restaurant menu items and submit a new order for a restaurant.</p>
+<h3>Creating the order model</h3>
+<p>First, let's look at the restaurant data we get back from the server. It looks like this:</p>
+<pre><code class="language-js">{
+  &quot;_id&quot;: &quot;5571e03daf2cdb6205000001&quot;,
+  &quot;name&quot;: &quot;Cheese Curd City&quot;,
+  &quot;slug&quot;: &quot;cheese-curd-city&quot;,
+  &quot;images&quot;: {
+    &quot;thumbnail&quot;: &quot;images/1-thumbnail.jpg&quot;,
+    &quot;owner&quot;: &quot;images/1-owner.jpg&quot;,
+    &quot;banner&quot;: &quot;images/2-banner.jpg&quot;
+  },
+  &quot;menu&quot;: {
+    &quot;lunch&quot;: [
+      {
+        &quot;name&quot;: &quot;Spinach Fennel Watercress Ravioli&quot;,
+        &quot;price&quot;: 35.99
+      },
+      {
+        &quot;name&quot;: &quot;Chicken with Tomato Carrot Chutney Sauce&quot;,
+        &quot;price&quot;: 45.99
+      },
+      {
+        &quot;name&quot;: &quot;Onion fries&quot;,
+        &quot;price&quot;: 15.99
+      }
+    ],
+    &quot;dinner&quot;: [
+      {
+        &quot;name&quot;: &quot;Gunthorp Chicken&quot;,
+        &quot;price&quot;: 21.99
+      },
+      {
+        &quot;name&quot;: &quot;Herring in Lavender Dill Reduction&quot;,
+        &quot;price&quot;: 45.99
+      },
+      {
+        &quot;name&quot;: &quot;Roasted Salmon&quot;,
+        &quot;price&quot;: 23.99
+      }
+    ]
+  },
+  &quot;address&quot;: {
+    &quot;street&quot;: &quot;1601-1625 N Campbell Ave&quot;,
+    &quot;city&quot;: &quot;Green Bay&quot;,
+    &quot;state&quot;: &quot;WI&quot;,
+    &quot;zip&quot;: &quot;60045&quot;
+  }
+}
+</code></pre>
+<p>We have a <code>menu</code> property which provides a <code>lunch</code> and <code>dinner</code> option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (<code>new</code>), and be able to calculate the order total. For that to happen, we need to create a new <code>order</code> model:</p>
+<pre><code>donejs add supermodel order
+</code></pre>
+<p>Like the restaurant model, the URL is <code>/api/orders</code> and the id property is <code>_id</code>. To select menu items, we need to add some additional functionality to <code>src/models/order.js</code>:</p>
+<pre><code class="language-js">import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import List from 'can/list/';
+import Map from 'can/map/';
+import 'can/map/define/';
+
+const ItemsList = List.extend({}, {
+  has: function(item) {
+    return this.indexOf(item) !== -1;
+  },
+
+  toggle: function(item) {
+    var index = this.indexOf(item);
+
+    if (index !== -1) {
+      this.splice(index, 1);
+    } else {
+      this.push(item);
+    }
+  }
+});
+
+let Order = Map.extend({
+  define: {
+    status: {
+      value: 'new'
+    },
+    items: {
+      Value: ItemsList
+    },
+    total: {
+      get() {
+        let total = 0.0;
+        this.attr('items').forEach(item =&gt;
+            total += parseFloat(item.attr('price')));
+        return total.toFixed(2);
+      }
+    }
+  },
+
+  markAs(status) {
+    this.attr('status', status);
+    this.save();
+  }
+});
+
+export const connection = superMap({
+  url: '/api/orders',
+  idProp: '_id',
+  Map: Order,
+  List: Order.List,
+  name: 'orders'
+});
+
+tag('order-model', connection);
+
+export default Order;
+
+</code></pre>
+<p><span line-highlight='3-4,7-21,25-38,41-44'></span>
+Here we define an <code>ItemsList</code> which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another <code>&lt;order-model&gt;</code> tag to load orders in the order history template later.</p>
+<h3>Implement the view model</h3>
+<p>Now we can update the view model in <code>src/order/new/new.js</code>:</p>
+<pre><code class="language-js">import Component from 'can/component/component';
+import Map from 'can/map/';
+import 'can/map/define/';
+import template from './new.stache';
+import Restaurant from 'place-my-order/models/restaurant';
+import Order from 'place-my-order/models/order';
+
+export const ViewModel = Map.extend({
+  define: {
+    slug: {
+      type: 'string'
+    },
+    order: {
+      Value: Order
+    },
+    saveStatus: {
+      Value: Object
+    },
+    canPlaceOrder: {
+      get() {
+        let items = this.attr('order.items');
+        return items.attr('length');
+      }
+    }
+  },
+
+  placeOrder() {
+    let order = this.attr('order');
+    order.attr('restaurant', this.attr('restaurant._id'));
+    this.attr('saveStatus', order.save());
+    return false;
+  },
+
+  startNewOrder() {
+    this.attr('order', new Order());
+    this.attr('saveStatus', null);
+    return false;
+  }
+});
+
+export default Component.extend({
+  tag: 'pmo-order-new',
+  viewModel: ViewModel,
+  template
+});
+
+</code></pre>
+<p><span line-highlight='5-6,9-25,27-32,34-38'></span>
+Here we just define the properties that we need: <code>slug</code>, <code>order</code>, <code>canPlaceOrder</code> - which we will use to enable/disable the submit button - and <code>saveStatus</code>, which will become a Deferred once the order is submitted. <code>placeOrder</code> updates the order with the restaurant information and saves the current order. <code>startNewOrder</code> allows us to submit another order.</p>
+<p>While we're here we can also update our test to get it passing again, replace <code>src/order/new/new_test.js</code> with:</p>
+<pre><code class="language-js">import QUnit from 'steal-qunit';
+import { ViewModel } from './new';
+
+// ViewModel unit tests
+QUnit.module('place-my-order/order/new');
+
+QUnit.test('canPlaceOrder', function(){
+  var vm = new ViewModel({
+    order: { items: [1] }
+  });
+  QUnit.equal(vm.attr('canPlaceOrder'), true, 'can place an order');
+});
+
+</code></pre>
+<p><span line-highlight='7-12'></span></p>
+<h3>Write the template</h3>
+<p>First, let's implement a small order confirmation component with</p>
+<pre><code>donejs add component order/details.component pmo-order-details
+</code></pre>
+<p>and changing <code>src/order/details.component</code> to:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-details&quot;&gt;
+  &lt;template&gt;
+    {{#order}}
+      &lt;h3&gt;Thanks for your order {{name}}!&lt;/h3&gt;
+      &lt;div&gt;&lt;label class=&quot;control-label&quot;&gt;
+        Confirmation Number: {{_id}}&lt;/label&gt;
+      &lt;/div&gt;
+
+      &lt;h4&gt;Items ordered:&lt;/h4&gt;
+      &lt;ul class=&quot;list-group panel&quot;&gt;
+        {{#each items}}
+          &lt;li class=&quot;list-group-item&quot;&gt;
+            &lt;label&gt;
+              {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
+            &lt;/label&gt;
+          &lt;/li&gt;
+        {{/each}}
+
+        &lt;li class=&quot;list-group-item&quot;&gt;
+          &lt;label&gt;
+            Total &lt;span class=&quot;badge&quot;&gt;${{total}}&lt;/span&gt;
+          &lt;/label&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;div&gt;&lt;label class=&quot;control-label&quot;&gt;
+        Phone: {{phone}}
+      &lt;/label&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;label class=&quot;control-label&quot;&gt;
+        Address: {{address}}
+      &lt;/label&gt;&lt;/div&gt;
+    {{/order}}
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p>Now we can import that component and update <code>src/order/new/new.stache</code> to:</p>
+<pre><code class="language-html">&lt;can-import from=&quot;bit-tabs/unstyled&quot;/&gt;
+&lt;can-import from=&quot;place-my-order/order/details.component&quot; /&gt;
+
+&lt;div class=&quot;order-form&quot;&gt;
+  &lt;restaurant-model get=&quot;{ _id=slug }&quot;&gt;
+    {{#if isPending}}
+      &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
+    {{else}}
+      {{#value}}
+        {{#if saveStatus.isResolved}}
+          &lt;pmo-order-details order=&quot;{saveStatus.value}&quot;&gt;&lt;/pmo-order-details&gt;
+          &lt;p&gt;&lt;a href=&quot;javascript://&quot; ($click)=&quot;startNewOrder&quot;&gt;
+            Place another order
+          &lt;/a&gt;&lt;/p&gt;
+        {{else}}
+          &lt;h3&gt;Order from {{name}}&lt;/h3&gt;
+
+          &lt;form ($submit)=&quot;placeOrder&quot;&gt;
+            &lt;bit-tabs tabs-class=&quot;nav nav-tabs&quot;&gt;
+              &lt;p class=&quot;info {{^if order.items.length}}text-error{{else}}text-success{{/if}}&quot;&gt;
+                {{^if order.items.length}}
+                  Please choose an item
+                {{else}}
+                  {{order.items.length}} selected
+                {{/if}}
+              &lt;/p&gt;
+              &lt;bit-panel title=&quot;Lunch menu&quot;&gt;
+                &lt;ul class=&quot;list-group&quot;&gt;
+                  {{#each menu.lunch}}
+                    &lt;li class=&quot;list-group-item&quot;&gt;
+                      &lt;label&gt;
+                        &lt;input type=&quot;checkbox&quot;
+                          ($change)=&quot;order.items.toggle(.)&quot;
+                          {{#if order.items.has(.)}}checked{{/if}}&gt;
+                        {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
+                      &lt;/label&gt;
+                    &lt;/li&gt;
+                  {{/each}}
+                &lt;/ul&gt;
+              &lt;/bit-panel&gt;
+              &lt;bit-panel title=&quot;Dinner menu&quot;&gt;
+                &lt;ul class=&quot;list-group&quot;&gt;
+                  {{#each menu.dinner}}
+                    &lt;li class=&quot;list-group-item&quot;&gt;
+                      &lt;label&gt;
+                        &lt;input type=&quot;checkbox&quot;
+                          ($change)=&quot;order.items.toggle(this)&quot;
+                          {{#if order.items.has(.)}}checked{{/if}}&gt;
+                        {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
+                      &lt;/label&gt;
+                    &lt;/li&gt;
+                  {{/each}}
+                &lt;/ul&gt;
+              &lt;/bit-panel&gt;
+            &lt;/bit-tabs&gt;
+
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot;&gt;Name:&lt;/label&gt;
+              &lt;input name=&quot;name&quot; type=&quot;text&quot; class=&quot;form-control&quot;
+                {($value)}=&quot;order.name&quot;&gt;
+              &lt;p&gt;Please enter your name.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot;&gt;Address:&lt;/label&gt;
+              &lt;input name=&quot;address&quot; type=&quot;text&quot; class=&quot;form-control&quot;
+                {($value)}=&quot;order.address&quot;&gt;
+              &lt;p class=&quot;help-text&quot;&gt;Please enter your address.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-group&quot;&gt;
+              &lt;label class=&quot;control-label&quot;&gt;Phone:&lt;/label&gt;
+              &lt;input name=&quot;phone&quot; type=&quot;text&quot; class=&quot;form-control&quot;
+                {($value)}=&quot;order.phone&quot;&gt;
+              &lt;p class=&quot;help-text&quot;&gt;Please enter your phone number.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;submit&quot;&gt;
+              &lt;h4&gt;Total: ${{order.total}}&lt;/h4&gt;
+              {{#if saveStatus.isPending}}
+                &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
+              {{else}}
+                &lt;button type=&quot;submit&quot;
+                    {{^if canPlaceOrder}}disabled{{/if}} class=&quot;btn&quot;&gt;
+                  Place My Order!
+                &lt;/button&gt;
+              {{/if}}
+            &lt;/div&gt;
+          &lt;/form&gt;
+        {{/if}}
+      {{/value}}
+    {{/if}}
+  &lt;/restaurant-model&gt;
+&lt;/div&gt;
+
+</code></pre>
+<p>This is a longer template so lets walk through it:</p>
+<ul>
+<li><code>&lt;can-import from=&quot;place-my-order/order/details.component&quot; /&gt;</code> loads the order details component we previously created</li>
+<li><code>&lt;restaurant-model get=&quot;{ _id=slug }&quot;&gt;</code> loads a restaurant based on the slug value passed to the component</li>
+<li>If the <code>saveStatus</code> deferred is resolved we show the <code>pmo-order-details</code> component with that order</li>
+<li>Otherwise we will show the order form with the <code>bit-tabs</code> panels we implemented in the previous chapter and iterate over each menu item]</li>
+<li><code>(submit)=&quot;{placeOrder}&quot;</code> will call <code>placeOrder</code> from our view model when the form is submitted</li>
+<li>The interesting part for showing a menu item is the checkbox <code>&lt;input type=&quot;checkbox&quot; (change)=&quot;{order.items.toggle this}&quot; {{#if order.items.has}}checked{{/if}}&gt;</code>
+<ul>
+<li><code>(change)</code> binds to the checkbox change event and runs <code>order.items.toggle</code> which toggles the item from <code>ItemList</code>, which we created in the model</li>
+<li><code>order.item.has</code> sets the checked status to whether or not this item is in the order</li>
+</ul></li>
+<li>Then we show form elements for name, address, and phone number, which are bound to the order model using <a href="http://canjs.com/docs/can.view.bindings.can-value.html">can-value</a></li>
+<li>Finally we disable the button with <code>{{^if canPlaceOrder}}disabled{{/if}}</code> which calls <code>canPlaceOrder</code> from the view model and returns false if no menu items are selected.</li>
+</ul>
+<h2>Set up a real-time connection</h2>
+<p>can-connect makes it very easy to implement real-time functionality. It is capable of listening to notifications from the server when server data has been created, updated, or removed. This is usually accomplished via <a href="https://en.wikipedia.org/wiki/WebSocket">websockets</a>, which allow sending push notifications to a client.</p>
+<h3>Adding real-time events to a model</h3>
+<p>The <code>place-my-order-api</code> module uses the <a href="http://feathersjs.com/">Feathers</a> NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like <code>orders created</code>. To make the order page update in real-time, all we need to do is add listeners for those events to <code>src/models/order.js</code> and in the handler notify the order connection.</p>
+<pre><code>npm install steal-socket.io --save
+</code></pre>
+<p>In <code>src/models/order.js</code> replace with:</p>
+<pre><code class="language-js">import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import List from 'can/list/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import io from 'steal-socket.io';
+
+const ItemsList = List.extend({}, {
+  has: function(item) {
+    return this.indexOf(item) !== -1;
+  },
+
+  toggle: function(item) {
+    var index = this.indexOf(item);
+
+    if (index !== -1) {
+      this.splice(index, 1);
+    } else {
+      this.push(item);
+    }
+  }
+});
+
+let Order = Map.extend({
+  define: {
+    status: {
+      value: 'new'
+    },
+    items: {
+      Value: ItemsList
+    },
+    total: {
+      get() {
+        let total = 0.0;
+        this.attr('items').forEach(item =&gt;
+            total += parseFloat(item.attr('price')));
+        return total.toFixed(2);
+      }
+    }
+  },
+
+  markAs(status) {
+    this.attr('status', status);
+    this.save();
+  }
+});
+
+export const connection = superMap({
+  url: '/api/orders',
+  idProp: '_id',
+  Map: Order,
+  List: Order.List,
+  name: 'orders'
+});
+
+const socket = io();
+
+socket.on('orders created', order =&gt; connection.createInstance(order));
+socket.on('orders updated', order =&gt; connection.updateInstance(order));
+socket.on('orders removed', order =&gt; connection.destroyInstance(order));
+
+tag('order-model', connection);
+
+export default Order;
+
+</code></pre>
+<p><span line-highlight='6,56-60'></span></p>
+<h3>Update the template</h3>
+<p>That's all the JavaScript we need to implement real-time functionality. All the rest can be done by creating the <code>pmo-order-list</code> component with:</p>
+<pre><code>donejs add component order/list.component pmo-order-list
+</code></pre>
+<p>Changing <code>src/order/list.component</code> to:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-list&quot;&gt;
+  &lt;template&gt;
+    &lt;h4&gt;{{listTitle}}&lt;/h4&gt;
+
+    {{#if orders.isPending}}
+     &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
+    {{else}}
+      {{#each orders.value}}
+      &lt;div class=&quot;order {{status}}&quot;&gt;
+        &lt;address&gt;
+          {{name}} &lt;br /&gt;{{address}} &lt;br /&gt;{{phone}}
+        &lt;/address&gt;
+
+        &lt;div class=&quot;items&quot;&gt;
+          &lt;ul&gt;
+            {{#each items}}&lt;li&gt;{{name}}&lt;/li&gt;{{/each}}
+          &lt;/ul&gt;
+        &lt;/div&gt;
+
+        &lt;div class=&quot;total&quot;&gt;${{total}}&lt;/div&gt;
+
+        &lt;div class=&quot;actions&quot;&gt;
+          &lt;span class=&quot;badge&quot;&gt;{{statusTitle}}&lt;/span&gt;
+          {{#if action}}
+            &lt;p class=&quot;action&quot;&gt;
+              Mark as:
+              &lt;a href=&quot;javascript://&quot; ($click)=&quot;markAs(action)&quot;&gt;
+                {{actionTitle}}
+              &lt;/a&gt;
+            &lt;/p&gt;
+          {{/if}}
+
+          &lt;p class=&quot;action&quot;&gt;
+            &lt;a href=&quot;javascript://&quot;  ($click)=&quot;destroy()&quot;&gt;Delete&lt;/a&gt;
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      {{else}}
+        &lt;div class=&quot;order empty&quot;&gt;{{emptyMessage}}&lt;/div&gt;
+      {{/each}}
+    {{/if}}
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p>And in the order history template by updating <code>src/order/history.component</code> to:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-history&quot;&gt;
+  &lt;template&gt;
+    &lt;can-import from=&quot;place-my-order/models/order&quot; /&gt;
+
+    &lt;div class=&quot;order-history&quot;&gt;
+      &lt;div class=&quot;order header&quot;&gt;
+        &lt;address&gt;Name / Address / Phone&lt;/address&gt;
+        &lt;div class=&quot;items&quot;&gt;Order&lt;/div&gt;
+        &lt;div class=&quot;total&quot;&gt;Total&lt;/div&gt;
+        &lt;div class=&quot;actions&quot;&gt;Action&lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;can-import from=&quot;place-my-order/order/list.component&quot; /&gt;
+      &lt;order-model getList=&quot;{status='new'}&quot;&gt;
+        &lt;pmo-order-list
+          {orders}=&quot;.&quot;
+          list-title=&quot;New Orders&quot;
+          status=&quot;new&quot;
+          status-title=&quot;New Order!&quot;
+          action=&quot;preparing&quot;
+          action-title=&quot;Preparing&quot;
+          empty-message=&quot;No new orders&quot;/&gt;
+      &lt;/order-model&gt;
+
+      &lt;order-model getList=&quot;{status='preparing'}&quot;&gt;
+        &lt;pmo-order-list
+          {orders}=&quot;.&quot;
+          list-title=&quot;Preparing&quot;
+          status=&quot;preparing&quot;
+          status-title=&quot;Preparing&quot;
+          action=&quot;delivery&quot;
+          action-title=&quot;Out for delivery&quot;
+          empty-message=&quot;No orders preparing&quot;/&gt;
+      &lt;/order-model&gt;
+
+      &lt;order-model getList=&quot;{status='delivery'}&quot;&gt;
+        &lt;pmo-order-list
+          {orders}=&quot;.&quot;
+          list-title=&quot;Out for delivery&quot;
+          status=&quot;delivery&quot;
+          status-title=&quot;Out for delivery&quot;
+          action=&quot;delivered&quot;
+          action-title=&quot;Delivered&quot;
+          empty-message=&quot;No orders are being delivered&quot;/&gt;
+      &lt;/order-model&gt;
+
+      &lt;order-model getList=&quot;{status='delivered'}&quot;&gt;
+        &lt;pmo-order-list
+          {orders}=&quot;.&quot;
+          list-title=&quot;Delivered&quot;
+          status=&quot;delivered&quot;
+          status-title=&quot;Delivered&quot;
+          empty-message=&quot;No delivered orders&quot;/&gt;
+      &lt;/order-model&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+&lt;/can-component&gt;
+
+</code></pre>
+<p>First we import the order model and then just call <code>&lt;order-model getList=&quot;{status='&lt;status&gt;'}&quot;&gt;</code> for each order status. That's it. If we now open the order page we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.</p>
+<h2>Create documentation</h2>
+<p>Documenting our code is very important to quickly get other developers up to speed. <a href="http://documentjs.com/">DocumentJS</a> makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.</p>
+<h3>Configuring DocumentJS</h3>
+<p>When we initialized the application all the infrastructure necessary to generate the documentation has already been set up. New modlet components will be added automatically. We can generate the documentation with:</p>
+<pre><code>donejs document
+</code></pre>
+<p>This produces documentation at <a href="http://localhost:8080/docs/">http://localhost:8080/docs/</a>.</p>
+<h3>Documenting a module</h3>
+<p>Let's add the documentation for a module. Let's use <code>src/order/new/new.js</code> and update it with some inline comments that describe what our view model properties are supposed to do:</p>
+<pre><code class="language-js">import Component from 'can/component/component';
+import Map from 'can/map/';
+import 'can/map/define/';
+import template from './new.stache';
+import Restaurant from 'place-my-order/models/restaurant';
+import Order from 'place-my-order/models/order';
+
+/**
+ * @add place-my-order/order/new
+ */
+export const ViewModel = Map.extend({
+  define: {
+    /**
+     * @property {String} slug
+     *
+     * The restaurants slug (short name). Will
+     * be used to request the actual restaurant.
+     */
+    slug: {
+      type: 'string'
+    },
+    /**
+     * @property {place-my-order/models/order} order
+     *
+     * The order that is being processed. Will
+     * be an empty new order inititally.
+     */
+    order: {
+      Value: Order
+    },
+    /**
+     * @property {can.Deferred} saveStatus
+     *
+     * A deferred that contains the status of the order when
+     * it is being saved.
+     */
+    saveStatus: {
+      Value: Object
+    },
+    /**
+     * @property {Boolean} canPlaceOrder
+     *
+     * A flag to enable / disable the &quot;Place my order&quot; button.
+     */
+    canPlaceOrder: {
+      get() {
+        let items = this.attr('order.items');
+        return items.attr('length');
+      }
+    }
+  },
+
+  /**
+   * @function placeOrder
+   *
+   * Save the current order and update the status Deferred.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  placeOrder() {
+    let order = this.attr('order');
+    this.attr('saveStatus', order.save());
+    return false;
+  },
+
+  /**
+   * @function startNewOrder
+   *
+   * Resets the order form, so a new order can be placed.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  startNewOrder: function() {
+    this.attr('order', new Order());
+    this.attr('saveStatus', null);
+    return false;
+  }
+});
+
+export default Component.extend({
+  tag: 'pmo-order-new',
+  viewModel: ViewModel,
+  template
+});
+
+</code></pre>
+<p><span line-highlight='8-10,13-18,22-27,31-36,40-44,53-59,66-72'></span>
+If we now run <code>donejs document</code> again, we will see the module show up in the menu bar and will be able to navigate through the different properties.</p>
+<h2>Production builds</h2>
+<p>Now we're ready to create a production build; go ahead and kill your development server, we won't need it from here on.</p>
+<h3>Progressive loading</h3>
+<p>Our <code>index.stache</code> contains a can-import tag for each of the pages we have implemented. These can-imports which have nested html will be progressively loaded; the restaurant list page's JavaScript and CSS will only be loaded when the user visits that page.</p>
+<h3>Bundling your app</h3>
+<p>To bundle our application for production we use the build script in <code>build.js</code>. We could also use <a href="http://gruntjs.com/">Grunt</a> or <a href="http://gulpjs.com/">Gulp</a>, but in this example we just run it directly with Node. Everything is set up already so we run:</p>
+<pre><code>donejs build
+</code></pre>
+<p>This will build the application to a <code>dist/</code> folder in the project's base directory.</p>
+<p>From here your application is ready to be used in production. Enable production mode by setting the <code>NODE_ENV</code> variable:</p>
+<pre><code>NODE_ENV=production donejs start
+</code></pre>
+<p>If you're using Windows omit the NODE_ENV=production in the command, and instead see the <a href="SettingUp.html#section=section_EnvironmentalVariables">setting up guide</a> on how to set environment variables.</p>
+<p>Refresh your browser to see the application load in production.</p>
+<h2>Desktop and mobile apps</h2>
+<h3>Building to iOS and Android</h3>
+<p>To build the application as a Cordova based mobile application, you need to have each platform's SDK installed.
+We'll be building an iOS app if you are a Mac user, and an Android app if you're a Windows user.</p>
+<p>Mac users should download XCode from the AppStore and install the <code>ios-sim</code> package globally with:</p>
+<pre><code>npm install -g ios-sim
+</code></pre>
+<p>We will use these tools to create an iOS application that can be tested in the iOS simulator.</p>
+<p>Windows users should install the <a href="https://developer.android.com/sdk/index.html">Android Studio</a>, which gives all of the tools we need. See the <a href="SettingUp.html#section=section_AndroidDevelopment">setting up guide</a> for full instructions on setting up your Android emulator.</p>
+<p>Now we can install the DoneJS Cordova tools with:</p>
+<pre><code>donejs add cordova
+</code></pre>
+<p>Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.</p>
+<p>This will change your <code>build.js</code> script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the <strong>glob</strong> property:</p>
+<pre><code>var cordovaOptions = {
+  buildDir: &quot;./build/cordova&quot;,
+  id: &quot;com.donejs.placemyorder&quot;,
+  name: &quot;place my order&quot;,
+  platforms: [&quot;ios&quot;],
+  plugins: [&quot;cordova-plugin-transport-security&quot;],
+  index: __dirname + &quot;/production.html&quot;,
+  glob: [
+    &quot;node_modules/steal/steal.production.js&quot;,
+    &quot;node_modules/place-my-order-assets/images/**/*&quot;
+  ]
+};
+</code></pre>
+<p><span line-highlight='10'></span></p>
+<h4>AJAX</h4>
+<p>When not running in a traditional browser environment, AJAX requests need to be made
+to an external URL. The module <code>steal-platform</code> aids in detecting environments like Cordova
+so special behavior can be added.  Install the module:</p>
+<pre><code>npm install steal-platform --save
+</code></pre>
+<p>Create a file: <code>src/service-base-url.js</code> and place this code:</p>
+<pre><code class="language-js">import platform from &quot;steal-platform&quot;;
+
+let baseUrl = '';
+
+if(platform.isCordova || platform.isNW) {
+  baseUrl = 'http://www.place-my-order.com';
+}
+
+export default baseUrl;
+</code></pre>
+<p>This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be made there.</p>
+<p>Our models will also need to be updated to use the baseUrl. For example in <code>src/models/state</code> do:</p>
+<pre><code class="language-js">import can from 'can';
+import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import 'can/map/define/define';
+import baseUrl from '../service-base-url';
+
+export const State = can.Map.extend({
+  define: {}
+});
+
+State.List = can.List.extend({
+  Map: State
+}, {});
+
+export const stateConnection = superMap({
+  url: baseUrl + '/api/states',
+  idProp: 'short',
+  Map: State,
+  List: State.List,
+  name: 'state'
+});
+
+tag('state-model', stateConnection);
+
+export default State;
+</code></pre>
+<p><span line-highlight='5,16'></span>
+Make this same change in <code>src/models/city.js</code> and <code>src/models/restaurant.js</code>.</p>
+<p>For <code>src/models/order</code>, you must also update the socket connection:</p>
+<pre><code class="language-js">import superMap from 'can-connect/can/super-map/';
+import tag from 'can-connect/can/tag/';
+import List from 'can/list/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import io from 'steal-socket.io';
+import baseUrl from '../service-base-url';
+
+const ItemsList = List.extend({}, {
+  has: function(item) {
+    return this.indexOf(item) !== -1;
+  },
+
+  toggle: function(item) {
+    var index = this.indexOf(item);
+
+    if (index !== -1) {
+      this.splice(index, 1);
+    } else {
+      this.push(item);
+    }
+  }
+});
+
+let Order = Map.extend({
+  define: {
+    status: {
+      value: 'new'
+    },
+    items: {
+      Value: ItemsList
+    },
+    total: {
+      get() {
+        let total = 0.0;
+        this.attr('items').forEach(item =&gt;
+            total += parseFloat(item.attr('price')));
+        return total.toFixed(2);
+      }
+    }
+  },
+
+  markAs(status) {
+    this.attr('status', status);
+    this.save();
+  }
+});
+
+export const connection = superMap({
+  url: baseUrl + '/api/orders',
+  idProp: '_id',
+  Map: Order,
+  List: Order.List,
+  name: 'orders'
+});
+
+const socket = io(baseUrl);
+
+socket.on('orders created', order =&gt; connection.createInstance(order));
+socket.on('orders updated', order =&gt; connection.updateInstance(order));
+socket.on('orders removed', order =&gt; connection.destroyInstance(order));
+
+tag('order-model', connection);
+window.orderConnection = connection;
+export default Order;
+</code></pre>
+<p><span line-highlight='7,50,57'></span>
+To run the Cordova build and launch the simulator we can now run:</p>
+<pre><code>donejs build cordova
+</code></pre>
+<p>If everything went well, we should see the emulator running our application.</p>
+<h3>Building to NW.js</h3>
+<p>To set up the desktop build, we have to add it to our application like this:</p>
+<pre><code>donejs add nw
+</code></pre>
+<p>We can answer most prompts with the default except for the version which needs to be set to the latest <strong>stable version</strong>. Set the version prompt to <code>0.12.3</code>.</p>
+<p>Like with Cordova, we need to add the place-my-order-assets images to the build, open your <code>build.js</code> script and update the <strong>glob</strong> property to reflect:</p>
+<pre><code class="language-js">var nwOptions = {
+  buildDir: &quot;./build&quot;,
+  version: &quot;0.12.3&quot;,
+  platforms: [&quot;osx32&quot;,&quot;osx64&quot;],
+  glob: [
+    &quot;package.json&quot;,
+    &quot;production.html&quot;,
+    &quot;node_modules/steal/steal.production.js&quot;,
+    &quot;node_modules/place-my-order-assets/images/**/*&quot;
+  ]
+};
+</code></pre>
+<p><span line-highlight='9'></span>
+Then we can run the build like this:</p>
+<pre><code>donejs build nw
+</code></pre>
+<p>The OS X application can be opened with</p>
+<pre><code>open build/place-my-order/osx64/place-my-order.app
+</code></pre>
+<p>The Windows application can be opened with</p>
+<pre><code>.\build\place-my-order\win64\place-my-order.exe
+</code></pre>
+<h2>Deploy</h2>
+<p>Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use <a href="https://www.firebase.com/">Firebase</a>, a service that provides static file hosting and <a href="https://en.wikipedia.org/wiki/Content_delivery_network">Content Delivery Network</a> (CDN) support, to automatically deploy and serve our application's static assets from a CDN and <a href="https://heroku.com">Heroku</a> to provide server-side rendering.</p>
+<h3>Bundling assets</h3>
+<p>Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at <code>node_modules/place-my-order-assets/images</code>.</p>
+<p>StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.</p>
+<p>To use this capability add an option to your build script to enable it. Change:</p>
+<pre><code class="language-js">var buildPromise = stealTools.build({
+  config: __dirname + &quot;/package.json!npm&quot;
+}, {
+  bundleAssets: true
+});
+</code></pre>
+<p>to:</p>
+<pre><code class="language-js">var buildPromise = stealTools.build({
+  config: __dirname + &quot;/package.json!npm&quot;
+}, {
+  bundleAssets: {
+    infer: false,
+    glob: &quot;node_modules/place-my-order-assets/images/**/*&quot;
+  }
+});
+</code></pre>
+<p><span line-highlight='4-7'></span>
+StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your <a href="http://stealjs.com/docs/System.bundlesPath.html">bundlesPath</a> to <code>dist/bundles</code>, and will place the place-my-order-assets images in <code>dist/node_modules/place-my-order/assets/images</code>. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.</p>
+<h3>Static hosting on Firebase</h3>
+<p>Sign up for free at <a href="https://firebase.google.com/">Firebase</a>. After you have an account go to <a href="https://console.firebase.google.com/">Firebase console</a> and create an app called <code>place-my-order-&lt;user&gt;</code> where <code>&lt;user&gt;</code> is your GitHub username:</p>
+<p><img src="static/img/guide-firebase-setup.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid; max-width: 400px;" /></p>
+<p>Write down the name of your app because you'll need it in the next section.</p>
+<blockquote>
+<p>You will get an error if your app name is too long, so pick something on the shorter side, for example <code>pmo-&lt;user&gt;</code>.</p>
+</blockquote>
+<p>When you deploy for the first time it will ask you to authorize with your login information, but first we need to configure the project.</p>
+<h4>Configuring DoneJS</h4>
+<p>With the Firebase account and application in place we can add the deployment configuration to our project like this:</p>
+<pre><code>donejs add firebase
+</code></pre>
+<p>When prompted, enter the name of the application created when you set up the Firebase app. Next, login to the firebase app for the first time by running:</p>
+<pre><code>node_modules/.bin/firebase login
+</code></pre>
+<p>And authorize your application.</p>
+<h4>Run deploy</h4>
+<p>We can now deploy the application by running:</p>
+<pre><code>donejs build
+donejs deploy
+</code></pre>
+<p>Static files are deployed to Firebase and we can verify that the application is loading from the CDN by loading it running:</p>
+<pre><code>NODE_ENV=production donejs start
+</code></pre>
+<blockquote>
+<p>If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.</p>
+</blockquote>
+<p>We should now see our assets being loaded from the Firebase CDN like this:</p>
+<p><img src="static/img/guide-firebase-network.png" alt="A network tab when using the CDN" /></p>
+<h3>Deploy your Node code</h3>
+<p>At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to get the benefit of server-side rendering.</p>
+<p>If you do not have an account yet, sign up for Heroku at <a href="https://signup.heroku.com/">signup.heroku.com</a>. Then download the <a href="https://devcenter.heroku.com/articles/heroku-command">Heroku CLI</a> which will be used to deploy.</p>
+<p>After installing we can initialize the application via</p>
+<pre><code>heroku login
+heroku create
+</code></pre>
+<p>This will return the url where your app can be viewed. Before you open it you'll need to update the NODE_ENV variable:</p>
+<pre><code>heroku config:set NODE_ENV=production
+</code></pre>
+<p>Add a new <code>Procfile</code> that tells Heroku what to launch as the app's server. Since we are using done-serve our Procfile just looks like this:</p>
+<pre><code>web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
+</code></pre>
+<p>First let's save our current status:</p>
+<pre><code>git add -A
+git commit -m &quot;Finishing place-my-order&quot;
+git push origin master
+</code></pre>
+<p>Since Heroku needs the build artifacts we need to commit those before pushing to Heroku. We recommend doing this in a separate branch.</p>
+<pre><code>git checkout -b deploy
+git add -f dist
+git commit -m &quot;Deploying to Heroku&quot;
+</code></pre>
+<p>And finally do an initial deploy.</p>
+<pre><code>git push heroku deploy:master
+</code></pre>
+<p>Any time in the future you want to deploy simply push to the Heroku remote. Once the deploy is finished you can open the link provided in your browser. If successful we can checkout the <em>master</em> branch:</p>
+<pre><code>git checkout master
+</code></pre>
+<h3>Continuous Deployment</h3>
+<p>Previously we set up Travis CI <a href="#section=section_Continuousintegration">for automated testing</a> of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.</p>
+<p>Open your <code>.travis.yml</code> file and add <code>before_deploy</code> and <code>deploy</code> keys that look like this:</p>
+<pre><code class="language-yaml">language: node_js
+node_js: node
+before_install:
+  - &quot;export DISPLAY=:99.0&quot;
+  - &quot;sh -e /etc/init.d/xvfb start&quot;
+before_deploy:
+  - &quot;git config --global user.email \&quot;me@example.com\&quot;&quot;
+  - &quot;git config --global user.name \&quot;PMO deploy bot\&quot;&quot;
+  - &quot;node build&quot;
+  - &quot;git add dist/ --force&quot;
+  - &quot;git commit -m \&quot;Updating build.\&quot;&quot;
+  - &quot;node_modules/.bin/firebase deploy --token \&quot;$FIREBASE_TOKEN\&quot;&quot;
+deploy:
+  skip_cleanup: true
+  provider: &quot;heroku&quot;
+  app: &lt;my-app&gt;
+</code></pre>
+<p><span line-highlight='6-16'></span>
+You can find the name of the app by running <code>heroku apps:info</code>.</p>
+<p>In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our <code>.travis.yml</code> should always be encrypted for which we install the <a href="https://www.npmjs.com/package/travis-encrypt">travis-encrypt</a> module:</p>
+<p><em>Note: if using Windows, first install the OpenSSL package as described in the <a href="https://donejs.com/SettingUp.html">Setting Up</a> guide.</em></p>
+<pre><code>npm install travis-encrypt -g
+</code></pre>
+<p>Now we can get the Heroku authentication token with:</p>
+<pre><code>heroku auth:token
+</code></pre>
+<p>Copy the token printed and paste it as <code>&lt;token&gt;</code> in the following command:</p>
+<pre><code>travis-encrypt --add deploy.api_key -r &lt;your-username&gt;/place-my-order &lt;token&gt;
+</code></pre>
+<p>Replace <code>&lt;your-username&gt;</code> with the name of your GitHub account.</p>
+<p>To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:</p>
+<pre><code>node_modules/.bin/firebase login:ci
+</code></pre>
+<p>In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the <code>&lt;token&gt;</code> in the following command:</p>
+<pre><code>travis-encrypt --add -r &lt;your-username&gt;/place-my-order 'FIREBASE_TOKEN=&quot;&lt;token&gt;&quot;'
+</code></pre>
+<p>Now any time a build succeeds when pushing to <code>master</code> the application will be deployed to Heroku and static assets to Firebase's CDN.</p>
+<p>To test this out checkout a new branch:</p>
+<pre><code>git checkout -b continuous
+git add -A
+git commit -m &quot;Trying out continuous deployment&quot;
+git push origin continuous
+</code></pre>
+<p>Visit your GitHub page, create a pull-request, wait for tests to pass and then merge. Visit your Travis CI build page at <a href="https://travis-ci.org/&lt;your-username&gt;/place-my-order">https://travis-ci.org/&lt;your-username&gt;/place-my-order</a> to see the deployment happening in real time like this:</p>
+<p><img src="static/img/guide-travis-deploy.png" alt="The Travis CI deploy" /></p>
+<h2>What's next?</h2>
+<p>In this final short chapter, let's quickly look at what we did in this guide and where to follow up for any questions.</p>
+<h3>Recap</h3>
+<p>In this in-depth guide we created and deployed a fully tested restaurant menu ordering application called <a href="http://www.place-my-order.com/">place-my-order</a> with DoneJS. We learned how to set up a DoneJS project, create custom elements and retrieve data from the server. Then we implemented a unit-tested view-model, ran those tests automatically from the command line and on a continuous integration server.</p>
+<p>We went into more detail on how to create nested routes and importing other projects from NPM. Then we created new orders and made it real-time, added and built documentation and made a production build. Finally we turned that same application into a desktop- and mobile application and deployed it to a CDN and the web.</p>
+<h3>Following up</h3>
+<p>You can learn more about each of the individual projects that DoneJS includes at:</p>
+<ul>
+<li><a href="http://stealjs.com">StealJS</a> - ES6, CJS, and AMD module loader and builder</li>
+<li><a href="http://canjs.com">CanJS</a> - Custom elements and Model-View-ViewModel utilities</li>
+<li><a href="http://jquery.com">jQuery</a> - DOM helpers</li>
+<li><a href="http://jquerypp.com">jQuery++</a> - Extended DOM helpers</li>
+<li><a href="https://qunitjs.com/">QUnit</a> or Mocha - Assertion library</li>
+<li><a href="http://funcunit.com">FuncUnit</a> - Functional tests</li>
+<li><a href="https://github.com/bitovi/testee">Testee</a> - Test runner</li>
+<li><a href="http://documentjs.com">DocumentJS</a> - Documentation</li>
+</ul>
+<p>If you have any questions, do not hesitate to ask us on <a href="https://gitter.im/donejs/donejs">Gitter</a> or the <a href="http://forums.donejs.com">forums</a>!</p>
+
+		</section>
+		
+		
+
+		
+
+		
+
+	
+	</article>
+	
+
+
+	</div>
+</div>
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="/static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="/Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="/About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="/Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="/Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="/community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-github-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-twitter-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="/static/img/icon-googleplus-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">
+								<img class="footer-social-icon" src="/static/img/icon-youtube-white.svg">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="http://www.bitovi.com">2015 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"type":"page","name":"place-my-order","src":"docs/guides/place-my-order.md","description":"In this guide you will learn about all of [DoneJS' features]() by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this: \n\n<img src=\"/static/img/place-my-order.png\" srcset=\"/static/img/place-my-order.png 1x, /static/img/place-my-order-2x.png 2x\">\n\n\nAfter the initial application setup, which includes a server that hosts and pre-renders the application, we will create several custom elements and bring them together using the application state and routes. Then we will learn how to retrieve data from the server using a RESTful API.\n\nAfter that we will talk about what a view model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser, we will automate running them locally from the command line and also on a continuous integration server. In the subsequent chapters, we will show how to easily import other modules into our application and how to set up a real-time connection.\n\nFinally, we will describe how to build and deploy our application to the web, as a desktop application with nw.js, and as a mobile app with Cordova.","title":"In depth guide","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/daffl/Jupiter/donejs/donejs"},"dest":"/Users/daffl/Jupiter/donejs/donejs/site","ignoreTemplateRender":true,"templates":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/templates","static":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+			steal = {
+			instantiated: {
+				"bundles/static.css!$css" : null
+			}
+			}
+		</script>
+		<script type='text/javascript'
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+				bundles-path="bundles"></script>
+	
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+
+
+
+</html>

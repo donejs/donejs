@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>donejs  - Features</title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<!--<![endif]-->
+</head>
+<body class="docs Features">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li >
+								<a href="./index.html">Home</a>
+							</li>
+							<li class="active">
+								<a href="./Features.html">Features</a>
+							</li>
+							<li >
+								<a href="./About.html">About</a>
+							</li>
+							<li >
+								<a href="./Apis.html">Apis</a>
+							</li>
+							<li class="guides-menu">
+									<a href="/Guides.html">Guides</a>
+									<ul class="dropdown-menu">
+                      <li ><a href="./SettingUp.html">Setting Up</a></li>
+											<li ><a href="./Guide.html">Quick Start</a></li>
+											<li><a  href="./place-my-order.html">In-depth</a></li>
+											<li><a  href="./plugin.html">Creating a plugin</a></li>
+											<li><a  href="./generator.html">Creating a generator</a></li>
+											<li><a  href="./bitballs.html">Example App: Bitballs</a></li>
+									</ul>
+							</li>
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="/static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="/static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="/static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">kQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="/static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="/static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+		<span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+<div class="container-fluid api">
+	<div class="row">
+
+	
+
+	
+	<article class="content docs col-xs-12 ">
+	
+
+		
+		<section class="title">
+			<div class="heading">
+<h1>Features</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+
+		
+		<section class="contents">
+		</section>
+		
+
+		
+
+		
+		<section class="description">
+			<p>Learn about the features that will help you get your app done.</p>
+<h3>All-in-one stack</h3>
+<p>DoneJS offers everything you need to build a modern web app. It comes with a module loader, build system, MVVM utilities, full testing layer, documentation generator, server side rendering utilities, a data layer, and more. Its completeness is itself a feature.</p>
+<p>There's no mixing and matching pieces of your stack. Just <code>npm install</code> and get started.</p>
+<p>Choosing a modern stack is not at all simple or straightforward.</p>
+<ol>
+<li><p><em>What types of tools do you want?</em>   Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?</p></li>
+<li><p><em>Choose all your pieces.</em> The good news is, you have <a href="http://microjs.com/#">many choices</a>. The bad news is, you have many choices. React, Angular, or Backbone? Require.js, browserify, or jspm? Jasmine or QUnit? What tool will run my tests?</p></li>
+<li><p><em>Finally, you have to make sure your chosen tools work together effectively.</em> Does require.js work well with Angular? Does Karma work with Browserify? What about React and Babel?</p></li>
+</ol>
+<p>DoneJS gives you a full solution. It's our mission to eliminate any ambiguity around choosing technology for building an app, so you spend less time tinkering with your stack, and more time actually building your app.</p>
+<p>And as we've proven <a href="/About.html#section=section_Evolve">over the last 8 years</a>, we'll keep updating the stack as the state of the art evolves over time.</p>
+<h3>Integrated layers</h3>
+<p>Just like Apple integrates the hardware and software for its devices, DoneJS integrates different technologies in a way that creates unique advantages that you can only get from using an integrated solution.</p>
+<h4>Cross-layer features</h4>
+<p>DoneJS makes it easier to do things that are not possible, or at best DIY, with competitor frameworks, by spanning technology layers. Here are a couple examples:</p>
+<h5>1. <a href="#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR">Server-side rendering</a></h5>
+<p>Server-side rendering (SSR), which you can read about in more detail in its <a href="#section_Server_SideRendered">section</a> below, spans many layers to make setup and integration simple.</p>
+<p>It uses hooks in data components to automatically notify the server to delay rendering, <a href="#section=section_HotModuleSwapping">hot module swapping</a> automatically integrates (no need to restart the server while developing), data is collected in an <a href="#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache">inline cache</a> automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.</p>
+<p>By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, hot module swapping, and inline caching.</p>
+<h5>2. <a href="#section=section_ProgressiveLoading__Howitworks">Progressive enhancement</a></h5>
+<p>You can mark a section of your template to be progressively loaded by wrapping it with <code>&lt;can-import&gt;</code>, like:</p>
+<pre><code>&lt;can-import from=&quot;components/home&quot;&gt;
+  &lt;home-page/&gt;
+&lt;/can-import&gt;
+</code></pre>
+<p>and then running <code>donejs build</code>.</p>
+<p><code>&lt;can-import&gt;</code> has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.</p>
+<h4>Story-level solutions</h4>
+<p>Another advantage of the integration between DoneJS' parts is the ability to solve development problems on the level of <a href="http://searchsoftwarequality.techtarget.com/definition/user-story"><strong>stories</strong></a> rather than just features.</p>
+<p>Solving a story means a packaged solution to a development problem, where several features across layers converge to solve the problem from start to finish. Here are several examples of stories that DoneJS solves:</p>
+<ol>
+<li><p><a href="section=section_NPMPackages__Howitworks__Modularworkflow">Modular workflow</a> - DoneJS makes it possible for teams to design and share components easily. Starting with <a href="#section=section_Generators">generators</a>, users can create <a href="#section=section_Modlets">modlets</a> that encapsulate everything a <a href="#section=section_CustomHTMLElements">custom elements</a> needs, easily add <a href="#section=section_Documentation">documentation</a> and <a href="#section=section_ComprehensiveTesting">testing</a>, then use <a href="#section=section_NPMPackages">NPM import and export</a> to easily share the modules with other developers, no matter what module format they're using.</p></li>
+<li><p><a href="#section=section_PerformanceFeatures">Performance</a> - DoneJS was designed from the start to solve the performance story, packaging <a href="#section=section_ServerSideRendered">server-side rendering</a>, <a href="#section=section_ProgressiveLoading">progressive loading</a>, <a href="#section=section_WorkerThreadRendering">worker thread rendering</a>, <a href="#section=section_CachingandMinimalDataRequests">data layer caching</a>, and more, all under one roof.</p></li>
+<li><p><a href="#section=section_Maintainabilityfeatures">Maintainability</a> - <a href="#section=section_ComprehensiveTesting">testing</a>, <a href="#section=section_Documentation">docs</a>, <a href="#section=section_MVVMArchitecture">MVVM</a></p></li>
+<li><p>Developer efficiency - <a href="#section=section_NPMPackages">zero-config NPM imports</a>, <a href="#section=section_HotModuleSwapping">hot module swapping</a>, <a href="#section=section_ES6Modules">ES6 support</a></p></li>
+</ol>
+<h3>Feature comparison</h3>
+<div class="matrix-wrapper">
+  <div class="matrix-legend" id="js-matrix-legend-affix">
+    <div class="title">SOLUTION LEGEND</div>
+    <ul>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+        <div>EASY</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+        <div>GOOD</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+        <div>DIFFICULT</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+        <div>THIRD-PARTY</div>
+      </li>
+      <li>
+        <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+        <div>NO</div>
+      </li>
+      <!-- <li>
+        <div class="asterisk-legend">
+          <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+        </div>
+        <div>TOOLTIP</div>
+      </li> -->
+    </ul>
+  </div>
+  <div class="table-wrapper">
+    <div class="scrollable">
+      <table id="js-matrix-table-affix" class="matrix-table responsive">
+      <thead>
+        <tr>
+          <th class="features">FEATURES</th>
+          <th><img class="framework-logo" src="/static/img/donejs-logo-matrix.png"></th>
+          <th><img class="framework-logo" src="/static/img/angular-logo.png"></th>
+          <th><img class="framework-logo" src="/static/img/react-logo.png"></th>
+        </tr>
+      </thead>
+        <tbody>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Server_SideRendered">Server-Side Rendering</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Angular doesn't support a virtual dom. No third-party library support would be equivalent." title="Angular doesn't support a virtual dom. No third-party library support would be equivalent.">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-container="matrix-wrapper" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='http://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has." title="Requires some manual setup and lacks most of the features/support DoneJS has.">
+                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ProgressiveLoading">Progressive Dependency Loading</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_CachingandMinimalDataRequests">Caching & Minimal Data Requests</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MinimalDOMUpdates">Minimal DOM Updates</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Updates DOM quickly, but only after expensive dirty check calculation." title="Updates DOM quickly, but only after expensive dirty check calculation.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_WorkerThreadRendering">Worker Thread Rendering</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="There is a virtual dom. So, Its possible, but there is no support out of the box." title="There is a virtual dom. So, Its possible, but there is no support out of the box.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_DeploytoaCDN">Deploy to a CDN</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_iOS_Android_andDesktopBuilds">iOS, Android, and Desktop Builds</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, there's no infrastructure to make it easy." title="While native app builds are possible, there's no infrastructure to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, there's no infrastructure to make it easy." title="While native app builds are possible, there's no infrastructure to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_SupportsAllBrowsers_EvenIE8">Browser Support</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>' title="Supports IE9+">
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_RealTimeConnected">Real-Time</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While connecting to real time data is possible, there is no built in support to make it easy." title="While connecting to real time data is possible, there is no built in support to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While connecting to real time data is possible, there is no built in support to make it easy." title="While connecting to real time data is possible, there is no built in support to make it easy.">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_PrettyURLswithPushstate">Pretty URLs</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Built-in routing is difficult to configure and maintain." title="Built-in routing is difficult to configure and maintain.">
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="React-router supports this, but is not part of the core library." title="React-router supports this, but is not part of the core library.">
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ComprehensiveTesting">Comprehensive Testing</a></div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Includes built-in support for every part of the testing lifecycle" title="Includes built-in support for every part of the testing lifecycle">
+                <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supports dependency injection, but offers poor support for end-to-end testing." title="Supports dependency injection, but offers poor support for end-to-end testing.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Includes some basic test utilities and mocks, but no support for other parts of the testing lifecycle." title="Includes some basic test utilities and mocks, but no support for other parts of the testing lifecycle.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+                <span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Documentation">Documentation</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ContinuousIntegration_Deployment">Continuous Integration & Deployment</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_NPMPackages">NPM Packages - Imports & Exports</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_ES6Modules">ES6 modules</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Coming in Angular 2" data-content="Coming in Angular 2">
+                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supported through transpiler included with react-tools." title="Supported through transpiler included with react-tools.">
+                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_CustomHTMLElements">Custom HTML Elements</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_MVVMArchitecture">MVVM Architecture</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+            <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Not explicitly MVVM, but could be implemented" title="Not explicitly MVVM, but could be implemented">
+                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="React is just the view layer. You'll need to implement your own MVVM architecture." title="React is just the view layer. You'll need to implement your own MVVM architecture.">
+                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_HotModuleSwapping">Hot Module Swapping</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+            </td>
+            <td>
+              <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Third-party libraries available for some support." title="Third-party libraries available for some support.">
+                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="features">
+              <div class="feature-description"><a href="#section=section_Generators">Generators</a></div>
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+            <td>
+              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+		</section>
+		
+
+		
+			
+		
+
+		
+
+
+		
+		<section class="comment">
+			<h2>Performance Features</h2>
+<p>DoneJS is configured for maximum performance right out of the box.</p>
+<h3>Server-Side Rendered</h3>
+<p>DoneJS applications are written as <a href="http://en.wikipedia.org/wiki/Single-page_application">Single Page Applications</a>,
+and are able to be rendered on the server by running the same code. This is known as <a href="http://isomorphic.net/javascript">Isomorphic JavaScript</a>, or <a href="https://medium.com/@mjackson/universal-javascript-4761051b7ae9">Universal JavaScript</a>.</p>
+<p>Server-side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.</p>
+<p>SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The benefit to your users is a noticeable difference in perceived page load performance:</p>
+<p><img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" /></p>
+<p>Compared to other server-side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.</p>
+<h4>Page load performance</h4>
+<p>Server-side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.</p>
+<p>Traditional SPAs must load the JS, execute, request data, and render before the user sees content.</p>
+<h4>SEO</h4>
+<p>Search engines can't easily index SPAs. Server-side rendering fixes that problem entirely. Even if <a href="http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html">Google can understand some JavaScript now</a>, many other search engines cannot.</p>
+<p>Since search engines see the HTML that your server returns (if you want search engines to find your pages) you'll want Google and other search engines seeing fully rendered content, not the spinners that normally show after initial SPAs load.</p>
+<h4>How it works</h4>
+<p>DoneJS implements SSR with a single-context virtual DOM.</p>
+<p><strong>Single context</strong> means every request to the server reuses the same context: including memory, modules, and even the same instance of the application.</p>
+<p><strong>Virtual DOM</strong> means a virtual representation of the DOM: the fundamental browser APIs that manipulate the DOM, but stubbed out.</p>
+<p>When using DoneJS SSR, the same app that runs on the client is loaded in Node. When a request comes in:</p>
+<ol>
+<li>The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application (single context is optional, so reload is something you can opt into) which means the initial response is very fast.</li>
+<li>The app renders content the same way it would in the browser, but with a mocked out virtual DOM, which is much faster than a real DOM.</li>
+<li>The server waits for all your asynchronous data requests to finish before signaling that rendering is complete (more on how that works below).</li>
+<li>When rendering is complete, the virtual DOM renders the string representation of the DOM, which is sent back to the client.</li>
+</ol>
+<p>Since SSR produces fully rendered HTML, it's possible to insert a caching layer, or use a service like Akamai, to serve most requests. Traditional SPAs don't have this option.</p>
+<p>Rather than a virtual DOM, some other SSR systems use a headless browser on the server, like PhantomJS, which uses a real DOM. These systems are much slower and require much more intensive server resources.</p>
+<p>Some systems, even if they do use a virtual DOM, require a new browser instance entirely, or at the very least, reloading the application and its memory for each incoming request, which also is slower and more resource intensive than DoneJS SSR.</p>
+<h5>Prepping your app for SSR</h5>
+<p>Any app that is rendered on the server needs a way to notify the server that any pending asynchronous data requests are finished, and the app can be rendered.</p>
+<p>React and other frameworks that support SSR don't provide much in the way of solving this problem. You're left to your own devices to check when all asychronous data requests are done, and delay rendering.</p>
+<p>DoneJS provides two easy mechanisms for notifying the server when data is finished loading.</p>
+<p>The more common way is to make data requests in the template, which is possible via can-connect's <a href="http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html">can-tag feature</a>. It calls a method internally that tells the server to wait for its promise to resolve. You just write your template, turn on SSR, and everything works seamlessly:</p>
+<pre><code>&lt;message-model get-list=&quot;{}&quot;&gt;
+  {{#each ./value}}
+    &lt;div&gt;{{text}}&lt;/div&gt;
+  {{/each}}
+&lt;/message-model&gt;
+</code></pre>
+<p>If you're making data requests in JavaScript, just add one line to do this manually:</p>
+<pre><code>this.attr( &quot;%root&quot; ).waitFor( promise );
+</code></pre>
+<p>The server will wait for all promises registered via <code>waitFor</code> before it renders the page. In a full component that might look like this:</p>
+<pre><code>can.Component.extend({
+  tag: &quot;user-name&quot;,
+  template: can.stache( &quot;{{user.name}}&quot; ),
+  viewModel: {
+    init: function () {
+      var promise = User.getOne( { id: this.attr( &quot;id&quot; ) } );
+      this.attr( &quot;%root&quot; ).waitFor( promise );
+      promise.then( ( user ) =&gt; { this.attr( &quot;user&quot;, user ); } );
+    }
+  }
+});
+</code></pre>
+<p><a class="btn" href="https://github.com/canjs/can-ssr"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html"><span>View the Guide</span></a></p>
+<p><em>Server-side rendering is a feature of <a href="https://github.com/canjs/can-ssr">can-ssr</a></em></p>
+<h3>Progressive Loading</h3>
+<p>When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These kilobytes of extra weight slow down page load performance, especially on mobile devices.</p>
+<p>DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load <em>fast</em>.</p>
+<p>There is no configuration needed to enable this feature, and wiring up progressively loaded sections of your app is simple.</p>
+<h4>How it works</h4>
+<div class="youtube-container"><div class="youtube-player" data-videoid="C-kM0v9L9UY"></div></div>
+<p>Other build tools require you to manually configure bundles, which doesn't scale with large applications.</p>
+<p>In a DoneJS application, you simply mark a section to be progressively loaded by wrapping it in your template with <code>&lt;can-import&gt;</code>.</p>
+<pre><code>{{#eq page 'home'}}
+&lt;can-import from=&quot;components/home&quot;&gt;
+  &lt;home-page/&gt;
+&lt;/can-import&gt;
+{{/eq}}
+{{#eq page 'chat'}}
+&lt;can-import from=&quot;components/chat&quot;&gt;
+  &lt;chat-page/&gt;
+&lt;/can-import&gt;
+{{/eq}}
+</code></pre>
+<p>Then you run the build.</p>
+<pre><code>donejs build
+</code></pre>
+<p>A build time algorithm analyzes the application's dependencies and groups them into bundles, optimizing for minimal download size.</p>
+<p>That's it! No need for additional configuration in your JavaScript.</p>
+<p><a class="btn" href="http://stealjs.com/docs/steal-tools.guides.progressive_loading.html"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Switchbetweenpages"><span>View the Guide</span></a></p>
+<p><em>Progressive Loading is a feature of <a href="http://stealjs.com/">StealJS</a> with additional support via the <a href="http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html"><code>&lt;can-import&gt;</code> tag</a> of <a href="http://canjs.com/">CanJS</a></em></p>
+<h3>Caching and Minimal Data Requests</h3>
+<p>DoneJS improves performance by intelligently managing the data layer, taking advantage of various forms of caching and request reduction techniques.</p>
+<p>Undoubtedly, the slowest part of any web application is round trips to the server. Especially now that <a href="http://searchengineland.com/its-official-google-says-more-searches-now-on-mobile-than-on-desktop-220369">more than 50% of web traffic comes from mobile devices</a>, where connections are notoriously slow and unreliable, applications must be smart about reducing network requests.</p>
+<p>Making matters worse, the concerns of maintainable architecture in single page applications are at odds with the concerns of minimizing network requests. This is because independent, isolated UI widgets, while easier to maintain, often make AJAX requests on page load. Without a layer that intelligently manages those requests, this architecture leads to too many AJAX requests before the user sees something useful.</p>
+<p>With DoneJS, you don't have to choose between maintainability and performance.</p>
+<p>DoneJS uses the following strategies to improve perceived performance (reduce the amount of time before users see content rendered):</p>
+<ul>
+<li><a href="#section=section_CachingandMinimalDataRequests__Howitworks__Fallthroughcaching">Fall through caching</a> - Cache data in localStorage. Automatically show cached data immediately, but look for updates on the server in the background and merge changes.</li>
+<li><a href="#section=section_CachingandMinimalDataRequests__Howitworks__Combiningrequests">Combining requests</a> - Instead of making multiple, independent requests to the same API, combine them into a single request.</li>
+<li><a href="#section=section_CachingandMinimalDataRequests__Howitworks__Requestcaching">Request caching</a> - Reduce the number and size of server requests by intelligently using cached datasets.</li>
+<li><a href="#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache">Inline cache</a> - Use data embedded in the page response instead of making duplicate requests.</li>
+</ul>
+<h4>How it works</h4>
+<p><a href="http://connect.canjs.com/">can-connect</a> makes up part of the DoneJS model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.</p>
+<p>It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests independently, and with little thought to performance, without actually creating a poorly performing application.</p>
+<h5>Fall through caching</h5>
+<p>Fall through caching serves cached data first, but still makes API requests to check for changes.</p>
+<p>The major benefit of this technique is improved perceived performance. Users will see content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate.</p>
+<p>This benefits two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.</p>
+<p>By default, this is turned on, but can easily be deactivated for data that should not be cached.</p>
+<p>Here's how the caching logic works:</p>
+<ol>
+<li>When the application loads, it checks for available cache connections.</li>
+<li>When a request is made, it checks for a cache hit.</li>
+<li>If there is a hit, the request is completed immediately with the cached data.</li>
+<li>Regardless of a hit or miss, a request is made in the background to the actual API endpoint.</li>
+<li>When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.</li>
+<li>Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.</li>
+</ol>
+<video style="width:100%;" controls poster="/static/img/poster-fall-thru-caching.jpg" preload="none">
+    <source src="/static/img/donejs-fallthrough-caching.webm" type="video/webm">
+    <source src="/static/img/donejs-fallthrough-caching.ogg" type="video/ogg">
+    <source src="/static/img/donejs-fallthrough-caching.mp4" type="video/mp4">
+</video>
+<h5>Combining requests</h5>
+<p>Combining requests combines multiple incoming requests into one, if possible. This is done with the help of <a href="https://en.wikipedia.org/wiki/Algebra_of_sets">set algebra</a>.</p>
+<p>DoneJS collects requests that are made within a few milliseconds of each other, and if they are pointed at the same API, tries to combine them into a single superset request.</p>
+<p>For example, the video below shows an application that shows two filtered lists of data on page load - a list of completed and incomplete todos. Both are subsets of a larger set of data - the entire list of todos.</p>
+<p>Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.</p>
+<video style="width:100%;" controls poster="/static/img/poster-combine-requests.jpg" preload="none">
+    <source src="/static/img/donejs-combine-requests.webm" type="video/webm">
+    <source src="/static/img/donejs-combine-requests.ogg" type="video/ogg">
+    <source src="/static/img/donejs-combine-requests.mp4" type="video/mp4">
+</video>
+<h5>Request caching</h5>
+<p>Request caching is a type of caching that is more aggressive than fallthrough caching. It is meant for data that doesn't change very often. Its advantage is it reduces both the number of requests that are made, and the size of those requests.</p>
+<p>There are two differences between request and fallthrough caching:</p>
+<ol>
+<li>Cached data is not invalidated.</li>
+</ol>
+<p>Once data is in the cache, no more requests to the API for that same set of data are made. You can write code that invalidates the cache at certain times, or after a new build is released.</p>
+<ol start="2">
+<li>The smallest possible request is made, based on the contents of the cache, and merged into a complete result set.</li>
+</ol>
+<p>The request logic is more aggressive in its attempts to find subsets of the data within the cache, and to only make an API request for the subset NOT found in the cache. In other words, partial cache hits are supported.</p>
+<p>The video below shows two example scenarios. The first shows the cache containing a supserset of the request. The second shows the cache containing a subset of the request.</p>
+<video style="width:100%;" controls poster="/static/img/poster-request-caching.jpg" preload="none">
+    <source src="/static/img/donejs-request-caching.webm" type="video/webm">
+    <source src="/static/img/donejs-request-caching.ogg" type="video/ogg">
+    <source src="/static/img/donejs-request-caching.mp4" type="video/mp4">
+</video>
+<h5>Inline cache</h5>
+<p>Server-side rendered single page apps (SPAs) have a problem with wasteful duplicate requests. These can cause the browser to slow down, waste bandwidth, and reduce perceived performance.</p>
+<ol>
+<li>When a page is rendered server-side, it makes data requests on the server to various APIs.</li>
+<li>After the page's rendered HTML loads in the client, the SPA is loaded in the client, so that subsequent requests are handled within the SPA.</li>
+<li>The SPA will want to re-request for the same data that was already requested on the server.</li>
+</ol>
+<p>DoneJS solves this problem with an inline cache - embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.</p>
+<p>DoneJS uniquely makes populating and using the inline cache easy. <code>waitFor</code> is a method that:</p>
+<ol>
+<li>Tells the SSR server to wait for a promise to resolve before rendering.</li>
+<li>Collects data from each promise and uses it to populate the inline cache.</li>
+</ol>
+<p>For example:</p>
+<pre><code>can.Component.extend({
+  tag: &quot;user-name&quot;,
+  template: can.stache( &quot;{{user.name}}&quot; ),
+  viewModel: {
+    init: function () {
+      var promise = User.getOne( { id: this.attr( &quot;id&quot; ) } );
+      this.attr( &quot;%root&quot; ).waitFor( promise );
+      promise.then( ( user ) =&gt; { this.attr( &quot;user&quot;, user ); } );
+    }
+  }
+});
+</code></pre>
+<p>The model layer seamlesslly integrates the inline cache in client side requests, without any special configuration.</p>
+<p>While this flow would be possible in other SSR systems, it would require manually setting up all of these steps.</p>
+<p>This video illustrates how it works.</p>
+<video style="width:100%;" controls poster="/static/img/poster-inline-cach.jpg" preload="none">
+    <source src="/static/img/donejs-inline-cache.webm" type="video/webm">
+    <source src="/static/img/donejs-inline-cache.ogg" type="video/ogg">
+    <source src="/static/img/donejs-inline-cache.mp4" type="video/mp4">
+</video>
+<p><a class="btn" href="http://connect.canjs.com/"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Messagespage"><span>View the Guide</span></a></p>
+<p><em>Caching and minimal data requests is a feature of <a href="https://github.com/canjs/can-connect">can-connect</a></em></p>
+<h3>Minimal DOM Updates</h3>
+<p>The rise of templates, data binding, and MV* separation, while boosting maintainability, has come at the cost of performance. Many frameworks are not careful or smart with DOM updates, leading to performance problems as apps scale in complexity and data size.</p>
+<p>DoneJS' view engine touches the DOM more minimally and specifically than competitor frameworks, providing better performance in large apps and a &quot;closer to the metal&quot; feel.</p>
+<p>Take the TodoMVC application as an example. If you measure how long it takes DoneJS and React to render the same number of todos you'll see the performance advantage of minimal DOM updates. In fact we did just that and here's the result:</p>
+<p><img class="img-with-caption" src="./static/img/donejs-minimal-dom-updates-todomvc.png" alt="Measuring React and DoneJS using TodoMVC." />
+<em>For a small set of todos the difference is negligible but as the number increases the gap widens to the point where React is 6 times slower than DoneJS when rendering 1000 todos.</em></p>
+<p>You can run this test for yourself at <a href="http://output.jsbin.com/monoqagofa/1" target="_blank">JS Bin</a>.</p>
+<h4>How it works</h4>
+<p>Consider the following template:</p>
+<pre><code class="language-html">{{#rows}}
+&lt;div&gt;{{name}}&lt;/div&gt;
+{{/rows}}
+</code></pre>
+<p>And the following change to its data:</p>
+<pre><code>rows[0].attr('name', 'changed'); // change the first row's name
+</code></pre>
+<p>In DoneJS, which uses the <a href="http://canjs.com/docs/can.stache.html">can.stache</a> view engine, that would:</p>
+<ol>
+<li>Trigger an event (because of the <a href="http://canjs.com/docs/can.Map.html">can.Map</a> object observe API)</li>
+<li>The event invokes a data binding event handler in the template layer</li>
+<li>The handler immediately results in the following code being run:</li>
+</ol>
+<pre><code>textNode.nodeValue = 'changed';
+</code></pre>
+<p>In Backbone, you would need to manually re-render the template or roll your own rendering library.</p>
+<p>In Angular, at the end of the current $digest cycle, that would result in an expensive comparison between the old rows array and the new one to see what properties have changed. After the changed property is discovered, the specific DOM node would be updated.</p>
+<p>In React, that would result in the virtual DOM being re-rendered. A diff algorithm comparing the new and old virtual DOM would discover the changed node, and then the specific DOM node would be updated.</p>
+<p>Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally.</p>
+<p>To see this in action run the test embedded below that shows how DoneJS, React and Angular compare when updating the DOM when a single property changes:
+<img src="./static/img/donejs-minimal-dom-updates-circles.png" alt="Measuring DoneJS, React and Angular rendering a simple property change." /></p>
+<p>You can run this test yourself at <a href="http://output.jsbin.com/giyobi/1" target="_blank">JS Bin</a></p>
+<p>With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.</p>
+<p><a class="btn" href="http://canjs.com/docs/can.stache.html"><span>can.stache Documentation</span></a>
+<a class="btn" href="http://canjs.com/docs/can.Map.html"><span>can.Map Documentation</span></a></p>
+<p><em>Minimal DOM updates is a feature of <a href="http://canjs.com/">CanJS</a></em></p>
+<h3>Worker Thread Rendering</h3>
+<p>Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM.</p>
+<p>Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.</p>
+<h4>How it works</h4>
+<p>Templates first render in a lightweight Virtual DOM in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers">Web Worker</a>. Changes are diffed and sent to the main thread to be applied to the real DOM. The main thread is only notified when there are changes to the DOM.</p>
+<p>The most expensive part of a web application - DOM updates - are separated from application logic, which means your application can continue to run while DOM reflows occur.</p>
+<p>By default, browsers use only a single thread of execution.</p>
+<p><img src="/static/img/donejs-single-thread.gif" srcset="/static/img/donejs-single-thread.gif 1x, /static/img/donejs-single-thread-2x.gif 2x" alt="A traditional single threaded javascript application">
+<em>With a single thread only one operation can occur at a time</em></p>
+<p>This means that performance problems in any area (expensive computations, DOM rendering, processing a large AJAX response, etc) can block the entire application, leaving the browser feeling &quot;frozen&quot;.</p>
+<p>With worker thread rendering, DOM updates and application logic are run in parallel threads.</p>
+<p><img src="/static/img/donejs-multi-thread.gif" srcset="/static/img/donejs-multi-thread.gif 1x, /static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
+<em>Using a worker thread application logic can still occur while the DOM is rendered. This could nearly double the number of operations per second.</em></p>
+<p>Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads.</p>
+<p>Adding worker thread rendering only requires changing one line. Change the main attribute of your page's script tag from:</p>
+<pre><code>&lt;script src=”node_modules/steal/steal.js” main=”my-app!done-autorender”&gt;&lt;/script&gt;
+</code></pre>
+<p>to</p>
+<pre><code>&lt;script src=”node_modules/steal/steal.js” main=”my-app!done-worker-autorender”&gt;&lt;/script&gt;
+</code></pre>
+<p>At this time, no other framework besides DoneJS, including Angular or React, supports worker thread rendering out of the box.</p>
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="vrgMUi8-7r4" data-params="start=28"></div></div>'>working on epic pool dunk videos.</a></div>
+    <img class="fun-img" src="/static/img/funny-dunk.png">
+</blockquote>
+<p><a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a></p>
+<p><em>Worker Thread Rendering is a feature of the <a href="https://github.com/canjs/worker-render">worker-render</a> project.</em></p>
+<h3>Deploy to a CDN</h3>
+<p>DoneJS makes it simple to deploy your static assets to a CDN (content delivery network).</p>
+<p>CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne.</p>
+<p><img class="img-with-caption" src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
+<em>Without a CDN, requests will take longer to fulfill if the user is located further away from your servers.</em></p>
+<hr />
+<p><img class="img-with-caption" src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
+<em>With a CDN, requests can be fulfilled much quicker. Users are served content from the servers located nearest to them.</em></p>
+<h4>How it works</h4>
+<p>It's widely known that CDNs offer the best performance for static assets, but most apps don't use them, mainly because its annoying: annoying to automate, configure, and integrate with your build process.</p>
+<p>DoneJS comes with integrations with <a href="https://aws.amazon.com/s3/">S3</a> and <a href="https://www.firebase.com">Firebase</a> (popular CDN services) that make configuring and deploying to a CDN dirt simple.</p>
+<ol>
+<li>You sign up for S3 or Firebase.</li>
+<li>You paste a few lines of config into your <code>package.json</code> that point to the right CDN service.</li>
+</ol>
+<pre><code>&quot;donejs&quot;: {
+  &quot;deploy&quot;: {
+    &quot;root&quot;: &quot;dist&quot;,
+    &quot;services&quot;: {
+      &quot;production&quot;: {
+        &quot;type&quot;: &quot;firebase&quot;,
+        &quot;config&quot;: {
+          &quot;firebase&quot;: &quot;place-my-order&quot;,
+          &quot;public&quot;: &quot;./dist&quot;,
+          &quot;headers&quot;: [{
+            &quot;source&quot;: &quot;/**&quot;,
+            &quot;headers&quot;: [{
+              &quot;key&quot;: &quot;Access-Control-Allow-Origin&quot;,
+              &quot;value&quot;: &quot;*&quot;
+            }]
+          }]
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<ol start="3">
+<li>You paste a few more lines that tell your production server to serve static assets from the CDN.</li>
+</ol>
+<pre><code>{
+ &quot;system&quot;: {
+   &quot;envs&quot;: {
+     &quot;production&quot;: {
+       &quot;baseURL&quot;: &quot;https://place-my-order.firebaseapp.com/&quot;
+     }
+   },
+</code></pre>
+<ol start="4">
+<li>You run <code>donejs deploy</code>.</li>
+</ol>
+<p>That's it. Now when you run your server in production mode, all static assets (CSS, JS, images, etc) are served from the CDN.</p>
+<p>Even better, you can set up <a href="./place-my-order.html#section=section_ContinuousDeployment">continuous deployment</a>, so that TravisCI or other tools will deploy your code, including pushing out your latest static files to the CDN, automatically.</p>
+<p><a class="btn" href="https://github.com/donejs/deploy"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Deploy"><span>View the Guide</span></a></p>
+<p><em>CDN deployment is a feature of the <a href="https://github.com/donejs/deploy">donejs/deploy</a> project.</em></p>
+<h2>Usability features</h2>
+<p>DoneJS is used to make beautiful, real-time user interfaces that can be exported to run on every platform.</p>
+<h3>iOS, Android, and Desktop Builds</h3>
+<p>Write your application once, then run it natively on every device and operating system. You can make iOS, Android, and desktop builds of your DoneJS application with no extra effort.</p>
+<p><img src="./static/img/desktop-mobile.gif" />
+<em>Our DoneJS Chat App running as a OS X desktop app and inside an iOS emulator.</em></p>
+<h4>How it works</h4>
+<p>For iOS and Android builds, DoneJS integrates with <a href="https://cordova.apache.org/">Apache Cordova</a> to generate a mobile app that is ready to be uploaded to Apple's App Store or Google Play.</p>
+<p>For native desktop applications, DoneJS integrates with <a href="https://github.com/nwjs/nw.js">NW.js</a> to create an native OSX, Windows, or Linux application.</p>
+<p>Adding this integration is as simple as running</p>
+<pre><code>donejs add cordova
+donejs add nw
+donejs build
+</code></pre>
+<p>With these simple integrations, you can expand your potential audience without having to build separate applications.</p>
+<p><a class="btn" href="https://github.com/stealjs/steal-cordova"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section_Desktopandmobileapps"><span>View the Guide</span></a></p>
+<p><em>Cordova and nw.js integration are features of the <a href="https://github.com/stealjs/steal-cordova">steal-cordova</a> and <a href="https://github.com/stealjs/steal-nw">steal-nw</a> projects.</em></p>
+<h3>Supports All Browsers, Even IE8</h3>
+<p>DoneJS applications support Internet Explorer 8 minimal additional configuration. You can even write applications using <a href="http://babeljs.io/docs/advanced/caveats/">most ES6 features</a> that run on IE8, using the built-in babel integration.</p>
+<p>Many people won't care about this because IE8 is on its way out, which is a very good thing!</p>
+<p>But it's <a href="https://youtu.be/grbSQ6O6kbs?t=61">not quite dead yet</a>. For many mainstream websites, banks, and ecommerce applications, IE8 continues to hang around the browser stats.</p>
+<p>And while other frameworks like AngularJS and EmberJS don't support IE8, DoneJS makes it easy to write one app that runs everywhere.</p>
+<p><a class="btn" href="/Guide.html#section=section_IE8Support"><span>View the Guide</span></a></p>
+<h3>Real Time Connected</h3>
+<p>DoneJS is designed to add real-time behavior to applications using any backend technology stack.</p>
+<p><a href="https://socket.io">Socket.io</a> provides the basics to add real-time capabilities to any JavaScript application, but the challenge of integrating real-time updates into your code remains.</p>
+<p>When new data arrives, how do you know what data structures to add it to? And where to re-render? Code must be written to send socket.io data across your application, but that code becomes aware of too much, and therefore is brittle and hard to maintain.</p>
+<p>DoneJS makes weaving Socket.io backends into your UI simple and automatic.</p>
+<h4>How it works</h4>
+<div class="youtube-container"><div class="youtube-player" data-videoid="w4mp4oSb6BQ"></div></div>
+<p>DoneJS' model layer uses set logic to maintain lists of data represented by JSON properties, like a list of todos with <code>{'ownerId': 2}</code>. These lists are rendered to the UI via data bound templates.</p>
+<p>When server-side updates are sent to the client, items are automatically removed or added to any lists they belong to. They also automatically show up in the UI because of the data bindings.</p>
+<p>All of this happens with about 4 lines of code.</p>
+<pre><code>const socket = io('http://chat.donejs.com');
+socket.on('messages created',
+  order =&gt; messageConnection.createInstance(order));
+socket.on('messages updated',
+  order =&gt; messageConnection.updateInstance(order));
+socket.on('messages removed',
+  order =&gt; messageConnection.destroyInstance(order));
+</code></pre>
+<p><a href="./Guide.html#section=section_Enableareal_timeconnection">Follow the guide</a> to see an example in action. View the can-connect real-time documentation <a href="http://connect.canjs.com/doc/can-connect%7Creal-time.html">here</a>.</p>
+<p><a class="btn" href="http://connect.canjs.com/doc/can-connect%7Creal-time.html"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Enableareal_timeconnection"><span>View the Guide</span></a></p>
+<p><em>Real time connections is a feature of the <a href="http://connect.canjs.com">can-connect</a> project.</em></p>
+<h3>Pretty URLs with Pushstate</h3>
+<p>DoneJS applications use <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method">pushstate</a> to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user in a single page.</p>
+<p>The use of pushstate allows your apps to have &quot;Pretty URLs&quot; like <code>myapp.com/user/1234</code> instead of uglier hash based URLs like <code>myapp.com#page=user&amp;userId=1234</code> or <code>myapp.com/#!user/1234</code>.</p>
+<p>Wiring up these pretty URLs in your code is simple and intuitive.</p>
+<h4>How it works</h4>
+<div class="youtube-container"><div class="youtube-player" data-videoid="aHA504Vx0eU"></div></div>
+<p>Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.</p>
+<p>DoneJS application <a href="http://canjs.com/docs/can.route.html">routes</a> map URL patterns, like <code>/user/1</code>, to properties in our application state, like <code>{'userId': 1}</code>. In other words, our routes will just be a representation of the application state.</p>
+<p>This architecture simplifies routes so that they can be managed entirely in simple data bound templates, like the following example:</p>
+<pre><code>{{#switch page}}
+  {{#case &quot;home&quot;}}
+      &lt;myapp-home&gt;&lt;/myapp-home&gt;
+  {{/case}}
+  {{#case &quot;users&quot;}}
+    {{#if slug}}
+      &lt;myapp-user-detail user-id=&quot;{slug}&quot;&gt;&lt;/myapp-user-detail&gt;
+    {{else}}
+      &lt;myapp-users&gt;&lt;/myapp-users&gt;
+    {{/if}}
+  {{/case}}
+{{/switch}}
+</code></pre>
+<p><a class="btn" href="http://canjs.com/guides/AppStateAndRouting.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Settinguprouting"><span>View the Guide</span></a></p>
+<p><em>Pretty URLs and routing are features of the <a href="http://canjs.com/">CanJS</a> project.</em></p>
+<h2>Maintainability features</h2>
+<p>DoneJS helps developers get things done quickly with an eye toward maintenance.</p>
+<h3>Comprehensive Testing</h3>
+<p>Nothing increases the maintainability of an application more than good automated testing. DoneJS includes a comprehensive test layer that makes writing, running, and maintaining tests intuitive and easy.</p>
+<p>DoneJS provides tools for the entire testing lifecycle:</p>
+<ul>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__Generators">Generators</a> - create boilerplate tests to get started quickly</li>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__Unittests">Unit testing</a> - assertion libraries to test your module interfaces</li>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__Functionaltests">Functional testing</a> - scripting the browser, simulating user actions, and testing your UI modules</li>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__Eventsimulationaccuracy">User action event simulation</a> - accurate event simulation for clicks, types, drags, and other user actions</li>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__Runningtestsfromthecommandline">A command line test runner</a> - invoke the same tests from the CLI</li>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__Runningtestsfromthecommandline">A browser launcher</a> - launch several browsers and target your tests against them</li>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__Runningtestsfromthecommandline">A reporting tool</a> - report results, including code coverage, to the CLI, in various formats</li>
+<li><a href="#section=section_ContinuousIntegration_Deployment">Simple integration with continuous integration tools</a> - one step to hook into TravisCI or other CI systems</li>
+<li><a href="#section=section_ComprehensiveTesting__Howitworks__MockingserverAPIs">A mock layer</a> - mock out your server APIs so you can test your app in isolation from a server</li>
+</ul>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/donejs-testing.jpg">
+        <source src="static/img/donejs-testing-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-testing-no-fade-in.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+<h4>How it works</h4>
+<p>Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack.</p>
+<h5>Generators</h5>
+<p>The DoneJS app generator command <code>donejs add app</code> creates a working project-level test HTML and JS file. Component generators via <code>donejs add component cart</code> create a test script and individual test page for each test.</p>
+<h5>Unit tests</h5>
+<p>Unit tests are used to test the interface for modules like models and view models. You can choose between BDD style unit tests with Jasmine or Mocha, or a more traditional TDD assertion style with QUnit.</p>
+<h5>Functional tests</h5>
+<p>Functional tests are used to test UI components by simulating user behavior. The syntax for writing functional tests is jQuery-like, chainable, and asynchronous, simulating user actions and waiting for page elements to change asynchronously.</p>
+<pre><code class="language-js">test('destroying todos', function() {
+  F('#new-todo').type('Sweet. [enter]');
+
+  F('.todo label:contains(&quot;Sweet.&quot;)').visible('basic assert');
+  F('.destroy').click();
+
+  F('.todo label:contains(&quot;Sweet.&quot;)').missing('destroyed todo');
+});
+</code></pre>
+<h5>Event simulation accuracy</h5>
+<p>User action methods, like click, type, and drag, simulate exactly the sequence of events generated by a browser when a user performs that action. For example this:</p>
+<pre><code>F( &quot;.menu&quot; ).click();
+</code></pre>
+<p>is not just a click event. It triggers a mousedown, then blur, then focus, then mouseup, then click. The result is more accurate tests that catch bugs early.</p>
+<p>Even further, there are differences between how IE and Safari handle a click. DoneJS tests take browser differences into account when running functional tests.</p>
+<h5>Running tests from the command line</h5>
+<p>DoneJS comes with a command line test runner, browser launcher, and reporting tool that integrates with any <a href="#section=section_ContinuousIntegration_Deployment">continuous integration</a> environment.</p>
+<p>No setup required, running a DoneJS project's test is as simple as running:</p>
+<pre><code>donejs test
+</code></pre>
+<p>You can run launch your unit and functional tests from the cli, either in headless browser mode, or via multiple real browsers. You can even launch browserstack virtual machines to test against any version of Android, Windows, etc.</p>
+<p>The reporting tool gives detailed information about coverage statistics, and lets you choose from many different output formats, including XML or JSON files.</p>
+<h5>Mocking server APIs</h5>
+<p>Automated frontend testing is most useful when it has no external dependencies on API servers or specific sets of data. Thus a good mock layer is critical to write resilient tests.</p>
+<p>DoneJS apps use fixtures to emulate REST APIs. A default set of fixtures are created by generators when a new model is created. Fixtures are very flexible, and can be used to simulate error states and slow performing APIs.</p>
+<pre><code class="language-js">import fixture from 'can-fixture';
+
+const store = fixture.store([
+  { name: 'Calisota', short: 'CA' },
+  { name: 'New Troy', short: 'NT'}
+],{});
+
+fixture({
+  'GET /api/states': store.findAll,
+  'GET /api/states/{short}': store.findOne,
+  'POST /api/states': store.create,
+  'PUT /api/states/{short}': store.update,
+  'DELETE /api/states/{short}': store.destroy
+});
+
+export default store;
+</code></pre>
+<h5>Simple authoring</h5>
+<p>Several DoneJS features converge to make authoring tests extremely simple.</p>
+<p>Because of <a href="#section=section_ES6Modules">ES6 Module</a> support, everything in a DoneJS app is a module, so a test can simply import the modules it needs - such as fixtues and module under test:</p>
+<pre><code>import restaurantStore from 'place-my-order/models/fixtures/restaurant';
+import { ViewModel } from './list';
+</code></pre>
+<p>This means the test is small, isolated, and simple. Tests themselves are modules too, so they can be collected easily into sets of tests.</p>
+<p>Because of the <a href="#section=section_Modlets">modlet</a> pattern, each component contains its own working test script and test file, which can be worked on in isolation.</p>
+<p>Because of <a href="#section=section_HotModuleSwapping">hot module swapping</a>, you can write, debug, and run tests without constantly reloading your page.</p>
+<p>Other frameworks require a build step before tests can be run. These builds concatenate dependencies and depend on specific order of tests running, which is a brittle and inefficient workflow.</p>
+<p>Because DoneJS uses a client side loader that makes it simple to start a new page that loads its own dependencies, there is no build script needed to compile and run tests.</p>
+<p>You just run the generator, load your modules, write your test, and run it - from the browser or CLI.</p>
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time messing with test infrastructure,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="s4faD0fox_s" data-params="start=261"></div></div>'>mud ridin'.</a></div>
+    <img class="fun-img" src="/static/img/funny-muddin.png">
+</blockquote>
+<h5>More information</h5>
+<p>The DoneJS testing layer involves many pieces, so if you want to learn more:</p>
+<ul>
+<li>follow along in the <a href="./place-my-order.html#section=section_Creatingaunit_testedviewmodel">Unit testing view model and fixtures</a> section of the guide</li>
+<li>see how to run tests and set up CI automation in the <a href="./place-my-order.html#section=section_Automatedtestsandcontinuousintegration">CI section</a> of the guide</li>
+<li>read about <a href="http://funcunit.com/">FuncUnit</a>, the functional testing and asynchronous user action simulating library</li>
+<li>read about <a href="https://github.com/bitovi/syn">syn</a> - the synthetic event library</li>
+<li>read about the <a href="https://github.com/bitovi/testee">Testee.js</a> browser launcher, test runner, and reporting tool</li>
+<li>read the <a href="http://canjs.com/docs/can.fixture.html">can.fixture</a> docs</li>
+</ul>
+<h3>Documentation</h3>
+<p>Documentation is critical for maintainability of any complex application. When your team adds developers, docs ensure minimal ramp up time and knowledge transfer.</p>
+<p>Yet most teams either don't write docs, or they'll do it &quot;later&quot; - a utoptian future period that is always just out of reach. Why? Because it's extra work to set up a tool, configure it, create and maintain separate documentation files.</p>
+<p>DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing docs, since all you have to do is comment your code (which most people already do) and run <code>donejs document</code>.</p>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/done-js-documentation.jpg">
+        <source src="static/img/donejs-documentation-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-documentation-no-fade-in.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+<h4>How it works</h4>
+<p>You write comments above the module, method, or object that you want to document:</p>
+<pre><code class="language-js">/**
+ * @module {function} utils/add
+ * @parent utils
+ *
+ * The module's description is the first paragraph.
+ *
+ * The body of the module's documentation.
+ *
+ * @param {Number} first This param's description.
+ * @param {Number} second This param's description.
+ * @return {Number} This return value's description.
+ */
+export default function(){ ... };
+</code></pre>
+<p>Then run <code>donejs document</code>. A browsable documentation website will be generated.</p>
+<p><img src="/static/img/docs.png" alt="A documentation website" /></p>
+<p>DoneJS applications use <a href="http://documentjs.com">DocumentJS</a> to produce multi-versioned documentation. It lets you:</p>
+<ul>
+<li>Write docs inline or in markdown files.</li>
+<li>Specify your code's behavior precisely with JSDoc and <a href="https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=en">Google Closure Compiler annotations</a> - a well known documentation syntax.</li>
+<li>Customize your site's theme and layout.</li>
+<li>Generate multi-versioned documentation.</li>
+<li>Document CSS alongside JavaScript. You can even make a <a href="http://documentjs.com/examples/styles/index.html">live style guide</a>.</li>
+</ul>
+<p>You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the <a href="http://canjs.com/docs/index.html">CanJS</a> site are generated using DocumentJS.</p>
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time messing with Documentation generators,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="7WaLCWaTo8"></div></div>'>perfecting your moonwalk.</a></div>
+    <img class="fun-img" src="/static/img/funny-moonwalk.png">
+</blockquote>
+<p><a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Createdocumentation"><span>View the Guide</span></a></p>
+<p><em>DoneJS Documentation is a feature of <a href="http://documentjs.com/">DocumentJS</a></em></p>
+<h3>Continuous Integration &amp; Deployment</h3>
+<p>Continuous Integration (CI) and Continuous Deployment (CD) are must have tools for any modern development team.</p>
+<p>CI is a practice whereby all active development (i.e. a pull request) is checked against automated tests and builds, allowing problems to be detected early (before merging the code into the release branch).</p>
+<p><img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
+<em>Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests.</em></p>
+<p>CD means that any release or merges to your release branch will trigger tests, builds and deployment.</p>
+<p>Paired together, CI and CD enable automatic, frequent releases. CD isn't possible without CI. Good automated testing is a must to provide the confidence to release without introducing bugs.</p>
+<p>DoneJS provides support for simple integration into popular CI and CD tools, like TravisCI and Jenkins.</p>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/continuous-integration0deployment.jpg">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-continuous-integration0deployment-no-fade-in.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+<h4>How it works</h4>
+<p>Setting up continuous integration and deployment involves several steps:</p>
+<ol>
+<li>Writing tests</li>
+<li>Setting up a test harness that runs tests from the command line</li>
+<li>Creating simple scripts for running a build, test, and deploy</li>
+<li>Integrating with a service that runs the scripts at the proper times</li>
+</ol>
+<p>Steps 1, 2, and 3 are the hard parts. Step 4 is simple. DoneJS supports  in two main ways: proper test support and simple CLI commands.</p>
+<h5>Proper test support</h5>
+<p>DoneJS comes with comprehensive support for testing. The <a href="#section=section_ComprehensiveTesting">Testing</a> section contains much more detail about testing support.</p>
+<p><a href="#section=section_Generators">Generators</a> create working test scripts right off the bat, and the plumbing for test automation is built into each project. Each <a href="#section=section_Modlets">modlet</a> contains a skeleton for unit tests. All that is left for the developer to do is write tests.</p>
+<h5>Simple CLI commands</h5>
+<p>Another hurdle is creating automated build, test, and deployment scripts. Every DoneJS app comes with a build, test, and deployment one-liner: <code>donejs build</code>, <code>donejs test</code>, and <code>donejs deploy</code>.</p>
+<h5>Tool integration</h5>
+<p>Once the tests are written and the scripts are automated, integrating with the tools that automatically runs these scripts is quite simple. For instance, setting up Travis CI involves signing up and adding a <code>.travis.yml</code> file to the project:</p>
+<pre><code>language: node_js
+node_js: node
+script: npm start &amp; npm test
+before_install:
+  - &quot;export DISPLAY=:99.0&quot;
+  - &quot;sh -e /etc/init.d/xvfb start&quot;
+</code></pre>
+<p><a class="btn" href="/place-my-order.html#section=section_Automatedtestsandcontinuousintegration"><span>View the CI Guide</span></a>
+<a class="btn" href="/place-my-order.html#section=section_ContinuousDeployment"><span>View the CD Guide</span></a></p>
+<h3>Modlets</h3>
+<p>The secret to building large apps is to never build large apps. Break up your application into small pieces. Then, assemble.</p>
+<p>DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.</p>
+<h4>How it works</h4>
+<p>Large apps have a lot of files. There are two ways to organize them: by type or by module.</p>
+<p><img src="/static/img/donejs-modlet-diagram.png" srcset="/static/img/donejs-modlet-diagram.png 1x, /static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" /></p>
+<p>Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. The benefits include:</p>
+<ul>
+<li>Each modlet contains its own demo page and its own test page. Getting a demo page running forces separation of concerns and isolated modules - hallmarks of good design. A standalone demo and test page makes it easy to work on pieces of your application in isolation.</li>
+<li>Developers are more likely to update tests and documentation if they are sitting right next to the module they are editing. The test is not hidden in a <code>tests</code> folder that is more easily ignored.</li>
+<li>You can develop the application without having to load the entire application and all of its tests on every change.</li>
+</ul>
+<p>An example modlet from the <a href="/place-my-order.html">in depth guide</a> is the <a href="https://github.com/donejs/place-my-order/tree/master/src/restaurant/list">order/new</a> component. It has its own <a href="http://www.place-my-order.com/src/order/new/demo.html">demo page</a> and <a href="http://www.place-my-order.com/src/order/new/test.html">test page</a>.</p>
+<p>DoneJS generators create modlets to get you started quickly. To learn more about the modlet pattern, read this <a href="http://blog.bitovi.com/modlet-workflows/">blog post</a>.</p>
+<p><a class="btn" href="https://youtu.be/eIfUsPdKF4A?t=97"><span>View the Video</span></a>
+<a class="btn" href="/Guide.html#section=section_Generatecustomelements"><span>View the Guide</span></a></p>
+<p><em>Modlets are a feature of DoneJS <a href="#section=section_Generators">generators</a>.</em></p>
+<h3>NPM Packages</h3>
+<p>DoneJS makes it easy to share and consume modules via package managers like NPM and Bower.</p>
+<p>You can import modules from any package manager in any format - CommonJS, AMD, or ES6 - without any configuration. And you can convert modules to any other format.</p>
+<p>The goal of these features is to transform project workflows, making it easier to share and reuse ideas and modules of functionality across applications, with less hassle.</p>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/donejs-npm-packaging-custom-elements.jpg">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-npm-packaging-custom-elements-no-fade-in.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+<h4>How it works</h4>
+<p>DoneJS apps use <a href="http://stealjs.com/">StealJS</a> to load modules and install packages. This video introduces NPM import and export in StealJS:</p>
+<div class="youtube-container"><div class="youtube-player" data-videoid="eIfUsPdKF4A"></div></div>
+<h5>Zero config package installation</h5>
+<p>Unlike Browserify or Webpack, StealJS is a client side loader, so you don't have to run a build to load pages.</p>
+<p>Installing a package in a DoneJS app via npm or bower involves no configuration. Install your package from the command line:</p>
+<pre><code>npm install jquery --save
+</code></pre>
+<p>Then immediately consume that package (and its dependencies) in your app:</p>
+<pre><code>import $ from &quot;jquery&quot;;
+</code></pre>
+<p>Using require.js or other client side loaders, you'd have to add pathing and other information to your configuration file before being able to use your package. In DoneJS, this step is bypassed because of scripts that add config to your package.json file as the package is installed.</p>
+<p>You can import that package in any format: CommonJS, AMD, or ES6 module format.</p>
+<h5>Convert to any format</h5>
+<p>DoneJS supports converting a module to any other format: CommonJS, AMD, or ES6 module format, or script and link tags.</p>
+<p>The advantage is that you can publish your module to a wider audience of users. Anyone writing JavaScript can use your module, regardless of which script loader they are using (or if they aren't using a script loader).</p>
+<p>Just create an <a href="http://stealjs.com/docs/steal-tools.export.html">export script</a> that points to the output formats you want, along with some options:</p>
+<pre><code class="language-js">var stealTools = require(&quot;steal-tools&quot;);
+stealTools.export({
+  system: {
+    config: __dirname+&quot;/package.json!npm&quot;
+  },
+  outputs: {
+    amd: {
+      format: &quot;amd&quot;,
+      graphs: true,
+      dest: __dirname+&quot;/dist/amd&quot;
+    }
+});
+</code></pre>
+<p>and run it from your command line:</p>
+<pre><code>node myexport.js
+</code></pre>
+<h5>Modular workflow</h5>
+<p>In combination with other DoneJS features, NPM module import and export make it possible for teams to design and share components easily.</p>
+<p><a href="#section=section_Generators">Generators</a> make it easy to bootstrap new modules of functionality quickly, and the <a href="#section_Modlets">modlet pattern</a> makes it easy to organize small, self-contained modules. Its even easy to create tests and documentation for each module.</p>
+<p>DoneJS enables a modular workflow, where pieces of small, reusable functionality can be easily created, shared, and consumed.</p>
+<ol>
+<li>Use generators to create a modlet</li>
+<li>Develop rich functionality</li>
+<li>Write tests and docs</li>
+<li>Export and publish it - internally or externally</li>
+<li>Consume it across applications</li>
+</ol>
+<p>Similar to the way that the <a href="http://microservices.io/patterns/microservices.html">microservices</a> architecture encourages reuse of APIs across applications, the modular workflow encourages reuse of self-contained modules of JavaScript across applications.</p>
+<p>Imagine an organization where every app is broken into many reusable pieces, each of which are independently tested, developed, and shared. Over time, developers would be able to quickly spin up new applications, reusing previous functionality. DoneJS makes this a real possibility.</p>
+<p><a class="btn" href="http://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Importingotherprojects"><span>View the Guide</span></a></p>
+<p><em>NPM package support is a feature of <a href="http://stealjs.com/">StealJS</a></em></p>
+<h3>ES6 Modules</h3>
+<p>DoneJS supports the compact and powerful <a href="http://www.2ality.com/2014/09/es6-modules-final.html">ES6 module</a> syntax, even for browsers that don't support it yet. Besides future proofing your application, writing ES6 modules makes it easier to write modular, maintainable code.</p>
+<pre><code>import { add, subtract } from &quot;math&quot;;
+
+export function subtract(a, b) {
+  return a - b;
+}
+</code></pre>
+<h4>How it works</h4>
+<p>DoneJS applications are actually able to import or export any module type: ES6, AMD and CommonJS. This means you can slowly phase in ES6, while still using your old code. You can also use any of the many exciting <a href="https://github.com/lukehoban/es6features">ES6 language features</a>.</p>
+<p>A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. During development, the compiler runs in the browser, so changes are happening live without a build step. During the build, your code is compiled to ES5, so your production code will run native in every browser. You can even run your <a href="#section=section_SupportsAllBrowsers_EvenIE8">ES6 application in IE8</a>!</p>
+<p><a class="btn" href="http://stealjs.com/docs/syntax.es6.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html"><span>View the Guide</span></a></p>
+<p><em>Pretty URLs and routing are features of the <a href="https://github.com/stealjs/transpile">stealjs/transpile</a> project.</em></p>
+<h3>Custom HTML Elements</h3>
+<p>One of the most important concepts in DoneJS is splitting up your application functionality into independent, isolated, reusable custom HTML elements.</p>
+<p>The major advantages of building applications based on custom HTML elements are:</p>
+<ol>
+<li><strong>Ease of page composition</strong> - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.</li>
+<li><strong>Forced modularity</strong> - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.</li>
+<li><strong>Reuse</strong> - Custom elements are designed to be reusable across pages and applications.</li>
+</ol>
+<p>Consider the following example:</p>
+<pre><code class="language-html">&lt;order-model get-list=&quot;{ period='previous_week' }&quot; {^value}=&quot;*previousWeek&quot; /&gt;
+&lt;order-model get-list=&quot;{ period='current_week' }&quot; {^value}=&quot;*currentWeek&quot; /&gt;
+
+&lt;bit-c3&gt;
+  &lt;bit-c3-data&gt;
+    &lt;bit-c3-data-column key=&quot;Last Week&quot; {value}=&quot;*previousWeek.totals&quot; /&gt;
+    &lt;bit-c3-data-column key=&quot;This Week&quot; {value}=&quot;*currentWeek.totals&quot; /&gt;
+  &lt;/bit-c3-data&gt;
+&lt;/bit-c3&gt;
+</code></pre>
+<p>This code demonstrates:</p>
+<ol>
+<li>An element that can load data</li>
+<li>Composable widget elements (a graph with a line-series)</li>
+</ol>
+<p>If our designer wanted to add another period, all they would need to do is add another <code>&lt;order-model&gt;</code> and <code>&lt;bit-c3-data-column&gt;</code> element.</p>
+<p>Here’s a working version of the same example in a JSBin.</p>
+<p><a class="jsbin-embed" href="http://jsbin.com/puwesa/embed?html,output">Custom HTML Elements on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.2"></script></p>
+<p>Just like HTML’s natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.</p>
+<h4>How it works</h4>
+<p>First, it's important to understand the background of custom elements and their advantages. Then, we'll discuss the details of creating powerful custom elements in specifically DoneJS, and why they're special.</p>
+<h5>Benefits of custom elements</h5>
+<p>Before custom HTML elements existed, to add a datepicker to your page, you would:</p>
+<ol>
+<li>Load a datepicker script</li>
+<li>Add a placeholder HTML element</li>
+</ol>
+<pre><code>&lt;div class='datepicker' /&gt;
+</code></pre>
+<ol start="3">
+<li>Add JavaScript code to instantiate your datepicker</li>
+</ol>
+<pre><code>$('.datepicker').datepicker()
+</code></pre>
+<ol start="4">
+<li>Gather your stone tipped spears and forage for small animals to feed your family for the night.</li>
+</ol>
+<p>With custom HTML elements, to add the same datepicker, you would:</p>
+<ol>
+<li>Load a datepicker script</li>
+<li>Add the datepicker to your HTML or template:</li>
+</ol>
+<pre><code>&lt;datepicker value=&quot;{date}&quot;/&gt;
+</code></pre>
+<p>That might seem like a subtle difference, but it is actually a major step forward. The custom HTML element syntax allows for instantiation, configuration, and location, all happening at the same time.</p>
+<p>Custom HTML elements are another name for <a href="http://webcomponents.org/">Web Components</a>, a browser spec that has <a href="http://caniuse.com/#search=components">yet to be implemented</a> across browsers.</p>
+<h5>Benefits of DoneJS custom elements</h5>
+<p>DoneJS uses CanJS' <a href="http://canjs.com/docs/can.Component.html">can.Component</a> to provide a modern take on web components.</p>
+<p>Components in DoneJS have three basic building blocks:</p>
+<ul>
+<li>a template</li>
+<li>a viewModel object</li>
+<li>event handlers</li>
+</ul>
+<p>There are several unique benefits to DoneJS custom elements:</p>
+<ul>
+<li><a href="#section=section_CustomHTMLElements__Howitworks__Definingacustomelement">Easily construct custom elements</a> - you can define them within a single <code>.component</code> file, or a modlet</li>
+<li><a href="#section=section_CustomHTMLElements__Howitworks__Dataelementsvisualelementsexpressivetemplates">Load data from custom elements</a></li>
+<li><a href="#section=section_CustomHTMLElements__Howitworks__Intemplatedependencydeclarations">Simple progressive loading with can-import</a></li>
+</ul>
+<h5>Defining a custom element</h5>
+<p>One way to define a component is with a <a href="https://github.com/donejs/done-component">web component</a> style declaration, using a single file with a <code>.component</code> extension:</p>
+<pre><code class="language-html">&lt;can-component tag=&quot;hello-world&quot;&gt;
+    &lt;style type=&quot;less&quot;&gt;
+        i {
+            color: red;
+        }
+    &lt;/style&gt;
+    &lt;template&gt;
+        {{#if visible}}&lt;b&gt;{{message}}&lt;/b&gt;{{else}}&lt;i&gt;Click me&lt;/i&gt;{{/if}}
+    &lt;/template&gt;
+    &lt;script type=&quot;view-model&quot;&gt;
+        export default {
+            visible: true,
+            message: &quot;Hello There!&quot;
+        };
+    &lt;/script&gt;
+    &lt;script type=&quot;events&quot;&gt;
+        export default {
+            click: function(){
+                this.viewModel.attr(&quot;visible&quot;, !this.viewModel.attr(&quot;visible&quot;))
+            }
+        };
+    &lt;/script&gt;
+&lt;/can-component&gt;
+</code></pre>
+<p>This simple form of custom elements is great for quick, small widgets, since everything is contained in one place.</p>
+<p>Another way to organize a custom element is a <a href="#section_Modlets">modlet</a> style file structure: a folder with the element broken into several independent pieces. In this pattern, the custom element's ViewModel, styles, template, event handlers, demo page, tests, and test page are all located in separate files. This type of custom element is well suited for <a href="#section=section_NPMPackages__Howitworks__Modularworkflow">export and reuse</a>.</p>
+<p>DoneJS <a href="#section_Generators">Generators</a> will create both of these types of custom elements so you can get started quickly.</p>
+<h5>Data elements + visual elements = expressive templates</h5>
+<p>The beauty and power of custom HTML elements is most apparent when visual widgets (like graphing) is combined with elements that express data.</p>
+<p>Back to our original example:</p>
+<pre><code class="language-html">&lt;order-model findAll=&quot;{previousWeek}&quot; [previousWeekData]=&quot;{value}&quot;/&gt;
+&lt;order-model findAll=&quot;{currentWeek}&quot; [currentWeekData]=&quot;{value}&quot;/&gt;
+
+&lt;bit-graph title=&quot;Week over week&quot;&gt;
+  &lt;bit-series data=&quot;{../previousWeekData}&quot; /&gt;
+  &lt;bit-series data=&quot;{../currentWeekData}&quot; color=&quot;Blue&quot;/&gt;
+&lt;/bit-graph&gt;
+</code></pre>
+<p>This template combines a request for data with an element that expresses it. It's immediately obvious how you would add or remove features from this, allowing for quick changes and easy prototyping. Without custom elements, the same changes would require more difficult code changes and wiring those changes up with widget elements that display the data.</p>
+<p>Data custom elements are part of DoneJS via can-connect's <a href="http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html">can-tag feature</a>.</p>
+<h5>Custom element libraries</h5>
+<p>Custom elements are designed to be easily shareable across your organization. DoneJS provides support for simple <a href="#section_NPMPackages">NPM import and export</a> and creating <a href="#section=section_Documentation">documentation</a> for elements. Together with custom element support, these features make it easier than ever to create reusable bits of functionality and share them.</p>
+<p>Some open source examples of DoneJS custom elements:</p>
+<p><a class="btn" href="http://bitovi-components.github.io/bit-c3/docs/index.html"><span>bit-c3</span></a>
+<a class="btn" href="https://github.com/bitovi-components/bit-tabs"><span>bit-tabs</span></a>
+<a class="btn" href="http://bitovi-components.github.io/bit-autocomplete/"><span>bit-autocomplete</span></a></p>
+<p>Check out <a href="https://github.com/bitovi-components/bit-tabs">their source</a> for good examples of shareable, documented, and tested custom elements.</p>
+<h5>In-template dependency declarations</h5>
+<p><a href="http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html">can-import</a> is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements, helpers, and other modules straight from a template file like:</p>
+<pre><code>&lt;can-import from=&quot;components/my_tabs&quot;/&gt;
+&lt;can-import from=&quot;helpers/prettyDate&quot;/&gt;
+&lt;my-tabs&gt;
+  &lt;my-panel title=&quot;{{prettyDate start}}&quot;&gt;...&lt;/my-panel&gt;
+  &lt;my-panel title=&quot;{{prettyDate end}}&quot;&gt;...&lt;/my-panel&gt;
+&lt;/my-tabs&gt;
+</code></pre>
+<p>The <code>&lt;can-import&gt;</code> element also plays a key role in <a href="#section=section_ProgressiveLoading">Progressive Loading</a>. Simply by wrapping a section in a closed can-import, it signals to the build that the enclosed section's dependencies should be progressively loaded.</p>
+<pre><code>{{#eq location 'home'}}
+&lt;can-import from=&quot;components/home&quot;&gt;
+  &lt;my-home/&gt;
+&lt;/can-import&gt;
+{{/eq}}
+{{#eq location 'away'}}
+&lt;can-import from=&quot;components/chat&quot;&gt;
+  &lt;my-chat/&gt;
+&lt;/can-import&gt;
+{{/eq}}
+</code></pre>
+<p><a class="btn" href="http://canjs.com/docs/can.Component.html"><span>View the Documentation</span></a>
+<a class="btn" href="/place-my-order.html#section=section_Creatingcustomelements"><span>View the Guide</span></a></p>
+<p><em>Custom HTML elements are a feature of <a href="http://canjs.com/">CanJS</a></em></p>
+<h3>MVVM Architecture</h3>
+<p>DoneJS applications employ a <a href="https://en.wikipedia.org/wiki/Model_View_ViewModel">Model-View-ViewModel</a> architecture pattern, provided by <a href="http://canjs.com/">CanJS</a>.</p>
+<p><img src="/static/img/mvvm.png" srcset="/static/img/mvvm.png 1x, /static/img/mvvm-2x.png 2x" alt="MVVM Architecture Diagram" /></p>
+<p>The introduction of a strong ViewModel has some key advantages for maintaining large applications:</p>
+<ul>
+<li><strong>Decouples the presentation from its business logic</strong> - A ViewModel is essentially an object and methods representing the state of a View. This separation of concerns enables simple, dumb HTML-based Views containing minimal logic, while the ViewModel manages the complexities of application logic.</li>
+<li><strong>Enables designer/developer cooperation</strong> - Because the view is stripped of code and application logic, designers can safely and comfortably change the View without fear of breaking things.</li>
+<li><strong>Enables easier <a href="#section=section_ComprehensiveTesting">testing</a></strong> - ViewModels can be unit tested easily. Because they represent the view's state without any knowledge of the DOM, they provide a simple interface for testing.</li>
+</ul>
+<h4>How it works</h4>
+<p>The following video introduces MVVM in DoneJS, focusing on the strength of the ViewModel with an example.</p>
+<div class="youtube-container"><div class="youtube-player" data-videoid="kCM03jujKy4"></div></div>
+<p>DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works and compare it to other frameworks.</p>
+<h5>MVVM overview</h5>
+<p><strong>Models</strong> in DoneJS are responsible for loading data from the server. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server. Models use intelligent set logic that enables <a href="#section=section_RealTimeConnected">real time</a> integration and <a href="#section=section_CachingandMinimalDataRequests">caching</a> techniques.</p>
+<p><strong>Views</strong> in DoneJS are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.</p>
+<p><strong>ViewModels</strong> will be covered in detail below.</p>
+<h5>Independent ViewModels</h5>
+<p>The first reason DoneJS ViewModels are unique is their independence. ViewModels and Views are completely decoupled, and can be developed completely isolated from a template.</p>
+<p>For example, here's a typical ViewModel, which is often defined in its own separate file like <code>viewmodel.js</code> and exported as its own module:</p>
+<pre><code>export const ViewModel = Map.extend({
+  define: {
+    fullName: {
+      get () {
+        return this.attr(&quot;first&quot;) + &quot; &quot; + this.attr(&quot;last&quot;);
+      }
+    }
+  }
+})
+</code></pre>
+<p>The template (view) lives in its own file, so a designer could easily modify it without touching any JavaScript. This template renders the ViewModel property from above:</p>
+<pre><code>&lt;div&gt;{{fullName}}&lt;/div&gt;
+</code></pre>
+<p>A <a href="#section=section_CustomHTMLElements">custom HTML element</a>, also known as a component, would be used to tie these layers together:</p>
+<pre><code>import Component from 'can/component/';
+import ViewModel from &quot;./viewmodel&quot;;
+import template from './template.stache!';
+
+Component.extend({
+  tag: 'my-component',
+  viewModel: ViewModel,
+  template
+});
+</code></pre>
+<p>The ViewModel is defined as its own module and exported as an ES6 module, so it can be imported into a unit test, instantiated, and tested in isolation from the DOM:</p>
+<pre><code>import ViewModel from &quot;./viewmodel&quot;;
+
+QUnit.test('fullName works', function() {
+  var vm = new ViewModel();
+  vm.attr('first', 'John');
+  vm.attr('last', 'Doe');
+  QUnit.equal(vm.attr('fullName'), 'John Doe');
+});
+</code></pre>
+<p>In other frameworks, ViewModels don't enjoy this level of independence. Every React class has a render function, which is essentially a template, so the View, ViewModel, and component definition are typically part of the same module. Every Angular directive is a ViewModel. In DoneJS, separating the ViewModel, template, and custom element is encouraged, making each module more decoupled and easier to unit test.</p>
+<h5>Powerful observable data layer</h5>
+<p>A powerful observable data layer binds the layers together with very minimal code.</p>
+<p>DoneJS supports the following features:</p>
+<ol>
+<li><p><strong>Direct observable objects</strong> - changes to a property in an object or array immediately and synchronously notify any event listeners.</p></li>
+<li><p><strong>Computed properties</strong> - ViewModels can define properties that depend on other properties, and they'll automatically recompute only when their dependent properties change.</p></li>
+<li><p><strong>Data bound templates</strong> - templates bind to property changes and update the DOM as needed.</p></li>
+</ol>
+<p>In the simple ViewModel example above, <code>fullName</code>'s value depends on <code>first</code> and <code>last</code>. If something in the application changes <code>first</code>, <code>fullName</code> will recompute.</p>
+<pre><code>export const ViewModel = Map.extend({
+  define: {
+    fullName: {
+      get () {
+        return this.attr(&quot;first&quot;) + &quot; &quot; + this.attr(&quot;last&quot;);
+      }
+    }
+  }
+})
+</code></pre>
+<p><code>fullName</code> is data bound to the view that renders it:</p>
+<pre><code>&lt;div&gt;{{fullName}}&lt;/div&gt;
+</code></pre>
+<p>If <code>first</code> is changed:</p>
+<pre><code>viewModel.attr('first', 'Jane');
+</code></pre>
+<p><code>fullName</code> recomputes, then the DOM automatically changes to reflect the new value.</p>
+<p>The interplay of these layers provides amazing power to developers. ViewModels express complex relationships between data, without regard to its display. Views express properties from the ViewModel, without regard to how the properties are computed. The app then comes alive with rich functionality.</p>
+<p>Without automatic ties connecting these layers, achieving the same <code>fullName</code> functionality would require more code explicitly performing these steps. There would need to be communication between layers, removing the isolation achieved above. Any change to <code>first</code> would need to notify ViewModel's <code>fullName</code> of a change. Any change to <code>fullName</code> would need to tell the view to re-render itself. These dependencies grow and quickly lead to unmaintainable code.</p>
+<p>In Angular, there are no direct observables. It uses dirty checking with regular JavaScript objects, which means at the end of the current $digest cycle, it will run an algorithm that determines what data has changed. This has performance drawbacks, as well as making it harder to write simple unit tests.</p>
+<p>In React, there is no observable data layer. You could define a <code>fullName</code> like we showed above, but it would be recomputed every time <code>render</code> is called, whether or not it has changed. Though it's possible to isolate and unit test its ViewModel, its not quite set up to make this easy.</p>
+<h5>More information</h5>
+<p>To learn more:</p>
+<ul>
+<li>Models - read about <a href="http://connect.canjs.com/">can.connect</a> and <a href="http://canjs.com/docs/can.Map.html">can.Map</a></li>
+<li>Computed properties - read about <a href="http://canjs.com/docs/can.compute.html">can.compute</a></li>
+<li>Observable data layer - read about <a href="http://canjs.com/docs/can.Map.html">can.Map</a> and <a href="http://canjs.com/docs/can.List.html">can.List</a></li>
+<li>ViewModels - read about <a href="http://canjs.com/docs/can.Component.html">can.component</a>, <a href="http://canjs.com/docs/can.Component.prototype.viewModel.html">can.Component.viewModel</a>, and <a href="http://canjs.com/docs/can.Map.prototype.define.html">can.Map.define</a></li>
+<li>Views - read about <a href="http://canjs.com/docs/can.stache.html">can.stache</a></li>
+<li><a href="./place-my-order.html#section=section_Creatingaunit_testedviewmodel">Create a unit tested ViewModel</a> in the in depth guide</li>
+</ul>
+<p><em>The MVVM architecture in DoneJS is provided by <a href="http://canjs.com/">CanJS</a>.</em></p>
+<h3>Hot Module Swapping</h3>
+<p>Getting and staying in <a href="https://en.wikipedia.org/wiki/Flow_(psychology)">flow</a> is critical while writing complex apps. In DoneJS, whenever you change JavaScript, CSS, or a template file, the change is automatically reflected in your browser, without a browser refresh.</p>
+<div class="maintainable wrapper">
+  <div class="background video">
+    <video tabindex="0" preload="none" class="img-responsive" poster="static/img/donejs-live-reload.jpg">
+        <source src="static/img/donejs-live-reload-no-fade-in.mov" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.mp4" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.ogg" type="video/mp4">
+        <source src="static/img/donejs-live-reload-no-fade-in.webm" type="video/webm">
+    </video>
+  </div>
+</div>
+<h4>How it works</h4>
+<p>Live reload servers generally watch for file changes and force your browser window to refresh. DoneJS doesn’t refresh the page, it re-imports modules that are marked as dirty, in real-time.</p>
+<p>The correct terminology is actually <a href="https://en.wikipedia.org/wiki/Hot_swapping">hot swapping</a>, not live reload. Regardless of what it's called, the result is a blazing fast development experience.</p>
+<p>There is no configuration needed to enable this feature. Just start the dev server and begin:</p>
+<pre><code>donejs develop
+</code></pre>
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time waiting for refreshes and builds,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="LbVZs80WMWI"></div></div>'>doing trust falls with giant yellow M&Ms.</a></div>
+    <img class="fun-img" src="/static/img/funny-mandm.png">
+</blockquote>
+<p><a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a></p>
+<p><em>Live reload is a feature of <a href="http://stealjs.com/">StealJS</a>.</em></p>
+<h3>Generators</h3>
+<p>DoneJS generators help you kickstart new projects and components. They'll save you time, eliminating boilerplate by scaffolding a working project, component, or module.</p>
+<p>Generator templates set up many of the best practices and features discussed in the rest of this page, without you even realizing it.</p>
+<h4>How it works</h4>
+<p>The DoneJS generator uses Yeoman to bootstrap your application, component, or model.</p>
+<p>There are four generators by default (and you can easily create your own).</p>
+<h5>Project generator</h5>
+<p>From the command line, run:</p>
+<pre><code>donejs add app
+</code></pre>
+<p>You'll be prompted for a project name, source folder, and other setup information. DoneJS' project dependencies will be installed, like StealJS and CanJS. In the folder that was created, you'll see:</p>
+<pre><code>├── .yo-rc.json
+├── build.js
+├── development.html
+├── documentjs.json
+├── package.json
+├── production.html
+├── readme.md
+├── src/
+|   ├── app.js
+|   ├── index.stache
+|   ├── models/
+|   |   ├── fixtures
+|   |   |   ├── fixtures.js
+|   |   ├── test.js
+|   ├── styles.less
+|   ├── test.html
+|   ├── test/
+|   |   ├── test.js
+|   |   ├── functional.js
+├── node_modules/
+</code></pre>
+<p>You're now a command away from running application wide tests, generating documentation, and running a build. Start your server with <code>donejs develop</code>, open your browser, and you'll see a functioning, server-side rendered hello world page.</p>
+<h5>Modlet component generator</h5>
+<p>To create a <a href="http://canjs.com/docs/can.Component.html">component</a> organized with the <a href="#section_Modlets">modlet</a> file organization pattern:</p>
+<pre><code>donejs add component &lt;folder-path&gt; &lt;component-name&gt;
+</code></pre>
+<p>It will create the following files:</p>
+<pre><code>restaurant/
+├── list/
+|   ├── list.html
+|   ├── list.js
+|   ├── list.less
+|   ├── list.md
+|   ├── list.stache
+|   ├── list_test.js
+|   ├── test.html
+</code></pre>
+<p>This folder contains everything a properly maintained component needs: a working demo page, a basic test, and documentation placeholder markdown file.</p>
+<h5>Simple component generator</h5>
+<p>For simple, standalone components:</p>
+<pre><code>donejs add component &lt;file-name&gt;.component &lt;component-name&gt;
+</code></pre>
+<p>Which will generate a working component in a single file.</p>
+<h5>Model generator</h5>
+<p>To create a new <a href="http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html">model</a>:</p>
+<pre><code>donejs add supermodel &lt;model-name&gt;
+</code></pre>
+<p>This will create:</p>
+<ul>
+<li>a working model in the application's <code>models</code> folder</li>
+<li>a working fixture file for that model</li>
+<li>a working test, and add the test as a dependency for the application's model test</li>
+</ul>
+<blockquote class="fun-quotes">
+  <div class="fun-intro">You spend less time setting up your app,</div>
+    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="xiE5AQHKj_Y" data-params="start=26"></div></div>'>searching for carrots.</a></div>
+    <img class="fun-img" src="/static/img/funny-carrots.png">
+</blockquote>
+<p><a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
+<a class="btn" href="/Guide.html#section=section_Generatetheapplication"><span>View the Guide</span></a></p>
+<p><em>Generators are provided by the <a href="https://github.com/donejs/generator-donejs">Generator DoneJS</a> project with additional support via the <a href="https://github.com/donejs/cli">donejs-cli</a> project</em></p>
+
+		</section>
+		
+		
+
+		
+
+		
+
+	
+	</article>
+	
+
+
+	</div>
+</div>
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="/static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="/Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="/About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="/Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="/Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="/community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-github-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-twitter-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="/static/img/icon-googleplus-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">
+								<img class="footer-social-icon" src="/static/img/icon-youtube-white.svg">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="http://www.bitovi.com">2015 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"type":"page","name":"Features","src":"docs/features.md","description":"Learn about the features that will help you get your app done.\n\n### All-in-one stack\n\nDoneJS offers everything you need to build a modern web app. It comes with a module loader, build system, MVVM utilities, full testing layer, documentation generator, server side rendering utilities, a data layer, and more. Its completeness is itself a feature.\n\nThere's no mixing and matching pieces of your stack. Just `npm install` and get started.\n\nChoosing a modern stack is not at all simple or straightforward.\n\n1. *What types of tools do you want?*   Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?\n\n2. *Choose all your pieces.* The good news is, you have [many choices](http://microjs.com/#). The bad news is, you have many choices. React, Angular, or Backbone? Require.js, browserify, or jspm? Jasmine or QUnit? What tool will run my tests?\n\n3. *Finally, you have to make sure your chosen tools work together effectively.* Does require.js work well with Angular? Does Karma work with Browserify? What about React and Babel?\n\nDoneJS gives you a full solution. It's our mission to eliminate any ambiguity around choosing technology for building an app, so you spend less time tinkering with your stack, and more time actually building your app.\n\nAnd as we've proven [over the last 8 years](/About.html#section=section_Evolve), we'll keep updating the stack as the state of the art evolves over time.\n\n### Integrated layers\n\nJust like Apple integrates the hardware and software for its devices, DoneJS integrates different technologies in a way that creates unique advantages that you can only get from using an integrated solution.\n\n#### Cross-layer features\n\nDoneJS makes it easier to do things that are not possible, or at best DIY, with competitor frameworks, by spanning technology layers. Here are a couple examples:\n\n##### 1. [Server-side rendering](#section=section_ServerSideRendered__Howitworks__PreppingyourappforSSR)\n\nServer-side rendering (SSR), which you can read about in more detail in its [section](#section_Server_SideRendered) below, spans many layers to make setup and integration simple.\n\nIt uses hooks in data components to automatically notify the server to delay rendering, [hot module swapping](#section=section_HotModuleSwapping) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#section=section_CachingandMinimalDataRequests__Howitworks__Inlinecache) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.\n\nBy contrast, React supports SSR, but you're left to your own devices to support delaying rendering, hot module swapping, and inline caching.\n\n##### 2. [Progressive enhancement](#section=section_ProgressiveLoading__Howitworks)\n\nYou can mark a section of your template to be progressively loaded by wrapping it with `<can-import>`, like:\n\n```\n<can-import from=\"components/home\">\n  <home-page/>\n</can-import>\n```\n\nand then running `donejs build`.\n\n`<can-import>` has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.\n\n#### Story-level solutions\n\nAnother advantage of the integration between DoneJS' parts is the ability to solve development problems on the level of [**stories**](http://searchsoftwarequality.techtarget.com/definition/user-story) rather than just features.\n\nSolving a story means a packaged solution to a development problem, where several features across layers converge to solve the problem from start to finish. Here are several examples of stories that DoneJS solves:\n\n1. [Modular workflow](section=section_NPMPackages__Howitworks__Modularworkflow) - DoneJS makes it possible for teams to design and share components easily. Starting with [generators](#section=section_Generators), users can create [modlets](#section=section_Modlets) that encapsulate everything a [custom elements](#section=section_CustomHTMLElements) needs, easily add [documentation](#section=section_Documentation) and [testing](#section=section_ComprehensiveTesting), then use [NPM import and export](#section=section_NPMPackages) to easily share the modules with other developers, no matter what module format they're using.\n\n2. [Performance](#section=section_PerformanceFeatures) - DoneJS was designed from the start to solve the performance story, packaging [server-side rendering](#section=section_ServerSideRendered), [progressive loading](#section=section_ProgressiveLoading), [worker thread rendering](#section=section_WorkerThreadRendering), [data layer caching](#section=section_CachingandMinimalDataRequests), and more, all under one roof.\n\n3. [Maintainability](#section=section_Maintainabilityfeatures) - [testing](#section=section_ComprehensiveTesting), [docs](#section=section_Documentation), [MVVM](#section=section_MVVMArchitecture)\n\n4.  Developer efficiency - [zero-config NPM imports](#section=section_NPMPackages), [hot module swapping](#section=section_HotModuleSwapping), [ES6 support](#section=section_ES6Modules)\n\n### Feature comparison\n\n<div class=\"matrix-wrapper\">\n  <div class=\"matrix-legend\" id=\"js-matrix-legend-affix\">\n    <div class=\"title\">SOLUTION LEGEND</div>\n    <ul>\n      <li>\n        <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n        <div>EASY</div>\n      </li>\n      <li>\n        <img class=\"matrix-rating-icon\" src=\"/static/img/icon-very-good.svg\">\n        <div>GOOD</div>\n      </li>\n      <li>\n        <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\">\n        <div>DIFFICULT</div>\n      </li>\n      <li>\n        <img class=\"matrix-rating-icon\" src=\"/static/img/icon-fair.svg\">\n        <div>THIRD-PARTY</div>\n      </li>\n      <li>\n        <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n        <div>NO</div>\n      </li>\n      <!-- <li>\n        <div class=\"asterisk-legend\">\n          <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\"><span class=\"asterisk\"></span>\n        </div>\n        <div>TOOLTIP</div>\n      </li> -->\n    </ul>\n  </div>\n  <div class=\"table-wrapper\">\n    <div class=\"scrollable\">\n      <table id=\"js-matrix-table-affix\" class=\"matrix-table responsive\">\n      <thead>\n        <tr>\n          <th class=\"features\">FEATURES</th>\n          <th><img class=\"framework-logo\" src=\"/static/img/donejs-logo-matrix.png\"></th>\n          <th><img class=\"framework-logo\" src=\"/static/img/angular-logo.png\"></th>\n          <th><img class=\"framework-logo\" src=\"/static/img/react-logo.png\"></th>\n        </tr>\n      </thead>\n        <tbody>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_Server_SideRendered\">Server-Side Rendering</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Angular doesn't support a virtual dom. No third-party library support would be equivalent.\" title=\"Angular doesn't support a virtual dom. No third-party library support would be equivalent.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-container=\"matrix-wrapper\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Requires some <a href='http://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has.\" title=\"Requires some manual setup and lacks most of the features/support DoneJS has.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-fair.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_ProgressiveLoading\">Progressive Dependency Loading</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_CachingandMinimalDataRequests\">Caching & Minimal Data Requests</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_MinimalDOMUpdates\">Minimal DOM Updates</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-very-good.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Updates DOM quickly, but only after expensive dirty check calculation.\" title=\"Updates DOM quickly, but only after expensive dirty check calculation.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_WorkerThreadRendering\">Worker Thread Rendering</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"There is a virtual dom. So, Its possible, but there is no support out of the box.\" title=\"There is a virtual dom. So, Its possible, but there is no support out of the box.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_DeploytoaCDN\">Deploy to a CDN</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_iOS_Android_andDesktopBuilds\">iOS, Android, and Desktop Builds</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"While native app builds are possible, there's no infrastructure to make it easy.\" title=\"While native app builds are possible, there's no infrastructure to make it easy.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"While native app builds are possible, there's no infrastructure to make it easy.\" title=\"While native app builds are possible, there's no infrastructure to make it easy.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_SupportsAllBrowsers_EvenIE8\">Browser Support</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content='<a href=\"https://docs.angularjs.org/guide/ie\" target=\"_blank\">Supports IE9+</a>' title=\"Supports IE9+\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-very-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_RealTimeConnected\">Real-Time</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"While connecting to real time data is possible, there is no built in support to make it easy.\" title=\"While connecting to real time data is possible, there is no built in support to make it easy.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"While connecting to real time data is possible, there is no built in support to make it easy.\" title=\"While connecting to real time data is possible, there is no built in support to make it easy.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_PrettyURLswithPushstate\">Pretty URLs</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Built-in routing is difficult to configure and maintain.\" title=\"Built-in routing is difficult to configure and maintain.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-very-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"React-router supports this, but is not part of the core library.\" title=\"React-router supports this, but is not part of the core library.\">\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-fair.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_ComprehensiveTesting\">Comprehensive Testing</a></div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Includes built-in support for every part of the testing lifecycle\" title=\"Includes built-in support for every part of the testing lifecycle\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Supports dependency injection, but offers poor support for end-to-end testing.\" title=\"Supports dependency injection, but offers poor support for end-to-end testing.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Includes some basic test utilities and mocks, but no support for other parts of the testing lifecycle.\" title=\"Includes some basic test utilities and mocks, but no support for other parts of the testing lifecycle.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\">\n                <span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_Documentation\">Documentation</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_ContinuousIntegration_Deployment\">Continuous Integration & Deployment</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_NPMPackages\">NPM Packages - Imports & Exports</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_ES6Modules\">ES6 modules</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Coming in Angular 2\" data-content=\"Coming in Angular 2\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"bottom\" data-html=\"true\" data-content=\"Supported through transpiler included with react-tools.\" title=\"Supported through transpiler included with react-tools.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-fair.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_CustomHTMLElements\">Custom HTML Elements</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_MVVMArchitecture\">MVVM Architecture</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n            <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"top\" data-html=\"true\" data-content=\"Not explicitly MVVM, but could be implemented\" title=\"Not explicitly MVVM, but could be implemented\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-very-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"top\" data-html=\"true\" data-content=\"React is just the view layer. You'll need to implement your own MVVM architecture.\" title=\"React is just the view layer. You'll need to implement your own MVVM architecture.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-good.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_HotModuleSwapping\">Hot Module Swapping</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-poor.svg\">\n            </td>\n            <td>\n              <div class=\"has-popover\" data-toggle=\"popover\" data-placement=\"top\" data-html=\"true\" data-content=\"Third-party libraries available for some support.\" title=\"Third-party libraries available for some support.\">\n                <img class=\"matrix-rating-icon\" src=\"/static/img/icon-fair.svg\"><span class=\"asterisk\"></span>\n              </div>\n            </td>\n          </tr>\n          <tr>\n            <td class=\"features\">\n              <div class=\"feature-description\"><a href=\"#section=section_Generators\">Generators</a></div>\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-excellent.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-fair.svg\">\n            </td>\n            <td>\n              <img class=\"matrix-rating-icon\" src=\"/static/img/icon-fair.svg\">\n            </td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/daffl/Jupiter/donejs/donejs"},"dest":"/Users/daffl/Jupiter/donejs/donejs/site","ignoreTemplateRender":true,"templates":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/templates","static":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+			steal = {
+			instantiated: {
+				"bundles/static.css!$css" : null
+			}
+			}
+		</script>
+		<script type='text/javascript'
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+				bundles-path="bundles"></script>
+	
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+
+
+
+</html>

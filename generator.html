@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>donejs - Creating a generator </title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<!--<![endif]-->
+</head>
+<body class="docs generator">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li >
+								<a href="./index.html">Home</a>
+							</li>
+							<li >
+								<a href="./Features.html">Features</a>
+							</li>
+							<li >
+								<a href="./About.html">About</a>
+							</li>
+							<li >
+								<a href="./Apis.html">Apis</a>
+							</li>
+							<li class="guides-menu">
+									<a href="/Guides.html">Guides</a>
+									<ul class="dropdown-menu">
+                      <li ><a href="./SettingUp.html">Setting Up</a></li>
+											<li ><a href="./Guide.html">Quick Start</a></li>
+											<li><a  href="./place-my-order.html">In-depth</a></li>
+											<li><a  href="./plugin.html">Creating a plugin</a></li>
+											<li><a class="active" href="./generator.html">Creating a generator</a></li>
+											<li><a  href="./bitballs.html">Example App: Bitballs</a></li>
+									</ul>
+							</li>
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="/static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="/static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="/static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">kQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="/static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="/static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+		<span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+<div class="container-fluid api">
+	<div class="row">
+
+	
+
+	
+	<article class="content docs col-xs-12 ">
+	
+
+		
+		<section class="title">
+			<div class="heading">
+<h1>Creating a generator</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">generator</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+
+		
+		<section class="contents">
+		</section>
+		
+
+		
+
+		
+		<section class="description">
+			<p>Generators add additional functionality to DoneJS applications. In this guide will create a generator that adds JSHint and an <code>.editorconfig</code> file to a DoneJS application.</p>
+
+		</section>
+		
+
+		
+			
+		
+
+		
+
+
+		
+		<section class="comment">
+			<p>If you have used <code>donejs add nw</code> or <code>donejs add cordova</code> to create a <a href="https://donejs.com/Features.html#section=section_iOS_Android_andDesktopBuilds">desktop- or mobile version</a> of your application you already used a DoneJS generator. Generators are <a href="https://www.npmjs.com/">npm</a> modules that provide a <a href="http://yeoman.io/">Yeoman</a> generator that adds functionality to your application.</p>
+<p>In this guide you will create your own version of <a href="https://www.npmjs.com/package/donejs-jshint">donejs-jshint</a>, a DoneJS generator that adds:</p>
+<ul>
+<li><a href="http://jshint.com/">JSHint</a>, a JavaScript code quality tool</li>
+<li>An <a href="http://editorconfig.org/">.editorconfig</a> file which helps text editors and IDEs to define and maintain a consistent coding style.</li>
+</ul>
+<p>It will also update the <code>npm test</code> script to run JSHint with our tests. You can find the code in the <a href="https://github.com/donejs/donejs-jshint">donejs-jshint</a> repository. We can run the generator with:</p>
+<pre><code>$ donejs add jshint
+</code></pre>
+<p>Currently it will only ask if we want to use spaces or tabs and to overwrite the <code>package.json</code> to add the npm scripts for JSHint:</p>
+<p><img src="https://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-03-09-at-2_47_43-PM.png" alt="DoneJS generator" style="width: 100%;" class="alignnone size-full wp-image-3023" /></p>
+<blockquote>
+<p><strong>Note:</strong> Since <code>donejs-jshint</code> already exists we will use <code>donejs-&lt;username&gt;-jshint</code> with <code>&lt;username&gt;</code> being your GitHub username for the remainder of this article. Once published it can then be used as <code>donejs add &lt;username&gt;-jshint</code>.</p>
+</blockquote>
+<h2>Setting up</h2>
+<h3>Creating the project on GitHub</h3>
+<p>We will use <a href="https://github.com">GitHub</a> to host the code for the project which makes it easy for others to contribute and to automatically run the tests in <a href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> which we will enable later.</p>
+<p>If you don't have an account yet, go to <a href="https://github.com/join">GitHub</a> to sign up and follow <a href="https://help.github.com/articles/set-up-git/">the help</a> on how to set it up for the command-line <code>git</code>. Once completed, create a new repository from your dashboard.</p>
+<p>Calling the repository <code>donejs-&lt;username&gt;-jshint</code> and initializing it empty (without any of the default files) looks like this:</p>
+<p><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-repository1.png" alt="generator-repository" style="width: 100%;" class="alignnone size-full wp-image-3077" /></p>
+<p>After creating the repository, clone it into a new folder:</p>
+<pre><code>$ git clone git@github.com:&lt;username&gt;/donejs-&lt;username&gt;-jshint.git
+$ cd donejs-&lt;username&gt;-jshint
+</code></pre>
+<h3>Initializing the project</h3>
+<p>To initialize a new generator you will need DoneJS version 0.9.0+ installed globally. To check your DoneJS version run</p>
+<pre><code>$ donejs --version
+</code></pre>
+<p>To install DoneJS or to get the latest version run:</p>
+<pre><code>$ npm install donejs -g    
+</code></pre>
+<p>In the <code>donejs-&lt;username&gt;-jshint</code> folder we can now initialize a new generator, very similar to a new DoneJS application, like this:</p>
+<pre><code>$ donejs add generator
+</code></pre>
+<p>The generator will ask several question that should be answered as follows:</p>
+<ul>
+<li>For the project name you can just confirm the default by pressing enter</li>
+<li>For the GitHub username or organization enter the GitHub username where the repository has been created</li>
+<li>All other fields can also be answered with the default or the information you would like to use</li>
+</ul>
+<p>Once all done, the final prompt looks similar to this:</p>
+<p><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-init.png" alt="generator-init" style="width: 100%;" class="alignnone size-full wp-image-3050" /></p>
+<p>Now the generator will initialize the default layout and install all its dependencies.</p>
+<h3>Setting up Travis CI</h3>
+<p>When the installation has completed, make sure everything got set up properly by running:</p>
+<pre><code>$ npm test
+</code></pre>
+<p>This will run some basic generator tests and output the result on the console.</p>
+<p>This command can also be used to automatically run the tests on a <a href="https://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a> server. There are many open source CI servers, the most popular being <a href="https://jenkins-ci.org/">Jenkins</a>, and many hosted solutions like <a href="https://travis-ci.org/">Travis CI</a>.</p>
+<p>We will use Travis CI as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to <code>Accounts</code> (in the dropdown under you name) to enable the <code>donejs-&lt;username&gt;-jshint</code> repository:</p>
+<p><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-travis.png" alt="generator-travis" style="width: 100%;" class="alignnone size-full wp-image-3054" /></p>
+<p>You may have to click the <em>&quot;Sync account&quot;</em> button for the repository to show up. Now, every time we push to GitHub the tests will run automatically. We can do so with our initial commit:</p>
+<pre><code>$ git add . --all
+$ git commit -am &quot;Initial commit&quot;
+$ git push origin master
+</code></pre>
+<p>If you now go <code>https://travis-ci.org/&lt;your-username&gt;/donejs-&lt;username&gt;-jshint/builds</code> you will see the build running and eventually turn green (which will update the badge that got added in the <code>readme.md</code> file).</p>
+<h2>Adding the configuration files</h2>
+<p>Now we can add the files that our generator should produce. All file templates will be put in the <code>default/templates/</code> folder.</p>
+<h3>.jshintrc</h3>
+<p>First, add a <code>default/templates/.jshintrc</code> file which contains <a href="http://jshint.com/docs/options/">options for JSHint</a>:</p>
+<pre><code>{
+  &quot;node&quot;: true,
+  &quot;esnext&quot;: true,
+  &quot;bitwise&quot;: true,
+  &quot;camelcase&quot;: true,
+  &quot;curly&quot;: true,
+  &quot;eqeqeq&quot;: true,
+  &quot;immed&quot;: true,
+  &quot;indent&quot;: 2,
+  &quot;latedef&quot;: &quot;nofunc&quot;,
+  &quot;newcap&quot;: false,
+  &quot;noarg&quot;: true,
+  &quot;regexp&quot;: true,
+  &quot;undef&quot;: true,
+  &quot;unused&quot;: true,
+  &quot;strict&quot;: false,
+  &quot;trailing&quot;: true,
+  &quot;smarttabs&quot;: true,
+  &quot;white&quot;: false
+}
+</code></pre>
+<h3>.editorconfig</h3>
+<p>Next add a <code>default/templates/.editorconfig</code> file like this:</p>
+<pre><code>; Unix-style newlines
+[*]
+end_of_line = LF
+indent_style = &lt;%= indent_style %&gt;
+trim_trailing_whitespace = true
+</code></pre>
+<p>All files support <a href="http://www.embeddedjs.com/">EJS</a> placeholders. Here, <code>&lt;%= indent_style %&gt;</code> will be used for the user choice of using whitespaces or tabs. Finally, remove <code>defaults/templates/file.js</code> since we won't be using it.</p>
+<h2>Implementing the generator</h2>
+<p>For the most part, DoneJS generators are simply <a href="http://yeoman.io/">Yeoman</a> generators so everything documented for <a href="http://yeoman.io/authoring/">writing your own Yeoman generator</a> also applies here. For the user choice of tabs vs. spaces also refer to the chapter about <a href="http://yeoman.io/authoring/user-interactions.html">interacting with the user</a>.</p>
+<h3>Adding the generator functionality</h3>
+<p>Our generator needs to ask if we want to use spaces or tabs and then copy the <code>.jshintrc</code> and <code>.editorconfig</code> files over to their final destination. We also want to add an <code>npm run jshint</code> script to the <code>package.json</code> and make sure that JSHint runs during <code>npm test</code>. The complete generator at <code>default/index.js</code> looks like this:</p>
+<pre><code>var generator = require('yeoman-generator');
+var _ = require('lodash');
+
+module.exports = generator.Base.extend({
+  initializing: function () {
+    // Read the original package.json
+    this.pkg = this.fs.readJSON(
+      this.destinationPath('package.json'), {}
+    );
+    
+    // Maintain a list of all files we want to copy over
+    this.files = [
+      '.editorconfig',
+      '.jshintrc'
+    ];
+  },
+  
+  prompting: function () {
+    var done = this.async();
+
+    // Create a prompt setting the `indent_style` property
+    // to `tab` or `space`
+    this.prompt([{
+      type: 'list',
+      name: 'indent_style',
+      message: 'What indentation style do you want to use?',
+      default: 'tab',
+      choices: [
+        {
+          name: 'Tabs',
+          value: 'tab'
+        },
+        {
+          name: 'Spaces',
+          value: 'space'
+        }
+      ]
+    }], function (answers) {
+      this.props = answers;
+      done();
+    }.bind(this));
+  },
+  
+  writing: function () {
+    var pkg = this.pkg;
+    
+    // Update `package.json` with the `jshint` command
+    // and update the `test` script
+    pkg.scripts = _.extend(pkg.scripts, {
+      test: 'npm run jshint &amp;&amp; ' + 
+        _.get(pkg, 'scripts.test',
+          'echo &quot;No tests specified&quot;'),
+      jshint: 'jshint ' + 
+        _.get(pkg, 'system.directories.lib',
+          'src') + 
+        '/. --config'
+    });
+    
+    // Write to `package.json` and format accordingly
+    // This will prompt you to overwrite
+    var indent = this.props.index === 'tab' ? '\t' : '  ';
+    this.fs.writeJSON('package.json', pkg, null, indent);
+
+    // Install jshint as a development dependency
+    this.npmInstall([ 'jshint' ], { saveDev: true});
+    
+    // Got through every file and copy it
+    this.files.forEach(function(file) {
+      this.fs.copyTpl(
+        this.templatePath(file),
+        this.destinationPath(file),
+        this.props
+      );
+    }.bind(this));
+  }
+});
+</code></pre>
+<p>That's it. Now we have a fully functional generator and can give it a try in a DoneJS application.</p>
+<h3>Manual testing</h3>
+<p>When running <code>donejs add &lt;generatorname&gt;</code> DoneJS will</p>
+<ul>
+<li>Check if <code>donejs-&lt;generatorname&gt;</code> is installed locally</li>
+<li>If not install it from NPM</li>
+<li>Then run the generator at <code>default/index.js</code></li>
+</ul>
+<p>If we want to test our generator without publishing it to npm first we can link it instead. In the generator folder run:</p>
+<pre><code>$ npm link
+</code></pre>
+<p>Then go into your test DoneJS application directory:</p>
+<pre><code>$ cd ../place-my-order
+$ npm link donejs-&lt;username&gt;-jshint
+</code></pre>
+<p>Now we can run</p>
+<pre><code>$ donejs add &lt;username&gt;-jshint
+</code></pre>
+<h3>Writing a unit test</h3>
+<p>Yeoman also comes with some tools for <a href="http://yeoman.io/authoring/testing.html">testing generators</a>. The test we initially ran with <code>npm test</code> makes sure that <code>default/templates/file.js</code> gets written. Since we deleted that file, update the test at <code>test/index.js</code> to verify that it wrote the files we want with the content we expect:</p>
+<pre><code>var path = require('path');
+var helpers = require('yeoman-test');
+var assert = require('yeoman-assert');
+
+describe('donejs-&lt;username&gt;-jshint', function() {
+  before(function(done) {
+    // Run the generator in a temprorary directory
+    helpers.run(path.join(__dirname, '../default'))
+      .inTmpDir()
+      // Mock the user input by setting
+      // `indent_style` to `tab`
+      .withPrompts({
+        'indent_style': 'tab'
+      }).on('end', done);
+  });
+
+  // Verify that `.jshintrc` got written
+  // and has some content
+  it('created .jshintrc', function() {
+    assert.file(['.jshintrc']);
+    assert.fileContent('.jshintrc',
+      /&quot;latedef&quot;: &quot;nofunc&quot;/);
+  });
+  
+  // Verify that `.editorconfig` got written
+  // with `indent_style` set to our selection
+  it('.editorconfig with indent_style', function() {
+    assert.file(['.editorconfig']);
+    assert.fileContent('.editorconfig',
+      /indent_style = tab/);
+  });
+  
+  // Make sure that `package.json` got updated
+  // with the `jshint` npm script
+  it('update package.json', function() {
+    assert.jsonFileContent('package.json', {
+      scripts: {
+        jshint: 'jshint src/. --config'
+      }
+    });
+  });
+});
+</code></pre>
+<p>Now we can see all tests passing when running:</p>
+<pre><code>$ npm test
+</code></pre>
+<h2>Publishing the plugin</h2>
+<h3>Making a pull request</h3>
+<p>Although we are working on the generator by ourselves for now, <a href="https://help.github.com/articles/using-pull-requests/">GitHub pull requests</a> are a great way to keep track of our progress and to make sure that all tests are passing. In the plugin folder run:</p>
+<pre><code>$ git checkout -b generator-functionality
+$ git add . --all
+$ git commit -m &quot;Implementing JSHint and editorconfig generator&quot;
+$ git push origin generator-functionality
+</code></pre>
+<p>And then create a new pull request by going to <code>https://github.com/&lt;username&gt;/donejs-&lt;username&gt;-jshint</code> which will now show an option like this:</p>
+<p><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-pr.png" alt="generator-pr" style="width: 100%;" class="alignnone size-full wp-image-3055" /></p>
+<p>Once you created the pull request, you will see a <code>Some checks haven’t completed yet</code> message that will eventually turn green:</p>
+<p><img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/generator-pull-request.png" alt="generator-pull-request" style="width: 100%;" class="alignnone size-full wp-image-3056" /></p>
+<p>Now you can click the &quot;Merge pull request&quot; button. Then in the console, checkout the <em>master</em> branch and pull down the latest changes with:</p>
+<pre><code>$ git checkout master
+$ git pull origin master
+</code></pre>
+<h3>Publishing to npm</h3>
+<p>For others to be able to use your generator via <code>donejs add &lt;generatorname&gt;</code> have to pulish it to <a href="http://npmjs.org">npm</a>. <a href="https://www.npmjs.com/signup">Create a new account</a> and then log in via</p>
+<pre><code>$ npm login
+</code></pre>
+<p><a href="http://semver.org/">Semantic versioning</a> is a great way to communicate new features and breaking changes. The generated plugin already comes with the release scripts to publish new versions according to the <code>major.minor.patch</code> schema. In our case to publish an initial version <code>0.1.0</code> we can run</p>
+<pre><code>$ donejs release:minor
+</code></pre>
+<p>Now version <code>0.1.0</code> of the generator is available and everybody can use it through</p>
+<pre><code>donejs add &lt;username&gt;-jshint
+</code></pre>
+<h2>Show it off</h2>
+<p>Once you published your generator, let the world know about it. <a href="https://twitter.com/donejs">Tweet @donejs</a> and post it in the <a href="http://forums.donejs.com/">DoneJS forums</a> and the <a href="https://gitter.im/donejs/donejs">DoneJS chat</a>. Those are also great places to get quick help with any questions.</p>
+
+		</section>
+		
+		
+
+		
+
+		
+
+	
+	</article>
+	
+
+
+	</div>
+</div>
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="/static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="/Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="/About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="/Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="/Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="/community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-github-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-twitter-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="/static/img/icon-googleplus-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">
+								<img class="footer-social-icon" src="/static/img/icon-youtube-white.svg">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="http://www.bitovi.com">2015 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"type":"page","name":"generator","src":"docs/guides/generator.md","description":"Generators add additional functionality to DoneJS applications. In this guide will create a generator that adds JSHint and an `.editorconfig` file to a DoneJS application.","title":"Creating a generator","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/daffl/Jupiter/donejs/donejs"},"dest":"/Users/daffl/Jupiter/donejs/donejs/site","ignoreTemplateRender":true,"templates":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/templates","static":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+			steal = {
+			instantiated: {
+				"bundles/static.css!$css" : null
+			}
+			}
+		</script>
+		<script type='text/javascript'
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+				bundles-path="bundles"></script>
+	
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+
+
+
+</html>

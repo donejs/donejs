@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>donejs  - Apis</title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<!--<![endif]-->
+</head>
+<body class="docs Apis">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li >
+								<a href="./index.html">Home</a>
+							</li>
+							<li >
+								<a href="./Features.html">Features</a>
+							</li>
+							<li >
+								<a href="./About.html">About</a>
+							</li>
+							<li class="active">
+								<a href="./Apis.html">Apis</a>
+							</li>
+							<li class="guides-menu">
+									<a href="/Guides.html">Guides</a>
+									<ul class="dropdown-menu">
+                      <li ><a href="./SettingUp.html">Setting Up</a></li>
+											<li ><a href="./Guide.html">Quick Start</a></li>
+											<li><a  href="./place-my-order.html">In-depth</a></li>
+											<li><a  href="./plugin.html">Creating a plugin</a></li>
+											<li><a  href="./generator.html">Creating a generator</a></li>
+											<li><a  href="./bitballs.html">Example App: Bitballs</a></li>
+									</ul>
+							</li>
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="/static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="/static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="/static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">kQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="/static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="/static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+		<span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+<div class="container-fluid api">
+	<div class="row">
+
+	
+
+	
+	<article class="content docs col-xs-12 ">
+	
+
+		
+		<section class="title">
+			<div class="heading">
+<h1>Apis</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+
+		
+		<section class="contents">
+		</section>
+		
+
+		
+
+		
+		<section class="description">
+			<p>DoneJS is comprised of many projects that are documented seperately. This page contains overviews of each project and links to their official APIs.</p>
+<h3>Application Infrastructure</h3>
+<p>The blue boxes in the following architecture diagram represent modules provided by DoneJS.</p>
+<object type="image/svg+xml" data="static/img/donejs-stack-app.svg"></object>
+<ul>
+<li><a href="#section=section_StealJS">StealJS</a> - Module loader and build system. <a href="http://stealjs.com/docs/index.html">api</a>.</li>
+<li><a href="#section=section_CanJS">CanJS</a> - Views, ViewModels, modeling part of Models, custom elements, routing. <a href="http://canjs.com/docs/index.html">api</a></li>
+<li><a href="#section=section_can_connect">can-connect</a> - Data connection part of Models, real-time, fall-through cache. <a href="https://connect.canjs.com">api</a></li>
+<li><a href="#section=section_can_set">can-set</a> - Create set algebras used to compare AJAX parameters. <a href="https://github.com/canjs/can-set#can-set">api</a></li>
+<li><a href="#section=section_jQuery">jQuery</a> - DOM utilities. <a href="http://jquery.com/">api</a></li>
+<li><a href="#section=section_jQuery__">jQuery++</a> - Even more DOM utilities. <a href="http://jquerypp.com/">api</a></li>
+<li><a href="#section=section_done_ssr">done-ssr</a> - Server-side rendering for NodeJS. <a href="https://github.com/donejs/done-ssr">api</a></li>
+<li><a href="#section=section_done_autorender">done-autorender</a> - Processes templates so they can be server-side rendered. <a href="https://github.com/donejs/autorender#use">api</a></li>
+<li><a href="#section=section_can_simple_dom">can-simple-dom</a> - A lightweight virtual DOM. <a href="https://github.com/canjs/can-simple-dom">api</a></li>
+</ul>
+<h3>Tooling</h3>
+<p>DoneJS provides many aspects of JavaScript application tooling, shown in the diagram below.</p>
+<object type="image/svg+xml" data="static/img/donejs-stack-tooling.svg"></object>
+<ul>
+<li><a href="#section_CLIandGenerators">donejs-cli</a> - The commands available to the donejs command line interface. <a href="https://github.com/donejs/cli">api</a></li>
+<li><a href="#section_CLIandGenerators">generator-donejs</a> - Default generators are bundled with DoneJS. <a href="https://github.com/donejs/generator-donejs/">api</a></li>
+<li><a href="#section_QUnit">QUnit</a> - Default test assertion library. <a href="http://qunitjs.com/">api</a></li>
+<li><a href="#section_FuncUnit">FuncUnit</a> - Functional test utilities. <a href="http://funcunit.com/">api</a></li>
+<li><a href="#section_Testee">Testee</a> - Browser launcher and test reporter. <a href="https://github.com/bitovi/testee">api</a></li>
+<li><a href="#section=section_DocumentJS">DocumentJS</a> - Documentation engine. <a href="http://documentjs.com/">api</a></li>
+</ul>
+
+		</section>
+		
+
+		
+			
+		
+
+		
+
+
+		
+		<section class="comment">
+			<h2>Application flow overview</h2>
+<p>Lets talk about how the typical behavior of a DoneJS application works.  We'll use
+the chat application as an example in development.  We'll cover what happens when:</p>
+<ul>
+<li>A user navigates their browser from a different domain to <code>http://donejs-chat.com/</code></li>
+<li>A user navigates from <code>http://donejs-chat.com/</code> to another <code>http://donejs-chat.com/chat</code>.</li>
+</ul>
+<h3>First page load</h3>
+<ol>
+<li><p>An http request for <code>http://donejs-chat.com/</code> is sent to a node server. The node server is configured,
+in this case with express, to use <a href="#section=section_done_ssr">done-ssr-middleware</a> to render a DoneJS application:</p>
+<pre><code>var ssr = require('done-ssr-middleware');
+
+app.use('/', ssr({
+  config: __dirname + '/public/package.json!npm'
+}));
+</code></pre></li>
+<li><p><a href="#section=section_done_ssr">done-ssr</a> uses <a href="#section=section_steal">steal</a> to load the application's main module which results in loading the
+entire application. Loading the application only happens once for all page requests.</p>
+<p>A DoneJS's main module is specified where all configuration of a DoneJS application happens, its <code>package.json</code>.
+The main module is usually a <a href="#section=section_can_stache">can.stache</a> template processed with the <a href="#section=section_done_autorender">done-autorender</a>
+plugin. The module name is specified like: <code>index.stache!done-autorender</code>. <code>index.stache</code> might look like:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;can-import from=&quot;styles.less!&quot;/&gt;
+  &lt;can-import from=&quot;donejs-chat/app&quot; export-as=&quot;viewModel&quot; /&gt;
+  {{#eq page &quot;home&quot;}}
+
+    &lt;can-import from=&quot;home/&quot;&gt;
+      {{#if isResolved}}
+        &lt;home-page&gt;&lt;/home-page&gt;
+      {{/if}}
+    &lt;/can-import&gt;
+
+  {{/eq}}
+  &lt;script src=&quot;node_modules/steal/steal.js&quot; main=&quot;index.stache!done-autorender&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>The <a href="#section=section_done_autorender">done-autorender</a> plugin, in NodeJS, exports this template so it can be rendered. It also exports
+any modules it imports with <code>&lt;can-import&gt;</code> that are labeled with <code>export-as=&quot;EXPORT_NAME&quot;</code>. Exporting
+the viewModel is important for <a href="#section=section_done_ssr">done-ssr</a></p></li>
+<li><p>Once <a href="#section=section_done_ssr">done-ssr</a> has the <a href="#section=section_done_autorender">done-autorender</a>'s <code>template</code> and <code>viewModel</code> export it:</p>
+<ol>
+<li>Creates a new instance of the viewModel, setting properties on it
+using <a href="#section=section_can_route">can.route</a>'s routing rules.</li>
+<li>Creates a new <a href="#section=section_can_simple_dom">virtual dom</a> instance.</li>
+<li>Renders the <a href="#section=section_can_stache">template</a> with the <code>viewModel</code> into the <code>virtual dom</code> instance.</li>
+</ol></li>
+<li><p><a href="#section=section_done_autorender">done-autorender</a> templates waits for all promises to complete
+before providing a final result.  Once the template is finished rendering, <a href="#section=section_done_ssr">done-ssr</a> converts it to a
+string and sends it back to the browser.</p></li>
+<li><p>The browser downloads the page's HTML, which includes a <code>&lt;script&gt;</code> tag that points to <a href="#section=section_steal">steal</a>.</p>
+<script src="node_modules/steal/steal.js" main="index.stache!done-autorender"></script>
+<p>In development, this loads <code>steal.js</code> which then loads <code>index.stache</code> and processes it with
+the <code>done-autorender</code>.</p></li>
+<li><p>In the browser, <code>done-autorender</code>:</p>
+<ol>
+<li>Creates a new instance of the <a href="#section=section_can_ssr_app_map">viewModel</a>, setting properties on it
+using <a href="#section=section_can_route">can.route</a>'s routing rules.</li>
+<li>Renders the <a href="#section=section_can_stache">template</a> with the <code>viewModel</code> into a document fragment.</li>
+<li>Once all asynchronous activity has completed, it replaces the document with the rendered result.</li>
+</ol></li>
+</ol>
+<h3>Pushstate change</h3>
+<ol>
+<li><p>A pushstate is triggered by user action, usually by clicking a link. <a href="#section=section_can_route">can.route</a>'s routing rules determines the properties set on the application <a href="#section=section_can_ssr_app_map">viewModel</a>.</p>
+<pre><code>can.route(':page', { page: 'home' });
+</code></pre></li>
+<li><p><a href="#section=section_done_autorender">done-autorender</a> previously bound the AppViewModel to <a href="#section=section_can_route">can.route</a> which causes any change in the route to be reflected in the AppMap instance.</p></li>
+<li><p>Live binding causes the initial template to reflect in the change in route. If the new route is <code>/chat</code> it will cause the <code>page</code> to be <strong>chat</strong>:</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Site&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;can-import from=&quot;styles.less!&quot;/&gt;
+  &lt;can-import from=&quot;donejs-chat/app&quot; export-as=&quot;viewModel&quot; /&gt;
+  {{#eq page &quot;home&quot;}}
+
+    &lt;can-import from=&quot;home/&quot;&gt;
+      {{#if isResolved}}
+        &lt;home-page&gt;&lt;/home-page&gt;
+      {{/if}}
+    &lt;/can-import&gt;
+
+  {{/eq}}
+
+  {{#eq page &quot;chat&quot;}}
+    &lt;can-import from=&quot;chat/&quot;&gt;
+     {{#if isResolved}}
+       &lt;chat-page&gt;&lt;/chat-page&gt;
+     {{/if}}
+   &lt;/can-import&gt;
+
+  {{/eq}}
+
+  &lt;script src=&quot;node_modules/steal/steal.js&quot; main=&quot;index.stache!done-autorender&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html">can-import</a> will progressively load the component for the new page with a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> as its view model. When the promise resolves the <a href="#section=section_can_Component">can.Component</a> will be inserted.</p></li>
+</ol>
+<h2>CLI and Generators</h2>
+<p>After installing DoneJS globally with <code>npm install donejs -g</code> you will have the <code>donejs</code> command available on the command line. It lets you initialize a new application and - when navigating within a DoneJS project - run scripts provided locally by your application. Within your application folder the <code>donejs</code> command is a convenience wrapper for the functionality described below and you can also get a list of all commands by running</p>
+<pre><code>donejs help
+</code></pre>
+<h3>NPM scripts</h3>
+<p><a href="https://docs.npmjs.com/misc/scripts">NPM scripts</a> are defined in the <code>scripts</code> section of your applications <code>package.json</code>. There are some standard scripts that every Node application uses (like <code>npm start</code> or <code>npm test</code> - both of which are already set up for you) and you can add your own which is what DoneJS does with commands like <code>npm run develop</code> or <code>npm run build</code>.
+The <code>donejs</code> command makes running those commands easier by allowing you to run them like <code>donejs start</code>, <code>donejs develop</code> or <code>donejs build</code></p>
+<h3>Generators</h3>
+<p><code>donejs add</code> lets you run the <a href="http://yeoman.io/">Yeoman</a> generators provided by <a href="https://github.com/donejs/generator-donejs/">generator-donejs</a>. Currently the following generators are available:</p>
+<ul>
+<li><code>donejs add app [folder]</code> which will initialize a new application (optionally within the given folder)</li>
+<li><code>donejs add component &lt;modulename&gt; &lt;tagname&gt;</code> to create a new can.Component</li>
+<li><code>donejs add supermodel &lt;modulename&gt;</code> to generate a new model</li>
+</ul>
+<h3>Third party generators</h3>
+<p>If <code>donejs add</code> can't find a built-in generator, e.g. when running <code>donejs add myplugin</code>, DoneJS will try to install the <code>donejs-myplugin</code> package from NPM and run the Yeoman generators it provides. This is how we can enable a desktop application build of the application by simply running</p>
+<pre><code>donejs add nw
+</code></pre>
+<p>Which will install the <a href="https://github.com/donejs/donejs-nw">donejs-nw</a> package and then run its generator which initializes everything you need. This also works for adding a mobile application build using <a href="https://github.com/donejs/donejs-cordova">donejs-cordova</a> like this:</p>
+<pre><code>donejs add cordova
+</code></pre>
+<p>This way you can use DoneJS's growing list of plugins and generators without having to add anything to your application that you don't use.</p>
+<h2>StealJS</h2>
+<p>The base of any good JavaScript application is its depenency management system.<br />
+DoneJS uses <a href="http://stealjs.com/">StealJS</a> which
+itself  is split into two sub-projects:</p>
+<ul>
+<li><code>steal</code> - loads CommonJS, ES6, and AMD modules. It can also load styles, templates and more.</li>
+<li><code>steal-tools</code> - builds your application's modules for production and also provides hot-module-swapping.</li>
+</ul>
+<h3>steal</h3>
+<p>To use <a href="http://stealjs.com/docs/steal.html">steal</a>, simply add a script tag to <code>steal.js</code>
+in an HTML page or in a <a href="#section=section_done_autorender">done-autorender</a> <code>template</code> and
+point the <code>main</code> attribute to a module to load like:</p>
+<pre><code>&lt;script src=&quot;../../node_modules/steal/steal.js&quot; main=&quot;my-app/my-module&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>Using the default DoneJS <a href="http://stealjs.com/docs/npm.html#section_Configuration">system.directories.lib</a> configuration, this will load
+<code>my-app/src/my-module.js</code>.  From there, use CommonJS, ES6, or AMD to load your modules:</p>
+<pre><code>// my-app/src/my-module.js
+import $ from &quot;jquery&quot;;
+import &quot;./styles.css!&quot;;
+
+$('body')
+</code></pre>
+<p>If an <code>import</code>, <code>require</code> or <code>define</code> module reference ends with <code>&quot;/&quot;</code>, is a shorthand
+for importing a module in the modlet format. The moduleName imported is the same
+as the module reference, but with the last folder name added again.</p>
+<p>Some examples:</p>
+<pre><code>// in components/person module.
+import &quot;can/component/&quot;; //imports &quot;can/component/component&quot;;
+import &quot;./edit/&quot;; // imports &quot;components/person/edit/edit&quot;;
+</code></pre>
+<p>Configure <a href="http://stealjs.com/docs/steal.html">steal</a>'s behavior in your <code>package.json</code> in the <code>system</code> object like:</p>
+<pre><code>// package.json
+{
+  &quot;main&quot;: &quot;index.stache!done-autorender&quot;,
+  ...
+  &quot;system&quot;: {
+    &quot;meta&quot;: {
+      &quot;ui/core&quot;: {
+        &quot;deps&quot;: [
+          &quot;jquery&quot;,
+          &quot;theme/core.css!&quot;,
+          &quot;theme/theme.css!&quot;
+        ]
+      }
+    }
+  }
+}
+</code></pre>
+<h3>steal-tools</h3>
+<p>In DoneJS applications, <a href="http://stealjs.com/docs/steal-tools.html">steal-tools</a> is primarily used to:</p>
+<ul>
+<li><a href="http://stealjs.com/docs/steal-tools.build.html">build</a> and minify your application to production-ready bundles.</li>
+<li>add <a href="http://stealjs.com/docs/steal-tools.cmd.live-reload.html">hot module swapping</a></li>
+</ul>
+<p>It can also be used to <a href="http://stealjs.com/docs/steal-tools.export.html">export</a> your
+modules to different formats.</p>
+<p>DoneJS comes with a <code>build.js</code> script that call's steal-tools' <a href="http://stealjs.com/docs/steal-tools.build.html">build</a>:</p>
+<pre><code>//build.js
+var stealTools = require(&quot;steal-tools&quot;);
+
+var buildPromise = stealTools.build({
+  config: __dirname + &quot;/package.json!npm&quot;,
+  babelOptions: {
+    loose: &quot;es6.modules&quot;
+  }
+}, {
+  bundleAssets: true
+});
+</code></pre>
+<p>This is already configured to run with:</p>
+<pre><code>&gt; donejs build
+</code></pre>
+<p>But you could also run it with:</p>
+<pre><code>&gt; node build.js
+</code></pre>
+<p>Hot module swapping is done with <a href="http://stealjs.com/docs/steal-tools.cmd.live-reload.html">live-reload</a> which
+is bundled within steal-tools.</p>
+<p>By default <code>donejs develop</code> starts the live-reload server.  However, you could start one
+yourself with:</p>
+<pre><code>&gt; steal-tools live-reload
+</code></pre>
+<h2>CanJS</h2>
+<p>CanJS provides:</p>
+<ul>
+<li><strong>observables</strong> with <a href="#section=section_can_Map">can.Map</a>, <a href="#section=section_can_List">can.List</a>, and <a href="#section=section_can_compute">can.compute</a>.</li>
+<li><strong>one-way and two-way binding templates</strong> with <a href="#section=section_can_stache">can.stache</a> and <a href="#section=section_can_view_bindings">can.view.bindings</a>.</li>
+<li><strong>custom elements</strong> with <a href="#section=section_can_Component">can.Component</a>.</li>
+<li><strong>routing</strong> with <a href="#section=section_can_route">can.route</a>.</li>
+</ul>
+<p>Observables act as the <code>ViewModel</code> and part of the <code>Model</code>.</p>
+<p>One-way and two-way binding templates act as the <code>View</code>.</p>
+<p><a href="#section=section_can_Component">can.Component</a> is used to combine <code>View</code> and <code>ViewModel</code> into
+easy to instantiate and assemble custom elements.</p>
+<p>Checkout the following quick examples of their use:</p>
+<p><strong>observables</strong>:</p>
+<pre><code>// Observable objects:
+var person = new can.Map({first: &quot;Justin&quot;, last: &quot;Meyer&quot;});
+
+// Observable arrays:
+var hobbies =  new can.List([&quot;basketball&quot;, &quot;hip-hop dancing&quot;]);
+
+// Observable single values:
+var age = can.compute(33);
+
+// Observable computed values:
+var info = can.compute(function(){
+  return person.attr(&quot;first&quot;)+&quot; &quot;+person.attr(&quot;last&quot;)+&quot; is &quot;+
+    age()+&quot; and likes &quot;+ hobbies.join(&quot;,&quot;)+&quot;.&quot;;
+});
+
+// Get the compute's value
+info() //-&gt; Justin Meyer is 33 and likes\
+       //   basketball, hip-hop dancing.
+
+// Listen to changes in the compute
+info.bind(&quot;change&quot;, function(ev, newValue){
+  newValue //-&gt; Justin Meyer is 33 and likes\
+           //   basketball, hip-hop dancing.
+});
+
+hobbies.pop(); // causes `change` event above
+</code></pre>
+<p><strong>one and two-way binding templates</strong>:</p>
+<pre><code>// Programatically create a template
+// `{($value)}` cross binds the input's value
+// to `first` in the scope.
+var template = can.stache(&quot;&lt;h1&gt;{{first}}&lt;/h1&gt;&quot;+
+    &quot;&lt;input {($value)}='first'/&gt;&quot;);
+
+// Create observable data for the template
+var person = new can.Map({first: &quot;Payal&quot;});
+
+// Render the template with data
+var frag = template(person);
+
+// Add the result to the document
+document.body.appendChild(frag);
+
+// Document shows rendered result
+document.body //-&gt; &lt;h1&gt;Payal&lt;/h1&gt;&lt;input value='Payal'/&gt;
+
+// ... User changes the input's value to &quot;Ramiya&quot; ...
+
+// Document is updated with changes
+document.body //-&gt; &lt;h1&gt;Ramiya&lt;/h1&gt;&lt;input value='Ramiya'/&gt;
+</code></pre>
+<p><strong>custom elements</strong>:</p>
+<pre><code>// Create a custom `can.Map` constructor function
+// with a helper function.
+var PersonEditViewModel = can.Map.extend({
+  fullName: function(){
+    return this.attr(&quot;first&quot;)+&quot; &quot;+this.attr(&quot;last&quot;);
+  }
+});
+
+// Create a template that will be rendered within
+// `&lt;person-edit&gt;` elements.
+var template = can.stache(&quot;Update {{fullName}}:&quot;+
+    &quot;&lt;input {($value)}='first'/&gt;&quot;+
+    &quot;&lt;input {($value)}='last'/&gt;&quot;);
+
+// Create the `&lt;person-edit&gt;` element with the specified
+// viewModel and template (view).
+can.Component.extend({
+  tag: &quot;person-edit&quot;,
+  viewModel: PersonEditViewModel,
+  template: template
+});
+
+// Use that custom element within another template.
+// `{(first)}` cross binds `&lt;person-edit&gt;`'s
+// `first` property to `firstName` in the scope.
+var parentTemplate = can.stache(
+  &quot;&lt;h1&gt;{{firstName}} {{lastName}}&lt;/h1&gt;&quot;+
+  &quot;&lt;person-edit {(first)}='firstName' {(last)}='lastName'/&gt;&quot;);
+
+// Render the parent template with some data:
+var frag = parentTemplate(new can.Map({
+  firstName: &quot;Brian&quot;,
+  lastName: &quot;Moschel&quot;
+}));
+
+document.body.appendChild(frag);
+</code></pre>
+<h3>can.Construct</h3>
+<p><a href="http://canjs.com/docs/can.Construct.html">can.Construct</a> allows you to define constructor functions that are easy to inherit
+from.  It's used by <a href="#section=section_can_Map">can.Map</a>, <a href="#section=section_can_List">can.List</a>, and <a href="#section=section_can_Component">can.Component</a>.</p>
+<p>To create your own constructor function, <a href="http://canjs.com/docs/can.Construct.extend.html">extend</a> <code>can.Construct</code>
+with prototype methods like:</p>
+<pre><code>var Todo = can.Construct.extend({
+  init: function(name){
+    this.name = name;
+  },
+
+  author: function() { ... },
+
+  coordinates: function() { ... },
+
+  allowedToEdit: function( account ) {
+    return true;
+  }
+});
+</code></pre>
+<p>Then you can create instances of <code>Todo</code> like:</p>
+<pre><code>var todo = new Todo(&quot;dishes&quot;);
+todo.name //-&gt; &quot;dishes&quot;;
+todo.allowedToEdit() //-&gt; true;
+</code></pre>
+<p>You can extend <code>Todo</code> with <a href="http://canjs.com/docs/can.Construct.extend.html">extend</a> too:</p>
+<pre><code>var PrivateTodo = Todo.extend({
+  allowedToEdit: function( account ) {
+    return account.owns( this );
+  }
+});
+</code></pre>
+<p><code>can.Construct</code> comes with a <a href="http://canjs.com/docs/can.Construct.super.html">super</a> plugin that allows you to easily
+call base behavior like:</p>
+<pre><code>var PrivateTodo = Todo.extend({
+  init: function(name, account){
+    this._super(name);
+    this.account = account;
+  }
+  allowedToEdit: function() {
+    return this.account.owns( this );
+  }
+});
+</code></pre>
+<h3>can.Map</h3>
+<p><a href="http://canjs.com/docs/can.Map.html">can.Map</a> is used to create observable
+JavaScript Object-like objects.  Create an instance of the
+base <code>can.Map</code> like:</p>
+<pre><code>var person = new can.Map({first: &quot;Justin&quot;, last: &quot;Meyer&quot;});
+</code></pre>
+<p>Read or write a <code>map</code>'s properties with <a href="http://canjs.com/docs/can.Map.prototype.attr.html">.attr</a>:</p>
+<pre><code>person.attr(&quot;first&quot;) //-&gt; Justin
+
+person.attr(&quot;first&quot;, &quot;Ramiya&quot;);
+person.attr() //-&gt; {first: &quot;Ramiya&quot;, last: &quot;Meyer&quot;}
+
+person.attr({first: &quot;Brian&quot;, last: &quot;Moschel&quot;});
+person.attr() //-&gt; {first: &quot;Brian&quot;, last: &quot;Moschel&quot;}
+</code></pre>
+<p>Bind to changes in a person's properties with <a href="http://canjs.com/docs/can.Map.prototype.bind.html">.bind</a>:</p>
+<pre><code>person.bind(&quot;first&quot;, function(ev, newValue, oldValue){
+  newValue //-&gt; &quot;Laura&quot;
+  oldvalue //-&gt; &quot;Brian&quot;
+});
+
+// changing `first` causes the function
+// call above.
+person.attr(&quot;first&quot;, &quot;Laura&quot;);
+</code></pre>
+<p>Extend a <code>can.Map</code> to create a new constructor function.  This is
+very useful for creating Models and View Models:</p>
+<pre><code>// pass extend an object of prototype values
+var Person = can.Map.extend({
+  fullName: function(){
+    person.attr(&quot;first&quot;)+&quot; &quot;+person.attr(&quot;last&quot;);
+  }
+})
+
+var me = new Person({first: &quot;Kathrine&quot;, last: &quot;Iannuzzi&quot;});
+me.fullName() //-&gt; &quot;Kathrine Iannuzzi&quot;
+</code></pre>
+<p>The <a href="http://canjs.com/docs/can.Map.prototype.define.html">define plugin</a> allows
+you to control the behavior of attributes.  You can define
+<a href="http://canjs.com/docs/can.Map.prototype.define.value.html">default values</a>,
+<a href="http://canjs.com/docs/can.Map.prototype.define.get.html">getters</a>,
+<a href="http://canjs.com/docs/can.Map.prototype.define.set.html">setters</a>, and
+<a href="http://canjs.com/docs/can.Map.prototype.define.type.html">type</a> converters.</p>
+<pre><code>var Todo = can.Map.extend({
+  define: {
+    percentComplete: {
+      value: 0.1,
+      type: &quot;number&quot;,
+      get: function(value){
+        return &quot;&quot;+value+&quot;%&quot;
+      },
+      set: function(newValue){
+        return newValue*100;
+      }
+    }
+  }
+});
+
+var todo = new Todo();
+todo.attr(&quot;percentComplete&quot;) //-&gt; 10%
+</code></pre>
+<p>You can even describe asynchronous behavior which is critical for working
+with service data:</p>
+<pre><code>var Todo = can.Map.extend({
+  define: {
+    owner: {
+      get: function(lastSetValue, resolve){
+        User.get({id: this.attr(&quot;ownerId&quot;)}).then(resolve);
+      }
+    }
+  }
+});
+
+todo = new Todo({ownerId: 5});
+
+// async values only become valid when bound
+// this isn't a problem because templates usually bind for you
+todo.bind(&quot;owner&quot;, function(ev, owner){
+  owner //-&gt; a User instance
+});
+</code></pre>
+<h3>can.List</h3>
+<p><a href="http://canjs.com/docs/can.List.html">can.List</a> is used to create observable
+JavaScript Array-like objects.  Create an instance of the
+base <code>can.List</code> like:</p>
+<pre><code>var hobbies = new can.List([&quot;basketball&quot;,&quot;dancing&quot;]);
+</code></pre>
+<p>Use <a href="http://canjs.com/docs/can.List.prototype.attr.html">.attr</a> to read and write items from the list or to read the length:</p>
+<pre><code>for(var i = 0, len = hobbies.attr(&quot;length&quot;); i &lt; len; i++){
+  var hobby = hobbies.attr(i);
+}
+hobbies.attr(1, &quot;hip hop dancing&quot;);
+hobbies.attr() //-&gt; [&quot;basketball&quot;, &quot;dancing&quot;]
+</code></pre>
+<p>Use array methods like <a href="http://canjs.com/docs/can.List.prototype.push.html">.push</a>, <a href="http://canjs.com/docs/can.List.prototype.pop.html">.pop</a>, and <a href="http://canjs.com/docs/can.List.prototype.splice.html">.splice</a> to modify the array:</p>
+<pre><code>hobbies.pop();
+
+hobbies.attr() //-&gt; [&quot;basketball&quot;];
+
+hobbies.push(&quot;football&quot;);
+
+hobbies //-&gt; can.List[&quot;basketball&quot;,&quot;football&quot;]
+</code></pre>
+<p>Use <a href="http://canjs.com/docs/can.List.prototype.forEach.html">.forEach</a>, <a href="http://canjs.com/docs/can.List.prototype.map.html">.map</a>, or <a href="http://canjs.com/docs/can.List.prototype.filter.html">.filter</a> to loop through the array.  All
+these methods return a <code>can.List</code></p>
+<pre><code>var intramurals = hobbies.map(function(hobby){
+  return &quot;intramural &quot;+hobby;
+})
+intramurals //-&gt; can.List[&quot;intramural basketball&quot;,
+                          &quot;intramural football&quot;]
+</code></pre>
+<p>Listen to when a list changes by binding on <code>add</code> or <code>remove</code> or <code>length</code>
+events.</p>
+<pre><code>hobbies.bind(&quot;add&quot;, function(ev, newHobbies, index){
+    console.log(&quot;added&quot;, newHobbies,&quot;at&quot;, index);
+  })
+  .bind(&quot;remove&quot;, function(ev, removedHobbies, index){
+    console.log(&quot;removed&quot;, newHobbies,&quot;at&quot;, index);
+  })
+  .bind(&quot;length&quot;, function(ev, newVal, oldVal){
+    console.log(&quot;length is&quot;, newVal);
+  });
+
+hobbies.splice(1,1,&quot;pumpkin carving&quot;,&quot;gardening&quot;);
+  // console.logs:
+  //     removed [football] 1
+  //     added [&quot;pumpkin carving&quot;,&quot;gardening&quot;] 1
+  //     length is 3
+</code></pre>
+<p>By default, if you initialize a list with plain JavaScript objects,
+those objects are converted to a <code>can.Map</code>:</p>
+<pre><code>var people = new can.List([
+  {first: &quot;Justin&quot;, last: &quot;Meyer&quot;, age: 72},
+  {first: &quot;David&quot;, last: &quot;Luecke&quot;, age: 20},
+  {first: &quot;Matthew&quot;, last: &quot;Phillips&quot;, age: 30}
+]);
+
+people.attr(0).attr(&quot;first&quot;) //-&gt; Justin
+people.attr(&quot;0.first&quot;) //-&gt; Justin
+</code></pre>
+<p>You can create your own custom <code>can.List</code> constructor functions
+by extending <code>can.List</code>:</p>
+<pre><code>var People = can.List.extend({
+  seniors: function(){
+    return this.filter(function(person){
+      return person.attr(&quot;age&quot;) &gt;= 65
+    });
+  }
+});
+
+var people = new People([
+  {first: &quot;Justin&quot;, last: &quot;Meyer&quot;, age: 72},
+  {first: &quot;David&quot;, last: &quot;Luecke&quot;, age: 20},
+  {first: &quot;Matthew&quot;, last: &quot;Phillips&quot;, age: 30}
+]);
+
+people.seniors() //-&gt; People[{Justin}]
+</code></pre>
+<p>When extending <code>can.List</code> you can specify the default <code>Map</code> type
+that's created when plain JS objects are added to the list:</p>
+<pre><code>var Person = can.Map.extend({
+  fullName: function(){
+    person.attr(&quot;first&quot;)+&quot; &quot;+person.attr(&quot;last&quot;);
+  }
+});
+
+var People = can.List.extend({
+  Map: Person
+},{
+  seniors: function(){
+    return this.filter(function(person){
+      return person.attr(&quot;age&quot;) &gt;= 65
+    });
+  }
+});
+
+var people = new People([
+  {first: &quot;Justin&quot;, last: &quot;Meyer&quot;, age: 72},
+  {first: &quot;David&quot;, last: &quot;Luecke&quot;, age: 20},
+  {first: &quot;Matthew&quot;, last: &quot;Phillips&quot;, age: 30}
+]);
+
+people.attr(0).fullName() //-&gt; &quot;Justin Meyer&quot;
+</code></pre>
+<h3>can.compute</h3>
+<p><a href="http://canjs.com/docs/can.compute.html">can.compute</a> isn't used
+directly much anymore. However, it's used heavily in <a href="#section=section_can_Map">can.Map</a>
+<a href="http://canjs.com/docs/can.Map.prototype.define.get.html">getters</a> and live binding
+so it's worth understanding the basics.</p>
+<p><code>can.compute</code> allows you to define single observable values like:</p>
+<pre><code>var age = can.compute(33);
+</code></pre>
+<p>or derived values like:</p>
+<pre><code>var person = new can.Map({first: &quot;Justin&quot;, last: &quot;Meyer&quot;}),
+    hobbies =  new can.List([&quot;basketball&quot;, &quot;hip-hop dancing&quot;]);
+
+var info = can.compute(function(){
+  return person.attr(&quot;first&quot;)+&quot; &quot;+person.attr(&quot;last&quot;)+&quot; is &quot;+
+    age()+&quot; and likes &quot;+ hobbies.join(&quot;,&quot;)+&quot;.&quot;;
+});
+</code></pre>
+<p>Read a compute by calling it like a function:</p>
+<pre><code>info() //-&gt; &quot;Justin Meyer is 33 and likes\
+       //    basketball, hip-hop dancing.&quot;
+</code></pre>
+<p>Listen to a compute by binding on its <code>change</code> event:</p>
+<pre><code>info.bind(&quot;change&quot;, function(ev, newVal, oldVal){
+  console.log(&quot;IS:\n&quot;,newVal,&quot;\nWAS:\n&quot;, oldVal);
+})
+</code></pre>
+<p>Internally, <code>bind</code> runs the compute function, identifying what observable
+values it reads, and listening to them.  It caches the return result so that
+reading the compute again like <code>info()</code> just returns the cached result.</p>
+<p>When any of the read observables change, it updates the cached value,
+and calls back any event handlers:</p>
+<pre><code>person.attr({first: &quot;Brian&quot;, last: &quot;Moschel&quot;});
+
+//  console.logs:
+//  IS:
+//  Brian Moschel is 33 and likes basketball, hip-hop dancing.
+//  WAS:
+//  Justin Meyer is 33 and likes basketball, hip-hop dancing.
+</code></pre>
+<h3>can.stache</h3>
+<p><a href="http://canjs.com/docs/can.stache.html">can.stache</a> is a Handlebars and
+Mustache compliant live-binding templating language.</p>
+<p>Create a template programmatically with <code>can.stache</code> like:</p>
+<pre><code>var template = can.stache(&quot;&lt;h1&gt;{{first}} {{last}}&lt;/h1&gt;&quot;);
+</code></pre>
+<p><code>template</code> is a <strong>renderer</strong> function that, when called with observable data,
+returns a <a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment">DocumentFragment</a> that is updated when the observable data changes.</p>
+<p>Add those fragments to the page to see the result:</p>
+<pre><code>var person = new can.Map({first: &quot;Brian&quot;, last: &quot;Moschel&quot;})
+
+var frag = template(person);
+
+document.body.appendChild(frag);
+
+document.body //-&gt; &lt;h1&gt;Brian Moschel&lt;/h1&gt;
+
+person.attr({first: &quot;Ramiya&quot;, last: &quot;Meyer&quot;})
+
+document.body //-&gt; &lt;h1&gt;Ramiya Meyer&lt;/h1&gt;
+</code></pre>
+<p>In a DoneJS application, templates are used primarily as part of
+a <a href="#section=section_can_Component">can.Component</a> or as the <a href="#section=section_done_autorender">done-autorender</a>ed main template.</p>
+<p>When used in a <a href="#section=section_can_Component">can.Component</a>, the templates are often put in their own file. For
+example, a <code>person_edit.js</code> component file might have a <code>person_edit.stache</code> file like:</p>
+<pre><code>// person_edit.stache
+Update {{fullName}}:
+&lt;input {($value)}='first'/&gt;
+&lt;input {($value)}='last'/&gt;
+</code></pre>
+<p>This template's <strong>renderer</strong> function is imported in <code>person_edit.js</code> like:</p>
+<pre><code>// person_edit.js
+import template from &quot;./person_edit.stache!&quot;;
+import Component from &quot;can/component/&quot;;
+
+Component.extend({
+  tag: &quot;person-edit&quot;,
+  template: template
+});
+</code></pre>
+<p><code>can.stache</code> template behavior is controlled by what's
+within magic tags like <code>{{ }}</code>. There are different tag types, lots of
+helper functions, and different ways to call methods and functions.</p>
+<p>There's too much to cover so we will highlight the important APIs.</p>
+<p>The different tag types:</p>
+<ul>
+<li><p><a href="http://canjs.com/docs/can.stache.tags.escaped.html">{{key}}</a> -
+inserts an escaped value.</p>
+<pre><code>can.stache(&quot;{{key}}&quot;)({key: &quot;&lt;b&gt;Foo&lt;/b&gt;&quot;}) //-&gt; `&amp;lt;b&amp;gt;Foo&amp;lt;/b&amp;gt;`
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.stache.tags.unescaped.html">{{{key}}}</a> -
+inserts an unescaped value.</p>
+<pre><code>can.stache(&quot;{{key}}&quot;)({key: &quot;&lt;b&gt;Foo&lt;/b&gt;&quot;}) //-&gt; `&lt;b&gt;Foo&lt;/b&gt;`
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.stache.tags.section.html">{{#key}} ... {{/key}}</a> -
+renders a subsection depending on the value of the key.</p>
+<pre><code>// boolean values render the subsection or its inverse
+can.stache(&quot;{{#key}}A{{/key}}&quot;)({key: true}) //-&gt; `A`
+can.stache(&quot;{{#key}}A{{/key}}&quot;)({key: false}) //-&gt; ``
+can.stache(&quot;{{#key}}A{{else}}B{{/key}}&quot;)({key: false}) //-&gt; `B`
+
+// iterative values render the subsection for each value
+can.stache(&quot;{{#key}}A{{/key}}&quot;)({key: [null,0]}) //-&gt; `AA`
+can.stache(&quot;{{#key}}A{{/key}}&quot;)({key: []}) //-&gt; ``
+
+</code></pre>
+<p>The subsection is rendered with the <code>key</code> value as the top of the <a href="http://canjs.com/docs/can.view.Scope.html">scope</a>:</p>
+<pre><code>can.stache(&quot;{{#key}}{{child}}{{/key}}&quot;)({key: {child:&quot;C&quot;}}) //-&gt;`C`
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.stache.tags.inverse.html">{{^key}} ... {{/key}}</a> -
+opposite of <code>{{#key}}</code>.</p>
+<pre><code>can.stache(&quot;{{^key}}A{{/key}}&quot;)({key: true}) //-&gt; ``
+can.stache(&quot;{{^key}}A{{/key}}&quot;)({key: false}) //-&gt; `A`
+can.stache(&quot;{{^key}}A{{/key}}&quot;)({key: [null,0]}) //-&gt; ``
+
+can.stache(&quot;{{^key}}A{{else}}B{{/key}}&quot;)({key: false}) //-&gt; `B`
+</code></pre></li>
+</ul>
+<p>The following are stache's most commonly used helpers:</p>
+<ul>
+<li><p><a href="http://canjs.com/docs/can.stache.helpers.if.html">{{#if expr}} .. {{/if}}</a> - renders the subsection if the expr is truthy.</p>
+<pre><code>can.stache(&quot;{{#if key}}A{{/if}}&quot;)({key: true}) //-&gt; `A`
+can.stache(&quot;{{#if key}}A{{/if}}&quot;)({key: false}) //-&gt; ``
+
+can.stache(&quot;{{#if key}}A{{else}}B{{/if}}&quot;)({key: false}) //-&gt; `B`
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.stache.helpers.is.html">{{#is expr1 expr2}} ... {{/is}}</a> - compares two expressions and renders a subsection depending on the result.</p>
+<pre><code>can.stache(&quot;{{#is page 'A'}}A{{/is}}&quot;)({page: 'A'}) //-&gt; `A`
+can.stache(&quot;{{#is page 'A'}}A{{/is}}&quot;)({page: 'B'}) //-&gt; ``
+
+can.stache(&quot;{{#is page 'A'}}A{{else}}C{{/is}}&quot;)({page: 'C'}) //-&gt; `B`
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.stache.helpers.each.html">{{#each key}} ... {{/each}}</a> - renders a subsection for each item in a key's value.</p>
+<pre><code>can.stache('{{#each hobbies}}&lt;p&gt;{{.}}&lt;/p&gt;{{/each}}')(['Hockey', 'Hiking']) //-&gt; `&lt;p&gt;Hockey&lt;/p&gt;&lt;p&gt;Hiking&lt;/p&gt;`
+</code></pre>
+<p>If the value of a key is a <a href="#section=section_can_List">can.List</a> only the minimum amount of DOM updates occur when the list changes.</p></li>
+<li><p><a href="http://canjs.com/docs/can.stache.helpers.routeUrl.html">{{routeUrl hashes}}</a> - generates a url using <a href="#section=section_can_route">can.route</a> for the provided hashes.</p>
+<pre><code>can.stache(&quot;&lt;a href=&quot;{{routeUrl page='details' id='23'}}&quot;&gt;{{name}}&lt;/a&gt;&quot;)({name: 'Item 23'}) //-&gt; `&lt;a href=&quot;#!&amp;page=details&amp;id=23&quot;&gt;Item 23&lt;/a&gt;`
+</code></pre></li>
+</ul>
+<p><a href="http://canjs.com/docs/can.stache.expressions.html#section_Callexpression">Call methods</a> in your scope like: <code>{{method(value)}}</code></p>
+<pre><code>can.stache('&lt;p&gt;10 {{pluralize(&quot;Baloon&quot; 10)}}&lt;/p&gt;')({
+  pluralize: function(subject, howMany) {
+    if(howMany &gt; 1) {
+      subject += 's';
+    }
+    return subject;
+  }
+}); //-&gt; &quot;&lt;p&gt;10 Baloons&lt;/p&gt;&quot;
+</code></pre>
+<h3>can.view.bindings</h3>
+<p><code>can.view.bindings</code> allows you to bind to viewModel or DOM events and create one-way or two-way bindings on element's properties/attributes, can.Component viewModels and <code>can.stache</code>'s scope.</p>
+<p>Create a one-way binding from the parent scope to a child's properties/attributes or viewModel:</p>
+<ul>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.toChild.html">{child-prop}=&quot;value&quot;</a> - One-way bind <code>value</code> in the scope to <code>childProp</code> in the viewModel.</p>
+<pre><code>&lt;my-component {user-name}=&quot;name&quot;&gt;&lt;/my-component&gt;
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.toChild.html">{$child-prop}=&quot;value&quot;</a> - One-way bind <code>value</code> in the scope to the <code>childProp</code> property or attribute of the element.</p>
+<pre><code>&lt;input {$value}=&quot;name&quot; type=&quot;text&quot;&gt;
+</code></pre></li>
+</ul>
+<p>Create a one-way binding from the child's properties/attributes or viewModel to the parent scope:</p>
+<ul>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.toParent.html">{^child-prop}=&quot;value&quot;</a> - One-way bind the value of <code>childProp</code> in the viewModel to the <code>name</code> in the parent scope.</p>
+<pre><code>&lt;my-component {^user-name}=&quot;name&quot;&gt;&lt;/my-component&gt;
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.toParent.html">{^$child-prop}=&quot;value&quot;</a> - One-way bind <code>value</code> in the scope to the <code>childProp</code> property or attribute of the element.</p>
+<pre><code>&lt;input {$value}=&quot;name&quot; type=&quot;text&quot;&gt;
+</code></pre></li>
+</ul>
+<p>Create two-way bindings between the parent scope and the child's viewModel or property/attributes:</p>
+<ul>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.twoWay.html">{(child-prop)}=&quot;value&quot;</a> - Two-way bind the value of <code>childProp</code> in the viewModel to the <code>name</code> in the parent scope.</p>
+<pre><code>&lt;my-component {(user-name)}=&quot;name&quot;&gt;&lt;/my-component&gt;
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.twoWay.html">{^$child-prop}=&quot;value&quot;</a> - Two-way bind <code>value</code> in the scope to the <code>childProp</code> property or attribute of the element.</p>
+<pre><code>&lt;input {$value}=&quot;name&quot; type=&quot;text&quot;&gt;
+</code></pre></li>
+</ul>
+<p>Create bindings to viewModel or DOM events:</p>
+<ul>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.event.html">($EVENT)=&quot;handler()&quot;</a> - Listen to the DOM event <code>EVENT</code> and use <code>handler</code> as the event handler.</p>
+<pre><code>&lt;div ($click)=&quot;updateThing()&quot;&gt;&lt;/my-component&gt;
+</code></pre></li>
+<li><p><a href="http://canjs.com/docs/can.view.bindings.event.html">(EVENT)=&quot;handler()&quot;</a> - Listen to the viewModel event <code>EVENT</code> and use <code>handler()</code> as the event handler.</p>
+<pre><code>&lt;my-component (show)=&quot;showTheThing()&quot;&gt;&lt;/my-component&gt;
+</code></pre></li>
+</ul>
+<h3>can.Component</h3>
+<p><a href="http://canjs.com/docs/can.Component.html">can.Component</a> lets you
+create widgets with well-defined View Models and are instantiated with
+custom elements.</p>
+<p>Define a <code>can.Component</code> by extending one with a <code>tag</code> name, <a href="#section=section_can_Map">can.Map</a> <code>viewModel</code> and
+<a href="#section=section_can_stache">can.stache template</a> like:</p>
+<pre><code>// Define the view model
+var HelloViewModel = can.Map.extend({
+  excitedMessage: function(){
+    return this.attr(&quot;message&quot;)+&quot;!&quot;
+  }
+});
+
+can.Component.extend({
+  tag: &quot;hello-world&quot;,
+  viewModel: HelloViewModel,
+  template: can.stache(&quot;&lt;h1&gt;{{excitedMessage}}&lt;/h1&gt;&quot;)
+});
+</code></pre>
+<p>To instantiate this component so it says <code>Hello World!</code>, add
+a <code>&lt;hello-world&gt;</code> element to the page like:</p>
+<pre><code>&lt;hello-world message=&quot;Hello World&quot;/&gt;
+</code></pre>
+<p>Use <a href="#section=section_can_view_bindings">can.view.bindings</a>
+to send a value from the <code>can.stache</code> scope like:</p>
+<pre><code>// a `can.Map` that will be available in the scope
+var appViewModel = new can.Map({
+  greeting: &quot;Howdy Planet&quot;
+});
+
+var template = can.stache('&lt;hello-world {message}=&quot;greeting&quot;/&gt;');
+
+var frag = template(appViewModel);
+
+frag //-&gt; &lt;hello-world {message}=&quot;greeting&quot;&gt;
+     //      &lt;h1&gt;Howdy Planet!&lt;/h1&gt;
+     //   &lt;/hello-world&gt;
+</code></pre>
+<p><code>can.Component</code>s are usually built as <a href="/Features.html#section_Modlets">modlets</a>,
+meaning their template and styles are another file and imported:</p>
+<pre><code>// hello-world.js
+import Component from 'can/component/';
+import Map from 'can/map/';
+import 'can/map/define/';
+import './hello-world.less!';
+import template from './hello-world.stache!';
+
+export const ViewModel = Map.extend({
+  excitedMessage: function(){
+    return this.attr(&quot;message&quot;)+&quot;!&quot;
+  } 
+});
+
+export default Component.extend({
+  tag: &quot;hello-world&quot;,
+  viewModel: ViewModel,
+  template
+});
+</code></pre>
+<p>Some components are so small, they they don't require three
+seperate files. For these, you can use a <code>.component</code> file:</p>
+<pre><code>&lt;!-- hello-world.component --&gt;
+&lt;can-component tag=&quot;&lt;%= tag %&gt;&quot;&gt;
+  &lt;style type=&quot;less&quot;&gt;
+    display: block;
+  &lt;/style&gt;
+  &lt;template&gt;
+    &lt;h1&gt;{{excitedMessage}}&lt;/h1&gt;
+  &lt;/template&gt;
+  &lt;view-model&gt;
+    import Map from 'can/map/';
+    import 'can/map/define/';
+
+    export default Map.extend({
+      excitedMessage: function(){
+        return this.attr(&quot;message&quot;)+&quot;!&quot;
+      }
+    });
+  &lt;/view-model&gt;
+&lt;/can-component&gt;
+</code></pre>
+<h3>can.route</h3>
+<p><a href="http://canjs.com/docs/can.route.html">can.route</a> provides powerful 2-way, nested, routing to your application, supporting both hash and <a href="http://canjs.com/docs/can.route.pushstate.html">pushstate</a>.</p>
+<p>Configure routing rules to define property values on your application's
+View Model when a url is matched.</p>
+<p>The following sets the application ViewModel's <code>page</code> property
+to <code>&quot;chat&quot;</code> when the url looks like <code>/chat</code>:</p>
+<pre><code>can.route(&quot;:page&quot;);
+</code></pre>
+<p>You can define defaults that get set when <code>:page</code> is empty. The
+following sets the default <code>page</code> property to <code>&quot;home&quot;</code>.</p>
+<pre><code>can.route(&quot;:page&quot;, { page: &quot;home&quot; }); 
+</code></pre>
+<p>You can specify multiple properties to set for a given url:</p>
+<pre><code>can.route(&quot;:page/:slug&quot;);
+can.route(&quot;:page/:slug/:action&quot;);
+</code></pre>
+<p>Update the url by changing <code>can.route</code>:</p>
+<pre><code>can.route.attr(&quot;page&quot;, &quot;restaurants&quot;);
+// location.href -&gt; &quot;/restaurants&quot;
+</code></pre>
+<p>Or change <code>can.route</code> by modifying the url:</p>
+<pre><code>history.pushState(null, null, &quot;/&quot;);
+// can.route.attr(&quot;page&quot;); // -&gt; &quot;home&quot;
+</code></pre>
+<p>In a DoneJS application can.route is bound to the <a href="#section=section_can_ssr_app_map">application View Model</a>, but you can connect <code>can.route</code> to other
+maps:</p>
+<pre><code>var Map = require(&quot;can/map/&quot;);
+
+var AppViewModel = Map.extend({
+ ...
+});
+
+var viewModel = new AppViewModel();
+
+can.route.map(viewModel);
+</code></pre>
+<p>Which will cause any changes in the route to reflect in the View Model instance, and any changes in the View Model instance to reflect in the route.</p>
+<h2>Data Layer APIs</h2>
+<h3>can-connect</h3>
+<p><a href="https://connect.canjs.com">can-connect</a> is used to connect typed
+data to backend services.  In a DoneJS application, that typed data is a
+<a href="#section=section_can_Map">can.Map</a> and <a href="#section=section_can_List">can.Map</a> type.</p>
+<p>To make a simple connection to a restful interface:</p>
+<pre><code>// First, create custom Map and List type 
+var Todo = Map.extend({
+  canComplete: function(ownerId) {
+    return this.attr(&quot;ownerId&quot;) === ownerId;
+  }
+});
+
+var TodoList = List.extend({
+  Map: Todo
+},{
+  incomplete: function(){
+    return this.filter(function(todo){
+      return !todo.attr(&quot;complete&quot;)
+    });
+  }
+});
+
+// Then, make a connection with the right behaviors and options.
+var todoConnection = connect([&quot;data-url&quot;,&quot;constructor&quot;,&quot;can/map&quot;],{
+  Map: Todo,
+  List: TodoList,
+  url: &quot;/services/todos&quot;
+});
+</code></pre>
+<p>This adds a <a href="http://connect.canjs.com/doc/can.Map.getList.html">getList</a>,
+<a href="http://connect.canjs.com/doc/can.Map.get.html">.get</a>,
+<a href="http://connect.canjs.com/doc/can.Map.prototype.save.html">.save</a> and
+<a href="http://connect.canjs.com/doc/can.Map.prototype.destroy.html">.destroy</a> methods to
+<code>Todo</code> allowing you to CRUD <code>Todo</code>s and <code>TodoList</code>s from the service layer like:</p>
+<pre><code>// Get a list of todos
+Todo.getList({due: &quot;today&quot;}).then(function(todos){ ... });
+
+// Get a single todo
+Todo.get({id: 5}).then(function(todo){ ... });
+
+// Create a todo
+var todo = new Todo({name: &quot;dishes&quot;})
+
+// Create it on the server 
+todo.save().then(function(todo){
+
+  // Update its properties
+  todo.attr({
+    name: &quot;Do the dishes&quot;
+  })
+  // Update the service layer with changes
+  .save().then(function(todo){
+    
+    // Delete the todo on  the service layer
+    todo.destroy();
+  });
+});
+</code></pre>
+<p><code>can-connect</code> comes with a wide variety of behaviors that
+can be mixed into a connection.  Examples include:</p>
+<ul>
+<li><a href="http://connect.canjs.com/doc/can-connect%7Creal-time.html">real-time</a> keeps <code>can.List</code>s updated with changes.</li>
+<li><a href="http://connect.canjs.com/doc/can-connect%7Cfall-through-cache.html">fall-through-cache</a></li>
+</ul>
+<p>To make the process of creating <code>can.Map</code> based connections easier,
+DoneJS comes with a <a href="#section=section_generator_donejs">supermodel generator</a>
+creates a <a href="http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html">super-map</a>.</p>
+<p>A super-map is just a connection with a bunch of the mostly commonly used
+behaviors.  Create one with the <code>superMap</code> function like:</p>
+<pre><code>export const messageConnection = superMap({
+  url: &quot;/services/todos&quot;,
+  Map: Todo,
+  List: TodoList,
+  name: 'todo'
+});
+</code></pre>
+<h3>can-set</h3>
+<p><a href="https://github.com/canjs/can-set">can-set</a> is used to compare
+set objects that are represented by the parameters commonly passed
+to service requests.</p>
+<p>For example, if you want all todos for user <code>5</code> that are complete, you
+might call:</p>
+<pre><code>Todo.getList({userId: 5, complete: true})
+</code></pre>
+<p><code>{userId: 5, complete: true}</code> represents a set.  Using
+<code>can-set</code> we can compare it to other sets. The following
+returns <code>true</code> because <code>{userId: 5, complete: true}</code> represents
+a subset of <code>{userId: 5}</code>.</p>
+<pre><code>set.subset({userId: 5, complete: true},{userId: 5}) //-&gt; true
+</code></pre>
+<p><code>can-set</code> can perform more complex logic with custom <a href="https://github.com/canjs/can-set#setalgebra">set Algebras</a>.</p>
+<p>The following creates a set-algebra that is able to combine ranges:</p>
+<pre><code>// Create a set Algebra
+var algebra = new set.Algebra(
+  set.comparators.rangeInclusive(&quot;start&quot;,&quot;end&quot;));
+
+// use it
+algebra.union({start: 1, end: 10},
+              {start: 11, end: 20}) //-&gt; {start: 1, end: 20}
+</code></pre>
+<p>In a DoneJS application, you create custom algebras to pass
+to <a href="#section=section_can_connect">can-connect</a> connections. The
+connection's behaviors use that <a href="http://connect.canjs.com/doc/connect.base.algebra.html">algebra</a> to their optimizations.</p>
+<p>For example, if the <code>Todo</code> type in the <a href="#section=section_can_connect">can-connect section</a> has the following property behaviors:</p>
+<ul>
+<li><code>complete</code> can be true or false</li>
+<li><code>type</code> can be one of &quot;dev&quot;, &quot;design&quot;, or &quot;QA&quot;</li>
+</ul>
+<p>... and the service layer supports queries like:</p>
+<pre><code>//-&gt; gets all incomplete todos
+/services/todos?complete=false 
+
+// -&gt; gets all todos that are for design and dev
+/services/todos?type[]=dev&amp;type[]=design
+</code></pre>
+<p>You'd want to create an algebra for the <code>superMap</code> as follows:</p>
+<pre><code>var algebra = new set.Algebra(
+  set.comparators.boolean(&quot;complete&quot;),
+  set.comparators.enum(&quot;type&quot;, [&quot;dev&quot;, &quot;design&quot;, &quot;QA&quot;])
+);
+
+export const messageConnection = superMap({
+  url: &quot;/services/todos&quot;,
+  Map: Todo,
+  List: TodoList,
+  name: 'todo',
+  algebra: algebra
+});
+</code></pre>
+<p>This allows a <code>superMap</code> to combine requests like:</p>
+<pre><code>  Todo.getList({complete: true})
++ Todo.getList({complete: true})
+================================
+  Todo.getList({})
+</code></pre>
+<p>And know that if <code>Todo.getList({type: [&quot;dev&quot;,&quot;design&quot;]})</code> has already been
+retrieved, there's no need to make a request for
+<code>Todo.getList({type: [&quot;dev&quot;]})</code>.</p>
+<h2>Testing APIs</h2>
+<h3>QUnit</h3>
+<p><a href="http://qunitjs.com/">QUnit</a> is DoneJS's default JavaScript unit testing framework. It is provided for DoneJS by the <a href="https://github.com/stealjs/steal-qunit">steal-qunit</a> project. A basic unit test for a can.Component view-model looks like this:</p>
+<pre><code class="language-js">import QUnit from 'steal-qunit';
+import { ViewModel } from 'my/component/';
+
+// ViewModel unit tests
+QUnit.module('my/component');
+
+QUnit.test('Has message', function(){
+  var vm = new ViewModel();
+  QUnit.equal(vm.attr('message'), 'This is the my-component component');
+});
+</code></pre>
+<p>While the generators create QUnit tests by default you can switch your own tests easily to <a href="https://github.com/stealjs/steal-jasmine">Jasmine</a> or <a href="https://github.com/stealjs/steal-mocha">Mocha</a>.
+To use Mocha instead for the previous view-model example we just need to install the wrapper with</p>
+<pre><code>npm install steal-mocha --save-dev
+npm install assert --save-dev
+</code></pre>
+<p>And then change the test file to:</p>
+<pre><code>import mocha from 'steal-mocha';
+import assert from 'assert';
+import { ViewModel } from 'my/component/';
+
+mocha.setup('bdd');
+
+// ViewModel unit tests
+describe('my/component', function() {
+  it('Has a message', function() {
+    var vm = new ViewModel();
+    assert.equal(vm.attr('message'), 'This is the my-component component');
+  });
+});
+</code></pre>
+<h3>FuncUnit</h3>
+<p><a href="http://funcunit.com/">FuncUnit</a> enhances QUnit, Mocha or Jasmine and enables them to simulate user actions, easily test asynchronous behavior, and support black box testing. It uses a jQuery-like syntax to write functional or unit tests. When generating an application, DoneJS already includes a basic FuncUnit smoke-test which runs alongside the other tests. It looks like this:</p>
+<pre><code class="language-js">import F from 'funcunit';
+import QUnit from 'steal-qunit';
+
+F.attach(QUnit);
+
+QUnit.module('my-app functional smoke test', {
+  beforeEach() {
+    F.open('../development.html');
+  }
+});
+
+QUnit.test('my-app main page shows up', function() {
+  F('title').text('my-app', 'Title is set');
+});
+</code></pre>
+<p>This will open the main application (<code>development.html</code> is the HTML file that loads our DoneJS app without server-side-rendering) and ensures that the <code>&lt;title&gt;</code> is set to the name (which is the default in a newly generated application). To learn more about the user interactions and assertions available, follow up in the <a href="http://funcunit.com/docs/index.html">FuncUnit API documentation</a>.</p>
+<h3>Testee</h3>
+<p><a href="https://github.com/bitovi/testee">Testee</a> is a JavaScript test runner that can run your QUnit, Mocha and Jasmine tests from the command line. The command executed when running <code>donejs test</code> (which is the same as running <code>npm test</code>) is located in the <code>package.json</code> <code>scripts</code> section and already set up to run the main test suite in Firefox like this:</p>
+<pre><code>testee src/test.html --browsers firefox --reporter Spec
+</code></pre>
+<p>To change the browsers that our tests run on we can update the list of browsers, for example to add Safari and Google Chrome Canary by changing the test script to:</p>
+<pre><code>testee src/test.html --browsers firefox,canary,safari --reporter Spec
+</code></pre>
+<p>Testee supports all <a href="https://mochajs.org/#reporters">Mocha command line reporters</a>. For example, running the tests in the default browser <a href="http://phantomjs.org/">PhantomJS</a> (DoneJS only works with PhantomJS &gt;= 2.0) on a <a href="https://jenkins-ci.org/">Jenkins CI</a> server that uses XUnit output from a <code>testresults.xml</code> can be accomplished like this:</p>
+<pre><code>testee src/test.html --reporter XUnit &gt; testresults.xml
+</code></pre>
+<p>For more configuration options follow up in the <a href="https://github.com/bitovi/testee#testee">Testee documentation</a>.</p>
+<h2>DocumentJS</h2>
+<p>When working on large applications keeping updated documentation is critical.
+<a href="http://documentjs.com/">DocumentJS</a> generates API documentation for your
+application supporting <a href="http://usejsdoc.org/">jsdoc</a> syntax that can be multi-versioned.</p>
+<h3>Configuration</h3>
+<p>DocumentJS is configured with a <a href="http://documentjs.com/docs/DocumentJS.docConfig.html">docConfig</a> specified
+in a <strong>documentjs.json</strong> file within your project:</p>
+<pre><code>{
+  &quot;sites&quot;: {
+    &quot;docs&quot;: {
+      &quot;dest&quot;: &quot;docs&quot;,
+      &quot;glob&quot; : &quot;**/*.{js,md}&quot;
+    }
+  }
+}
+</code></pre>
+<p>This specifies to look in JavaScript and Markdown files for jsdoc tags. When ran the documentation will be written to the <strong>docs</strong> folder.</p>
+<h3>Documenting</h3>
+<p>DocumentJS includes most <a href="http://documentjs.com/docs/documentjs.tags.html">tags</a> you need to document a web application and includes an API to create your own.</p>
+<p>Here's how you would document a <a href="#section=section_can_Component">can.Component</a> View Model:</p>
+<pre><code>/**
+ * @add order/new
+ */
+export const ViewModel = Map.extend({
+  define: {
+    /**
+     * @property {String} slug
+     *
+     * The restaurants slug (short name). Will
+     * be used to request the actual restaurant.
+     */
+    slug: {
+      type: 'string'
+    },
+    /**
+     * @property {place-my-order/models/order} order
+     *
+     * The order that is being processed. Will
+     * be an empty new order inititally.
+     */
+    order: {
+      Value: Order
+    },
+    /**
+     * @property {can.Deferred} saveStatus
+     *
+     * A deferred that contains the status of the order when
+     * it is being saved.
+     */
+    saveStatus: {
+      Value: Object
+    },
+    /**
+     * @property {Boolean} canPlaceOrder
+     *
+     * A flag to enable / disable the &quot;Place my order&quot; button.
+     */
+    canPlaceOrder: {
+      get() {
+        let items = this.attr('order.items');
+        return items.attr('length');
+      }
+    }
+  },
+
+  /**
+   * @function placeOrder
+   *
+   * Save the current order and update the status Deferred.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  placeOrder() {
+    let order = this.attr('order');
+    this.attr('saveStatus', order.save());
+    return false;
+  },
+
+  /**
+   * @function startNewOrder
+   *
+   * Resets the order form, so a new order can be placed.
+   *
+   * @return {boolean} false to prevent the form submission
+   */
+  startNewOrder: function() {
+    this.attr('order', new Order());
+    this.attr('saveStatus', null);
+    return false;
+  }
+});
+</code></pre>
+<h3>Generating</h3>
+<p>DoneJS preconfigures your app to be documented with:</p>
+<pre><code>donejs document
+</code></pre>
+<p>Or you can run the <a href="http://documentjs.com/docs/DocumentJS.apis.generate.documentjs.html">documentjs</a> command directly with:</p>
+<pre><code>node_modules/.bin/documentjs
+</code></pre>
+<h2>DOM APIs</h2>
+<h3>jQuery</h3>
+<p><a href="http://jquery.com/">jQuery</a> is the ubiquitous DOM manipulation
+library. While you don't often need to write jQuery directly,
+<a href="#section=section_CanJS">CanJS</a> is built making it safe to use jQuery when needed.</p>
+<p>For example, you can make your own custom elements that call jQuery
+plugins:</p>
+<pre><code>can.view.tag(&quot;tooltip&quot;, function(el){
+  $(el).tooltip({
+    content: el.getAttribute(&quot;content&quot;), 
+    items: &quot;tooltip&quot;
+  });
+})
+</code></pre>
+<p><a href="#section=section_can_view_bindings">can.view.bindings</a> lets you listen
+to <a href="http://benalman.com/news/2010/03/jquery-special-events/">jQuery special events</a> like:</p>
+<pre><code>&lt;div ($tripleclick)=&quot;doSomething()&quot;&gt;
+</code></pre>
+<p><a href="#section=section_can_Component">can.Component</a>'s events object also supports this:</p>
+<pre><code>can.Component.extend({
+  events: {
+    &quot;li tripleclick&quot;: function(li, ev){ ... }
+  }
+})
+</code></pre>
+<p>CanJS adds special <a href="http://canjs.com/docs/can.events.inserted.html">inserted</a>, <a href="http://canjs.com/docs/can.events.removed.html">removed</a>, and <a href="http://canjs.com/docs/can.events.attributes.html">attributes</a> events. This allows you to
+teardown any behavior when the DOM is modified:</p>
+<pre><code>$(el).bind(&quot;removed&quot;, function(){
+  $(el).tooltip(&quot;teardown&quot;);
+})
+</code></pre>
+<p>CanJS's live-binding also hooks into these same events.  So if you remove
+an element with jQuery, CanJS will also teardown its bindings.  This means that if
+you were to call:</p>
+<pre><code>$(&quot;body&quot;).empty();
+</code></pre>
+<h3>jQuery++</h3>
+<p><a href="http://jquerypp.com/">jQuery++</a> adds a bunch of special events and other DOM
+utilties to jQuery.</p>
+<ul>
+<li>DOM utilities
+<ul>
+<li><a href="http://jquerypp.com/#animate">animate</a> - Overwrites <code>jQuery.animate</code> to use CSS3 animations if possible.</li>
+<li><a href="http://jquerypp.com/#compare">compare</a> - Compare the position of two elements in the page.</li>
+<li><a href="http://jquerypp.com/#range">range</a> - Manipulate text ranges.</li>
+<li><a href="http://jquerypp.com/#within">within</a> - Get the elements within a specified area.</li>
+</ul></li>
+<li>Special events
+<ul>
+<li><a href="http://jquerypp.com/#drag">drag / drop</a> - drag drop events.</li>
+<li><a href="http://jquerypp.com/#hover">hover</a> - hover events.</li>
+<li><a href="http://jquerypp.com/#key">key</a> - get a string representation of the key pressed.</li>
+<li><a href="http://jquerypp.com/#resize">resize</a> - listen to when an element changes size.</li>
+<li><a href="http://jquerypp.com/#swipe">swipe</a> - mobile swipe events.</li>
+</ul></li>
+</ul>
+<h2>Server Side Rendering APIs</h2>
+<h3>done-ssr</h3>
+<p><a href="https://github.com/donejs/done-ssr">done-ssr</a> enables DoneJS applications to be
+server-side rendered. Paired with <a href="#section=section_done_autorender">done-autorender</a>
+it allows you to render the entire document from a single template.</p>
+<pre><code>var http = require(&quot;http&quot;);
+var ssr = require(&quot;done-ssr&quot;);
+var render = ssr();
+
+var server = http.createServer(function(request, response){
+    render(request).pipe(response);
+});
+
+server.listen(8080);
+</code></pre>
+<p>The render function is called with a string url to render and returns a response
+object that contains the html string that was rendered. Use any Node-based
+http framework with done-ssr.</p>
+<p>For convenience we have published an <a href="http://expressjs.com/">Express</a> middleware:</p>
+<pre><code>var ssr = require(&quot;done-ssr-middleware&quot;);
+var app = require(&quot;express&quot;)();
+
+app.use(ssr(
+  config: __dirname + &quot;/package.json!npm&quot;
+));
+</code></pre>
+<p>Additionally DoneJS has <a href="https://github.com/donejs/done-serve">done-serve</a>
+which acts as a rendering front-end for your application. It will host static
+content, render your application, and proxy requests to another back-end server.</p>
+<pre><code>done-serve --proxy http://localhost:7070 --port 8080
+</code></pre>
+<h3>done-autorender</h3>
+<p><a href="https://github.com/donejs/autorender">done-autorender</a> is a Steal plugin that
+enables using a <a href="#section=section_can_stache">can.stache</a> template as your application's entry point. Create a template like:</p>
+<pre><code class="language-handlebars">&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;app | {{page}}&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;can-import from=&quot;app/state&quot; export-as=&quot;viewModel&quot;/&gt;
+
+  &lt;div&gt;Hello {{name}}&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>done-autorender</strong> will insert this template on page load. The import specied with
+the <code>export-as=&quot;viewModel&quot;</code> attribute is a <a href="#section=section_can_Map">can.Map</a> that acts as the View Model
+for the application.</p>
+<p>If you have <a href="http://stealjs.com/docs/steal.live-reload.html#section_Use">live-reload</a> enabled done-autorender will additionally use those APIs to re-render the
+application when any modules are reloaded.</p>
+<p>done-autorender handles requests when running in Node for server-side rendering and
+will wait for all asynchronous events to complete.</p>
+<h3>can-simple-dom</h3>
+<p><a href="https://github.com/canjs/can-simple-dom">can-simple-dom</a> is a minimal virtual DOM implementation used
+for server-side and worker thread rendering. It contains enough of the DOM APIs to get basic
+jQuery usage to work, as well as what is typical of CanJS applications.</p>
+<p>If you are working on an advanced plugin you might use can-simple-dom directly,
+in which case you would import it:</p>
+<pre><code class="language-js">import simpleDOM from &quot;can-simple-dom&quot;;
+
+const document = new simpleDOM.Document();
+</code></pre>
+<p>From here document has the normal DOM apis such as <code>document.createElement</code>.</p>
+
+		</section>
+		
+		
+
+		
+
+		
+
+	
+	</article>
+	
+
+
+	</div>
+</div>
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="/static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="/Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="/About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="/Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="/Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="/community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-github-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-twitter-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="/static/img/icon-googleplus-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">
+								<img class="footer-social-icon" src="/static/img/icon-youtube-white.svg">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="http://www.bitovi.com">2015 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"type":"page","name":"Apis","src":"docs/apis.md","description":"DoneJS is comprised of many projects that are documented seperately. This page contains overviews of each project and links to their official APIs. \n### Application Infrastructure\n\nThe blue boxes in the following architecture diagram represent modules provided by DoneJS.\n\n<object type=\"image/svg+xml\" data=\"static/img/donejs-stack-app.svg\"></object>\n\n- [StealJS](#section=section_StealJS) - Module loader and build system. [api](http://stealjs.com/docs/index.html).\n- [CanJS](#section=section_CanJS) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](http://canjs.com/docs/index.html)\n- [can-connect](#section=section_can_connect) - Data connection part of Models, real-time, fall-through cache. [api](https://connect.canjs.com)\n- [can-set](#section=section_can_set) - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)\n- [jQuery](#section=section_jQuery) - DOM utilities. [api](http://jquery.com/)\n- [jQuery++](#section=section_jQuery__) - Even more DOM utilities. [api](http://jquerypp.com/)\n- [done-ssr](#section=section_done_ssr) - Server-side rendering for NodeJS. [api](https://github.com/donejs/done-ssr)\n- [done-autorender](#section=section_done_autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)\n- [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)\n\n### Tooling\n\nDoneJS provides many aspects of JavaScript application tooling, shown in the diagram below.\n\n<object type=\"image/svg+xml\" data=\"static/img/donejs-stack-tooling.svg\"></object>\n\n- [donejs-cli](#section_CLIandGenerators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)\n- [generator-donejs](#section_CLIandGenerators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)\n- [QUnit](#section_QUnit) - Default test assertion library. [api](http://qunitjs.com/)\n- [FuncUnit](#section_FuncUnit) - Functional test utilities. [api](http://funcunit.com/)\n- [Testee](#section_Testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)\n- [DocumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/daffl/Jupiter/donejs/donejs"},"dest":"/Users/daffl/Jupiter/donejs/donejs/site","ignoreTemplateRender":true,"templates":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/templates","static":"/Users/daffl/Jupiter/donejs/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+			steal = {
+			instantiated: {
+				"bundles/static.css!$css" : null
+			}
+			}
+		</script>
+		<script type='text/javascript'
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+				bundles-path="bundles"></script>
+	
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+
+
+
+</html>
