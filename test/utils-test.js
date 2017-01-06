@@ -114,6 +114,7 @@ describe('utils tests', function() {
       assert.equal(utils.versionRange("0.5.1"), "0.5.x");
       assert.equal(utils.versionRange("0.5.1-beta.1"), "0.5.1-beta.x");
       assert.equal(utils.versionRange("0.5.0-pre.0"), "^0.5.0-pre.0");
+      assert.equal(utils.versionRange("1.0.0-alpha.0"), "^1.0.0-alpha.0");
     });
   });
 });
