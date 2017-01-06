@@ -6,9 +6,9 @@ before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 node_js:
-- '0.12'
-- 4.2.2
-- node
+- 4
+- 6
+- 7
 notifications:
   slack:
     secure: TAq0S0FA/OXtLjmIlJsytzz5WMB5L2QEedW7q+rAhKHg+w9FXOkE9guP72yLe92hKLMAsitD4OSACOtIR3QSSGNden/eKYQEVikCeNKOIO/FoHOrPTkXHfW1/2ihIvOBF2NaEvIGZsjwr12wIewSSM5VrdKwl1skgd0K7CoY/Uw=
