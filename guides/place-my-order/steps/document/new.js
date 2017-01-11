@@ -1,7 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './new.less';
-import template from './new.stache';
+import view from './new.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
@@ -23,7 +23,7 @@ export const ViewModel = DefineMap.extend({
    * be an empty new order inititally.
    */
   order: {
-    value: Order
+    Value: Order
   },
   /**
     * @property {Promise} saveStatus
@@ -32,6 +32,12 @@ export const ViewModel = DefineMap.extend({
     * it is being saved.
     */
   saveStatus: '*',
+  /**
+    * @property {Boolean} canPlaceOrder
+    *
+    * boolean indicating whether the order
+    * can be placed.
+    */
   canPlaceOrder: {
     get() {
       let items = this.order.items;
@@ -59,7 +65,7 @@ export const ViewModel = DefineMap.extend({
    * @return {boolean} false to prevent the form submission
    */
   startNewOrder() {
-    this.order = new order();
+    this.order = new Order();
     this.saveStatus = null;
     return false;
   }
@@ -67,6 +73,6 @@ export const ViewModel = DefineMap.extend({
 
 export default Component.extend({
   tag: 'pmo-order-new',
-  ViewModel: ViewModel,
-  template
+  ViewModel,
+  view
 });

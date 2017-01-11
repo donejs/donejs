@@ -1,11 +1,12 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/map';
-import template from './list.stache';
+import DefineMap from 'can-define/map/';
+import './list.less';
+import view from './list.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import State from 'place-my-order/models/state';
 import City from 'place-my-order/models/city';
 
-export var ViewModel = DefineMap.extend({
+export const ViewModel = DefineMap.extend({
   states: {
     get() {
       return State.getList({});
@@ -53,6 +54,6 @@ export var ViewModel = DefineMap.extend({
 
 export default Component.extend({
   tag: 'pmo-restaurant-list',
-  ViewModel: ViewModel,
-  template: template
+  ViewModel,
+  view
 });

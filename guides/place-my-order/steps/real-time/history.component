@@ -1,5 +1,5 @@
 <can-component tag="pmo-order-history">
-  <template>
+  <view>
     <can-import from="place-my-order/models/order" />
 
     <div class="order-history">
@@ -11,7 +11,7 @@
       </div>
 
       <can-import from="place-my-order/order/list.component" />
-      <order-model getList="{status='new'}">
+      <order-model get-list="{status='new'}">
         <pmo-order-list
           {orders}="."
           list-title="New Orders"
@@ -22,7 +22,7 @@
           empty-message="No new orders"/>
       </order-model>
 
-      <order-model getList="{status='preparing'}">
+      <order-model get-list="{status='preparing'}">
         <pmo-order-list
           {orders}="."
           list-title="Preparing"
@@ -33,7 +33,7 @@
           empty-message="No orders preparing"/>
       </order-model>
 
-      <order-model getList="{status='delivery'}">
+      <order-model get-list="{status='delivery'}">
         <pmo-order-list
           {orders}="."
           list-title="Out for delivery"
@@ -44,7 +44,7 @@
           empty-message="No orders are being delivered"/>
       </order-model>
 
-      <order-model getList="{status='delivered'}">
+      <order-model get-list="{status='delivered'}">
         <pmo-order-list
           {orders}="."
           list-title="Delivered"
@@ -53,5 +53,5 @@
           empty-message="No delivered orders"/>
       </order-model>
     </div>
-  </template>
+  </view>
 </can-component>

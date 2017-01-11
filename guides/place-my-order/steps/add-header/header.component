@@ -1,5 +1,10 @@
 <can-component tag="pmo-header">
-  <template>
+  <style type="less">
+    display: block;
+
+    p { font-weight: bold; }
+  </style>
+  <view>
     <can-import from="can-stache/helpers/route" />
     <header>
       <nav>
@@ -17,5 +22,14 @@
        </ul>
       </nav>
     </header>
-  </template>
+  </view>
+  <script type="view-model">
+    import DefineMap from 'can-define/map/';
+
+    export default DefineMap.extend({
+      message: {
+        value: 'This is the pmo-header component'
+      }
+    });
+  </script>
 </can-component>

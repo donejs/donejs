@@ -1,7 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './new.less';
-import template from './new.stache';
+import view from './new.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
 
@@ -32,6 +32,6 @@ export const ViewModel = DefineMap.extend({
 
 export default Component.extend({
   tag: 'pmo-order-new',
-  ViewModel: ViewModel,
-  template
+  ViewModel,
+  view
 });

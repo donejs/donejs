@@ -1,5 +1,5 @@
 <can-component tag="pmo-restaurant-details">
-  <template>
+  <view>
     <can-import from="place-my-order/models/restaurant"/>
     <restaurant-model get="{ _id=slug }">
       {{#if isPending}}
@@ -43,5 +43,5 @@
       {{/value}}
       {{/if}}
     </restaurant-model>
-  </template>
+  </view>
 </can-component>

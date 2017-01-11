@@ -1,5 +1,5 @@
 <can-component tag="pmo-order-details">
-  <template>
+  <view>
     {{#order}}
       <h3>Thanks for your order {{name}}!</h3>
       <div><label class="control-label">
@@ -30,5 +30,5 @@
         Address: {{address}}
       </label></div>
     {{/order}}
-  </template>
+  </view>
 </can-component>
