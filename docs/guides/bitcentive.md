@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @page bitcentive Example: Bitcentive
 @parent DoneJS
 @hide sidebar
