@@ -1,4 +1,4 @@
-<can-component tag="pmo-loading">
+<can-component tag="pmo-loading" leak-scope>
   <style type="less">
     display: block;
 
