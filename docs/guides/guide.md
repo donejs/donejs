@@ -235,7 +235,7 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 
 ### Create messages
 
-Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. 
+Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input.
 
 Update `src/messages/messages.stache` to look like this:
 
@@ -266,7 +266,7 @@ Right now our chat's messages update automatically with our own messages, but no
 To connect to it, first we'll install a socket.io connector, by running:
 
 ```
-npm install steal-socket.io --save
+npm install steal-socket.io@2 --save
 ```
 
 Update `src/models/message.js` to:
