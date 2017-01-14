@@ -222,13 +222,17 @@ guide.test(function(){
  * @Step 12
  */
 guide.step("Enable a real-time connection", function(){
-	return guide.executeCommand("npm", ["install", "steal-socket.io", "--save"])
+	return guide.executeCommand("npm", ["install", "steal-socket.io@2", "--save"])
 		.then(wait)
 		.then(function(){
 			return guide.replaceFile(join("src", "models", "message.js"),
 									 join(__dirname, "steps", "12-real-time", "message.js"));
 		});
 
+});
+
+guide.test(function(){
+	return guide.functionalTest(join(__dirname, "steps", "12-real-time", "test.js"));
 });
 
 /**
