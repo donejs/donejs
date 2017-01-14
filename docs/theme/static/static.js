@@ -11,7 +11,7 @@ steal(
     "./js/responsive-tables.js",
     "./js/lazy-youtube.js",
     "./js/affix.js",
-    "./js/bithub-embed/bithub-embed.js",
+    "./js/upcoming-events/upcoming-events.js",
     "./styles/styles.less!",
     "./prettify", function($, ContentList, FrameHelper, Versions, Highlighter){
         var codes = document.getElementsByTagName("code");
@@ -567,9 +567,9 @@ steal(
         })
 
 
-        $('#bithub-events-embed').bithubEmbed({
-            hubId: 5,
-            tenant_name: 'charming_volcano_7196_1'
+        $('#bithub-events-embed').upcomingEvents({
+            apiKey: 'AIzaSyBsNpdGbkTsqn1BCSPQrjO9OaMySjK5Sns',
+            calendarId: 'jupiterjs.com_g27vck36nifbnqrgkctkoanqb4@group.calendar.google.com'
         });
 
     });

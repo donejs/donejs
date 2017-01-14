@@ -1,25 +1,22 @@
 import $ from 'jquery';
 import can from 'can/';
-import Bit from './bit';
+import Event from './event';
 import 'can/construct/super/';
 import 'can/control/plugin/';
 import 'can/view/stache/';
 import 'can/list/promise/';
 import 'can/map/define/';
 
-import '../components/bithub-embed/bithub-embed';
-import '../components/bithub-bit/bithub-bit';
+import '../components/upcoming-events/upcoming-events';
+import '../components/upcoming-event/upcoming-event';
 
-var template = can.stache('<bithub-embed bits="{bits}"></bithub-embed>');
+var template = can.stache('<upcoming-events events="{events}"></upcoming-events>');
 
-var BithubEmbed = can.Control.extend({
-  pluginName: 'bithubEmbed',
+var UpcomingEvents = can.Control.extend({
+  pluginName: 'upcomingEvents',
   defaults: {
-    hubId: null,
-    tenant_name: null,
-    view: 'public',
-    offset: 0,
-    limit: 50
+    apiKey: null,
+    calendarId: null
   }
 }, {
   init: function(el, options) {
@@ -34,14 +31,14 @@ var BithubEmbed = can.Control.extend({
 
 export var ViewModel = can.Map.extend({
   define: {
-    bits: {
-      Value: Bit.List,
+    events: {
+      Value: Event.List,
       get: function(currentValue) {
-        currentValue.replace(Bit.findAll( this.attr() ));
+        currentValue.replace(Event.findAll( this.attr() ));
         return currentValue;
       }
     }
   }
 });
 
-export default BithubEmbed;
+export default UpcomingEvents;
