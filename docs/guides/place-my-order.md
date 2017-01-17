@@ -597,6 +597,8 @@ And add a `.travis.yml` file to our project root:
 ```
 language: node_js
 node_js: node
+addons:
+  firefox: "latest"
 before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
