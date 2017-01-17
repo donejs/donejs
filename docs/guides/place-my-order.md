@@ -462,7 +462,7 @@ Now we can load a list of states and cities.
 
 ### Implement view model behavior
 
-Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
+Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/doc/can-define/map/map.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
 
 @sourceref guides/place-my-order/steps/create-dependent/list.js
 @highlight 6-7,10-52
