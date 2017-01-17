@@ -331,7 +331,7 @@ donejs add component loading.component pmo-loading
 Change `src/loading.component` to:
 
 @sourceref guides/place-my-order/steps/add-loading/loading.component
-@highlight 8-12
+@highlight 1,8-12
 
 
 ### Switch between components
