@@ -7,17 +7,20 @@ import Order from 'place-my-order/models/order';
 
 export const ViewModel = DefineMap.extend({
   slug: 'string',
+  saveStatus: '*',
   order: {
     Value: Order
   },
-  saveStatus: '*',
-  canPlaceOrder: {
-    get() {
-      let items = this.order.items;
-      return items.length;
+  get restaurantPromise() {
+    return Restaurant.get({ _id: this.slug });
+  },
+  restaurant: {
+    get(lastSetVal, resolve) {
+      this.restaurantPromise.then(resolve);
     }
   },
-  placeOrder() {
+  placeOrder(ev) {
+    ev.preventDefault();
     let order = this.order;
     order.restaurant = this.restaurant._id;
     this.saveStatus = order.save();
@@ -25,7 +28,7 @@ export const ViewModel = DefineMap.extend({
   },
   startNewOrder() {
     this.order = new Order();
-    this.statusStatus = null;
+    this.saveStatus = null;
     return false;
   }
 });

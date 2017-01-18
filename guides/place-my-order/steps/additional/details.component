@@ -1,6 +1,7 @@
 <can-component tag="pmo-restaurant-details">
   <view>
-    <can-import from="place-my-order/models/restaurant"/>
+    <can-import from="place-my-order/models/restaurant" />
+    <can-import from="can-stache/helpers/route" />
     <restaurant-model get="{ _id=slug }">
       {{#if isPending}}
         <div class="loading"></div>

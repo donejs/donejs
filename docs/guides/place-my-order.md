@@ -465,7 +465,7 @@ Now we can load a list of states and cities.
 Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/doc/can-define/map/map.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
 
 @sourceref guides/place-my-order/steps/create-dependent/list.js
-@highlight 6-7,10-52
+@highlight 6-7,10-46
 
 Let's take a closer look at those properties:
 
@@ -517,7 +517,7 @@ Update `src/restaurant/list/list.stache` to:
 Some things worth pointing out:
 
 - Since `states` and `cities` return a promise, we can check the promise's status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
-- The `state` and `city` properties are two-way bound to their select fields via [{($value)}](http://canjs.com/docs/can.view.bindings.can-value.html)
+- The `state` and `city` properties are two-way bound to their select fields via [{($value)}](http://canjs.com/doc/can-stache-bindings.twoWay.html#___child_prop____key_)
 
 Now we have a component that lets us select state and city and displays the appropriate restaurant list.
 
@@ -781,7 +781,7 @@ First, let's look at the restaurant data we get back from the server. It looks l
 }
 ```
 
-We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter later). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new `order` model:
+We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new `order` model:
 
 ```
 donejs add supermodel order
@@ -790,7 +790,7 @@ donejs add supermodel order
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
 @sourceref guides/place-my-order/steps/create-data/order.js
-@highlight 6-26,32-55
+@highlight 6-26,32-52
 
 Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
@@ -799,9 +799,9 @@ Here we define an `ItemsList` which allows us to toggle menu items and check if 
 Now we can update the view model in `src/order/new/new.js`:
 
 @sourceref guides/place-my-order/steps/create-data/new.js
-@highlight 5-6,9-30
+@highlight 5-6,9-33
 
-Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
+Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a promise once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
 While we're here we can also update our test to get it passing again, replace `src/order/new/new_test.js` with:
 
@@ -828,14 +828,14 @@ This is a longer template so lets walk through it:
 
 - `<can-import from="place-my-order/order/details.component" />` loads the order details component we previously created
 - `<restaurant-model get="{ _id=slug }">` loads a restaurant based on the slug value passed to the component
-- If the `saveStatus` deferred is resolved we show the `pmo-order-details` component with that order
-- Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item]
-- `(submit)="{placeOrder}"` will call `placeOrder` from our view model when the form is submitted
-- The interesting part for showing a menu item is the checkbox `<input type="checkbox" (change)="{order.items.toggle this}" {{#if order.items.has}}checked{{/if}}>`
-  - `(change)` binds to the checkbox change event and runs `order.items.toggle` which toggles the item from `ItemList`, which we created in the model
+- If the `saveStatus` promise is resolved we show the `pmo-order-details` component with that order
+- Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item
+- `($submit)="placeOrder()"` will call `placeOrder` from our view model when the form is submitted
+- The interesting part for showing a menu item is the checkbox `<input type="checkbox" ($change)="order.items.toggle(.)" {{#if order.items.has(.)}}checked{{/if}}>`
+  - `($change)` binds to the checkbox change event and runs `order.items.toggle` which toggles the item from `ItemList`, which we created in the model
   - `order.item.has` sets the checked status to whether or not this item is in the order
 - Then we show form elements for name, address, and phone number, which are bound to the order model using [can-stache-bindings](http://canjs.com/doc/can-stache-bindings.html)
-- Finally we disable the button with `{{^if canPlaceOrder}}disabled{{/if}}` which calls `canPlaceOrder` from the view model and returns false if no menu items are selected.
+- Finally we disable the button with `{{^if canPlaceOrder}}disabled{{/if}}` which gets `canPlaceOrder` from the view model and returns false if no menu items are selected.
 
 ## Set up a real-time connection
 

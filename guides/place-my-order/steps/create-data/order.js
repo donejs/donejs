@@ -40,15 +40,12 @@ export const Order = DefineMap.extend({
   items: {
     Value: ItemsList
   },
-  total: {
-    get() {
-      let total = 0.0;
-      this.items.forEach(item =>
-          total += parseFloat(item.price));
-      return total.toFixed(2);
-    }
+  get total() {
+    let total = 0.0;
+    this.items.forEach(item =>
+        total += parseFloat(item.price));
+    return total.toFixed(2);
   },
-
   markAs(status) {
     this.status = status;
     this.save();
