@@ -160,7 +160,7 @@ guide.step("Install and use bit-tabs", function(){
     return guide.wait(10000);
   }
 
-	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@alpha", "--save"])
     .then(installWait)
 		.then(function(){
 			return guide.replaceFile(join("src", "home.component"),
