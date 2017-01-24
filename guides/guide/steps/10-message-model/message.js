@@ -16,7 +16,7 @@ Message.List = DefineList.extend({
 });
 
 export const messageConnection = superMap({
-  url: '/message',
+  url: 'http://chat.donejs.com/api/messages',
   idProp: 'id',
   Map: Message,
   List: Message.List,
