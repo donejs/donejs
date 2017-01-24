@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <can-import from="bootstrap/less/bootstrap.less" />
+    <can-import from="donejs-chat/styles.less" />
+    <can-import from="donejs-chat/app" export-as="viewModel" />
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+          {{#eq page 'chat'}}
+            <can-import from="donejs-chat/messages/">
+              {{#if isPending}}
+                Loading...
+              {{else}}
+                <chat-messages/>
+              {{/if}}
+            </can-import>
+          {{else}}
+            <can-import from="donejs-chat/home.component">
+              {{#if isPending}}
+                Loading...
+              {{else}}
+                <chat-home/>
+              {{/if}}
+            </can-import>
+          {{/eq}}
+        </div>
+      </div>
+    </div>
+
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="{{joinBase 'steal.production.js'}}"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
+</html>
