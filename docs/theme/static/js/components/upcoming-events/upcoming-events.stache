@@ -1,0 +1,22 @@
+{{#if events.isResolved}}
+
+  {{#if events.length}}
+
+    {{#each visibleEvents}}
+      <upcoming-event model="{.}"></upcoming-event>
+    {{/each}}
+
+  {{else}}
+    <h3>There are no events to show.</h3>
+  {{/if}}
+{{/if}}
+{{#if events.isPending}}
+  <span class="pending-spinner"></span>
+{{/if}}
+
+{{#if events.isRejected}}
+  <div class="danger">
+    <p>Sorry, events can’t load right now.</p>
+    <small>Error: {{events.reason.responseJSON.message}}</small>
+  </div>
+{{/if}}

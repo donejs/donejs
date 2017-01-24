@@ -240,7 +240,7 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 
 ### Create messages
 
-Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input. 
+Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input.
 
 Update `src/messages/messages.stache` to look like this:
 
@@ -271,7 +271,7 @@ Right now our chat's messages update automatically with our own messages, but no
 To connect to it, first we'll install a socket.io connector, by running:
 
 ```
-npm install steal-socket.io --save
+npm install steal-socket.io@2 --save
 ```
 
 Update `src/models/message.js` to:
@@ -326,7 +326,7 @@ Now that we verified that our application works in production, we can deploy it 
 
 ### Set up Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
+Sign up for free at [Firebase](https://firebase.google.com/). After you have an account go to [Firebase console](https://console.firebase.google.com/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
 
 > You'll get an error if your app name is too long, so pick something on the shorter side.
 
@@ -336,25 +336,22 @@ When you deploy for the first time it will ask you to authorize, but first we ne
 
 Now we can add the Firebase deployment configuration to our `package.json` like this:
 
-@sourceref guides/guide/steps/16-cdn/deploy.json
-
-Change the `<appname>` to the name of the application created when you set up the Firebase app.
-
-And also update the production `baseURL` in the `system` section:
-
 ```
-...
-"system": {
-  ...
-  "envs": {
-    "server-production": {
-      "renderingBaseURL": "https://<appname>.firebaseapp.com/"
-    }
-  }
-}
+donejs add firebase
 ```
 
-Again, make sure to replace the URL with your Firebase application name. Then we can deploy the application by running:
+When prompted, enter the name of the application created when you set up the Firebase app. Before you can deploy your app you need to login and authorize the Firebase tools, which you can do with:
+
+```
+node_modules/.bin/firebase login
+```
+
+Update your index.stache to change the production steal path:
+
+@sourceref guides/guide/steps/16-cdn/index.stache
+@highlight 36
+
+Then we can deploy the application by running:
 
 ```
 donejs build
@@ -363,7 +360,7 @@ donejs deploy
 
 Static files are deployed to Firebase.
 
-<img src="static/img/donejs-firebase.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-firebase.png" alt="two browsers" />
 
 And verify that the application is loading from the CDN by loading it after running:
 
@@ -454,98 +451,3 @@ The Windows application can be opened with
 In this guide we created a small chat application that connects to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We built an optimized bundle for production and deployed it to a static file host and CDN. Last, we made builds of the application as a mobile and desktop application.
 
 If you want to learn more about DoneJS - like how to create more complex custom elements and routes, write and automatically run tests, Continuous Integration and Continuous Deployment - head over to the [place-my-order Guide](./place-my-order.html).
-
-## IE8 Support
-
-This section is optional. Follow it only if you're interested in making applications that are compatible with IE8.
-
-### Support CORS
-
-Since our application uses cross domain requests we need to make a couple of changes to make it work in IE8 which doesn't support CORS. The first is to create a [jQuery prefilter](http://api.jquery.com/jquery.ajaxprefilter/) so all HTTP requests are marked as being cross domain. Create `src/prefilter.js`:
-
-```js
-import $ from "jquery";
-
-$.ajaxPrefilter(function(options){
-  options.crossDomain = true;
-});
-```
-
-Next we need to install [jQuery transport](http://api.jquery.com/jquery.ajaxtransport/) that will perform our cross domain requests in IE8:
-
-```
-npm install jquery-transport-xdr --save
-```
-
-Finally import both of these modules in your messages model. Change `src/models/message.js` to:
-
-```js
-import can from 'can';
-import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
-import io from 'steal-socket.io';
-import 'jquery-transport-xdr';
-import 'donejs-chat/prefilter';
-
-export const Message = can.Map.extend({
-  define: {}
-});
-
-Message.List = can.List.extend({
-  Map: Message
-}, {});
-
-export const messageConnection = superMap({
-  url: 'http://chat.donejs.com/api/messages',
-  idProp: 'id',
-  Map: Message,
-  List: Message.List,
-  name: 'message'
-});
-
-tag('message-model', messageConnection);
-
-const socket = io('http://chat.donejs.com');
-
-socket.on('messages created',
-  order => messageConnection.createInstance(order));
-socket.on('messages updated',
-  order => messageConnection.updateInstance(order));
-socket.on('messages removed',
-  order => messageConnection.destroyInstance(order));
-
-export default Message;
-```
-@highlight 6,7
-
-### Install jQuery 1.x
-
-DoneJS comes with jQuery 2.x by default, but if you need to support IE8 the 1.x branch is necessary. You can switch by installing the right version:
-
-```
-npm install jquery@1.11.0 --save
-```
-
-Update your `build.js` file to make the compiled output work in IE:
-
-```js
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm",
-  babelOptions: {
-    loose: "es6.modules"
-  }
-}, {
-  bundleAssets: true
-});
-...
-```
-@highlight 2-5
-
-And rebuild:
-
-```
-donejs build
-```
-
-The application will now work in IE8.

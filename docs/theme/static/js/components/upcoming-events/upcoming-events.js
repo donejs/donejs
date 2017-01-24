@@ -1,40 +1,47 @@
 import Component from 'can/component/';
 import Map from 'can/map/';
-import template from './bithub-embed.stache!';
+import template from './upcoming-events.stache!';
 import 'can/map/define/';
 import 'can/list/promise/';
 
 export const ViewModel = Map.extend({
   define: {
-    bits: {
+    events: {
       value: []
     },
-    visibleBits: {
+    visibleEvents: {
       // This methods will give the three next upcoming
       // events, supplemented by past events if needed
       get: function() {
-        let bits = this.attr('bits').attr();
+        let events = this.attr('events').serialize();
+
+        // Filter out recurring events (like the contributors meeting)
+        events = events.filter(function(event) {
+          return !event.recurringEventId;
+        });
+
         // The current installed version of can for this version of DocumentJS
         // has neither a sort method nor a sort plugin.
-        bits.sort((a,b) => {
-          return a.thread_updated_ts - b.thread_updated_ts;
+        events.sort((a,b) => {
+          return a.startTimestamp - b.startTimestamp;
         });
+
         // get next 3 events, or all future events + past events up to 3
-        for (let i=bits.length-1, l = i, now = Date.now(); i>=0; i--) {
-          if (bits[i].thread_updated_ts*1000 < now && l-i >= 3) {
-            bits = bits.slice(i+1, i+4);
+        for (let i=events.length-1, l = i, now = Date.now(); i>=0; i--) {
+          if (events[i].startTimestamp*1000 < now && l-i >= 3) {
+            events = events.slice(i+1, i+4);
             break;
           }
         }
 
-        return bits;
+        return events;
       }
     }
   }
 });
 
 export default Component.extend({
-  tag: 'bithub-embed',
+  tag: 'upcoming-events',
   scope: ViewModel,
   template
 });

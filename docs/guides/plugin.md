@@ -24,7 +24,7 @@ If you don't have an account yet, go to [GitHub][6] to sign up and follow [the h
 
 Calling the repository `<username>-number-input` and initializing it empty (without any of the default files) looks like this:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-1.53.10-PM.png" alt="Screen Shot 2016-02-16 at 1.53.10 PM" style="width: 100%;" class="alignnone size-full wp-image-2665" />][8]
+[<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-1.53.10-PM.png" alt="Screen Shot 2016-02-16 at 1.53.10 PM" style="width: 100%;" class="alignnone size-full wp-image-2665" />][8]
 
 After creating the repository, we can clone it into a new folder:
 
@@ -50,7 +50,7 @@ $ npm install donejs -g
 In the `<username>-number-input` folder we can now initialize a new plugin like this:
 
 ```
-$ donejs plugin
+$ donejs add plugin
 ```
 
 The plugin generator will ask several question that should be answered as follows:
@@ -61,7 +61,7 @@ The plugin generator will ask several question that should be answered as follow
 
 Once all done, the final prompt looks similar to this:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
+[<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
 
 Now the generator will initialize the default plugin layout and install all its dependencies.
 
@@ -79,7 +79,7 @@ This command can also be used to automatically run the tests on a [continuous in
 
 We will use Travis CI as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. Once signed in, go to `Accounts` (in the dropdown under you name) to enable the `<username>-number-input` repository:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-2.03.56-PM.png" alt="Enabling on Travis CI" style="width: 100%;" class="alignnone size-full wp-image-2669" />][12]
+[<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-2.03.56-PM.png" alt="Enabling on Travis CI" style="width: 100%;" class="alignnone size-full wp-image-2669" />][12]
 
 You may have to click the *"Sync account"* button for the repository to show up. Now, every time we push to GitHub the tests will run automatically. We can do so with our initial commit:
 
@@ -268,11 +268,11 @@ $ git push origin number-input-component
 
 And then create a new pull request by going to `https://github.com/<your-username>/<username>-number-input` which will now show an option like this:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-8.17.50-AM.png" alt="Screen Shot 2016-02-16 at 8.17.50 AM" class="alignnone size-full wp-image-2658" />][19]
+[<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.17.50-AM.png" alt="Screen Shot 2016-02-16 at 8.17.50 AM" class="alignnone size-full wp-image-2658" />][19]
 
 Once you created the pull request, you will see a `Some checks haven’t completed yet` message that will eventually turn green:
 
-[<img src="http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-8.30.41-AM.png" alt="Screen Shot 2016-02-16 at 8.30.41 AM" style="width: 100%;" class="alignnone size-full wp-image-2662" />][20]
+[<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.30.41-AM.png" alt="Screen Shot 2016-02-16 at 8.30.41 AM" style="width: 100%;" class="alignnone size-full wp-image-2662" />][20]
 
 Now you can click the "Merge pull request" button. Then in the console, checkout the *master* branch and pull down the latest changes with:
 
@@ -335,18 +335,18 @@ Once you published your plugin, let the world know about it. [Tweet @donejs](htt
  [5]: https://en.wikipedia.org/wiki/Continuous_integration
  [6]: https://github.com/join?source=header-home
  [7]: https://help.github.com/articles/set-up-git/
- [8]: http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-1.53.10-PM.png
- [9]: http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-7.55.03-AM.png
+ [8]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-1.53.10-PM.png
+ [9]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-7.55.03-AM.png
  [10]: https://jenkins-ci.org/
  [11]: https://travis-ci.org/
- [12]: http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-2.03.56-PM.png
+ [12]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-2.03.56-PM.png
  [13]: http://localhost:8080/src/test/test.html
  [14]: http://localhost:8080/src/donejs-number-input.html
  [15]: http://localhost:8080/src/test.html
  [16]: https://canjs.com/docs/can.Map.prototype.define.html
  [17]: https://canjs.com/docs/can.Map.prototype.define.set.html
  [18]: https://help.github.com/articles/using-pull-requests/
- [19]: http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-8.17.50-AM.png
- [20]: http://blog.bitovi.com/wp-content/uploads/2016/02/Screen-Shot-2016-02-16-at-8.30.41-AM.png
+ [19]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.17.50-AM.png
+ [20]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.30.41-AM.png
  [21]: https://www.npmjs.com/signup
  [22]: http://semver.org/

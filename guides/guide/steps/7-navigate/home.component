@@ -3,7 +3,7 @@
     display: block;
     h1.page-header { margin-top: 0; }
   </style>
-  <template>
+  <view>
     <can-import from="can-stache/helpers/route"/>
     <h1 class="page-header text-center">
       <img src="http://donejs.com/static/img/donejs-logo-white.svg"
@@ -15,5 +15,5 @@
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>
-  </template>
+  </view>
 </can-component>
