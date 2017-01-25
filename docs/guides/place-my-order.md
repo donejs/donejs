@@ -1379,7 +1379,7 @@ In this final short chapter, let's quickly look at what we did in this guide and
 
 In this in-depth guide we created and deployed a fully tested restaurant menu ordering application called [place-my-order](http://www.place-my-order.com/) with DoneJS. We learned how to set up a DoneJS project, create custom elements and retrieve data from the server. Then we implemented a unit-tested view-model, ran those tests automatically from the command line and on a continuous integration server.
 
-We went into more detail on how to create nested routes and importing other projects from NPM. Then we created new orders and made it real-time, added and built documentation and made a production build. Finally we turned that same application into a desktop- and mobile application and deployed it to a CDN and the web.
+We went into more detail on how to create nested routes and importing other projects from NPM. Then we created new orders and made it real-time, added and built documentation and made a production build. Finally we turned that same application into a desktop and mobile application and deployed it to a CDN and the web.
 
 ### Following up
 
