@@ -1,6 +1,6 @@
+<can-import from="bit-tabs/unstyled"/>
 <div class="order-form">
   <h2>Order here</h2>
-  <can-import from="bit-tabs/unstyled" />
 
   <bit-tabs tabs-class="nav nav-tabs">
     <bit-panel title="Lunch menu">

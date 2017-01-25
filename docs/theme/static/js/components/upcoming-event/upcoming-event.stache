@@ -3,7 +3,7 @@
     <div class="header">
 
       <div class="event-title">
-        <a href="{{url}}" target="_blank">{{ title }}</a>
+        <a href="{{url}}" target="_blank">{{ summary }}</a>
       </div>
 
       <div class="event-group">

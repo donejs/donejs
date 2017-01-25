@@ -106,7 +106,7 @@ The default port is 8080, so if we now go to [http://localhost:8080/](localhost:
 
 Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we'll just install and start an existing service API created specifically for use with this tutorial:
 
-**Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows, cmd+c on Mac).
+**Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows and Mac).
 
 ```
 npm install place-my-order-api --save
@@ -526,6 +526,7 @@ Now we have a component that lets us select state and city and displays the appr
 We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
 
 @sourceref guides/place-my-order/steps/write-template/list.html
+@highlight 2-3
 
 View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
 
@@ -656,7 +657,8 @@ We want to use those routes when we are in the `restaurants` page. The relevant 
 
 ```html
 {{#case "restaurants"}}
-  <can-import from="src/restaurant/list/">
+  <can-import from="src/restaurant/list/"
+      can-tag="pmo-loading">
     <pmo-restaurant-list/>
   </can-import>
 {{/case}}
@@ -694,7 +696,8 @@ Now we can add those components to the main template (at `src/index.stache`) wit
 
 ```html
 {{#case "restaurants"}}
-  <can-import from="place-my-order/restaurant/list/">
+  <can-import from="place-my-order/restaurant/list/"
+      can-tag="pmo-loading">
     <pmo-restaurant-list/>
   </can-import>
 {{/case}}
@@ -1190,9 +1193,9 @@ StealTools will find all of the assets you reference in your CSS and copy them t
 
 ### Static hosting on Firebase
 
-Sign up for free at [Firebase](https://www.firebase.com/). After you have an account go to [the account page](https://www.firebase.com/account/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username:
+Sign up for free at [Firebase](https://firebase.google.com/). After you have an account go to [Firebase console](https://console.firebase.google.com/) and create an app called `place-my-order-<user>` where `<user>` is your GitHub username:
 
-![Settting up a Firebase project](static/img/guide-firebase-setup.png)
+<img src="static/img/guide-firebase-setup.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid; max-width: 400px;" />
 
 Write down the name of your app because you'll need it in the next section.
 
@@ -1202,109 +1205,19 @@ When you deploy for the first time it will ask you to authorize with your login 
 
 #### Configuring DoneJS
 
-With the Firebase account and application in place we can add the deployment configuration to our `package.json` like this:
+With the Firebase account and application in place we can add the deployment configuration to our project like this:
 
-```js
-{
-  "name": "place-my-order",
-  "version": "0.0.0",
-  "description": "",
-  "homepage": "",
-  "author": {
-    "name": "",
-    "email": "",
-    "url": ""
-  },
-  "scripts": {
-    "api": "place-my-order-api --port 7070",
-    "test": "testee src/test.html --browsers firefox --reporter Spec",
-    "start": "done-serve --proxy http://localhost:7070 --port 8080",
-    "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
-    "document": "documentjs",
-    "build": "node build"
-  },
-  "main": "production.html",
-  "files": [
-    "src"
-  ],
-  "keywords": [],
-  "system": {
-    "envs": {
-      "server-production": {
-        "renderingBaseURL": "https://<appname>.firebaseapp.com/"
-      }
-    },
-    "main": "place-my-order/index.stache!done-autorender",
-    "directories": {
-      "lib": "src"
-    },
-    "configDependencies": [
-      "live-reload",
-      "node_modules/can-zone/register"
-    ],
-    "npmAlgorithm": "flat"
-  },
-  "dependencies": {
-    "bit-tabs": "^0.2.0",
-    "can": "^2.3.16",
-    "can-connect": "^0.5.0",
-    "can-zone": "^0.4.4",
-    "done-autorender": "^0.8.0",
-    "done-component": "^0.4.0",
-    "done-css": "~2.0.2",
-    "done-serve": "^0.2.0",
-    "generator-donejs": "^0.9.0",
-    "jquery": "~2.2.1",
-    "place-my-order-api": "^0.4.4",
-    "place-my-order-assets": "^0.1.7",
-    "steal": "^0.16.0",
-    "steal-platform": "0.0.4",
-    "steal-socket.io": "^2.0.0"
-  },
-  "devDependencies": {
-    "can-fixture": "^0.1.2",
-    "documentjs": "^0.4.2",
-    "donejs-cli": "^0.8.0",
-    "donejs-deploy": "^0.4.0",
-    "funcunit": "~3.0.0",
-    "steal-cordova": "^0.1.3",
-    "steal-nw": "^0.1.4",
-    "steal-qunit": "^0.1.1",
-    "steal-tools": "^0.16.0",
-    "testee": "^0.2.4"
-  },
-  "window": {
-    "width": 1000,
-    "height": 600,
-    "toolbar": true
-  },
-  "donejs": {
-    "deploy": {
-      "root": "dist",
-      "services": {
-        "production": {
-          "type": "firebase",
-          "config": {
-            "firebase": "<appname>",
-            "public": "./dist",
-            "headers": [{
-              "source": "/**",
-              "headers": [{
-                "key": "Access-Control-Allow-Origin",
-                "value": "*"
-              }]
-            }]
-          }
-        }
-      }
-    }
-  }
-}
+```
+donejs add firebase
 ```
 
-@highlight 25-29,74-94
+When prompted, enter the name of the application created when you set up the Firebase app. Next, login to the firebase app for the first time by running:
 
-Change the `<appname>` to the name of the application created when you set up the Firebase app.
+```
+node_modules/.bin/firebase login
+```
+
+And authorize your application.
 
 #### Run deploy
 
@@ -1398,7 +1311,7 @@ before_deploy:
   - "node build"
   - "git add dist/ --force"
   - "git commit -m \"Updating build.\""
-  - "node_modules/.bin/deploy"
+  - "node_modules/.bin/firebase deploy --token \"$FIREBASE_TOKEN\""
 deploy:
   skip_cleanup: true
   provider: "heroku"

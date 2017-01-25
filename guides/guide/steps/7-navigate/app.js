@@ -11,6 +11,6 @@ const AppViewModel = DefineMap.extend({
   }
 });
 
-route('/:page', { page: 'home' });
+route('/{page}', { page: 'home' });
 
 export default AppViewModel;

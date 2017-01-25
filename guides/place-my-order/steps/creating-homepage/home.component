@@ -13,7 +13,7 @@
         We make it easier than ever to order gourmet food
         from your favorite local restaurants.
       </p>
-      <p><a class="btn" href="/restaurants" role="button">Choose a Restaurant</a></p>
+      <p><a class="btn" href="{{routeUrl page='restaurants'}}" role="button">Choose a Restaurant</a></p>
      </div>
   </view>
   <script type="view-model">
