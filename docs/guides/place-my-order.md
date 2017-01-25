@@ -906,6 +906,40 @@ Now we're ready to create a production build; go ahead and kill your development
 
 Our `index.stache` contains a can-import tag for each of the pages we have implemented. These can-imports which have nested html will be progressively loaded; the restaurant list page's JavaScript and CSS will only be loaded when the user visits that page.
 
+### Bundling assets
+
+Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at `node_modules/place-my-order-assets/images`.
+
+StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.
+
+To use this capability add an option to your build script to enable it. Change:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: true
+});
+```
+
+to:
+
+```js
+var buildPromise = stealTools.build({
+  config: __dirname + "/package.json!npm"
+}, {
+  bundleAssets: {
+    infer: false,
+    glob: "node_modules/place-my-order-assets/images/**/*"
+  }
+});
+```
+
+@highlight 4-7
+
+StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [dest](http://stealjs.com/docs/steal-tools.build.html#dest) to `dist`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
+
+
 ### Bundling your app
 
 To bundle our application for production we use the build script in `build.js`. We could also use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example we just run it directly with Node. Everything is set up already so we run:
@@ -1156,39 +1190,6 @@ The Windows application can be opened with
 ## Deploy
 
 Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use [Firebase](https://www.firebase.com/), a service that provides static file hosting and [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) (CDN) support, to automatically deploy and serve our application's static assets from a CDN and [Heroku](https://heroku.com) to provide server-side rendering.
-
-### Bundling assets
-
-Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at `node_modules/place-my-order-assets/images`.
-
-StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.
-
-To use this capability add an option to your build script to enable it. Change:
-
-```js
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm"
-}, {
-  bundleAssets: true
-});
-```
-
-to:
-
-```js
-var buildPromise = stealTools.build({
-  config: __dirname + "/package.json!npm"
-}, {
-  bundleAssets: {
-    infer: false,
-    glob: "node_modules/place-my-order-assets/images/**/*"
-  }
-});
-```
-
-@highlight 4-7
-
-StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [bundlesPath](http://stealjs.com/docs/System.bundlesPath.html) to `dist/bundles`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
 
 ### Static hosting on Firebase
 
