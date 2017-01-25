@@ -346,11 +346,6 @@ When prompted, enter the name of the application created when you set up the Fir
 node_modules/.bin/firebase login
 ```
 
-Update your index.stache to change the production steal path:
-
-@sourceref guides/guide/steps/16-cdn/index.stache
-@highlight 36
-
 Then we can deploy the application by running:
 
 ```

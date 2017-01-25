@@ -12,10 +12,7 @@
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script
-          src="{{joinBase 'node_modules/steal/steal.production.js'}}"
-          main="place-my-order/index.stache!done-autorender">
-        </script>
+        <script src="{{joinBase 'steal.production.js'}}"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
