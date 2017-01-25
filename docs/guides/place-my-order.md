@@ -1080,7 +1080,7 @@ let Order = Map.extend({
   }
 });
 
-export const connection = superMap({
+export const orderConnection = superMap({
   url: baseUrl + '/api/orders',
   idProp: '_id',
   Map: Order,
@@ -1090,12 +1090,11 @@ export const connection = superMap({
 
 const socket = io(baseUrl);
 
-socket.on('orders created', order => connection.createInstance(order));
-socket.on('orders updated', order => connection.updateInstance(order));
-socket.on('orders removed', order => connection.destroyInstance(order));
+socket.on('orders created', order => orderConnection.createInstance(order));
+socket.on('orders updated', order => orderConnection.updateInstance(order));
+socket.on('orders removed', order => orderConnection.destroyInstance(order));
 
-tag('order-model', connection);
-window.orderConnection = connection;
+tag('order-model', orderConnection);
 export default Order;
 ```
 
