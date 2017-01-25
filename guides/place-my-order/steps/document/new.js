@@ -17,6 +17,13 @@ export const ViewModel = DefineMap.extend({
    */
   slug: 'string',
   /**
+    * @property {Promise} saveStatus
+    *
+    * a Promise that contains the status of the order when
+    * it is being saved.
+    */
+  saveStatus: '*',
+  /**
    * @property {place-my-order/models/order} order
    *
    * the order that is being processed. will
@@ -26,48 +33,53 @@ export const ViewModel = DefineMap.extend({
     Value: Order
   },
   /**
-    * @property {Promise} saveStatus
+    * @property {Promise} restaurantPromise
     *
-    * a Promise that contains the status of the order when
-    * it is being saved.
+    * a Promise that contains the restaurant that is being
+    * ordered from.
     */
-  saveStatus: '*',
+  get restaurantPromise() {
+    return Restaurant.get({ _id: this.slug });
+  },
+  /**
+   * @property {place-my-order/models/restaurant} restaurant
+   *
+   * the restaurant that is being ordered from.
+   */
+  restaurant: {
+    get(lastSetVal, resolve) {
+      this.restaurantPromise.then(resolve);
+    }
+  },
   /**
     * @property {Boolean} canPlaceOrder
     *
     * boolean indicating whether the order
     * can be placed.
     */
-  canPlaceOrder: {
-    get() {
-      let items = this.order.items;
-      return items.length;
-    }
+  get canPlaceOrder() {
+    let items = this.order.items;
+    return items.length;
   },
   /**
    * @function placeOrder
    *
    * save the current order and update the status deferred.
-   *
-   * @return {boolean} false to prevent the form submission
    */
-  placeOrder() {
+  placeOrder(ev) {
+    ev.preventDefault();
     let order = this.order;
     order.restaurant = this.restaurant._id;
     this.saveStatus = order.save();
-    return false;
   },
   /**
    * @function startNewOrder
    *
    * resets the order form, so a new order can be placed.
-   *
-   * @return {boolean} false to prevent the form submission
    */
   startNewOrder() {
     this.order = new Order();
     this.saveStatus = null;
-    return false;
   }
 });
 

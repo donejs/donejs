@@ -70,9 +70,9 @@ export const orderConnection = superMap({
 
 const socket = io();
 
-socket.on('orders created', order => connection.createInstance(order));
-socket.on('orders updated', order => connection.updateInstance(order));
-socket.on('orders removed', order => connection.destroyInstance(order));
+socket.on('orders created', order => orderConnection.createInstance(order));
+socket.on('orders updated', order => orderConnection.updateInstance(order));
+socket.on('orders removed', order => orderConnection.destroyInstance(order));
 
 tag('order-model', orderConnection);
 

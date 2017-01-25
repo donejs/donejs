@@ -799,7 +799,7 @@ Here we define an `ItemsList` which allows us to toggle menu items and check if 
 Now we can update the view model in `src/order/new/new.js`:
 
 @sourceref guides/place-my-order/steps/create-data/new.js
-@highlight 5-6,9-33
+@highlight 5-6,9-31
 
 Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a promise once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
@@ -891,7 +891,7 @@ This produces documentation at [http://localhost:8080/docs/](http://localhost:80
 Let's add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
 
 @sourceref guides/place-my-order/steps/document/new.js
-@highlight 8-10,12-17,19-24,28-33,35-40,47-53,60-66
+@highlight 8-10,12-17,19-24,26-31,35-40,44-48,54-59,64-68,75-79
 
 If we now run `donejs document` again, we will see the module show up in the menu bar and will be able to navigate through the different properties.
 

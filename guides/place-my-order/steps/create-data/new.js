@@ -24,12 +24,10 @@ export const ViewModel = DefineMap.extend({
     let order = this.order;
     order.restaurant = this.restaurant._id;
     this.saveStatus = order.save();
-    return false;
   },
   startNewOrder() {
     this.order = new Order();
     this.saveStatus = null;
-    return false;
   }
 });
 
