@@ -248,15 +248,15 @@ guide.step("Create dependent models", function(){
 guide.closeBrowser();
 
 guide.step("Create a test", function(){
-	return guide.replaceFile(join("src", "models", "fixtures", "state.js"),
-													 join(__dirname, "steps", "create-test", "state.js"))
+	return guide.replaceFile(join("src", "models", "fixtures", "states.js"),
+													 join(__dirname, "steps", "create-test", "states.js"))
 		.then(function(){
-			return guide.replaceFile(join("src", "models", "fixtures", "city.js"),
-													 join(__dirname, "steps", "create-test", "city.js"));
+			return guide.replaceFile(join("src", "models", "fixtures", "cities.js"),
+													 join(__dirname, "steps", "create-test", "cities.js"));
 		})
 		.then(function(){
-			return guide.replaceFile(join("src", "models", "fixtures", "restaurant.js"),
-													 join(__dirname, "steps", "create-test", "restaurant.js"));
+			return guide.replaceFile(join("src", "models", "fixtures", "restaurants.js"),
+													 join(__dirname, "steps", "create-test", "restaurants.js"));
 		})
 		.then(function(){
 			return guide.replaceFile(join("src", "restaurant", "list", "list_test.js"),
@@ -343,7 +343,7 @@ guide.step("Create additional components", function(){
 });
 
 guide.step("Importing other projects", function(){
-	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@alpha", "--save"])
 		.then(wait)
 		.then(wait)
 		.then(function(){
