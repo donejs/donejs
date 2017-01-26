@@ -19,6 +19,9 @@ export const ViewModel = DefineMap.extend({
       this.restaurantPromise.then(resolve);
     }
   },
+  get canPlaceOrder() {
+    return this.order.items.length;
+  },
   placeOrder(ev) {
     ev.preventDefault();
     let order = this.order;

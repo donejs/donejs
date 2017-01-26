@@ -387,7 +387,7 @@ We have now created a model and fixtures (for testing without an API) with a fol
 To test the connection you can run the following in the console:
 
 ```js
-System.import("place-my-order/models/restaurant")
+steal.import("place-my-order/models/restaurant")
   .then(function(module) {
     var Restaurant = module["default"];
     return Restaurant.getList({});
@@ -802,7 +802,7 @@ Here we define an `ItemsList` which allows us to toggle menu items and check if 
 Now we can update the view model in `src/order/new/new.js`:
 
 @sourceref guides/place-my-order/steps/create-data/new.js
-@highlight 5-6,9-31
+@highlight 5-6,9-34
 
 Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a promise once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
