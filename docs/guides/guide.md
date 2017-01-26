@@ -150,7 +150,7 @@ Next, add a link to go back to the homepage from the chat page by updating `src/
 Then, add a routing rule for the `page` property in `src/app.js`:
 
 @sourceref guides/guide/steps/7-navigate/app.js
-@highlight 7,14
+@highlight 6,13
 
 ### Switch between pages
 
