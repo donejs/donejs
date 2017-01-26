@@ -58,8 +58,7 @@ export const ViewModel = DefineMap.extend({
     * can be placed.
     */
   get canPlaceOrder() {
-    let items = this.order.items;
-    return items.length;
+    return this.order.items.length;
   },
   /**
    * @function placeOrder
