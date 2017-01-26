@@ -223,7 +223,7 @@ When asked for the URL endpoint, set it to our remote RESTful API at `http://cha
 Update `src/models/message.js` to:
 
 @sourceref guides/guide/steps/10-message-model/message.js
-@highlight 6-12
+@highlight 10-11
 
 ### Use the connection
 
@@ -232,7 +232,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 Update `src/messages/messages.stache` to:
 
 @sourceref guides/guide/steps/10-use-connection/messages.stache
-@highlight 1-2,5-16
+@highlight 2,5-16
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
