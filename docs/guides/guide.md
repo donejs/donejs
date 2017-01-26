@@ -192,7 +192,7 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
 Update `src/home.component` to:
 
 @sourceref guides/guide/steps/8-bit-tabs/home.component
-@highlight 5-7,10-11,18-25
+@highlight 5-7,11,18-25
 
 You'll notice tabs appear in the browser:
 
