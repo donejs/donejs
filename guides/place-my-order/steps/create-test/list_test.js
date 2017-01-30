@@ -1,7 +1,7 @@
 import QUnit from 'steal-qunit';
-import cityStore from 'place-my-order/models/fixtures/city';
-import stateStore from 'place-my-order/models/fixtures/state';
-import restaurantStore from 'place-my-order/models/fixtures/restaurant';
+import cityStore from 'place-my-order/models/fixtures/cities';
+import stateStore from 'place-my-order/models/fixtures/states';
+import restaurantStore from 'place-my-order/models/fixtures/restaurants';
 import { ViewModel } from './list';
 
 QUnit.module('place-my-order/restaurant/list', {
@@ -15,7 +15,7 @@ QUnit.asyncTest('loads all states', function() {
   var expectedStates = stateStore.getListData({});
 
   vm.states.then(states => {
-    QUnit.deepEqual(states.toObject(), expectedStates.data, 'Got all states');
+    QUnit.deepEqual(states.serialize(), expectedStates.data, 'Got all states');
     QUnit.start();
   });
 });
@@ -27,7 +27,7 @@ QUnit.asyncTest('setting a state loads its cities', function() {
   QUnit.equal(vm.cities, null, '');
   vm.state = 'CA';
   vm.cities.then(cities => {
-    QUnit.deepEqual(cities.toObject(), expectedCities, 'Got all cities');
+    QUnit.deepEqual(cities.serialize(), expectedCities, 'Got all cities');
     QUnit.start();
   });
 });
@@ -39,7 +39,7 @@ QUnit.asyncTest('changing a state resets city', function() {
   QUnit.equal(vm.cities, null, '');
   vm.state = 'CA';
   vm.cities.then(cities => {
-    QUnit.deepEqual(cities.toObject(), expectedCities);
+    QUnit.deepEqual(cities.serialize(), expectedCities);
     vm.state = 'NT';
     QUnit.equal(vm.city, null);
     QUnit.start();
@@ -56,7 +56,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
   vm.city = 'Alberny';
 
   vm.restaurants.then(restaurants => {
-    QUnit.deepEqual(restaurants.toObject(), expectedRestaurants);
+    QUnit.deepEqual(restaurants.serialize(), expectedRestaurants);
     QUnit.start();
   });
 });

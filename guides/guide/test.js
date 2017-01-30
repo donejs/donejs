@@ -287,23 +287,7 @@ guide.step("Stop production mode", function(){
 guide.stepIf("Deploy to CDN", function() {
 	return !!guide.options.app;
 }, function(){
-	var appName = guide.options.app;
-
-	var setConfig = function(pkg){
-		pkg.donejs.deploy.services.production.config.firebase = appName;
-		if(!pkg.system.envs) {
-			pkg.system.envs = {};
-		}
-
-		if(!pkg.system.envs["server-production"]) {
-			pkg.system.envs["server-production"] = {};
-		}
-		pkg.system.envs["server-production"].baseURL = "https://" +
-			appName + ".firebaseapp.com/";
-		return pkg;
-	};
-	return guide.replaceJson("package.json",
-							 join(__dirname, "steps", "16-cdn", "deploy.json"), setConfig)
+  return guide.executeCommand("donejs", ["add", "firebase"])
 		.then(function(){
 			return guide.executeCommand("donejs", ["build"]);
 		})
