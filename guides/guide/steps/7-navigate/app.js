@@ -3,8 +3,7 @@ import route from 'can-route';
 import 'can-route-pushstate';
 
 const AppViewModel = DefineMap.extend({
-  route: "string",
-  page: "string",
+  page: 'string',
   title: {
     value: 'donejs-chat',
     serialize: false

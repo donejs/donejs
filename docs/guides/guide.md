@@ -150,7 +150,7 @@ Next, add a link to go back to the homepage from the chat page by updating `src/
 Then, add a routing rule for the `page` property in `src/app.js`:
 
 @sourceref guides/guide/steps/7-navigate/app.js
-@highlight 7,14
+@highlight 6,13
 
 ### Switch between pages
 
@@ -192,7 +192,7 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
 Update `src/home.component` to:
 
 @sourceref guides/guide/steps/8-bit-tabs/home.component
-@highlight 5-7,10-11,18-25
+@highlight 5-7,11,18-25
 
 You'll notice tabs appear in the browser:
 
@@ -223,7 +223,7 @@ When asked for the URL endpoint, set it to our remote RESTful API at `http://cha
 Update `src/models/message.js` to:
 
 @sourceref guides/guide/steps/10-message-model/message.js
-@highlight 6-12
+@highlight 10-11
 
 ### Use the connection
 
@@ -232,7 +232,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 Update `src/messages/messages.stache` to:
 
 @sourceref guides/guide/steps/10-use-connection/messages.stache
-@highlight 1-2,5-16
+@highlight 2,5-16
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
@@ -345,11 +345,6 @@ When prompted, enter the name of the application created when you set up the Fir
 ```
 node_modules/.bin/firebase login
 ```
-
-Update your index.stache to change the production steal path:
-
-@sourceref guides/guide/steps/16-cdn/index.stache
-@highlight 36
 
 Then we can deploy the application by running:
 
