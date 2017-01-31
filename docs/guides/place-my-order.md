@@ -873,7 +873,7 @@ And in the order history template by updating `src/order/history.component` to:
 
 @sourceref guides/place-my-order/steps/real-time/history.component
 
-First we import the order model and then just call `<order-model getList="{status='<status>'}">` for each order status. That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
+First we import the order model and then just call `<order-model get-list="{status='<status>'}">` for each order status. That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
 ## Create documentation
 
