@@ -49,7 +49,6 @@ This will install all of DoneJS's dependencies, including the following:
 - [QUnit](https://qunitjs.com/) - Assertion library (optionally: [Mocha] or [Jasmine])
 - [FuncUnit](http://funcunit.com) - Functional tests
 - [Testee](https://github.com/bitovi/testee) - JavaScript Test runner
-- [DocumentJS](http://documentjs.com) - Documentation
 
 ### Turn on development mode
 
