@@ -434,6 +434,9 @@ guide.step("Create documentation", function(){
 	return guide.replaceFile(join("src", "order", "new", "new.js"),
 													 join(__dirname, "steps", "document", "new.js"))
 		.then(function(){
+			return guide.executeCommand("donejs", ["add", "documentjs"]);
+		})
+		.then(function(){
 			return guide.executeCommand("donejs", ["document"]);
 		})
 		.then(wait)

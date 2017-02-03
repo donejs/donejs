@@ -45,7 +45,6 @@ The initialization process will ask you questions like the name of your applicat
 - [QUnit](https://qunitjs.com/) or Mocha - Assertion library
 - [FuncUnit](http://funcunit.com) - Functional tests
 - [Testee](https://github.com/bitovi/testee) - Test runner
-- [DocumentJS](http://documentjs.com) - Documentation
 
 If we now go into the `place-my-order` folder with
 
@@ -58,7 +57,6 @@ We can see the following files:
 ```
 ├── build.js
 ├── development.html
-├── documentjs.json
 ├── package.json
 ├── production.html
 ├── readme.md
@@ -82,7 +80,6 @@ Let's have a quick look at the purpose of each:
 - `development.html`, `production.html` those pages can run the DoneJS application in development or production mode without a server
 - `package.json` is the main configuration file that defines all our application dependencies and other settings.
 - `test.html` is used to run all our tests.
-- `documentjs.json` is the configuration file for generating documentation.
 - `readme.md` is the readme file for your repository.
 - `src` is the folder where all our development assets live in their own modlets (more about that later).
 - `src/app.js` is the main application file, which exports the main application state.
@@ -120,7 +117,6 @@ Now we can add an API server start script into the `scripts` section of our `pac
     "test": "testee src/test.html --browsers firefox --reporter Spec",
     "start": "done-serve --port 8080",
     "develop": "done-serve --develop --port 8080",
-    "document": "documentjs",
     "build": "node build"
   },
 ```
@@ -145,7 +141,6 @@ Now our application is good to go and we can start the server. We need to proxy 
   "test": "testee src/test.html --browsers firefox --reporter Spec",
   "start": "done-serve --proxy http://localhost:7070 --port 8080",
   "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
-  "document": "documentjs",
   "build": "node build"
 },
 ```
@@ -879,9 +874,15 @@ First we import the order model and then just call `<order-model get-list="{stat
 
 Documenting our code is very important to quickly get other developers up to speed. [DocumentJS](http://documentjs.com/) makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.
 
-### Configuring DocumentJS
+### Installing and Configuring DocumentJS
 
-When we initialized the application all the infrastructure necessary to generate the documentation has already been set up. New modlet components will be added automatically. We can generate the documentation with:
+Let's add DocumentJS to our application:
+
+```
+donejs add documentjs
+```
+
+This will install DocumentJS and also create a `documentjs.json` configuration file. Now we can generate the documentation with:
 
 ```
 donejs document
