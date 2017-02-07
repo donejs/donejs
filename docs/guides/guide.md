@@ -132,14 +132,14 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/guides/AppStateAndRouting.html).
+> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](http://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/guides/AppStateAndRouting.html).
 
 First, let's update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
 @sourceref guides/guide/steps/7-navigate/home.component
 @highlight 4,7-17
 
-> [`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
+> [`routeUrl`](http://canjs.com/doc/can-stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
 
 Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
 
@@ -222,7 +222,7 @@ When asked for the URL endpoint, set it to our remote RESTful API at `http://cha
 Update `src/models/message.js` to:
 
 @sourceref guides/guide/steps/10-message-model/message.js
-@highlight 10-11
+@highlight 11-12
 
 ### Use the connection
 
@@ -270,13 +270,13 @@ Right now our chat's messages update automatically with our own messages, but no
 To connect to it, first we'll install a socket.io connector, by running:
 
 ```
-npm install steal-socket.io@2 --save
+npm install steal-socket.io --save
 ```
 
 Update `src/models/message.js` to:
 
 @sourceref guides/guide/steps/12-real-time/message.js
-@highlight 5,29-36
+@highlight 6,30-37
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 

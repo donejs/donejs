@@ -174,7 +174,7 @@ load the static assets and set a `<meta>` tag to support a responsive design:
 @sourceref guides/place-my-order/steps/loading-assets/index.stache
 @highlight 4,7
 
-This is an HTML5 template that uses [can.stache](http://canjs.com/docs/can.stache.html) - a [Handlebars syntax](http://handlebarsjs.com/)-compatible view engine. It renders a `message` property from the application state.
+This is an HTML5 template that uses [can-stache](http://canjs.com/doc/can-stache.html) - a [Handlebars syntax](http://handlebarsjs.com/)-compatible view engine. It renders a `message` property from the application state.
 
 `can-import` loads the template's dependencies:
  1. The `place-my-order-assets` package, which loads the LESS styles for the application
@@ -202,7 +202,7 @@ const AppViewModel = DefineMap.extend({
 export default AppViewModel;
 ```
 
-This initializes a [can.DefineMap](http://canjs.com/doc/can-define/map/map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
+This initializes a [DefineMap](http://canjs.com/doc/can-define/map/map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
 
 ## Creating custom elements
 
@@ -223,7 +223,7 @@ This will create a file at `src/home.component` containing the basic ingredients
 @sourceref guides/place-my-order/steps/creating-homepage/home.component
 @highlight 8-17
 
-Here we created a [can.Component](http://canjs.com/docs/can.Component.html) named `pmo-home` using a [web-component](http://webcomponents.org/) style declaration. This particular component is just a basic template, it does not have much in the way of styles or functionality.
+Here we created a [can-component](http://canjs.com/doc/can-component.html) named `pmo-home`. This particular component is just a basic template, it does not have much in the way of styles or functionality.
 
 ### Create the order history element
 
@@ -280,7 +280,7 @@ In this part, we will create routes - URL patterns that load specific parts of o
 
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](http://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
 To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/guides/AppStateAndRouting.html).
 
@@ -311,7 +311,7 @@ and update `src/header.component` to:
 @sourceref guides/place-my-order/steps/add-header/header.component
 @highlight 8-24
 
-Here we use [routeUrl](http://canjs.com/docs/can.stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
+Here we use [routeUrl](http://canjs.com/doc/can-stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
 We also use the Stache `eq` helper to make the appropriate link active.
 
@@ -476,7 +476,7 @@ View models that are decoupled from the presentation layer are easy to test. We 
 
 #### Fixtures: Create fake data
 
-Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/docs/can.fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use for tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/states.js` to:
+Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/doc/can-fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use for tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/states.js` to:
 
 @sourceref guides/place-my-order/steps/create-test/states.js
 @highlight 3-6
@@ -788,7 +788,7 @@ donejs add supermodel order
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
 @sourceref guides/place-my-order/steps/create-data/order.js
-@highlight 6-26,32-52
+@highlight 7-27,33-53
 
 Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
@@ -850,7 +850,7 @@ npm install steal-socket.io --save
 Update `src/models/order.js` to:
 
 @sourceref guides/place-my-order/steps/real-time/order.js
-@highlight 5,71-75
+@highlight 6,72-76
 
 ### Update the template
 
@@ -984,7 +984,9 @@ Now we can install the DoneJS Cordova tools with:
 donejs add cordova
 ```
 
-Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
+Answer the question about the URL of the service layer with `http://www.place-my-order.com`.
+
+Depending on your operating system you can accept most of the rest of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
 
 This will change your `build.js` script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the **glob** property:
 
@@ -997,143 +999,12 @@ var cordovaOptions = {
   plugins: ["cordova-plugin-transport-security"],
   index: __dirname + "/production.html",
   glob: [
-    "node_modules/steal/steal.production.js",
     "node_modules/place-my-order-assets/images/**/*"
   ]
 };
 ```
 
-@highlight 10
-
-#### AJAX
-
-When not running in a traditional browser environment, AJAX requests need to be made
-to an external URL. The module `steal-platform` aids in detecting environments like Cordova
-so special behavior can be added.  Install the module:
-
-```
-npm install steal-platform --save
-```
-
-Create a file: `src/service-base-url.js` and place this code:
-
-```js
-import platform from "steal-platform";
-
-let baseUrl = '';
-
-if(platform.isCordova || platform.isNW) {
-  baseUrl = 'http://www.place-my-order.com';
-}
-
-export default baseUrl;
-```
-
-This detects if the environment running your app is either Cordova or NW.js and if so sets the baseUrl to place-my-order.com so that all AJAX requests will be made there.
-
-Our models will also need to be updated to use the baseUrl. For example in `src/models/state` do:
-
-```js
-import can from 'can';
-import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
-import baseUrl from '../service-base-url';
-
-export const State = can.Map.extend({
-  define: {}
-});
-
-State.List = can.List.extend({
-  Map: State
-}, {});
-
-export const stateConnection = superMap({
-  url: baseUrl + '/api/states',
-  idProp: 'short',
-  Map: State,
-  List: State.List,
-  name: 'state'
-});
-
-tag('state-model', stateConnection);
-
-export default State;
-```
-@highlight 5,16
-
-Make this same change in `src/models/city.js` and `src/models/restaurant.js`.
-
-For `src/models/order`, you must also update the socket connection:
-
-```js
-import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
-import List from 'can/list/';
-import Map from 'can/map/';
-import 'can/map/define/';
-import io from 'steal-socket.io';
-import baseUrl from '../service-base-url';
-
-const ItemsList = List.extend({}, {
-  has: function(item) {
-    return this.indexOf(item) !== -1;
-  },
-
-  toggle: function(item) {
-    var index = this.indexOf(item);
-
-    if (index !== -1) {
-      this.splice(index, 1);
-    } else {
-      this.push(item);
-    }
-  }
-});
-
-let Order = Map.extend({
-  define: {
-    status: {
-      value: 'new'
-    },
-    items: {
-      Value: ItemsList
-    },
-    total: {
-      get() {
-        let total = 0.0;
-        this.attr('items').forEach(item =>
-            total += parseFloat(item.attr('price')));
-        return total.toFixed(2);
-      }
-    }
-  },
-
-  markAs(status) {
-    this.attr('status', status);
-    this.save();
-  }
-});
-
-export const orderConnection = superMap({
-  url: baseUrl + '/api/orders',
-  idProp: '_id',
-  Map: Order,
-  List: Order.List,
-  name: 'orders'
-});
-
-const socket = io(baseUrl);
-
-socket.on('orders created', order => orderConnection.createInstance(order));
-socket.on('orders updated', order => orderConnection.updateInstance(order));
-socket.on('orders removed', order => orderConnection.destroyInstance(order));
-
-tag('order-model', orderConnection);
-export default Order;
-```
-
-@highlight 7,50,57
+@highlight 9
 
 To run the Cordova build and launch the simulator we can now run:
 
@@ -1151,24 +1022,23 @@ To set up the desktop build, we have to add it to our application like this:
 donejs add nw
 ```
 
-We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
+Answer the question about the URL of the service layer with `http://www.place-my-order.com`. We can answer the rest of the prompts with the default.
 
 Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **glob** property to reflect:
 
 ```js
 var nwOptions = {
   buildDir: "./build",
-  version: "0.12.3",
-  platforms: ["osx32","osx64"],
+  version: "latest",
+  platforms: ["osx64"],
   glob: [
     "package.json",
     "production.html",
-    "node_modules/steal/steal.production.js",
     "node_modules/place-my-order-assets/images/**/*"
   ]
 };
 ```
-@highlight 9
+@highlight 8
 
 Then we can run the build like this:
 
