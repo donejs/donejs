@@ -101,7 +101,7 @@ __Testing__
 - Ajax Fixtures: [can-fixture](https://www.npmjs.com/package/can-fixture)
 - Functional Testing: [FuncUnit](https://www.npmjs.com/package/funcunit)
 - Test Runner: [Testee](https://www.npmjs.com/package/testee)
-- Continuous Integation and Deployment: [Travis CI](https://travis-ci.org/)
+- Continuous Integration and Deployment: [Travis CI](https://travis-ci.org/)
 
 
 __Hosting__
