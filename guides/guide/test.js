@@ -185,6 +185,7 @@ guide.step("Generate the Message model", function(){
 
 	answer(/URL endpoint/, "http://chat.donejs.com/api/messages\n");
 	answer(/property name/, "\n");
+  answer(/service URL/, "Yes\n");
 
 	return supermodel.promise;
 });
@@ -309,6 +310,7 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 
 			answer(/Name of project/, "donejs chat\n");
 			answer(/ID of project/, "com.donejs.donejschat\n");
+      answer(/service layer/, "\n");
 			answer(/What platforms/, "\n");
 
 			return proc.promise;
@@ -329,6 +331,7 @@ guide.stepIf("Desktop and mobile apps: NW.js", function() {
 
 	answer(/Main HTML file/, "\n");
 	answer(/The nw.js version/, "0.12.3\n");
+  answer(/service layer/, "\n");
 	answer(/Width of/, "\n");
 	answer(/Height of/, "\n");
 	answer(/What platforms/, "\n");
