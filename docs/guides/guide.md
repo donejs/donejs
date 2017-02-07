@@ -4,7 +4,7 @@
 @outline 2 ol
 @description In this guide, we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 
-<img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 In the first part of this guide we will install DoneJS, [generate a new application](Features.html#section=section_Generators) and start a server that provides [hot module swapping](Features.html#section=section_HotModuleSwapping) and [server-side rendering](Features.html#section=section_ServerSideRendered). We will then [import Bootstrap from NPM](Features.html#section=section_NPMPackages), create our [own custom HTML elements](Features.html#section=section_CustomHTMLElements) and [set up routing](Features.html#section=section_PrettyURL_swithPushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](Features.html#section=section_RealTimeConnected).
 
@@ -38,7 +38,7 @@ This will create a new folder called `donejs-chat` and in it generate our applic
 
 The initialization process will ask questions like the name of your application, the source folder, etc. We'll answer these with the default settings by hitting enter.
 
-<img src="static/img/donejs-init.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-init.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 This will install all of DoneJS's dependencies, including the following:
 
@@ -70,7 +70,7 @@ The default port is `8080`.
 
 Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage.
 
-<img src="static/img/donejs-helloworld.png" alt="hello world" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-helloworld.png" alt="hello world" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## Adding Bootstrap
 
@@ -92,12 +92,12 @@ Update `src/index.stache` to look like this:
 
 > The highlighted lines have been added or changed.
 
-@sourceref guides/guide/steps/4-bootstrap/index.stache
+@sourceref ../../guides/guide/steps/4-bootstrap/index.stache
 @highlight 6,10-20
 
 If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file.
 
-<img src="static/img/donejs-bootstrap.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-bootstrap.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Feel free to edit the HTML or `src/styles.less` to see how hot module swapping updates the page automatically.
 
@@ -126,7 +126,7 @@ Now run:
 donejs add component messages chat-messages
 ```
 
-<img src="static/img/donejs-generator.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-generator.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Later we will update the generated files with the chat messages functionality.
 
@@ -136,19 +136,19 @@ Later we will update the generated files with the chat messages functionality.
 
 First, let's update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
-@sourceref guides/guide/steps/7-navigate/home.component
+@sourceref ../../guides/guide/steps/7-navigate/home.component
 @highlight 4,7-17
 
 > [`routeUrl`](http://canjs.com/docs/can.stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
 
 Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
 
-@sourceref guides/guide/steps/7-navigate/messages.stache
+@sourceref ../../guides/guide/steps/7-navigate/messages.stache
 @highlight 1-2
 
 Then, add a routing rule for the `page` property in `src/app.js`:
 
-@sourceref guides/guide/steps/7-navigate/app.js
+@sourceref ../../guides/guide/steps/7-navigate/app.js
 @highlight 6,13
 
 ### Switch between pages
@@ -157,16 +157,16 @@ Finally, we'll glue both components together as separate pages in `src/index.sta
 
 Update `src/index.stache` to:
 
-@sourceref guides/guide/steps/7-navigate/index.stache
+@sourceref ../../guides/guide/steps/7-navigate/index.stache
 @highlight 13-29
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
-<img src="static/img/donejs-chat1.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-chat1.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the page's content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
 
-<img src="static/img/donejs-viewsource.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-viewsource.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 
 ## Homepage
@@ -190,12 +190,12 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
 
 Update `src/home.component` to:
 
-@sourceref guides/guide/steps/8-bit-tabs/home.component
+@sourceref ../../guides/guide/steps/8-bit-tabs/home.component
 @highlight 5-7,11,18-25
 
 You'll notice tabs appear in the browser:
 
-<img src="static/img/donejs-tabs.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-tabs.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## Messages page
 
@@ -217,11 +217,11 @@ donejs add supermodel message
 
 When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
 
-<img src="static/img/donejs-model-generator.png" alt="model generator" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-model-generator.png" alt="model generator" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Update `src/models/message.js` to:
 
-@sourceref guides/guide/steps/10-message-model/message.js
+@sourceref ../../guides/guide/steps/10-message-model/message.js
 @highlight 10-11
 
 ### Use the connection
@@ -230,12 +230,12 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 
 Update `src/messages/messages.stache` to:
 
-@sourceref guides/guide/steps/10-use-connection/messages.stache
+@sourceref ../../guides/guide/steps/10-use-connection/messages.stache
 @highlight 2,5-16
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
-<img src="static/img/donejs-chat2.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-chat2.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ### Create messages
 
@@ -243,25 +243,25 @@ Now let's add the form to create new messages. The form two-way binds the `name`
 
 Update `src/messages/messages.stache` to look like this:
 
-@sourceref guides/guide/steps/11-create-messages/messages.stache
+@sourceref ../../guides/guide/steps/11-create-messages/messages.stache
 @highlight 18-30
 
 Next we have to implement the `send()` method. Update `src/messages/messages.js` to this:
 
-@sourceref guides/guide/steps/11-create-messages/messages.js
+@sourceref ../../guides/guide/steps/11-create-messages/messages.js
 @highlight 5,8-18
 
 The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
 
 You can now enter your name and a message! It will automatically appear in our messages list.
 
-<img src="static/img/donejs-chat3.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-chat3.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. [can-connect](http://connect.canjs.com/) automatically manages the lists, while also providing [caching and minimized data requests](Features.html#section=section_Cachingandminimaldatarequests).
 
 You can see from your console that the localStorage cache is already populated with data:
 
-<img src="static/img/donejs-localstorage.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-localstorage.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ### Enable a real-time connection
 
@@ -275,12 +275,12 @@ npm install steal-socket.io@2 --save
 
 Update `src/models/message.js` to:
 
-@sourceref guides/guide/steps/12-real-time/message.js
+@sourceref ../../guides/guide/steps/12-real-time/message.js
 @highlight 5,29-36
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
-<img src="static/img/donejs-twobrowsers.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-twobrowsers.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## Production build
 
@@ -315,7 +315,7 @@ Then run your application with `donejs start`.
 
 If we now open [localhost:8080](http://localhost:8080/) again we can see the production bundles being loaded in the network tab of the developer tools.
 
-<img src="static/img/donejs-prodmode.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-prodmode.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 All DoneJS projects are extremely modular, which is why in development mode, you see 200 or more requests when loading the page (thanks to hot module swapping we only have to make those requests once). In production mode, we can only see about 10 requests and a significantly reduced file-size.
 
@@ -354,7 +354,7 @@ donejs deploy
 
 Static files are deployed to Firebase.
 
-<img src="static/img/donejs-firebase.png" alt="two browsers" />
+<img src="/static/img/donejs-firebase.png" alt="two browsers" />
 
 And verify that the application is loading from the CDN by loading it after running:
 
@@ -366,7 +366,7 @@ NODE_ENV=production donejs start
 
 We should now see our assets being loaded from the Firebase CDN.
 
-<img src="static/img/donejs-deploy.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-deploy.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## Desktop and mobile apps
 
@@ -403,7 +403,7 @@ donejs build cordova
 
 If everything went well, we should see the emulator running our application.
 
-<img src="static/img/donejs-ios.png" alt="ios build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-ios.png" alt="ios build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.
 
@@ -417,7 +417,7 @@ donejs add nw
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
 
-<img src="static/img/donejs-nw1.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-nw1.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Then we can run the build like this:
 
@@ -438,7 +438,7 @@ The Windows application can be opened with
 .\build\donejs-chat\win64\donejs-chat.exe
 ```
 
-<img src="static/img/donejs-nw2.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="/static/img/donejs-nw2.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## What's next?
 
