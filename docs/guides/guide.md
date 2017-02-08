@@ -215,7 +215,7 @@ Generate a `message` supermodel like this:
 donejs add supermodel message
 ```
 
-When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. The other questions can be answered with the default by hitting enter.
+When asked for the URL endpoint, set it to our remote RESTful API at `http://chat.donejs.com/api/messages`. When it asks if http://chat.donejs.com is your service URL answer `Yes`. The other questions can be answered with the default by hitting enter.
 
 <img src="static/img/donejs-model-generator.png" alt="model generator" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
