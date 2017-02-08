@@ -2,6 +2,7 @@ import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
+import loader from '@loader';
 
 export const Message = DefineMap.extend({
   seal: false
@@ -16,7 +17,7 @@ Message.List = DefineList.extend({
 });
 
 export const messageConnection = superMap({
-  url: 'http://chat.donejs.com/api/messages',
+  url: loader.serviceBaseURL + '/api/messages',
   idProp: 'id',
   Map: Message,
   List: Message.List,

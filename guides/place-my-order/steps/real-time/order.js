@@ -2,6 +2,7 @@ import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
+import loader from '@loader';
 import io from 'steal-socket.io';
 
 const Item = DefineMap.extend({
@@ -61,14 +62,14 @@ Order.List = DefineList.extend({
 });
 
 export const orderConnection = superMap({
-  url: '/api/orders',
+  url: loader.serviceBaseURL + '/api/orders',
   idProp: '_id',
   Map: Order,
   List: Order.List,
   name: 'order'
 });
 
-const socket = io();
+const socket = io(loader.serviceBaseURL);
 
 socket.on('orders created', order => orderConnection.createInstance(order));
 socket.on('orders updated', order => orderConnection.updateInstance(order));

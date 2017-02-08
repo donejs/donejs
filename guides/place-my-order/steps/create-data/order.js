@@ -2,6 +2,7 @@ import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
+import loader from '@loader';
 
 const Item = DefineMap.extend({
   price: 'number'
@@ -57,7 +58,7 @@ Order.List = DefineList.extend({
 });
 
 export const orderConnection = superMap({
-  url: '/api/orders',
+  url: loader.serviceBaseURL + '/api/orders',
   idProp: '_id',
   Map: Order,
   List: Order.List,
