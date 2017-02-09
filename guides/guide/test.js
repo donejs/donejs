@@ -207,11 +207,11 @@ guide.test(function(){
  * @Step 11
  */
 guide.step("Create messages", function(){
-	return guide.replaceFile(join("src", "messages", "messages.stache"),
-							 join(__dirname, "steps", "11-create-messages", "messages.stache"))
+  return guide.replaceFile(join("src", "messages", "messages.js"),
+               join(__dirname, "steps", "11-create-messages", "messages.js"))
 		.then(function(){
-			return guide.replaceFile(join("src", "messages", "messages.js"),
-									 join(__dirname, "steps", "11-create-messages", "messages.js"));
+      return guide.replaceFile(join("src", "messages", "messages.stache"),
+    							 join(__dirname, "steps", "11-create-messages", "messages.stache"));
 		}).then(wait);
 });
 

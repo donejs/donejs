@@ -241,17 +241,17 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 
 Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input.
 
-Update `src/messages/messages.stache` to look like this:
-
-@sourceref guides/guide/steps/11-create-messages/messages.stache
-@highlight 18-30
-
-Next we have to implement the `send()` method. Update `src/messages/messages.js` to this:
+First we have to implement the `send()` method. Update `src/messages/messages.js` to this:
 
 @sourceref guides/guide/steps/11-create-messages/messages.js
 @highlight 5,8-18
 
 The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
+
+Next update `src/messages/messages.stache` to look like this:
+
+@sourceref guides/guide/steps/11-create-messages/messages.stache
+@highlight 18-30
 
 You can now enter your name and a message! It will automatically appear in our messages list.
 
