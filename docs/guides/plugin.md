@@ -10,7 +10,7 @@ We will create the project on [GitHub](https://github.com), initialize the repos
 
 You can find the code in the [donejs-number-input](https://github.com/donejs/donejs-number-input) repository. The final result looks like this:
 
-<a class="jsbin-embed" href="http://jsbin.com/cihawi/embed?output">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.9"></script>
+<a class="jsbin-embed" href="//jsbin.com/cihawi/embed?output">JS Bin on jsbin.com</a><script src="//static.jsbin.com/js/embed.min.js?3.35.9"></script>
 
 ## Setting up
 
