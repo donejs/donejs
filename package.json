@@ -7,6 +7,7 @@
     "donejs": "./bin/donejs"
   },
   "scripts": {
+    "document": "bit-docs",
     "test": "npm run jshint && npm run mocha && npm run document && npm run test-guides",
     "test-guides": "npm run test-quickstart && npm run test-pmo",
     "test-quickstart": "guide guides/guide/test.js --local",
@@ -14,8 +15,6 @@
     "jshint": "jshint lib/. bin/donejs test/. --config",
     "mocha": "mocha test/test --timeout 120000",
     "verify": "echo \"Script ran\"",
-    "document:watch": "documentjs --watch",
-    "document": "documentjs -f && cp docs/theme/static/favicon.ico site/favicon.ico",
     "publish": "git push origin && git push origin --tags",
     "release:prerelease": "npm version prerelease && npm publish",
     "release:patch": "npm version patch && npm publish",
@@ -40,8 +39,8 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
+    "bit-docs": "0.0.7",
     "coveralls-send": "0.0.2",
-    "documentjs": "^0.4.3",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^3.0.2",
     "guide-automation": "^0.3.4",
@@ -63,5 +62,28 @@
   },
   "directories": {
     "doc": "docs"
+  },
+  "bit-docs": {
+    "dependencies": {
+      "bit-docs-glob-finder": "^0.0.5",
+      "bit-docs-dev": "^0.0.3",
+      "bit-docs-js": "^0.0.6",
+      "bit-docs-tag-sourceref": "^0.0.3",
+      "bit-docs-tag-package": "^0.0.3",
+      "bit-docs-process-mustache": "^0.0.1",
+      "bit-docs-generate-html": "^0.3.6",
+      "bit-docs-prettify": "^0.1.0",
+      "bit-docs-html-highlight-line": "^0.2.2",
+      "bit-docs-tag-demo": "^0.3.0",
+      "bit-docs-html-toc": "^0.6.1",
+      "bit-docs-tag-demo": "^0.3.0",
+      "bit-docs-donejs-theme": "^0.0.8"
+    },
+    "glob": {
+      "pattern": "docs/**/*.{md,mustache}"
+    },
+    "parent": "donejs",
+    "minifyBuild": false,
+    "dest": "./site"
   }
 }
