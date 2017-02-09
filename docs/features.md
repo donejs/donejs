@@ -76,31 +76,25 @@ Solving a story means a packaged solution to a development problem, where severa
     <div class="title">SOLUTION LEGEND</div>
     <ul>
       <li>
-        <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+        <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
         <div>EASY</div>
       </li>
       <li>
-        <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+        <img class="matrix-rating-icon" src="static/img/icon-very-good.svg">
         <div>GOOD</div>
       </li>
       <li>
-        <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+        <img class="matrix-rating-icon" src="static/img/icon-good.svg">
         <div>DIFFICULT</div>
       </li>
       <li>
-        <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+        <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
         <div>THIRD-PARTY</div>
       </li>
       <li>
-        <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+        <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
         <div>NO</div>
       </li>
-      <!-- <li>
-        <div class="asterisk-legend">
-          <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
-        </div>
-        <div>TOOLTIP</div>
-      </li> -->
     </ul>
   </div>
   <div class="table-wrapper">
@@ -109,9 +103,9 @@ Solving a story means a packaged solution to a development problem, where severa
       <thead>
         <tr>
           <th class="features">FEATURES</th>
-          <th><img class="framework-logo" src="/static/img/donejs-logo-matrix.png"></th>
-          <th><img class="framework-logo" src="/static/img/angular-logo.png"></th>
-          <th><img class="framework-logo" src="/static/img/react-logo.png"></th>
+          <th><img class="framework-logo" src="static/img/donejs-logo-matrix.png"></th>
+          <th><img class="framework-logo" src="static/img/angular-logo.png"></th>
+          <th><img class="framework-logo" src="static/img/react-logo.png"></th>
         </tr>
       </thead>
         <tbody>
@@ -120,16 +114,16 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_Server_SideRendered">Server-Side Rendering</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Angular doesn't support a virtual dom. No third-party library support would be equivalent." title="Angular doesn't support a virtual dom. No third-party library support would be equivalent.">
-                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-poor.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-container="matrix-wrapper" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='http://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has." title="Requires some manual setup and lacks most of the features/support DoneJS has.">
-                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -138,13 +132,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_ProgressiveLoading">Progressive Dependency Loading</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -152,13 +146,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_CachingandMinimalDataRequests">Caching & Minimal Data Requests</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -166,15 +160,15 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_MinimalDOMUpdates">Minimal DOM Updates</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-very-good.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Updates DOM quickly, but only after expensive dirty check calculation." title="Updates DOM quickly, but only after expensive dirty check calculation.">
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
           </tr>
           <tr>
@@ -182,14 +176,14 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_WorkerThreadRendering">Worker Thread Rendering</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="There is a virtual dom. So, Its possible, but there is no support out of the box." title="There is a virtual dom. So, Its possible, but there is no support out of the box.">
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -198,13 +192,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_DeploytoaCDN">Deploy to a CDN</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -212,16 +206,16 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_iOS_Android_andDesktopBuilds">iOS, Android, and Desktop Builds</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, there's no infrastructure to make it easy." title="While native app builds are possible, there's no infrastructure to make it easy.">
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, there's no infrastructure to make it easy." title="While native app builds are possible, there's no infrastructure to make it easy.">
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -230,15 +224,15 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_SupportsAllBrowsers_EvenIE8">Browser Support</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>' title="Supports IE9+">
-                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
           </tr>
           <tr>
@@ -246,16 +240,16 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_RealTimeConnected">Real-Time</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While connecting to real time data is possible, there is no built in support to make it easy." title="While connecting to real time data is possible, there is no built in support to make it easy.">
-                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-poor.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While connecting to real time data is possible, there is no built in support to make it easy." title="While connecting to real time data is possible, there is no built in support to make it easy.">
-                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-poor.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -264,16 +258,16 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_PrettyURLswithPushstate">Pretty URLs</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Built-in routing is difficult to configure and maintain." title="Built-in routing is difficult to configure and maintain.">
-                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="React-router supports this, but is not part of the core library." title="React-router supports this, but is not part of the core library.">
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -283,17 +277,17 @@ Solving a story means a packaged solution to a development problem, where severa
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Includes built-in support for every part of the testing lifecycle" title="Includes built-in support for every part of the testing lifecycle">
-                <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-excellent.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supports dependency injection, but offers poor support for end-to-end testing." title="Supports dependency injection, but offers poor support for end-to-end testing.">
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Includes some basic test utilities and mocks, but no support for other parts of the testing lifecycle." title="Includes some basic test utilities and mocks, but no support for other parts of the testing lifecycle.">
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg">
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg">
                 <span class="asterisk"></span>
               </div>
             </td>
@@ -303,13 +297,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_Documentation">Documentation</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -317,13 +311,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_ContinuousIntegration_Deployment">Continuous Integration & Deployment</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -331,13 +325,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_NPMPackages">NPM Packages - Imports & Exports</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
           </tr>
           <tr>
@@ -345,16 +339,16 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_ES6Modules">ES6 modules</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Coming in Angular 2" data-content="Coming in Angular 2">
-                <img class="matrix-rating-icon" src="/static/img/icon-poor.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-poor.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supported through transpiler included with react-tools." title="Supported through transpiler included with react-tools.">
-                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -363,13 +357,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_CustomHTMLElements">Custom HTML Elements</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
           </tr>
           <tr>
@@ -377,16 +371,16 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_MVVMArchitecture">MVVM Architecture</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
             <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Not explicitly MVVM, but could be implemented" title="Not explicitly MVVM, but could be implemented">
-                <img class="matrix-rating-icon" src="/static/img/icon-very-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="React is just the view layer. You'll need to implement your own MVVM architecture." title="React is just the view layer. You'll need to implement your own MVVM architecture.">
-                <img class="matrix-rating-icon" src="/static/img/icon-good.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -395,14 +389,14 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_HotModuleSwapping">Hot Module Swapping</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Third-party libraries available for some support." title="Third-party libraries available for some support.">
-                <img class="matrix-rating-icon" src="/static/img/icon-fair.svg"><span class="asterisk"></span>
+                <img class="matrix-rating-icon" src="static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
           </tr>
@@ -411,13 +405,13 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#section=section_Generators">Generators</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="/static/img/icon-fair.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
             </td>
           </tr>
         </tbody>
@@ -441,7 +435,7 @@ Server-side rendering (SSR) provides two large benefits over traditional single 
 
 SSR apps return fully rendered HTML. Traditional single page apps return a page with a spinner. The benefit to your users is a noticeable difference in perceived page load performance:
 
-<img src="./static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
+<img src="static/img/donejs-server-render-diagram.svg" alt="donejs-server-render-diagram.svg" />
 
 Compared to other server-side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
 
@@ -609,10 +603,10 @@ Here's how the caching logic works:
 1. When that response comes back, if there was a difference between the API response data and the cache hit data, the initial request promise's data is updated with the new data. Template data bindings will cause the UI to update automatically with these changes.
 1. Updated response data is automatically saved in the cache, to be used for future requests - whether that's in the current page session, or when the user comes back in the future.
 
-<video style="width:100%;" controls poster="/static/img/poster-fall-thru-caching.jpg" preload="none">
-    <source src="/static/img/donejs-fallthrough-caching.webm" type="video/webm">
-    <source src="/static/img/donejs-fallthrough-caching.ogg" type="video/ogg">
-    <source src="/static/img/donejs-fallthrough-caching.mp4" type="video/mp4">
+<video style="width:100%;" controls poster="static/img/poster-fall-thru-caching.jpg" preload="none">
+    <source src="static/img/donejs-fallthrough-caching.webm" type="video/webm">
+    <source src="static/img/donejs-fallthrough-caching.ogg" type="video/ogg">
+    <source src="static/img/donejs-fallthrough-caching.mp4" type="video/mp4">
 </video>
 
 ##### Combining requests
@@ -625,10 +619,10 @@ For example, the video below shows an application that shows two filtered lists 
 
 Combining these into a single request reduces the number of requests. This optimization is abstracted away from the application code that made the original request.
 
-<video style="width:100%;" controls poster="/static/img/poster-combine-requests.jpg" preload="none">
-    <source src="/static/img/donejs-combine-requests.webm" type="video/webm">
-    <source src="/static/img/donejs-combine-requests.ogg" type="video/ogg">
-    <source src="/static/img/donejs-combine-requests.mp4" type="video/mp4">
+<video style="width:100%;" controls poster="static/img/poster-combine-requests.jpg" preload="none">
+    <source src="static/img/donejs-combine-requests.webm" type="video/webm">
+    <source src="static/img/donejs-combine-requests.ogg" type="video/ogg">
+    <source src="static/img/donejs-combine-requests.mp4" type="video/mp4">
 </video>
 
 ##### Request caching
@@ -647,10 +641,10 @@ The request logic is more aggressive in its attempts to find subsets of the data
 
 The video below shows two example scenarios. The first shows the cache containing a supserset of the request. The second shows the cache containing a subset of the request.
 
-<video style="width:100%;" controls poster="/static/img/poster-request-caching.jpg" preload="none">
-    <source src="/static/img/donejs-request-caching.webm" type="video/webm">
-    <source src="/static/img/donejs-request-caching.ogg" type="video/ogg">
-    <source src="/static/img/donejs-request-caching.mp4" type="video/mp4">
+<video style="width:100%;" controls poster="static/img/poster-request-caching.jpg" preload="none">
+    <source src="static/img/donejs-request-caching.webm" type="video/webm">
+    <source src="static/img/donejs-request-caching.ogg" type="video/ogg">
+    <source src="static/img/donejs-request-caching.mp4" type="video/mp4">
 </video>
 
 
@@ -691,10 +685,10 @@ While this flow would be possible in other SSR systems, it would require manuall
 
 This video illustrates how it works.
 
-<video style="width:100%;" controls poster="/static/img/poster-inline-cach.jpg" preload="none">
-    <source src="/static/img/donejs-inline-cache.webm" type="video/webm">
-    <source src="/static/img/donejs-inline-cache.ogg" type="video/ogg">
-    <source src="/static/img/donejs-inline-cache.mp4" type="video/mp4">
+<video style="width:100%;" controls poster="static/img/poster-inline-cach.jpg" preload="none">
+    <source src="static/img/donejs-inline-cache.webm" type="video/webm">
+    <source src="static/img/donejs-inline-cache.ogg" type="video/ogg">
+    <source src="static/img/donejs-inline-cache.mp4" type="video/mp4">
 </video>
 
 
@@ -713,7 +707,7 @@ DoneJS' view engine touches the DOM more minimally and specifically than competi
 
 Take the TodoMVC application as an example. If you measure how long it takes DoneJS and React to render the same number of todos you'll see the performance advantage of minimal DOM updates. In fact we did just that and here's the result:
 
-<img class="img-with-caption" src="./static/img/donejs-minimal-dom-updates-todomvc.png" alt="Measuring React and DoneJS using TodoMVC." />
+<img class="img-with-caption" src="static/img/donejs-minimal-dom-updates-todomvc.png" alt="Measuring React and DoneJS using TodoMVC." />
 _For a small set of todos the difference is negligible but as the number increases the gap widens to the point where React is 6 times slower than DoneJS when rendering 1000 todos._
 
 You can run this test for yourself at <a href="http://output.jsbin.com/monoqagofa/1" target="_blank">JS Bin</a>.
@@ -752,7 +746,7 @@ In React, that would result in the virtual DOM being re-rendered. A diff algorit
 Of these four approaches, DoneJS knows about the change the quickest, and updates the DOM the most minimally.
 
 To see this in action run the test embedded below that shows how DoneJS, React and Angular compare when updating the DOM when a single property changes:
-<img src="./static/img/donejs-minimal-dom-updates-circles.png" alt="Measuring DoneJS, React and Angular rendering a simple property change." />
+<img src="static/img/donejs-minimal-dom-updates-circles.png" alt="Measuring DoneJS, React and Angular rendering a simple property change." />
 
 You can run this test yourself at <a href="http://output.jsbin.com/giyobi/1" target="_blank">JS Bin</a>
 
@@ -777,14 +771,14 @@ The most expensive part of a web application - DOM updates - are separated from 
 
 By default, browsers use only a single thread of execution.
 
-<img src="/static/img/donejs-single-thread.gif" srcset="/static/img/donejs-single-thread.gif 1x, /static/img/donejs-single-thread-2x.gif 2x" alt="A traditional single threaded javascript application">
+<img src="static/img/donejs-single-thread.gif" srcset="static/img/donejs-single-thread.gif 1x, static/img/donejs-single-thread-2x.gif 2x" alt="A traditional single threaded javascript application">
 _With a single thread only one operation can occur at a time_
 
 This means that performance problems in any area (expensive computations, DOM rendering, processing a large AJAX response, etc) can block the entire application, leaving the browser feeling "frozen".
 
 With worker thread rendering, DOM updates and application logic are run in parallel threads.
 
-<img src="/static/img/donejs-multi-thread.gif" srcset="/static/img/donejs-multi-thread.gif 1x, /static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
+<img src="static/img/donejs-multi-thread.gif" srcset="static/img/donejs-multi-thread.gif 1x, static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
 _Using a worker thread application logic can still occur while the DOM is rendered. This could nearly double the number of operations per second._
 
 Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads.
@@ -803,7 +797,7 @@ At this time, no other framework besides DoneJS, including Angular or React, sup
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="vrgMUi8-7r4" data-params="start=28"></div></div>'>working on epic pool dunk videos.</a></div>
-    <img class="fun-img" src="/static/img/funny-dunk.png">
+    <img class="fun-img" src="static/img/funny-dunk.png">
 </blockquote>
 
 
@@ -817,12 +811,12 @@ DoneJS makes it simple to deploy your static assets to a CDN (content delivery n
 
 CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne.
 
-<img class="img-with-caption" src="./static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
+<img class="img-with-caption" src="static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
 _Without a CDN, requests will take longer to fulfill if the user is located further away from your servers._
 <hr />
 
 
-<img class="img-with-caption" src="./static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
+<img class="img-with-caption" src="static/img/DoneJS-Animated-With-CDN.gif" alt="User request across the globe with a CDN." />
 _With a CDN, requests can be fulfilled much quicker. Users are served content from the servers located nearest to them._
 
 #### How it works
@@ -887,7 +881,7 @@ DoneJS is used to make beautiful, real-time user interfaces that can be exported
 
 Write your application once, then run it natively on every device and operating system. You can make iOS, Android, and desktop builds of your DoneJS application with no extra effort.
 
-<img src="./static/img/desktop-mobile.gif" />
+<img src="static/img/desktop-mobile.gif" />
 _Our DoneJS Chat App running as a OS X desktop app and inside an iOS emulator._
 
 #### How it works
@@ -1132,7 +1126,7 @@ You just run the generator, load your modules, write your test, and run it - fro
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with test infrastructure,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="s4faD0fox_s" data-params="start=261"></div></div>'>mud ridin'.</a></div>
-    <img class="fun-img" src="/static/img/funny-muddin.png">
+    <img class="fun-img" src="static/img/funny-muddin.png">
 </blockquote>
 
 ##### More information
@@ -1187,7 +1181,7 @@ export default function(){ ... };
 
 Then run `donejs document`. A browsable documentation website will be generated.
 
-<img src="/static/img/docs.png" alt="A documentation website" />
+<img src="static/img/docs.png" alt="A documentation website" />
 
 DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation. It lets you:
 
@@ -1202,7 +1196,7 @@ You can keep it simple like the example above, or you can customize your docs wi
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with Documentation generators,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="7WaLCWaTo8"></div></div>'>perfecting your moonwalk.</a></div>
-    <img class="fun-img" src="/static/img/funny-moonwalk.png">
+    <img class="fun-img" src="static/img/funny-moonwalk.png">
 </blockquote>
 
 <a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
@@ -1216,7 +1210,7 @@ Continuous Integration (CI) and Continuous Deployment (CD) are must have tools f
 
 CI is a practice whereby all active development (i.e. a pull request) is checked against automated tests and builds, allowing problems to be detected early (before merging the code into the release branch).
 
-<img src="/static/img/git-failed.gif" srcset="/static/img/git-failed.gif 1x, /static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
+<img src="static/img/git-failed.gif" srcset="static/img/git-failed.gif 1x, static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
 
 CD means that any release or merges to your release branch will trigger tests, builds and deployment.
@@ -1282,7 +1276,7 @@ DoneJS encourages use of the modlet file organization pattern. Modlets are small
 
 Large apps have a lot of files. There are two ways to organize them: by type or by module.
 
-<img src="/static/img/donejs-modlet-diagram.png" srcset="/static/img/donejs-modlet-diagram.png 1x, /static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" />
+<img src="static/img/donejs-modlet-diagram.png" srcset="static/img/donejs-modlet-diagram.png 1x, static/img/donejs-modlet-diagram-2x.png 2x" alt="DoneJS Modlet Organization Diagram" />
 
 Organization by module - or modlets - make large applications easier to maintain by encouraging good architecture patterns. The benefits include:
 
@@ -1609,7 +1603,7 @@ _Custom HTML elements are a feature of [CanJS](http://canjs.com/)_
 
 DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) architecture pattern, provided by [CanJS](http://canjs.com/).
 
-<img src="/static/img/mvvm.png" srcset="/static/img/mvvm.png 1x, /static/img/mvvm-2x.png 2x" alt="MVVM Architecture Diagram" />
+<img src="static/img/mvvm.png" srcset="static/img/mvvm.png 1x, static/img/mvvm-2x.png 2x" alt="MVVM Architecture Diagram" />
 
 The introduction of a strong ViewModel has some key advantages for maintaining large applications:
 
@@ -1778,7 +1772,7 @@ donejs develop
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time waiting for refreshes and builds,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="LbVZs80WMWI"></div></div>'>doing trust falls with giant yellow M&Ms.</a></div>
-    <img class="fun-img" src="/static/img/funny-mandm.png">
+    <img class="fun-img" src="static/img/funny-mandm.png">
 </blockquote>
 
 <a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
@@ -1885,7 +1879,7 @@ This will create:
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time setting up your app,</div>
     <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="xiE5AQHKj_Y" data-params="start=26"></div></div>'>searching for carrots.</a></div>
-    <img class="fun-img" src="/static/img/funny-carrots.png">
+    <img class="fun-img" src="static/img/funny-carrots.png">
 </blockquote>
 
 <a class="btn" href="https://github.com/donejs/generator-donejs"><span>View the Documentation</span></a>
