@@ -189,28 +189,24 @@ The main application file at `src/app.js` looks like this:
 
 ```
 // src/app.js
-import Map from "can/map/";
-import route from "can/route/";
-import 'can/map/define/';
-import 'can/route/pushstate/';
+import DefineMap from 'can-define/map/';
+import route from 'can-route';
+import 'can-route-pushstate';
 
-const AppViewModel = Map.extend({
-  define: {
-    message: {
-      value: 'Hello World!',
-      serialize: false
-    },
-    title: {
-      value: 'place-my-order',
-      serialize: false
-    }
+const AppViewModel = DefineMap.extend({
+  route: "string",
+  message: {
+    value: 'Hello World!',
+    serialize: false
+  },
+  title: {
+    value: 'place-my-order',
+    serialize: false
   }
 });
-
-export default AppViewModel;
 ```
 
-This initializes a [can.Map](https://canjs.com/docs/can.Map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
+This initializes a [can-define/map/](DOCS): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
 
 ## Creating custom elements
 
@@ -295,7 +291,7 @@ To learn more about routing visit the CanJS guide on [Application State and Rout
 To add our routes, change `src/app.js` to:
 
 @sourceref guides/place-my-order/steps/create-routes/app.js
-@highlight 15-17
+@highlight 7-9,21-23
 
 > Notice: We also removed the `message` property in `AppViewModel`.  This is because
 > it is not needed.
@@ -319,7 +315,7 @@ donejs add component header.component pmo-header
 and update `src/header.component` to:
 
 @sourceref guides/place-my-order/steps/add-header/header.component
-@highlight 3-18
+@highlight 3-19
 
 Here we use [routeUrl](http://canjs.com/docs/can.stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
@@ -404,46 +400,14 @@ of all restaurants on the server and log them to the console.
 
 ### Add data to the page
 
-Now, update the `ViewModel` in `src/restaurant/list/list.js` to use [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html) to load all restaurants from the restaurant connection:
+Now, update the `ViewModel` in `src/restaurant/list/list.js` to use [can-define](https://github.com/canjs/can-define) to load all restaurants from the restaurant connection:
 
 @sourceref guides/place-my-order/steps/add-data/list.js
-@highlight 5,9-13
+@highlight 4,7-11
 
-And update the template at `src/restaurant/list/list.stache` to use the [Promise](http://canjs.com/docs/can.Deferred.html) returned for the `restaurants` property to render the template:
+And update the template at `src/restaurant/list/list.stache` to use the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) returned for the `restaurants` property to render the template:
 
-```html
-<div class="restaurants">
-  <h2 class="page-header">Restaurants</h2>
-  {{#if restaurants.isPending}}
-    <div class="restaurant loading"></div>
-  {{/if}}
-  {{#if restaurants.isResolved}}
-    {{#each restaurants.value}}
-      <div class="restaurant">
-        <img src="{{joinBase images.thumbnail}}"
-          width="100" height="100">
-        <h3>{{name}}</h3>
-        {{#address}}
-        <div class="address">
-          {{street}}<br />{{city}}, {{state}} {{zip}}
-        </div>
-        {{/address}}
-
-        <div class="hours-price">
-          $$$<br />
-          Hours: M-F 10am-11pm
-          <span class="open-now">Open Now</span>
-        </div>
-
-        <a class="btn" href="{{routeUrl page='restaurants' slug=slug}}">
-          Details
-        </a>
-        <br />
-      </div>
-    {{/each}}
-  {{/if}}
-</div>
-```
+@sourceref guides/place-my-order/steps/add-data/list.stache
 
 By checking for `restaurants.isPending` and `restaurants.isResolved` we are able to show a loading indicator while the data are being retrieved. Once resolved, the actual restaurant list is available at `restaurants.value`. When navigating to the restaurants page now we can see a list of all restaurants.
 
@@ -500,7 +464,7 @@ Now we can load a list of states and cities.
 Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/docs/can.Map.prototype.define.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
 
 @sourceref guides/place-my-order/steps/create-dependent/list.js
-@highlight 6-7,11-53
+@highlight 5-6,9-51
 
 Let's take a closer look at those properties:
 
@@ -546,7 +510,7 @@ Now that our view model is implemented and tested, we'll update the restaurant l
 Update `src/restaurant/list/list.stache` to:
 
 @sourceref guides/place-my-order/steps/write-template/list.stache
-@highlight 3-34
+@highlight 5-36
 
 
 Some things worth pointing out:
@@ -768,7 +732,7 @@ In this section, we will update the order component to be able to select restaur
 
 First, let's look at the restaurant data we get back from the server. It looks like this:
 
-```js
+```
 {
   "_id": "5571e03daf2cdb6205000001",
   "name": "Cheese Curd City",
@@ -826,7 +790,7 @@ donejs add supermodel order
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
 @sourceref guides/place-my-order/steps/create-data/order.js
-@highlight 3-4,7-21,25-38,41-44
+@highlight 6-26,32-55
 
 Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
@@ -835,7 +799,7 @@ Here we define an `ItemsList` which allows us to toggle menu items and check if 
 Now we can update the view model in `src/order/new/new.js`:
 
 @sourceref guides/place-my-order/steps/create-data/new.js
-@highlight 5-6,9-25,27-32,34-38
+@highlight 5-6,9-30
 
 Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a Deferred once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
@@ -888,7 +852,7 @@ npm install steal-socket.io --save
 In `src/models/order.js` replace with:
 
 @sourceref guides/place-my-order/steps/real-time/order.js
-@highlight 6,56-60
+@highlight 5,71-75
 
 ### Update the template
 
@@ -927,7 +891,7 @@ This produces documentation at [http://localhost:8080/docs/](http://localhost:80
 Let's add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
 
 @sourceref guides/place-my-order/steps/document/new.js
-@highlight 8-10,13-18,22-27,31-36,40-44,53-59,66-72
+@highlight 8-10,12-17,19-24,28-33,41-47,54-60
 
 If we now run `donejs document` again, we will see the module show up in the menu bar and will be able to navigate through the different properties.
 

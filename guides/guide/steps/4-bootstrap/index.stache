@@ -3,8 +3,8 @@
     <title>{{title}}</title>
   </head>
   <body>
-    <can-import from="bootstrap/less/bootstrap.less!" />
-    <can-import from="donejs-chat/styles.less!" />
+    <can-import from="bootstrap/less/bootstrap.less" />
+    <can-import from="donejs-chat/styles.less" />
     <can-import from="donejs-chat/app" export-as="viewModel" />
 
     <div class="container">

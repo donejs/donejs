@@ -1,6 +1,6 @@
-import Component from 'can/component/component';
-import Map from 'can/map/';
-import 'can/map/define/';
+import Component from 'can-component';
+import DefineMap from 'can-define/map/';
+import './new.less';
 import template from './new.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 import Order from 'place-my-order/models/order';
@@ -8,77 +8,65 @@ import Order from 'place-my-order/models/order';
 /**
  * @add place-my-order/order/new
  */
-export const ViewModel = Map.extend({
-  define: {
-    /**
-     * @property {String} slug
-     *
-     * The restaurants slug (short name). Will
-     * be used to request the actual restaurant.
-     */
-    slug: {
-      type: 'string'
-    },
-    /**
-     * @property {place-my-order/models/order} order
-     *
-     * The order that is being processed. Will
-     * be an empty new order inititally.
-     */
-    order: {
-      Value: Order
-    },
-    /**
-     * @property {can.Deferred} saveStatus
-     *
-     * A deferred that contains the status of the order when
-     * it is being saved.
-     */
-    saveStatus: {
-      Value: Object
-    },
-    /**
-     * @property {Boolean} canPlaceOrder
-     *
-     * A flag to enable / disable the "Place my order" button.
-     */
-    canPlaceOrder: {
-      get() {
-        let items = this.attr('order.items');
-        return items.attr('length');
-      }
+export const ViewModel = DefineMap.extend({
+  /**
+   * @property {string} slug
+   *
+   * the restaurants slug (short name). will
+   * be used to request the actual restaurant.
+   */
+  slug: 'string',
+  /**
+   * @property {place-my-order/models/order} order
+   *
+   * the order that is being processed. will
+   * be an empty new order inititally.
+   */
+  order: {
+    value: Order
+  },
+  /**
+    * @property {Promise} saveStatus
+    *
+    * a Promise that contains the status of the order when
+    * it is being saved.
+    */
+  saveStatus: '*',
+  canPlaceOrder: {
+    get() {
+      let items = this.order.items;
+      return items.length;
     }
   },
-
   /**
    * @function placeOrder
    *
-   * Save the current order and update the status Deferred.
+   * save the current order and update the status deferred.
    *
    * @return {boolean} false to prevent the form submission
    */
   placeOrder() {
-    let order = this.attr('order');
-    this.attr('saveStatus', order.save());
+    let order = this.order;
+    order.restaurant = this.restaurant._id;
+    this.saveStatus = order.save();
     return false;
   },
-
   /**
    * @function startNewOrder
    *
-   * Resets the order form, so a new order can be placed.
+   * resets the order form, so a new order can be placed.
    *
    * @return {boolean} false to prevent the form submission
    */
-  startNewOrder: function() {
-    this.attr('order', new Order());
-    this.attr('saveStatus', null);
+  startNewOrder() {
+    this.order = new order();
+    this.saveStatus = null;
     return false;
   }
 });
 
 export default Component.extend({
   tag: 'pmo-order-new',
-  viewModel: ViewModel,
+  ViewModel: ViewModel,
   template
 });

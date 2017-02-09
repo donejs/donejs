@@ -1,10 +1,15 @@
+import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
-import List from 'can/list/';
-import Map from 'can/map/';
-import 'can/map/define/';
 
-const ItemsList = List.extend({}, {
+const Item = DefineMap.extend({
+  price: 'number'
+});
+
+const ItemsList = DefineList.extend({
+  '*': Item
+}, {
   has: function(item) {
     return this.indexOf(item) !== -1;
   },
@@ -20,38 +25,48 @@ const ItemsList = List.extend({}, {
   }
 });
 
-let Order = Map.extend({
-  define: {
-    status: {
-      value: 'new'
-    },
-    items: {
-      Value: ItemsList
-    },
-    total: {
-      get() {
-        let total = 0.0;
-        this.attr('items').forEach(item =>
-            total += parseFloat(item.attr('price')));
-        return total.toFixed(2);
-      }
+export const Order = DefineMap.extend({
+  seal: false
+}, {
+  '_id': '*',
+  name: 'string',
+  address: 'string',
+  phone: 'string',
+  restaurant: 'string',
+
+  status: {
+    value: 'new'
+  },
+  items: {
+    Value: ItemsList
+  },
+  total: {
+    get() {
+      let total = 0.0;
+      this.items.forEach(item =>
+          total += parseFloat(item.price));
+      return total.toFixed(2);
     }
   },
 
   markAs(status) {
-    this.attr('status', status);
+    this.status = status;
     this.save();
   }
 });
 
-export const connection = superMap({
+Order.List = DefineList.extend({
+  '*': Order
+});
+
+export const orderConnection = superMap({
   url: '/api/orders',
   idProp: '_id',
   Map: Order,
   List: Order.List,
-  name: 'orders'
+  name: 'order'
 });
 
-tag('order-model', connection);
+tag('order-model', orderConnection);
 
 export default Order;

@@ -1,21 +1,18 @@
-import Component from 'can/component/';
-import Map from 'can/map/';
-import 'can/map/define/';
+import Component from 'can-component';
+import DefineMap from 'can-define/map/map';
 import template from './list.stache';
 import Restaurant from 'place-my-order/models/restaurant';
 
-export var ViewModel = Map.extend({
-  define: {
-    restaurants: {
-      value() {
-        return Restaurant.getList({});
-      }
+export var ViewModel = DefineMap.extend({
+  restaurants: {
+    value() {
+      return Restaurant.getList({});
     }
   }
 });
 
 export default Component.extend({
   tag: 'pmo-restaurant-list',
-  viewModel: ViewModel,
+  ViewModel: ViewModel,
   template: template
 });
