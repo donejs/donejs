@@ -17,6 +17,8 @@
 {{#if events.isRejected}}
   <div class="danger">
     <p>Sorry, events can’t load right now.</p>
-    <small>Error: {{events.reason.responseJSON.message}}</small>
+    {{#each events.reason.responseJSON.error.errors}}
+      <p><a href="{{extendedHelp}}"><small>{{message}}</small></a></p>
+    {{/each}}
   </div>
 {{/if}}
