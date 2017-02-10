@@ -18,6 +18,8 @@ If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/d
 
 In this section, we will install DoneJS and generate a new application.
 
+> If you haven't already, check out the [SettingUp] guide to ensure you have all of the prerequisites installed and configured.
+
 ### Install DoneJS
 
 To get started, let's install the DoneJS command line utility globally:
@@ -415,7 +417,7 @@ To set up the desktop build, we have to add it to our application like this:
 donejs add nw
 ```
 
-We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
+Accept the default for all of the prompts.
 
 <img src="static/img/donejs-nw1.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 

@@ -12,7 +12,7 @@ After the initial application setup, which includes a server that hosts and pre-
 
 After that we will talk about what a view model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser, we will automate running them locally from the command line and also on a continuous integration server. In the subsequent chapters, we will show how to easily import other modules into our application and how to set up a real-time connection.
 
-Finally, we will describe how to build and deploy our application to the web, as a desktop application with nw.js, and as a mobile app with Cordova.
+Finally, we will describe how to build and deploy our application to the web, as a desktop application with NW.js, and as a mobile app with Cordova.
 
 
 @body
@@ -20,7 +20,9 @@ Finally, we will describe how to build and deploy our application to the web, as
 ## Set up the project
 
 In this section we will create our DoneJS project and set up a RESTful API for the application to use.
-You will need [NodeJS](http://nodejs.org) or [io.js](https://iojs.org/en/index.html) installed and your code editor of choice.
+You will need [NodeJS](http://nodejs.org) installed and your code editor of choice.
+
+> If you haven't already, check out the [SettingUp] guide to ensure you have all of the prerequisites installed and configured.
 
 ### Create the project
 
