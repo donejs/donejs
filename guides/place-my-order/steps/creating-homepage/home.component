@@ -1,5 +1,10 @@
 <can-component tag="pmo-home">
-  <template>
+  <style type="less">
+    display: block;
+
+    p { font-weight: bold; }
+  </style>
+  <view>
      <div class="homepage">
       <img src="{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}"
           width="250" height="380" />
@@ -10,5 +15,14 @@
       </p>
       <p><a class="btn" href="{{routeUrl page='restaurants'}}" role="button">Choose a Restaurant</a></p>
      </div>
-  </template>
+  </view>
+  <script type="view-model">
+    import DefineMap from 'can-define/map/';
+
+    export default DefineMap.extend({
+      message: {
+        value: 'This is the pmo-home component'
+      }
+    });
+  </script>
 </can-component>

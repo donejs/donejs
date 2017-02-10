@@ -2,6 +2,7 @@ import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import superMap from 'can-connect/can/super-map/';
 import tag from 'can-connect/can/tag/';
+import loader from '@loader';
 
 const Item = DefineMap.extend({
   price: 'number'
@@ -40,15 +41,12 @@ export const Order = DefineMap.extend({
   items: {
     Value: ItemsList
   },
-  total: {
-    get() {
-      let total = 0.0;
-      this.items.forEach(item =>
-          total += parseFloat(item.price));
-      return total.toFixed(2);
-    }
+  get total() {
+    let total = 0.0;
+    this.items.forEach(item =>
+        total += parseFloat(item.price));
+    return total.toFixed(2);
   },
-
   markAs(status) {
     this.status = status;
     this.save();
@@ -60,7 +58,7 @@ Order.List = DefineList.extend({
 });
 
 export const orderConnection = superMap({
-  url: '/api/orders',
+  url: loader.serviceBaseURL + '/api/orders',
   idProp: '_id',
   Map: Order,
   List: Order.List,

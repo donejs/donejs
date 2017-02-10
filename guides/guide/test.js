@@ -160,7 +160,7 @@ guide.step("Install and use bit-tabs", function(){
     return guide.wait(10000);
   }
 
-	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@alpha", "--save"])
     .then(installWait)
 		.then(function(){
 			return guide.replaceFile(join("src", "home.component"),
@@ -185,6 +185,7 @@ guide.step("Generate the Message model", function(){
 
 	answer(/URL endpoint/, "http://chat.donejs.com/api/messages\n");
 	answer(/property name/, "\n");
+  answer(/service URL/, "Yes\n");
 
 	return supermodel.promise;
 });
@@ -206,11 +207,11 @@ guide.test(function(){
  * @Step 11
  */
 guide.step("Create messages", function(){
-	return guide.replaceFile(join("src", "messages", "messages.stache"),
-							 join(__dirname, "steps", "11-create-messages", "messages.stache"))
+  return guide.replaceFile(join("src", "messages", "messages.js"),
+               join(__dirname, "steps", "11-create-messages", "messages.js"))
 		.then(function(){
-			return guide.replaceFile(join("src", "messages", "messages.js"),
-									 join(__dirname, "steps", "11-create-messages", "messages.js"));
+      return guide.replaceFile(join("src", "messages", "messages.stache"),
+    							 join(__dirname, "steps", "11-create-messages", "messages.stache"));
 		}).then(wait);
 });
 
@@ -222,13 +223,17 @@ guide.test(function(){
  * @Step 12
  */
 guide.step("Enable a real-time connection", function(){
-	return guide.executeCommand("npm", ["install", "steal-socket.io", "--save"])
+	return guide.executeCommand("npm", ["install", "steal-socket.io@2", "--save"])
 		.then(wait)
 		.then(function(){
 			return guide.replaceFile(join("src", "models", "message.js"),
 									 join(__dirname, "steps", "12-real-time", "message.js"));
 		});
 
+});
+
+guide.test(function(){
+	return guide.functionalTest(join(__dirname, "steps", "12-real-time", "test.js"));
 });
 
 /**
@@ -283,23 +288,7 @@ guide.step("Stop production mode", function(){
 guide.stepIf("Deploy to CDN", function() {
 	return !!guide.options.app;
 }, function(){
-	var appName = guide.options.app;
-
-	var setConfig = function(pkg){
-		pkg.donejs.deploy.services.production.config.firebase = appName;
-		if(!pkg.system.envs) {
-			pkg.system.envs = {};
-		}
-
-		if(!pkg.system.envs["server-production"]) {
-			pkg.system.envs["server-production"] = {};
-		}
-		pkg.system.envs["server-production"].baseURL = "https://" +
-			appName + ".firebaseapp.com/";
-		return pkg;
-	};
-	return guide.replaceJson("package.json",
-							 join(__dirname, "steps", "16-cdn", "deploy.json"), setConfig)
+  return guide.executeCommand("donejs", ["add", "firebase"])
 		.then(function(){
 			return guide.executeCommand("donejs", ["build"]);
 		})
@@ -321,6 +310,7 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 
 			answer(/Name of project/, "donejs chat\n");
 			answer(/ID of project/, "com.donejs.donejschat\n");
+      answer(/service layer/, "\n");
 			answer(/What platforms/, "\n");
 
 			return proc.promise;
@@ -341,6 +331,7 @@ guide.stepIf("Desktop and mobile apps: NW.js", function() {
 
 	answer(/Main HTML file/, "\n");
 	answer(/The nw.js version/, "0.12.3\n");
+  answer(/service layer/, "\n");
 	answer(/Width of/, "\n");
 	answer(/Height of/, "\n");
 	answer(/What platforms/, "\n");

@@ -17,27 +17,27 @@ The application allows __admins__, who manage the application, to:
 
 Establish login or establish an account with Github:
 
-<img src="/static/img/bitcentive/use-1-login-a.png"/>
+<img src="static/img/bitcentive/use-1-login-a.png"/>
 
 This opens a popup allowing you to access the account:
 
-<img src="/static/img/bitcentive/use-1-login-b.png"/>
+<img src="static/img/bitcentive/use-1-login-b.png"/>
 
 Add, update, or delete a list of Open Source projects available for the bounty that month:
 
-<img src="/static/img/bitcentive/use-2-os-projects.png"/>
+<img src="static/img/bitcentive/use-2-os-projects.png"/>
 
 Add, update, or delete a list of client projects for that month:
 
-<img src="/static/img/bitcentive/use-3-client-projects.png"/>
+<img src="static/img/bitcentive/use-3-client-projects.png"/>
 
 Manage the Open Source projects used by the client for that month:
 
-<img src="/static/img/bitcentive/use-4-client-projects-os-projects.png"/>
+<img src="static/img/bitcentive/use-4-client-projects-os-projects.png"/>
 
 Add, update, or delete a list of contributions for the month.
 
-<img src="/static/img/bitcentive/use-5-contributions.png"/>
+<img src="static/img/bitcentive/use-5-contributions.png"/>
 
 See royalty payments for the month:
 

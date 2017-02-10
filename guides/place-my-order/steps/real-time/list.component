@@ -1,5 +1,5 @@
 <can-component tag="pmo-order-list">
-  <template>
+  <view>
     <h4>{{listTitle}}</h4>
 
     {{#if orders.isPending}}
@@ -39,5 +39,5 @@
         <div class="order empty">{{emptyMessage}}</div>
       {{/each}}
     {{/if}}
-  </template>
+  </view>
 </can-component>

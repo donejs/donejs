@@ -6,8 +6,8 @@
       padding: 10px;
     }
   </style>
-  <template>
-    <can-import from="can-stache/helpers/route"/>
+  <view>
+    <can-import from="can-stache/helpers/route" />
     <can-import from="bit-tabs/unstyled" />
     <h1 class="page-header text-center">
       <img src="http://donejs.com/static/img/donejs-logo-white.svg"
@@ -28,5 +28,5 @@
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>
-  </template>
+  </view>
 </can-component>

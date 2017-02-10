@@ -5,6 +5,7 @@
   {{#if restaurants.isPending}}
     <div class="restaurant loading"></div>
   {{/if}}
+
   {{#if restaurants.isResolved}}
     {{#each restaurants.value}}
       <div class="restaurant">

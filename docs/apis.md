@@ -11,15 +11,15 @@ The blue boxes in the following architecture diagram represent modules provided 
 
 <object type="image/svg+xml" data="static/img/donejs-stack-app.svg"></object>
 
-- [StealJS](#section=section_StealJS) - Module loader and build system. [api](http://stealjs.com/docs/index.html).
-- [CanJS](#section=section_CanJS) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](http://canjs.com/docs/index.html)
-- [can-connect](#section=section_can_connect) - Data connection part of Models, real-time, fall-through cache. [api](https://connect.canjs.com)
-- [can-set](#section=section_can_set) - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)
-- [jQuery](#section=section_jQuery) - DOM utilities. [api](http://jquery.com/)
-- [jQuery++](#section=section_jQuery__) - Even more DOM utilities. [api](http://jquerypp.com/)
-- [done-ssr](#section=section_done_ssr) - Server-side rendering for NodeJS. [api](https://github.com/donejs/done-ssr)
-- [done-autorender](#section=section_done_autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
-- [can-simple-dom](#section=section_can_simple_dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)
+- [StealJS](#stealjs) - Module loader and build system. [api](http://stealjs.com/docs/index.html).
+- [CanJS](#canjs) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](http://canjs.com/docs/index.html)
+- [can-connect](#can-connect) - Data connection part of Models, real-time, fall-through cache. [api](https://connect.canjs.com)
+- [can-set](#can-set) - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)
+- [jQuery](#jquery) - DOM utilities. [api](http://jquery.com/)
+- [jQuery++](#jquery-1) - Even more DOM utilities. [api](http://jquerypp.com/)
+- [done-ssr](#done-ssr) - Server-side rendering for NodeJS. [api](https://github.com/donejs/done-ssr)
+- [done-autorender](#done-autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
+- [can-simple-dom](#can-simple-dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)
 
 ### Tooling
 
@@ -27,12 +27,12 @@ DoneJS provides many aspects of JavaScript application tooling, shown in the dia
 
 <object type="image/svg+xml" data="static/img/donejs-stack-tooling.svg"></object>
 
-- [donejs-cli](#section_CLIandGenerators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)
-- [generator-donejs](#section_CLIandGenerators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)
-- [QUnit](#section_QUnit) - Default test assertion library. [api](http://qunitjs.com/)
-- [FuncUnit](#section_FuncUnit) - Functional test utilities. [api](http://funcunit.com/)
-- [Testee](#section_Testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)
-- [DocumentJS](#section=section_DocumentJS) - Documentation engine. [api](http://documentjs.com/)
+- [donejs-cli](#cli-and-generators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)
+- [generator-donejs](#cli-and-generators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)
+- [QUnit](#qunit) - Default test assertion library. [api](http://qunitjs.com/)
+- [FuncUnit](#funcunit) - Functional test utilities. [api](http://funcunit.com/)
+- [Testee](#testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)
+- [DocumentJS](#documentjs) - Documentation engine. [api](http://documentjs.com/)
 
 @body
 
@@ -48,7 +48,7 @@ the chat application as an example in development.  We'll cover what happens whe
 ### First page load
 
 1. An http request for `http://donejs-chat.com/` is sent to a node server. The node server is configured,
-   in this case with express, to use [done-ssr-middleware](#section=section_done_ssr) to render a DoneJS application:
+   in this case with express, to use [done-ssr-middleware](#done-ssr) to render a DoneJS application:
 
    ```
    var ssr = require('done-ssr-middleware');
@@ -58,11 +58,11 @@ the chat application as an example in development.  We'll cover what happens whe
    }));
    ```
 
-2. [done-ssr](#section=section_done_ssr) uses [steal](#section=section_steal) to load the application's main module which results in loading the
+2. [done-ssr](#done-ssr) uses [steal](#stealjs) to load the application's main module which results in loading the
    entire application. Loading the application only happens once for all page requests.
 
    A DoneJS's main module is specified where all configuration of a DoneJS application happens, its `package.json`.
-   The main module is usually a [can.stache](#section=section_can_stache) template processed with the [done-autorender](#section=section_done_autorender)
+   The main module is usually a [can.stache](#canstache) template processed with the [done-autorender](#done-autorender)
    plugin. The module name is specified like: `index.stache!done-autorender`. `index.stache` might look like:
 
    ```
@@ -87,22 +87,22 @@ the chat application as an example in development.  We'll cover what happens whe
    </html>
    ```
 
-   The [done-autorender](#section=section_done_autorender) plugin, in NodeJS, exports this template so it can be rendered. It also exports
+   The [done-autorender](#done-autorender) plugin, in NodeJS, exports this template so it can be rendered. It also exports
    any modules it imports with `<can-import>` that are labeled with `export-as="EXPORT_NAME"`. Exporting
-   the viewModel is important for [done-ssr](#section=section_done_ssr)
+   the viewModel is important for [done-ssr](#done-ssr)
 
-3. Once [done-ssr](#section=section_done_ssr) has the [done-autorender](#section=section_done_autorender)'s `template` and `viewModel` export it:
+3. Once [done-ssr](#done-ssr) has the [done-autorender](#done-autorender)'s `template` and `viewModel` export it:
 
    1. Creates a new instance of the viewModel, setting properties on it
-   using [can.route](#section=section_can_route)'s routing rules.  
-   2. Creates a new [virtual dom](#section=section_can_simple_dom) instance.
-   3. Renders the [template](#section=section_can_stache) with the `viewModel` into the `virtual dom` instance.
+   using [can.route](#canroute)'s routing rules.  
+   2. Creates a new [virtual dom](#can-simple-dom) instance.
+   3. Renders the [template](#canstache) with the `viewModel` into the `virtual dom` instance.
 
-4. [done-autorender](#section=section_done_autorender) templates waits for all promises to complete
-   before providing a final result.  Once the template is finished rendering, [done-ssr](#section=section_done_ssr) converts it to a
+4. [done-autorender](#done-autorender) templates waits for all promises to complete
+   before providing a final result.  Once the template is finished rendering, [done-ssr](#done-ssr) converts it to a
    string and sends it back to the browser.
 
-5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal](#section=section_steal).  
+5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal](#stealjs).  
 
    <script src="node_modules/steal/steal.js" main="index.stache!done-autorender"></script>
 
@@ -111,22 +111,22 @@ the chat application as an example in development.  We'll cover what happens whe
 
 6. In the browser, `done-autorender`:
 
-   1. Creates a new instance of the [viewModel](#section=section_can_ssr_app_map), setting properties on it
-   using [can.route](#section=section_can_route)'s routing rules.  
-   2. Renders the [template](#section=section_can_stache) with the `viewModel` into a document fragment.
+   1. Creates a new instance of the [viewModel](#canmap), setting properties on it
+   using [can.route](#canroute)'s routing rules.  
+   2. Renders the [template](#canstache) with the `viewModel` into a document fragment.
    3. Once all asynchronous activity has completed, it replaces the document with the rendered result.
 
 
 
 ### Pushstate change
 
-1. A pushstate is triggered by user action, usually by clicking a link. [can.route](#section=section_can_route)'s routing rules determines the properties set on the application [viewModel](#section=section_can_ssr_app_map).
+1. A pushstate is triggered by user action, usually by clicking a link. [can.route](#canroute)'s routing rules determines the properties set on the application [viewModel](#canmap).
 
    ```
    can.route(':page', { page: 'home' });
    ```
 
-2. [done-autorender](#section=section_done_autorender) previously bound the AppViewModel to [can.route](#section=section_can_route) which causes any change in the route to be reflected in the AppMap instance.
+2. [done-autorender](#done-autorender) previously bound the AppViewModel to [can.route](#canroute) which causes any change in the route to be reflected in the AppMap instance.
 
 3. Live binding causes the initial template to reflect in the change in route. If the new route is `/chat` it will cause the `page` to be **chat**:
 
@@ -213,7 +213,7 @@ itself  is split into two sub-projects:
 ### steal
 
 To use [steal](http://stealjs.com/docs/steal.html), simply add a script tag to `steal.js`
-in an HTML page or in a [done-autorender](#section=section_done_autorender) `template` and
+in an HTML page or in a [done-autorender](#done-autorender) `template` and
 point the `main` attribute to a module to load like:
 
 ```
@@ -316,16 +316,16 @@ yourself with:
 
 CanJS provides:
 
-- __observables__ with [can.Map](#section=section_can_Map), [can.List](#section=section_can_List), and [can.compute](#section=section_can_compute).
-- __one-way and two-way binding templates__ with [can.stache](#section=section_can_stache) and [can.view.bindings](#section=section_can_view_bindings).
-- __custom elements__ with [can.Component](#section=section_can_Component).
-- __routing__ with [can.route](#section=section_can_route).
+- __observables__ with [can.Map](#canmap), [can.List](#canlist), and [can.compute](#cancompute).
+- __one-way and two-way binding templates__ with [can.stache](#canstache) and [can.view.bindings](#canviewbindings).
+- __custom elements__ with [can.Component](#cancomponent).
+- __routing__ with [can.route](#canroute).
 
 Observables act as the `ViewModel` and part of the `Model`.
 
 One-way and two-way binding templates act as the `View`.
 
-[can.Component](#section=section_can_Component) is used to combine `View` and `ViewModel` into
+[can.Component](#cancomponent) is used to combine `View` and `ViewModel` into
 easy to instantiate and assemble custom elements.
 
 Checkout the following quick examples of their use:
@@ -432,7 +432,7 @@ document.body.appendChild(frag);
 ### can.Construct
 
 [can.Construct](http://canjs.com/docs/can.Construct.html) allows you to define constructor functions that are easy to inherit
-from.  It's used by [can.Map](#section=section_can_Map), [can.List](#section=section_can_List), and [can.Component](#section=section_can_Component).
+from.  It's used by [can.Map](#canmap), [can.List](#canlist), and [can.Component](#cancomponent).
 
 To create your own constructor function, [extend](http://canjs.com/docs/can.Construct.extend.html) `can.Construct`
 with prototype methods like:
@@ -719,7 +719,7 @@ people.attr(0).fullName() //-> "Justin Meyer"
 ### can.compute
 
 [can.compute](http://canjs.com/docs/can.compute.html) isn't used
-directly much anymore. However, it's used heavily in [can.Map](#section=section_can_Map)
+directly much anymore. However, it's used heavily in [can.Map](#canmap)
 [getters](http://canjs.com/docs/can.Map.prototype.define.get.html) and live binding
 so it's worth understanding the basics.
 
@@ -805,9 +805,9 @@ document.body //-> <h1>Ramiya Meyer</h1>
 ```
 
 In a DoneJS application, templates are used primarily as part of
-a [can.Component](#section=section_can_Component) or as the [done-autorender](#section=section_done_autorender)ed main template.
+a [can.Component](#cancomponent) or as the [done-autorender](#done-autorender)ed main template.
 
-When used in a [can.Component](#section=section_can_Component), the templates are often put in their own file. For
+When used in a [can.Component](#cancomponent), the templates are often put in their own file. For
 example, a `person_edit.js` component file might have a `person_edit.stache` file like:
 
 ```
@@ -912,7 +912,7 @@ The following are stache's most commonly used helpers:
 
     If the value of a key is a [can.List](#section=section_can_List) only the minimum amount of DOM updates occur when the list changes.
 
- - [{{routeUrl hashes}}](http://canjs.com/docs/can.stache.helpers.routeUrl.html) - generates a url using [can.route](#section=section_can_route) for the provided hashes.
+ - [{{routeUrl hashes}}](http://canjs.com/docs/can.stache.helpers.routeUrl.html) - generates a url using [can.route](#canroute) for the provided hashes.
 
    ```
    can.stache("<a href="{{routeUrl page='details' id='23'}}">{{name}}</a>")({name: 'Item 23'}) //-> `<a href="#!&page=details&id=23">Item 23</a>`
@@ -997,8 +997,8 @@ Create bindings to viewModel or DOM events:
 create widgets with well-defined View Models and are instantiated with
 custom elements.
 
-Define a `can.Component` by extending one with a `tag` name, [can.Map](#section=section_can_Map) `viewModel` and 
-[can.stache template](#section=section_can_stache) like:
+Define a `can.Component` by extending one with a `tag` name, [can.Map](#canmap) `viewModel` and 
+[can.stache template](#canstache) like:
 
 ```
 // Define the view model
@@ -1022,7 +1022,7 @@ a `<hello-world>` element to the page like:
 <hello-world message="Hello World"/>
 ```
 
-Use [can.view.bindings](#section=section_can_view_bindings)
+Use [can.view.bindings](#canviewbindings)
 to send a value from the `can.stache` scope like:
 
 ```
@@ -1040,7 +1040,7 @@ frag //-> <hello-world {message}="greeting">
      //   </hello-world>
 ```
 
-`can.Component`s are usually built as [modlets](/Features.html#section_Modlets),
+`can.Component`s are usually built as [modlets](./Features.html#modlets),
 meaning their template and styles are another file and imported:
 
 ```
@@ -1133,7 +1133,7 @@ history.pushState(null, null, "/");
 // can.route.attr("page"); // -> "home"
 ```
 
-In a DoneJS application can.route is bound to the [application View Model](#section=section_can_ssr_app_map), but you can connect `can.route` to other
+In a DoneJS application can.route is bound to the [application View Model](#canmap), but you can connect `can.route` to other
 maps:
 
 ```
@@ -1157,7 +1157,7 @@ Which will cause any changes in the route to reflect in the View Model instance,
 
 [can-connect](https://connect.canjs.com) is used to connect typed 
 data to backend services.  In a DoneJS application, that typed data is a 
-[can.Map](#section=section_can_Map) and [can.Map](#section=section_can_List) type.  
+[can.Map](#canmap) and [can.Map](#canlist) type.  
 
 To make a simple connection to a restful interface:
 
@@ -1226,7 +1226,7 @@ can be mixed into a connection.  Examples include:
  - [fall-through-cache](http://connect.canjs.com/doc/can-connect%7Cfall-through-cache.html)
 
 To make the process of creating `can.Map` based connections easier,
-DoneJS comes with a [supermodel generator](#section=section_generator_donejs)
+DoneJS comes with a [supermodel generator](#generators)
 creates a [super-map](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).
 
 A super-map is just a connection with a bunch of the mostly commonly used
@@ -1281,7 +1281,7 @@ In a DoneJS application, you create custom algebras to pass
 to [can-connect](#section=section_can_connect) connections. The
 connection's behaviors use that [algebra](http://connect.canjs.com/doc/connect.base.algebra.html) to their optimizations.
 
-For example, if the `Todo` type in the [can-connect section](#section=section_can_connect) has the following property behaviors:
+For example, if the `Todo` type in the [can-connect section](#can-connect) has the following property behaviors:
 
  - `complete` can be true or false
  - `type` can be one of "dev", "design", or "QA"
@@ -1445,7 +1445,7 @@ This specifies to look in JavaScript and Markdown files for jsdoc tags. When ran
 
 DocumentJS includes most [tags](http://documentjs.com/docs/documentjs.tags.html) you need to document a web application and includes an API to create your own.
 
-Here's how you would document a [can.Component](#section=section_can_Component) View Model:
+Here's how you would document a [can.Component](#cancomponent) View Model:
 
 ```
 /**
@@ -1541,7 +1541,7 @@ node_modules/.bin/documentjs
 
 [jQuery](http://jquery.com/) is the ubiquitous DOM manipulation 
 library. While you don't often need to write jQuery directly,
-[CanJS](#section=section_CanJS) is built making it safe to use jQuery when needed.
+[CanJS](#canjs) is built making it safe to use jQuery when needed.
 
 For example, you can make your own custom elements that call jQuery
 plugins:
@@ -1555,14 +1555,14 @@ can.view.tag("tooltip", function(el){
 })
 ```
 
-[can.view.bindings](#section=section_can_view_bindings) lets you listen 
+[can.view.bindings](#canviewbindings) lets you listen 
 to [jQuery special events](http://benalman.com/news/2010/03/jquery-special-events/) like:
 
 ```
 <div ($tripleclick)="doSomething()">
 ```
 
-[can.Component](#section=section_can_Component)'s events object also supports this:  
+[can.Component](#cancomponent)'s events object also supports this:  
 
 ```
 can.Component.extend({
@@ -1613,7 +1613,7 @@ utilties to jQuery.
 ### done-ssr
 
 [done-ssr](https://github.com/donejs/done-ssr) enables DoneJS applications to be
-server-side rendered. Paired with [done-autorender](#section=section_done_autorender) 
+server-side rendered. Paired with [done-autorender](#done-autorender) 
 it allows you to render the entire document from a single template.
 
 ```
@@ -1654,7 +1654,7 @@ done-serve --proxy http://localhost:7070 --port 8080
 ### done-autorender
 
 [done-autorender](https://github.com/donejs/autorender) is a Steal plugin that
-enables using a [can.stache](#section=section_can_stache) template as your application's entry point. Create a template like:
+enables using a [can.stache](#canstache) template as your application's entry point. Create a template like:
 
 ```handlebars
 <html>
@@ -1670,7 +1670,7 @@ enables using a [can.stache](#section=section_can_stache) template as your appli
 ```
 
 **done-autorender** will insert this template on page load. The import specied with
-the `export-as="viewModel"` attribute is a [can.Map](#section=section_can_Map) that acts as the View Model
+the `export-as="viewModel"` attribute is a [can.Map](#canmap) that acts as the View Model
 for the application.
 
 If you have [live-reload](http://stealjs.com/docs/steal.live-reload.html#section_Use) enabled done-autorender will additionally use those APIs to re-render the

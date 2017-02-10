@@ -4,14 +4,14 @@
       {{#case 'order'}}
         <can-import from="place-my-order/order/new/"
             can-tag="pmo-loading">
-          <pmo-order-new slug="{slug}"/>
+          <pmo-order-new {slug}="slug"/>
         </can-import>
       {{/case}}
 
       {{#default}}
         <can-import from="place-my-order/restaurant/details.component"
             can-tag="pmo-loading">
-          <pmo-restaurant-details/>
+          <pmo-restaurant-details {slug}="slug"/>
         </can-import>
       {{/default}}
     {{/switch}}

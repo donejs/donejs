@@ -5,8 +5,8 @@ var rimraf = require("rimraf").sync;
 var streamWhen = require("stream-when");
 var nodeVersion = +process.version.substr(1).split(".")[0];
 
-// Only run in AppVeyor if version >= 5
-if(isWindowsCI && nodeVersion < 5) {
+// Only run in AppVeyor if version 6
+if(isWindowsCI && nodeVersion !== 6) {
 	process.exit(0);
 }
 
@@ -248,15 +248,15 @@ guide.step("Create dependent models", function(){
 guide.closeBrowser();
 
 guide.step("Create a test", function(){
-	return guide.replaceFile(join("src", "models", "fixtures", "state.js"),
-													 join(__dirname, "steps", "create-test", "state.js"))
+	return guide.replaceFile(join("src", "models", "fixtures", "states.js"),
+													 join(__dirname, "steps", "create-test", "states.js"))
 		.then(function(){
-			return guide.replaceFile(join("src", "models", "fixtures", "city.js"),
-													 join(__dirname, "steps", "create-test", "city.js"));
+			return guide.replaceFile(join("src", "models", "fixtures", "cities.js"),
+													 join(__dirname, "steps", "create-test", "cities.js"));
 		})
 		.then(function(){
-			return guide.replaceFile(join("src", "models", "fixtures", "restaurant.js"),
-													 join(__dirname, "steps", "create-test", "restaurant.js"));
+			return guide.replaceFile(join("src", "models", "fixtures", "restaurants.js"),
+													 join(__dirname, "steps", "create-test", "restaurants.js"));
 		})
 		.then(function(){
 			return guide.replaceFile(join("src", "restaurant", "list", "list_test.js"),
@@ -343,7 +343,7 @@ guide.step("Create additional components", function(){
 });
 
 guide.step("Importing other projects", function(){
-	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@alpha", "--save"])
 		.then(wait)
 		.then(wait)
 		.then(function(){
@@ -433,6 +433,9 @@ guide.step("Set up a real-time connection", function(){
 guide.step("Create documentation", function(){
 	return guide.replaceFile(join("src", "order", "new", "new.js"),
 													 join(__dirname, "steps", "document", "new.js"))
+		.then(function(){
+			return guide.executeCommand("donejs", ["add", "documentjs"]);
+		})
 		.then(function(){
 			return guide.executeCommand("donejs", ["document"]);
 		})
