@@ -104,7 +104,9 @@ the chat application as an example in development.  We'll cover what happens whe
 
 5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal](#stealjs).  
 
+   ```
    <script src="node_modules/steal/steal.js" main="index.stache!done-autorender"></script>
+   ```
 
    In development, this loads `steal.js` which then loads `index.stache` and processes it with
    the `done-autorender`.  
