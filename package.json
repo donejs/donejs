@@ -75,15 +75,14 @@
       "bit-docs-prettify": "^0.1.0",
       "bit-docs-html-highlight-line": "^0.2.2",
       "bit-docs-tag-demo": "^0.3.0",
-      "bit-docs-html-toc": "^0.6.1",
-      "bit-docs-tag-demo": "^0.3.0",
-      "bit-docs-donejs-theme": "^0.0.8"
+      "bit-docs-html-toc": "^0.6.2",
+      "bit-docs-donejs-theme": "^0.0.9"
     },
     "glob": {
       "pattern": "docs/**/*.{md,mustache}"
     },
     "parent": "donejs",
-    "minifyBuild": false,
+    "minifyBuild": true,
     "dest": "./site"
   }
 }
