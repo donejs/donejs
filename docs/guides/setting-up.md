@@ -2,13 +2,13 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever 
+@description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever
 install DoneJS and includes platform-specific pieces of information not covered in the Quick Start or In Depth guides.
 
 DoneJS officially supports:
 
- - [Node](https://nodejs.org) 0.10.x, 0.12.x, and Node 4/5
- - [npm](https://www.npmjs.com/) 2.x, 3.x
+ - [Node](https://nodejs.org) 6 and up
+ - [npm](https://www.npmjs.com/) 3.x and up
 
 @body
 
@@ -236,7 +236,7 @@ Then click **OK** to create the device.
 Close the AVD Manager and you should have everything you need for Android development.
 
 
-## Vagrant & VirtualBox 
+## Vagrant & VirtualBox
 
 ### Prerequisites
 
@@ -286,7 +286,7 @@ Make sure that `C:/www/donejs` is a valid directory.
 For more information check the documentation on https://www.vagrantup.com/docs/synced-folders/basic_usage.html
 
 ### Launching the Vagrant Box
-Once you have done all the configuration run 
+Once you have done all the configuration run
 ```
 vagrant up
 ```
