@@ -49,19 +49,19 @@ We aim to help in three main ways:
 
 DoneJS has good solutions for:
 
- - [Builds to mobile and desktop](#section=section_iOS_Android_andDesktopBuilds)
- - [Server Side Rendering](#section=section_Server_SideRendered)
- - [Automatic real-time updates](#section=section_RealTimeConnected)
- - [Fast download times](##section=section_ProgressiveLoading)
+ - [Builds to mobile and desktop](./Features.html#ios-android-and-desktop-builds)
+ - [Server Side Rendering](./Features.html#server-side-rendered)
+ - [Automatic real-time updates](./Features.html#real-time-connected)
+ - [Fast download times](./Features.html#progressive-loading)
 
-These are just a few examples from our [features page](/Features.html). If
+These are just a few examples from our [features page](./Features.html). If
 there's a hard problem that you keep running into, we want to solve it.
 
 #### 2. Provide an integrated solution
 
 Too many choices can make decision making difficult.  DoneJS simplifies
 matters by providing a full stack of frontend tooling tested to work
-great together.  The start of the [features page](/Features.html)
+great together.  The start of the [features page](./Features.html)
 goes into detail with examples of this benefit.
 
 _Note: Despite being an integrated solution, you can replace parts of
@@ -76,11 +76,11 @@ making doing the `right thing` simply part of the normal dev cycle.
 
 Check out what DoneJS does for:
 
-- [Tests](#section=section_ComprehensiveTesting)
-- [Documentation](#section=section_Documentation)
-- [Guides for CI and CD](#section=section_ContinuousIntegration_Deployment)
-- [Modlets](#section=section_Modlets)
-- [Generators](#section=section_Generators)
+- [Tests](./Features.html#comprehensive-testing)
+- [Documentation](./Features.html#documentation)
+- [Guides for CI and CD](./Features.html#continuous-integration--deployment)
+- [Modlets](./Features.html#modlets)
+- [Generators](./Features.html#generators)
 
 ### Evolve
 
@@ -114,7 +114,7 @@ to create great learning material, but also create an environment
 where people feel comfortable getting help.  
 
 The core team is always available on [gitter](https://gitter.im/donejs/donejs)
-and provides [weekly trainings](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](/community.html) and we will come to your
+and provides [weekly trainings](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](./community.html) and we will come to your
 city and teach you DoneJS!
 
 
@@ -124,9 +124,9 @@ DoneJS has benefited greatly from other projects ideas and technology. It should
 
 You can already use many of DoneJS parts with other projects:
 
- - StealJS works great with ReactJS.  
- - CanJS works with RequireJS or Browserify.  
- - can-connect works on its own.  
+ - StealJS works great with ReactJS. 
+ - CanJS works with RequireJS or Browserify.
+ - can-connect works on its own.
 
 We should always seek to cooperate with others.
 
