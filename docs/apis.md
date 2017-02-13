@@ -184,8 +184,10 @@ The `donejs` command makes running those commands easier by allowing you to run 
 `donejs add` lets you run the [Yeoman](http://yeoman.io/) generators provided by [generator-donejs](https://github.com/donejs/generator-donejs/). Currently the following generators are available:
 
 - `donejs add app [folder]` which will initialize a new application (optionally within the given folder)
-- `donejs add component <modulename> <tagname>` to create a new can.Component
+- `donejs add component <modulename> <tagname>` to create a new can-component
 - `donejs add supermodel <modulename>` to generate a new model
+- `donejs add plugin [folder]` which will initialize a new plugin project
+- `donejs add generator [folder]` which will initialize a new generator project
 
 ### Third party generators
 
@@ -995,11 +997,11 @@ Create bindings to viewModel or DOM events:
 
 ### can.Component
 
-[can.Component](http://canjs.com/docs/can.Component.html) lets you 
+[can.Component](http://canjs.com/docs/can.Component.html) lets you
 create widgets with well-defined View Models and are instantiated with
 custom elements.
 
-Define a `can.Component` by extending one with a `tag` name, [can.Map](#canmap) `viewModel` and 
+Define a `can.Component` by extending one with a `tag` name, [can.Map](#canmap) `viewModel` and
 [can.stache template](#canstache) like:
 
 ```
@@ -1056,7 +1058,7 @@ import template from './hello-world.stache!';
 export const ViewModel = Map.extend({
   excitedMessage: function(){
     return this.attr("message")+"!"
-  } 
+  }
 });
 
 export default Component.extend({
@@ -1093,9 +1095,9 @@ seperate files. For these, you can use a `.component` file:
 
 ### can.route
 
-[can.route](http://canjs.com/docs/can.route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](http://canjs.com/docs/can.route.pushstate.html). 
+[can.route](http://canjs.com/docs/can.route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](http://canjs.com/docs/can.route.pushstate.html).
 
-Configure routing rules to define property values on your application's 
+Configure routing rules to define property values on your application's
 View Model when a url is matched.
 
 
@@ -1110,10 +1112,10 @@ You can define defaults that get set when `:page` is empty. The
 following sets the default `page` property to `"home"`.
 
 ```
-can.route(":page", { page: "home" }); 
+can.route(":page", { page: "home" });
 ```
 
-You can specify multiple properties to set for a given url: 
+You can specify multiple properties to set for a given url:
 
 ```
 can.route(":page/:slug");
@@ -1157,14 +1159,14 @@ Which will cause any changes in the route to reflect in the View Model instance,
 
 ### can-connect
 
-[can-connect](https://connect.canjs.com) is used to connect typed 
-data to backend services.  In a DoneJS application, that typed data is a 
+[can-connect](https://connect.canjs.com) is used to connect typed
+data to backend services.  In a DoneJS application, that typed data is a
 [can.Map](#canmap) and [can.Map](#canlist) type.  
 
 To make a simple connection to a restful interface:
 
 ```
-// First, create custom Map and List type 
+// First, create custom Map and List type
 var Todo = Map.extend({
   canComplete: function(ownerId) {
     return this.attr("ownerId") === ownerId;
@@ -1189,9 +1191,9 @@ var todoConnection = connect(["data-url","constructor","can/map"],{
 });
 ```
 
-This adds a [getList](http://connect.canjs.com/doc/can.Map.getList.html), 
-[.get](http://connect.canjs.com/doc/can.Map.get.html), 
-[.save](http://connect.canjs.com/doc/can.Map.prototype.save.html) and 
+This adds a [getList](http://connect.canjs.com/doc/can.Map.getList.html),
+[.get](http://connect.canjs.com/doc/can.Map.get.html),
+[.save](http://connect.canjs.com/doc/can.Map.prototype.save.html) and
 [.destroy](http://connect.canjs.com/doc/can.Map.prototype.destroy.html) methods to
 `Todo` allowing you to CRUD `Todo`s and `TodoList`s from the service layer like:
 
@@ -1205,7 +1207,7 @@ Todo.get({id: 5}).then(function(todo){ ... });
 // Create a todo
 var todo = new Todo({name: "dishes"})
 
-// Create it on the server 
+// Create it on the server
 todo.save().then(function(todo){
 
   // Update its properties
@@ -1214,7 +1216,7 @@ todo.save().then(function(todo){
   })
   // Update the service layer with changes
   .save().then(function(todo){
-    
+
     // Delete the todo on  the service layer
     todo.destroy();
   });
@@ -1246,7 +1248,7 @@ export const messageConnection = superMap({
 ### can-set
 
 [can-set](https://github.com/canjs/can-set) is used to compare
-set objects that are represented by the parameters commonly passed 
+set objects that are represented by the parameters commonly passed
 to service requests.  
 
 For example, if you want all todos for user `5` that are complete, you
@@ -1277,7 +1279,7 @@ var algebra = new set.Algebra(
 // use it
 algebra.union({start: 1, end: 10},
               {start: 11, end: 20}) //-> {start: 1, end: 20}
-``` 
+```
 
 In a DoneJS application, you create custom algebras to pass
 to [can-connect](#section=section_can_connect) connections. The
@@ -1292,7 +1294,7 @@ For example, if the `Todo` type in the [can-connect section](#can-connect) has t
 
 ```
 //-> gets all incomplete todos
-/services/todos?complete=false 
+/services/todos?complete=false
 
 // -> gets all todos that are for design and dev
 /services/todos?type[]=dev&type[]=design
@@ -1324,8 +1326,8 @@ This allows a `superMap` to combine requests like:
   Todo.getList({})
 ```
 
-And know that if `Todo.getList({type: ["dev","design"]})` has already been 
-retrieved, there's no need to make a request for 
+And know that if `Todo.getList({type: ["dev","design"]})` has already been
+retrieved, there's no need to make a request for
 `Todo.getList({type: ["dev"]})`.
 
 
@@ -1421,7 +1423,7 @@ For more configuration options follow up in the [Testee documentation](https://g
 
 ## DocumentJS
 
-When working on large applications keeping updated documentation is critical. 
+When working on large applications keeping updated documentation is critical.
 [DocumentJS](http://documentjs.com/) generates API documentation for your
 application supporting [jsdoc](http://usejsdoc.org/) syntax that can be multi-versioned.
 
@@ -1541,7 +1543,7 @@ node_modules/.bin/documentjs
 
 ### jQuery
 
-[jQuery](http://jquery.com/) is the ubiquitous DOM manipulation 
+[jQuery](http://jquery.com/) is the ubiquitous DOM manipulation
 library. While you don't often need to write jQuery directly,
 [CanJS](#canjs) is built making it safe to use jQuery when needed.
 
@@ -1551,13 +1553,13 @@ plugins:
 ```
 can.view.tag("tooltip", function(el){
   $(el).tooltip({
-    content: el.getAttribute("content"), 
+    content: el.getAttribute("content"),
     items: "tooltip"
   });
 })
 ```
 
-[can.view.bindings](#canviewbindings) lets you listen 
+[can.view.bindings](#canviewbindings) lets you listen
 to [jQuery special events](http://benalman.com/news/2010/03/jquery-special-events/) like:
 
 ```
@@ -1615,7 +1617,7 @@ utilties to jQuery.
 ### done-ssr
 
 [done-ssr](https://github.com/donejs/done-ssr) enables DoneJS applications to be
-server-side rendered. Paired with [done-autorender](#done-autorender) 
+server-side rendered. Paired with [done-autorender](#done-autorender)
 it allows you to render the entire document from a single template.
 
 ```
