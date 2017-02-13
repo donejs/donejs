@@ -352,7 +352,7 @@ In this next part, we'll connect to the RESTful API that we set up with `place-m
 
 ### Creating a restaurants connection
 
-At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `done-serve` to proxy it to [http://localhost:8080/api](http://localhost:8080/api).
+At the beginning of this guide we set up a REST API at [http://localhost:7070](http://localhost:7070) and told `done-serve` to proxy it to http://localhost:8080/api.
 
 To manage the restaurant data located at [http://localhost:8080/api/restaurants](http://localhost:8080/api/restaurants), we'll create a restaurant supermodel:
 
@@ -562,7 +562,7 @@ Now we have to initialize Git in our project folder and add the GitHub repositor
 
 ```
 git init
-git remote add origin git@github.com:<your-username>/place-my-order.git
+git remote add origin https://github.com/<your-username>/place-my-order.git
 ```
 
 Then we can add all files and push to origin like this:
