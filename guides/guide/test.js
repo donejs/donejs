@@ -323,14 +323,12 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 /**
  * @Step 18
  */
-guide.stepIf("Desktop and mobile apps: NW.js", function() {
-  return process.platform !== 'win32';
-}, function(){
+guide.step("Desktop and mobile apps: NW.js", function(){
 	var proc = guide.answerPrompts("donejs", ["add", "nw"]);
 	var answer = proc.answer;
 
 	answer(/Main HTML file/, "\n");
-	answer(/The nw.js version/, "0.12.3\n");
+	answer(/The nw.js version/, "\n");
   answer(/service layer/, "\n");
 	answer(/Width of/, "\n");
 	answer(/Height of/, "\n");
