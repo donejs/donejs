@@ -18,6 +18,18 @@ DoneJS officially supports:
 
 This will help you get set up with DoneJS on Windows. To use DoneJS you need a C++ compiler (for native dependencies). First you need a recent version of [Node.js](https://nodejs.org/en/).
 
+#### Node.js
+
+To download Node.js visit [https://nodejs.org](https://nodejs.org). There will be two big green buttons for the two recommended downloads. Choose the one on the right, which says **Current**. This will give you the most recent version of Node.js.
+
+Once downloaded, double-click the installer and go through the installation process. Once complete you should be able to open up a terminal and type:
+
+```shell
+node -v
+```
+
+Which should then print out the version of Node.js that is installed.
+
 #### Package Management
 
 In this guide we'll use [chocolatey](https://chocolatey.org/) to install packages needed. You don't have to use chocolatey if you don't want, and can instead search for the dependencies and install them with a Windows installer, but we'll use chocolately because it makes things a bit easier.
@@ -126,6 +138,18 @@ Close the AVD Manager and you should have everything you need for Android develo
 
 ## Mac OS X
 
+### Node.js
+
+To download Node.js visit [https://nodejs.org](https://nodejs.org). There will be two big green buttons for the two recommended downloads. Choose the one on the right, which says **Current**. This will give you the most recent version of Node.js.
+
+Once downloaded, double-click the installer and go through the installation process. Once complete you should be able to open up a terminal and type:
+
+```shell
+node -v
+```
+
+Which should then print out the version of Node.js that is installed.
+
 ### Prerequisites
 
 To get DoneJS working on OS X you need Xcode command line tools which you can get by typing:
@@ -146,7 +170,7 @@ Installing in a Debian / Ubuntu environment takes a little extra work because th
 
 ### Prerequisites
 
-Instead of installing Node.js from the repository we recommend using a PPA (a repostiroy maintained by a 3rd party). First get a copy of `curl` if you don't already have it:
+Instead of installing Node.js from the repository we recommend using a PPA (a repository maintained by a 3rd party). First get a copy of `curl` if you don't already have it:
 
 ```
 sudo apt-get install curl
