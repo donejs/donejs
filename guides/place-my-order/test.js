@@ -409,26 +409,30 @@ guide.closeBrowser();
  */
 guide.step("Set up a real-time connection", function(){
 	var replaceFile = guide.replaceFile;
-	return guide.executeCommand("npm", ["install", "steal-socket.io", "--save"])
-		.then(function(){
-			return replaceFile(join("src", "models", "order.js"),
-												 join(__dirname, "steps", "real-time", "order.js"));
-		})
-		.then(function(){
-			var args = "add component order/list.component pmo-order-list".split(" ");
-			return guide.executeCommand("donejs", args);
-		})
-		.then(function(){
-			return replaceFile(join("src", "order", "list.component"),
-												 join(__dirname, "steps", "real-time", "list.component"));
-		})
-		.then(function(){
-			return replaceFile(join("src", "order", "history.component"),
-												 join(__dirname, "steps", "real-time",
-															"history.component"));
-		})
-		.then(wait)
-		.then(wait);
+
+	return Promise.resolve()
+	.then(function(){
+		var args = "add component order/list.component pmo-order-list".split(" ");
+		return guide.executeCommand("donejs", args);
+	})
+	.then(function(){
+		return replaceFile(join("src", "order", "list.component"),
+											 join(__dirname, "steps", "real-time", "list.component"));
+	})
+	.then(function(){
+		return replaceFile(join("src", "order", "history.component"),
+											 join(__dirname, "steps", "real-time",
+														"history.component"));
+	})
+	.then(function(){
+		return guide.executeCommand("npm", ["install", "steal-socket.io", "--save"])
+	})
+	.then(function(){
+		return replaceFile(join("src", "models", "order.js"),
+											 join(__dirname, "steps", "real-time", "order.js"));
+	})
+	.then(wait)
+	.then(wait);
 });
 
 /**
