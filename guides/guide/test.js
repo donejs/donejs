@@ -196,6 +196,10 @@ guide.step("Generate the Message model", function(){
 guide.step("Use the connection", function(){
 	return guide.replaceFile(join("src", "messages", "messages.stache"),
 							 join(__dirname, "steps", "10-use-connection", "messages.stache"))
+    .then(function() {
+      return guide.replaceFile(join("src", "messages", "messages.js"),
+                   join(__dirname, "steps", "10-use-connection", "messages.js"))
+    })
 		.then(wait);
 });
 

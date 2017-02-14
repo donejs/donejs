@@ -228,12 +228,17 @@ Update `src/models/message.js` to:
 
 ### Use the connection
 
-The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages with the `<message-model>` custom element.
+The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages.
 
-Update `src/messages/messages.stache` to:
+Update `src/messages/messages.js` to:
+
+@sourceref ../../guides/guide/steps/10-use-connection/messages.js
+@highlight 5,8-10
+
+Display the messages by updating `src/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/10-use-connection/messages.stache
-@highlight 2,5-16
+@highlight 4-15
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
@@ -246,14 +251,14 @@ Now let's add the form to create new messages. The form two-way binds the `name`
 First we have to implement the `send()` method. Update `src/messages/messages.js` to this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.js
-@highlight 5,8-18
+@highlight 8-18
 
 The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
 
 Next update `src/messages/messages.stache` to look like this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.stache
-@highlight 18-30
+@highlight 17-29
 
 You can now enter your name and a message! It will automatically appear in our messages list.
 
@@ -278,7 +283,7 @@ npm install steal-socket.io --save
 Update `src/models/message.js` to:
 
 @sourceref ../../guides/guide/steps/12-real-time/message.js
-@highlight 6,30-37
+@highlight 6,32-39
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
