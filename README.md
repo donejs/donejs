@@ -7,7 +7,7 @@
 [![npm version](https://badge.fury.io/js/donejs.svg)](https://badge.fury.io/js/donejs)
 [![Build Status](https://travis-ci.org/donejs/donejs.svg?branch=master)](https://travis-ci.org/donejs/donejs)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/donejs/donejs?branch=master&svg=true)](https://ci.appveyor.com/project/daffl/donejs)
-[![Coverage Status](https://coveralls.io/repos/github/donejs/donejs/badge.svg?branch=cli-refactor)](https://coveralls.io/github/donejs/donejs?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/donejs/donejs/badge.svg?branch=master)](https://coveralls.io/github/donejs/donejs?branch=master)
 
 DoneJS is the easiest way to get a high-performance, real-time, web and mobile application
 done! The framework provides a nearly comprehensive combination of technologies for
