@@ -1,7 +1,7 @@
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
+import set from 'can-set';
 import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
 import loader from '@loader';
 
 const Item = DefineMap.extend({
@@ -26,7 +26,7 @@ const ItemsList = DefineList.extend({
   }
 });
 
-export const Order = DefineMap.extend({
+const Order = DefineMap.extend({
   seal: false
 }, {
   '_id': '*',
@@ -53,18 +53,20 @@ export const Order = DefineMap.extend({
   }
 });
 
+const algebra = set.Algebra(
+  set.props.id('_id')
+);
+
 Order.List = DefineList.extend({
   '*': Order
 });
 
-export const orderConnection = superMap({
+Order.connection = superMap({
   url: loader.serviceBaseURL + '/api/orders',
-  idProp: '_id',
   Map: Order,
   List: Order.List,
-  name: 'order'
+  name: 'order',
+  algebra
 });
-
-tag('order-model', orderConnection);
 
 export default Order;

@@ -3,9 +3,9 @@ import route from 'can-route';
 import 'can-route-pushstate';
 
 const AppViewModel = DefineMap.extend({
-  page: "string",
-  slug: "string",
-  action: "string",
+  page: 'string',
+  slug: 'string',
+  action: 'string',
 
   title: {
     value: 'place-my-order',

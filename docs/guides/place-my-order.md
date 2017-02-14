@@ -481,17 +481,22 @@ View models that are decoupled from the presentation layer are easy to test. We 
 Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/doc/can-fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use for tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/states.js` to:
 
 @sourceref ../../guides/place-my-order/steps/create-test/states.js
-@highlight 3-6
+@highlight 4-7
 
 Update `src/models/fixtures/cities.js` to look like:
 
 @sourceref ../../guides/place-my-order/steps/create-test/cities.js
-@highlight 3-6
+@highlight 4-7
 
-And we also need to provide a restaurant list according to the selected city and state in `src/models/fixtures/restaurants.js`:
+Update `src/models/fixtures/restaurants.js` to look like:
 
 @sourceref ../../guides/place-my-order/steps/create-test/restaurants.js
-@highlight 3-36
+@highlight 4-30
+
+And we also need to specify that the restaurant list should be filtered to only restaurants in the selected city and state by updating `src/models/restaurants.js`:
+
+@sourceref ../../guides/place-my-order/steps/create-test/restaurants_model.js
+@highlight 15-22
 
 #### Test the view model
 
@@ -826,7 +831,6 @@ Now we can import that component and update `src/order/new/new.stache` to:
 This is a longer template so lets walk through it:
 
 - `<can-import from="place-my-order/order/details.component" />` loads the order details component we previously created
-- `<restaurant-model get="{ _id=slug }">` loads a restaurant based on the slug value passed to the component
 - If the `saveStatus` promise is resolved we show the `pmo-order-details` component with that order
 - Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item
 - `($submit)="placeOrder()"` will call `placeOrder` from our view model when the form is submitted
@@ -851,7 +855,12 @@ npm install steal-socket.io --save
 Update `src/models/order.js` to:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order.js
-@highlight 6,72-76
+@highlight 6-7,74-78,80
+
+This:
+
+- uses socket.io to update the Order model in real-time
+- sets up [can-connect/can/tag/](http://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively in the template like `<order-model get-list="{status='new'}">`
 
 ### Update the template
 

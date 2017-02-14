@@ -1,8 +1,9 @@
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
+import set from 'can-set';
 import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
 import loader from '@loader';
+import tag from 'can-connect/can/tag/';
 import io from 'steal-socket.io';
 
 const Item = DefineMap.extend({
@@ -27,7 +28,7 @@ const ItemsList = DefineList.extend({
   }
 });
 
-export const Order = DefineMap.extend({
+const Order = DefineMap.extend({
   seal: false
 }, {
   '_id': '*',
@@ -42,39 +43,40 @@ export const Order = DefineMap.extend({
   items: {
     Value: ItemsList
   },
-  total: {
-    get() {
-      let total = 0.0;
-      this.items.forEach(item =>
-          total += parseFloat(item.price));
-      return total.toFixed(2);
-    }
+  get total() {
+    let total = 0.0;
+    this.items.forEach(item =>
+        total += parseFloat(item.price));
+    return total.toFixed(2);
   },
-
   markAs(status) {
     this.status = status;
     this.save();
   }
 });
 
+const algebra = new set.Algebra(
+  set.props.id('_id')
+);
+
 Order.List = DefineList.extend({
   '*': Order
 });
 
-export const orderConnection = superMap({
+Order.connection = superMap({
   url: loader.serviceBaseURL + '/api/orders',
-  idProp: '_id',
   Map: Order,
   List: Order.List,
-  name: 'order'
+  name: 'order',
+  algebra
 });
 
 const socket = io(loader.serviceBaseURL);
 
-socket.on('orders created', order => orderConnection.createInstance(order));
-socket.on('orders updated', order => orderConnection.updateInstance(order));
-socket.on('orders removed', order => orderConnection.destroyInstance(order));
+socket.on('orders created', order => Order.connection.createInstance(order));
+socket.on('orders updated', order => Order.connection.updateInstance(order));
+socket.on('orders removed', order => Order.connection.destroyInstance(order));
 
-tag('order-model', orderConnection);
+tag('order-model', Order.connection);
 
 export default Order;

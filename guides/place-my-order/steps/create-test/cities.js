@@ -1,16 +1,11 @@
 import fixture from 'can-fixture';
+import City from '../city';
 
 const store = fixture.store([
   { state: 'CA', name: 'Casadina' },
   { state: 'NT', name: 'Alberny' }
-],{});
+], City.connection.algebra);
 
-fixture({
-  'GET /api/cities': store.findAll,
-  'GET /api/cities/{name}': store.findOne,
-  'POST /api/cities': store.create,
-  'PUT /api/cities/{name}': store.update,
-  'DELETE /api/cities/{name}': store.destroy
-});
+fixture('/api/cities/{name}', store);
 
 export default store;

@@ -259,6 +259,10 @@ guide.step("Create a test", function(){
 													 join(__dirname, "steps", "create-test", "restaurants.js"));
 		})
 		.then(function(){
+			return guide.replaceFile(join("src", "models", "restaurants.js"),
+													 join(__dirname, "steps", "create-test", "restaurants_model.js"));
+		})
+		.then(function(){
 			return guide.replaceFile(join("src", "restaurant", "list", "list_test.js"),
 													 join(__dirname, "steps", "create-test", "list_test.js"));
 

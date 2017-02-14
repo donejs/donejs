@@ -1,16 +1,11 @@
 import fixture from 'can-fixture';
+import State from '../state';
 
 const store = fixture.store([
   { name: 'Calisota', short: 'CA' },
   { name: 'New Troy', short: 'NT'}
-],{});
+], State.connection.algebra);
 
-fixture({
-  'GET /api/states': store.findAll,
-  'GET /api/states/{short}': store.findOne,
-  'POST /api/states': store.create,
-  'PUT /api/states/{short}': store.update,
-  'DELETE /api/states/{short}': store.destroy
-});
+fixture('/api/states/{short}', store);
 
 export default store;
