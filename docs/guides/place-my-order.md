@@ -381,7 +381,7 @@ We have now created a model and fixtures (for testing without an API) with a fol
 
 ### Test the connection
 
-To test the connection you can run the following in the console:
+To test the connection you can run the following in the browser console. You can access the browser console by right clicking in the browser and selecting **Inspect**. Then switch to the **Console** tab if not already there. Test the connection with:
 
 ```js
 steal.import("place-my-order/models/restaurant")
