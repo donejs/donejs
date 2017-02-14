@@ -545,6 +545,8 @@ If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src
 
 ### Using a test runner
 
+**Note**: If you are using Firefox for development, close the browser temporarily so that we can run our tests.
+
 The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee](https://github.com/bitovi/testee) which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
 
 ```
