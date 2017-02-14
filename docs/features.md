@@ -460,7 +460,7 @@ DoneJS implements SSR with a single-context virtual DOM.
 **Virtual DOM** means a virtual representation of the DOM: the fundamental browser APIs that manipulate the DOM, but stubbed out.
 
 When using DoneJS SSR, the same app that runs on the client is loaded in Node. When a request comes in:
- 1. The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application (single context is optional, so reload is something you can opt into) which means the initial response is very fast.
+ 1. The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application which means the initial response is very fast.
  1. The app renders content the same way it would in the browser, but with a mocked out virtual DOM, which is much faster than a real DOM.
  1. The server waits for all your asynchronous data requests to finish before signaling that rendering is complete (more on how that works below).
  1. When rendering is complete, the virtual DOM renders the string representation of the DOM, which is sent back to the client.
