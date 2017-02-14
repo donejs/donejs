@@ -34,48 +34,4 @@ and [guides](https://donejs.com/Guides.html) on how to use them together to buil
 
 ## Contributing
 
-### Cloning the repository
-
-```
-git clone git@github.com:donejs/donejs.git
-cd donejs
-```
-
-### Installing the dependencies
-
-```
-npm install
-```
-
-### Running the tests
-
-```
-npm test
-```
-
-### Building the docs
-
-```
-npm run document
-```
-
-### Deploying to DoneJS.com
-
-After cloning the repo and installing the dependencies:
-
-```
-git clone git@github.com:donejs/donejs.git -b gh-pages site/
-```
-
-If you get an error saying `Permission denied (publickey)` then you should follow GitHub’s instructions on
-[generating an SSH key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
-
-Push a new commit to the `gh-pages` branch with the built docs:
-
-```
-npm run document
-cd site/
-git add --all
-git commit -am "Updating site"
-git push origin gh-pages
-```
+Check out the [contribution guide on DoneJS.com](https://donejs.com/contributing.html).
