@@ -76,7 +76,7 @@
       "bit-docs-html-highlight-line": "^0.2.2",
       "bit-docs-tag-demo": "^0.3.0",
       "bit-docs-html-toc": "^0.6.2",
-      "bit-docs-donejs-theme": "^0.0.12"
+      "bit-docs-donejs-theme": "^0.0.13"
     },
     "glob": {
       "pattern": "docs/**/*.{md,mustache}"
