@@ -1,4 +1,5 @@
 import fixture from 'can-fixture';
+import Restaurant from '../restaurant';
 
 const store = fixture.store([{
   _id: 1,
@@ -26,21 +27,8 @@ const store = fixture.store([{
     owner: "node_modules/place-my-order-assets/images/3-owner.jpg",
     thumbnail: "node_modules/place-my-order-assets/images/2-thumbnail.jpg"
   }
-}],{
-  "address.city": function(restaurantValue, paramValue, restaurant){
-    return restaurant.address.city === paramValue;
-  },
-  "address.state": function(restaurantValue, paramValue, restaurant){
-    return restaurant.address.state === paramValue;
-  }
-});
+}], Restaurant.connection.algebra);
 
-fixture({
-  'GET /api/restaurants': store.findAll,
-  'GET /api/restaurants/{id}': store.findOne,
-  'POST /api/restaurants': store.create,
-  'PUT /api/restaurants/{id}': store.update,
-  'DELETE /api/restaurants/{id}': store.destroy
-});
+fixture('/api/restaurants/{_id}', store);
 
 export default store;
