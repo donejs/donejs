@@ -428,7 +428,7 @@ admin users can manipulate tournament data.
 
 And only admin users can set another user as an admin user.
 
-_PIC:admin view of users page_
+<img src="static/img/bitballs/admin-view.png">
 
 Non-admin users can read data.  
 

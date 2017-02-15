@@ -381,7 +381,7 @@ We have now created a model and fixtures (for testing without an API) with a fol
 
 ### Test the connection
 
-To test the connection you can run the following in the console:
+To test the connection you can run the following in the browser console. You can access the browser console by right clicking in the browser and selecting **Inspect**. Then switch to the **Console** tab if not already there. Test the connection with:
 
 ```js
 steal.import("place-my-order/models/restaurant")
@@ -544,6 +544,8 @@ We already worked with an individual component test page in [src/restaurant/list
 If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src/test.html) we still see all restaurant list tests passing but we will add more here later on.
 
 ### Using a test runner
+
+**Note**: If you are using Firefox for development, close the browser temporarily so that we can run our tests.
 
 The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee](https://github.com/bitovi/testee) which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
 
@@ -844,6 +846,24 @@ This is a longer template so lets walk through it:
 
 can-connect makes it very easy to implement real-time functionality. It is capable of listening to notifications from the server when server data has been created, updated, or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket), which allow sending push notifications to a client.
 
+### Update the template
+
+First let's create the `pmo-order-list` component with:
+
+```
+donejs add component order/list.component pmo-order-list
+```
+
+And then change `src/order/list.component` to:
+
+@sourceref ../../guides/place-my-order/steps/real-time/list.component
+
+In the order history template update `src/order/history.component` to:
+
+@sourceref ../../guides/place-my-order/steps/real-time/history.component
+
+First we import the order model and then just call `<order-model get-list="{status='<status>'}">` for each order status. These are all of the template changes needed, next is to set up the real-time connection.
+
 ### Adding real-time events to a model
 
 The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
@@ -862,23 +882,7 @@ This:
 - uses socket.io to update the Order model in real-time
 - sets up [can-connect/can/tag/](http://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively in the template like `<order-model get-list="{status='new'}">`
 
-### Update the template
-
-That's all the JavaScript we need to implement real-time functionality. All the rest can be done by creating the `pmo-order-list` component with:
-
-```
-donejs add component order/list.component pmo-order-list
-```
-
-Changing `src/order/list.component` to:
-
-@sourceref ../../guides/place-my-order/steps/real-time/list.component
-
-And in the order history template by updating `src/order/history.component` to:
-
-@sourceref ../../guides/place-my-order/steps/real-time/history.component
-
-First we import the order model and then just call `<order-model get-list="{status='<status>'}">` for each order status. That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
+That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
 ## Create documentation
 

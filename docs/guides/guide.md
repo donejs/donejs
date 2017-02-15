@@ -92,8 +92,6 @@ To see hot module swapping in action, let's update the main template to import B
 
 Update `src/index.stache` to look like this:
 
-> The highlighted lines have been added or changed.
-
 @sourceref ../../guides/guide/steps/4-bootstrap/index.stache
 @highlight 6,10-20
 
