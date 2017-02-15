@@ -10,6 +10,6 @@ MinUnit.test("Can go to the chat page and add a message", function(done){
 	F("form input:eq(1)").click().type("Rocks");
 	F("form input:eq(2)").click();
 
-	F("message-model .list-group-item").size(some, "Message added to the page");
+	F("chat-messages .list-group-item").size(some, "Message added to the page");
 	F(done);
 });

@@ -1,29 +1,31 @@
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
+import set from 'can-set';
 import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
 import loader from '@loader';
 
-export const Message = DefineMap.extend({
+const Message = DefineMap.extend({
   seal: false
 }, {
-  id: '*',
+  'id': '*',
   name: 'string',
   body: 'string'
 });
+
+const algebra = new set.Algebra(
+  set.props.id('id')
+);
 
 Message.List = DefineList.extend({
   '*': Message
 });
 
-export const messageConnection = superMap({
+Message.connection = superMap({
   url: loader.serviceBaseURL + '/api/messages',
-  idProp: 'id',
   Map: Message,
   List: Message.List,
-  name: 'message'
+  name: 'message',
+  algebra
 });
-
-tag('message-model', messageConnection);
 
 export default Message;
