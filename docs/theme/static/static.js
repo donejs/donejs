@@ -231,7 +231,7 @@ steal(
         var scrollSpyCurrentH2 = $( "#scrollSpyCurrentH2" );
         var scrollSpyCurrentH3 = $( "#scrollSpyCurrentH3" );
         var activeH2Li = $();
-        var doJQCollapsing = $( "body.Guide, body.place-my-order, body.Apis" ).length ? true : false;
+        var doJQCollapsing = $( "body.Guide, body.place-my-order, body.Apis, body.contributing" ).length ? true : false;
 
         if ( doJQCollapsing ) {
             $( "section.contents ol ol" ).hide();
