@@ -12,6 +12,16 @@ If you make changes to one of the presentations, please bring it to the top of t
 
 ## Full List
 
+### Getting to Know CanJS 3
+
+- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEVTJQZHJyVGhid0U)
+- Last Modified: 2017-02-15
+
+### Harnessing the Power of Set Logic in Your Model Layer
+
+- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEWmFCYkUwcnRCMU0)
+- Last Modified: 2017-02-15
+
 ### Dynamic Animations with Declarative Templates
 
 - [Description](https://drive.google.com/open?id=0B8wssyNpvaFEek5SZFRzdy00Mk0)
