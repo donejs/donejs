@@ -90,7 +90,7 @@ __Client__
 
 - Dependency Management: [StealJS](http://stealjs.com/) with mixed use of [CommonJS](http://stealjs.com/docs/syntax.CommonJS.html) and [ES6](http://stealjs.com/docs/syntax.es6.html).
 - Model: [can-connect](https://connect.canjs.com/)
-- ViewModel: [can.Map](https://canjs.com/docs/can.Map.html) and [can.List](https://canjs.com/docs/can.List.html)
+- ViewModel: [can-define/map](http://v3.canjs.com/doc/can-define/map/map.html) and [can-define/list](http://v3.canjs.com/doc/can-define/list/list.html)
 - View: [can.stache](https://canjs.com/docs/can.stache.html)
 - Custom Elements: [can.Component](https://canjs.com/docs/can.Component.html)
 - Routing: [can.route](https://canjs.com/docs/can.route.html)
@@ -101,7 +101,7 @@ __Testing__
 - Ajax Fixtures: [can-fixture](https://www.npmjs.com/package/can-fixture)
 - Functional Testing: [FuncUnit](https://www.npmjs.com/package/funcunit)
 - Test Runner: [Testee](https://www.npmjs.com/package/testee)
-- Continuous Integation and Deployment: [Travis CI](https://travis-ci.org/)
+- Continuous Integration and Deployment: [Travis CI](https://travis-ci.org/)
 
 
 __Hosting__
@@ -467,7 +467,7 @@ to request and store the available
 session. You can read the session's user and if they are an admin like:
 
 ```
-appViewModel.attr('user').attr('isAdmin')
+appViewModel.user.isAdmin
 ```
 
 The [`<bitballs-navigation>`](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html) component allows someone to login and change
@@ -517,7 +517,7 @@ saveUser: function(ev) {
         ev.preventDefault();
     }
     var self = this,
-        promise = this.attr("user").save().then(function(user) {
+        promise = this.user.save().then(function(user) {
             ...
         });
     ...
@@ -572,7 +572,7 @@ session: {
   serialize: false,
   value: function() {
     Session.get({}).then((session) => {
-      this.attr("session", session);
+      this.session = session;
     });
   }
 },
@@ -626,14 +626,14 @@ and also provides an `isAdmin` method that returns if admin functionality should
 be available:
 
 ```js
-var Session = Map.extend({
+var Session = DefineMap.extend({
 	define: {
 		user: {
 			Type: User
 		}
 	},
 	isAdmin: function(){
-		return this.attr("user") && this.attr("user").attr("isAdmin");
+		return this.user && this.user.isAdmin;
 	}
 });
 ```
@@ -697,11 +697,11 @@ createSession: function(ev){
         ev.preventDefault();
     }
     var self = this;
-    this.attr("loginSession").save().then(function(session){
+    this.loginSession.save().then(function(session){
         // create placeholder session for next login.
-        self.attr("loginSession", new Session({user: new User()}));
+        self.loginSession = new Session({user: new User()});
         // update AppViewModel with new session
-        self.attr("app").attr("session", session);
+        self.app.session = session;
 
     });
 },
@@ -757,8 +757,8 @@ calls `logout()` on its ViewModel:
 
 ```js
 logout: function(){
-  this.attr("session").destroy().then(()=>{
-    this.attr("session", null);
+  this.session.destroy().then(()=>{
+    this.session = null;
   });
 }
 ```
@@ -915,7 +915,7 @@ related fields like:
 
 ```
 Game.get({
-	id: this.attr("gameId"),
+	id: this.gameId,
 	withRelated: ["stats",
 		"homeTeam.player1",
 		"homeTeam.player2",
@@ -1005,7 +1005,7 @@ comments, we could make the following work:
 
 ```
 Game.get({
-	id: this.attr("gameId"),
+	id: this.gameId,
 	withRelated: ["comments"]
 });
 ```
@@ -1076,11 +1076,11 @@ to create a relational algebra that understands the service API.
 Bitballs' client Models are [can-connect supermodels](https://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).  So a type and list type is defined:
 
 ```
-var Game = Map.extend({
+var Game = DefineMap.extend({
   ...
 });
 
-Game.List = can.List.extend({Map: Game},{});
+Game.List = DefineList.extend({"#": Game},{});
 ```
 
 And they are connected to a url:
@@ -1114,8 +1114,7 @@ Because Game data can come back with a `homeTeam`,
 are created as the right type:
 
 ```
-var Game = Map.extend({
-  define: {
+var Game = DefineMap.extend({
 	homeTeam: {
 		Type: Team
 	},
@@ -1125,11 +1124,10 @@ var Game = Map.extend({
 	stats: {
 		Type: Stat.List,
 		set: function(newVal){
-			newVal.__listSet = {where: {gameId: this.attr("id")}};
+			newVal.__listSet = {where: {gameId: this.id}};
 			return newVal;
 		}
-	}
-  },
+	},
   ...
 });
 ```
@@ -1142,39 +1140,32 @@ Notice that `stats.set` is setting the [__listSet](https://connect.canjs.com/doc
 derive their value from related fields:
 
 ```js
-var Game = Map.extend({
-  define: {
-    ...
-    teams: {
-      get: function() {
+var Game = DefineMap.extend({
+  ...
+  get teams() {
+    var teams = [],
+      home = this.homeTeam,
+      away = this.awayTeam;
 
-        var teams = [],
-          home = this.attr("homeTeam"),
-          away = this.attr("awayTeam");
-
-        if (home) {
-          teams.push(home);
-        }
-        if (away) {
-          teams.push(away);
-        }
-        return new Team.List(teams);
-      }
-    },
-    players: {
-      get: function() {
-        var players = [];
-        this.attr("teams").forEach(function(team) {
-          [].push.apply(players, can.makeArray(team.attr("players")));
-        });
-        return new Player.List(players);
-      }
+    if (home) {
+      teams.push(home);
     }
+    if (away) {
+      teams.push(away);
+    }
+    return new Team.List(teams);
+  },
+  get players() {
+    var players = [];
+    this.teams.forEach(function(team) {
+      [].push.apply(players, can.makeArray(team.players));
+    });
+    return new Player.List(players);
   }
 });
 ```
 
-In `players`, `team.attr("players")` is actually making use of a similar computed
+In `players`, `team.players` is actually making use of a similar computed
 [`players` property](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cteam.html)  in the Team client model.
 
 #### Defining intermediate computed properties to avoid recomputing.
@@ -1183,9 +1174,9 @@ Sometimes ViewModels mash up Model data.  For example,
 the `<tournament-details>` component makes four requests in parallel:
 
 ```
-Tournament.get({id: this.attr("tournamentId")});
-Game.getList({tournamentId: this.attr("tournamentId")});
-Team.getList({ tournamentId: this.attr("tournamentId") });
+Tournament.get({id: this.tournamentId});
+Game.getList({tournamentId: this.tournamentId});
+Team.getList({ tournamentId: this.tournamentId });
 Player.getList({});
 ```
 
@@ -1203,11 +1194,11 @@ all we have are player ids on each team:
 A naive solution would be to make a `getById` method on `Player.List` like:
 
 ```
-Player.List = can.List.extend({Map: Player},{
+Player.List = DefineList.extend({"#": Player},{
   getById: function(id){
     return this.filter(function(player){
-      return team.attr("id") === id;
-    }).attr(0);
+      return team.id === id;
+    })[0];
   }
 });
 ```
@@ -1231,13 +1222,13 @@ we can keep a mapping of player ids to players like:
 
 ```
 idMap: {
-    type: "*",
+    type: "any",
     get: function(){
 
         var map = {};
 
         this.each(function(player){
-            map[player.attr("id")] = player;
+            map[player.id] = player;
         });
 
         return map;
@@ -1249,7 +1240,7 @@ And make a `getById` use `idMap` like:
 
 ```
 playerById: function(id){
-	return this.attr("playerIdMap")[id];
+	return this.playerIdMap[id];
 },
 ```
 
@@ -1319,13 +1310,13 @@ For Bitballs, we implemented `statusCode` as a [define getter](https://canjs.com
 ```
 statusCode: {
     get: function(lastSet, resolve){
-        var pageConfig = this.attr("pageComponentConfig");
+        var pageConfig = this.pageComponentConfig;
 
         if(pageConfig.statusCode) {
             return pageConfig.statusCode;
         }
 
-        var pagePromise = this.attr('pagePromise');
+        var pagePromise = this.pagePromise;
         if(pagePromise){
             pagePromise.then(function(){
                 resolve(200);
@@ -1349,31 +1340,29 @@ to be given.  `pageComponentConfig` only specifies a `statusCode` when its state
 doesn't match a valid route:
 
 ```
-pageComponentConfig: {
-    get: function(){
-        var page = this.attr("page");
-        if(this.attr("gameId")) {
-            return {...};
-        } else if(this.attr("tournamentId")) {
-            return {...};
-        } else if(page === "tournaments") {
-            return {...};
-        } else if(page === "users") {
-            return {...};
-        } else if(page === "register" || page === "account") {
-            return {...};
-        } else if(page === "players"){
-            return {...};
-        } else {
+get pageComponentConfig() {
+    var page = this.page;
+    if(this.gameId) {
+        return {...};
+    } else if(this.tournamentId) {
+        return {...};
+    } else if(page === "tournaments") {
+        return {...};
+    } else if(page === "users") {
+        return {...};
+    } else if(page === "register" || page === "account") {
+        return {...};
+    } else if(page === "players"){
+        return {...};
+    } else {
 
-            return {
-                title: "Page Not Found",
-                componentName: "four-0-four",
-                attributes: "",
-                moduleName: "404.component!",
-                statusCode: 404
-            };
-        }
+        return {
+            title: "Page Not Found",
+            componentName: "four-0-four",
+            attributes: "",
+            moduleName: "404.component!",
+            statusCode: 404
+        };
     }
 },
 ```
@@ -1396,36 +1385,34 @@ as the `pagePromise` like `{^game-promise}='./pagePromise'`:
 
 
 ```js
-pageComponentConfig: {
-    get: function(){
-        var page = this.attr("page");
-        if(this.attr("gameId")) {
-            return {
-                title: "Game",
-                componentName: "game-details",
-                attributes: "{^game-promise}='./pagePromise' {game-id}='./gameId' {session}='./session'",
-                moduleName: "game/details/"
-            };
+get pageComponentConfig() {
+    var page = this.page;
+    if(this.gameId) {
+        return {
+            title: "Game",
+            componentName: "game-details",
+            attributes: "{^game-promise}='./pagePromise' {game-id}='./gameId' {session}='./session'",
+            moduleName: "game/details/"
+        };
 
-        } else if(this.attr("tournamentId")) {
-            return {
-                title: "Tournament",
-                componentName: "tournament-details",
-                attributes: "{^tournament-promise}='./pagePromise' {tournament-id}='./tournamentId' {is-admin}='./isAdmin'",
-                moduleName: "tournament/details/"
-            };
+    } else if(this.tournamentId) {
+        return {
+            title: "Tournament",
+            componentName: "tournament-details",
+            attributes: "{^tournament-promise}='./pagePromise' {tournament-id}='./tournamentId' {is-admin}='./isAdmin'",
+            moduleName: "tournament/details/"
+        };
 
-        } else if(page === "tournaments") {
-            return {...};
-        } else if(page === "users") {
-            return {...};
-        } else if(page === "register" || page === "account") {
-            return {...};
-        } else if(page === "players"){
-            return {...};
-        } else {
-            return {...};
-        }
+    } else if(page === "tournaments") {
+        return {...};
+    } else if(page === "users") {
+        return {...};
+    } else if(page === "register" || page === "account") {
+        return {...};
+    } else if(page === "players"){
+        return {...};
+    } else {
+        return {...};
     }
 },
 ```
@@ -1433,13 +1420,11 @@ pageComponentConfig: {
 [<game-details>](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cgame%7Cdetails.html)'s `gamePromise` property is used to load the game's data:
 
 ```js
-gamePromise: {
-    get: function() {
-        return Game.get({
-            id: this.attr("gameId"),
-            withRelated: [...]
-        });
-    }
+get gamePromise() {
+    return Game.get({
+        id: this.gameId,
+        withRelated: [...]
+    });
 }
 ```
 

@@ -1444,7 +1444,7 @@ If our designer wanted to add another period, all they would need to do is add a
 
 Here’s a working version of the same example in a JSBin.
 
-<a class="jsbin-embed" href="http://jsbin.com/puwesa/embed?html,output">Custom HTML Elements on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?3.35.2"></script>
+<a class="jsbin-embed" href="//jsbin.com/puwesa/embed?html,output">Custom HTML Elements on jsbin.com</a><script src="//static.jsbin.com/js/embed.min.js?3.35.2"></script>
 
 Just like HTML’s natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.
 
