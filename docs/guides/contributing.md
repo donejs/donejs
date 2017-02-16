@@ -338,7 +338,9 @@ GitHub has additional documentation on [creating a pull request from a fork](htt
 
 ## Updating DoneJS.com
 
-First, create a new clone and install the dependencies:
+[DoneJS.com](https://donejs.com/) is hosted on [GitHub pages](https://pages.github.com/) from the [`gh-pages`](https://github.com/donejs/donejs/tree/gh-pages) branch.
+
+First, from within your local DoneJS repository, create a new clone in the `site` folder and install the dependencies:
 
 ```shell
 git clone git@github.com:donejs/donejs.git -b gh-pages site/
@@ -358,34 +360,7 @@ git commit -am "Updating the site"
 git push origin gh-pages
 ```
 
-[DoneJS.com](https://donejs.com/) is hosted on [GitHub pages](https://pages.github.com/) from the [`gh-pages`](https://github.com/donejs/donejs/tree/gh-pages) branch.
-
-To generate and push a new version of the website, verify you have push access to that branch, then get all latest changes via:
-
-```shell
-git checkout master
-git fetch --all && git rebase
-```
-
-Then, reinstall the dependencies:
-
-```shell
-npm cache clean
-rm -rf node_modules
-npm install
-```
-
-Next, delete the local `gh-pages` branch:
-
-```shell
-git branch -D gh-pages
-```
-
-Then run the following to generate and publish a new version of the website:
-
-```shell
-make
-```
+That’s it! [DoneJS.com](https://donejs.com/) should now have your changes.
 
 ## Evangelism
 
