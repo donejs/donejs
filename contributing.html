@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>donejs - Contributing </title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="/static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+	<!--[if lt IE 9]>
+		<script type="text/javascript" src="static/html5shiv.js"></script>
+	<!--<![endif]-->
+</head>
+<body class="docs contributing">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li >
+								<a href="./index.html">Home</a>
+							</li>
+							<li >
+								<a href="./Features.html">Features</a>
+							</li>
+							<li >
+								<a href="./About.html">About</a>
+							</li>
+							<li >
+								<a href="./Apis.html">Apis</a>
+							</li>
+							<li class="guides-menu">
+									<a href="/Guides.html">Guides</a>
+									<ul class="dropdown-menu">
+                      <li ><a href="./SettingUp.html">Setting Up</a></li>
+											<li ><a href="./Guide.html">Quick Start</a></li>
+											<li><a  href="./place-my-order.html">In-depth</a></li>
+											<li><a  href="./plugin.html">Creating a plugin</a></li>
+											<li><a  href="./generator.html">Creating a generator</a></li>
+											<li><a  href="./bitballs.html">Example App: Bitballs</a></li>
+											<li><a class="active" href="./contributing.html">Contributing</a></li>
+									</ul>
+							</li>
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="http://bitovi.com">Bitovi.com</a></li>
+									<li><a href="http://bitovi.com/blog/">Blog</a></li>
+									<li><a href="http://bitovi.com/consulting/">Consulting</a></li>
+									<li><a href="http://bitovi.com/training/">Training</a></li>
+									<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+									<li><a href="http://bitovi.com/people/">People</a></li>
+									<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="/static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="/static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="/static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">jQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="/static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="/static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+		<span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+<div class="container-fluid api">
+	<div class="row">
+
+	
+
+	
+	<article class="content docs col-xs-12 ">
+	
+
+		
+		<section class="title">
+			<div class="heading">
+<h1>Contributing</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">contributing</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+
+		
+		<section class="contents">
+		</section>
+		
+
+		
+
+		
+
+		
+			
+		
+
+		
+
+
+		
+		<section class="comment">
+			<p>Thank you for your interest in contributing to DoneJS! DoneJS is maintained by <a href="./About.html#section=section_Team">the core team</a> but depends on contributors like you! Whether you’re interested in <a href="#section=section_Findingopenissues">fixing issues</a>, <a href="#section=section_Gettinginvolvedinthecommunity">answering questions</a>, or <a href="#section=section_Evangelism">spreading the word</a>, we welcome you to our community!</p>
+<p>Contributing to an open source project can be an intimidating experience. We’re committed to making it as pleasant and rewarding as possible. Please always feel free to <a href="https://gitter.im/donejs/donejs">reach out to us on Gitter</a>.</p>
+<h2>Code of Conduct</h2>
+<p>In the interest of fostering an open and welcoming environment, we as
+contributors and maintainers pledge to make participation in our project and community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.</p>
+<p><a href="https://github.com/donejs/donejs/blob/master/CODE_OF_CONDUCT.md">Please read our Code of Conduct in its entirety before participating in our community.</a></p>
+<h2>Getting Help</h2>
+<p><a href="http://forums.donejs.com/">Our forums</a> and <a href="https://gitter.im/donejs/donejs">Gitter chat</a> are the best places to ask questions. The core team regularly checks both and there are other users who generously help others.</p>
+<p>If you’re interested in contributing to DoneJS, the core team is happy to pair with you to fix a bug or write a new feature! Please either message us on Gitter or the forums, or leave a comment on the GitHub issue you’re interested in helping with. We will happily walk you through setting up your development environment, creating a test and/or writing documentation, and submitting a pull request.</p>
+<h2>Project Organization</h2>
+<p>At its core, DoneJS is a CLI tool that generates an application structure with a number of projects that are built to work together.</p>
+<p>The following projects are a core part of DoneJS:</p>
+<ul>
+<li><a href="https://canjs.com/">CanJS</a></li>
+<li><a href="https://documentjs.com/">DocumentJS</a></li>
+<li><a href="https://funcunit.com/">FuncUnit</a></li>
+<li><a href="http://jquerypp.com/">jQuery++</a></li>
+<li><a href="https://stealjs.com/">StealJS</a></li>
+<li><a href="https://github.com/bitovi/syn">Syn</a></li>
+<li><a href="https://github.com/bitovi/testee">Testee</a></li>
+</ul>
+<p>Here are the DoneJS projects that glue things together and add additional functionality:</p>
+<ul>
+<li><a href="https://github.com/donejs/autorender">autorender</a></li>
+<li><a href="https://github.com/donejs/cli">cli</a></li>
+<li><a href="https://github.com/donejs/css">css</a></li>
+<li><a href="https://github.com/donejs/deploy">deploy</a></li>
+<li><a href="https://github.com/donejs/done-component">component</a></li>
+<li><a href="https://github.com/donejs/done-serve">done-serve</a></li>
+<li><a href="https://github.com/donejs/done-ssr">done-ssr</a></li>
+<li><a href="https://github.com/donejs/done-ssr-middleware">done-ssr-middleware</a></li>
+<li><a href="https://github.com/donejs/donejs">donejs</a></li>
+<li><a href="https://github.com/donejs/donejs-connect-model">donejs-connect-model</a></li>
+<li><a href="https://github.com/donejs/donejs-cordova">donejs-cordova</a></li>
+<li><a href="https://github.com/donejs/donejs-documentjs">donejs-documentjs</a></li>
+<li><a href="https://github.com/donejs/donejs-electron">donejs-electron</a></li>
+<li><a href="https://github.com/donejs/donejs-feathers">donejs-feathers</a></li>
+<li><a href="https://github.com/donejs/donejs-firebase">donejs-firebase</a></li>
+<li><a href="https://github.com/donejs/donejs-jasmine">donejs-jasmine</a></li>
+<li><a href="https://github.com/donejs/donejs-jshint">donejs-jshint</a></li>
+<li><a href="https://github.com/donejs/donejs-mocha">donejs-mocha</a></li>
+<li><a href="https://github.com/donejs/donejs-nw">donejs-nw</a></li>
+<li><a href="https://github.com/donejs/donejs-react">donejs-react</a></li>
+<li><a href="https://github.com/donejs/donejs-vagrant">donejs-vagrant</a></li>
+<li><a href="https://github.com/donejs/generator-donejs">generator-donejs</a></li>
+<li><a href="https://github.com/donejs/worker-autorender">worker-autorender</a></li>
+</ul>
+<h2>Reporting Bugs</h2>
+<p>DoneJS uses <a href="https://github.com/donejs/donejs/issues">GitHub Issues</a> to track bugs. As noted <a href="#section=section_ProjectOrganization">above</a>, DoneJS is made up of many individual GitHub repositories. Ideally, bugs are created within the
+repository whose code is causing the issue.  For example, if you’re having issues with the development server, you can create an issue at <a href="https://github.com/donejs/done-serve/issues/new?labels=bug">donejs/done-serve/issues/new</a>.</p>
+<p>If you do not know which repository your issue belongs to, that’s okay!  Please
+create your issue in
+<a href="https://github.com/donejs/donejs/issues/new?labels=bug">the main DoneJS repo</a>.  The core team will
+move the issue to the correct repository (if necessary).</p>
+<p>When creating an issue, it’s helpful to include:</p>
+<ul>
+<li>How often you can reproduce it.</li>
+<li>A detailed description of the issue with specific details to help us understand the problem.</li>
+<li>A list of the steps to reproduce the issue.</li>
+<li>What actually happened versus what you expected to have happen.</li>
+<li>Details about your environment, including the version of DoneJS, Node.js, and npm you’re using.</li>
+</ul>
+<p>Before filing a new issue, please search for previous tickets.  If there’s something similar, add to that, or
+give it a 👍. If you can provide additional information that’s not already in the issue, please add a comment to it.</p>
+<p>If you are unsure about any of this or have any other questions, please reach out to
+us on the <a href="http://forums.donejs.com/c/donejs">DoneJS forums</a> or talk to us on
+the <a href="https://gitter.im/donejs/donejs">Gitter donejs/donejs channel</a>. We’re happy to discuss any bugs and help you file a bug report.</p>
+<h2>Suggesting Features</h2>
+<p>DoneJS uses <a href="https://github.com/donejs/donejs/issues">GitHub Issues</a> to track feature suggestions. As noted <a href="#section=section_ProjectOrganization">above</a>, DoneJS is made up of many individual GitHub repositories. Ideally, feature suggestions are created within the
+repository whose code could be improved.  For example, if you have a suggestion related to the development server, you can create an issue at <a href="https://github.com/donejs/done-serve/issues/new?labels=enhancement">donejs/done-serve/issues/new</a>.</p>
+<p>If you do not know which repository your issue belongs to, that’s okay!  Please
+create your issue in
+<a href="https://github.com/donejs/donejs/issues/new?labels=enhancement">the main DoneJS repo</a>.  The core team will
+move the issue to the correct repository (if necessary).</p>
+<p>When filing a feature suggestion, it’s very helpful to include:</p>
+<ul>
+<li>Examples of what using the feature will look like.</li>
+<li>Benefits and drawbacks of the feature.</li>
+<li>Why the feature is important.</li>
+<li>Any implementation details around the feature.</li>
+</ul>
+<p>Before filing a new suggestion, please search for previous feature requests.  If there’s something similar, add to that, or
+give it a 👍. If you have additional ideas that are not already in the issue, please add a comment to it.</p>
+<p>If you are unsure about any of this or have any other questions, please reach out to
+us on the <a href="http://forums.donejs.com/c/donejs">DoneJS forums</a> or talk to us on
+the <a href="https://gitter.im/donejs/donejs">Gitter donejs/donejs channel</a>. We’re happy to discuss any ideas and help you file a feature suggestion.</p>
+<h2>Finding Ways to Contribute</h2>
+<p>There are many ways to contribute to DoneJS, whether you’re a developer who wants to code, a designer who can help improve the design and usability of our projects, or someone who’s interested in helping other members of the community.</p>
+<h3>Finding open issues</h3>
+<p>DoneJS uses <a href="https://github.com/donejs/donejs/issues">GitHub Issues</a> to track improvements we want to make to the project, whether that’s bug fixes, new features, design improvements, etc.</p>
+<p>We use a few labels to organize issues across all of the repositories:</p>
+<ul>
+<li>“help wanted” for any issues with which the core team would like help</li>
+<li>“easy” for issues the core team thinks are good for someone who’s new to contributing</li>
+<li>“documentation” for issues related to documenting the APIs</li>
+<li>“design” for issues that could use a designer’s expertise</li>
+</ul>
+<p>Here are links to GitHub searches for those terms:</p>
+<ul>
+<li>DoneJS
+<ul>
+<li><a href="https://github.com/search?q=org%3Adonejs+label%3Adesign&amp;state=open">design</a></li>
+<li><a href="https://github.com/search?q=org%3Adonejs+label%3Adocumentation&amp;state=open">documentation</a></li>
+<li><a href="https://github.com/search?q=org%3Adonejs+label%3Aeasy&amp;state=open">easy</a></li>
+<li><a href="https://github.com/search?q=org%3Adonejs+label%3A%22help+wanted%22&amp;state=open">help wanted</a></li>
+</ul></li>
+<li>CanJS
+<ul>
+<li><a href="https://github.com/search?q=org%3Acanjs+label%3Adesign&amp;state=open">design</a></li>
+<li><a href="https://github.com/search?q=org%3Acanjs+label%3Adesign&amp;state=open">documentation</a></li>
+<li><a href="https://github.com/search?q=org%3Acanjs+label%3Aeasy&amp;state=open">easy</a></li>
+<li><a href="https://github.com/search?q=org%3Acanjs+label%3A%22help+wanted%22&amp;state=open">help wanted</a></li>
+</ul></li>
+<li>DocumentJS
+<ul>
+<li><a href="https://github.com/bitovi/documentjs/labels/design">design</a></li>
+<li><a href="https://github.com/bitovi/documentjs/labels/documentation">documentation</a></li>
+<li><a href="https://github.com/bitovi/documentjs/labels/easy">easy</a></li>
+<li><a href="https://github.com/bitovi/documentjs/labels/help%20wanted">help wanted</a></li>
+</ul></li>
+<li>FuncUnit
+<ul>
+<li><a href="https://github.com/bitovi/funcunit/labels/design">design</a></li>
+<li><a href="https://github.com/bitovi/funcunit/labels/documentation">documentation</a></li>
+<li><a href="https://github.com/bitovi/funcunit/labels/easy">easy</a></li>
+<li><a href="https://github.com/bitovi/funcunit/labels/help%20wanted">help wanted</a></li>
+</ul></li>
+<li>jQuery++
+<ul>
+<li><a href="https://github.com/bitovi/funcunit/labels/design">design</a></li>
+<li><a href="https://github.com/bitovi/funcunit/labels/documentation">documentation</a></li>
+<li><a href="https://github.com/bitovi/funcunit/labels/easy">easy</a></li>
+<li><a href="https://github.com/bitovi/jquerypp/labels/help%20wanted">help wanted</a></li>
+</ul></li>
+<li>StealJS
+<ul>
+<li><a href="https://github.com/search?q=org%3Astealjs+label%3Adesign&amp;state=open">design</a></li>
+<li><a href="https://github.com/search?q=org%3Astealjs+label%3Adocumentation&amp;state=open">documentation</a></li>
+<li><a href="https://github.com/search?q=org%3Astealjs+label%3Aeasy&amp;state=open">easy</a></li>
+<li><a href="https://github.com/search?q=org%3Astealjs+label%3A%22help+wanted%22&amp;state=open">help wanted</a></li>
+</ul></li>
+<li>Syn
+<ul>
+<li><a href="https://github.com/bitovi/syn/labels/design">design</a></li>
+<li><a href="https://github.com/bitovi/syn/labels/documentation">documentation</a></li>
+<li><a href="https://github.com/bitovi/syn/labels/easy">easy</a></li>
+<li><a href="https://github.com/bitovi/syn/labels/help%20wanted">help wanted</a></li>
+</ul></li>
+<li>Testee
+<ul>
+<li><a href="https://github.com/bitovi/syn/labels/design">design</a></li>
+<li><a href="https://github.com/bitovi/syn/labels/documentation">documentation</a></li>
+<li><a href="https://github.com/bitovi/syn/labels/easy">easy</a></li>
+<li><a href="https://github.com/bitovi/testee/labels/help%20wanted">help wanted</a></li>
+</ul></li>
+</ul>
+<h3>Getting involved in the community</h3>
+<p>You can also get involved in our community by posting in our forums, chatting with us on Gitter, and answering questions on Stack Overflow.</p>
+<ul>
+<li>DoneJS
+<ul>
+<li><a href="http://forums.donejs.com/c/donejs">Forums</a></li>
+<li><a href="https://gitter.im/donejs/donejs">Gitter</a></li>
+<li><a href="http://stackoverflow.com/search?tab=newest&amp;q=donejs+answers:0">Stack Overflow</a></li>
+</ul></li>
+<li>CanJS
+<ul>
+<li><a href="http://forums.donejs.com/c/canjs">Forums</a></li>
+<li><a href="https://gitter.im/canjs/canjs">Gitter</a></li>
+<li><a href="http://stackoverflow.com/search?tab=newest&amp;q=canjs+answers:0">Stack Overflow</a></li>
+</ul></li>
+<li>DocumentJS
+<ul>
+<li><a href="http://forums.donejs.com/c/documentjs">Forums</a></li>
+<li><a href="https://gitter.im/bitovi/documentjs">Gitter</a></li>
+<li><a href="http://stackoverflow.com/search?tab=newest&amp;q=documentjs+answers:0">Stack Overflow</a></li>
+</ul></li>
+<li>FuncUnit
+<ul>
+<li><a href="https://gitter.im/bitovi/funcunit">Gitter</a></li>
+<li><a href="http://stackoverflow.com/search?tab=newest&amp;q=funcunit+answers:0">Stack Overflow</a></li>
+</ul></li>
+<li>jQuery++
+<ul>
+<li><a href="http://stackoverflow.com/search?tab=newest&amp;q=jquerypp+answers:0">Stack Overflow</a></li>
+</ul></li>
+<li>StealJS
+<ul>
+<li><a href="http://forums.donejs.com/c/stealjs">Forums</a></li>
+<li><a href="https://gitter.im/stealjs/steal">Gitter</a></li>
+<li><a href="http://stackoverflow.com/search?tab=newest&amp;q=stealjs+answers:0">Stack Overflow</a></li>
+</ul></li>
+<li>Syn
+<ul>
+<li><a href="https://gitter.im/bitovi/syn">Gitter</a></li>
+</ul></li>
+<li>Testee
+<ul>
+<li><a href="https://gitter.im/bitovi/testee">Gitter</a></li>
+</ul></li>
+</ul>
+<h3>Spreading the word</h3>
+<p>We also always need help spreading the word about the DoneJS projects. Check out the <a href="#section=section_Evangelism">evangelism section</a> on how you can <a href="#section=section_Writingablogarticle">write a blog post</a>, <a href="#section=section_Speakingataconferenceormeetup">speak at a conference</a>, or <a href="#section=section_OrganizingaDoneJSmeetup">organize a meetup</a>.</p>
+<h2>Developing Locally</h2>
+<p>This section will walk you through setting up the <a href="https://github.com/donejs/donejs">main DoneJS repository</a> on your computer. Remember that DoneJS is <a href="#section=section_ProjectOrganization">split into multiple repositories</a>, but you can apply the same general steps to set up any of the other repos.</p>
+<h3>Signing up for GitHub</h3>
+<p>If you don’t already have a GitHub account, you’ll need to <a href="https://help.github.com/articles/signing-up-for-a-new-github-account/">create a new one</a>.</p>
+<h3>Forking &amp; cloning the repository</h3>
+<p>A “fork” is a copy of a repository in your personal GitHub account. “Cloning” is the process of getting the repository’s source code on your computer.</p>
+<p>GitHub has a guide for <a href="https://help.github.com/articles/fork-a-repo/">forking a repo</a>. To fork DoneJS, you can start by going to its <a href="https://github.com/donejs/donejs/fork">fork page</a>.</p>
+<p>Next, you’ll want to clone the repo. <a href="https://help.github.com/articles/cloning-a-repository/">GitHub’s cloning guide</a> explains how to do this on Linux, Mac, or Windows.</p>
+<p>GitHub’s guide will <a href="https://help.github.com/articles/fork-a-repo/#step-2-create-a-local-clone-of-your-fork">instruct you</a> to clone it with a command like:</p>
+<pre><code class="language-shell">git clone https://github.com/YOUR-USERNAME/donejs
+</code></pre>
+<p>Make sure you replace <code>YOUR-USERNAME</code> with your GitHub username.</p>
+<h3>Installing the dependencies</h3>
+<p>After you’ve <a href="#section=section_Forking_cloningtherepository">forked &amp; cloned the repository</a>, you’ll need to install the project’s dependencies.</p>
+<p>First, make sure you’ve <a href="https://docs.npmjs.com/getting-started/installing-node">installed Node.js and npm</a>.</p>
+<p>If you just cloned the repo from the command line, you’ll want to switch to the folder with your clone:</p>
+<pre><code class="language-shell">cd donejs
+</code></pre>
+<p>Next, install the project’s dependencies with npm:</p>
+<pre><code class="language-shell">npm install
+</code></pre>
+<h3>Running the tests</h3>
+<p>Firefox is used to run the repository’s tests. If you don’t already have it, <a href="https://www.mozilla.org/en-US/firefox/new/">download Firefox</a>. Mozilla has guides for installing it on <a href="https://support.mozilla.org/t5/Install-and-Update/Install-Firefox-on-Linux/ta-p/2516">Linux</a>, <a href="https://support.mozilla.org/t5/Install-and-Update/How-to-download-and-install-Firefox-on-Mac/ta-p/3453">Mac</a>, and <a href="https://support.mozilla.org/t5/Install-and-Update/How-to-download-and-install-Firefox-on-Windows/ta-p/2210">Windows</a>.</p>
+<p>After Firefox is installed, you can run:</p>
+<pre><code class="language-shell">npm test
+</code></pre>
+<p>If every test passed, congratulations! You have everything you need to change the code and have the core team review it.</p>
+<h3>Building the documentation</h3>
+<p>The <a href="https://github.com/donejs/donejs">main DoneJS repo</a> contains <a href="https://donejs.com/">DoneJS.com</a>.</p>
+<p>To build the site, run:</p>
+<pre><code class="language-shell">npm run document
+</code></pre>
+<p><a href="https://docs.npmjs.com/cli/run-script"><code>npm run</code></a> will look for the <code>document</code> script in the repository’s <a href="https://github.com/donejs/donejs/blob/master/package.json"><code>package.json</code></a> and run it.</p>
+<h3>Viewing the site</h3>
+<p>After you <a href="#section=section_Buildingthedocumentation">build the docs</a>, your <code>donejs</code> repository will contain a <code>site</code> folder with the website.</p>
+<p>To view the site, we recommend you install <a href="https://www.npmjs.com/package/http-server">http-server</a>.</p>
+<pre><code class="language-shell">npm install http-server -g
+</code></pre>
+<p>After it’s installed, you can start a server for the <code>site</code> directory:</p>
+<pre><code class="language-shell">http-server site
+</code></pre>
+<p><code>http-server</code> will tell you where you can go in your browser to see the site. It will be something like <a href="http://127.0.0.1:8080">http://127.0.0.1:8080</a>.</p>
+<h2>Changing the Code</h2>
+<p>Now that your computer is set up to <a href="#section=section_DevelopingLocally">develop DoneJS locally</a>, you can make changes in your local repository.</p>
+<p>The DoneJS projects generally follow the <a href="https://help.github.com/articles/github-flow/">GitHub flow</a>. This section will briefly explain how you can make changes on your computer and submit a pull request to have those changes merged into the main project.</p>
+<h3>Creating a new branch</h3>
+<p>Starting in the DoneJS repository you have cloned to your computer, you can create a new branch:</p>
+<pre><code class="language-shell">git checkout -b your-branch-name
+</code></pre>
+<p>Replace <code>your-branch-name</code> with the name of your feature branch. You can name the feature branch whatever you’d like. We recommend starting the name with the issue number and a few words related to the issue. For example, for <a href="https://github.com/donejs/donejs/issues/295">#295 “Make a contribution guide”</a>, <code>295-contribution-guide</code> is an appropriate branch name.</p>
+<h3>Style guide</h3>
+<p>Where possible, our code generally follows <a href="https://contribute.jquery.org/style-guide/js/">jQuery’s coding conventions</a>.</p>
+<h3>Updating tests</h3>
+<p>The <a href="https://github.com/donejs/donejs/tree/master/test"><code>test</code> directory</a> contains files related to testing the code in the repository. When fixing bugs or writing new features, you should update the existing tests or create new tests to cover your changes.</p>
+<p>After updating the tests, make sure you <a href="#section=section_Runningthetests">run the tests</a>.</p>
+<h3>Updating the documentation</h3>
+<p>The <a href="https://github.com/donejs/donejs/tree/master/docs"><code>docs</code></a> and <a href="https://github.com/donejs/donejs/tree/master/guides"><code>guides</code></a> directories contain the files used to generate <a href="https://donejs.com/">DoneJS.com</a>.</p>
+<p>After making changes, make sure you <a href="#section=section_Buildingthedocumentation">build the documentation</a>.</p>
+<h3>Submitting a pull request</h3>
+<p>Once you’ve made your changes and <a href="#section=section_Runningthetests">run the tests</a>, you can push your branch to GitHub:</p>
+<pre><code class="language-shell">git push origin your-branch-name
+</code></pre>
+<p>Make sure you replace <code>your-branch-name</code> with the name of your branch.</p>
+<p>Next, go to the DoneJS repository’s <a href="https://github.com/donejs/donejs/compare">compare changes</a> page and click on “compare across forks.” You’ll need to change the “head fork” to your repository and select your branch name.</p>
+<p>After you’ve selected your forked repository and branch, you can click on “Create pull request”. Give your PR a meaningful title and provide details about the change in the description, including a link to the issue(s) your PR addresses. If applicable, please include a screenshot or gif to demonstrate your change. This makes it easier for reviewers to verify that it works for them. <a href="http://www.cockos.com/licecap/">LICEcap</a> is a great tool for making gifs.</p>
+<p>Once you’ve filled out your pull request’s details, click on “Create pull request”. The core team will receive a notification about your pull request and will provide feedback.</p>
+<p>GitHub has additional documentation on <a href="https://help.github.com/articles/creating-a-pull-request-from-a-fork/">creating a pull request from a fork</a> that you might find useful.</p>
+<h2>Updating DoneJS.com</h2>
+<p>First, create a new clone and install the dependencies:</p>
+<pre><code class="language-shell">git clone git@github.com:donejs/donejs.git -b gh-pages site/
+npm install
+</code></pre>
+<p>If you get an error saying <code>Permission denied (publickey)</code> then you should follow GitHub’s instructions on
+<a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">generating an SSH key</a>.</p>
+<p>Push a new commit to the <code>gh-pages</code> branch with the built docs:</p>
+<pre><code class="language-shell">npm run document
+cd site/
+git add --all
+git commit -am &quot;Updating the site&quot;
+git push origin gh-pages
+</code></pre>
+<p><a href="https://donejs.com/">DoneJS.com</a> is hosted on <a href="https://pages.github.com/">GitHub pages</a> from the <a href="https://github.com/donejs/donejs/tree/gh-pages"><code>gh-pages</code></a> branch.</p>
+<p>To generate and push a new version of the website, verify you have push access to that branch, then get all latest changes via:</p>
+<pre><code class="language-shell">git checkout master
+git fetch --all &amp;&amp; git rebase
+</code></pre>
+<p>Then, reinstall the dependencies:</p>
+<pre><code class="language-shell">npm cache clean
+rm -rf node_modules
+npm install
+</code></pre>
+<p>Next, delete the local <code>gh-pages</code> branch:</p>
+<pre><code class="language-shell">git branch -D gh-pages
+</code></pre>
+<p>Then run the following to generate and publish a new version of the website:</p>
+<pre><code class="language-shell">make
+</code></pre>
+<h2>Evangelism</h2>
+<p>Hopefully you love DoneJS as much as we do and you want to share your
+knowledge about it. Fantastic! We want to help you.</p>
+<p>There are lots of ways to spread the word about DoneJS, including:</p>
+<ul>
+<li>Writing a blog article</li>
+<li>Speaking at a conference or meetup</li>
+<li>Organizing a DoneJS meetup</li>
+</ul>
+<p>No matter what you’re interested in, please <a href="mailto:chasen@bitovi.com">email Chasen Le Hara</a> so he can help promote you and what you’re doing.</p>
+<h3>Writing a blog article</h3>
+<p>If you’re writing something about DoneJS and would like the core team to review it,
+we’re happy to help.  Once it’s published, let us know so we can promote it.</p>
+<h3>Speaking at a conference or meetup</h3>
+<p>The <a href="./presentations.html">presentations list</a> contains a variety of talks related to the DoneJS projects.</p>
+<h3>Organizing a DoneJS meetup</h3>
+<p>There are several local DoneJS groups:</p>
+<ul>
+<li><a href="https://www.meetup.com/DoneJS-Boston/">Boston</a></li>
+<li><a href="https://www.meetup.com/DoneJS-Chicago/">Chicago</a></li>
+<li><a href="https://www.meetup.com/DoneJS-Fort-Lauderdale/">Ft. Lauderdale</a></li>
+<li><a href="https://www.meetup.com/DoneJS-LA/">Los Angeles</a></li>
+<li><a href="https://www.meetup.com/DoneJS-NYC/">New York</a></li>
+<li><a href="https://www.meetup.com/DoneJS-Phoenix/">Phoenix</a></li>
+<li><a href="https://www.meetup.com/DoneJS-raleigh-durham/">Raleigh-Durham</a></li>
+<li><a href="https://www.meetup.com/DoneJS-San-Francisco/">San Francisco</a></li>
+<li><a href="https://www.meetup.com/DoneJS-Seattle/">Seattle</a></li>
+<li><a href="https://www.meetup.com/DoneJS-Silicon-Valley/">Silicon Valley</a></li>
+</ul>
+<p>We’re always looking for people to speak at one of these groups, become an organizer,
+or start their own group. If you are interested in any of these things,
+please let us know!</p>
+
+		</section>
+		
+		
+
+		
+
+		
+
+	
+	</article>
+	
+
+
+	</div>
+</div>
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="/static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="/Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="/About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="/Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="/Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="/community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-github-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="/static/img/icon-twitter-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="/static/img/icon-googleplus-white.svg">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">
+								<img class="footer-social-icon" src="/static/img/icon-youtube-white.svg">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="http://www.bitovi.com">2015 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"type":"page","name":"contributing","src":"docs/guides/contributing.md","description":"","title":"Contributing","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Library/WebServer/Documents/GitHub/donejs"},"dest":"/Library/WebServer/Documents/GitHub/donejs/site","ignoreTemplateRender":true,"templates":"/Library/WebServer/Documents/GitHub/donejs/docs/theme/templates","static":"/Library/WebServer/Documents/GitHub/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+			steal = {
+			instantiated: {
+				"bundles/static.css!$css" : null
+			}
+			}
+		</script>
+		<script type='text/javascript'
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+				bundles-path="bundles"></script>
+	
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+
+
+
+</html>

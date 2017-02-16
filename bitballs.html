@@ -91,6 +91,7 @@
 											<li><a  href="./plugin.html">Creating a plugin</a></li>
 											<li><a  href="./generator.html">Creating a generator</a></li>
 											<li><a class="active" href="./bitballs.html">Example App: Bitballs</a></li>
+											<li><a  href="./contributing.html">Contributing</a></li>
 									</ul>
 							</li>
 							<li >
@@ -278,7 +279,7 @@ endorse any backend storage technology.</p>
 <ul>
 <li>Dependency Management: <a href="http://stealjs.com/">StealJS</a> with mixed use of <a href="http://stealjs.com/docs/syntax.CommonJS.html">CommonJS</a> and <a href="http://stealjs.com/docs/syntax.es6.html">ES6</a>.</li>
 <li>Model: <a href="https://connect.canjs.com/">can-connect</a></li>
-<li>ViewModel: <a href="https://canjs.com/docs/can.Map.html">can.Map</a> and <a href="https://canjs.com/docs/can.List.html">can.List</a></li>
+<li>ViewModel: <a href="http://v3.canjs.com/doc/can-define/map/map.html">can-define/map</a> and <a href="http://v3.canjs.com/doc/can-define/list/list.html">can-define/list</a></li>
 <li>View: <a href="https://canjs.com/docs/can.stache.html">can.stache</a></li>
 <li>Custom Elements: <a href="https://canjs.com/docs/can.Component.html">can.Component</a></li>
 <li>Routing: <a href="https://canjs.com/docs/can.route.html">can.route</a></li>
@@ -289,7 +290,7 @@ endorse any backend storage technology.</p>
 <li>Ajax Fixtures: <a href="https://www.npmjs.com/package/can-fixture">can-fixture</a></li>
 <li>Functional Testing: <a href="https://www.npmjs.com/package/funcunit">FuncUnit</a></li>
 <li>Test Runner: <a href="https://www.npmjs.com/package/testee">Testee</a></li>
-<li>Continuous Integation and Deployment: <a href="https://travis-ci.org/">Travis CI</a></li>
+<li>Continuous Integration and Deployment: <a href="https://travis-ci.org/">Travis CI</a></li>
 </ul>
 <p><strong>Hosting</strong></p>
 <ul>
@@ -592,7 +593,7 @@ other users as admin.</p>
 <p>The <a href="http://donejs.github.io/bitballs/docs/bitballs%7Capp.html">AppViewModel</a> has a <code>session</code> property that uses the [Session] model
 to request and store the available
 session. You can read the session's user and if they are an admin like:</p>
-<pre><code>appViewModel.attr('user').attr('isAdmin')
+<pre><code>appViewModel.user.isAdmin
 </code></pre>
 <p>The <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html"><code>&lt;bitballs-navigation&gt;</code></a> component allows someone to login and change
 the <code>AppViewModel</code>'s session.</p>
@@ -633,7 +634,7 @@ creates a form that takes a user's email and password.</p>
         ev.preventDefault();
     }
     var self = this,
-        promise = this.attr(&quot;user&quot;).save().then(function(user) {
+        promise = this.user.save().then(function(user) {
             ...
         });
     ...
@@ -679,7 +680,7 @@ be stored on the AppViewModel.</p>
   serialize: false,
   value: function() {
     Session.get({}).then((session) =&gt; {
-      this.attr(&quot;session&quot;, session);
+      this.session = session;
     });
   }
 },
@@ -719,14 +720,14 @@ object will be available on the AppViewModel.</p>
 <p>The <a href="http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Csession.html"><code>Session</code> client model</a> makes sure that <code>user</code> is converted into a <a href="http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cuser.html">User model</a>
 and also provides an <code>isAdmin</code> method that returns if admin functionality should
 be available:</p>
-<pre><code class="language-js">var Session = Map.extend({
+<pre><code class="language-js">var Session = DefineMap.extend({
     define: {
         user: {
             Type: User
         }
     },
     isAdmin: function(){
-        return this.attr(&quot;user&quot;) &amp;&amp; this.attr(&quot;user&quot;).attr(&quot;isAdmin&quot;);
+        return this.user &amp;&amp; this.user.isAdmin;
     }
 });
 </code></pre>
@@ -773,11 +774,11 @@ the new session instance.</p>
         ev.preventDefault();
     }
     var self = this;
-    this.attr(&quot;loginSession&quot;).save().then(function(session){
+    this.loginSession.save().then(function(session){
         // create placeholder session for next login.
-        self.attr(&quot;loginSession&quot;, new Session({user: new User()}));
+        self.loginSession = new Session({user: new User()});
         // update AppViewModel with new session
-        self.attr(&quot;app&quot;).attr(&quot;session&quot;, session);
+        self.app.session = session;
 
     });
 },
@@ -819,8 +820,8 @@ calls <code>logout()</code> on its ViewModel:</p>
 </code></pre>
 <p><code>logout</code> calls destroy on the session and then removes the session from the AppViewModel:</p>
 <pre><code class="language-js">logout: function(){
-  this.attr(&quot;session&quot;).destroy().then(()=&gt;{
-    this.attr(&quot;session&quot;, null);
+  this.session.destroy().then(()=&gt;{
+    this.session = null;
   });
 }
 </code></pre>
@@ -949,7 +950,7 @@ backend <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">Object
 <p>For instance, the <strong>game details</strong> page requests a game with its
 related fields like:</p>
 <pre><code>Game.get({
-    id: this.attr(&quot;gameId&quot;),
+    id: this.gameId,
     withRelated: [&quot;stats&quot;,
         &quot;homeTeam.player1&quot;,
         &quot;homeTeam.player2&quot;,
@@ -1022,7 +1023,7 @@ to make a service that can dynamically include related data:</p>
 database. For instance, if a game suddenly has
 comments, we could make the following work:</p>
 <pre><code>Game.get({
-    id: this.attr(&quot;gameId&quot;),
+    id: this.gameId,
     withRelated: [&quot;comments&quot;]
 });
 </code></pre>
@@ -1076,11 +1077,11 @@ any of the advanced behavior of <a href="connect.canjs.com">can-connect</a>, you
 to create a relational algebra that understands the service API.</p>
 <h4>Connecting to a service</h4>
 <p>Bitballs' client Models are <a href="https://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html">can-connect supermodels</a>.  So a type and list type is defined:</p>
-<pre><code>var Game = Map.extend({
+<pre><code>var Game = DefineMap.extend({
   ...
 });
 
-Game.List = can.List.extend({Map: Game},{});
+Game.List = DefineList.extend({&quot;#&quot;: Game},{});
 </code></pre>
 <p>And they are connected to a url:</p>
 <pre><code>var gameConnection = superMap({
@@ -1103,8 +1104,7 @@ expects, we need to define a custom set algebra. For <code>Game</code>, it looks
 <p>Because Game data can come back with a <code>homeTeam</code>,
 <code>awayTeam</code> and <code>stats</code> property, we make sure those
 are created as the right type:</p>
-<pre><code>var Game = Map.extend({
-  define: {
+<pre><code>var Game = DefineMap.extend({
     homeTeam: {
         Type: Team
     },
@@ -1114,11 +1114,10 @@ are created as the right type:</p>
     stats: {
         Type: Stat.List,
         set: function(newVal){
-            newVal.__listSet = {where: {gameId: this.attr(&quot;id&quot;)}};
+            newVal.__listSet = {where: {gameId: this.id}};
             return newVal;
         }
-    }
-  },
+    },
   ...
 });
 </code></pre>
@@ -1126,45 +1125,38 @@ are created as the right type:</p>
 <h4>Defining computed properties</h4>
 <p><code>Game</code> also has <code>teams</code> and <code>players</code> computed properties that
 derive their value from related fields:</p>
-<pre><code class="language-js">var Game = Map.extend({
-  define: {
-    ...
-    teams: {
-      get: function() {
+<pre><code class="language-js">var Game = DefineMap.extend({
+  ...
+  get teams() {
+    var teams = [],
+      home = this.homeTeam,
+      away = this.awayTeam;
 
-        var teams = [],
-          home = this.attr(&quot;homeTeam&quot;),
-          away = this.attr(&quot;awayTeam&quot;);
-
-        if (home) {
-          teams.push(home);
-        }
-        if (away) {
-          teams.push(away);
-        }
-        return new Team.List(teams);
-      }
-    },
-    players: {
-      get: function() {
-        var players = [];
-        this.attr(&quot;teams&quot;).forEach(function(team) {
-          [].push.apply(players, can.makeArray(team.attr(&quot;players&quot;)));
-        });
-        return new Player.List(players);
-      }
+    if (home) {
+      teams.push(home);
     }
+    if (away) {
+      teams.push(away);
+    }
+    return new Team.List(teams);
+  },
+  get players() {
+    var players = [];
+    this.teams.forEach(function(team) {
+      [].push.apply(players, can.makeArray(team.players));
+    });
+    return new Player.List(players);
   }
 });
 </code></pre>
-<p>In <code>players</code>, <code>team.attr(&quot;players&quot;)</code> is actually making use of a similar computed
+<p>In <code>players</code>, <code>team.players</code> is actually making use of a similar computed
 <a href="http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Cteam.html"><code>players</code> property</a>  in the Team client model.</p>
 <h4>Defining intermediate computed properties to avoid recomputing.</h4>
 <p>Sometimes ViewModels mash up Model data.  For example,
 the <code>&lt;tournament-details&gt;</code> component makes four requests in parallel:</p>
-<pre><code>Tournament.get({id: this.attr(&quot;tournamentId&quot;)});
-Game.getList({tournamentId: this.attr(&quot;tournamentId&quot;)});
-Team.getList({ tournamentId: this.attr(&quot;tournamentId&quot;) });
+<pre><code>Tournament.get({id: this.tournamentId});
+Game.getList({tournamentId: this.tournamentId});
+Team.getList({ tournamentId: this.tournamentId });
 Player.getList({});
 </code></pre>
 <p>This gets a tournament, the games for a tournament, the
@@ -1176,11 +1168,11 @@ Team request because all players are already loading.</p>
 all we have are player ids on each team:</p>
 <p><img class="img-responsive" src="/static/img/bitballs/team-list.png" srcset="/static/img/bitballs/team-list.png 1x, /static/img/bitballs/team-list-2x.png 2x"></p>
 <p>A naive solution would be to make a <code>getById</code> method on <code>Player.List</code> like:</p>
-<pre><code>Player.List = can.List.extend({Map: Player},{
+<pre><code>Player.List = DefineList.extend({&quot;#&quot;: Player},{
   getById: function(id){
     return this.filter(function(player){
-      return team.attr(&quot;id&quot;) === id;
-    }).attr(0);
+      return team.id === id;
+    })[0];
   }
 });
 </code></pre>
@@ -1199,13 +1191,13 @@ all we have are player ids on each team:</p>
 <p>The problem with this is that each <code>.getById</code> call is linear search.  Instead,
 we can keep a mapping of player ids to players like:</p>
 <pre><code>idMap: {
-    type: &quot;*&quot;,
+    type: &quot;any&quot;,
     get: function(){
 
         var map = {};
 
         this.each(function(player){
-            map[player.attr(&quot;id&quot;)] = player;
+            map[player.id] = player;
         });
 
         return map;
@@ -1214,7 +1206,7 @@ we can keep a mapping of player ids to players like:</p>
 </code></pre>
 <p>And make a <code>getById</code> use <code>idMap</code> like:</p>
 <pre><code>playerById: function(id){
-    return this.attr(&quot;playerIdMap&quot;)[id];
+    return this.playerIdMap[id];
 },
 </code></pre>
 <p>Now when <code>.getById</code> is used in the template <code>playerIdMap</code> will only ever
@@ -1268,13 +1260,13 @@ on the <a href="http://donejs.github.io/bitballs/docs/bitballs%7Capp.html">AppVi
 <p>For Bitballs, we implemented <code>statusCode</code> as a <a href="https://canjs.com/docs/can.Map.prototype.define.get.html">define getter</a> as follows:</p>
 <pre><code>statusCode: {
     get: function(lastSet, resolve){
-        var pageConfig = this.attr(&quot;pageComponentConfig&quot;);
+        var pageConfig = this.pageComponentConfig;
 
         if(pageConfig.statusCode) {
             return pageConfig.statusCode;
         }
 
-        var pagePromise = this.attr('pagePromise');
+        var pagePromise = this.pagePromise;
         if(pagePromise){
             pagePromise.then(function(){
                 resolve(200);
@@ -1293,31 +1285,29 @@ situations.</p>
 <p><code>statusCode</code> first checks if the <code>pageComponentConfig</code> is specifying a specific <code>statusCode</code>
 to be given.  <code>pageComponentConfig</code> only specifies a <code>statusCode</code> when its state
 doesn't match a valid route:</p>
-<pre><code>pageComponentConfig: {
-    get: function(){
-        var page = this.attr(&quot;page&quot;);
-        if(this.attr(&quot;gameId&quot;)) {
-            return {...};
-        } else if(this.attr(&quot;tournamentId&quot;)) {
-            return {...};
-        } else if(page === &quot;tournaments&quot;) {
-            return {...};
-        } else if(page === &quot;users&quot;) {
-            return {...};
-        } else if(page === &quot;register&quot; || page === &quot;account&quot;) {
-            return {...};
-        } else if(page === &quot;players&quot;){
-            return {...};
-        } else {
+<pre><code>get pageComponentConfig() {
+    var page = this.page;
+    if(this.gameId) {
+        return {...};
+    } else if(this.tournamentId) {
+        return {...};
+    } else if(page === &quot;tournaments&quot;) {
+        return {...};
+    } else if(page === &quot;users&quot;) {
+        return {...};
+    } else if(page === &quot;register&quot; || page === &quot;account&quot;) {
+        return {...};
+    } else if(page === &quot;players&quot;){
+        return {...};
+    } else {
 
-            return {
-                title: &quot;Page Not Found&quot;,
-                componentName: &quot;four-0-four&quot;,
-                attributes: &quot;&quot;,
-                moduleName: &quot;404.component!&quot;,
-                statusCode: 404
-            };
-        }
+        return {
+            title: &quot;Page Not Found&quot;,
+            componentName: &quot;four-0-four&quot;,
+            attributes: &quot;&quot;,
+            moduleName: &quot;404.component!&quot;,
+            statusCode: 404
+        };
     }
 },
 </code></pre>
@@ -1332,47 +1322,43 @@ a <code>404</code> status code is returned.</p>
 <p><code>pagePromise</code> is a promise that is passed by a child component up to the
 <code>AppViewModel</code>.  Notice how <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cgame%7Cdetails.html">&lt;game-details&gt;</a> passes its <code>gamePromise</code>
 as the <code>pagePromise</code> like <code>{^game-promise}='./pagePromise'</code>:</p>
-<pre><code class="language-js">pageComponentConfig: {
-    get: function(){
-        var page = this.attr(&quot;page&quot;);
-        if(this.attr(&quot;gameId&quot;)) {
-            return {
-                title: &quot;Game&quot;,
-                componentName: &quot;game-details&quot;,
-                attributes: &quot;{^game-promise}='./pagePromise' {game-id}='./gameId' {session}='./session'&quot;,
-                moduleName: &quot;game/details/&quot;
-            };
+<pre><code class="language-js">get pageComponentConfig() {
+    var page = this.page;
+    if(this.gameId) {
+        return {
+            title: &quot;Game&quot;,
+            componentName: &quot;game-details&quot;,
+            attributes: &quot;{^game-promise}='./pagePromise' {game-id}='./gameId' {session}='./session'&quot;,
+            moduleName: &quot;game/details/&quot;
+        };
 
-        } else if(this.attr(&quot;tournamentId&quot;)) {
-            return {
-                title: &quot;Tournament&quot;,
-                componentName: &quot;tournament-details&quot;,
-                attributes: &quot;{^tournament-promise}='./pagePromise' {tournament-id}='./tournamentId' {is-admin}='./isAdmin'&quot;,
-                moduleName: &quot;tournament/details/&quot;
-            };
+    } else if(this.tournamentId) {
+        return {
+            title: &quot;Tournament&quot;,
+            componentName: &quot;tournament-details&quot;,
+            attributes: &quot;{^tournament-promise}='./pagePromise' {tournament-id}='./tournamentId' {is-admin}='./isAdmin'&quot;,
+            moduleName: &quot;tournament/details/&quot;
+        };
 
-        } else if(page === &quot;tournaments&quot;) {
-            return {...};
-        } else if(page === &quot;users&quot;) {
-            return {...};
-        } else if(page === &quot;register&quot; || page === &quot;account&quot;) {
-            return {...};
-        } else if(page === &quot;players&quot;){
-            return {...};
-        } else {
-            return {...};
-        }
+    } else if(page === &quot;tournaments&quot;) {
+        return {...};
+    } else if(page === &quot;users&quot;) {
+        return {...};
+    } else if(page === &quot;register&quot; || page === &quot;account&quot;) {
+        return {...};
+    } else if(page === &quot;players&quot;){
+        return {...};
+    } else {
+        return {...};
     }
 },
 </code></pre>
 <p><a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cgame%7Cdetails.html">&lt;game-details&gt;</a>'s <code>gamePromise</code> property is used to load the game's data:</p>
-<pre><code class="language-js">gamePromise: {
-    get: function() {
-        return Game.get({
-            id: this.attr(&quot;gameId&quot;),
-            withRelated: [...]
-        });
-    }
+<pre><code class="language-js">get gamePromise() {
+    return Game.get({
+        id: this.gameId,
+        withRelated: [...]
+    });
 }
 </code></pre>
 <p>If there is no game at <code>gameId</code>, the promise will be rejected and <code>statusCode</code> will be
@@ -1509,7 +1495,7 @@ will also be true.</p>
 	
 
 	<script type="text/javascript">
-		var docObject = {"type":"page","name":"bitballs","src":"docs/guides/bitballs.md","description":"In this guide, you'll learn how [Bitballs](http://bitballs.herokuapp.com) - a charity basketball tournament management application - works.\nSpecifically, this guide will walk through the implementation of the following behaviors or functionality:\n\n - Registration, login, user sessions, and access rights.\n - Handling relationships between model types.\n - Setup node services and server-side rendering on the same process.\n - How to turn off parts of the app that should not be server-side rendered.\n\nThe code for Bitballs can be found [on github](http://github.com/donejs/bitballs).\nTo install and run it locally, follow its\n[development setup instructions](https://github.com/donejs/bitballs#setup-environment).\n\nBitballs was written to help organize Bitovi's yearly charity basketball tournament\nfor the American Heart and Stroke Association.  Justin Meyer, one of Bitovi's founders,\nand DoneJS core contributor had a stroke. Read about his experience and the purpose of\nthe tournament [here](http://blog.bitovi.com/bitovi-hoops-for-heart-with-the-american-stroke-association/).\n\nThe application allows __admins__, who manage the tournament, to:\n\nCreate an account (and verify their email address):\n\n<img src=\"/static/img/bitballs/create-user.png\" srcset=\"/static/img/bitballs/create-user.png 1x, /static/img/bitballs/create-user-2x.png 2x\">\n\nLogin:\n\n<img src=\"/static/img/bitballs/login.png\" srcset=\"/static/img/bitballs/login.png 1x, /static/img/bitballs/login-2x.png 2x\">\n\nCreate, edit, and delete players:\n\n<img src=\"/static/img/bitballs/create-player.png\" srcset=\"/static/img/bitballs/create-player.png 1x, /static/img/bitballs/create-player-2x.png 2x\">\n\nCreate, edit, and delete tournaments:\n\n<img src=\"/static/img/bitballs/create-tournament.png\" srcset=\"/static/img/bitballs/create-tournament.png 1x, /static/img/bitballs/create-tournament-2x.png 2x\">\n\nCreate teams of players for a tournament:\n\n<img src=\"/static/img/bitballs/create-team.png\" srcset=\"/static/img/bitballs/create-team.png 1x, /static/img/bitballs/create-team-2x.png 2x\">\n\nCreate and delete games for a tournament:\n\n<img src=\"/static/img/bitballs/new-game.png\" srcset=\"/static/img/bitballs/new-game.png 1x, /static/img/bitballs/new-game-2x.png 2x\">\n\nAdd and remove stats for a game while watching it on youtube:\n\n<img src=\"/static/img/bitballs/add-stat.png\" srcset=\"/static/img/bitballs/add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x\">\n\nVisitors who are not admins are only able to\nview the list of players, tournaments, and game details:\n\n<img src=\"/static/img/bitballs/public-view.png\" srcset=\"/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x\">","title":"Example: Bitballs","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/mmujica/Projects/donejs"},"dest":"/Users/mmujica/Projects/donejs/site","ignoreTemplateRender":true,"templates":"/Users/mmujica/Projects/donejs/docs/theme/templates","static":"/Users/mmujica/Projects/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+		var docObject = {"type":"page","name":"bitballs","src":"docs/guides/bitballs.md","description":"In this guide, you'll learn how [Bitballs](http://bitballs.herokuapp.com) - a charity basketball tournament management application - works.\nSpecifically, this guide will walk through the implementation of the following behaviors or functionality:\n\n - Registration, login, user sessions, and access rights.\n - Handling relationships between model types.\n - Setup node services and server-side rendering on the same process.\n - How to turn off parts of the app that should not be server-side rendered.\n\nThe code for Bitballs can be found [on github](http://github.com/donejs/bitballs).\nTo install and run it locally, follow its\n[development setup instructions](https://github.com/donejs/bitballs#setup-environment).\n\nBitballs was written to help organize Bitovi's yearly charity basketball tournament\nfor the American Heart and Stroke Association.  Justin Meyer, one of Bitovi's founders,\nand DoneJS core contributor had a stroke. Read about his experience and the purpose of\nthe tournament [here](http://blog.bitovi.com/bitovi-hoops-for-heart-with-the-american-stroke-association/).\n\nThe application allows __admins__, who manage the tournament, to:\n\nCreate an account (and verify their email address):\n\n<img src=\"/static/img/bitballs/create-user.png\" srcset=\"/static/img/bitballs/create-user.png 1x, /static/img/bitballs/create-user-2x.png 2x\">\n\nLogin:\n\n<img src=\"/static/img/bitballs/login.png\" srcset=\"/static/img/bitballs/login.png 1x, /static/img/bitballs/login-2x.png 2x\">\n\nCreate, edit, and delete players:\n\n<img src=\"/static/img/bitballs/create-player.png\" srcset=\"/static/img/bitballs/create-player.png 1x, /static/img/bitballs/create-player-2x.png 2x\">\n\nCreate, edit, and delete tournaments:\n\n<img src=\"/static/img/bitballs/create-tournament.png\" srcset=\"/static/img/bitballs/create-tournament.png 1x, /static/img/bitballs/create-tournament-2x.png 2x\">\n\nCreate teams of players for a tournament:\n\n<img src=\"/static/img/bitballs/create-team.png\" srcset=\"/static/img/bitballs/create-team.png 1x, /static/img/bitballs/create-team-2x.png 2x\">\n\nCreate and delete games for a tournament:\n\n<img src=\"/static/img/bitballs/new-game.png\" srcset=\"/static/img/bitballs/new-game.png 1x, /static/img/bitballs/new-game-2x.png 2x\">\n\nAdd and remove stats for a game while watching it on youtube:\n\n<img src=\"/static/img/bitballs/add-stat.png\" srcset=\"/static/img/bitballs/add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x\">\n\nVisitors who are not admins are only able to\nview the list of players, tournaments, and game details:\n\n<img src=\"/static/img/bitballs/public-view.png\" srcset=\"/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x\">","title":"Example: Bitballs","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","glob":{"pattern":"docs/**/*.{md,mustache}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Library/WebServer/Documents/GitHub/donejs"},"dest":"/Library/WebServer/Documents/GitHub/donejs/site","ignoreTemplateRender":true,"templates":"/Library/WebServer/Documents/GitHub/donejs/docs/theme/templates","static":"/Library/WebServer/Documents/GitHub/donejs/docs/theme/static","forceBuild":true,"generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
 	</script>
 
 	
