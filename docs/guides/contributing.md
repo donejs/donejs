@@ -127,6 +127,11 @@ We use a few labels to organize issues across all of the repositories:
 
 Here are links to GitHub searches for those terms:
 
+- DoneJS
+	- [design](https://github.com/search?q=org%3Adonejs+label%3Adesign&state=open)
+	- [documentation](https://github.com/search?q=org%3Adonejs+label%3Adocumentation&state=open)
+	- [easy](https://github.com/search?q=org%3Adonejs+label%3Aeasy&state=open)
+	- [help wanted](https://github.com/search?q=org%3Adonejs+label%3A%22help+wanted%22&state=open)
 - CanJS
 	- [design](https://github.com/search?q=org%3Acanjs+label%3Adesign&state=open)
 	- [documentation](https://github.com/search?q=org%3Acanjs+label%3Adesign&state=open)
@@ -137,11 +142,6 @@ Here are links to GitHub searches for those terms:
 	- [documentation](https://github.com/bitovi/documentjs/labels/documentation)
 	- [easy](https://github.com/bitovi/documentjs/labels/easy)
 	- [help wanted](https://github.com/bitovi/documentjs/labels/help%20wanted)
-- DoneJS
-	- [design](https://github.com/search?q=org%3Adonejs+label%3Adesign&state=open)
-	- [documentation](https://github.com/search?q=org%3Adonejs+label%3Adocumentation&state=open)
-	- [easy](https://github.com/search?q=org%3Adonejs+label%3Aeasy&state=open)
-	- [help wanted](https://github.com/search?q=org%3Adonejs+label%3A%22help+wanted%22&state=open)
 - FuncUnit
 	- [design](https://github.com/bitovi/funcunit/labels/design)
 	- [documentation](https://github.com/bitovi/funcunit/labels/documentation)
@@ -172,6 +172,10 @@ Here are links to GitHub searches for those terms:
 
 You can also get involved in our community by posting in our forums, chatting with us on Gitter, and answering questions on Stack Overflow.
 
+- DoneJS
+	- [Forums](http://forums.donejs.com/c/donejs)
+	- [Gitter](https://gitter.im/donejs/donejs)
+	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=donejs+answers:0)
 - CanJS
 	- [Forums](http://forums.donejs.com/c/canjs)
 	- [Gitter](https://gitter.im/canjs/canjs)
@@ -180,10 +184,6 @@ You can also get involved in our community by posting in our forums, chatting wi
 	- [Forums](http://forums.donejs.com/c/documentjs)
 	- [Gitter](https://gitter.im/bitovi/documentjs)
 	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=documentjs+answers:0)
-- DoneJS
-	- [Forums](http://forums.donejs.com/c/donejs)
-	- [Gitter](https://gitter.im/donejs/donejs)
-	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=donejs+answers:0)
 - FuncUnit
 	- [Gitter](https://gitter.im/bitovi/funcunit)
 	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=funcunit+answers:0)
