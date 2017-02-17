@@ -486,7 +486,8 @@ the <a href="https://gitter.im/donejs/donejs">Gitter donejs/donejs channel</a>. 
 <p>Once you’ve filled out your pull request’s details, click on “Create pull request”. The core team will receive a notification about your pull request and will provide feedback.</p>
 <p>GitHub has additional documentation on <a href="https://help.github.com/articles/creating-a-pull-request-from-a-fork/">creating a pull request from a fork</a> that you might find useful.</p>
 <h2>Updating DoneJS.com</h2>
-<p>First, create a new clone and install the dependencies:</p>
+<p><a href="https://donejs.com/">DoneJS.com</a> is hosted on <a href="https://pages.github.com/">GitHub pages</a> from the <a href="https://github.com/donejs/donejs/tree/gh-pages"><code>gh-pages</code></a> branch.</p>
+<p>First, from within your local DoneJS repository, create a new clone in the <code>site</code> folder and install the dependencies:</p>
 <pre><code class="language-shell">git clone git@github.com:donejs/donejs.git -b gh-pages site/
 npm install
 </code></pre>
@@ -499,22 +500,7 @@ git add --all
 git commit -am &quot;Updating the site&quot;
 git push origin gh-pages
 </code></pre>
-<p><a href="https://donejs.com/">DoneJS.com</a> is hosted on <a href="https://pages.github.com/">GitHub pages</a> from the <a href="https://github.com/donejs/donejs/tree/gh-pages"><code>gh-pages</code></a> branch.</p>
-<p>To generate and push a new version of the website, verify you have push access to that branch, then get all latest changes via:</p>
-<pre><code class="language-shell">git checkout master
-git fetch --all &amp;&amp; git rebase
-</code></pre>
-<p>Then, reinstall the dependencies:</p>
-<pre><code class="language-shell">npm cache clean
-rm -rf node_modules
-npm install
-</code></pre>
-<p>Next, delete the local <code>gh-pages</code> branch:</p>
-<pre><code class="language-shell">git branch -D gh-pages
-</code></pre>
-<p>Then run the following to generate and publish a new version of the website:</p>
-<pre><code class="language-shell">make
-</code></pre>
+<p>That’s it! <a href="https://donejs.com/">DoneJS.com</a> should now have your changes.</p>
 <h2>Evangelism</h2>
 <p>Hopefully you love DoneJS as much as we do and you want to share your
 knowledge about it. Fantastic! We want to help you.</p>
