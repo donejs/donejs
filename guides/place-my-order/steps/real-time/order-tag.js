@@ -4,7 +4,6 @@ import set from 'can-set';
 import superMap from 'can-connect/can/super-map/';
 import loader from '@loader';
 import tag from 'can-connect/can/tag/';
-import io from 'steal-socket.io';
 
 const Item = DefineMap.extend({
   price: 'number'
@@ -71,12 +70,6 @@ Order.connection = superMap({
   name: 'order',
   algebra
 });
-
-const socket = io(loader.serviceBaseURL);
-
-socket.on('orders created', order => Order.connection.createInstance(order));
-socket.on('orders updated', order => Order.connection.updateInstance(order));
-socket.on('orders removed', order => Order.connection.destroyInstance(order));
 
 tag('order-model', Order.connection);
 
