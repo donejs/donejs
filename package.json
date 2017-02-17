@@ -9,6 +9,7 @@
   "scripts": {
     "docs-copy": "cp -R docs/static/img site/static/ && cp docs/static/favicon.ico site/favicon.ico",
     "document": "bit-docs && npm run docs-copy",
+    "document:force": "bit-docs -fd && npm run docs-copy",
     "test": "npm run jshint && npm run mocha && npm run document && npm run test-guides",
     "test-guides": "npm run test-quickstart && npm run test-pmo",
     "test-quickstart": "guide guides/guide/test.js --local",
@@ -76,7 +77,7 @@
       "bit-docs-html-highlight-line": "^0.2.2",
       "bit-docs-tag-demo": "^0.3.0",
       "bit-docs-html-toc": "^0.6.2",
-      "bit-docs-donejs-theme": "^0.0.13"
+      "bit-docs-donejs-theme": "^0.0.16"
     },
     "glob": {
       "pattern": "docs/**/*.{md,mustache}"
