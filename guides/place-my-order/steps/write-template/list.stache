@@ -28,7 +28,7 @@
           <option value="">Choose a city</option>
           {{/if}}
           {{#each cities.value}}
-          <option>{{name}}</option>
+          <option value="{{name}}">{{name}}</option>
           {{/each}}
         {{/if}}
       </select>
