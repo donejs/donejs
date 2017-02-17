@@ -846,6 +846,15 @@ This is a longer template so lets walk through it:
 
 can-connect makes it very easy to implement real-time functionality. It is capable of listening to notifications from the server when server data has been created, updated, or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket), which allow sending push notifications to a client.
 
+### Add the order-model tag
+
+Update `src/models/order.js` to use [can-connect/can/tag/](http://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively:
+
+@sourceref ../../guides/place-my-order/steps/real-time/order-tag.js
+@highlight 6,59,74
+
+The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator](http://canjs.com/doc/can-set.props.enum.html) so that multiple requests for different statuses can be combined.
+
 ### Update the template
 
 First let's create the `pmo-order-list` component with:
@@ -858,7 +867,7 @@ And then change `src/order/list.component` to:
 
 @sourceref ../../guides/place-my-order/steps/real-time/list.component
 
-In the order history template update `src/order/history.component` to:
+Also update the order history template by changing `src/order/history.component` to:
 
 @sourceref ../../guides/place-my-order/steps/real-time/history.component
 
@@ -872,15 +881,10 @@ The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) Node
 npm install steal-socket.io --save
 ```
 
-Update `src/models/order.js` to:
+Update `src/models/order.js` to use socket.io to update the Order model in real-time:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order.js
-@highlight 6-7,74-78,80
-
-This:
-
-- uses socket.io to update the Order model in real-time
-- sets up [can-connect/can/tag/](http://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively in the template like `<order-model get-list="{status='new'}">`
+@highlight 7,75-79
 
 That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
