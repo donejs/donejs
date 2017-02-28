@@ -61,19 +61,18 @@ We can see the following files:
 ├── development.html
 ├── package.json
 ├── production.html
-├── readme.md
+├── README.md
+├── test.html
 ├── src/
 |   ├── app.js
+|   ├── index.md
 |   ├── index.stache
 |   ├── models/
 |   |   ├── fixtures
 |   |   |   ├── fixtures.js
 |   |   ├── test.js
 |   ├── styles.less
-|   ├── test.html
-|   ├── test/
-|   |   ├── test.js
-|   |   ├── functional.js
+|   ├── test.js
 ├── node_modules/
 ```
 
@@ -82,14 +81,14 @@ Let's have a quick look at the purpose of each:
 - `development.html`, `production.html` those pages can run the DoneJS application in development or production mode without a server
 - `package.json` is the main configuration file that defines all our application dependencies and other settings.
 - `test.html` is used to run all our tests.
-- `readme.md` is the readme file for your repository.
+- `README.md` is the readme file for your repository.
 - `src` is the folder where all our development assets live in their own modlets (more about that later).
 - `src/app.js` is the main application file, which exports the main application state.
 - `src/index.stache` is the main client template that includes server-side rendering.
+- `src/index.md` is the main documentation file for our application.
 - `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures/fixtures.js` which will reference all the specific models fixtures files (so that we can run model tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
 - `src/styles.less` is the main application styles.
-- `src/test/test.js` collects all individual component and model tests we will create throughout this guide and is loaded by `test.html`.
-- `src/test/functional.js` will contain functional smoke tests for our application.
+- `src/test.js` collects all individual component and model tests we will create throughout this guide as well as the functional smoke test for our application and is loaded by `test.html`.
 
 ### Development mode
 
@@ -116,7 +115,7 @@ Now we can add an API server start script into the `scripts` section of our `pac
 ```js
   "scripts": {
     "api": "place-my-order-api --port 7070",
-    "test": "testee src/test.html --browsers firefox --reporter Spec",
+    "test": "testee test.html --browsers firefox --reporter Spec",
     "start": "done-serve --port 8080",
     "develop": "done-serve --develop --port 8080",
     "build": "node build"
@@ -140,7 +139,7 @@ Now our application is good to go and we can start the server. We need to proxy 
 ```js
 "scripts": {
   "api": "place-my-order-api --port 7070",
-  "test": "testee src/test.html --browsers firefox --reporter Spec",
+  "test": "testee test.html --browsers firefox --reporter Spec",
   "start": "done-serve --proxy http://localhost:7070 --port 8080",
   "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
   "build": "node build"
@@ -257,7 +256,9 @@ The component's files are collected in a single folder so that components can be
 ├── package.json
 ├── src/
 |   ├── app.js
-|   └── index.stache
+|   ├── index.md
+|   ├── index.stache
+|   ├── test.js
 |   ├── models
 |   ├── order/
 |   |   ├── history.component
@@ -268,7 +269,7 @@ The component's files are collected in a single folder so that components can be
 |   |   |   ├── list.less
 |   |   |   ├── list.md
 |   |   |   ├── list.stache
-|   |   |   ├── list_test.js
+|   |   |   ├── list-test.js
 |   |   |   ├── test.html
 ```
 
@@ -369,13 +370,15 @@ We have now created a model and fixtures (for testing without an API) with a fol
 ├── package.json
 ├── src/
 |   ├── app.js
-|   └── index.stache
+|   ├── index.md
+|   ├── index.stache
+|   ├── test.js
 |   ├── models/
 |   |   ├── fixtures/
 |   |   |   ├── restaurant.js
 |   |   ├── fixtures.js
 |   |   ├── restaurant.js
-|   |   ├── restaurant_test.js
+|   |   ├── restaurant-test.js
 |   |   ├── test.js
 ```
 
@@ -500,9 +503,9 @@ And we also need to specify that the restaurant list should be filtered to only 
 
 #### Test the view model
 
-With fake data in place, we can test our view model by changing `src/restaurant/list/list_test.js` to:
+With fake data in place, we can test our view model by changing `src/restaurant/list/list-test.js` to:
 
-@sourceref ../../guides/place-my-order/steps/create-test/list_test.js
+@sourceref ../../guides/place-my-order/steps/create-test/list-test.js
 
 These unit tests are comparing expected data (what we we defined in the fixtures) with actual data (how the view model methods are behaving). Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
 
@@ -537,17 +540,17 @@ In this chapter we will automate running the tests so that they can be run from 
 
 ### Using the global test page
 
-We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [src/test.html](http://localhost:8080/src/test.html). All tests are being loaded in `src/test/test.js`. Since we don't have tests for our models at the moment, let's remove the `import 'place-my-order/models/test';` part so that `src/test/test.js` looks like this:
+We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [test.html](http://localhost:8080/test.html). All tests are being loaded in `src/test.js`. Since we don't have tests for our models at the moment, let's remove the `import 'place-my-order/models/test';` part so that `src/test.js` looks like this:
 
 @sourceref ../../guides/place-my-order/steps/test-runner/test.js
 
-If you now go to [http://localhost:8080/src/test.html](http://localhost:8080/src/test.html) we still see all restaurant list tests passing but we will add more here later on.
+If you now go to [http://localhost:8080/test.html](http://localhost:8080/test.html) we still see all restaurant list tests passing but we will add more here later on.
 
 ### Using a test runner
 
 **Note**: If you are using Firefox for development, close the browser temporarily so that we can run our tests.
 
-The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee](https://github.com/bitovi/testee) which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `src/test.html` page in Firefox is already set up and we can launch the tests by running:
+The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee](https://github.com/bitovi/testee) which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `test.html` page in Firefox is already set up and we can launch the tests by running:
 
 ```
 donejs test
@@ -809,9 +812,9 @@ Now we can update the view model in `src/order/new/new.js`:
 
 Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a promise once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
-While we're here we can also update our test to get it passing again, replace `src/order/new/new_test.js` with:
+While we're here we can also update our test to get it passing again, replace `src/order/new/new-test.js` with:
 
-@sourceref ../../guides/place-my-order/steps/create-data/new_test.js
+@sourceref ../../guides/place-my-order/steps/create-data/new-test.js
 @highlight 7-12
 
 ### Write the template
