@@ -151,7 +151,7 @@ Now, lets checkout the contents of the `/public` folder:
 |   ├── contribution-month/ - ContributionMonth model and sub-types
 |   |   ├── contribution-month.js
 |   |   ├── monthly-client-project.js
-|   |   ├── monthly-client-projects-os-projects.js
+|   |   ├── monthly-client-project-os-project-list.js
 |   |   ├── monthly-contribution.js
 |   |   ├── monthly-os-project.js
 
