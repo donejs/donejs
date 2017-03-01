@@ -310,7 +310,7 @@ guide.test(function(){
 guide.closeBrowser();
 
 guide.step("Using a test runner", function(){
-	return guide.replaceFile(join("src", "test", "test.js"),
+	return guide.replaceFile(join("src", "test.js"),
 													 join(__dirname, "steps", "test-runner", "test.js"))
 		.then(function(){
 			return guide.executeCommand("donejs", ["test"]);
