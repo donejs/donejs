@@ -263,8 +263,8 @@ guide.step("Create a test", function(){
 													 join(__dirname, "steps", "create-test", "restaurants_model.js"));
 		})
 		.then(function(){
-			return guide.replaceFile(join("src", "restaurant", "list", "list_test.js"),
-													 join(__dirname, "steps", "create-test", "list_test.js"));
+			return guide.replaceFile(join("src", "restaurant", "list", "list-test.js"),
+													 join(__dirname, "steps", "create-test", "list-test.js"));
 
 		})
 	.then(function(){
@@ -310,7 +310,7 @@ guide.test(function(){
 guide.closeBrowser();
 
 guide.step("Using a test runner", function(){
-	return guide.replaceFile(join("src", "test", "test.js"),
+	return guide.replaceFile(join("src", "test.js"),
 													 join(__dirname, "steps", "test-runner", "test.js"))
 		.then(function(){
 			return guide.executeCommand("donejs", ["test"]);
@@ -369,8 +369,8 @@ guide.step("Creating the order model", function(){
 												 join(__dirname, "steps", "create-data", "new.js"));
 		})
 		.then(function(){
-			return replaceFile(join("src", "order", "new", "new_test.js"),
-												 join(__dirname, "steps", "create-data", "new_test.js"));
+			return replaceFile(join("src", "order", "new", "new-test.js"),
+												 join(__dirname, "steps", "create-data", "new-test.js"));
 		})
 		.then(function(){
 			var args = "add component order/details.component pmo-order-details"
