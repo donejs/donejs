@@ -12,7 +12,7 @@ After the initial application setup, which includes a server that hosts and pre-
 
 After that we will talk about what a view model is and how to identify, implement and test its functionality. Once we have unit tests running in the browser, we will automate running them locally from the command line and also on a continuous integration server. In the subsequent chapters, we will show how to easily import other modules into our application and how to set up a real-time connection.
 
-Finally, we will describe how to build and deploy our application to the web, as a desktop application with NW.js, and as a mobile app with Cordova.
+Finally, we will describe how to build and deploy our application to the web, as a desktop application with Electron, and as a mobile app with Cordova.
 
 
 @body
@@ -1035,48 +1035,32 @@ donejs build cordova
 
 If everything went well, we should see the emulator running our application.
 
-### Building to NW.js
+### Building to Electron
 
 To set up the desktop build, we have to add it to our application like this:
 
 ```
-donejs add nw
+donejs add electron
 ```
 
 Answer the question about the URL of the service layer with `http://www.place-my-order.com`. We can answer the rest of the prompts with the default.
 
-Like with Cordova, we need to add the place-my-order-assets images to the build, open your `build.js` script and update the **glob** property to reflect:
-
-```js
-var nwOptions = {
-  buildDir: "./build",
-  version: "latest",
-  platforms: ["osx64"],
-  glob: [
-    "package.json",
-    "production.html",
-    "node_modules/place-my-order-assets/images/**/*"
-  ]
-};
-```
-@highlight 8
-
 Then we can run the build like this:
 
 ```
-donejs build nw
+donejs build electron
 ```
 
 The OS X application can be opened with
 
 ```
-open build/place-my-order/osx64/place-my-order.app
+open build/place-my-order-darwin-x64/place-my-order.app
 ```
 
 The Windows application can be opened with
 
 ```
-.\build\place-my-order\win64\place-my-order.exe
+.\build\place-my-order-win32-x64\place-my-order.exe
 ```
 
 ## Deploy
