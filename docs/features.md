@@ -27,7 +27,7 @@ And as we've proven [over the last 8 years](./About.html#evolve), we'll keep upd
 
 ### Integrated layers
 
-Just like Apple integrates the hardware and software for its devices, DoneJS integrates different technologies in a way that creates unique advantages that you can only get from using an integrated solution.
+DoneJS integrates different technologies in a way that creates unique advantages that you can only get from using an integrated solution.
 
 #### Cross-layer features
 
