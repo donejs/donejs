@@ -6,11 +6,17 @@
 
 <img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
-In the first part of this guide we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from NPM](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).
+In the first part of this guide, we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from NPM](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](./Features.html#progressive-loading) and [deploy it to a CDN](./Features.html#deploy-to-a-cdn). We will conclude with creating a [mobile and desktop](./Features.html#ios-android-and-desktop-builds) version of the application.
 
 If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we're happy to help out.
+
+> For an even easier version of this guide, one that can be done entirely online, checkout [CanJS's Chat Guide](http://canjs.com/doc/guides/chat.html). There, you'll build the same chat widget in a `JSBin`, but
+without a mobile or desktop build and deployment to a CDN.
+>
+>
+> Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout [StealJS's Quick Start Guide](http://stealjs.com/docs/StealJS.quick-start.html) before proceeding with this guide.
 
 @body
 
@@ -25,7 +31,7 @@ In this section, we will install DoneJS and generate a new application.
 To get started, let's install the DoneJS command line utility globally:
 
 ```
-npm install -g donejs
+npm install -g donejs@alpha
 ```
 
 ### Generate the application
@@ -48,7 +54,7 @@ This will install all of DoneJS's dependencies, including the following:
 - [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
 - [jQuery](http://jquery.com) - DOM helpers
 - [jQuery++](http://jquerypp.com) - Extended DOM helpers
-- [QUnit](https://qunitjs.com/) - Assertion library (optionally: [Mocha] or [Jasmine])
+- [QUnit](https://qunitjs.com/) - Assertion library (A [Mocha](https://github.com/donejs/donejs-mocha) generator is also available)
 - [FuncUnit](http://funcunit.com) - Functional tests
 - [Testee](https://github.com/bitovi/testee) - JavaScript Test runner
 
@@ -76,7 +82,7 @@ Go to [http://localhost:8080/](localhost:8080) to see our application showing a 
 
 ## Adding Bootstrap
 
-DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section we will install and add [Bootstrap](http://getbootstrap.com/) to the page and see DoneJS's [hot module swapping](./Features.html#hot-module-swapping) in action.
+DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section, we will install and add [Bootstrap](http://getbootstrap.com/) to the page, and see DoneJS's [hot module swapping](./Features.html#hot-module-swapping) in action.
 
 ### Install the NPM package
 
@@ -95,6 +101,9 @@ Update `src/index.stache` to look like this:
 @sourceref ../../guides/guide/steps/4-bootstrap/index.stache
 @highlight 6,10-20
 
+> New APIs Used:
+> - [<can-import>](http://canjs.com/doc/can-view-import.html) - specifies template dependencies.
+
 If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file.
 
 <img src="static/img/donejs-bootstrap.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
@@ -103,7 +112,7 @@ Feel free to edit the HTML or `src/styles.less` to see how hot module swapping u
 
 ## Routing and components
 
-In this part we will create our own custom HTML elements - one for the homepage and another to display the chat messages. Then we will create routes to navigate between these two pages.
+In this part, we will create our own custom HTML elements - one for the homepage and another to display the chat messages. Then we will create routes to navigate between these two pages.
 
 ### Generate custom elements
 
@@ -132,33 +141,47 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](http://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/guides/AppStateAndRouting.html).
+> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](http://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit [can-route's documentation](http://canjs.com/doc/can-route.html).
 
 First, let's update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
 @sourceref ../../guides/guide/steps/7-navigate/home.component
 @highlight 4,7-17
 
-> [`routeUrl`](http://canjs.com/doc/can-stache.helpers.routeUrl.html) is a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
+> New APIs Used:
+> - [<can-component>](https://github.com/donejs/done-component#done-component) - a [StealJS](http://stealjs.com/) plugin for CanJS [components](http://canjs.com/doc/can-component.html) that allows you to define a component completely within a  _.component_ file.
+> - [`routeUrl`](http://canjs.com/doc/can-stache.helpers.routeUrl.html) - a helper that populates the anchor's href with a URL that sets the application ViewModel's `page` property to `"chat"`. The AppViewModel is shown below.
 
 Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/messages.stache
 @highlight 1-2
 
-Then, add a routing rule for the `page` property in `src/app.js`:
+Then, add a `page` property on the `AppViewModel` and
+defines a rule for it in `src/app.js`:
 
 @sourceref ../../guides/guide/steps/7-navigate/app.js
 @highlight 6,13
 
+> New APIs Used:
+> - [DefineMap](http://canjs.com/doc/can-define/map/map.html) - used to define observable types.
+> - [route](http://canjs.com/doc/can-route.html) - used to map changes in the URL to changes on the AppViewModel's `page`
+>   property.
+
 ### Switch between pages
 
-Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding dynamic imports for the `home.component` and `messages/` components and showing each import based on the `page` property.
+Finally, we'll glue both components together as separate pages in `src/index.stache`. This is done by adding  for the `home.component` and `messages/` components and showing each import based on the `page` property.
 
 Update `src/index.stache` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/index.stache
 @highlight 13-29
+
+> New APIs Used:
+> - [{{#eq}}](http://canjs.com/doc/can-stache.helpers.is.html) - compares the AppViewModel's `page` property to 'chat'.
+> - [can-view-import](http://canjs.com/doc/can-view-import.html) - provides dynamic imports.
+> - [{{#if isPending}}](http://canjs.com/doc/can-stache.helpers.if.html) - renders _"Loading"_ while the modules are loading.
+> - [{{else}}](http://canjs.com/doc/can-stache.helpers.else.html) - Renders the components once their modules have loaded.
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
@@ -181,7 +204,7 @@ On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-comp
 Run:
 
 ```
-npm install bit-tabs --save
+npm install bit-tabs@alpha --save
 ```
 
 ### Update the page
@@ -224,6 +247,14 @@ Update `src/models/message.js` to:
 @sourceref ../../guides/guide/steps/10-message-model/message.js
 @highlight 11-12
 
+> New APIs Used:
+> - [set.Algebra](http://canjs.com/doc/can-set.Algebra.html) - used to describe a service-layer's parameters. For example if `"api/messages?limit=20"` only returned 20 messages, you would configure the `limit` parameter behavior in the connection's `set.Algebra`.
+> - [DefineList](http://canjs.com/doc/can-define/list/list.html) - used to define the behavior of an observable list of `Message`s.
+> - [superMap](http://canjs.com/doc/can-connect/can/super-map/super-map.html) - connects the `Message` type to the  
+>   restful `'/api/messages'` service. This adds [real-time](http://canjs.com/doc/can-connect/real-time/real-time.html), [fall-through-caching](http://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html) and other useful behaviors.
+> - [loader](http://stealjs.com/docs/@loader.html) - references the module loader that is loading this code. All configuration
+>   in your _package.json_'s "steal" property is available, including the `serviceBaseUrl`.
+
 ### Use the connection
 
 The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages.
@@ -233,10 +264,19 @@ Update `src/messages/messages.js` to:
 @sourceref ../../guides/guide/steps/10-use-connection/messages.js
 @highlight 5,8-10
 
+> New APIs Used:
+> - [getList](http://canjs.com/doc/can-connect/connection.getList.html) - returns a promise that resolves to a `Message.List` of `Message` instances.
+
 Display the messages by updating `src/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/10-use-connection/messages.stache
 @highlight 4-15
+
+> New APIs Used:
+> - [{{#each}}](http://canjs.com/doc/can-stache.helpers.each.html) - loops through each `Message` instance.
+> - [{{key}}](http://canjs.com/doc/can-stache.tags.escaped.html) - reads either the name or body of a
+>   `Message` instance and inserts it into the output of the template.
+
 
 If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a list of messages from the server or the "No message" text.
 
@@ -244,12 +284,16 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 
 ### Create messages
 
-Now let's add the form to create new messages. The form two-way binds the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input.
+Now let's add the form to create new messages. The form will two-way bind the `name` and `body` properties to the component's view-model and calls `send()` when hitting the enter key in the message input.
 
 First we have to implement the `send()` method. Update `src/messages/messages.js` to this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.js
 @highlight 8-18
+
+> New APIs Used:
+> - [save()](http://canjs.com/doc/can-connect/connection.save.html) - creates a `POST` request to `/api/messages` with
+>   the message data.  
 
 The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
 
@@ -257,6 +301,13 @@ Next update `src/messages/messages.stache` to look like this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.stache
 @highlight 17-29
+
+> New APIs Used:
+> - [($submit)](http://canjs.com/doc/can-stache-bindings.event.html) - listens to _submit_ events and calls
+>   the `send()` method on the ViewModel.
+> - [{($value)}](http://canjs.com/doc/can-stache-bindings.twoWay.html) - two-way bindings a `<input>`'s value
+>   to a property of the ViewModel.
+
 
 You can now enter your name and a message! It will automatically appear in our messages list.
 
@@ -282,6 +333,14 @@ Update `src/models/message.js` to:
 
 @sourceref ../../guides/guide/steps/12-real-time/message.js
 @highlight 6,32-39
+
+> New APIs used:
+> - [createInstance](http://canjs.com/doc/can-connect/real-time/real-time.createInstance.html) - tells the real-time
+>   system that a message has been created.
+> - [updateInstance](http://canjs.com/doc/can-connect/real-time/real-time.updateInstance.html) - tells the real-time
+>   system that a message has been created.
+> - [destroyInstance](http://canjs.com/doc/can-connect/real-time/real-time.destroyInstance.html) - tells the real-time
+>   system that a message has been created.
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
@@ -395,7 +454,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```
-donejs add cordova
+donejs add cordova@alpha
 ```
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
@@ -449,3 +508,8 @@ The Windows application can be opened with
 In this guide we created a small chat application that connects to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We built an optimized bundle for production and deployed it to a static file host and CDN. Last, we made builds of the application as a mobile and desktop application.
 
 If you want to learn more about DoneJS - like how to create more complex custom elements and routes, write and automatically run tests, Continuous Integration and Continuous Deployment - head over to the [place-my-order Guide](./place-my-order.html).
+
+If you're not ready for that yet, we might suggest the following guides:
+
+- CanJS's [TodoMVC Guide](http://canjs.com/doc/guides/todomvc.html) and [ATM Guide](http://canjs.com/doc/guides/atm.html) - to better familiarize yourself with CanJS (DoneJS's models, views, and observables).
+- StealJS's [Progressive Loading Guide](http://stealjs.com/docs/StealJS.guides.progressive_loading.html) - to better familiarize yourself with StealJS (DoneJS's module loader and builder).
