@@ -338,9 +338,9 @@ Update `src/models/message.js` to:
 > - [createInstance](http://canjs.com/doc/can-connect/real-time/real-time.createInstance.html) - tells the real-time
 >   system that a message has been created.
 > - [updateInstance](http://canjs.com/doc/can-connect/real-time/real-time.updateInstance.html) - tells the real-time
->   system that a message has been created.
+>   system that a message has been updated.
 > - [destroyInstance](http://canjs.com/doc/can-connect/real-time/real-time.destroyInstance.html) - tells the real-time
->   system that a message has been created.
+>   system that a message has been destroyed.
 
 This will listen to `messages <event>` events sent by the server and tell the connection to update all active lists of messages accordingly. Try opening another browser window to see receiving messages in real-time.
 
