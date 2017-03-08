@@ -279,6 +279,7 @@ guide.launchBrowser("http://localhost:8080/src/restaurant/list/test.html");
 guide.test(function(){
 	return guide.functionalTest(join(__dirname, "steps", "create-test",
 																	 "test.js"))
+		.then(wait)
 		.then(wait);
 });
 
@@ -296,6 +297,7 @@ guide.step("Write the template", function(){
 		.then(function(){
 			return guide.injectSpy("src/restaurant/list/list.html");
 		})
+		.then(wait)
 		.then(wait);
 });
 
@@ -304,6 +306,7 @@ guide.launchBrowser("http://localhost:8080/src/restaurant/list/list.html");
 guide.test(function(){
 	return guide.functionalTest(join(__dirname, "steps", "write-template",
 																	 "test.js"))
+		.then(wait)
 		.then(wait);
 });
 
@@ -315,6 +318,7 @@ guide.step("Using a test runner", function(){
 		.then(function(){
 			return guide.executeCommand("donejs", ["test"]);
 		})
+		.then(wait)
 		.then(wait);
 });
 
