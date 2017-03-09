@@ -14,7 +14,7 @@ DoneJS is your new favorite way to get **high-performance**, **real-time**, **we
 A comprehensive set of packages that are perfect for complex JavaScript projects, and the ability to quickly
 provision a modern development environment, means producing lightning-fast applications can be done faster.
 
-Use the DoneJS environment to automate the orchestration of these (otherwise disparate) parts:
+DoneJS automates the orchestration of these (otherwise disparate) parts:
 
 | Package                 | Description |
 |:----------------------- |:----------- |
