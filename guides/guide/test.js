@@ -327,20 +327,18 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 /**
  * @Step 18
  */
-guide.step("Desktop and mobile apps: NW.js", function(){
-	var proc = guide.answerPrompts("donejs", ["add", "nw"]);
+guide.step("Desktop and mobile apps: Electron", function(){
+	var proc = guide.answerPrompts("donejs", ["add", "electron"]);
 	var answer = proc.answer;
 
 	answer(/Main HTML file/, "\n");
-	answer(/The nw.js version/, "\n");
   answer(/service layer/, "\n");
-	answer(/Width of/, "\n");
-	answer(/Height of/, "\n");
 	answer(/What platforms/, "\n");
+	answer(/What architectures/, "\n");
 
 	return proc.promise
 		.then(function(){
-			return guide.executeCommand("donejs", ["build", "nw"]);
+			return guide.executeCommand("donejs", ["build", "electron"]);
 		});
 });
 

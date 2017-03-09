@@ -375,7 +375,7 @@ We should now see our assets being loaded from the Firebase CDN.
 
 ## Desktop and mobile apps
 
-In the last part of this guide we will make mobile and desktop builds of our chat application, using [Cordova](https://cordova.apache.org/) and [nw.js](http://nwjs.io/).
+In the last part of this guide we will make mobile and desktop builds of our chat application, using [Cordova](https://cordova.apache.org/) and [Electron](https://electron.atom.io/).
 
 ### Cordova
 
@@ -412,38 +412,37 @@ If everything went well, we should see the emulator running our application.
 
 Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.
 
-### NW.js
+### Electron
 
 To set up the desktop build, we have to add it to our application like this:
 
 ```
-donejs add nw
+donejs add electron
 ```
 
 Accept the default for all of the prompts.
 
-<img src="static/img/donejs-nw1.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-electron-prompt.png" alt="electron prompt" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Then we can run the build like this:
 
 ```
-donejs build nw
+donejs build electron
 ```
 
 The OS X application can be opened with
 
 ```
-cd build/donejs-chat/osx64
-open donejs-chat.app
+open build/donejs-chat-darwin-x64/donejs-chat.app
 ```
 
 The Windows application can be opened with
 
 ```
-.\build\donejs-chat\win64\donejs-chat.exe
+.\build\donejs-chat-win32-x64\donejs-chat.exe
 ```
 
-<img src="static/img/donejs-nw2.png" alt="nw build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-electron-app.png" alt="electron app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## What's next?
 

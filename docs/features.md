@@ -888,13 +888,14 @@ _Our DoneJS Chat App running as a OS X desktop app and inside an iOS emulator._
 
 For iOS and Android builds, DoneJS integrates with [Apache Cordova](https://cordova.apache.org/) to generate a mobile app that is ready to be uploaded to Apple's App Store or Google Play.
 
-For native desktop applications, DoneJS integrates with [NW.js](https://github.com/nwjs/nw.js) to create an native OSX, Windows, or Linux application.
+For native desktop applications, DoneJS integrates with [Electron](https://electron.atom.io/) or [NW.js](https://github.com/nwjs/nw.js) to create an native OSX, Windows, or Linux application.
 
 Adding this integration is as simple as running
 
 ```
 donejs add cordova
 donejs add nw
+donejs add electron
 donejs build
 ```
 
@@ -903,7 +904,7 @@ With these simple integrations, you can expand your potential audience without h
 <a class="btn" href="https://github.com/stealjs/steal-cordova"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#desktop-and-mobile-apps"><span>View the Guide</span></a>
 
-_Cordova and nw.js integration are features of the [steal-cordova](https://github.com/stealjs/steal-cordova) and [steal-nw](https://github.com/stealjs/steal-nw) projects._
+_Cordova, Electron, and NW.js integration are features of the [steal-electron](https://github.com/stealjs/steal-electron), [steal-cordova](https://github.com/stealjs/steal-cordova), and [steal-nw](https://github.com/stealjs/steal-nw) projects._
 
 ### Supports All Browsers, Even IE8
 
