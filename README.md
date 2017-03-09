@@ -9,14 +9,12 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/donejs/donejs?branch=master&svg=true)](https://ci.appveyor.com/project/daffl/donejs)
 [![Coverage Status](https://coveralls.io/repos/github/donejs/donejs/badge.svg?branch=master)](https://coveralls.io/github/donejs/donejs?branch=master)
 
-DoneJS is the easiest way to get a high-performance, real-time, web and mobile application
-done! The framework provides a nearly comprehensive combination of technologies for
-building complex JavaScript applications.
+DoneJS is your new favorite way of getting **high-performance**, **real-time**, **web and mobile** applications done!
 
-If you are looking for the fastest way to get a fully modern development environment setup
-and produce a lightning fast application, you’ve come to the right place.
+DoneJS combines a comprehensive set of frameworks geared towards building complex JavaScript applications
+and bootstraps a modern development environment setup to help you produce lightning-fast applications.
 
-DoneJS is a combination of the following technologies:
+Use DoneJS to automate the installation and composition of these (otherwise disparate) parts:
 
 - [StealJS](http://stealjs.com) — ES6, CJS, and AMD module loader and builder
 - [CanJS](https://canjs.com) — Custom elements and model-view-viewmodel (MVVM) utilities
@@ -28,10 +26,17 @@ DoneJS is a combination of the following technologies:
 - [DocumentJS](http://documentjs.com) — Documentation
 - [can-ssr](https://github.com/canjs/ssr) — Server-side rendering utilities for CanJS
 
-DoneJS is an `npm` package that simply installs all the previous
-technologies. Check out [DoneJS.com](https://donejs.com/) for the collective [benefits](https://donejs.com/Features.html) of these technologies
-and [guides](https://donejs.com/Guides.html) on how to use them together to build an amazing application.
+## Quick Start
+
+Ready to install DoneJS?
+
+```
+npm install -g donejs 
+donejs add app my-app
+```
+
+In-depth [guides](https://donejs.com/Guides.html) and an explanation of the [collective benefits](https://donejs.com/Features.html) of these technologies can be found at [DoneJS.com](https://donejs.com/).
 
 ## Contributing
 
-Check out the [contribution guide on DoneJS.com](https://donejs.com/contributing.html).
+Check out the [Contributing Guide on DoneJS.com](https://donejs.com/contributing.html) for more information.
