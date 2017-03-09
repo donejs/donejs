@@ -11,8 +11,8 @@
 
 DoneJS is your new favorite way to get **high-performance**, **real-time**, **web and mobile** applications DONE!
 
-A comprehensive set of packages that are perfect for complex JavaScript projects, and the ability to quickly
-provision a modern development environment, means producing lightning-fast applications can be done faster.
+A comprehensive set of packages ideal for complex JavaScript projects and the ability to quickly provision a 
+modern development environment means producing lightning-fast applications can be done faster.
 
 DoneJS automates the orchestration of these (otherwise disparate) parts:
 
