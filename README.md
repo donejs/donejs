@@ -9,12 +9,12 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/donejs/donejs?branch=master&svg=true)](https://ci.appveyor.com/project/daffl/donejs)
 [![Coverage Status](https://coveralls.io/repos/github/donejs/donejs/badge.svg?branch=master)](https://coveralls.io/github/donejs/donejs?branch=master)
 
-DoneJS is your new favorite way of getting **high-performance**, **real-time**, **web and mobile** applications done!
+DoneJS is your new favorite way to get **high-performance**, **real-time**, **web and mobile** applications DONE!
 
-With DoneJS you can combine a comprehensive set of packages (geared towards building complex JavaScript applications),
-and bootstrap a modern development environment, to help you produce lightning-fast applications.
+A comprehensive set of packages that are perfect for complex JavaScript projects, and the ability to quickly
+provision a modern development environment, means producing lightning-fast applications can be done faster.
 
-Use DoneJS to automate the orchestration of these (otherwise disparate) parts:
+Use the DoneJS environment to automate the orchestration of these (otherwise disparate) parts:
 
 | Package                 | Description |
 |:----------------------- |:----------- |
