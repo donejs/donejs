@@ -14,7 +14,7 @@ DoneJS is your new favorite way of getting **high-performance**, **real-time**, 
 DoneJS combines a comprehensive set of frameworks geared towards building complex JavaScript applications,
 and bootstraps a modern development environment setup to help you produce lightning-fast applications.
 
-Use DoneJS to automate the installation and composition of these (otherwise disparate) parts:
+Use DoneJS to automate the orchestration of these (otherwise disparate) parts:
 
 | Framework               | Description |
 |:----------------------- |:----------- |
