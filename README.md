@@ -41,7 +41,7 @@ donejs add app my-app
 
 ## Contributing
 
-Check out the [Contributing Guide](https://donejs.com/contributing.html) for more information.
+If you would like to contribute to the DoneJS project, see the [Contributing Guide](https://donejs.com/contributing.html) for more information.
 
 [StealJS]: http://stealjs.com
 [CanJS]: https://canjs.com
