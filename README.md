@@ -37,7 +37,7 @@ npm install -g donejs
 donejs add app my-app
 ```
 
-In-depth [guides](https://donejs.com/Guides.html) and an explanation of the [collective benefits](https://donejs.com/Features.html) of these technologies can be found at [DoneJS.com](https://donejs.com/).
+[In-depth guides](https://donejs.com/Guides.html), and an explanation of the [collective benefits](https://donejs.com/Features.html) of these technologies, can be found at [DoneJS.com](https://donejs.com/).
 
 ## Contributing
 
