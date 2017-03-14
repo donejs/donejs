@@ -220,3 +220,8 @@ If you make changes to one of the presentations, please bring it to the top of t
 
 - [Download](https://drive.google.com/open?id=0Bx-kNqf-wxZeb0FuUUJJX2t3Nms)
 - Last Modified: 2015-08-21
+
+### Change Detection in JavaScript Applications
+
+- [Description](https://drive.google.com/open?id=0B9StcZoMxwPeZklBUF9YdlAwdm8)
+- Last Modified: 2017-03-14
