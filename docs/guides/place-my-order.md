@@ -27,7 +27,7 @@ You will need [NodeJS](http://nodejs.org) or [io.js](https://iojs.org/en/index.h
 To get started, let's install the DoneJS command line utility globally:
 
 ```
-npm install -g donejs@0.9
+npm install -g donejs@alpha
 ```
 
 Then we can create a new DoneJS application:
@@ -751,7 +751,7 @@ Here we are adding some more conditions if `page` is set to `restaurants`:
 The NPM integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
 ```
-npm install bit-tabs@0.2 --save
+npm install bit-tabs@1 --save
 ```
 
 And then integrate it into `src/order/new/new.stache`:
@@ -912,7 +912,13 @@ First we import the order model and then just call `<order-model getList="{statu
 
 Documenting our code is very important to quickly get other developers up to speed. [DocumentJS](http://documentjs.com/) makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.
 
-### Configuring DocumentJS
+### Installing and Configuring DocumentJS
+
+Let's add DocumentJS to our application:
+
+```
+donejs add documentjs@0.1
+```
 
 When we initialized the application all the infrastructure necessary to generate the documentation has already been set up. New modlet components will be added automatically. We can generate the documentation with:
 
@@ -979,7 +985,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```
-donejs add cordova@0.2
+donejs add cordova@1
 ```
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
@@ -1147,7 +1153,7 @@ If everything went well, we should see the emulator running our application.
 To set up the desktop build, we have to add it to our application like this:
 
 ```
-donejs add nw@0.2
+donejs add electron@1
 ```
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
