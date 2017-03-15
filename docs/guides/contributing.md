@@ -155,9 +155,9 @@ Here are links to GitHub searches for those terms:
 	- [easy](https://github.com/bitovi/funcunit/labels/easy)
 	- [help wanted](https://github.com/bitovi/funcunit/labels/help%20wanted)
 - jQuery++
-	- [design](https://github.com/bitovi/funcunit/labels/design)
-	- [documentation](https://github.com/bitovi/funcunit/labels/documentation)
-	- [easy](https://github.com/bitovi/funcunit/labels/easy)
+	- [design](https://github.com/bitovi/jquerypp/labels/design)
+	- [documentation](https://github.com/bitovi/jquerypp/labels/documentation)
+	- [easy](https://github.com/bitovi/jquerypp/labels/easy)
 	- [help wanted](https://github.com/bitovi/jquerypp/labels/help%20wanted)
 - StealJS
 	- [design](https://github.com/search?q=org%3Astealjs+label%3Adesign&state=open)
@@ -170,9 +170,9 @@ Here are links to GitHub searches for those terms:
 	- [easy](https://github.com/bitovi/syn/labels/easy)
 	- [help wanted](https://github.com/bitovi/syn/labels/help%20wanted)
 - Testee
-	- [design](https://github.com/bitovi/syn/labels/design)
-	- [documentation](https://github.com/bitovi/syn/labels/documentation)
-	- [easy](https://github.com/bitovi/syn/labels/easy)
+	- [design](https://github.com/bitovi/testee/labels/design)
+	- [documentation](https://github.com/bitovi/testee/labels/documentation)
+	- [easy](https://github.com/bitovi/testee/labels/easy)
 	- [help wanted](https://github.com/bitovi/testee/labels/help%20wanted)
 
 <a name="section=section_Gettinginvolvedinthecommunity"></a>

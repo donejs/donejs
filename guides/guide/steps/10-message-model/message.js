@@ -7,7 +7,7 @@ import loader from '@loader';
 const Message = DefineMap.extend({
   seal: false
 }, {
-  'id': '*',
+  'id': 'any',
   name: 'string',
   body: 'string'
 });
@@ -17,7 +17,7 @@ const algebra = new set.Algebra(
 );
 
 Message.List = DefineList.extend({
-  '*': Message
+  '#': Message
 });
 
 Message.connection = superMap({
