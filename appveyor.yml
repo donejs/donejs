@@ -12,6 +12,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   # install modules
   - npm cache clean
+  - npm set registry http://registry.npmjs.org/
   - npm install
 
 # Post-install test scripts.
