@@ -27,7 +27,7 @@ You will need [NodeJS](http://nodejs.org) or [io.js](https://iojs.org/en/index.h
 To get started, let's install the DoneJS command line utility globally:
 
 ```
-npm install -g donejs
+npm install -g donejs@0.9
 ```
 
 Then we can create a new DoneJS application:
@@ -109,7 +109,7 @@ Single page applications usually communicate with a RESTful API and a websocket 
 **Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows and Mac).
 
 ```
-npm install place-my-order-api --save
+npm install place-my-order-api@0.4 --save
 ```
 
 Now we can add an API server start script into the `scripts` section of our `package.json` like this:
@@ -165,7 +165,7 @@ Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" me
 Before we get to the code, we also need to install the `place-my-order-assets` package which contains the images and styles specifically for this tutorial's application:
 
 ```
-npm install place-my-order-assets --save
+npm install place-my-order-assets@0.1 --save
 ```
 
 Every DoneJS application consists of at least two files:
@@ -751,7 +751,7 @@ Here we are adding some more conditions if `page` is set to `restaurants`:
 The NPM integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
 ```
-npm install bit-tabs --save
+npm install bit-tabs@0.2 --save
 ```
 
 And then integrate it into `src/order/new/new.stache`:
@@ -882,7 +882,7 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
 
 ```
-npm install steal-socket.io --save
+npm install steal-socket.io@2 --save
 ```
 
 In `src/models/order.js` replace with:
@@ -979,7 +979,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```
-donejs add cordova
+donejs add cordova@0.2
 ```
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
@@ -1147,7 +1147,7 @@ If everything went well, we should see the emulator running our application.
 To set up the desktop build, we have to add it to our application like this:
 
 ```
-donejs add nw
+donejs add nw@0.2
 ```
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
@@ -1241,7 +1241,7 @@ When you deploy for the first time it will ask you to authorize with your login 
 With the Firebase account and application in place we can add the deployment configuration to our project like this:
 
 ```
-donejs add firebase
+donejs add firebase@1
 ```
 
 When prompted, enter the name of the application created when you set up the Firebase app. Next, login to the firebase app for the first time by running:
