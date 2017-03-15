@@ -76,7 +76,7 @@ guide.step("Run NPM install", function() {
 
 
 guide.step("Install place-my-order-api", function() {
-	return guide.executeCommand("npm", ["install", "place-my-order-api"]);
+	return guide.executeCommand("npm", ["install", "place-my-order-api@0.4"]);
 });
 
 guide.step("Starting the application", function(){
@@ -110,7 +110,7 @@ guide.launchBrowser("http://localhost:8080");
  * Loading assets
  */
 guide.step("Loading assets", function(){
-	return guide.executeCommand("npm", ["install", "place-my-order-assets", "--save"])
+	return guide.executeCommand("npm", ["install", "place-my-order-assets@0.1", "--save"])
 		.then(wait)
 		.then(function(){
 			return guide.replaceFile(join("src", "index.stache"),
@@ -275,6 +275,7 @@ guide.launchBrowser("http://localhost:8080/src/restaurant/list/test.html");
 guide.test(function(){
 	return guide.functionalTest(join(__dirname, "steps", "create-test",
 																	 "test.js"))
+		.then(wait)
 		.then(wait);
 });
 
@@ -292,6 +293,7 @@ guide.step("Write the template", function(){
 		.then(function(){
 			return guide.injectSpy("src/restaurant/list/list.html");
 		})
+		.then(wait)
 		.then(wait);
 });
 
@@ -300,6 +302,7 @@ guide.launchBrowser("http://localhost:8080/src/restaurant/list/list.html");
 guide.test(function(){
 	return guide.functionalTest(join(__dirname, "steps", "write-template",
 																	 "test.js"))
+		.then(wait)
 		.then(wait);
 });
 
@@ -311,6 +314,7 @@ guide.step("Using a test runner", function(){
 		.then(function(){
 			return guide.executeCommand("donejs", ["test"]);
 		})
+		.then(wait)
 		.then(wait);
 });
 
@@ -343,7 +347,7 @@ guide.step("Create additional components", function(){
 });
 
 guide.step("Importing other projects", function(){
-	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@0.2", "--save"])
 		.then(wait)
 		.then(wait)
 		.then(function(){
@@ -405,7 +409,7 @@ guide.closeBrowser();
  */
 guide.step("Set up a real-time connection", function(){
 	var replaceFile = guide.replaceFile;
-	return guide.executeCommand("npm", ["install", "steal-socket.io", "--save"])
+	return guide.executeCommand("npm", ["install", "steal-socket.io@2", "--save"])
 		.then(function(){
 			return replaceFile(join("src", "models", "order.js"),
 												 join(__dirname, "steps", "real-time", "order.js"));

@@ -160,7 +160,7 @@ guide.step("Install and use bit-tabs", function(){
     return guide.wait(10000);
   }
 
-	return guide.executeCommand("npm", ["install", "bit-tabs", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@0.2", "--save"])
     .then(installWait)
 		.then(function(){
 			return guide.replaceFile(join("src", "home.component"),
@@ -320,7 +320,7 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 }, function(){
 	return guide.executeCommand("npm", ["install", "-g", "ios-sim"])
 		.then(function(){
-			var proc = guide.answerPrompts("donejs", ["add", "cordova"]);
+			var proc = guide.answerPrompts("donejs", ["add", "cordova@0.2"]);
 			var answer = proc.answer;
 
 			answer(/Name of project/, "donejs chat\n");
@@ -340,7 +340,7 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 guide.stepIf("Desktop and mobile apps: NW.js", function() {
   return process.platform !== 'win32';
 }, function(){
-	var proc = guide.answerPrompts("donejs", ["add", "nw"]);
+	var proc = guide.answerPrompts("donejs", ["add", "nw@0.2"]);
 	var answer = proc.answer;
 
 	answer(/Main HTML file/, "\n");

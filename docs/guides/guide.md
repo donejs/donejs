@@ -23,7 +23,7 @@ In this section, we will install DoneJS and generate a new application.
 To get started, let's install the DoneJS command line utility globally:
 
 ```
-npm install -g donejs
+npm install -g donejs@0.9
 ```
 
 ### Generate the application
@@ -182,7 +182,7 @@ On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-comp
 Run:
 
 ```
-npm install bit-tabs --save
+npm install bit-tabs@0.2 --save
 ```
 
 ### Update the page
@@ -332,7 +332,7 @@ When you deploy for the first time it will ask you to authorize, but first we ne
 Now we can add the Firebase deployment configuration to our `package.json` like this:
 
 ```
-donejs add firebase
+donejs add firebase@1
 ```
 
 When prompted, enter the name of the application created when you set up the Firebase app. Before you can deploy your app you need to login and authorize the Firebase tools, which you can do with:
@@ -386,7 +386,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```
-donejs add cordova
+donejs add cordova@0.2
 ```
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
@@ -408,7 +408,7 @@ Windows users will get instructions to download the latest version of the platfo
 To set up the desktop build, we have to add it to our application like this:
 
 ```
-donejs add nw
+donejs add nw@0.2
 ```
 
 We can answer most prompts with the default except for the version which needs to be set to the latest **stable version**. Set the version prompt to `0.12.3`.
