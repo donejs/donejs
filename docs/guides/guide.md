@@ -159,7 +159,7 @@ Finally, we'll glue both components together as separate pages in `src/index.sta
 Update `src/index.stache` to:
 
 @sourceref guides/guide/steps/7-navigate/index.stache
-@highlight 15-31
+@highlight 18-34
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
