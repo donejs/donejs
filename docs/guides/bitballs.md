@@ -25,36 +25,36 @@ The application allows __admins__, who manage the tournament, to:
 
 Create an account (and verify their email address):
 
-<img src="/static/img/bitballs/create-user.png" srcset="/static/img/bitballs/create-user.png 1x, /static/img/bitballs/create-user-2x.png 2x">
+<img src="static/img/bitballs/create-user.png" srcset="static/img/bitballs/create-user.png 1x, static/img/bitballs/create-user-2x.png 2x">
 
 Login:
 
-<img src="/static/img/bitballs/login.png" srcset="/static/img/bitballs/login.png 1x, /static/img/bitballs/login-2x.png 2x">
+<img src="static/img/bitballs/login.png" srcset="static/img/bitballs/login.png 1x, static/img/bitballs/login-2x.png 2x">
 
 Create, edit, and delete players:
 
-<img src="/static/img/bitballs/create-player.png" srcset="/static/img/bitballs/create-player.png 1x, /static/img/bitballs/create-player-2x.png 2x">
+<img src="static/img/bitballs/create-player.png" srcset="static/img/bitballs/create-player.png 1x, static/img/bitballs/create-player-2x.png 2x">
 
 Create, edit, and delete tournaments:
 
-<img src="/static/img/bitballs/create-tournament.png" srcset="/static/img/bitballs/create-tournament.png 1x, /static/img/bitballs/create-tournament-2x.png 2x">
+<img src="static/img/bitballs/create-tournament.png" srcset="static/img/bitballs/create-tournament.png 1x, static/img/bitballs/create-tournament-2x.png 2x">
 
 Create teams of players for a tournament:
 
-<img src="/static/img/bitballs/create-team.png" srcset="/static/img/bitballs/create-team.png 1x, /static/img/bitballs/create-team-2x.png 2x">
+<img src="static/img/bitballs/create-team.png" srcset="static/img/bitballs/create-team.png 1x, static/img/bitballs/create-team-2x.png 2x">
 
 Create and delete games for a tournament:
 
-<img src="/static/img/bitballs/new-game.png" srcset="/static/img/bitballs/new-game.png 1x, /static/img/bitballs/new-game-2x.png 2x">
+<img src="static/img/bitballs/new-game.png" srcset="static/img/bitballs/new-game.png 1x, static/img/bitballs/new-game-2x.png 2x">
 
 Add and remove stats for a game while watching it on youtube:
 
-<img src="/static/img/bitballs/add-stat.png" srcset="/static/img/bitballs/add-stat.png 1x, /static/img/bitballs/add-stat-2x.png 2x">
+<img src="static/img/bitballs/add-stat.png" srcset="static/img/bitballs/add-stat.png 1x, static/img/bitballs/add-stat-2x.png 2x">
 
 Visitors who are not admins are only able to
 view the list of players, tournaments, and game details:
 
-<img src="/static/img/bitballs/public-view.png" srcset="/static/img/bitballs/public-view.png 1x, /static/img/bitballs/public-view-2x.png 2x">
+<img src="static/img/bitballs/public-view.png" srcset="static/img/bitballs/public-view.png 1x, static/img/bitballs/public-view-2x.png 2x">
 
 
 @body
@@ -205,7 +205,7 @@ Bitballs has the following tables and therefore data types:
 The server also has a concept of a [Session](http://donejs.github.io/bitballs/docs/bitballs%7Cmodels%7Csession.html).  The Session
 can be thought of as having a User.
 
-<img class="img-responsive" src="/static/img/bitballs/data-model.png">
+<img class="img-responsive" src="static/img/bitballs/data-model.png">
 
 
 The restful service layer provides the following urls
@@ -356,7 +356,7 @@ RESPONSE:
 
 The [`/services/session`](http://donejs.github.io/bitballs/docs/services%7Csession.html) api is singular because there can only be
 one session available to a particular user. We'll discuss
-this more in the [Users, Sessions, and Access section](#section=section_Users_Sessions_andAccess)
+this more in the [Users, Sessions, and Access section](#users-sessions-and-access)
 
 
 ### Component map
@@ -366,49 +366,49 @@ The following diagrams the component responsible for each part of the applicatio
 <div class="row">
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html">
-    <img class="img-responsive" src="/static/img/bitballs/map-navlogin.png" srcset="/static/img/bitballs/map-navlogin.png 1x, /static/img/bitballs/map-navlogin-2x.png 2x">
+    <img class="img-responsive" src="static/img/bitballs/map-navlogin.png" srcset="static/img/bitballs/map-navlogin.png 1x, static/img/bitballs/map-navlogin-2x.png 2x">
     </a>
   </div>
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html">
-    <img class="img-responsive" src="/static/img/bitballs/map-nav.png" srcset="/static/img/bitballs/map-nav.png 1x, /static/img/bitballs/map-nav-2x.png 2x">
+    <img class="img-responsive" src="static/img/bitballs/map-nav.png" srcset="static/img/bitballs/map-nav.png 1x, static/img/bitballs/map-nav-2x.png 2x">
     </a>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Ctournament%7Clist.html">
-        <img class="img-responsive" src="/static/img/bitballs/map-tournamentlist.png" srcset="/static/img/bitballs/map-tournamentlist.png 1x, /static/img/bitballs/map-tournamentlist-2x.png 2x">
+        <img class="img-responsive" src="static/img/bitballs/map-tournamentlist.png" srcset="static/img/bitballs/map-tournamentlist.png 1x, static/img/bitballs/map-tournamentlist-2x.png 2x">
     </a>
   </div>
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cplayer%7Clist.html">
-    <img class="img-responsive" src="/static/img/bitballs/map-playerlist.png" srcset="/static/img/bitballs/map-playerlist.png 1x, /static/img/bitballs/map-playerlist-2x.png 2x">
+    <img class="img-responsive" src="static/img/bitballs/map-playerlist.png" srcset="static/img/bitballs/map-playerlist.png 1x, static/img/bitballs/map-playerlist-2x.png 2x">
     </a>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Ctournament%7Cdetails.html">
-    <img class="img-responsive" src="/static/img/bitballs/map-tournamentdetails.png" srcset="/static/img/bitballs/map-tournamentdetails.png 1x, /static/img/bitballs/map-tournamentdetails-2x.png 2x">
+    <img class="img-responsive" src="static/img/bitballs/map-tournamentdetails.png" srcset="static/img/bitballs/map-tournamentdetails.png 1x, static/img/bitballs/map-tournamentdetails-2x.png 2x">
     </a>
   </div>
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cgame%7Cdetails.html">
-        <img class="img-responsive" src="/static/img/bitballs/map-gamedetails.png"  
-        srcset="/static/img/bitballs/map-gamedetails.png 1x, /static/img/bitballs/map-gamedetails-2x.png 2x">
+        <img class="img-responsive" src="static/img/bitballs/map-gamedetails.png"  
+        srcset="static/img/bitballs/map-gamedetails.png 1x, static/img/bitballs/map-gamedetails-2x.png 2x">
     </a>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Cdetails.html">
-    <img class="img-responsive" src="/static/img/bitballs/map-userdetails.png" srcset="/static/img/bitballs/map-userdetails.png 1x, /static/img/bitballs/map-userdetails-2x.png 2x">
+    <img class="img-responsive" src="static/img/bitballs/map-userdetails.png" srcset="static/img/bitballs/map-userdetails.png 1x, static/img/bitballs/map-userdetails-2x.png 2x">
     </a>
   </div>
   <div class="col-sm-6">
     <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Clist.html">
-        <img class="img-responsive" src="/static/img/bitballs/map-userlist.png" srcset="/static/img/bitballs/map-userlist.png 1x, /static/img/bitballs/map-userlist-2x.png 2x">
+        <img class="img-responsive" src="static/img/bitballs/map-userlist.png" srcset="static/img/bitballs/map-userlist.png 1x, static/img/bitballs/map-userlist-2x.png 2x">
     </a>
   </div>
 </div>
@@ -424,19 +424,19 @@ rights are handled.
 Bitballs has a very simple access rights system.  Only
 admin users can manipulate tournament data.
 
-<img src="/static/img/bitballs/new-game.png" srcset="/static/img/bitballs/new-game.png 1x, /static/img/bitballs/new-game-2x.png 2x">
+<img src="static/img/bitballs/new-game.png" srcset="static/img/bitballs/new-game.png 1x, static/img/bitballs/new-game-2x.png 2x">
 
 And only admin users can set another user as an admin user.
 
-_PIC:admin view of users page_
+<img src="static/img/bitballs/admin-view.png">
 
 Non-admin users can read data.  
 
-<img src="/static/img/bitballs/nonadmin-games.png" srcset="/static/img/bitballs/nonadmin-games.png 1x, /static/img/bitballs/nonadmin-games-2x.png 2x">
+<img src="static/img/bitballs/nonadmin-games.png" srcset="static/img/bitballs/nonadmin-games.png 1x, static/img/bitballs/nonadmin-games-2x.png 2x">
 
 Non-admins can register themselves and verify their email address.
 
-<img src="/static/img/bitballs/register.png" srcset="/static/img/bitballs/register.png 1x, /static/img/bitballs/register-2x.png 2x">
+<img src="static/img/bitballs/register.png" srcset="static/img/bitballs/register.png 1x, static/img/bitballs/register-2x.png 2x">
 
 The only exception is when there are no users.  In this situation,
 the first created user will be automatically set as the admin user.
@@ -801,7 +801,7 @@ can quickly respond to changes in design.
 
 ### Performance vs Maintainability
 
-Bitballs [data model](#section=section_DataModelandServicelayer) has many relationships among
+Bitballs [data model](#data-model-and-service-layer) has many relationships among
 its data types.  For example, Tournaments have many Games and have many Teams.  Games
 have Teams and Stats.  And Teams have Players.
 
@@ -1189,7 +1189,7 @@ Team request because all players are already loading.
 But this makes it tricky to list a team's players because
 all we have are player ids on each team:
 
-<img class="img-responsive" src="/static/img/bitballs/team-list.png" srcset="/static/img/bitballs/team-list.png 1x, /static/img/bitballs/team-list-2x.png 2x">
+<img class="img-responsive" src="static/img/bitballs/team-list.png" srcset="static/img/bitballs/team-list.png 1x, static/img/bitballs/team-list-2x.png 2x">
 
 A naive solution would be to make a `getById` method on `Player.List` like:
 

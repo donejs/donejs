@@ -3,8 +3,8 @@
     <title>{{title}}</title>
   </head>
   <body>
-    <can-import from="bootstrap/less/bootstrap.less!" />
-    <can-import from="donejs-chat/styles.less!" />
+    <can-import from="bootstrap/less/bootstrap.less" />
+    <can-import from="donejs-chat/styles.less" />
     <can-import from="donejs-chat/app" export-as="viewModel" />
 
     <div class="container">
@@ -21,7 +21,7 @@
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="donejs-chat/index.stache!done-autorender"></script>
+        <script src="{{joinBase 'steal.production.js'}}"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>

@@ -14,6 +14,6 @@ describe("after running donejs document", function(){
   });
 
   it("Has produced a page", function(){
-    assert(this.html, "Documentjs made a page");
+    assert(/THIS IS A GENERATED FILE/.test(this.html), "Documentjs made a page");
   });
 });

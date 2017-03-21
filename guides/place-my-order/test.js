@@ -5,8 +5,8 @@ var rimraf = require("rimraf").sync;
 var streamWhen = require("stream-when");
 var nodeVersion = +process.version.substr(1).split(".")[0];
 
-// Only run in AppVeyor if version >= 5
-if(isWindowsCI && nodeVersion < 5) {
+// Only run in AppVeyor if version 6
+if(isWindowsCI && nodeVersion !== 6) {
 	process.exit(0);
 }
 
@@ -38,7 +38,8 @@ guide.step("Remove existing dependencies", function(){
 });
 
 guide.step("Install donejs", function(){
-	var branch = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH || 'master';
+  var branch = process.env.TRAVIS_PULL_REQUEST_BRANCH ||
+    process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_COMMIT || 'master';
 
   return guide.executeCommand("npm", ["install", "donejs/donejs#" + branch, "-g"]);
 });
@@ -248,19 +249,23 @@ guide.step("Create dependent models", function(){
 guide.closeBrowser();
 
 guide.step("Create a test", function(){
-	return guide.replaceFile(join("src", "models", "fixtures", "state.js"),
-													 join(__dirname, "steps", "create-test", "state.js"))
+	return guide.replaceFile(join("src", "models", "fixtures", "states.js"),
+													 join(__dirname, "steps", "create-test", "states.js"))
 		.then(function(){
-			return guide.replaceFile(join("src", "models", "fixtures", "city.js"),
-													 join(__dirname, "steps", "create-test", "city.js"));
+			return guide.replaceFile(join("src", "models", "fixtures", "cities.js"),
+													 join(__dirname, "steps", "create-test", "cities.js"));
 		})
 		.then(function(){
-			return guide.replaceFile(join("src", "models", "fixtures", "restaurant.js"),
-													 join(__dirname, "steps", "create-test", "restaurant.js"));
+			return guide.replaceFile(join("src", "models", "fixtures", "restaurants.js"),
+													 join(__dirname, "steps", "create-test", "restaurants.js"));
 		})
 		.then(function(){
-			return guide.replaceFile(join("src", "restaurant", "list", "list_test.js"),
-													 join(__dirname, "steps", "create-test", "list_test.js"));
+			return guide.replaceFile(join("src", "models", "restaurants.js"),
+													 join(__dirname, "steps", "create-test", "restaurants_model.js"));
+		})
+		.then(function(){
+			return guide.replaceFile(join("src", "restaurant", "list", "list-test.js"),
+													 join(__dirname, "steps", "create-test", "list-test.js"));
 
 		})
 	.then(function(){
@@ -309,7 +314,7 @@ guide.test(function(){
 guide.closeBrowser();
 
 guide.step("Using a test runner", function(){
-	return guide.replaceFile(join("src", "test", "test.js"),
+	return guide.replaceFile(join("src", "test.js"),
 													 join(__dirname, "steps", "test-runner", "test.js"))
 		.then(function(){
 			return guide.executeCommand("donejs", ["test"]);
@@ -347,7 +352,7 @@ guide.step("Create additional components", function(){
 });
 
 guide.step("Importing other projects", function(){
-	return guide.executeCommand("npm", ["install", "bit-tabs@0.2", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@alpha", "--save"])
 		.then(wait)
 		.then(wait)
 		.then(function(){
@@ -369,8 +374,8 @@ guide.step("Creating the order model", function(){
 												 join(__dirname, "steps", "create-data", "new.js"));
 		})
 		.then(function(){
-			return replaceFile(join("src", "order", "new", "new_test.js"),
-												 join(__dirname, "steps", "create-data", "new_test.js"));
+			return replaceFile(join("src", "order", "new", "new-test.js"),
+												 join(__dirname, "steps", "create-data", "new-test.js"));
 		})
 		.then(function(){
 			var args = "add component order/details.component pmo-order-details"
@@ -409,26 +414,30 @@ guide.closeBrowser();
  */
 guide.step("Set up a real-time connection", function(){
 	var replaceFile = guide.replaceFile;
-	return guide.executeCommand("npm", ["install", "steal-socket.io@2", "--save"])
-		.then(function(){
-			return replaceFile(join("src", "models", "order.js"),
-												 join(__dirname, "steps", "real-time", "order.js"));
-		})
-		.then(function(){
-			var args = "add component order/list.component pmo-order-list".split(" ");
-			return guide.executeCommand("donejs", args);
-		})
-		.then(function(){
-			return replaceFile(join("src", "order", "list.component"),
-												 join(__dirname, "steps", "real-time", "list.component"));
-		})
-		.then(function(){
-			return replaceFile(join("src", "order", "history.component"),
-												 join(__dirname, "steps", "real-time",
-															"history.component"));
-		})
-		.then(wait)
-		.then(wait);
+
+	return Promise.resolve()
+	.then(function(){
+		var args = "add component order/list.component pmo-order-list".split(" ");
+		return guide.executeCommand("donejs", args);
+	})
+	.then(function(){
+		return replaceFile(join("src", "order", "list.component"),
+											 join(__dirname, "steps", "real-time", "list.component"));
+	})
+	.then(function(){
+		return replaceFile(join("src", "order", "history.component"),
+											 join(__dirname, "steps", "real-time",
+														"history.component"));
+	})
+	.then(function(){
+		return guide.executeCommand("npm", ["install", "steal-socket.io@4", "--save"])
+	})
+	.then(function(){
+		return replaceFile(join("src", "models", "order.js"),
+											 join(__dirname, "steps", "real-time", "order.js"));
+	})
+	.then(wait)
+	.then(wait);
 });
 
 /**
@@ -437,6 +446,9 @@ guide.step("Set up a real-time connection", function(){
 guide.step("Create documentation", function(){
 	return guide.replaceFile(join("src", "order", "new", "new.js"),
 													 join(__dirname, "steps", "document", "new.js"))
+		.then(function(){
+			return guide.executeCommand("donejs", ["add", "documentjs"]);
+		})
 		.then(function(){
 			return guide.executeCommand("donejs", ["document"]);
 		})

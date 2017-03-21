@@ -1,34 +1,41 @@
-import can from 'can';
+import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/';
+import set from 'can-set';
 import superMap from 'can-connect/can/super-map/';
-import tag from 'can-connect/can/tag/';
-import 'can/map/define/define';
+import loader from '@loader';
 import io from 'steal-socket.io';
 
-export const Message = can.Map.extend({
-  define: {}
+const Message = DefineMap.extend({
+  seal: false
+}, {
+  'id': 'any',
+  name: 'string',
+  body: 'string'
 });
 
-Message.List = can.List.extend({
-  Map: Message
-}, {});
+const algebra = new set.Algebra(
+  set.props.id('id')
+);
 
-export const messageConnection = superMap({
-  url: 'http://chat.donejs.com/api/messages',
-  idProp: 'id',
+Message.List = DefineList.extend({
+  '#': Message
+});
+
+Message.connection = superMap({
+  url: loader.serviceBaseURL + '/api/messages',
   Map: Message,
   List: Message.List,
-  name: 'message'
+  name: 'message',
+  algebra
 });
 
-tag('message-model', messageConnection);
-
-const socket = io('http://chat.donejs.com');
+const socket = io(loader.serviceBaseURL);
 
 socket.on('messages created',
-  message => messageConnection.createInstance(message));
+  message => Message.connection.createInstance(message));
 socket.on('messages updated',
-  message => messageConnection.updateInstance(message));
+  message => Message.connection.updateInstance(message));
 socket.on('messages removed',
-  message => messageConnection.destroyInstance(message));
+  message => Message.connection.destroyInstance(message));
 
 export default Message;

@@ -2,13 +2,13 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever 
+@description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever
 install DoneJS and includes platform-specific pieces of information not covered in the Quick Start or In Depth guides.
 
 DoneJS officially supports:
 
- - [Node](https://nodejs.org) 0.10.x, 0.12.x, and Node 4/5
- - [npm](https://www.npmjs.com/) 2.x, 3.x
+ - [Node](https://nodejs.org) 6 and up
+ - [npm](https://www.npmjs.com/) 3.x and up
 
 @body
 
@@ -17,6 +17,18 @@ DoneJS officially supports:
 ### Prerequisites
 
 This will help you get set up with DoneJS on Windows. To use DoneJS you need a C++ compiler (for native dependencies). First you need a recent version of [Node.js](https://nodejs.org/en/).
+
+#### Node.js
+
+To download Node.js visit [https://nodejs.org](https://nodejs.org). There will be two big green buttons for the two recommended downloads. Choose the one on the right, which says **Current**. This will give you the most recent version of Node.js.
+
+Once downloaded, double-click the installer and go through the installation process. Once complete you should be able to open up a terminal and type:
+
+```shell
+node -v
+```
+
+Which should then print out the version of Node.js that is installed.
 
 #### Package Management
 
@@ -126,6 +138,18 @@ Close the AVD Manager and you should have everything you need for Android develo
 
 ## Mac OS X
 
+### Node.js
+
+To download Node.js visit [https://nodejs.org](https://nodejs.org). There will be two big green buttons for the two recommended downloads. Choose the one on the right, which says **Current**. This will give you the most recent version of Node.js.
+
+Once downloaded, double-click the installer and go through the installation process. Once complete you should be able to open up a terminal and type:
+
+```shell
+node -v
+```
+
+Which should then print out the version of Node.js that is installed.
+
 ### Prerequisites
 
 To get DoneJS working on OS X you need Xcode command line tools which you can get by typing:
@@ -146,7 +170,7 @@ Installing in a Debian / Ubuntu environment takes a little extra work because th
 
 ### Prerequisites
 
-Instead of installing Node.js from the repository we recommend using a PPA (a repostiroy maintained by a 3rd party). First get a copy of `curl` if you don't already have it:
+Instead of installing Node.js from the repository we recommend using a PPA (a repository maintained by a 3rd party). First get a copy of `curl` if you don't already have it:
 
 ```
 sudo apt-get install curl
@@ -236,7 +260,7 @@ Then click **OK** to create the device.
 Close the AVD Manager and you should have everything you need for Android development.
 
 
-## Vagrant & VirtualBox 
+## Vagrant & VirtualBox
 
 ### Prerequisites
 
@@ -286,7 +310,7 @@ Make sure that `C:/www/donejs` is a valid directory.
 For more information check the documentation on https://www.vagrantup.com/docs/synced-folders/basic_usage.html
 
 ### Launching the Vagrant Box
-Once you have done all the configuration run 
+Once you have done all the configuration run
 ```
 vagrant up
 ```

@@ -1,5 +1,10 @@
 <can-component tag="pmo-order-history">
-  <template>
+  <style type="less">
+    display: block;
+
+    p { font-weight: bold; }
+  </style>
+  <view>
     <div class="order-history">
       <div class="order header">
         <address>Name / Address / Phone</address>
@@ -8,5 +13,14 @@
         <div class="actions">Action</div>
       </div>
     </div>
-  </template>
+  </view>
+  <script type="view-model">
+    import DefineMap from 'can-define/map/';
+
+    export default DefineMap.extend({
+      message: {
+        value: 'This is the pmo-order-history component'
+      }
+    });
+  </script>
 </can-component>

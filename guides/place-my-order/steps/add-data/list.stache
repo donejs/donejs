@@ -1,8 +1,11 @@
+<can-import from="can-stache/helpers/route" />
+
 <div class="restaurants">
   <h2 class="page-header">Restaurants</h2>
   {{#if restaurants.isPending}}
     <div class="restaurant loading"></div>
   {{/if}}
+
   {{#if restaurants.isResolved}}
     {{#each restaurants.value}}
       <div class="restaurant">

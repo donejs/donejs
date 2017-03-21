@@ -1,3 +1,5 @@
+<can-import from="can-stache/helpers/route" />
+
 <div class="restaurants">
   <h2 class="page-header">Restaurants</h2>
   <form class="form">
@@ -26,7 +28,7 @@
           <option value="">Choose a city</option>
           {{/if}}
           {{#each cities.value}}
-          <option>{{name}}</option>
+          <option value="{{name}}">{{name}}</option>
           {{/each}}
         {{/if}}
       </select>

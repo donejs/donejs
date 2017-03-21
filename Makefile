@@ -1,9 +1,9 @@
-docs:
-  git clone git@github.com:donejs/donejs.git site/ -b gh-pages
-  npm run document
-  cd site
-  git add . --all
-  git commit -am "Updating site"
-  git push origin gh-pages
-  cd ..
-  rm -rf site/
+publish-docs:
+	npm install
+	./node_modules/.bin/bit-docs -fd
+	cp -R docs/static/img site/static/
+	cp docs/static/favicon.ico site/favicon.ico
+	cd site && \
+	git add --all && \
+	git commit -am "Publish docs" && \
+  git push -f origin gh-pages

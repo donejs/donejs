@@ -25,7 +25,8 @@ guide.step("Remove existing dependencies", function(){
 });
 
 guide.step("Install donejs", function(){
-  var branch = process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH || 'master';
+  var branch = process.env.TRAVIS_PULL_REQUEST_BRANCH || process.env.TRAVIS_BRANCH
+    || process.env.APPVEYOR_REPO_COMMIT || 'master';
 
 	return guide.executeCommand("npm", ["install", "donejs/donejs#" + branch, "-g"]);
 });
@@ -160,7 +161,7 @@ guide.step("Install and use bit-tabs", function(){
     return guide.wait(10000);
   }
 
-	return guide.executeCommand("npm", ["install", "bit-tabs@0.2", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@alpha", "--save"])
     .then(installWait)
 		.then(function(){
 			return guide.replaceFile(join("src", "home.component"),
@@ -185,6 +186,7 @@ guide.step("Generate the Message model", function(){
 
 	answer(/URL endpoint/, "http://chat.donejs.com/api/messages\n");
 	answer(/property name/, "\n");
+  answer(/service URL/, "Yes\n");
 
 	return supermodel.promise;
 });
@@ -195,6 +197,10 @@ guide.step("Generate the Message model", function(){
 guide.step("Use the connection", function(){
 	return guide.replaceFile(join("src", "messages", "messages.stache"),
 							 join(__dirname, "steps", "10-use-connection", "messages.stache"))
+    .then(function() {
+      return guide.replaceFile(join("src", "messages", "messages.js"),
+                   join(__dirname, "steps", "10-use-connection", "messages.js"))
+    })
 		.then(wait);
 });
 
@@ -206,11 +212,11 @@ guide.test(function(){
  * @Step 11
  */
 guide.step("Create messages", function(){
-	return guide.replaceFile(join("src", "messages", "messages.stache"),
-							 join(__dirname, "steps", "11-create-messages", "messages.stache"))
+  return guide.replaceFile(join("src", "messages", "messages.js"),
+               join(__dirname, "steps", "11-create-messages", "messages.js"))
 		.then(function(){
-			return guide.replaceFile(join("src", "messages", "messages.js"),
-									 join(__dirname, "steps", "11-create-messages", "messages.js"));
+      return guide.replaceFile(join("src", "messages", "messages.stache"),
+    							 join(__dirname, "steps", "11-create-messages", "messages.stache"));
 		}).then(wait);
 });
 
@@ -287,23 +293,7 @@ guide.step("Stop production mode", function(){
 guide.stepIf("Deploy to CDN", function() {
 	return !!guide.options.app;
 }, function(){
-	var appName = guide.options.app;
-
-	var setConfig = function(pkg){
-		pkg.donejs.deploy.services.production.config.firebase = appName;
-		if(!pkg.system.envs) {
-			pkg.system.envs = {};
-		}
-
-		if(!pkg.system.envs["server-production"]) {
-			pkg.system.envs["server-production"] = {};
-		}
-		pkg.system.envs["server-production"].baseURL = "https://" +
-			appName + ".firebaseapp.com/";
-		return pkg;
-	};
-	return guide.replaceJson("package.json",
-							 join(__dirname, "steps", "16-cdn", "deploy.json"), setConfig)
+  return guide.executeCommand("donejs", ["add", "firebase"])
 		.then(function(){
 			return guide.executeCommand("donejs", ["build"]);
 		})
@@ -320,11 +310,12 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 }, function(){
 	return guide.executeCommand("npm", ["install", "-g", "ios-sim"])
 		.then(function(){
-			var proc = guide.answerPrompts("donejs", ["add", "cordova@0.2"]);
+			var proc = guide.answerPrompts("donejs", ["add", "cordova"]);
 			var answer = proc.answer;
 
 			answer(/Name of project/, "donejs chat\n");
 			answer(/ID of project/, "com.donejs.donejschat\n");
+      answer(/service layer/, "\n");
 			answer(/What platforms/, "\n");
 
 			return proc.promise;
@@ -337,21 +328,18 @@ guide.stepIf("Desktop and mobile apps: Cordova", function() {
 /**
  * @Step 18
  */
-guide.stepIf("Desktop and mobile apps: NW.js", function() {
-  return process.platform !== 'win32';
-}, function(){
-	var proc = guide.answerPrompts("donejs", ["add", "nw@0.2"]);
+guide.step("Desktop and mobile apps: Electron", function(){
+	var proc = guide.answerPrompts("donejs", ["add", "electron"]);
 	var answer = proc.answer;
 
 	answer(/Main HTML file/, "\n");
-	answer(/The nw.js version/, "0.12.3\n");
-	answer(/Width of/, "\n");
-	answer(/Height of/, "\n");
+  answer(/service layer/, "\n");
 	answer(/What platforms/, "\n");
+	answer(/What architectures/, "\n");
 
 	return proc.promise
 		.then(function(){
-			return guide.executeCommand("donejs", ["build", "nw"]);
+			return guide.executeCommand("donejs", ["build", "electron"]);
 		});
 });
 
