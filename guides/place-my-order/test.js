@@ -432,7 +432,7 @@ guide.step("Set up a real-time connection", function(){
 														"history.component"));
 	})
 	.then(function(){
-		return guide.executeCommand("npm", ["install", "steal-socket.io@4", "--save"])
+		return guide.executeCommand("npm", ["install", "steal-socket.io", "--save"])
 	})
 	.then(function(){
 		return replaceFile(join("src", "models", "order.js"),
