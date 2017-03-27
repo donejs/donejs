@@ -77,7 +77,7 @@ guide.step("Run NPM install", function() {
 
 
 guide.step("Install place-my-order-api", function() {
-	return guide.executeCommand("npm", ["install", "place-my-order-api@0.4"]);
+	return guide.executeCommand("npm", ["install", "place-my-order-api@0.4", "--save"]);
 });
 
 guide.step("Starting the application", function(){
