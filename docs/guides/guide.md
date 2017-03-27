@@ -158,7 +158,7 @@ Next, add a link to go back to the homepage from the chat page by updating `src/
 @highlight 1-2
 
 Then, add a `page` property on the `AppViewModel` and
-defines a rule for it in `src/app.js`:
+define a rule for it in `src/app.js`:
 
 @sourceref ../../guides/guide/steps/7-navigate/app.js
 @highlight 6,13
