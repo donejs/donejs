@@ -92,13 +92,15 @@ guide.step("Starting the application", function(){
 
   function startAPIServer() {
 		var child = guide.doneApi = guide.executeCommand("donejs", ["api"]);
-		return guide.wait(5000);
+		return guide.wait(5000)
+			.then(guide.wait(5000));
   }
 
   function updateScripts(){
 		return guide.replaceJson("package.json", join(__dirname, "steps",
 																									"starting-the-application",
 																									"scripts.json"))
+																									.then(wait)
 																									.then(wait);
   }
 
