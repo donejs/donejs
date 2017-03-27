@@ -77,7 +77,7 @@ guide.step("Run NPM install", function() {
 
 
 guide.step("Install place-my-order-api", function() {
-	return guide.executeCommand("npm", ["install", "place-my-order-api@0.4", "--save"]);
+	return guide.executeCommand("npm", ["install", "place-my-order-api"]);
 });
 
 guide.step("Starting the application", function(){
@@ -113,7 +113,7 @@ guide.launchBrowser("http://localhost:8080");
  * Loading assets
  */
 guide.step("Loading assets", function(){
-	return guide.executeCommand("npm", ["install", "place-my-order-assets@0.1", "--save"])
+	return guide.executeCommand("npm", ["install", "place-my-order-assets", "--save"])
 		.then(wait)
 		.then(function(){
 			return guide.replaceFile(join("src", "index.stache"),
