@@ -13,7 +13,7 @@
     "test": "npm run jshint && npm run mocha && npm run document && npm run test-guides",
     "test-guides": "npm run test-quickstart && npm run test-pmo",
     "test-quickstart": "guide guides/guide/test.js --local",
-    "test-pmo": "DEBUG=* guide guides/place-my-order/test.js --local --debug",
+    "test-pmo": "DEBUG=* guide guides/place-my-order/test.js --local",
     "jshint": "jshint lib/. bin/donejs test/. --config",
     "mocha": "mocha test/test --timeout 120000",
     "verify": "echo \"Script ran\"",
