@@ -1,8 +1,8 @@
 sudo: false
-dist: xenial
+dist: trusty
 language: node_js
 addons:
-  firefox: "51.0"
+  firefox: "52.0"
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
