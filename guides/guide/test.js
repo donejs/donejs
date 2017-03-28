@@ -25,8 +25,7 @@ guide.step("Remove existing dependencies", function(){
 });
 
 guide.step("Install donejs", function(){
-  var branch = process.env.TRAVIS_PULL_REQUEST_BRANCH || process.env.TRAVIS_BRANCH
-    || process.env.APPVEYOR_REPO_COMMIT || 'master';
+  var branch = process.env.TRAVIS_PULL_REQUEST_BRANCH || process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_BRANCH || 'master';
 
 	return guide.executeCommand("npm", ["install", "donejs/donejs#" + branch, "-g"]);
 });
