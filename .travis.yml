@@ -1,4 +1,5 @@
 sudo: false
+dist: trusty
 language: node_js
 addons:
   firefox: "51.0"

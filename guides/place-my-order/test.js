@@ -77,7 +77,7 @@ guide.step("Run NPM install", function() {
 
 
 guide.step("Install place-my-order-api", function() {
-	return guide.executeCommand("npm", ["install", "place-my-order-api@0.4"]);
+	return guide.executeCommand("npm", ["install", "place-my-order-api"]);
 });
 
 guide.step("Starting the application", function(){
@@ -92,13 +92,15 @@ guide.step("Starting the application", function(){
 
   function startAPIServer() {
 		var child = guide.doneApi = guide.executeCommand("donejs", ["api"]);
-		return guide.wait(5000);
+		return guide.wait(5000)
+			.then(guide.wait(5000));
   }
 
   function updateScripts(){
 		return guide.replaceJson("package.json", join(__dirname, "steps",
 																									"starting-the-application",
 																									"scripts.json"))
+																									.then(wait)
 																									.then(wait);
   }
 
@@ -111,7 +113,7 @@ guide.launchBrowser("http://localhost:8080");
  * Loading assets
  */
 guide.step("Loading assets", function(){
-	return guide.executeCommand("npm", ["install", "place-my-order-assets@0.1", "--save"])
+	return guide.executeCommand("npm", ["install", "place-my-order-assets", "--save"])
 		.then(wait)
 		.then(function(){
 			return guide.replaceFile(join("src", "index.stache"),
@@ -430,7 +432,7 @@ guide.step("Set up a real-time connection", function(){
 														"history.component"));
 	})
 	.then(function(){
-		return guide.executeCommand("npm", ["install", "steal-socket.io@4", "--save"])
+		return guide.executeCommand("npm", ["install", "steal-socket.io", "--save"])
 	})
 	.then(function(){
 		return replaceFile(join("src", "models", "order.js"),
