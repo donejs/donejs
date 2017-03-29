@@ -5,8 +5,8 @@ var rimraf = require("rimraf").sync;
 var streamWhen = require("stream-when");
 var nodeVersion = +process.version.substr(1).split(".")[0];
 
-// Only run in AppVeyor if version 6
-if(isWindowsCI && nodeVersion !== 6) {
+// Only run in AppVeyor if version 7
+if(isWindowsCI && nodeVersion <= 7) {
 	process.exit(0);
 }
 
