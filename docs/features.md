@@ -825,44 +825,9 @@ It's widely known that CDNs offer the best performance for static assets, but mo
 
 DoneJS comes with integrations with [S3](https://aws.amazon.com/s3/) and [Firebase](https://www.firebase.com) (popular CDN services) that make configuring and deploying to a CDN dirt simple.
 
- 1. You sign up for S3 or Firebase.
- 2. You paste a few lines of config into your `package.json` that point to the right CDN service.
-
-```
-"donejs": {
-  "deploy": {
-    "root": "dist",
-    "services": {
-      "production": {
-        "type": "firebase",
-        "config": {
-          "firebase": "place-my-order",
-          "public": "./dist",
-          "headers": [{
-            "source": "/**",
-            "headers": [{
-              "key": "Access-Control-Allow-Origin",
-              "value": "*"
-            }]
-          }]
-        }
-      }
-    }
-  }
-}
-```
- 3. You paste a few more lines that tell your production server to serve static assets from the CDN.
-
-```
-{
- "system": {
-   "envs": {
-     "production": {
-       "baseURL": "https://place-my-order.firebaseapp.com/"
-     }
-   },
-```
- 4. You run `donejs deploy`.
+ 1. You sign up for Firebase.
+ 2. You run: `donejs add firebase` in your terminal. It asks a few questions, most of which you can accept the default answer.
+ 3. You run `donejs deploy`.
 
 That's it. Now when you run your server in production mode, all static assets (CSS, JS, images, etc) are served from the CDN.
 
