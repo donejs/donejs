@@ -2,7 +2,7 @@
   "name": "donejs",
   "version": "1.0.0",
   "description": "Your app is done",
-  "main": "index.js",
+  "main": "./lib/cli/index.js",
   "bin": {
     "donejs": "./bin/donejs"
   },
