@@ -1,7 +1,7 @@
 {
   "scripts": {
     "api": "place-my-order-api --port 7070",
-    "test": "testee src/test.html --browsers firefox --reporter Spec",
+    "test": "testee test.html --browsers firefox --reporter Spec",
     "start": "done-serve --proxy http://localhost:7070 --port 8080",
     "develop": "done-serve --develop --proxy http://localhost:7070 --port 8080",
     "build": "node build"
