@@ -29,7 +29,7 @@ You will need [NodeJS](http://nodejs.org) installed and your code editor of choi
 To get started, let's install the DoneJS command line utility globally:
 
 ```
-npm install -g donejs@alpha
+npm install -g donejs@1
 ```
 
 Then we can create a new DoneJS application:
@@ -724,7 +724,7 @@ Here we are adding some more conditions if `page` is set to `restaurants`:
 The NPM integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
 ```
-npm install bit-tabs@alpha --save
+npm install bit-tabs@1 --save
 ```
 
 And then integrate it into `src/order/new/new.stache`:
@@ -1002,7 +1002,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```
-donejs add cordova@alpha
+donejs add cordova@1
 ```
 
 Answer the question about the URL of the service layer with `http://www.place-my-order.com`.

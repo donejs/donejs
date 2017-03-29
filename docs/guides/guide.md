@@ -31,7 +31,7 @@ In this section, we will install DoneJS and generate a new application.
 To get started, let's install the DoneJS command line utility globally:
 
 ```
-npm install -g donejs@alpha
+npm install -g donejs@1
 ```
 
 ### Generate the application
@@ -204,7 +204,7 @@ On the homepage, let's install and add [bit-tabs](https://github.com/bitovi-comp
 Run:
 
 ```
-npm install bit-tabs@alpha --save
+npm install bit-tabs@1 --save
 ```
 
 ### Update the page
@@ -454,7 +454,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```
-donejs add cordova@alpha
+donejs add cordova@1
 ```
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
@@ -476,7 +476,7 @@ Windows users will get instructions to download the latest version of the platfo
 To set up the desktop build, we have to add it to our application like this:
 
 ```
-donejs add electron
+donejs add electron@1
 ```
 
 Accept the default for all of the prompts.
