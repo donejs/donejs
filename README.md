@@ -9,29 +9,48 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/donejs/donejs?branch=master&svg=true)](https://ci.appveyor.com/project/daffl/donejs)
 [![Coverage Status](https://coveralls.io/repos/github/donejs/donejs/badge.svg?branch=master)](https://coveralls.io/github/donejs/donejs?branch=master)
 
-DoneJS is the easiest way to get a high-performance, real-time, web and mobile application
-done! The framework provides a nearly comprehensive combination of technologies for
-building complex JavaScript applications.
+DoneJS is your new favorite way to get **high-performance**, **real-time**, **web and mobile** applications DONE!
 
-If you are looking for the fastest way to get a fully modern development environment setup
-and produce a lightning fast application, you’ve come to the right place.
+With a comprehensive set of packages designed specifically for complex JavaScript projects, and the ability to quickly
+provision a modern development environment, producing lightning-fast applications can now be done faster.
 
-DoneJS is a combination of the following technologies:
+The DoneJS environment automates the orchestration of these (otherwise disparate) parts:
 
-- [StealJS](http://stealjs.com) — ES6, CJS, and AMD module loader and builder
-- [CanJS](https://canjs.com) — Custom elements and model-view-viewmodel (MVVM) utilities
-- [jQuery](https://jquery.com/) — DOM helpers
-- [jQuery++](http://jquerypp.com) — Extended DOM helpers
-- [QUnit](https://qunitjs.com/) or [Mocha](https://mochajs.org/) — Assertion library
-- [FuncUnit](https://funcunit.com/) — Functional tests
-- [Testee](https://github.com/bitovi/testee) or [Karma](https://karma-runner.github.io/) — Test runner
-- [DocumentJS](http://documentjs.com) — Documentation
-- [can-ssr](https://github.com/canjs/ssr) — Server-side rendering utilities for CanJS
+| Package                 | Description |
+|:----------------------- |:----------- |
+| [StealJS][]             | ES6, CJS, and AMD module loader and builder
+| [CanJS][]               | Custom elements and model-view-viewmodel (MVVM) utilities
+| [jQuery][]              | DOM helpers
+| [jQuery++][]            | Extended DOM helpers
+| [QUnit][] or [Mocha][]  | Assertion library
+| [FuncUnit][]            | Functional tests
+| [Testee][] or [Karma][] | Test runner
+| [DocumentJS][]          | Documentation
+| [can-ssr][]             | Server-side rendering utilities for CanJS
 
-DoneJS is an `npm` package that simply installs all the previous
-technologies. Check out [DoneJS.com](https://donejs.com/) for the collective [benefits](https://donejs.com/Features.html) of these technologies
-and [guides](https://donejs.com/Guides.html) on how to use them together to build an amazing application.
+## Quick Start
+
+Ready to install DoneJS?
+
+```
+npm install -g donejs 
+donejs add app my-app
+```
+
+[In-depth guides](https://donejs.com/Guides.html), an explanation of the [collective benefits](https://donejs.com/Features.html), and more can be found at [DoneJS.com](https://donejs.com/).
 
 ## Contributing
 
-Check out the [contribution guide on DoneJS.com](https://donejs.com/contributing.html).
+If you would like to contribute to the DoneJS project, see the [Contributing Guide](https://donejs.com/contributing.html) for more information.
+
+[StealJS]: http://stealjs.com
+[CanJS]: https://canjs.com
+[jQuery]: https://jquery.com/
+[jQuery++]: http://jquerypp.com
+[QUnit]: https://qunitjs.com/
+[Mocha]: https://mochajs.org/
+[FuncUnit]: https://funcunit.com/
+[Testee]: https://github.com/bitovi/testee
+[Karma]: https://karma-runner.github.io/
+[DocumentJS]: http://documentjs.com
+[can-ssr]: https://github.com/canjs/ssr
