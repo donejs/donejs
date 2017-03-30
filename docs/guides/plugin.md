@@ -10,7 +10,7 @@ We will create the project on [GitHub](https://github.com), initialize the repos
 
 You can find the code in the [donejs-number-input](https://github.com/donejs/donejs-number-input) repository. The final result looks like this:
 
-<a class="jsbin-embed" href="//jsbin.com/cihawi/embed?output">JS Bin on jsbin.com</a><script src="//static.jsbin.com/js/embed.min.js?3.35.9"></script>
+<a class="jsbin-embed" href="//jsbin.com/zuqadox/1/embed?html,css,js,output">JS Bin on jsbin.com</a><script src="//static.jsbin.com/js/embed.min.js?3.41.9"></script>
 
 ## Setting up
 
@@ -61,7 +61,7 @@ The plugin generator will ask several question that should be answered as follow
 
 Once all done, the final prompt looks similar to this:
 
-[<img src="http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-7.55.03-AM.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
+[<img src="static/img/donejs-plugin.png" alt="DoneJS adding a new plugin" style="width: 100%;" class="alignnone size-full wp-image-2666" />][9]
 
 Now the generator will initialize the default plugin layout and install all its dependencies.
 
@@ -111,7 +111,7 @@ A plugin can contain anything from shared utility functions to model- or compone
 $ donejs add component <username>-number-input
 ```
 
-This creates a complete component using the `<username>-number-input` tag with tests and documentation. Because the module name is the same as the plugin name (`<username>-number-input`), the generator will put the component files directly in the `src/` folder (instead of a subfolder). Confirm the default tag name and and the prompts to overwrite the existing files by pressing enter. The initialized component can now be viewed at `http://localhost:8080/src/<username>-number-input.html`. The component tests are available at [localhost:8080/src/test.html][15].
+This creates a complete component using the `<username>-number-input` tag with tests and documentation. Because the module name is the same as the plugin name (`<username>-number-input`), the generator will put the component files directly in the `src/` folder (instead of a subfolder). Confirm the default tag name by pressing enter. Confirm the prompts to overwrite the existing files by typing `Y` and pressing enter. The initialized component can now be viewed at `http://localhost:8080/src/<username>-number-input.html`. The component tests are available at [localhost:8080/src/test.html][15].
 
 ### Creating and testing the view-model
 
@@ -122,92 +122,13 @@ Our number input view-model should provide the following functionality:
 
 We can use the [define plugin][16] to define a `min` and `max` value and [a setter][17] for the `value` to make sure that it always is within those constraints. We will also add an `increment` and `decrement` method that will modify the value by 1. The component view-model (in `src/<username>-number-input.js`) then looks like this:
 
-```js
-import Component from 'can/component/';
-import Map from 'can/map/';
-import 'can/map/define/';
-import './<username>-number-input.less!';
-import template from './<username>-number-input.stache!';
+@sourceref ../../guides/plugin/steps/implement/number-input.js
+@highlight 7-35
 
-export const ViewModel = Map.extend({
-  define: {
-    value: {
-      value: 0,
-      type: 'number',
-      set(value) {
-        if(value > this.attr('max')) {
-          return this.attr('max');
-        }
+To test this functionality we can change the tests in `src/<username>-number-input-test.js` to look like this:
 
-        if(value < this.attr('min')) {
-          return this.attr('min');
-        }
-
-        return value;
-      }
-    },
-    max: {
-      value: Infinity,
-      type: 'number'
-    },
-    min: {
-      value: 0,
-      type: 'number'
-    }
-  },
-
-  increment() {
-    this.attr('value', this.attr('value') + 1);
-  },
-
-  decrement() {
-    this.attr('value', this.attr('value') - 1);
-  }
-});
-
-export default Component.extend({
-  tag: '<username>-number-input',
-  viewModel: ViewModel,
-  template
-});
-```
-
-To test this functionality we can change the tests in `src/<username>-number-input_test.js` to look like this:
-
-```html
-import QUnit from 'steal-qunit';
-import { ViewModel } from './<username>-number-input.js';
-
-// ViewModel unit tests
-QUnit.module('<username>-number-input/component');
-
-QUnit.test('Initializes the ViewModel', function(){
-  var vm = new ViewModel();
-  
-  QUnit.equal(vm.attr('value'), 0,
-    'Default value is 0');
-  QUnit.equal(vm.attr('max'), Infinity,
-    'Max value is infinity');
-  QUnit.equal(vm.attr('min'), 0,
-    'Max value is number max value');
-});
-
-QUnit.test('.increment', function(){
-  var vm = new ViewModel();
-
-  vm.increment();
-  QUnit.equal(vm.attr('value'), 1, 'Value incremented');
-});
-
-QUnit.test('.decrement', function(){
-  var vm = new ViewModel();
-
-  vm.increment();
-  vm.increment();
-  vm.decrement();
-  QUnit.equal(vm.attr('value'), 1, 'Value updated');
-});
-```
+@sourceref ../../guides/plugin/steps/implement/number-input-test.js
+@highlight 7-29
 
 You can run all tests either by going to [localhost:8080/src/test/test.html](http://localhost:8080/src/test/test.html) in the browser or via
 
@@ -217,39 +138,15 @@ $ npm test
 
 ### Adding the template
 
-In the template we will use [Bootstrap][2] which we first have to install as a dependency of the plugin:
+In the template we will use [Bootstrap][2] and [can-view-import][23], so first install them as dependencies:
 
 ```
-$ npm install bootstrap --save
+$ npm install bootstrap can-view-import --save
 ```
 
 Then we can update `src/<username>-number-input.stache` to look like this:
 
-```html
-<can-import from="bootstrap/less/bootstrap.less!" />
-<form class="form-inline">
-  <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-btn">
-        <button class="btn btn-primary" type="button"
-          {{#eq value min}}disabled{{/eq}}
-          ($click)="decrement">
-            -
-          </button>
-      </div>
-      <input type="number" class="form-control"
-        {($value)}="value">
-      <div class="input-group-btn">
-        <button class="btn btn-primary" type="button"
-          {{#eq value max}}disabled{{/eq}}
-          ($click)="increment">
-            +
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
-```
+@sourceref ../../guides/plugin/steps/implement/number-input.stache
 
 This template first imports the Bootstrap LESS. Then we create a button group with a `-` button on the left, a number input in the middle and a `+` button on the right. When the buttons are clicked the `increment` or `decrement` view-model methods are being called. The value of the input field is two-way bound with the `value` property of the view-model. When the value is either `min` or `max`, the `-` or `+` buttons will be disabled.
 
@@ -336,7 +233,7 @@ Once you published your plugin, let the world know about it. [Tweet @donejs](htt
  [6]: https://github.com/join?source=header-home
  [7]: https://help.github.com/articles/set-up-git/
  [8]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-1.53.10-PM.png
- [9]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-7.55.03-AM.png
+ [9]: static/img/donejs-plugin.png
  [10]: https://jenkins-ci.org/
  [11]: https://travis-ci.org/
  [12]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-2.03.56-PM.png
@@ -350,3 +247,4 @@ Once you published your plugin, let the world know about it. [Tweet @donejs](htt
  [20]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.30.41-AM.png
  [21]: https://www.npmjs.com/signup
  [22]: http://semver.org/
+ [23]: http://canjs.com/doc/can-view-import.html
