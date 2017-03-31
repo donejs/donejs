@@ -8,7 +8,7 @@
 
 DoneJS 1.0 brings together the latest changes introduced in [CanJS 3.0](https://www.bitovi.com/blog/canjs-3-0-release) and [StealJS 1.0](https://www.bitovi.com/blog/stealjs-1.0-release). This guide explains how to upgrade your DoneJS 0.9 app (which uses CanJS 2.3 and StealJS 0.16) to 1.0.
 
-# Preparation
+## Preparation
 
 Before trying to upgrade to DoneJS 1.0 it's a good idea to make sure all of your tests are passing. This will give you more assurance as you upgrade individual parts of the project. To make sure tests are passing, run:
 
@@ -16,7 +16,7 @@ Before trying to upgrade to DoneJS 1.0 it's a good idea to make sure all of your
 donejs test
 ```
 
-## Install donejs@1
+### Install donejs@1
 
 Next, upgrade to the latest version of the **donejs** package on npm:
 
@@ -26,7 +26,7 @@ npm install --global donejs@1
 
 Now any time you create new applications using `donejs add app`, it will scaffold out a DoneJS 1.0 project.
 
-## Use done-serve in static mode
+### Use done-serve in static mode
 
 As you do the upgrade you'll want to disable SSR so that you can focus on changes to your code. Once all dependencies are up to date you can switch back and everything should work. To disable SSR open up your package.json and change your **develop** script. It will look something like:
 
@@ -42,13 +42,13 @@ done-serve --static ...
 
 > *Note*: removing the `--develop` flag will disable live-reload. As we upgrade our application it will be in a broken state most of the time, so live-reload will not work anyways. When we've completed the upgrade we can switch back on `--develop`.
 
-# Front-end
+## Front-end
 
-## Upgrade to CanJS 3.0
+### Upgrade to CanJS 3.0
 
 See the [CanJS 3 migration guide](http://canjs.com/doc/migrate-3.html) for instructions on how to migrate CanJS. Once you've made all necessary changes it is likely that your tests will still not pass. *Don't worry*! Some of the DoneJS dependencies you have installed still expect to use CanJS 2.3, once we've upgraded all of those the tests should pass again.
 
-## Upgrade other DoneJS libraries
+### Upgrade other DoneJS libraries
 
 The following packages should be updated to reflect the following semver ranges:
 
@@ -73,7 +73,7 @@ Then run `npm install` to have these packages be upgraded.
 
 Once you've upgraded CanJS and these ancillary packages your app should generally work. SSR is still disabled, but the front-end should be okay.
 
-# Upgrade StealJS
+## Upgrade StealJS
 
 Refer to the [StealJS 1.0](http://stealjs.com/docs/StealJS.topics.migrating-one.html) guide to upgrade StealJS. In addition make sure to have the latest versions of these packages:
 
@@ -106,7 +106,7 @@ Your package.json's **steal** section (which used to be called **system**) shoul
 
 This configures Steal to be able to load file types other than JavaScript.
 
-# Utilities
+## Utilities
 
 The last thing is to upgrade *everything else* that you haven't already changed. This should include the following:
 
