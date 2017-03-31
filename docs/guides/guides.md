@@ -62,6 +62,10 @@ Specifically, this guide will walk through the implementation of the following b
  - Setup node services and server-side rendering on the same process.
  - How to turn off parts of the app that should not be server-side rendered.
 
+## [migrate-1]
+
+Explains how to upgrade DoneJS 0.9 app to 1.0.
+
 ## [contributing]
 
 The [contributing contribution guide] includes information about our code of conduct, reporting bugs, submitting new code, and more!
