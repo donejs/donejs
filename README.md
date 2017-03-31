@@ -34,4 +34,6 @@ and [guides](https://donejs.com/Guides.html) on how to use them together to buil
 
 ## Contributing
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/donejs/donejs.svg)](https://greenkeeper.io/)
+
 Check out the [contribution guide on DoneJS.com](https://donejs.com/contributing.html).
