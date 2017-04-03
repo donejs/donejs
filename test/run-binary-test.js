@@ -54,7 +54,7 @@ describe('runBinary', function() {
       })
       .catch(function(err) {
         assert(
-          /Could not find local DoneJS/.test(err.message),
+          /Could not find local DoneJS CLI binary/.test(err.message),
           'it should reject with error'
         );
 
@@ -67,26 +67,35 @@ describe('runBinary', function() {
       });
   });
 
-  it('spawns process with provided arguments', function(done) {
-    var binaryPath;
+  describe('spawns a process with provided arguments', function() {
+    it('when the binary file is named `donejs`', function(done) {
+      spawnCreatedBinary('donejs', done);
+    });
+    it('when the binary file is named `donejs-cli`', function(done) {
+      spawnCreatedBinary('donejs-cli', done);
+    });
+  });
 
-    createDoneJSBinary()
-      .then(function(binary) {
-        binaryPath = binary;
+  function spawnCreatedBinary(binFile, done) {
+    var binPath;
+
+    createBinary(binFile)
+      .then(function(returnedPath) {
+        binPath = returnedPath;
         return runBinary(['--help']);
       })
       .then(function() {
         assert.equal(spawnCalls.length, 1, 'should spawn process');
         var call = spawnCalls[0];
 
-        assert.equal(call.binary, binaryPath);
+        assert.equal(call.binary, binPath);
         assert.deepEqual(call.args, ['--help']);
         assert.deepEqual(call.options, { cwd: root });
 
         done();
       })
       .catch(done);
-  });
+  }
 
   function deleteFolder() {
     if (fs.existsSync(root)) {
@@ -94,18 +103,18 @@ describe('runBinary', function() {
     }
   }
 
-  function createDoneJSBinary() {
-    var binary = path.join(root, 'node_modules', '.bin');
-    var doneScript = process.platform === 'win32' ? 'donejs.cmd' : 'donejs';
-    var binaryPath = path.join(binary, doneScript);
+  function createBinary(binFile) {
+    var binDir = path.join(root, 'node_modules', '.bin');
+    binFile = process.platform === 'win32' ? binFile+'.cmd' : binFile;
+    var binPath = path.join(binDir, binFile);
 
-    return utils.mkdirp(binary)
+    return utils.mkdirp(binDir)
       .then(function() {
         var writeFile = Q.denodeify(fs.writeFile);
-        return writeFile(binaryPath);
+        return writeFile(binPath);
       })
       .then(function() {
-        return binaryPath;
+        return binPath;
       });
   }
 });
