@@ -78,7 +78,7 @@ We can see the following files:
 
 Let's have a quick look at the purpose of each:
 
-- `development.html`, `production.html` those pages can run the DoneJS application in development or production mode without a server
+- [`development.html`](https://github.com/donejs/generator-donejs#developmenthtml), [`production.html`](https://github.com/donejs/generator-donejs#productionhtml) those pages can run the DoneJS application in development or production mode without a server.
 - `package.json` is the main configuration file that defines all our application dependencies and other settings.
 - `test.html` is used to run all our tests.
 - `README.md` is the readme file for your repository.
