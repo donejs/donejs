@@ -453,16 +453,18 @@ Since search engines see the HTML that your server returns (if you want search e
 
 #### How it works
 
-DoneJS implements SSR with a single-context virtual DOM.
+DoneJS implements SSR with a single-context virtual DOM utilizing [zones](https://davidwalsh.name/can-zone).
 
 **Single context** means every request to the server reuses the same context: including memory, modules, and even the same instance of the application.
 
 **Virtual DOM** means a virtual representation of the DOM: the fundamental browser APIs that manipulate the DOM, but stubbed out.
 
+A **zone** is used to isolate the asynchronous activity of one request. Asynchronous activity like API requests are *tracked* and DoneJS' SSR will wait for all to complete, ensuring that the page is fully rendered before showing HTML to the user.
+
 When using DoneJS SSR, the same app that runs on the client is loaded in Node. When a request comes in:
  1. The server handles the incoming request by reusing the application that is already running in memory. It doesn't reload the application which means the initial response is very fast.
  1. The app renders content the same way it would in the browser, but with a mocked out virtual DOM, which is much faster than a real DOM.
- 1. The server waits for all your asynchronous data requests to finish before signaling that rendering is complete (more on how that works below).
+ 1. The server creates a new zone to wait for all your asynchronous data requests to finish before signaling that rendering is complete.
  1. When rendering is complete, the virtual DOM renders the string representation of the DOM, which is sent back to the client.
 
 
@@ -476,46 +478,14 @@ Some systems, even if they do use a virtual DOM, require a new browser instance 
 
 Any app that is rendered on the server needs a way to notify the server that any pending asynchronous data requests are finished, and the app can be rendered.
 
-React and other frameworks that support SSR don't provide much in the way of solving this problem. You're left to your own devices to check when all asychronous data requests are done, and delay rendering.
+React and other frameworks that support SSR don't provide much in the way of solving this problem. You're left to your own devices to check when all asynchronous data requests are done, and delay rendering.
 
-DoneJS provides two easy mechanisms for notifying the server when data is finished loading.
+In a DoneJS application asynchronous data requests are tracked automatically. Using can-zone, DoneJS keeps a count of requests that are made and waits for all of them to complete.
 
-The more common way is to make data requests in the template, which is possible via can-connect's [can-tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html). It calls a method internally that tells the server to wait for its promise to resolve. You just write your template, turn on SSR, and everything works seamlessly:
-
-```
-<message-model get-list="{}">
-  {{#each ./value}}
-    <div>{{text}}</div>
-  {{/each}}
-</message-model>
-```
-
-If you're making data requests in JavaScript, just add one line to do this manually:
-
-```
-this.attr( "%root" ).waitFor( promise );
-```
-
-The server will wait for all promises registered via `waitFor` before it renders the page. In a full component that might look like this:
-
-```
-can.Component.extend({
-  tag: "user-name",
-  template: can.stache( "{{user.name}}" ),
-  viewModel: {
-    init: function () {
-      var promise = User.getOne( { id: this.attr( "id" ) } );
-      this.attr( "%root" ).waitFor( promise );
-      promise.then( ( user ) => { this.attr( "user", user ); } );
-    }
-  }
-});
-```
-
-<a class="btn" href="https://github.com/canjs/can-ssr"><span>View the Documentation</span></a>
+<a class="btn" href="https://github.com/donejs/done-ssr"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html"><span>View the Guide</span></a>
 
-_Server-side rendering is a feature of [can-ssr](https://github.com/canjs/can-ssr)_
+_Server-side rendering is a feature of [done-ssr](https://github.com/donejs/done-ssr)_
 
 ### Progressive Loading
 
@@ -658,7 +628,7 @@ Server-side rendered single page apps (SPAs) have a problem with wasteful duplic
 
 DoneJS solves this problem with an inline cache - embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
 
-DoneJS uniquely makes populating and using the inline cache easy. `waitFor` is a method that:
+DoneJS uniquely makes populating and using the inline cache easy. Using plain XHR:
 
 1. Tells the SSR server to wait for a promise to resolve before rendering.
 1. Collects data from each promise and uses it to populate the inline cache.
@@ -666,20 +636,18 @@ DoneJS uniquely makes populating and using the inline cache easy. `waitFor` is a
 For example:
 
 ```
-can.Component.extend({
+Component.extend({
   tag: "user-name",
-  template: can.stache( "{{user.name}}" ),
-  viewModel: {
+  view: stache( "{{user.name}}" ),
+  ViewModel: {
     init: function () {
-      var promise = User.getOne( { id: this.attr( "id" ) } );
-      this.attr( "%root" ).waitFor( promise );
-      promise.then( ( user ) => { this.attr( "user", user ); } );
+      User.get( { id: this.id } );
     }
   }
 });
 ```
 
-The model layer seamlesslly integrates the inline cache in client side requests, without any special configuration.
+The model layer seamlessly integrates the inline cache in client side requests, without any special configuration.
 
 While this flow would be possible in other SSR systems, it would require manually setting up all of these steps.
 
