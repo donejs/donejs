@@ -117,8 +117,8 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Angular doesn't support a virtual dom. No third-party library support would be equivalent." title="Angular doesn't support a virtual dom. No third-party library support would be equivalent.">
-                <img class="matrix-rating-icon" src="static/img/icon-poor.svg"><span class="asterisk"></span>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='https://universal.angular.io/' target='_blank'>manual setup</a>." title="Requires some <a href='https://universal.angular.io/' target='_blank'>manual setup</a>.">
+                <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
@@ -149,7 +149,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-good.svg">
             </td>
             <td>
               <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
@@ -179,7 +179,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-good.svg">
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="There is a virtual dom. So, Its possible, but there is no support out of the box." title="There is a virtual dom. So, Its possible, but there is no support out of the box.">
@@ -195,10 +195,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
             </td>
           </tr>
           <tr>
@@ -209,7 +209,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, there's no infrastructure to make it easy." title="While native app builds are possible, there's no infrastructure to make it easy.">
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="While native app builds are possible, it requires the use of NativeScript." title="While native app builds are possible, it requires the use of NativeScript.">
                 <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
               </div>
             </td>
@@ -281,8 +281,8 @@ Solving a story means a packaged solution to a development problem, where severa
               </div>
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supports dependency injection, but offers poor support for end-to-end testing." title="Supports dependency injection, but offers poor support for end-to-end testing.">
-                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
+              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supports dependency injection and end-to-end testing." title="Supports dependency injection and end-to-end testing.">
+                <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
               </div>
             </td>
             <td>
@@ -300,7 +300,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-very-good.svg">
             </td>
             <td>
               <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
@@ -314,10 +314,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
             </td>
           </tr>
           <tr>
@@ -328,10 +328,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-very-good.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-very-good.svg">
             </td>
           </tr>
           <tr>
@@ -342,14 +342,10 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Coming in Angular 2" data-content="Coming in Angular 2">
-                <img class="matrix-rating-icon" src="static/img/icon-poor.svg"><span class="asterisk"></span>
-              </div>
+              <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Supported through transpiler included with react-tools." title="Supported through transpiler included with react-tools.">
-                <img class="matrix-rating-icon" src="static/img/icon-fair.svg"><span class="asterisk"></span>
-              </div>
+              <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
             </td>
           </tr>
           <tr>
@@ -392,7 +388,9 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Third-party libraries available for some support." title="Third-party libraries available for some support.">
+                <img class="matrix-rating-icon" src="static/img/icon-fair.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
               <div class="has-popover" data-toggle="popover" data-placement="top" data-html="true" data-content="Third-party libraries available for some support." title="Third-party libraries available for some support.">
