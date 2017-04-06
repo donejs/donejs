@@ -723,6 +723,42 @@ With synchronously observable objects and data bindings that change mimimal piec
 
 _Minimal DOM updates is a feature of [CanJS](http://canjs.com/)_
 
+### Memory Safety
+
+Preventing memory leaks is a critical feature of any client-side framework. The biggest source of memory leaks in client-side applications is event handlers. When adding an event handler to a DOM node you have to be sure to remove that handler when the node is removed. If you do not, that DOM node will never be garbage collected by the browser.
+
+#### How it works
+
+When event listeners are created in a DoneJS application using template event binding or by binding using Controls, internally these handlers are stored. This looks like:
+
+```
+<a href="/todos/new" $(click)="newTodo()">New Todo</a>
+```
+
+for templates and:
+
+```
+var TodoPage = Control.extend({
+  "a click": function(){
+    this.addTodo();
+  }
+})
+```
+
+for controls. Internally CanJS listens for this element's "removed" event. The "removed" event is a synthetic event that will be used to:
+
+* Remove all event listeners.
+* Remove DOM data associated with the element.
+* Remove any template bindings, such as computes bound to text within the template.
+
+CanJS is different from other frameworks in that it will clean up its own memory event when not using the framework to tear down DOM. For example if you were to do:
+
+```
+todoAnchor.parentNode.removeChild(todoAnchor);
+```
+
+The event listener created would still be torn down. This is because CanJS uses a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) to know about all changes to the DOM. When it sees an element was removed it will trigger the "removed" event, cleaning up the memory.
+
 ### Worker Thread Rendering
 
 Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM.
