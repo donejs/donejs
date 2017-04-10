@@ -676,7 +676,7 @@ Take the TodoMVC application as an example. If you measure how long it takes Don
 <img class="img-with-caption" src="static/img/donejs-minimal-dom-updates-todomvc.png" alt="Measuring React and DoneJS using TodoMVC." />
 _For a small set of todos the difference is negligible but as the number increases the gap widens to the point where React is 6 times slower than DoneJS when rendering 1000 todos._
 
-You can run this test for yourself at <a href="http://output.jsbin.com/zigovul/1" target="_blank">JS Bin</a>.
+You can run this test for yourself at <a href="https://output.jsbin.com/zigovul/7" target="_blank">JS Bin</a>.
 
 #### How it works
 
@@ -714,7 +714,7 @@ Of these four approaches, DoneJS knows about the change the quickest, and update
 To see this in action run the test embedded below that shows how DoneJS, React and Angular compare when updating the DOM when a single property changes:
 <img src="static/img/donejs-minimal-dom-updates-circles.png" alt="Measuring DoneJS, React and Angular rendering a simple property change." />
 
-You can run this test yourself at <a href="http://output.jsbin.com/wotevub/" target="_blank">JS Bin</a>
+You can run this test yourself at <a href="https://output.jsbin.com/wotevub/2" target="_blank">JS Bin</a>
 
 With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
