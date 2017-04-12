@@ -47,7 +47,9 @@ You can mark a section of your template to be progressively loaded by wrapping i
 
 ```
 <can-import from="components/home">
+  {{#if isResolved}}
   <home-page/>
+  {{/if}}
 </can-import>
 ```
 
@@ -489,7 +491,7 @@ _Server-side rendering is a feature of [done-ssr](https://github.com/donejs/done
 
 When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These kilobytes of extra weight slow down page load performance, especially on mobile devices.
 
-DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cachable bundles. That means your application will load *fast*.
+DoneJS applications load only the JavaScript and CSS they need, when they need it, in highly optimized and cacheable bundles. That means your application will load *fast*.
 
 There is no configuration needed to enable this feature, and wiring up progressively loaded sections of your app is simple.
 
@@ -504,12 +506,16 @@ In a DoneJS application, you simply mark a section to be progressively loaded by
 ```
 {{#eq page 'home'}}
 <can-import from="components/home">
+  {{#if isResolved}}
   <home-page/>
+  {{/if}}
 </can-import>
 {{/eq}}
 {{#eq page 'chat'}}
 <can-import from="components/chat">
+  {{#if isResolved}}
   <chat-page/>
+  {{/if}}
 </can-import>
 {{/eq}}
 ```
@@ -636,10 +642,10 @@ For example:
 ```
 Component.extend({
   tag: "user-name",
-  view: stache( "{{user.name}}" ),
+  view: stache("{{user.name}}"),
   ViewModel: {
     init: function () {
-      User.get( { id: this.id } );
+      User.get({ id: this.id });
     }
   }
 });
@@ -691,12 +697,12 @@ Consider the following template:
 And the following change to its data:
 
 ```
-rows[0].attr('name', 'changed'); // change the first row's name
+rows[0].name = 'changed'; // change the first row's name
 ```
 
-In DoneJS, which uses the [can.stache](http://canjs.com/docs/can.stache.html) view engine, that would:
+In DoneJS, which uses the [can-stache](http://canjs.com/doc/can-stache.html) view engine, that would:
 
- 1. Trigger an event (because of the [can.Map](http://canjs.com/docs/can.Map.html) object observe API)
+ 1. Trigger an event (because of the [DefineMap](http://canjs.com/doc/can-define/map/map.html) object observe API)
  1. The event invokes a data binding event handler in the template layer
  1. The handler immediately results in the following code being run:
 ```
@@ -718,8 +724,8 @@ You can run this test yourself at <a href="https://output.jsbin.com/wotevub/2" t
 
 With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
-<a class="btn" href="http://canjs.com/docs/can.stache.html"><span>can.stache Documentation</span></a>
-<a class="btn" href="http://canjs.com/docs/can.Map.html"><span>can.Map Documentation</span></a>
+<a class="btn" href="http://canjs.com/doc/can-stache.html"><span>can-stache Documentation</span></a>
+<a class="btn" href="http://canjs.com/doc/can-define.html"><span>can-map Documentation</span></a>
 
 _Minimal DOM updates is a feature of [CanJS](http://canjs.com/)_
 
@@ -835,10 +841,7 @@ That's it. Now when you run your server in production mode, all static assets (C
 
 Even better, you can set up [continuous deployment](./place-my-order.html#continuous-deployment), so that TravisCI or other tools will deploy your code, including pushing out your latest static files to the CDN, automatically.
 
-<a class="btn" href="https://github.com/donejs/deploy"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#deploy"><span>View the Guide</span></a>
-
-_CDN deployment is a feature of the [donejs/deploy](https://github.com/donejs/deploy) project._
 
 ## Usability features
 
@@ -936,7 +939,7 @@ Wiring up these pretty URLs in your code is simple and intuitive.
 
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](http://canjs.com/docs/can.route.html) map URL patterns, like `/user/1`, to properties in our application state, like `{'userId': 1}`. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](http://canjs.com/doc/can-route.html) map URL patterns, like `/user/1`, to properties in our application state, like `{'userId': 1}`. In other words, our routes will just be a representation of the application state.
 
 This architecture simplifies routes so that they can be managed entirely in simple data bound templates, like the following example:
 
@@ -955,7 +958,6 @@ This architecture simplifies routes so that they can be managed entirely in simp
 {{/switch}}
 ```
 
-<a class="btn" href="http://canjs.com/guides/AppStateAndRouting.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html#setting-up-routing"><span>View the Guide</span></a>
 
 _Pretty URLs and routing are features of the [CanJS](http://canjs.com/) project._
@@ -1057,13 +1059,7 @@ const store = fixture.store([
   { name: 'New Troy', short: 'NT'}
 ],{});
 
-fixture({
-  'GET /api/states': store.findAll,
-  'GET /api/states/{short}': store.findOne,
-  'POST /api/states': store.create,
-  'PUT /api/states/{short}': store.update,
-  'DELETE /api/states/{short}': store.destroy
-});
+fixture('/api/states/{short}', store);
 
 export default store;
 ```
@@ -1106,7 +1102,7 @@ The DoneJS testing layer involves many pieces, so if you want to learn more:
  * read about [FuncUnit](http://funcunit.com/), the functional testing and asynchronous user action simulating library
  * read about [syn](https://github.com/bitovi/syn) - the synthetic event library
  * read about the [Testee.js](https://github.com/bitovi/testee) browser launcher, test runner, and reporting tool
- * read the [can.fixture](http://canjs.com/docs/can.fixture.html) docs
+ * read the [can-fixture](http://canjs.com/doc/can-fixture.html) docs
 
 ### Documentation
 
@@ -1324,7 +1320,7 @@ stealTools.export({
     amd: {
       format: "amd",
       graphs: true,
-      dest: __dirname+"/dist/amd"
+      dest: __dirname + "/dist/amd"
     }
 });
 ```
@@ -1452,7 +1448,7 @@ Custom HTML elements are another name for [Web Components](http://webcomponents.
 
 ##### Benefits of DoneJS custom elements
 
-DoneJS uses CanJS' [can.Component](http://canjs.com/docs/can.Component.html) to provide a modern take on web components.
+DoneJS uses CanJS' [can-component](http://canjs.com/doc/can-component.html) to provide a modern take on web components.
 
 Components in DoneJS have three basic building blocks:
 
@@ -1477,19 +1473,21 @@ One way to define a component is with a [web component](https://github.com/donej
             color: red;
         }
     </style>
-    <template>
+    <view>
         {{#if visible}}<b>{{message}}</b>{{else}}<i>Click me</i>{{/if}}
-    </template>
+    </view>
     <script type="view-model">
-        export default {
-            visible: true,
-            message: "Hello There!"
-        };
+        import DefineMap from "can-define/map/map";
+
+        export default DefineMap.extend({
+            visible: { value: true },
+            message: { value: "Hello There!" }
+        });
     </script>
     <script type="events">
         export default {
             click: function(){
-                this.viewModel.attr("visible", !this.viewModel.attr("visible"))
+                this.viewModel.visible = !this.viewModel.visible;
             }
         };
     </script>
@@ -1509,8 +1507,8 @@ The beauty and power of custom HTML elements is most apparent when visual widget
 Back to our original example:
 
 ```html
-<order-model findAll="{previousWeek}" [previousWeekData]="{value}"/>
-<order-model findAll="{currentWeek}" [currentWeekData]="{value}"/>
+<order-model get-list="{previousWeek}" [previousWeekData]="{value}"/>
+<order-model get-list="{currentWeek}" [currentWeekData]="{value}"/>
 
 <bit-graph title="Week over week">
   <bit-series data="{../previousWeekData}" />
@@ -1552,17 +1550,21 @@ The `<can-import>` element also plays a key role in [Progressive Loading](#progr
 ```
 {{#eq location 'home'}}
 <can-import from="components/home">
+  {{#if isResolved}}
   <my-home/>
+  {{/if}}
 </can-import>
 {{/eq}}
 {{#eq location 'away'}}
 <can-import from="components/chat">
+  {{#if isResolved}}
   <my-chat/>
+  {{/if}}
 </can-import>
 {{/eq}}
 ```
 
-<a class="btn" href="http://canjs.com/docs/can.Component.html"><span>View the Documentation</span></a>
+<a class="btn" href="http://canjs.com/doc/can-component.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html#creating-custom-elements"><span>View the Guide</span></a>
 
 _Custom HTML elements are a feature of [CanJS](http://canjs.com/)_
@@ -1603,13 +1605,9 @@ The first reason DoneJS ViewModels are unique is their independence. ViewModels 
 For example, here's a typical ViewModel, which is often defined in its own separate file like `viewmodel.js` and exported as its own module:
 
 ```
-export const ViewModel = Map.extend({
-  define: {
-    fullName: {
-      get () {
-        return this.attr("first") + " " + this.attr("last");
-      }
-    }
+export const ViewModel = DefineMap.extend({
+  get fullName() {
+    return this.first + " " + this.last;
   }
 })
 ```
@@ -1623,14 +1621,14 @@ The template (view) lives in its own file, so a designer could easily modify it 
 A [custom HTML element](#custom-html-elements), also known as a component, would be used to tie these layers together:
 
 ```
-import Component from 'can/component/';
+import Component from 'can-component';
 import ViewModel from "./viewmodel";
-import template from './template.stache!';
+import view from './view.stache';
 
 Component.extend({
   tag: 'my-component',
-  viewModel: ViewModel,
-  template
+  viewModel,
+  view
 });
 ```
 
@@ -1641,9 +1639,9 @@ import ViewModel from "./viewmodel";
 
 QUnit.test('fullName works', function() {
   var vm = new ViewModel();
-  vm.attr('first', 'John');
-  vm.attr('last', 'Doe');
-  QUnit.equal(vm.attr('fullName'), 'John Doe');
+  vm.first = John;
+  vm.last = Doe;
+  QUnit.equal(vm.fullName, 'John Doe');
 });
 ```
 
@@ -1664,14 +1662,10 @@ DoneJS supports the following features:
 In the simple ViewModel example above, `fullName`'s value depends on `first` and `last`. If something in the application changes `first`, `fullName` will recompute.
 
 ```
-export const ViewModel = Map.extend({
-  define: {
-    fullName: {
-      get () {
-        return this.attr("first") + " " + this.attr("last");
-      }
+export const ViewModel = DefineMap.extend({
+    get fullName() {
+      return this.first + " " + this.last;
     }
-  }
 })
 ```
 
@@ -1684,7 +1678,7 @@ export const ViewModel = Map.extend({
 If `first` is changed:
 
 ```
-viewModel.attr('first', 'Jane');
+viewModel.first = Jane;
 ```
 
 `fullName` recomputes, then the DOM automatically changes to reflect the new value.
@@ -1701,11 +1695,10 @@ In React, there is no observable data layer. You could define a `fullName` like 
 
 To learn more:
 
- * Models - read about [can.connect](http://connect.canjs.com/) and [can.Map](http://canjs.com/docs/can.Map.html)
- * Computed properties - read about [can.compute](http://canjs.com/docs/can.compute.html)
- * Observable data layer - read about [can.Map](http://canjs.com/docs/can.Map.html) and [can.List](http://canjs.com/docs/can.List.html)
- * ViewModels - read about [can.component](http://canjs.com/docs/can.Component.html), [can.Component.viewModel](http://canjs.com/docs/can.Component.prototype.viewModel.html), and [can.Map.define](http://canjs.com/docs/can.Map.prototype.define.html)
- * Views - read about [can.stache](http://canjs.com/docs/can.stache.html)
+ * Models - read about [can-connect](http://canjs.com/doc/can-connect.html) and [can-define](http://canjs.com/doc/can-define.html)
+ * Computed properties - read about [can-compute](http://canjs.com/doc/can-compute.html)
+ * Observable data layer - read about [DefineMap](http://canjs.com/doc/can-define/map/map.html) and [DefineList](http://canjs.com/doc/can-define/list/list.html)
+ * Views - read about [can-stache](http://canjs.com/doc/can-stache.html)
  * [Create a unit tested ViewModel](./place-my-order.html#creating-a-unit-tested-view-model) in the in depth guide
 
 _The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/)._
@@ -1774,10 +1767,10 @@ You'll be prompted for a project name, source folder, and other setup informatio
 ├── .yo-rc.json
 ├── build.js
 ├── development.html
-├── documentjs.json
 ├── package.json
 ├── production.html
 ├── readme.md
+├── test.html
 ├── src/
 |   ├── app.js
 |   ├── index.stache
@@ -1786,10 +1779,7 @@ You'll be prompted for a project name, source folder, and other setup informatio
 |   |   |   ├── fixtures.js
 |   |   ├── test.js
 |   ├── styles.less
-|   ├── test.html
-|   ├── test/
-|   |   ├── test.js
-|   |   ├── functional.js
+|   ├── test.js
 ├── node_modules/
 ```
 
@@ -1797,7 +1787,7 @@ You're now a command away from running application wide tests, generating docume
 
 ##### Modlet component generator
 
-To create a [component](http://canjs.com/docs/can.Component.html) organized with the [modlet](#modlets) file organization pattern:
+To create a [component](http://canjs.com/doc/can-component.html) organized with the [modlet](#modlets) file organization pattern:
 
 ```
 donejs add component <folder-path> <component-name>
@@ -1832,7 +1822,7 @@ Which will generate a working component in a single file.
 
 ##### Model generator
 
-To create a new [model](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html):
+To create a new [model](http://canjs.com/doc/can-connect/can/super-map/super-map.html):
 
 ```
 donejs add supermodel <model-name>
