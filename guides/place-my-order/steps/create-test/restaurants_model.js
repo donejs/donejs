@@ -23,7 +23,7 @@ const algebra = new set.Algebra(
 );
 
 Restaurant.List = DefineList.extend({
-  '*': Restaurant
+  '#': Restaurant
 });
 
 Restaurant.connection = superMap({
