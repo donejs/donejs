@@ -12,6 +12,18 @@ If you make changes to one of the presentations, please bring it to the top of t
 
 ## Full List
 
+### High-Performance Apps with DoneJS
+
+- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEQXhYVjdVX2FzR28)
+- [Download](https://drive.google.com/open?id=0B8wssyNpvaFEODNwbk05TXVMLTQ)
+- [Download](https://drive.google.com/open?id=0B8wssyNpvaFEdXZqNF96RjkyYmM)
+- Last Modified: 2017-04-12
+
+### Preparing for the Future of JavaScript
+
+- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEeTNGdkNuR2k0YzQ)
+- Last Modified: 2017-04-12
+
 ### Getting to Know CanJS 3
 
 - [Description](https://drive.google.com/open?id=0B8wssyNpvaFEVTJQZHJyVGhid0U)
@@ -42,11 +54,6 @@ If you make changes to one of the presentations, please bring it to the top of t
 - [Description](https://drive.google.com/open?id=0B8wssyNpvaFEcVdyUGNFZ2xNSEk)
 - [Download](https://drive.google.com/open?id=0B09kZkWwiRDvUkU5aW5RZnJtT2s)
 - Last Modified: 2017-01-31
-
-### Preparing for the Future of JavaScript
-
-- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEeTNGdkNuR2k0YzQ)
-- Last Modified: 2017-01-30
 
 ### Server-Side Rendering Ain’t Easy
 
@@ -144,12 +151,6 @@ If you make changes to one of the presentations, please bring it to the top of t
 
 - [Download](https://drive.google.com/open?id=0Bx-kNqf-wxZeT2pJUnh3RTZZclk)
 - Last Modified: 2016-07-29
-
-### High Performance Apps with DoneJS
-
-- [Download](https://drive.google.com/open?id=0B8wssyNpvaFEODNwbk05TXVMLTQ)
-- [Download](https://drive.google.com/open?id=0B8wssyNpvaFEdXZqNF96RjkyYmM)
-- Last Modified: 2016-07-09
 
 ### EZPZ ES6 (StealJS Quick Start)
 
