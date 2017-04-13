@@ -12,14 +12,8 @@ const Restaurant = DefineMap.extend({
 
 const algebra = new set.Algebra(
   set.props.id('_id'),
-  {
-    "address.city": function(restaurantValue, paramValue, restaurant){
-      return restaurant['address.city'] === restaurantValue;
-    },
-    "address.state": function(restaurantValue, paramValue, restaurant){
-      return restaurant['address.state'] === restaurantValue;
-    }
-  }
+  set.props.dotNotation('address.state'),
+  set.props.dotNotation('address.city')
 );
 
 Restaurant.List = DefineList.extend({

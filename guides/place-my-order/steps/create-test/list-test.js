@@ -56,7 +56,8 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
   vm.city = 'Alberny';
 
   vm.restaurants.then(restaurants => {
-    QUnit.deepEqual(restaurants.serialize(), expectedRestaurants, 'Got all restaurants');
+    QUnit.deepEqual(restaurants.serialize(), expectedRestaurants, 'Fetched restaurants equal to expected');
+    QUnit.deepEqual(restaurants.length, 1, 'Got expected number of restaurants');
     QUnit.start();
   });
 });
