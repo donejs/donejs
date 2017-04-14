@@ -387,7 +387,10 @@ We also need to specify that the restaurant list can be filtered to restaurants 
 @sourceref ../../guides/place-my-order/steps/create-test/restaurants_model.js
 @highlight 15-16
 
-Above we use 'set.props.dotNotation' since our queries for these nested properties will be in the MongoDB-style 'dot notation' format required by the backend.
+Above we use `set.props.dotNotation` since our queries for these nested properties will be in the [MongoDB-style 'dot notation'](https://docs.mongodb.com/v2.2/reference/glossary/#term-dot-notation) format required by the backend.
+
+For example, MongoDB expects a query parameter for restaurants in a specific state to look like `{'address.state':'IL'}` and the libraries underneath supermodel expect it to look like `{address:{state: 'IL'}}`. `can.set.dotNotation` allows supermodel to make comparisons these two formats.
+
 
 ### Test the connection
 
