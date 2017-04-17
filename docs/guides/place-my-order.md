@@ -382,6 +382,16 @@ We have now created a model and fixtures (for testing without an API) with a fol
 |   |   ├── test.js
 ```
 
+We also need to specify that the restaurant list can be filtered to restaurants in a queried city and state by updating `src/models/restaurants.js`:
+
+@sourceref ../../guides/place-my-order/steps/create-test/restaurants_model.js
+@highlight 15-16
+
+Above we use `set.props.dotNotation` since our queries for these nested properties will be in the [MongoDB-style 'dot notation'](https://docs.mongodb.com/v2.2/reference/glossary/#term-dot-notation) format required by the backend.
+
+For example, MongoDB expects a query parameter for restaurants in a specific state to look like `{'address.state':'IL'}` and can-connect expects it to look like `{address:{state: 'IL'}}`. `set.props.dotNotation` allows can-connect to make comparisons between these two formats.
+
+
 ### Test the connection
 
 To test the connection you can run the following in the browser console. You can access the browser console by right clicking in the browser and selecting **Inspect**. Then switch to the **Console** tab if not already there. Test the connection with:
@@ -495,11 +505,6 @@ Update `src/models/fixtures/restaurants.js` to look like:
 
 @sourceref ../../guides/place-my-order/steps/create-test/restaurants.js
 @highlight 4-30
-
-And we also need to specify that the restaurant list should be filtered to only restaurants in the selected city and state by updating `src/models/restaurants.js`:
-
-@sourceref ../../guides/place-my-order/steps/create-test/restaurants_model.js
-@highlight 15-22
 
 #### Test the view model
 
