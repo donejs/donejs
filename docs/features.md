@@ -1248,7 +1248,7 @@ Organization by module - or modlets - make large applications easier to maintain
  * Developers are more likely to update tests and documentation if they are sitting right next to the module they are editing. The test is not hidden in a `tests` folder that is more easily ignored.
  * You can develop the application without having to load the entire application and all of its tests on every change.
 
-An example modlet from the [in depth guide](./place-my-order.html) is the [order/new](https://github.com/donejs/place-my-order/tree/master/src/restaurant/list) component. It has its own [demo page](http://www.place-my-order.com/src/order/new/demo.html) and [test page](http://www.place-my-order.com/src/order/new/test.html).
+An example modlet from the [in-depth guide](./place-my-order.html) is the [order/new](https://github.com/donejs/place-my-order/tree/master/src/restaurant/list) component. It has its own [demo page](http://www.place-my-order.com/src/order/new/demo.html) and [test page](http://www.place-my-order.com/src/order/new/test.html).
 
 DoneJS generators create modlets to get you started quickly. To learn more about the modlet pattern, read this [blog post](http://blog.bitovi.com/modlet-workflows/).
 
@@ -1699,7 +1699,7 @@ To learn more:
  * Computed properties - read about [can-compute](http://canjs.com/doc/can-compute.html)
  * Observable data layer - read about [DefineMap](http://canjs.com/doc/can-define/map/map.html) and [DefineList](http://canjs.com/doc/can-define/list/list.html)
  * Views - read about [can-stache](http://canjs.com/doc/can-stache.html)
- * [Create a unit tested ViewModel](./place-my-order.html#creating-a-unit-tested-view-model) in the in depth guide
+ * [Create a unit tested ViewModel](./place-my-order.html#creating-a-unit-tested-view-model) in the in-depth guide
 
 _The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/)._
 
