@@ -281,7 +281,7 @@ config.vm.synced_folder "C:/www/donejs", "/home/vagrant/donejs"
 
 Make sure that `C:/www/donejs` is a valid directory.
 
-For more information check the documentation on https://www.vagrantup.com/docs/synced-folders/basic_usage.html
+For more information check the [documentation](https://www.vagrantup.com/docs/synced-folders/basic_usage.html).
 
 ### Launching the Vagrant Box
 Once you have done all the configuration run
