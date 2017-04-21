@@ -11,7 +11,7 @@ If you have used `donejs add nw` or `donejs add cordova` to create a [desktop or
 In this guide you will create your own version of [donejs-jshint](https://www.npmjs.com/package/donejs-jshint), a DoneJS generator that adds:
 
 - [JSHint](http://jshint.com/), a JavaScript code quality tool
-- An [.editorconfig](http://editorconfig.org/) file which helps text editors and IDEs to define and maintain a consistent coding style.
+- A [.editorconfig](http://editorconfig.org/) file which helps text editors and IDEs to define and maintain a consistent coding style.
 
 It will also update the `npm test` script to run JSHint with our tests. You can find the code in the [donejs-jshint](https://github.com/donejs/donejs-jshint) repository. We can run the generator with:
 
@@ -245,7 +245,7 @@ That's it. Now we have a fully functional generator and can give it a try in a D
 When running `donejs add <generatorname>` DoneJS will
 
 - Check if `donejs-<generatorname>` is installed locally
-- If not install it from NPM
+- If not, install it from NPM
 - Then run the generator at `default/index.js`
 
 If we want to test our generator without publishing it to npm first we can link it instead. In the generator folder run:
@@ -354,7 +354,7 @@ Now you can click the "Merge pull request" button. Then in the console, checkout
 
 ### Publishing to npm
 
-For others to be able to use your generator via `donejs add <generatorname>` have to pulish it to [npm](http://npmjs.org). [Create a new account](https://www.npmjs.com/signup) and then log in via
+For others to be able to use your generator via `donejs add <generatorname>` you have to publish it to [npm](http://npmjs.org). [Create a new account](https://www.npmjs.com/signup) and then log in via
 
 
     $ npm login
