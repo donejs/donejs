@@ -298,4 +298,4 @@ vagrant ssh
 command in your terminal.
 
 ### Further information
-For further information what is pre-installed on the Vagrant Box and which ports are forwarding to your host please check out the Github repository [DoneJS Vagrant](https://github.com/donejs/donejs-vagrant)
+For further information about what is pre-installed on the Vagrant Box and which ports are forwarding to your host please check out the Github repository [DoneJS Vagrant](https://github.com/donejs/donejs-vagrant)
