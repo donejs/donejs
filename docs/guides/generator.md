@@ -2,7 +2,7 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description Generators add additional functionality to DoneJS applications. In this guide will create a generator that adds JSHint and an `.editorconfig` file to a DoneJS application.
+@description Generators add additional functionality to DoneJS applications. In this guide will create a generator that adds JSHint and a `.editorconfig` file to a DoneJS application.
 
 @body
 
