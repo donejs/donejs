@@ -278,7 +278,7 @@ Yeoman also comes with some tools for [testing generators](http://yeoman.io/auth
 
     describe('donejs-<username>-jshint', function() {
       before(function(done) {
-        // Run the generator in a temprorary directory
+        // Run the generator in a temporary directory
         helpers.run(path.join(__dirname, '../default'))
           .inTmpDir()
           // Mock the user input by setting
