@@ -265,7 +265,7 @@ For more information check out https://www.vagrantup.com/docs/vagrantfile/
 
 
 ### Configure your shared folders
-Before you start the Vagrant Box, you have to specified which folder you would like to sync from your local machine to the virtual machine.
+Before you start the Vagrant Box, you have to specify which folder you would like to sync from your local machine to the virtual machine.
 For that, open the **Vagrantfile** in that folder you initialized Vagrant. Scroll down to:
 ```
 # Share an additional folder to the guest VM. The first argument is
