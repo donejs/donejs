@@ -6,7 +6,7 @@
 
 @body
 
-If you have used `donejs add nw` or `donejs add cordova` to create a [desktop- or mobile version](./Features.html#ios-android-and-desktop-builds) of your application you already used a DoneJS generator. Generators are [npm](https://www.npmjs.com/) modules that provide a [Yeoman](http://yeoman.io/) generator that adds functionality to your application.
+If you have used `donejs add nw` or `donejs add cordova` to create a [desktop or mobile version](./Features.html#ios-android-and-desktop-builds) of your application you already used a DoneJS generator. Generators are [npm](https://www.npmjs.com/) modules that provide a [Yeoman](http://yeoman.io/) generator that adds functionality to your application.
 
 In this guide you will create your own version of [donejs-jshint](https://www.npmjs.com/package/donejs-jshint), a DoneJS generator that adds:
 
