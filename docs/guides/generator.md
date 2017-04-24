@@ -2,7 +2,7 @@
 @parent DoneJS
 @hide sidebar
 @outline 2 ol
-@description Generators add additional functionality to DoneJS applications. In this guide will create a generator that adds JSHint and a `.editorconfig` file to a DoneJS application.
+@description Generators add additional functionality to DoneJS applications. In this guide, we’ll create a generator that adds JSHint and a `.editorconfig` file to a DoneJS application.
 
 @body
 
@@ -245,7 +245,7 @@ That's it. Now we have a fully functional generator and can give it a try in a D
 When running `donejs add <generatorname>` DoneJS will
 
 - Check if `donejs-<generatorname>` is installed locally
-- If not, install it from NPM
+- If not, install it from npm
 - Then run the generator at `default/index.js`
 
 If we want to test our generator without publishing it to npm first we can link it instead. In the generator folder run:
