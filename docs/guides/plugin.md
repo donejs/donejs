@@ -125,7 +125,7 @@ We can use the [define plugin][16] to define a `min` and `max` value and [a sett
 @sourceref ../../guides/plugin/steps/implement/number-input.js
 @highlight 7-35
 
-To test this functionality we can change the tests in `src/<username>-number-input-test.js` to look like this:
+To test this functionality, we can change the tests in `src/<username>-number-input-test.js` to look like this:
 
 @sourceref ../../guides/plugin/steps/implement/number-input-test.js
 @highlight 7-29

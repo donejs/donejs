@@ -84,7 +84,7 @@ __Server and Services__
 - Server Side Rendering: [done-ssr's express middleware](https://www.npmjs.com/package/done-ssr-middleware)
 - Session Management: [passport](http://passportjs.org/)
 
-> NOTE: DoneJS works with any service technology.  Furthermore, Bitballs' server-side code was not created by server-side NodeJS experts.  There are likely many improvements that could be made.  Don't learn NodeJS/Express from us.  With respect to the server, our only goal with this example is to introduce service APIs that work well DoneJS clients and give an example of how to create them.
+> NOTE: DoneJS works with any service technology.  Furthermore, Bitballs' server-side code was not created by server-side NodeJS experts.  There are likely many improvements that could be made.  Don't learn NodeJS/Express from us.  With respect to the server, our only goal with this example is to introduce service APIs that work well with DoneJS clients and give an example of how to create them.
 
 __Client__
 
@@ -361,7 +361,7 @@ this more in the [Users, Sessions, and Access section](#users-sessions-and-acces
 
 ### Component map
 
-The following diagrams the component responsible for each part of the application:
+The following diagrams show which component is responsible for each part of the application:
 
 <div class="row">
   <div class="col-sm-6">
@@ -763,8 +763,7 @@ logout: function(){
 }
 ```
 
-Destroying a session calls `DELETE /services/session` to destroy a session server side. No
-data is needed to be passed. The server simply calls passport's `logout()` and responds
+Destroying a session calls `DELETE /services/session` to destroy a session server side. No data needs to be passed. The server simply calls passport's `logout()` and responds
 with an empty JSON object.
 
 ```js
@@ -1239,7 +1238,7 @@ idMap: {
 And make a `getById` use `idMap` like:
 
 ```
-playerById: function(id){
+getById: function(id){
 	return this.playerIdMap[id];
 },
 ```
