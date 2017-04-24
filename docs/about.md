@@ -124,7 +124,7 @@ DoneJS has benefited greatly from other projects ideas and technology. It should
 
 You can already use many of DoneJS parts with other projects:
 
- - StealJS works great with ReactJS. 
+ - StealJS works great with ReactJS.
  - CanJS works with RequireJS or Browserify.
  - can-connect works on its own.
 
@@ -159,18 +159,38 @@ The following are our highest priority, non bug fix features:
 
 ## Team
 
-The DoneJS family of technologies is built by 100s of contributors:
+The DoneJS family of technologies is built by hundreds of contributors just like you! Our [contributing contribution guide] includes information about reporting bugs, finding ways to contribute, submitting new code, and more!
 
-
-### Core team
-
-To become a contributor to DoneJS or its sub-projects, you simply have to:
+If you’d like to take your commitment to DoneJS or its sub-projects to the next level, you can join our core team. To become a part of the core team, you simply have to:
 
 - [Email](mailto:contact@bitovi.com) the core team expressing your interest.
 - Attend the weekly _DoneJS Contributors_ meeting twice a month. [DoneJS Calendar](https://www.google.com/calendar/embed?src=jupiterjs.com_g27vck36nifbnqrgkctkoanqb4%40group.calendar.google.com&ctz=America/Chicago)
-- Make one small contribution, even a spelling correction, a month.
+- Make one small contribution, even a spelling correction, each month.
 
-Core team:
+### Core team
+
+The core team is made up of both part-time and full-time contributors.
+
+<div class="core-team-member">
+  <img class="member-avatar" src="https://avatars2.githubusercontent.com/u/2445805?v=3&s=400" alt="Kevin Dillon profile picture" />
+  <h4>Kevin Dillon</h4>
+  <p>
+    Kevin is a senior infrastructure engineer at The MathWorks in the Web and Mobile Tools team.
+    He focuses on the development of FuncUnit and Syn.
+  </p>
+  <a href="https://github.com/kdillon" target="_blank">GitHub</a>
+</div>
+
+<div class="core-team-member">
+  <img class="member-avatar" src="https://avatars2.githubusercontent.com/u/10070176?v=3&s=400" alt="Chasen Le Hara profile picture" />
+  <h4>Chasen Le Hara</h4>
+  <p>
+    Chasen is a 🍺 🏃 with a passion for building great web apps.
+    He supports the DoneJS community by leading developer advocacy for DoneJS.
+  </p>
+  <a href="https://twitter.com/chasenlehara" target="_blank">@chasenlehara</a>
+  <a href="https://github.com/chasenlehara" target="_blank">GitHub</a>
+</div>
 
 <div class="core-team-member">
 <img class="member-avatar" src="https://avatars3.githubusercontent.com/u/4830283?v=3&s=300"/>
@@ -212,10 +232,6 @@ Kevin is based in Chicago (well, close enough). He wants to make it easy for any
 <a href="https://github.com/phillipskevin" target="_blank">Github</a>
 
 </div>
-
-### Fulltime team
-
-There are currently 3 fulltime contributors to DoneJS and its subprojects:
 
 <div class="core-team-member">
 <img class="member-avatar" src="https://avatars3.githubusercontent.com/u/78602?v=3&s=300"/>
