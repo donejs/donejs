@@ -361,7 +361,7 @@ this more in the [Users, Sessions, and Access section](#users-sessions-and-acces
 
 ### Component map
 
-The following diagrams show what component is responsible for each part of the application:
+The following diagrams show which component is responsible for each part of the application:
 
 <div class="row">
   <div class="col-sm-6">
