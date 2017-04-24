@@ -84,12 +84,11 @@ Check out what DoneJS does for:
 
 ### Evolve
 
-Application development and maintenence often
+Application development and maintenance often
 lasts many years. Stability is needed to release complex applications. However,
 new techniques and best practices are constantly evolving.
 
-DoneJS's goal is to strike a balance between immovable stability and irresistable
-progress.  We do this by evolving frequently, while maintaining backward compatability between major releases.
+DoneJS's goal is to strike a balance between immovable stability and irresistible progress. We do this by evolving frequently, while maintaining backward compatibility between major releases.
 
 It can be a bumpy road, with lots of little changes. But it
 avoids rewrites, resulting in greater productivity:  
@@ -114,7 +113,7 @@ to create great learning material, but also create an environment
 where people feel comfortable getting help.  
 
 The core team is always available on [gitter](https://gitter.im/donejs/donejs)
-and provides [weekly trainings](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](./community.html) and we will come to your
+and provides [weekly training](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](./community.html) and we will come to your
 city and teach you DoneJS!
 
 
@@ -133,7 +132,7 @@ We should always seek to cooperate with others.
 #### Attract
 
 If you have the next great JS idea, we want to encourage you to help build it as part of the DoneJS
-family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full time devs to build out your idea. Reach out to us on
+family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full-time developers to build out your idea. Reach out to us on
 [gitter](https://gitter.im/donejs/donejs) or create an issue.
 
 
@@ -147,7 +146,7 @@ _This section will be complete by Nov 1st. Stay tuned._
 
 ### Tomorrow's Roadmap
 
-The following are our highest priority, non bug fix features:
+The following are our highest priority, non-bug fix features:
 
 - [can-set support sort](https://github.com/canjs/can-set/pull/10)
 - [documentjs configured in package.json](https://github.com/bitovi/documentjs/issues/202)
@@ -176,7 +175,7 @@ Core team:
 <img class="member-avatar" src="https://avatars3.githubusercontent.com/u/4830283?v=3&s=300"/>
 <h4>Prashant Sharma</h4>
 <p>
-Prashant is based in Bangalore, India. He likes the understated elegance of CanJS. I also believe DoneJS is a great framework in the making, since it makes technology selection a no brainer by uniquely offering developers an all-in-one technology stack.
+Prashant is based in Bangalore, India. He likes the understated elegance of CanJS. I also believe DoneJS is a great framework in the making, since it makes technology selection a no-brainer by uniquely offering developers an all-in-one technology stack.
 </p>
 <a href="https://github.com/prashantsharmain" target="_blank">github</a>
 </div>
@@ -194,7 +193,7 @@ A 29 old guy from Germany, Julian started coding at the age of 16. Now he freela
 <img class="member-avatar" src="https://avatars1.githubusercontent.com/u/109013?v=3&s=300"/>
 <h4>Mohamed Cherif Bouchelaghem</h4>
 <p>
-Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side developer in day work, JavaScript developer after work hours specially using DoneJS/CanJS. He likes to help people to learn and find solutions to issues with DoneJS framework and build applications and code samples that help to show the best from DoneJS/Canjs and learn it faster.
+Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side developer in day work, JavaScript developer after work hours especially using DoneJS/CanJS. He likes to help people to learn and find solutions to issues with DoneJS framework and build applications and code samples that help to show the best from DoneJS/Canjs and learn it faster.
 </p>
 <a href="https://twitter.com/Cherif_b" target="_blank">@Cherif_b</a>
 <a href="https://github.com/cherifGsoul" target="_blank">Github</a>
@@ -213,9 +212,9 @@ Kevin is based in Chicago (well, close enough). He wants to make it easy for any
 
 </div>
 
-### Fulltime team
+### Full-time team
 
-There are currently 3 fulltime contributors to DoneJS and its subprojects:
+There are currently 3 full-time contributors to DoneJS and its subprojects:
 
 <div class="core-team-member">
 <img class="member-avatar" src="https://avatars3.githubusercontent.com/u/78602?v=3&s=300"/>
