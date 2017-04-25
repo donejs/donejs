@@ -530,7 +530,7 @@ A build time algorithm analyzes the application's dependencies and groups them i
 
 That's it! No need for additional configuration in your JavaScript.
 
-<a class="btn" href="http://stealjs.com/docs/steal-tools.guides.progressive_loading.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://stealjs.com/docs/StealJS.guides.progressive_loading.html"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#switch-between-pages"><span>View the Guide</span></a>
 
 _Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additional support via the [`<can-import>` tag](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](http://canjs.com/)_
@@ -878,7 +878,7 @@ _Cordova, Electron, and NW.js integration are features of the [steal-electron](h
 
 ### Supports All Browsers, Even IE9+
 
-DoneJS applications support Internet Explorer 8 minimal additional configuration. You can even write applications using [most ES6 features](http://babeljs.io/docs/advanced/caveats/) that run on IE9+, using the built-in babel integration.
+DoneJS applications support Internet Explorer 8 minimal additional configuration. You can even write applications using [most ES6 features](https://babeljs.io/docs/usage/caveats/) that run on IE9+, using the built-in babel integration.
 
 Many people won't care about this because IE9+ is on its way out, which is a very good thing!
 
