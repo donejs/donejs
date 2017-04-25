@@ -145,7 +145,7 @@ DoneJS’s history goes back for almost a decade!  Learn why JavaScriptMVC was s
 
 We begin [our story](https://forum.javascriptmvc.com/topic/a-brief-history-of-javascriptmvc) in 2007 when Justin Meyer, the CEO of Bitovi, was working for Accenture. He had an idea to build something like [ZoHo Creator](https://creator.zoho.com/home), so you could set up REST services and use an online IDE to write JavaScript apps from those services — you could sell your apps and everything. He called it Scaffold.
 
-He worked with Brian, a friend from his fraternity (who’s now the CTO of Bitovi). Brian quit graduate school so they could start working on it together. They worked on it for about a year and managed to sell it to a few places, but it never really took off. They then started building JavaScript tools for Scaffold to help people write their apps.
+He worked with Brian, a friend from college (who’s now the CTO of Bitovi). Brian quit graduate school so they could start working on it together. They worked on it for about a year and managed to sell it to a few places, but it never really took off. They then started building JavaScript tools for Scaffold to help people write their apps.
 
 Their initial work was based off a library called [TrimPath](https://code.google.com/archive/p/trimpath/). It had templates, an MVC pattern, etc. They worked with Steve Yen for a little bit, but their client-only focus left them to split of trimpath/trimjunction into what they called JSJunction. Eventually, they didn’t like the name JSJunction and changed it to JavaScriptMVC.
 
