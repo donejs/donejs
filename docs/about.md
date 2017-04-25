@@ -254,4 +254,4 @@ If you'd like to support the development of DoneJS, please find available option
 please [email us](mailto:contact@bitovi.com).
 
 
-Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS.
+[Bitovi](https://www.bitovi.com/), a JavaScript consulting company, is the primary sponsor of DoneJS.
