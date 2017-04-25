@@ -5,6 +5,7 @@ var rimraf = require('rimraf');
 var assert = require('assert');
 var mockery = require('mockery');
 var utils = require('../lib/utils');
+var symlink = Q.denodeify(fs.symlink);
 
 describe('donejs-cli init command', function() {
   var cwd;
@@ -97,22 +98,32 @@ describe('donejs-cli init command', function() {
       .catch(done);
   });
 
-  // if folder already exists, we assume it was put there by npm link, or manually, for debugging purposes
-  it('skips install if {folder}/node_modules/donejs-cli exists, still runs `donejs-cli init`', function(done) {
-    utils.mkdirp(path.join(folder, 'node_modules', 'donejs-cli')).then(function() {
-      init(folder, {})
-        .then(function() {
-          var installCliCall = spawnCalls[0];
-          var folderPath = path.join(cwd, folder);
+  // if folder exists as symlink, we assume it was put there by npm link, or
+  // manually, for debugging purposes
+  it('skips install if {folder}/node_modules/donejs-cli exist as symlink, still runs `donejs-cli init`', function(done) {
+    var localCli = path.join(folder, 'local-donejs-cli');
+    var nodeModules = path.join(folder, 'node_modules');
+    utils.mkdirp(localCli).then(function() {
+      utils.mkdirp(nodeModules).then(function() {
+        symlink('../local-donejs-cli', path.join(nodeModules, 'donejs-cli')).then(function() {
+          init(folder, {})
+            .then(function() {
+              var installCliCall = spawnCalls[0];
+              var folderPath = path.join(cwd, folder);
 
-          assert.strictEqual(installCliCall, undefined); 
+              assert.strictEqual(installCliCall, undefined); 
 
-          assertRunBinaryCallInit(folderPath);
+              assertRunBinaryCallInit(folderPath);
 
-          done();
+              done();
+            })
+            .catch(done);
         })
         .catch(done);
-    });
+      })
+      .catch(done);
+    })
+    .catch(done);
   });
 
   it('passes options to `donejs-cli init` properly', function(done) {
