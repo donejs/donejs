@@ -62,6 +62,7 @@ guide.step("Run donejs add app", function(){
 	answer(/Author's Homepage/, "\n");
 	answer(/Application keywords/, "\n");
 	answer(/NPM version/, "\n");
+  answer(/Which license/, "\n");
 
 	return init.promise;
 });
