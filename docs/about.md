@@ -211,7 +211,7 @@ The core team is made up of both part-time and full-time contributors.
 <p>
 Prashant is based in Bangalore, India. He likes the understated elegance of CanJS. He also believes DoneJS is a great framework in the making, since it makes technology selection a no-brainer by uniquely offering developers an all-in-one technology stack.
 </p>
-<a href="https://github.com/prashantsharmain" target="_blank">Github</a>
+<a href="https://github.com/prashantsharmain" target="_blank">GitHub</a>
 </div>
 
 <div class="core-team-member">
@@ -230,7 +230,7 @@ A 29 old guy from Germany, Julian started coding at the age of 16. Now he freela
 Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side developer in day work, JavaScript developer after work hours especially using DoneJS/CanJS. He likes to help people to learn and find solutions to issues with DoneJS framework and build applications and code samples that help to show the best from DoneJS/Canjs and learn it faster.
 </p>
 <a href="https://twitter.com/Cherif_b" target="_blank">@Cherif_b</a>
-<a href="https://github.com/cherifGsoul" target="_blank">Github</a>
+<a href="https://github.com/cherifGsoul" target="_blank">GitHub</a>
 
 </div>
 
@@ -242,7 +242,7 @@ Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side develope
 Kevin is based in Chicago (well, close enough). He wants to make it easy for anyone to get started with DoneJS and will work on features that help solve complex problems.
 </p>
 <a href="https://twitter.com/kdotphil" target="_blank">@kdotphil</a>
-<a href="https://github.com/phillipskevin" target="_blank">Github</a>
+<a href="https://github.com/phillipskevin" target="_blank">GitHub</a>
 
 </div>
 
@@ -254,7 +254,7 @@ Justin dances and plays basketball in Chicago. He created JavaScriptMVC and mana
 DoneJS project, and shouldn't code on it as much as he does.
 </p>
 <a href="https://twitter.com/justinbmeyer" target="_blank">@justinbmeyer</a>
-<a href="https://github.com/justinbmeyer" target="_blank">Github</a>
+<a href="https://github.com/justinbmeyer" target="_blank">GitHub</a>
 </div>
 
 <div class="core-team-member">
@@ -265,7 +265,7 @@ David is a Canadian by way of Germany. His focus is on CanJS and
 DoneJS's testing stack.
 </p>
 <a href="https://twitter.com/daffl" target="_blank">@daffl</a>
-<a href="https://github.com/daffl" target="_blank">Github</a>
+<a href="https://github.com/daffl" target="_blank">GitHub</a>
 </div>
 
 <div class="core-team-member">
@@ -275,7 +275,7 @@ DoneJS's testing stack.
 Matthew, keeper of beards, is the lead maintainer of StealJS and its related tools.
 </p>
 <a href="https://twitter.com/matthewcp" target="_blank">@matthewcp</a>
-<a href="https://github.com/matthewp" target="_blank">Github</a>
+<a href="https://github.com/matthewp" target="_blank">GitHub</a>
 </div>
 
 
