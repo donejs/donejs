@@ -10,7 +10,7 @@ We will create the project on [GitHub](https://github.com), initialize the repos
 
 You can find the code in the [donejs-number-input](https://github.com/donejs/donejs-number-input) repository. The final result looks like this:
 
-<a class="jsbin-embed" href="//jsbin.com/zuqadox/1/embed?html,css,js,output">JS Bin on jsbin.com</a><script src="//static.jsbin.com/js/embed.min.js?3.41.9"></script>
+<a class="jsbin-embed" href="https://jsbin.com/nuxiyay/1/embed?html,css,js,output">JS Bin on jsbin.com</a><script src="https://static.jsbin.com/js/embed.min.js?3.41.10"></script>
 
 ## Setting up
 
@@ -125,7 +125,7 @@ We can use the [define plugin][16] to define a `min` and `max` value and [a sett
 @sourceref ../../guides/plugin/steps/implement/number-input.js
 @highlight 7-35
 
-To test this functionality we can change the tests in `src/<username>-number-input-test.js` to look like this:
+To test this functionality, we can change the tests in `src/<username>-number-input-test.js` to look like this:
 
 @sourceref ../../guides/plugin/steps/implement/number-input-test.js
 @highlight 7-29
