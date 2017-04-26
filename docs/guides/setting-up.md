@@ -265,7 +265,7 @@ For more information check out https://www.vagrantup.com/docs/vagrantfile/
 
 
 ### Configure your shared folders
-Before you start the Vagrant Box, you have to specified which folder you would like to sync from your local machine to the virtual machine.
+Before you start the Vagrant Box, you have to specify which folder you would like to sync from your local machine to the virtual machine.
 For that, open the **Vagrantfile** in that folder you initialized Vagrant. Scroll down to:
 ```
 # Share an additional folder to the guest VM. The first argument is
@@ -281,7 +281,7 @@ config.vm.synced_folder "C:/www/donejs", "/home/vagrant/donejs"
 
 Make sure that `C:/www/donejs` is a valid directory.
 
-For more information check the documentation on https://www.vagrantup.com/docs/synced-folders/basic_usage.html
+For more information check the [documentation](https://www.vagrantup.com/docs/synced-folders/basic_usage.html).
 
 ### Launching the Vagrant Box
 Once you have done all the configuration run
@@ -298,4 +298,4 @@ vagrant ssh
 command in your terminal.
 
 ### Further information
-For further information what is pre-installed on the Vagrant Box and which ports are forwarding to your host please check out the Github repository [DoneJS Vagrant](https://github.com/donejs/donejs-vagrant)
+For further information about what is pre-installed on the Vagrant Box and which ports are forwarding to your host please check out the Github repository [DoneJS Vagrant](https://github.com/donejs/donejs-vagrant)

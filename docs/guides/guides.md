@@ -20,7 +20,7 @@ In the [quick start guide](./Guide.html), we will build a small chat application
 - Progressive loading
 - Real time connections
 - Building and deploying to a CDN.
-- Builds to Codova (mobile) and NW.js (desktop).
+- Builds to Cordova (mobile) and NW.js (desktop).
 
 ## [In-depth: place-my-order](./place-my-order.html)
 <a href="./place-my-order.html"><img class="app-thumbs" src="static/img/thumb-pmo.png" srcset="static/img/thumb-pmo.png 1x, static/img/thumb-pmo-2x.png 2x"></a>
