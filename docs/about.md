@@ -49,7 +49,7 @@ We aim to help in three main ways:
 
 DoneJS has good solutions for:
 
- - [Building cross-platform applications](./Features.html#ios-android-and-desktop-builds)
+ - [Building mobile and desktop applications](./Features.html#ios-android-and-desktop-builds)
  - [Server Side Rendering](./Features.html#server-side-rendered)
  - [Automatic real-time updates](./Features.html#real-time-connected)
  - [Fast download times](./Features.html#progressive-loading)
@@ -78,7 +78,7 @@ Check out what DoneJS does for:
 
 - [Tests](./Features.html#comprehensive-testing)
 - [Documentation](./Features.html#documentation)
-- [CI and CD](./Features.html#continuous-integration--deployment)
+- [Continuous Integration and Deployment](./Features.html#continuous-integration--deployment)
 - [Modlets](./Features.html#modlets)
 - [Generators](./Features.html#generators)
 
