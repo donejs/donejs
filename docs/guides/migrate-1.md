@@ -31,9 +31,26 @@ If you are using `donejs deploy` to deploy your site to a service like Firebase,
 
 Additionally, if you are using either `donejs build cordova` or `donejs build nw` to create desktop or mobile apps, make sure both of those are working correctly.
 
-### Install donejs@1
+There are a few more pages you might use in your normal development workflow that will be helpful during the migration process:
 
-Next, upgrade to the latest version of the **donejs** package on npm:
+- `development.html`: [http://localhost:8080/development.html]
+- `production.html`: [http://localhost:8080/production.html]
+- `src/test.html`: [http://localhost:8080/src/test.html]
+
+We recommend taking a “bottom up” approach to upgrading your application by focusing on getting each of your components’ test and demo pages working first.
+
+For example, if you have a `messages` component in `src/messages/`, the following pages should work correctly:
+
+- demo page: [http://localhost:8080/src/messages/messages.html]
+- test page: [http://localhost:8080/src/messages/test.html]
+
+You should also follow the [CanJS 3 pre-migration preparation](https://canjs.com/doc/migrate-3.html#Pre_migrationpreparation) steps _before_ going through the rest of this guide. The pre-migration section of the [CanJS 3 migration guide](https://canjs.com/doc/migrate-3.html) includes changes you can make to your existing CanJS 2.3 app that will make migrating to CanJS 3 easier.
+
+If you have any questions about any of the steps in this guide, please join us on [Gitter chat](https://gitter.im/donejs/donejs) and [the forums](http://forums.donejs.com/).
+
+## Install donejs@1
+
+First, upgrade to the latest version of the **donejs** package on npm:
 
 ```shell
 npm install --global donejs@1
@@ -41,7 +58,7 @@ npm install --global donejs@1
 
 Now any time you create new applications using `donejs add app`, it will scaffold out a DoneJS 1.0 project.
 
-### Use done-serve in static mode
+## Use done-serve in static mode
 
 As you do the upgrade, you’ll want to disable SSR so that you can focus on changes to your code. Once all dependencies are up to date you can switch back and everything should work.
 
@@ -59,20 +76,44 @@ done-serve --static ...
 
 > *Note*: removing the `--develop` flag will disable live-reload. As we upgrade our application, it will be in a broken state most of the time, so live-reload will not work anyway. When we’ve completed the upgrade, we can switch `--develop` back on.
 
-## Front-end
+## Upgrade to CanJS 3
 
-### Upgrade to CanJS 3.0
+See the [CanJS 3 migration guide](https://canjs.com/doc/migrate-3.html) for instructions on how to migrate CanJS. If you followed the advice above, you will have already gone through the [pre-migration](https://canjs.com/doc/migrate-3.html#Pre_migrationpreparation) steps, so you will only need to follow the [minimal migration path](https://canjs.com/doc/migrate-3.html#Minimalmigrationpath) steps. We recommend that you also follow the [modernized migration path](https://canjs.com/doc/migrate-3.html#Modernizedmigrationpath) steps as well.
 
-See the [CanJS 3 migration guide](https://canjs.com/doc/migrate-3.html) for instructions on how to migrate CanJS. Once you’ve made all necessary changes, it is likely that your tests will still not pass. *Don’t worry*! Some of the DoneJS dependencies you have installed still expect to use CanJS 2.3; once we’ve upgraded all of those, the tests should pass again.
-
-### Upgrade other DoneJS libraries
-
-Use npm to install the latest versions of the following packages:
+Now is a good time to install the latest versions of any other CanJS packages, including the following:
 
 ```shell
 npm install can-connect@1 --save
 npm install can-fixture@1 --save-dev
 npm install can-zone@0.6 --save
+```
+
+This will update your `package.json` to look something like this:
+
+```json
+"dependencies": {
+  ...
+
+  "can-connect": "^1.0.0",
+  "can-zone": "^0.6.0"
+},
+
+"devDependencies": {
+  ...
+
+  "can-fixture": "^1.0.0"
+}
+```
+
+Once you’ve made these changes, the demo and test pages for your individual components should start to work but your entire test suite may not work quite yet. *Don’t worry*! Some of the DoneJS dependencies you have installed still expect to use CanJS 2.3; once we’ve upgraded all of those, we’ll start to get the other pages working again.
+
+> *Note*: if you receive an error such as `Uncaught Error: You can't have two versions of can-event/batch/batch`, you maybe be able to fix the issue by deleting your `node_modules` folder and running `npm install` to re-install all of the packages.
+
+## Upgrade other DoneJS libraries
+
+Use npm to install the latest versions of the following packages:
+
+```shell
 npm install done-autorender@1 --save
 npm install done-component@1 --save
 ```
@@ -83,20 +124,14 @@ This will update your `package.json` to look something like this:
 "dependencies": {
   ...
 
-  "can-connect": "^1.0.0",
-  "can-zone": "^0.6.0",
   "done-autorender": "^1.0.0",
   "done-component": "^1.0.0",
-},
-
-"devDependencies": {
-  ...
-
-  "can-fixture": "^1.0.0"
 }
 ```
 
-### Upgrade other dependencies
+At this point, your [development.html](http://localhost:8080/development.html) and [src/test.html](http://localhost:8080/src/test.html) files should start working. Not all of your tests may pass, but you should be able to load the test page and see results.
+
+## Upgrade other dependencies
 
 You may be using other packages that are specifically made to work with CanJS 2.x, like `bit-tabs@0`.
 
@@ -108,9 +143,9 @@ npm install bit-tabs@1 --save
 
 Once you’ve upgraded CanJS and these ancillary packages, your app should generally work. SSR is still disabled, but the front-end should be okay.
 
-## Upgrade StealJS
+## Upgrade to StealJS 1
 
-Refer to the [StealJS 1.0 guide](https://stealjs.com/docs/StealJS.topics.migrating-one.html) to upgrade StealJS.
+Refer to the [StealJS 1 guide](https://stealjs.com/docs/StealJS.topics.migrating-one.html) to upgrade StealJS.
 
 Additionally, upgrade to the latest versions of these packages:
 
@@ -156,10 +191,9 @@ Your package.json’s **steal** section (which used to be called **system**) sho
 
 This configures Steal to be able to load file types other than JavaScript.
 
-## Utilities
+## Upgrade other utilities
 
 The last thing is to upgrade *everything else* that you haven’t already changed. This should include the following:
-
 
 ```shell
 npm install done-serve@1 --save
