@@ -49,7 +49,7 @@ We aim to help in three main ways:
 
 DoneJS has good solutions for:
 
- - [Building cross-platform applications](./Features.html#ios-android-and-desktop-builds)
+ - [Building mobile and desktop applications](./Features.html#ios-android-and-desktop-builds)
  - [Server Side Rendering](./Features.html#server-side-rendered)
  - [Automatic real-time updates](./Features.html#real-time-connected)
  - [Fast download times](./Features.html#progressive-loading)
@@ -78,7 +78,7 @@ Check out what DoneJS does for:
 
 - [Tests](./Features.html#comprehensive-testing)
 - [Documentation](./Features.html#documentation)
-- [CI and CD](./Features.html#continuous-integration--deployment)
+- [Continuous Integration and Deployment](./Features.html#continuous-integration--deployment)
 - [Modlets](./Features.html#modlets)
 - [Generators](./Features.html#generators)
 
@@ -137,11 +137,26 @@ If you have the next great JS idea, we want to encourage and help you to build i
 
 ## History
 
-DoneJS's history goes back more than 10 years!  Learn why JavaScriptMVC was started, and how it evolved into DoneJS.
+DoneJS’s history goes back for almost a decade!  Learn why JavaScriptMVC was started and how it evolved into DoneJS.
 
 ### Beginning Steps
 
-_This section will be complete by Nov 1st. Stay tuned._
+We begin [our story](https://forum.javascriptmvc.com/topic/a-brief-history-of-javascriptmvc) in 2007 when Justin Meyer, the CEO of Bitovi, was working for Accenture. He had an idea to build something like [ZoHo Creator](https://creator.zoho.com/home), so you could set up REST services and use an online IDE to write JavaScript apps from those services — you could sell your apps and everything. He called it Scaffold.
+
+He worked with Brian, a friend from college (who’s now the CTO of Bitovi). Brian quit graduate school so they could start working on it together. They worked on it for about a year and managed to sell it to a few places, but it never really took off. They then started building JavaScript tools for Scaffold to help people write their apps.
+
+Their initial work was based off a library called [TrimPath](https://code.google.com/archive/p/trimpath/). It had templates, an MVC pattern, etc. They worked with Steve Yen for a little bit, but their client-only focus left them to split of trimpath/trimjunction into what they called JSJunction. Eventually, they didn’t like the name JSJunction and changed it to JavaScriptMVC.
+
+In JavaScriptMVC’s first release, it had support for things such as:
+
+- Model - View - Controller design pattern
+- History & routing
+- Templates
+- Plugins for filtering, paginating, sorting, etc.
+
+Even in JavaScriptMVC’s early days, Justin knew that [“developers need a repeatable way of building their applications and separating concerns.”](https://groups.google.com/forum/#!searchin/jquery-dev/jQuery$20enterprise/jquery-dev/HsTcpuAmFtY/mN4qFyHw54oJ) When a dev team can work with a standard set of tools and processes, their productivity can greatly increase.
+
+FuncUnit and StealJS both started in 2010, and in 2012 we started splitting JavaScriptMVC into smaller, focused projects, including CanJS, jQuery++, DocumentJS, and DocumentCSS. Then, in 2015, we rebranded JavaScriptMVC to DoneJS and released it to the public.
 
 ### Tomorrow's Roadmap
 
