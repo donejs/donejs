@@ -63,7 +63,7 @@ Another advantage of the integration between DoneJS' parts is the ability to sol
 
 Solving a story means a packaged solution to a development problem, where several features across layers converge to solve the problem from start to finish. Here are several examples of stories that DoneJS solves:
 
-1. [Modular workflow](#modular-workflow) - DoneJS makes it possible for teams to design and share components easily. Starting with [generators](#generators), users can create [modlets](#modlets) that encapsulate everything a [custom elements](#custom-html-elements) needs, easily add [documentation](#documentation) and [testing](#comprehensive-testing), then use [NPM import and export](#npm-packages) to easily share the modules with other developers, no matter what module format they're using.
+1. [Modular workflow](#modular-workflow) - DoneJS makes it possible for teams to design and share components easily. Starting with [generators](#generators), users can create [modlets](#modlets) that encapsulate everything a [custom element](#custom-html-elements) needs, easily add [documentation](#documentation) and [testing](#comprehensive-testing), then use [NPM import and export](#npm-packages) to easily share the modules with other developers, no matter what module format they're using.
 
 2. [Performance](#performance-features) - DoneJS was designed from the start to solve the performance story, packaging [server-side rendering](#server-side-rendered), [progressive loading](#progressive-loading), [worker thread rendering](#worker-thread-rendering), [data layer caching](#caching-and-minimal-data-requests), and more, all under one roof.
 
@@ -480,7 +480,7 @@ Any app that is rendered on the server needs a way to notify the server that any
 
 React and other frameworks that support SSR don't provide much in the way of solving this problem. You're left to your own devices to check when all asynchronous data requests are done, and delay rendering.
 
-In a DoneJS application asynchronous data requests are tracked automatically. Using can-zone, DoneJS keeps a count of requests that are made and waits for all of them to complete.
+In a DoneJS application, asynchronous data requests are tracked automatically. Using can-zone, DoneJS keeps a count of requests that are made and waits for all of them to complete.
 
 <a class="btn" href="https://github.com/donejs/done-ssr"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html"><span>View the Guide</span></a>
@@ -530,7 +530,7 @@ A build time algorithm analyzes the application's dependencies and groups them i
 
 That's it! No need for additional configuration in your JavaScript.
 
-<a class="btn" href="http://stealjs.com/docs/steal-tools.guides.progressive_loading.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://stealjs.com/docs/StealJS.guides.progressive_loading.html"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#switch-between-pages"><span>View the Guide</span></a>
 
 _Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additional support via the [`<can-import>` tag](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](http://canjs.com/)_
@@ -564,7 +564,7 @@ Fall through caching serves cached data first, but still makes API requests to c
 
 The major benefit of this technique is improved perceived performance. Users will see content faster. Most of the time, when there is a cache hit, that content will still be accurate, or at least mostly accurate.
 
-This benefits two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
+This benefits two types of situations. First is page loads after the first page load (the first page load populates the cache). This scenario is less relevant when using server-side rendering. Second is long-lived applications that make API requests after the page has loaded. These types of applications will enjoy improved performance.
 
 By default, this is turned on, but can easily be deactivated for data that should not be cached.
 
@@ -613,7 +613,7 @@ Once data is in the cache, no more requests to the API for that same set of data
 
 The request logic is more aggressive in its attempts to find subsets of the data within the cache, and to only make an API request for the subset NOT found in the cache. In other words, partial cache hits are supported.
 
-The video below shows two example scenarios. The first shows the cache containing a supserset of the request. The second shows the cache containing a subset of the request.
+The video below shows two example scenarios. The first shows the cache containing a superset of the request. The second shows the cache containing a subset of the request.
 
 <video style="width:100%;" controls poster="static/img/poster-request-caching.jpg" preload="none">
     <source src="static/img/donejs-request-caching.webm" type="video/webm">
@@ -677,7 +677,7 @@ The rise of templates, data binding, and MV* separation, while boosting maintain
 
 DoneJS' view engine touches the DOM more minimally and specifically than competitor frameworks, providing better performance in large apps and a "closer to the metal" feel.
 
-Take the TodoMVC application as an example. If you measure how long it takes DoneJS and React to render the same number of todos you'll see the performance advantage of minimal DOM updates. In fact we did just that and here's the result:
+Take the TodoMVC application as an example. If you measure how long it takes DoneJS and React to render the same number of todos you'll see the performance advantage of minimal DOM updates. In fact, we did just that and here's the result:
 
 <img class="img-with-caption" src="static/img/donejs-minimal-dom-updates-todomvc.png" alt="Measuring React and DoneJS using TodoMVC." />
 _For a small set of todos the difference is negligible but as the number increases the gap widens to the point where React is 6 times slower than DoneJS when rendering 1000 todos._
@@ -722,7 +722,7 @@ To see this in action run the test embedded below that shows how DoneJS, React a
 
 You can run this test yourself at <a href="https://output.jsbin.com/wotevub/2" target="_blank">JS Bin</a>
 
-With synchronously observable objects and data bindings that change mimimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
+With synchronously observable objects and data bindings that change minimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
 <a class="btn" href="http://canjs.com/doc/can-stache.html"><span>can-stache Documentation</span></a>
 <a class="btn" href="http://canjs.com/doc/can-define.html"><span>can-map Documentation</span></a>
@@ -757,7 +757,7 @@ for controls. Internally CanJS listens for this element's "removed" event. The "
 * Remove DOM data associated with the element.
 * Remove any template bindings, such as computes bound to text within the template.
 
-CanJS is different from other frameworks in that it will clean up its own memory event when not using the framework to tear down DOM. For example if you were to do:
+CanJS is different from other frameworks in that it will clean up its own memory event when not using the framework to tear down DOM. For example, if you were to do:
 
 ```
 todoAnchor.parentNode.removeChild(todoAnchor);
@@ -819,7 +819,7 @@ DoneJS makes it simple to deploy your static assets to a CDN (content delivery n
 
 CDNs are distributed networks of servers that serve static assets (CSS, JS, and image files). You only push your files to one service, and the CDN takes care of pushing and updating your assets on different servers across the country and globe. As your app scales CDNs will keep up with the demand, and help support users regardless if they are in New York or Melbourne.
 
-<img class="img-with-caption" src="static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe with out a CDN." />
+<img class="img-with-caption" src="static/img/DoneJS-Animated-No-CDN.gif" alt="User request across the globe without a CDN." />
 _Without a CDN, requests will take longer to fulfill if the user is located further away from your servers._
 <hr />
 
@@ -852,13 +852,13 @@ DoneJS is used to make beautiful, real-time user interfaces that can be exported
 Write your application once, then run it natively on every device and operating system. You can make iOS, Android, and desktop builds of your DoneJS application with no extra effort.
 
 <img src="static/img/desktop-mobile.gif" />
-_Our DoneJS Chat App running as a OS X desktop app and inside an iOS emulator._
+_Our DoneJS Chat App running as a macOS desktop app and inside an iOS emulator._
 
 #### How it works
 
 For iOS and Android builds, DoneJS integrates with [Apache Cordova](https://cordova.apache.org/) to generate a mobile app that is ready to be uploaded to Apple's App Store or Google Play.
 
-For native desktop applications, DoneJS integrates with [Electron](https://electron.atom.io/) or [NW.js](https://github.com/nwjs/nw.js) to create an native OSX, Windows, or Linux application.
+For native desktop applications, DoneJS integrates with [Electron](https://electron.atom.io/) or [NW.js](https://github.com/nwjs/nw.js) to create a native macOS, Windows, or Linux application.
 
 Adding this integration is as simple as running
 
@@ -878,11 +878,11 @@ _Cordova, Electron, and NW.js integration are features of the [steal-electron](h
 
 ### Supports All Browsers, Even IE9+
 
-DoneJS applications support Internet Explorer 8 minimal additional configuration. You can even write applications using [most ES6 features](http://babeljs.io/docs/advanced/caveats/) that run on IE9+, using the built-in babel integration.
+DoneJS applications support Internet Explorer 8 minimal additional configuration. You can even write applications using [most ES6 features](https://babeljs.io/docs/usage/caveats/) that run on IE9+, using the built-in babel integration.
 
 Many people won't care about this because IE9+ is on its way out, which is a very good thing!
 
-But it's [not quite dead yet](https://youtu.be/grbSQ6O6kbs?t=61). For many mainstream websites, banks, and ecommerce applications, IE9+ continues to hang around the browser stats.
+But it's [not quite dead yet](https://youtu.be/grbSQ6O6kbs?t=61). For many mainstream websites, banks, and e-commerce applications, IE9+ continues to hang around the browser stats.
 
 And while other frameworks like AngularJS and EmberJS don't support IE9+, DoneJS makes it easy to write one app that runs everywhere.
 
@@ -927,9 +927,9 @@ _Real time connections is a feature of the [can-connect](http://connect.canjs.co
 
 ### Pretty URLs with Pushstate
 
-DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user in a single page.
+DoneJS applications use [pushstate](https://developer.mozilla.org/en-US/docs/Web/API/History_API#The_pushState()_method) to provide navigable, bookmarkable pages that support the back and refresh buttons, while still keeping the user on a single page.
 
-The use of pushstate allows your apps to have "Pretty URLs" like `myapp.com/user/1234` instead of uglier hash based URLs like `myapp.com#page=user&userId=1234` or `myapp.com/#!user/1234`.
+The use of pushstate allows your apps to have "Pretty URLs" like `myapp.com/user/1234` instead of uglier hash-based URLs like `myapp.com#page=user&userId=1234` or `myapp.com/#!user/1234`.
 
 Wiring up these pretty URLs in your code is simple and intuitive.
 
@@ -995,7 +995,7 @@ DoneJS provides tools for the entire testing lifecycle:
 
 #### How it works
 
-Testing JavaScript apps is complex unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack.
+Testing JavaScript apps is a complex task process unto itself. To do it right, you need many tools that have to work together seamlessly. DoneJS provides everything you need - the whole stack.
 
 ##### Generators
 
@@ -1003,7 +1003,7 @@ The DoneJS app generator command `donejs add app` creates a working project-leve
 
 ##### Unit tests
 
-Unit tests are used to test the interface for modules like models and view models. You can choose between BDD style unit tests with Jasmine or Mocha, or a more traditional TDD assertion style with QUnit.
+Unit tests are used to test the interface for modules like models and view models. You can choose between BDD style unit tests with Jasmine, Mocha, or a more traditional TDD assertion style with QUnit.
 
 ##### Functional tests
 
@@ -1047,9 +1047,9 @@ The reporting tool gives detailed information about coverage statistics, and let
 
 ##### Mocking server APIs
 
-Automated frontend testing is most useful when it has no external dependencies on API servers or specific sets of data. Thus a good mock layer is critical to write resilient tests.
+Automated frontend testing is most useful when it has no external dependencies on API servers or specific sets of data. Thus a good mock layer is critical to writing resilient tests.
 
-DoneJS apps use fixtures to emulate REST APIs. A default set of fixtures are created by generators when a new model is created. Fixtures are very flexible, and can be used to simulate error states and slow performing APIs.
+DoneJS apps use fixtures to emulate REST APIs. A default set of fixtures is created by generators when a new model is created. Fixtures are very flexible, and can be used to simulate error states and slow performing APIs.
 
 ```js
 import fixture from 'can-fixture';
@@ -1068,7 +1068,7 @@ export default store;
 
 Several DoneJS features converge to make authoring tests extremely simple.
 
-Because of [ES6 Module](#es6-modules) support, everything in a DoneJS app is a module, so a test can simply import the modules it needs - such as fixtues and module under test:
+Because of [ES6 Module](#es6-modules) support, everything in a DoneJS app is a module, so a test can simply import the modules it needs - such as fixtures and module under test:
 
 ```
 import restaurantStore from 'place-my-order/models/fixtures/restaurant';
@@ -1081,7 +1081,7 @@ Because of the [modlet](#modlets) pattern, each component contains its own worki
 
 Because of [hot module swapping](#hot-module-swapping), you can write, debug, and run tests without constantly reloading your page.
 
-Other frameworks require a build step before tests can be run. These builds concatenate dependencies and depend on specific order of tests running, which is a brittle and inefficient workflow.
+Other frameworks require a build step before tests can be run. These builds concatenate dependencies and depend on the specific order of tests running, which is a brittle and inefficient workflow.
 
 Because DoneJS uses a client side loader that makes it simple to start a new page that loads its own dependencies, there is no build script needed to compile and run tests.
 
@@ -1108,9 +1108,9 @@ The DoneJS testing layer involves many pieces, so if you want to learn more:
 
 Documentation is critical for maintainability of any complex application. When your team adds developers, docs ensure minimal ramp up time and knowledge transfer.
 
-Yet most teams either don't write docs, or they'll do it "later" - a utoptian future period that is always just out of reach. Why? Because it's extra work to set up a tool, configure it, create and maintain separate documentation files.
+Yet most teams either don't write docs, or they'll do it "later" - a utopian future period that is always just out of reach. Why? Because it's extra work to set up a tool, configure it, create and maintain separate documentation files.
 
-DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing docs, since all you have to do is comment your code (which most people already do) and run `donejs document`.
+DoneJS comes with a documentation tool built in, and it generates multi-versioned documentation from inline code comments. It eliminates the barrier to producing documentation, since all you have to do is comment your code (which most people already do) and run `donejs document`.
 
 <div class="maintainable wrapper">
   <div class="background video">
@@ -1150,7 +1150,7 @@ Then run `donejs document`. A browsable documentation website will be generated.
 DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation. It lets you:
 
 - Write docs inline or in markdown files.
-- Specify your code's behavior precisely with JSDoc and [Google Closure Compiler annotations](https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=en) - a well known documentation syntax.
+- Specify your code's behavior precisely with JSDoc and [Google Closure Compiler annotations](https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=en) - a well-known documentation syntax.
 - Customize your site's theme and layout.
 - Generate multi-versioned documentation.
 - Document CSS alongside JavaScript. You can even make a [live style guide](http://documentjs.com/examples/styles/index.html).
@@ -1177,7 +1177,7 @@ CI is a practice whereby all active development (i.e. a pull request) is checked
 <img src="static/img/git-failed.gif" srcset="static/img/git-failed.gif 1x, static/img/git-failed-2x.gif 2x" alt="A pull request that breaks the build or fails tests">
 _Example of a GitHub pull request with Travis CI integrated. Warns users in advance of merges if their changes will break builds or fail tests._
 
-CD means that any release or merges to your release branch will trigger tests, builds and deployment.
+CD means that any release or merges to your release branch will trigger tests, builds, and deployment.
 
 Paired together, CI and CD enable automatic, frequent releases. CD isn't possible without CI. Good automated testing is a must to provide the confidence to release without introducing bugs.
 
@@ -1234,7 +1234,7 @@ before_install:
 
 The secret to building large apps is to never build large apps. Break up your application into small pieces. Then, assemble.
 
-DoneJS encourages use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
+DoneJS encourages the use of the modlet file organization pattern. Modlets are small, decoupled, reusable, testable mini applications.
 
 #### How it works
 
@@ -1334,7 +1334,7 @@ node myexport.js
 
 In combination with other DoneJS features, NPM module import and export make it possible for teams to design and share components easily.
 
-[Generators](#generators) make it easy to bootstrap new modules of functionality quickly, and the [modlet pattern](#modlets) makes it easy to organize small, self-contained modules. Its even easy to create tests and documentation for each module.
+[Generators](#generators) make it easy to bootstrap new modules of functionality quickly, and the [modlet pattern](#modlets) makes it easy to organize small, self-contained modules. It's even easy to create tests and documentation for each module.
 
 DoneJS enables a modular workflow, where pieces of small, reusable functionality can be easily created, shared, and consumed.
 
@@ -1346,7 +1346,7 @@ DoneJS enables a modular workflow, where pieces of small, reusable functionality
 
 Similar to the way that the [microservices](http://microservices.io/patterns/microservices.html) architecture encourages reuse of APIs across applications, the modular workflow encourages reuse of self-contained modules of JavaScript across applications.
 
-Imagine an organization where every app is broken into many reusable pieces, each of which are independently tested, developed, and shared. Over time, developers would be able to quickly spin up new applications, reusing previous functionality. DoneJS makes this a real possibility.
+Imagine an organization where every app is broken into many reusable pieces, each of which is independently tested, developed, and shared. Over time, developers would be able to quickly spin up new applications, reusing previous functionality. DoneJS makes this a real possibility.
 
 <a class="btn" href="http://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html#importing-other-projects"><span>View the Guide</span></a>
@@ -1369,7 +1369,7 @@ export function subtract(a, b) {
 
 DoneJS applications are actually able to import or export any module type: ES6, AMD and CommonJS. This means you can slowly phase in ES6, while still using your old code. You can also use any of the many exciting [ES6 language features](https://github.com/lukehoban/es6features).
 
-A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. During development, the compiler runs in the browser, so changes are happening live without a build step. During the build, your code is compiled to ES5, so your production code will run native in every browser. You can even run your [ES6 application in IE9+](#supports-all-browsers-even-ie9)!
+A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. During development, the compiler runs in the browser, so changes are happening live without a build step. During the build, your code is compiled to ES5, so your production code will run natively in every browser. You can even run your [ES6 application in IE9+](#supports-all-browsers-even-ie9)!
 
 <a class="btn" href="http://stealjs.com/docs/syntax.es6.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html"><span>View the Guide</span></a>
@@ -1383,7 +1383,7 @@ One of the most important concepts in DoneJS is splitting up your application fu
 The major advantages of building applications based on custom HTML elements are:
 
  1. **Ease of page composition** - Designers can do it! Non-developers can express complex behavior with little to no JavaScript required. All you need to build a new page or feature is HTML.
- 1. **Forced modularity** - Because the nature of HTML elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
+ 1. **Forced modularity** - Because the nature of HTML, elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
  1. **Reuse** - Custom elements are designed to be reusable across pages and applications.
 
 Consider the following example:
@@ -1464,7 +1464,7 @@ There are several unique benefits to DoneJS custom elements:
 
 ##### Defining a custom element
 
-One way to define a component is with a [web component](https://github.com/donejs/done-component) style declaration, using a single file with a `.component` extension:
+One way to define a component is using a [web component](https://github.com/donejs/done-component) style declaration, using a single file with a `.component` extension:
 
 ```html
 <can-component tag="hello-world">
@@ -1502,7 +1502,7 @@ DoneJS [Generators](#generators) will create both of these types of custom eleme
 
 ##### Data elements + visual elements = expressive templates
 
-The beauty and power of custom HTML elements is most apparent when visual widgets (like graphing) is combined with elements that express data.
+The beauty and power of custom HTML elements are most apparent when visual widgets (like graphing) is combined with elements that express data.
 
 Back to our original example:
 
@@ -1587,12 +1587,12 @@ The following video introduces MVVM in DoneJS, focusing on the strength of the V
 
 <div class="youtube-container"><div class="youtube-player" data-videoid="kCM03jujKy4"></div></div>
 
-DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works and compare it to other frameworks.
+DoneJS has a uniquely strong ViewModel layer compared to other frameworks. We'll discuss how it works and compares it to other frameworks.
 
 
 ##### MVVM overview
 
-**Models** in DoneJS are responsible for loading data from the server. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server. Models use intelligent set logic that enables [real time](#real-time-connected) integration and [caching](#caching-and-minimal-data-requests) techniques.
+**Models** in DoneJS are responsible for loading data from the server. They can be reused across ViewModels. They often perform data validation and sanitization logic. Their main function is to represent data sent back from a server. Models use an intelligent set logic that enables [real-time](#real-time-connected) integration and [caching](#caching-and-minimal-data-requests) techniques.
 
 **Views** in DoneJS are templates. Specifically, templates that use handlebars syntax, but with data bindings and rewritten for better performance. Handlebars templates are designed to be logic-less.
 
@@ -1689,7 +1689,7 @@ Without automatic ties connecting these layers, achieving the same `fullName` fu
 
 In Angular, there are no direct observables. It uses dirty checking with regular JavaScript objects, which means at the end of the current $digest cycle, it will run an algorithm that determines what data has changed. This has performance drawbacks, as well as making it harder to write simple unit tests.
 
-In React, there is no observable data layer. You could define a `fullName` like we showed above, but it would be recomputed every time `render` is called, whether or not it has changed. Though it's possible to isolate and unit test its ViewModel, its not quite set up to make this easy.
+In React, there is no observable data layer. You could define a `fullName` like we showed above, but it would be recomputed every time `render` is called, whether or not it has changed. Though it's possible to isolate and unit test its ViewModel, it's not quite set up to make this easy.
 
 ##### More information
 

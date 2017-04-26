@@ -49,7 +49,7 @@ We aim to help in three main ways:
 
 DoneJS has good solutions for:
 
- - [Builds to mobile and desktop](./Features.html#ios-android-and-desktop-builds)
+ - [Building mobile and desktop applications](./Features.html#ios-android-and-desktop-builds)
  - [Server Side Rendering](./Features.html#server-side-rendered)
  - [Automatic real-time updates](./Features.html#real-time-connected)
  - [Fast download times](./Features.html#progressive-loading)
@@ -57,7 +57,7 @@ DoneJS has good solutions for:
 These are just a few examples from our [features page](./Features.html). If
 there's a hard problem that you keep running into, we want to solve it.
 
-#### 2. Provide an integrated solution
+#### 2. Providing an integrated solution
 
 Too many choices can make decision making difficult.  DoneJS simplifies
 matters by providing a full stack of frontend tooling tested to work
@@ -72,24 +72,23 @@ DoneJS with alternatives._
 
 Writing tests and documentation, setting up continuous integration and deployment
 isn't fun or easy.  DoneJS tries to lower the barrier enough to
-making doing the `right thing` simply part of the normal dev cycle.
+making doing the _right thing_ simply part of the normal development cycle.
 
 Check out what DoneJS does for:
 
 - [Tests](./Features.html#comprehensive-testing)
 - [Documentation](./Features.html#documentation)
-- [Guides for CI and CD](./Features.html#continuous-integration--deployment)
+- [Continuous Integration and Deployment](./Features.html#continuous-integration--deployment)
 - [Modlets](./Features.html#modlets)
 - [Generators](./Features.html#generators)
 
 ### Evolve
 
-Application development and maintenence often
+Application development and maintenance often
 lasts many years. Stability is needed to release complex applications. However,
 new techniques and best practices are constantly evolving.
 
-DoneJS's goal is to strike a balance between immovable stability and irresistable
-progress.  We do this by evolving frequently, while maintaining backward compatability between major releases.
+DoneJS's goal is to strike a balance between immovable stability and irresistible progress. We do this by evolving frequently, while maintaining backward compatibility between major releases.
 
 It can be a bumpy road, with lots of little changes. But it
 avoids rewrites, resulting in greater productivity:  
@@ -97,7 +96,7 @@ avoids rewrites, resulting in greater productivity:
 <img src="http://blog.bitovi.com/wp-content/uploads/2015/10/mountain-climb1.jpg"/>
 
 
-DoneJS is the successor to JavaScriptMVC. If your project chose JavaScriptMVC in 2007, you would have made a wise decision, giving your team an upgrade path to a modern application for the past 8 years.
+DoneJS is the successor to JavaScriptMVC. If your project chose JavaScriptMVC in 2007, you would have made a wise decision, giving your team an upgrade path to a modern application for the past 10 years.
 
 We hope to continue this trend until programs start writing themselves.
 
@@ -105,7 +104,7 @@ We hope to continue this trend until programs start writing themselves.
 
 Software is better with friends.  Our goal is to establish a world-wide
 community with people of all backgrounds and skill levels dedicated to
-teaching, exploring and innovating.
+teaching, exploring, and innovating.
 
 #### Teaching
 
@@ -114,7 +113,7 @@ to create great learning material, but also create an environment
 where people feel comfortable getting help.  
 
 The core team is always available on [gitter](https://gitter.im/donejs/donejs)
-and provides [weekly trainings](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](./community.html) and we will come to your
+and provides [weekly training](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](./community.html) and we will come to your
 city and teach you DoneJS!
 
 
@@ -132,8 +131,7 @@ We should always seek to cooperate with others.
 
 #### Attract
 
-If you have the next great JS idea, we want to encourage you to help build it as part of the DoneJS
-family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full time devs to build out your idea. Reach out to us on
+If you have the next great JS idea, we want to encourage and help you to build it as part of the DoneJS family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full-time developers to build out your idea. Reach out to us on
 [gitter](https://gitter.im/donejs/donejs) or create an issue.
 
 
@@ -162,7 +160,7 @@ FuncUnit and StealJS both started in 2010, and in 2012 we started splitting Java
 
 ### Tomorrow's Roadmap
 
-The following are our highest priority, non bug fix features:
+The following are our highest priority, non-bug-fix features:
 
 - [can-set support sort](https://github.com/canjs/can-set/pull/10)
 - [documentjs configured in package.json](https://github.com/bitovi/documentjs/issues/202)
@@ -211,9 +209,9 @@ The core team is made up of both part-time and full-time contributors.
 <img class="member-avatar" src="https://avatars3.githubusercontent.com/u/4830283?v=3&s=300"/>
 <h4>Prashant Sharma</h4>
 <p>
-Prashant is based in Bangalore, India. He likes the understated elegance of CanJS. I also believe DoneJS is a great framework in the making, since it makes technology selection a no brainer by uniquely offering developers an all-in-one technology stack.
+Prashant is based in Bangalore, India. He likes the understated elegance of CanJS. He also believes DoneJS is a great framework in the making, since it makes technology selection a no-brainer by uniquely offering developers an all-in-one technology stack.
 </p>
-<a href="https://github.com/prashantsharmain" target="_blank">github</a>
+<a href="https://github.com/prashantsharmain" target="_blank">GitHub</a>
 </div>
 
 <div class="core-team-member">
@@ -229,10 +227,10 @@ A 29 old guy from Germany, Julian started coding at the age of 16. Now he freela
 <img class="member-avatar" src="https://avatars1.githubusercontent.com/u/109013?v=3&s=300"/>
 <h4>Mohamed Cherif Bouchelaghem</h4>
 <p>
-Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side developer in day work, JavaScript developer after work hours specially using DoneJS/CanJS. He likes to help people to learn and find solutions to issues with DoneJS framework and build applications and code samples that help to show the best from DoneJS/Canjs and learn it faster.
+Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side developer in day work, JavaScript developer after work hours especially using DoneJS/CanJS. He likes to help people to learn and find solutions to issues with DoneJS framework and build applications and code samples that help to show the best from DoneJS/Canjs and learn it faster.
 </p>
 <a href="https://twitter.com/Cherif_b" target="_blank">@Cherif_b</a>
-<a href="https://github.com/cherifGsoul" target="_blank">Github</a>
+<a href="https://github.com/cherifGsoul" target="_blank">GitHub</a>
 
 </div>
 
@@ -244,7 +242,7 @@ Mohamed Cherif BOUCHELAGHEM from Algiers, Algeria, almost a server side develope
 Kevin is based in Chicago (well, close enough). He wants to make it easy for anyone to get started with DoneJS and will work on features that help solve complex problems.
 </p>
 <a href="https://twitter.com/kdotphil" target="_blank">@kdotphil</a>
-<a href="https://github.com/phillipskevin" target="_blank">Github</a>
+<a href="https://github.com/phillipskevin" target="_blank">GitHub</a>
 
 </div>
 
@@ -256,7 +254,7 @@ Justin dances and plays basketball in Chicago. He created JavaScriptMVC and mana
 DoneJS project, and shouldn't code on it as much as he does.
 </p>
 <a href="https://twitter.com/justinbmeyer" target="_blank">@justinbmeyer</a>
-<a href="https://github.com/justinbmeyer" target="_blank">github</a>
+<a href="https://github.com/justinbmeyer" target="_blank">GitHub</a>
 </div>
 
 <div class="core-team-member">
@@ -267,7 +265,7 @@ David is a Canadian by way of Germany. His focus is on CanJS and
 DoneJS's testing stack.
 </p>
 <a href="https://twitter.com/daffl" target="_blank">@daffl</a>
-<a href="https://github.com/daffl" target="_blank">github</a>
+<a href="https://github.com/daffl" target="_blank">GitHub</a>
 </div>
 
 <div class="core-team-member">
@@ -277,7 +275,7 @@ DoneJS's testing stack.
 Matthew, keeper of beards, is the lead maintainer of StealJS and its related tools.
 </p>
 <a href="https://twitter.com/matthewcp" target="_blank">@matthewcp</a>
-<a href="https://github.com/matthewp" target="_blank">github</a>
+<a href="https://github.com/matthewp" target="_blank">GitHub</a>
 </div>
 
 
@@ -287,4 +285,4 @@ If you'd like to support the development of DoneJS, please find available option
 please [email us](mailto:contact@bitovi.com).
 
 
-Bitovi, a JavaScript consulting company, is the primary sponsor of DoneJS.
+[Bitovi](https://www.bitovi.com/), a JavaScript consulting company, is the primary sponsor of DoneJS.

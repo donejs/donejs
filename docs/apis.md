@@ -3,7 +3,7 @@
 @hide sidebar
 @outline 2 ol
 
-@description DoneJS is comprised of many projects that are documented seperately. This page contains overviews of each project and links to their official APIs.
+@description DoneJS is comprised of many projects that are documented separately. This page contains overviews of each project and links to their official APIs.
 
 ### Application Infrastructure
 
@@ -95,8 +95,8 @@ the chat application as an example in development.  We'll cover what happens whe
 
    1. Creates a new instance of the viewModel, setting properties on it
    using [can-route](#canroute)'s routing rules.  
-   2. Creates a new [virtual dom](#can-simple-dom) instance.
-   3. Renders the [template](#canstache) with the `viewModel` into the `virtual dom` instance.
+   2. Creates a new [virtual DOM](#can-simple-dom) instance.
+   3. Renders the [template](#canstache) with the `viewModel` into the `virtual DOM` instance.
 
 4. [done-autorender](#done-autorender) templates waits for all promises to complete
    before providing a final result.  Once the template is finished rendering, [done-ssr](#done-ssr) converts it to a
@@ -207,7 +207,7 @@ This way you can use DoneJS's growing list of plugins and generators without hav
 
 ## StealJS
 
-The base of any good JavaScript application is its depenency management system.  
+The base of any good JavaScript application is its dependency management system.  
 DoneJS uses [StealJS](http://stealjs.com/) which
 itself  is split into two sub-projects:
 
@@ -365,7 +365,7 @@ hobbies.pop(); // causes `change` event above
 __one and two-way binding templates__:
 
 ```
-// Programatically create a template
+// Programmatically create a template
 // `{($value)}` cross binds the input's value
 // to `first` in the scope.
 var template = stache("<h1>{{first}}</h1>"+
@@ -1053,7 +1053,7 @@ export default Component.extend({
 ```
 
 Some components are so small, they they don't require three
-seperate files. For these, you can use a `.component` file:
+separate files. For these, you can use a `.component` file:
 
 ```
 <!-- hello-world.component -->
@@ -1654,7 +1654,7 @@ enables using a [can.stache](#canstache) template as your application's entry po
 </html>
 ```
 
-**done-autorender** will insert this template on page load. The import specied with
+**done-autorender** will insert this template on page load. The `can-import` tag with
 the `export-as="viewModel"` attribute is a [can-define/map/map](#candefine) that acts as the View Model
 for the application.
 
