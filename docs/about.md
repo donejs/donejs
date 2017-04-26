@@ -165,7 +165,7 @@ The DoneJS family of technologies is built by 100s of contributors:
 To become a contributor to DoneJS or its sub-projects, you simply have to:
 
 - [Email](mailto:contact@bitovi.com) the core team expressing your interest.
-- Attend the weekly _DoneJS Contributors_ meeting. [DoneJS Calendar](https://www.google.com/calendar/embed?src=jupiterjs.com_g27vck36nifbnqrgkctkoanqb4%40group.calendar.google.com&ctz=America/Chicago)
+- Attend the weekly _DoneJS Contributors_ meeting twice a month. [DoneJS Calendar](https://www.google.com/calendar/embed?src=jupiterjs.com_g27vck36nifbnqrgkctkoanqb4%40group.calendar.google.com&ctz=America/Chicago)
 - Make one small contribution, even a spelling correction, a month.
 
 Core team:

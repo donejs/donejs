@@ -757,7 +757,7 @@ for controls. Internally CanJS listens for this element's "removed" event. The "
 * Remove DOM data associated with the element.
 * Remove any template bindings, such as computes bound to text within the template.
 
-CanJS is different from other frameworks in that it will clean up it's own memory event when not using the framework to tear down DOM. For example, if you were to do:
+CanJS is different from other frameworks in that it will clean up its own memory event when not using the framework to tear down DOM. For example, if you were to do:
 
 ```
 todoAnchor.parentNode.removeChild(todoAnchor);
