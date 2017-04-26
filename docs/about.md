@@ -187,16 +187,6 @@ If you’d like to take your commitment to DoneJS or its sub-projects to the nex
 The core team is made up of both part-time and full-time contributors.
 
 <div class="core-team-member">
-  <img class="member-avatar" src="https://avatars2.githubusercontent.com/u/2445805?v=3&s=400" alt="Kevin Dillon profile picture" />
-  <h4>Kevin Dillon</h4>
-  <p>
-    Kevin is a senior infrastructure engineer at The MathWorks in the Web and Mobile Tools team.
-    He focuses on the development of FuncUnit and Syn.
-  </p>
-  <a href="https://github.com/kdillon" target="_blank">GitHub</a>
-</div>
-
-<div class="core-team-member">
   <img class="member-avatar" src="https://avatars2.githubusercontent.com/u/10070176?v=3&s=400" alt="Chasen Le Hara profile picture" />
   <h4>Chasen Le Hara</h4>
   <p>
