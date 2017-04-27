@@ -1,9 +1,10 @@
 publish-docs:
+	npm cache clean
+	rm -rf node_modules
 	npm install
-	./node_modules/.bin/bit-docs -fd
-	cp -R docs/static/img site/static/
-	cp docs/static/favicon.ico site/favicon.ico
+	npm run document:force
 	cd site && \
 	git add --all && \
-	git commit -am "Publish docs" && \
+	git commit -am "Updating the site" && \
   git push -f origin gh-pages
+	cd ../
