@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+  <title>donejs - Migrating to DoneJS 1</title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+		<link rel="stylesheet" type="text/css" href="./static/bundles/bit-docs-site/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+</head>
+<body class="docs migrate-1">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for betteor mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="http://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="http://canjs.com">CanJS</a></li>
+								<li><a href="http://stealjs.com">StealJS</a></li>
+								<li><a href="http://jquerypp.com">jQuery++</a></li>
+								<li><a href="http://funcunit.com">FuncUnit</a></li>
+								<li><a href="http://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li ><a href="./index.html">Home</a></li>
+							<li ><a href="./Features.html">Features</a></li>
+							<li ><a href="./About.html">About</a></li>
+							<li ><a href="./Apis.html">Apis</a></li>
+
+							<li class="guides-menu">
+								<a href="./Guides.html">Guides</a>
+								<ul class="dropdown-menu">
+									<li><a href="./SettingUp.html">Setting Up</a></li>
+									<li><a href="./Guide.html">Quick Start</a></li>
+									<li><a href="./place-my-order.html">In-depth</a></li>
+									<li><a href="./plugin.html">Creating a plugin</a></li>
+									<li><a href="./generator.html">Creating a generator</a></li>
+									<li><a href="./bitballs.html">Example App: Bitballs</a></li>
+									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
+									<li><a href="./contributing.html">Contributing</a></li>
+								</ul>
+							</li>
+
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+									<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+									<li><a href="https://www.bitovi.com/design">Design</a></li>
+									<li><a href="https://www.bitovi.com/development">Development</a></li>
+									<li><a href="https://www.bitovi.com/training">Training</a></li>
+									<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+									<li><a href="https://www.bitovi.com/about">About</a></li>
+									<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">jQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+    <span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+
+	
+	<div class="container-fluid api">
+		<div class="row">
+	
+		
+
+		
+		<article class="content docs col-xs-12 ">
+		
+
+			
+			<section class="title">
+				<div class="heading">
+<h1>Migrating to DoneJS 1</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">migrate-1</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+</ul>
+<br />
+
+			</section>
+			
+
+      
+      <section
+        class="contents on-this-page-container"
+        data-headings-container-selector=".content .comment"
+        >
+      </section>
+      
+
+			
+
+			
+			<section class="description">
+				<p>This guide walks you through the step-by-step process of upgrading a DoneJS 0.9 app to DoneJS 1.</p>
+
+			</section>
+			
+
+			
+				
+			
+
+			
+
+
+			
+			<section class="comment">
+				<p>DoneJS 1.0 brings together the latest changes introduced in <a href="https://www.bitovi.com/blog/canjs-3-0-release">CanJS 3.0</a> and <a href="https://www.bitovi.com/blog/stealjs-1.0-release">StealJS 1.0</a>. This guide explains how to upgrade your DoneJS 0.9 app (which uses CanJS 2.3 and StealJS 0.16) to 1.0.</p>
+<h2>Pre-migration preparation</h2>
+<p>Before upgrading to DoneJS 1.0, it’s a good idea to make sure all of your tests are passing, your project builds successfully, and you can deploy your app. This will give you more assurance as you upgrade individual parts of your project.</p>
+<p>To make sure tests are passing, run:</p>
+<pre><code class="language-shell">donejs test
+</code></pre>
+<p>To confirm that your build is working correctly, run:</p>
+<pre><code class="language-shell">donejs build
+NODE_ENV=production donejs start
+</code></pre>
+<p>This will create your production build and then start a local server in production mode. If you open <a href="http://localhost:8080/">localhost:8080</a> in your browser, you should see the production bundles being loaded in the Network tab of your developer tools.</p>
+<p>If you are using <code>donejs deploy</code> to deploy your site to a service like Firebase, make sure it’s working before proceeding.</p>
+<p>Additionally, if you are using either <code>donejs build cordova</code> or <code>donejs build nw</code> to create desktop or mobile apps, make sure both of those are working correctly.</p>
+<p>There are a few more pages you might use in your normal development workflow that will be helpful during the migration process:</p>
+<ul>
+<li><code>development.html</code>: <a href="http://localhost:8080/development.html" title="http://localhost:8080/development.html">http://localhost:8080/development.html</a></li>
+<li><code>production.html</code>: <a href="http://localhost:8080/production.html" title="http://localhost:8080/production.html">http://localhost:8080/production.html</a></li>
+<li><code>src/test.html</code>: <a href="http://localhost:8080/src/test.html" title="http://localhost:8080/src/test.html">http://localhost:8080/src/test.html</a></li>
+</ul>
+<p>We recommend taking a “bottom up” approach to upgrading your application by focusing on getting each of your components’ test and demo pages working first.</p>
+<p>For example, if you have a <code>messages</code> component in <code>src/messages/</code>, the following pages should work correctly:</p>
+<ul>
+<li>demo page: <a href="http://localhost:8080/src/messages/messages.html" title="http://localhost:8080/src/messages/messages.html">http://localhost:8080/src/messages/messages.html</a></li>
+<li>test page: <a href="http://localhost:8080/src/messages/test.html" title="http://localhost:8080/src/messages/test.html">http://localhost:8080/src/messages/test.html</a></li>
+</ul>
+<p>You should also follow the <a href="https://canjs.com/doc/migrate-3.html#Pre_migrationpreparation">CanJS 3 pre-migration preparation</a> steps <em>before</em> going through the rest of this guide. The pre-migration section of the <a href="https://canjs.com/doc/migrate-3.html">CanJS 3 migration guide</a> includes changes you can make to your existing CanJS 2.3 app that will make migrating to CanJS 3 easier.</p>
+<p>If you have any questions about any of the steps in this guide, please join us on <a href="https://gitter.im/donejs/donejs">Gitter chat</a> and <a href="http://forums.donejs.com/">the forums</a>.</p>
+<h2>Install donejs@1</h2>
+<p>First, upgrade to the latest version of the <strong>donejs</strong> package on npm:</p>
+<pre><code class="language-shell">npm install --global donejs@1
+</code></pre>
+<p>Now any time you create new applications using <code>donejs add app</code>, it will scaffold out a DoneJS 1.0 project.</p>
+<h2>Use done-serve in static mode</h2>
+<p>As you do the upgrade, you’ll want to disable SSR so that you can focus on changes to your code. Once all dependencies are up to date you can switch back and everything should work.</p>
+<p>To disable SSR, open up your <code>package.json</code> and change your <strong>develop</strong> script. It will look something like:</p>
+<pre><code class="language-shell">done-serve --develop ...
+</code></pre>
+<p>Update it to remove the <code>--develop</code> flag and add the <code>--static</code> flag instead:</p>
+<pre><code class="language-shell">done-serve --static ...
+</code></pre>
+<blockquote>
+<p><em>Note</em>: removing the <code>--develop</code> flag will disable live-reload. As we upgrade our application, it will be in a broken state most of the time, so live-reload will not work anyway. When we’ve completed the upgrade, we can switch <code>--develop</code> back on.</p>
+</blockquote>
+<h2>Upgrade to CanJS 3</h2>
+<p>See the <a href="https://canjs.com/doc/migrate-3.html">CanJS 3 migration guide</a> for instructions on how to migrate CanJS. If you followed the advice above, you will have already gone through the <a href="https://canjs.com/doc/migrate-3.html#Pre_migrationpreparation">pre-migration</a> steps, so you will only need to follow the <a href="https://canjs.com/doc/migrate-3.html#Minimalmigrationpath">minimal migration path</a> steps. We recommend that you also follow the <a href="https://canjs.com/doc/migrate-3.html#Modernizedmigrationpath">modernized migration path</a> steps as well.</p>
+<p>Now is a good time to install the latest versions of any other CanJS packages, including the following:</p>
+<pre><code class="language-shell">npm install can-connect@1 --save
+npm install can-fixture@1 --save-dev
+npm install can-zone@0.6 --save
+</code></pre>
+<p>This will update your <code>package.json</code> to look something like this:</p>
+<pre><code class="language-json">&quot;dependencies&quot;: {
+  ...
+
+  &quot;can-connect&quot;: &quot;^1.0.0&quot;,
+  &quot;can-zone&quot;: &quot;^0.6.0&quot;
+},
+
+&quot;devDependencies&quot;: {
+  ...
+
+  &quot;can-fixture&quot;: &quot;^1.0.0&quot;
+}
+</code></pre>
+<p>Once you’ve made these changes, the demo and test pages for your individual components should start to work but your entire test suite may not work quite yet. <em>Don’t worry</em>! Some of the DoneJS dependencies you have installed still expect to use CanJS 2.3; once we’ve upgraded all of those, we’ll start to get the other pages working again.</p>
+<blockquote>
+<p><em>Note</em>: if you receive an error such as <code>Uncaught Error: You can't have two versions of can-event/batch/batch</code>, you maybe be able to fix the issue by deleting your <code>node_modules</code> folder and running <code>npm install</code> to re-install all of the packages.</p>
+</blockquote>
+<h2>Upgrade other DoneJS libraries</h2>
+<p>Use npm to install the latest versions of the following packages:</p>
+<pre><code class="language-shell">npm install done-autorender@1 --save
+npm install done-component@1 --save
+</code></pre>
+<p>This will update your <code>package.json</code> to look something like this:</p>
+<pre><code class="language-json">&quot;dependencies&quot;: {
+  ...
+
+  &quot;done-autorender&quot;: &quot;^1.0.0&quot;,
+  &quot;done-component&quot;: &quot;^1.0.0&quot;,
+}
+</code></pre>
+<p>At this point, your <a href="http://localhost:8080/development.html">development.html</a> and <a href="http://localhost:8080/src/test.html">src/test.html</a> files should start working. Not all of your tests may pass, but you should be able to load the test page and see results.</p>
+<h2>Upgrade other dependencies</h2>
+<p>You may be using other packages that are specifically made to work with CanJS 2.x, like <code>bit-tabs@0</code>.</p>
+<p>At this point, you should look for those other dependencies in your <code>package.json</code> and upgrade them, like so:</p>
+<pre><code class="language-shell">npm install bit-tabs@1 --save
+</code></pre>
+<p>Once you’ve upgraded CanJS and these ancillary packages, your app should generally work. SSR is still disabled, but the front-end should be okay.</p>
+<h2>Upgrade to StealJS 1</h2>
+<p>Refer to the <a href="https://stealjs.com/docs/StealJS.topics.migrating-one.html">StealJS 1 guide</a> to upgrade StealJS.</p>
+<p>Additionally, upgrade to the latest versions of these packages:</p>
+<pre><code class="language-shell">npm install done-css@3 --save
+npm install steal-less@1 --save
+npm install steal-qunit@1 --save-dev
+npm install steal-stache@3 --save
+</code></pre>
+<p>This will update your <code>package.json</code> to look something like this:</p>
+<pre><code class="language-json">&quot;dependencies&quot;: {
+  ...
+
+  &quot;done-css&quot;: &quot;^3.0.0&quot;,
+  &quot;steal-less&quot;: &quot;^1.2.0&quot;,
+  &quot;steal-stache&quot;: &quot;^3.0.5&quot;
+},
+
+&quot;devDependencies&quot;: {
+  ...
+
+  &quot;steal-qunit&quot;: &quot;^1.0.0&quot;
+}
+</code></pre>
+<p>Your package.json’s <strong>steal</strong> section (which used to be called <strong>system</strong>) should have this configuration:</p>
+<pre><code class="language-json">&quot;steal&quot;: {
+  ...
+
+  &quot;plugins&quot;: [
+    &quot;done-component&quot;,
+    &quot;done-css&quot;,
+    &quot;steal-less&quot;,
+    &quot;steal-stache&quot;
+  ]
+}
+</code></pre>
+<p>This configures Steal to be able to load file types other than JavaScript.</p>
+<h2>Upgrade other utilities</h2>
+<p>The last thing is to upgrade <em>everything else</em> that you haven’t already changed. This should include the following:</p>
+<pre><code class="language-shell">npm install done-serve@1 --save
+npm install donejs-cli@1 --save-dev
+npm install funcunit@3 --save-dev
+npm install generator-donejs@1 --save
+npm install testee@0.4 --save-dev
+</code></pre>
+<p>This will update your <code>package.json</code> to look something like this:</p>
+<pre><code class="language-json">&quot;dependencies&quot;: {
+  ...
+
+  &quot;done-serve&quot;: &quot;^1.0.0&quot;,
+  &quot;generator-donejs&quot;: &quot;^1.0.0&quot;
+},
+&quot;devDependencies&quot;: {
+  ...
+
+  &quot;donejs-cli&quot;: &quot;^1.0.0&quot;,
+  &quot;funcunit&quot;: &quot;^3.3.0&quot;,
+  &quot;testee&quot;: &quot;^0.4.0&quot;
+}
+</code></pre>
+<p>Once this is done, you should be able to start up a server using <code>donejs start</code>. If that works, then re-enable SSR and live-reload in your <strong>develop</strong> script (remove the <code>--static</code> flag we added earlier):</p>
+<pre><code>done-serve --develop ...
+</code></pre>
+<p>If everything seems to work and your tests pass when running <code>donejs test</code>, congratulations! Your project is now on DoneJS 1.0. 🎉</p>
+<p>If you run into problems, please refer to the <a href="https://github.com/donejs/cli/blob/v1.0.1/package.json#L59">dependency list here</a> and make sure that your version numbers match.</p>
+<p>As always, we’re available on <a href="https://gitter.im/donejs/donejs">Gitter chat</a> and <a href="http://forums.donejs.com/">the forums</a> to try and help!</p>
+
+			</section>
+			
+			
+
+			
+
+			
+
+		
+		</article>
+		
+
+	
+		</div>
+	</div>
+	
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="./Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="./About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="./Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="./Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="./community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="static/img/icon-github-white.svg" alt="Github">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="static/img/icon-twitter-white.svg" alt="Twitter">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="static/img/icon-googleplus-white.svg" alt="Google+">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UC_HPFLeKzJNLOUnLc_3311Q/videos">
+								<img class="footer-social-icon" src="static/img/icon-youtube-white.svg" alt="YouTube">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="https://www.bitovi.com/">2015-2017 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"src":{"path":"docs/guides/migrate-1.md"},"description":"This guide walks you through the step-by-step process of upgrading a DoneJS 0.9 app to DoneJS 1. \n","name":"migrate-1","title":"Migrating to DoneJS 1","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
+	</script>
+
+	
+		<script type="text/javascript">
+		  steal = {
+		    instantiated: {
+		      "bundles/bit-docs-site/static.css!$css" : null
+		    }
+		  };
+		</script>
+		<script
+			data-main="bit-docs-site/static"
+			src="./static/node_modules/steal/steal.production.js"
+		>
+		</script>
+	
+
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+</html>
