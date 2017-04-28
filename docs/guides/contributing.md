@@ -374,24 +374,19 @@ GitHub has additional documentation on [creating a pull request from a fork](htt
 
 [DoneJS.com](https://donejs.com/) is hosted on [GitHub pages](https://pages.github.com/) from the [`gh-pages`](https://github.com/donejs/donejs/tree/gh-pages) branch.
 
-First, from within your local DoneJS repository, create a new clone in the `site` folder and install the dependencies:
+First, from within your local DoneJS repository, create a new clone in the `site` folder:
 
 ```shell
 git clone git@github.com:donejs/donejs.git -b gh-pages site/
-npm install
 ```
 
 If you get an error saying `Permission denied (publickey)` then you should follow GitHub’s instructions on
 [generating an SSH key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 
-Push a new commit to the `gh-pages` branch with the built docs:
+Install the dependencies, build the site, and push a new commit to the `gh-pages` branch with:
 
 ```shell
-npm run document
-cd site/
-git add --all
-git commit -am "Updating the site"
-git push origin gh-pages
+make
 ```
 
 That’s it! [DoneJS.com](https://donejs.com/) should now have your changes.
