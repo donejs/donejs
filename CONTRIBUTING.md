@@ -29,3 +29,60 @@ Check out the [contribution guide on DoneJS.com](https://donejs.com/contributing
 	- [Writing a blog article](https://donejs.com/contributing.html#writing-a-blog-article)
 	- [Speaking at a conference or meetup](https://donejs.com/contributing.html#speaking-at-a-conference-or-meetup)
 	- [Organizing a DoneJS meetup](https://donejs.com/contributing.html#organizing-a-donejs-meetup)
+
+## Developing Locally with `donejs/cli`
+
+If you wish to develop both this project (`donejs/donejs`) and the CLI part (`donejs/cli`) in tandem, you may do so using `npm link`.
+
+First, clone `donejs/donejs`:
+
+```shell
+git clone https://github.com/donejs/donejs.git
+```
+
+Next, clone `donejs/cli`:
+
+```shell
+https://github.com/donejs/cli.git
+```
+
+Now, in the cloned `donejs`, install the npm dependencies, and link it into npm:
+
+```shell
+cd donejs && npm install && npm link
+```
+
+Do the same in the cloned `cli`:
+
+```shell
+cd cli && npm install && npm link
+```
+
+Finally, you may now generate a DoneJS app that will use your locally linked `cli` and `donejs` like so:
+
+```shell
+npm link donejs-cli && donejs add app
+```
+
+In this way you, you can test your changes to the `donejs` and `donesj-cli` packages simultaneously.
+
+### Developing Locally with `donejs/generator-donejs`
+
+You can follow this logic to develop the previous two projects in tandem with the generator part (`donejs/generator-donejs`).
+
+Essentially, clone `donejs/generator-donejs`, `npm install`, `npm link`:
+
+```shell
+git clone https://github.com/donejs/generator-donejs.git
+cd generator-donejs && npm install && npm link
+```
+
+Now, in an empty directory, before you run any `donejs` command, link in the generator:
+
+```shell
+npm link generator-donejs && donejs add app
+```
+
+The app will be generated using your local version of the generator.
+
+Link in both `donejs-cli` and `generator-donejs` before running any `donejs` command to combine these.

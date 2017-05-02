@@ -5,8 +5,9 @@ var rimraf = require('rimraf');
 var assert = require('assert');
 var mockery = require('mockery');
 var utils = require('../lib/utils');
+var symlink = Q.denodeify(fs.symlink);
 
-describe('cli init cmd', function() {
+describe('donejs-cli init command', function() {
   var cwd;
   var init;
   var spawnCalls;
@@ -55,13 +56,11 @@ describe('cli init cmd', function() {
     mockery.deregisterAll();
   });
 
-  it('creates folder if it does not exist', function(done) {
-    var folder = 'test-project';
-
+  it('creates project {folder} if it does not exist', function(done) {
     init(folder, {})
       .then(function() {
         process.chdir(cwd);
-        assert(fs.existsSync(folder), 'should create folder');
+        assert(fs.existsSync(folder), 'should create project {folder}');
         done();
       })
       .catch(done);
@@ -70,7 +69,7 @@ describe('cli init cmd', function() {
   // otherwise npm will walk up the tree until it finds a node_modules folder,
   // that causes issues if there is indeed an existing node_modules in any of
   // the "folder" parent directories.
-  it('creates {folder}/node_modules for deps to be installed', function(done) {
+  it('creates {folder}/node_modules to stop npm from crawling parent dirs', function(done) {
     init(folder, {})
       .then(function() {
         process.chdir(cwd);
@@ -81,7 +80,7 @@ describe('cli init cmd', function() {
       .catch(done);
   });
 
-  it('installs the donejs-cli and then runs done-js init', function(done) {
+  it('installs donejs-cli and then runs `donejs-cli init`', function(done) {
     init(folder, {})
       .then(function() {
         var installCliCall = spawnCalls[0];
@@ -92,19 +91,42 @@ describe('cli init cmd', function() {
           'install', 'donejs-cli@latest', '--loglevel', 'error'
         ]);
 
-        assert.deepEqual(runBinaryCall.args, ['init']);
-        assert.deepEqual(
-          runBinaryCall.options,
-          { cwd: folderPath },
-          'it should set cwd to folderPath so init puts files in {folder}'
-        );
+        assertRunBinaryCallInit(folderPath);
 
         done();
       })
       .catch(done);
   });
 
-  it('passes options to donejs-init properly', function(done) {
+  // if folder exists as symlink, we assume it was put there by npm link, or
+  // manually, for debugging purposes
+  it('skips install if {folder}/node_modules/donejs-cli exist as symlink, still runs `donejs-cli init`', function(done) {
+    var localCli = path.join(folder, 'local-donejs-cli');
+    var nodeModules = path.join(folder, 'node_modules');
+    utils.mkdirp(localCli).then(function() {
+      utils.mkdirp(nodeModules).then(function() {
+        symlink('../local-donejs-cli', path.join(nodeModules, 'donejs-cli')).then(function() {
+          init(folder, {})
+            .then(function() {
+              var installCliCall = spawnCalls[0];
+              var folderPath = path.join(cwd, folder);
+
+              assert.strictEqual(installCliCall, undefined); 
+
+              assertRunBinaryCallInit(folderPath);
+
+              done();
+            })
+            .catch(done);
+        })
+        .catch(done);
+      })
+      .catch(done);
+    })
+    .catch(done);
+  });
+
+  it('passes options to `donejs-cli init` properly', function(done) {
     init(folder, { skipInstall: true, type: 'foobar' })
       .then(function() {
         assert.deepEqual(runBinaryCall.args, [
@@ -114,6 +136,15 @@ describe('cli init cmd', function() {
       })
       .catch(done);
   });
+
+  function assertRunBinaryCallInit(folderPath) {
+    assert.deepEqual(runBinaryCall.args, ['init']);
+    assert.deepEqual(
+      runBinaryCall.options,
+      { cwd: folderPath },
+      'it should set cwd so init puts files in {folder}'
+    );
+  }
 
   function deleteFolder() {
     if (fs.existsSync(folder)) {
