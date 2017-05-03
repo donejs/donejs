@@ -523,18 +523,13 @@ the <a href="https://gitter.im/donejs/donejs">Gitter donejs/donejs channel</a>. 
 <p><a id="section=section_UpdatingDoneJS_com"></a></p>
 <h2>Updating DoneJS.com</h2>
 <p><a href="https://donejs.com/">DoneJS.com</a> is hosted on <a href="https://pages.github.com/">GitHub pages</a> from the <a href="https://github.com/donejs/donejs/tree/gh-pages"><code>gh-pages</code></a> branch.</p>
-<p>First, from within your local DoneJS repository, create a new clone in the <code>site</code> folder and install the dependencies:</p>
+<p>First, from within your local DoneJS repository, create a new clone in the <code>site</code> folder:</p>
 <pre><code class="language-shell">git clone git@github.com:donejs/donejs.git -b gh-pages site/
-npm install
 </code></pre>
 <p>If you get an error saying <code>Permission denied (publickey)</code> then you should follow GitHub’s instructions on
 <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">generating an SSH key</a>.</p>
-<p>Push a new commit to the <code>gh-pages</code> branch with the built docs:</p>
-<pre><code class="language-shell">npm run document
-cd site/
-git add --all
-git commit -am &quot;Updating the site&quot;
-git push origin gh-pages
+<p>Install the dependencies, build the site, and push a new commit to the <code>gh-pages</code> branch with:</p>
+<pre><code class="language-shell">make
 </code></pre>
 <p>That’s it! <a href="https://donejs.com/">DoneJS.com</a> should now have your changes.</p>
 <p><a id="section=section_Evangelism"></a></p>

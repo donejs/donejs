@@ -362,14 +362,14 @@ The <code>donejs</code> command makes running those commands easier by allowing 
 <li><code>donejs add plugin [folder]</code> which will initialize a new plugin project</li>
 <li><code>donejs add generator [folder]</code> which will initialize a new generator project</li>
 </ul>
-<h3>Third party generators</h3>
-<p>If <code>donejs add</code> can't find a built-in generator, e.g. when running <code>donejs add myplugin</code>, DoneJS will try to install the <code>donejs-myplugin</code> package from NPM and run the Yeoman generators it provides. This is how we can enable a desktop application build of the application by simply running</p>
-<pre><code>donejs add nw
+<h3>Third-party generators</h3>
+<p>If <code>donejs add</code> can’t find a built-in generator, e.g. when running <code>donejs add mygenerator</code>, DoneJS will try to install the <code>donejs-mygenerator</code> package from npm and run the Yeoman generators it provides. This is how we can enable a desktop application build of the application by simply running:</p>
+<pre><code>donejs add electron
 </code></pre>
-<p>Which will install the <a href="https://github.com/donejs/donejs-nw">donejs-nw</a> package and then run its generator which initializes everything you need. This also works for adding a mobile application build using <a href="https://github.com/donejs/donejs-cordova">donejs-cordova</a> like this:</p>
+<p>Which will install the <a href="https://github.com/donejs/donejs-electron">donejs-electron</a> package and then run its generator, which initializes everything you need. This also works for adding a mobile application build using <a href="https://github.com/donejs/donejs-cordova">donejs-cordova</a> like this:</p>
 <pre><code>donejs add cordova
 </code></pre>
-<p>This way you can use DoneJS's growing list of plugins and generators without having to add anything to your application that you don't use.</p>
+<p>This way you can use DoneJS’s growing list of plugins and generators without having to add anything to your application that you don't use.</p>
 <h2>StealJS</h2>
 <p>The base of any good JavaScript application is its dependency management system.<br />
 DoneJS uses <a href="http://stealjs.com/">StealJS</a> which
