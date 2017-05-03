@@ -189,21 +189,21 @@ The `donejs` command makes running those commands easier by allowing you to run 
 - `donejs add plugin [folder]` which will initialize a new plugin project
 - `donejs add generator [folder]` which will initialize a new generator project
 
-### Third party generators
+### Third-party generators
 
-If `donejs add` can't find a built-in generator, e.g. when running `donejs add myplugin`, DoneJS will try to install the `donejs-myplugin` package from NPM and run the Yeoman generators it provides. This is how we can enable a desktop application build of the application by simply running
+If `donejs add` can’t find a built-in generator, e.g. when running `donejs add mygenerator`, DoneJS will try to install the `donejs-mygenerator` package from npm and run the Yeoman generators it provides. This is how we can enable a desktop application build of the application by simply running:
 
 ```
-donejs add nw
+donejs add electron
 ```
 
-Which will install the [donejs-nw](https://github.com/donejs/donejs-nw) package and then run its generator which initializes everything you need. This also works for adding a mobile application build using [donejs-cordova](https://github.com/donejs/donejs-cordova) like this:
+Which will install the [donejs-electron](https://github.com/donejs/donejs-electron) package and then run its generator, which initializes everything you need. This also works for adding a mobile application build using [donejs-cordova](https://github.com/donejs/donejs-cordova) like this:
 
 ```
 donejs add cordova
 ```
 
-This way you can use DoneJS's growing list of plugins and generators without having to add anything to your application that you don't use.
+This way you can use DoneJS’s growing list of plugins and generators without having to add anything to your application that you don't use.
 
 ## StealJS
 
