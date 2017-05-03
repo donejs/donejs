@@ -62,7 +62,7 @@ describe('runBinary', function() {
           /Allowed types for a new project are/.test(err.message),
           'it should reject with error'
         );
-        
+
         done();
       });
   });
@@ -98,11 +98,17 @@ describe('runBinary', function() {
     var binary = path.join(root, 'node_modules', '.bin');
     var doneScript = process.platform === 'win32' ? 'donejs.cmd' : 'donejs';
     var binaryPath = path.join(binary, doneScript);
+    var actualBinaryPath = path.join(__dirname, "/../bin", "donejs");
+
+    var readBinaryPromise = Q.denodeify(fs.readFile)(actualBinaryPath);
 
     return utils.mkdirp(binary)
-      .then(function() {
+      .then(function(){
+        return readBinaryPromise;
+      })
+      .then(function(code) {
         var writeFile = Q.denodeify(fs.writeFile);
-        return writeFile(binaryPath);
+        return writeFile(binaryPath, code);
       })
       .then(function() {
         return binaryPath;
