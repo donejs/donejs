@@ -382,7 +382,7 @@ We have now created a model and fixtures (for testing without an API) with a fol
 |   |   ├── test.js
 ```
 
-We also need to specify that the restaurant list can be filtered to restaurants in a queried city and state by updating `src/models/restaurants.js`:
+We also need to specify that the restaurant list can be filtered to restaurants in a queried city and state by updating `src/models/restaurant.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-test/restaurants_model.js
 @highlight 15-16
