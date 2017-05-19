@@ -53,7 +53,7 @@ const Order = DefineMap.extend({
   }
 });
 
-const algebra = set.Algebra(
+const algebra = new set.Algebra(
   set.props.id('_id')
 );
 
