@@ -29,7 +29,7 @@ guide.step("Install donejs", function(){
     || process.env.APPVEYOR_REPO_COMMIT || 'master';
   var repo = process.env.TRAVIS_PULL_REQUEST_SLUG || process.env.TRAVIS_REPO_SLUG;
 
-	return guide.executeCommand("npm", ["install", repo + branch, "-g"]);
+	return guide.executeCommand("npm", ["install", repo + "#" + branch, "-g"]);
 });
 
 // Move to a temp folder for the rest of the guide
