@@ -222,7 +222,7 @@ donejs add component home.component pmo-home
 This will create a file at `src/home.component` containing the basic ingredients of a component. We will update it to reflect the below content:
 
 @sourceref ../../guides/place-my-order/steps/creating-homepage/home.component
-@highlight 8-17
+@highlight 7-19
 
 Here we created a [can-component](http://canjs.com/doc/can-component.html) named `pmo-home`. This particular component is just a basic template, it does not have much in the way of styles or functionality.
 
