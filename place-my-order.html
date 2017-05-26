@@ -397,11 +397,11 @@ export default AppViewModel;
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-home&quot;&gt;
   &lt;style type=&quot;less&quot;&gt;
     display: block;
-
     p { font-weight: bold; }
   &lt;/style&gt;
   &lt;view&gt;
-     &lt;div class=&quot;homepage&quot;&gt;
+    &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
+    &lt;div class=&quot;homepage&quot;&gt;
       &lt;img src=&quot;{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}&quot;
           width=&quot;250&quot; height=&quot;380&quot; /&gt;
       &lt;h1&gt;Ordering food has never been easier&lt;/h1&gt;
@@ -409,8 +409,10 @@ export default AppViewModel;
         We make it easier than ever to order gourmet food
         from your favorite local restaurants.
       &lt;/p&gt;
-      &lt;p&gt;&lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants'}}&quot; role=&quot;button&quot;&gt;Choose a Restaurant&lt;/a&gt;&lt;/p&gt;
-     &lt;/div&gt;
+      &lt;p&gt;
+        &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants'}}&quot; role=&quot;button&quot;&gt;Choose a Restaurant&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/div&gt;
   &lt;/view&gt;
   &lt;script type=&quot;view-model&quot;&gt;
     import DefineMap from 'can-define/map/';
@@ -424,7 +426,7 @@ export default AppViewModel;
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='8-17'></span>
+<p><span line-highlight='7-19'></span>
 Here we created a <a href="http://canjs.com/doc/can-component.html">can-component</a> named <code>pmo-home</code>. This particular component is just a basic template, it does not have much in the way of styles or functionality.</p>
 <h3>Create the order history element</h3>
 <p>We'll create an initial version of order history that is very similar.</p>
@@ -677,13 +679,13 @@ Here we make a <code>switch</code> statement that checks for the current <code>p
 |   ├── test.js
 |   ├── models/
 |   |   ├── fixtures/
-|   |   |   ├── restaurant.js
+|   |   |   ├── restaurants.js
 |   |   ├── fixtures.js
 |   |   ├── restaurant.js
 |   |   ├── restaurant-test.js
 |   |   ├── test.js
 </code></pre>
-<p>We also need to specify that the restaurant list can be filtered to restaurants in a queried city and state by updating <code>src/models/restaurants.js</code>:</p>
+<p>We also need to specify that the restaurant list can be filtered to restaurants in a queried city and state by updating <code>src/models/restaurant.js</code>:</p>
 <pre><code class="language-js">import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import set from 'can-set';
@@ -1460,7 +1462,7 @@ const Order = DefineMap.extend({
   }
 });
 
-const algebra = set.Algebra(
+const algebra = new set.Algebra(
   set.props.id('_id')
 );
 

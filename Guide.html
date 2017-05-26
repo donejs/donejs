@@ -204,15 +204,15 @@
 
 			
 			<section class="description">
-				<p>In this guide, we will create <a href="http://chat.donejs.com">chat.donejs.com</a>, a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
+				<p>In this guide, we will create <a href="https://chat.donejs.com">chat.donejs.com</a>, a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 <img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>In the first part of this guide, we will install DoneJS, <a href="./Features.html#generators">generate a new application</a> and start a server that provides <a href="./Features.html#hot-module-swapping">hot module swapping</a> and <a href="./Features.html#server-side-rendered">server-side rendering</a>. We will then <a href="./Features.html#npm-packages">import Bootstrap from NPM</a>, create our <a href="./Features.html#custom-html-elements">own custom HTML elements</a> and <a href="./Features.html#pretty-urls-with-pushstate">set up routing</a> between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and <a href="./Features.html#real-time-connected">receive real-time updates</a>.</p>
 <p>In the final parts of the guide we will make an <a href="./Features.html#progressive-loading">optimized, progressively loaded production build</a> and <a href="./Features.html#deploy-to-a-cdn">deploy it to a CDN</a>. We will conclude with creating a <a href="./Features.html#ios-android-and-desktop-builds">mobile and desktop</a> version of the application.</p>
-<p>If you run into any problems, let us know <a href="https://gitter.im/donejs/donejs">on Gitter</a>, we're happy to help out.</p>
+<p>If you run into any problems, let us know <a href="https://gitter.im/donejs/donejs">on Gitter</a>, we’re happy to help out.</p>
 <blockquote>
-<p>For an even easier version of this guide, one that can be done entirely online, checkout <a href="http://canjs.com/doc/guides/chat.html">CanJS's Chat Guide</a>. There, you'll build the same chat widget in a <code>JSBin</code>, but
+<p>For an even easier version of this guide, one that can be done entirely online, checkout <a href="https://canjs.com/doc/guides/chat.html">CanJS’s Chat Guide</a>. There, you'll build the same chat widget in a <a href="https://jsbin.com/">JS Bin</a>, but
 without a mobile or desktop build and deployment to a CDN.</p>
-<p>Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout <a href="http://stealjs.com/docs/StealJS.quick-start.html">StealJS's Quick Start Guide</a> before proceeding with this guide.</p>
+<p>Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout <a href="https://stealjs.com/docs/StealJS.quick-start.html">StealJS’s Quick Start Guide</a> before proceeding with this guide.</p>
 </blockquote>
 
 			</section>
@@ -237,29 +237,29 @@ Node 6 and up
 npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prerequisites installed and configured.</p>
 </blockquote>
 <h3>Install DoneJS</h3>
-<p>To get started, let's install the DoneJS command line utility globally:</p>
+<p>To get started, let’s install the DoneJS command line utility globally:</p>
 <pre><code>npm install -g donejs@1
 </code></pre>
 <h3>Generate the application</h3>
-<p>Then we'll create a new DoneJS application called <code>donejs-chat</code>:</p>
+<p>Then we’ll create a new DoneJS application called <code>donejs-chat</code>:</p>
 <pre><code>donejs add app donejs-chat
 </code></pre>
 <p>This will create a new folder called <code>donejs-chat</code> and in it generate our application.</p>
-<p>The initialization process will ask questions like the name of your application, the source folder, etc. We'll answer these with the default settings by hitting enter.</p>
+<p>The initialization process will ask questions like the name of your application, the source folder, etc. We’ll answer these with the default settings by hitting enter.</p>
 <p><img src="static/img/donejs-init.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
-<p>This will install all of DoneJS's dependencies, including the following:</p>
+<p>This will install all of DoneJS’s dependencies, including the following:</p>
 <ul>
-<li><a href="http://stealjs.com">StealJS</a> - ES6, CJS, and AMD module loader and builder</li>
-<li><a href="http://canjs.com">CanJS</a> - Custom elements and Model-View-ViewModel utilities</li>
-<li><a href="http://jquery.com">jQuery</a> - DOM helpers</li>
-<li><a href="http://jquerypp.com">jQuery++</a> - Extended DOM helpers</li>
-<li><a href="https://qunitjs.com/">QUnit</a> - Assertion library (A <a href="https://github.com/donejs/donejs-mocha">Mocha</a> generator is also available)</li>
-<li><a href="http://funcunit.com">FuncUnit</a> - Functional tests</li>
-<li><a href="https://github.com/bitovi/testee">Testee</a> - JavaScript Test runner</li>
+<li><a href="https://stealjs.com">StealJS</a> — ES6, CJS, and AMD module loader and builder</li>
+<li><a href="https://canjs.com">CanJS</a> — Custom elements and Model-View-ViewModel utilities</li>
+<li><a href="https://jquery.com">jQuery</a> — DOM helpers</li>
+<li><a href="https://jquerypp.com">jQuery++</a> — Extended DOM helpers</li>
+<li><a href="https://qunitjs.com/">QUnit</a> — Assertion library (A <a href="https://github.com/donejs/donejs-mocha">Mocha</a> generator is also available)</li>
+<li><a href="https://funcunit.com">FuncUnit</a> — Functional tests</li>
+<li><a href="https://github.com/bitovi/testee">Testee</a> — JavaScript Test runner</li>
 </ul>
 <h3>Turn on development mode</h3>
 <p>DoneJS comes with its own development server, which hosts your development files and automatically <a href="./Features.html#server-side-rendered">renders the application on the server</a>. Development mode enables <a href="./Features.html#hot-module-swapping">hot module swapping</a>, which automatically reloads files in the browser and on the server as they change.</p>
-<p>To start it let's go into the <code>donejs-chat</code> application directory:</p>
+<p>To start it let’s go into the <code>donejs-chat</code> application directory:</p>
 <pre><code>cd donejs-chat
 </code></pre>
 <p>We can start development mode by running:</p>
@@ -267,15 +267,15 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </code></pre>
 <p>The default port is <code>8080</code>.</p>
 <p>Go to <a href="localhost:8080">http://localhost:8080/</a> to see our application showing a default homepage.</p>
-<p><img src="static/img/donejs-helloworld.png" alt="hello world" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p><img src="static/img/donejs-helloworld.png" alt="hello world" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Adding Bootstrap</h2>
-<p>DoneJS makes it easy to import other projects that are published on <a href="https://npmjs.org">NPM</a>. In this section, we will install and add <a href="http://getbootstrap.com/">Bootstrap</a> to the page, and see DoneJS's <a href="./Features.html#hot-module-swapping">hot module swapping</a> in action.</p>
+<p>DoneJS makes it easy to import other projects that are published on <a href="https://npmjs.org">NPM</a>. In this section, we will install and add <a href="https://getbootstrap.com/">Bootstrap</a> to the page, and see DoneJS’s <a href="./Features.html#hot-module-swapping">hot module swapping</a> in action.</p>
 <h3>Install the NPM package</h3>
 <p>Open a new terminal window so we can keep the DoneJS development server running. Then, install the <a href="https://www.npmjs.com/package/bootstrap">Bootstrap NPM package</a> and save it as a dependency of our application like this:</p>
 <pre><code>npm install bootstrap --save
 </code></pre>
 <h3>Add it to the page</h3>
-<p>To see hot module swapping in action, let's update the main template to import Bootstrap's LESS file and also add some HTML that uses its styles.</p>
+<p>To see hot module swapping in action, let’s update the main template to import Bootstrap’s LESS file and also add some HTML that uses its styles.</p>
 <p>Update <code>src/index.stache</code> to look like this:</p>
 <pre><code class="language-html">&lt;html&gt;
   &lt;head&gt;
@@ -314,21 +314,21 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-view-import.html">&lt;can-import&gt;</a> - specifies template dependencies.</li>
+<li><a href="https://canjs.com/doc/can-view-import.html">&lt;can-import&gt;</a> — specifies template dependencies.</li>
 </ul>
 </blockquote>
 <p>If you kept your browser window open at <a href="localhost:8080">http://localhost:8080/</a> you should see the updated styles and content as soon as you save the file.</p>
-<p><img src="static/img/donejs-bootstrap.png" alt="donejs add app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p><img src="static/img/donejs-bootstrap.png" alt="donejs add app" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Feel free to edit the HTML or <code>src/styles.less</code> to see how hot module swapping updates the page automatically.</p>
 <h2>Routing and components</h2>
-<p>In this part, we will create our own custom HTML elements - one for the homepage and another to display the chat messages. Then we will create routes to navigate between these two pages.</p>
+<p>In this part, we will create our own custom HTML elements — one for the homepage and another to display the chat messages. Then we will create routes to navigate between these two pages.</p>
 <h3>Generate custom elements</h3>
-<p>We'll use a DoneJS <a href="./Features.html#generators">generator</a> to create custom components. The component generator is run by typing <code>donejs add component &lt;file-or-folder&gt; &lt;component-name&gt;</code>.</p>
-<p>The homepage custom element (with the HTML tag name <code>chat-home</code>) won't be very big or complex, so we'll put everything into a single <code>.component</code> file.</p>
+<p>We’ll use a DoneJS <a href="./Features.html#generators">generator</a> to create custom components. The component generator is run by typing <code>donejs add component &lt;file-or-folder&gt; &lt;component-name&gt;</code>.</p>
+<p>The homepage custom element (with the HTML tag name <code>chat-home</code>) won't be very big or complex, so we’ll put everything into a single <code>.component</code> file.</p>
 <p>To generate it, run:</p>
 <pre><code>donejs add component home.component chat-home
 </code></pre>
-<p>The messages component (with the tag <code>chat-messages</code>) will be a little more complex, so we'll generate it using the <a href="./Features.html#modlets">modlet file pattern</a>.</p>
+<p>The messages component (with the tag <code>chat-messages</code>) will be a little more complex, so we’ll generate it using the <a href="./Features.html#modlets">modlet file pattern</a>.</p>
 <p>Now run:</p>
 <pre><code>donejs add component messages chat-messages
 </code></pre>
@@ -336,9 +336,9 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <p>Later we will update the generated files with the chat messages functionality.</p>
 <h3>Navigate between pages</h3>
 <blockquote>
-<p>Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application <a href="http://canjs.com/doc/can-route.html">routes</a> map URL strings (like /user/1) to properties on our application's view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit <a href="http://canjs.com/doc/can-route.html">can-route's documentation</a>.</p>
+<p>Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application <a href="https://canjs.com/doc/can-route.html">routes</a> map URL strings (like /user/1) to properties on our application’s view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit <a href="https://canjs.com/doc/can-route.html">can-route’s documentation</a>.</p>
 </blockquote>
-<p>First, let's update <code>src/home.component</code> with the original content from the homepage and a link to the chat messages page:</p>
+<p>First, let’s update <code>src/home.component</code> with the original content from the homepage and a link to the chat messages page:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;chat-home&quot;&gt;
   &lt;style type=&quot;less&quot;&gt;
     display: block;
@@ -364,8 +364,8 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="https://github.com/donejs/done-component#done-component">&lt;can-component&gt;</a> - a <a href="http://stealjs.com/">StealJS</a> plugin for CanJS <a href="http://canjs.com/doc/can-component.html">components</a> that allows you to define a component completely within a  <em>.component</em> file.</li>
-<li><a href="http://canjs.com/doc/can-stache.helpers.routeUrl.html"><code>routeUrl</code></a> - a helper that populates the anchor's href with a URL that sets the application ViewModel's <code>page</code> property to <code>&quot;chat&quot;</code>. The AppViewModel is shown below.</li>
+<li><a href="https://github.com/donejs/done-component#done-component">&lt;can-component&gt;</a> — a <a href="https://stealjs.com/">StealJS</a> plugin for CanJS <a href="https://canjs.com/doc/can-component.html">components</a> that allows you to define a component completely within a  <em>.component</em> file.</li>
+<li><a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html"><code>routeUrl</code></a> — a helper that populates the anchor’s href with a URL that sets the application ViewModel’s <code>page</code> property to <code>&quot;chat&quot;</code>. The AppViewModel is shown below.</li>
 </ul>
 </blockquote>
 <p>Next, add a link to go back to the homepage from the chat page by updating <code>src/messages/messages.stache</code> to:</p>
@@ -398,13 +398,13 @@ export default AppViewModel;
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-define/map/map.html">DefineMap</a> - used to define observable types.</li>
-<li><a href="http://canjs.com/doc/can-route.html">route</a> - used to map changes in the URL to changes on the AppViewModel's <code>page</code>
+<li><a href="https://canjs.com/doc/can-define/map/map.html">DefineMap</a> — used to define observable types.</li>
+<li><a href="https://canjs.com/doc/can-route.html">route</a> — used to map changes in the URL to changes on the AppViewModel’s <code>page</code>
 property.</li>
 </ul>
 </blockquote>
 <h3>Switch between pages</h3>
-<p>Finally, we'll glue both components together as separate pages in <code>src/index.stache</code>. This is done by adding  for the <code>home.component</code> and <code>messages/</code> components and showing each import based on the <code>page</code> property.</p>
+<p>Finally, we’ll glue both components together as separate pages in <code>src/index.stache</code>. This is done by adding  for the <code>home.component</code> and <code>messages/</code> components and showing each import based on the <code>page</code> property.</p>
 <p>Update <code>src/index.stache</code> to:</p>
 <pre><code class="language-html">&lt;html&gt;
   &lt;head&gt;
@@ -455,25 +455,25 @@ property.</li>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-stache.helpers.is.html">{{#eq}}</a> - compares the AppViewModel's <code>page</code> property to 'chat'.</li>
-<li><a href="http://canjs.com/doc/can-view-import.html">can-view-import</a> - provides dynamic imports.</li>
-<li><a href="http://canjs.com/doc/can-stache.helpers.if.html">{{#if isPending}}</a> - renders <em>&quot;Loading&quot;</em> while the modules are loading.</li>
-<li><a href="http://canjs.com/doc/can-stache.helpers.else.html">{{else}}</a> - Renders the components once their modules have loaded.</li>
+<li><a href="https://canjs.com/doc/can-stache.helpers.is.html">{{#eq}}</a> — compares the AppViewModel’s <code>page</code> property to 'chat'.</li>
+<li><a href="https://canjs.com/doc/can-view-import.html">can-view-import</a> — provides dynamic imports.</li>
+<li><a href="https://canjs.com/doc/can-stache.helpers.if.html">{{#if isPending}}</a> — renders <em>&quot;Loading&quot;</em> while the modules are loading.</li>
+<li><a href="https://canjs.com/doc/can-stache.helpers.else.html">{{else}}</a> — Renders the components once their modules have loaded.</li>
 </ul>
 </blockquote>
 <p>Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.</p>
 <p><img src="static/img/donejs-chat1.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
-<p>Also, everything is <a href="Features.html#section=section_ServerSideRendered">rendered on the server</a>. If you reload the homepage at <a href="http://localhost:8080">localhost:8080</a> you'll see the page's content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.</p>
+<p>Also, everything is <a href="Features.html#section=section_ServerSideRendered">rendered on the server</a>. If you reload the homepage at <a href="http://localhost:8080">localhost:8080</a> you'll see the page’s content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.</p>
 <p><img src="static/img/donejs-viewsource.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Homepage</h2>
 <p>Now that we can navigate between pages, we will finish implementing their functionality, starting with the homepage.</p>
 <h3>Install bit-tabs</h3>
-<p>On the homepage, let's install and add <a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a>, a simple declarative tabs widget.</p>
+<p>On the homepage, let’s install and add <a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a>, a simple declarative tabs widget.</p>
 <p>Run:</p>
 <pre><code>npm install bit-tabs@1 --save
 </code></pre>
 <h3>Update the page</h3>
-<p>Then, import the unstyled custom elements from <code>bit-tabs/unstyled</code> (unstyled because we will use Bootstrap's styles) and add <code>&lt;bit-tabs&gt;</code> and <code>&lt;bit-panel&gt;</code> elements to the template.</p>
+<p>Then, import the unstyled custom elements from <code>bit-tabs/unstyled</code> (unstyled because we will use Bootstrap’s styles) and add <code>&lt;bit-tabs&gt;</code> and <code>&lt;bit-panel&gt;</code> elements to the template.</p>
 <p>Update <code>src/home.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;chat-home&quot;&gt;
   &lt;style type=&quot;less&quot;&gt;
@@ -511,20 +511,20 @@ property.</li>
 </code></pre>
 <p><span line-highlight='5-7,11,18-25'></span>
 You'll notice tabs appear in the browser:</p>
-<p><img src="static/img/donejs-tabs.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p><img src="static/img/donejs-tabs.png" alt="chat.donejs.com" height="437" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Messages page</h2>
-<p>In this section we add live chat functionality to the messages page. We'll need to:</p>
+<p>In this section we add live chat functionality to the messages page. We’ll need to:</p>
 <ul>
 <li>Create a messages model that connects to a RESTful API.</li>
 <li>Add the ability to retrieve and list messages and create new messages.</li>
 <li>Make the message list receive real-time updates from other clients.</li>
 </ul>
 <h3>Generate Message model</h3>
-<p>To load messages from the server, we will use <a href="http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html">can-connect's supermodel</a>.</p>
+<p>To load messages from the server, we will use <a href="https://canjs.com/doc/can-connect/can/super-map/super-map.html">can-connect’s supermodel</a>.</p>
 <p>Generate a <code>message</code> supermodel like this:</p>
 <pre><code>donejs add supermodel message
 </code></pre>
-<p>When asked for the URL endpoint, set it to our remote RESTful API at <code>http://chat.donejs.com/api/messages</code>. When it asks if http://chat.donejs.com is your service URL answer <code>Yes</code>. The other questions can be answered with the default by hitting enter.</p>
+<p>When asked for the URL endpoint, set it to our remote RESTful API at <code>https://chat.donejs.com/api/messages</code>. When it asks if https://chat.donejs.com is your service URL answer <code>Yes</code>. The other questions can be answered with the default by hitting enter.</p>
 <p><img src="static/img/donejs-model-generator.png" alt="model generator" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Update <code>src/models/message.js</code> to:</p>
 <pre><code class="language-js">import DefineMap from 'can-define/map/';
@@ -564,12 +564,12 @@ export default Message;
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-set.Algebra.html">set.Algebra</a> - used to describe a service-layer's parameters. For example if <code>&quot;api/messages?limit=20&quot;</code> only returned 20 messages, you would configure the <code>limit</code> parameter behavior in the connection's <code>set.Algebra</code>.</li>
-<li><a href="http://canjs.com/doc/can-define/list/list.html">DefineList</a> - used to define the behavior of an observable list of <code>Message</code>s.</li>
-<li><a href="http://canjs.com/doc/can-connect/can/super-map/super-map.html">superMap</a> - connects the <code>Message</code> type to the<br />
-restful <code>'/api/messages'</code> service. This adds <a href="http://canjs.com/doc/can-connect/real-time/real-time.html">real-time</a>, <a href="http://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html">fall-through-caching</a> and other useful behaviors.</li>
-<li><a href="http://stealjs.com/docs/@loader.html">loader</a> - references the module loader that is loading this code. All configuration
-in your <em>package.json</em>'s &quot;steal&quot; property is available, including the <code>serviceBaseUrl</code>.</li>
+<li><a href="https://canjs.com/doc/can-set.Algebra.html">set.Algebra</a> — used to describe a service-layer’s parameters. For example if <code>&quot;api/messages?limit=20&quot;</code> only returned 20 messages, you would configure the <code>limit</code> parameter behavior in the connection’s <code>set.Algebra</code>.</li>
+<li><a href="https://canjs.com/doc/can-define/list/list.html">DefineList</a> — used to define the behavior of an observable list of <code>Message</code>s.</li>
+<li><a href="https://canjs.com/doc/can-connect/can/super-map/super-map.html">superMap</a> — connects the <code>Message</code> type to the<br />
+restful <code>'/api/messages'</code> service. This adds <a href="https://canjs.com/doc/can-connect/real-time/real-time.html">real-time</a>, <a href="https://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html">fall-through-caching</a> and other useful behaviors.</li>
+<li><a href="https://stealjs.com/docs/@loader.html">loader</a> — references the module loader that is loading this code. All configuration
+in your <em>package.json</em>’s &quot;steal&quot; property is available, including the <code>serviceBaseUrl</code>.</li>
 </ul>
 </blockquote>
 <h3>Use the connection</h3>
@@ -598,7 +598,7 @@ export default Component.extend({
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-connect/connection.getList.html">getList</a> - returns a promise that resolves to a <code>Message.List</code> of <code>Message</code> instances.</li>
+<li><a href="https://canjs.com/doc/can-connect/connection.getList.html">getList</a> — returns a promise that resolves to a <code>Message.List</code> of <code>Message</code> instances.</li>
 </ul>
 </blockquote>
 <p>Display the messages by updating <code>src/messages/messages.stache</code> to:</p>
@@ -623,15 +623,15 @@ export default Component.extend({
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-stache.helpers.each.html">{{#each}}</a> - loops through each <code>Message</code> instance.</li>
-<li><a href="http://canjs.com/doc/can-stache.tags.escaped.html">{{key}}</a> - reads either the name or body of a
+<li><a href="https://canjs.com/doc/can-stache.helpers.each.html">{{#each}}</a> — loops through each <code>Message</code> instance.</li>
+<li><a href="https://canjs.com/doc/can-stache.tags.escaped.html">{{key}}</a> — reads either the name or body of a
 <code>Message</code> instance and inserts it into the output of the template.</li>
 </ul>
 </blockquote>
 <p>If you open <a href="http://localhost:8080/chat">localhost:8080/chat</a>, you will see a list of messages from the server or the &quot;No message&quot; text.</p>
-<p><img src="static/img/donejs-chat2.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p><img src="static/img/donejs-chat2.png" alt="chat.donejs.com" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h3>Create messages</h3>
-<p>Now let's add the form to create new messages. The form will two-way bind the <code>name</code> and <code>body</code> properties to the component's view-model and calls <code>send()</code> when hitting the enter key in the message input.</p>
+<p>Now let’s add the form to create new messages. The form will two-way bind the <code>name</code> and <code>body</code> properties to the component’s view-model and calls <code>send()</code> when hitting the enter key in the message input.</p>
 <p>First we have to implement the <code>send()</code> method. Update <code>src/messages/messages.js</code> to this:</p>
 <pre><code class="language-js">import Component from 'can-component';
 import DefineMap from 'can-define/map/';
@@ -668,7 +668,7 @@ export default Component.extend({
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-connect/connection.save.html">save()</a> - creates a <code>POST</code> request to <code>/api/messages</code> with
+<li><a href="https://canjs.com/doc/can-connect/connection.save.html">save()</a> — creates a <code>POST</code> request to <code>/api/messages</code> with
 the message data.</li>
 </ul>
 </blockquote>
@@ -709,20 +709,20 @@ the message data.</li>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-stache-bindings.event.html">($submit)</a> - listens to <em>submit</em> events and calls
+<li><a href="https://canjs.com/doc/can-stache-bindings.event.html">($submit)</a> — listens to <em>submit</em> events and calls
 the <code>send()</code> method on the ViewModel.</li>
-<li><a href="http://canjs.com/doc/can-stache-bindings.twoWay.html">{($value)}</a> - two-way bindings a <code>&lt;input&gt;</code>'s value
+<li><a href="https://canjs.com/doc/can-stache-bindings.twoWay.html">{($value)}</a> — two-way bindings a <code>&lt;input&gt;</code>’s value
 to a property of the ViewModel.</li>
 </ul>
 </blockquote>
 <p>You can now enter your name and a message! It will automatically appear in our messages list.</p>
-<p><img src="static/img/donejs-chat3.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
-<p>In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. <a href="http://connect.canjs.com/">can-connect</a> automatically manages the lists, while also providing <a href="./Features.html#caching-and-minimal-data-requests">caching and minimized data requests</a>.</p>
+<p><img src="static/img/donejs-chat3.png" alt="chat.donejs.com" height="289" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p>In fact, all lists that are related to that model will be updated automatically whenever there is new, modified, or deleted data. <a href="https://canjs.com/doc/can-connect.html">can-connect</a> automatically manages the lists, while also providing <a href="./Features.html#caching-and-minimal-data-requests">caching and minimized data requests</a>.</p>
 <p>You can see from your console that the localStorage cache is already populated with data:</p>
 <p><img src="static/img/donejs-localstorage.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h3>Enable a real-time connection</h3>
-<p>Right now our chat's messages update automatically with our own messages, but not with messages from other clients. The API server (<a href="http://chat.donejs.com/api/messages">chat.donejs.com/api/messages</a>) provides a <a href="http://socket.io/">Socket.io</a> server that sends out real-time updates for new, updated and deleted chat messages.</p>
-<p>To connect to it, first we'll install a socket.io connector, by running:</p>
+<p>Right now our chat’s messages update automatically with our own messages, but not with messages from other clients. The API server (<a href="https://chat.donejs.com/api/messages">chat.donejs.com/api/messages</a>) provides a <a href="https://socket.io/">Socket.io</a> server that sends out real-time updates for new, updated and deleted chat messages.</p>
+<p>To connect to it, first we’ll install a socket.io connector, by running:</p>
 <pre><code>npm install steal-socket.io --save
 </code></pre>
 <p>Update <code>src/models/message.js</code> to:</p>
@@ -773,11 +773,11 @@ export default Message;
 <blockquote>
 <p>New APIs used:</p>
 <ul>
-<li><a href="http://canjs.com/doc/can-connect/real-time/real-time.createInstance.html">createInstance</a> - tells the real-time
+<li><a href="https://canjs.com/doc/can-connect/real-time/real-time.createInstance.html">createInstance</a> — tells the real-time
 system that a message has been created.</li>
-<li><a href="http://canjs.com/doc/can-connect/real-time/real-time.updateInstance.html">updateInstance</a> - tells the real-time
+<li><a href="https://canjs.com/doc/can-connect/real-time/real-time.updateInstance.html">updateInstance</a> — tells the real-time
 system that a message has been updated.</li>
-<li><a href="http://canjs.com/doc/can-connect/real-time/real-time.destroyInstance.html">destroyInstance</a> - tells the real-time
+<li><a href="https://canjs.com/doc/can-connect/real-time/real-time.destroyInstance.html">destroyInstance</a> — tells the real-time
 system that a message has been destroyed.</li>
 </ul>
 </blockquote>
@@ -795,7 +795,7 @@ system that a message has been destroyed.</li>
 <p>To test the production build, close the current server (with <code>CTRL + C</code>) and start it with the environment (<code>NODE_ENV</code>) set to <code>production</code>:</p>
 <pre><code>NODE_ENV=production donejs start
 </code></pre>
-<p>If you're using Windows, you must first set the environmental variable:</p>
+<p>If you’re using Windows, you must first set the environmental variable:</p>
 <ol>
 <li>For Windows <strong>command prompt</strong> you set with <code>set NODE_ENV=production</code></li>
 <li>For Windows <strong>Powershell</strong> you set it with <code>$env:NODE_ENV=&quot;production&quot;</code></li>
@@ -803,9 +803,9 @@ system that a message has been destroyed.</li>
 <p>Then run your application with <code>donejs start</code>.</p>
 <p>If we now open <a href="http://localhost:8080/">localhost:8080</a> again we can see the production bundles being loaded in the network tab of the developer tools.</p>
 <p><img src="static/img/donejs-prodmode.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
-<p>All DoneJS projects are extremely modular, which is why in development mode, you see 200 or more requests when loading the page (thanks to hot module swapping we only have to make those requests once). In production mode, we can only see about 10 requests and a significantly reduced file-size.</p>
+<p>All DoneJS projects are extremely modular, which is why in development mode, you see 200 or more requests when loading the page (thanks to hot-module swapping, we only have to make those requests once). In production mode, we can see only about 8 requests and a significantly reduced file-size.</p>
 <h2>Deploy</h2>
-<p>Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use <a href="https://www.firebase.com/">Firebase</a>, a service that provides static file hosting and <a href="https://en.wikipedia.org/wiki/Content_delivery_network">Content Delivery Network</a> (CDN) support, to automatically deploy and serve our application's static assets from a CDN.</p>
+<p>Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use <a href="https://firebase.google.com/">Firebase</a>, a service that provides static file hosting and <a href="https://en.wikipedia.org/wiki/Content_delivery_network">Content Delivery Network</a> (CDN) support, to automatically deploy and serve our application’s static assets from a CDN.</p>
 <h3>Set up Firebase</h3>
 <p>Sign up for free at <a href="https://firebase.google.com/">Firebase</a>. After you have an account go to <a href="https://console.firebase.google.com/">Firebase console</a> and create an app called <code>donejs-chat-&lt;user&gt;</code> where <code>&lt;user&gt;</code> is your GitHub username. Write down the name of your app because you'll need it in the next section.</p>
 <blockquote>
@@ -829,15 +829,15 @@ donejs deploy
 <pre><code>NODE_ENV=production donejs start
 </code></pre>
 <blockquote>
-<p>If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.</p>
+<p>If you’re using Windows, set the NODE_ENV variable as you did previously in the Production section.</p>
 </blockquote>
 <p>We should now see our assets being loaded from the Firebase CDN.</p>
 <p><img src="static/img/donejs-deploy.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Desktop and mobile apps</h2>
 <p>In the last part of this guide we will make mobile and desktop builds of our chat application, using <a href="https://cordova.apache.org/">Cordova</a> and <a href="https://electron.atom.io/">Electron</a>.</p>
 <h3>Cordova</h3>
-<p>To build the application as a Cordova based mobile application, you need to have each platform's SDK installed.
-We'll be building an iOS app if you are a Mac user, and an Android app if you're a Windows user.</p>
+<p>To build the application as a Cordova based mobile application, you need to have each platform’s SDK installed.
+We’ll be building an iOS app if you are a Mac user, and an Android app if you’re a Windows user.</p>
 <p>Mac users should download XCode from the AppStore and install the <code>ios-sim</code> package globally with:</p>
 <pre><code>npm install -g ios-sim
 </code></pre>
@@ -869,13 +869,13 @@ We'll be building an iOS app if you are a Mac user, and an Android app if you're
 <pre><code>.\build\donejs-chat-win32-x64\donejs-chat.exe
 </code></pre>
 <p><img src="static/img/donejs-electron-app.png" alt="electron app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
-<h2>What's next?</h2>
+<h2>What’s next?</h2>
 <p>In this guide we created a small chat application that connects to a remote API with DoneJS. It has routing between two pages and can send and receive messages in real-time. We built an optimized bundle for production and deployed it to a static file host and CDN. Last, we made builds of the application as a mobile and desktop application.</p>
 <p>If you want to learn more about DoneJS - like how to create more complex custom elements and routes, write and automatically run tests, Continuous Integration and Continuous Deployment - head over to the <a href="./place-my-order.html">place-my-order Guide</a>.</p>
-<p>If you're not ready for that yet, we might suggest the following guides:</p>
+<p>If you’re not ready for that yet, we might suggest the following guides:</p>
 <ul>
-<li>CanJS's <a href="http://canjs.com/doc/guides/todomvc.html">TodoMVC Guide</a> and <a href="http://canjs.com/doc/guides/atm.html">ATM Guide</a> - to better familiarize yourself with CanJS (DoneJS's models, views, and observables).</li>
-<li>StealJS's <a href="http://stealjs.com/docs/StealJS.guides.progressive_loading.html">Progressive Loading Guide</a> - to better familiarize yourself with StealJS (DoneJS's module loader and builder).</li>
+<li>CanJS’s <a href="https://canjs.com/doc/guides/todomvc.html">TodoMVC Guide</a> and <a href="https://canjs.com/doc/guides/atm.html">ATM Guide</a> — to better familiarize yourself with CanJS (DoneJS’s models, views, and observables).</li>
+<li>StealJS’s <a href="https://stealjs.com/docs/StealJS.guides.progressive_loading.html">Progressive Loading Guide</a> — to better familiarize yourself with StealJS (DoneJS’s module loader and builder).</li>
 </ul>
 
 			</section>
@@ -959,7 +959,7 @@ We'll be building an iOS app if you are a Mac user, and an Android app if you're
 	
 
 	<script type="text/javascript">
-		var docObject = {"src":{"path":"docs/guides/guide.md"},"description":"In this guide, we will create [chat.donejs.com](http://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time: \n<img src=\"static/img/donejs-chat.gif\" alt=\"chat.donejs.com\" style=\"box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;\" />\n\nIn the first part of this guide, we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from NPM](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).\n\nIn the final parts of the guide we will make an [optimized, progressively loaded production build](./Features.html#progressive-loading) and [deploy it to a CDN](./Features.html#deploy-to-a-cdn). We will conclude with creating a [mobile and desktop](./Features.html#ios-android-and-desktop-builds) version of the application.\n\nIf you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we're happy to help out.\n\n> For an even easier version of this guide, one that can be done entirely online, checkout [CanJS's Chat Guide](http://canjs.com/doc/guides/chat.html). There, you'll build the same chat widget in a `JSBin`, but\nwithout a mobile or desktop build and deployment to a CDN.\n>\n>\n> Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout [StealJS's Quick Start Guide](http://stealjs.com/docs/StealJS.quick-start.html) before proceeding with this guide.\n\n","name":"Guide","title":"Quick start guide","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
+		var docObject = {"src":{"path":"docs/guides/guide.md"},"description":"In this guide, we will create [chat.donejs.com](https://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time: \n<img src=\"static/img/donejs-chat.gif\" alt=\"chat.donejs.com\" style=\"box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;\" />\n\nIn the first part of this guide, we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from NPM](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).\n\nIn the final parts of the guide we will make an [optimized, progressively loaded production build](./Features.html#progressive-loading) and [deploy it to a CDN](./Features.html#deploy-to-a-cdn). We will conclude with creating a [mobile and desktop](./Features.html#ios-android-and-desktop-builds) version of the application.\n\nIf you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we’re happy to help out.\n\n> For an even easier version of this guide, one that can be done entirely online, checkout [CanJS’s Chat Guide](https://canjs.com/doc/guides/chat.html). There, you'll build the same chat widget in a [JS Bin](https://jsbin.com/), but\nwithout a mobile or desktop build and deployment to a CDN.\n>\n>\n> Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout [StealJS’s Quick Start Guide](https://stealjs.com/docs/StealJS.quick-start.html) before proceeding with this guide.\n\n","name":"Guide","title":"Quick start guide","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
 	</script>
 
 	

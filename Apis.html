@@ -310,7 +310,7 @@ using <a href="#canroute">can-route</a>'s routing rules.</li>
 <h3>Pushstate change</h3>
 <ol>
 <li><p>A pushstate is triggered by user action, usually by clicking a link. <a href="#canroute">can-route</a>'s routing rules determines the properties set on the application <a href="#canmap">viewModel</a>.</p>
-<pre><code>route(':page', { page: 'home' });
+<pre><code>route('{page}', { page: 'home' });
 </code></pre></li>
 <li><p><a href="#done-autorender">done-autorender</a> previously bound the AppViewModel to <a href="#canroute">can-route</a> which causes any change in the route to be reflected in the AppMap instance.</p></li>
 <li><p>Live binding causes the initial template to reflect in the change in route. If the new route is <code>/chat</code> it will cause the <code>page</code> to be <strong>chat</strong>:</p>
@@ -1043,15 +1043,15 @@ separate files. For these, you can use a <code>.component</code> file:</p>
 View Model when a url is matched.</p>
 <p>The following sets the application ViewModel's <code>page</code> property
 to <code>&quot;chat&quot;</code> when the url looks like <code>/chat</code>:</p>
-<pre><code>route(&quot;:page&quot;);
+<pre><code>route(&quot;{page}&quot;);
 </code></pre>
-<p>You can define defaults that get set when <code>:page</code> is empty. The
+<p>You can define defaults that get set when <code>{page}</code> is empty. The
 following sets the default <code>page</code> property to <code>&quot;home&quot;</code>.</p>
-<pre><code>route(&quot;:page&quot;, { page: &quot;home&quot; });
+<pre><code>route(&quot;{page}&quot;, { page: &quot;home&quot; });
 </code></pre>
 <p>You can specify multiple properties to set for a given url:</p>
-<pre><code>route(&quot;:page/:slug&quot;);
-route(&quot;:page/:slug/:action&quot;);
+<pre><code>route(&quot;{page}/{slug}&quot;);
+route(&quot;{page}/{slug}/{action}&quot;);
 </code></pre>
 <p>Update the url by changing <code>can-route</code>:</p>
 <pre><code>route.attr(&quot;page&quot;, &quot;restaurants&quot;);
