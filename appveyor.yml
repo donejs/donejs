@@ -11,7 +11,7 @@ install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node $env:nodejs_version
   # install modules
-  - npm cache clean
+  - npm cache clean --force
   - npm set registry http://registry.npmjs.org/
   - npm install
 
