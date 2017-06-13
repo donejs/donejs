@@ -12,6 +12,19 @@ If you make changes to one of the presentations, please bring it to the top of t
 
 ## Full List
 
+### Intro to CanJS — Building a Weather Report
+
+- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEcjVUeXRITUJkSms)
+- [Download Slides (Keynote)](https://drive.google.com/open?id=0B8wssyNpvaFEbFBTNjhiSEt6Z2c)
+- [Download Slides (PDF)](https://drive.google.com/open?id=0B8wssyNpvaFEVnJUSFZyaXlxYnc)
+- Last Modified: 2017-06-12
+
+### The Who, What, Where, When, Why, and How of Open Source
+
+- [Description](https://drive.google.com/open?id=0B8wssyNpvaFETkdpMWU4QzJ3WXM)
+- [Download Slides (Keynote)](https://drive.google.com/open?id=0B8wssyNpvaFENzFQdWRzaENSQnc)
+- Last Modified: 2017-05-10
+
 ### High-Performance Apps with DoneJS
 
 - [Description](https://drive.google.com/open?id=0B8wssyNpvaFEQXhYVjdVX2FzR28)
