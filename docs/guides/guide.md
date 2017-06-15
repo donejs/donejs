@@ -391,7 +391,7 @@ Now that we verified that our application works in production, we can deploy it 
 
 Sign up for free at [Firebase](https://firebase.google.com/). After you have an account go to [Firebase console](https://console.firebase.google.com/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
 
-> You'll get an error if your app name is too long, so pick something on the shorter side.
+> You'll get an error if your app name is too long, so pick something on the shorter side. After you're created your app be sure to note the Firebase **ID**, as this is the information you need to enter in the next section.
 
 When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
