@@ -1078,7 +1078,7 @@ Sign up for free at [Firebase](https://firebase.google.com/). After you have an 
 
 <img src="static/img/guide-firebase-setup.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid; max-width: 400px;" />
 
-Write down the name of your app because you'll need it in the next section.
+Write down the name of your app's ID because you'll need it in the next section.
 
 > You will get an error if your app name is too long, so pick something on the shorter side, for example `pmo-<user>`.
 
@@ -1192,7 +1192,7 @@ before_deploy:
   - "node build"
   - "git add dist/ --force"
   - "git commit -m \"Updating build.\""
-  - "node_modules/.bin/firebase deploy --token \"$FIREBASE_TOKEN\""
+  - "npm run deploy:ci"
 deploy:
   skip_cleanup: true
   provider: "heroku"
