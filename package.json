@@ -10,7 +10,7 @@
     "docs-copy": "cp -R docs/static/img site/static/ && cp docs/static/favicon.ico site/favicon.ico",
     "document": "bit-docs && npm run docs-copy",
     "document:force": "bit-docs -fd && npm run docs-copy",
-    "test": "npm run jshint && npm run mocha && npm run document && npm run test-guides",
+    "test": "npm run jshint && npm run mocha && npm run test-guides",
     "test-guides": "npm run test-quickstart && npm run test-pmo",
     "test-quickstart": "guide guides/guide/test.js --local",
     "test-pmo": "guide guides/place-my-order/test.js --local",
