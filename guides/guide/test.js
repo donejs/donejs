@@ -186,7 +186,7 @@ guide.step("Generate the Message model", function(){
 	var supermodel = guide.answerPrompts("donejs", ["add", "supermodel", "message"]);
 	var answer = supermodel.answer;
 
-	answer(/URL endpoint/, "http://chat.donejs.com/api/messages\n");
+	answer(/URL endpoint/, "https://chat.donejs.com/api/messages\n");
 	answer(/property name/, "\n");
   answer(/service URL/, "Yes\n");
 

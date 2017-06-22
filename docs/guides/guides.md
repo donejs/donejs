@@ -13,7 +13,7 @@ whistles a modern developer needs, we created the following guides.
 ## [Quick start: donejs-chat](./Guide.html)
 <a href="./Guide.html"><img class="app-thumbs" src="static/img/donejs-chat.gif" width="500" style="border: 1px solid #000"></a>
 
-In the [quick start guide](./Guide.html), we will build a small chat application - [http://chat.donejs.com/](http://chat.donejs.com/).  You'll learn about:
+In the [quick start guide](./Guide.html), we will build a small chat application - [https://chat.donejs.com/](https://chat.donejs.com/).  You'll learn about:
 
 - Hot Module Swapping
 - Server-side rendering

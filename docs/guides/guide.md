@@ -146,7 +146,7 @@ Later we will update the generated files with the chat messages functionality.
 First, let’s update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
 @sourceref ../../guides/guide/steps/7-navigate/home.component
-@highlight 4,7-17
+@highlight 5,8-18
 
 > New APIs Used:
 > - [<can-component>](https://github.com/donejs/done-component#done-component) — a [StealJS](https://stealjs.com/) plugin for CanJS [components](https://canjs.com/doc/can-component.html) that allows you to define a component completely within a  _.component_ file.
@@ -185,7 +185,7 @@ Update `src/index.stache` to:
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
-<img src="static/img/donejs-chat1.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-chat1.png" alt="chat.donejs.com" height="302" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the page’s content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
 
@@ -467,7 +467,7 @@ donejs build cordova
 
 If everything went well, we should see the emulator running our application.
 
-<img src="static/img/donejs-ios.png" alt="ios build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-ios.png" alt="ios build" height="590" width="320" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.
 
