@@ -2170,7 +2170,7 @@ To run the Cordova build and launch the simulator we can now run:</p>
 <h3>Static hosting on Firebase</h3>
 <p>Sign up for free at <a href="https://firebase.google.com/">Firebase</a>. After you have an account go to <a href="https://console.firebase.google.com/">Firebase console</a> and create an app called <code>place-my-order-&lt;user&gt;</code> where <code>&lt;user&gt;</code> is your GitHub username:</p>
 <p><img src="static/img/guide-firebase-setup.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid; max-width: 400px;" /></p>
-<p>Write down the name of your app because you'll need it in the next section.</p>
+<p>Write down the name of your app's ID because you'll need it in the next section.</p>
 <blockquote>
 <p>You will get an error if your app name is too long, so pick something on the shorter side, for example <code>pmo-&lt;user&gt;</code>.</p>
 </blockquote>
@@ -2239,7 +2239,7 @@ before_deploy:
   - &quot;node build&quot;
   - &quot;git add dist/ --force&quot;
   - &quot;git commit -m \&quot;Updating build.\&quot;&quot;
-  - &quot;node_modules/.bin/firebase deploy --token \&quot;$FIREBASE_TOKEN\&quot;&quot;
+  - &quot;npm run deploy:ci&quot;
 deploy:
   skip_cleanup: true
   provider: &quot;heroku&quot;
