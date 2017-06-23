@@ -2,11 +2,12 @@
 environment:
   matrix:
   # node.js
-  - nodejs_version: "8.1.2"
+  - nodejs_version: "8"
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of Node.js or io.js
-  - ps: Install-Product node $env:nodejs_version
+  - ps: Install-Product node 8.1.2
+  #$env:nodejs_version
   # install modules
   - npm cache clean --force
   - npm set registry http://registry.npmjs.org/
