@@ -4,6 +4,8 @@ environment:
   # node.js
   - nodejs_version: "8"
 # Install scripts. (runs after repo cloning)
+platform:
+  - x64
 install:
   # Get the latest stable version of Node.js or io.js
   - ps: Install-Product node 8.1.2
