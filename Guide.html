@@ -290,7 +290,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
       &lt;div class=&quot;row&quot;&gt;
         &lt;div class=&quot;col-sm-8 col-sm-offset-2&quot;&gt;
           &lt;h1 class=&quot;page-header text-center&quot;&gt;
-            &lt;img src=&quot;http://donejs.com/static/img/donejs-logo-white.svg&quot;
+            &lt;img src=&quot;https://donejs.com/static/img/donejs-logo-white.svg&quot;
                 alt=&quot;DoneJS logo&quot; style=&quot;width: 100%;&quot; /&gt;
             &lt;br&gt;Chat
           &lt;/h1&gt;
@@ -342,12 +342,13 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <pre><code class="language-html">&lt;can-component tag=&quot;chat-home&quot;&gt;
   &lt;style type=&quot;less&quot;&gt;
     display: block;
+
     h1.page-header { margin-top: 0; }
   &lt;/style&gt;
   &lt;view&gt;
     &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
     &lt;h1 class=&quot;page-header text-center&quot;&gt;
-      &lt;img src=&quot;http://donejs.com/static/img/donejs-logo-white.svg&quot;
+      &lt;img src=&quot;https://donejs.com/static/img/donejs-logo-white.svg&quot;
            alt=&quot;DoneJS logo&quot; style=&quot;width: 100%;&quot; /&gt;
       &lt;br&gt;Chat
     &lt;/h1&gt;
@@ -360,7 +361,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='4,7-17'></span></p>
+<p><span line-highlight='5,8-18'></span></p>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -462,7 +463,7 @@ property.</li>
 </ul>
 </blockquote>
 <p>Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.</p>
-<p><img src="static/img/donejs-chat1.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p><img src="static/img/donejs-chat1.png" alt="chat.donejs.com" height="302" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Also, everything is <a href="Features.html#section=section_ServerSideRendered">rendered on the server</a>. If you reload the homepage at <a href="http://localhost:8080">localhost:8080</a> you'll see the page’s content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.</p>
 <p><img src="static/img/donejs-viewsource.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Homepage</h2>
@@ -487,7 +488,7 @@ property.</li>
     &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
     &lt;can-import from=&quot;bit-tabs/unstyled&quot; /&gt;
     &lt;h1 class=&quot;page-header text-center&quot;&gt;
-      &lt;img src=&quot;http://donejs.com/static/img/donejs-logo-white.svg&quot;
+      &lt;img src=&quot;https://donejs.com/static/img/donejs-logo-white.svg&quot;
         alt=&quot;DoneJS logo&quot; style=&quot;width: 100%;&quot; /&gt;
       &lt;br&gt;Chat
     &lt;/h1&gt;
@@ -611,11 +612,11 @@ export default Component.extend({
       &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{name}}&lt;/h4&gt;
       &lt;p class=&quot;list-group-item-text&quot;&gt;{{body}}&lt;/p&gt;
     &lt;/div&gt;
+  {{else}}
+    &lt;div class=&quot;list-group-item&quot;&gt;
+      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;No messages&lt;/h4&gt;
+    &lt;/div&gt;
   {{/each}}
-{{else}}
-  &lt;div class=&quot;list-group-item&quot;&gt;
-    &lt;h4 class=&quot;list-group-item-heading&quot;&gt;No messages&lt;/h4&gt;
-  &lt;/div&gt;
 {{/if}}
 
 </code></pre>
@@ -683,11 +684,11 @@ the message data.</li>
       &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{name}}&lt;/h4&gt;
       &lt;p class=&quot;list-group-item-text&quot;&gt;{{body}}&lt;/p&gt;
     &lt;/div&gt;
+  {{else}}
+    &lt;div class=&quot;list-group-item&quot;&gt;
+      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;No messages&lt;/h4&gt;
+    &lt;/div&gt;
   {{/each}}
-{{else}}
-  &lt;div class=&quot;list-group-item&quot;&gt;
-    &lt;h4 class=&quot;list-group-item-heading&quot;&gt;No messages&lt;/h4&gt;
-  &lt;/div&gt;
 {{/if}}
 
 &lt;form class=&quot;row&quot; ($submit)=&quot;send(%event)&quot;&gt;
@@ -851,7 +852,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 <pre><code>donejs build cordova
 </code></pre>
 <p>If everything went well, we should see the emulator running our application.</p>
-<p><img src="static/img/donejs-ios.png" alt="ios build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p><img src="static/img/donejs-ios.png" alt="ios build" height="590" width="320" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.</p>
 <h3>Electron</h3>
 <p>To set up the desktop build, we have to add it to our application like this:</p>

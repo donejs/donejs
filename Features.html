@@ -903,7 +903,7 @@ donejs build
 <p>DoneJS' model layer uses set logic to maintain lists of data represented by JSON properties, like a list of todos with <code>{'ownerId': 2}</code>. These lists are rendered to the UI via data bound templates.</p>
 <p>When server-side updates are sent to the client, items are automatically removed or added to any lists they belong to. They also automatically show up in the UI because of the data bindings.</p>
 <p>All of this happens with about 4 lines of code.</p>
-<pre><code>const socket = io('http://chat.donejs.com');
+<pre><code>const socket = io('https://chat.donejs.com');
 socket.on('messages created',
   order =&gt; messageConnection.createInstance(order));
 socket.on('messages updated',
