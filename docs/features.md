@@ -909,7 +909,7 @@ When server-side updates are sent to the client, items are automatically removed
 All of this happens with about 4 lines of code.
 
 ```
-const socket = io('http://chat.donejs.com');
+const socket = io('https://chat.donejs.com');
 socket.on('messages created',
   order => messageConnection.createInstance(order));
 socket.on('messages updated',
