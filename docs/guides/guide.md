@@ -99,7 +99,7 @@ To see hot module swapping in action, let’s update the main template to import
 Update `src/index.stache` to look like this:
 
 @sourceref ../../guides/guide/steps/4-bootstrap/index.stache
-@highlight 6,10-20
+@highlight 6,10-20,only
 
 > New APIs Used:
 > - [<can-import>](https://canjs.com/doc/can-view-import.html) — specifies template dependencies.
@@ -146,7 +146,7 @@ Later we will update the generated files with the chat messages functionality.
 First, let’s update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
 @sourceref ../../guides/guide/steps/7-navigate/home.component
-@highlight 5,8-18
+@highlight 5,8-18,only
 
 > New APIs Used:
 > - [<can-component>](https://github.com/donejs/done-component#done-component) — a [StealJS](https://stealjs.com/) plugin for CanJS [components](https://canjs.com/doc/can-component.html) that allows you to define a component completely within a  _.component_ file.
@@ -155,13 +155,13 @@ First, let’s update `src/home.component` with the original content from the ho
 Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/messages.stache
-@highlight 1-2
+@highlight 1-2,only
 
 Then, add a `page` property on the `AppViewModel` and
 define a rule for it in `src/app.js`:
 
 @sourceref ../../guides/guide/steps/7-navigate/app.js
-@highlight 6,13
+@highlight 6,13,only
 
 > New APIs Used:
 > - [DefineMap](https://canjs.com/doc/can-define/map/map.html) — used to define observable types.
@@ -175,7 +175,7 @@ Finally, we’ll glue both components together as separate pages in `src/index.s
 Update `src/index.stache` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/index.stache
-@highlight 13-29
+@highlight 13-29,only
 
 > New APIs Used:
 > - [{{#eq}}](https://canjs.com/doc/can-stache.helpers.is.html) — compares the AppViewModel’s `page` property to 'chat'.
@@ -214,7 +214,7 @@ Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled bec
 Update `src/home.component` to:
 
 @sourceref ../../guides/guide/steps/8-bit-tabs/home.component
-@highlight 5-7,11,18-25
+@highlight 5-7,11,18-25,only
 
 You'll notice tabs appear in the browser:
 
@@ -245,7 +245,7 @@ When asked for the URL endpoint, set it to our remote RESTful API at `https://ch
 Update `src/models/message.js` to:
 
 @sourceref ../../guides/guide/steps/10-message-model/message.js
-@highlight 11-12
+@highlight 11-12,only
 
 > New APIs Used:
 > - [set.Algebra](https://canjs.com/doc/can-set.Algebra.html) — used to describe a service-layer’s parameters. For example if `"api/messages?limit=20"` only returned 20 messages, you would configure the `limit` parameter behavior in the connection’s `set.Algebra`.
@@ -262,7 +262,7 @@ The generated file is all that is needed to connect to our RESTful API. Use it b
 Update `src/messages/messages.js` to:
 
 @sourceref ../../guides/guide/steps/10-use-connection/messages.js
-@highlight 5,8-10
+@highlight 5,8-10,only
 
 > New APIs Used:
 > - [getList](https://canjs.com/doc/can-connect/connection.getList.html) — returns a promise that resolves to a `Message.List` of `Message` instances.
@@ -270,7 +270,7 @@ Update `src/messages/messages.js` to:
 Display the messages by updating `src/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/10-use-connection/messages.stache
-@highlight 4-15
+@highlight 4-15,only
 
 > New APIs Used:
 > - [{{#each}}](https://canjs.com/doc/can-stache.helpers.each.html) — loops through each `Message` instance.
@@ -289,7 +289,7 @@ Now let’s add the form to create new messages. The form will two-way bind the 
 First we have to implement the `send()` method. Update `src/messages/messages.js` to this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.js
-@highlight 8-18
+@highlight 8-18,only
 
 > New APIs Used:
 > - [save()](https://canjs.com/doc/can-connect/connection.save.html) — creates a `POST` request to `/api/messages` with
@@ -300,7 +300,7 @@ The `send()` method takes the `name` and `message` properties from the view-mode
 Next update `src/messages/messages.stache` to look like this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.stache
-@highlight 17-29
+@highlight 17-29,only
 
 > New APIs Used:
 > - [($submit)](https://canjs.com/doc/can-stache-bindings.event.html) — listens to _submit_ events and calls
@@ -332,7 +332,7 @@ npm install steal-socket.io --save
 Update `src/models/message.js` to:
 
 @sourceref ../../guides/guide/steps/12-real-time/message.js
-@highlight 6,32-39
+@highlight 6,32-39,only
 
 > New APIs used:
 > - [createInstance](https://canjs.com/doc/can-connect/real-time/real-time.createInstance.html) — tells the real-time

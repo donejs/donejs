@@ -123,12 +123,12 @@ Our number input view-model should provide the following functionality:
 We can use the [define plugin][16] to define a `min` and `max` value and [a setter][17] for the `value` to make sure that it always is within those constraints. We will also add an `increment` and `decrement` method that will modify the value by 1. The component view-model (in `src/<username>-number-input.js`) then looks like this:
 
 @sourceref ../../guides/plugin/steps/implement/number-input.js
-@highlight 7-35
+@highlight 7-35,only
 
 To test this functionality, we can change the tests in `src/<username>-number-input-test.js` to look like this:
 
 @sourceref ../../guides/plugin/steps/implement/number-input-test.js
-@highlight 7-29
+@highlight 7-29,only
 
 You can run all tests either by going to [localhost:8080/src/test/test.html](http://localhost:8080/src/test/test.html) in the browser or via
 
