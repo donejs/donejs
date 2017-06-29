@@ -110,7 +110,8 @@ When you start Android Studio for the first time it will go through the installa
 
 Once this is complete you should have everything you need for Android development. You can close Android Studio as you won't need it for DoneJS development.
 
-## Mac OS X
+<a id="mac-os-x"></a>
+## macOS
 
 ### Node.js
 
@@ -126,7 +127,7 @@ Which should then print out the version of Node.js that is installed.
 
 ### Prerequisites
 
-To get DoneJS working on OS X you need Xcode command line tools which you can get by typing:
+To get DoneJS working on macOS you need Xcode command line tools which you can get by typing:
 
 ```shell
 xcode-select --install

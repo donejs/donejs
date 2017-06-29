@@ -80,7 +80,7 @@ __Server and Services__
 - Language: JavaScript/[Node 5](https://nodejs.org/)
 - Object Relational Mapper: [Bookshelf](http://bookshelfjs.org/)
 - Migrations: [DBMigrate](http://umigrate.readthedocs.org/projects/db-migrate/en/v0.9.x/)
-- Service Middleware: [Express](http://expressjs.com/)
+- Service Middleware: [Express](https://expressjs.com/)
 - Server Side Rendering: [done-ssr's express middleware](https://www.npmjs.com/package/done-ssr-middleware)
 - Session Management: [passport](http://passportjs.org/)
 
@@ -88,8 +88,8 @@ __Server and Services__
 
 __Client__
 
-- Dependency Management: [StealJS](http://stealjs.com/) with mixed use of [CommonJS](http://stealjs.com/docs/syntax.CommonJS.html) and [ES6](http://stealjs.com/docs/syntax.es6.html).
-- Model: [can-connect](https://connect.canjs.com/)
+- Dependency Management: [StealJS](https://stealjs.com/) with mixed use of [CommonJS](https://stealjs.com/docs/syntax.CommonJS.html) and [ES6](https://stealjs.com/docs/syntax.es6.html).
+- Model: [can-connect](https://canjs.com/doc/can-connect.html/)
 - ViewModel: [can-define/map](http://v3.canjs.com/doc/can-define/map/map.html) and [can-define/list](http://v3.canjs.com/doc/can-define/list/list.html)
 - View: [can.stache](https://canjs.com/docs/can.stache.html)
 - Custom Elements: [can.Component](https://canjs.com/docs/can.Component.html)
@@ -112,7 +112,7 @@ __Hosting__
 
 __Documentation__
 
-- Engine: [DocumentJS](http://documentjs.com/)
+- Engine: [DocumentJS](https://documentjs.com/)
 
 .
 
@@ -1067,12 +1067,12 @@ closely matches the API of your ORM.
 
 Once you've settled on an expressive service API, you need
 to make Models that connect to it and handle associated data. And if you want
-any of the advanced behavior of [can-connect](connect.canjs.com), you have
+any of the advanced behavior of [can-connect](https://canjs.com/doc/can-connect.html), you have
 to create a relational algebra that understands the service API.
 
 #### Connecting to a service
 
-Bitballs' client Models are [can-connect supermodels](https://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).  So a type and list type is defined:
+Bitballs' client Models are [can-connect supermodels](https://canjs.com/doc/can-connect.html/doc/can-connect%7Ccan%7Csuper-map.html).  So a type and list type is defined:
 
 ```
 var Game = DefineMap.extend({
@@ -1131,7 +1131,7 @@ var Game = DefineMap.extend({
 });
 ```
 
-Notice that `stats.set` is setting the [__listSet](https://connect.canjs.com/doc/connect.base.listSetProp.html) property of the stats.  This is necessary for [can-connect's real-time](https://connect.canjs.com/doc/can-connect%7Creal-time.html) behavior. When stats are created for this game, they will automatically appear in this list.
+Notice that `stats.set` is setting the [__listSet](https://canjs.com/doc/can-connect.html/doc/connect.base.listSetProp.html) property of the stats.  This is necessary for [can-connect's real-time](https://canjs.com/doc/can-connect.html/doc/can-connect%7Creal-time.html) behavior. When stats are created for this game, they will automatically appear in this list.
 
 #### Defining computed properties
 
@@ -1261,7 +1261,7 @@ NodeJS application.  This is the only, relatively minor, advantage of writing ba
 
 ### Setup
 
-Bitballs is written using [Express middleware](http://expressjs.com/en/guide/using-middleware.html).
+Bitballs is written using [Express middleware](https://expressjs.com/en/guide/using-middleware.html).
 With express you order middleware functions to handle different requests. Bitballs sets up its middleware in [/index.js](https://github.com/donejs/bitballs/blob/master/index.js). The middleware is setup in the
 following order:
 

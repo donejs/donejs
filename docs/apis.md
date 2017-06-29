@@ -11,12 +11,12 @@ The blue boxes in the following architecture diagram represent modules provided 
 
 <object type="image/svg+xml" data="static/img/donejs-stack-app.svg"></object>
 
-- [StealJS](#stealjs) - Module loader and build system. [api](http://stealjs.com/docs/index.html).
-- [CanJS](#canjs) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](http://canjs.com/docs/index.html)
-- [can-connect](#can-connect) - Data connection part of Models, real-time, fall-through cache. [api](https://connect.canjs.com)
-- [can-set](#can-set) - Create set algebras used to compare AJAX parameters. [api](https://github.com/canjs/can-set#can-set)
-- [jQuery](#jquery) - DOM utilities. [api](http://jquery.com/)
-- [jQuery++](#jquery-1) - Even more DOM utilities. [api](http://jquerypp.com/)
+- [StealJS](#stealjs) - Module loader and build system. [api](https://stealjs.com/docs/index.html).
+- [CanJS](#canjs) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](https://canjs.com/doc/api.html)
+- [can-connect](#can-connect) - Data connection part of Models, real-time, fall-through cache. [api](https://canjs.com/doc/can-connect.html)
+- [can-set](#can-set) - Create set algebras used to compare AJAX parameters. [api](https://canjs.com/doc/can-set.html)
+- [jQuery](#jquery) - DOM utilities. [api](https://jquery.com/)
+- [jQuery++](#jquery-1) - Even more DOM utilities. [api](https://jquerypp.com/)
 - [done-ssr](#done-ssr) - Server-side rendering for NodeJS. [api](https://github.com/donejs/done-ssr)
 - [done-autorender](#done-autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)
 - [can-simple-dom](#can-simple-dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)
@@ -29,10 +29,10 @@ DoneJS provides many aspects of JavaScript application tooling, shown in the dia
 
 - [donejs-cli](#cli-and-generators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)
 - [generator-donejs](#cli-and-generators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)
-- [QUnit](#qunit) - Default test assertion library. [api](http://qunitjs.com/)
-- [FuncUnit](#funcunit) - Functional test utilities. [api](http://funcunit.com/)
+- [QUnit](#qunit) - Default test assertion library. [api](https://qunitjs.com/)
+- [FuncUnit](#funcunit) - Functional test utilities. [api](https://funcunit.com/)
 - [Testee](#testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)
-- [DocumentJS](#documentjs) - Documentation engine. [api](http://documentjs.com/)
+- [DocumentJS](#documentjs) - Documentation engine. [api](https://documentjs.com/)
 
 @body
 
@@ -41,13 +41,13 @@ DoneJS provides many aspects of JavaScript application tooling, shown in the dia
 Lets talk about how the typical behavior of a DoneJS application works.  We'll use
 the chat application as an example in development.  We'll cover what happens when:
 
- - A user navigates their browser from a different domain to `http://donejs-chat.com/`
- - A user navigates from `http://donejs-chat.com/` to another `http://donejs-chat.com/chat`.
+ - A user navigates their browser from a different domain to `https://chat.donejs.com/`
+ - A user navigates from `https://chat.donejs.com/` to another `https://chat.donejs.com/chat`.
 
 
 ### First page load
 
-1. An http request for `http://donejs-chat.com/` is sent to a node server. The node server is configured,
+1. An http request for `https://chat.donejs.com/` is sent to a node server. The node server is configured,
    in this case with express, to use [done-ssr-middleware](#done-ssr) to render a DoneJS application:
 
    ```
@@ -164,7 +164,7 @@ the chat application as an example in development.  We'll cover what happens whe
    </html>
    ```
 
-3. [can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) will progressively load the component for the new page with a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) as its view model. When the promise resolves the [can-component](#section=section_can_Component) will be inserted.
+3. [can-import](https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) will progressively load the component for the new page with a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) as its view model. When the promise resolves the [can-component](#section=section_can_Component) will be inserted.
 
 ## CLI and Generators
 
@@ -174,9 +174,9 @@ After installing DoneJS globally with `npm install donejs -g` you will have the 
 donejs help
 ```
 
-### NPM scripts
+### npm scripts
 
-[NPM scripts](https://docs.npmjs.com/misc/scripts) are defined in the `scripts` section of your applications `package.json`. There are some standard scripts that every Node application uses (like `npm start` or `npm test` - both of which are already set up for you) and you can add your own which is what DoneJS does with commands like `npm run develop` or `npm run build`.
+[npm scripts](https://docs.npmjs.com/misc/scripts) are defined in the `scripts` section of your applications `package.json`. There are some standard scripts that every Node application uses (like `npm start` or `npm test` - both of which are already set up for you) and you can add your own which is what DoneJS does with commands like `npm run develop` or `npm run build`.
 The `donejs` command makes running those commands easier by allowing you to run them like `donejs start`, `donejs develop` or `donejs build`
 
 ### Generators
@@ -208,7 +208,7 @@ This way you can use DoneJS’s growing list of plugins and generators without h
 ## StealJS
 
 The base of any good JavaScript application is its dependency management system.  
-DoneJS uses [StealJS](http://stealjs.com/) which
+DoneJS uses [StealJS](https://stealjs.com/) which
 itself  is split into two sub-projects:
 
 - `steal` - loads CommonJS, ES6, and AMD modules. It can also load styles, templates and more.
@@ -216,7 +216,7 @@ itself  is split into two sub-projects:
 
 ### steal
 
-To use [steal](http://stealjs.com/docs/steal.html), simply add a script tag to `steal.js`
+To use [steal](https://stealjs.com/docs/steal.html), simply add a script tag to `steal.js`
 in an HTML page or in a [done-autorender](#done-autorender) `template` and
 point the `main` attribute to a module to load like:
 
@@ -224,7 +224,7 @@ point the `main` attribute to a module to load like:
 <script src="../../node_modules/steal/steal.js" main="my-app/my-module"></script>
 ```
 
-Using the default DoneJS [system.directories.lib](http://stealjs.com/docs/npm.html#section_Configuration) configuration, this will load
+Using the default DoneJS [system.directories.lib](https://stealjs.com/docs/npm.html#configuration) configuration, this will load
 `my-app/src/my-module.js`.  From there, use CommonJS, ES6, or AMD to load your modules:
 
 ```
@@ -247,7 +247,7 @@ import "can-component"; //imports "can-component";
 import "./edit/"; // imports "components/person/edit/edit";
 ```
 
-Configure [steal](http://stealjs.com/docs/steal.html)'s behavior in your `package.json` in the `steal` object like:
+Configure [steal](https://stealjs.com/docs/steal.html)'s behavior in your `package.json` in the `steal` object like:
 
 ```
 // package.json
@@ -270,15 +270,15 @@ Configure [steal](http://stealjs.com/docs/steal.html)'s behavior in your `packag
 
 ### steal-tools
 
-In DoneJS applications, [steal-tools](http://stealjs.com/docs/steal-tools.html) is primarily used to:
+In DoneJS applications, [steal-tools](https://stealjs.com/docs/steal-tools.html) is primarily used to:
 
- - [build](http://stealjs.com/docs/steal-tools.build.html) and minify your application to production-ready bundles.
- - add [hot module swapping](http://stealjs.com/docs/steal-tools.cmd.live-reload.html)
+ - [build](https://stealjs.com/docs/steal-tools.build.html) and minify your application to production-ready bundles.
+ - add [hot module swapping](https://stealjs.com/docs/steal-tools.cmd.live-reload.html)
 
-It can also be used to [export](http://stealjs.com/docs/steal-tools.export.html) your
+It can also be used to [export](https://stealjs.com/docs/steal-tools.export.html) your
 modules to different formats.
 
-DoneJS comes with a `build.js` script that call's steal-tools' [build](http://stealjs.com/docs/steal-tools.build.html):
+DoneJS comes with a `build.js` script that call's steal-tools' [build](https://stealjs.com/docs/steal-tools.build.html):
 
 ```
 //build.js
@@ -303,7 +303,7 @@ But you could also run it with:
 > node build.js
 ```
 
-Hot module swapping is done with [live-reload](http://stealjs.com/docs/steal-tools.cmd.live-reload.html) which
+Hot module swapping is done with [live-reload](https://stealjs.com/docs/steal-tools.cmd.live-reload.html) which
 is bundled within steal-tools.  
 
 By default `donejs develop` starts the live-reload server.  However, you could start one
@@ -434,10 +434,10 @@ document.body.appendChild(frag);
 
 ### can-construct
 
-[can-construct](http://canjs.com/doc/can-construct.html) allows you to define constructor functions that are easy to inherit
+[can-construct](https://canjs.com/doc/can-construct.html) allows you to define constructor functions that are easy to inherit
 from.  It's used by [can-define](#candefine) and [can-component](#cancomponent).
 
-To create your own constructor function, [extend](http://canjs.com/doc/can-construct.extend.html) `can-construct`
+To create your own constructor function, [extend](https://canjs.com/doc/can-construct.extend.html) `can-construct`
 with prototype methods like:
 
 ```
@@ -464,7 +464,7 @@ todo.name //-> "dishes";
 todo.allowedToEdit() //-> true;
 ```
 
-You can extend `Todo` with [extend](http://canjs.com/doc/can-construct.extend.html) too:
+You can extend `Todo` with [extend](https://canjs.com/doc/can-construct.extend.html) too:
 
 ```
 var PrivateTodo = Todo.extend({
@@ -476,7 +476,7 @@ var PrivateTodo = Todo.extend({
 
 ### can-define/map/map
 
-[can-define](http://canjs.com/doc/can-define.html) is used to create observable
+[can-define](https://canjs.com/doc/can-define.html) is used to create observable
 JavaScript Object-like objects.  Create an instance of the
 base can-define/map/map like:
 
@@ -497,7 +497,7 @@ person.last = "Moschel";
 person.get() //-> {first: "Brian", last: "Moschel"}
 ```
 
-Bind to changes in a person's properties with [.on](http://canjs.com/doc/can-define/map/map.prototype.on.html):
+Bind to changes in a person's properties with [.on](https://canjs.com/doc/can-define/map/map.prototype.on.html):
 
 ```
 person.on("first", function(ev, newValue, oldValue){
@@ -527,12 +527,12 @@ var me = new Person({first: "Kathrine", last: "Iannuzzi"});
 me.fullName() //-> "Kathrine Iannuzzi"
 ```
 
-The [can-define](http://canjs.com/doc/can-define.html) allows
+The [can-define](https://canjs.com/doc/can-define.html) allows
 you to control the behavior of attributes.  You can define
-[default values](http://canjs.com/doc/can-define.types.value.html),
-[getters](http://canjs.com/doc/can-define.types.get.html),
-[setters](http://canjs.com/doc/can-define.types.set.html), and
-[type](http://canjs.com/doc/can-define.types.type.html) converters.
+[default values](https://canjs.com/doc/can-define.types.value.html),
+[getters](https://canjs.com/doc/can-define.types.get.html),
+[setters](https://canjs.com/doc/can-define.types.set.html), and
+[type](https://canjs.com/doc/can-define.types.type.html) converters.
 
 ```
 var Todo = DefineMap.extend({
@@ -577,7 +577,7 @@ todo.on("owner", function(ev, owner){
 
 ### can-define/list/list
 
-[can-define/list/list](http://canjs.com/doc/can-define/list/list.html) is used to create observable
+[can-define/list/list](https://canjs.com/doc/can-define/list/list.html) is used to create observable
 JavaScript Array-like objects.  Create an instance of the
 base `DefineList` like:
 
@@ -595,7 +595,7 @@ hobbies.set(1, "hip hop dancing");
 hobbies.get() //-> ["basketball", "dancing"]
 ```
 
-Use array methods like [.push](http://canjs.com/doc/can-define/list/list.prototype.push.html), [.pop](http://canjs.com/doc/can-define/list/list.prototype.pop.html), and [.splice](http://canjs.com/doc/can-define/list/list.prototype.splice.html) to modify the array:
+Use array methods like [.push](https://canjs.com/doc/can-define/list/list.prototype.push.html), [.pop](https://canjs.com/doc/can-define/list/list.prototype.pop.html), and [.splice](https://canjs.com/doc/can-define/list/list.prototype.splice.html) to modify the array:
 
 ```
 hobbies.pop();
@@ -607,7 +607,7 @@ hobbies.push("football");
 hobbies //-> DefineList["basketball","football"]
 ```
 
-Use [.forEach](http://canjs.com/doc/can-define/list/list.prototype.forEach.html), [.map](http://canjs.com/doc/can-define/list/list.prototype.map.html), or [.filter](http://canjs.com/doc/can-define/list/list.prototype.filter.html) to loop through the array.  All
+Use [.forEach](https://canjs.com/doc/can-define/list/list.prototype.forEach.html), [.map](https://canjs.com/doc/can-define/list/list.prototype.map.html), or [.filter](https://canjs.com/doc/can-define/list/list.prototype.filter.html) to loop through the array.  All
 these methods return a `DefineList`
 
 ```
@@ -705,9 +705,9 @@ people.get(0).fullName() //-> "Justin Meyer"
 
 ### can-compute
 
-[can-compute](http://canjs.com/doc/can-compute.html) isn't used
+[can-compute](https://canjs.com/doc/can-compute.html) isn't used
 directly much anymore. However, it's used heavily in [can-define](#candefine)
-[getters](http://canjs.com/doc/can-define.types.get.html) and live binding
+[getters](https://canjs.com/doc/can-define.types.get.html) and live binding
 so it's worth understanding the basics.
 
 `can-compute` allows you to define single observable values like:
@@ -763,7 +763,7 @@ person.last = "Moschel";
 
 ### can-stache
 
-[can-stache](http://canjs.com/doc/can-stache.html) is a Handlebars and
+[can-stache](https://canjs.com/doc/can-stache.html) is a Handlebars and
 Mustache compliant live-binding templating language.
 
 Create a template programmatically with `can-stache` like:
@@ -826,21 +826,21 @@ There's too much to cover so we will highlight the important APIs.
 
 The different tag types:
 
- - [{{key}}](http://canjs.com/doc/can-stache.tags.escaped.html) -
+ - [{{key}}](https://canjs.com/doc/can-stache.tags.escaped.html) -
    inserts an escaped value.
 
    ```
    stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
    ```
 
- - [{{{key}}}](http://canjs.com/doc/can-stache.tags.unescaped.html) -
+ - [{{{key}}}](https://canjs.com/doc/can-stache.tags.unescaped.html) -
    inserts an unescaped value.
 
    ```
    stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
    ```
 
-- [{{#key}} ... {{/key}}](http://canjs.com/doc/can-stache.tags.section.html) -
+- [{{#key}} ... {{/key}}](https://canjs.com/doc/can-stache.tags.section.html) -
   renders a subsection depending on the value of the key.
 
   ```
@@ -855,13 +855,13 @@ The different tag types:
 
   ```
 
-  The subsection is rendered with the `key` value as the top of the [scope](http://canjs.com/doc/can-view-scope.html):
+  The subsection is rendered with the `key` value as the top of the [scope](https://canjs.com/doc/can-view-scope.html):
 
   ```
   stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
   ```
 
-- [{{^key}} ... {{/key}}](http://canjs.com/doc/can-stache.tags.inverse.html) -
+- [{{^key}} ... {{/key}}](https://canjs.com/doc/can-stache.tags.inverse.html) -
   opposite of `{{#key}}`.
 
   ```
@@ -874,7 +874,7 @@ The different tag types:
 
 The following are stache's most commonly used helpers:
 
- - [{{#if expr}} .. {{/if}}](http://canjs.com/doc/can-stache.helpers.if.html) - renders the subsection if the expr is truthy.
+ - [{{#if expr}} .. {{/if}}](https://canjs.com/doc/can-stache.helpers.if.html) - renders the subsection if the expr is truthy.
 
    ```
    stache("{{#if key}}A{{/if}}")({key: true}) //-> `A`
@@ -883,7 +883,7 @@ The following are stache's most commonly used helpers:
    stache("{{#if key}}A{{else}}B{{/if}}")({key: false}) //-> `B`
    ```
 
- - [{{#is expr1 expr2}} ... {{/is}}](http://canjs.com/doc/can-stache.helpers.is.html) - compares two expressions and renders a subsection depending on the result.
+ - [{{#is expr1 expr2}} ... {{/is}}](https://canjs.com/doc/can-stache.helpers.is.html) - compares two expressions and renders a subsection depending on the result.
 
    ```
    stache("{{#is page 'A'}}A{{/is}}")({page: 'A'}) //-> `A`
@@ -892,7 +892,7 @@ The following are stache's most commonly used helpers:
    stache("{{#is page 'A'}}A{{else}}C{{/is}}")({page: 'C'}) //-> `B`
    ```
 
- - [{{#each key}} ... {{/each}}](http://canjs.com/doc/can-stache.helpers.each.html) - renders a subsection for each item in a key's value.
+ - [{{#each key}} ... {{/each}}](https://canjs.com/doc/can-stache.helpers.each.html) - renders a subsection for each item in a key's value.
 
    ```
    stache('{{#each hobbies}}<p>{{.}}</p>{{/each}}')(['Hockey', 'Hiking']) //-> `<p>Hockey</p><p>Hiking</p>`
@@ -900,13 +900,13 @@ The following are stache's most commonly used helpers:
 
     If the value of a key is a [DefineList](#section=section_definelist) only the minimum amount of DOM updates occur when the list changes.
 
- - [{{routeUrl hashes}}](http://canjs.com/doc/can-stache/helpers/route.html) - generates a url using [can-route](#canroute) for the provided hashes.
+ - [{{routeUrl hashes}}](https://canjs.com/doc/can-stache/helpers/route.html) - generates a url using [can-route](#canroute) for the provided hashes.
 
    ```
    stache("<a href="{{routeUrl page='details' id='23'}}">{{name}}</a>")({name: 'Item 23'}) //-> `<a href="#!&page=details&id=23">Item 23</a>`
    ```
 
-[Call methods](http://canjs.com/doc/can-stache.expressions.html#Callexpressions) in your scope like: `{{method(value)}}`
+[Call methods](https://canjs.com/doc/can-stache.expressions.html#Callexpressions) in your scope like: `{{method(value)}}`
 
 ```
 stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
@@ -925,13 +925,13 @@ stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
 
 Create a one-way binding from the parent scope to a child's properties/attributes or viewModel:
 
- - [{child-prop}="value"](http://canjs.com/doc/can-stache-bindings.toChild.html) - One-way bind `value` in the scope to `childProp` in the viewModel.
+ - [{child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toChild.html) - One-way bind `value` in the scope to `childProp` in the viewModel.
 
     ```
     <my-component {user-name}="name"></my-component>
     ```
 
- - [{$child-prop}="value"](http://canjs.com/doc/can-stache-bindings.toChild.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
+ - [{$child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toChild.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
 
     ```
     <input {$value}="name" type="text">
@@ -939,13 +939,13 @@ Create a one-way binding from the parent scope to a child's properties/attribute
 
 Create a one-way binding from the child's properties/attributes or viewModel to the parent scope:
 
-- [{^child-prop}="value"](http://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+- [{^child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
 
     ```
     <my-component {^user-name}="name"></my-component>
     ```
 
- - [{^$child-prop}="value"](http://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
+ - [{^$child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
 
     ```
     <input {$value}="name" type="text">
@@ -953,13 +953,13 @@ Create a one-way binding from the child's properties/attributes or viewModel to 
 
 Create two-way bindings between the parent scope and the child's viewModel or property/attributes:
 
-- [{(child-prop)}="value"](http://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+- [{(child-prop)}="value"](https://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
 
     ```
     <my-component {(user-name)}="name"></my-component>
     ```
 
- - [{^$child-prop}="value"](http://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind `value` in the scope to the `childProp` property or attribute of the element.
+ - [{^$child-prop}="value"](https://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind `value` in the scope to the `childProp` property or attribute of the element.
 
     ```
     <input {$value}="name" type="text">
@@ -967,13 +967,13 @@ Create two-way bindings between the parent scope and the child's viewModel or pr
 
 Create bindings to viewModel or DOM events:
 
- - [($EVENT)="handler()"](http://canjs.com/doc/can-stache-bindings.event.html) - Listen to the DOM event `EVENT` and use `handler` as the event handler.
+ - [($EVENT)="handler()"](https://canjs.com/doc/can-stache-bindings.event.html) - Listen to the DOM event `EVENT` and use `handler` as the event handler.
 
     ```
     <div ($click)="updateThing()"></my-component>
     ```
 
-- [(EVENT)="handler()"](http://canjs.com/doc/can-stache-bindings.event.html) - Listen to the viewModel event `EVENT` and use `handler()` as the event handler.
+- [(EVENT)="handler()"](https://canjs.com/doc/can-stache-bindings.event.html) - Listen to the viewModel event `EVENT` and use `handler()` as the event handler.
 
     ```
     <my-component (show)="showTheThing()"></my-component>
@@ -981,7 +981,7 @@ Create bindings to viewModel or DOM events:
 
 ### can-component
 
-[can-component](http://canjs.com/doc/can-component.html) lets you
+[can-component](https://canjs.com/doc/can-component.html) lets you
 create widgets with well-defined View Models and are instantiated with
 custom elements.
 
@@ -1079,7 +1079,7 @@ separate files. For these, you can use a `.component` file:
 
 ### can-route
 
-[can-route](http://canjs.com/doc/can-route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](http://canjs.com/doc/can-route-pushstate.html).
+[can-route](https://canjs.com/doc/can-route.html) provides powerful 2-way, nested, routing to your application, supporting both hash and [pushstate](https://canjs.com/doc/can-route-pushstate.html).
 
 Configure routing rules to define property values on your application's
 View Model when a url is matched.
@@ -1143,7 +1143,7 @@ Which will cause any changes in the route to reflect in the View Model instance,
 
 ### can-connect
 
-[can-connect](https://connect.canjs.com) is used to connect typed
+[can-connect](https://canjs.com/doc/can-connect.html) is used to connect typed
 data to backend services.  In a DoneJS application, that typed data is a
 [can-define/map/map](#candefine) and [can-define/list/list](#candefinelistlist) type.  
 
@@ -1176,10 +1176,10 @@ var todoConnection = connect(["data-url","constructor","can/map"],{
 });
 ```
 
-This adds a [getList](http://connect.canjs.com/doc/can.Map.getList.html),
-[.get](http://connect.canjs.com/doc/can.Map.get.html),
-[.save](http://connect.canjs.com/doc/can.Map.prototype.save.html) and
-[.destroy](http://connect.canjs.com/doc/can.Map.prototype.destroy.html) methods to
+This adds a [getList](https://canjs.com/doc/can-connect/can/map/map.getList.html),
+[.get](https://canjs.com/doc/can-connect/can/map/map.get.html),
+[.save](https://canjs.com/doc/can-connect/can/map/map.prototype.save.html) and
+[.destroy](https://canjs.com/doc/can-connect/can/map/map.prototype.destroy.html) methods to
 `Todo` allowing you to CRUD `Todo`s and `TodoList`s from the service layer like:
 
 ```
@@ -1209,12 +1209,12 @@ todo.save().then(function(todo){
 `can-connect` comes with a wide variety of behaviors that
 can be mixed into a connection.  Examples include:
 
- - [real-time](http://connect.canjs.com/doc/can-connect%7Creal-time.html) keeps `can.List`s updated with changes.
- - [fall-through-cache](http://connect.canjs.com/doc/can-connect%7Cfall-through-cache.html)
+ - [real-time](https://canjs.com/doc/can-connect/real-time/real-time.html) keeps `can.List`s updated with changes.
+ - [fall-through-cache](https://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html)
 
 To make the process of creating `can.Map` based connections easier,
 DoneJS comes with a [supermodel generator](#generators)
-creates a [super-map](http://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html).
+creates a [super-map](https://canjs.com/doc/can-connect/can/super-map/super-map.html).
 
 A super-map is just a connection with a bunch of the mostly commonly used
 behaviors.  Create one with the `superMap` function like:
@@ -1266,7 +1266,7 @@ algebra.union({start: 1, end: 10},
 
 In a DoneJS application, you create custom algebras to pass
 to [can-connect](#section=section_can_connect) connections. The
-connection's behaviors use that [algebra](http://connect.canjs.com/doc/connect.base.algebra.html) to their optimizations.
+connection's behaviors use that [algebra](https://canjs.com/doc/can-connect/base/base.algebra.html) to their optimizations.
 
 For example, if the `Todo` type in the [can-connect section](#can-connect) has the following property behaviors:
 
@@ -1318,7 +1318,7 @@ retrieved, there's no need to make a request for
 
 ### QUnit
 
-[QUnit](http://qunitjs.com/) is DoneJS's default JavaScript unit testing framework. It is provided for DoneJS by the [steal-qunit](https://github.com/stealjs/steal-qunit) project. A basic unit test for a can.Component view-model looks like this:
+[QUnit](https://qunitjs.com/) is DoneJS's default JavaScript unit testing framework. It is provided for DoneJS by the [steal-qunit](https://github.com/stealjs/steal-qunit) project. A basic unit test for a can.Component view-model looks like this:
 
 ```js
 import QUnit from 'steal-qunit';
@@ -1361,7 +1361,7 @@ describe('my/component', function() {
 
 ### FuncUnit
 
-[FuncUnit](http://funcunit.com/) enhances QUnit, Mocha or Jasmine and enables them to simulate user actions, easily test asynchronous behavior, and support black box testing. It uses a jQuery-like syntax to write functional or unit tests. When generating an application, DoneJS already includes a basic FuncUnit smoke-test which runs alongside the other tests. It looks like this:
+[FuncUnit](https://funcunit.com/) enhances QUnit, Mocha or Jasmine and enables them to simulate user actions, easily test asynchronous behavior, and support black box testing. It uses a jQuery-like syntax to write functional or unit tests. When generating an application, DoneJS already includes a basic FuncUnit smoke-test which runs alongside the other tests. It looks like this:
 
 ```js
 import F from 'funcunit';
@@ -1380,7 +1380,7 @@ QUnit.test('my-app main page shows up', function() {
 });
 ```
 
-This will open the main application (`development.html` is the HTML file that loads our DoneJS app without server-side-rendering) and ensures that the `<title>` is set to the name (which is the default in a newly generated application). To learn more about the user interactions and assertions available, follow up in the [FuncUnit API documentation](http://funcunit.com/docs/index.html).
+This will open the main application (`development.html` is the HTML file that loads our DoneJS app without server-side-rendering) and ensures that the `<title>` is set to the name (which is the default in a newly generated application). To learn more about the user interactions and assertions available, follow up in the [FuncUnit API documentation](https://funcunit.com/docs/index.html).
 
 ### Testee
 
@@ -1407,12 +1407,12 @@ For more configuration options follow up in the [Testee documentation](https://g
 ## DocumentJS
 
 When working on large applications keeping updated documentation is critical.
-[DocumentJS](http://documentjs.com/) generates API documentation for your
-application supporting [jsdoc](http://usejsdoc.org/) syntax that can be multi-versioned.
+[DocumentJS](https://documentjs.com/) generates API documentation for your
+application supporting [JSDoc](http://usejsdoc.org/) syntax that can be multi-versioned.
 
 ### Configuration
 
-DocumentJS is configured with a [docConfig](http://documentjs.com/docs/DocumentJS.docConfig.html) specified
+DocumentJS is configured with a [docConfig](https://documentjs.com/docs/DocumentJS.docConfig.html) specified
 in a **documentjs.json** file within your project:
 
 ```
@@ -1430,7 +1430,7 @@ This specifies to look in JavaScript and Markdown files for jsdoc tags. When ran
 
 ### Documenting
 
-DocumentJS includes most [tags](http://documentjs.com/docs/documentjs.tags.html) you need to document a web application and includes an API to create your own.
+DocumentJS includes most [tags](https://documentjs.com/docs/documentjs.tags.html) you need to document a web application and includes an API to create your own.
 
 Here's how you would document a [can-component](#cancomponent) View Model:
 
@@ -1514,7 +1514,7 @@ DoneJS preconfigures your app to be documented with:
 donejs document
 ```
 
-Or you can run the [documentjs](http://documentjs.com/docs/DocumentJS.apis.generate.documentjs.html) command directly with:
+Or you can run the [documentjs](https://documentjs.com/docs/DocumentJS.apis.generate.documentjs.html) command directly with:
 
 ```
 node_modules/.bin/documentjs
@@ -1524,7 +1524,7 @@ node_modules/.bin/documentjs
 
 ### jQuery
 
-[jQuery](http://jquery.com/) is the ubiquitous DOM manipulation
+[jQuery](https://jquery.com/) is the ubiquitous DOM manipulation
 library. While you don't often need to write jQuery directly,
 [CanJS](#canjs) is built making it safe to use jQuery when needed.
 
@@ -1558,7 +1558,7 @@ Component.extend({
 ```
 
 
-CanJS adds special [inserted](http://canjs.com/docs/can.events.inserted.html), [removed](http://canjs.com/docs/can.events.removed.html), and [attributes](http://canjs.com/docs/can.events.attributes.html) events. This allows you to
+CanJS adds special [inserted](https://canjs.com/docs/can.events.inserted.html), [removed](https://canjs.com/docs/can.events.removed.html), and [attributes](https://canjs.com/docs/can.events.attributes.html) events. This allows you to
 teardown any behavior when the DOM is modified:
 
 ```
@@ -1577,20 +1577,20 @@ $("body").empty();
 
 ### jQuery++
 
-[jQuery++](http://jquerypp.com/) adds a bunch of special events and other DOM
+[jQuery++](https://jquerypp.com/) adds a bunch of special events and other DOM
 utilties to jQuery.  
 
  - DOM utilities
-   - [animate](http://jquerypp.com/#animate) - Overwrites `jQuery.animate` to use CSS3 animations if possible.
-   - [compare](http://jquerypp.com/#compare) - Compare the position of two elements in the page.
-   - [range](http://jquerypp.com/#range) - Manipulate text ranges.
-   - [within](http://jquerypp.com/#within) - Get the elements within a specified area.
+   - [animate](https://jquerypp.com/#animate) - Overwrites `jQuery.animate` to use CSS3 animations if possible.
+   - [compare](https://jquerypp.com/#compare) - Compare the position of two elements in the page.
+   - [range](https://jquerypp.com/#range) - Manipulate text ranges.
+   - [within](https://jquerypp.com/#within) - Get the elements within a specified area.
  - Special events
-   - [drag / drop](http://jquerypp.com/#drag) - drag drop events.
-   - [hover](http://jquerypp.com/#hover) - hover events.
-   - [key](http://jquerypp.com/#key) - get a string representation of the key pressed.
-   - [resize](http://jquerypp.com/#resize) - listen to when an element changes size.
-   - [swipe](http://jquerypp.com/#swipe) - mobile swipe events.
+   - [drag / drop](https://jquerypp.com/#drag) - drag drop events.
+   - [hover](https://jquerypp.com/#hover) - hover events.
+   - [key](https://jquerypp.com/#key) - get a string representation of the key pressed.
+   - [resize](https://jquerypp.com/#resize) - listen to when an element changes size.
+   - [swipe](https://jquerypp.com/#swipe) - mobile swipe events.
 
 
 ## Server Side Rendering APIs
@@ -1617,7 +1617,7 @@ The render function is called with a string url to render and returns a response
 object that contains the html string that was rendered. Use any Node-based
 http framework with done-ssr.
 
-For convenience we have published an [Express](http://expressjs.com/) middleware:
+For convenience we have published an [Express](https://expressjs.com/) middleware:
 
 ```
 var ssr = require("done-ssr-middleware");
@@ -1658,7 +1658,7 @@ enables using a [can.stache](#canstache) template as your application's entry po
 the `export-as="viewModel"` attribute is a [can-define/map/map](#candefine) that acts as the View Model
 for the application.
 
-If you have [live-reload](http://stealjs.com/docs/steal.live-reload.html#section_Use) enabled done-autorender will additionally use those APIs to re-render the
+If you have [live-reload](https://stealjs.com/docs/steal.live-reload.html#use) enabled done-autorender will additionally use those APIs to re-render the
 application when any modules are reloaded.
 
 done-autorender handles requests when running in Node for server-side rendering and

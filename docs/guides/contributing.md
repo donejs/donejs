@@ -33,7 +33,7 @@ The following projects are a core part of DoneJS:
 - [CanJS](https://canjs.com/)
 - [DocumentJS](https://documentjs.com/)
 - [FuncUnit](https://funcunit.com/)
-- [jQuery++](http://jquerypp.com/)
+- [jQuery++](https://jquerypp.com/)
 - [StealJS](https://stealjs.com/)
 - [Syn](https://github.com/bitovi/syn)
 - [Testee](https://github.com/bitovi/testee)
@@ -194,24 +194,24 @@ You can also get involved in our community by posting in our forums, chatting wi
 - DoneJS
 	- [Forums](http://forums.donejs.com/c/donejs)
 	- [Gitter](https://gitter.im/donejs/donejs)
-	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=donejs+answers:0)
+	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=donejs+answers:0)
 - CanJS
 	- [Forums](http://forums.donejs.com/c/canjs)
 	- [Gitter](https://gitter.im/canjs/canjs)
-	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=canjs+answers:0)
+	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=canjs+answers:0)
 - DocumentJS
 	- [Forums](http://forums.donejs.com/c/documentjs)
 	- [Gitter](https://gitter.im/bitovi/documentjs)
-	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=documentjs+answers:0)
+	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=documentjs+answers:0)
 - FuncUnit
 	- [Gitter](https://gitter.im/bitovi/funcunit)
-	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=funcunit+answers:0)
+	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=funcunit+answers:0)
 - jQuery++
-	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=jquerypp+answers:0)
+	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=jquerypp+answers:0)
 - StealJS
 	- [Forums](http://forums.donejs.com/c/stealjs)
 	- [Gitter](https://gitter.im/stealjs/steal)
-	- [Stack Overflow](http://stackoverflow.com/search?tab=newest&q=stealjs+answers:0)
+	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=stealjs+answers:0)
 - Syn
 	- [Gitter](https://gitter.im/bitovi/syn)
 - Testee

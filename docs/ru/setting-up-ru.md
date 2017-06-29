@@ -65,11 +65,11 @@ set NODE_ENV=production
 $env:NODE_ENV="production"
 ```
 
-## Mac OS X
+## macOS
 
 ### Предустановки
 
-Чтобы DoneJS работал на OS X вам понадобится Xcode command line tools которую вы можете получить набрав:
+Чтобы DoneJS работал на macOS вам понадобится Xcode command line tools которую вы можете получить набрав:
 
 ```shell
 xcode-select --install
