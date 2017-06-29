@@ -16,7 +16,6 @@ notifications:
   email:
     recipients:
       - justin@bitovi.com
-      - david@bitovi.com
       - matthew@bitovi.com
     on_success: change
     on_failure: change
