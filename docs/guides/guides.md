@@ -47,7 +47,7 @@ In the [plugin guide](plugin.html), we will create a reusable number input widge
 - Implement the component functionality and tests
 - Make a pull request to the repository
 - Make a build
-- Publish to NPM
+- Publish to npm
 - Use the plugin in other projects
 
 ## [Example App: Bitballs](./bitballs.html)

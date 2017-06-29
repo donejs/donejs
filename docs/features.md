@@ -63,13 +63,13 @@ Another advantage of the integration between DoneJS' parts is the ability to sol
 
 Solving a story means a packaged solution to a development problem, where several features across layers converge to solve the problem from start to finish. Here are several examples of stories that DoneJS solves:
 
-1. [Modular workflow](#modular-workflow) - DoneJS makes it possible for teams to design and share components easily. Starting with [generators](#generators), users can create [modlets](#modlets) that encapsulate everything a [custom element](#custom-html-elements) needs, easily add [documentation](#documentation) and [testing](#comprehensive-testing), then use [NPM import and export](#npm-packages) to easily share the modules with other developers, no matter what module format they're using.
+1. [Modular workflow](#modular-workflow) - DoneJS makes it possible for teams to design and share components easily. Starting with [generators](#generators), users can create [modlets](#modlets) that encapsulate everything a [custom element](#custom-html-elements) needs, easily add [documentation](#documentation) and [testing](#comprehensive-testing), then use [npm import and export](#npm-packages) to easily share the modules with other developers, no matter what module format they're using.
 
 2. [Performance](#performance-features) - DoneJS was designed from the start to solve the performance story, packaging [server-side rendering](#server-side-rendered), [progressive loading](#progressive-loading), [worker thread rendering](#worker-thread-rendering), [data layer caching](#caching-and-minimal-data-requests), and more, all under one roof.
 
 3. [Maintainability](#maintainability-features) - [testing](#comprehensive-testing), [docs](#documentation), [MVVM](#mvvm-architecture)
 
-4.  Developer efficiency - [zero-config NPM imports](#npm-packages), [hot module swapping](#hot-module-swapping), [ES6 support](#es6-modules)
+4.  Developer efficiency - [zero-config npm imports](#npm-packages), [hot module swapping](#hot-module-swapping), [ES6 support](#es6-modules)
 
 ### Feature comparison
 
@@ -124,7 +124,7 @@ Solving a story means a packaged solution to a development problem, where severa
               </div>
             </td>
             <td>
-              <div class="has-popover" data-container="matrix-wrapper" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='http://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has." title="Requires some manual setup and lacks most of the features/support DoneJS has.">
+              <div class="has-popover" data-container="matrix-wrapper" data-toggle="popover" data-placement="bottom" data-html="true" data-content="Requires some <a href='https://reactjsnews.com/isomorphic-javascript-with-react-node' target='_blank'>manual setup</a> and lacks most of the features/support DoneJS has." title="Requires some manual setup and lacks most of the features/support DoneJS has.">
                 <img class="matrix-rating-icon" src="static/img/icon-fair.svg"><span class="asterisk"></span>
               </div>
             </td>
@@ -324,7 +324,7 @@ Solving a story means a packaged solution to a development problem, where severa
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#npm-packages">NPM Packages - Imports & Exports</a></div>
+              <div class="feature-description"><a href="#npm-packages">npm Packages - Imports & Exports</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
@@ -428,7 +428,7 @@ DoneJS is configured for maximum performance right out of the box.
 
 ### Server-Side Rendered
 
-DoneJS applications are written as [Single Page Applications](http://en.wikipedia.org/wiki/Single-page_application),
+DoneJS applications are written as [Single Page Applications](https://en.wikipedia.org/wiki/Single-page_application),
 and are able to be rendered on the server by running the same code. This is known as [Isomorphic JavaScript](http://isomorphic.net/javascript), or [Universal JavaScript](https://medium.com/@mjackson/universal-javascript-4761051b7ae9).
 
 Server-side rendering (SSR) provides two large benefits over traditional single page apps: much better page load performance and SEO support.
@@ -533,7 +533,7 @@ That's it! No need for additional configuration in your JavaScript.
 <a class="btn" href="https://stealjs.com/docs/StealJS.guides.progressive_loading.html"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#switch-between-pages"><span>View the Guide</span></a>
 
-_Progressive Loading is a feature of [StealJS](http://stealjs.com/) with additional support via the [`<can-import>` tag](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](http://canjs.com/)_
+_Progressive Loading is a feature of [StealJS](https://stealjs.com/) with additional support via the [`<can-import>` tag](https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) of [CanJS](https://canjs.com/)_
 
 ### Caching and Minimal Data Requests
 
@@ -554,7 +554,7 @@ DoneJS uses the following strategies to improve perceived performance (reduce th
 
 #### How it works
 
-[can-connect](http://connect.canjs.com/) makes up part of the DoneJS model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
+[can-connect](https://canjs.com/doc/can-connect.html) makes up part of the DoneJS model layer. Since all requests flow through this data layer, by making heavy use of set logic and localStorage caching, it's able to identify cache hits, even partial hits, and make the most minimal set of requests possible.
 
 It acts as a central hub for data requests, making decisions about how to best serve each request, but abstracting this complexity away from the application code. This leaves the UI components themselves able to make requests independently, and with little thought to performance, without actually creating a poorly performing application.
 
@@ -666,7 +666,7 @@ This video illustrates how it works.
 
 
 
-<a class="btn" href="http://connect.canjs.com/"><span>View the Documentation</span></a>
+<a class="btn" href="https://canjs.com/doc/can-connect.html"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#messages-page"><span>View the Guide</span></a>
 
 _Caching and minimal data requests is a feature of [can-connect](https://github.com/canjs/can-connect)_
@@ -700,9 +700,9 @@ And the following change to its data:
 rows[0].name = 'changed'; // change the first row's name
 ```
 
-In DoneJS, which uses the [can-stache](http://canjs.com/doc/can-stache.html) view engine, that would:
+In DoneJS, which uses the [can-stache](https://canjs.com/doc/can-stache.html) view engine, that would:
 
- 1. Trigger an event (because of the [DefineMap](http://canjs.com/doc/can-define/map/map.html) object observe API)
+ 1. Trigger an event (because of the [DefineMap](https://canjs.com/doc/can-define/map/map.html) object observe API)
  1. The event invokes a data binding event handler in the template layer
  1. The handler immediately results in the following code being run:
 ```
@@ -724,10 +724,10 @@ You can run this test yourself at <a href="https://output.jsbin.com/wotevub/2" t
 
 With synchronously observable objects and data bindings that change minimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
-<a class="btn" href="http://canjs.com/doc/can-stache.html"><span>can-stache Documentation</span></a>
-<a class="btn" href="http://canjs.com/doc/can-define.html"><span>can-map Documentation</span></a>
+<a class="btn" href="https://canjs.com/doc/can-stache.html"><span>can-stache Documentation</span></a>
+<a class="btn" href="https://canjs.com/doc/can-define.html"><span>can-map Documentation</span></a>
 
-_Minimal DOM updates is a feature of [CanJS](http://canjs.com/)_
+_Minimal DOM updates is a feature of [CanJS](https://canjs.com/)_
 
 ### Memory Safety
 
@@ -918,12 +918,12 @@ socket.on('messages removed',
   order => messageConnection.destroyInstance(order));
 ```
 
-[Follow the guide](./Guide.html#enable-a-real-time-connection) to see an example in action. View the can-connect real-time documentation [here](http://connect.canjs.com/doc/can-connect%7Creal-time.html).
+[Follow the guide](./Guide.html#enable-a-real-time-connection) to see an example in action. View the can-connect real-time documentation [here](https://canjs.com/doc/can-connect/real-time/real-time.html).
 
-<a class="btn" href="http://connect.canjs.com/doc/can-connect%7Creal-time.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://canjs.com/doc/can-connect/real-time/real-time.html"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#enable-a-real-time-connection"><span>View the Guide</span></a>
 
-_Real time connections is a feature of the [can-connect](http://connect.canjs.com) project._
+_Real time connections is a feature of the [can-connect](https://canjs.com/doc/can-connect.html) project._
 
 ### Pretty URLs with Pushstate
 
@@ -939,7 +939,7 @@ Wiring up these pretty URLs in your code is simple and intuitive.
 
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](http://canjs.com/doc/can-route.html) map URL patterns, like `/user/1`, to properties in our application state, like `{'userId': 1}`. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL patterns, like `/user/1`, to properties in our application state, like `{'userId': 1}`. In other words, our routes will just be a representation of the application state.
 
 This architecture simplifies routes so that they can be managed entirely in simple data bound templates, like the following example:
 
@@ -960,7 +960,7 @@ This architecture simplifies routes so that they can be managed entirely in simp
 
 <a class="btn" href="./place-my-order.html#setting-up-routing"><span>View the Guide</span></a>
 
-_Pretty URLs and routing are features of the [CanJS](http://canjs.com/) project._
+_Pretty URLs and routing are features of the [CanJS](https://canjs.com/) project._
 
 ## Maintainability features
 
@@ -1099,10 +1099,10 @@ The DoneJS testing layer involves many pieces, so if you want to learn more:
 
  * follow along in the [Unit testing view model and fixtures](./place-my-order.html#creating-a-unit-tested-view-model) section of the guide
  * see how to run tests and set up CI automation in the [CI section](./place-my-order.html#continuous-integration) of the guide
- * read about [FuncUnit](http://funcunit.com/), the functional testing and asynchronous user action simulating library
+ * read about [FuncUnit](https://funcunit.com/), the functional testing and asynchronous user action simulating library
  * read about [syn](https://github.com/bitovi/syn) - the synthetic event library
  * read about the [Testee.js](https://github.com/bitovi/testee) browser launcher, test runner, and reporting tool
- * read the [can-fixture](http://canjs.com/doc/can-fixture.html) docs
+ * read the [can-fixture](https://canjs.com/doc/can-fixture.html) docs
 
 ### Documentation
 
@@ -1147,15 +1147,15 @@ Then run `donejs document`. A browsable documentation website will be generated.
 
 <img src="static/img/docs.png" alt="A documentation website" />
 
-DoneJS applications use [DocumentJS](http://documentjs.com) to produce multi-versioned documentation. It lets you:
+DoneJS applications use [DocumentJS](https://documentjs.com) to produce multi-versioned documentation. It lets you:
 
 - Write docs inline or in markdown files.
 - Specify your code's behavior precisely with JSDoc and [Google Closure Compiler annotations](https://developers.google.com/closure/compiler/docs/js-for-compiler?hl=en) - a well-known documentation syntax.
 - Customize your site's theme and layout.
 - Generate multi-versioned documentation.
-- Document CSS alongside JavaScript. You can even make a [live style guide](http://documentjs.com/examples/styles/index.html).
+- Document CSS alongside JavaScript. You can even make a [live style guide](https://documentjs.com/examples/styles/index.html).
 
-You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](http://canjs.com/docs/index.html) site are generated using DocumentJS.
+You can keep it simple like the example above, or you can customize your docs with many powerful features. In fact, this entire site and the [CanJS](https://canjs.com/doc/api.html) site are generated using DocumentJS.
 
 <blockquote class="fun-quotes">
   <div class="fun-intro">You spend less time messing with Documentation generators,</div>
@@ -1163,10 +1163,10 @@ You can keep it simple like the example above, or you can customize your docs wi
     <img class="fun-img" src="static/img/funny-moonwalk.png">
 </blockquote>
 
-<a class="btn" href="http://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://documentjs.com/docs/index.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html#create-documentation"><span>View the Guide</span></a>
 
-_DoneJS Documentation is a feature of [DocumentJS](http://documentjs.com/)_
+_DoneJS Documentation is a feature of [DocumentJS](https://documentjs.com/)_
 
 ### Continuous Integration & Deployment
 
@@ -1257,9 +1257,9 @@ DoneJS generators create modlets to get you started quickly. To learn more about
 
 _Modlets are a feature of DoneJS [generators](#generators)._
 
-### NPM Packages
+### npm Packages
 
-DoneJS makes it easy to share and consume modules via package managers like NPM and Bower.
+DoneJS makes it easy to share and consume modules via package managers like npm and Bower.
 
 You can import modules from any package manager in any format - CommonJS, AMD, or ES6 - without any configuration. And you can convert modules to any other format.
 
@@ -1279,7 +1279,7 @@ The goal of these features is to transform project workflows, making it easier t
 
 #### How it works
 
-DoneJS apps use [StealJS](http://stealjs.com/) to load modules and install packages. This video introduces NPM import and export in StealJS:
+DoneJS apps use [StealJS](https://stealjs.com/) to load modules and install packages. This video introduces npm import and export in StealJS:
 
 <div class="youtube-container"><div class="youtube-player" data-videoid="eIfUsPdKF4A"></div></div>
 
@@ -1309,7 +1309,7 @@ DoneJS supports converting a module to any other format: CommonJS, AMD, or ES6 m
 
 The advantage is that you can publish your module to a wider audience of users. Anyone writing JavaScript can use your module, regardless of which script loader they are using (or if they aren't using a script loader).
 
-Just create an [export script](http://stealjs.com/docs/steal-tools.export.html) that points to the output formats you want, along with some options:
+Just create an [export script](https://stealjs.com/docs/steal-tools.export.html) that points to the output formats you want, along with some options:
 ```js
 var stealTools = require("steal-tools");
 stealTools.export({
@@ -1332,7 +1332,7 @@ node myexport.js
 
 ##### Modular workflow
 
-In combination with other DoneJS features, NPM module import and export make it possible for teams to design and share components easily.
+In combination with other DoneJS features, npm module import and export make it possible for teams to design and share components easily.
 
 [Generators](#generators) make it easy to bootstrap new modules of functionality quickly, and the [modlet pattern](#modlets) makes it easy to organize small, self-contained modules. It's even easy to create tests and documentation for each module.
 
@@ -1348,10 +1348,10 @@ Similar to the way that the [microservices](http://microservices.io/patterns/mic
 
 Imagine an organization where every app is broken into many reusable pieces, each of which is independently tested, developed, and shared. Over time, developers would be able to quickly spin up new applications, reusing previous functionality. DoneJS makes this a real possibility.
 
-<a class="btn" href="http://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://stealjs.com/docs/steal.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html#importing-other-projects"><span>View the Guide</span></a>
 
-_NPM package support is a feature of [StealJS](http://stealjs.com/)_
+_npm package support is a feature of [StealJS](https://stealjs.com/)_
 
 ### ES6 Modules
 
@@ -1371,7 +1371,7 @@ DoneJS applications are actually able to import or export any module type: ES6, 
 
 A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. During development, the compiler runs in the browser, so changes are happening live without a build step. During the build, your code is compiled to ES5, so your production code will run natively in every browser. You can even run your [ES6 application in IE9+](#supports-all-browsers-even-ie9)!
 
-<a class="btn" href="http://stealjs.com/docs/syntax.es6.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://stealjs.com/docs/syntax.es6.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html"><span>View the Guide</span></a>
 
 _Pretty URLs and routing are features of the [stealjs/transpile](https://github.com/stealjs/transpile) project._
@@ -1448,7 +1448,7 @@ Custom HTML elements are another name for [Web Components](http://webcomponents.
 
 ##### Benefits of DoneJS custom elements
 
-DoneJS uses CanJS' [can-component](http://canjs.com/doc/can-component.html) to provide a modern take on web components.
+DoneJS uses CanJS' [can-component](https://canjs.com/doc/can-component.html) to provide a modern take on web components.
 
 Components in DoneJS have three basic building blocks:
 
@@ -1518,23 +1518,23 @@ Back to our original example:
 
 This template combines a request for data with an element that expresses it. It's immediately obvious how you would add or remove features from this, allowing for quick changes and easy prototyping. Without custom elements, the same changes would require more difficult code changes and wiring those changes up with widget elements that display the data.
 
-Data custom elements are part of DoneJS via can-connect's [can-tag feature](http://connect.canjs.com/doc/can-connect%7Ccan%7Ctag.html).
+Data custom elements are part of DoneJS via can-connect's [can-tag feature](https://canjs.com/doc/can-connect/can/tag/tag.html).
 
 ##### Custom element libraries
 
-Custom elements are designed to be easily shareable across your organization. DoneJS provides support for simple [NPM import and export](#section_NPMPackages) and creating [documentation](#documentation) for elements. Together with custom element support, these features make it easier than ever to create reusable bits of functionality and share them.
+Custom elements are designed to be easily shareable across your organization. DoneJS provides support for simple [npm import and export](#npm-packages) and creating [documentation](#documentation) for elements. Together with custom element support, these features make it easier than ever to create reusable bits of functionality and share them.
 
 Some open source examples of DoneJS custom elements:
 
-<a class="btn" href="http://bitovi-components.github.io/bit-c3/docs/index.html"><span>bit-c3</span></a>
+<a class="btn" href="https://bitovi-components.github.io/bit-c3/docs/index.html"><span>bit-c3</span></a>
 <a class="btn" href="https://github.com/bitovi-components/bit-tabs"><span>bit-tabs</span></a>
-<a class="btn" href="http://bitovi-components.github.io/bit-autocomplete/"><span>bit-autocomplete</span></a>
+<a class="btn" href="https://bitovi-components.github.io/bit-autocomplete/"><span>bit-autocomplete</span></a>
 
 Check out [their source](https://github.com/bitovi-components/bit-tabs) for good examples of shareable, documented, and tested custom elements.
 
 ##### In-template dependency declarations
 
-[can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements, helpers, and other modules straight from a template file like:
+[can-import](https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) is a powerful feature that allows templates to be entirely self-sufficient. You can load custom elements, helpers, and other modules straight from a template file like:
 
 ```
 <can-import from="components/my_tabs"/>
@@ -1564,14 +1564,14 @@ The `<can-import>` element also plays a key role in [Progressive Loading](#progr
 {{/eq}}
 ```
 
-<a class="btn" href="http://canjs.com/doc/can-component.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://canjs.com/doc/can-component.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html#creating-custom-elements"><span>View the Guide</span></a>
 
-_Custom HTML elements are a feature of [CanJS](http://canjs.com/)_
+_Custom HTML elements are a feature of [CanJS](https://canjs.com/)_
 
 ### MVVM Architecture
 
-DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) architecture pattern, provided by [CanJS](http://canjs.com/).
+DoneJS applications employ a [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model_View_ViewModel) architecture pattern, provided by [CanJS](https://canjs.com/).
 
 <img src="static/img/mvvm.png" srcset="static/img/mvvm.png 1x, static/img/mvvm-2x.png 2x" alt="MVVM Architecture Diagram" />
 
@@ -1695,13 +1695,13 @@ In React, there is no observable data layer. You could define a `fullName` like 
 
 To learn more:
 
- * Models - read about [can-connect](http://canjs.com/doc/can-connect.html) and [can-define](http://canjs.com/doc/can-define.html)
- * Computed properties - read about [can-compute](http://canjs.com/doc/can-compute.html)
- * Observable data layer - read about [DefineMap](http://canjs.com/doc/can-define/map/map.html) and [DefineList](http://canjs.com/doc/can-define/list/list.html)
- * Views - read about [can-stache](http://canjs.com/doc/can-stache.html)
+ * Models - read about [can-connect](https://canjs.com/doc/can-connect.html) and [can-define](https://canjs.com/doc/can-define.html)
+ * Computed properties - read about [can-compute](https://canjs.com/doc/can-compute.html)
+ * Observable data layer - read about [DefineMap](https://canjs.com/doc/can-define/map/map.html) and [DefineList](https://canjs.com/doc/can-define/list/list.html)
+ * Views - read about [can-stache](https://canjs.com/doc/can-stache.html)
  * [Create a unit tested ViewModel](./place-my-order.html#creating-a-unit-tested-view-model) in the in-depth guide
 
-_The MVVM architecture in DoneJS is provided by [CanJS](http://canjs.com/)._
+_The MVVM architecture in DoneJS is provided by [CanJS](https://canjs.com/)._
 
 ### Hot Module Swapping
 
@@ -1736,9 +1736,9 @@ donejs develop
     <img class="fun-img" src="static/img/funny-mandm.png">
 </blockquote>
 
-<a class="btn" href="http://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://stealjs.com/docs/steal.live-reload.html"><span>View the Documentation</span></a>
 
-_Live reload is a feature of [StealJS](http://stealjs.com/)._
+_Live reload is a feature of [StealJS](https://stealjs.com/)._
 
 
 ### Generators
@@ -1787,7 +1787,7 @@ You're now a command away from running application wide tests, generating docume
 
 ##### Modlet component generator
 
-To create a [component](http://canjs.com/doc/can-component.html) organized with the [modlet](#modlets) file organization pattern:
+To create a [component](https://canjs.com/doc/can-component.html) organized with the [modlet](#modlets) file organization pattern:
 
 ```
 donejs add component <folder-path> <component-name>
@@ -1822,7 +1822,7 @@ Which will generate a working component in a single file.
 
 ##### Model generator
 
-To create a new [model](http://canjs.com/doc/can-connect/can/super-map/super-map.html):
+To create a new [model](https://canjs.com/doc/can-connect/can/super-map/super-map.html):
 
 ```
 donejs add supermodel <model-name>

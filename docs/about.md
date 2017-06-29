@@ -5,7 +5,7 @@
 
 @description
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2015/10/donejs-logo-ie.png"/>
+<img src="https://www.bitovi.com/hubfs/Imported_Blog_Media/donejs-logo-ie.png"/>
 
 DoneJS' goal is to help the JavaScript community get amazing applications done fast.
 Amazing applications are fast, sublimely usable, and maintainable.
@@ -93,7 +93,7 @@ DoneJS's goal is to strike a balance between immovable stability and irresistibl
 It can be a bumpy road, with lots of little changes. But it
 avoids rewrites, resulting in greater productivity:  
 
-<img src="http://blog.bitovi.com/wp-content/uploads/2015/10/mountain-climb1.jpg"/>
+<img src="https://www.bitovi.com/hubfs/Imported_Blog_Media/mountain-climb1.jpg"/>
 
 
 DoneJS is the successor to JavaScriptMVC. If your project chose JavaScriptMVC in 2007, you would have made a wise decision, giving your team an upgrade path to a modern application for the past 10 years.
@@ -113,7 +113,7 @@ to create great learning material, but also create an environment
 where people feel comfortable getting help.  
 
 The core team is always available on [gitter](https://gitter.im/donejs/donejs)
-and provides [weekly training](http://blog.bitovi.com/free-weekly-online-javascript-training/). Signup for a [meetup](./community.html) and we will come to your
+and provides [weekly training](https://www.bitovi.com/blog/free-weekly-online-javascript-training). Signup for a [meetup](./community.html) and we will come to your
 city and teach you DoneJS!
 
 

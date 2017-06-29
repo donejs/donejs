@@ -247,4 +247,4 @@ Once you published your plugin, let the world know about it. [Tweet @donejs](htt
  [20]: http://www.bitovi.com/hubfs/Imported_Blog_Media/Screen-Shot-2016-02-16-at-8.30.41-AM.png
  [21]: https://www.npmjs.com/signup
  [22]: http://semver.org/
- [23]: http://canjs.com/doc/can-view-import.html
+ [23]: https://canjs.com/doc/can-view-import.html
