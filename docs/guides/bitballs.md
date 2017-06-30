@@ -12,7 +12,7 @@ Specifically, this guide will walk through the implementation of the following b
  - Setup node services and server-side rendering on the same process.
  - How to turn off parts of the app that should not be server-side rendered.
 
-The code for Bitballs can be found [on github](http://github.com/donejs/bitballs).
+The code for Bitballs can be found [on GitHub](http://github.com/donejs/bitballs).
 To install and run it locally, follow its
 [development setup instructions](https://github.com/donejs/bitballs#setup-environment).
 
@@ -47,7 +47,7 @@ Create and delete games for a tournament:
 
 <img src="static/img/bitballs/new-game.png" srcset="static/img/bitballs/new-game.png 1x, static/img/bitballs/new-game-2x.png 2x">
 
-Add and remove stats for a game while watching it on youtube:
+Add and remove stats for a game while watching it on YouTube:
 
 <img src="static/img/bitballs/add-stat.png" srcset="static/img/bitballs/add-stat.png 1x, static/img/bitballs/add-stat-2x.png 2x">
 
