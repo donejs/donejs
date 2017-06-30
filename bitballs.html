@@ -266,7 +266,7 @@ endorse any backend storage technology.</p>
 <li>Language: JavaScript/<a href="https://nodejs.org/">Node 5</a></li>
 <li>Object Relational Mapper: <a href="http://bookshelfjs.org/">Bookshelf</a></li>
 <li>Migrations: <a href="http://umigrate.readthedocs.org/projects/db-migrate/en/v0.9.x/">DBMigrate</a></li>
-<li>Service Middleware: <a href="http://expressjs.com/">Express</a></li>
+<li>Service Middleware: <a href="https://expressjs.com/">Express</a></li>
 <li>Server Side Rendering: <a href="https://www.npmjs.com/package/done-ssr-middleware">done-ssr's express middleware</a></li>
 <li>Session Management: <a href="http://passportjs.org/">passport</a></li>
 </ul>
@@ -275,8 +275,8 @@ endorse any backend storage technology.</p>
 </blockquote>
 <p><strong>Client</strong></p>
 <ul>
-<li>Dependency Management: <a href="http://stealjs.com/">StealJS</a> with mixed use of <a href="http://stealjs.com/docs/syntax.CommonJS.html">CommonJS</a> and <a href="http://stealjs.com/docs/syntax.es6.html">ES6</a>.</li>
-<li>Model: <a href="https://connect.canjs.com/">can-connect</a></li>
+<li>Dependency Management: <a href="https://stealjs.com/">StealJS</a> with mixed use of <a href="https://stealjs.com/docs/syntax.CommonJS.html">CommonJS</a> and <a href="https://stealjs.com/docs/syntax.es6.html">ES6</a>.</li>
+<li>Model: <a href="https://canjs.com/doc/can-connect.html/">can-connect</a></li>
 <li>ViewModel: <a href="http://v3.canjs.com/doc/can-define/map/map.html">can-define/map</a> and <a href="http://v3.canjs.com/doc/can-define/list/list.html">can-define/list</a></li>
 <li>View: <a href="https://canjs.com/docs/can.stache.html">can.stache</a></li>
 <li>Custom Elements: <a href="https://canjs.com/docs/can.Component.html">can.Component</a></li>
@@ -297,7 +297,7 @@ endorse any backend storage technology.</p>
 </ul>
 <p><strong>Documentation</strong></p>
 <ul>
-<li>Engine: <a href="http://documentjs.com/">DocumentJS</a></li>
+<li>Engine: <a href="https://documentjs.com/">DocumentJS</a></li>
 </ul>
 <p>.</p>
 <h3>Folder organization</h3>
@@ -1070,10 +1070,10 @@ closely matches the API of your ORM.</p>
 <h3>Models and ViewModels</h3>
 <p>Once you've settled on an expressive service API, you need
 to make Models that connect to it and handle associated data. And if you want
-any of the advanced behavior of <a href="connect.canjs.com">can-connect</a>, you have
+any of the advanced behavior of <a href="https://canjs.com/doc/can-connect.html">can-connect</a>, you have
 to create a relational algebra that understands the service API.</p>
 <h4>Connecting to a service</h4>
-<p>Bitballs' client Models are <a href="https://connect.canjs.com/doc/can-connect%7Ccan%7Csuper-map.html">can-connect supermodels</a>.  So a type and list type is defined:</p>
+<p>Bitballs' client Models are <a href="https://canjs.com/doc/can-connect.html/doc/can-connect%7Ccan%7Csuper-map.html">can-connect supermodels</a>.  So a type and list type is defined:</p>
 <pre><code>var Game = DefineMap.extend({
   ...
 });
@@ -1118,7 +1118,7 @@ are created as the right type:</p>
   ...
 });
 </code></pre>
-<p>Notice that <code>stats.set</code> is setting the <a href="https://connect.canjs.com/doc/connect.base.listSetProp.html">__listSet</a> property of the stats.  This is necessary for <a href="https://connect.canjs.com/doc/can-connect%7Creal-time.html">can-connect's real-time</a> behavior. When stats are created for this game, they will automatically appear in this list.</p>
+<p>Notice that <code>stats.set</code> is setting the <a href="https://canjs.com/doc/can-connect.html/doc/connect.base.listSetProp.html">__listSet</a> property of the stats.  This is necessary for <a href="https://canjs.com/doc/can-connect.html/doc/can-connect%7Creal-time.html">can-connect's real-time</a> behavior. When stats are created for this game, they will automatically appear in this list.</p>
 <h4>Defining computed properties</h4>
 <p><code>Game</code> also has <code>teams</code> and <code>players</code> computed properties that
 derive their value from related fields:</p>
@@ -1220,7 +1220,7 @@ are written in NodeJS, you can host server-side rendering in the same process as
 NodeJS application.  This is the only, relatively minor, advantage of writing backend services in NodeJS.</p>
 </blockquote>
 <h3>Setup</h3>
-<p>Bitballs is written using <a href="http://expressjs.com/en/guide/using-middleware.html">Express middleware</a>.
+<p>Bitballs is written using <a href="https://expressjs.com/en/guide/using-middleware.html">Express middleware</a>.
 With express you order middleware functions to handle different requests. Bitballs sets up its middleware in <a href="https://github.com/donejs/bitballs/blob/master/index.js">/index.js</a>. The middleware is setup in the
 following order:</p>
 <ol>

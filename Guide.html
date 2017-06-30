@@ -206,7 +206,7 @@
 			<section class="description">
 				<p>In this guide, we will create <a href="https://chat.donejs.com">chat.donejs.com</a>, a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:
 <img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
-<p>In the first part of this guide, we will install DoneJS, <a href="./Features.html#generators">generate a new application</a> and start a server that provides <a href="./Features.html#hot-module-swapping">hot module swapping</a> and <a href="./Features.html#server-side-rendered">server-side rendering</a>. We will then <a href="./Features.html#npm-packages">import Bootstrap from NPM</a>, create our <a href="./Features.html#custom-html-elements">own custom HTML elements</a> and <a href="./Features.html#pretty-urls-with-pushstate">set up routing</a> between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and <a href="./Features.html#real-time-connected">receive real-time updates</a>.</p>
+<p>In the first part of this guide, we will install DoneJS, <a href="./Features.html#generators">generate a new application</a> and start a server that provides <a href="./Features.html#hot-module-swapping">hot module swapping</a> and <a href="./Features.html#server-side-rendered">server-side rendering</a>. We will then <a href="./Features.html#npm-packages">import Bootstrap from npm</a>, create our <a href="./Features.html#custom-html-elements">own custom HTML elements</a> and <a href="./Features.html#pretty-urls-with-pushstate">set up routing</a> between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and <a href="./Features.html#real-time-connected">receive real-time updates</a>.</p>
 <p>In the final parts of the guide we will make an <a href="./Features.html#progressive-loading">optimized, progressively loaded production build</a> and <a href="./Features.html#deploy-to-a-cdn">deploy it to a CDN</a>. We will conclude with creating a <a href="./Features.html#ios-android-and-desktop-builds">mobile and desktop</a> version of the application.</p>
 <p>If you run into any problems, let us know <a href="https://gitter.im/donejs/donejs">on Gitter</a>, we’re happy to help out.</p>
 <blockquote>
@@ -266,12 +266,12 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <pre><code>donejs develop
 </code></pre>
 <p>The default port is <code>8080</code>.</p>
-<p>Go to <a href="localhost:8080">http://localhost:8080/</a> to see our application showing a default homepage.</p>
+<p>Go to <a href="http://localhost:8080/" title="http://localhost:8080/">http://localhost:8080/</a> to see our application showing a default homepage.</p>
 <p><img src="static/img/donejs-helloworld.png" alt="hello world" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Adding Bootstrap</h2>
-<p>DoneJS makes it easy to import other projects that are published on <a href="https://npmjs.org">NPM</a>. In this section, we will install and add <a href="https://getbootstrap.com/">Bootstrap</a> to the page, and see DoneJS’s <a href="./Features.html#hot-module-swapping">hot module swapping</a> in action.</p>
-<h3>Install the NPM package</h3>
-<p>Open a new terminal window so we can keep the DoneJS development server running. Then, install the <a href="https://www.npmjs.com/package/bootstrap">Bootstrap NPM package</a> and save it as a dependency of our application like this:</p>
+<p>DoneJS makes it easy to import other projects that are published on <a href="https://npmjs.org">npm</a>. In this section, we will install and add <a href="https://getbootstrap.com/">Bootstrap</a> to the page, and see DoneJS’s <a href="./Features.html#hot-module-swapping">hot module swapping</a> in action.</p>
+<h3>Install the npm package</h3>
+<p>Open a new terminal window so we can keep the DoneJS development server running. Then, install the <a href="https://www.npmjs.com/package/bootstrap">Bootstrap npm package</a> and save it as a dependency of our application like this:</p>
 <pre><code>npm install bootstrap --save
 </code></pre>
 <h3>Add it to the page</h3>
@@ -317,7 +317,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <li><a href="https://canjs.com/doc/can-view-import.html">&lt;can-import&gt;</a> — specifies template dependencies.</li>
 </ul>
 </blockquote>
-<p>If you kept your browser window open at <a href="localhost:8080">http://localhost:8080/</a> you should see the updated styles and content as soon as you save the file.</p>
+<p>If you kept your browser window open at <a href="http://localhost:8080/" title="http://localhost:8080/">http://localhost:8080/</a> you should see the updated styles and content as soon as you save the file.</p>
 <p><img src="static/img/donejs-bootstrap.png" alt="donejs add app" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Feel free to edit the HTML or <code>src/styles.less</code> to see how hot module swapping updates the page automatically.</p>
 <h2>Routing and components</h2>
@@ -854,6 +854,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 <p>If everything went well, we should see the emulator running our application.</p>
 <p><img src="static/img/donejs-ios.png" alt="ios build" height="590" width="320" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.</p>
+<p><strong>Note:</strong> if you receive the error <code>Error: Cannot read property 'replace' of undefined</code>, you can work around it by running <code>cd build/cordova/platforms/ios/cordova/ &amp;&amp; npm install ios-sim@6</code> until <a href="https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git;a=commit;h=4490abf273ec6d12810c8ff5ea16d197c58ecd4b">this patch</a> is released.</p>
 <h3>Electron</h3>
 <p>To set up the desktop build, we have to add it to our application like this:</p>
 <pre><code>donejs add electron@1
@@ -863,7 +864,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 <p>Then we can run the build like this:</p>
 <pre><code>donejs build electron
 </code></pre>
-<p>The OS X application can be opened with</p>
+<p>The macOS application can be opened with</p>
 <pre><code>open build/donejs-chat-darwin-x64/donejs-chat.app
 </code></pre>
 <p>The Windows application can be opened with</p>
@@ -960,7 +961,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 	
 
 	<script type="text/javascript">
-		var docObject = {"src":{"path":"docs/guides/guide.md"},"description":"In this guide, we will create [chat.donejs.com](https://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time: \n<img src=\"static/img/donejs-chat.gif\" alt=\"chat.donejs.com\" style=\"box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;\" />\n\nIn the first part of this guide, we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from NPM](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).\n\nIn the final parts of the guide we will make an [optimized, progressively loaded production build](./Features.html#progressive-loading) and [deploy it to a CDN](./Features.html#deploy-to-a-cdn). We will conclude with creating a [mobile and desktop](./Features.html#ios-android-and-desktop-builds) version of the application.\n\nIf you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we’re happy to help out.\n\n> For an even easier version of this guide, one that can be done entirely online, checkout [CanJS’s Chat Guide](https://canjs.com/doc/guides/chat.html). There, you'll build the same chat widget in a [JS Bin](https://jsbin.com/), but\nwithout a mobile or desktop build and deployment to a CDN.\n>\n>\n> Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout [StealJS’s Quick Start Guide](https://stealjs.com/docs/StealJS.quick-start.html) before proceeding with this guide.\n\n","name":"Guide","title":"Quick start guide","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
+		var docObject = {"src":{"path":"docs/guides/guide.md"},"description":"In this guide, we will create [chat.donejs.com](https://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time: \n<img src=\"static/img/donejs-chat.gif\" alt=\"chat.donejs.com\" style=\"box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;\" />\n\nIn the first part of this guide, we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from npm](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).\n\nIn the final parts of the guide we will make an [optimized, progressively loaded production build](./Features.html#progressive-loading) and [deploy it to a CDN](./Features.html#deploy-to-a-cdn). We will conclude with creating a [mobile and desktop](./Features.html#ios-android-and-desktop-builds) version of the application.\n\nIf you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we’re happy to help out.\n\n> For an even easier version of this guide, one that can be done entirely online, checkout [CanJS’s Chat Guide](https://canjs.com/doc/guides/chat.html). There, you'll build the same chat widget in a [JS Bin](https://jsbin.com/), but\nwithout a mobile or desktop build and deployment to a CDN.\n>\n>\n> Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout [StealJS’s Quick Start Guide](https://stealjs.com/docs/StealJS.quick-start.html) before proceeding with this guide.\n\n","name":"Guide","title":"Quick start guide","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
 	</script>
 
 	
