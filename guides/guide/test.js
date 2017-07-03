@@ -12,7 +12,7 @@ if(isWindowsCI && nodeVersion <= 7) {
 
 var guide = automate({ spinner: true, log: true });
 var wait = function(){
-    var ms = isWindowsCI ? 5000 : 2000;
+    var ms = isWindowsCI ? 10000 : 2000;
 	return guide.wait(ms);
 };
 
