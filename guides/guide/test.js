@@ -27,7 +27,8 @@ guide.step("Remove existing dependencies", function(){
 guide.step("Install donejs", function(){
   var branch = process.env.TRAVIS_PULL_REQUEST_BRANCH || process.env.TRAVIS_BRANCH
     || process.env.APPVEYOR_REPO_COMMIT || 'master';
-  var repo = process.env.TRAVIS_PULL_REQUEST_SLUG || process.env.TRAVIS_REPO_SLUG;
+  var repo = process.env.TRAVIS_PULL_REQUEST_SLUG ||
+    process.env.TRAVIS_REPO_SLUG || "donejs/donejs";
 
 	return guide.executeCommand("npm", ["install", repo + "#" + branch, "-g"]);
 });
@@ -186,7 +187,7 @@ guide.step("Generate the Message model", function(){
 	var supermodel = guide.answerPrompts("donejs", ["add", "supermodel", "message"]);
 	var answer = supermodel.answer;
 
-	answer(/URL endpoint/, "http://chat.donejs.com/api/messages\n");
+	answer(/URL endpoint/, "https://chat.donejs.com/api/messages\n");
 	answer(/property name/, "\n");
   answer(/service URL/, "Yes\n");
 

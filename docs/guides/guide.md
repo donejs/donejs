@@ -6,7 +6,7 @@
 
 <img src="static/img/donejs-chat.gif" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
-In the first part of this guide, we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from NPM](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).
+In the first part of this guide, we will install DoneJS, [generate a new application](./Features.html#generators) and start a server that provides [hot module swapping](./Features.html#hot-module-swapping) and [server-side rendering](./Features.html#server-side-rendered). We will then [import Bootstrap from npm](./Features.html#npm-packages), create our [own custom HTML elements](./Features.html#custom-html-elements) and [set up routing](./Features.html#pretty-urls-with-pushstate) between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and [receive real-time updates](./Features.html#real-time-connected).
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](./Features.html#progressive-loading) and [deploy it to a CDN](./Features.html#deploy-to-a-cdn). We will conclude with creating a [mobile and desktop](./Features.html#ios-android-and-desktop-builds) version of the application.
 
@@ -76,17 +76,17 @@ donejs develop
 
 The default port is `8080`.
 
-Go to [http://localhost:8080/](localhost:8080) to see our application showing a default homepage.
+Go to [http://localhost:8080/] to see our application showing a default homepage.
 
 <img src="static/img/donejs-helloworld.png" alt="hello world" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 ## Adding Bootstrap
 
-DoneJS makes it easy to import other projects that are published on [NPM](https://npmjs.org). In this section, we will install and add [Bootstrap](https://getbootstrap.com/) to the page, and see DoneJS’s [hot module swapping](./Features.html#hot-module-swapping) in action.
+DoneJS makes it easy to import other projects that are published on [npm](https://npmjs.org). In this section, we will install and add [Bootstrap](https://getbootstrap.com/) to the page, and see DoneJS’s [hot module swapping](./Features.html#hot-module-swapping) in action.
 
-### Install the NPM package
+### Install the npm package
 
-Open a new terminal window so we can keep the DoneJS development server running. Then, install the [Bootstrap NPM package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
+Open a new terminal window so we can keep the DoneJS development server running. Then, install the [Bootstrap npm package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
 ```
 npm install bootstrap --save
@@ -104,7 +104,7 @@ Update `src/index.stache` to look like this:
 > New APIs Used:
 > - [<can-import>](https://canjs.com/doc/can-view-import.html) — specifies template dependencies.
 
-If you kept your browser window open at [http://localhost:8080/](localhost:8080) you should see the updated styles and content as soon as you save the file.
+If you kept your browser window open at [http://localhost:8080/] you should see the updated styles and content as soon as you save the file.
 
 <img src="static/img/donejs-bootstrap.png" alt="donejs add app" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
@@ -146,7 +146,7 @@ Later we will update the generated files with the chat messages functionality.
 First, let’s update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
 @sourceref ../../guides/guide/steps/7-navigate/home.component
-@highlight 4,7-17
+@highlight 5,8-18
 
 > New APIs Used:
 > - [<can-component>](https://github.com/donejs/done-component#done-component) — a [StealJS](https://stealjs.com/) plugin for CanJS [components](https://canjs.com/doc/can-component.html) that allows you to define a component completely within a  _.component_ file.
@@ -185,7 +185,7 @@ Update `src/index.stache` to:
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
-<img src="static/img/donejs-chat1.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-chat1.png" alt="chat.donejs.com" height="302" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the page’s content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
 
@@ -391,7 +391,7 @@ Now that we verified that our application works in production, we can deploy it 
 
 Sign up for free at [Firebase](https://firebase.google.com/). After you have an account go to [Firebase console](https://console.firebase.google.com/) and create an app called `donejs-chat-<user>` where `<user>` is your GitHub username. Write down the name of your app because you'll need it in the next section.
 
-> You'll get an error if your app name is too long, so pick something on the shorter side.
+> You'll get an error if your app name is too long, so pick something on the shorter side. After you're created your app be sure to note the Firebase **ID**, as this is the information you need to enter in the next section.
 
 When you deploy for the first time it will ask you to authorize, but first we need to configure the project.
 
@@ -467,9 +467,11 @@ donejs build cordova
 
 If everything went well, we should see the emulator running our application.
 
-<img src="static/img/donejs-ios.png" alt="ios build" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-ios.png" alt="ios build" height="590" width="320" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
 
 Windows users will get instructions to download the latest version of the platform and to create a Virtual Device. Follow the instructions and then re-do the build. This will only happen the first time you build for Cordova.
+
+__Note:__ if you receive the error `Error: Cannot read property 'replace' of undefined`, you can work around it by running `cd build/cordova/platforms/ios/cordova/ && npm install ios-sim@6` until [this patch](https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git;a=commit;h=4490abf273ec6d12810c8ff5ea16d197c58ecd4b) is released.
 
 ### Electron
 
@@ -489,7 +491,7 @@ Then we can run the build like this:
 donejs build electron
 ```
 
-The OS X application can be opened with
+The macOS application can be opened with
 
 ```
 open build/donejs-chat-darwin-x64/donejs-chat.app

@@ -1,5 +1,4 @@
 publish-docs:
-	npm cache clean
 	rm -rf node_modules
 	npm install
 	npm run document:force

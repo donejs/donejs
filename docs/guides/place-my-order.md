@@ -40,12 +40,12 @@ donejs add app place-my-order
 
 The initialization process will ask you questions like the name of your application (set to `place-my-order`) and the source folder (set to `src`). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:
 
-- [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
-- [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
-- [jQuery](http://jquery.com) - DOM helpers
-- [jQuery++](http://jquerypp.com) - Extended DOM helpers
+- [StealJS](https://stealjs.com) - ES6, CJS, and AMD module loader and builder
+- [CanJS](https://canjs.com) - Custom elements and Model-View-ViewModel utilities
+- [jQuery](https://jquery.com) - DOM helpers
+- [jQuery++](https://jquerypp.com) - Extended DOM helpers
 - [QUnit](https://qunitjs.com/) or Mocha - Assertion library
-- [FuncUnit](http://funcunit.com) - Functional tests
+- [FuncUnit](https://funcunit.com) - Functional tests
 - [Testee](https://github.com/bitovi/testee) - Test runner
 
 If we now go into the `place-my-order` folder with
@@ -98,7 +98,7 @@ DoneJS comes with its own server, which hosts your development files and takes c
 donejs develop
 ```
 
-The default port is 8080, so if we now go to [http://localhost:8080/](localhost:8080) we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
+The default port is 8080, so if we now go to [http://localhost:8080/] we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
 
 ### Setup a service API
 
@@ -175,7 +175,7 @@ load the static assets and set a `<meta>` tag to support a responsive design:
 @sourceref ../../guides/place-my-order/steps/loading-assets/index.stache
 @highlight 4,7
 
-This is an HTML5 template that uses [can-stache](http://canjs.com/doc/can-stache.html) - a [Handlebars syntax](http://handlebarsjs.com/)-compatible view engine. It renders a `message` property from the application state.
+This is an HTML5 template that uses [can-stache](https://canjs.com/doc/can-stache.html) - a [Handlebars syntax](http://handlebarsjs.com/)-compatible view engine. It renders a `message` property from the application state.
 
 `can-import` loads the template's dependencies:
  1. The `place-my-order-assets` package, which loads the LESS styles for the application
@@ -203,7 +203,7 @@ const AppViewModel = DefineMap.extend({
 export default AppViewModel;
 ```
 
-This initializes a [DefineMap](http://canjs.com/doc/can-define/map/map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
+This initializes a [DefineMap](https://canjs.com/doc/can-define/map/map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
 
 ## Creating custom elements
 
@@ -224,7 +224,7 @@ This will create a file at `src/home.component` containing the basic ingredients
 @sourceref ../../guides/place-my-order/steps/creating-homepage/home.component
 @highlight 7-19
 
-Here we created a [can-component](http://canjs.com/doc/can-component.html) named `pmo-home`. This particular component is just a basic template, it does not have much in the way of styles or functionality.
+Here we created a [can-component](https://canjs.com/doc/can-component.html) named `pmo-home`. This particular component is just a basic template, it does not have much in the way of styles or functionality.
 
 ### Create the order history element
 
@@ -283,9 +283,9 @@ In this part, we will create routes - URL patterns that load specific parts of o
 
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](http://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
-To learn more about routing visit the CanJS guide on [Application State and Routing](http://canjs.com/guides/AppStateAndRouting.html).
+To learn more about routing visit the CanJS guide on [Application State and Routing](https://canjs.com/guides/AppStateAndRouting.html).
 
 To add our routes, change `src/app.js` to:
 
@@ -314,7 +314,7 @@ and update `src/header.component` to:
 @sourceref ../../guides/place-my-order/steps/add-header/header.component
 @highlight 8-24
 
-Here we use [routeUrl](http://canjs.com/doc/can-stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
+Here we use [routeUrl](https://canjs.com/doc/can-stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
 We also use the Stache `eq` helper to make the appropriate link active.
 
@@ -341,7 +341,7 @@ Update `src/index.stache` to:
 @sourceref ../../guides/place-my-order/steps/switch-between/index.stache
 @highlight 11-13,15-34
 
-Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](http://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) and initializes it.
+Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) and initializes it.
 
 Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its `state` property to `resolved`.
 
@@ -349,7 +349,7 @@ Now we can see the header and the home component and be able to navigate to the 
 
 ## Getting Data from the Server
 
-In this next part, we'll connect to the RESTful API that we set up with `place-my-order-api`, using the powerful data layer provided by [can-connect](http://connect.canjs.com/).
+In this next part, we'll connect to the RESTful API that we set up with `place-my-order-api`, using the powerful data layer provided by [can-connect](https://canjs.com/doc/can-connect.html).
 
 ### Creating a restaurants connection
 
@@ -472,7 +472,7 @@ Now we can load a list of states and cities.
 
 ### Implement view model behavior
 
-Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](http://canjs.com/doc/can-define/map/map.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
+Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](https://canjs.com/doc/can-define/map/map.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-dependent/list.js
 @highlight 6-7,10-46
@@ -487,11 +487,11 @@ Let's take a closer look at those properties:
 
 ### Create a test
 
-View models that are decoupled from the presentation layer are easy to test. We will use [QUnit](http://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`). The component generator created a fully working test page for the component, which can be opened at [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html). Currently, the tests will fail because we changed the view model, but in this section we will create some unit tests for the new functionality.
+View models that are decoupled from the presentation layer are easy to test. We will use [QUnit](https://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`). The component generator created a fully working test page for the component, which can be opened at [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html). Currently, the tests will fail because we changed the view model, but in this section we will create some unit tests for the new functionality.
 
 #### Fixtures: Create fake data
 
-Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](http://canjs.com/doc/can-fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use for tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/states.js` to:
+Unit tests should be able to run by themselves without the need for an API server. This is where [fixtures](https://canjs.com/doc/can-fixture.html) come in. Fixtures allow us to mock requests to the REST API with data that we can use for tests or demo pages. Default fixtures will be provided for every generated model. Now we'll add more realistic fake data by updating `src/models/fixtures/states.js` to:
 
 @sourceref ../../guides/place-my-order/steps/create-test/states.js
 @highlight 4-7
@@ -526,7 +526,7 @@ Update `src/restaurant/list/list.stache` to:
 Some things worth pointing out:
 
 - Since `states` and `cities` return a promise, we can check the promise's status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
-- The `state` and `city` properties are two-way bound to their select fields via [{($value)}](http://canjs.com/doc/can-stache-bindings.twoWay.html#___child_prop____key_)
+- The `state` and `city` properties are two-way bound to their select fields via [{($value)}](https://canjs.com/doc/can-stache-bindings.twoWay.html#___child_prop____key_)
 
 Now we have a component that lets us select state and city and displays the appropriate restaurant list.
 
@@ -726,7 +726,7 @@ Here we are adding some more conditions if `page` is set to `restaurants`:
 
 ## Importing other projects
 
-The NPM integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
+The npm integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
 ```
 npm install bit-tabs@1 --save
@@ -847,7 +847,7 @@ This is a longer template so lets walk through it:
 - The interesting part for showing a menu item is the checkbox `<input type="checkbox" ($change)="order.items.toggle(.)" {{#if order.items.has(.)}}checked{{/if}}>`
   - `($change)` binds to the checkbox change event and runs `order.items.toggle` which toggles the item from `ItemList`, which we created in the model
   - `order.item.has` sets the checked status to whether or not this item is in the order
-- Then we show form elements for name, address, and phone number, which are bound to the order model using [can-stache-bindings](http://canjs.com/doc/can-stache-bindings.html)
+- Then we show form elements for name, address, and phone number, which are bound to the order model using [can-stache-bindings](https://canjs.com/doc/can-stache-bindings.html)
 - Finally we disable the button with `{{^if canPlaceOrder}}disabled{{/if}}` which gets `canPlaceOrder` from the view model and returns false if no menu items are selected.
 
 ## Set up a real-time connection
@@ -856,12 +856,12 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 
 ### Add the order-model tag
 
-Update `src/models/order.js` to use [can-connect/can/tag/](http://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively:
+Update `src/models/order.js` to use [can-connect/can/tag/](https://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order-tag.js
 @highlight 6,59,74
 
-The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator](http://canjs.com/doc/can-set.props.enum.html) so that multiple requests for different statuses can be combined.
+The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator](https://canjs.com/doc/can-set.props.enum.html) so that multiple requests for different statuses can be combined.
 
 ### Update the template
 
@@ -883,7 +883,7 @@ First we import the order model and then just call `<order-model get-list="{stat
 
 ### Adding real-time events to a model
 
-The `place-my-order-api` module uses the [Feathers](http://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
+The `place-my-order-api` module uses the [Feathers](https://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
 
 ```
 npm install steal-socket.io@4 --save
@@ -898,7 +898,7 @@ That's it. If we now open the [order page](http://localhost:8080/order-history) 
 
 ## Create documentation
 
-Documenting our code is very important to quickly get other developers up to speed. [DocumentJS](http://documentjs.com/) makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.
+Documenting our code is very important to quickly get other developers up to speed. [DocumentJS](https://documentjs.com/) makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.
 
 ### Installing and Configuring DocumentJS
 
@@ -964,7 +964,7 @@ var buildPromise = stealTools.build({
 
 @highlight 4-7
 
-StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [dest](http://stealjs.com/docs/steal-tools.build.html#dest) to `dist`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
+StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your [dest](https://stealjs.com/docs/steal-tools.build.html#dest) to `dist`, and will place the place-my-order-assets images in `dist/node_modules/place-my-order/assets/images`. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.
 
 
 ### Bundling your app
@@ -1056,7 +1056,7 @@ Then we can run the build like this:
 donejs build electron
 ```
 
-The OS X application can be opened with
+The macOS application can be opened with
 
 ```
 open build/place-my-order-darwin-x64/place-my-order.app
@@ -1078,7 +1078,7 @@ Sign up for free at [Firebase](https://firebase.google.com/). After you have an 
 
 <img src="static/img/guide-firebase-setup.png" alt="two browsers" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid; max-width: 400px;" />
 
-Write down the name of your app because you'll need it in the next section.
+Write down the name of your app's ID because you'll need it in the next section.
 
 > You will get an error if your app name is too long, so pick something on the shorter side, for example `pmo-<user>`.
 
@@ -1192,7 +1192,7 @@ before_deploy:
   - "node build"
   - "git add dist/ --force"
   - "git commit -m \"Updating build.\""
-  - "node_modules/.bin/firebase deploy --token \"$FIREBASE_TOKEN\""
+  - "npm run deploy:ci"
 deploy:
   skip_cleanup: true
   provider: "heroku"
@@ -1260,19 +1260,19 @@ In this final short chapter, let's quickly look at what we did in this guide and
 
 In this in-depth guide we created and deployed a fully tested restaurant menu ordering application called [place-my-order](http://www.place-my-order.com/) with DoneJS. We learned how to set up a DoneJS project, create custom elements and retrieve data from the server. Then we implemented a unit-tested view-model, ran those tests automatically from the command line and on a continuous integration server.
 
-We went into more detail on how to create nested routes and importing other projects from NPM. Then we created new orders and made it real-time, added and built documentation and made a production build. Finally we turned that same application into a desktop and mobile application and deployed it to a CDN and the web.
+We went into more detail on how to create nested routes and importing other projects from npm. Then we created new orders and made it real-time, added and built documentation and made a production build. Finally we turned that same application into a desktop and mobile application and deployed it to a CDN and the web.
 
 ### Following up
 
 You can learn more about each of the individual projects that DoneJS includes at:
 
-- [StealJS](http://stealjs.com) - ES6, CJS, and AMD module loader and builder
-- [CanJS](http://canjs.com) - Custom elements and Model-View-ViewModel utilities
-- [jQuery](http://jquery.com) - DOM helpers
-- [jQuery++](http://jquerypp.com) - Extended DOM helpers
+- [StealJS](https://stealjs.com) - ES6, CJS, and AMD module loader and builder
+- [CanJS](https://canjs.com) - Custom elements and Model-View-ViewModel utilities
+- [jQuery](https://jquery.com) - DOM helpers
+- [jQuery++](https://jquerypp.com) - Extended DOM helpers
 - [QUnit](https://qunitjs.com/) or Mocha - Assertion library
-- [FuncUnit](http://funcunit.com) - Functional tests
+- [FuncUnit](https://funcunit.com) - Functional tests
 - [Testee](https://github.com/bitovi/testee) - Test runner
-- [DocumentJS](http://documentjs.com) - Documentation
+- [DocumentJS](https://documentjs.com) - Documentation
 
 If you have any questions, do not hesitate to ask us on [Gitter](https://gitter.im/donejs/donejs) or the [forums](http://forums.donejs.com)!
