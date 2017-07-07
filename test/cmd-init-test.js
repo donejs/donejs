@@ -89,7 +89,7 @@ describe('cli init cmd', function() {
 
         assert.equal(installCliCall.binary, 'npm');
         assert.deepEqual(installCliCall.args, [
-          'install', 'donejs-cli@latest', '--loglevel', 'error'
+          'install', 'donejs-cli@latest', '--no-shrinkwrap', '--loglevel', 'error'
         ]);
 
         assert.deepEqual(runBinaryCall.args, ['init']);
@@ -121,4 +121,3 @@ describe('cli init cmd', function() {
     }
   }
 });
-
