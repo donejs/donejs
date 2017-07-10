@@ -4,6 +4,7 @@
 
 ![DoneJS logo](https://donejs.com/static/img/donejs-logo-black.svg)
 
+
 [![npm version](https://badge.fury.io/js/donejs.svg)](https://badge.fury.io/js/donejs)
 [![Build Status](https://travis-ci.org/donejs/donejs.svg?branch=master)](https://travis-ci.org/donejs/donejs)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/donejs/donejs?branch=master&svg=true)](https://ci.appveyor.com/project/daffl/donejs)
