@@ -275,6 +275,7 @@ guide.step("Create a test", function(){
 			return guide.injectSpy("src/restaurant/list/test.html");
 	})
 		.then(wait)
+		.then(wait)
 		.then(wait);
 });
 
