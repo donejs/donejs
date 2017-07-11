@@ -38,10 +38,17 @@ guide.step("Remove existing dependencies", function(){
 });
 
 guide.step("Install donejs", function(){
-  var branch = process.env.TRAVIS_PULL_REQUEST_BRANCH ||
-    process.env.TRAVIS_BRANCH || process.env.APPVEYOR_REPO_COMMIT || 'master';
-  var repo = process.env.TRAVIS_PULL_REQUEST_SLUG ||
-    process.env.TRAVIS_REPO_SLUG || "donejs/donejs";
+  var branch =
+    process.env.TRAVIS_PULL_REQUEST_BRANCH ||
+    process.env.TRAVIS_BRANCH ||
+    process.env.APPVEYOR_REPO_BRANCH ||
+    process.env.APPVEYOR_REPO_COMMIT ||
+    'master';
+  var repo =
+    process.env.TRAVIS_PULL_REQUEST_SLUG ||
+    process.env.TRAVIS_REPO_SLUG ||
+    process.env.APPVEYOR_REPO_NAME ||
+    'donejs/donejs';
 
   return guide.executeCommand("npm", ["install", repo + "#" + branch, "-g"]);
 });
