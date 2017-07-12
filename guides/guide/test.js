@@ -381,6 +381,12 @@ guide.run().then(
 		guide.canServe.kill();
 	}
 	return exitCode;
+}).then(function (x) {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(x);
+    }, 30000); // BIG OLE DELAY
+  });
 }).then(function(exitCode){
 	process.exit(exitCode);
 });

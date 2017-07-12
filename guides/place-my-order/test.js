@@ -520,7 +520,13 @@ guide.run().then(
 		console.error("Oh no", err.message, err.stack, err);
 		return 1;
 	}
-).then(function(exitCode){
+).then(function (x) {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve(x);
+    }, 30000); // BIG OLE DELAY
+  });
+}).then(function(exitCode){
 	console.log("Exiting", exitCode);
 	process.exit(exitCode);
 });
