@@ -11,7 +11,7 @@
     "document": "bit-docs && npm run docs-copy",
     "document:force": "bit-docs -fd && npm run docs-copy",
     "test": "npm run test-guides",
-    "test-guides": "npm run test-quickstart && npm run test-pmo",
+    "test-guides": "npm run test-pmo && npm run test-quickstart",
     "test-quickstart": "guide guides/guide/test.js --local",
     "test-pmo": "guide guides/place-my-order/test.js --local",
     "jshint": "jshint lib/. bin/donejs test/. --config",
