@@ -304,7 +304,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
     &quot;build&quot;: &quot;node build&quot;
   },
 </code></pre>
-<p><span line-highlight='2,2'></span>
+<p><span line-highlight='2,2,only'></span>
 Which allows us to start the server like:</p>
 <pre><code>donejs api
 </code></pre>
@@ -319,7 +319,7 @@ Which allows us to start the server like:</p>
   &quot;build&quot;: &quot;node build&quot;
 },
 </code></pre>
-<p><span line-highlight='4,5'></span>
+<p><span line-highlight='4,5,only'></span>
 Now we can start the application with:</p>
 <pre><code>donejs develop
 </code></pre>
@@ -359,7 +359,7 @@ load the static assets and set a <code>&lt;meta&gt;</code> tag to support a resp
 &lt;/html&gt;
 
 </code></pre>
-<p><span line-highlight='4,7'></span>
+<p><span line-highlight='4,7,only'></span>
 This is an HTML5 template that uses <a href="https://canjs.com/doc/can-stache.html">can-stache</a> - a <a href="http://handlebarsjs.com/">Handlebars syntax</a>-compatible view engine. It renders a <code>message</code> property from the application state.</p>
 <p><code>can-import</code> loads the template's dependencies:</p>
 <ol>
@@ -426,7 +426,7 @@ export default AppViewModel;
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='7-19'></span>
+<p><span line-highlight='7-19,only'></span>
 Here we created a <a href="https://canjs.com/doc/can-component.html">can-component</a> named <code>pmo-home</code>. This particular component is just a basic template, it does not have much in the way of styles or functionality.</p>
 <h3>Create the order history element</h3>
 <p>We'll create an initial version of order history that is very similar.</p>
@@ -461,7 +461,7 @@ Here we created a <a href="https://canjs.com/doc/can-component.html">can-compone
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='8-15'></span></p>
+<p><span line-highlight='8-15,only'></span></p>
 <h3>Creating a restaurant list element</h3>
 <p>The restaurant list will contain more functionality, which is why we will split its template and component logic into separate files.</p>
 <p>We can create a basic component like that by running:</p>
@@ -518,7 +518,7 @@ route('{page}/{slug}/{action}', { slug: null, action: null });
 export default AppViewModel;
 
 </code></pre>
-<p><span line-highlight='6-8,16-18'></span></p>
+<p><span line-highlight='6-8,16-18,only'></span></p>
 <blockquote>
 <p>Notice: We also removed the <code>message</code> property in <code>AppViewModel</code>.  This is because
 it is not needed.</p>
@@ -571,7 +571,7 @@ it is not needed.</p>
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='8-24'></span>
+<p><span line-highlight='8-24,only'></span>
 Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">routeUrl</a> to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules (<a href="http://localhost:8080/home">http://localhost:8080/home</a> in this case) that sets the <code>page</code> property to <code>home</code> when clicked.</p>
 <p>We also use the Stache <code>eq</code> helper to make the appropriate link active.</p>
 <h3>Create a loading indicator</h3>
@@ -604,7 +604,7 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='1,8-12'></span></p>
+<p><span line-highlight='1,8-12,only'></span></p>
 <h3>Switch between components</h3>
 <p>Now we can glue all those individual components together in <code>src/index.stache</code>. What we want to do is - based on the current page (<code>home</code>, <code>restaurants</code> or <code>order-history</code>) - load the correct component and then initialize it.</p>
 <p>Update <code>src/index.stache</code> to:</p>
@@ -657,7 +657,7 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
 &lt;/html&gt;
 
 </code></pre>
-<p><span line-highlight='11-13,15-34'></span>
+<p><span line-highlight='11-13,15-34,only'></span>
 Here we make a <code>switch</code> statement that checks for the current <code>page</code> property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with <a href="https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html">can-import</a> and initializes it.</p>
 <p>Setting <code>can-tag=&quot;pmo-loading&quot;</code> inserts a <code>&lt;pmo-loading&gt;</code> loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its <code>state</code> property to <code>resolved</code>.</p>
 <p>Now we can see the header and the home component and be able to navigate to the different pages through the header.</p>
@@ -719,7 +719,7 @@ Restaurant.connection = superMap({
 export default Restaurant;
 
 </code></pre>
-<p><span line-highlight='15-16'></span>
+<p><span line-highlight='15-16,only'></span>
 Above we use <code>set.props.dotNotation</code> since our queries for these nested properties will be in the <a href="https://docs.mongodb.com/v2.2/reference/glossary/#term-dot-notation">MongoDB-style 'dot notation'</a> format required by the backend.</p>
 <p>For example, MongoDB expects a query parameter for restaurants in a specific state to look like <code>{'address.state':'IL'}</code> and can-connect expects it to look like <code>{address:{state: 'IL'}}</code>. <code>set.props.dotNotation</code> allows can-connect to make comparisons between these two formats.</p>
 <h3>Test the connection</h3>
@@ -757,7 +757,7 @@ export default Component.extend({
 });
 
 </code></pre>
-<p><span line-highlight='5,8-12'></span>
+<p><span line-highlight='5,8-12,only'></span>
 And update the template at <code>src/restaurant/list/list.stache</code> to use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> returned for the <code>restaurants</code> property to render the template:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
 
@@ -880,7 +880,7 @@ export default Component.extend({
 });
 
 </code></pre>
-<p><span line-highlight='6-7,10-46'></span>
+<p><span line-highlight='6-7,10-46,only'></span>
 Let's take a closer look at those properties:</p>
 <ul>
 <li><code>states</code> will return a list of all available states by calling <code>State.getList({})</code></li>
@@ -906,7 +906,7 @@ fixture('/api/states/{short}', store);
 export default store;
 
 </code></pre>
-<p><span line-highlight='4-7'></span>
+<p><span line-highlight='4-7,only'></span>
 Update <code>src/models/fixtures/cities.js</code> to look like:</p>
 <pre><code class="language-js">import fixture from 'can-fixture';
 import City from '../city';
@@ -921,7 +921,7 @@ fixture('/api/cities/{name}', store);
 export default store;
 
 </code></pre>
-<p><span line-highlight='4-7'></span>
+<p><span line-highlight='4-7,only'></span>
 Update <code>src/models/fixtures/restaurants.js</code> to look like:</p>
 <pre><code class="language-js">import fixture from 'can-fixture';
 import Restaurant from '../restaurant';
@@ -959,7 +959,7 @@ fixture('/api/restaurants/{_id}', store);
 export default store;
 
 </code></pre>
-<p><span line-highlight='4-30'></span></p>
+<p><span line-highlight='4-30,only'></span></p>
 <h4>Test the view model</h4>
 <p>With fake data in place, we can test our view model by changing <code>src/restaurant/list/list-test.js</code> to:</p>
 <pre><code class="language-js">import QUnit from 'steal-qunit';
@@ -1100,7 +1100,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 &lt;/div&gt;
 
 </code></pre>
-<p><span line-highlight='5-36'></span>
+<p><span line-highlight='5-36,only'></span>
 Some things worth pointing out:</p>
 <ul>
 <li>Since <code>states</code> and <code>cities</code> return a promise, we can check the promise's status via <code>isResolved</code> and <code>isPending</code> and once resolved get the actual value with <code>states.value</code> and <code>cities.value</code>. This also allows us to easily show loading indicators and disable the select fields while loading data.</li>
@@ -1119,7 +1119,7 @@ Some things worth pointing out:</p>
         main=&quot;can-view-autorender&quot;&gt;&lt;/script&gt;
 
 </code></pre>
-<p><span line-highlight='2-3'></span>
+<p><span line-highlight='2-3,only'></span>
 View the demo page at <a href="http://localhost:8080/src/restaurant/list/list.html">http://localhost:8080/src/restaurant/list/list.html</a> .</p>
 <h2>Automated tests</h2>
 <p>In this chapter we will automate running the tests so that they can be run from from the command line.</p>
@@ -1187,7 +1187,7 @@ before_install:
 
 # place-my-order
 </code></pre>
-<p><span line-highlight='1'></span>
+<p><span line-highlight='1,only'></span>
 To see Travis run, let's add all changes and push to the branch:</p>
 <pre><code>git add readme.md .travis.yml
 git commit -am &quot;Enabling Travis CI&quot;
@@ -1481,7 +1481,7 @@ Order.connection = superMap({
 export default Order;
 
 </code></pre>
-<p><span line-highlight='7-27,33-53'></span>
+<p><span line-highlight='7-27,33-53,only'></span>
 Here we define an <code>ItemsList</code> which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another <code>&lt;order-model&gt;</code> tag to load orders in the order history template later.</p>
 <h3>Implement the view model</h3>
 <p>Now we can update the view model in <code>src/order/new/new.js</code>:</p>
@@ -1528,7 +1528,7 @@ export default Component.extend({
 });
 
 </code></pre>
-<p><span line-highlight='5-6,9-34'></span>
+<p><span line-highlight='5-6,9-34,only'></span>
 Here we just define the properties that we need: <code>slug</code>, <code>order</code>, <code>canPlaceOrder</code> - which we will use to enable/disable the submit button - and <code>saveStatus</code>, which will become a promise once the order is submitted. <code>placeOrder</code> updates the order with the restaurant information and saves the current order. <code>startNewOrder</code> allows us to submit another order.</p>
 <p>While we're here we can also update our test to get it passing again, replace <code>src/order/new/new-test.js</code> with:</p>
 <pre><code class="language-js">import QUnit from 'steal-qunit';
@@ -1545,7 +1545,7 @@ QUnit.test('canPlaceOrder', function(){
 });
 
 </code></pre>
-<p><span line-highlight='7-12'></span></p>
+<p><span line-highlight='7-12,only'></span></p>
 <h3>Write the template</h3>
 <p>First, let's implement a small order confirmation component with</p>
 <pre><code>donejs add component order/details.component pmo-order-details
@@ -1773,7 +1773,7 @@ tag('order-model', Order.connection);
 export default Order;
 
 </code></pre>
-<p><span line-highlight='6,59,74'></span>
+<p><span line-highlight='6,59,74,only'></span>
 The model can now be used in the template like <code>&lt;order-model get-list=&quot;{status='new'}&quot;&gt;</code>. This also adds an <a href="https://canjs.com/doc/can-set.props.enum.html">enum comparator</a> so that multiple requests for different statuses can be combined.</p>
 <h3>Update the template</h3>
 <p>First let's create the <code>pmo-order-list</code> component with:</p>
@@ -1976,7 +1976,7 @@ tag('order-model', Order.connection);
 export default Order;
 
 </code></pre>
-<p><span line-highlight='7,75-79'></span>
+<p><span line-highlight='7,75-79,only'></span>
 That's it. If we now open the <a href="http://localhost:8080/order-history">order page</a> we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.</p>
 <h2>Create documentation</h2>
 <p>Documenting our code is very important to quickly get other developers up to speed. <a href="https://documentjs.com/">DocumentJS</a> makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.</p>
@@ -2081,7 +2081,7 @@ export default Component.extend({
 });
 
 </code></pre>
-<p><span line-highlight='8-10,12-17,19-24,26-31,35-40,44-48,54-59,63-67,74-78'></span>
+<p><span line-highlight='8-10,12-17,19-24,26-31,35-40,44-48,54-59,63-67,74-78,only'></span>
 If we now run <code>donejs document</code> again, we will see the module show up in the menu bar and will be able to navigate through the different properties.</p>
 <h2>Production builds</h2>
 <p>Now we're ready to create a production build; go ahead and kill your development server, we won't need it from here on.</p>
@@ -2107,7 +2107,7 @@ If we now run <code>donejs document</code> again, we will see the module show up
   }
 });
 </code></pre>
-<p><span line-highlight='4-7'></span>
+<p><span line-highlight='4-7,only'></span>
 StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your <a href="https://stealjs.com/docs/steal-tools.build.html#dest">dest</a> to <code>dist</code>, and will place the place-my-order-assets images in <code>dist/node_modules/place-my-order/assets/images</code>. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.</p>
 <h3>Bundling your app</h3>
 <p>To bundle our application for production we use the build script in <code>build.js</code>. We could also use <a href="http://gruntjs.com/">Grunt</a> or <a href="http://gulpjs.com/">Gulp</a>, but in this example we just run it directly with Node. Everything is set up already so we run:</p>
@@ -2146,7 +2146,7 @@ We'll be building an iOS app if you are a Mac user, and an Android app if you're
   ]
 };
 </code></pre>
-<p><span line-highlight='9'></span>
+<p><span line-highlight='9,only'></span>
 To run the Cordova build and launch the simulator we can now run:</p>
 <pre><code>donejs build cordova
 </code></pre>
@@ -2245,7 +2245,7 @@ deploy:
   provider: &quot;heroku&quot;
   app: &lt;my-app&gt;
 </code></pre>
-<p><span line-highlight='6-16'></span>
+<p><span line-highlight='6-16,only'></span>
 You can find the name of the app by running <code>heroku apps:info</code>.</p>
 <p>In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our <code>.travis.yml</code> should always be encrypted for which we install the <a href="https://www.npmjs.com/package/travis-encrypt">travis-encrypt</a> module:</p>
 <p><em>Note: if using Windows, first install the OpenSSL package as described in the <a href="https://donejs.com/SettingUp.html">Setting Up</a> guide.</em></p>
