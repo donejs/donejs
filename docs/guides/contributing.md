@@ -131,6 +131,7 @@ We use a few labels to organize issues across all of the repositories:
 - “easy” for issues the core team thinks are good for someone who’s new to contributing
 - “documentation” for issues related to documenting the APIs
 - “design” for issues that could use a designer’s expertise
+- “p0”, “p1”, “p2”, etc. for prioritizing issues
 
 Here are links to GitHub searches for those terms:
 
@@ -139,41 +140,49 @@ Here are links to GitHub searches for those terms:
 	- [documentation](https://github.com/search?q=org%3Adonejs+label%3Adocumentation&state=open)
 	- [easy](https://github.com/search?q=org%3Adonejs+label%3Aeasy&state=open)
 	- [help wanted](https://github.com/search?q=org%3Adonejs+label%3A%22help+wanted%22&state=open)
+	- [p0](https://github.com/search?q=org%3Adonejs+label%3Ap0&state=open), [p1](https://github.com/search?q=org%3Adonejs+label%3Ap1&state=open), [p2](https://github.com/search?q=org%3Adonejs+label%3Ap2&state=open), [p3](https://github.com/search?q=org%3Adonejs+label%3Ap3&state=open), & [p4](https://github.com/search?q=org%3Adonejs+label%3Ap4&state=open)
 - CanJS
 	- [design](https://github.com/search?q=org%3Acanjs+label%3Adesign&state=open)
 	- [documentation](https://github.com/search?q=org%3Acanjs+label%3Adesign&state=open)
 	- [easy](https://github.com/search?q=org%3Acanjs+label%3Aeasy&state=open)
 	- [help wanted](https://github.com/search?q=org%3Acanjs+label%3A%22help+wanted%22&state=open)
+	- [p0](https://github.com/search?q=org%3Acanjs+label%3Ap0&state=open), [p1](https://github.com/search?q=org%3Acanjs+label%3Ap1&state=open), [p2](https://github.com/search?q=org%3Acanjs+label%3Ap2&state=open), [p3](https://github.com/search?q=org%3Acanjs+label%3Ap3&state=open), & [p4](https://github.com/search?q=org%3Acanjs+label%3Ap4&state=open)
 - DocumentJS
 	- [design](https://github.com/bitovi/documentjs/labels/design)
 	- [documentation](https://github.com/bitovi/documentjs/labels/documentation)
 	- [easy](https://github.com/bitovi/documentjs/labels/easy)
 	- [help wanted](https://github.com/bitovi/documentjs/labels/help%20wanted)
+	- [p0](https://github.com/bitovi/documentjs/labels/p0), [p1](https://github.com/bitovi/documentjs/labels/p1), [p2](https://github.com/bitovi/documentjs/labels/p2), [p3](https://github.com/bitovi/documentjs/labels/p3), & [p4](https://github.com/bitovi/documentjs/labels/p4)
 - FuncUnit
 	- [design](https://github.com/bitovi/funcunit/labels/design)
 	- [documentation](https://github.com/bitovi/funcunit/labels/documentation)
 	- [easy](https://github.com/bitovi/funcunit/labels/easy)
 	- [help wanted](https://github.com/bitovi/funcunit/labels/help%20wanted)
+	- [p0](https://github.com/bitovi/funcunit/labels/p0), [p1](https://github.com/bitovi/funcunit/labels/p1), [p2](https://github.com/bitovi/funcunit/labels/p2), [p3](https://github.com/bitovi/funcunit/labels/p3), & [p4](https://github.com/bitovi/funcunit/labels/p4)
 - jQuery++
 	- [design](https://github.com/bitovi/jquerypp/labels/design)
 	- [documentation](https://github.com/bitovi/jquerypp/labels/documentation)
 	- [easy](https://github.com/bitovi/jquerypp/labels/easy)
 	- [help wanted](https://github.com/bitovi/jquerypp/labels/help%20wanted)
+	- [p0](https://github.com/bitovi/jquerypp/labels/p0), [p1](https://github.com/bitovi/jquerypp/labels/p1), [p2](https://github.com/bitovi/jquerypp/labels/p2), [p3](https://github.com/bitovi/jquerypp/labels/p3), & [p4](https://github.com/bitovi/jquerypp/labels/p4)
 - StealJS
 	- [design](https://github.com/search?q=org%3Astealjs+label%3Adesign&state=open)
 	- [documentation](https://github.com/search?q=org%3Astealjs+label%3Adocumentation&state=open)
 	- [easy](https://github.com/search?q=org%3Astealjs+label%3Aeasy&state=open)
 	- [help wanted](https://github.com/search?q=org%3Astealjs+label%3A%22help+wanted%22&state=open)
+	- [p0](https://github.com/search?q=org%3Astealjs+label%3Ap0&state=open), [p1](https://github.com/search?q=org%3Astealjs+label%3Ap1&state=open), [p2](https://github.com/search?q=org%3Astealjs+label%3Ap2&state=open), [p3](https://github.com/search?q=org%3Astealjs+label%3Ap3&state=open), & [p4](https://github.com/search?q=org%3Astealjs+label%3Ap4&state=open)
 - Syn
 	- [design](https://github.com/bitovi/syn/labels/design)
 	- [documentation](https://github.com/bitovi/syn/labels/documentation)
 	- [easy](https://github.com/bitovi/syn/labels/easy)
 	- [help wanted](https://github.com/bitovi/syn/labels/help%20wanted)
+	- [p0](https://github.com/bitovi/syn/labels/p0), [p1](https://github.com/bitovi/syn/labels/p1), [p2](https://github.com/bitovi/syn/labels/p2), [p3](https://github.com/bitovi/syn/labels/p3), & [p4](https://github.com/bitovi/syn/labels/p4)
 - Testee
 	- [design](https://github.com/bitovi/testee/labels/design)
 	- [documentation](https://github.com/bitovi/testee/labels/documentation)
 	- [easy](https://github.com/bitovi/testee/labels/easy)
 	- [help wanted](https://github.com/bitovi/testee/labels/help%20wanted)
+	- [p0](https://github.com/bitovi/testee/labels/p0), [p1](https://github.com/bitovi/testee/labels/p1), [p2](https://github.com/bitovi/testee/labels/p2), [p3](https://github.com/bitovi/testee/labels/p3), & [p4](https://github.com/bitovi/testee/labels/p4)
 
 Triaging issues that have no labels is also really helpful! Here are some searches you can use to find unlabeled issues:
 
