@@ -12,6 +12,17 @@ If you make changes to one of the presentations, please bring it to the top of t
 
 ## Full List
 
+### High-Performance Apps with DoneJS
+
+- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEQXhYVjdVX2FzR28)
+- [Download](https://drive.google.com/open?id=0B8wssyNpvaFEZng3RU5ZYVhfaDg)
+- Last Modified: 2017-08-01
+
+### StealJS Progressive Loading Guide
+
+- [Download](https://drive.google.com/open?id=0Bx-kNqf-wxZeSlB2SjZ1X09YMVk)
+- Last Modified: 2017-07-25
+
 ### Intro to CanJS — Building a Weather Report
 
 - [Description](https://drive.google.com/open?id=0B8wssyNpvaFEcjVUeXRITUJkSms)
@@ -24,13 +35,6 @@ If you make changes to one of the presentations, please bring it to the top of t
 - [Description](https://drive.google.com/open?id=0B8wssyNpvaFETkdpMWU4QzJ3WXM)
 - [Download Slides (Keynote)](https://drive.google.com/open?id=0B8wssyNpvaFENzFQdWRzaENSQnc)
 - Last Modified: 2017-05-10
-
-### High-Performance Apps with DoneJS
-
-- [Description](https://drive.google.com/open?id=0B8wssyNpvaFEQXhYVjdVX2FzR28)
-- [Download](https://drive.google.com/open?id=0B8wssyNpvaFEODNwbk05TXVMLTQ)
-- [Download](https://drive.google.com/open?id=0B8wssyNpvaFEdXZqNF96RjkyYmM)
-- Last Modified: 2017-04-12
 
 ### Preparing for the Future of JavaScript
 
