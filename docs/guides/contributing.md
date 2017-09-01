@@ -19,7 +19,7 @@ contributors and maintainers pledge to make participation in our project and com
 <a id="section=section_GettingHelp"></a>
 ## Getting Help
 
-[Our forums](http://forums.donejs.com/) and [Gitter chat](https://gitter.im/donejs/donejs) are the best places to ask questions. The core team regularly checks both and there are other users who generously help others.
+[Our forums](https://forums.donejs.com/) and [Gitter chat](https://gitter.im/donejs/donejs) are the best places to ask questions. The core team regularly checks both and there are other users who generously help others.
 
 If you’re interested in contributing to DoneJS, the core team is happy to pair with you to fix a bug or write a new feature! Please either message us on Gitter or the forums, or leave a comment on the GitHub issue you’re interested in helping with. We will happily walk you through setting up your development environment, creating a test and/or writing documentation, and submitting a pull request.
 
@@ -87,7 +87,7 @@ Before filing a new issue, please search for previous tickets.  If there’s som
 give it a 👍. If you can provide additional information that’s not already in the issue, please add a comment to it.
 
 If you are unsure about any of this or have any other questions, please reach out to
-us on the [DoneJS forums](http://forums.donejs.com/c/donejs) or talk to us on
+us on the [DoneJS forums](https://forums.donejs.com/c/donejs) or talk to us on
 the [Gitter donejs/donejs channel](https://gitter.im/donejs/donejs). We’re happy to discuss any bugs and help you file a bug report.
 
 <a id="section=section_SuggestingFeatures"></a>
@@ -112,7 +112,7 @@ Before filing a new suggestion, please search for previous feature requests.  If
 give it a 👍. If you have additional ideas that are not already in the issue, please add a comment to it.
 
 If you are unsure about any of this or have any other questions, please reach out to
-us on the [DoneJS forums](http://forums.donejs.com/c/donejs) or talk to us on
+us on the [DoneJS forums](https://forums.donejs.com/c/donejs) or talk to us on
 the [Gitter donejs/donejs channel](https://gitter.im/donejs/donejs). We’re happy to discuss any ideas and help you file a feature suggestion.
 
 <a id="section=section_FindingWaystoContribute"></a>
@@ -201,15 +201,15 @@ Triaging issues that have no labels is also really helpful! Here are some search
 You can also get involved in our community by posting in our forums, chatting with us on Gitter, and answering questions on Stack Overflow.
 
 - DoneJS
-	- [Forums](http://forums.donejs.com/c/donejs)
+	- [Forums](https://forums.donejs.com/c/donejs)
 	- [Gitter](https://gitter.im/donejs/donejs)
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=donejs+answers:0)
 - CanJS
-	- [Forums](http://forums.donejs.com/c/canjs)
+	- [Forums](https://forums.donejs.com/c/canjs)
 	- [Gitter](https://gitter.im/canjs/canjs)
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=canjs+answers:0)
 - DocumentJS
-	- [Forums](http://forums.donejs.com/c/documentjs)
+	- [Forums](https://forums.donejs.com/c/documentjs)
 	- [Gitter](https://gitter.im/bitovi/documentjs)
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=documentjs+answers:0)
 - FuncUnit
@@ -218,7 +218,7 @@ You can also get involved in our community by posting in our forums, chatting wi
 - jQuery++
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=jquerypp+answers:0)
 - StealJS
-	- [Forums](http://forums.donejs.com/c/stealjs)
+	- [Forums](https://forums.donejs.com/c/stealjs)
 	- [Gitter](https://gitter.im/stealjs/steal)
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=stealjs+answers:0)
 - Syn

@@ -168,7 +168,7 @@ The following are our highest priority, non-bug-fix features:
 - [can-connect supporting other frameworks](https://github.com/canjs/can-connect/issues/42)
 - [Animation utilities](https://github.com/canjs/can-animate)
 - [O(log n) derived list modification](https://github.com/canjs/can-derive)
-- [CanJS Roadmap Discussion](http://forums.donejs.com/t/canjs-roadmap-discussion/75)
+- [CanJS Roadmap Discussion](https://forums.donejs.com/t/canjs-roadmap-discussion/75)
 
 ## Team
 
