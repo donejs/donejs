@@ -1,5 +1,5 @@
 @page place-my-order In-depth guide
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 @description In this guide you will learn about all of [DoneJS' features](./Features.html) by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
