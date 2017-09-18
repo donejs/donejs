@@ -230,7 +230,7 @@ The database-backed services, like `/services/teams` follow a subset of
 
 This means that you can get all Teams like:
 
-```
+```js
 REQUEST:
   GET /services/teams
 RESPONSE:
@@ -248,7 +248,7 @@ RESPONSE:
 
 Or get list of teams for a particular tournament like:
 
-```
+```js
 REQUEST:
   GET /services/teams?where[gameId]=7
 RESPONSE:
@@ -267,7 +267,7 @@ RESPONSE:
 But critically for handling data relationships, you can tell the
 server to bring in related data like:
 
-```
+```js
 REQUEST:
   GET /services/teams?where[gameId]=7\
                       &withRelated[]=player1\
@@ -296,7 +296,7 @@ RESPONSE:
 
 Get a single Team like:
 
-```
+```js
 REQUEST:
   GET /services/teams/5
 
@@ -310,7 +310,7 @@ RESPONSE:
 
 Create a team like:
 
-```
+```js
 REQUEST:
   POST /services/teams
   {
@@ -327,7 +327,7 @@ RESPONSE:
 
 Update a team like:
 
-```
+```js
 REQUEST:
   PUT /services/teams/5
   {
@@ -346,7 +346,7 @@ RESPONSE:
 
 Destroy a team like:
 
-```
+```js
 REQUEST:
   DELETE /services/teams/5
 
@@ -430,7 +430,7 @@ And only admin users can set another user as an admin user.
 
 <img src="static/img/bitballs/admin-view.png">
 
-Non-admin users can read data.  
+Non-admin users can read data.
 
 <img src="static/img/bitballs/nonadmin-games.png" srcset="static/img/bitballs/nonadmin-games.png 1x, static/img/bitballs/nonadmin-games-2x.png 2x">
 
@@ -466,7 +466,7 @@ The [AppViewModel](http://donejs.github.io/bitballs/docs/bitballs%7Capp.html) ha
 to request and store the available
 session. You can read the session's user and if they are an admin like:
 
-```
+```js
 appViewModel.user.isAdmin
 ```
 
@@ -481,8 +481,8 @@ use it to determine which functionality should be displayed.
 When a user navigates to `/register`, the [`<user-details>`](http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Cdetails.html) component
 creates a form that takes a user's email and password.  
 
-```
-<form ($submit)="saveUser(%event)" action="">
+```html
+<form on:el:submit="saveUser(%event)" action="">
     <div class="form-group">
         <label for="user-email">
             Email
@@ -494,14 +494,14 @@ creates a form that takes a user's email and password.
                     class="form-control"
                     id="user-email"
                     {{^if user.isNew}}disabled{{/if}}
-                    {($value)}="user.email" />
+                    el:value:bind="user.email" />
             </div>
         {{else}}
             <input
                 class="form-control"
                 id="user-email"
                 {{^if user.isNew}}disabled{{/if}}
-                {($value)}="user.email" />
+                el:value:bind="user.email" />
         {{/is}}
     </div>
     ...
@@ -600,7 +600,7 @@ app.get('/services/session', function(req, res) {
 This means that once a user logs in, `GET /services/session` responds with
 an object like:
 
-```
+```js
 {
   user: {email: "justin@bitovi.com", isAdmin: true}
 }
@@ -610,7 +610,7 @@ We like to keep session data distinct from User data.  In a more complex applica
 additional session information could be returned that does not belong on the
 user. For example:
 
-```
+```js
 {
   createdAt: 1456512713012,
   expiresAt: 14565123013012,
@@ -642,26 +642,26 @@ The session, its user, or the result of `isAdmin` is then passed to
 sub components depending on their needs:
 
 ```html
-<tournament-details {is-admin}='session.isAdmin'/>
+<tournament-details vm:isAdmin:from='session.isAdmin'/>
 ```
 
 Finally, those components use that information to control what is
 shown on the page:
 
-```
+```html
 {{#if isAdmin}}
 <h4>New Game</h4>
-<form ($submit)="createGame(%event)">...</form>
+<form on:el:submit="createGame(%event)">...</form>
 {{/if}}
 ```
 
 In more complex apps, the `user` object might include an [Access Control List](https://en.wikipedia.org/wiki/Access_control_list)
 which might include methods to check access rights:
 
-```
+```html
 {{#if user.acl.can("create","game") }}
 <h4>New Game</h4>
-<form ($submit)="createGame(%event)">...</form>
+<form on:el:submit="createGame(%event)">...</form>
 {{/if}}
 ```
 
@@ -671,15 +671,15 @@ Creating a session is done with the [<bitballs-navigation>](http://donejs.github
 login form that takes an email and password:
 
 ```html
-<form ($submit)="createSession(%event)" action="">
-    <input  
+<form on:el:submit="createSession(%event)" action="">
+    <input
         placeholder="email"
-    	{($value)}="loginSession.user.email"/>
+        el:value:bind="loginSession.user.email"/>
 
-    <input  
+    <input
         placeholder="password"
     	type="password"
-    	{($value)}="loginSession.user.password"/>
+      el:value:bind="loginSession.user.password"/>
 
 	<button type="submit">Login</button>
 </form>
@@ -709,7 +709,7 @@ createSession: function(ev){
 
 Saving a session calls `POST /services/session` to create a session server side. The service should operate on similar data as `GET /services/session`, so it's passed data like:
 
-```ks
+```js
 {
   user: {email: "justin@bitovi.com", password: "pass1234"}
 }
@@ -750,7 +750,7 @@ The [`<bitballs-navigation>`](http://donejs.github.io/bitballs/docs/bitballs%7Cc
 calls `logout()` on its ViewModel:
 
 ```html
-<a href="javascript://" ($click)="logout()">Logout</a>
+<a href="javascript://" on:el:click="logout()">Logout</a>
 ```
 
 `logout` calls destroy on the session and then removes the session from the AppViewModel:
@@ -814,7 +814,7 @@ Bitballs needs to be able to load these pages quickly.  Using a very simplistic
 RESTful service layer, the client might have to do the following to load a __game details__
 page:
 
-```
+```js
 GET /services/games/5
  -> {id: 5, homeTeamId: 16, awayTeamId: 17, videoUrl: "X1Ha9d8fE", ...}
 
@@ -848,7 +848,7 @@ have the game.
 Instead, we'd want to load a game and get back its data with its
 nested teams and players and stats like:
 
-```
+```js
 GET /services/games/5
  -> {
  id: 5,
@@ -912,7 +912,7 @@ backend [Object Relational Mapper](https://en.wikipedia.org/wiki/Object-relation
 For instance, the __game details__ page requests a game with its
 related fields like:
 
-```
+```js
 Game.get({
 	id: this.gameId,
 	withRelated: ["stats",
@@ -930,7 +930,7 @@ Game.get({
 
 This results in an AJAX request like:
 
-```
+```js
 GET /services/games/5?\
   withRelated[]=stats&\
   withRelated[]=homeTeam.player1&\
@@ -952,7 +952,7 @@ Database request, most ORMs make it easy to do the expected thing.
 Bitballs uses [Bookshelf](http://bookshelfjs.org/) as its ORM.  It allows us
 to define relationships between a `Game` and other server-side models:
 
-```
+```js
 var Game = bookshelf.Model.extend({
 	tableName: 'games',
 	stats: function(){
@@ -969,7 +969,7 @@ var Game = bookshelf.Model.extend({
 
 It does a similar thing for `Team`:
 
-```
+```js
 var Team = bookshelf.Model.extend({
 	tableName: 'teams',
 	player1: function(){
@@ -990,7 +990,7 @@ var Team = bookshelf.Model.extend({
 Once these server Models are in place, it is extremely easy
 to make a service that can dynamically include related data:
 
-```
+```js
 app.get('/services/games/:id', function(req, res){
 	new Game({id: req.params.id}).fetch(req.query).then(function(game){
 		res.send(game.toJSON());
@@ -1002,7 +1002,7 @@ This setup also lets us be very adaptive to changes in the
 database. For instance, if a game suddenly has
 comments, we could make the following work:
 
-```
+```js
 Game.get({
 	id: this.gameId,
 	withRelated: ["comments"]
@@ -1012,7 +1012,7 @@ Game.get({
 By creating a `Comment` model and changing `Game` to
 look like:
 
-```
+```js
 var Game = bookshelf.Model.extend({
 	tableName: 'games',
 	comments: function(){
@@ -1045,13 +1045,13 @@ service layer should provide:
 
 For example, I can get all of team 5's games like:
 
-```
+```js
 GET /services/games?where[teamId]=5
 ```
 
 This happens for free because we pass the querystrng directly to bookshelf:
 
-```
+```js
 app.get('/services/games', function(req, res){
 	new Games().query(req.query).fetch().then(function(games){
 		res.send({data: games.toJSON()});
@@ -1074,7 +1074,7 @@ to create a relational algebra that understands the service API.
 
 Bitballs' client Models are [can-connect supermodels](https://canjs.com/doc/can-connect.html/doc/can-connect%7Ccan%7Csuper-map.html).  So a type and list type is defined:
 
-```
+```js
 var Game = DefineMap.extend({
   ...
 });
@@ -1084,7 +1084,7 @@ Game.List = DefineList.extend({"#": Game},{});
 
 And they are connected to a url:
 
-```
+```js
 var gameConnection = superMap({
   Map: Game,
   List: Game.List,
@@ -1112,7 +1112,7 @@ Because Game data can come back with a `homeTeam`,
 `awayTeam` and `stats` property, we make sure those
 are created as the right type:
 
-```
+```js
 var Game = DefineMap.extend({
 	homeTeam: {
 		Type: Team
@@ -1172,7 +1172,7 @@ In `players`, `team.players` is actually making use of a similar computed
 Sometimes ViewModels mash up Model data.  For example,
 the `<tournament-details>` component makes four requests in parallel:
 
-```
+```js
 Tournament.get({id: this.tournamentId});
 Game.getList({tournamentId: this.tournamentId});
 Team.getList({ tournamentId: this.tournamentId });
@@ -1192,7 +1192,7 @@ all we have are player ids on each team:
 
 A naive solution would be to make a `getById` method on `Player.List` like:
 
-```
+```js
 Player.List = DefineList.extend({"#": Player},{
   getById: function(id){
     return this.filter(function(player){
@@ -1204,7 +1204,7 @@ Player.List = DefineList.extend({"#": Player},{
 
 And then use that in the template to look up the player:
 
-```
+```js
 {{#each teams}}
     ...
     <td>{{#../players.getById(player1Id)}}{{name}}{{/}}</td>
@@ -1219,7 +1219,7 @@ And then use that in the template to look up the player:
 The problem with this is that each `.getById` call is linear search.  Instead,
 we can keep a mapping of player ids to players like:
 
-```
+```js
 idMap: {
     type: "any",
     get: function(){
@@ -1237,7 +1237,7 @@ idMap: {
 
 And make a `getById` use `idMap` like:
 
-```
+```js
 getById: function(id){
 	return this.playerIdMap[id];
 },
@@ -1306,7 +1306,7 @@ on the [AppViewModel](http://donejs.github.io/bitballs/docs/bitballs%7Capp.html)
 
 For Bitballs, we implemented `statusCode` as a [define getter](https://canjs.com/docs/can.Map.prototype.define.get.html) as follows:
 
-```
+```js
 statusCode: {
     get: function(lastSet, resolve){
         var pageConfig = this.pageComponentConfig;
@@ -1338,7 +1338,7 @@ situations.
 to be given.  `pageComponentConfig` only specifies a `statusCode` when its state
 doesn't match a valid route:
 
-```
+```js
 get pageComponentConfig() {
     var page = this.page;
     if(this.gameId) {

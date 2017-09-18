@@ -28,13 +28,13 @@ You will need [NodeJS](http://nodejs.org) installed and your code editor of choi
 
 To get started, let's install the DoneJS command line utility globally:
 
-```
+```shell
 npm install -g donejs@1
 ```
 
 Then we can create a new DoneJS application:
 
-```
+```shell
 donejs add app place-my-order
 ```
 
@@ -50,13 +50,13 @@ The initialization process will ask you questions like the name of your applicat
 
 If we now go into the `place-my-order` folder with
 
-```
+```shell
 cd place-my-order
 ```
 
 We can see the following files:
 
-```
+```shell
 ├── build.js
 ├── development.html
 ├── package.json
@@ -94,7 +94,7 @@ Let's have a quick look at the purpose of each:
 
 DoneJS comes with its own server, which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also enable [hot module swapping](http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/) which automatically reloads files in the browser as they change. You can start it by running:
 
-```
+```shell
 donejs develop
 ```
 
@@ -106,7 +106,7 @@ Single page applications usually communicate with a RESTful API and a websocket 
 
 **Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows and Mac).
 
-```
+```shell
 npm install place-my-order-api@0.4 --save
 ```
 
@@ -126,7 +126,7 @@ Now we can add an API server start script into the `scripts` section of our `pac
 
 Which allows us to start the server like:
 
-```
+```shell
 donejs api
 ```
 
@@ -150,7 +150,7 @@ Now our application is good to go and we can start the server. We need to proxy 
 
 Now we can start the application with:
 
-```
+```shell
 donejs develop
 ```
 
@@ -160,7 +160,7 @@ Go to [http://localhost:8080](http://localhost:8080) to see the "hello world" me
 
 Before we get to the code, we also need to install the `place-my-order-assets` package which contains the images and styles specifically for this tutorial's application:
 
-```
+```shell
 npm install place-my-order-assets@0.1 --save
 ```
 
@@ -183,7 +183,7 @@ This is an HTML5 template that uses [can-stache](https://canjs.com/doc/can-stach
 
 The main application file at `src/app.js` looks like this:
 
-```
+```js
 // src/app.js
 import DefineMap from 'can-define/map/';
 import route from 'can-route';
@@ -215,7 +215,7 @@ There are two ways of creating components. For smaller components we can define 
 
 To generate a new component run:
 
-```
+```shell
 donejs add component home.component pmo-home
 ```
 
@@ -230,7 +230,7 @@ Here we created a [can-component](https://canjs.com/doc/can-component.html) name
 
 We'll create an initial version of order history that is very similar.
 
-```
+```shell
 donejs add component order/history.component pmo-order-history
 ```
 
@@ -245,13 +245,13 @@ The restaurant list will contain more functionality, which is why we will split 
 
 We can create a basic component like that by running:
 
-```
+```shell
 donejs add component restaurant/list pmo-restaurant-list
 ```
 
 The component's files are collected in a single folder so that components can be easily tested, moved, and re-used. The folder structure looks like this:
 
-```
+```shell
 ├── node_modules
 ├── package.json
 ├── src/
@@ -305,7 +305,7 @@ Now we have three routes available:
 
 Now is also a good time to add a header element that links to the different routes we just defined. We can run
 
-```
+```shell
 donejs add component header.component pmo-header
 ```
 
@@ -322,7 +322,7 @@ We also use the Stache `eq` helper to make the appropriate link active.
 
 To show that something is currently loading, let's create a `pmo-loading` component:
 
-```
+```shell
 donejs add component loading.component pmo-loading
 ```
 
@@ -365,7 +365,7 @@ Answer the question about the URL endpoint with `/api/restaurants` and the name 
 
 We have now created a model and fixtures (for testing without an API) with a folder structure like this:
 
-```
+```shell
 ├── node_modules
 ├── package.json
 ├── src/
@@ -454,7 +454,7 @@ The API already provides a list of available [states](http://localhost:8080/api/
 
 Run:
 
-```
+```shell
 donejs add supermodel state
 ```
 
@@ -462,7 +462,7 @@ When prompted, set the URL to `/api/states` and the id property to `short`.
 
 Run:
 
-```
+```shell
 donejs add supermodel city
 ```
 
@@ -557,7 +557,7 @@ If you now go to [http://localhost:8080/test.html](http://localhost:8080/test.ht
 
 The tests can be automated with any test runner that supports running QUnit tests. We will use [Testee](https://github.com/bitovi/testee) which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the `test.html` page in Firefox is already set up and we can launch the tests by running:
 
-```
+```shell
 donejs test
 ```
 
@@ -575,14 +575,14 @@ If you don't have an account yet, go to [GitHub](https://github.com) to sign up 
 
 Now we have to initialize Git in our project folder and add the GitHub repository we created as the origin remote (replace `<your-username>` with your GitHub username):
 
-```
+```shell
 git init
 git remote add origin https://github.com/<your-username>/place-my-order.git
 ```
 
 Then we can add all files and push to origin like this:
 
-```
+```shell
 git add . --all
 git commit -am "Initial commit"
 git push origin master
@@ -600,13 +600,13 @@ We will use Travis as our hosted solution because it is free for open source pro
 
 Continuous integration on GitHub is most useful when using [branches and pull requests](https://help.github.com/categories/collaborating-on-projects-using-pull-requests/). That way your main branch (master) will only get new code changes if all tests pass. Let's create a new branch with
 
-```
+```shell
 git checkout -b travis-ci
 ```
 
 And add a `.travis.yml` file to our project root:
 
-```
+```shell
 language: node_js
 node_js: node
 addons:
@@ -629,7 +629,7 @@ We can also add a *Build Passing* badge to the top `readme.md`:
 
 To see Travis run, let's add all changes and push to the branch:
 
-```
+```shell
 git add readme.md .travis.yml
 git commit -am "Enabling Travis CI"
 git push origin travis-ci
@@ -645,7 +645,7 @@ Once you created the pull request, you will see a `Some checks haven’t complet
 
 Once everything turns green, click the "Merge pull request" button.  Then in your console, checkout the _master_ branch and pull down it's latest with:
 
-```
+```shell
 git checkout master
 git pull origin master
 ```
@@ -684,7 +684,7 @@ We want to support two additional routes:
 
 To make this happen, we need two more components. First, the `pmo-restaurant-details` component which loads the restaurant (based on the `slug`) and displays its information.
 
-```
+```shell
 donejs add component restaurant/details.component pmo-restaurant-details
 ```
 
@@ -694,7 +694,7 @@ And change `src/restaurant/details.component` to:
 
 The order component will be a little more complex, which is why we will put it into its own folder:
 
-```
+```shell
 donejs add component order/new pmo-order-new
 ```
 
@@ -728,7 +728,7 @@ Here we are adding some more conditions if `page` is set to `restaurants`:
 
 The npm integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
-```
+```shell
 npm install bit-tabs@1 --save
 ```
 
@@ -746,7 +746,7 @@ In this section, we will update the order component to be able to select restaur
 
 First, let's look at the restaurant data we get back from the server. It looks like this:
 
-```
+```js
 {
   "_id": "5571e03daf2cdb6205000001",
   "name": "Cheese Curd City",
@@ -797,7 +797,7 @@ First, let's look at the restaurant data we get back from the server. It looks l
 
 We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new `order` model:
 
-```
+```shell
 donejs add supermodel order
 ```
 
@@ -826,7 +826,7 @@ While we're here we can also update our test to get it passing again, replace `s
 
 First, let's implement a small order confirmation component with
 
-```
+```shell
 donejs add component order/details.component pmo-order-details
 ```
 
@@ -867,7 +867,7 @@ The model can now be used in the template like `<order-model get-list="{status='
 
 First let's create the `pmo-order-list` component with:
 
-```
+```shell
 donejs add component order/list.component pmo-order-list
 ```
 
@@ -885,7 +885,7 @@ First we import the order model and then just call `<order-model get-list="{stat
 
 The `place-my-order-api` module uses the [Feathers](https://feathersjs.com/) NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like `orders created`. To make the order page update in real-time, all we need to do is add listeners for those events to `src/models/order.js` and in the handler notify the order connection.
 
-```
+```shell
 npm install steal-socket.io@4 --save
 ```
 
@@ -904,13 +904,13 @@ Documenting our code is very important to quickly get other developers up to spe
 
 Let's add DocumentJS to our application:
 
-```
+```shell
 donejs add documentjs@0.1
 ```
 
 This will install DocumentJS and also create a `documentjs.json` configuration file. Now we can generate the documentation with:
 
-```
+```shell
 donejs document
 ```
 
@@ -971,7 +971,7 @@ StealTools will find all of the assets you reference in your CSS and copy them t
 
 To bundle our application for production we use the build script in `build.js`. We could also use [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), but in this example we just run it directly with Node. Everything is set up already so we run:
 
-```
+```shell
 donejs build
 ```
 
@@ -979,7 +979,7 @@ This will build the application to a `dist/` folder in the project's base direct
 
 From here your application is ready to be used in production. Enable production mode by setting the `NODE_ENV` variable:
 
-```
+```shell
 NODE_ENV=production donejs start
 ```
 
@@ -996,7 +996,7 @@ We'll be building an iOS app if you are a Mac user, and an Android app if you're
 
 Mac users should download XCode from the AppStore and install the `ios-sim` package globally with:
 
-```
+```shell
 npm install -g ios-sim
 ```
 
@@ -1006,7 +1006,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 
 Now we can install the DoneJS Cordova tools with:
 
-```
+```shell
 donejs add cordova@1
 ```
 
@@ -1016,7 +1016,7 @@ Depending on your operating system you can accept most of the rest of the defaul
 
 This will change your `build.js` script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the **glob** property:
 
-```
+```js
 var cordovaOptions = {
   buildDir: "./build/cordova",
   id: "com.donejs.placemyorder",
@@ -1034,7 +1034,7 @@ var cordovaOptions = {
 
 To run the Cordova build and launch the simulator we can now run:
 
-```
+```shell
 donejs build cordova
 ```
 
@@ -1044,7 +1044,7 @@ If everything went well, we should see the emulator running our application.
 
 To set up the desktop build, we have to add it to our application like this:
 
-```
+```shell
 donejs add electron@1
 ```
 
@@ -1052,19 +1052,19 @@ Answer the question about the URL of the service layer with `http://www.place-my
 
 Then we can run the build like this:
 
-```
+```shell
 donejs build electron
 ```
 
 The macOS application can be opened with
 
-```
+```shell
 open build/place-my-order-darwin-x64/place-my-order.app
 ```
 
 The Windows application can be opened with
 
-```
+```shell
 .\build\place-my-order-win32-x64\place-my-order.exe
 ```
 
@@ -1088,13 +1088,13 @@ When you deploy for the first time it will ask you to authorize with your login 
 
 With the Firebase account and application in place we can add the deployment configuration to our project like this:
 
-```
+```shell
 donejs add firebase@1
 ```
 
 When prompted, enter the name of the application created when you set up the Firebase app. Next, login to the firebase app for the first time by running:
 
-```
+```shell
 node_modules/.bin/firebase login
 ```
 
@@ -1104,14 +1104,14 @@ And authorize your application.
 
 We can now deploy the application by running:
 
-```
+```shell
 donejs build
 donejs deploy
 ```
 
 Static files are deployed to Firebase and we can verify that the application is loading from the CDN by loading it running:
 
-```
+```shell
 NODE_ENV=production donejs start
 ```
 
@@ -1129,26 +1129,26 @@ If you do not have an account yet, sign up for Heroku at [signup.heroku.com](htt
 
 After installing we can initialize the application via
 
-```
+```shell
 heroku login
 heroku create
 ```
 
 This will return the url where your app can be viewed. Before you open it you'll need to update the NODE_ENV variable:
 
-```
+```shell
 heroku config:set NODE_ENV=production
 ```
 
 Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using done-serve our Procfile just looks like this:
 
-```
+```shell
 web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
 ```
 
 First let's save our current status:
 
-```
+```shell
 git add -A
 git commit -m "Finishing place-my-order"
 git push origin master
@@ -1156,7 +1156,7 @@ git push origin master
 
 Since Heroku needs the build artifacts we need to commit those before pushing to Heroku. We recommend doing this in a separate branch.
 
-```
+```shell
 git checkout -b deploy
 git add -f dist
 git commit -m "Deploying to Heroku"
@@ -1164,13 +1164,13 @@ git commit -m "Deploying to Heroku"
 
 And finally do an initial deploy.
 
-```
+```shell
 git push heroku deploy:master
 ```
 
 Any time in the future you want to deploy simply push to the Heroku remote. Once the deploy is finished you can open the link provided in your browser. If successful we can checkout the _master_ branch:
 
-```
+```shell
 git checkout master
 ```
 
@@ -1207,19 +1207,19 @@ In order to deploy to Heroku you need to provide Travis with your Heroku API key
 
 *Note: if using Windows, first install the OpenSSL package as described in the [Setting Up](https://donejs.com/SettingUp.html) guide.*
 
-```
+```shell
 npm install travis-encrypt -g
 ```
 
 Now we can get the Heroku authentication token with:
 
-```
+```shell
 heroku auth:token
 ```
 
 Copy the token printed and paste it as `<token>` in the following command:
 
-```
+```shell
 travis-encrypt --add deploy.api_key -r <your-username>/place-my-order <token>
 ```
 
@@ -1227,13 +1227,13 @@ Replace `<your-username>` with the name of your GitHub account.
 
 To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:
 
-```
+```shell
 node_modules/.bin/firebase login:ci
 ```
 
 In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the `<token>` in the following command:
 
-```
+```shell
 travis-encrypt --add -r <your-username>/place-my-order 'FIREBASE_TOKEN="<token>"'
 ```
 
@@ -1241,7 +1241,7 @@ Now any time a build succeeds when pushing to `master` the application will be d
 
 To test this out checkout a new branch:
 
-```
+```shell
 git checkout -b continuous
 git add -A
 git commit -m "Trying out continuous deployment"

@@ -1389,13 +1389,13 @@ The major advantages of building applications based on custom HTML elements are:
 Consider the following example:
 
 ```html
-<order-model get-list="{ period='previous_week' }" {^value}="*previousWeek" />
-<order-model get-list="{ period='current_week' }" {^value}="*currentWeek" />
+<order-model get-list="{ period='previous_week' }" vm:value:to="*previousWeek" />
+<order-model get-list="{ period='current_week' }" vm:value:to="*currentWeek" />
 
 <bit-c3>
   <bit-c3-data>
-    <bit-c3-data-column key="Last Week" {value}="*previousWeek.totals" />
-    <bit-c3-data-column key="This Week" {value}="*currentWeek.totals" />
+    <bit-c3-data-column key="Last Week" vm:value:from="*previousWeek.totals" />
+    <bit-c3-data-column key="This Week" vm:value:from="*currentWeek.totals" />
   </bit-c3-data>
 </bit-c3>
 ```

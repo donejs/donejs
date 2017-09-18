@@ -30,7 +30,7 @@ In this section, we will install DoneJS and generate a new application.
 
 To get started, let’s install the DoneJS command line utility globally:
 
-```
+```shell
 npm install -g donejs@1
 ```
 
@@ -38,7 +38,7 @@ npm install -g donejs@1
 
 Then we’ll create a new DoneJS application called `donejs-chat`:
 
-```
+```shell
 donejs add app donejs-chat
 ```
 
@@ -64,13 +64,13 @@ DoneJS comes with its own development server, which hosts your development files
 
 To start it let’s go into the `donejs-chat` application directory:
 
-```
+```shell
 cd donejs-chat
 ```
 
 We can start development mode by running:
 
-```
+```shell
 donejs develop
 ```
 
@@ -88,7 +88,7 @@ DoneJS makes it easy to import other projects that are published on [npm](https:
 
 Open a new terminal window so we can keep the DoneJS development server running. Then, install the [Bootstrap npm package](https://www.npmjs.com/package/bootstrap) and save it as a dependency of our application like this:
 
-```
+```shell
 npm install bootstrap --save
 ```
 
@@ -122,7 +122,7 @@ The homepage custom element (with the HTML tag name `chat-home`) won't be very b
 
 To generate it, run:
 
-```
+```shell
 donejs add component home.component chat-home
 ```
 
@@ -131,7 +131,7 @@ The messages component (with the tag `chat-messages`) will be a little more comp
 
 Now run:
 
-```
+```shell
 donejs add component messages chat-messages
 ```
 
@@ -203,7 +203,7 @@ On the homepage, let’s install and add [bit-tabs](https://github.com/bitovi-co
 
 Run:
 
-```
+```shell
 npm install bit-tabs@1 --save
 ```
 
@@ -234,7 +234,7 @@ To load messages from the server, we will use [can-connect’s supermodel](https
 
 Generate a `message` supermodel like this:
 
-```
+```shell
 donejs add supermodel message
 ```
 
@@ -325,7 +325,7 @@ Right now our chat’s messages update automatically with our own messages, but 
 
 To connect to it, first we’ll install a socket.io connector, by running:
 
-```
+```shell
 npm install steal-socket.io --save
 ```
 
@@ -356,7 +356,7 @@ We can find the build configuration in `build.js` in the application folder.
 
 Everything is already set up, so we can simply make a build by running:
 
-```
+```shell
 donejs build
 ```
 
@@ -366,7 +366,7 @@ The optimized bundles that load your JavaScript and CSS as fast as possible are 
 
 To test the production build, close the current server (with `CTRL + C`) and start it with the environment (`NODE_ENV`) set to `production`:
 
-```
+```shell
 NODE_ENV=production donejs start
 ```
 
@@ -399,19 +399,19 @@ When you deploy for the first time it will ask you to authorize, but first we ne
 
 Now we can add the Firebase deployment configuration to our `package.json` like this:
 
-```
+```shell
 donejs add firebase
 ```
 
 When prompted, enter the name of the application created when you set up the Firebase app. Before you can deploy your app you need to login and authorize the Firebase tools, which you can do with:
 
-```
+```shell
 node_modules/.bin/firebase login
 ```
 
 Then we can deploy the application by running:
 
-```
+```shell
 donejs build
 donejs deploy
 ```
@@ -422,7 +422,7 @@ Static files are deployed to Firebase.
 
 And verify that the application is loading from the CDN by loading it after running:
 
-```
+```shell
 NODE_ENV=production donejs start
 ```
 
@@ -443,7 +443,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 
 Mac users should download XCode from the AppStore and install the `ios-sim` package globally with:
 
-```
+```shell
 npm install -g ios-sim
 ```
 
@@ -453,7 +453,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 
 Now we can install the DoneJS Cordova tools with:
 
-```
+```shell
 donejs add cordova@1
 ```
 
@@ -461,7 +461,7 @@ Depending on your operating system you can accept most of the defaults, unless y
 
 To run the Cordova build and launch the simulator we can now run:
 
-```
+```shell
 donejs build cordova
 ```
 
@@ -477,7 +477,7 @@ __Note:__ if you receive the error `Error: Cannot read property 'replace' of und
 
 To set up the desktop build, we have to add it to our application like this:
 
-```
+```shell
 donejs add electron@1
 ```
 
@@ -487,19 +487,19 @@ Accept the default for all of the prompts.
 
 Then we can run the build like this:
 
-```
+```shell
 donejs build electron
 ```
 
 The macOS application can be opened with
 
-```
+```shell
 open build/donejs-chat-darwin-x64/donejs-chat.app
 ```
 
 The Windows application can be opened with
 
-```
+```shell
 .\build\donejs-chat-win32-x64\donejs-chat.exe
 ```
 
