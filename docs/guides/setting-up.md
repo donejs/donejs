@@ -1,5 +1,5 @@
 @page SettingUp Setting Up DoneJS
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 @description This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever

@@ -1,5 +1,5 @@
 @page migrate-1 Migrating to DoneJS 1
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 @description This guide walks you through the step-by-step process of upgrading a DoneJS 0.9 app to DoneJS 1.

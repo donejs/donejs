@@ -1,5 +1,5 @@
 @page generator Creating a generator
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 @description Generators add additional functionality to DoneJS applications. In this guide, we’ll create a generator that adds JSHint and a `.editorconfig` file to a DoneJS application.
@@ -169,14 +169,14 @@ Our generator needs to ask if we want to use spaces or tabs and then copy the `.
         this.pkg = this.fs.readJSON(
           this.destinationPath('package.json'), {}
         );
-        
+
         // Maintain a list of all files we want to copy over
         this.files = [
           '.editorconfig',
           '.jshintrc'
         ];
       },
-      
+
       prompting: function () {
         var done = this.async();
 
@@ -202,22 +202,22 @@ Our generator needs to ask if we want to use spaces or tabs and then copy the `.
           done();
         }.bind(this));
       },
-      
+
       writing: function () {
         var pkg = this.pkg;
-        
+
         // Update `package.json` with the `jshint` command
         // and update the `test` script
         pkg.scripts = _.extend(pkg.scripts, {
-          test: 'npm run jshint && ' + 
+          test: 'npm run jshint && ' +
             _.get(pkg, 'scripts.test',
               'echo "No tests specified"'),
-          jshint: 'jshint ' + 
+          jshint: 'jshint ' +
             _.get(pkg, 'system.directories.lib',
-              'src') + 
+              'src') +
             '/. --config'
         });
-        
+
         // Write to `package.json` and format accordingly
         // This will prompt you to overwrite
         var indent = this.props.index === 'tab' ? '\t' : '  ';
@@ -225,7 +225,7 @@ Our generator needs to ask if we want to use spaces or tabs and then copy the `.
 
         // Install jshint as a development dependency
         this.npmInstall([ 'jshint' ], { saveDev: true});
-        
+
         // Got through every file and copy it
         this.files.forEach(function(file) {
           this.fs.copyTpl(
@@ -295,7 +295,7 @@ Yeoman also comes with some tools for [testing generators](http://yeoman.io/auth
         assert.fileContent('.jshintrc',
           /"latedef": "nofunc"/);
       });
-      
+
       // Verify that `.editorconfig` got written
       // with `indent_style` set to our selection
       it('.editorconfig with indent_style', function() {
@@ -303,7 +303,7 @@ Yeoman also comes with some tools for [testing generators](http://yeoman.io/auth
         assert.fileContent('.editorconfig',
           /indent_style = tab/);
       });
-      
+
       // Make sure that `package.json` got updated
       // with the `jshint` npm script
       it('update package.json', function() {
