@@ -1,4 +1,4 @@
-@page survey Survey
+@page survey Community Survey
 @parent DoneJS
 @hide sidebar
 
@@ -7,7 +7,7 @@ by taking a short email survey every six weeks.
 
 @body
 
-We want to hear from you. What do you love and hate about CanJS, DoneJS, and
+__We want to hear from you.__ What do you love and hate about CanJS, DoneJS, and
 StealJS? What can the core team work on to make you grow fonder of these
 projects?
 
@@ -31,9 +31,10 @@ with a link to the survey.
 
 We will look at every single response and use it to prioritize what the team
 works on in the coming months. Short of [hiring us](https://www.bitovi.com/contact)
-to work on something in particular, this is the best way to have a direct impact
-on our priorities.
+to work on something in particular, __this is the best way to have a direct impact
+on our priorities.__
 
+[Read more about the survey in our announcement blog post.](https://www.bitovi.com/blog/help-us-improve-canjs-stealjs-and-the-rest-of-the-donejs-family)
 If you have any questions, please don’t hesitate to ask on
 [our forums](https://forums.donejs.com/),
 [Gitter](https://gitter.im/donejs/donejs), or
