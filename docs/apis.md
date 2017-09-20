@@ -366,10 +366,10 @@ __one and two-way binding templates__:
 
 ```js
 // Programmatically create a template
-// `{($value)}` cross binds the input's value
+// `value:bind` cross binds the input's value
 // to `first` in the scope.
 var template = stache("<h1>{{first}}</h1>"+
-	"<input {($value)}='first'/>");
+	"<input value:bind='first'/>");
 
 // Create observable data for the template
 var person = new DefineMap({first: "Payal"});
@@ -405,8 +405,8 @@ var PersonEditViewModel = DefineMap.extend({
 // Create a template that will be rendered within
 // `<person-edit>` elements.
 var template = stache("Update {{fullName}}:"+
-	"<input {($value)}='first'/>"+
-	"<input {($value)}='last'/>");
+	"<input value:bind='first'/>"+
+	"<input value:bind='last'/>");
 
 // Create the `<person-edit>` element with the specified
 // viewModel and template (view).
@@ -417,11 +417,11 @@ Component.extend({
 });
 
 // Use that custom element within another template.
-// `{(first)}` cross binds `<person-edit>`'s
+// `first.bind` cross binds `<person-edit>`'s
 // `first` property to `firstName` in the scope.
 var parentTemplate = stache(
   "<h1>{{firstName}} {{lastName}}</h1>"+
-  "<person-edit {(first)}='firstName' {(last)}='lastName'/>");
+  "<person-edit first:bind='firstName' last:bind='lastName'/>");
 
 // Render the parent template with some data:
 var frag = parentTemplate(new DefineMap({
@@ -723,7 +723,7 @@ var person = new DefineMap({first: "Justin", last: "Meyer"}),
     hobbies =  new DefineList(["basketball", "hip-hop dancing"]);
 
 var info = compute(function(){
-  return person.firs + " " + person.last + " is " +
+  return person.first + " " + person.last + " is " +
   	age() + " and likes " + hobbies.join(",") + ".";
 });
 ```
@@ -801,8 +801,8 @@ example, a `person_edit.js` component file might have a `person_edit.stache` fil
 ```js
 // person_edit.stache
 Update {{fullName}}:
-<input {($value)}='first'/>
-<input {($value)}='last'/>
+<input value:bind='first'/>
+<input value:bind='last'/>
 ```
 
 This template's __renderer__ function is imported in `person_edit.js` like:
@@ -929,9 +929,9 @@ Create a one-way binding from the parent scope to a child's properties/attribute
 
 
   ```html
-    <my-component vm:userName:from="name"></my-component>
+    <my-component userName:from="name"></my-component>
 
-    <input el:value:from="name" type="text">
+    <input value:from="name" type="text">
     ```
 
 Create a one-way binding from the child's properties/attributes or viewModel to the parent scope:
@@ -939,9 +939,9 @@ Create a one-way binding from the child's properties/attributes or viewModel to 
 - [childProp:to="name"](https://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind the value of `userName` property on the viewModel or the `value` attribute on the `input` element to the `name` property in the parent scope.
 
     ```html
-    <my-component vm:userName:to="name"></my-component>
+    <my-component userName:to="name"></my-component>
 
-    <input el:value:to="name" type="text">
+    <input value:to="name" type="text">
     ```
 
 Create two-way bindings between the parent scope and the child's viewModel or property/attributes:
@@ -949,9 +949,9 @@ Create two-way bindings between the parent scope and the child's viewModel or pr
 - [propName:bind="value"](https://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind the value of `userName` property in the viewModel or `value` attribute on the `input` element to the `name` in the parent scope.
 
     ```html
-    <my-component vm:userName:bind="name"></my-component>
+    <my-component userName:bind="name"></my-component>
 
-    <input el:value:bind="name" type="text">
+    <input value:bind="name" type="text">
     ```
 
 Create bindings to viewModel or DOM events:
@@ -959,12 +959,15 @@ Create bindings to viewModel or DOM events:
 - [on:EVENT="handler()"](https://canjs.com/doc/can-stache-bindings.event.html) - Listen to the DOM event or viewModel `EVENT` and use `handler` as the event handler.
 
 Listen to the `click` event emitted by a DOM element:
+
     ```html
-    <div on:el:click="updateThing()"></my-component>
+    <div on:click="updateThing()"></my-component>
     ```
+
 Listen to the `show` event emitted by the viewModel, `vm`:
+
     ```html
-    <my-component on:vm:show="showTheThing()"></my-component>
+    <my-component on:show="showTheThing()"></my-component>
     ```
 
 ### can-component
@@ -1007,11 +1010,11 @@ var appViewModel = new DefineMap({
   greeting: "Howdy Planet"
 });
 
-var template = stache('<hello-world vm:message:from="greeting"/>');
+var template = stache('<hello-world message:from="greeting"/>');
 
 var frag = template(appViewModel);
 
-frag //-> <hello-world vm:message:from="greeting">
+frag //-> <hello-world message:from="greeting">
      //      <h1>Howdy Planet!</h1>
      //   </hello-world>
 ```
@@ -1532,7 +1535,7 @@ callbacks.tag("tooltip", function(el){
 to [jQuery special events](http://benalman.com/news/2010/03/jquery-special-events/) like:
 
 ```html
-<div on:el:tripleclick="doSomething()">
+<div on:tripleclick="doSomething()">
 ```
 
 [can-component](#cancomponent)'s events object also supports this:
