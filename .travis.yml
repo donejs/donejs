@@ -22,8 +22,7 @@ notifications:
     on_success: change
     on_failure: change
 script:
-  - sudo sh -c 'dbus-uuidgen > /etc/machine-id'
   - npm run jshint
   - npm run document
-  - npm run test-guides
+  - npm run test-quickstart
   - npm run coverage:upload
