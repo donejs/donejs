@@ -1,6 +1,6 @@
-sudo: false
+sudo: required
 language: node_js
-dist: precise
+dist: trusty
 addons:
   firefox: "51.0"
 before_install:
@@ -22,6 +22,7 @@ notifications:
     on_success: change
     on_failure: change
 script:
+  - sudo sh -c 'dbus-uuidgen > /etc/machine-id'
   - npm run jshint
   - npm run document
   - npm run test-guides

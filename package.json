@@ -45,7 +45,7 @@
     "coveralls-send": "0.0.2",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^4.1.0",
-    "guide-automation": "^0.3.4",
+    "guide-automation": "^0.3.11",
     "is-appveyor": "^1.0.0",
     "istanbul": "^0.4.2",
     "jshint": "^2.8.0",
