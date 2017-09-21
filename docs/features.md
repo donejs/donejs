@@ -1507,12 +1507,12 @@ The beauty and power of custom HTML elements are most apparent when visual widge
 Back to our original example:
 
 ```html
-<order-model get-list="{previousWeek}" [previousWeekData]="{value}"/>
-<order-model get-list="{currentWeek}" [currentWeekData]="{value}"/>
+<order-model get-list="{previous_week}" value:to="*previousWeek" />
+<order-model get-list="{current_week}" value:to="*currentWeek" />
 
 <bit-graph title="Week over week">
-  <bit-series data="{../previousWeekData}" />
-  <bit-series data="{../currentWeekData}" color="Blue"/>
+  <bit-series data:from="{../previousWeekData}" />
+  <bit-series data:from="{../currentWeekData}" color="Blue"/>
 </bit-graph>
 ```
 
