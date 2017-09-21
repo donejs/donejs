@@ -482,7 +482,7 @@ When a user navigates to `/register`, the [`<user-details>`](http://donejs.githu
 creates a form that takes a user's email and password.  
 
 ```html
-<form on:el:submit="saveUser(%event)" action="">
+<form on:submit="saveUser(%event)" action="">
     <div class="form-group">
         <label for="user-email">
             Email
@@ -494,14 +494,14 @@ creates a form that takes a user's email and password.
                     class="form-control"
                     id="user-email"
                     {{^if user.isNew}}disabled{{/if}}
-                    el:value:bind="user.email" />
+                    value:bind="user.email" />
             </div>
         {{else}}
             <input
                 class="form-control"
                 id="user-email"
                 {{^if user.isNew}}disabled{{/if}}
-                el:value:bind="user.email" />
+                value:bind="user.email" />
         {{/is}}
     </div>
     ...
@@ -642,7 +642,7 @@ The session, its user, or the result of `isAdmin` is then passed to
 sub components depending on their needs:
 
 ```html
-<tournament-details vm:isAdmin:from='session.isAdmin'/>
+<tournament-details isAdmin:from='session.isAdmin'/>
 ```
 
 Finally, those components use that information to control what is
@@ -651,7 +651,7 @@ shown on the page:
 ```html
 {{#if isAdmin}}
 <h4>New Game</h4>
-<form on:el:submit="createGame(%event)">...</form>
+<form on:submit="createGame(%event)">...</form>
 {{/if}}
 ```
 
@@ -661,7 +661,7 @@ which might include methods to check access rights:
 ```html
 {{#if user.acl.can("create","game") }}
 <h4>New Game</h4>
-<form on:el:submit="createGame(%event)">...</form>
+<form on:submit="createGame(%event)">...</form>
 {{/if}}
 ```
 
@@ -671,15 +671,15 @@ Creating a session is done with the [<bitballs-navigation>](http://donejs.github
 login form that takes an email and password:
 
 ```html
-<form on:el:submit="createSession(%event)" action="">
+<form on:submit="createSession(%event)" action="">
     <input
         placeholder="email"
-        el:value:bind="loginSession.user.email"/>
+        value:bind="loginSession.user.email"/>
 
     <input
         placeholder="password"
     	type="password"
-      el:value:bind="loginSession.user.password"/>
+      value:bind="loginSession.user.password"/>
 
 	<button type="submit">Login</button>
 </form>
@@ -750,7 +750,7 @@ The [`<bitballs-navigation>`](http://donejs.github.io/bitballs/docs/bitballs%7Cc
 calls `logout()` on its ViewModel:
 
 ```html
-<a href="javascript://" on:el:click="logout()">Logout</a>
+<a href="javascript://" on:click="logout()">Logout</a>
 ```
 
 `logout` calls destroy on the session and then removes the session from the AppViewModel:
@@ -944,7 +944,7 @@ GET /services/games/5?\
 ```
 
 `withRelated` allows the client to control the the Database's `JOIN`
-clause.  
+clause.
 
 Instead of processing the querystring ourselves and build the corresponding
 Database request, most ORMs make it easy to do the expected thing.
@@ -1390,7 +1390,7 @@ get pageComponentConfig() {
         return {
             title: "Game",
             componentName: "game-details",
-            attributes: "{^game-promise}='./pagePromise' {game-id}='./gameId' {session}='./session'",
+            attributes: "gamePromise:to='./pagePromise' gameId:from='./gameId' session:from='./session'",
             moduleName: "game/details/"
         };
 
@@ -1398,7 +1398,7 @@ get pageComponentConfig() {
         return {
             title: "Tournament",
             componentName: "tournament-details",
-            attributes: "{^tournament-promise}='./pagePromise' {tournament-id}='./tournamentId' {is-admin}='./isAdmin'",
+            attributes: "tournamentPromise:to='./pagePromise' tournamentId:from='./tournamentId' isAdmin:from='./isAdmin'",
             moduleName: "tournament/details/"
         };
 
