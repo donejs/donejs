@@ -303,9 +303,9 @@ Next update `src/messages/messages.stache` to look like this:
 @highlight 17-29,only
 
 > New APIs Used:
-> - [($submit)](https://canjs.com/doc/can-stache-bindings.event.html) — listens to _submit_ events and calls
+> - [on:submit](https://canjs.com/doc/can-stache-bindings.event.html) — listens to _submit_ events and calls
 >   the `send()` method on the ViewModel.
-> - [{($value)}](https://canjs.com/doc/can-stache-bindings.twoWay.html) — two-way bindings a `<input>`’s value
+> - [value:bind](https://canjs.com/doc/can-stache-bindings.twoWay.html) — two-way bindings a `<input>`’s value
 >   to a property of the ViewModel.
 
 
