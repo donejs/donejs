@@ -13,7 +13,7 @@
       <can-import from="place-my-order/order/list.component" />
       <order-model get-list="{status='new'}">
         <pmo-order-list
-          {orders}="."
+          orders:from="."
           list-title="New Orders"
           status="new"
           status-title="New Order!"
@@ -24,7 +24,7 @@
 
       <order-model get-list="{status='preparing'}">
         <pmo-order-list
-          {orders}="."
+          orders:from="."
           list-title="Preparing"
           status="preparing"
           status-title="Preparing"
@@ -35,7 +35,7 @@
 
       <order-model get-list="{status='delivery'}">
         <pmo-order-list
-          {orders}="."
+          orders:from="."
           list-title="Out for delivery"
           status="delivery"
           status-title="Out for delivery"
@@ -46,7 +46,7 @@
 
       <order-model get-list="{status='delivered'}">
         <pmo-order-list
-          {orders}="."
+          orders:from="."
           list-title="Delivered"
           status="delivered"
           status-title="Delivered"

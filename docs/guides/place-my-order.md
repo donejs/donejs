@@ -526,7 +526,7 @@ Update `src/restaurant/list/list.stache` to:
 Some things worth pointing out:
 
 - Since `states` and `cities` return a promise, we can check the promise's status via `isResolved` and `isPending` and once resolved get the actual value with `states.value` and `cities.value`. This also allows us to easily show loading indicators and disable the select fields while loading data.
-- The `state` and `city` properties are two-way bound to their select fields via [{($value)}](https://canjs.com/doc/can-stache-bindings.twoWay.html#___child_prop____key_)
+- The `state` and `city` properties are two-way bound to their select fields via [value:bind](https://canjs.com/doc/can-stache-bindings.twoWay.html#___child_prop____key_)
 
 Now we have a component that lets us select state and city and displays the appropriate restaurant list.
 
@@ -843,9 +843,9 @@ This is a longer template so lets walk through it:
 - `<can-import from="place-my-order/order/details.component" />` loads the order details component we previously created
 - If the `saveStatus` promise is resolved we show the `pmo-order-details` component with that order
 - Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item
-- `($submit)="placeOrder()"` will call `placeOrder` from our view model when the form is submitted
-- The interesting part for showing a menu item is the checkbox `<input type="checkbox" ($change)="order.items.toggle(.)" {{#if order.items.has(.)}}checked{{/if}}>`
-  - `($change)` binds to the checkbox change event and runs `order.items.toggle` which toggles the item from `ItemList`, which we created in the model
+- `on:submit="placeOrder()"` will call `placeOrder` from our view model when the form is submitted
+- The interesting part for showing a menu item is the checkbox `<input type="checkbox" on:change="order.items.toggle(.)" {{#if order.items.has(.)}}checked{{/if}}>`
+  - `on:change` binds to the checkbox change event and runs `order.items.toggle` which toggles the item from `ItemList`, which we created in the model
   - `order.item.has` sets the checked status to whether or not this item is in the order
 - Then we show form elements for name, address, and phone number, which are bound to the order model using [can-stache-bindings](https://canjs.com/doc/can-stache-bindings.html)
 - Finally we disable the button with `{{^if canPlaceOrder}}disabled{{/if}}` which gets `canPlaceOrder` from the view model and returns false if no menu items are selected.

@@ -24,14 +24,14 @@
           {{#if action}}
             <p class="action">
               Mark as:
-              <a href="javascript://" ($click)="markAs(action)">
+              <a href="javascript://" on:click="markAs(action)">
                 {{actionTitle}}
               </a>
             </p>
           {{/if}}
 
           <p class="action">
-            <a href="javascript://"  ($click)="destroy()">Delete</a>
+            <a href="javascript://"  on:click="destroy()">Delete</a>
           </p>
         </div>
       </div>
