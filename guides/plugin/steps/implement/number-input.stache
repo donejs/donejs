@@ -5,16 +5,16 @@
       <div class="input-group-btn">
         <button class="btn btn-primary" type="button"
           {{#eq value min}}disabled{{/eq}}
-          ($click)="decrement">
+          on:click="decrement">
             -
           </button>
       </div>
       <input type="number" class="form-control"
-        {($value)}="value">
+        value:bind="value">
       <div class="input-group-btn">
         <button class="btn btn-primary" type="button"
           {{#eq value max}}disabled{{/eq}}
-          ($click)="increment">
+          on:click="increment">
             +
         </button>
       </div>
