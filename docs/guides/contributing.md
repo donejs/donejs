@@ -1,5 +1,5 @@
 @page contributing Contributing
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 

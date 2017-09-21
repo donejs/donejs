@@ -1,5 +1,5 @@
 @page bitballs Example: Bitballs
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 @description

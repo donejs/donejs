@@ -1,5 +1,5 @@
 @page plugin Creating a plugin
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 @description DoneJS doesn't just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this guide we will create a reusable number input widget using [Bootstrap](http://getbootstrap.com) styles.

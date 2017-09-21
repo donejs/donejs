@@ -1,5 +1,5 @@
 @page Guide Quick start guide
-@parent DoneJS
+@parent Guides
 @hide sidebar
 @outline 2 ol
 @description In this guide, we will create [chat.donejs.com](https://chat.donejs.com), a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:

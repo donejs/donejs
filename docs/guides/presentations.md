@@ -1,5 +1,5 @@
 @page presentations Presentations
-@parent DoneJS
+@parent contributing
 @hide sidebar
 @outline 1 ol
 
