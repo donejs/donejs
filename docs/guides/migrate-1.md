@@ -223,7 +223,7 @@ This will update your `package.json` to look something like this:
 
 Once this is done, you should be able to start up a server using `donejs start`. If that works, then re-enable SSR and live-reload in your **develop** script (remove the `--static` flag we added earlier):
 
-```
+```shell
 done-serve --develop ...
 ```
 

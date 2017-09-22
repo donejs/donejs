@@ -50,7 +50,7 @@ the chat application as an example in development.  We'll cover what happens whe
 1. An http request for `https://chat.donejs.com/` is sent to a node server. The node server is configured,
    in this case with express, to use [done-ssr-middleware](#done-ssr) to render a DoneJS application:
 
-   ```
+   ```js
    var ssr = require('done-ssr-middleware');
 
    app.use('/', ssr({
@@ -65,7 +65,7 @@ the chat application as an example in development.  We'll cover what happens whe
    The main module is usually a [can-stache](#canstache) template processed with the [done-autorender](#done-autorender)
    plugin. The module name is specified like: `index.stache!done-autorender`. `index.stache` might look like:
 
-   ```
+   ```html
    <html>
    <head>
      <title>My Site</title>
@@ -104,7 +104,7 @@ the chat application as an example in development.  We'll cover what happens whe
 
 5. The browser downloads the page's HTML, which includes a `<script>` tag that points to [steal](#stealjs).  
 
-   ```
+   ```html
    <script src="node_modules/steal/steal.js" main="index.stache!done-autorender"></script>
    ```
 
@@ -124,7 +124,7 @@ the chat application as an example in development.  We'll cover what happens whe
 
 1. A pushstate is triggered by user action, usually by clicking a link. [can-route](#canroute)'s routing rules determines the properties set on the application [viewModel](#canmap).
 
-   ```
+   ```js
    route('{page}', { page: 'home' });
    ```
 
@@ -132,7 +132,7 @@ the chat application as an example in development.  We'll cover what happens whe
 
 3. Live binding causes the initial template to reflect in the change in route. If the new route is `/chat` it will cause the `page` to be **chat**:
 
-   ```
+   ```html
    <html>
    <head>
      <title>My Site</title>
@@ -220,14 +220,14 @@ To use [steal](https://stealjs.com/docs/steal.html), simply add a script tag to 
 in an HTML page or in a [done-autorender](#done-autorender) `template` and
 point the `main` attribute to a module to load like:
 
-```
+```html
 <script src="../../node_modules/steal/steal.js" main="my-app/my-module"></script>
 ```
 
 Using the default DoneJS [system.directories.lib](https://stealjs.com/docs/npm.html#configuration) configuration, this will load
 `my-app/src/my-module.js`.  From there, use CommonJS, ES6, or AMD to load your modules:
 
-```
+```js
 // my-app/src/my-module.js
 import $ from "jquery";
 import "./styles.css";
@@ -241,7 +241,7 @@ as the module reference, but with the last folder name added again.
 
 Some examples:
 
-```
+```js
 // in components/person module.
 import "can-component"; //imports "can-component";
 import "./edit/"; // imports "components/person/edit/edit";
@@ -249,7 +249,7 @@ import "./edit/"; // imports "components/person/edit/edit";
 
 Configure [steal](https://stealjs.com/docs/steal.html)'s behavior in your `package.json` in the `steal` object like:
 
-```
+```js
 // package.json
 {
   "main": "index.stache!done-autorender",
@@ -280,7 +280,7 @@ modules to different formats.
 
 DoneJS comes with a `build.js` script that call's steal-tools' [build](https://stealjs.com/docs/steal-tools.build.html):
 
-```
+```js
 //build.js
 var stealTools = require("steal-tools");
 
@@ -333,7 +333,7 @@ Checkout the following quick examples of their use:
 
 __observables__:
 
-```
+```js
 // Observable objects:
 var person = new DefineMap({first: "Justin", last: "Meyer"});
 
@@ -364,12 +364,12 @@ hobbies.pop(); // causes `change` event above
 
 __one and two-way binding templates__:
 
-```
+```js
 // Programmatically create a template
-// `{($value)}` cross binds the input's value
+// `value:bind` cross binds the input's value
 // to `first` in the scope.
 var template = stache("<h1>{{first}}</h1>"+
-	"<input {($value)}='first'/>");
+	"<input value:bind='first'/>");
 
 // Create observable data for the template
 var person = new DefineMap({first: "Payal"});
@@ -391,7 +391,7 @@ document.body //-> <h1>Ramiya</h1><input value='Ramiya'/>
 
 __custom elements__:
 
-```
+```js
 // Create a custom `can-define/map/map` constructor function
 // with a helper function.
 var PersonEditViewModel = DefineMap.extend({
@@ -405,8 +405,8 @@ var PersonEditViewModel = DefineMap.extend({
 // Create a template that will be rendered within
 // `<person-edit>` elements.
 var template = stache("Update {{fullName}}:"+
-	"<input {($value)}='first'/>"+
-	"<input {($value)}='last'/>");
+	"<input value:bind='first'/>"+
+	"<input value:bind='last'/>");
 
 // Create the `<person-edit>` element with the specified
 // viewModel and template (view).
@@ -417,11 +417,11 @@ Component.extend({
 });
 
 // Use that custom element within another template.
-// `{(first)}` cross binds `<person-edit>`'s
+// `first.bind` cross binds `<person-edit>`'s
 // `first` property to `firstName` in the scope.
 var parentTemplate = stache(
   "<h1>{{firstName}} {{lastName}}</h1>"+
-  "<person-edit {(first)}='firstName' {(last)}='lastName'/>");
+  "<person-edit first:bind='firstName' last:bind='lastName'/>");
 
 // Render the parent template with some data:
 var frag = parentTemplate(new DefineMap({
@@ -440,7 +440,7 @@ from.  It's used by [can-define](#candefine) and [can-component](#cancomponent).
 To create your own constructor function, [extend](https://canjs.com/doc/can-construct.extend.html) `can-construct`
 with prototype methods like:
 
-```
+```js
 var Todo = Construct.extend({
   init: function(name){
     this.name = name;
@@ -458,7 +458,7 @@ var Todo = Construct.extend({
 
 Then you can create instances of `Todo` like:
 
-```
+```js
 var todo = new Todo("dishes");
 todo.name //-> "dishes";
 todo.allowedToEdit() //-> true;
@@ -466,7 +466,7 @@ todo.allowedToEdit() //-> true;
 
 You can extend `Todo` with [extend](https://canjs.com/doc/can-construct.extend.html) too:
 
-```
+```js
 var PrivateTodo = Todo.extend({
   allowedToEdit: function( account ) {
     return account.owns( this );
@@ -480,13 +480,13 @@ var PrivateTodo = Todo.extend({
 JavaScript Object-like objects.  Create an instance of the
 base can-define/map/map like:
 
-```
+```js
 var person = new DefineMap({first: "Justin", last: "Meyer"});
 ```
 
 Read or write a `map`'s properties:
 
-```
+```js
 person.first //-> Justin
 
 person.first = "Ramiya";
@@ -499,7 +499,7 @@ person.get() //-> {first: "Brian", last: "Moschel"}
 
 Bind to changes in a person's properties with [.on](https://canjs.com/doc/can-define/map/map.prototype.on.html):
 
-```
+```js
 person.on("first", function(ev, newValue, oldValue){
   newValue //-> "Laura"
   oldvalue //-> "Brian"
@@ -513,7 +513,7 @@ person.first = "Laura";
 Extend a `DefineMap` to create a new constructor function.  This is
 very useful for creating Models and View Models:
 
-```
+```js
 // pass extend an object of prototype values
 var Person = DefineMap.extend({
   first: "string",
@@ -534,7 +534,7 @@ you to control the behavior of attributes.  You can define
 [setters](https://canjs.com/doc/can-define.types.set.html), and
 [type](https://canjs.com/doc/can-define.types.type.html) converters.
 
-```
+```js
 var Todo = DefineMap.extend({
   percentComplete: {
     value: 0.1,
@@ -555,7 +555,7 @@ todo.percentComplete //-> 10%
 You can even describe asynchronous behavior which is critical for working
 with service data:
 
-```
+```js
 var Todo = DefineMap.extend({
   ownerId: "number",
   owner: {
@@ -581,13 +581,13 @@ todo.on("owner", function(ev, owner){
 JavaScript Array-like objects.  Create an instance of the
 base `DefineList` like:
 
-```
+```js
 var hobbies = new DefineList(["basketball","dancing"]);
 ```
 
 Read and write items from the list or to read the length:
 
-```
+```js
 for(var i = 0, len = hobbies.length; i < len; i++){
   var hobby = hobbies.get(i);
 }
@@ -597,7 +597,7 @@ hobbies.get() //-> ["basketball", "dancing"]
 
 Use array methods like [.push](https://canjs.com/doc/can-define/list/list.prototype.push.html), [.pop](https://canjs.com/doc/can-define/list/list.prototype.pop.html), and [.splice](https://canjs.com/doc/can-define/list/list.prototype.splice.html) to modify the array:
 
-```
+```js
 hobbies.pop();
 
 hobbies.generated() //-> ["basketball"];
@@ -610,7 +610,7 @@ hobbies //-> DefineList["basketball","football"]
 Use [.forEach](https://canjs.com/doc/can-define/list/list.prototype.forEach.html), [.map](https://canjs.com/doc/can-define/list/list.prototype.map.html), or [.filter](https://canjs.com/doc/can-define/list/list.prototype.filter.html) to loop through the array.  All
 these methods return a `DefineList`
 
-```
+```js
 var intramurals = hobbies.map(function(hobby){
   return "intramural "+hobby;
 })
@@ -619,9 +619,9 @@ intramurals //-> DefineList["intramural basketball",
 ```
 
 Listen to when a list changes by binding on `add` or `remove` or `length`
-events.  
+events.
 
-```
+```js
 hobbies.on("add", function(ev, newHobbies, index){
     console.log("added", newHobbies,"at", index);
   })
@@ -643,7 +643,7 @@ hobbies.splice(1,1,"pumpkin carving","gardening");
 By default, if you initialize a list with plain JavaScript objects,
 those objects are converted to a `DefineMap`:
 
-```
+```js
 var people = new DefineList([
   {first: "Justin", last: "Meyer", age: 72},
   {first: "David", last: "Luecke", age: 20},
@@ -656,7 +656,7 @@ people.get(0).first //-> Justin
 You can create your own custom `DefineList` constructor functions
 by extending `DefineList`:
 
-```
+```js
 var People = DefineList.extend({
   seniors: function(){
     return this.filter(function(person){
@@ -677,7 +677,7 @@ people.seniors() //-> People[{Justin}]
 When extending `DefineList` you can specify the default `Map` type
 that's created when plain JS objects are added to the list:
 
-```
+```js
 var Person = can.Map.extend({
   fullName: function(){
     person.first + " " + person.last;
@@ -712,32 +712,32 @@ so it's worth understanding the basics.
 
 `can-compute` allows you to define single observable values like:
 
-```
+```js
 var age = compute(33);
 ```
 
 or derived values like:
 
-```
+```js
 var person = new DefineMap({first: "Justin", last: "Meyer"}),
     hobbies =  new DefineList(["basketball", "hip-hop dancing"]);
 
 var info = compute(function(){
-  return person.firs + " " + person.last + " is " +
+  return person.first + " " + person.last + " is " +
   	age() + " and likes " + hobbies.join(",") + ".";
 });
 ```
 
 Read a compute by calling it like a function:
 
-```
+```js
 info() //-> "Justin Meyer is 33 and likes\
        //    basketball, hip-hop dancing."
 ```
 
 Listen to a compute by binding on its `change` event:
 
-```
+```js
 info.on("change", function(ev, newVal, oldVal){
   console.log("IS:\n",newVal,"\nWAS:\n", oldVal);
 })
@@ -750,7 +750,7 @@ reading the compute again like `info()` just returns the cached result.
 When any of the read observables change, it updates the cached value,
 and calls back any event handlers:
 
-```
+```js
 person.first = "Brian";
 person.last = "Moschel";
 
@@ -768,7 +768,7 @@ Mustache compliant live-binding templating language.
 
 Create a template programmatically with `can-stache` like:
 
-```
+```js
 var template = stache("<h1>{{first}} {{last}}</h1>");
 ```
 
@@ -777,7 +777,7 @@ returns a [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/Do
 
 Add those fragments to the page to see the result:
 
-```
+```js
 var person = new DefineMap({first: "Brian", last: "Moschel"})
 
 var frag = template(person);
@@ -798,16 +798,16 @@ a [can-component](#cancomponent) or as the [done-autorender](#done-autorender)ed
 When used in a [can-component](#cancomponent), the templates are often put in their own file. For
 example, a `person_edit.js` component file might have a `person_edit.stache` file like:
 
-```
+```js
 // person_edit.stache
 Update {{fullName}}:
-<input {($value)}='first'/>
-<input {($value)}='last'/>
+<input value:bind='first'/>
+<input value:bind='last'/>
 ```
 
 This template's __renderer__ function is imported in `person_edit.js` like:
 
-```
+```js
 // person_edit.js
 import template from "./person_edit.stache";
 import Component from "can-component";
@@ -829,21 +829,21 @@ The different tag types:
  - [{{key}}](https://canjs.com/doc/can-stache.tags.escaped.html) -
    inserts an escaped value.
 
-   ```
+   ```js
    stache("{{key}}")({key: "<b>Foo</b>"}) //-> `&lt;b&gt;Foo&lt;/b&gt;`
    ```
 
  - [{{{key}}}](https://canjs.com/doc/can-stache.tags.unescaped.html) -
    inserts an unescaped value.
 
-   ```
+   ```js
    stache("{{key}}")({key: "<b>Foo</b>"}) //-> `<b>Foo</b>`
    ```
 
 - [{{#key}} ... {{/key}}](https://canjs.com/doc/can-stache.tags.section.html) -
   renders a subsection depending on the value of the key.
 
-  ```
+  ```js
   // boolean values render the subsection or its inverse
   stache("{{#key}}A{{/key}}")({key: true}) //-> `A`
   stache("{{#key}}A{{/key}}")({key: false}) //-> ``
@@ -857,14 +857,14 @@ The different tag types:
 
   The subsection is rendered with the `key` value as the top of the [scope](https://canjs.com/doc/can-view-scope.html):
 
-  ```
+  ```js
   stache("{{#key}}{{child}}{{/key}}")({key: {child:"C"}}) //->`C`
   ```
 
 - [{{^key}} ... {{/key}}](https://canjs.com/doc/can-stache.tags.inverse.html) -
   opposite of `{{#key}}`.
 
-  ```
+  ```js
   stache("{{^key}}A{{/key}}")({key: true}) //-> ``
   stache("{{^key}}A{{/key}}")({key: false}) //-> `A`
   stache("{{^key}}A{{/key}}")({key: [null,0]}) //-> ``
@@ -876,7 +876,7 @@ The following are stache's most commonly used helpers:
 
  - [{{#if expr}} .. {{/if}}](https://canjs.com/doc/can-stache.helpers.if.html) - renders the subsection if the expr is truthy.
 
-   ```
+   ```js
    stache("{{#if key}}A{{/if}}")({key: true}) //-> `A`
    stache("{{#if key}}A{{/if}}")({key: false}) //-> ``
 
@@ -885,7 +885,7 @@ The following are stache's most commonly used helpers:
 
  - [{{#is expr1 expr2}} ... {{/is}}](https://canjs.com/doc/can-stache.helpers.is.html) - compares two expressions and renders a subsection depending on the result.
 
-   ```
+   ```js
    stache("{{#is page 'A'}}A{{/is}}")({page: 'A'}) //-> `A`
    stache("{{#is page 'A'}}A{{/is}}")({page: 'B'}) //-> ``
 
@@ -894,7 +894,7 @@ The following are stache's most commonly used helpers:
 
  - [{{#each key}} ... {{/each}}](https://canjs.com/doc/can-stache.helpers.each.html) - renders a subsection for each item in a key's value.
 
-   ```
+   ```js
    stache('{{#each hobbies}}<p>{{.}}</p>{{/each}}')(['Hockey', 'Hiking']) //-> `<p>Hockey</p><p>Hiking</p>`
    ```
 
@@ -902,13 +902,13 @@ The following are stache's most commonly used helpers:
 
  - [{{routeUrl hashes}}](https://canjs.com/doc/can-stache/helpers/route.html) - generates a url using [can-route](#canroute) for the provided hashes.
 
-   ```
+   ```js
    stache("<a href="{{routeUrl page='details' id='23'}}">{{name}}</a>")({name: 'Item 23'}) //-> `<a href="#!&page=details&id=23">Item 23</a>`
    ```
 
 [Call methods](https://canjs.com/doc/can-stache.expressions.html#Callexpressions) in your scope like: `{{method(value)}}`
 
-```
+```js
 stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
   pluralize: function(subject, howMany) {
     if(howMany > 1) {
@@ -925,58 +925,49 @@ stache('<p>10 {{pluralize("Baloon" 10)}}</p>')({
 
 Create a one-way binding from the parent scope to a child's properties/attributes or viewModel:
 
- - [{child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toChild.html) - One-way bind `value` in the scope to `childProp` in the viewModel.
+- [childProp:from="value"](https://canjs.com/doc/can-stache-bindings.toChild.html) - One-way bind `name` in the scope to `userName` property on the viewModel or the `value` attribute on the `input` element.
 
-    ```
-    <my-component {user-name}="name"></my-component>
-    ```
 
- - [{$child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toChild.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
+  ```html
+    <my-component userName:from="name"></my-component>
 
-    ```
-    <input {$value}="name" type="text">
+    <input value:from="name" type="text">
     ```
 
 Create a one-way binding from the child's properties/attributes or viewModel to the parent scope:
 
-- [{^child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+- [childProp:to="name"](https://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind the value of `userName` property on the viewModel or the `value` attribute on the `input` element to the `name` property in the parent scope.
 
-    ```
-    <my-component {^user-name}="name"></my-component>
-    ```
+    ```html
+    <my-component userName:to="name"></my-component>
 
- - [{^$child-prop}="value"](https://canjs.com/doc/can-stache-bindings.toParent.html) - One-way bind `value` in the scope to the `childProp` property or attribute of the element.
-
-    ```
-    <input {$value}="name" type="text">
+    <input value:to="name" type="text">
     ```
 
 Create two-way bindings between the parent scope and the child's viewModel or property/attributes:
 
-- [{(child-prop)}="value"](https://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind the value of `childProp` in the viewModel to the `name` in the parent scope.
+- [propName:bind="value"](https://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind the value of `userName` property in the viewModel or `value` attribute on the `input` element to the `name` in the parent scope.
 
-    ```
-    <my-component {(user-name)}="name"></my-component>
-    ```
+    ```html
+    <my-component userName:bind="name"></my-component>
 
- - [{^$child-prop}="value"](https://canjs.com/doc/can-stache-bindings.twoWay.html) - Two-way bind `value` in the scope to the `childProp` property or attribute of the element.
-
-    ```
-    <input {$value}="name" type="text">
+    <input value:bind="name" type="text">
     ```
 
 Create bindings to viewModel or DOM events:
 
- - [($EVENT)="handler()"](https://canjs.com/doc/can-stache-bindings.event.html) - Listen to the DOM event `EVENT` and use `handler` as the event handler.
+- [on:EVENT="handler()"](https://canjs.com/doc/can-stache-bindings.event.html) - Listen to the DOM event or viewModel `EVENT` and use `handler` as the event handler.
 
-    ```
-    <div ($click)="updateThing()"></my-component>
+Listen to the `click` event emitted by a DOM element:
+
+    ```html
+    <div on:click="updateThing()"></my-component>
     ```
 
-- [(EVENT)="handler()"](https://canjs.com/doc/can-stache-bindings.event.html) - Listen to the viewModel event `EVENT` and use `handler()` as the event handler.
+Listen to the `show` event emitted by the viewModel, `vm`:
 
-    ```
-    <my-component (show)="showTheThing()"></my-component>
+    ```html
+    <my-component on:show="showTheThing()"></my-component>
     ```
 
 ### can-component
@@ -988,7 +979,7 @@ custom elements.
 Define a `can-component` by extending one with a `tag` name, [can-define](#candefine) `viewModel` and
 [can-stache template](#canstache) like:
 
-```
+```js
 // Define the view model
 var HelloViewModel = DefineMap.extend({
   excitedMessage: function(){
@@ -1006,24 +997,24 @@ Component.extend({
 To instantiate this component so it says `Hello World!`, add
 a `<hello-world>` element to the page like:
 
-```
+```html
 <hello-world message="Hello World"/>
 ```
 
 Use [can-stache-bindings](#canstachebindings)
 to send a value from the `can-stache` scope like:
 
-```
+```js
 // a `DefineMap` that will be available in the scope
 var appViewModel = new DefineMap({
   greeting: "Howdy Planet"
 });
 
-var template = stache('<hello-world {message}="greeting"/>');
+var template = stache('<hello-world message:from="greeting"/>');
 
 var frag = template(appViewModel);
 
-frag //-> <hello-world {message}="greeting">
+frag //-> <hello-world message:from="greeting">
      //      <h1>Howdy Planet!</h1>
      //   </hello-world>
 ```
@@ -1031,7 +1022,7 @@ frag //-> <hello-world {message}="greeting">
 `can-component`s are usually built as [modlets](./Features.html#modlets),
 meaning their template and styles are another file and imported:
 
-```
+```js
 // hello-world.js
 import Component from 'can-component';
 import Map from 'can-define/map/map';
@@ -1055,7 +1046,7 @@ export default Component.extend({
 Some components are so small, they they don't require three
 separate files. For these, you can use a `.component` file:
 
-```
+```html
 <!-- hello-world.component -->
 <can-component tag="<%= tag %>">
   <style type="less">
@@ -1088,20 +1079,20 @@ View Model when a url is matched.
 The following sets the application ViewModel's `page` property
 to `"chat"` when the url looks like `/chat`:
 
-```
+```js
 route("{page}");
 ```
 
 You can define defaults that get set when `{page}` is empty. The
 following sets the default `page` property to `"home"`.
 
-```
+```js
 route("{page}", { page: "home" });
 ```
 
 You can specify multiple properties to set for a given url:
 
-```
+```js
 route("{page}/{slug}");
 route("{page}/{slug}/{action}");
 ```
@@ -1109,14 +1100,14 @@ route("{page}/{slug}/{action}");
 
 Update the url by changing `can-route`:
 
-```
+```js
 route.attr("page", "restaurants");
 // location.href -> "/restaurants"
 ```
 
 Or change `route` by modifying the url:
 
-```
+```js
 history.pushState(null, null, "/");
 // route.attr("page"); // -> "home"
 ```
@@ -1124,7 +1115,7 @@ history.pushState(null, null, "/");
 In a DoneJS application can.route is bound to the [application View Model](#candefine), but you can connect `can-route` to other
 maps:
 
-```
+```js
 var DefineMap = require("can-define/map/map");
 
 var AppViewModel = DefineMap.extend({
@@ -1145,11 +1136,11 @@ Which will cause any changes in the route to reflect in the View Model instance,
 
 [can-connect](https://canjs.com/doc/can-connect.html) is used to connect typed
 data to backend services.  In a DoneJS application, that typed data is a
-[can-define/map/map](#candefine) and [can-define/list/list](#candefinelistlist) type.  
+[can-define/map/map](#candefine) and [can-define/list/list](#candefinelistlist) type.
 
 To make a simple connection to a restful interface:
 
-```
+```js
 // First, create custom Map and List type
 var Todo = DefineMap.extend({
   ownerId: "number",
@@ -1182,7 +1173,7 @@ This adds a [getList](https://canjs.com/doc/can-connect/can/map/map.getList.html
 [.destroy](https://canjs.com/doc/can-connect/can/map/map.prototype.destroy.html) methods to
 `Todo` allowing you to CRUD `Todo`s and `TodoList`s from the service layer like:
 
-```
+```js
 // Get a list of todos
 Todo.getList({due: "today"}).then(function(todos){ ... });
 
@@ -1209,8 +1200,8 @@ todo.save().then(function(todo){
 `can-connect` comes with a wide variety of behaviors that
 can be mixed into a connection.  Examples include:
 
- - [real-time](https://canjs.com/doc/can-connect/real-time/real-time.html) keeps `can.List`s updated with changes.
- - [fall-through-cache](https://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html)
+- [real-time](https://canjs.com/doc/can-connect/real-time/real-time.html) keeps `can.List`s updated with changes.
+- [fall-through-cache](https://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html)
 
 To make the process of creating `can.Map` based connections easier,
 DoneJS comes with a [supermodel generator](#generators)
@@ -1219,7 +1210,7 @@ creates a [super-map](https://canjs.com/doc/can-connect/can/super-map/super-map.
 A super-map is just a connection with a bunch of the mostly commonly used
 behaviors.  Create one with the `superMap` function like:
 
-```
+```js
 export const messageConnection = superMap({
   url: "/services/todos",
   Map: Todo,
@@ -1232,12 +1223,12 @@ export const messageConnection = superMap({
 
 [can-set](https://github.com/canjs/can-set) is used to compare
 set objects that are represented by the parameters commonly passed
-to service requests.  
+to service requests.
 
 For example, if you want all todos for user `5` that are complete, you
 might call:
 
-```
+```js
 Todo.getList({userId: 5, complete: true})
 ```
 
@@ -1246,7 +1237,7 @@ Todo.getList({userId: 5, complete: true})
 returns `true` because `{userId: 5, complete: true}` represents
 a subset of `{userId: 5}`.
 
-```
+```js
 set.subset({userId: 5, complete: true},{userId: 5}) //-> true
 ```
 
@@ -1254,7 +1245,7 @@ set.subset({userId: 5, complete: true},{userId: 5}) //-> true
 
 The following creates a set-algebra that is able to combine ranges:
 
-```
+```js
 // Create a set Algebra
 var algebra = new set.Algebra(
   set.comparators.rangeInclusive("start","end"));
@@ -1275,7 +1266,7 @@ For example, if the `Todo` type in the [can-connect section](#can-connect) has t
 
 ... and the service layer supports queries like:
 
-```
+```js
 //-> gets all incomplete todos
 /services/todos?complete=false
 
@@ -1285,7 +1276,7 @@ For example, if the `Todo` type in the [can-connect section](#can-connect) has t
 
 You'd want to create an algebra for the `superMap` as follows:
 
-```
+```js
 var algebra = new set.Algebra(
   set.comparators.boolean("complete"),
   set.comparators.enum("type", ["dev", "design", "QA"])
@@ -1302,7 +1293,7 @@ export const messageConnection = superMap({
 
 This allows a `superMap` to combine requests like:
 
-```
+```js
   Todo.getList({complete: true})
 + Todo.getList({complete: true})
 ================================
@@ -1343,7 +1334,7 @@ npm install assert --save-dev
 
 And then change the test file to:
 
-```
+```js
 import mocha from 'steal-mocha';
 import assert from 'assert';
 import { ViewModel } from 'my/component/';
@@ -1415,7 +1406,7 @@ application supporting [JSDoc](http://usejsdoc.org/) syntax that can be multi-ve
 DocumentJS is configured with a [docConfig](https://documentjs.com/docs/DocumentJS.docConfig.html) specified
 in a **documentjs.json** file within your project:
 
-```
+```js
 {
   "sites": {
     "docs": {
@@ -1434,7 +1425,7 @@ DocumentJS includes most [tags](https://documentjs.com/docs/documentjs.tags.html
 
 Here's how you would document a [can-component](#cancomponent) View Model:
 
-```
+```js
 /**
  * @add order/new
  */
@@ -1531,7 +1522,7 @@ library. While you don't often need to write jQuery directly,
 For example, you can make your own custom elements that call jQuery
 plugins:
 
-```
+```js
 callbacks.tag("tooltip", function(el){
   $(el).tooltip({
     content: el.getAttribute("content"),
@@ -1543,13 +1534,13 @@ callbacks.tag("tooltip", function(el){
 [can.-stache-bindings](#canstachebindings) lets you listen
 to [jQuery special events](http://benalman.com/news/2010/03/jquery-special-events/) like:
 
-```
-<div ($tripleclick)="doSomething()">
+```html
+<div on:tripleclick="doSomething()">
 ```
 
-[can-component](#cancomponent)'s events object also supports this:  
+[can-component](#cancomponent)'s events object also supports this:
 
-```
+```js
 Component.extend({
   events: {
     "li tripleclick": function(li, ev){ ... }
@@ -1561,7 +1552,7 @@ Component.extend({
 CanJS adds special [inserted](https://canjs.com/docs/can.events.inserted.html), [removed](https://canjs.com/docs/can.events.removed.html), and [attributes](https://canjs.com/docs/can.events.attributes.html) events. This allows you to
 teardown any behavior when the DOM is modified:
 
-```
+```js
 $(el).bind("removed", function(){
   $(el).tooltip("teardown");
 })
@@ -1571,14 +1562,14 @@ CanJS's live-binding also hooks into these same events.  So if you remove
 an element with jQuery, CanJS will also teardown its bindings.  This means that if
 you were to call:
 
-```
+```js
 $("body").empty();
 ```
 
 ### jQuery++
 
 [jQuery++](https://jquerypp.com/) adds a bunch of special events and other DOM
-utilties to jQuery.  
+utilties to jQuery.
 
  - DOM utilities
    - [animate](https://jquerypp.com/#animate) - Overwrites `jQuery.animate` to use CSS3 animations if possible.
@@ -1601,7 +1592,7 @@ utilties to jQuery.
 server-side rendered. Paired with [done-autorender](#done-autorender)
 it allows you to render the entire document from a single template.
 
-```
+```js
 var http = require("http");
 var ssr = require("done-ssr");
 var render = ssr();
@@ -1619,7 +1610,7 @@ http framework with done-ssr.
 
 For convenience we have published an [Express](https://expressjs.com/) middleware:
 
-```
+```js
 var ssr = require("done-ssr-middleware");
 var app = require("express")();
 
@@ -1641,7 +1632,7 @@ done-serve --proxy http://localhost:7070 --port 8080
 [done-autorender](https://github.com/donejs/autorender) is a Steal plugin that
 enables using a [can.stache](#canstache) template as your application's entry point. Create a template like:
 
-```handlebars
+```html
 <html>
 <head>
   <title>app | {{page}}</title>

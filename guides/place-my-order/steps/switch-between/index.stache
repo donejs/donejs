@@ -10,7 +10,7 @@
 
     <can-import from="place-my-order/loading.component" />
     <can-import from="place-my-order/header.component" />
-    <pmo-header {page}="page"/>
+    <pmo-header page:from="page"/>
 
     {{#switch page}}
       {{#case "home"}}

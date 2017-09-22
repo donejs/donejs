@@ -6,14 +6,14 @@
     <div class="loading"></div>
   {{else}}
     {{#if saveStatus.isResolved}}
-      <pmo-order-details {order}="saveStatus.value"></pmo-order-details>
-      <p><a href="javascript://" ($click)="startNewOrder()">
+      <pmo-order-details order:from="saveStatus.value"></pmo-order-details>
+      <p><a href="javascript://" on:click="startNewOrder()">
         Place another order
       </a></p>
     {{else}}
       <h3>Order from {{restaurant.name}}</h3>
 
-      <form ($submit)="placeOrder(%event)">
+      <form on:submit="placeOrder(%event)">
         <bit-tabs tabs-class="nav nav-tabs">
           <p class="info {{^if order.items.length}}text-error{{else}}text-success{{/if}}">
             {{^if order.items.length}}
@@ -28,7 +28,7 @@
                 <li class="list-group-item">
                   <label>
                     <input type="checkbox"
-                      ($change)="order.items.toggle(.)"
+                      on:change="order.items.toggle(.)"
                       {{#if order.items.has(.)}}checked{{/if}}>
                     {{name}} <span class="badge">${{price}}</span>
                   </label>
@@ -42,7 +42,7 @@
                 <li class="list-group-item">
                   <label>
                     <input type="checkbox"
-                      ($change)="order.items.toggle(this)"
+                      on:change="order.items.toggle(this)"
                       {{#if order.items.has(.)}}checked{{/if}}>
                     {{name}} <span class="badge">${{price}}</span>
                   </label>
@@ -55,19 +55,19 @@
         <div class="form-group">
           <label class="control-label">Name:</label>
           <input name="name" type="text" class="form-control"
-            {($value)}="order.name">
+            value:bind="order.name">
           <p>Please enter your name.</p>
         </div>
         <div class="form-group">
           <label class="control-label">Address:</label>
           <input name="address" type="text" class="form-control"
-            {($value)}="order.address">
+            value:bind="order.address">
           <p class="help-text">Please enter your address.</p>
         </div>
         <div class="form-group">
           <label class="control-label">Phone:</label>
           <input name="phone" type="text" class="form-control"
-            {($value)}="order.phone">
+            value:bind="order.phone">
           <p class="help-text">Please enter your phone number.</p>
         </div>
         <div class="submit">
