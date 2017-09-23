@@ -378,16 +378,16 @@ You can run all tests either by going to <a href="http://localhost:8080/src/test
       &lt;div class=&quot;input-group-btn&quot;&gt;
         &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot;
           {{#eq value min}}disabled{{/eq}}
-          ($click)=&quot;decrement&quot;&gt;
+          on:click=&quot;decrement&quot;&gt;
             -
           &lt;/button&gt;
       &lt;/div&gt;
       &lt;input type=&quot;number&quot; class=&quot;form-control&quot;
-        {($value)}=&quot;value&quot;&gt;
+        value:bind=&quot;value&quot;&gt;
       &lt;div class=&quot;input-group-btn&quot;&gt;
         &lt;button class=&quot;btn btn-primary&quot; type=&quot;button&quot;
           {{#eq value max}}disabled{{/eq}}
-          ($click)=&quot;increment&quot;&gt;
+          on:click=&quot;increment&quot;&gt;
             +
         &lt;/button&gt;
       &lt;/div&gt;

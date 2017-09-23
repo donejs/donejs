@@ -400,7 +400,7 @@ can be thought of as having a User.</p>
 <li>To destroy an item, <code>DELETE /services/{plural_type}/{id}</code></li>
 </ul>
 <p>This means that you can get all Teams like:</p>
-<pre><code>REQUEST:
+<pre><code class="language-js">REQUEST:
   GET /services/teams
 RESPONSE:
   {
@@ -415,7 +415,7 @@ RESPONSE:
   }
 </code></pre>
 <p>Or get list of teams for a particular tournament like:</p>
-<pre><code>REQUEST:
+<pre><code class="language-js">REQUEST:
   GET /services/teams?where[gameId]=7
 RESPONSE:
   {
@@ -431,7 +431,7 @@ RESPONSE:
 </code></pre>
 <p>But critically for handling data relationships, you can tell the
 server to bring in related data like:</p>
-<pre><code>REQUEST:
+<pre><code class="language-js">REQUEST:
   GET /services/teams?where[gameId]=7\
                       &amp;withRelated[]=player1\
                       &amp;withRelated[]=player2\
@@ -457,7 +457,7 @@ RESPONSE:
   }
 </code></pre>
 <p>Get a single Team like:</p>
-<pre><code>REQUEST:
+<pre><code class="language-js">REQUEST:
   GET /services/teams/5
 
 RESPONSE:
@@ -468,7 +468,7 @@ RESPONSE:
   }
 </code></pre>
 <p>Create a team like:</p>
-<pre><code>REQUEST:
+<pre><code class="language-js">REQUEST:
   POST /services/teams
   {
     color: &quot;Red&quot;, name: &quot;Red Dragons&quot;,
@@ -482,7 +482,7 @@ RESPONSE:
   }
 </code></pre>
 <p>Update a team like:</p>
-<pre><code>REQUEST:
+<pre><code class="language-js">REQUEST:
   PUT /services/teams/5
   {
     color: &quot;Red&quot;, name: &quot;Red Dragons&quot;,
@@ -498,7 +498,7 @@ RESPONSE:
   }
 </code></pre>
 <p>Destroy a team like:</p>
-<pre><code>REQUEST:
+<pre><code class="language-js">REQUEST:
   DELETE /services/teams/5
 
 RESPONSE:
@@ -591,7 +591,7 @@ other users as admin.</p>
 <p>The <a href="http://donejs.github.io/bitballs/docs/bitballs%7Capp.html">AppViewModel</a> has a <code>session</code> property that uses the [Session] model
 to request and store the available
 session. You can read the session's user and if they are an admin like:</p>
-<pre><code>appViewModel.user.isAdmin
+<pre><code class="language-js">appViewModel.user.isAdmin
 </code></pre>
 <p>The <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html"><code>&lt;bitballs-navigation&gt;</code></a> component allows someone to login and change
 the <code>AppViewModel</code>'s session.</p>
@@ -600,7 +600,7 @@ use it to determine which functionality should be displayed.</p>
 <h3>Creating a user</h3>
 <p>When a user navigates to <code>/register</code>, the <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Cdetails.html"><code>&lt;user-details&gt;</code></a> component
 creates a form that takes a user's email and password.</p>
-<pre><code>&lt;form ($submit)=&quot;saveUser(%event)&quot; action=&quot;&quot;&gt;
+<pre><code class="language-html">&lt;form on:submit=&quot;saveUser(%event)&quot; action=&quot;&quot;&gt;
     &lt;div class=&quot;form-group&quot;&gt;
         &lt;label for=&quot;user-email&quot;&gt;
             Email
@@ -612,14 +612,14 @@ creates a form that takes a user's email and password.</p>
                     class=&quot;form-control&quot;
                     id=&quot;user-email&quot;
                     {{^if user.isNew}}disabled{{/if}}
-                    {($value)}=&quot;user.email&quot; /&gt;
+                    value:bind=&quot;user.email&quot; /&gt;
             &lt;/div&gt;
         {{else}}
             &lt;input
                 class=&quot;form-control&quot;
                 id=&quot;user-email&quot;
                 {{^if user.isNew}}disabled{{/if}}
-                {($value)}=&quot;user.email&quot; /&gt;
+                value:bind=&quot;user.email&quot; /&gt;
         {{/is}}
     &lt;/div&gt;
     ...
@@ -700,14 +700,14 @@ user logs in.  That user object is returned, minus any private data, as associat
 </code></pre>
 <p>This means that once a user logs in, <code>GET /services/session</code> responds with
 an object like:</p>
-<pre><code>{
+<pre><code class="language-js">{
   user: {email: &quot;justin@bitovi.com&quot;, isAdmin: true}
 }
 </code></pre>
 <p>We like to keep session data distinct from User data.  In a more complex application,
 additional session information could be returned that does not belong on the
 user. For example:</p>
-<pre><code>{
+<pre><code class="language-js">{
   createdAt: 1456512713012,
   expiresAt: 14565123013012,
   user: {email: &quot;justin@bitovi.com&quot;, isAdmin: true},
@@ -731,34 +731,34 @@ be available:</p>
 </code></pre>
 <p>The session, its user, or the result of <code>isAdmin</code> is then passed to
 sub components depending on their needs:</p>
-<pre><code class="language-html">&lt;tournament-details {is-admin}='session.isAdmin'/&gt;
+<pre><code class="language-html">&lt;tournament-details isAdmin:from='session.isAdmin'/&gt;
 </code></pre>
 <p>Finally, those components use that information to control what is
 shown on the page:</p>
-<pre><code>{{#if isAdmin}}
+<pre><code class="language-html">{{#if isAdmin}}
 &lt;h4&gt;New Game&lt;/h4&gt;
-&lt;form ($submit)=&quot;createGame(%event)&quot;&gt;...&lt;/form&gt;
+&lt;form on:submit=&quot;createGame(%event)&quot;&gt;...&lt;/form&gt;
 {{/if}}
 </code></pre>
 <p>In more complex apps, the <code>user</code> object might include an <a href="https://en.wikipedia.org/wiki/Access_control_list">Access Control List</a>
 which might include methods to check access rights:</p>
-<pre><code>{{#if user.acl.can(&quot;create&quot;,&quot;game&quot;) }}
+<pre><code class="language-html">{{#if user.acl.can(&quot;create&quot;,&quot;game&quot;) }}
 &lt;h4&gt;New Game&lt;/h4&gt;
-&lt;form ($submit)=&quot;createGame(%event)&quot;&gt;...&lt;/form&gt;
+&lt;form on:submit=&quot;createGame(%event)&quot;&gt;...&lt;/form&gt;
 {{/if}}
 </code></pre>
 <h4>Creating a session</h4>
 <p>Creating a session is done with the <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html">&lt;bitballs-navigation&gt;</a> component. It builds a
 login form that takes an email and password:</p>
-<pre><code class="language-html">&lt;form ($submit)=&quot;createSession(%event)&quot; action=&quot;&quot;&gt;
-    &lt;input  
+<pre><code class="language-html">&lt;form on:submit=&quot;createSession(%event)&quot; action=&quot;&quot;&gt;
+    &lt;input
         placeholder=&quot;email&quot;
-        {($value)}=&quot;loginSession.user.email&quot;/&gt;
+        value:bind=&quot;loginSession.user.email&quot;/&gt;
 
-    &lt;input  
+    &lt;input
         placeholder=&quot;password&quot;
         type=&quot;password&quot;
-        {($value)}=&quot;loginSession.user.password&quot;/&gt;
+      value:bind=&quot;loginSession.user.password&quot;/&gt;
 
     &lt;button type=&quot;submit&quot;&gt;Login&lt;/button&gt;
 &lt;/form&gt;
@@ -782,7 +782,7 @@ the new session instance.</p>
 },
 </code></pre>
 <p>Saving a session calls <code>POST /services/session</code> to create a session server side. The service should operate on similar data as <code>GET /services/session</code>, so it's passed data like:</p>
-<pre><code class="language-ks">{
+<pre><code class="language-js">{
   user: {email: &quot;justin@bitovi.com&quot;, password: &quot;pass1234&quot;}
 }
 </code></pre>
@@ -814,7 +814,7 @@ responds with the Session data.</p>
 <h4>Destroy the session</h4>
 <p>The <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html"><code>&lt;bitballs-navigation&gt;</code></a> component's <a href="https://github.com/donejs/bitballs/blob/master/public/components/navigation/navigation.stache">template</a> as a link that
 calls <code>logout()</code> on its ViewModel:</p>
-<pre><code class="language-html">&lt;a href=&quot;javascript://&quot; ($click)=&quot;logout()&quot;&gt;Logout&lt;/a&gt;
+<pre><code class="language-html">&lt;a href=&quot;javascript://&quot; on:click=&quot;logout()&quot;&gt;Logout&lt;/a&gt;
 </code></pre>
 <p><code>logout</code> calls destroy on the session and then removes the session from the AppViewModel:</p>
 <pre><code class="language-js">logout: function(){
@@ -860,7 +860,7 @@ players.</p>
 <p>Bitballs needs to be able to load these pages quickly.  Using a very simplistic
 RESTful service layer, the client might have to do the following to load a <strong>game details</strong>
 page:</p>
-<pre><code>GET /services/games/5
+<pre><code class="language-js">GET /services/games/5
  -&gt; {id: 5, homeTeamId: 16, awayTeamId: 17, videoUrl: &quot;X1Ha9d8fE&quot;, ...}
 
 GET /services/stats?gameId=5
@@ -890,7 +890,7 @@ players until we have teams.  We can't load teams until we
 have the game.</p>
 <p>Instead, we'd want to load a game and get back its data with its
 nested teams and players and stats like:</p>
-<pre><code>GET /services/games/5
+<pre><code class="language-js">GET /services/games/5
  -&gt; {
  id: 5,
  homeTeamId: 16,
@@ -946,7 +946,7 @@ normally goes into database requests while being adaptive to changes in the data
 backend <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">Object Relational Mapper</a> (ORM).</p>
 <p>For instance, the <strong>game details</strong> page requests a game with its
 related fields like:</p>
-<pre><code>Game.get({
+<pre><code class="language-js">Game.get({
     id: this.gameId,
     withRelated: [&quot;stats&quot;,
         &quot;homeTeam.player1&quot;,
@@ -961,7 +961,7 @@ related fields like:</p>
 });
 </code></pre>
 <p>This results in an AJAX request like:</p>
-<pre><code>GET /services/games/5?\
+<pre><code class="language-js">GET /services/games/5?\
   withRelated[]=stats&amp;\
   withRelated[]=homeTeam.player1&amp;\
   withRelated[]=homeTeam.player2&amp;\
@@ -978,7 +978,7 @@ clause.</p>
 Database request, most ORMs make it easy to do the expected thing.</p>
 <p>Bitballs uses <a href="http://bookshelfjs.org/">Bookshelf</a> as its ORM.  It allows us
 to define relationships between a <code>Game</code> and other server-side models:</p>
-<pre><code>var Game = bookshelf.Model.extend({
+<pre><code class="language-js">var Game = bookshelf.Model.extend({
     tableName: 'games',
     stats: function(){
         return this.hasMany(Stat,&quot;gameId&quot;);
@@ -992,7 +992,7 @@ to define relationships between a <code>Game</code> and other server-side models
 });
 </code></pre>
 <p>It does a similar thing for <code>Team</code>:</p>
-<pre><code>var Team = bookshelf.Model.extend({
+<pre><code class="language-js">var Team = bookshelf.Model.extend({
     tableName: 'teams',
     player1: function(){
         return this.belongsTo(Player,&quot;player1Id&quot;);
@@ -1010,7 +1010,7 @@ to define relationships between a <code>Game</code> and other server-side models
 </code></pre>
 <p>Once these server Models are in place, it is extremely easy
 to make a service that can dynamically include related data:</p>
-<pre><code>app.get('/services/games/:id', function(req, res){
+<pre><code class="language-js">app.get('/services/games/:id', function(req, res){
     new Game({id: req.params.id}).fetch(req.query).then(function(game){
         res.send(game.toJSON());
     });
@@ -1019,14 +1019,14 @@ to make a service that can dynamically include related data:</p>
 <p>This setup also lets us be very adaptive to changes in the
 database. For instance, if a game suddenly has
 comments, we could make the following work:</p>
-<pre><code>Game.get({
+<pre><code class="language-js">Game.get({
     id: this.gameId,
     withRelated: [&quot;comments&quot;]
 });
 </code></pre>
 <p>By creating a <code>Comment</code> model and changing <code>Game</code> to
 look like:</p>
-<pre><code>var Game = bookshelf.Model.extend({
+<pre><code class="language-js">var Game = bookshelf.Model.extend({
     tableName: 'games',
     comments: function(){
         return this.hasMany(Comment,&quot;commentId&quot;);
@@ -1055,10 +1055,10 @@ service layer should provide:</p>
 <li>which properties to include or exclude</li>
 </ul>
 <p>For example, I can get all of team 5's games like:</p>
-<pre><code>GET /services/games?where[teamId]=5
+<pre><code class="language-js">GET /services/games?where[teamId]=5
 </code></pre>
 <p>This happens for free because we pass the querystrng directly to bookshelf:</p>
-<pre><code>app.get('/services/games', function(req, res){
+<pre><code class="language-js">app.get('/services/games', function(req, res){
     new Games().query(req.query).fetch().then(function(games){
         res.send({data: games.toJSON()});
     });
@@ -1074,14 +1074,14 @@ any of the advanced behavior of <a href="https://canjs.com/doc/can-connect.html"
 to create a relational algebra that understands the service API.</p>
 <h4>Connecting to a service</h4>
 <p>Bitballs' client Models are <a href="https://canjs.com/doc/can-connect.html/doc/can-connect%7Ccan%7Csuper-map.html">can-connect supermodels</a>.  So a type and list type is defined:</p>
-<pre><code>var Game = DefineMap.extend({
+<pre><code class="language-js">var Game = DefineMap.extend({
   ...
 });
 
 Game.List = DefineList.extend({&quot;#&quot;: Game},{});
 </code></pre>
 <p>And they are connected to a url:</p>
-<pre><code>var gameConnection = superMap({
+<pre><code class="language-js">var gameConnection = superMap({
   Map: Game,
   List: Game.List,
   url: &quot;/services/games&quot;,
@@ -1101,7 +1101,7 @@ expects, we need to define a custom set algebra. For <code>Game</code>, it looks
 <p>Because Game data can come back with a <code>homeTeam</code>,
 <code>awayTeam</code> and <code>stats</code> property, we make sure those
 are created as the right type:</p>
-<pre><code>var Game = DefineMap.extend({
+<pre><code class="language-js">var Game = DefineMap.extend({
     homeTeam: {
         Type: Team
     },
@@ -1151,7 +1151,7 @@ derive their value from related fields:</p>
 <h4>Defining intermediate computed properties to avoid recomputing.</h4>
 <p>Sometimes ViewModels mash up Model data.  For example,
 the <code>&lt;tournament-details&gt;</code> component makes four requests in parallel:</p>
-<pre><code>Tournament.get({id: this.tournamentId});
+<pre><code class="language-js">Tournament.get({id: this.tournamentId});
 Game.getList({tournamentId: this.tournamentId});
 Team.getList({ tournamentId: this.tournamentId });
 Player.getList({});
@@ -1165,7 +1165,7 @@ Team request because all players are already loading.</p>
 all we have are player ids on each team:</p>
 <p><img class="img-responsive" src="static/img/bitballs/team-list.png" srcset="static/img/bitballs/team-list.png 1x, static/img/bitballs/team-list-2x.png 2x"></p>
 <p>A naive solution would be to make a <code>getById</code> method on <code>Player.List</code> like:</p>
-<pre><code>Player.List = DefineList.extend({&quot;#&quot;: Player},{
+<pre><code class="language-js">Player.List = DefineList.extend({&quot;#&quot;: Player},{
   getById: function(id){
     return this.filter(function(player){
       return team.id === id;
@@ -1174,7 +1174,7 @@ all we have are player ids on each team:</p>
 });
 </code></pre>
 <p>And then use that in the template to look up the player:</p>
-<pre><code>{{#each teams}}
+<pre><code class="language-js">{{#each teams}}
     ...
     &lt;td&gt;{{#../players.getById(player1Id)}}{{name}}{{/}}&lt;/td&gt;
     &lt;td&gt;{{#../players.getById(player2Id)}}{{name}}{{/}}&lt;/td&gt;
@@ -1187,7 +1187,7 @@ all we have are player ids on each team:</p>
 </blockquote>
 <p>The problem with this is that each <code>.getById</code> call is linear search.  Instead,
 we can keep a mapping of player ids to players like:</p>
-<pre><code>idMap: {
+<pre><code class="language-js">idMap: {
     type: &quot;any&quot;,
     get: function(){
 
@@ -1202,7 +1202,7 @@ we can keep a mapping of player ids to players like:</p>
 },
 </code></pre>
 <p>And make a <code>getById</code> use <code>idMap</code> like:</p>
-<pre><code>getById: function(id){
+<pre><code class="language-js">getById: function(id){
     return this.playerIdMap[id];
 },
 </code></pre>
@@ -1255,7 +1255,7 @@ status code:</p>
 <p><a href="https://github.com/donejs/done-ssr-middleware">done-ssr-middleware</a> uses the <code>statusCode</code> property
 on the <a href="http://donejs.github.io/bitballs/docs/bitballs%7Capp.html">AppViewModel</a> as the status of the http response.</p>
 <p>For Bitballs, we implemented <code>statusCode</code> as a <a href="https://canjs.com/docs/can.Map.prototype.define.get.html">define getter</a> as follows:</p>
-<pre><code>statusCode: {
+<pre><code class="language-js">statusCode: {
     get: function(lastSet, resolve){
         var pageConfig = this.pageComponentConfig;
 
@@ -1282,7 +1282,7 @@ situations.</p>
 <p><code>statusCode</code> first checks if the <code>pageComponentConfig</code> is specifying a specific <code>statusCode</code>
 to be given.  <code>pageComponentConfig</code> only specifies a <code>statusCode</code> when its state
 doesn't match a valid route:</p>
-<pre><code>get pageComponentConfig() {
+<pre><code class="language-js">get pageComponentConfig() {
     var page = this.page;
     if(this.gameId) {
         return {...};
@@ -1325,7 +1325,7 @@ as the <code>pagePromise</code> like <code>{^game-promise}='./pagePromise'</code
         return {
             title: &quot;Game&quot;,
             componentName: &quot;game-details&quot;,
-            attributes: &quot;{^game-promise}='./pagePromise' {game-id}='./gameId' {session}='./session'&quot;,
+            attributes: &quot;gamePromise:to='./pagePromise' gameId:from='./gameId' session:from='./session'&quot;,
             moduleName: &quot;game/details/&quot;
         };
 
@@ -1333,7 +1333,7 @@ as the <code>pagePromise</code> like <code>{^game-promise}='./pagePromise'</code
         return {
             title: &quot;Tournament&quot;,
             componentName: &quot;tournament-details&quot;,
-            attributes: &quot;{^tournament-promise}='./pagePromise' {tournament-id}='./tournamentId' {is-admin}='./isAdmin'&quot;,
+            attributes: &quot;tournamentPromise:to='./pagePromise' tournamentId:from='./tournamentId' isAdmin:from='./isAdmin'&quot;,
             moduleName: &quot;tournament/details/&quot;
         };
 

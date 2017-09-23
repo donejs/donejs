@@ -221,14 +221,29 @@
 				<p><strong>We want to hear from you.</strong> What do you love and hate about CanJS, DoneJS, and
 StealJS? What can the core team work on to make you grow fonder of these
 projects?</p>
+<div class="cta">
+  <a href="https://www.surveymonkey.com/r/donejs-survey-1" target="_blank">
+    Take the community survey
+  </a>
+</div>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
 <script>
+var endTime = new Date('Sep 28 2017 07:00:00 UTC');// Midnight Pacific
+if (new Date() < endTime) {// Survey has not yet ended
+  var elements = document.getElementsByClassName('comment');
+  var container = elements[0];
+  if (container) {
+    container.className = container.className + ' survey-is-active';
+  }
+} else {// Survey has ended
   hbspt.forms.create({
     css: '',
     portalId: '2171535',
     formId: '45da8caa-c096-4099-a444-450f5c303ba0'
   });
+}
 </script>
+<div class="form-explanation">
 <p>Provide your email address (and optionally your GitHub username) above and
 you’ll be signed up for our survey:</p>
 <ul>
@@ -238,15 +253,24 @@ with a link to the survey.</li>
 <li>Each survey will be about seven questions and take just a few minutes to complete.</li>
 <li>An opt-out/unsubscribe link will be included in each email.</li>
 </ul>
+</div>
 <p>We will look at every single response and use it to prioritize what the team
 works on in the coming months. Short of <a href="https://www.bitovi.com/contact">hiring us</a>
 to work on something in particular, <strong>this is the best way to have a direct impact
 on our priorities.</strong></p>
+<div class="youtube-embed">
+  <p>Watch the contributors meeting below to learn more about each item on the survey:</p>
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/95OX6-qii24?rel=0&amp;start=140" frameborder="0" allowfullscreen></iframe>
+</div>
 <p><a href="https://www.bitovi.com/blog/help-us-improve-canjs-stealjs-and-the-rest-of-the-donejs-family">Read more about the survey in our announcement blog post.</a>
 If you have any questions, please don’t hesitate to ask on
 <a href="https://forums.donejs.com/">our forums</a>,
 <a href="https://gitter.im/donejs/donejs">Gitter</a>, or
 <a href="https://twitter.com/donejs">Twitter</a></p>
+<figure>
+    <img alt="Photo of the DoneJS core team" src="https://www.bitovi.com/hs-fs/hubfs/DoneJS%20core%20team%20photo%20(small).jpg?t=1505933448740&cos_cdn=1&width=2160&cos_cdn=1&name=DoneJS%20core%20team%20photo%20(small).jpg" />
+    <figcaption>The core team thanks you for participating in our survey!</figcaption>
+</figure>
 
 			</section>
 			

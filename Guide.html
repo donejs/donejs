@@ -238,11 +238,11 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </blockquote>
 <h3>Install DoneJS</h3>
 <p>To get started, let’s install the DoneJS command line utility globally:</p>
-<pre><code>npm install -g donejs@1
+<pre><code class="language-shell">npm install -g donejs@1
 </code></pre>
 <h3>Generate the application</h3>
 <p>Then we’ll create a new DoneJS application called <code>donejs-chat</code>:</p>
-<pre><code>donejs add app donejs-chat
+<pre><code class="language-shell">donejs add app donejs-chat
 </code></pre>
 <p>This will create a new folder called <code>donejs-chat</code> and in it generate our application.</p>
 <p>The initialization process will ask questions like the name of your application, the source folder, etc. We’ll answer these with the default settings by hitting enter.</p>
@@ -260,10 +260,10 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <h3>Turn on development mode</h3>
 <p>DoneJS comes with its own development server, which hosts your development files and automatically <a href="./Features.html#server-side-rendered">renders the application on the server</a>. Development mode enables <a href="./Features.html#hot-module-swapping">hot module swapping</a>, which automatically reloads files in the browser and on the server as they change.</p>
 <p>To start it let’s go into the <code>donejs-chat</code> application directory:</p>
-<pre><code>cd donejs-chat
+<pre><code class="language-shell">cd donejs-chat
 </code></pre>
 <p>We can start development mode by running:</p>
-<pre><code>donejs develop
+<pre><code class="language-shell">donejs develop
 </code></pre>
 <p>The default port is <code>8080</code>.</p>
 <p>Go to <a href="http://localhost:8080/" title="http://localhost:8080/">http://localhost:8080/</a> to see our application showing a default homepage.</p>
@@ -272,7 +272,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <p>DoneJS makes it easy to import other projects that are published on <a href="https://npmjs.org">npm</a>. In this section, we will install and add <a href="https://getbootstrap.com/">Bootstrap</a> to the page, and see DoneJS’s <a href="./Features.html#hot-module-swapping">hot module swapping</a> in action.</p>
 <h3>Install the npm package</h3>
 <p>Open a new terminal window so we can keep the DoneJS development server running. Then, install the <a href="https://www.npmjs.com/package/bootstrap">Bootstrap npm package</a> and save it as a dependency of our application like this:</p>
-<pre><code>npm install bootstrap --save
+<pre><code class="language-shell">npm install bootstrap --save
 </code></pre>
 <h3>Add it to the page</h3>
 <p>To see hot module swapping in action, let’s update the main template to import Bootstrap’s LESS file and also add some HTML that uses its styles.</p>
@@ -326,11 +326,11 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <p>We’ll use a DoneJS <a href="./Features.html#generators">generator</a> to create custom components. The component generator is run by typing <code>donejs add component &lt;file-or-folder&gt; &lt;component-name&gt;</code>.</p>
 <p>The homepage custom element (with the HTML tag name <code>chat-home</code>) won't be very big or complex, so we’ll put everything into a single <code>.component</code> file.</p>
 <p>To generate it, run:</p>
-<pre><code>donejs add component home.component chat-home
+<pre><code class="language-shell">donejs add component home.component chat-home
 </code></pre>
 <p>The messages component (with the tag <code>chat-messages</code>) will be a little more complex, so we’ll generate it using the <a href="./Features.html#modlets">modlet file pattern</a>.</p>
 <p>Now run:</p>
-<pre><code>donejs add component messages chat-messages
+<pre><code class="language-shell">donejs add component messages chat-messages
 </code></pre>
 <p><img src="static/img/donejs-generator.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Later we will update the generated files with the chat messages functionality.</p>
@@ -471,7 +471,7 @@ property.</li>
 <h3>Install bit-tabs</h3>
 <p>On the homepage, let’s install and add <a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a>, a simple declarative tabs widget.</p>
 <p>Run:</p>
-<pre><code>npm install bit-tabs@1 --save
+<pre><code class="language-shell">npm install bit-tabs@1 --save
 </code></pre>
 <h3>Update the page</h3>
 <p>Then, import the unstyled custom elements from <code>bit-tabs/unstyled</code> (unstyled because we will use Bootstrap’s styles) and add <code>&lt;bit-tabs&gt;</code> and <code>&lt;bit-panel&gt;</code> elements to the template.</p>
@@ -523,7 +523,7 @@ You'll notice tabs appear in the browser:</p>
 <h3>Generate Message model</h3>
 <p>To load messages from the server, we will use <a href="https://canjs.com/doc/can-connect/can/super-map/super-map.html">can-connect’s supermodel</a>.</p>
 <p>Generate a <code>message</code> supermodel like this:</p>
-<pre><code>donejs add supermodel message
+<pre><code class="language-shell">donejs add supermodel message
 </code></pre>
 <p>When asked for the URL endpoint, set it to our remote RESTful API at <code>https://chat.donejs.com/api/messages</code>. When it asks if https://chat.donejs.com is your service URL answer <code>Yes</code>. The other questions can be answered with the default by hitting enter.</p>
 <p><img src="static/img/donejs-model-generator.png" alt="model generator" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
@@ -691,14 +691,14 @@ the message data.</li>
   {{/each}}
 {{/if}}
 
-&lt;form class=&quot;row&quot; ($submit)=&quot;send(%event)&quot;&gt;
+&lt;form class=&quot;row&quot; on:submit=&quot;send(%event)&quot;&gt;
   &lt;div class=&quot;col-sm-3&quot;&gt;
     &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Your name&quot;
-           {($value)}=&quot;name&quot;/&gt;
+           value:bind=&quot;name&quot;/&gt;
   &lt;/div&gt;
   &lt;div class=&quot;col-sm-6&quot;&gt;
     &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Your message&quot;
-           {($value)}=&quot;body&quot;/&gt;
+           value:bind=&quot;body&quot;/&gt;
   &lt;/div&gt;
   &lt;div class=&quot;col-sm-3&quot;&gt;
     &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary btn-block&quot; value=&quot;Send&quot;/&gt;
@@ -710,9 +710,9 @@ the message data.</li>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="https://canjs.com/doc/can-stache-bindings.event.html">($submit)</a> — listens to <em>submit</em> events and calls
+<li><a href="https://canjs.com/doc/can-stache-bindings.event.html">on:submit</a> — listens to <em>submit</em> events and calls
 the <code>send()</code> method on the ViewModel.</li>
-<li><a href="https://canjs.com/doc/can-stache-bindings.twoWay.html">{($value)}</a> — two-way bindings a <code>&lt;input&gt;</code>’s value
+<li><a href="https://canjs.com/doc/can-stache-bindings.twoWay.html">value:bind</a> — two-way bindings a <code>&lt;input&gt;</code>’s value
 to a property of the ViewModel.</li>
 </ul>
 </blockquote>
@@ -724,7 +724,7 @@ to a property of the ViewModel.</li>
 <h3>Enable a real-time connection</h3>
 <p>Right now our chat’s messages update automatically with our own messages, but not with messages from other clients. The API server (<a href="https://chat.donejs.com/api/messages">chat.donejs.com/api/messages</a>) provides a <a href="https://socket.io/">Socket.io</a> server that sends out real-time updates for new, updated and deleted chat messages.</p>
 <p>To connect to it, first we’ll install a socket.io connector, by running:</p>
-<pre><code>npm install steal-socket.io --save
+<pre><code class="language-shell">npm install steal-socket.io --save
 </code></pre>
 <p>Update <code>src/models/message.js</code> to:</p>
 <pre><code class="language-js">import DefineMap from 'can-define/map/';
@@ -789,12 +789,12 @@ system that a message has been destroyed.</li>
 <h3>Run build</h3>
 <p>We can find the build configuration in <code>build.js</code> in the application folder.</p>
 <p>Everything is already set up, so we can simply make a build by running:</p>
-<pre><code>donejs build
+<pre><code class="language-shell">donejs build
 </code></pre>
 <p>The optimized bundles that load your JavaScript and CSS as fast as possible are sent to the <code>dist/</code> folder.</p>
 <h3>Turn on production</h3>
 <p>To test the production build, close the current server (with <code>CTRL + C</code>) and start it with the environment (<code>NODE_ENV</code>) set to <code>production</code>:</p>
-<pre><code>NODE_ENV=production donejs start
+<pre><code class="language-shell">NODE_ENV=production donejs start
 </code></pre>
 <p>If you’re using Windows, you must first set the environmental variable:</p>
 <ol>
@@ -815,19 +815,19 @@ system that a message has been destroyed.</li>
 <p>When you deploy for the first time it will ask you to authorize, but first we need to configure the project.</p>
 <h3>Configure DoneJS</h3>
 <p>Now we can add the Firebase deployment configuration to our <code>package.json</code> like this:</p>
-<pre><code>donejs add firebase
+<pre><code class="language-shell">donejs add firebase
 </code></pre>
 <p>When prompted, enter the name of the application created when you set up the Firebase app. Before you can deploy your app you need to login and authorize the Firebase tools, which you can do with:</p>
-<pre><code>node_modules/.bin/firebase login
+<pre><code class="language-shell">node_modules/.bin/firebase login
 </code></pre>
 <p>Then we can deploy the application by running:</p>
-<pre><code>donejs build
+<pre><code class="language-shell">donejs build
 donejs deploy
 </code></pre>
 <p>Static files are deployed to Firebase.</p>
 <p><img src="static/img/donejs-firebase.png" alt="two browsers" /></p>
 <p>And verify that the application is loading from the CDN by loading it after running:</p>
-<pre><code>NODE_ENV=production donejs start
+<pre><code class="language-shell">NODE_ENV=production donejs start
 </code></pre>
 <blockquote>
 <p>If you’re using Windows, set the NODE_ENV variable as you did previously in the Production section.</p>
@@ -840,16 +840,16 @@ donejs deploy
 <p>To build the application as a Cordova based mobile application, you need to have each platform’s SDK installed.
 We’ll be building an iOS app if you are a Mac user, and an Android app if you’re a Windows user.</p>
 <p>Mac users should download XCode from the AppStore and install the <code>ios-sim</code> package globally with:</p>
-<pre><code>npm install -g ios-sim
+<pre><code class="language-shell">npm install -g ios-sim
 </code></pre>
 <p>We will use these tools to create an iOS application that can be tested in the iOS simulator.</p>
 <p>Windows users should install the <a href="https://developer.android.com/sdk/index.html">Android Studio</a>, which gives all of the tools we need.</p>
 <p>Now we can install the DoneJS Cordova tools with:</p>
-<pre><code>donejs add cordova@1
+<pre><code class="language-shell">donejs add cordova@1
 </code></pre>
 <p>Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.</p>
 <p>To run the Cordova build and launch the simulator we can now run:</p>
-<pre><code>donejs build cordova
+<pre><code class="language-shell">donejs build cordova
 </code></pre>
 <p>If everything went well, we should see the emulator running our application.</p>
 <p><img src="static/img/donejs-ios.png" alt="ios build" height="590" width="320" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
@@ -857,18 +857,18 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 <p><strong>Note:</strong> if you receive the error <code>Error: Cannot read property 'replace' of undefined</code>, you can work around it by running <code>cd build/cordova/platforms/ios/cordova/ &amp;&amp; npm install ios-sim@6</code> until <a href="https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git;a=commit;h=4490abf273ec6d12810c8ff5ea16d197c58ecd4b">this patch</a> is released.</p>
 <h3>Electron</h3>
 <p>To set up the desktop build, we have to add it to our application like this:</p>
-<pre><code>donejs add electron@1
+<pre><code class="language-shell">donejs add electron@1
 </code></pre>
 <p>Accept the default for all of the prompts.</p>
 <p><img src="static/img/donejs-electron-prompt.png" alt="electron prompt" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Then we can run the build like this:</p>
-<pre><code>donejs build electron
+<pre><code class="language-shell">donejs build electron
 </code></pre>
 <p>The macOS application can be opened with</p>
-<pre><code>open build/donejs-chat-darwin-x64/donejs-chat.app
+<pre><code class="language-shell">open build/donejs-chat-darwin-x64/donejs-chat.app
 </code></pre>
 <p>The Windows application can be opened with</p>
-<pre><code>.\build\donejs-chat-win32-x64\donejs-chat.exe
+<pre><code class="language-shell">.\build\donejs-chat-win32-x64\donejs-chat.exe
 </code></pre>
 <p><img src="static/img/donejs-electron-app.png" alt="electron app" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>What’s next?</h2>

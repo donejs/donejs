@@ -234,10 +234,10 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </blockquote>
 <h3>Create the project</h3>
 <p>To get started, let's install the DoneJS command line utility globally:</p>
-<pre><code>npm install -g donejs@1
+<pre><code class="language-shell">npm install -g donejs@1
 </code></pre>
 <p>Then we can create a new DoneJS application:</p>
-<pre><code>donejs add app place-my-order
+<pre><code class="language-shell">donejs add app place-my-order
 </code></pre>
 <p>The initialization process will ask you questions like the name of your application (set to <code>place-my-order</code>) and the source folder (set to <code>src</code>). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:</p>
 <ul>
@@ -250,10 +250,10 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <li><a href="https://github.com/bitovi/testee">Testee</a> - Test runner</li>
 </ul>
 <p>If we now go into the <code>place-my-order</code> folder with</p>
-<pre><code>cd place-my-order
+<pre><code class="language-shell">cd place-my-order
 </code></pre>
 <p>We can see the following files:</p>
-<pre><code>├── build.js
+<pre><code class="language-shell">├── build.js
 ├── development.html
 ├── package.json
 ├── production.html
@@ -287,13 +287,13 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </ul>
 <h3>Development mode</h3>
 <p>DoneJS comes with its own server, which hosts your development files and takes care of server-side rendering. DoneJS' development mode will also enable <a href="http://blog.bitovi.com/hot-module-replacement-comes-to-stealjs/">hot module swapping</a> which automatically reloads files in the browser as they change. You can start it by running:</p>
-<pre><code>donejs develop
+<pre><code class="language-shell">donejs develop
 </code></pre>
 <p>The default port is 8080, so if we now go to <a href="http://localhost:8080/" title="http://localhost:8080/">http://localhost:8080/</a> we can see our application with a default homepage. If we change <code>src/index.stache</code> or <code>src/app.js</code> all changes will show up right away in the browser. Try it by changing the <code>message</code> property in <code>src/app.js</code>.</p>
 <h3>Setup a service API</h3>
 <p>Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we'll just install and start an existing service API created specifically for use with this tutorial:</p>
 <p><strong>Note</strong>: Kill the server for now while we install a few dependencies (ctrl+c on Windows and Mac).</p>
-<pre><code>npm install place-my-order-api@0.4 --save
+<pre><code class="language-shell">npm install place-my-order-api@0.4 --save
 </code></pre>
 <p>Now we can add an API server start script into the <code>scripts</code> section of our <code>package.json</code> like this:</p>
 <pre><code class="language-js">  &quot;scripts&quot;: {
@@ -306,7 +306,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </code></pre>
 <p><span line-highlight='2,2,only'></span>
 Which allows us to start the server like:</p>
-<pre><code>donejs api
+<pre><code class="language-shell">donejs api
 </code></pre>
 <p>The first time it starts, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to <a href="http://localhost:7070/restaurants">http://localhost:7070/restaurants</a>, where we can see a JSON list of restaurant data.</p>
 <h3>Starting the application</h3>
@@ -321,12 +321,12 @@ Which allows us to start the server like:</p>
 </code></pre>
 <p><span line-highlight='4,5,only'></span>
 Now we can start the application with:</p>
-<pre><code>donejs develop
+<pre><code class="language-shell">donejs develop
 </code></pre>
 <p>Go to <a href="http://localhost:8080">http://localhost:8080</a> to see the &quot;hello world&quot; message again.</p>
 <h3>Loading assets</h3>
 <p>Before we get to the code, we also need to install the <code>place-my-order-assets</code> package which contains the images and styles specifically for this tutorial's application:</p>
-<pre><code>npm install place-my-order-assets@0.1 --save
+<pre><code class="language-shell">npm install place-my-order-assets@0.1 --save
 </code></pre>
 <p>Every DoneJS application consists of at least two files:</p>
 <ol>
@@ -367,7 +367,7 @@ This is an HTML5 template that uses <a href="https://canjs.com/doc/can-stache.ht
 <li><code>place-my-order/app</code>, which is the main application file</li>
 </ol>
 <p>The main application file at <code>src/app.js</code> looks like this:</p>
-<pre><code>// src/app.js
+<pre><code class="language-js">// src/app.js
 import DefineMap from 'can-define/map/';
 import route from 'can-route';
 import 'can-route-pushstate';
@@ -391,7 +391,7 @@ export default AppViewModel;
 <p>There are two ways of creating components. For smaller components we can define all templates, styles and functionality in a single <code>.component</code> file (to learn more see <a href="https://github.com/donejs/done-component">done-component</a>). Larger components can be split up into several separate files.</p>
 <h3>Creating a homepage element</h3>
 <p>To generate a new component run:</p>
-<pre><code>donejs add component home.component pmo-home
+<pre><code class="language-shell">donejs add component home.component pmo-home
 </code></pre>
 <p>This will create a file at <code>src/home.component</code> containing the basic ingredients of a component. We will update it to reflect the below content:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-home&quot;&gt;
@@ -430,7 +430,7 @@ export default AppViewModel;
 Here we created a <a href="https://canjs.com/doc/can-component.html">can-component</a> named <code>pmo-home</code>. This particular component is just a basic template, it does not have much in the way of styles or functionality.</p>
 <h3>Create the order history element</h3>
 <p>We'll create an initial version of order history that is very similar.</p>
-<pre><code>donejs add component order/history.component pmo-order-history
+<pre><code class="language-shell">donejs add component order/history.component pmo-order-history
 </code></pre>
 <p>And update <code>src/order/history.component</code>:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-history&quot;&gt;
@@ -465,10 +465,10 @@ Here we created a <a href="https://canjs.com/doc/can-component.html">can-compone
 <h3>Creating a restaurant list element</h3>
 <p>The restaurant list will contain more functionality, which is why we will split its template and component logic into separate files.</p>
 <p>We can create a basic component like that by running:</p>
-<pre><code>donejs add component restaurant/list pmo-restaurant-list
+<pre><code class="language-shell">donejs add component restaurant/list pmo-restaurant-list
 </code></pre>
 <p>The component's files are collected in a single folder so that components can be easily tested, moved, and re-used. The folder structure looks like this:</p>
-<pre><code>├── node_modules
+<pre><code class="language-shell">├── node_modules
 ├── package.json
 ├── src/
 |   ├── app.js
@@ -531,7 +531,7 @@ it is not needed.</p>
 </ul>
 <h3>Adding a header element</h3>
 <p>Now is also a good time to add a header element that links to the different routes we just defined. We can run</p>
-<pre><code>donejs add component header.component pmo-header
+<pre><code class="language-shell">donejs add component header.component pmo-header
 </code></pre>
 <p>and update <code>src/header.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-header&quot;&gt;
@@ -576,7 +576,7 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
 <p>We also use the Stache <code>eq</code> helper to make the appropriate link active.</p>
 <h3>Create a loading indicator</h3>
 <p>To show that something is currently loading, let's create a <code>pmo-loading</code> component:</p>
-<pre><code>donejs add component loading.component pmo-loading
+<pre><code class="language-shell">donejs add component loading.component pmo-loading
 </code></pre>
 <p>Change <code>src/loading.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-loading&quot; leak-scope&gt;
@@ -620,7 +620,7 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
 
     &lt;can-import from=&quot;place-my-order/loading.component&quot; /&gt;
     &lt;can-import from=&quot;place-my-order/header.component&quot; /&gt;
-    &lt;pmo-header {page}=&quot;page&quot;/&gt;
+    &lt;pmo-header page:from=&quot;page&quot;/&gt;
 
     {{#switch page}}
       {{#case &quot;home&quot;}}
@@ -670,7 +670,7 @@ Here we make a <code>switch</code> statement that checks for the current <code>p
 </code></pre>
 <p>Answer the question about the URL endpoint with <code>/api/restaurants</code> and the name of the id property with <code>_id</code>.</p>
 <p>We have now created a model and fixtures (for testing without an API) with a folder structure like this:</p>
-<pre><code>├── node_modules
+<pre><code class="language-shell">├── node_modules
 ├── package.json
 ├── src/
 |   ├── app.js
@@ -815,11 +815,11 @@ And update the template at <code>src/restaurant/list/list.stache</code> to use t
 <h3>Create dependent models</h3>
 <p>The API already provides a list of available <a href="http://localhost:8080/api/states">states</a> and <a href="http://localhost:8080/api/cities">cities</a>. To load them we can create the corresponding models like we already did for Restaurants.</p>
 <p>Run:</p>
-<pre><code>donejs add supermodel state
+<pre><code class="language-shell">donejs add supermodel state
 </code></pre>
 <p>When prompted, set the URL to <code>/api/states</code> and the id property to <code>short</code>.</p>
 <p>Run:</p>
-<pre><code>donejs add supermodel city
+<pre><code class="language-shell">donejs add supermodel city
 </code></pre>
 <p>When prompted, set the URL to <code>/api/cities</code> and the id property to <code>name</code>.</p>
 <p>Now we can load a list of states and cities.</p>
@@ -1038,7 +1038,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
   &lt;form class=&quot;form&quot;&gt;
     &lt;div class=&quot;form-group&quot;&gt;
       &lt;label&gt;State&lt;/label&gt;
-      &lt;select {($value)}=&quot;state&quot; {{#if states.isPending}}disabled{{/if}}&gt;
+      &lt;select value:bind=&quot;state&quot; {{#if states.isPending}}disabled{{/if}}&gt;
         {{#if states.isPending}}
           &lt;option value=&quot;&quot;&gt;Loading...&lt;/option&gt;
         {{else}}
@@ -1053,7 +1053,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
     &lt;/div&gt;
     &lt;div class=&quot;form-group&quot;&gt;
       &lt;label&gt;City&lt;/label&gt;
-      &lt;select {($value)}=&quot;city&quot;{{^if state}}disabled{{/if}}&gt;
+      &lt;select value:bind=&quot;city&quot;{{^if state}}disabled{{/if}}&gt;
         {{#if cities.isPending}}
           &lt;option value=&quot;&quot;&gt;Loading...&lt;/option&gt;
         {{else}}
@@ -1104,7 +1104,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 Some things worth pointing out:</p>
 <ul>
 <li>Since <code>states</code> and <code>cities</code> return a promise, we can check the promise's status via <code>isResolved</code> and <code>isPending</code> and once resolved get the actual value with <code>states.value</code> and <code>cities.value</code>. This also allows us to easily show loading indicators and disable the select fields while loading data.</li>
-<li>The <code>state</code> and <code>city</code> properties are two-way bound to their select fields via <a href="https://canjs.com/doc/can-stache-bindings.twoWay.html#___child_prop____key_">{($value)}</a></li>
+<li>The <code>state</code> and <code>city</code> properties are two-way bound to their select fields via <a href="https://canjs.com/doc/can-stache-bindings.twoWay.html#___child_prop____key_">value:bind</a></li>
 </ul>
 <p>Now we have a component that lets us select state and city and displays the appropriate restaurant list.</p>
 <h3>Update the demo page</h3>
@@ -1147,7 +1147,7 @@ QUnit.test('place-my-order main page shows up', function() {
 <h3>Using a test runner</h3>
 <p><strong>Note</strong>: If you are using Firefox for development, close the browser temporarily so that we can run our tests.</p>
 <p>The tests can be automated with any test runner that supports running QUnit tests. We will use <a href="https://github.com/bitovi/testee">Testee</a> which makes it easy to run those tests in any browser from the command line without much configuration. In fact, everything needed to automatically run the <code>test.html</code> page in Firefox is already set up and we can launch the tests by running:</p>
-<pre><code>donejs test
+<pre><code class="language-shell">donejs test
 </code></pre>
 <p>To see the tests passing on the command line.</p>
 <h2>Continuous integration</h2>
@@ -1156,11 +1156,11 @@ QUnit.test('place-my-order main page shows up', function() {
 <p>If you don't have an account yet, go to <a href="https://github.com">GitHub</a> to sign up and follow <a href="https://help.github.com/articles/set-up-git/">the help</a> on how to set it up for use with the command-line <code>git</code>. Once completed, you can create a new repository from your dashboard. Calling the repository <code>place-my-order</code> and initializing it empty (without any of the default files) looks like this:</p>
 <p><img src="static/img/guide-create-repo.png" alt="Creating a new repository on GitHub" /></p>
 <p>Now we have to initialize Git in our project folder and add the GitHub repository we created as the origin remote (replace <code>&lt;your-username&gt;</code> with your GitHub username):</p>
-<pre><code>git init
+<pre><code class="language-shell">git init
 git remote add origin https://github.com/&lt;your-username&gt;/place-my-order.git
 </code></pre>
 <p>Then we can add all files and push to origin like this:</p>
-<pre><code>git add . --all
+<pre><code class="language-shell">git add . --all
 git commit -am &quot;Initial commit&quot;
 git push origin master
 </code></pre>
@@ -1170,10 +1170,10 @@ git push origin master
 <p>We will use Travis as our hosted solution because it is free for open source projects. It works with your GitHub account which it will use to sign up. First, <a href="https://travis-ci.org/">sign up</a>, then go to <code>Accounts</code> (in the dropdown under you name) to enable the <code>place-my-order</code> repository:</p>
 <p><img src="static/img/guide-travis-ci.png" alt="Enabling the repository on Travis CI" /></p>
 <p>Continuous integration on GitHub is most useful when using <a href="https://help.github.com/categories/collaborating-on-projects-using-pull-requests/">branches and pull requests</a>. That way your main branch (master) will only get new code changes if all tests pass. Let's create a new branch with</p>
-<pre><code>git checkout -b travis-ci
+<pre><code class="language-shell">git checkout -b travis-ci
 </code></pre>
 <p>And add a <code>.travis.yml</code> file to our project root:</p>
-<pre><code>language: node_js
+<pre><code class="language-shell">language: node_js
 node_js: node
 addons:
   firefox: &quot;latest&quot;
@@ -1189,7 +1189,7 @@ before_install:
 </code></pre>
 <p><span line-highlight='1,only'></span>
 To see Travis run, let's add all changes and push to the branch:</p>
-<pre><code>git add readme.md .travis.yml
+<pre><code class="language-shell">git add readme.md .travis.yml
 git commit -am &quot;Enabling Travis CI&quot;
 git push origin travis-ci
 </code></pre>
@@ -1198,7 +1198,7 @@ git push origin travis-ci
 <p>Once you created the pull request, you will see a <code>Some checks haven’t completed yet</code> message that will eventually turn green like this:</p>
 <p><img src="static/img/guide-merge-pr.png" alt="Merging a pull request with all tests passed" /></p>
 <p>Once everything turns green, click the &quot;Merge pull request&quot; button.  Then in your console, checkout the <em>master</em> branch and pull down it's latest with:</p>
-<pre><code>git checkout master
+<pre><code class="language-shell">git checkout master
 git pull origin master
 </code></pre>
 <h2>Nested routes</h2>
@@ -1223,7 +1223,7 @@ route('{page}/{slug}/{action}', { slug: null, action: null });
 </ul>
 <h3>Create additional components</h3>
 <p>To make this happen, we need two more components. First, the <code>pmo-restaurant-details</code> component which loads the restaurant (based on the <code>slug</code>) and displays its information.</p>
-<pre><code>donejs add component restaurant/details.component pmo-restaurant-details
+<pre><code class="language-shell">donejs add component restaurant/details.component pmo-restaurant-details
 </code></pre>
 <p>And change <code>src/restaurant/details.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-restaurant-details&quot;&gt;
@@ -1285,7 +1285,7 @@ route('{page}/{slug}/{action}', { slug: null, action: null });
 
 </code></pre>
 <p>The order component will be a little more complex, which is why we will put it into its own folder:</p>
-<pre><code>donejs add component order/new pmo-order-new
+<pre><code class="language-shell">donejs add component order/new pmo-order-new
 </code></pre>
 <p>For now, we will just use placeholder content and implement the functionality in
 the following chapters.</p>
@@ -1305,14 +1305,14 @@ the following chapters.</p>
       {{#case 'order'}}
         &lt;can-import from=&quot;place-my-order/order/new/&quot;
             can-tag=&quot;pmo-loading&quot;&gt;
-          &lt;pmo-order-new {slug}=&quot;slug&quot;/&gt;
+          &lt;pmo-order-new slug:from=&quot;slug&quot;/&gt;
         &lt;/can-import&gt;
       {{/case}}
 
       {{#default}}
         &lt;can-import from=&quot;place-my-order/restaurant/details.component&quot;
             can-tag=&quot;pmo-loading&quot;&gt;
-          &lt;pmo-restaurant-details {slug}=&quot;slug&quot;/&gt;
+          &lt;pmo-restaurant-details slug:from=&quot;slug&quot;/&gt;
         &lt;/can-import&gt;
       {{/default}}
     {{/switch}}
@@ -1333,7 +1333,7 @@ the following chapters.</p>
 </ul>
 <h2>Importing other projects</h2>
 <p>The npm integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the <code>pmo-order-new</code> component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a <a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a> component which does exactly that. Let's add it as a project dependency with:</p>
-<pre><code>npm install bit-tabs@1 --save
+<pre><code class="language-shell">npm install bit-tabs@1 --save
 </code></pre>
 <p>And then integrate it into <code>src/order/new/new.stache</code>:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;bit-tabs/unstyled&quot;/&gt;
@@ -1356,7 +1356,7 @@ the following chapters.</p>
 <p>In this section, we will update the order component to be able to select restaurant menu items and submit a new order for a restaurant.</p>
 <h3>Creating the order model</h3>
 <p>First, let's look at the restaurant data we get back from the server. It looks like this:</p>
-<pre><code>{
+<pre><code class="language-js">{
   &quot;_id&quot;: &quot;5571e03daf2cdb6205000001&quot;,
   &quot;name&quot;: &quot;Cheese Curd City&quot;,
   &quot;slug&quot;: &quot;cheese-curd-city&quot;,
@@ -1404,7 +1404,7 @@ the following chapters.</p>
 }
 </code></pre>
 <p>We have a <code>menu</code> property which provides a <code>lunch</code> and <code>dinner</code> option (which will show later inside the tabs we set up in the previous chapter). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (<code>new</code>), and be able to calculate the order total. For that to happen, we need to create a new <code>order</code> model:</p>
-<pre><code>donejs add supermodel order
+<pre><code class="language-shell">donejs add supermodel order
 </code></pre>
 <p>Like the restaurant model, the URL is <code>/api/orders</code> and the id property is <code>_id</code>. To select menu items, we need to add some additional functionality to <code>src/models/order.js</code>:</p>
 <pre><code class="language-js">import DefineMap from 'can-define/map/';
@@ -1548,7 +1548,7 @@ QUnit.test('canPlaceOrder', function(){
 <p><span line-highlight='7-12,only'></span></p>
 <h3>Write the template</h3>
 <p>First, let's implement a small order confirmation component with</p>
-<pre><code>donejs add component order/details.component pmo-order-details
+<pre><code class="language-shell">donejs add component order/details.component pmo-order-details
 </code></pre>
 <p>and changing <code>src/order/details.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-details&quot;&gt;
@@ -1596,14 +1596,14 @@ QUnit.test('canPlaceOrder', function(){
     &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
   {{else}}
     {{#if saveStatus.isResolved}}
-      &lt;pmo-order-details {order}=&quot;saveStatus.value&quot;&gt;&lt;/pmo-order-details&gt;
-      &lt;p&gt;&lt;a href=&quot;javascript://&quot; ($click)=&quot;startNewOrder()&quot;&gt;
+      &lt;pmo-order-details order:from=&quot;saveStatus.value&quot;&gt;&lt;/pmo-order-details&gt;
+      &lt;p&gt;&lt;a href=&quot;javascript://&quot; on:click=&quot;startNewOrder()&quot;&gt;
         Place another order
       &lt;/a&gt;&lt;/p&gt;
     {{else}}
       &lt;h3&gt;Order from {{restaurant.name}}&lt;/h3&gt;
 
-      &lt;form ($submit)=&quot;placeOrder(%event)&quot;&gt;
+      &lt;form on:submit=&quot;placeOrder(%event)&quot;&gt;
         &lt;bit-tabs tabs-class=&quot;nav nav-tabs&quot;&gt;
           &lt;p class=&quot;info {{^if order.items.length}}text-error{{else}}text-success{{/if}}&quot;&gt;
             {{^if order.items.length}}
@@ -1618,7 +1618,7 @@ QUnit.test('canPlaceOrder', function(){
                 &lt;li class=&quot;list-group-item&quot;&gt;
                   &lt;label&gt;
                     &lt;input type=&quot;checkbox&quot;
-                      ($change)=&quot;order.items.toggle(.)&quot;
+                      on:change=&quot;order.items.toggle(.)&quot;
                       {{#if order.items.has(.)}}checked{{/if}}&gt;
                     {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
                   &lt;/label&gt;
@@ -1632,7 +1632,7 @@ QUnit.test('canPlaceOrder', function(){
                 &lt;li class=&quot;list-group-item&quot;&gt;
                   &lt;label&gt;
                     &lt;input type=&quot;checkbox&quot;
-                      ($change)=&quot;order.items.toggle(this)&quot;
+                      on:change=&quot;order.items.toggle(this)&quot;
                       {{#if order.items.has(.)}}checked{{/if}}&gt;
                     {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
                   &lt;/label&gt;
@@ -1645,19 +1645,19 @@ QUnit.test('canPlaceOrder', function(){
         &lt;div class=&quot;form-group&quot;&gt;
           &lt;label class=&quot;control-label&quot;&gt;Name:&lt;/label&gt;
           &lt;input name=&quot;name&quot; type=&quot;text&quot; class=&quot;form-control&quot;
-            {($value)}=&quot;order.name&quot;&gt;
+            value:bind=&quot;order.name&quot;&gt;
           &lt;p&gt;Please enter your name.&lt;/p&gt;
         &lt;/div&gt;
         &lt;div class=&quot;form-group&quot;&gt;
           &lt;label class=&quot;control-label&quot;&gt;Address:&lt;/label&gt;
           &lt;input name=&quot;address&quot; type=&quot;text&quot; class=&quot;form-control&quot;
-            {($value)}=&quot;order.address&quot;&gt;
+            value:bind=&quot;order.address&quot;&gt;
           &lt;p class=&quot;help-text&quot;&gt;Please enter your address.&lt;/p&gt;
         &lt;/div&gt;
         &lt;div class=&quot;form-group&quot;&gt;
           &lt;label class=&quot;control-label&quot;&gt;Phone:&lt;/label&gt;
           &lt;input name=&quot;phone&quot; type=&quot;text&quot; class=&quot;form-control&quot;
-            {($value)}=&quot;order.phone&quot;&gt;
+            value:bind=&quot;order.phone&quot;&gt;
           &lt;p class=&quot;help-text&quot;&gt;Please enter your phone number.&lt;/p&gt;
         &lt;/div&gt;
         &lt;div class=&quot;submit&quot;&gt;
@@ -1682,10 +1682,10 @@ QUnit.test('canPlaceOrder', function(){
 <li><code>&lt;can-import from=&quot;place-my-order/order/details.component&quot; /&gt;</code> loads the order details component we previously created</li>
 <li>If the <code>saveStatus</code> promise is resolved we show the <code>pmo-order-details</code> component with that order</li>
 <li>Otherwise we will show the order form with the <code>bit-tabs</code> panels we implemented in the previous chapter and iterate over each menu item</li>
-<li><code>($submit)=&quot;placeOrder()&quot;</code> will call <code>placeOrder</code> from our view model when the form is submitted</li>
-<li>The interesting part for showing a menu item is the checkbox <code>&lt;input type=&quot;checkbox&quot; ($change)=&quot;order.items.toggle(.)&quot; {{#if order.items.has(.)}}checked{{/if}}&gt;</code>
+<li><code>on:submit=&quot;placeOrder()&quot;</code> will call <code>placeOrder</code> from our view model when the form is submitted</li>
+<li>The interesting part for showing a menu item is the checkbox <code>&lt;input type=&quot;checkbox&quot; on:change=&quot;order.items.toggle(.)&quot; {{#if order.items.has(.)}}checked{{/if}}&gt;</code>
 <ul>
-<li><code>($change)</code> binds to the checkbox change event and runs <code>order.items.toggle</code> which toggles the item from <code>ItemList</code>, which we created in the model</li>
+<li><code>on:change</code> binds to the checkbox change event and runs <code>order.items.toggle</code> which toggles the item from <code>ItemList</code>, which we created in the model</li>
 <li><code>order.item.has</code> sets the checked status to whether or not this item is in the order</li>
 </ul></li>
 <li>Then we show form elements for name, address, and phone number, which are bound to the order model using <a href="https://canjs.com/doc/can-stache-bindings.html">can-stache-bindings</a></li>
@@ -1777,7 +1777,7 @@ export default Order;
 The model can now be used in the template like <code>&lt;order-model get-list=&quot;{status='new'}&quot;&gt;</code>. This also adds an <a href="https://canjs.com/doc/can-set.props.enum.html">enum comparator</a> so that multiple requests for different statuses can be combined.</p>
 <h3>Update the template</h3>
 <p>First let's create the <code>pmo-order-list</code> component with:</p>
-<pre><code>donejs add component order/list.component pmo-order-list
+<pre><code class="language-shell">donejs add component order/list.component pmo-order-list
 </code></pre>
 <p>And then change <code>src/order/list.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-list&quot;&gt;
@@ -1806,14 +1806,14 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
           {{#if action}}
             &lt;p class=&quot;action&quot;&gt;
               Mark as:
-              &lt;a href=&quot;javascript://&quot; ($click)=&quot;markAs(action)&quot;&gt;
+              &lt;a href=&quot;javascript://&quot; on:click=&quot;markAs(action)&quot;&gt;
                 {{actionTitle}}
               &lt;/a&gt;
             &lt;/p&gt;
           {{/if}}
 
           &lt;p class=&quot;action&quot;&gt;
-            &lt;a href=&quot;javascript://&quot;  ($click)=&quot;destroy()&quot;&gt;Delete&lt;/a&gt;
+            &lt;a href=&quot;javascript://&quot;  on:click=&quot;destroy()&quot;&gt;Delete&lt;/a&gt;
           &lt;/p&gt;
         &lt;/div&gt;
       &lt;/div&gt;
@@ -1841,7 +1841,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
       &lt;can-import from=&quot;place-my-order/order/list.component&quot; /&gt;
       &lt;order-model get-list=&quot;{status='new'}&quot;&gt;
         &lt;pmo-order-list
-          {orders}=&quot;.&quot;
+          orders:from=&quot;.&quot;
           list-title=&quot;New Orders&quot;
           status=&quot;new&quot;
           status-title=&quot;New Order!&quot;
@@ -1852,7 +1852,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
 
       &lt;order-model get-list=&quot;{status='preparing'}&quot;&gt;
         &lt;pmo-order-list
-          {orders}=&quot;.&quot;
+          orders:from=&quot;.&quot;
           list-title=&quot;Preparing&quot;
           status=&quot;preparing&quot;
           status-title=&quot;Preparing&quot;
@@ -1863,7 +1863,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
 
       &lt;order-model get-list=&quot;{status='delivery'}&quot;&gt;
         &lt;pmo-order-list
-          {orders}=&quot;.&quot;
+          orders:from=&quot;.&quot;
           list-title=&quot;Out for delivery&quot;
           status=&quot;delivery&quot;
           status-title=&quot;Out for delivery&quot;
@@ -1874,7 +1874,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
 
       &lt;order-model get-list=&quot;{status='delivered'}&quot;&gt;
         &lt;pmo-order-list
-          {orders}=&quot;.&quot;
+          orders:from=&quot;.&quot;
           list-title=&quot;Delivered&quot;
           status=&quot;delivered&quot;
           status-title=&quot;Delivered&quot;
@@ -1888,7 +1888,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
 <p>First we import the order model and then just call <code>&lt;order-model get-list=&quot;{status='&lt;status&gt;'}&quot;&gt;</code> for each order status. These are all of the template changes needed, next is to set up the real-time connection.</p>
 <h3>Adding real-time events to a model</h3>
 <p>The <code>place-my-order-api</code> module uses the <a href="https://feathersjs.com/">Feathers</a> NodeJS framework, which in addition to providing a REST API, sends those events in the form of a websocket event like <code>orders created</code>. To make the order page update in real-time, all we need to do is add listeners for those events to <code>src/models/order.js</code> and in the handler notify the order connection.</p>
-<pre><code>npm install steal-socket.io@4 --save
+<pre><code class="language-shell">npm install steal-socket.io@4 --save
 </code></pre>
 <p>Update <code>src/models/order.js</code> to use socket.io to update the Order model in real-time:</p>
 <pre><code class="language-js">import DefineMap from 'can-define/map/';
@@ -1982,10 +1982,10 @@ That's it. If we now open the <a href="http://localhost:8080/order-history">orde
 <p>Documenting our code is very important to quickly get other developers up to speed. <a href="https://documentjs.com/">DocumentJS</a> makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.</p>
 <h3>Installing and Configuring DocumentJS</h3>
 <p>Let's add DocumentJS to our application:</p>
-<pre><code>donejs add documentjs@0.1
+<pre><code class="language-shell">donejs add documentjs@0.1
 </code></pre>
 <p>This will install DocumentJS and also create a <code>documentjs.json</code> configuration file. Now we can generate the documentation with:</p>
-<pre><code>donejs document
+<pre><code class="language-shell">donejs document
 </code></pre>
 <p>This produces documentation at <a href="http://localhost:8080/docs/">http://localhost:8080/docs/</a>.</p>
 <h3>Documenting a module</h3>
@@ -2111,11 +2111,11 @@ If we now run <code>donejs document</code> again, we will see the module show up
 StealTools will find all of the assets you reference in your CSS and copy them to the dist folder. By default StealTools will set your <a href="https://stealjs.com/docs/steal-tools.build.html#dest">dest</a> to <code>dist</code>, and will place the place-my-order-assets images in <code>dist/node_modules/place-my-order/assets/images</code>. bundleAssets preserves the path of your assets so that their locations are the same relative to the base url in both development and production.</p>
 <h3>Bundling your app</h3>
 <p>To bundle our application for production we use the build script in <code>build.js</code>. We could also use <a href="http://gruntjs.com/">Grunt</a> or <a href="http://gulpjs.com/">Gulp</a>, but in this example we just run it directly with Node. Everything is set up already so we run:</p>
-<pre><code>donejs build
+<pre><code class="language-shell">donejs build
 </code></pre>
 <p>This will build the application to a <code>dist/</code> folder in the project's base directory.</p>
 <p>From here your application is ready to be used in production. Enable production mode by setting the <code>NODE_ENV</code> variable:</p>
-<pre><code>NODE_ENV=production donejs start
+<pre><code class="language-shell">NODE_ENV=production donejs start
 </code></pre>
 <p>If you're using Windows omit the NODE_ENV=production in the command, and instead see the <a href="./SettingUp.html#environmental-variables">setting up guide</a> on how to set environment variables.</p>
 <p>Refresh your browser to see the application load in production.</p>
@@ -2124,17 +2124,17 @@ StealTools will find all of the assets you reference in your CSS and copy them t
 <p>To build the application as a Cordova based mobile application, you need to have each platform's SDK installed.
 We'll be building an iOS app if you are a Mac user, and an Android app if you're a Windows user.</p>
 <p>Mac users should download XCode from the AppStore and install the <code>ios-sim</code> package globally with:</p>
-<pre><code>npm install -g ios-sim
+<pre><code class="language-shell">npm install -g ios-sim
 </code></pre>
 <p>We will use these tools to create an iOS application that can be tested in the iOS simulator.</p>
 <p>Windows users should install the <a href="https://developer.android.com/sdk/index.html">Android Studio</a>, which gives all of the tools we need. See the <a href="./SettingUp.html#android-development-1">setting up guide</a> for full instructions on setting up your Android emulator.</p>
 <p>Now we can install the DoneJS Cordova tools with:</p>
-<pre><code>donejs add cordova@1
+<pre><code class="language-shell">donejs add cordova@1
 </code></pre>
 <p>Answer the question about the URL of the service layer with <code>http://www.place-my-order.com</code>.</p>
 <p>Depending on your operating system you can accept most of the rest of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.</p>
 <p>This will change your <code>build.js</code> script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the <strong>glob</strong> property:</p>
-<pre><code>var cordovaOptions = {
+<pre><code class="language-js">var cordovaOptions = {
   buildDir: &quot;./build/cordova&quot;,
   id: &quot;com.donejs.placemyorder&quot;,
   name: &quot;place my order&quot;,
@@ -2148,22 +2148,22 @@ We'll be building an iOS app if you are a Mac user, and an Android app if you're
 </code></pre>
 <p><span line-highlight='9,only'></span>
 To run the Cordova build and launch the simulator we can now run:</p>
-<pre><code>donejs build cordova
+<pre><code class="language-shell">donejs build cordova
 </code></pre>
 <p>If everything went well, we should see the emulator running our application.</p>
 <h3>Building to Electron</h3>
 <p>To set up the desktop build, we have to add it to our application like this:</p>
-<pre><code>donejs add electron@1
+<pre><code class="language-shell">donejs add electron@1
 </code></pre>
 <p>Answer the question about the URL of the service layer with <code>http://www.place-my-order.com</code>. We can answer the rest of the prompts with the default.</p>
 <p>Then we can run the build like this:</p>
-<pre><code>donejs build electron
+<pre><code class="language-shell">donejs build electron
 </code></pre>
 <p>The macOS application can be opened with</p>
-<pre><code>open build/place-my-order-darwin-x64/place-my-order.app
+<pre><code class="language-shell">open build/place-my-order-darwin-x64/place-my-order.app
 </code></pre>
 <p>The Windows application can be opened with</p>
-<pre><code>.\build\place-my-order-win32-x64\place-my-order.exe
+<pre><code class="language-shell">.\build\place-my-order-win32-x64\place-my-order.exe
 </code></pre>
 <h2>Deploy</h2>
 <p>Now that we verified that our application works in production, we can deploy it to the web. In this section, we will use <a href="https://www.firebase.com/">Firebase</a>, a service that provides static file hosting and <a href="https://en.wikipedia.org/wiki/Content_delivery_network">Content Delivery Network</a> (CDN) support, to automatically deploy and serve our application's static assets from a CDN and <a href="https://heroku.com">Heroku</a> to provide server-side rendering.</p>
@@ -2177,19 +2177,19 @@ To run the Cordova build and launch the simulator we can now run:</p>
 <p>When you deploy for the first time it will ask you to authorize with your login information, but first we need to configure the project.</p>
 <h4>Configuring DoneJS</h4>
 <p>With the Firebase account and application in place we can add the deployment configuration to our project like this:</p>
-<pre><code>donejs add firebase@1
+<pre><code class="language-shell">donejs add firebase@1
 </code></pre>
 <p>When prompted, enter the name of the application created when you set up the Firebase app. Next, login to the firebase app for the first time by running:</p>
-<pre><code>node_modules/.bin/firebase login
+<pre><code class="language-shell">node_modules/.bin/firebase login
 </code></pre>
 <p>And authorize your application.</p>
 <h4>Run deploy</h4>
 <p>We can now deploy the application by running:</p>
-<pre><code>donejs build
+<pre><code class="language-shell">donejs build
 donejs deploy
 </code></pre>
 <p>Static files are deployed to Firebase and we can verify that the application is loading from the CDN by loading it running:</p>
-<pre><code>NODE_ENV=production donejs start
+<pre><code class="language-shell">NODE_ENV=production donejs start
 </code></pre>
 <blockquote>
 <p>If you're using Windows, set the NODE_ENV variable as you did previously in the Production section.</p>
@@ -2200,30 +2200,30 @@ donejs deploy
 <p>At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to get the benefit of server-side rendering.</p>
 <p>If you do not have an account yet, sign up for Heroku at <a href="https://signup.heroku.com/">signup.heroku.com</a>. Then download the <a href="https://devcenter.heroku.com/articles/heroku-command">Heroku CLI</a> which will be used to deploy.</p>
 <p>After installing we can initialize the application via</p>
-<pre><code>heroku login
+<pre><code class="language-shell">heroku login
 heroku create
 </code></pre>
 <p>This will return the url where your app can be viewed. Before you open it you'll need to update the NODE_ENV variable:</p>
-<pre><code>heroku config:set NODE_ENV=production
+<pre><code class="language-shell">heroku config:set NODE_ENV=production
 </code></pre>
 <p>Add a new <code>Procfile</code> that tells Heroku what to launch as the app's server. Since we are using done-serve our Procfile just looks like this:</p>
-<pre><code>web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
+<pre><code class="language-shell">web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
 </code></pre>
 <p>First let's save our current status:</p>
-<pre><code>git add -A
+<pre><code class="language-shell">git add -A
 git commit -m &quot;Finishing place-my-order&quot;
 git push origin master
 </code></pre>
 <p>Since Heroku needs the build artifacts we need to commit those before pushing to Heroku. We recommend doing this in a separate branch.</p>
-<pre><code>git checkout -b deploy
+<pre><code class="language-shell">git checkout -b deploy
 git add -f dist
 git commit -m &quot;Deploying to Heroku&quot;
 </code></pre>
 <p>And finally do an initial deploy.</p>
-<pre><code>git push heroku deploy:master
+<pre><code class="language-shell">git push heroku deploy:master
 </code></pre>
 <p>Any time in the future you want to deploy simply push to the Heroku remote. Once the deploy is finished you can open the link provided in your browser. If successful we can checkout the <em>master</em> branch:</p>
-<pre><code>git checkout master
+<pre><code class="language-shell">git checkout master
 </code></pre>
 <h3>Continuous Deployment</h3>
 <p>Previously we set up Travis CI <a href="#continuous-integration">for automated testing</a> of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.</p>
@@ -2249,24 +2249,24 @@ deploy:
 You can find the name of the app by running <code>heroku apps:info</code>.</p>
 <p>In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our <code>.travis.yml</code> should always be encrypted for which we install the <a href="https://www.npmjs.com/package/travis-encrypt">travis-encrypt</a> module:</p>
 <p><em>Note: if using Windows, first install the OpenSSL package as described in the <a href="https://donejs.com/SettingUp.html">Setting Up</a> guide.</em></p>
-<pre><code>npm install travis-encrypt -g
+<pre><code class="language-shell">npm install travis-encrypt -g
 </code></pre>
 <p>Now we can get the Heroku authentication token with:</p>
-<pre><code>heroku auth:token
+<pre><code class="language-shell">heroku auth:token
 </code></pre>
 <p>Copy the token printed and paste it as <code>&lt;token&gt;</code> in the following command:</p>
-<pre><code>travis-encrypt --add deploy.api_key -r &lt;your-username&gt;/place-my-order &lt;token&gt;
+<pre><code class="language-shell">travis-encrypt --add deploy.api_key -r &lt;your-username&gt;/place-my-order &lt;token&gt;
 </code></pre>
 <p>Replace <code>&lt;your-username&gt;</code> with the name of your GitHub account.</p>
 <p>To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:</p>
-<pre><code>node_modules/.bin/firebase login:ci
+<pre><code class="language-shell">node_modules/.bin/firebase login:ci
 </code></pre>
 <p>In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the <code>&lt;token&gt;</code> in the following command:</p>
-<pre><code>travis-encrypt --add -r &lt;your-username&gt;/place-my-order 'FIREBASE_TOKEN=&quot;&lt;token&gt;&quot;'
+<pre><code class="language-shell">travis-encrypt --add -r &lt;your-username&gt;/place-my-order 'FIREBASE_TOKEN=&quot;&lt;token&gt;&quot;'
 </code></pre>
 <p>Now any time a build succeeds when pushing to <code>master</code> the application will be deployed to Heroku and static assets to Firebase's CDN.</p>
 <p>To test this out checkout a new branch:</p>
-<pre><code>git checkout -b continuous
+<pre><code class="language-shell">git checkout -b continuous
 git add -A
 git commit -m &quot;Trying out continuous deployment&quot;
 git push origin continuous
