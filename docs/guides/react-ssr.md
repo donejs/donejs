@@ -4,11 +4,11 @@
 @outline 2 ol
 @description
 
-In this guide you'll learn on using [done-ssr](https://github.com/donejs/done-ssr) to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:
+In this guide you'll learn about using [done-ssr](https://github.com/donejs/done-ssr) to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:
 
-- Using [Zones](https://github.com/canjs/can-zone) to isolate rendering, allowing multiple requests to be served from the same application.
-- Server virtual DOMs which common APIs, allowing you to use the same code that runs on the client, for rendering on the server.
-- HTTP/2 support, and PUSH, to PUSH out API requests as they are fulfilled on the server.
+- Using [Zones](https://github.com/canjs/can-zone) to isolate rendering, allowing multiple requests to be served from the same application
+- Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server
+- HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server
 - Incremental rendering using HTTP/2 PUSH and the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 @body
@@ -17,10 +17,10 @@ In this guide you'll learn on using [done-ssr](https://github.com/donejs/done-ss
 
 This app uses [create-react-app](https://github.com/facebookincubator/create-react-app) to scaffold a React application and for client development. We'll be swapping out the server for our own, to enable server-side rendering.
 
-If you haven't already, install create-react-app:
+If you haven't already, install yarn and create-react-app:
 
 ```
-npm install -g create-react-app
+npm install -g yarn create-react-app
 ```
 
 The, create the application:
@@ -33,7 +33,7 @@ This will install the dependencies to a new folder `my-react-app/`. Once done yo
 
 ```
 cd my-react-app/
-npm start
+yarn start
 ```
 
 This will start a development server and launch the browser. It looks like:
@@ -45,7 +45,7 @@ This will start a development server and launch the browser. It looks like:
 In order to use done-ssr for server-side rendering, we need to first set up a server. We'll use [Express](https://expressjs.com/) as our server framework. Install a few dependencies we need:
 
 ```shell
-npm install express ignore-styles done-ssr@beta --save
+yarn add express ignore-styles can-zone-jsdom done-ssr@beta --save
 ```
 
 Create a folder to put our server code:
@@ -77,46 +77,37 @@ require('babel-register')({
   presets: ['react-app']
 });
 
-const App = require('../src/App').default;
-const React = require('react');
-const ReactDOM = require('react-dom');
 const Zone = require('can-zone');
 const express = require('express');
-const fs = require('fs');
 const app = express();
 
-const requests = require("done-ssr/zones/requests");
-const dom = require("done-ssr/zones/can-simple-dom");
-
-function render() {
-  document.body.innerHTML = `
-    <div id="one"></div>
-    <div id="root"></div>
-    <script src="path/to/main.js"></script>
-  `;
-
-  ReactDOM.render(React.createElement(App), document.getElementById('root'));
-}
+const dom = require('can-zone-jsdom');
+const requests = require('done-ssr/zones/requests');
 
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static('build'));
+app.use(express.static('build', { index: false }));
 app.use(express.static('.'));
 
 app.get('*', async (request, response) => {
-	var zone = new Zone([
-		// Overrides XHR, fetch
-		requests(request),
+  var zone = new Zone([
+    // Overrides XHR, fetch
+    requests(request),
 
-		// Sets up a DOM
-		dom(request)
-	]);
+    // Sets up a DOM
+    dom(request, {
+      root: __dirname + '/../build',
+      html: 'index.html'
+    })
+  ]);
 
-  const {html} = await zone.run(render);
+  const { html } = await zone.run();
   response.end(html);
 });
 
-require('http').createServer(app).listen(PORT);
+require('http')
+  .createServer(app)
+  .listen(PORT);
 
 console.error(`Server running at http://localhost:${PORT}`);
 ```
@@ -132,7 +123,7 @@ To run it, you need to add a `NODE_ENV` environment variable. For convenience ad
 And then launch it with:
 
 ```
-npm run server
+yarn server
 ```
 
 And navigate to http://localhost:8080.
@@ -141,7 +132,7 @@ Let's break down the interesting parts of this server.
 
 ### React
 
-This server directly uses the entry point `src/App.js` React component in the Node application. Since React apps are written in such a way that they need bundling -- this application imports CSS, SVG, and uses JavaScript syntax not available in Node today -- we use a couple of dependencies (**ignore-styles** and **babel-register**) to compile them on-the-fly.
+This server directly uses the entry point `build/index.html` in the Node application. Since React apps are written in such a way that they need bundling -- this application imports CSS, SVG, and uses JavaScript syntax not available in Node today -- we use a couple of dependencies (**ignore-styles** and **babel-register**) to compile them on-the-fly.
 
 It's usually not recommended to do this in a production application. We are doing it here for convenience, since the meat of this guide is about the other parts of SSR, that comes next.
 
@@ -175,7 +166,7 @@ The rest of this guide will focus on the code contained within the `*` route. Th
 * **done-ssr/zones/requests**:
   * Provides polyfills for `XMLHttpRequest`, `fetch`, and `WebSocket`.
   * Allows domain-relative URLs like `/api/todos`.
-* **done-ssr/zones/can-simple-dom**: Provides our DOM implementation, including `document`, `window`, and `location` objects. Serializes the document (when the zone is complete) as `zone.data.html`.
+* **can-zone-jsdom**: Provides a DOM implementation, including `document`, `window`, and `location` objects. Serializes the document (when the zone is complete) as `zone.data.html`.
 
 Later in the guide we'll add a couple of more, for HTTP/2 support.
 
@@ -187,36 +178,23 @@ var zone = new Zone([
   requests(request),
 
   // Sets up a DOM
-  dom(request)
+  dom(request, {
+    root: __dirname + '/../build',
+    html: 'index.html'
+  })
 ]);
 ```
 
-Creates a new can-zone using the previously mentioned zone plugins.
+This creates a new can-zone using the previously mentioned zone plugins.
 
 ```js
-const {html} = await zone.run(render);
+const { html } = await zone.run();
 response.end(html);
 ```
 
-Runs the `render` function within the zone and waits for it to asynchronously complete. Once completed extracts the `html` string and ends the `response` with that as the value.
+Runs the contents of `index.html` within the zone and waits for it to asynchronously complete. Once completed extracts the `html` string and ends the `response` with that as the value.
 
-The **render** function looks like:
-
-```js
-function render() {
-  document.body.innerHTML = `
-    <div id="one"></div>
-    <div id="root"></div>
-    <script src="path/to/main.js"></script>
-  `;
-
-  ReactDOM.render(React.createElement(App), document.getElementById('root'));
-}
-```
-
-Remember that this **render** function is called every time a request is rendered, and a new `document` is set for each request (by **done-ssr/zones/can-simple-dom**).
-
-> *Note*: an easier way to do this would be to use a static *HTML* file. This is still under development under the can-zone-jsdom project.
+Remember that the **index.html** is run every time a request is rendered, and a new `document` is set for each request (by **can-zone-jsdom**).
 
 ## HTTP/2
 
@@ -229,7 +207,7 @@ Using the **done-ssr/zones/push-mutations** zone, we can add incremental renderi
 First, we need to install an HTTP/2 server. While HTTP/2 support is in Node 8.6.0 behind a flag, I've found it to be too buggy to use today. So use *donejs-spdy* instead:
 
 ```
-npm install donejs-spdy --save
+yarn add donejs-spdy
 ```
 
 At this point you'll need to create a private key and certificate, as HTTP/2 requires SSL. If using a Unix operating system, you can use *openssl* for this:
@@ -265,48 +243,38 @@ require('babel-register')({
   presets: ['react-app']
 });
 
-const App = require('../src/App').default;
-const React = require('react');
-const ReactDOM = require('react-dom');
 const Zone = require('can-zone');
 const express = require('express');
 const fs = require('fs');
 const app = express();
 
-const requests = require("done-ssr/zones/requests");
-const dom = require("done-ssr/zones/can-simple-dom");
-const pushFetch = require("done-ssr/zones/push-fetch");
-const pushMutations = require("done-ssr/zones/push-mutations");
-
-function render() {
-  document.body.innerHTML = `
-    <div id="one"></div>
-    <div id="root"></div>
-    <script src="path/to/main.js"></script>
-  `;
-
-  ReactDOM.render(React.createElement(App), document.getElementById('root'));
-}
+const dom = require('can-zone-jsdom');
+const requests = require('done-ssr/zones/requests');
+const pushFetch = require('done-ssr/zones/push-fetch');
+const pushMutations = require('done-ssr/zones/push-mutations');
 
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static('build'));
+app.use(express.static('build', { index: false }));
 app.use(express.static('.'));
 
 app.get('*', async (request, response) => {
-	var zone = new Zone([
-		// Overrides XHR, fetch
-		requests(request),
+  var zone = new Zone([
+    // Overrides XHR, fetch
+    requests(request),
 
-		// Sets up a DOM
-		dom(request),
+    // Sets up a DOM
+    dom(request, {
+      root: __dirname + '/../build',
+      html: 'index.html'
+    }),
 
     // H2 push
     pushFetch(response),
     pushMutations(response)
-	]);
+  ]);
 
-  const zonePromise = zone.run(render);
+  const zonePromise = zone.run();
 
   response.write(zone.data.html);
 
@@ -314,26 +282,32 @@ app.get('*', async (request, response) => {
   response.end();
 });
 
-require('donejs-spdy').createServer({
-  key: fs.readFileSync(process.env.KEY),
-	cert: fs.readFileSync(process.env.CERT),
-	spdy: {
-		protocols: ['h2', 'http/1.1']
-	}
-}, app).listen(PORT);
+require('donejs-spdy')
+  .createServer(
+    {
+      key: fs.readFileSync(process.env.KEY),
+      cert: fs.readFileSync(process.env.CERT),
+      spdy: {
+        protocols: ['h2', 'http/1.1']
+      }
+    },
+    app
+  )
+  .listen(PORT);
 
-console.error(`Server running at https://localhost:${PORT}`);
+console.error(`Server running at http://localhost:${PORT}`);
 ```
-@highlight 17-18,43-45,48-53,56-62,64,only
+@highlight 10,15-16,34-36,39-44,47-57,only
 
 This adds two new zones to our arsenal:
 
 * **done-ssr/zones/push-fetch**: Traps calls to the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) and uses H2 PUSH to start pushing them to the browser. This way when the browser JavaScript tries to fetch this resource it's already available in the browser cache.
 * **done-ssr/zones/push-mutations**: This is the zone that handles incremental rendering. It does a few things interesting:
-  #. Listens to mutations in the document and serializes a *patch* that can be applied in the browser document.
-  #. Adds a script to the `<head>` that will attach to a special URL where the mutations are being streamed. When this script runs in the browser it will fetch that URL and start applying the mutation patches as they come in.
 
-If you start your server again with `npm run server`, you should be able to see the application running.
+  1. Listens to mutations in the document and serializes a *patch* that can be applied in the browser document.
+  1. Adds a script to the `<head>` that will attach to a special URL where the mutations are being streamed. When this script runs in the browser it will fetch that URL and start applying the mutation patches as they come in.
+
+If you start your server again with `yarn server`, you should be able to see the application running.
 
 ## Adding an API
 
@@ -353,7 +327,7 @@ ndjson is just JSON that is separated by newline characters. It looks like this:
 We'll use [can-ndjson-stream](https://github.com/canjs/can-ndjson-stream) to make it easier to work with this format. So install that first:
 
 ```js
-npm install can-ndjson-stream --save
+yarn add can-ndjson-stream
 ```
 
 We'll use this in our client code. Create `src/List.js`:
@@ -435,7 +409,7 @@ What is happening in *src/List.js*:
 
 1. A component is created with a `items` Array in the state.
 2. A *fetch* request is made to `/api/items`.
-3. can-ndjson-stream is called with the response body.
+3. `can-ndjson-stream` is called with the response body.
 4. Each item comes through the stream as a JavaScript object and appended to `this.state.items`.
 5. `render()` is recalled and a new `<li>` is created for each item.
 
@@ -493,49 +467,39 @@ require('babel-register')({
   presets: ['react-app']
 });
 
-const App = require('../src/App').default;
-const React = require('react');
-const ReactDOM = require('react-dom');
 const Zone = require('can-zone');
 const express = require('express');
 const fs = require('fs');
 const app = express();
 
-const requests = require("done-ssr/zones/requests");
-const dom = require("done-ssr/zones/can-simple-dom");
-const pushFetch = require("done-ssr/zones/push-fetch");
-const pushMutations = require("done-ssr/zones/push-mutations");
-
-function render() {
-  document.body.innerHTML = `
-    <div id="one"></div>
-    <div id="root"></div>
-    <script src="path/to/main.js"></script>
-  `;
-
-  ReactDOM.render(React.createElement(App), document.getElementById('root'));
-}
+const dom = require('can-zone-jsdom');
+const requests = require('done-ssr/zones/requests');
+const pushFetch = require('done-ssr/zones/push-fetch');
+const pushMutations = require('done-ssr/zones/push-mutations');
 
 const PORT = process.env.PORT || 8080;
 
-app.use(express.static('build'));
+app.use(express.static('build', { index: false }));
 app.use(express.static('.'));
 require('./api')(app);
 
 app.get('*', async (request, response) => {
-	var zone = new Zone([
-		// Overrides XHR, fetch
-		requests(request),
+  var zone = new Zone([
+    // Overrides XHR, fetch
+    requests(request),
 
-		// Sets up a DOM
-		dom(request),
+    // Sets up a DOM
+    dom(request, {
+      root: __dirname + '/../build',
+      html: 'index.html'
+    }),
 
     // H2 push
     pushFetch(response),
     pushMutations(response)
-	]);
+  ]);
 
-  const zonePromise = zone.run(render);
+  const zonePromise = zone.run();
 
   response.write(zone.data.html);
 
@@ -543,48 +507,27 @@ app.get('*', async (request, response) => {
   response.end();
 });
 
-require('donejs-spdy').createServer({
-  key: fs.readFileSync(process.env.KEY),
-	cert: fs.readFileSync(process.env.CERT),
-	spdy: {
-		protocols: ['h2', 'http/1.1']
-	}
-}, app).listen(PORT);
+require('donejs-spdy')
+  .createServer(
+    {
+      key: fs.readFileSync(process.env.KEY),
+      cert: fs.readFileSync(process.env.CERT),
+      spdy: {
+        protocols: ['h2', 'http/1.1']
+      }
+    },
+    app
+  )
+  .listen(PORT);
 
-console.error(`Server running at https://localhost:${PORT}`);
+console.error(`Server running at http://localhost:${PORT}`);
 ```
-@highlight 35,only
-
-### Reattachment
-
-The last part of using incremental rendering is reattaching the client application while also allowing changes to be streamed from the server. `pushMutations` includes a script which handles this, but to use it your client code needs to call the `window.doneSsrAttach` function. Call this function with a Node and it will swap it for what is in the document once the Node has caught up with incremental rendering.
-
-To enable this, change your `src/App.js` to be:
-
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-
-let root;
-if(window.doneSsrAttach) {
-  root = document.createElement('div');
-  root.id = 'root';
-  window.doneSsrAttach(root);
-} else {
-  root = document.getElementById('root');
-}
-
-ReactDOM.render(<App />, root);
-```
-@highlight 7-16,only
+@highlight 22,only
 
 And then run the build:
 
 ```js
-npm run build
+yarn build
 ```
 
 Now, if you restart your server you should see the list incrementally updating.
