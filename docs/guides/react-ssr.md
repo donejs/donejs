@@ -17,13 +17,16 @@ In this guide you'll learn about using [done-ssr](https://github.com/donejs/done
 
 This app uses [create-react-app](https://github.com/facebookincubator/create-react-app) to scaffold a React application and for client development. We'll be swapping out the server for our own, to enable server-side rendering.
 
-If you haven't already, install yarn and create-react-app:
+If you haven't already, install create-react-app:
+
+> **_note: if you are a `yarn` user, replace all the following npm commands with the appropriate yarn command_**  
+> _if you are having any trouble with packages not appearing to have been installed, sometimes deleteing your `node_modules` directory and running `npm install` can sort things out, this generally only happens if you have yarn installed globally, but are using npm_
 
 ```
-npm install -g yarn create-react-app
+npm install -g create-react-app
 ```
 
-The, create the application:
+Then, create the application:
 
 ```
 create-react-app my-react-app
@@ -33,7 +36,7 @@ This will install the dependencies to a new folder `my-react-app/`. Once done yo
 
 ```
 cd my-react-app/
-yarn start
+npm start
 ```
 
 This will start a development server and launch the browser. It looks like:
@@ -45,7 +48,7 @@ This will start a development server and launch the browser. It looks like:
 In order to use done-ssr for server-side rendering, we need to first set up a server. We'll use [Express](https://expressjs.com/) as our server framework. Install a few dependencies we need:
 
 ```shell
-yarn add express ignore-styles can-zone-jsdom done-ssr@beta --save
+npm install express ignore-styles can-zone-jsdom done-ssr@beta --save
 ```
 
 Create a folder to put our server code:
@@ -120,10 +123,16 @@ To run it, you need to add a `NODE_ENV` environment variable. For convenience ad
 }
 ```
 
+Then run the build step for your React app:
+
+```
+npm run build
+```
+
 And then launch it with:
 
 ```
-yarn server
+npm run server
 ```
 
 And navigate to http://localhost:8080.
@@ -207,7 +216,7 @@ Using the **done-ssr/zones/push-mutations** zone, we can add incremental renderi
 First, we need to install an HTTP/2 server. While HTTP/2 support is in Node 8.6.0 behind a flag, I've found it to be too buggy to use today. So use *donejs-spdy* instead:
 
 ```
-yarn add donejs-spdy
+npm install donejs-spdy --save
 ```
 
 At this point you'll need to create a private key and certificate, as HTTP/2 requires SSL. If using a Unix operating system, you can use *openssl* for this:
@@ -295,9 +304,9 @@ require('donejs-spdy')
   )
   .listen(PORT);
 
-console.error(`Server running at http://localhost:${PORT}`);
+console.error(`Server running at https://localhost:${PORT}`);
 ```
-@highlight 10,15-16,34-36,39-44,47-57,only
+@highlight 10,15-16,34-36,39-44,47-57,61,only
 
 This adds two new zones to our arsenal:
 
@@ -307,7 +316,7 @@ This adds two new zones to our arsenal:
   1. Listens to mutations in the document and serializes a *patch* that can be applied in the browser document.
   1. Adds a script to the `<head>` that will attach to a special URL where the mutations are being streamed. When this script runs in the browser it will fetch that URL and start applying the mutation patches as they come in.
 
-If you start your server again with `yarn server`, you should be able to see the application running.
+If you start your server again with `npm run server`, you should be able to see the application running.
 
 ## Adding an API
 
@@ -327,7 +336,7 @@ ndjson is just JSON that is separated by newline characters. It looks like this:
 We'll use [can-ndjson-stream](https://github.com/canjs/can-ndjson-stream) to make it easier to work with this format. So install that first:
 
 ```js
-yarn add can-ndjson-stream
+npm install can-ndjson-stream --save
 ```
 
 We'll use this in our client code. Create `src/List.js`:
@@ -407,7 +416,7 @@ export default App;
 
 What is happening in *src/List.js*:
 
-1. A component is created with a `items` Array in the state.
+1. A component is created with an `items` Array in the state.
 2. A *fetch* request is made to `/api/items`.
 3. `can-ndjson-stream` is called with the response body.
 4. Each item comes through the stream as a JavaScript object and appended to `this.state.items`.
@@ -520,14 +529,14 @@ require('donejs-spdy')
   )
   .listen(PORT);
 
-console.error(`Server running at http://localhost:${PORT}`);
+console.error(`Server running at https://localhost:${PORT}`);
 ```
 @highlight 22,only
 
 And then run the build:
 
 ```js
-yarn build
+npm run build
 ```
 
 Now, if you restart your server you should see the list incrementally updating.
