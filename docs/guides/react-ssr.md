@@ -1,4 +1,4 @@
-@page ssr-react SSR - React
+@page ssr-react Server rendering a React app
 @parent Guides
 @hide sidebar
 @outline 2 ol
@@ -20,7 +20,7 @@ This app uses [create-react-app](https://github.com/facebookincubator/create-rea
 If you haven't already, install create-react-app:
 
 > **_note: if you are a `yarn` user, replace all the following npm commands with the appropriate yarn command_**  
-> _if you are having any trouble with packages not appearing to have been installed, sometimes deleteing your `node_modules` directory and running `npm install` can sort things out, this generally only happens if you have yarn installed globally, but are using npm_
+> _if you are having any trouble with packages not appearing to have been installed, sometimes deleting your `node_modules` directory and running `npm install` can sort things out, this generally only happens if you have yarn installed globally, but are using npm_
 
 ```
 npm install -g create-react-app
@@ -57,29 +57,9 @@ Create a folder to put our server code:
 mkdir server
 ```
 
-Create `server/ignore-styles.js`. This file is used to make `.css` and `.svg` imports be ignored in Node.
+Create `server/index.js`:
 
 ```js
-const path = require('path');
-const register = require('ignore-styles').default;
-
-register(undefined, (module, filename) => {
-  if(['.svg'].some(ext => filename.endsWith(ext))) {
-    module.exports = path.relative(process.cwd(), filename);
-  }
-});
-```
-
-And add the following to `server/index.js`:
-
-```js
-require('./ignore-styles');
-require('babel-register')({
-  ignore: /\/(build|node_modules)\//,
-  plugins: ['babel-plugin-transform-es2015-modules-commonjs'],
-  presets: ['react-app']
-});
-
 const Zone = require('can-zone');
 const express = require('express');
 const app = express();
@@ -87,7 +67,7 @@ const app = express();
 const dom = require('can-zone-jsdom');
 const requests = require('done-ssr/zones/requests');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static('build', { index: false }));
 app.use(express.static('.'));
@@ -135,15 +115,27 @@ And then launch it with:
 npm run server
 ```
 
-And navigate to http://localhost:8080.
+And navigate to [http://localhost:3000](http://localhost:3000).
 
 Let's break down the interesting parts of this server.
 
 ### React
 
-This server directly uses the entry point `build/index.html` in the Node application. Since React apps are written in such a way that they need bundling -- this application imports CSS, SVG, and uses JavaScript syntax not available in Node today -- we use a couple of dependencies (**ignore-styles** and **babel-register**) to compile them on-the-fly.
+__[can-zone-jsdom](https://github.com/canjs/can-zone-jsdom)__ is the project that we use to provide a DOM environment for the app. This plugin allows you to load an HTML file for each request.
 
-It's usually not recommended to do this in a production application. We are doing it here for convenience, since the meat of this guide is about the other parts of SSR, that comes next.
+This server directly uses the entry point `build/index.html` in the Node application. This is an HTML file that is created when `npm run build` is ran. You can see the use here:
+
+```js
+// Sets up a DOM
+dom(request, {
+  root: __dirname + '/../build',
+  html: 'index.html'
+})
+```
+
+This says that the [document.baseURI](https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI) is the *build* folder, and to use *index.html* to load into the DOM.
+
+For each request the HTML file is loaded and its scripts are executed.
 
 ### Routing
 
@@ -245,13 +237,6 @@ Lastly, update your *package.json* so these files are available to use:
 Now that you have SSL and an HTTP/2 server installed, update your `server/index.js` script to:
 
 ```js
-require('./ignore-styles');
-require('babel-register')({
-  ignore: /\/(build|node_modules)\//,
-  plugins: ['babel-plugin-transform-es2015-modules-commonjs'],
-  presets: ['react-app']
-});
-
 const Zone = require('can-zone');
 const express = require('express');
 const fs = require('fs');
@@ -306,7 +291,7 @@ require('donejs-spdy')
 
 console.error(`Server running at https://localhost:${PORT}`);
 ```
-@highlight 10,15-16,34-36,39-44,47-57,61,only
+@highlight 3,8-9,27-29,32-37,40-50,54,only
 
 This adds two new zones to our arsenal:
 
@@ -324,7 +309,7 @@ Even though we have incremental server-side rendering set up, since we're not do
 
 ### List component
 
-To make this even better, we'll use `ReadableStream`, the advanced feature of `fetch` that allows you to stream in the request in chunks. When streaming in API requests, it's good to use the [ndjson](http://ndjson.org/) format.
+To make this even better, we'll use *ReadableStream*, the advanced feature of `fetch` that allows you to stream in the request in chunks. When streaming in API requests, it's good to use the [ndjson](http://ndjson.org/) format.
 
 ndjson is just JSON that is separated by newline characters. It looks like this:
 
@@ -387,7 +372,7 @@ export default class extends Component {
 }
 ```
 
-And then use it within `src/App.js`:
+And then use it within *src/App.js*:
 
 
 ```js
@@ -424,7 +409,7 @@ What is happening in *src/List.js*:
 
 ### API route
 
-Now that we have the client code we need to set up the route to handle it. Create `server/api.js` with the following:
+Now that we have the client code we need to set up the route to handle it. Create *server/api.js* with the following:
 
 ```js
 const Readable = require('stream').Readable;
@@ -451,7 +436,7 @@ module.exports = function(app){
         setTimeout(() => {
           var item = chunks.shift();
           if(item) {
-            this.push(JSON.stringify(item) + "\n");
+            this.push(`${JSON.stringify(item)}\n`);
           } else {
             this.push(null);
           }
@@ -466,16 +451,9 @@ module.exports = function(app){
 
 This route is very simple, it returns an ndjson stream that emits a row every *500* milliseconds. Since there are 10 rows it takes 5 seconds for this to complete. This is just enough time to see incremental rendering in action.
 
-To use it, update `server/index.js`:
+To use it, update *server/index.js*:
 
 ```js
-require('./ignore-styles');
-require('babel-register')({
-  ignore: /\/(build|node_modules)\//,
-  plugins: ['babel-plugin-transform-es2015-modules-commonjs'],
-  presets: ['react-app']
-});
-
 const Zone = require('can-zone');
 const express = require('express');
 const fs = require('fs');
@@ -531,7 +509,7 @@ require('donejs-spdy')
 
 console.error(`Server running at https://localhost:${PORT}`);
 ```
-@highlight 22,only
+@highlight 15,only
 
 And then run the build:
 

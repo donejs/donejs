@@ -69,3 +69,7 @@ Explains how to upgrade DoneJS 0.9 app to 1.0.
 ## [contributing]
 
 The [contributing contribution guide] includes information about our code of conduct, reporting bugs, submitting new code, and more!
+
+## [ssr-react]
+
+SOMETHING
