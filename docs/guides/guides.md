@@ -69,3 +69,7 @@ Explains how to upgrade DoneJS 0.9 app to 1.0.
 ## [contributing]
 
 The [contributing contribution guide] includes information about our code of conduct, reporting bugs, submitting new code, and more!
+
+## [ssr-react]
+
+In this guide you'll learn how to use the great features of [done-ssr](https://github.com/donejs/done-ssr) outside of a traditional DoneJS app. This guide walks through building a [React](https://reactjs.org/) app with a streaming list, and then building an HTTP/2 server that renders using done-ssr and [can-zone](https://github.com/canjs/can-zone).
