@@ -1,4 +1,4 @@
-@page ssr-react Server rendering a React app
+@page ssr-react Server rendering
 @parent Guides
 @hide sidebar
 @outline 2 ol
@@ -48,7 +48,7 @@ This will start a development server and launch the browser. It looks like:
 In order to use done-ssr for server-side rendering, we need to first set up a server. We'll use [Express](https://expressjs.com/) as our server framework. Install a few dependencies we need:
 
 ```shell
-npm install express ignore-styles can-zone-jsdom done-ssr@beta --save
+npm install express can-zone-jsdom done-ssr --save
 ```
 
 Create a folder to put our server code:
