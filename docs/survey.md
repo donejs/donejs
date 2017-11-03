@@ -18,7 +18,7 @@ projects?
 </div>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
 <script>
-var endTime = new Date('Nov 7 2017 05:00:00 UTC');// Midnight Pacific
+var endTime = new Date('Nov 8 2017 05:00:00 UTC');// Midnight Pacific
 if (new Date() < endTime) {// Survey has not yet ended
   var elements = document.getElementsByClassName('comment');
   var container = elements[0];
