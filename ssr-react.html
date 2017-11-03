@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+  <title>donejs - Server rendering</title>
+	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
+	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="author" content="Bitovi - DoneJS">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" sizes="57x57" href="static/img/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="static/img/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="static/img/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="static/img/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="static/img/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="static/img/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="static/img/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="static/img/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="static/img/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="static/img/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="static/img/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="static/img/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="static/img/favicons/favicon-16x16.png" sizes="16x16">
+	
+		<link rel="stylesheet" type="text/css" href="./static/bundles/bit-docs-site/static.css">
+	
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+</head>
+<body class="docs ssr-react">
+		<div id="greyOutUnderNav" style="display:none;"></div>
+		<header>
+			<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<!-- Brand and toggle get grouped for betteor mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="mobile-menu-label">MENU</span>
+							<span class="mobile-menu-close"></span>
+						</button>
+						<div class="logo-menu">
+							<a class="brand" href="./index.html">DoneJS</a>
+							<ul class="dropdown-menu hidden-xs">
+								<li><a href="https://donejs.com" class="active">DoneJS</a></li>
+								<li><a href="https://canjs.com">CanJS</a></li>
+								<li><a href="https://stealjs.com">StealJS</a></li>
+								<li><a href="https://jquerypp.com">jQuery++</a></li>
+								<li><a href="https://funcunit.com">FuncUnit</a></li>
+								<li><a href="https://documentjs.com">DocumentJS</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li ><a href="./index.html">Home</a></li>
+							<li ><a href="./Features.html">Features</a></li>
+							<li ><a href="./About.html">About</a></li>
+							<li ><a href="./Apis.html">Apis</a></li>
+
+							<li class="guides-menu">
+								<a href="./Guides.html">Guides</a>
+								<ul class="dropdown-menu">
+									<li><a href="./SettingUp.html">Setting Up</a></li>
+									<li><a href="./Guide.html">Quick Start</a></li>
+									<li><a href="./place-my-order.html">In-depth</a></li>
+									<li><a href="./plugin.html">Creating a plugin</a></li>
+									<li><a href="./generator.html">Creating a generator</a></li>
+									<li><a href="./bitballs.html">Example App: Bitballs</a></li>
+									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
+									<li><a href="./contributing.html">Contributing</a></li>
+								</ul>
+							</li>
+
+							<li >
+								<a href="./community.html">Community</a>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right bitovi-menu">
+							<li class="dropdown">
+								<a href="https://www.bitovi.com" class="bitovi icon-bits">Bitovi</a>
+								<ul class="dropdown-menu">
+									<li><a href="https://www.bitovi.com/">Bitovi.com</a></li>
+									<li><a href="https://www.bitovi.com/blog">Blog</a></li>
+									<li><a href="https://www.bitovi.com/design">Design</a></li>
+									<li><a href="https://www.bitovi.com/development">Development</a></li>
+									<li><a href="https://www.bitovi.com/training">Training</a></li>
+									<li><a href="https://www.bitovi.com/open-source">Open Source</a></li>
+									<li><a href="https://www.bitovi.com/about">About</a></li>
+									<li><a href="https://www.bitovi.com/contact">Contact Us</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="menu-lib-logos hidden-sm hidden-md hidden-lg">
+							<li>
+								<a href="#">
+									<img class="logo-canjs" src="static/img/lib-logos/canjs_logo.svg" />
+									<span class="logo-label">CanJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-stealjs" src="static/img/lib-logos/stealjs-logo.svg" />
+									<span class="logo-label">StealJS</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-jqueryplus" src="static/img/lib-logos/jquery-plusplus-logo.svg" />
+									<span class="logo-label">jQuery++</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-funcunit" src="static/img/lib-logos/funcunit-logo.svg" />
+									<span class="logo-label">FuncUnit</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									<img class="logo-docjs" src="static/img/lib-logos/documentjs-logo.svg" />
+									<span class="logo-label">DocumentJS</span>
+								</a>
+							</li>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</header>
+
+	<div class="scroll-spy-title hidden-md hidden-lg">
+    <span class="menu-indicator menus-closed"></span>
+		<div id="scrollSpyCurrentH2" class="h2Only">Table of Contents</div>
+		<div id="scrollSpyCurrentH3"></div>
+	</div>
+	
+
+	
+	<div class="container-fluid api">
+		<div class="row">
+	
+		
+
+		
+		<article class="content docs col-xs-12 ">
+		
+
+			
+			<section class="title">
+				<div class="heading">
+<h1>Server rendering</h1>
+	<ul class="tags">
+		<li>page</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">ssr-react</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+</ul>
+<br />
+
+			</section>
+			
+
+      
+      <section
+        class="contents on-this-page-container"
+        data-headings-container-selector=".content .comment"
+        >
+      </section>
+      
+
+			
+
+			
+			<section class="description">
+				<p>In this guide you'll learn about using <a href="https://github.com/donejs/done-ssr">done-ssr</a> to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:</p>
+<ul>
+<li>Using <a href="https://github.com/canjs/can-zone">Zones</a> to isolate rendering, allowing multiple requests to be served from the same application</li>
+<li>Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server</li>
+<li>HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server</li>
+<li>Incremental rendering using HTTP/2 PUSH and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch API</a>.</li>
+</ul>
+
+			</section>
+			
+
+			
+				
+			
+
+			
+
+
+			
+			<section class="comment">
+				<h2>Setting up</h2>
+<p>This app uses <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a> to scaffold a React application and for client development. We'll be swapping out the server for our own, to enable server-side rendering.</p>
+<p>If you haven't already, install create-react-app:</p>
+<blockquote>
+<p><strong><em>note: if you are a <code>yarn</code> user, replace all the following npm commands with the appropriate yarn command</em></strong><br />
+<em>if you are having any trouble with packages not appearing to have been installed, sometimes deleting your <code>node_modules</code> directory and running <code>npm install</code> can sort things out, this generally only happens if you have yarn installed globally, but are using npm</em></p>
+</blockquote>
+<pre><code>npm install -g create-react-app
+</code></pre>
+<p>Then, create the application:</p>
+<pre><code>create-react-app my-react-app
+</code></pre>
+<p>This will install the dependencies to a new folder <code>my-react-app/</code>. Once done you can cd into the folder and start the development server:</p>
+<pre><code>cd my-react-app/
+npm start
+</code></pre>
+<p>This will start a development server and launch the browser. It looks like:</p>
+<p><img src="https://user-images.githubusercontent.com/361671/31185277-92a89bfc-a8f9-11e7-9b02-d2899173ae4b.png" alt="react app dev server" /></p>
+<h2>Adding a server</h2>
+<p>In order to use done-ssr for server-side rendering, we need to first set up a server. We'll use <a href="https://expressjs.com/">Express</a> as our server framework. Install a few dependencies we need:</p>
+<pre><code class="language-shell">npm install express can-zone-jsdom done-ssr --save
+</code></pre>
+<p>Create a folder to put our server code:</p>
+<pre><code class="language-shell">mkdir server
+</code></pre>
+<p>Create <code>server/index.js</code>:</p>
+<pre><code class="language-js">const Zone = require('can-zone');
+const express = require('express');
+const app = express();
+
+const dom = require('can-zone-jsdom');
+const requests = require('done-ssr/zones/requests');
+
+const PORT = process.env.PORT || 3000;
+
+app.use(express.static('build', { index: false }));
+app.use(express.static('.'));
+
+app.get('*', async (request, response) =&gt; {
+  var zone = new Zone([
+    // Overrides XHR, fetch
+    requests(request),
+
+    // Sets up a DOM
+    dom(request, {
+      root: __dirname + '/../build',
+      html: 'index.html'
+    })
+  ]);
+
+  const { html } = await zone.run();
+  response.end(html);
+});
+
+require('http')
+  .createServer(app)
+  .listen(PORT);
+
+console.error(`Server running at http://localhost:${PORT}`);
+</code></pre>
+<p>To run it, you need to add a <code>NODE_ENV</code> environment variable. For convenience add this to your package.json <em>scripts</em>:</p>
+<pre><code class="language-json">&quot;scripts&quot;: {
+  &quot;server&quot;: &quot;NODE_ENV=development node server/index.js&quot;
+}
+</code></pre>
+<p>Then run the build step for your React app:</p>
+<pre><code>npm run build
+</code></pre>
+<p>And then launch it with:</p>
+<pre><code>npm run server
+</code></pre>
+<p>And navigate to <a href="http://localhost:3000">http://localhost:3000</a>.</p>
+<p>Let's break down the interesting parts of this server.</p>
+<h3>React</h3>
+<p><strong><a href="https://github.com/canjs/can-zone-jsdom">can-zone-jsdom</a></strong> is the project that we use to provide a DOM environment for the app. This plugin allows you to load an HTML file for each request.</p>
+<p>This server directly uses the entry point <code>build/index.html</code> in the Node application. This is an HTML file that is created when <code>npm run build</code> is ran. You can see the use here:</p>
+<pre><code class="language-js">// Sets up a DOM
+dom(request, {
+  root: __dirname + '/../build',
+  html: 'index.html'
+})
+</code></pre>
+<p>This says that the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/baseURI">document.baseURI</a> is the <em>build</em> folder, and to use <em>index.html</em> to load into the DOM.</p>
+<p>For each request the HTML file is loaded and its scripts are executed.</p>
+<h3>Routing</h3>
+<p>We are using <a href="https://expressjs.com/">Express</a> to provide routing for this application. In addition, it handles server static files:</p>
+<pre><code class="language-js">app.use(express.static('build'));
+app.use(express.static('.'));
+</code></pre>
+<p>There is only one route defined:</p>
+<pre><code class="language-js">app.get('*', (request, response) =&gt; {
+  // Stuff here
+});
+</code></pre>
+<p>This means that the server will first check for a static file in either <code>build/</code> or <code>.</code>, and if not available, it will go to the wildcard route.</p>
+<p>This allows us to handle routing for our app the same way as we would in the browser. We are only handling the <code>/</code> route in this application, but there are many choices for routing in React such as React-Route or <a href="https://github.com/visionmedia/page.js">page.js</a>.</p>
+<h3>Zones</h3>
+<p>The rest of this guide will focus on the code contained within the <code>*</code> route. This uses <a href="https://github.com/canjs/can-zone">can-zone</a> to act as a common context when calling into the client-side components (starting with <code>src/App.js</code>). You can read more about can-zone <a href="https://davidwalsh.name/can-zone">here</a>.</p>
+<p><strong>done-ssr</strong> provides a set of zone plugins (referred to hereafter as <em>zones</em>) that provide various capabilities. Right now we are using only 2 zones:</p>
+<ul>
+<li><strong>done-ssr/zones/requests</strong>:
+<ul>
+<li>Provides polyfills for <code>XMLHttpRequest</code>, <code>fetch</code>, and <code>WebSocket</code>.</li>
+<li>Allows domain-relative URLs like <code>/api/todos</code>.</li>
+</ul></li>
+<li><strong>can-zone-jsdom</strong>: Provides a DOM implementation, including <code>document</code>, <code>window</code>, and <code>location</code> objects. Serializes the document (when the zone is complete) as <code>zone.data.html</code>.</li>
+</ul>
+<p>Later in the guide we'll add a couple of more, for HTTP/2 support.</p>
+<p>Breaking down the steps here, first we have:</p>
+<pre><code class="language-js">var zone = new Zone([
+  // Overrides XHR, fetch
+  requests(request),
+
+  // Sets up a DOM
+  dom(request, {
+    root: __dirname + '/../build',
+    html: 'index.html'
+  })
+]);
+</code></pre>
+<p>This creates a new can-zone using the previously mentioned zone plugins.</p>
+<pre><code class="language-js">const { html } = await zone.run();
+response.end(html);
+</code></pre>
+<p>Runs the contents of <code>index.html</code> within the zone and waits for it to asynchronously complete. Once completed extracts the <code>html</code> string and ends the <code>response</code> with that as the value.</p>
+<p>Remember that the <strong>index.html</strong> is run every time a request is rendered, and a new <code>document</code> is set for each request (by <strong>can-zone-jsdom</strong>).</p>
+<h2>HTTP/2</h2>
+<p>Using done-ssr makes it very simple to support HTTP/1 applications, but we can do even better using HTTP/2 and <a href="https://www.bitovi.com/blog/utilizing-http2-push-in-a-single-page-application">incremental rendering</a>.</p>
+<p>Using the <strong>done-ssr/zones/push-mutations</strong> zone, we can add incremental rendering to this application.</p>
+<h3>Setup</h3>
+<p>First, we need to install an HTTP/2 server. While HTTP/2 support is in Node 8.6.0 behind a flag, I've found it to be too buggy to use today. So use <em>donejs-spdy</em> instead:</p>
+<pre><code>npm install donejs-spdy --save
+</code></pre>
+<p>At this point you'll need to create a private key and certificate, as HTTP/2 requires SSL. If using a Unix operating system, you can use <em>openssl</em> for this:</p>
+<pre><code>openssl req  -nodes -new -x509  -keyout server.key -out server.cert
+</code></pre>
+<p>This will create <em>server.key</em> and <em>server.cert</em> files. I like to copy those to another folder so that they can be reused in other applications.</p>
+<pre><code class="language-shell">mkdir -p ~/.localhost-ssl
+mv server.key server.cert ~/.localhost-ssl
+</code></pre>
+<p>Lastly, update your <em>package.json</em> so these files are available to use:</p>
+<pre><code class="language-js">&quot;scripts&quot;: {
+  &quot;server&quot;: &quot;NODE_ENV=development KEY=~/.localhost-ssl/server.key CERT=~/.localhost-ssl/server.cert node server/index.js&quot;
+}
+</code></pre>
+<h3>Update server</h3>
+<p>Now that you have SSL and an HTTP/2 server installed, update your <code>server/index.js</code> script to:</p>
+<pre><code class="language-js">const Zone = require('can-zone');
+const express = require('express');
+const fs = require('fs');
+const app = express();
+
+const dom = require('can-zone-jsdom');
+const requests = require('done-ssr/zones/requests');
+const pushFetch = require('done-ssr/zones/push-fetch');
+const pushMutations = require('done-ssr/zones/push-mutations');
+
+const PORT = process.env.PORT || 8080;
+
+app.use(express.static('build', { index: false }));
+app.use(express.static('.'));
+
+app.get('*', async (request, response) =&gt; {
+  var zone = new Zone([
+    // Overrides XHR, fetch
+    requests(request),
+
+    // Sets up a DOM
+    dom(request, {
+      root: __dirname + '/../build',
+      html: 'index.html'
+    }),
+
+    // H2 push
+    pushFetch(response),
+    pushMutations(response)
+  ]);
+
+  const zonePromise = zone.run();
+
+  response.write(zone.data.html);
+
+  await zonePromise;
+  response.end();
+});
+
+require('donejs-spdy')
+  .createServer(
+    {
+      key: fs.readFileSync(process.env.KEY),
+      cert: fs.readFileSync(process.env.CERT),
+      spdy: {
+        protocols: ['h2', 'http/1.1']
+      }
+    },
+    app
+  )
+  .listen(PORT);
+
+console.error(`Server running at https://localhost:${PORT}`);
+</code></pre>
+<p><span line-highlight='3,8-9,27-29,32-37,40-50,54,only'></span>
+This adds two new zones to our arsenal:</p>
+<ul>
+<li><p><strong>done-ssr/zones/push-fetch</strong>: Traps calls to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch API</a> and uses H2 PUSH to start pushing them to the browser. This way when the browser JavaScript tries to fetch this resource it's already available in the browser cache.</p></li>
+<li><p><strong>done-ssr/zones/push-mutations</strong>: This is the zone that handles incremental rendering. It does a few things interesting:</p>
+<ol>
+<li>Listens to mutations in the document and serializes a <em>patch</em> that can be applied in the browser document.</li>
+<li>Adds a script to the <code>&lt;head&gt;</code> that will attach to a special URL where the mutations are being streamed. When this script runs in the browser it will fetch that URL and start applying the mutation patches as they come in.</li>
+</ol></li>
+</ul>
+<p>If you start your server again with <code>npm run server</code>, you should be able to see the application running.</p>
+<h2>Adding an API</h2>
+<p>Even though we have incremental server-side rendering set up, since we're not doing any <code>fetch</code> requests, there are no mutations to be applied. So let's add an API route and have our client code make a request.</p>
+<h3>List component</h3>
+<p>To make this even better, we'll use <em>ReadableStream</em>, the advanced feature of <code>fetch</code> that allows you to stream in the request in chunks. When streaming in API requests, it's good to use the <a href="http://ndjson.org/">ndjson</a> format.</p>
+<p>ndjson is just JSON that is separated by newline characters. It looks like this:</p>
+<pre><code>{&quot;item&quot;: &quot;One&quot;}
+{&quot;item&quot;: &quot;Two&quot;}
+</code></pre>
+<p>We'll use <a href="https://github.com/canjs/can-ndjson-stream">can-ndjson-stream</a> to make it easier to work with this format. So install that first:</p>
+<pre><code class="language-js">npm install can-ndjson-stream --save
+</code></pre>
+<p>We'll use this in our client code. Create <code>src/List.js</code>:</p>
+<pre><code class="language-js">import React, { Component } from 'react';
+import ndjsonStream from 'can-ndjson-stream';
+
+export default class extends Component {
+  constructor() {
+    super();
+    this.state = { items: [] };
+
+    fetch('/api/items').then(resp =&gt; {
+      return ndjsonStream(resp.body);
+    }).then(stream =&gt; {
+      let reader = stream.getReader();
+
+      let read = result =&gt; {
+        if (result.done) return;
+        this.setState({
+          items: this.state.items.concat(result.value)
+        });
+        return reader.read().then(read);
+      }
+
+      return reader.read().then(read);
+    });
+  }
+
+  render() {
+    let { items } = this.state;
+
+    return (
+      &lt;section&gt;
+        &lt;h2&gt;List of stuff&lt;/h2&gt;
+        &lt;ul&gt;
+          {items.map(item =&gt; (
+            &lt;li key={item.item}&gt;
+              {item.item}
+            &lt;/li&gt;
+          ))}
+        &lt;/ul&gt;
+      &lt;/section&gt;
+
+    );
+  }
+}
+</code></pre>
+<p>And then use it within <em>src/App.js</em>:</p>
+<pre><code class="language-js">import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import List from './List.js';
+
+class App extends Component {
+  render() {
+    return (
+      &lt;div className=&quot;App&quot;&gt;
+        &lt;header className=&quot;App-header&quot;&gt;
+          &lt;img src={logo} className=&quot;App-logo&quot; alt=&quot;logo&quot; /&gt;
+          &lt;h1 className=&quot;App-title&quot;&gt;Welcome to React&lt;/h1&gt;
+        &lt;/header&gt;
+        &lt;List /&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+export default App;
+</code></pre>
+<p><span line-highlight='4,14'></span>
+What is happening in <em>src/List.js</em>:</p>
+<ol>
+<li>A component is created with an <code>items</code> Array in the state.</li>
+<li>A <em>fetch</em> request is made to <code>/api/items</code>.</li>
+<li><code>can-ndjson-stream</code> is called with the response body.</li>
+<li>Each item comes through the stream as a JavaScript object and appended to <code>this.state.items</code>.</li>
+<li><code>render()</code> is recalled and a new <code>&lt;li&gt;</code> is created for each item.</li>
+</ol>
+<h3>API route</h3>
+<p>Now that we have the client code we need to set up the route to handle it. Create <em>server/api.js</em> with the following:</p>
+<pre><code class="language-js">const Readable = require('stream').Readable;
+
+module.exports = function(app){
+  app.get('/api/items', (request, response) =&gt; {
+    response.writeHead(200, { 'Content-Type': 'text/plain' })
+
+    var chunks = [
+      {item:'One'},
+      {item:'Two'},
+      {item:'Three'},
+      {item:'Four'},
+      {item:'Five'},
+      {item:'Six'},
+      {item:'Seven'},
+      {item:'Eight'},
+      {item:'Nine'},
+      {item:'Ten'}
+    ];
+
+    var r = new Readable({
+      read() {
+        setTimeout(() =&gt; {
+          var item = chunks.shift();
+          if(item) {
+            this.push(`${JSON.stringify(item)}\n`);
+          } else {
+            this.push(null);
+          }
+        }, 500);
+      }
+    });
+
+    r.pipe(response);
+  });
+};
+</code></pre>
+<p>This route is very simple, it returns an ndjson stream that emits a row every <em>500</em> milliseconds. Since there are 10 rows it takes 5 seconds for this to complete. This is just enough time to see incremental rendering in action.</p>
+<p>To use it, update <em>server/index.js</em>:</p>
+<pre><code class="language-js">const Zone = require('can-zone');
+const express = require('express');
+const fs = require('fs');
+const app = express();
+
+const dom = require('can-zone-jsdom');
+const requests = require('done-ssr/zones/requests');
+const pushFetch = require('done-ssr/zones/push-fetch');
+const pushMutations = require('done-ssr/zones/push-mutations');
+
+const PORT = process.env.PORT || 8080;
+
+app.use(express.static('build', { index: false }));
+app.use(express.static('.'));
+require('./api')(app);
+
+app.get('*', async (request, response) =&gt; {
+  var zone = new Zone([
+    // Overrides XHR, fetch
+    requests(request),
+
+    // Sets up a DOM
+    dom(request, {
+      root: __dirname + '/../build',
+      html: 'index.html'
+    }),
+
+    // H2 push
+    pushFetch(response),
+    pushMutations(response)
+  ]);
+
+  const zonePromise = zone.run();
+
+  response.write(zone.data.html);
+
+  await zonePromise;
+  response.end();
+});
+
+require('donejs-spdy')
+  .createServer(
+    {
+      key: fs.readFileSync(process.env.KEY),
+      cert: fs.readFileSync(process.env.CERT),
+      spdy: {
+        protocols: ['h2', 'http/1.1']
+      }
+    },
+    app
+  )
+  .listen(PORT);
+
+console.error(`Server running at https://localhost:${PORT}`);
+</code></pre>
+<p><span line-highlight='15,only'></span>
+And then run the build:</p>
+<pre><code class="language-js">npm run build
+</code></pre>
+<p>Now, if you restart your server you should see the list incrementally updating.</p>
+<p><img src="https://user-images.githubusercontent.com/361671/31230099-f3ada73c-a9b0-11e7-85f6-2ac9a4cf0a9f.gif" alt="rendering gif" /></p>
+<h2>Conclusion</h2>
+<p>In this guide we've discussed:</p>
+<ul>
+<li>Using <a href="https://github.com/canjs/can-zone">can-zone</a> to provide context to rendering a React application.</li>
+<li>Setting up an HTTP/2 server.</li>
+<li>Enabling incremental rendering, so that the application can be updated as changes occur on the server.</li>
+</ul>
+<p>To see this guide as a fully working example, check out the <a href="https://github.com/donejs/done-ssr-react-example">done-ssr-react-example</a> repository.</p>
+
+			</section>
+			
+			
+
+			
+
+			
+
+		
+		</article>
+		
+
+	
+		</div>
+	</div>
+	
+
+<survey-ad>
+  <button aria-label="Close" class="close" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <a href="https://donejs.com/survey.html">
+    Help us improve DoneJS by taking our community survey
+  </a>
+</survey-ad>
+
+
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<div class="col-xs-1 footer-brand">
+						<a href="/"><img src="static/img/donejs-logo-final-02.svg"></a>
+					</div>
+
+					<ul class="footer-nav-main list-stacked">
+						<li>
+							<a href="/">HOME</a>
+						</li>
+						<li>
+							<a href="./Features.html">FEATURES</a>
+						</li>
+						<li>
+							<a href="./About.html">ABOUT</a>
+						</li>
+						<li>
+							<a href="./Apis.html">APIS</a>
+						</li>
+						<li>
+							<a href="./Guides.html">GUIDES</a>
+						</li>
+						<li>
+							<a href="./community.html">COMMUNITY</a>
+						</li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-4">
+					<ul class="footer-nav-social list-stacked">
+						<li>
+							<a href="https://github.com/donejs">
+								<img class="footer-social-icon" src="static/img/icon-github-white.svg" alt="Github">
+							</a>
+						</li>
+						<li>
+							<a href="https://twitter.com/donejs">
+								<img class="footer-social-icon" src="static/img/icon-twitter-white.svg" alt="Twitter">
+							</a>
+						</li>
+						<li>
+							<a href="https://plus.google.com/+Bitovi/posts">
+								<img class="footer-social-icon" src="static/img/icon-googleplus-white.svg" alt="Google+">
+							</a>
+						</li>
+						<li>
+							<a href="https://www.youtube.com/channel/UCEnTQUfJi0L6l7g8IRuaVkg">
+								<img class="footer-social-icon" src="static/img/icon-youtube-white.svg" alt="YouTube">
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="footer-copyright col-sm-12">
+					&copy; <a href="https://www.bitovi.com/">2015-2017 Bitovi, Inc.</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+
+	<script type="text/javascript">
+		var docObject = {"src":{"path":"docs/guides/react-ssr.md"},"description":" \nIn this guide you'll learn about using [done-ssr](https://github.com/donejs/done-ssr) to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:\n\n- Using [Zones](https://github.com/canjs/can-zone) to isolate rendering, allowing multiple requests to be served from the same application\n- Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server\n- HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server\n- Incremental rendering using HTTP/2 PUSH and the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).\n\n","name":"ssr-react","title":"Server rendering","type":"page","parent":"Guides","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
+	</script>
+
+	
+		<script type="text/javascript">
+		  steal = {
+		    instantiated: {
+		      "bundles/bit-docs-site/static.css!$css" : null
+		    }
+		  };
+		</script>
+		<script
+			data-main="bit-docs-site/static"
+			src="./static/node_modules/steal/steal.production.js"
+		>
+		</script>
+	
+
+	<script>
+	 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	 ga('create', 'UA-2302003-14', 'auto');
+	 ga('send', 'pageview');
+	</script>
+</body>
+</html>

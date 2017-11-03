@@ -264,6 +264,13 @@ Specifically, this guide will walk through the implementation of the following b
 <p>Explains how to upgrade DoneJS 0.9 app to 1.0.</p>
 <h2><a href="contributing.html" title="">Contributing</a></h2>
 <p>The <a href="contributing.html" title="">contribution guide</a> includes information about our code of conduct, reporting bugs, submitting new code, and more!</p>
+<h2><a href="ssr-react.html" title="In this guide you'll learn about using done-ssr to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:
+
+Using Zones to isolate rendering, allowing multiple requests to be served from the same application
+Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server
+HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server
+Incremental rendering using HTTP/2 PUSH and the fetch API.">Server rendering</a></h2>
+<p>In this guide you'll learn how to use the great features of <a href="https://github.com/donejs/done-ssr">done-ssr</a> outside of a traditional DoneJS app. This guide walks through building a <a href="https://reactjs.org/">React</a> app with a streaming list, and then building an HTTP/2 server that renders using done-ssr and <a href="https://github.com/canjs/can-zone">can-zone</a>.</p>
 
 			</section>
 			
