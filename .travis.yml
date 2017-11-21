@@ -22,6 +22,5 @@ notifications:
 script:
   - sudo sh -c 'dbus-uuidgen > /etc/machine-id'
   - npm run jshint
-  - npm run document
   - npm run test-guides
   - npm run coverage:upload
