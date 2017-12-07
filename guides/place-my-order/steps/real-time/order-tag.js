@@ -54,14 +54,14 @@ const Order = DefineMap.extend({
   }
 });
 
+Order.List = DefineList.extend({
+  '#': Order
+});
+
 const algebra = new set.Algebra(
   set.props.id('_id'),
   set.comparators.enum("status", ["new", "preparing", "delivery", "delivered"])
 );
-
-Order.List = DefineList.extend({
-  '#': Order
-});
 
 Order.connection = superMap({
   url: loader.serviceBaseURL + '/api/orders',

@@ -385,7 +385,7 @@ We have now created a model and fixtures (for testing without an API) with a fol
 We also need to specify that the restaurant list can be filtered to restaurants in a queried city and state by updating `src/models/restaurant.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-test/restaurants_model.js
-@highlight 15-16,only
+@highlight 19-20,only
 
 Above we use `set.props.dotNotation` since our queries for these nested properties will be in the [MongoDB-style 'dot notation'](https://docs.mongodb.com/v2.2/reference/glossary/#term-dot-notation) format required by the backend.
 
@@ -859,7 +859,7 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 Update `src/models/order.js` to use [can-connect/can/tag/](https://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order-tag.js
-@highlight 6,59,74,only
+@highlight 6,63,74,only
 
 The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator](https://canjs.com/doc/can-set.props.enum.html) so that multiple requests for different statuses can be combined.
 

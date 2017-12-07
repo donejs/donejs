@@ -53,13 +53,13 @@ const Order = DefineMap.extend({
   }
 });
 
-const algebra = new set.Algebra(
-  set.props.id('_id')
-);
-
 Order.List = DefineList.extend({
   '#': Order
 });
+
+const algebra = new set.Algebra(
+  set.props.id('_id')
+);
 
 Order.connection = superMap({
   url: loader.serviceBaseURL + '/api/orders',
