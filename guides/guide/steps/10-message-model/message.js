@@ -12,13 +12,13 @@ const Message = DefineMap.extend({
   body: 'string'
 });
 
-const algebra = new set.Algebra(
-  set.props.id('id')
-);
-
 Message.List = DefineList.extend({
   '#': Message
 });
+
+const algebra = new set.Algebra(
+  set.props.id('id')
+);
 
 Message.connection = superMap({
   url: loader.serviceBaseURL + '/api/messages',

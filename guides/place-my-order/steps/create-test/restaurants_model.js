@@ -10,15 +10,15 @@ const Restaurant = DefineMap.extend({
   '_id': '*'
 });
 
+Restaurant.List = DefineList.extend({
+  '#': Restaurant
+});
+
 const algebra = new set.Algebra(
   set.props.id('_id'),
   set.props.dotNotation('address.state'),
   set.props.dotNotation('address.city')
 );
-
-Restaurant.List = DefineList.extend({
-  '#': Restaurant
-});
 
 Restaurant.connection = superMap({
   url: loader.serviceBaseURL + '/api/restaurants',
