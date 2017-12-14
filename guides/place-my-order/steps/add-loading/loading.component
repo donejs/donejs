@@ -5,7 +5,7 @@
     p { font-weight: bold; }
   </style>
   <view>
-    {{#eq state "resolved"}}
+    {{#eq(state, "resolved")}}
       <content></content>
     {{else}}
       <div class="loading"></div>

@@ -5,8 +5,6 @@ import superMap from 'can-connect/can/super-map/';
 import loader from '@loader';
 
 const Restaurant = DefineMap.extend({
-  seal: false
-}, {
   '_id': '*'
 });
 

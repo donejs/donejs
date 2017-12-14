@@ -1,8 +1,8 @@
 <can-import from="can-stache/helpers/route" />
-<h5><a href="{{routeUrl page='home'}}">Home</a></h5>
+<h5><a href="{{routeUrl(page='home')}}">Home</a></h5>
 
-{{#if messagesPromise.isResolved}}
-  {{#each messagesPromise.value}}
+{{#if(messagesPromise.isResolved)}}
+  {{#each(messagesPromise.value)}}
     <div class="list-group-item">
       <h4 class="list-group-item-heading">{{name}}</h4>
       <p class="list-group-item-text">{{body}}</p>

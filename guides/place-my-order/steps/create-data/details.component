@@ -8,7 +8,7 @@
 
       <h4>Items ordered:</h4>
       <ul class="list-group panel">
-        {{#each items}}
+        {{#each(items)}}
           <li class="list-group-item">
             <label>
               {{name}} <span class="badge">${{price}}</span>

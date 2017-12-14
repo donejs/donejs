@@ -12,7 +12,7 @@
       <br>Chat
     </h1>
 
-    <a href="{{routeUrl page='chat' }}"
+    <a href="{{routeUrl(page='chat')}}"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>

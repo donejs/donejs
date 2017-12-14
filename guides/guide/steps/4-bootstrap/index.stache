@@ -19,9 +19,9 @@
       </div>
     </div>
 
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="{{joinBase 'steal.production.js'}}"></script>
+    {{#switch(env.NODE_ENV)}}
+      {{#case("production")}}
+        <script src="{{joinBase('steal.production.js')}}"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>

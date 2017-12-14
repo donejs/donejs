@@ -24,7 +24,7 @@
       </bit-panel>
     </bit-tabs>
 
-    <a href="{{routeUrl page='chat'}}"
+    <a href="{{routeUrl(page='chat')}}"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>

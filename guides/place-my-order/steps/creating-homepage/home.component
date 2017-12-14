@@ -6,7 +6,7 @@
   <view>
     <can-import from="can-stache/helpers/route" />
     <div class="homepage">
-      <img src="{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}"
+      <img src="{{joinBase('node_modules/place-my-order-assets/images/homepage-hero.jpg')}}"
           width="250" height="380" />
       <h1>Ordering food has never been easier</h1>
       <p>
@@ -14,7 +14,7 @@
         from your favorite local restaurants.
       </p>
       <p>
-        <a class="btn" href="{{routeUrl page='restaurants'}}" role="button">Choose a Restaurant</a>
+        <a class="btn" href="{{routeUrl(page='restaurants')}}" role="button">Choose a Restaurant</a>
       </p>
     </div>
   </view>

@@ -2,10 +2,10 @@
 <can-import from="place-my-order/order/details.component" />
 
 <div class="order-form">
-  {{#if restaurantPromise.isPending}}
+  {{#if(restaurantPromise.isPending)}}
     <div class="loading"></div>
   {{else}}
-    {{#if saveStatus.isResolved}}
+    {{#if(saveStatus.isResolved)}}
       <pmo-order-details order:from="saveStatus.value"></pmo-order-details>
       <p><a href="javascript://" on:click="startNewOrder()">
         Place another order
@@ -13,10 +13,10 @@
     {{else}}
       <h3>Order from {{restaurant.name}}</h3>
 
-      <form on:submit="placeOrder(%event)">
+      <form on:submit="placeOrder(scope.event)">
         <bit-tabs tabs-class="nav nav-tabs">
-          <p class="info {{^if order.items.length}}text-error{{else}}text-success{{/if}}">
-            {{^if order.items.length}}
+          <p class="info {{^if(order.items.length)}}text-error{{else}}text-success{{/if}}">
+            {{^if(order.items.length)}}
               Please choose an item
             {{else}}
               {{order.items.length}} selected
@@ -24,12 +24,12 @@
           </p>
           <bit-panel title="Lunch menu">
             <ul class="list-group">
-              {{#each restaurant.menu.lunch}}
+              {{#each(restaurant.menu.lunch)}}
                 <li class="list-group-item">
                   <label>
                     <input type="checkbox"
                       on:change="order.items.toggle(.)"
-                      {{#if order.items.has(.)}}checked{{/if}}>
+                      {{#if(order.items.has(.))}}checked{{/if}}>
                     {{name}} <span class="badge">${{price}}</span>
                   </label>
                 </li>
@@ -38,12 +38,12 @@
           </bit-panel>
           <bit-panel title="Dinner menu">
             <ul class="list-group">
-              {{#each restaurant.menu.dinner}}
+              {{#each(restaurant.menu.dinner)}}
                 <li class="list-group-item">
                   <label>
                     <input type="checkbox"
                       on:change="order.items.toggle(this)"
-                      {{#if order.items.has(.)}}checked{{/if}}>
+                      {{#if(order.items.has(.))}}checked{{/if}}>
                     {{name}} <span class="badge">${{price}}</span>
                   </label>
                 </li>
@@ -72,11 +72,11 @@
         </div>
         <div class="submit">
           <h4>Total: ${{order.total}}</h4>
-          {{#if saveStatus.isPending}}
+          {{#if(saveStatus.isPending)}}
             <div class="loading"></div>
           {{else}}
             <button type="submit"
-                {{^if canPlaceOrder}}disabled{{/if}} class="btn">
+                {{^if(canPlaceOrder)}}disabled{{/if}} class="btn">
               Place My Order!
             </button>
           {{/if}}

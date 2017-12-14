@@ -5,8 +5,6 @@ import superMap from 'can-connect/can/super-map/';
 import loader from '@loader';
 
 const Message = DefineMap.extend({
-  seal: false
-}, {
   'id': 'any',
   name: 'string',
   body: 'string'
