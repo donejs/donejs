@@ -357,7 +357,7 @@ guide.step("Create additional components", function(){
 });
 
 guide.step("Importing other projects", function(){
-	return guide.executeCommand("npm", ["install", "bit-tabs@1", "--save"])
+	return guide.executeCommand("npm", ["install", "bit-tabs@2", "--save"])
 		.then(wait)
 		.then(wait)
 		.then(function(){

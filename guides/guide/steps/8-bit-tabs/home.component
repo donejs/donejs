@@ -16,10 +16,10 @@
     </h1>
 
     <bit-tabs tabs-class="nav nav-tabs">
-      <bit-panel title="CanJS">
+      <bit-panel title:from="'CanJS'">
         <p>CanJS provides the MV*</p>
       </bit-panel>
-      <bit-panel title="StealJS">
+      <bit-panel title:from="'StealJS'">
         <p>StealJS provides the infrastructure.</p>
       </bit-panel>
     </bit-tabs>
