@@ -1,4 +1,4 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 
 <div class="restaurants">
   <h2 class="page-header">Restaurants</h2>

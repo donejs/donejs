@@ -5,7 +5,7 @@
     p { font-weight: bold; }
   </style>
   <view>
-    <can-import from="can-stache/helpers/route" />
+    <can-import from="can-stache-route-helpers" />
     <header>
       <nav>
        <h1>place-my-order.com</h1>

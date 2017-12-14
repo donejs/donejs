@@ -7,7 +7,7 @@
     }
   </style>
   <view>
-    <can-import from="can-stache/helpers/route" />
+    <can-import from="can-stache-route-helpers" />
     <can-import from="bit-tabs/unstyled" />
     <h1 class="page-header text-center">
       <img src="https://donejs.com/static/img/donejs-logo-white.svg"
