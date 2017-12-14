@@ -204,7 +204,7 @@ On the homepage, let’s install and add [bit-tabs](https://github.com/bitovi-co
 Run:
 
 ```shell
-npm install bit-tabs@1 --save
+npm install bit-tabs@pre --save
 ```
 
 ### Update the page

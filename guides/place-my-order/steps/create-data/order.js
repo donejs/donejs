@@ -5,6 +5,8 @@ import superMap from 'can-connect/can/super-map/';
 import loader from '@loader';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 

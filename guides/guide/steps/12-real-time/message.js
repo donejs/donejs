@@ -6,6 +6,8 @@ import loader from '@loader';
 import io from 'steal-socket.io';
 
 const Message = DefineMap.extend({
+  seal: false
+}, {
   'id': 'any',
   name: 'string',
   body: 'string'
