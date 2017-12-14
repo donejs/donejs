@@ -12,20 +12,20 @@
     <can-import from="place-my-order/header.component" />
     <pmo-header page:from="page"/>
 
-    {{#switch(page)}}
-      {{#case("home")}}
+    {{#switch page}}
+      {{#case "home"}}
         <can-import from="place-my-order/home.component"
             can-tag="pmo-loading">
           <pmo-home/>
         </can-import>
       {{/case}}
-      {{#case("restaurants")}}
+      {{#case "restaurants"}}
         <can-import from="place-my-order/restaurant/list/"
             can-tag="pmo-loading">
           <pmo-restaurant-list/>
         </can-import>
       {{/case}}
-      {{#case("order-history")}}
+      {{#case "order-history"}}
         <can-import from="place-my-order/order/history.component"
             can-tag="pmo-loading">
           <pmo-order-history/>
@@ -33,8 +33,8 @@
       {{/case}}
     {{/switch}}
 
-    {{#switch(env.NODE_ENV)}}
-      {{#case("production")}}
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
         <script
           src="{{joinBase('steal.production.js')}}">
         </script>

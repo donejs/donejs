@@ -944,11 +944,11 @@ DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL patter
 This architecture simplifies routes so that they can be managed entirely in simple data bound templates, like the following example:
 
 ```html
-{{#switch(page)}}
-  {{#case("home")}}
+{{#switch page}}
+  {{#case "home"}}
       <myapp-home></myapp-home>
   {{/case}}
-  {{#case("users")}}
+  {{#case "users"}}
     {{#if(slug)}}
       <myapp-user-detail userId:bind="slug"></myapp-user-detail>
     {{else}}
