@@ -2,10 +2,10 @@
   <view>
     <h4>{{listTitle}}</h4>
 
-    {{#if orders.isPending}}
+    {{#if(orders.isPending)}}
      <div class="loading"></div>
     {{else}}
-      {{#each orders.value}}
+      {{#each(orders.value)}}
       <div class="order {{status}}">
         <address>
           {{name}} <br />{{address}} <br />{{phone}}
@@ -13,7 +13,7 @@
 
         <div class="items">
           <ul>
-            {{#each items}}<li>{{name}}</li>{{/each}}
+            {{#each(items)}}<li>{{name}}</li>{{/each}}
           </ul>
         </div>
 
@@ -21,7 +21,7 @@
 
         <div class="actions">
           <span class="badge">{{statusTitle}}</span>
-          {{#if action}}
+          {{#if(action)}}
             <p class="action">
               Mark as:
               <a href="javascript://" on:click="markAs(action)">

@@ -5,19 +5,19 @@
     p { font-weight: bold; }
   </style>
   <view>
-    <can-import from="can-stache/helpers/route" />
+    <can-import from="can-stache-route-helpers" />
     <header>
       <nav>
        <h1>place-my-order.com</h1>
        <ul>
-         <li class="{{#eq page 'home'}}active{{/eq}}">
-           <a href="{{routeUrl page='home'}}">Home</a>
+         <li class="{{#eq(page, 'home')}}active{{/eq}}">
+           <a href="{{routeUrl(page='home')}}">Home</a>
          </li>
-         <li class="{{#eq page 'restaurants'}}active{{/eq}}">
-           <a href="{{routeUrl page='restaurants'}}">Restaurants</a>
+         <li class="{{#eq(page, 'restaurants')}}active{{/eq}}">
+           <a href="{{routeUrl(page='restaurants')}}">Restaurants</a>
          </li>
-         <li class="{{#eq page 'order-history'}}active{{/eq}}">
-           <a href="{{routeUrl page='order-history'}}">Order History</a>
+         <li class="{{#eq(page, 'order-history')}}active{{/eq}}">
+           <a href="{{routeUrl(page='order-history')}}">Order History</a>
          </li>
        </ul>
       </nav>

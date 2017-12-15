@@ -20,12 +20,12 @@
         </can-import>
       {{/case}}
       {{#case "restaurants"}}
-        {{#if slug}}
+        {{#if(slug)}}
           {{#switch action}}
             {{#case 'order'}}
               <can-import from="place-my-order/order/new/"
                   can-tag="pmo-loading">
-                <pmo-order-new slug="{slug}"></pmo-order-new>
+                <pmo-order-new slug:bind="slug"></pmo-order-new>
               </can-import>
             {{/case}}
 
@@ -54,7 +54,7 @@
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
         <script
-          src="{{joinBase 'steal.production.js'}}">
+          src="{{joinBase('steal.production.js')}}">
         </script>
       {{/case}}
       {{#default}}

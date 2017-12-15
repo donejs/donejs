@@ -1,5 +1,5 @@
-{{#case "restaurants"}}
-  {{#if slug}}
+{{#case("restaurants")}}
+  {{#if(slug)}}
     {{#switch action}}
       {{#case 'order'}}
         <can-import from="place-my-order/order/new/"

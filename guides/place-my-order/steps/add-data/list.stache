@@ -1,15 +1,15 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 
 <div class="restaurants">
   <h2 class="page-header">Restaurants</h2>
-  {{#if restaurants.isPending}}
+  {{#if(restaurants.isPending)}}
     <div class="restaurant loading"></div>
   {{/if}}
 
-  {{#if restaurants.isResolved}}
-    {{#each restaurants.value}}
+  {{#if(restaurants.isResolved)}}
+    {{#each(restaurants.value)}}
       <div class="restaurant">
-        <img src="{{joinBase images.thumbnail}}"
+        <img src="{{joinBase(images.thumbnail)}}"
           width="100" height="100">
         <h3>{{name}}</h3>
         {{#address}}
@@ -24,7 +24,7 @@
           <span class="open-now">Open Now</span>
         </div>
 
-        <a class="btn" href="{{routeUrl page='restaurants' slug=slug}}">
+        <a class="btn" href="{{routeUrl(page='restaurants' slug=slug)}}">
           Details
         </a>
         <br />

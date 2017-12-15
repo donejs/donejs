@@ -36,7 +36,7 @@
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
         <script
-          src="{{joinBase 'steal.production.js'}}">
+          src="{{joinBase('steal.production.js')}}">
         </script>
       {{/case}}
       {{#default}}

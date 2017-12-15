@@ -6,6 +6,8 @@ import loader from '@loader';
 import tag from 'can-connect/can/tag/';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 

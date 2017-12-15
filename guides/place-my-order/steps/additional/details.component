@@ -1,13 +1,13 @@
 <can-component tag="pmo-restaurant-details">
   <view>
     <can-import from="place-my-order/models/restaurant" />
-    <can-import from="can-stache/helpers/route" />
-    {{#if restaurantPromise.isPending}}
+    <can-import from="can-stache-route-helpers" />
+    {{#if(restaurantPromise.isPending)}}
       <div class="loading"></div>
     {{else}}
       {{#restaurantPromise.value}}
       <div class="restaurant-header"
-          style="background-image: url({{joinBase images.banner}});">
+          style="background-image: url({{joinBase(images.banner)}});">
         <div class="background">
           <h2>{{name}}</h2>
 
@@ -31,11 +31,11 @@
         <h3>The best food this side of the Mississippi</h3>
 
         <p class="description">
-          <img src="{{joinBase images.owner}}" />
+          <img src="{{joinBase(images.owner)}}" />
           Description for {{name}}
         </p>
         <p class="order-link">
-          <a class="btn" href="{{routeUrl page='restaurants' slug=slug action='order'}}">
+          <a class="btn" href="{{routeUrl(page='restaurants' slug=slug action='order')}}">
             Order from {{name}}
           </a>
         </p>

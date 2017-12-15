@@ -7,6 +7,8 @@ import tag from 'can-connect/can/tag/';
 import io from 'steal-socket.io';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 

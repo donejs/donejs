@@ -10,9 +10,9 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-          {{#eq page 'chat'}}
+          {{#eq(page, 'chat')}}
             <can-import from="donejs-chat/messages/">
-              {{#if isPending}}
+              {{#if(isPending)}}
                 Loading...
               {{else}}
                 <chat-messages/>
@@ -20,7 +20,7 @@
             </can-import>
           {{else}}
             <can-import from="donejs-chat/home.component">
-              {{#if isPending}}
+              {{#if(isPending)}}
                 Loading...
               {{else}}
                 <chat-home/>
@@ -33,7 +33,7 @@
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'steal.production.js'}}"></script>
+        <script src="{{joinBase('steal.production.js')}}"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>
