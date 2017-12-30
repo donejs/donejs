@@ -81,6 +81,7 @@
 									<li><a href="./plugin.html">Creating a plugin</a></li>
 									<li><a href="./generator.html">Creating a generator</a></li>
 									<li><a href="./bitballs.html">Example App: Bitballs</a></li>
+                  <li><a href="./ssr-react.html">Server rendering React</a></li>
 									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
 									<li><a href="./contributing.html">Contributing</a></li>
 								</ul>
@@ -698,15 +699,15 @@ const Restaurant = DefineMap.extend({
   '_id': '*'
 });
 
+Restaurant.List = DefineList.extend({
+  '#': Restaurant
+});
+
 const algebra = new set.Algebra(
   set.props.id('_id'),
   set.props.dotNotation('address.state'),
   set.props.dotNotation('address.city')
 );
-
-Restaurant.List = DefineList.extend({
-  '#': Restaurant
-});
 
 Restaurant.connection = superMap({
   url: loader.serviceBaseURL + '/api/restaurants',
@@ -719,7 +720,7 @@ Restaurant.connection = superMap({
 export default Restaurant;
 
 </code></pre>
-<p><span line-highlight='15-16,only'></span>
+<p><span line-highlight='19-20,only'></span>
 Above we use <code>set.props.dotNotation</code> since our queries for these nested properties will be in the <a href="https://docs.mongodb.com/v2.2/reference/glossary/#term-dot-notation">MongoDB-style 'dot notation'</a> format required by the backend.</p>
 <p>For example, MongoDB expects a query parameter for restaurants in a specific state to look like <code>{'address.state':'IL'}</code> and can-connect expects it to look like <code>{address:{state: 'IL'}}</code>. <code>set.props.dotNotation</code> allows can-connect to make comparisons between these two formats.</p>
 <h3>Test the connection</h3>
@@ -1462,13 +1463,13 @@ const Order = DefineMap.extend({
   }
 });
 
-const algebra = new set.Algebra(
-  set.props.id('_id')
-);
-
 Order.List = DefineList.extend({
   '#': Order
 });
+
+const algebra = new set.Algebra(
+  set.props.id('_id')
+);
 
 Order.connection = superMap({
   url: loader.serviceBaseURL + '/api/orders',
@@ -1751,14 +1752,14 @@ const Order = DefineMap.extend({
   }
 });
 
+Order.List = DefineList.extend({
+  '#': Order
+});
+
 const algebra = new set.Algebra(
   set.props.id('_id'),
   set.comparators.enum(&quot;status&quot;, [&quot;new&quot;, &quot;preparing&quot;, &quot;delivery&quot;, &quot;delivered&quot;])
 );
-
-Order.List = DefineList.extend({
-  '#': Order
-});
 
 Order.connection = superMap({
   url: loader.serviceBaseURL + '/api/orders',
@@ -1773,7 +1774,7 @@ tag('order-model', Order.connection);
 export default Order;
 
 </code></pre>
-<p><span line-highlight='6,59,74,only'></span>
+<p><span line-highlight='6,63,74,only'></span>
 The model can now be used in the template like <code>&lt;order-model get-list=&quot;{status='new'}&quot;&gt;</code>. This also adds an <a href="https://canjs.com/doc/can-set.props.enum.html">enum comparator</a> so that multiple requests for different statuses can be combined.</p>
 <h3>Update the template</h3>
 <p>First let's create the <code>pmo-order-list</code> component with:</p>
@@ -2373,6 +2374,7 @@ git push origin continuous
 						</li>
 					</ul>
 				</div>
+				<div class="clear"></div>
 				<div class="footer-copyright col-sm-12">
 					&copy; <a href="https://www.bitovi.com/">2015-2017 Bitovi, Inc.</a>
 				</div>
