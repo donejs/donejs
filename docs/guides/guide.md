@@ -31,7 +31,7 @@ In this section, we will install DoneJS and generate a new application.
 To get started, let’s install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs@1
+npm install -g donejs@pre
 ```
 
 ### Generate the application
