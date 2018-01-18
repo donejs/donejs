@@ -94,7 +94,7 @@ guide.launchBrowser("http://localhost:8080");
  * @Step 5
  */
 guide.step("Install bootstrap", function(){
-	return guide.executeCommand("npm", ["install", "bootstrap", "--save"])
+	return guide.executeCommand("npm", ["install", "bootstrap@3", "--save"])
 		.then(wait)
 		.then(function(){
 			return guide.replaceFile(join("src", "index.stache"),
