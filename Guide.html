@@ -607,17 +607,17 @@ export default Component.extend({
 <pre><code class="language-html">&lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
 &lt;h5&gt;&lt;a href=&quot;{{routeUrl page='home'}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
 
-{{#if messagesPromise.isResolved}}
-  {{#each messagesPromise.value}}
-    &lt;div class=&quot;list-group-item&quot;&gt;
-      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{name}}&lt;/h4&gt;
-      &lt;p class=&quot;list-group-item-text&quot;&gt;{{body}}&lt;/p&gt;
-    &lt;/div&gt;
-  {{else}}
-    &lt;div class=&quot;list-group-item&quot;&gt;
-      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;No messages&lt;/h4&gt;
-    &lt;/div&gt;
+{{#if(messagesPromise.isResolved)}}
+  {{#each(messagesPromise.value)}}
+    <div class="list-group-item">
+      <h4 class="list-group-item-heading">{{name}}</h4>
+      <p class="list-group-item-text">{{body}}</p>
+    </div>
   {{/each}}
+{{else}}
+  <div class="list-group-item">
+    <h4 class="list-group-item-heading">No messages</h4>
+  </div>
 {{/if}}
 
 </code></pre>
