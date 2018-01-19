@@ -19,7 +19,7 @@
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-order-history component'
+        default: 'This is the pmo-order-history component'
       }
     });
   </script>

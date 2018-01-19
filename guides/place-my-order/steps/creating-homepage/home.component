@@ -23,7 +23,7 @@
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-home component'
+        default: 'This is the pmo-home component'
       }
     });
   </script>

@@ -40,10 +40,10 @@ const Order = DefineMap.extend({
   restaurant: 'string',
 
   status: {
-    value: 'new'
+    default: 'new'
   },
   items: {
-    Value: ItemsList
+    Default: ItemsList
   },
   get total() {
     let total = 0.0;
