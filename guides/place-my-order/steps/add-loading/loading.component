@@ -16,7 +16,7 @@
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-loading component'
+        default: 'This is the pmo-loading component'
       }
     });
   </script>

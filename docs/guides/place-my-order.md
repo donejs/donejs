@@ -190,12 +190,16 @@ import route from 'can-route';
 import 'can-route-pushstate';
 
 const AppViewModel = DefineMap.extend({
+  env: {
+    default: () => ({NODE_ENV:'development'}),
+    serialize: false
+  },
   message: {
-    value: 'Hello World!',
+    default: 'Hello World!',
     serialize: false
   },
   title: {
-    value: 'place-my-order',
+    default: 'place-my-order',
     serialize: false
   }
 });
@@ -660,8 +664,8 @@ In this section, we will add additional pages that are shown under nested urls s
 Until now we've used three top level routes: `home`, `restaurants` and `order-history`. We did however also define two additional routes in `src/app.js` which looked like:
 
 ```js
-route('{page}/{slug}', { slug: null });
-route('{page}/{slug}/{action}', { slug: null, action: null });
+route.register('{page}/{slug}', { slug: null });
+route.register('{page}/{slug}/{action}', { slug: null, action: null });
 ```
 
 We want to use those routes when we are in the `restaurants` page. The relevant section in `src/index.stache` currently looks like this:

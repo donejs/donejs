@@ -12,7 +12,7 @@ export const ViewModel = DefineMap.extend({
   },
   state: {
     type: 'string',
-    value: null,
+    default: null,
     set() {
       // Remove the city when the state changes
       this.city = null;
@@ -29,7 +29,7 @@ export const ViewModel = DefineMap.extend({
   },
   city: {
     type: 'string',
-    value: null
+    default: null
   },
   get restaurants() {
     let state = this.state;

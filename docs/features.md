@@ -1480,8 +1480,8 @@ One way to define a component is using a [web component](https://github.com/done
         import DefineMap from "can-define/map/map";
 
         export default DefineMap.extend({
-            visible: { value: true },
-            message: { value: "Hello There!" }
+            visible: { default: true },
+            message: { default: "Hello There!" }
         });
     </script>
     <script type="events">

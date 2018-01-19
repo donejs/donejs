@@ -5,7 +5,7 @@ import view from './donejs-number-input.stache';
 
 export const ViewModel = DefineMap.extend({
 	value: {
-		value: 0,
+		default: 0,
 		type: 'number',
 		set(value) {
 			if(value > this.max) {
@@ -20,11 +20,11 @@ export const ViewModel = DefineMap.extend({
 		}
 	},
 	max: {
-		value: Infinity,
+		default: Infinity,
 		type: 'number'
 	},
 	min: {
-		value: 0,
+		default: 0,
 		type: 'number'
 	},
 	increment() {

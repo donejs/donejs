@@ -30,7 +30,7 @@ export const ViewModel = DefineMap.extend({
    * be an empty new order inititally.
    */
   order: {
-    Value: Order
+    Default: Order
   },
   /**
     * @property {Promise} restaurantPromise

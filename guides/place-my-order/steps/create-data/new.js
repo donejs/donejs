@@ -9,7 +9,7 @@ export const ViewModel = DefineMap.extend({
   slug: 'string',
   saveStatus: '*',
   order: {
-    Value: Order
+    Default: Order
   },
   get restaurantPromise() {
     return Restaurant.get({ _id: this.slug });
