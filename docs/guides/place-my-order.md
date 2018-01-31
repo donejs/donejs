@@ -29,7 +29,7 @@ You will need [NodeJS](http://nodejs.org) installed and your code editor of choi
 To get started, let's install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs@1
+npm install -g donejs@pre
 ```
 
 Then we can create a new DoneJS application:

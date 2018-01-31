@@ -141,7 +141,7 @@ $ npm test
 In the template we will use [Bootstrap][2] and [can-view-import][23], so first install them as dependencies:
 
 ```
-$ npm install bootstrap can-view-import --save
+$ npm install bootstrap@3 can-view-import --save
 ```
 
 Then we can update `src/<username>-number-input.stache` to look like this:
