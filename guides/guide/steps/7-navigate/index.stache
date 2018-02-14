@@ -4,14 +4,14 @@
   </head>
   <body>
     <can-import from="bootstrap/less/bootstrap.less" />
-    <can-import from="donejs-chat/styles.less" />
-    <can-import from="donejs-chat/app" export-as="viewModel" />
+    <can-import from="~/styles.less" />
+    <can-import from="~/app" export-as="viewModel" />
 
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
           {{#eq(page, 'chat')}}
-            <can-import from="donejs-chat/messages/">
+            <can-import from="~/messages/">
               {{#if(isPending)}}
                 Loading...
               {{else}}
@@ -19,7 +19,7 @@
               {{/if}}
             </can-import>
           {{else}}
-            <can-import from="donejs-chat/home.component">
+            <can-import from="~/home.component">
               {{#if(isPending)}}
                 Loading...
               {{else}}

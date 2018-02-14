@@ -5,28 +5,28 @@
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less" />
-    <can-import from="place-my-order/app" export-as="viewModel" />
+    <can-import from="~/styles.less" />
+    <can-import from="~/app" export-as="viewModel" />
 
-    <can-import from="place-my-order/loading.component" />
-    <can-import from="place-my-order/header.component" />
+    <can-import from="~/loading.component" />
+    <can-import from="~/header.component" />
     <pmo-header page:from="page"/>
 
     {{#switch page}}
       {{#case "home"}}
-        <can-import from="place-my-order/home.component"
+        <can-import from="~/home.component"
             can-tag="pmo-loading">
           <pmo-home/>
         </can-import>
       {{/case}}
       {{#case "restaurants"}}
-        <can-import from="place-my-order/restaurant/list/"
+        <can-import from="~/restaurant/list/"
             can-tag="pmo-loading">
           <pmo-restaurant-list/>
         </can-import>
       {{/case}}
       {{#case "order-history"}}
-        <can-import from="place-my-order/order/history.component"
+        <can-import from="~/order/history.component"
             can-tag="pmo-loading">
           <pmo-order-history/>
         </can-import>

@@ -1,10 +1,10 @@
 import QUnit from 'steal-qunit';
-import cityStore from 'place-my-order/models/fixtures/cities';
-import stateStore from 'place-my-order/models/fixtures/states';
-import restaurantStore from 'place-my-order/models/fixtures/restaurants';
+import cityStore from '~/models/fixtures/cities';
+import stateStore from '~/models/fixtures/states';
+import restaurantStore from '~/models/fixtures/restaurants';
 import { ViewModel } from './list';
 
-QUnit.module('place-my-order/restaurant/list', {
+QUnit.module('~/restaurant/list', {
   beforeEach() {
     localStorage.clear();
   }
