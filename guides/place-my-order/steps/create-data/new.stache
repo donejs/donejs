@@ -1,5 +1,5 @@
 <can-import from="bit-tabs/unstyled" />
-<can-import from="place-my-order/order/details.component" />
+<can-import from="~/order/details.component" />
 
 <div class="order-form">
   {{#if(restaurantPromise.isPending)}}

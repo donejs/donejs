@@ -2,9 +2,9 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './list.less';
 import view from './list.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import State from 'place-my-order/models/state';
-import City from 'place-my-order/models/city';
+import Restaurant from '~/models/restaurant';
+import State from '~/models/state';
+import City from '~/models/city';
 
 export const ViewModel = DefineMap.extend({
   get states() {

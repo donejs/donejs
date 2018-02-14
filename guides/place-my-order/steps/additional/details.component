@@ -1,6 +1,6 @@
 <can-component tag="pmo-restaurant-details">
   <view>
-    <can-import from="place-my-order/models/restaurant" />
+    <can-import from="~/models/restaurant" />
     <can-import from="can-stache-route-helpers" />
     {{#if(restaurantPromise.isPending)}}
       <div class="loading"></div>
@@ -45,7 +45,7 @@
   </view>
   <script type="view-model">
     import DefineMap from 'can-define/map/';
-    import Restaurant from 'place-my-order/models/restaurant';
+    import Restaurant from '~/models/restaurant';
 
     export default DefineMap.extend({
       get restaurantPromise() {
