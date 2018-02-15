@@ -7,7 +7,7 @@
     <can-import from="can-stache-route-helpers" />
     <div class="homepage">
       <img src="{{joinBase('node_modules/place-my-order-assets/images/homepage-hero.jpg')}}"
-          width="250" height="380" />
+          alt="Restaurant table with glasses." width="250" height="380" />
       <h1>Ordering food has never been easier</h1>
       <p>
         We make it easier than ever to order gourmet food
