@@ -604,24 +604,42 @@ Continuous integration on GitHub is most useful when using [branches and pull re
 git checkout -b travis-ci
 ```
 
-And add a `.travis.yml` file to our project root:
+Run the [donejs-travis](https://github.com/donejs/donejs-travis/) generator to add a `.travis.yml` file to our project root, and to add a *Build Passing* badge to the top of `readme.md`:
+
+```shell
+donejs add travis
+```
+
+When prompted, confirm the Github user name and repository by hitting the enter key, you can also type in new values if needed:
+
+```shell
+? What is the GitHub owner name? (<your-username>)
+? What is the GitHub repository name? (place-my-order)
+```
+
+Following these questions, the generator will notify you of the changes made to `readme.md`, 
+hit enter to accept the changes to the file:
+
+```shell
+conflict README.md
+? Overwrite README.md? (Ynaxdh)
+```
+
+> You can also hit 'd' to see a diff of the changes before writing to the file.
+
+The generated `.travis.yml` should look like this:
 
 ```shell
 language: node_js
 node_js: node
 addons:
-  firefox: "latest"
+  firefox: latest
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
 ```
 
 By default Travis CI runs `npm test` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox.
-
-We can also add a *Build Passing* badge to the top `readme.md`:
-
-```
-[![Build Status](https://travis-ci.org/<your-username>/place-my-order.png?branch=master)](https://travis-ci.org/<your-username>/place-my-order)
 
 # place-my-order
 ```
@@ -1127,26 +1145,36 @@ At this point your application has been deployed to a CDN. This contains StealJS
 
 If you do not have an account yet, sign up for Heroku at [signup.heroku.com](https://signup.heroku.com/). Then download the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command) which will be used to deploy.
 
-After installing we can initialize the application via
+After installing run the [donejs-heroku](https://github.com/donejs/donejs-heroku) generator via:
 
 ```shell
-heroku login
-heroku create
+donejs add heroku
 ```
 
-This will return the url where your app can be viewed. Before you open it you'll need to update the NODE_ENV variable:
+Once you have logged in into your Heroku account, choose whether you want Heroku to use a random
+name for the application. If you choose not to use a random name, you will be prompted to type in
+the application name:
+
+> We recommend you to use a random name since Heroku fails to create the app if the name is already taken.
+
+```shell
+? Do you want Heroku to use a random app name? Yes
+```
+
+When prompted, type 'Y' and enter the following proxy url:
+
+```shell
+? Does the application require a Proxy? Yes
+? What's the Proxy url? http://www.place-my-order.com/api
+```
+
+Once the generator finishes, update the NODE_ENV variable via:
 
 ```shell
 heroku config:set NODE_ENV=production
 ```
 
-Add a new `Procfile` that tells Heroku what to launch as the app's server. Since we are using done-serve our Procfile just looks like this:
-
-```shell
-web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
-```
-
-First let's save our current status:
+and follow the generator instructions to save our current changes:
 
 ```shell
 git add -A
@@ -1178,30 +1206,68 @@ git checkout master
 
 Previously we set up Travis CI [for automated testing](#continuous-integration) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.
 
-Open your `.travis.yml` file and add `before_deploy` and `deploy` keys that look like this:
+Run the [donejs-travis-to-heroku](https://github.com/donejs/donejs-travis-to-heroku) generator like this:
+
+```shell
+donejs add travis-to-heroku
+```
+
+When prompted, confirm the heroku application name by hitting the enter key and then confirm the changes made to the `.travis.yml` file.
+
+The generator adds a `before_deploy` and `deploy` keys that look like this:
 
 ```yaml
 language: node_js
 node_js: node
+addons:
+  firefox: latest
 before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
 before_deploy:
-  - "git config --global user.email \"me@example.com\""
-  - "git config --global user.name \"PMO deploy bot\""
-  - "node build"
-  - "git add dist/ --force"
-  - "git commit -m \"Updating build.\""
-  - "npm run deploy:ci"
+  - git config --global user.email "me@example.com"
+  - git config --global user.name "deploy bot"
+  - node build
+  - git add dist/ --force
+  - git commit -m "Updating build."
 deploy:
   skip_cleanup: true
-  provider: "heroku"
+  provider: heroku
   app: <my-app>
 ```
+@highlight 8-17,only
 
-@highlight 6-16,only
+> The `donejs-travis-to-heroku` generator retrieves the application name from local configuration files, if the name suggested is not correct or the generator fails to retrieve the name, you can type it when the question is prompted. Run `heroku apps:info` to find the name of the app.
 
-You can find the name of the app by running `heroku apps:info`.
+Next, we set up Travis CI to deploy to [Firebase](https://www.firebase.com/) as well, run:
+
+```shell
+donejs add travis-to-firebase
+```
+
+And hit enter to overwrite `.travis.yml` which should now look like this:
+
+```yaml
+language: node_js
+node_js: node
+addons:
+  firefox: latest
+before_install:
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
+before_deploy:
+  - git config --global user.email "me@example.com"
+  - git config --global user.name "deploy bot"
+  - node build
+  - git add dist/ --force
+  - git commit -m "Updating build."
+  - 'npm run deploy:ci'
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: random-bullet
+```
+@highlight 14,only
 
 In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our `.travis.yml` should always be encrypted for which we install the [travis-encrypt](https://www.npmjs.com/package/travis-encrypt) module:
 
