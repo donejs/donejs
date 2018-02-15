@@ -610,7 +610,7 @@ Run the [donejs-travis](https://github.com/donejs/donejs-travis/) generator to a
 donejs add travis
 ```
 
-When prompted, confirm the Github user name and repository by hitting the enter key, you can also type in new values if needed:
+When prompted, confirm the GitHub user name and repository by hitting the enter key, you can also type in new values if needed:
 
 ```shell
 ? What is the GitHub owner name? (<your-username>)
