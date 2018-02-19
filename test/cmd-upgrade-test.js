@@ -1,6 +1,5 @@
 var Q = require('q');
 var fs = require('fs');
-var path = require('path');
 var rimraf = require('rimraf');
 var assert = require('assert');
 var mockery = require('mockery');
@@ -10,6 +9,7 @@ describe('cli upgrade cmd', function() {
   var cwd;
   var upgrade;
   var spawnCalls;
+  var writeCalls;
   var runBinaryCall;
   var folder = 'test-project';
   var cmdUpgradePath = '../lib/cli/cmd-upgrade';
