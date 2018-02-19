@@ -1,5 +1,6 @@
 var Q = require('q');
 var fs = require('fs');
+var path = require('path');
 var rimraf = require('rimraf');
 var assert = require('assert');
 var mockery = require('mockery');
@@ -10,15 +11,13 @@ describe('cli upgrade cmd', function() {
   var upgrade;
   var spawnCalls;
   var writeCalls;
-  var runBinaryCall;
   var folder = 'test-project';
   var cmdUpgradePath = '../lib/cli/cmd-upgrade';
-  var pkgJsonPath = __dirname + '/../test-project/package.json';
+  var pkgJsonPath = path.join(__dirname, "..", folder, "package.json");
 
   beforeEach(function() {
     spawnCalls = [];
     writeCalls = [];
-    runBinaryCall = {};
     cwd = process.cwd();
 
     deleteFolder();
@@ -29,11 +28,6 @@ describe('cli upgrade cmd', function() {
     });
 
     mockery.registerAllowable(cmdUpgradePath);
-
-    mockery.registerMock('./run-binary', function() {
-      runBinaryCall.args = arguments[0];
-      runBinaryCall.options = arguments[1];
-    });
 
     mockery.registerMock('../utils', {
       mkdirp: utils.mkdirp,
@@ -95,7 +89,7 @@ describe('cli upgrade cmd', function() {
   });
 
   afterEach(function() {
-    deleteFolder();
+    //deleteFolder();
     mockery.disable();
     mockery.deregisterAll();
   });
@@ -118,7 +112,8 @@ describe('cli upgrade cmd', function() {
   it('runs can-migrate', function(done){
     upgrade(null, {canmigrate: true})
       .then(function(){
-        assert.equal(runBinaryCall.args[0], "can-migrate", "ran can-migrate");
+        var lastCall = spawnCalls[spawnCalls.length - 1];
+        assert.ok(/can-migrate/.test(lastCall.args[0]), "ran can-migrate");
         done();
       })
       .catch(done);
@@ -127,7 +122,8 @@ describe('cli upgrade cmd', function() {
   it('Does not run can-migrate when --no-canmigrate flag is passed', function(done){
     upgrade(null, {canmigrate: false})
       .then(function(){
-        assert.equal(runBinaryCall.args, undefined, "did not run can-migrate");
+        var lastCall = spawnCalls[spawnCalls.length - 1];
+        assert.ok(!/can-migrate/.test(lastCall.args[0]), "did not run  can-migrate");
         done();
       })
       .catch(done);
