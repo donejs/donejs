@@ -4,17 +4,17 @@
     p { font-weight: bold; }
   </style>
   <view>
-    <can-import from="can-stache/helpers/route" />
+    <can-import from="can-stache-route-helpers" />
     <div class="homepage">
-      <img src="{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}"
-          width="250" height="380" />
+      <img src="{{joinBase('node_modules/place-my-order-assets/images/homepage-hero.jpg')}}"
+          alt="Restaurant table with glasses." width="250" height="380" />
       <h1>Ordering food has never been easier</h1>
       <p>
         We make it easier than ever to order gourmet food
         from your favorite local restaurants.
       </p>
       <p>
-        <a class="btn" href="{{routeUrl page='restaurants'}}" role="button">Choose a Restaurant</a>
+        <a class="btn" href="{{routeUrl(page='restaurants')}}" role="button">Choose a Restaurant</a>
       </p>
     </div>
   </view>
@@ -23,7 +23,7 @@
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-home component'
+        default: 'This is the pmo-home component'
       }
     });
   </script>

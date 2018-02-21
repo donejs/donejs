@@ -570,7 +570,7 @@ be stored on the AppViewModel.
 ```js
 session: {
   serialize: false,
-  value: function() {
+  default: function() {
     Session.get({}).then((session) => {
       this.session = session;
     });

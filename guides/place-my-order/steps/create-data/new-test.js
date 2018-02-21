@@ -2,7 +2,7 @@ import QUnit from 'steal-qunit';
 import { ViewModel } from './new';
 
 // ViewModel unit tests
-QUnit.module('place-my-order/order/new');
+QUnit.module('~/order/new');
 
 QUnit.test('canPlaceOrder', function(){
   var vm = new ViewModel({

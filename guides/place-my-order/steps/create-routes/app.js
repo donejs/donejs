@@ -8,13 +8,13 @@ const AppViewModel = DefineMap.extend({
   action: 'string',
 
   title: {
-    value: 'place-my-order',
+    default: 'place-my-order',
     serialize: false
   }
 });
 
-route('{page}', { page: 'home' });
-route('{page}/{slug}', { slug: null });
-route('{page}/{slug}/{action}', { slug: null, action: null });
+route.register('{page}', { page: 'home' });
+route.register('{page}/{slug}', { slug: null });
+route.register('{page}/{slug}/{action}', { slug: null, action: null });
 
 export default AppViewModel;

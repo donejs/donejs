@@ -2,7 +2,7 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './list.less';
 import view from './list.stache';
-import Restaurant from 'place-my-order/models/restaurant';
+import Restaurant from '~/models/restaurant';
 
 export const ViewModel = DefineMap.extend({
   restaurants: {

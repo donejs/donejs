@@ -5,7 +5,7 @@
     p { font-weight: bold; }
   </style>
   <view>
-    {{#eq state "resolved"}}
+    {{#eq(state, "resolved")}}
       <content></content>
     {{else}}
       <div class="loading"></div>
@@ -16,7 +16,7 @@
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-loading component'
+        default: 'This is the pmo-loading component'
       }
     });
   </script>

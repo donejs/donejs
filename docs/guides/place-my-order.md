@@ -29,7 +29,7 @@ You will need [NodeJS](http://nodejs.org) installed and your code editor of choi
 To get started, let's install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs@1
+npm install -g donejs@pre
 ```
 
 Then we can create a new DoneJS application:
@@ -190,12 +190,16 @@ import route from 'can-route';
 import 'can-route-pushstate';
 
 const AppViewModel = DefineMap.extend({
+  env: {
+    default: () => ({NODE_ENV:'development'}),
+    serialize: false
+  },
   message: {
-    value: 'Hello World!',
+    default: 'Hello World!',
     serialize: false
   },
   title: {
-    value: 'place-my-order',
+    default: 'place-my-order',
     serialize: false
   }
 });
@@ -686,8 +690,8 @@ In this section, we will add additional pages that are shown under nested urls s
 Until now we've used three top level routes: `home`, `restaurants` and `order-history`. We did however also define two additional routes in `src/app.js` which looked like:
 
 ```js
-route('{page}/{slug}', { slug: null });
-route('{page}/{slug}/{action}', { slug: null, action: null });
+route.register('{page}/{slug}', { slug: null });
+route.register('{page}/{slug}/{action}', { slug: null, action: null });
 ```
 
 We want to use those routes when we are in the `restaurants` page. The relevant section in `src/index.stache` currently looks like this:
@@ -755,7 +759,7 @@ Here we are adding some more conditions if `page` is set to `restaurants`:
 The npm integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
 ```shell
-npm install bit-tabs@1 --save
+npm install bit-tabs@pre --save
 ```
 
 And then integrate it into `src/order/new/new.stache`:

@@ -1,18 +1,18 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 
 <div class="restaurants">
   <h2 class="page-header">Restaurants</h2>
   <form class="form">
     <div class="form-group">
       <label>State</label>
-      <select value:bind="state" {{#if states.isPending}}disabled{{/if}}>
-        {{#if states.isPending}}
+      <select value:bind="state" {{#if(states.isPending)}}disabled{{/if}}>
+        {{#if(states.isPending)}}
           <option value="">Loading...</option>
         {{else}}
-          {{^if state}}
+          {{^if(state)}}
           <option value="">Choose a state</option>
           {{/if}}
-          {{#each states.value}}
+          {{#each(states.value)}}
           <option value="{{short}}">{{name}}</option>
           {{/each}}
         {{/if}}
@@ -20,15 +20,15 @@
     </div>
     <div class="form-group">
       <label>City</label>
-      <select value:bind="city"{{^if state}}disabled{{/if}}>
-        {{#if cities.isPending}}
+      <select value:bind="city"{{^if(state)}}disabled{{/if}}>
+        {{#if(cities.isPending)}}
           <option value="">Loading...</option>
         {{else}}
-          {{^if city}}
+          {{^if(city)}}
           <option value="">Choose a city</option>
           {{/if}}
-          {{#each cities.value}}
-          <option value="{{name}}">{{name}}</option>
+          {{#each(cities.value)}}
+          <option value:from="name">{{name}}</option>
           {{/each}}
         {{/if}}
       </select>

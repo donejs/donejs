@@ -5,6 +5,8 @@ import superMap from 'can-connect/can/super-map/';
 import loader from '@loader';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 
@@ -36,10 +38,10 @@ const Order = DefineMap.extend({
   restaurant: 'string',
 
   status: {
-    value: 'new'
+    default: 'new'
   },
   items: {
-    Value: ItemsList
+    Default: ItemsList
   },
   get total() {
     let total = 0.0;

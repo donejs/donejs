@@ -5,14 +5,14 @@
   </head>
   <body>
     <can-import from="place-my-order-assets" />
-    <can-import from="place-my-order/styles.less" />
-    <can-import from="place-my-order/app" export-as="viewModel" />
+    <can-import from="~/styles.less" />
+    <can-import from="~/app" export-as="viewModel" />
 
     <h1>{{message}}</h1>
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
-        <script src="{{joinBase 'steal.production.js'}}"></script>
+        <script src="{{joinBase('steal.production.js')}}"></script>
       {{/case}}
       {{#default}}
         <script src="/node_modules/steal/steal.js"></script>

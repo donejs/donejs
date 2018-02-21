@@ -7,7 +7,7 @@
     }
   </style>
   <view>
-    <can-import from="can-stache/helpers/route" />
+    <can-import from="can-stache-route-helpers" />
     <can-import from="bit-tabs/unstyled" />
     <h1 class="page-header text-center">
       <img src="https://donejs.com/static/img/donejs-logo-white.svg"
@@ -15,16 +15,16 @@
       <br>Chat
     </h1>
 
-    <bit-tabs tabs-class="nav nav-tabs">
-      <bit-panel title="CanJS">
+    <bit-tabs tabsClass:from="'nav nav-tabs'">
+      <bit-panel title:from="'CanJS'">
         <p>CanJS provides the MV*</p>
       </bit-panel>
-      <bit-panel title="StealJS">
+      <bit-panel title:from="'StealJS'">
         <p>StealJS provides the infrastructure.</p>
       </bit-panel>
     </bit-tabs>
 
-    <a href="{{routeUrl page='chat'}}"
+    <a href="{{routeUrl(page='chat')}}"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>

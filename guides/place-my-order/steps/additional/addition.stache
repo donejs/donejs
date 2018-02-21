@@ -1,22 +1,22 @@
-{{#case "restaurants"}}
-  {{#if slug}}
+{{#case("restaurants")}}
+  {{#if(slug)}}
     {{#switch action}}
       {{#case 'order'}}
-        <can-import from="place-my-order/order/new/"
+        <can-import from="~/order/new/"
             can-tag="pmo-loading">
           <pmo-order-new slug:from="slug"/>
         </can-import>
       {{/case}}
 
       {{#default}}
-        <can-import from="place-my-order/restaurant/details.component"
+        <can-import from="~/restaurant/details.component"
             can-tag="pmo-loading">
           <pmo-restaurant-details slug:from="slug"/>
         </can-import>
       {{/default}}
     {{/switch}}
   {{else}}
-    <can-import from="place-my-order/restaurant/list/"
+    <can-import from="~/restaurant/list/"
         can-tag="pmo-loading">
       <pmo-restaurant-list/>
     </can-import>

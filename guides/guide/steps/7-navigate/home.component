@@ -5,14 +5,14 @@
     h1.page-header { margin-top: 0; }
   </style>
   <view>
-    <can-import from="can-stache/helpers/route" />
+    <can-import from="can-stache-route-helpers" />
     <h1 class="page-header text-center">
       <img src="https://donejs.com/static/img/donejs-logo-white.svg"
            alt="DoneJS logo" style="width: 100%;" />
       <br>Chat
     </h1>
 
-    <a href="{{routeUrl page='chat' }}"
+    <a href="{{routeUrl(page='chat')}}"
        class="btn btn-primary btn-block btn-lg">
       Start chat
     </a>

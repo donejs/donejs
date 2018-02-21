@@ -7,6 +7,8 @@ import tag from 'can-connect/can/tag/';
 import io from 'steal-socket.io';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 
@@ -38,10 +40,10 @@ const Order = DefineMap.extend({
   restaurant: 'string',
 
   status: {
-    value: 'new'
+    default: 'new'
   },
   items: {
-    Value: ItemsList
+    Default: ItemsList
   },
   get total() {
     let total = 0.0;

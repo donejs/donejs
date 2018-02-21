@@ -47,7 +47,7 @@ You can mark a section of your template to be progressively loaded by wrapping i
 
 ```html
 <can-import from="components/home">
-  {{#if isResolved}}
+  {{#if(isResolved)}}
   <home-page/>
   {{/if}}
 </can-import>
@@ -506,14 +506,14 @@ In a DoneJS application, you simply mark a section to be progressively loaded by
 ```html
 {{#eq page 'home'}}
 <can-import from="components/home">
-  {{#if isResolved}}
+  {{#if(isResolved)}}
   <home-page/>
   {{/if}}
 </can-import>
 {{/eq}}
-{{#eq page 'chat'}}
+{{#eq(page, 'chat')}}
 <can-import from="components/chat">
-  {{#if isResolved}}
+  {{#if(isResolved)}}
   <chat-page/>
   {{/if}}
 </can-import>
@@ -949,7 +949,7 @@ This architecture simplifies routes so that they can be managed entirely in simp
       <myapp-home></myapp-home>
   {{/case}}
   {{#case "users"}}
-    {{#if slug}}
+    {{#if(slug)}}
       <myapp-user-detail userId:bind="slug"></myapp-user-detail>
     {{else}}
       <myapp-users></myapp-users>
@@ -1480,8 +1480,8 @@ One way to define a component is using a [web component](https://github.com/done
         import DefineMap from "can-define/map/map";
 
         export default DefineMap.extend({
-            visible: { value: true },
-            message: { value: "Hello There!" }
+            visible: { default: true },
+            message: { default: "Hello There!" }
         });
     </script>
     <script type="events">

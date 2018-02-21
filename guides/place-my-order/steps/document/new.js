@@ -2,11 +2,11 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './new.less';
 import view from './new.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import Order from 'place-my-order/models/order';
+import Restaurant from '~/models/restaurant';
+import Order from '~/models/order';
 
 /**
- * @add place-my-order/order/new
+ * @add ~/order/new
  */
 export const ViewModel = DefineMap.extend({
   /**
@@ -24,13 +24,13 @@ export const ViewModel = DefineMap.extend({
     */
   saveStatus: '*',
   /**
-   * @property {place-my-order/models/order} order
+   * @property {~/models/order} order
    *
    * the order that is being processed. will
    * be an empty new order inititally.
    */
   order: {
-    Value: Order
+    Default: Order
   },
   /**
     * @property {Promise} restaurantPromise
@@ -42,7 +42,7 @@ export const ViewModel = DefineMap.extend({
     return Restaurant.get({ _id: this.slug });
   },
   /**
-   * @property {place-my-order/models/restaurant} restaurant
+   * @property {~/models/restaurant} restaurant
    *
    * the restaurant that is being ordered from.
    */

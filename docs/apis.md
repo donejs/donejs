@@ -125,7 +125,7 @@ the chat application as an example in development.  We'll cover what happens whe
 1. A pushstate is triggered by user action, usually by clicking a link. [can-route](#canroute)'s routing rules determines the properties set on the application [viewModel](#canmap).
 
    ```js
-   route('{page}', { page: 'home' });
+   route.register('{page}', { page: 'home' });
    ```
 
 2. [done-autorender](#done-autorender) previously bound the AppViewModel to [can-route](#canroute) which causes any change in the route to be reflected in the AppMap instance.
@@ -537,7 +537,7 @@ you to control the behavior of attributes.  You can define
 ```js
 var Todo = DefineMap.extend({
   percentComplete: {
-    value: 0.1,
+    default: 0.1,
     type: "number",
     get: function(value){
       return ""+value+"%"
@@ -1080,21 +1080,21 @@ The following sets the application ViewModel's `page` property
 to `"chat"` when the url looks like `/chat`:
 
 ```js
-route("{page}");
+route.register("{page}");
 ```
 
 You can define defaults that get set when `{page}` is empty. The
 following sets the default `page` property to `"home"`.
 
 ```js
-route("{page}", { page: "home" });
+route.register("{page}", { page: "home" });
 ```
 
 You can specify multiple properties to set for a given url:
 
 ```js
-route("{page}/{slug}");
-route("{page}/{slug}/{action}");
+route.register("{page}/{slug}");
+route.register("{page}/{slug}/{action}");
 ```
 
 
@@ -1446,7 +1446,7 @@ export const ViewModel = Define.extend({
    * be an empty new order inititally.
    */
   order: {
-    Value: Order
+    Default: Order
   },
   /**
    * @property {can.Deferred} saveStatus
@@ -1455,7 +1455,7 @@ export const ViewModel = Define.extend({
    * it is being saved.
    */
   saveStatus: {
-    Value: Object
+    Default: Object
   },
   /**
    * @property {Boolean} canPlaceOrder
