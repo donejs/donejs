@@ -161,7 +161,7 @@ Then, add a `page` property on the `AppViewModel` and
 define a rule for it in `src/app.js`:
 
 @sourceref ../../guides/guide/steps/7-navigate/app.js
-@highlight 6,13,only
+@highlight 7,14,only
 
 > New APIs Used:
 > - [DefineMap](https://canjs.com/doc/can-define/map/map.html) — used to define observable types.

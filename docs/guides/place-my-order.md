@@ -188,6 +188,7 @@ The main application file at `src/app.js` looks like this:
 import DefineMap from 'can-define/map/';
 import route from 'can-route';
 import 'can-route-pushstate';
+import 'can-debug#?./is-dev';
 
 const AppViewModel = DefineMap.extend({
   env: {
@@ -294,7 +295,7 @@ To learn more about routing visit the CanJS guide on [Application State and Rout
 To add our routes, change `src/app.js` to:
 
 @sourceref ../../guides/place-my-order/steps/create-routes/app.js
-@highlight 6-8,16-18,only
+@highlight 7-9,17-19,only
 
 > Notice: We also removed the `message` property in `AppViewModel`.  This is because
 > it is not needed.
