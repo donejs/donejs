@@ -134,7 +134,7 @@ The first time it starts, the server will initialize some default data (restaura
 
 ### Starting the application
 
-Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid violating the same origin policy. This means that we need to modify the `start` and `develop` script in our `package.json` to:
+Now our application is good to go and we can start the server. We need to proxy the `place-my-order-api` server to `/api` on our server in order to avoid violating the [same origin policy](https://en.wikipedia.org/wiki/Same-origin_policy). This means that we need to modify the `start` and `develop` script in our `package.json` to:
 
 ```js
 "scripts": {
@@ -583,7 +583,7 @@ git remote add origin https://github.com/<your-username>/place-my-order.git
 Then we can add all files and push to origin like this:
 
 ```shell
-git add . --all
+git add --all
 git commit -am "Initial commit"
 git push origin master
 ```
@@ -610,22 +610,30 @@ Run the [donejs-travis](https://github.com/donejs/donejs-travis/) generator to a
 donejs add travis
 ```
 
-When prompted, confirm the GitHub user name and repository by hitting the enter key, you can also type in new values if needed:
+When prompted, confirm the GitHub user name and repository by pressing the Enter key, you can also enter new values if needed:
 
 ```shell
 ? What is the GitHub owner name? (<your-username>)
 ? What is the GitHub repository name? (place-my-order)
 ```
 
-Following these questions, the generator will notify you of the changes made to `readme.md`, 
-hit enter to accept the changes to the file:
+Following these questions, the generator will first update the [package.json's repository](https://docs.npmjs.com/files/package.json#repository) field to point it to where your code lives.
+
+Confirm the changes by pressing the Enter key,
+
+```
+ conflict package.json
+? Overwrite package.json? (Ynaxdh)
+```
+
+> You can also press the `d` key to see a diff of the changes before writing to the file.
+
+Then, the generator creates a `.travis.yml` file and updates `readme.md` to include a badge indicating the status of the build, confirm the changes by pressing the Enter key:
 
 ```shell
 conflict README.md
 ? Overwrite README.md? (Ynaxdh)
 ```
-
-> You can also hit 'd' to see a diff of the changes before writing to the file.
 
 The generated `.travis.yml` should look like this:
 
@@ -648,7 +656,7 @@ By default Travis CI runs `npm test` for NodeJS projects which is what we want. 
 To see Travis run, let's add all changes and push to the branch:
 
 ```shell
-git add readme.md .travis.yml
+git add --all
 git commit -am "Enabling Travis CI"
 git push origin travis-ci
 ```
@@ -1152,7 +1160,7 @@ donejs add heroku
 ```
 
 Once you have logged in into your Heroku account, choose whether you want Heroku to use a random
-name for the application. If you choose not to use a random name, you will be prompted to type in
+name for the application. If you choose not to use a random name, you will be prompted to enter
 the application name:
 
 > We recommend you to use a random name since Heroku fails to create the app if the name is already taken.
@@ -1161,10 +1169,15 @@ the application name:
 ? Do you want Heroku to use a random app name? Yes
 ```
 
-When prompted, type 'Y' and enter the following proxy url:
+When prompted, press the `Y` key since the application requires a proxy 
 
 ```shell
 ? Does the application require a Proxy? Yes
+```
+
+Then enter `http://www.place-my-order.com/api` as the proxy url:
+
+```shell
 ? What's the Proxy url? http://www.place-my-order.com/api
 ```
 
@@ -1177,7 +1190,7 @@ heroku config:set NODE_ENV=production
 and follow the generator instructions to save our current changes:
 
 ```shell
-git add -A
+git add --all
 git commit -m "Finishing place-my-order"
 git push origin master
 ```
@@ -1206,15 +1219,19 @@ git checkout master
 
 Previously we set up Travis CI [for automated testing](#continuous-integration) of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.
 
-Run the [donejs-travis-to-heroku](https://github.com/donejs/donejs-travis-to-heroku) generator like this:
+In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our `.travis.yml` should always be encrypted, and the generator takes care of encrypting the API key using the [travis-encrypt](https://www.npmjs.com/package/travis-encrypt) module.
+
+*Note: if using Windows, first install the OpenSSL package as described in the [Setting Up](https://donejs.com/SettingUp.html) guide.*
+
+Run the [donejs-travis-deploy-to-heroku](https://github.com/donejs/donejs-travis-deploy-to-heroku) generator like this:
 
 ```shell
-donejs add travis-to-heroku
+donejs add travis-deploy-to-heroku
 ```
 
-When prompted, confirm the heroku application name by hitting the enter key and then confirm the changes made to the `.travis.yml` file.
+When prompted, confirm each prompt by pressing the Enter key (or enter new values if needed) and then confirm the changes made to the `.travis.yml` file.
 
-The generator adds a `before_deploy` and `deploy` keys that look like this:
+The updated `.travis.yml` should look like this: 
 
 ```yaml
 language: node_js
@@ -1224,28 +1241,46 @@ addons:
 before_install:
   - 'export DISPLAY=:99.0'
   - sh -e /etc/init.d/xvfb start
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: <heroku-appname> 
+  api_key: <encrypted-heroku-api-key>
 before_deploy:
   - git config --global user.email "me@example.com"
   - git config --global user.name "deploy bot"
   - node build
   - git add dist/ --force
   - git commit -m "Updating build."
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  app: <my-app>
 ```
-@highlight 8-17,only
+@highlight 8-18,only
 
-> The `donejs-travis-to-heroku` generator retrieves the application name from local configuration files, if the name suggested is not correct or the generator fails to retrieve the name, you can type it when the question is prompted. Run `heroku apps:info` to find the name of the app.
+> The `donejs-travis-deploy-to-heroku` generator retrieves data from local configuration files, if any of the values set as default is incorrect, you can enter the correct value when prompted. To find the name of the Heroku application run `heroku apps:info`; or run `heroku auth:token` if you want to see your authentication token.
 
-Next, we set up Travis CI to deploy to [Firebase](https://www.firebase.com/) as well, run:
+Next, we set up Travis CI to deploy to [Firebase](https://www.firebase.com/) as well. To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:
 
 ```shell
-donejs add travis-to-firebase
+node_modules/.bin/firebase login:ci
 ```
 
-And hit enter to overwrite `.travis.yml` which should now look like this:
+In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and enter it when prompted by the [travis-deploy-to-firebase](https://github.com/donejs/donejs-travis-deploy-to-firebase) generator.
+
+Run the following command:
+
+
+```shell
+donejs add travis-deploy-to-firebase
+```
+
+Confirm your GitHub username and application name, then enter the Firebase CI Token from the previous step:
+
+```shell
+? What's your GitHub username? <your-username>
+? What's your GitHub application name? place-my-order
+? What's your Firebase CI Token? <your-firebase-ci-token>
+```
+
+And press the Enter key to update the `.travis.yml` file which should now look like this:
 
 ```yaml
 language: node_js
@@ -1255,6 +1290,11 @@ addons:
 before_install:
   - 'export DISPLAY=:99.0'
   - sh -e /etc/init.d/xvfb start
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: <heroku-appname>
+  api_key: <encrypted-heroku-api-key>
 before_deploy:
   - git config --global user.email "me@example.com"
   - git config --global user.name "deploy bot"
@@ -1262,46 +1302,11 @@ before_deploy:
   - git add dist/ --force
   - git commit -m "Updating build."
   - 'npm run deploy:ci'
-deploy:
-  skip_cleanup: true
-  provider: heroku
-  app: random-bullet
+env:
+  global:
+    - secure: <encrypted-firebase-ci-token>
 ```
-@highlight 14,only
-
-In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our `.travis.yml` should always be encrypted for which we install the [travis-encrypt](https://www.npmjs.com/package/travis-encrypt) module:
-
-*Note: if using Windows, first install the OpenSSL package as described in the [Setting Up](https://donejs.com/SettingUp.html) guide.*
-
-```shell
-npm install travis-encrypt -g
-```
-
-Now we can get the Heroku authentication token with:
-
-```shell
-heroku auth:token
-```
-
-Copy the token printed and paste it as `<token>` in the following command:
-
-```shell
-travis-encrypt --add deploy.api_key -r <your-username>/place-my-order <token>
-```
-
-Replace `<your-username>` with the name of your GitHub account.
-
-To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:
-
-```shell
-node_modules/.bin/firebase login:ci
-```
-
-In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the `<token>` in the following command:
-
-```shell
-travis-encrypt --add -r <your-username>/place-my-order 'FIREBASE_TOKEN="<token>"'
-```
+@highlight 19-22,only
 
 Now any time a build succeeds when pushing to `master` the application will be deployed to Heroku and static assets to Firebase's CDN.
 
