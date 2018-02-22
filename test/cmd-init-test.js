@@ -105,11 +105,15 @@ describe('cli init cmd', function() {
   });
 
   it('passes options to donejs-init properly', function(done) {
-    init(folder, { skipInstall: true, type: 'foobar' })
+    init(folder, { skipInstall: true, yes: true, type: 'foobar' })
       .then(function() {
-        assert.deepEqual(runBinaryCall.args, [
-          'init', '--skip-install', '--type', 'foobar'
-        ]);
+        var args = runBinaryCall.args;
+
+        assert(includes(args, '--skip-install'));
+        assert(includes(args, '--yes'));
+        assert(includes(args, '--type'));
+        assert(includes(args, 'foobar'));
+
         done();
       })
       .catch(done);
@@ -119,5 +123,9 @@ describe('cli init cmd', function() {
     if (fs.existsSync(folder)) {
       rimraf.sync(folder);
     }
+  }
+
+  function includes(collection, value) {
+    return (collection || []).indexOf(value) !== -1;
   }
 });
