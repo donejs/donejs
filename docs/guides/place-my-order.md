@@ -29,7 +29,7 @@ You will need [NodeJS](http://nodejs.org) installed and your code editor of choi
 To get started, let's install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs@pre
+npm install -g donejs
 ```
 
 Then we can create a new DoneJS application:
@@ -760,7 +760,7 @@ Here we are adding some more conditions if `page` is set to `restaurants`:
 The npm integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the `pmo-order-new` component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a [bit-tabs](https://github.com/bitovi-components/bit-tabs) component which does exactly that. Let's add it as a project dependency with:
 
 ```shell
-npm install bit-tabs@pre --save
+npm install bit-tabs@2 --save
 ```
 
 And then integrate it into `src/order/new/new.stache`:

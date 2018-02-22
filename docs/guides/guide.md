@@ -31,7 +31,7 @@ In this section, we will install DoneJS and generate a new application.
 To get started, let’s install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs@pre
+npm install -g donejs
 ```
 
 ### Generate the application
@@ -204,7 +204,7 @@ On the homepage, let’s install and add [bit-tabs](https://github.com/bitovi-co
 Run:
 
 ```shell
-npm install bit-tabs@pre --save
+npm install bit-tabs@2 --save
 ```
 
 ### Update the page
