@@ -51,23 +51,7 @@ guide.moveToTmp();
 
 guide.step("Run donejs add app", function(){
 	var init = guide.answerPrompts("donejs", ["add", "app", "place-my-order",
-		"--skip-install"]);
-	var answer = init.answer;
-
-	answer(/Project name/, "\n");
-	answer(/Project main folder/, "src\n");
-	answer(/Description/, "\n");
-	answer(/Project homepage url/, "\n");
-	answer(/GitHub username or organization/, "\n");
-	answer(/Author's Name/, "\n");
-	answer(/Author's Email/, "\n");
-	answer(/Author's Homepage/, "\n");
-	answer(/Application keywords/, "\n");
-	answer(/NPM version/, "\n");
-  answer(/Your email/, "\n");
-  answer(/Your website/, "\n");
-  answer(/Which license/, "\n");
-
+		"--skip-install", "--yes"]);
 	return init.promise;
 });
 

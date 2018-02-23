@@ -35,7 +35,7 @@ npm install -g donejs
 Then we can create a new DoneJS application:
 
 ```shell
-donejs add app place-my-order
+donejs add app place-my-order --yes
 ```
 
 The initialization process will ask you questions like the name of your application (set to `place-my-order`) and the source folder (set to `src`). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:
@@ -1174,7 +1174,7 @@ the application name:
 ? Do you want Heroku to use a random app name? Yes
 ```
 
-When prompted, press the `Y` key since the application requires a proxy 
+When prompted, press the `Y` key since the application requires a proxy
 
 ```shell
 ? Does the application require a Proxy? Yes
@@ -1236,7 +1236,7 @@ donejs add travis-deploy-to-heroku
 
 When prompted, confirm each prompt by pressing the Enter key (or enter new values if needed) and then confirm the changes made to the `.travis.yml` file.
 
-The updated `.travis.yml` should look like this: 
+The updated `.travis.yml` should look like this:
 
 ```yaml
 language: node_js
@@ -1249,7 +1249,7 @@ before_install:
 deploy:
   skip_cleanup: true
   provider: heroku
-  app: <heroku-appname> 
+  app: <heroku-appname>
   api_key: <encrypted-heroku-api-key>
 before_deploy:
   - git config --global user.email "me@example.com"

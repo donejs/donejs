@@ -39,7 +39,7 @@ npm install -g donejs
 Then we’ll create a new DoneJS application called `donejs-chat`:
 
 ```shell
-donejs add app donejs-chat
+donejs add app donejs-chat --yes
 ```
 
 This will create a new folder called `donejs-chat` and in it generate our application.
