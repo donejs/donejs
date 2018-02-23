@@ -654,10 +654,6 @@ before_install:
 
 By default Travis CI runs `npm test` for NodeJS projects which is what we want. `before_install` sets up a window system to run Firefox.
 
-# place-my-order
-```
-@highlight 1,only
-
 To see Travis run, let's add all changes and push to the branch:
 
 ```shell
