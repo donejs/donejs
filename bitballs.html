@@ -83,6 +83,7 @@
 									<li><a href="./bitballs.html">Example App: Bitballs</a></li>
                   <li><a href="./ssr-react.html">Server rendering React</a></li>
 									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
+                  <li><a href="./migrate-2.html">Migrate to DoneJS 2</a></li>
 									<li><a href="./contributing.html">Contributing</a></li>
 								</ul>
 							</li>
@@ -677,7 +678,7 @@ model to retrieve the current session.  If there is a session, it will
 be stored on the AppViewModel.</p>
 <pre><code class="language-js">session: {
   serialize: false,
-  value: function() {
+  default: function() {
     Session.get({}).then((session) =&gt; {
       this.session = session;
     });

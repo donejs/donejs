@@ -17,7 +17,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-  <title>donejs - Guides</title>
+  <title>donejs - Migrating to DoneJS 2</title>
 	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
 	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
 	<meta name="author" content="Bitovi - DoneJS">
@@ -41,7 +41,7 @@
 	
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
 </head>
-<body class="docs Guides">
+<body class="docs migrate-2">
 		<div id="greyOutUnderNav" style="display:none;"></div>
 		<header>
 			<nav class="navbar navbar-default navbar-fixed-top">
@@ -72,7 +72,7 @@
 							<li ><a href="./About.html">About</a></li>
 							<li ><a href="./Apis.html">Apis</a></li>
 
-							<li class="guides-menu active">
+							<li class="guides-menu">
 								<a href="./Guides.html">Guides</a>
 								<ul class="dropdown-menu">
 									<li><a href="./SettingUp.html">Setting Up</a></li>
@@ -166,7 +166,7 @@
 			
 			<section class="title">
 				<div class="heading">
-<h1>Guides</h1>
+<h1>Migrating to DoneJS 2</h1>
 	<ul class="tags">
 		<li>page</li>
 	</ul>
@@ -175,6 +175,10 @@
 </div>
 
 <div class="sub-heading">
+	
+	
+		<span class="module">migrate-2</span>
+	
 	
 	
 	<span class="inherits">&nbsp;</span>
@@ -202,8 +206,7 @@
 
 			
 			<section class="description">
-				<p>DoneJS is about getting your application ... <strong>done</strong> ... so you can spend time with your friends and family.  To demonstrate how easy it is to make something amazing with all the bells and
-whistles a modern developer needs, we created the following guides.</p>
+				<p>This guide walks you through the step-by-step process of upgrading a DoneJS 1 app to DoneJS 2.</p>
 
 			</section>
 			
@@ -217,62 +220,46 @@ whistles a modern developer needs, we created the following guides.</p>
 
 			
 			<section class="comment">
-				<h2><a href="./Guide.html">Quick start: donejs-chat</a></h2>
-<p><a href="./Guide.html"><img class="app-thumbs" src="static/img/donejs-chat.gif" width="500" style="border: 1px solid #000"></a></p>
-<p>In the <a href="./Guide.html">quick start guide</a>, we will build a small chat application - <a href="https://chat.donejs.com/">https://chat.donejs.com/</a>.  You'll learn about:</p>
+				<p>This guide explains how to upgrade DoneJS 1.0 app to DoneJS 2.</p>
+<h2>Pre-migration preparation</h2>
+<p>Before upgrading to DoneJS 2, it’s a good idea to make sure all of your tests are passing, your project builds successfully, and you can deploy your app. This will give you more assurance as you upgrade individual parts of your project.</p>
+<p>To make sure tests are passing, run:</p>
+<pre><code class="language-shell">donejs test
+</code></pre>
+<p>To confirm that your build is working correctly, run:</p>
+<pre><code class="language-shell">donejs build
+NODE_ENV=production donejs start
+</code></pre>
+<p>This will create your production build and then start a local server in production mode. If you open <a href="http://localhost:8080/">localhost:8080</a> in your browser, you should see the production bundles being loaded in the Network tab of your developer tools.</p>
+<p>Once you are confident that you are ready to upgrade, create a new branch from which to work. Assuming you are using git run this command:</p>
+<pre><code class="language-js">git checkout -b upgrade-donejs
+</code></pre>
+<p>If you are using a different version control system, substitute above for the relevant commands. The idea is the same; create a new branch from which to make the DoneJS upgrade changes.</p>
+<h2>Install donejs@2</h2>
+<p>Once you have completed the prepreation, upgrade to the latest version of the <strong>donejs</strong> global package.</p>
+<pre><code class="language-shell">npm install --global donejs@2
+</code></pre>
+<p>Now any time you create new applications using <code>donejs add app</code>, it will scaffold out a DoneJS 2 project.</p>
+<h2>Run donejs upgrade</h2>
+<blockquote>
+<p><em>Important</em>: Before running this step make sure your git directory is clean. It's best to create a new branch to do the upgrade, so that you can ensure everything is working before accepting it into master.</p>
+</blockquote>
+<p>DoneJS 2 include a new command <code>donejs upgrade</code> which will upgrade all of your dependencies to their latest version and run any codemods that are available. Running the following command:</p>
+<pre><code class="language-shell">donejs upgrade
+</code></pre>
+<p>This will:</p>
 <ul>
-<li>Hot Module Swapping</li>
-<li>Server-side rendering</li>
-<li>Progressive loading</li>
-<li>Real time connections</li>
-<li>Building and deploying to a CDN.</li>
-<li>Builds to Cordova (mobile) and NW.js (desktop).</li>
+<li>Update your package.json with the latest versions of each DoneJS packages.</li>
+<li>Run <code>npm install</code>, to give you the latest versions.</li>
+<li>Run <code>can-migrate</code> to apply codemods for the changes that happened in CanJS 4.0.</li>
 </ul>
-<h2><a href="./place-my-order.html">In-depth: place-my-order</a></h2>
-<p><a href="./place-my-order.html"><img class="app-thumbs" src="static/img/thumb-pmo.png" srcset="static/img/thumb-pmo.png 1x, static/img/thumb-pmo-2x.png 2x"></a></p>
-<p>In the <a href="./place-my-order.html">place-my-order guide</a>, we will go into detail, creating <a href="http://place-my-order.com">http://place-my-order.com</a>, a restaurant menu order application. You'll learn everything covered in the &quot;Quick start&quot;, plus more:</p>
-<ul>
-<li>MVVM architecture</li>
-<li>Testing</li>
-<li>Nested routing</li>
-<li>Continuous integration and continuous deployment</li>
-<li>Documentation</li>
-</ul>
-<h2><a href="./plugin.html">Creating a plugin</a></h2>
-<p><a href="./plugin.html"><img class="app-thumbs" src="static/img/thumb-plugin.png" srcset="static/img/thumb-plugin.png 1x, static/img/thumb-plugin-2x.png 2x"></a></p>
-<p>In the <a href="plugin.html">plugin guide</a>, we will create a reusable number input widget using <a href="http://getbootstrap.com">Bootstrap</a> styles. We will cover:</p>
-<ul>
-<li>Create the project on GitHub</li>
-<li>Initialize the repository as a new DoneJS plugin</li>
-<li>Set up continuous integration with Travis CI</li>
-<li>Start development mode</li>
-<li>Implement the component functionality and tests</li>
-<li>Make a pull request to the repository</li>
-<li>Make a build</li>
-<li>Publish to npm</li>
-<li>Use the plugin in other projects</li>
-</ul>
-<h2><a href="./bitballs.html">Example App: Bitballs</a></h2>
-<p><a href="./bitballs.html"><img class="app-thumbs" src="static/img/bitballs/bitballs-video.png" srcset="static/img/bitballs/bitballs-video.png 1x, static/img/bitballs/bitballs-video-2x.png 2x"></a></p>
-<p>In this guide, you'll learn how <a href="http://bitballs.herokuapp.com">Bitballs</a> - a charity basketball tournament management application - works.
-Specifically, this guide will walk through the implementation of the following behaviors or functionality:</p>
-<ul>
-<li>Registration, login, user sessions, and access rights.</li>
-<li>Handling relationships between model types.</li>
-<li>Setup node services and server-side rendering on the same process.</li>
-<li>How to turn off parts of the app that should not be server-side rendered.</li>
-</ul>
-<h2><a href="migrate-1.html" title="This guide walks you through the step-by-step process of upgrading a DoneJS 0.9 app to DoneJS 1.">Migrating to DoneJS 1</a></h2>
-<p>Explains how to upgrade DoneJS 0.9 app to 1.0.</p>
-<h2><a href="contributing.html" title="">Contributing</a></h2>
-<p>The <a href="contributing.html" title="">contribution guide</a> includes information about our code of conduct, reporting bugs, submitting new code, and more!</p>
-<h2><a href="ssr-react.html" title="In this guide you'll learn about using done-ssr to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:
-
-Using Zones to isolate rendering, allowing multiple requests to be served from the same application
-Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server
-HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server
-Incremental rendering using HTTP/2 PUSH and the fetch API.">Server rendering</a></h2>
-<p>In this guide you'll learn how to use the great features of <a href="https://github.com/donejs/done-ssr">done-ssr</a> outside of a traditional DoneJS app. This guide walks through building a <a href="https://reactjs.org/">React</a> app with a streaming list, and then building an HTTP/2 server that renders using done-ssr and <a href="https://github.com/canjs/can-zone">can-zone</a>.</p>
+<p>Once this is complete you will see several changed files. It's a good idea to look at these files using your favorite diff tool to see if the changes look correct. can-migrate is conservative about the changes it makes but is not perfect.</p>
+<p>If you would prefer <em>not</em> to run the CanJS codemods as part of the upgrade, you can skip this part by running the command as <code>donejs upgrade --no-canmigrate</code>.</p>
+<h2>Go through the CanJS 4 Migration Guide</h2>
+<p>Although <code>donejs upgrade</code> covers a lot of the important parts of the upgrade, especially getting the correct versions of each dependency, it cannot do everything for you.</p>
+<p>The <a href="https://canjs.com/doc/migrate-4.html">CanJS 4.0 migration guide</a> goes over the parts that you might need to change manually. Reviewing this guide will also help familiarize yourself with CanJS 4, so it's a good thing to read even if you are developing a new project.</p>
+<h2>Reach out for help</h2>
+<p>We've taken care to make upgrading DoneJS apps as easy as possible. However, as always, we're available on <a href="https://gitter.im/donejs/donejs">Gitter chat</a> and <a href="https://forums.donejs.com/">the forums</a> to try and help!</p>
 
 			</section>
 			
@@ -365,7 +352,7 @@ Incremental rendering using HTTP/2 PUSH and the fetch API.">Server rendering</a>
 	
 
 	<script type="text/javascript">
-		var docObject = {"src":{"path":"docs/guides/guides.md"},"description":"DoneJS is about getting your application ... __done__ ... so you can spend time with your friends and family.  To demonstrate how easy it is to make something amazing with all the bells and\nwhistles a modern developer needs, we created the following guides.\n\n\n","name":"Guides","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
+		var docObject = {"src":{"path":"docs/guides/migrate-2.md"},"description":"This guide walks you through the step-by-step process of upgrading a DoneJS 1 app to DoneJS 2. \n","name":"migrate-2","title":"Migrating to DoneJS 2","type":"page","parent":"Guides","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
 	</script>
 
 	

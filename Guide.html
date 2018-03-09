@@ -83,6 +83,7 @@
 									<li><a href="./bitballs.html">Example App: Bitballs</a></li>
                   <li><a href="./ssr-react.html">Server rendering React</a></li>
 									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
+                  <li><a href="./migrate-2.html">Migrate to DoneJS 2</a></li>
 									<li><a href="./contributing.html">Contributing</a></li>
 								</ul>
 							</li>
@@ -239,11 +240,11 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </blockquote>
 <h3>Install DoneJS</h3>
 <p>To get started, let’s install the DoneJS command line utility globally:</p>
-<pre><code class="language-shell">npm install -g donejs@1
+<pre><code class="language-shell">npm install -g donejs
 </code></pre>
 <h3>Generate the application</h3>
 <p>Then we’ll create a new DoneJS application called <code>donejs-chat</code>:</p>
-<pre><code class="language-shell">donejs add app donejs-chat
+<pre><code class="language-shell">donejs add app donejs-chat --yes
 </code></pre>
 <p>This will create a new folder called <code>donejs-chat</code> and in it generate our application.</p>
 <p>The initialization process will ask questions like the name of your application, the source folder, etc. We’ll answer these with the default settings by hitting enter.</p>
@@ -284,8 +285,8 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
   &lt;/head&gt;
   &lt;body&gt;
     &lt;can-import from=&quot;bootstrap/less/bootstrap.less&quot; /&gt;
-    &lt;can-import from=&quot;donejs-chat/styles.less&quot; /&gt;
-    &lt;can-import from=&quot;donejs-chat/app&quot; export-as=&quot;viewModel&quot; /&gt;
+    &lt;can-import from=&quot;~/styles.less&quot; /&gt;
+    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; /&gt;
 
     &lt;div class=&quot;container&quot;&gt;
       &lt;div class=&quot;row&quot;&gt;
@@ -301,7 +302,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 
     {{#switch env.NODE_ENV}}
       {{#case &quot;production&quot;}}
-        &lt;script src=&quot;{{joinBase 'steal.production.js'}}&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
       {{/case}}
       {{#default}}
         &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
@@ -347,14 +348,14 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
     h1.page-header { margin-top: 0; }
   &lt;/style&gt;
   &lt;view&gt;
-    &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
+    &lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
     &lt;h1 class=&quot;page-header text-center&quot;&gt;
       &lt;img src=&quot;https://donejs.com/static/img/donejs-logo-white.svg&quot;
            alt=&quot;DoneJS logo&quot; style=&quot;width: 100%;&quot; /&gt;
       &lt;br&gt;Chat
     &lt;/h1&gt;
 
-    &lt;a href=&quot;{{routeUrl page='chat' }}&quot;
+    &lt;a href=&quot;{{routeUrl(page='chat')}}&quot;
        class=&quot;btn btn-primary btn-block btn-lg&quot;&gt;
       Start chat
     &lt;/a&gt;
@@ -371,8 +372,8 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </ul>
 </blockquote>
 <p>Next, add a link to go back to the homepage from the chat page by updating <code>src/messages/messages.stache</code> to:</p>
-<pre><code class="language-html">&lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
-&lt;h5&gt;&lt;a href=&quot;{{routeUrl page='home'}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
+<pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
+&lt;h5&gt;&lt;a href=&quot;{{routeUrl(page='home')}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
 &lt;p&gt;{{message}}&lt;/p&gt;
 
 </code></pre>
@@ -382,21 +383,22 @@ define a rule for it in <code>src/app.js</code>:</p>
 <pre><code class="language-js">import DefineMap from 'can-define/map/';
 import route from 'can-route';
 import 'can-route-pushstate';
+import 'can-debug#?./is-dev';
 
 const AppViewModel = DefineMap.extend({
   page: 'string',
   title: {
-    value: 'donejs-chat',
+    default: 'donejs-chat',
     serialize: false
   }
 });
 
-route('/{page}', { page: 'home' });
+route.register('/{page}', { page: 'home' });
 
 export default AppViewModel;
 
 </code></pre>
-<p><span line-highlight='6,13,only'></span></p>
+<p><span line-highlight='7,14,only'></span></p>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -414,23 +416,23 @@ property.</li>
   &lt;/head&gt;
   &lt;body&gt;
     &lt;can-import from=&quot;bootstrap/less/bootstrap.less&quot; /&gt;
-    &lt;can-import from=&quot;donejs-chat/styles.less&quot; /&gt;
-    &lt;can-import from=&quot;donejs-chat/app&quot; export-as=&quot;viewModel&quot; /&gt;
+    &lt;can-import from=&quot;~/styles.less&quot; /&gt;
+    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; /&gt;
 
     &lt;div class=&quot;container&quot;&gt;
       &lt;div class=&quot;row&quot;&gt;
         &lt;div class=&quot;col-sm-8 col-sm-offset-2&quot;&gt;
-          {{#eq page 'chat'}}
-            &lt;can-import from=&quot;donejs-chat/messages/&quot;&gt;
-              {{#if isPending}}
+          {{#eq(page, 'chat')}}
+            &lt;can-import from=&quot;~/messages/&quot;&gt;
+              {{#if(isPending)}}
                 Loading...
               {{else}}
                 &lt;chat-messages/&gt;
               {{/if}}
             &lt;/can-import&gt;
           {{else}}
-            &lt;can-import from=&quot;donejs-chat/home.component&quot;&gt;
-              {{#if isPending}}
+            &lt;can-import from=&quot;~/home.component&quot;&gt;
+              {{#if(isPending)}}
                 Loading...
               {{else}}
                 &lt;chat-home/&gt;
@@ -443,7 +445,7 @@ property.</li>
 
     {{#switch env.NODE_ENV}}
       {{#case &quot;production&quot;}}
-        &lt;script src=&quot;{{joinBase 'steal.production.js'}}&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
       {{/case}}
       {{#default}}
         &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
@@ -472,7 +474,7 @@ property.</li>
 <h3>Install bit-tabs</h3>
 <p>On the homepage, let’s install and add <a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a>, a simple declarative tabs widget.</p>
 <p>Run:</p>
-<pre><code class="language-shell">npm install bit-tabs@1 --save
+<pre><code class="language-shell">npm install bit-tabs@2 --save
 </code></pre>
 <h3>Update the page</h3>
 <p>Then, import the unstyled custom elements from <code>bit-tabs/unstyled</code> (unstyled because we will use Bootstrap’s styles) and add <code>&lt;bit-tabs&gt;</code> and <code>&lt;bit-panel&gt;</code> elements to the template.</p>
@@ -486,7 +488,7 @@ property.</li>
     }
   &lt;/style&gt;
   &lt;view&gt;
-    &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
+    &lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
     &lt;can-import from=&quot;bit-tabs/unstyled&quot; /&gt;
     &lt;h1 class=&quot;page-header text-center&quot;&gt;
       &lt;img src=&quot;https://donejs.com/static/img/donejs-logo-white.svg&quot;
@@ -494,16 +496,16 @@ property.</li>
       &lt;br&gt;Chat
     &lt;/h1&gt;
 
-    &lt;bit-tabs tabs-class=&quot;nav nav-tabs&quot;&gt;
-      &lt;bit-panel title=&quot;CanJS&quot;&gt;
+    &lt;bit-tabs tabsClass:from=&quot;'nav nav-tabs'&quot;&gt;
+      &lt;bit-panel title:from=&quot;'CanJS'&quot;&gt;
         &lt;p&gt;CanJS provides the MV*&lt;/p&gt;
       &lt;/bit-panel&gt;
-      &lt;bit-panel title=&quot;StealJS&quot;&gt;
+      &lt;bit-panel title:from=&quot;'StealJS'&quot;&gt;
         &lt;p&gt;StealJS provides the infrastructure.&lt;/p&gt;
       &lt;/bit-panel&gt;
     &lt;/bit-tabs&gt;
 
-    &lt;a href=&quot;{{routeUrl page='chat'}}&quot;
+    &lt;a href=&quot;{{routeUrl(page='chat')}}&quot;
        class=&quot;btn btn-primary btn-block btn-lg&quot;&gt;
       Start chat
     &lt;/a&gt;
@@ -604,11 +606,11 @@ export default Component.extend({
 </ul>
 </blockquote>
 <p>Display the messages by updating <code>src/messages/messages.stache</code> to:</p>
-<pre><code class="language-html">&lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
-&lt;h5&gt;&lt;a href=&quot;{{routeUrl page='home'}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
+<pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
+&lt;h5&gt;&lt;a href=&quot;{{routeUrl(page='home')}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
 
-{{#if messagesPromise.isResolved}}
-  {{#each messagesPromise.value}}
+{{#if(messagesPromise.isResolved)}}
+  {{#each(messagesPromise.value)}}
     &lt;div class=&quot;list-group-item&quot;&gt;
       &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{name}}&lt;/h4&gt;
       &lt;p class=&quot;list-group-item-text&quot;&gt;{{body}}&lt;/p&gt;
@@ -676,10 +678,10 @@ the message data.</li>
 </blockquote>
 <p>The <code>send()</code> method takes the <code>name</code> and <code>message</code> properties from the view-model and creates a <code>Message</code> instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.</p>
 <p>Next update <code>src/messages/messages.stache</code> to look like this:</p>
-<pre><code class="language-html">&lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
-&lt;h5&gt;&lt;a href=&quot;{{routeUrl page='home'}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
+<pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
+&lt;h5&gt;&lt;a href=&quot;{{routeUrl(page='home')}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
 
-{{#if messagesPromise.isResolved}}
+{{#if(messagesPromise.isResolved)}}
   {{#each messagesPromise.value}}
     &lt;div class=&quot;list-group-item&quot;&gt;
       &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{name}}&lt;/h4&gt;
@@ -692,7 +694,7 @@ the message data.</li>
   {{/each}}
 {{/if}}
 
-&lt;form class=&quot;row&quot; on:submit=&quot;send(%event)&quot;&gt;
+&lt;form class=&quot;row&quot; on:submit=&quot;send(scope.event)&quot;&gt;
   &lt;div class=&quot;col-sm-3&quot;&gt;
     &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Your name&quot;
            value:bind=&quot;name&quot;/&gt;

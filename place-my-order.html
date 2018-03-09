@@ -83,6 +83,7 @@
 									<li><a href="./bitballs.html">Example App: Bitballs</a></li>
                   <li><a href="./ssr-react.html">Server rendering React</a></li>
 									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
+                  <li><a href="./migrate-2.html">Migrate to DoneJS 2</a></li>
 									<li><a href="./contributing.html">Contributing</a></li>
 								</ul>
 							</li>
@@ -235,10 +236,10 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </blockquote>
 <h3>Create the project</h3>
 <p>To get started, let's install the DoneJS command line utility globally:</p>
-<pre><code class="language-shell">npm install -g donejs@1
+<pre><code class="language-shell">npm install -g donejs
 </code></pre>
 <p>Then we can create a new DoneJS application:</p>
-<pre><code class="language-shell">donejs add app place-my-order
+<pre><code class="language-shell">donejs add app place-my-order --yes
 </code></pre>
 <p>The initialization process will ask you questions like the name of your application (set to <code>place-my-order</code>) and the source folder (set to <code>src</code>). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:</p>
 <ul>
@@ -311,7 +312,7 @@ Which allows us to start the server like:</p>
 </code></pre>
 <p>The first time it starts, the server will initialize some default data (restaurants and orders). Once started, you can verify that the data has been created and the service is running by going to <a href="http://localhost:7070/restaurants">http://localhost:7070/restaurants</a>, where we can see a JSON list of restaurant data.</p>
 <h3>Starting the application</h3>
-<p>Now our application is good to go and we can start the server. We need to proxy the <code>place-my-order-api</code> server to <code>/api</code> on our server in order to avoid violating the same origin policy. This means that we need to modify the <code>start</code> and <code>develop</code> script in our <code>package.json</code> to:</p>
+<p>Now our application is good to go and we can start the server. We need to proxy the <code>place-my-order-api</code> server to <code>/api</code> on our server in order to avoid violating the <a href="https://en.wikipedia.org/wiki/Same-origin_policy">same origin policy</a>. This means that we need to modify the <code>start</code> and <code>develop</code> script in our <code>package.json</code> to:</p>
 <pre><code class="language-js">&quot;scripts&quot;: {
   &quot;api&quot;: &quot;place-my-order-api --port 7070&quot;,
   &quot;test&quot;: &quot;testee test.html --browsers firefox --reporter Spec&quot;,
@@ -343,14 +344,14 @@ load the static assets and set a <code>&lt;meta&gt;</code> tag to support a resp
   &lt;/head&gt;
   &lt;body&gt;
     &lt;can-import from=&quot;place-my-order-assets&quot; /&gt;
-    &lt;can-import from=&quot;place-my-order/styles.less&quot; /&gt;
-    &lt;can-import from=&quot;place-my-order/app&quot; export-as=&quot;viewModel&quot; /&gt;
+    &lt;can-import from=&quot;~/styles.less&quot; /&gt;
+    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; /&gt;
 
     &lt;h1&gt;{{message}}&lt;/h1&gt;
 
     {{#switch env.NODE_ENV}}
       {{#case &quot;production&quot;}}
-        &lt;script src=&quot;{{joinBase 'steal.production.js'}}&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
       {{/case}}
       {{#default}}
         &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
@@ -372,14 +373,19 @@ This is an HTML5 template that uses <a href="https://canjs.com/doc/can-stache.ht
 import DefineMap from 'can-define/map/';
 import route from 'can-route';
 import 'can-route-pushstate';
+import 'can-debug#?./is-dev';
 
 const AppViewModel = DefineMap.extend({
+  env: {
+    default: () =&gt; ({NODE_ENV:'development'}),
+    serialize: false
+  },
   message: {
-    value: 'Hello World!',
+    default: 'Hello World!',
     serialize: false
   },
   title: {
-    value: 'place-my-order',
+    default: 'place-my-order',
     serialize: false
   }
 });
@@ -401,17 +407,17 @@ export default AppViewModel;
     p { font-weight: bold; }
   &lt;/style&gt;
   &lt;view&gt;
-    &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
+    &lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
     &lt;div class=&quot;homepage&quot;&gt;
-      &lt;img src=&quot;{{joinBase 'node_modules/place-my-order-assets/images/homepage-hero.jpg'}}&quot;
-          width=&quot;250&quot; height=&quot;380&quot; /&gt;
+      &lt;img src=&quot;{{joinBase('node_modules/place-my-order-assets/images/homepage-hero.jpg')}}&quot;
+          alt=&quot;Restaurant table with glasses.&quot; width=&quot;250&quot; height=&quot;380&quot; /&gt;
       &lt;h1&gt;Ordering food has never been easier&lt;/h1&gt;
       &lt;p&gt;
         We make it easier than ever to order gourmet food
         from your favorite local restaurants.
       &lt;/p&gt;
       &lt;p&gt;
-        &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants'}}&quot; role=&quot;button&quot;&gt;Choose a Restaurant&lt;/a&gt;
+        &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl(page='restaurants')}}&quot; role=&quot;button&quot;&gt;Choose a Restaurant&lt;/a&gt;
       &lt;/p&gt;
     &lt;/div&gt;
   &lt;/view&gt;
@@ -420,7 +426,7 @@ export default AppViewModel;
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-home component'
+        default: 'This is the pmo-home component'
       }
     });
   &lt;/script&gt;
@@ -455,7 +461,7 @@ Here we created a <a href="https://canjs.com/doc/can-component.html">can-compone
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-order-history component'
+        default: 'This is the pmo-order-history component'
       }
     });
   &lt;/script&gt;
@@ -500,6 +506,7 @@ Here we created a <a href="https://canjs.com/doc/can-component.html">can-compone
 <pre><code class="language-js">import DefineMap from 'can-define/map/';
 import route from 'can-route';
 import 'can-route-pushstate';
+import 'can-debug#?./is-dev';
 
 const AppViewModel = DefineMap.extend({
   page: 'string',
@@ -507,19 +514,19 @@ const AppViewModel = DefineMap.extend({
   action: 'string',
 
   title: {
-    value: 'place-my-order',
+    default: 'place-my-order',
     serialize: false
   }
 });
 
-route('{page}', { page: 'home' });
-route('{page}/{slug}', { slug: null });
-route('{page}/{slug}/{action}', { slug: null, action: null });
+route.register('{page}', { page: 'home' });
+route.register('{page}/{slug}', { slug: null });
+route.register('{page}/{slug}/{action}', { slug: null, action: null });
 
 export default AppViewModel;
 
 </code></pre>
-<p><span line-highlight='6-8,16-18,only'></span></p>
+<p><span line-highlight='7-9,17-19,only'></span></p>
 <blockquote>
 <p>Notice: We also removed the <code>message</code> property in <code>AppViewModel</code>.  This is because
 it is not needed.</p>
@@ -542,19 +549,19 @@ it is not needed.</p>
     p { font-weight: bold; }
   &lt;/style&gt;
   &lt;view&gt;
-    &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
+    &lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
     &lt;header&gt;
       &lt;nav&gt;
        &lt;h1&gt;place-my-order.com&lt;/h1&gt;
        &lt;ul&gt;
-         &lt;li class=&quot;{{#eq page 'home'}}active{{/eq}}&quot;&gt;
-           &lt;a href=&quot;{{routeUrl page='home'}}&quot;&gt;Home&lt;/a&gt;
+         &lt;li class=&quot;{{#eq(page, 'home')}}active{{/eq}}&quot;&gt;
+           &lt;a href=&quot;{{routeUrl(page='home')}}&quot;&gt;Home&lt;/a&gt;
          &lt;/li&gt;
-         &lt;li class=&quot;{{#eq page 'restaurants'}}active{{/eq}}&quot;&gt;
-           &lt;a href=&quot;{{routeUrl page='restaurants'}}&quot;&gt;Restaurants&lt;/a&gt;
+         &lt;li class=&quot;{{#eq(page, 'restaurants')}}active{{/eq}}&quot;&gt;
+           &lt;a href=&quot;{{routeUrl(page='restaurants')}}&quot;&gt;Restaurants&lt;/a&gt;
          &lt;/li&gt;
-         &lt;li class=&quot;{{#eq page 'order-history'}}active{{/eq}}&quot;&gt;
-           &lt;a href=&quot;{{routeUrl page='order-history'}}&quot;&gt;Order History&lt;/a&gt;
+         &lt;li class=&quot;{{#eq(page, 'order-history')}}active{{/eq}}&quot;&gt;
+           &lt;a href=&quot;{{routeUrl(page='order-history')}}&quot;&gt;Order History&lt;/a&gt;
          &lt;/li&gt;
        &lt;/ul&gt;
       &lt;/nav&gt;
@@ -565,7 +572,7 @@ it is not needed.</p>
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-header component'
+        default: 'This is the pmo-header component'
       }
     });
   &lt;/script&gt;
@@ -587,7 +594,7 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
     p { font-weight: bold; }
   &lt;/style&gt;
   &lt;view&gt;
-    {{#eq state &quot;resolved&quot;}}
+    {{#eq(state, &quot;resolved&quot;)}}
       &lt;content&gt;&lt;/content&gt;
     {{else}}
       &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
@@ -598,7 +605,7 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
 
     export default DefineMap.extend({
       message: {
-        value: 'This is the pmo-loading component'
+        default: 'This is the pmo-loading component'
       }
     });
   &lt;/script&gt;
@@ -616,28 +623,28 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
   &lt;/head&gt;
   &lt;body&gt;
     &lt;can-import from=&quot;place-my-order-assets&quot; /&gt;
-    &lt;can-import from=&quot;place-my-order/styles.less&quot; /&gt;
-    &lt;can-import from=&quot;place-my-order/app&quot; export-as=&quot;viewModel&quot; /&gt;
+    &lt;can-import from=&quot;~/styles.less&quot; /&gt;
+    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; /&gt;
 
-    &lt;can-import from=&quot;place-my-order/loading.component&quot; /&gt;
-    &lt;can-import from=&quot;place-my-order/header.component&quot; /&gt;
+    &lt;can-import from=&quot;~/loading.component&quot; /&gt;
+    &lt;can-import from=&quot;~/header.component&quot; /&gt;
     &lt;pmo-header page:from=&quot;page&quot;/&gt;
 
     {{#switch page}}
       {{#case &quot;home&quot;}}
-        &lt;can-import from=&quot;place-my-order/home.component&quot;
+        &lt;can-import from=&quot;~/home.component&quot;
             can-tag=&quot;pmo-loading&quot;&gt;
           &lt;pmo-home/&gt;
         &lt;/can-import&gt;
       {{/case}}
       {{#case &quot;restaurants&quot;}}
-        &lt;can-import from=&quot;place-my-order/restaurant/list/&quot;
+        &lt;can-import from=&quot;~/restaurant/list/&quot;
             can-tag=&quot;pmo-loading&quot;&gt;
           &lt;pmo-restaurant-list/&gt;
         &lt;/can-import&gt;
       {{/case}}
       {{#case &quot;order-history&quot;}}
-        &lt;can-import from=&quot;place-my-order/order/history.component&quot;
+        &lt;can-import from=&quot;~/order/history.component&quot;
             can-tag=&quot;pmo-loading&quot;&gt;
           &lt;pmo-order-history/&gt;
         &lt;/can-import&gt;
@@ -647,7 +654,7 @@ Here we use <a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html">rou
     {{#switch env.NODE_ENV}}
       {{#case &quot;production&quot;}}
         &lt;script
-          src=&quot;{{joinBase 'steal.production.js'}}&quot;&gt;
+          src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;
         &lt;/script&gt;
       {{/case}}
       {{#default}}
@@ -741,7 +748,7 @@ of all restaurants on the server and log them to the console.</p>
 import DefineMap from 'can-define/map/';
 import './list.less';
 import view from './list.stache';
-import Restaurant from 'place-my-order/models/restaurant';
+import Restaurant from '~/models/restaurant';
 
 export const ViewModel = DefineMap.extend({
   restaurants: {
@@ -760,18 +767,18 @@ export default Component.extend({
 </code></pre>
 <p><span line-highlight='5,8-12,only'></span>
 And update the template at <code>src/restaurant/list/list.stache</code> to use the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> returned for the <code>restaurants</code> property to render the template:</p>
-<pre><code class="language-html">&lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
+<pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
 
 &lt;div class=&quot;restaurants&quot;&gt;
   &lt;h2 class=&quot;page-header&quot;&gt;Restaurants&lt;/h2&gt;
-  {{#if restaurants.isPending}}
+  {{#if(restaurants.isPending)}}
     &lt;div class=&quot;restaurant loading&quot;&gt;&lt;/div&gt;
   {{/if}}
 
-  {{#if restaurants.isResolved}}
-    {{#each restaurants.value}}
+  {{#if(restaurants.isResolved)}}
+    {{#each(restaurants.value)}}
       &lt;div class=&quot;restaurant&quot;&gt;
-        &lt;img src=&quot;{{joinBase images.thumbnail}}&quot;
+        &lt;img src=&quot;{{joinBase(images.thumbnail)}}&quot;
           width=&quot;100&quot; height=&quot;100&quot;&gt;
         &lt;h3&gt;{{name}}&lt;/h3&gt;
         {{#address}}
@@ -786,7 +793,7 @@ And update the template at <code>src/restaurant/list/list.stache</code> to use t
           &lt;span class=&quot;open-now&quot;&gt;Open Now&lt;/span&gt;
         &lt;/div&gt;
 
-        &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants' slug=slug}}&quot;&gt;
+        &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl(page='restaurants' slug=slug)}}&quot;&gt;
           Details
         &lt;/a&gt;
         &lt;br /&gt;
@@ -830,9 +837,9 @@ And update the template at <code>src/restaurant/list/list.stache</code> to use t
 import DefineMap from 'can-define/map/';
 import './list.less';
 import view from './list.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import State from 'place-my-order/models/state';
-import City from 'place-my-order/models/city';
+import Restaurant from '~/models/restaurant';
+import State from '~/models/state';
+import City from '~/models/city';
 
 export const ViewModel = DefineMap.extend({
   get states() {
@@ -840,7 +847,7 @@ export const ViewModel = DefineMap.extend({
   },
   state: {
     type: 'string',
-    value: null,
+    default: null,
     set() {
       // Remove the city when the state changes
       this.city = null;
@@ -857,7 +864,7 @@ export const ViewModel = DefineMap.extend({
   },
   city: {
     type: 'string',
-    value: null
+    default: null
   },
   get restaurants() {
     let state = this.state;
@@ -964,12 +971,12 @@ export default store;
 <h4>Test the view model</h4>
 <p>With fake data in place, we can test our view model by changing <code>src/restaurant/list/list-test.js</code> to:</p>
 <pre><code class="language-js">import QUnit from 'steal-qunit';
-import cityStore from 'place-my-order/models/fixtures/cities';
-import stateStore from 'place-my-order/models/fixtures/states';
-import restaurantStore from 'place-my-order/models/fixtures/restaurants';
+import cityStore from '~/models/fixtures/cities';
+import stateStore from '~/models/fixtures/states';
+import restaurantStore from '~/models/fixtures/restaurants';
 import { ViewModel } from './list';
 
-QUnit.module('place-my-order/restaurant/list', {
+QUnit.module('~/restaurant/list', {
   beforeEach() {
     localStorage.clear();
   }
@@ -1032,21 +1039,21 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 <h3>Write the template</h3>
 <p>Now that our view model is implemented and tested, we'll update the restaurant list template to support the city/state selection functionality.</p>
 <p>Update <code>src/restaurant/list/list.stache</code> to:</p>
-<pre><code class="language-html">&lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
+<pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
 
 &lt;div class=&quot;restaurants&quot;&gt;
   &lt;h2 class=&quot;page-header&quot;&gt;Restaurants&lt;/h2&gt;
   &lt;form class=&quot;form&quot;&gt;
     &lt;div class=&quot;form-group&quot;&gt;
       &lt;label&gt;State&lt;/label&gt;
-      &lt;select value:bind=&quot;state&quot; {{#if states.isPending}}disabled{{/if}}&gt;
-        {{#if states.isPending}}
+      &lt;select value:bind=&quot;state&quot; {{#if(states.isPending)}}disabled{{/if}}&gt;
+        {{#if(states.isPending)}}
           &lt;option value=&quot;&quot;&gt;Loading...&lt;/option&gt;
         {{else}}
-          {{^if state}}
+          {{^if(state)}}
           &lt;option value=&quot;&quot;&gt;Choose a state&lt;/option&gt;
           {{/if}}
-          {{#each states.value}}
+          {{#each(states.value)}}
           &lt;option value=&quot;{{short}}&quot;&gt;{{name}}&lt;/option&gt;
           {{/each}}
         {{/if}}
@@ -1054,15 +1061,15 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
     &lt;/div&gt;
     &lt;div class=&quot;form-group&quot;&gt;
       &lt;label&gt;City&lt;/label&gt;
-      &lt;select value:bind=&quot;city&quot;{{^if state}}disabled{{/if}}&gt;
-        {{#if cities.isPending}}
+      &lt;select value:bind=&quot;city&quot;{{^if(state)}}disabled{{/if}}&gt;
+        {{#if(cities.isPending)}}
           &lt;option value=&quot;&quot;&gt;Loading...&lt;/option&gt;
         {{else}}
-          {{^if city}}
+          {{^if(city)}}
           &lt;option value=&quot;&quot;&gt;Choose a city&lt;/option&gt;
           {{/if}}
-          {{#each cities.value}}
-          &lt;option value=&quot;{{name}}&quot;&gt;{{name}}&lt;/option&gt;
+          {{#each(cities.value)}}
+          &lt;option value:from=&quot;name&quot;&gt;{{name}}&lt;/option&gt;
           {{/each}}
         {{/if}}
       &lt;/select&gt;
@@ -1112,8 +1119,8 @@ Some things worth pointing out:</p>
 <p>We already have an existing demo page at <a href="http://localhost:8080/src/restaurant/list/list.html">src/restaurant/list/list.html</a>. We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:</p>
 <pre><code class="language-html">&lt;script type=&quot;text/stache&quot; can-autorender&gt;
   &lt;can-import from=&quot;place-my-order-assets&quot; /&gt;
-  &lt;can-import from=&quot;place-my-order/models/fixtures/&quot; /&gt;
-  &lt;can-import from=&quot;place-my-order/restaurant/list/&quot; /&gt;
+  &lt;can-import from=&quot;~/models/fixtures/&quot; /&gt;
+  &lt;can-import from=&quot;~/restaurant/list/&quot; /&gt;
   &lt;pmo-restaurant-list/&gt;
 &lt;/script&gt;
 &lt;script src=&quot;../../../node_modules/steal/steal.js&quot;
@@ -1129,7 +1136,7 @@ View the demo page at <a href="http://localhost:8080/src/restaurant/list/list.ht
 <pre><code class="language-js">import F from 'funcunit';
 import QUnit from 'steal-qunit';
 
-import 'place-my-order/restaurant/list/list-test';
+import '~/restaurant/list/list-test';
 
 F.attach(QUnit);
 
@@ -1161,7 +1168,7 @@ QUnit.test('place-my-order main page shows up', function() {
 git remote add origin https://github.com/&lt;your-username&gt;/place-my-order.git
 </code></pre>
 <p>Then we can add all files and push to origin like this:</p>
-<pre><code class="language-shell">git add . --all
+<pre><code class="language-shell">git add --all
 git commit -am &quot;Initial commit&quot;
 git push origin master
 </code></pre>
@@ -1173,24 +1180,37 @@ git push origin master
 <p>Continuous integration on GitHub is most useful when using <a href="https://help.github.com/categories/collaborating-on-projects-using-pull-requests/">branches and pull requests</a>. That way your main branch (master) will only get new code changes if all tests pass. Let's create a new branch with</p>
 <pre><code class="language-shell">git checkout -b travis-ci
 </code></pre>
-<p>And add a <code>.travis.yml</code> file to our project root:</p>
+<p>Run the <a href="https://github.com/donejs/donejs-travis/">donejs-travis</a> generator to add a <code>.travis.yml</code> file to our project root, and to add a <em>Build Passing</em> badge to the top of <code>readme.md</code>:</p>
+<pre><code class="language-shell">donejs add travis
+</code></pre>
+<p>When prompted, confirm the GitHub user name and repository by pressing the Enter key, you can also enter new values if needed:</p>
+<pre><code class="language-shell">? What is the GitHub owner name? (&lt;your-username&gt;)
+? What is the GitHub repository name? (place-my-order)
+</code></pre>
+<p>Following these questions, the generator will first update the <a href="https://docs.npmjs.com/files/package.json#repository">package.json's repository</a> field to point it to where your code lives.</p>
+<p>Confirm the changes by pressing the Enter key,</p>
+<pre><code> conflict package.json
+? Overwrite package.json? (Ynaxdh)
+</code></pre>
+<blockquote>
+<p>You can also press the <code>d</code> key to see a diff of the changes before writing to the file.</p>
+</blockquote>
+<p>Then, the generator creates a <code>.travis.yml</code> file and updates <code>readme.md</code> to include a badge indicating the status of the build, confirm the changes by pressing the Enter key:</p>
+<pre><code class="language-shell">conflict README.md
+? Overwrite README.md? (Ynaxdh)
+</code></pre>
+<p>The generated <code>.travis.yml</code> should look like this:</p>
 <pre><code class="language-shell">language: node_js
 node_js: node
 addons:
-  firefox: &quot;latest&quot;
+  firefox: latest
 before_install:
-  - &quot;export DISPLAY=:99.0&quot;
-  - &quot;sh -e /etc/init.d/xvfb start&quot;
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
 </code></pre>
 <p>By default Travis CI runs <code>npm test</code> for NodeJS projects which is what we want. <code>before_install</code> sets up a window system to run Firefox.</p>
-<p>We can also add a <em>Build Passing</em> badge to the top <code>readme.md</code>:</p>
-<pre><code>[![Build Status](https://travis-ci.org/&lt;your-username&gt;/place-my-order.png?branch=master)](https://travis-ci.org/&lt;your-username&gt;/place-my-order)
-
-# place-my-order
-</code></pre>
-<p><span line-highlight='1,only'></span>
-To see Travis run, let's add all changes and push to the branch:</p>
-<pre><code class="language-shell">git add readme.md .travis.yml
+<p>To see Travis run, let's add all changes and push to the branch:</p>
+<pre><code class="language-shell">git add --all
 git commit -am &quot;Enabling Travis CI&quot;
 git push origin travis-ci
 </code></pre>
@@ -1206,8 +1226,8 @@ git pull origin master
 <p>In this section, we will add additional pages that are shown under nested urls such as <code>restaurants/cheese-curd-city/order</code>.</p>
 <div></div>
 <p>Until now we've used three top level routes: <code>home</code>, <code>restaurants</code> and <code>order-history</code>. We did however also define two additional routes in <code>src/app.js</code> which looked like:</p>
-<pre><code class="language-js">route('{page}/{slug}', { slug: null });
-route('{page}/{slug}/{action}', { slug: null, action: null });
+<pre><code class="language-js">route.register('{page}/{slug}', { slug: null });
+route.register('{page}/{slug}/{action}', { slug: null, action: null });
 </code></pre>
 <p>We want to use those routes when we are in the <code>restaurants</code> page. The relevant section in <code>src/index.stache</code> currently looks like this:</p>
 <pre><code class="language-html">{{#case &quot;restaurants&quot;}}
@@ -1229,14 +1249,14 @@ route('{page}/{slug}/{action}', { slug: null, action: null });
 <p>And change <code>src/restaurant/details.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-restaurant-details&quot;&gt;
   &lt;view&gt;
-    &lt;can-import from=&quot;place-my-order/models/restaurant&quot; /&gt;
-    &lt;can-import from=&quot;can-stache/helpers/route&quot; /&gt;
-    {{#if restaurantPromise.isPending}}
+    &lt;can-import from=&quot;~/models/restaurant&quot; /&gt;
+    &lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
+    {{#if(restaurantPromise.isPending)}}
       &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
     {{else}}
       {{#restaurantPromise.value}}
       &lt;div class=&quot;restaurant-header&quot;
-          style=&quot;background-image: url({{joinBase images.banner}});&quot;&gt;
+          style=&quot;background-image: url({{joinBase(images.banner)}});&quot;&gt;
         &lt;div class=&quot;background&quot;&gt;
           &lt;h2&gt;{{name}}&lt;/h2&gt;
 
@@ -1260,11 +1280,11 @@ route('{page}/{slug}/{action}', { slug: null, action: null });
         &lt;h3&gt;The best food this side of the Mississippi&lt;/h3&gt;
 
         &lt;p class=&quot;description&quot;&gt;
-          &lt;img src=&quot;{{joinBase images.owner}}&quot; /&gt;
+          &lt;img src=&quot;{{joinBase(images.owner)}}&quot; /&gt;
           Description for {{name}}
         &lt;/p&gt;
         &lt;p class=&quot;order-link&quot;&gt;
-          &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl page='restaurants' slug=slug action='order'}}&quot;&gt;
+          &lt;a class=&quot;btn&quot; href=&quot;{{routeUrl(page='restaurants' slug=slug action='order')}}&quot;&gt;
             Order from {{name}}
           &lt;/a&gt;
         &lt;/p&gt;
@@ -1274,7 +1294,7 @@ route('{page}/{slug}/{action}', { slug: null, action: null });
   &lt;/view&gt;
   &lt;script type=&quot;view-model&quot;&gt;
     import DefineMap from 'can-define/map/';
-    import Restaurant from 'place-my-order/models/restaurant';
+    import Restaurant from '~/models/restaurant';
 
     export default DefineMap.extend({
       get restaurantPromise() {
@@ -1300,25 +1320,25 @@ the following chapters.</p>
 {{/case}}
 </code></pre>
 <p>To:</p>
-<pre><code class="language-html">{{#case &quot;restaurants&quot;}}
-  {{#if slug}}
+<pre><code class="language-html">{{#case(&quot;restaurants&quot;)}}
+  {{#if(slug)}}
     {{#switch action}}
       {{#case 'order'}}
-        &lt;can-import from=&quot;place-my-order/order/new/&quot;
+        &lt;can-import from=&quot;~/order/new/&quot;
             can-tag=&quot;pmo-loading&quot;&gt;
           &lt;pmo-order-new slug:from=&quot;slug&quot;/&gt;
         &lt;/can-import&gt;
       {{/case}}
 
       {{#default}}
-        &lt;can-import from=&quot;place-my-order/restaurant/details.component&quot;
+        &lt;can-import from=&quot;~/restaurant/details.component&quot;
             can-tag=&quot;pmo-loading&quot;&gt;
           &lt;pmo-restaurant-details slug:from=&quot;slug&quot;/&gt;
         &lt;/can-import&gt;
       {{/default}}
     {{/switch}}
   {{else}}
-    &lt;can-import from=&quot;place-my-order/restaurant/list/&quot;
+    &lt;can-import from=&quot;~/restaurant/list/&quot;
         can-tag=&quot;pmo-loading&quot;&gt;
       &lt;pmo-restaurant-list/&gt;
     &lt;/can-import&gt;
@@ -1334,18 +1354,18 @@ the following chapters.</p>
 </ul>
 <h2>Importing other projects</h2>
 <p>The npm integration of StealJS makes it very easy to share and import other components. One thing we want to do when showing the <code>pmo-order-new</code> component is have a tab to choose between the lunch and dinner menu. The good news is that there is already a <a href="https://github.com/bitovi-components/bit-tabs">bit-tabs</a> component which does exactly that. Let's add it as a project dependency with:</p>
-<pre><code class="language-shell">npm install bit-tabs@1 --save
+<pre><code class="language-shell">npm install bit-tabs@2 --save
 </code></pre>
 <p>And then integrate it into <code>src/order/new/new.stache</code>:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;bit-tabs/unstyled&quot;/&gt;
 &lt;div class=&quot;order-form&quot;&gt;
   &lt;h2&gt;Order here&lt;/h2&gt;
 
-  &lt;bit-tabs tabs-class=&quot;nav nav-tabs&quot;&gt;
-    &lt;bit-panel title=&quot;Lunch menu&quot;&gt;
+  &lt;bit-tabs tabsClass:from=&quot;'nav nav-tabs'&quot;&gt;
+    &lt;bit-panel title:from=&quot;'Lunch menu'&quot;&gt;
       This is the lunch menu
     &lt;/bit-panel&gt;
-    &lt;bit-panel title=&quot;Dinner menu&quot;&gt;
+    &lt;bit-panel title:from=&quot;'Dinner menu'&quot;&gt;
       This is the dinner menu
     &lt;/bit-panel&gt;
   &lt;/bit-tabs&gt;
@@ -1415,6 +1435,8 @@ import superMap from 'can-connect/can/super-map/';
 import loader from '@loader';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 
@@ -1446,10 +1468,10 @@ const Order = DefineMap.extend({
   restaurant: 'string',
 
   status: {
-    value: 'new'
+    default: 'new'
   },
   items: {
-    Value: ItemsList
+    Default: ItemsList
   },
   get total() {
     let total = 0.0;
@@ -1490,14 +1512,14 @@ Here we define an <code>ItemsList</code> which allows us to toggle menu items an
 import DefineMap from 'can-define/map/';
 import './new.less';
 import view from './new.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import Order from 'place-my-order/models/order';
+import Restaurant from '~/models/restaurant';
+import Order from '~/models/order';
 
 export const ViewModel = DefineMap.extend({
   slug: 'string',
   saveStatus: '*',
   order: {
-    Value: Order
+    Default: Order
   },
   get restaurantPromise() {
     return Restaurant.get({ _id: this.slug });
@@ -1536,7 +1558,7 @@ Here we just define the properties that we need: <code>slug</code>, <code>order<
 import { ViewModel } from './new';
 
 // ViewModel unit tests
-QUnit.module('place-my-order/order/new');
+QUnit.module('~/order/new');
 
 QUnit.test('canPlaceOrder', function(){
   var vm = new ViewModel({
@@ -1562,7 +1584,7 @@ QUnit.test('canPlaceOrder', function(){
 
       &lt;h4&gt;Items ordered:&lt;/h4&gt;
       &lt;ul class=&quot;list-group panel&quot;&gt;
-        {{#each items}}
+        {{#each(items)}}
           &lt;li class=&quot;list-group-item&quot;&gt;
             &lt;label&gt;
               {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
@@ -1590,13 +1612,13 @@ QUnit.test('canPlaceOrder', function(){
 </code></pre>
 <p>Now we can import that component and update <code>src/order/new/new.stache</code> to:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;bit-tabs/unstyled&quot; /&gt;
-&lt;can-import from=&quot;place-my-order/order/details.component&quot; /&gt;
+&lt;can-import from=&quot;~/order/details.component&quot; /&gt;
 
 &lt;div class=&quot;order-form&quot;&gt;
-  {{#if restaurantPromise.isPending}}
+  {{#if(restaurantPromise.isPending)}}
     &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
   {{else}}
-    {{#if saveStatus.isResolved}}
+    {{#if(saveStatus.isResolved)}}
       &lt;pmo-order-details order:from=&quot;saveStatus.value&quot;&gt;&lt;/pmo-order-details&gt;
       &lt;p&gt;&lt;a href=&quot;javascript://&quot; on:click=&quot;startNewOrder()&quot;&gt;
         Place another order
@@ -1604,37 +1626,37 @@ QUnit.test('canPlaceOrder', function(){
     {{else}}
       &lt;h3&gt;Order from {{restaurant.name}}&lt;/h3&gt;
 
-      &lt;form on:submit=&quot;placeOrder(%event)&quot;&gt;
-        &lt;bit-tabs tabs-class=&quot;nav nav-tabs&quot;&gt;
-          &lt;p class=&quot;info {{^if order.items.length}}text-error{{else}}text-success{{/if}}&quot;&gt;
-            {{^if order.items.length}}
+      &lt;form on:submit=&quot;placeOrder(scope.event)&quot;&gt;
+        &lt;bit-tabs tabsClass:from=&quot;'nav nav-tabs'&quot;&gt;
+          &lt;p class=&quot;info {{^if(order.items.length)}}text-error{{else}}text-success{{/if}}&quot;&gt;
+            {{^if(order.items.length)}}
               Please choose an item
             {{else}}
               {{order.items.length}} selected
             {{/if}}
           &lt;/p&gt;
-          &lt;bit-panel title=&quot;Lunch menu&quot;&gt;
+          &lt;bit-panel title:from=&quot;'Lunch menu'&quot;&gt;
             &lt;ul class=&quot;list-group&quot;&gt;
-              {{#each restaurant.menu.lunch}}
+              {{#each(restaurant.menu.lunch)}}
                 &lt;li class=&quot;list-group-item&quot;&gt;
                   &lt;label&gt;
                     &lt;input type=&quot;checkbox&quot;
                       on:change=&quot;order.items.toggle(.)&quot;
-                      {{#if order.items.has(.)}}checked{{/if}}&gt;
+                      {{#if(order.items.has(.))}}checked{{/if}}&gt;
                     {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
                   &lt;/label&gt;
                 &lt;/li&gt;
               {{/each}}
             &lt;/ul&gt;
           &lt;/bit-panel&gt;
-          &lt;bit-panel title=&quot;Dinner menu&quot;&gt;
+          &lt;bit-panel title:from=&quot;'Dinner menu'&quot;&gt;
             &lt;ul class=&quot;list-group&quot;&gt;
-              {{#each restaurant.menu.dinner}}
+              {{#each(restaurant.menu.dinner)}}
                 &lt;li class=&quot;list-group-item&quot;&gt;
                   &lt;label&gt;
                     &lt;input type=&quot;checkbox&quot;
                       on:change=&quot;order.items.toggle(this)&quot;
-                      {{#if order.items.has(.)}}checked{{/if}}&gt;
+                      {{#if(order.items.has(.))}}checked{{/if}}&gt;
                     {{name}} &lt;span class=&quot;badge&quot;&gt;${{price}}&lt;/span&gt;
                   &lt;/label&gt;
                 &lt;/li&gt;
@@ -1663,11 +1685,11 @@ QUnit.test('canPlaceOrder', function(){
         &lt;/div&gt;
         &lt;div class=&quot;submit&quot;&gt;
           &lt;h4&gt;Total: ${{order.total}}&lt;/h4&gt;
-          {{#if saveStatus.isPending}}
+          {{#if(saveStatus.isPending)}}
             &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
           {{else}}
             &lt;button type=&quot;submit&quot;
-                {{^if canPlaceOrder}}disabled{{/if}} class=&quot;btn&quot;&gt;
+                {{^if(canPlaceOrder)}}disabled{{/if}} class=&quot;btn&quot;&gt;
               Place My Order!
             &lt;/button&gt;
           {{/if}}
@@ -1704,6 +1726,8 @@ import loader from '@loader';
 import tag from 'can-connect/can/tag/';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 
@@ -1735,10 +1759,10 @@ const Order = DefineMap.extend({
   restaurant: 'string',
 
   status: {
-    value: 'new'
+    default: 'new'
   },
   items: {
-    Value: ItemsList
+    Default: ItemsList
   },
   get total() {
     let total = 0.0;
@@ -1785,10 +1809,10 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
   &lt;view&gt;
     &lt;h4&gt;{{listTitle}}&lt;/h4&gt;
 
-    {{#if orders.isPending}}
+    {{#if(orders.isPending)}}
      &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
     {{else}}
-      {{#each orders.value}}
+      {{#each(orders.value)}}
       &lt;div class=&quot;order {{status}}&quot;&gt;
         &lt;address&gt;
           {{name}} &lt;br /&gt;{{address}} &lt;br /&gt;{{phone}}
@@ -1796,7 +1820,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
 
         &lt;div class=&quot;items&quot;&gt;
           &lt;ul&gt;
-            {{#each items}}&lt;li&gt;{{name}}&lt;/li&gt;{{/each}}
+            {{#each(items)}}&lt;li&gt;{{name}}&lt;/li&gt;{{/each}}
           &lt;/ul&gt;
         &lt;/div&gt;
 
@@ -1804,7 +1828,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
 
         &lt;div class=&quot;actions&quot;&gt;
           &lt;span class=&quot;badge&quot;&gt;{{statusTitle}}&lt;/span&gt;
-          {{#if action}}
+          {{#if(action)}}
             &lt;p class=&quot;action&quot;&gt;
               Mark as:
               &lt;a href=&quot;javascript://&quot; on:click=&quot;markAs(action)&quot;&gt;
@@ -1829,7 +1853,7 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
 <p>Also update the order history template by changing <code>src/order/history.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;pmo-order-history&quot;&gt;
   &lt;view&gt;
-    &lt;can-import from=&quot;place-my-order/models/order&quot; /&gt;
+    &lt;can-import from=&quot;~/models/order&quot; /&gt;
 
     &lt;div class=&quot;order-history&quot;&gt;
       &lt;div class=&quot;order header&quot;&gt;
@@ -1839,47 +1863,47 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
         &lt;div class=&quot;actions&quot;&gt;Action&lt;/div&gt;
       &lt;/div&gt;
 
-      &lt;can-import from=&quot;place-my-order/order/list.component&quot; /&gt;
+      &lt;can-import from=&quot;~/order/list.component&quot; /&gt;
       &lt;order-model get-list=&quot;{status='new'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title=&quot;New Orders&quot;
-          status=&quot;new&quot;
-          status-title=&quot;New Order!&quot;
-          action=&quot;preparing&quot;
-          action-title=&quot;Preparing&quot;
-          empty-message=&quot;No new orders&quot;/&gt;
+          list-title:from=&quot;'New Orders'&quot;
+          status:from=&quot;'new'&quot;
+          status-title:from=&quot;'New Order!''&quot;
+          action:from=&quot;'preparing'&quot;
+          action-title:from=&quot;'Preparing'&quot;
+          empty-message:from=&quot;'No new orders'&quot;/&gt;
       &lt;/order-model&gt;
 
       &lt;order-model get-list=&quot;{status='preparing'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title=&quot;Preparing&quot;
-          status=&quot;preparing&quot;
-          status-title=&quot;Preparing&quot;
-          action=&quot;delivery&quot;
-          action-title=&quot;Out for delivery&quot;
-          empty-message=&quot;No orders preparing&quot;/&gt;
+          list-title:from=&quot;'Preparing'&quot;
+          status:from=&quot;'preparing'&quot;
+          status-title:from=&quot;'Preparing'&quot;
+          action:from=&quot;'delivery'&quot;
+          action-title:from=&quot;'Out for delivery'&quot;
+          empty-message:from=&quot;'No orders preparing'&quot;/&gt;
       &lt;/order-model&gt;
 
       &lt;order-model get-list=&quot;{status='delivery'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title=&quot;Out for delivery&quot;
-          status=&quot;delivery&quot;
-          status-title=&quot;Out for delivery&quot;
-          action=&quot;delivered&quot;
-          action-title=&quot;Delivered&quot;
-          empty-message=&quot;No orders are being delivered&quot;/&gt;
+          list-title:from=&quot;'Out for delivery'&quot;
+          status:from=&quot;'delivery'&quot;
+          status-title:from=&quot;'Out for delivery'&quot;
+          action:from=&quot;'delivered'&quot;
+          action-title:from=&quot;'Delivered'&quot;
+          empty-message:from=&quot;'No orders are being delivered'&quot;/&gt;
       &lt;/order-model&gt;
 
       &lt;order-model get-list=&quot;{status='delivered'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title=&quot;Delivered&quot;
-          status=&quot;delivered&quot;
-          status-title=&quot;Delivered&quot;
-          empty-message=&quot;No delivered orders&quot;/&gt;
+          list-title:from=&quot;'Delivered'&quot;
+          status:from=&quot;'delivered'&quot;
+          status-title:from=&quot;'Delivered'&quot;
+          empty-message:from=&quot;'No delivered orders'&quot;/&gt;
       &lt;/order-model&gt;
     &lt;/div&gt;
   &lt;/view&gt;
@@ -1901,6 +1925,8 @@ import tag from 'can-connect/can/tag/';
 import io from 'steal-socket.io';
 
 const Item = DefineMap.extend({
+  seal: false
+}, {
   price: 'number'
 });
 
@@ -1932,10 +1958,10 @@ const Order = DefineMap.extend({
   restaurant: 'string',
 
   status: {
-    value: 'new'
+    default: 'new'
   },
   items: {
-    Value: ItemsList
+    Default: ItemsList
   },
   get total() {
     let total = 0.0;
@@ -1995,11 +2021,11 @@ That's it. If we now open the <a href="http://localhost:8080/order-history">orde
 import DefineMap from 'can-define/map/';
 import './new.less';
 import view from './new.stache';
-import Restaurant from 'place-my-order/models/restaurant';
-import Order from 'place-my-order/models/order';
+import Restaurant from '~/models/restaurant';
+import Order from '~/models/order';
 
 /**
- * @add place-my-order/order/new
+ * @add ~/order/new
  */
 export const ViewModel = DefineMap.extend({
   /**
@@ -2017,13 +2043,13 @@ export const ViewModel = DefineMap.extend({
     */
   saveStatus: '*',
   /**
-   * @property {place-my-order/models/order} order
+   * @property {~/models/order} order
    *
    * the order that is being processed. will
    * be an empty new order inititally.
    */
   order: {
-    Value: Order
+    Default: Order
   },
   /**
     * @property {Promise} restaurantPromise
@@ -2035,7 +2061,7 @@ export const ViewModel = DefineMap.extend({
     return Restaurant.get({ _id: this.slug });
   },
   /**
-   * @property {place-my-order/models/restaurant} restaurant
+   * @property {~/models/restaurant} restaurant
    *
    * the restaurant that is being ordered from.
    */
@@ -2200,18 +2226,28 @@ donejs deploy
 <h3>Deploy your Node code</h3>
 <p>At this point your application has been deployed to a CDN. This contains StealJS, your production bundles and CSS, and any images or other static files. You still need to deploy your server code in order to get the benefit of server-side rendering.</p>
 <p>If you do not have an account yet, sign up for Heroku at <a href="https://signup.heroku.com/">signup.heroku.com</a>. Then download the <a href="https://devcenter.heroku.com/articles/heroku-command">Heroku CLI</a> which will be used to deploy.</p>
-<p>After installing we can initialize the application via</p>
-<pre><code class="language-shell">heroku login
-heroku create
+<p>After installing run the <a href="https://github.com/donejs/donejs-heroku">donejs-heroku</a> generator via:</p>
+<pre><code class="language-shell">donejs add heroku
 </code></pre>
-<p>This will return the url where your app can be viewed. Before you open it you'll need to update the NODE_ENV variable:</p>
+<p>Once you have logged in into your Heroku account, choose whether you want Heroku to use a random
+name for the application. If you choose not to use a random name, you will be prompted to enter
+the application name:</p>
+<blockquote>
+<p>We recommend you to use a random name since Heroku fails to create the app if the name is already taken.</p>
+</blockquote>
+<pre><code class="language-shell">? Do you want Heroku to use a random app name? Yes
+</code></pre>
+<p>When prompted, press the <code>Y</code> key since the application requires a proxy</p>
+<pre><code class="language-shell">? Does the application require a Proxy? Yes
+</code></pre>
+<p>Then enter <code>http://www.place-my-order.com/api</code> as the proxy url:</p>
+<pre><code class="language-shell">? What's the Proxy url? http://www.place-my-order.com/api
+</code></pre>
+<p>Once the generator finishes, update the NODE_ENV variable via:</p>
 <pre><code class="language-shell">heroku config:set NODE_ENV=production
 </code></pre>
-<p>Add a new <code>Procfile</code> that tells Heroku what to launch as the app's server. Since we are using done-serve our Procfile just looks like this:</p>
-<pre><code class="language-shell">web: node_modules/.bin/done-serve --proxy http://www.place-my-order.com/api
-</code></pre>
-<p>First let's save our current status:</p>
-<pre><code class="language-shell">git add -A
+<p>and follow the generator instructions to save our current changes:</p>
+<pre><code class="language-shell">git add --all
 git commit -m &quot;Finishing place-my-order&quot;
 git push origin master
 </code></pre>
@@ -2228,44 +2264,74 @@ git commit -m &quot;Deploying to Heroku&quot;
 </code></pre>
 <h3>Continuous Deployment</h3>
 <p>Previously we set up Travis CI <a href="#continuous-integration">for automated testing</a> of our application code as we developed, but Travis (and other CI solutions) can also be used to deploy our code to production once tests have passed.</p>
-<p>Open your <code>.travis.yml</code> file and add <code>before_deploy</code> and <code>deploy</code> keys that look like this:</p>
+<p>In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our <code>.travis.yml</code> should always be encrypted, and the generator takes care of encrypting the API key using the <a href="https://www.npmjs.com/package/travis-encrypt">travis-encrypt</a> module.</p>
+<p><em>Note: if using Windows, first install the OpenSSL package as described in the <a href="https://donejs.com/SettingUp.html">Setting Up</a> guide.</em></p>
+<p>Run the <a href="https://github.com/donejs/donejs-travis-deploy-to-heroku">donejs-travis-deploy-to-heroku</a> generator like this:</p>
+<pre><code class="language-shell">donejs add travis-deploy-to-heroku
+</code></pre>
+<p>When prompted, confirm each prompt by pressing the Enter key (or enter new values if needed) and then confirm the changes made to the <code>.travis.yml</code> file.</p>
+<p>The updated <code>.travis.yml</code> should look like this:</p>
 <pre><code class="language-yaml">language: node_js
 node_js: node
+addons:
+  firefox: latest
 before_install:
-  - &quot;export DISPLAY=:99.0&quot;
-  - &quot;sh -e /etc/init.d/xvfb start&quot;
-before_deploy:
-  - &quot;git config --global user.email \&quot;me@example.com\&quot;&quot;
-  - &quot;git config --global user.name \&quot;PMO deploy bot\&quot;&quot;
-  - &quot;node build&quot;
-  - &quot;git add dist/ --force&quot;
-  - &quot;git commit -m \&quot;Updating build.\&quot;&quot;
-  - &quot;npm run deploy:ci&quot;
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
 deploy:
   skip_cleanup: true
-  provider: &quot;heroku&quot;
-  app: &lt;my-app&gt;
+  provider: heroku
+  app: &lt;heroku-appname&gt;
+  api_key: &lt;encrypted-heroku-api-key&gt;
+before_deploy:
+  - git config --global user.email &quot;me@example.com&quot;
+  - git config --global user.name &quot;deploy bot&quot;
+  - node build
+  - git add dist/ --force
+  - git commit -m &quot;Updating build.&quot;
 </code></pre>
-<p><span line-highlight='6-16,only'></span>
-You can find the name of the app by running <code>heroku apps:info</code>.</p>
-<p>In order to deploy to Heroku you need to provide Travis with your Heroku API key. Sensitive information in our <code>.travis.yml</code> should always be encrypted for which we install the <a href="https://www.npmjs.com/package/travis-encrypt">travis-encrypt</a> module:</p>
-<p><em>Note: if using Windows, first install the OpenSSL package as described in the <a href="https://donejs.com/SettingUp.html">Setting Up</a> guide.</em></p>
-<pre><code class="language-shell">npm install travis-encrypt -g
-</code></pre>
-<p>Now we can get the Heroku authentication token with:</p>
-<pre><code class="language-shell">heroku auth:token
-</code></pre>
-<p>Copy the token printed and paste it as <code>&lt;token&gt;</code> in the following command:</p>
-<pre><code class="language-shell">travis-encrypt --add deploy.api_key -r &lt;your-username&gt;/place-my-order &lt;token&gt;
-</code></pre>
-<p>Replace <code>&lt;your-username&gt;</code> with the name of your GitHub account.</p>
-<p>To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:</p>
+<p><span line-highlight='8-18,only'></span></p>
+<blockquote>
+<p>The <code>donejs-travis-deploy-to-heroku</code> generator retrieves data from local configuration files, if any of the values set as default is incorrect, you can enter the correct value when prompted. To find the name of the Heroku application run <code>heroku apps:info</code>; or run <code>heroku auth:token</code> if you want to see your authentication token.</p>
+</blockquote>
+<p>Next, we set up Travis CI to deploy to <a href="https://www.firebase.com/">Firebase</a> as well. To automate the deploy to Firebase you need to provide the Firebase CI token. You can get the token by running:</p>
 <pre><code class="language-shell">node_modules/.bin/firebase login:ci
 </code></pre>
-<p>In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and use it as the <code>&lt;token&gt;</code> in the following command:</p>
-<pre><code class="language-shell">travis-encrypt --add -r &lt;your-username&gt;/place-my-order 'FIREBASE_TOKEN=&quot;&lt;token&gt;&quot;'
+<p>In the application folder. It will open a browser window and ask you to authorize the application. Once successful, copy the token and enter it when prompted by the <a href="https://github.com/donejs/donejs-travis-deploy-to-firebase">travis-deploy-to-firebase</a> generator.</p>
+<p>Run the following command:</p>
+<pre><code class="language-shell">donejs add travis-deploy-to-firebase
 </code></pre>
-<p>Now any time a build succeeds when pushing to <code>master</code> the application will be deployed to Heroku and static assets to Firebase's CDN.</p>
+<p>Confirm your GitHub username and application name, then enter the Firebase CI Token from the previous step:</p>
+<pre><code class="language-shell">? What's your GitHub username? &lt;your-username&gt;
+? What's your GitHub application name? place-my-order
+? What's your Firebase CI Token? &lt;your-firebase-ci-token&gt;
+</code></pre>
+<p>And press the Enter key to update the <code>.travis.yml</code> file which should now look like this:</p>
+<pre><code class="language-yaml">language: node_js
+node_js: node
+addons:
+  firefox: latest
+before_install:
+  - 'export DISPLAY=:99.0'
+  - sh -e /etc/init.d/xvfb start
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  app: &lt;heroku-appname&gt;
+  api_key: &lt;encrypted-heroku-api-key&gt;
+before_deploy:
+  - git config --global user.email &quot;me@example.com&quot;
+  - git config --global user.name &quot;deploy bot&quot;
+  - node build
+  - git add dist/ --force
+  - git commit -m &quot;Updating build.&quot;
+  - 'npm run deploy:ci'
+env:
+  global:
+    - secure: &lt;encrypted-firebase-ci-token&gt;
+</code></pre>
+<p><span line-highlight='19-22,only'></span>
+Now any time a build succeeds when pushing to <code>master</code> the application will be deployed to Heroku and static assets to Firebase's CDN.</p>
 <p>To test this out checkout a new branch:</p>
 <pre><code class="language-shell">git checkout -b continuous
 git add -A

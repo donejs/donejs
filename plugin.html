@@ -83,6 +83,7 @@
 									<li><a href="./bitballs.html">Example App: Bitballs</a></li>
                   <li><a href="./ssr-react.html">Server rendering React</a></li>
 									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
+                  <li><a href="./migrate-2.html">Migrate to DoneJS 2</a></li>
 									<li><a href="./contributing.html">Contributing</a></li>
 								</ul>
 							</li>
@@ -293,7 +294,7 @@ import view from './donejs-number-input.stache';
 
 export const ViewModel = DefineMap.extend({
     value: {
-        value: 0,
+        default: 0,
         type: 'number',
         set(value) {
             if(value &gt; this.max) {
@@ -308,11 +309,11 @@ export const ViewModel = DefineMap.extend({
         }
     },
     max: {
-        value: Infinity,
+        default: Infinity,
         type: 'number'
     },
     min: {
-        value: 0,
+        default: 0,
         type: 'number'
     },
     increment() {
@@ -369,7 +370,7 @@ You can run all tests either by going to <a href="http://localhost:8080/src/test
 </code></pre>
 <h3>Adding the template</h3>
 <p>In the template we will use <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://canjs.com/doc/can-view-import.html">can-view-import</a>, so first install them as dependencies:</p>
-<pre><code>$ npm install bootstrap can-view-import --save
+<pre><code>$ npm install bootstrap@3 can-view-import --save
 </code></pre>
 <p>Then we can update <code>src/&lt;username&gt;-number-input.stache</code> to look like this:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;bootstrap/less/bootstrap.less!&quot; /&gt;
