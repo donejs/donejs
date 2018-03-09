@@ -12,13 +12,13 @@ StealJS? What can the core team work on to make you grow fonder of these
 projects?
 
 <div class="cta">
-  <a href="https://www.surveymonkey.com/r/donejs-survey-3" target="_blank">
+  <a href="https://www.surveymonkey.com/r/donejs-survey-4" target="_blank">
     Take the community survey
   </a>
 </div>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
 <script>
-var endTime = new Date('Jan 31 2018 14:00:00 UTC');// 6 a.m. Pacific
+var endTime = new Date('Mar 14 2018 13:00:00 UTC');// 6 a.m. Pacific
 if (new Date() < endTime) {// Survey has not yet ended
   var elements = document.getElementsByClassName('comment');
   var container = elements[0];
@@ -42,7 +42,7 @@ you’ll be signed up for our survey:
 - You’ll receive an email about
 [every six weeks](https://calendar.google.com/calendar/embed?src=jupiterjs.com_g27vck36nifbnqrgkctkoanqb4%40group.calendar.google.com)
 with a link to the survey.
-- Each survey will be about seven questions and take just a few minutes to complete.
+- Each survey will be about five questions and take just a few minutes to complete.
 - An opt-out/unsubscribe link will be included in each email.
 
 </div>
@@ -54,7 +54,7 @@ on our priorities.__
 
 <div class="youtube-embed">
   <p>Watch the discussion below to learn more about each item on the survey:</p>
-  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ndAlLvRmyNI?rel=0" frameborder="0" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/EEBytcIX7oA?rel=0" frameborder="0" allowfullscreen></iframe>
 </div>
 
 [Read more about the survey in our announcement blog post.](https://www.bitovi.com/blog/help-us-improve-canjs-stealjs-and-the-rest-of-the-donejs-family)
