@@ -2,11 +2,11 @@
 <div class="order-form">
   <h2>Order here</h2>
 
-  <bit-tabs tabsClass:from="'nav nav-tabs'">
-    <bit-panel title:from="'Lunch menu'">
+  <bit-tabs tabsClass:raw="nav nav-tabs">
+    <bit-panel title:raw="Lunch menu">
       This is the lunch menu
     </bit-panel>
-    <bit-panel title:from="'Dinner menu'">
+    <bit-panel title:raw="Dinner menu">
       This is the dinner menu
     </bit-panel>
   </bit-tabs>
