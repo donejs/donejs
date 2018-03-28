@@ -14,43 +14,43 @@
       <order-model get-list="{status='new'}">
         <pmo-order-list
           orders:from="."
-          list-title:from="'New Orders'"
-          status:from="'new'"
-          status-title:from="'New Order!''"
-          action:from="'preparing'"
-          action-title:from="'Preparing'"
-          empty-message:from="'No new orders'"/>
+          list-title:raw="New Orders"
+          status:raw="new"
+          status-title:raw="New Order!"
+          action:raw="preparing"
+          action-title:raw="Preparing"
+          empty-message:raw="No new orders"/>
       </order-model>
 
       <order-model get-list="{status='preparing'}">
         <pmo-order-list
           orders:from="."
-          list-title:from="'Preparing'"
-          status:from="'preparing'"
-          status-title:from="'Preparing'"
-          action:from="'delivery'"
-          action-title:from="'Out for delivery'"
-          empty-message:from="'No orders preparing'"/>
+          list-title:raw="Preparing"
+          status:raw="preparing"
+          status-title:raw="Preparing"
+          action:raw="delivery"
+          action-title:raw="Out for delivery"
+          empty-message:raw="No orders preparing"/>
       </order-model>
 
       <order-model get-list="{status='delivery'}">
         <pmo-order-list
           orders:from="."
-          list-title:from="'Out for delivery'"
-          status:from="'delivery'"
-          status-title:from="'Out for delivery'"
-          action:from="'delivered'"
-          action-title:from="'Delivered'"
-          empty-message:from="'No orders are being delivered'"/>
+          list-title:raw="Out for delivery"
+          status:raw="delivery"
+          status-title:raw="Out for delivery"
+          action:raw="delivered"
+          action-title:raw="Delivered"
+          empty-message:raw="No orders are being delivered"/>
       </order-model>
 
       <order-model get-list="{status='delivered'}">
         <pmo-order-list
           orders:from="."
-          list-title:from="'Delivered'"
-          status:from="'delivered'"
-          status-title:from="'Delivered'"
-          empty-message:from="'No delivered orders'"/>
+          list-title:raw="Delivered"
+          status:raw="delivered"
+          status-title:raw="Delivered"
+          empty-message:raw="No delivered orders"/>
       </order-model>
     </div>
   </view>

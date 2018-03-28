@@ -14,7 +14,7 @@
       <h3>Order from {{restaurant.name}}</h3>
 
       <form on:submit="placeOrder(scope.event)">
-        <bit-tabs tabsClass:from="'nav nav-tabs'">
+        <bit-tabs tabsClass:raw="nav nav-tabs">
           <p class="info {{^if(order.items.length)}}text-error{{else}}text-success{{/if}}">
             {{^if(order.items.length)}}
               Please choose an item
@@ -22,7 +22,7 @@
               {{order.items.length}} selected
             {{/if}}
           </p>
-          <bit-panel title:from="'Lunch menu'">
+          <bit-panel title:raw="Lunch menu">
             <ul class="list-group">
               {{#each(restaurant.menu.lunch)}}
                 <li class="list-group-item">
@@ -36,7 +36,7 @@
               {{/each}}
             </ul>
           </bit-panel>
-          <bit-panel title:from="'Dinner menu'">
+          <bit-panel title:raw="Dinner menu">
             <ul class="list-group">
               {{#each(restaurant.menu.dinner)}}
                 <li class="list-group-item">

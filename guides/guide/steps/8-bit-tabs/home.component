@@ -15,11 +15,11 @@
       <br>Chat
     </h1>
 
-    <bit-tabs tabsClass:from="'nav nav-tabs'">
-      <bit-panel title:from="'CanJS'">
+    <bit-tabs tabsClass:raw="nav nav-tabs">
+      <bit-panel title:raw="CanJS">
         <p>CanJS provides the MV*</p>
       </bit-panel>
-      <bit-panel title:from="'StealJS'">
+      <bit-panel title:raw="StealJS">
         <p>StealJS provides the infrastructure.</p>
       </bit-panel>
     </bit-tabs>
