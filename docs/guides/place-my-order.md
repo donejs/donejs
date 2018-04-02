@@ -831,7 +831,7 @@ donejs add supermodel order
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-data/order.js
-@highlight 7-27,33-53,only
+@highlight 7-29,34-55,only
 
 Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
@@ -886,7 +886,7 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 Update `src/models/order.js` to use [can-connect/can/tag/](https://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order-tag.js
-@highlight 6,63,74,only
+@highlight 6,65,76,only
 
 The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator](https://canjs.com/doc/can-set.props.enum.html) so that multiple requests for different statuses can be combined.
 
@@ -919,7 +919,7 @@ npm install steal-socket.io@4 --save
 Update `src/models/order.js` to use socket.io to update the Order model in real-time:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order.js
-@highlight 7,75-79,only
+@highlight 7,77-81,only
 
 That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
