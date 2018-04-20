@@ -1361,11 +1361,11 @@ the following chapters.</p>
 &lt;div class=&quot;order-form&quot;&gt;
   &lt;h2&gt;Order here&lt;/h2&gt;
 
-  &lt;bit-tabs tabsClass:from=&quot;'nav nav-tabs'&quot;&gt;
-    &lt;bit-panel title:from=&quot;'Lunch menu'&quot;&gt;
+  &lt;bit-tabs tabsClass:raw=&quot;nav nav-tabs&quot;&gt;
+    &lt;bit-panel title:raw=&quot;Lunch menu&quot;&gt;
       This is the lunch menu
     &lt;/bit-panel&gt;
-    &lt;bit-panel title:from=&quot;'Dinner menu'&quot;&gt;
+    &lt;bit-panel title:raw=&quot;Dinner menu&quot;&gt;
       This is the dinner menu
     &lt;/bit-panel&gt;
   &lt;/bit-tabs&gt;
@@ -1504,7 +1504,7 @@ Order.connection = superMap({
 export default Order;
 
 </code></pre>
-<p><span line-highlight='7-27,33-53,only'></span>
+<p><span line-highlight='7-29,34-55,only'></span>
 Here we define an <code>ItemsList</code> which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another <code>&lt;order-model&gt;</code> tag to load orders in the order history template later.</p>
 <h3>Implement the view model</h3>
 <p>Now we can update the view model in <code>src/order/new/new.js</code>:</p>
@@ -1627,7 +1627,7 @@ QUnit.test('canPlaceOrder', function(){
       &lt;h3&gt;Order from {{restaurant.name}}&lt;/h3&gt;
 
       &lt;form on:submit=&quot;placeOrder(scope.event)&quot;&gt;
-        &lt;bit-tabs tabsClass:from=&quot;'nav nav-tabs'&quot;&gt;
+        &lt;bit-tabs tabsClass:raw=&quot;nav nav-tabs&quot;&gt;
           &lt;p class=&quot;info {{^if(order.items.length)}}text-error{{else}}text-success{{/if}}&quot;&gt;
             {{^if(order.items.length)}}
               Please choose an item
@@ -1635,7 +1635,7 @@ QUnit.test('canPlaceOrder', function(){
               {{order.items.length}} selected
             {{/if}}
           &lt;/p&gt;
-          &lt;bit-panel title:from=&quot;'Lunch menu'&quot;&gt;
+          &lt;bit-panel title:raw=&quot;Lunch menu&quot;&gt;
             &lt;ul class=&quot;list-group&quot;&gt;
               {{#each(restaurant.menu.lunch)}}
                 &lt;li class=&quot;list-group-item&quot;&gt;
@@ -1649,7 +1649,7 @@ QUnit.test('canPlaceOrder', function(){
               {{/each}}
             &lt;/ul&gt;
           &lt;/bit-panel&gt;
-          &lt;bit-panel title:from=&quot;'Dinner menu'&quot;&gt;
+          &lt;bit-panel title:raw=&quot;Dinner menu&quot;&gt;
             &lt;ul class=&quot;list-group&quot;&gt;
               {{#each(restaurant.menu.dinner)}}
                 &lt;li class=&quot;list-group-item&quot;&gt;
@@ -1798,7 +1798,7 @@ tag('order-model', Order.connection);
 export default Order;
 
 </code></pre>
-<p><span line-highlight='6,63,74,only'></span>
+<p><span line-highlight='6,65,76,only'></span>
 The model can now be used in the template like <code>&lt;order-model get-list=&quot;{status='new'}&quot;&gt;</code>. This also adds an <a href="https://canjs.com/doc/can-set.props.enum.html">enum comparator</a> so that multiple requests for different statuses can be combined.</p>
 <h3>Update the template</h3>
 <p>First let's create the <code>pmo-order-list</code> component with:</p>
@@ -1867,43 +1867,43 @@ The model can now be used in the template like <code>&lt;order-model get-list=&q
       &lt;order-model get-list=&quot;{status='new'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title:from=&quot;'New Orders'&quot;
-          status:from=&quot;'new'&quot;
-          status-title:from=&quot;'New Order!''&quot;
-          action:from=&quot;'preparing'&quot;
-          action-title:from=&quot;'Preparing'&quot;
-          empty-message:from=&quot;'No new orders'&quot;/&gt;
+          list-title:raw=&quot;New Orders&quot;
+          status:raw=&quot;new&quot;
+          status-title:raw=&quot;New Order!&quot;
+          action:raw=&quot;preparing&quot;
+          action-title:raw=&quot;Preparing&quot;
+          empty-message:raw=&quot;No new orders&quot;/&gt;
       &lt;/order-model&gt;
 
       &lt;order-model get-list=&quot;{status='preparing'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title:from=&quot;'Preparing'&quot;
-          status:from=&quot;'preparing'&quot;
-          status-title:from=&quot;'Preparing'&quot;
-          action:from=&quot;'delivery'&quot;
-          action-title:from=&quot;'Out for delivery'&quot;
-          empty-message:from=&quot;'No orders preparing'&quot;/&gt;
+          list-title:raw=&quot;Preparing&quot;
+          status:raw=&quot;preparing&quot;
+          status-title:raw=&quot;Preparing&quot;
+          action:raw=&quot;delivery&quot;
+          action-title:raw=&quot;Out for delivery&quot;
+          empty-message:raw=&quot;No orders preparing&quot;/&gt;
       &lt;/order-model&gt;
 
       &lt;order-model get-list=&quot;{status='delivery'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title:from=&quot;'Out for delivery'&quot;
-          status:from=&quot;'delivery'&quot;
-          status-title:from=&quot;'Out for delivery'&quot;
-          action:from=&quot;'delivered'&quot;
-          action-title:from=&quot;'Delivered'&quot;
-          empty-message:from=&quot;'No orders are being delivered'&quot;/&gt;
+          list-title:raw=&quot;Out for delivery&quot;
+          status:raw=&quot;delivery&quot;
+          status-title:raw=&quot;Out for delivery&quot;
+          action:raw=&quot;delivered&quot;
+          action-title:raw=&quot;Delivered&quot;
+          empty-message:raw=&quot;No orders are being delivered&quot;/&gt;
       &lt;/order-model&gt;
 
       &lt;order-model get-list=&quot;{status='delivered'}&quot;&gt;
         &lt;pmo-order-list
           orders:from=&quot;.&quot;
-          list-title:from=&quot;'Delivered'&quot;
-          status:from=&quot;'delivered'&quot;
-          status-title:from=&quot;'Delivered'&quot;
-          empty-message:from=&quot;'No delivered orders'&quot;/&gt;
+          list-title:raw=&quot;Delivered&quot;
+          status:raw=&quot;delivered&quot;
+          status-title:raw=&quot;Delivered&quot;
+          empty-message:raw=&quot;No delivered orders&quot;/&gt;
       &lt;/order-model&gt;
     &lt;/div&gt;
   &lt;/view&gt;
@@ -2003,7 +2003,7 @@ tag('order-model', Order.connection);
 export default Order;
 
 </code></pre>
-<p><span line-highlight='7,75-79,only'></span>
+<p><span line-highlight='7,77-81,only'></span>
 That's it. If we now open the <a href="http://localhost:8080/order-history">order page</a> we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.</p>
 <h2>Create documentation</h2>
 <p>Documenting our code is very important to quickly get other developers up to speed. <a href="https://documentjs.com/">DocumentJS</a> makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.</p>
