@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
-    "bit-docs": "0.0.7",
+    "bit-docs": "0.0.9",
     "coveralls-send": "0.0.2",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^4.1.0",
