@@ -290,7 +290,7 @@ Routing works a bit differently than other libraries. In other libraries, you mi
 
 DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
-To learn more about routing visit the CanJS guide on [Application State and Routing](https://canjs.com/guides/AppStateAndRouting.html).
+To learn more about routing visit the CanJS guide on [Application State and Routing]<!--(https://canjs.com/guides/AppStateAndRouting.html) this link is broken-->.
 
 To add our routes, change `src/app.js` to:
 
@@ -319,7 +319,7 @@ and update `src/header.component` to:
 @sourceref ../../guides/place-my-order/steps/add-header/header.component
 @highlight 8-24,only
 
-Here we use [routeUrl](https://canjs.com/doc/can-stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
+Here we use [routeUrl]<!--(https://canjs.com/doc/can-stache.helpers.routeUrl.html) this link is also broken--> to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
 We also use the Stache `eq` helper to make the appropriate link active.
 
@@ -346,7 +346,7 @@ Update `src/index.stache` to:
 @sourceref ../../guides/place-my-order/steps/switch-between/index.stache
 @highlight 11-13,15-34,only
 
-Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) and initializes it.
+Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](https://canjs.com/doc/can-view-import.html)<!--please double check if this is the correct link --> and initializes it.
 
 Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its `state` property to `resolved`.
 
@@ -888,7 +888,7 @@ Update `src/models/order.js` to use [can-connect/can/tag/](https://canjs.com/doc
 @sourceref ../../guides/place-my-order/steps/real-time/order-tag.js
 @highlight 6,65,76,only
 
-The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator](https://canjs.com/doc/can-set.props.enum.html) so that multiple requests for different statuses can be combined.
+The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator]<!--(https://canjs.com/doc/can-set.props.enum.html) Broken link --> so that multiple requests for different statuses can be combined.
 
 ### Update the template
 
