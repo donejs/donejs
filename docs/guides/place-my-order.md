@@ -29,7 +29,7 @@ You will need [NodeJS](http://nodejs.org) installed and your code editor of choi
 To get started, let's install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs
+npm install -g donejs@3
 ```
 
 Then we can create a new DoneJS application:
@@ -40,7 +40,7 @@ donejs add app place-my-order --yes
 
 The initialization process will ask you questions like the name of your application (set to `place-my-order`) and the source folder (set to `src`). The other questions can be skipped by hitting enter. This will install all of DoneJS' dependencies. The main project dependencies include:
 
-- [StealJS](https://stealjs.com) - ES6, CJS, and AMD module loader and builder
+- [StealJS](https://stealjs.com) - Module loader and builder
 - [CanJS](https://canjs.com) - Custom elements and Model-View-ViewModel utilities
 - [jQuery](https://jquery.com) - DOM helpers
 - [jQuery++](https://jquerypp.com) - Extended DOM helpers
@@ -288,21 +288,21 @@ In this part, we will create routes - URL patterns that load specific parts of o
 
 Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions.
 
-DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
+DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties on an observable object.
 
-To learn more about routing visit the CanJS guide on [Application State and Routing](https://canjs.com/guides/AppStateAndRouting.html).
+To learn more about routing visit the CanJS [Routing guide](https://canjs.com/doc/guides/routing.html).
 
 To add our routes, change `src/app.js` to:
 
 @sourceref ../../guides/place-my-order/steps/create-routes/app.js
-@highlight 7-9,17-19,only
+@highlight 15-17,only
 
 > Notice: We also removed the `message` property in `AppViewModel`.  This is because
 > it is not needed.
 
 Now we have three routes available:
 
-- `{page}` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `AppViewModel` to `home` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
+- `{page}` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `route.data` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
 - `{page}/{slug}` matches restaurant links like [http://localhost:8080/restaurants/spago](http://localhost:8080/restaurants/spago) and sets `page` and `slug` (a URL friendly restaurant short name)
 - `{page}/{slug}/{action}` will be used to show the order page for a specific restaurant e.g. [http://localhost:8080/restaurants/spago/order](http://localhost:8080/restaurants/spago/order)
 
@@ -323,32 +323,23 @@ Here we use [routeUrl](https://canjs.com/doc/can-stache.helpers.routeUrl.html) t
 
 We also use the Stache `eq` helper to make the appropriate link active.
 
-### Create a loading indicator
-
-To show that something is currently loading, let's create a `pmo-loading` component:
-
-```shell
-donejs add component loading.component pmo-loading
-```
-
-Change `src/loading.component` to:
-
-@sourceref ../../guides/place-my-order/steps/add-loading/loading.component
-@highlight 1,8-12,only
-
-
 ### Switch between components
 
-Now we can glue all those individual components together in `src/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it.
+Now we can glue all those individual components together in `src/app.js` and display the current component in `src/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it.
 
-Update `src/index.stache` to:
+First update `src/app.js` to:
+
+@sourceref ../../guides/place-my-order/steps/switch-between/app.js
+@highlight 12-27,only
+
+Here we use a `switch` statement that checks for the `page` property of the route's data observable, then progressively loads the component and initializes it.
+
+Next update `src/index.stache` to:
 
 @sourceref ../../guides/place-my-order/steps/switch-between/index.stache
-@highlight 11-13,15-34,only
+@highlight 11-12,14-18,only
 
-Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) and initializes it.
-
-Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its `state` property to `resolved`.
+This uses the newly created `pageComponent` property to either show the component, once loaded, or display a loading indicator *while* it is being loaded.
 
 Now we can see the header and the home component and be able to navigate to the different pages through the header.
 
@@ -691,15 +682,20 @@ route.register('{page}/{slug}', { slug: null });
 route.register('{page}/{slug}/{action}', { slug: null, action: null });
 ```
 
-We want to use those routes when we are in the `restaurants` page. The relevant section in `src/index.stache` currently looks like this:
+We want to use those routes when we are in the `restaurants` page. The relevant section in `src/app.js` currently looks like this:
 
-```html
-{{#case "restaurants"}}
-  <can-import from="src/restaurant/list/"
-      can-tag="pmo-loading">
-    <pmo-restaurant-list/>
-  </can-import>
-{{/case}}
+```javascript
+switch(page) {
+  case "home":
+    let Home = (await import("~/home.component")).default;
+    return new Home();
+  case "restaurants":
+    let RestaurantList = (await import("~/restaurant/list/")).default;
+    return new RestaurantList();
+  case "order-history":
+    let OrderHistory = (await import("~/order/history.component")).default;
+    return new OrderHistory();
+}
 ```
 
 We want to support two additional routes:
@@ -730,20 +726,10 @@ the following chapters.
 
 ### Add to the main template
 
-Now we can add those components to the main template (at `src/index.stache`) with conditions based on the routes that we want to match. Change the section which contains:
+Now we can add those components to the main template by updating the `pageComponent` definition on our AppViewModel with conditions based on the routes that we want to match. Update it to:
 
-```html
-{{#case "restaurants"}}
-  <can-import from="place-my-order/restaurant/list/"
-      can-tag="pmo-loading">
-    <pmo-restaurant-list/>
-  </can-import>
-{{/case}}
-```
-
-To:
-
-@sourceref ../../guides/place-my-order/steps/additional/addition.stache
+@sourceref ../../guides/place-my-order/steps/additional/app.js
+@highlight 1,20-36,only
 
 Here we are adding some more conditions if `page` is set to `restaurants`:
 
