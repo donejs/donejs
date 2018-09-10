@@ -31,7 +31,7 @@ In this section, we will install DoneJS and generate a new application.
 To get started, let’s install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs
+npm install -g donejs@3
 ```
 
 ### Generate the application
@@ -62,7 +62,7 @@ This will install all of DoneJS’s dependencies, including the following:
 
 DoneJS comes with its own development server, which hosts your development files and automatically [renders the application on the server](./Features.html#server-side-rendered). Development mode enables [hot module swapping](./Features.html#hot-module-swapping), which automatically reloads files in the browser and on the server as they change.
 
-To start it let’s go into the `donejs-chat` application directory:
+To start it let’s go into the __donejs-chat__ application directory:
 
 ```shell
 cd donejs-chat
@@ -141,7 +141,7 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties on our application’s view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit [can-route’s documentation](https://canjs.com/doc/can-route.html).
+> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to an observable object. To learn more about routing visit [the routing guide](https://canjs.com/doc/guides/routing.html).
 
 First, let’s update `src/home.component` with the original content from the homepage and a link to the chat messages page:
 
@@ -150,38 +150,36 @@ First, let’s update `src/home.component` with the original content from the ho
 
 > New APIs Used:
 > - [<can-component>](https://github.com/donejs/done-component#done-component) — a [StealJS](https://stealjs.com/) plugin for CanJS [components](https://canjs.com/doc/can-component.html) that allows you to define a component completely within a  _.component_ file.
-> - [`routeUrl`](https://canjs.com/doc/can-stache.helpers.routeUrl.html) — a helper that populates the anchor’s href with a URL that sets the application ViewModel’s `page` property to `"chat"`. The AppViewModel is shown below.
+> - [`routeUrl`]https://canjs.com/doc/can-stache-route-helpers.routeUrl.html) — a helper that populates the anchor’s href with a URL that sets the application ViewModel’s `page` property to `"chat"`. The AppViewModel is shown below.
 
 Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/messages.stache
 @highlight 1-2,only
 
-Then, add a `page` property on the `AppViewModel` and
-define a rule for it in `src/app.js`:
-
-@sourceref ../../guides/guide/steps/7-navigate/app.js
-@highlight 7,14,only
-
 > New APIs Used:
 > - [DefineMap](https://canjs.com/doc/can-define/map/map.html) — used to define observable types.
-> - [route](https://canjs.com/doc/can-route.html) — used to map changes in the URL to changes on the AppViewModel’s `page`
+> - [route](https://canjs.com/doc/can-route.html) — used to register a route for the `page`
 >   property.
 
 ### Switch between pages
 
-Finally, we’ll glue both components together as separate pages in `src/index.stache`. This is done by adding  for the `home.component` and `messages/` components and showing each import based on the `page` property.
+Finally, we'll glue both components together as separate pages in `src/app.js`, and display the current page in the `index.stache`.
 
-Update `src/index.stache` to:
+Update `src/app.js` to:
+
+@sourceref ../../guides/guide/steps/7-navigate/app.js
+@highlight 16-20,only
+
+And then `src/index.stache` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/index.stache
-@highlight 13-29,only
+@highlight 13-17,only
 
 > New APIs Used:
-> - [{{#eq}}](https://canjs.com/doc/can-stache.helpers.is.html) — compares the AppViewModel’s `page` property to 'chat'.
-> - [can-view-import](https://canjs.com/doc/can-view-import.html) — provides dynamic imports.
-> - [{{#if isPending}}](https://canjs.com/doc/can-stache.helpers.if.html) — renders _"Loading"_ while the modules are loading.
-> - [{{else}}](https://canjs.com/doc/can-stache.helpers.else.html) — Renders the components once their modules have loaded.
+> - [{{#if(pageComponent.isResolved)}}](https://canjs.com/doc/can-stache.helpers.else.html) — Renders the components once their modules have loaded.
+> - [{{else}}](https://canjs.com/doc/can-stache.helpers.if.html) — renders _"Loading..."_ while the modules are loading.
+> - [new Component()](https://canjs.com/doc/can-component.html#newComponent__options__) - Creates a new instance of the imported component.
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 

@@ -10,34 +10,19 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
-          {{#eq(page, 'chat')}}
-            <can-import from="~/messages/">
-              {{#if(isPending)}}
-                Loading...
-              {{else}}
-                <chat-messages/>
-              {{/if}}
-            </can-import>
+          {{#if(pageComponent.isResolved)}}
+            {{pageComponent.value}}
           {{else}}
-            <can-import from="~/home.component">
-              {{#if(isPending)}}
-                Loading...
-              {{else}}
-                <chat-home/>
-              {{/if}}
-            </can-import>
-          {{/eq}}
+            Loading...
+          {{/if}}
         </div>
       </div>
     </div>
 
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="{{joinBase('steal.production.js')}}"></script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
+    {{#eq(this.env.NODE_ENV, "production")}}
+      <script src="{{joinBase('steal.production.js')}}"></script>
+    {{else}}
+      <script src="/node_modules/steal/steal.js" main></script>
+    {{/eq}}
   </body>
 </html>
