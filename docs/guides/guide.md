@@ -169,7 +169,7 @@ Finally, we'll glue both components together as separate pages in `src/app.js`, 
 Update `src/app.js` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/app.js
-@highlight 16-20,only
+@highlight 16-21,only
 
 And then `src/index.stache` to:
 

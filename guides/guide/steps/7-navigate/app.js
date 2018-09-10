@@ -13,10 +13,12 @@ const AppViewModel = DefineMap.extend({
   routeData: {
     default: route.data
   },
-  get pageComponent() {
-    let page = this.routeData.page;
-    let Component = (await import(`~/components/${page}/`)).default;
-    return new Component();
+  pageComponent: {
+    async get() {
+      let page = this.routeData.page;
+      let Component = (await import(`~/components/${page}/`)).default;
+      return new Component();
+    }
   }
 });
 
