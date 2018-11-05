@@ -31,7 +31,7 @@ In this section, we will install DoneJS and generate a new application.
 To get started, let’s install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs
+npm install -g donejs@3
 ```
 
 ### Generate the application
@@ -281,7 +281,7 @@ Now let’s add the form to create new messages. The form will two-way bind the 
 First we have to implement the `send()` method. Update `src/pages/messages/messages.js` to this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.js
-@highlight 28-35,only
+@highlight 16-17,29-36,only
 
 > New APIs Used:
 > - [save()](https://canjs.com/doc/can-connect/connection.save.html) — creates a `POST` request to `/api/messages` with

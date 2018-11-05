@@ -13,7 +13,8 @@ export default Component.extend({
 
     // INTERNAL STATEFUL PROPERTIES
     // These properties are owned by this component.
-    message: { default: "This is the chat-messages component" },
+    name: 'string',
+    body: 'string',
 
     // DERIVED PROPERTIES
     // These properties combine other property values. Example:
