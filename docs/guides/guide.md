@@ -52,8 +52,7 @@ This will install all of DoneJS’s dependencies, including the following:
 
 - [StealJS](https://stealjs.com) — ES6, CJS, and AMD module loader and builder
 - [CanJS](https://canjs.com) — Custom elements and Model-View-ViewModel utilities
-- [jQuery](https://jquery.com) — DOM helpers
-- [jQuery++](https://jquerypp.com) — Extended DOM helpers
+- [done-ssr](https://github.com/donejs/done-ssr) - Server-rendering
 - [QUnit](https://qunitjs.com/) — Assertion library (A [Mocha](https://github.com/donejs/donejs-mocha) generator is also available)
 - [FuncUnit](https://funcunit.com) — Functional tests
 - [Testee](https://github.com/bitovi/testee) — JavaScript Test runner
@@ -78,7 +77,7 @@ The default port is `8080`.
 
 Go to [http://localhost:8080/] to see our application showing a default homepage.
 
-<img src="static/img/donejs-helloworld.png" alt="hello world" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
+<img src="static/img/donejs-homepage.png" alt="hello world" height="272" width="600" />
 
 ## Adding Bootstrap
 
@@ -123,7 +122,7 @@ The homepage custom element (with the HTML tag name `chat-home`) won't be very b
 To generate it, run:
 
 ```shell
-donejs add component home.component chat-home
+donejs add component pages/home.component chat-home
 ```
 
 The messages component (with the tag `chat-messages`) will be a little more complex, so we’ll generate it using the [modlet file pattern](./Features.html#modlets).
@@ -132,7 +131,7 @@ The messages component (with the tag `chat-messages`) will be a little more comp
 Now run:
 
 ```shell
-donejs add component messages chat-messages
+donejs add component pages/messages chat-messages
 ```
 
 <img src="static/img/donejs-generator.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
@@ -141,56 +140,49 @@ Later we will update the generated files with the chat messages functionality.
 
 ### Navigate between pages
 
-> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties on our application’s view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit [can-route’s documentation](https://canjs.com/doc/can-route.html).
+> Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties on an observable. In other words, our routes will just be a representation of the application state. To learn more about routing visit the [CanJS Routing guide](https://canjs.com/doc/guides/routing.html).
 
-First, let’s update `src/home.component` with the original content from the homepage and a link to the chat messages page:
+First, let’s update `src/pages/home.component` with the original content from the homepage and a link to the chat messages page:
 
 @sourceref ../../guides/guide/steps/7-navigate/home.component
 @highlight 5,8-18,only
 
 > New APIs Used:
-> - [<can-component>](https://github.com/donejs/done-component#done-component) — a [StealJS](https://stealjs.com/) plugin for CanJS [components](https://canjs.com/doc/can-component.html) that allows you to define a component completely within a  _.component_ file.
-> - [`routeUrl`](https://canjs.com/doc/can-stache.helpers.routeUrl.html) — a helper that populates the anchor’s href with a URL that sets the application ViewModel’s `page` property to `"chat"`. The AppViewModel is shown below.
+> - [done-component](https://github.com/donejs/done-component#done-component) — a [StealJS](https://stealjs.com/) plugin for CanJS [components](https://canjs.com/doc/can-component.html) that allows you to define a component completely within a  _.component_ file.
+> - [`routeUrl`](https://canjs.com/doc/can-stache.helpers.routeUrl.html) — a helper that populates the anchor’s href with a URL that sets the `page` property to `"chat"` on [route.data](https://canjs.com/doc/can-route.data.html).
 
-Next, add a link to go back to the homepage from the chat page by updating `src/messages/messages.stache` to:
+Next, add a link to go back to the homepage from the chat page by updating `src/pages/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/7-navigate/messages.stache
 @highlight 1-2,only
 
-Then, add a `page` property on the `AppViewModel` and
-define a rule for it in `src/app.js`:
-
-@sourceref ../../guides/guide/steps/7-navigate/app.js
-@highlight 7,14,only
-
 > New APIs Used:
 > - [DefineMap](https://canjs.com/doc/can-define/map/map.html) — used to define observable types.
-> - [route](https://canjs.com/doc/can-route.html) — used to map changes in the URL to changes on the AppViewModel’s `page`
->   property.
+> - [route](https://canjs.com/doc/can-route.html) — used to map changes in the URL to changes on the route.data `page` property.
 
 ### Switch between pages
 
-Finally, we’ll glue both components together as separate pages in `src/index.stache`. This is done by adding  for the `home.component` and `messages/` components and showing each import based on the `page` property.
+Finally we'll glue together these components as separate pages. Our Application ViewModel is where we determine which page to show. This is done by determining the `pageComponent`, an instance of a [can-component](https://canjs.com/doc/can-component.html), based on the `route.data.page` property.
 
-Update `src/index.stache` to:
+Add the following two new properties to `src/app.js`:
+
+@sourceref ../../guides/guide/steps/7-navigate/app.js
+@highlight 21-36,only
+
+This imports the chosen page's module and then instantiates a new instance using `new Component()`. We can use this component by placing it in the `index.stache`:
 
 @sourceref ../../guides/guide/steps/7-navigate/index.stache
-@highlight 13-29,only
+@highlight 13-17,only
 
 > New APIs Used:
-> - [{{#eq}}](https://canjs.com/doc/can-stache.helpers.is.html) — compares the AppViewModel’s `page` property to 'chat'.
-> - [can-view-import](https://canjs.com/doc/can-view-import.html) — provides dynamic imports.
-> - [{{#if isPending}}](https://canjs.com/doc/can-stache.helpers.if.html) — renders _"Loading"_ while the modules are loading.
-> - [{{else}}](https://canjs.com/doc/can-stache.helpers.else.html) — Renders the components once their modules have loaded.
+> - [steal.import](https://stealjs.com/docs/steal.import.html) - imports the pageComponentModuleName dynamically.
+> - [new Component()](https://canjs.com/doc/can-component.html#newComponent__options__) - creates new instance of the component imported.
+> - [{{#if(isResolved)}}](https://canjs.com/doc/can-stache.helpers.if.html) — Renders the components once their modules have loaded.
+> - [{{else}}](https://canjs.com/doc/can-stache.helpers.else.html) — renders _"Loading"_ while the modules are loading.
 
 Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.
 
 <img src="static/img/donejs-chat1.png" alt="chat.donejs.com" height="302" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
-
-Also, everything is [rendered on the server](Features.html#section=section_ServerSideRendered). If you reload the homepage at [localhost:8080](http://localhost:8080) you'll see the page’s content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.
-
-<img src="static/img/donejs-viewsource.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" />
-
 
 ## Homepage
 
@@ -211,7 +203,7 @@ npm install bit-tabs@2 --save
 
 Then, import the unstyled custom elements from `bit-tabs/unstyled` (unstyled because we will use Bootstrap’s styles) and add `<bit-tabs>` and `<bit-panel>` elements to the template.
 
-Update `src/home.component` to:
+Update `src/pages/home.component` to:
 
 @sourceref ../../guides/guide/steps/8-bit-tabs/home.component
 @highlight 5-7,11,18-25,only
@@ -245,12 +237,12 @@ When asked for the URL endpoint, set it to our remote RESTful API at `https://ch
 Update `src/models/message.js` to:
 
 @sourceref ../../guides/guide/steps/10-message-model/message.js
-@highlight 11-12,only
+@highlight 10-12
 
 > New APIs Used:
-> - [set.Algebra](https://canjs.com/doc/can-set.Algebra.html) — used to describe a service-layer’s parameters. For example if `"api/messages?limit=20"` only returned 20 messages, you would configure the `limit` parameter behavior in the connection’s `set.Algebra`.
+> - [QueryLogic](https://canjs.com/doc/can-query-logic.html) — used to describe a service-layer’s parameters. For example if `"api/messages?limit=20"` only returned 20 messages, you would configure the `limit` parameter behavior in the connection’s `queryLogic`.
 > - [DefineList](https://canjs.com/doc/can-define/list/list.html) — used to define the behavior of an observable list of `Message`s.
-> - [superMap](https://canjs.com/doc/can-connect/can/super-map/super-map.html) — connects the `Message` type to the  
+> - [superModel](https://canjs.com/doc/can-super-model.html) — connects the `Message` type to the  
 >   restful `'/api/messages'` service. This adds [real-time](https://canjs.com/doc/can-connect/real-time/real-time.html), [fall-through-caching](https://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html) and other useful behaviors.
 > - [loader](https://stealjs.com/docs/@loader.html) — references the module loader that is loading this code. All configuration
 >   in your _package.json_’s "steal" property is available, including the `serviceBaseUrl`.
@@ -259,15 +251,15 @@ Update `src/models/message.js` to:
 
 The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages.
 
-Update `src/messages/messages.js` to:
+Update `src/pages/messages/messages.js` to:
 
 @sourceref ../../guides/guide/steps/10-use-connection/messages.js
-@highlight 5,8-10,only
+@highlight 4,21-23,only
 
 > New APIs Used:
 > - [getList](https://canjs.com/doc/can-connect/connection.getList.html) — returns a promise that resolves to a `Message.List` of `Message` instances.
 
-Display the messages by updating `src/messages/messages.stache` to:
+Display the messages by updating `src/pages/messages/messages.stache` to:
 
 @sourceref ../../guides/guide/steps/10-use-connection/messages.stache
 @highlight 4-15,only
@@ -286,10 +278,10 @@ If you open [localhost:8080/chat](http://localhost:8080/chat), you will see a li
 
 Now let’s add the form to create new messages. The form will two-way bind the `name` and `body` properties to the component’s view-model and calls `send()` when hitting the enter key in the message input.
 
-First we have to implement the `send()` method. Update `src/messages/messages.js` to this:
+First we have to implement the `send()` method. Update `src/pages/messages/messages.js` to this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.js
-@highlight 8-18,only
+@highlight 28-35,only
 
 > New APIs Used:
 > - [save()](https://canjs.com/doc/can-connect/connection.save.html) — creates a `POST` request to `/api/messages` with
@@ -297,7 +289,7 @@ First we have to implement the `send()` method. Update `src/messages/messages.js
 
 The `send()` method takes the `name` and `message` properties from the view-model and creates a `Message` instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.
 
-Next update `src/messages/messages.stache` to look like this:
+Next update `src/pages/messages/messages.stache` to look like this:
 
 @sourceref ../../guides/guide/steps/11-create-messages/messages.stache
 @highlight 17-29,only
@@ -332,7 +324,7 @@ npm install steal-socket.io --save
 Update `src/models/message.js` to:
 
 @sourceref ../../guides/guide/steps/12-real-time/message.js
-@highlight 6,32-39,only
+@highlight 3,27-34,only
 
 > New APIs used:
 > - [createInstance](https://canjs.com/doc/can-connect/real-time/real-time.createInstance.html) — tells the real-time
