@@ -446,7 +446,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```shell
-donejs add cordova@1
+donejs add cordova@2
 ```
 
 Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.
@@ -470,7 +470,7 @@ __Note:__ if you receive the error `Error: Cannot read property 'replace' of und
 To set up the desktop build, we have to add it to our application like this:
 
 ```shell
-donejs add electron@1
+donejs add electron@2
 ```
 
 Accept the default for all of the prompts.
