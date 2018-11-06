@@ -21,8 +21,8 @@ const AppViewModel = DefineMap.extend({
   pageComponentModuleName: {
     get() {
       switch (this.routeData.page) {
-        case 'chat': return '~/messages/';
-        default: return '~/home.component';
+        case 'chat': return '~/pages/messages/';
+        default: return '~/pages/home.component';
       }
     }
   },

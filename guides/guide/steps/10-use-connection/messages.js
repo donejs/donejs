@@ -1,7 +1,7 @@
 import { Component } from 'can';
 import './messages.less';
 import view from './messages.stache';
-import Message from '../models/message';
+import Message from '../../models/message';
 
 export default Component.extend({
   tag: 'chat-messages',

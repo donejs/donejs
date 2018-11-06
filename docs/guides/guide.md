@@ -167,7 +167,7 @@ Finally we'll glue together these components as separate pages. Our Application 
 Add the following two new properties to `src/app.js`:
 
 @sourceref ../../guides/guide/steps/7-navigate/app.js
-@highlight 21-36,only
+@highlight 20-36,only
 
 This imports the chosen page's module and then instantiates a new instance using `new Component()`. We can use this component by placing it in the `index.stache`:
 
