@@ -29,7 +29,7 @@ You will need [NodeJS](http://nodejs.org) installed and your code editor of choi
 To get started, let's install the DoneJS command line utility globally:
 
 ```shell
-npm install -g donejs
+npm install -g donejs@3
 ```
 
 Then we can create a new DoneJS application:
@@ -42,8 +42,7 @@ The initialization process will ask you questions like the name of your applicat
 
 - [StealJS](https://stealjs.com) - ES6, CJS, and AMD module loader and builder
 - [CanJS](https://canjs.com) - Custom elements and Model-View-ViewModel utilities
-- [jQuery](https://jquery.com) - DOM helpers
-- [jQuery++](https://jquerypp.com) - Extended DOM helpers
+- [done-ssr](https://github.com/donejs/done-ssr) - Server-rendering
 - [QUnit](https://qunitjs.com/) or Mocha - Assertion library
 - [FuncUnit](https://funcunit.com) - Functional tests
 - [Testee](https://github.com/bitovi/testee) - Test runner
@@ -65,8 +64,8 @@ We can see the following files:
 ├── test.html
 ├── src/
 |   ├── app.js
-|   ├── index.md
 |   ├── index.stache
+|   ├── is-dev.js
 |   ├── models/
 |   |   ├── fixtures
 |   |   |   ├── fixtures.js
@@ -85,7 +84,7 @@ Let's have a quick look at the purpose of each:
 - `src` is the folder where all our development assets live in their own modlets (more about that later).
 - `src/app.js` is the main application file, which exports the main application state.
 - `src/index.stache` is the main client template that includes server-side rendering.
-- `src/index.md` is the main documentation file for our application.
+- `src/is-dev.js` is used to conditional load modules in development-mode only.
 - `src/models/` is the folder where models for the API connection will be put. It currently contains `fixtures/fixtures.js` which will reference all the specific models fixtures files (so that we can run model tests without the need for a running API server) and `test.js` which will later gather all the individual model test files.
 - `src/styles.less` is the main application styles.
 - `src/test.js` collects all individual component and model tests we will create throughout this guide as well as the functional smoke test for our application and is loaded by `test.html`.
@@ -98,16 +97,16 @@ DoneJS comes with its own server, which hosts your development files and takes c
 donejs develop
 ```
 
-The default port is 8080, so if we now go to [http://localhost:8080/] we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by changing the `message` property in `src/app.js`.
+The default port is 8080, so if we now go to [http://localhost:8080/] we can see our application with a default homepage. If we change `src/index.stache` or `src/app.js` all changes will show up right away in the browser. Try it by adding some HTML in `src/index.stache`.
 
 ### Setup a service API
 
-Single page applications usually communicate with a RESTful API and a websocket connection for real-time updates. This guide will not cover how to create a REST API. Instead, we'll just install and start an existing service API created specifically for use with this tutorial:
+Single page applications often communicate with a RESTful API and a [WebSocket connection](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for real-time updates. This guide will not cover how to create a REST API. Instead, we'll just install and start an existing service API created specifically for use with this tutorial:
 
 **Note**: Kill the server for now while we install a few dependencies (ctrl+c on Windows and Mac).
 
 ```shell
-npm install place-my-order-api@0.4 --save
+npm install place-my-order-api@1 --save
 ```
 
 Now we can add an API server start script into the `scripts` section of our `package.json` like this:
@@ -185,27 +184,33 @@ The main application file at `src/app.js` looks like this:
 
 ```js
 // src/app.js
-import DefineMap from 'can-define/map/';
-import route from 'can-route';
-import 'can-route-pushstate';
-import 'can-debug#?./is-dev';
+import { DefineMap, route } from 'can';
+import RoutePushstate from 'can-route-pushstate';
+import debug from 'can-debug#?./is-dev';
+
+//!steal-remove-start
+if(debug) {
+	debug();
+}
+//!steal-remove-end
 
 const AppViewModel = DefineMap.extend({
   env: {
-    default: () => ({NODE_ENV:'development'}),
-    serialize: false
-  },
-  message: {
-    default: 'Hello World!',
-    serialize: false
+    default: () => ({NODE_ENV:'development'})
   },
   title: {
-    default: 'place-my-order',
-    serialize: false
+    default: 'place-my-order'
+  },
+  routeData: {
+    default: () => route.data
   }
 });
 
+route.urlData = new RoutePushstate();
+route.register("{page}", { page: "home" });
+
 export default AppViewModel;
+
 ```
 
 This initializes a [DefineMap](https://canjs.com/doc/can-define/map/map.html): a special object that acts as the application global state (with a default `message` property) and also plays a key role in enabling server side rendering.
@@ -221,13 +226,13 @@ There are two ways of creating components. For smaller components we can define 
 To generate a new component run:
 
 ```shell
-donejs add component home.component pmo-home
+donejs add component pages/home.component pmo-home
 ```
 
-This will create a file at `src/home.component` containing the basic ingredients of a component. We will update it to reflect the below content:
+This will create a file at `src/pages/home.component` containing the basic ingredients of a component. We will update it to reflect the below content:
 
 @sourceref ../../guides/place-my-order/steps/creating-homepage/home.component
-@highlight 7-19,only
+@highlight 8-20,only
 
 Here we created a [can-component](https://canjs.com/doc/can-component.html) named `pmo-home`. This particular component is just a basic template, it does not have much in the way of styles or functionality.
 
@@ -236,10 +241,10 @@ Here we created a [can-component](https://canjs.com/doc/can-component.html) name
 We'll create an initial version of order history that is very similar.
 
 ```shell
-donejs add component order/history.component pmo-order-history
+donejs add component pages/order/history.component pmo-order-history
 ```
 
-And update `src/order/history.component`:
+And update `src/pages/order/history.component`:
 
 @sourceref ../../guides/place-my-order/steps/creating-oh/history.component
 @highlight 8-15,only
@@ -251,7 +256,7 @@ The restaurant list will contain more functionality, which is why we will split 
 We can create a basic component like that by running:
 
 ```shell
-donejs add component restaurant/list pmo-restaurant-list
+donejs add component pages/restaurant/list pmo-restaurant-list
 ```
 
 The component's files are collected in a single folder so that components can be easily tested, moved, and re-used. The folder structure looks like this:
@@ -265,20 +270,21 @@ The component's files are collected in a single folder so that components can be
 |   ├── index.stache
 |   ├── test.js
 |   ├── models
-|   ├── order/
-|   |   ├── history.component
-|   ├── restaurant/
-|   |   ├── list/
-|   |   |   ├── list.html
-|   |   |   ├── list.js
-|   |   |   ├── list.less
-|   |   |   ├── list.md
-|   |   |   ├── list.stache
-|   |   |   ├── list-test.js
-|   |   |   ├── test.html
+|   ├── pages/
+|   |   ├── order/
+|   |   |   ├── history.component
+|   |   ├── restaurant/
+|   |   |   ├── list/
+|   |   |   |   ├── list.html
+|   |   |   |   ├── list.js
+|   |   |   |   ├── list.less
+|   |   |   |   ├── list.md
+|   |   |   |   ├── list.stache
+|   |   |   |   ├── list-test.js
+|   |   |   |   ├── test.html
 ```
 
-We will learn more about those files and add more functionality to this element later, but it already contains a fully functional component with a demo page (see [localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html)), a basic test (at [localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html)) and documentation placeholders.
+We will learn more about those files and add more functionality to this element later, but it already contains a fully functional component with a demo page (see [localhost:8080/src/pages/restaurant/list/list.html](http://localhost:8080/src/pages/restaurant/list/list.html)), a basic test (at [localhost:8080/src/pages/restaurant/list/test.html](http://localhost:8080/src/pages/restaurant/list/test.html)) and documentation placeholders.
 
 ## Setting up routing
 
@@ -295,14 +301,11 @@ To learn more about routing visit the CanJS guide on [Application State and Rout
 To add our routes, change `src/app.js` to:
 
 @sourceref ../../guides/place-my-order/steps/create-routes/app.js
-@highlight 7-9,17-19,only
-
-> Notice: We also removed the `message` property in `AppViewModel`.  This is because
-> it is not needed.
+@highlight 12-14,28-29,only
 
 Now we have three routes available:
 
-- `{page}` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `AppViewModel` to `home` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
+- `{page}` captures urls like [http://localhost:8080/home](http://localhost:8080/home) and sets the `page` property on `routeData` to `home` (which is also the default when visiting [http://localhost:8080/](http://localhost:8080/))
 - `{page}/{slug}` matches restaurant links like [http://localhost:8080/restaurants/spago](http://localhost:8080/restaurants/spago) and sets `page` and `slug` (a URL friendly restaurant short name)
 - `{page}/{slug}/{action}` will be used to show the order page for a specific restaurant e.g. [http://localhost:8080/restaurants/spago/order](http://localhost:8080/restaurants/spago/order)
 
@@ -311,50 +314,41 @@ Now we have three routes available:
 Now is also a good time to add a header element that links to the different routes we just defined. We can run
 
 ```shell
-donejs add component header.component pmo-header
+donejs add component components/header.component pmo-header
 ```
 
-and update `src/header.component` to:
+and update `src/components/header.component` to:
 
 @sourceref ../../guides/place-my-order/steps/add-header/header.component
-@highlight 8-24,only
+@highlight 8-24,33,only
 
 Here we use [routeUrl](https://canjs.com/doc/can-stache.helpers.routeUrl.html) to create links that will set values in the application state. For example, the first usage of routeUrl above will create a link based on the current routing rules ([http://localhost:8080/home](http://localhost:8080/home) in this case) that sets the `page` property to `home` when clicked.
 
 We also use the Stache `eq` helper to make the appropriate link active.
 
-### Create a loading indicator
-
-To show that something is currently loading, let's create a `pmo-loading` component:
-
-```shell
-donejs add component loading.component pmo-loading
-```
-
-Change `src/loading.component` to:
-
-@sourceref ../../guides/place-my-order/steps/add-loading/loading.component
-@highlight 1,8-12,only
-
-
 ### Switch between components
 
-Now we can glue all those individual components together in `src/index.stache`. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it.
+Now we can glue all those individual components together. What we want to do is - based on the current page (`home`, `restaurants` or `order-history`) - load the correct component and then initialize it.
+
+Update `src/app.js` to:
+
+@sourceref ../../guides/place-my-order/steps/switch-between/app.js
+@highlight 23-44,only
 
 Update `src/index.stache` to:
 
 @sourceref ../../guides/place-my-order/steps/switch-between/index.stache
-@highlight 11-13,15-34,only
+@highlight 11-12,14-18,only
 
-Here we make a `switch` statement that checks for the current `page` property (part of the AppViewModel that makes up the scope object of this template) then progressively loads the component with [can-import](https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html) and initializes it.
+Here we use a `switch` statement that checks for the current `page` property on the `route.data`, then progressively loads the component with [steal.import](https://stealjs.com/docs/steal.import.html) and [initializes it](https://canjs.com/doc/can-component.html#newComponent__options__).
 
-Setting `can-tag="pmo-loading"` inserts a `<pmo-loading>` loading indicator while the import is in progress. A can-import's view model is a promise object, so once it is done loading, it sets its `state` property to `resolved`.
+In the template `{{#if(this.pageComponent.isResolved)}}` shows a loading indicator while the page loads, and then inserts the page (the one instantiated in the Application ViewModel) with `{{this.pageComponent.value}}`.
 
 Now we can see the header and the home component and be able to navigate to the different pages through the header.
 
 ## Getting Data from the Server
 
-In this next part, we'll connect to the RESTful API that we set up with `place-my-order-api`, using the powerful data layer provided by [can-connect](https://canjs.com/doc/can-connect.html).
+In this next part, we'll connect to the RESTful API that we set up with `place-my-order-api`, using the powerful data layer provided by [CanJS](https://canjs.com) with [QueryLogic](https://canjs.com/doc/can-query-logic.html) and [realtimeRestModel](https://canjs.com/doc/can-realtime-rest-model.html).
 
 ### Creating a restaurants connection
 
@@ -387,16 +381,6 @@ We have now created a model and fixtures (for testing without an API) with a fol
 |   |   ├── test.js
 ```
 
-We also need to specify that the restaurant list can be filtered to restaurants in a queried city and state by updating `src/models/restaurant.js`:
-
-@sourceref ../../guides/place-my-order/steps/create-test/restaurants_model.js
-@highlight 19-20,only
-
-Above we use `set.props.dotNotation` since our queries for these nested properties will be in the [MongoDB-style 'dot notation'](https://docs.mongodb.com/v2.2/reference/glossary/#term-dot-notation) format required by the backend.
-
-For example, MongoDB expects a query parameter for restaurants in a specific state to look like `{'address.state':'IL'}` and can-connect expects it to look like `{address:{state: 'IL'}}`. `set.props.dotNotation` allows can-connect to make comparisons between these two formats.
-
-
 ### Test the connection
 
 To test the connection you can run the following in the browser console. You can access the browser console by right clicking in the browser and selecting **Inspect**. Then switch to the **Console** tab if not already there. Test the connection with:
@@ -416,12 +400,14 @@ of all restaurants on the server and log them to the console.
 
 ### Add data to the page
 
-Now, update the `ViewModel` in `src/restaurant/list/list.js` to use [can-define](https://github.com/canjs/can-define) to load all restaurants from the restaurant connection:
+Now, update the `ViewModel` in `src/pages/restaurant/list/list.js` to load all restaurants from the restaurant connection:
 
 @sourceref ../../guides/place-my-order/steps/add-data/list.js
-@highlight 5,8-12,only
+@highlight 4,16-20,only
 
-And update the template at `src/restaurant/list/list.stache` to use the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) returned for the `restaurants` property to render the template:
+> *Note*: we also removed the __message__ property.
+
+And update the template at `src/pages/restaurant/list/list.stache` to use the [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) returned for the `restaurants` property to render the template:
 
 @sourceref ../../guides/place-my-order/steps/add-data/list.stache
 
@@ -480,19 +466,19 @@ Now we can load a list of states and cities.
 Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](https://canjs.com/doc/can-define/map/map.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-dependent/list.js
-@highlight 6-7,10-46,only
+@highlight 5-6,18-56,only
 
 Let's take a closer look at those properties:
 
 - `states` will return a list of all available states by calling `State.getList({})`
-- `state` is a string property set to `null` by default (no selection). Additionally, when `state` is changed we will remove the dependent `city` selection.
+- `state` is a string property set to `null` by default (no selection).
 - `cities` will return `null` if no state has been selected. Otherwise, it will load all the cities for a given state by sending `state` as a query paramater (which will make a request like [http://localhost:8080/api/cities?state=IL](http://localhost:8080/api/cities?state=IL))
-- `city` is a simple string, set to `null` by default
+- `city` is a string, set to `null` by default. It [listens to](https://canjs.com/doc/can-define.types.valueOptions.html) itself being set and resolves to that value. Additionally it listens to `state` and resolves back to `null` when it changes.
 - `restaurants` will always be `null` unless both a `city` and a `state` are selected. If both are selected, it will set the `address.state` and `address.city` query parameters which will return a list of all restaurants whose address matches those parameters.
 
 ### Create a test
 
-View models that are decoupled from the presentation layer are easy to test. We will use [QUnit](https://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`). The component generator created a fully working test page for the component, which can be opened at [http://localhost:8080/pmo/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html). Currently, the tests will fail because we changed the view model, but in this section we will create some unit tests for the new functionality.
+View models that are decoupled from the presentation layer are easy to test. We will use [QUnit](https://qunitjs.com/) as the testing framework by loading a StealJS-friendly wrapper (`steal-qunit`). The component generator created a fully working test page for the component, which can be opened at [http://localhost:8080/src/pages/restaurant/list/test.html](http://localhost:8080/src/pages/restaurant/list/test.html). Currently, the tests will fail because we changed the view model, but in this section we will create some unit tests for the new functionality.
 
 #### Fixtures: Create fake data
 
@@ -513,11 +499,11 @@ Update `src/models/fixtures/restaurants.js` to look like:
 
 #### Test the view model
 
-With fake data in place, we can test our view model by changing `src/restaurant/list/list-test.js` to:
+With fake data in place, we can test our view model by changing `src/pages/restaurant/list/list-test.js` to:
 
 @sourceref ../../guides/place-my-order/steps/create-test/list-test.js
 
-These unit tests are comparing expected data (what we we defined in the fixtures) with actual data (how the view model methods are behaving). Visit [http://localhost:8080/src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) to see all tests passing.
+These unit tests are comparing expected data (what we we defined in the fixtures) with actual data (how the view model methods are behaving). Visit [http://localhost:8080/src/pages/restaurant/list/test.html](http://localhost:8080/src/pages/restaurant/list/test.html) to see all tests passing.
 
 ### Write the template
 
@@ -526,7 +512,7 @@ Now that our view model is implemented and tested, we'll update the restaurant l
 Update `src/restaurant/list/list.stache` to:
 
 @sourceref ../../guides/place-my-order/steps/write-template/list.stache
-@highlight 5-36,only
+@highlight 5-38,only
 
 Some things worth pointing out:
 
@@ -540,9 +526,9 @@ Now we have a component that lets us select state and city and displays the appr
 We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
 
 @sourceref ../../guides/place-my-order/steps/write-template/list.html
-@highlight 2-3,only
+@highlight 3-9,only
 
-View the demo page at [http://localhost:8080/src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html) .
+View the demo page at [http://localhost:8080/src/pages/restaurant/list/list.html](http://localhost:8080/src/pages/restaurant/list/list.html) .
 
 ## Automated tests
 
@@ -550,7 +536,7 @@ In this chapter we will automate running the tests so that they can be run from 
 
 ### Using the global test page
 
-We already worked with an individual component test page in [src/restaurant/list/test.html](http://localhost:8080/src/restaurant/list/test.html) but we also have a global test page available at [test.html](http://localhost:8080/test.html). All tests are being loaded in `src/test.js`. Since we don't have tests for our models at the moment, let's remove the `import 'place-my-order/models/test';` part so that `src/test.js` looks like this:
+We already worked with an individual component test page in [src/pages/restaurant/list/test.html](http://localhost:8080/pages/src/restaurant/list/test.html) but we also have a global test page available at [test.html](http://localhost:8080/test.html). All tests are being loaded in `src/test.js`. Since we don't have tests for our models at the moment, let's remove the `import 'place-my-order/models/test';` part so that `src/test.js` looks like this:
 
 @sourceref ../../guides/place-my-order/steps/test-runner/test.js
 

@@ -1,7 +1,7 @@
 import F from 'funcunit';
 import QUnit from 'steal-qunit';
 
-import '~/restaurant/list/list-test';
+import '~/pages/restaurant/list/list-test';
 
 F.attach(QUnit);
 

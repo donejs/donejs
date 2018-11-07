@@ -2,21 +2,24 @@
 
 <div class="restaurants">
   <h2 class="page-header">Restaurants</h2>
-  {{#if(restaurants.isPending)}}
+  {{#if(this.restaurants.isPending)}}
     <div class="restaurant loading"></div>
   {{/if}}
 
-  {{#if(restaurants.isResolved)}}
-    {{#each(restaurants.value)}}
+  {{#if(this.restaurants.isResolved)}}
+    {{#for(restaurant of this.restaurants.value)}}
+      {{let addr=restaurant.address}}
+
       <div class="restaurant">
-        <img src="{{joinBase(images.thumbnail)}}"
+        <img src="{{joinBase(restaurant.images.thumbnail)}}"
           width="100" height="100">
-        <h3>{{name}}</h3>
-        {{#address}}
+        <h3>{{restaurant.name}}</h3>
+        
+        {{#if(addr)}}
         <div class="address">
-          {{street}}<br />{{city}}, {{state}} {{zip}}
+          {{addr.street}}<br />{{addr.city}}, {{addr.state}} {{addr.zip}}
         </div>
-        {{/address}}
+        {{/if}}
 
         <div class="hours-price">
           $$$<br />
@@ -24,11 +27,11 @@
           <span class="open-now">Open Now</span>
         </div>
 
-        <a class="btn" href="{{routeUrl(page='restaurants' slug=slug)}}">
+        <a class="btn" href="{{routeUrl(page='restaurants' slug=restaurant.slug)}}">
           Details
         </a>
         <br />
       </div>
-    {{/each}}
+    {{/for}}
   {{/if}}
 </div>
