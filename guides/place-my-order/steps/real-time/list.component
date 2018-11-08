@@ -1,43 +1,77 @@
 <can-component tag="pmo-order-list">
   <view>
-    <h4>{{listTitle}}</h4>
+    <h4>{{this.listTitle}}</h4>
 
-    {{#if(orders.isPending)}}
+    {{#if(this.orders.isPending)}}
      <div class="loading"></div>
     {{else}}
-      {{#each(orders.value)}}
-      <div class="order {{status}}">
+      {{#for(order of this.orders.value)}}
+      <div class="order {{order.status}}">
         <address>
-          {{name}} <br />{{address}} <br />{{phone}}
+          {{order.name}} <br />{{order.address}} <br />{{order.phone}}
         </address>
 
         <div class="items">
           <ul>
-            {{#each(items)}}<li>{{name}}</li>{{/each}}
+            {{#for(item of order.items)}}<li>{{item.name}}</li>{{/for}}
           </ul>
         </div>
 
-        <div class="total">${{total}}</div>
+        <div class="total">${{order.total}}</div>
 
         <div class="actions">
-          <span class="badge">{{statusTitle}}</span>
-          {{#if(action)}}
+          <span class="badge">{{this.statusTitle}}</span>
+          {{#if(this.action)}}
             <p class="action">
               Mark as:
-              <a href="javascript://" on:click="markAs(action)">
-                {{actionTitle}}
+              <a href="javascript://" on:click="order.markAs(this.action)">
+                {{this.actionTitle}}
               </a>
             </p>
           {{/if}}
 
           <p class="action">
-            <a href="javascript://"  on:click="destroy()">Delete</a>
+            <a href="javascript://"  on:click="order.destroy()">Delete</a>
           </p>
         </div>
       </div>
       {{else}}
-        <div class="order empty">{{emptyMessage}}</div>
-      {{/each}}
+        <div class="order empty">{{this.emptyMessage}}</div>
+      {{/for}}
     {{/if}}
   </view>
+  <script type="view-model">
+    import { DefineMap } from 'can';
+
+    export default DefineMap.extend("PmoOrderListVM", {
+      // EXTERNAL STATEFUL PROPERTIES
+      // These properties are passed from another component. Example:
+      // value: {type: "number"}
+      orders: "any",
+      listTitle: "string",
+      status: "string",
+      statusTitle: "string",
+      action: "string",
+      actionTitle: "string",
+      emptyMessage: "string",
+
+      // INTERNAL STATEFUL PROPERTIES
+      // These properties are owned by this component.
+
+      // DERIVED PROPERTIES
+      // These properties combine other property values. Example:
+      // get valueAndMessage(){ return this.value + this.message; }
+
+      // METHODS
+      // Functions that can be called by the view. Example:
+      // incrementValue() { this.value++; }
+
+      // SIDE EFFECTS
+      // The following is a good place to perform changes to the DOM
+      // or do things that don't fit in to one of the areas above.
+      connectedCallback(element){
+
+      }
+    });
+  </script>
 </can-component>

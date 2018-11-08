@@ -831,14 +831,14 @@ While we're here we can also update our test to get it passing again, replace `s
 First, let's implement a small order confirmation component with
 
 ```shell
-donejs add component order/details.component pmo-order-details
+donejs add component components/order/details.component pmo-order-details
 ```
 
-and changing `src/order/details.component` to:
+and changing `src/components/order/details.component` to:
 
 @sourceref ../../guides/place-my-order/steps/create-data/details.component
 
-Now we can import that component and update `src/order/new/new.stache` to:
+Now we can import that component and update `src/pages/order/new/new.stache` to:
 
 @sourceref ../../guides/place-my-order/steps/create-data/new.stache
 
@@ -847,39 +847,37 @@ This is a longer template so lets walk through it:
 - `<can-import from="place-my-order/order/details.component" />` loads the order details component we previously created
 - If the `saveStatus` promise is resolved we show the `pmo-order-details` component with that order
 - Otherwise we will show the order form with the `bit-tabs` panels we implemented in the previous chapter and iterate over each menu item
-- `on:submit="placeOrder()"` will call `placeOrder` from our view model when the form is submitted
-- The interesting part for showing a menu item is the checkbox `<input type="checkbox" on:change="order.items.toggle(.)" {{#if order.items.has(.)}}checked{{/if}}>`
-  - `on:change` binds to the checkbox change event and runs `order.items.toggle` which toggles the item from `ItemList`, which we created in the model
-  - `order.item.has` sets the checked status to whether or not this item is in the order
+- `on:submit="this.placeOrder()"` will call `placeOrder` from our view model when the form is submitted
+- The interesting part for showing a menu item is the checkbox `<input type="checkbox" on:change="this.order.items.toggle(item)" {{#if this.order.items.has(item)}}checked{{/if}}>`
+  - `on:change` binds to the checkbox change event and runs `this.order.items.toggle` which toggles the item from `ItemList`, which we created in the model
+  - `this.order.item.has` sets the checked status to whether or not this item is in the order
 - Then we show form elements for name, address, and phone number, which are bound to the order model using [can-stache-bindings](https://canjs.com/doc/can-stache-bindings.html)
-- Finally we disable the button with `{{^if canPlaceOrder}}disabled{{/if}}` which gets `canPlaceOrder` from the view model and returns false if no menu items are selected.
+- Finally we disable the button with `{{^if(this.canPlaceOrder)}}disabled{{/if}}` which gets `canPlaceOrder` from the view model and returns false if no menu items are selected.
 
 ## Set up a real-time connection
 
 can-connect makes it very easy to implement real-time functionality. It is capable of listening to notifications from the server when server data has been created, updated, or removed. This is usually accomplished via [websockets](https://en.wikipedia.org/wiki/WebSocket), which allow sending push notifications to a client.
 
-### Add the order-model tag
+### Add the Status enum type
 
-Update `src/models/order.js` to use [can-connect/can/tag/](https://canjs.com/doc/can-connect/can/tag/tag.html) so that the Order model can be used declaratively:
+Update `src/models/order.js` to use [QueryLogic.makeEnum](https://canjs.com/doc/can-query-logic.makeEnum.html) so that we can declare all of the possible values for an order's `status`.
 
-@sourceref ../../guides/place-my-order/steps/real-time/order-tag.js
-@highlight 6,65,76,only
-
-The model can now be used in the template like `<order-model get-list="{status='new'}">`. This also adds an [enum comparator](https://canjs.com/doc/can-set.props.enum.html) so that multiple requests for different statuses can be combined.
+@sourceref ../../guides/place-my-order/steps/real-time/order-model.js
+@highlight 1,28,43-44,only
 
 ### Update the template
 
 First let's create the `pmo-order-list` component with:
 
 ```shell
-donejs add component order/list.component pmo-order-list
+donejs add component components/order/list.component pmo-order-list
 ```
 
-And then change `src/order/list.component` to:
+And then change `src/components/order/list.component` to:
 
 @sourceref ../../guides/place-my-order/steps/real-time/list.component
 
-Also update the order history template by changing `src/order/history.component` to:
+Also update the order history template by changing `src/pages/order/history.component` to:
 
 @sourceref ../../guides/place-my-order/steps/real-time/history.component
 
@@ -896,7 +894,7 @@ npm install steal-socket.io@4 --save
 Update `src/models/order.js` to use socket.io to update the Order model in real-time:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order.js
-@highlight 7,77-81,only
+@highlight 3,73-77,only
 
 That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
@@ -1011,7 +1009,7 @@ Windows users should install the [Android Studio](https://developer.android.com/
 Now we can install the DoneJS Cordova tools with:
 
 ```shell
-donejs add cordova@1
+donejs add cordova@2
 ```
 
 Answer the question about the URL of the service layer with `http://www.place-my-order.com`.
@@ -1049,7 +1047,7 @@ If everything went well, we should see the emulator running our application.
 To set up the desktop build, we have to add it to our application like this:
 
 ```shell
-donejs add electron@1
+donejs add electron@2
 ```
 
 Answer the question about the URL of the service layer with `http://www.place-my-order.com`. We can answer the rest of the prompts with the default.
