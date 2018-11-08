@@ -677,15 +677,14 @@ route.register('{page}/{slug}', { slug: null });
 route.register('{page}/{slug}/{action}', { slug: null, action: null });
 ```
 
-We want to use those routes when we are in the `restaurants` page. The relevant section in `src/index.stache` currently looks like this:
+We want to use those routes when we are in the `restaurants` page. The relevant section in `pageComponent` currently looks like this:
 
-```html
-{{#case "restaurants"}}
-  <can-import from="src/restaurant/list/"
-      can-tag="pmo-loading">
-    <pmo-restaurant-list/>
-  </can-import>
-{{/case}}
+```js
+case 'restaurants': {
+  return steal.import('~/pages/restaurant/list/').then(({default: RestaurantList}) => {
+    return new RestaurantList();
+  });
+}
 ```
 
 We want to support two additional routes:
@@ -698,44 +697,36 @@ We want to support two additional routes:
 To make this happen, we need two more components. First, the `pmo-restaurant-details` component which loads the restaurant (based on the `slug`) and displays its information.
 
 ```shell
-donejs add component restaurant/details.component pmo-restaurant-details
+donejs add component pages/restaurant/details.component pmo-restaurant-details
 ```
 
-And change `src/restaurant/details.component` to:
+And change `src/pages/restaurant/details.component` to:
 
 @sourceref ../../guides/place-my-order/steps/additional/details.component
 
 The order component will be a little more complex, which is why we will put it into its own folder:
 
 ```shell
-donejs add component order/new pmo-order-new
+donejs add component pages/order/new pmo-order-new
 ```
 
 For now, we will just use placeholder content and implement the functionality in
 the following chapters.
 
-### Add to the main template
+### Add to the Application ViewModel routing
 
-Now we can add those components to the main template (at `src/index.stache`) with conditions based on the routes that we want to match. Change the section which contains:
+Now we can add those components to the `pageComponent` property (at `src/app.js`) with conditions based on the routes that we want to match. Update `src/app.js` with:
 
-```html
-{{#case "restaurants"}}
-  <can-import from="place-my-order/restaurant/list/"
-      can-tag="pmo-loading">
-    <pmo-restaurant-list/>
-  </can-import>
-{{/case}}
-```
-
-To:
-
-@sourceref ../../guides/place-my-order/steps/additional/addition.stache
+@sourceref ../../guides/place-my-order/steps/additional/app.js
+@highlight 1,33-57,only
 
 Here we are adding some more conditions if `page` is set to `restaurants`:
 
 - When there is no `slug` set, show the original restaurant list
 - When `slug` is set but no `action`, show the restaurant details
 - When `slug` is set and `action` is `order`, show the order component for that restaurant
+
+As before, we import the page component based on the state of the route. Since the page component is a class, we can call `new` to create a new instance. Then we use [can-value](https://canjs.com/doc/can-value.from.html) to bind the `slug` from the route to the component.
 
 ## Importing other projects
 
@@ -745,7 +736,7 @@ The npm integration of StealJS makes it very easy to share and import other comp
 npm install bit-tabs@2 --save
 ```
 
-And then integrate it into `src/order/new/new.stache`:
+And then integrate it into `src/pages/order/new/new.stache`:
 
 @sourceref ../../guides/place-my-order/steps/bit-tabs/new.stache
 
@@ -817,20 +808,20 @@ donejs add supermodel order
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-data/order.js
-@highlight 7-29,34-55,only
+@highlight 4-26,34-55,only
 
 Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
 ### Implement the view model
 
-Now we can update the view model in `src/order/new/new.js`:
+Now we can update the view model in `src/pages/order/new/new.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-data/new.js
-@highlight 5-6,9-34,only
+@highlight 4-5,14,18-32,41-50,only
 
 Here we just define the properties that we need: `slug`, `order`, `canPlaceOrder` - which we will use to enable/disable the submit button - and `saveStatus`, which will become a promise once the order is submitted. `placeOrder` updates the order with the restaurant information and saves the current order. `startNewOrder` allows us to submit another order.
 
-While we're here we can also update our test to get it passing again, replace `src/order/new/new-test.js` with:
+While we're here we can also update our test to get it passing again, replace `src/pages/order/new/new-test.js` with:
 
 @sourceref ../../guides/place-my-order/steps/create-data/new-test.js
 @highlight 7-12,only

@@ -1,21 +1,27 @@
 <can-component tag="pmo-restaurant-details">
+  <style type="less">
+    display: block;
+
+    p { font-weight: bold; }
+  </style>
   <view>
     <can-import from="~/models/restaurant" />
     <can-import from="can-stache-route-helpers" />
-    {{#if(restaurantPromise.isPending)}}
+    {{#if(this.restaurantPromise.isPending)}}
       <div class="loading"></div>
     {{else}}
-      {{#restaurantPromise.value}}
+      {{let restaurant=this.restaurantPromise.value}}
       <div class="restaurant-header"
-          style="background-image: url({{joinBase(images.banner)}});">
+          style="background-image: url({{joinBase(restaurant.images.banner)}});">
         <div class="background">
-          <h2>{{name}}</h2>
+          <h2>{{restaurant.name}}</h2>
 
-          {{#address}}
+          {{let addr=restaurant.address}}
+          {{#if(addr)}}
           <div class="address">
-            {{street}}<br />{{city}}, {{state}} {{zip}}
+            {{addr.street}}<br />{{addr.city}}, {{addr.state}} {{addr.zip}}
           </div>
-          {{/address}}
+          {{/if}}
 
           <div class="hours-price">
             $$$<br />
@@ -31,25 +37,45 @@
         <h3>The best food this side of the Mississippi</h3>
 
         <p class="description">
-          <img src="{{joinBase(images.owner)}}" />
-          Description for {{name}}
+          <img src="{{joinBase(restaurant.images.owner)}}" />
+          Description for {{restaurant.name}}
         </p>
         <p class="order-link">
-          <a class="btn" href="{{routeUrl(page='restaurants' slug=slug action='order')}}">
-            Order from {{name}}
+          <a class="btn" href="{{routeUrl(page='restaurants' slug=restaurant.slug action='order')}}">
+            Order from {{restaurant.name}}
           </a>
         </p>
       </div>
-      {{/restaurantPromise.value}}
     {{/if}}
   </view>
   <script type="view-model">
-    import DefineMap from 'can-define/map/';
-    import Restaurant from '~/models/restaurant';
+    import { DefineMap } from 'can';
 
-    export default DefineMap.extend({
+    export default DefineMap.extend("PmoRestaurantDetailsVM", {
+      // EXTERNAL STATEFUL PROPERTIES
+      // These properties are passed from another component. Example:
+      // value: {type: "number"}
+
+      // INTERNAL STATEFUL PROPERTIES
+      // These properties are owned by this component.
+      message: { default: "This is the pmo-restaurant-details component" },
+
+      // DERIVED PROPERTIES
+      // These properties combine other property values. Example:
+      // get valueAndMessage(){ return this.value + this.message; }
       get restaurantPromise() {
         return Restaurant.get({ _id: this.slug });
+      },
+
+      // METHODS
+      // Functions that can be called by the view. Example:
+      // incrementValue() { this.value++; }
+
+      // SIDE EFFECTS
+      // The following is a good place to perform changes to the DOM
+      // or do things that don't fit in to one of the areas above.
+      connectedCallback(element){
+
       }
     });
   </script>
