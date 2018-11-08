@@ -1,10 +1,10 @@
-import fixture from 'can-fixture';
+import { fixture } from 'can';
 import City from '../city';
 
 const store = fixture.store([
   { state: 'CA', name: 'Casadina' },
   { state: 'NT', name: 'Alberny' }
-], City.connection.algebra);
+], City.connection.queryLogic);
 
 fixture('/api/cities/{name}', store);
 

@@ -5,63 +5,69 @@
   <form class="form">
     <div class="form-group">
       <label>State</label>
-      <select value:bind="state" {{#if(states.isPending)}}disabled{{/if}}>
-        {{#if(states.isPending)}}
+      <select value:bind="this.state" {{#if(this.states.isPending)}}disabled{{/if}}>
+        {{#if(this.states.isPending)}}
           <option value="">Loading...</option>
         {{else}}
-          {{^if(state)}}
+          {{^if(this.state)}}
           <option value="">Choose a state</option>
           {{/if}}
-          {{#each(states.value)}}
-          <option value="{{short}}">{{name}}</option>
-          {{/each}}
+          {{#for(state of this.states.value)}}
+          <option value="{{state.short}}">{{state.name}}</option>
+          {{/for}}
         {{/if}}
       </select>
     </div>
     <div class="form-group">
       <label>City</label>
-      <select value:bind="city"{{^if(state)}}disabled{{/if}}>
-        {{#if(cities.isPending)}}
+      <select value:bind="this.city"{{^if(this.state)}}disabled{{/if}}>
+        {{#if(this.cities.isPending)}}
           <option value="">Loading...</option>
         {{else}}
-          {{^if(city)}}
-          <option value="">Choose a city</option>
+          {{#if(this.state)}}
+            {{^if(this.city)}}
+            <option value="">Choose a city</option>
+            {{/if}}
+            {{#for(city of this.cities.value)}}
+            <option value:from="city.name">{{city.name}}</option>
+            {{/for}}
           {{/if}}
-          {{#each(cities.value)}}
-          <option value:from="name">{{name}}</option>
-          {{/each}}
         {{/if}}
       </select>
     </div>
   </form>
 
-  {{#if restaurants.isPending}}
-  <div class="restaurant loading"></div>
+  {{#if(this.restaurants.isPending)}}
+    <div class="restaurant loading"></div>
   {{/if}}
 
-  {{#if restaurants.isResolved}}
-    {{#each restaurants.value}}
-    <div class="restaurant">
-      <img src="{{joinBase images.thumbnail}}"
-        width="100" height="100">
-      <h3>{{name}}</h3>
-      {{#address}}
-      <div class="address">
-        {{street}}<br />{{city}}, {{state}} {{zip}}
-      </div>
-      {{/address}}
+  {{#if(this.restaurants.isResolved)}}
+    {{console.log("count", this.restaurants.value.length)}}
+    {{#for(restaurant of this.restaurants.value)}}
+      {{let addr=restaurant.address}}
 
-      <div class="hours-price">
-        $$$<br />
-        Hours: M-F 10am-11pm
-        <span class="open-now">Open Now</span>
-      </div>
+      <div class="restaurant">
+        <img src="{{joinBase(restaurant.images.thumbnail)}}"
+          width="100" height="100">
+        <h3>{{restaurant.name}}</h3>
 
-      <a class="btn" href="{{routeUrl page='restaurants' slug=slug}}">
-        Place My Order
-      </a>
-      <br />
-    </div>
-    {{/each}}
+        {{#if(addr)}}
+        <div class="address">
+          {{addr.street}}<br />{{addr.city}}, {{addr.state}} {{addr.zip}}
+        </div>
+        {{/if}}
+
+        <div class="hours-price">
+          $$$<br />
+          Hours: M-F 10am-11pm
+          <span class="open-now">Open Now</span>
+        </div>
+
+        <a class="btn" href="{{routeUrl(page='restaurants' slug=restaurant.slug)}}">
+          Details
+        </a>
+        <br />
+      </div>
+    {{/for}}
   {{/if}}
 </div>

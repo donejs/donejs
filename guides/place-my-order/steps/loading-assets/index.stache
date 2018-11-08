@@ -1,22 +1,19 @@
 <html>
   <head>
-    <title>{{title}}</title>
+    <title>{{this.title}}</title>
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>
   <body>
     <can-import from="place-my-order-assets" />
     <can-import from="~/styles.less" />
-    <can-import from="~/app" export-as="viewModel" />
+    <can-import from="~/app" export-as="viewModel" route-data="routeData" />
 
-    <h1>{{message}}</h1>
+    <h1>The <strong>{{this.routeData.page}}</strong> page</h1>
 
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="{{joinBase('steal.production.js')}}"></script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
+    {{#eq(this.env.NODE_ENV, "production")}}
+      <script src="{{joinBase('steal.production.js')}}"></script>
+    {{else}}
+      <script src="/node_modules/steal/steal.js" main></script>
+    {{/eq}}
   </body>
 </html>

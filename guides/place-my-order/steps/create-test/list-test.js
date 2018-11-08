@@ -48,8 +48,9 @@ QUnit.asyncTest('changing a state resets city', function() {
 
 QUnit.asyncTest('setting state and city loads a list of its restaurants', function() {
   var vm = new ViewModel();
+  vm.bind('city', () => {});
   var expectedRestaurants = restaurantStore.getList({
-    "address.city": "Alberny"
+    filter: { address: { city: "Alberny" } }
   }).data;
 
   vm.state = 'NT';

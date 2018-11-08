@@ -1,9 +1,5 @@
-import DefineMap from 'can-define/map/';
-import DefineList from 'can-define/list/';
-import set from 'can-set';
-import superMap from 'can-connect/can/super-map/';
+import { DefineMap, DefineList, superModel, QueryLogic } from 'can';
 import loader from '@loader';
-import tag from 'can-connect/can/tag/';
 import io from 'steal-socket.io';
 
 const Item = DefineMap.extend({
@@ -30,17 +26,23 @@ const ItemsList = DefineList.extend({
   }
 });
 
+const Status = QueryLogic.makeEnum(["new", "preparing", "delivery", "delivered"]);
+
 const Order = DefineMap.extend({
   seal: false
 }, {
-  '_id': '*',
+  '_id': {
+    type: 'any',
+    identity: true
+  },
   name: 'string',
   address: 'string',
   phone: 'string',
   restaurant: 'string',
 
   status: {
-    default: 'new'
+    default: 'new',
+    Type: Status
   },
   items: {
     Default: ItemsList
@@ -57,21 +59,15 @@ const Order = DefineMap.extend({
   }
 });
 
-const algebra = new set.Algebra(
-  set.props.id('_id'),
-  set.comparators.enum("status", ["new", "preparing", "delivery", "delivered"])
-);
-
 Order.List = DefineList.extend({
   '#': Order
 });
 
-Order.connection = superMap({
+Order.connection = superModel({
   url: loader.serviceBaseURL + '/api/orders',
   Map: Order,
   List: Order.List,
-  name: 'order',
-  algebra
+  name: 'order'
 });
 
 const socket = io(loader.serviceBaseURL);
@@ -79,7 +75,5 @@ const socket = io(loader.serviceBaseURL);
 socket.on('orders created', order => Order.connection.createInstance(order));
 socket.on('orders updated', order => Order.connection.updateInstance(order));
 socket.on('orders removed', order => Order.connection.destroyInstance(order));
-
-tag('order-model', Order.connection);
 
 export default Order;
