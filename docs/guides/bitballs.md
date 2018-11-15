@@ -482,26 +482,26 @@ When a user navigates to `/register`, the [`<user-details>`](http://donejs.githu
 creates a form that takes a user's email and password.  
 
 ```html
-<form on:submit="saveUser(%event)" action="">
+<form on:submit="this.saveUser(scope.event)" action="">
     <div class="form-group">
         <label for="user-email">
             Email
         </label>
-        {{#is userStatus "verified"}}
+        {{#is(this.userStatus, "verified")}}
             <div class="input-group has-success has-feedback">
                 <span class="input-group-addon">verified!</span>
                 <input
                     class="form-control"
                     id="user-email"
-                    {{^if user.isNew}}disabled{{/if}}
-                    value:bind="user.email" />
+                    {{^if(this.user.isNew)}}disabled{{/if}}
+                    value:bind="this.user.email" />
             </div>
         {{else}}
             <input
                 class="form-control"
                 id="user-email"
-                {{^if user.isNew}}disabled{{/if}}
-                value:bind="user.email" />
+                {{^if(this.user.isNew)}}disabled{{/if}}
+                value:bind="this.user.email" />
         {{/is}}
     </div>
     ...
@@ -651,7 +651,7 @@ shown on the page:
 ```html
 {{#if isAdmin}}
 <h4>New Game</h4>
-<form on:submit="createGame(%event)">...</form>
+<form on:submit="this.createGame(scope.event)">...</form>
 {{/if}}
 ```
 
@@ -659,9 +659,9 @@ In more complex apps, the `user` object might include an [Access Control List](h
 which might include methods to check access rights:
 
 ```html
-{{#if user.acl.can("create","game") }}
+{{#if(this.user.acl.can("create","game")) }}
 <h4>New Game</h4>
-<form on:submit="createGame(%event)">...</form>
+<form on:submit="this.createGame(scope.event)">...</form>
 {{/if}}
 ```
 
@@ -671,15 +671,15 @@ Creating a session is done with the [<bitballs-navigation>](http://donejs.github
 login form that takes an email and password:
 
 ```html
-<form on:submit="createSession(%event)" action="">
+<form on:submit="this.createSession(scope.event)" action="">
     <input
         placeholder="email"
-        value:bind="loginSession.user.email"/>
+        value:bind="this.loginSession.user.email"/>
 
     <input
         placeholder="password"
     	type="password"
-      value:bind="loginSession.user.password"/>
+      value:bind="this.loginSession.user.password"/>
 
 	<button type="submit">Login</button>
 </form>
@@ -696,12 +696,12 @@ createSession: function(ev){
     if(ev) {
         ev.preventDefault();
     }
-    var self = this;
-    this.loginSession.save().then(function(session){
+
+    this.loginSession.save().then((session) => {
         // create placeholder session for next login.
-        self.loginSession = new Session({user: new User()});
+        this.loginSession = new Session({user: new User()});
         // update AppViewModel with new session
-        self.app.session = session;
+        this.app.session = session;
 
     });
 },
@@ -750,7 +750,7 @@ The [`<bitballs-navigation>`](http://donejs.github.io/bitballs/docs/bitballs%7Cc
 calls `logout()` on its ViewModel:
 
 ```html
-<a href="javascript://" on:click="logout()">Logout</a>
+<a href="javascript://" on:click="this.logout()">Logout</a>
 ```
 
 `logout` calls destroy on the session and then removes the session from the AppViewModel:
@@ -767,7 +767,7 @@ Destroying a session calls `DELETE /services/session` to destroy a session serve
 with an empty JSON object.
 
 ```js
-app['delete']("/services/session", function(req, res){
+app.delete("/services/session", function(req, res){
 	req.logout();
 	res.json({});
 });
@@ -898,7 +898,7 @@ case, the teams and players would not be necessary.
 So how do you reconcile performance needs with the certainty that application
 requirements and the uses of your services will change?
 
-The answer is making expressive Restful services and client Models and ViewModels
+The answer is making expressive RESTful services and client Models and ViewModels
 that are able to work with them.  
 
 ### Expressive services
@@ -915,7 +915,8 @@ related fields like:
 ```js
 Game.get({
 	id: this.gameId,
-	withRelated: ["stats",
+	withRelated: [
+    "stats",
 		"homeTeam.player1",
 		"homeTeam.player2",
 		"homeTeam.player3",
@@ -1068,7 +1069,7 @@ closely matches the API of your ORM.
 Once you've settled on an expressive service API, you need
 to make Models that connect to it and handle associated data. And if you want
 any of the advanced behavior of [can-connect](https://canjs.com/doc/can-connect.html), you have
-to create a relational algebra that understands the service API.
+to create a QueryLogic that understands the service API.
 
 #### Connecting to a service
 
@@ -1085,25 +1086,41 @@ Game.List = DefineList.extend({"#": Game},{});
 And they are connected to a url:
 
 ```js
-var gameConnection = superMap({
+var gameConnection = realTimeRestModel({
   Map: Game,
   List: Game.List,
   url: "/services/games",
   name: "game",
-  algebra: Game.algebra
+  queryLogic: new QueryLogic(Game, bookshelfService)
 });
 ```
 
 #### Relational Algebra
 
 To match the query parameters our service and eventually Bookshelf
-expects, we need to define a custom set algebra. For `Game`, it looks like this:
+expects, we need to define a custom *query logic*. For our app, it looks like this:
+
+__models/bookshelf-service.js__
 
 ```js
-Game.algebra = new set.Algebra(
-	new set.Translate("where","where"),
-	set.comparators.sort('sortBy')
-);
+import { key } from "can";
+
+const bookshelfService = {
+    toQuery(params) {
+        return key.transform(params, {
+            where: "filter",
+            orderBy: "sort"
+        });
+    },
+    toParams(query){
+        return key.transform(query, {
+            filter: "where",
+            sort: "orderBy"
+        });
+    }
+};
+
+export default bookshelfService;
 ```
 
 #### Defining related properties
@@ -1122,16 +1139,16 @@ var Game = DefineMap.extend({
 	},
 	stats: {
 		Type: Stat.List,
-		set: function(newVal){
-			newVal.__listSet = {where: {gameId: this.id}};
-			return newVal;
+		set: function(stats){
+			stats[Stat.connection.listQueryProp] = { filter: {gameId: this.id }};
+			return stats;
 		}
 	},
   ...
 });
 ```
 
-Notice that `stats.set` is setting the [__listSet](https://canjs.com/doc/can-connect.html/doc/connect.base.listSetProp.html) property of the stats.  This is necessary for [can-connect's real-time](https://canjs.com/doc/can-connect.html/doc/can-connect%7Creal-time.html) behavior. When stats are created for this game, they will automatically appear in this list.
+Notice that `stats.set` is setting the [listQueryProp](https://canjs.com/doc/can-connect/base/base.listQueryProp.html) property of the stats.  This is necessary for [can-connect's real-time](https://canjs.com/doc/can-connect/real-time/real-time.html) behavior. When stats are created for this game, they will automatically appear in this list.
 
 #### Defining computed properties
 
@@ -1207,10 +1224,10 @@ And then use that in the template to look up the player:
 ```js
 {{#each teams}}
     ...
-    <td>{{#../players.getById(player1Id)}}{{name}}{{/}}</td>
-    <td>{{#../players.getById(player2Id)}}{{name}}{{/}}</td>
-    <td>{{#../players.getById(player3Id)}}{{name}}{{/}}</td>
-    <td>{{#../players.getById(player4Id)}}{{name}}{{/}}</td>
+    <td>{{#for(player of this.players.getById(player1Id))}}{{player.name}}{{/for}}</td>
+    <td>{{#for(player of this.players.getById(player2Id))}}{{player.name}}{{/for}}</td>
+    <td>{{#for(player of this.players.getById(player3Id))}}{{player.name}}{{/for}}</td>
+    <td>{{#for(player of this.players.getById(player4Id))}}{{player.name}}{{/for}}</td>
 {{/each}}
 ```
 
