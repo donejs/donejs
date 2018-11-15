@@ -1,5 +1,35 @@
 <html>
   <head>
+    <title>{{this.title}}</title>
+    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+  <body>
+    <can-import from="place-my-order-assets" />
+    <can-import from="~/styles.less" />
+    <can-import from="~/app" export-as="viewModel" route-data="routeData" />
+
+    <can-import from="~/components/header.component" />
+    <pmo-header page:from="this.routeData.page"/>
+
+    {{#if(this.pageComponent.isResolved)}}
+      {{this.pageComponent.value}}
+    {{else}}
+      <div class="loading"></div>
+    {{/if}}
+
+    <h1>The <strong>{{this.routeData.page}}</strong> page</h1>
+
+    {{#eq(this.env.NODE_ENV, "production")}}
+      <script src="{{joinBase('steal.production.js')}}"></script>
+    {{else}}
+      <script src="/node_modules/steal/steal.js" main></script>
+    {{/eq}}
+  </body>
+</html>
+
+
+<html>
+  <head>
     <title>{{title}}</title>
     <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   </head>

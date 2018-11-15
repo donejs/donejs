@@ -1,6 +1,6 @@
 {
   "name": "donejs",
-  "version": "2.1.0",
+  "version": "3.0.0-pre.0",
   "description": "Your app is done",
   "main": "./lib/cli/index.js",
   "bin": {
@@ -72,7 +72,7 @@
       "bit-docs-tag-sourceref": "^0.0.3",
       "bit-docs-tag-package": "^0.0.3",
       "bit-docs-process-mustache": "^0.0.1",
-      "bit-docs-generate-html": "^0.3.6",
+      "bit-docs-generate-html": "^0.3.7",
       "bit-docs-prettify": "^0.1.0",
       "bit-docs-html-highlight-line": "^0.2.2",
       "bit-docs-tag-demo": "^0.3.0",

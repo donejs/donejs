@@ -1,11 +1,11 @@
 <html>
   <head>
-    <title>{{title}}</title>
+    <title>{{this.title}}</title>
   </head>
   <body>
     <can-import from="bootstrap/less/bootstrap.less" />
     <can-import from="~/styles.less" />
-    <can-import from="~/app" export-as="viewModel" />
+    <can-import from="~/app" export-as="viewModel" route-data="routeData" />
 
     <div class="container">
       <div class="row">
@@ -19,13 +19,10 @@
       </div>
     </div>
 
-    {{#switch env.NODE_ENV}}
-      {{#case "production"}}
-        <script src="{{joinBase('steal.production.js')}}"></script>
-      {{/case}}
-      {{#default}}
-        <script src="/node_modules/steal/steal.js"></script>
-      {{/default}}
-    {{/switch}}
+    {{#eq(this.env.NODE_ENV, "production")}}
+      <script src="{{joinBase('steal.production.js')}}"></script>
+    {{else}}
+      <script src="/node_modules/steal/steal.js" main></script>
+    {{/eq}}
   </body>
 </html>

@@ -1,4 +1,4 @@
-import fixture from 'can-fixture';
+import { fixture } from 'can';
 import Restaurant from '../restaurant';
 
 const store = fixture.store([{
@@ -27,7 +27,7 @@ const store = fixture.store([{
     owner: "node_modules/place-my-order-assets/images/3-owner.jpg",
     thumbnail: "node_modules/place-my-order-assets/images/2-thumbnail.jpg"
   }
-}], Restaurant.connection.algebra);
+}], Restaurant.connection.queryLogic);
 
 fixture('/api/restaurants/{_id}', store);
 

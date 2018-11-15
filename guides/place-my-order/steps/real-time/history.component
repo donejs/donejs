@@ -1,7 +1,6 @@
 <can-component tag="pmo-order-history">
   <view>
-    <can-import from="~/models/order" />
-
+    <can-import from="~/components/order/list.component" />
     <div class="order-history">
       <div class="order header">
         <address>Name / Address / Phone</address>
@@ -10,48 +9,80 @@
         <div class="actions">Action</div>
       </div>
 
-      <can-import from="~/order/list.component" />
-      <order-model get-list="{status='new'}">
-        <pmo-order-list
-          orders:from="."
-          list-title:raw="New Orders"
-          status:raw="new"
-          status-title:raw="New Order!"
-          action:raw="preparing"
-          action-title:raw="Preparing"
-          empty-message:raw="No new orders"/>
-      </order-model>
+      <pmo-order-list
+        orders:from="this.statusNew"
+        listTitle:raw="New Orders"
+        status:raw="new"
+        statusTitle:raw="New Order!"
+        action:raw="preparing"
+        actionTitle:raw="Preparing"
+        emptyMessage:raw="No new orders"/>
 
-      <order-model get-list="{status='preparing'}">
-        <pmo-order-list
-          orders:from="."
-          list-title:raw="Preparing"
-          status:raw="preparing"
-          status-title:raw="Preparing"
-          action:raw="delivery"
-          action-title:raw="Out for delivery"
-          empty-message:raw="No orders preparing"/>
-      </order-model>
+      <pmo-order-list
+        orders:from="this.statusPreparing"
+        listTitle:raw="Preparing"
+        status:raw="preparing"
+        statusTitle:raw="Preparing"
+        action:raw="delivery"
+        actionTitle:raw="Out for delivery"
+        emptyMessage:raw="No orders preparing"/>
 
-      <order-model get-list="{status='delivery'}">
-        <pmo-order-list
-          orders:from="."
-          list-title:raw="Out for delivery"
-          status:raw="delivery"
-          status-title:raw="Out for delivery"
-          action:raw="delivered"
-          action-title:raw="Delivered"
-          empty-message:raw="No orders are being delivered"/>
-      </order-model>
+      <pmo-order-list
+        orders:from="this.statusDelivery"
+        listTitle:raw="Out for delivery"
+        status:raw="delivery"
+        statusTitle:raw="Out for delivery"
+        action:raw="delivered"
+        actionTitle:raw="Delivered"
+        emptyMessage:raw="No orders are being delivered"/>
 
-      <order-model get-list="{status='delivered'}">
-        <pmo-order-list
-          orders:from="."
-          list-title:raw="Delivered"
-          status:raw="delivered"
-          status-title:raw="Delivered"
-          empty-message:raw="No delivered orders"/>
-      </order-model>
+      <pmo-order-list
+        orders:from="this.statusDelivered"
+        listTitle:raw="Delivered"
+        status:raw="delivered"
+        statusTitle:raw="Delivered"
+        emptyMessage:raw="No delivered orders"/>
     </div>
   </view>
+  <script type="view-model">
+    import { DefineMap } from 'can';
+    import Order from '~/models/order';
+
+    export default DefineMap.extend("PmoOrderHistoryVM", {
+      // EXTERNAL STATEFUL PROPERTIES
+      // These properties are passed from another component. Example:
+      // value: {type: "number"}
+
+      // INTERNAL STATEFUL PROPERTIES
+      // These properties are owned by this component.
+      message: { default: "This is the pmo-order-history component" },
+
+      // DERIVED PROPERTIES
+      // These properties combine other property values. Example:
+      // get valueAndMessage(){ return this.value + this.message; }
+      get statusNew() {
+        return Order.getList({ filter: { status: "new" }});
+      },
+      get statusPreparing() {
+        return Order.getList({ filter: { status: "preparing" }});
+      },
+      get statusDelivery() {
+        return Order.getList({ filter: { status: "delivery" }});
+      },
+      get statusDelivered() {
+        return Order.getList({ filter: { status: "delivered" }});
+      },
+
+      // METHODS
+      // Functions that can be called by the view. Example:
+      // incrementValue() { this.value++; }
+
+      // SIDE EFFECTS
+      // The following is a good place to perform changes to the DOM
+      // or do things that don't fit in to one of the areas above.
+      connectedCallback(element){
+
+      }
+    });
+  </script>
 </can-component>

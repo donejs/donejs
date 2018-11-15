@@ -17,9 +17,9 @@ Choosing a modern stack is not at all simple or straightforward.
 
 1. *What types of tools do you want?*   Server-side rendering? What is a virtual DOM? Do I need one? MVVM or Flux? Should I set up testing infrastructure? Documentation?
 
-2. *Choose all your pieces.* The good news is, you have [many choices](http://microjs.com/#). The bad news is, you have many choices. React, Angular, or Backbone? Require.js, browserify, or jspm? Jasmine or QUnit? What tool will run my tests?
+2. *Choose all your pieces.* The good news is, you have [many choices](http://microjs.com/#). The bad news is, you have many choices. React, Angular, or Vue? WebPack, rollup, or parcel? Mocha or QUnit? What tool will run my tests?
 
-3. *Finally, you have to make sure your chosen tools work together effectively.* Does require.js work well with Angular? Does Karma work with Browserify? What about React and Babel?
+3. *Finally, you have to make sure your chosen tools work together effectively.* Does parcel work well with Angular? Does Karma work with Browserify? What about React and Babel?
 
 DoneJS gives you a full solution. It's our mission to eliminate any ambiguity around choosing technology for building an app, so you spend less time tinkering with your stack, and more time actually building your app.
 
@@ -37,25 +37,30 @@ DoneJS makes it easier to do things that are not possible, or at best DIY, with 
 
 Server-side rendering (SSR), which you can read about in more detail in its [section](#server-side-rendered) below, spans many layers to make setup and integration simple.
 
-It uses hooks in data components to automatically notify the server to delay rendering, [hot module swapping](#hot-module-swapping) automatically integrates (no need to restart the server while developing), data is collected in an [inline cache](#how-it-works-2) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-connect, can-ssr, CanJS, and StealJS.
+It uses [zones](https://davidwalsh.name/can-zone) to automatically notify the server to delay rendering, [hot module swapping](#hot-module-swapping) automatically integrates (no need to restart the server while developing), data is cached on the server and pushed to the client (http/2 server [PUSH](https://www.smashingmagazine.com/2017/04/guide-http2-server-push/) or [Preload Links](https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content) for http/1.1) automatically and used to prevent duplicate AJAX requests. Support for these features is only possible because of code that spans layers, including can-zone, done-ssr, CanJS, and StealJS.
 
-By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, hot module swapping, and inline caching.
+By contrast, React supports SSR, but you're left to your own devices to support delaying rendering, hot module swapping, and request reuse.
 
 ##### 2. [Progressive enhancement](#how-it-works-1)
 
-You can mark a section of your template to be progressively loaded by wrapping it with `<can-import>`, like:
+Parts of your application can be progressively loaded using [steal.import](https://stealjs.com/docs/steal.import.html):
 
-```html
-<can-import from="components/home">
-  {{#if(isResolved)}}
-  <home-page/>
-  {{/if}}
-</can-import>
+```js
+import { DefineMap } from "can";
+
+export default DefineMap.extend("AppViewModel", {
+  page: "string",
+  get pageComponent() {
+    let moduleName = `~/pages/${this.page}/`;
+    let Component = (await steal.import(moduleName)).default;
+    return new Component();
+  }
+})
 ```
 
 and then running `donejs build`.
 
-`<can-import>` has hooks that notify the build time algorithm to create a bundle for this template fragment and its dependencies. This feature spans StealJS, steal-build, CanJS, and done-cli.
+DoneJS' generators define anything within `~/pages` to be split into bundles. This feature spans StealJS, steal-tools, and donejs-cli.
 
 #### Story-level solutions
 
@@ -140,7 +145,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-poor.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-very-good.svg">
             </td>
           </tr>
           <tr>
@@ -178,7 +183,9 @@ Solving a story means a packaged solution to a development problem, where severa
               <div class="feature-description"><a href="#worker-thread-rendering">Worker Thread Rendering</a></div>
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
+              <div data-toggle="popover" data-placement="bottom" data-html="true" data-content="Previously well supported but hasn't been updated in a few versions." title="Previously well supported but hasn't been updated in a few versions.">
+                <img class="matrix-rating-icon" src="static/img/icon-good.svg"><span class="asterisk"></span>
+              </div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="static/img/icon-good.svg">
@@ -229,9 +236,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <div class="has-popover" data-toggle="popover" data-placement="bottom" data-html="true" data-content='<a href="https://docs.angularjs.org/guide/ie" target="_blank">Supports IE9+</a>' title="Supports IE9+">
-                <img class="matrix-rating-icon" src="static/img/icon-very-good.svg"><span class="asterisk"></span>
-              </div>
+              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
@@ -361,7 +366,7 @@ Solving a story means a packaged solution to a development problem, where severa
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
             </td>
             <td>
-              <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
+              <img class="matrix-rating-icon" src="static/img/icon-fair.svg">
             </td>
           </tr>
           <tr>
@@ -439,12 +444,6 @@ SSR apps return fully rendered HTML. Traditional single page apps return a page 
 
 Compared to other server-side rendering systems, which require additional code and infrastructure to work correctly, DoneJS is uniquely designed to make turning on SSR quick and easy, and the server it runs is lightweight and fast.
 
-#### Page load performance
-
-Server-side rendered SPAs can load pre-rendered HTML immediately. They can also cache HTML and serve it from a CDN.
-
-Traditional SPAs must load the JS, execute, request data, and render before the user sees content.
-
 #### SEO
 
 Search engines can't easily index SPAs. Server-side rendering fixes that problem entirely. Even if [Google can understand some JavaScript now](http://googlewebmastercentral.blogspot.ca/2014/05/understanding-web-pages-better.html), many other search engines cannot.
@@ -487,6 +486,28 @@ In a DoneJS application, asynchronous data requests are tracked automatically. U
 
 _Server-side rendering is a feature of [done-ssr](https://github.com/donejs/done-ssr)_
 
+### Incremental Rendering
+
+DoneJS applications by default employ [incremental rendering](https://www.bitovi.com/blog/utilizing-http2-push-in-a-single-page-application) to get the best possible load performance. If SEO is important go for [Server-side rendering](#server-side-rendered) instead.
+
+Incrementally rendering apps return an initial HTML that includes the *skeleton* of your application and a tiny runtime script that connects *back* to the server to receive and apply incremental rendering instructions.
+
+#### How it works
+
+Incremental rendering uses most of the same mechanisms as server-side rendering in DoneJS: the single context virtual DOM provided by done-ssr, zones using can-zone.
+
+What makes incremental rendering different is that it gets an initial page to the user as quickly as possible, while it *continues to render*. Any changes that take place on the server after HTML is sent get streamed as mutation instructions back to the browser where they are reapplied.
+
+<img src="static/img/incremental-rendering.png" alt="Incremental rendering diagram" />
+
+1. Like with SSR, the server reuses the existing application context and renders the requested route.
+1. Once the page skeleton is ready the HTML is sent back to the browser. Along with the HTML is a small script that makes a request back to the server like `_donessr_instructions/uniqueId`.
+1. These instructions are PUSHed with http/2 or preloaded with http/1.
+1. Back on the server, the app continues to render as data requests are completed and other asynchronous activity takes place.
+1. The script connects using [fetch()](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) and applies the DOM mutations that are streamed from the server.
+1. Meanwhile the *application begins to run in the client* the same way it would in any Single-page Application.
+1. The embedded script detects when the client-side application catches up to the mutations and __flips__ so that the app is shown.
+
 ### Progressive Loading
 
 When you first load a single page app, you're typically downloading all the JavaScript and CSS for every part of the application. These kilobytes of extra weight slow down page load performance, especially on mobile devices.
@@ -501,24 +522,7 @@ There is no configuration needed to enable this feature, and wiring up progressi
 
 Other build tools require you to manually configure bundles, which doesn't scale with large applications.
 
-In a DoneJS application, you simply mark a section to be progressively loaded by wrapping it in your template with `<can-import>`.
-
-```html
-{{#eq page 'home'}}
-<can-import from="components/home">
-  {{#if(isResolved)}}
-  <home-page/>
-  {{/if}}
-</can-import>
-{{/eq}}
-{{#eq(page, 'chat')}}
-<can-import from="components/chat">
-  {{#if(isResolved)}}
-  <chat-page/>
-  {{/if}}
-</can-import>
-{{/eq}}
-```
+In a DoneJS application any components (either modlets or `.component` files) contained within the `~/pages` folder are progressively loaded.
 
 Then you run the build.
 
@@ -622,7 +626,7 @@ The video below shows two example scenarios. The first shows the cache containin
 </video>
 
 
-##### Inline cache
+##### Inline cache and server push
 
 Server-side rendered single page apps (SPAs) have a problem with wasteful duplicate requests. These can cause the browser to slow down, waste bandwidth, and reduce perceived performance.
 
@@ -630,22 +634,23 @@ Server-side rendered single page apps (SPAs) have a problem with wasteful duplic
 1. After the page's rendered HTML loads in the client, the SPA is loaded in the client, so that subsequent requests are handled within the SPA.
 1. The SPA will want to re-request for the same data that was already requested on the server.
 
-DoneJS solves this problem with an inline cache - embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
+DoneJS solves this problem with server push and an inline cache - embedded inline JSON data sent back with the server rendered content, which is used to serve the initial SPA data requests.
 
 DoneJS uniquely makes populating and using the inline cache easy. Using plain XHR:
 
 1. Tells the SSR server to wait for a promise to resolve before rendering.
-1. Collects data from each promise and uses it to populate the inline cache.
+1. Collects data from each promise and uses it to populate the inline cache. In http/2 servers it does a server PUSH instead, which elimnates the need for inlining the data in HTML.
 
 For example:
 
 ```js
 Component.extend({
   tag: "user-name",
-  view: stache("{{user.name}}"),
+  view: `{{user.name}}`,
   ViewModel: {
-    init: function () {
-      User.get({ id: this.id });
+    id: "number",
+    get userPromise() {
+      return User.get({ id: this.id });
     }
   }
 });
@@ -664,9 +669,7 @@ This video illustrates how it works.
 </video>
 
 
-
-
-<a class="btn" href="https://canjs.com/doc/can-connect.html"><span>View the Documentation</span></a>
+<a class="btn" href="https://canjs.com/doc/can-query-logic.html"><span>View the Documentation</span></a>
 <a class="btn" href="./Guide.html#messages-page"><span>View the Guide</span></a>
 
 _Caching and minimal data requests is a feature of [can-connect](https://github.com/canjs/can-connect)_
@@ -689,9 +692,9 @@ You can run this test for yourself at <a href="https://output.jsbin.com/zigovul/
 Consider the following template:
 
 ```html
-{{#rows}}
-<div>{{name}}</div>
-{{/rows}}
+{{#for(row of this.rows)}}
+<div>{{row.name}}</div>
+{{/for}}
 ```
 
 And the following change to its data:
@@ -725,7 +728,7 @@ You can run this test yourself at <a href="https://output.jsbin.com/wotevub/2" t
 With synchronously observable objects and data bindings that change minimal pieces of the DOM, DoneJS aims to provide the best possible mix between powerful, yet performant, templates.
 
 <a class="btn" href="https://canjs.com/doc/can-stache.html"><span>can-stache Documentation</span></a>
-<a class="btn" href="https://canjs.com/doc/can-define.html"><span>can-map Documentation</span></a>
+<a class="btn" href="https://canjs.com/doc/can-define/map/map.html"><span>DefineMap Documentation</span></a>
 
 _Minimal DOM updates is a feature of [CanJS](https://canjs.com/)_
 
@@ -738,20 +741,10 @@ Preventing memory leaks is a critical feature of any client-side framework. The 
 When event listeners are created in a DoneJS application using template event binding or by binding using Controls, internally these handlers are stored. This looks like:
 
 ```html
-<a href="/todos/new" on:click="newTodo()">New Todo</a>
+<a href="/todos/new" on:click="this.newTodo()">New Todo</a>
 ```
 
-for templates and:
-
-```js
-var TodoPage = Control.extend({
-  "a click": function(){
-    this.addTodo();
-  }
-})
-```
-
-for controls. Internally CanJS listens for this element's "removed" event. The "removed" event is a synthetic event that will be used to:
+Internally CanJS listens for this element's "removed" event. The "removed" event is a synthetic event that will be used to:
 
 * Remove all event listeners.
 * Remove DOM data associated with the element.
@@ -764,54 +757,6 @@ todoAnchor.parentNode.removeChild(todoAnchor);
 ```
 
 The event listener created would still be torn down. This is because CanJS uses a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) to know about all changes to the DOM. When it sees an element was removed it will trigger the "removed" event, cleaning up the memory.
-
-### Worker Thread Rendering
-
-Worker thread rendering increases the performance of your application. It essentially allows your application to run entirely within a Web Worker, freeing the main thread to only update the DOM.
-
-Since much of the work is offloaded from the main thread, applications will feel snappy, even while heavy computations are taking place.
-
-#### How it works
-
-Templates first render in a lightweight Virtual DOM in a [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). Changes are diffed and sent to the main thread to be applied to the real DOM. The main thread is only notified when there are changes to the DOM.
-
-The most expensive part of a web application - DOM updates - are separated from application logic, which means your application can continue to run while DOM reflows occur.
-
-By default, browsers use only a single thread of execution.
-
-<img src="static/img/donejs-single-thread.gif" srcset="static/img/donejs-single-thread.gif 1x, static/img/donejs-single-thread-2x.gif 2x" alt="A traditional single threaded javascript application">
-_With a single thread only one operation can occur at a time_
-
-This means that performance problems in any area (expensive computations, DOM rendering, processing a large AJAX response, etc) can block the entire application, leaving the browser feeling "frozen".
-
-With worker thread rendering, DOM updates and application logic are run in parallel threads.
-
-<img src="static/img/donejs-multi-thread.gif" srcset="static/img/donejs-multi-thread.gif 1x, static/img/donejs-multi-thread-2x.gif 2x" alt="A javascript application using a worker thread">
-_Using a worker thread application logic can still occur while the DOM is rendered. This could nearly double the number of operations per second._
-
-Due to this parallelization, performance problems that may have caused noticeable issues in a single thread will likely not cause any noticeable issues while running in separate threads.
-
-Adding worker thread rendering only requires changing one line. Change the main attribute of your page's script tag from:
-```html
-<script src=”node_modules/steal/steal.js” main=”my-app!done-autorender”></script>
-```
-to
-```html
-<script src=”node_modules/steal/steal.js” main=”my-app!done-worker-autorender”></script>
-```
-
-At this time, no other framework besides DoneJS, including Angular or React, supports worker thread rendering out of the box.
-
-<blockquote class="fun-quotes">
-  <div class="fun-intro">You spend less time worrying about performance micro-optimizations,</div>
-    <div class="fun-link">...and more time <a href="javascript:void(0)" data-toggle="popover" data-placement="top" data-html="true" data-content='<div class="youtube-container"><div class="youtube-player" data-videoid="vrgMUi8-7r4" data-params="start=28"></div></div>'>working on epic pool dunk videos.</a></div>
-    <img class="fun-img" src="static/img/funny-dunk.png">
-</blockquote>
-
-
-<a class="btn" href="https://github.com/canjs/worker-render"><span>View the Documentation</span></a>
-
-_Worker Thread Rendering is a feature of the [worker-render](https://github.com/canjs/worker-render) project._
 
 ### Deploy to a CDN
 
@@ -876,15 +821,15 @@ With these simple integrations, you can expand your potential audience without h
 
 _Cordova, Electron, and NW.js integration are features of the [steal-electron](https://github.com/stealjs/steal-electron), [steal-cordova](https://github.com/stealjs/steal-cordova), and [steal-nw](https://github.com/stealjs/steal-nw) projects._
 
-### Supports All Browsers, Even IE9+
+### Supports All Browsers, Even IE11
 
-DoneJS applications support Internet Explorer 8 minimal additional configuration. You can even write applications using [most ES6 features](https://babeljs.io/docs/usage/caveats/) that run on IE9+, using the built-in babel integration.
+DoneJS applications support Internet Explorer 11 with minimal additional configuration. You can even write applications using [most ES6 features](https://babeljs.io/docs/usage/caveats/), using the built-in babel integration.
 
-Many people won't care about this because IE9+ is on its way out, which is a very good thing!
+Many people won't care about this because Internet Explorer is on its way out, which is a very good thing!
 
-But it's [not quite dead yet](https://youtu.be/grbSQ6O6kbs?t=61). For many mainstream websites, banks, and e-commerce applications, IE9+ continues to hang around the browser stats.
+But it's [not quite dead yet](https://youtu.be/grbSQ6O6kbs?t=61). For many mainstream websites, banks, and e-commerce applications, IE continues to hang around the browser stats.
 
-And while other frameworks like AngularJS and EmberJS don't support IE9+, DoneJS makes it easy to write one app that runs everywhere.
+And while other frameworks don't support Internet Explorer at all, DoneJS makes it easy to write one app that runs everywhere.
 
 <a class="btn" href="./Guide.html"><span>View the Guide</span></a>
 
@@ -1386,31 +1331,7 @@ The major advantages of building applications based on custom HTML elements are:
  1. **Forced modularity** - Because the nature of HTML, elements are isolated modules, custom HTML elements must be designed as small, isolated components. This makes them easier to test, debug, and understand.
  1. **Reuse** - Custom elements are designed to be reusable across pages and applications.
 
-Consider the following example:
-
-```html
-<order-model get-list="{ period='previous_week' }" value:to="*previousWeek" />
-<order-model get-list="{ period='current_week' }" value:to="*currentWeek" />
-
-<bit-c3>
-  <bit-c3-data>
-    <bit-c3-data-column key="Last Week" value:from="*previousWeek.totals" />
-    <bit-c3-data-column key="This Week" value:from="*currentWeek.totals" />
-  </bit-c3-data>
-</bit-c3>
-```
-This code demonstrates:
-
- 1. An element that can load data
- 1. Composable widget elements (a graph with a line-series)
-
-If our designer wanted to add another period, all they would need to do is add another `<order-model>` and `<bit-c3-data-column>` element.
-
-Here’s a working version of the same example in a JS Bin:
-
-<a class="jsbin-embed" href="https://jsbin.com/xutupo/2/embed?html,output">Custom HTML Elements on jsbin.com</a><script src="https://static.jsbin.com/js/embed.min.js?3.41.10"></script>
-
-Just like HTML’s natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.
+Just like HTML's natural advantages, composing entire applications from HTML building blocks allows for powerful and easy expression of dynamic behavior.
 
 #### How it works
 
@@ -1444,7 +1365,7 @@ With custom HTML elements, to add the same datepicker, you would:
 
 That might seem like a subtle difference, but it is actually a major step forward. The custom HTML element syntax allows for instantiation, configuration, and location, all happening at the same time.
 
-Custom HTML elements are another name for [Web Components](http://webcomponents.org/), a browser spec that has [yet to be implemented](http://caniuse.com/#search=components) across browsers.
+Custom HTML elements are another name for [Web Components](http://webcomponents.org/), a browser spec that has [been implemented](http://caniuse.com/#search=components) across browsers.
 
 ##### Benefits of DoneJS custom elements
 
@@ -1464,33 +1385,33 @@ There are several unique benefits to DoneJS custom elements:
 
 ##### Defining a custom element
 
-One way to define a component is using a [web component](https://github.com/donejs/done-component) style declaration, using a single file with a `.component` extension:
+One way to define a component is using a [DoneJS component](https://github.com/donejs/done-component) style declaration, using a single-file with a `.component` extension:
 
 ```html
 <can-component tag="hello-world">
-    <style type="less">
-        i {
-            color: red;
-        }
-    </style>
-    <view>
-        {{#if visible}}<b>{{message}}</b>{{else}}<i>Click me</i>{{/if}}
-    </view>
-    <script type="view-model">
-        import DefineMap from "can-define/map/map";
+  <style type="less">
+    i {
+      color: red;
+    }
+  </style>
+  <view>
+    {{#if(this.visible)}}<b>{{this.message}}</b>{{else}}<i>Click me</i>{{/if}}
+  </view>
+  <script type="view-model">
+    import { DefineMap } from "can";
 
-        export default DefineMap.extend({
-            visible: { default: true },
-            message: { default: "Hello There!" }
-        });
-    </script>
-    <script type="events">
-        export default {
-            click: function(){
-                this.viewModel.visible = !this.viewModel.visible;
-            }
-        };
-    </script>
+    export default DefineMap.extend({
+      visible: { default: true },
+      message: { default: "Hello There!" }
+    });
+  </script>
+  <script type="events">
+    export default {
+      click: function(){
+        this.viewModel.visible = !this.viewModel.visible;
+      }
+    };
+  </script>
 </can-component>
 ```
 
@@ -1503,22 +1424,6 @@ DoneJS [Generators](#generators) will create both of these types of custom eleme
 ##### Data elements + visual elements = expressive templates
 
 The beauty and power of custom HTML elements are most apparent when visual widgets (like graphing) is combined with elements that express data.
-
-Back to our original example:
-
-```html
-<order-model get-list="{previous_week}" value:to="*previousWeek" />
-<order-model get-list="{current_week}" value:to="*currentWeek" />
-
-<bit-graph title="Week over week">
-  <bit-series data:from="{../previousWeekData}" />
-  <bit-series data:from="{../currentWeekData}" color="Blue"/>
-</bit-graph>
-```
-
-This template combines a request for data with an element that expresses it. It's immediately obvious how you would add or remove features from this, allowing for quick changes and easy prototyping. Without custom elements, the same changes would require more difficult code changes and wiring those changes up with widget elements that display the data.
-
-Data custom elements are part of DoneJS via can-connect's [can-tag feature](https://canjs.com/doc/can-connect/can/tag/tag.html).
 
 ##### Custom element libraries
 
@@ -1540,28 +1445,9 @@ Check out [their source](https://github.com/bitovi-components/bit-tabs) for good
 <can-import from="components/my_tabs"/>
 <can-import from="helpers/prettyDate"/>
 <my-tabs>
-  <my-panel title="{{prettyDate start}}">...</my-panel>
-  <my-panel title="{{prettyDate end}}">...</my-panel>
+  <my-panel title="{{prettyDate(start)}}">...</my-panel>
+  <my-panel title="{{prettyDate(end)}}">...</my-panel>
 </my-tabs>
-```
-
-The `<can-import>` element also plays a key role in [Progressive Loading](#progressive-loading). Simply by wrapping a section in a closed can-import, it signals to the build that the enclosed section's dependencies should be progressively loaded.
-
-```html
-{{#eq location 'home'}}
-<can-import from="components/home">
-  {{#if isResolved}}
-  <my-home/>
-  {{/if}}
-</can-import>
-{{/eq}}
-{{#eq location 'away'}}
-<can-import from="components/chat">
-  {{#if isResolved}}
-  <my-chat/>
-  {{/if}}
-</can-import>
-{{/eq}}
 ```
 
 <a class="btn" href="https://canjs.com/doc/can-component.html"><span>View the Documentation</span></a>
@@ -1605,7 +1491,9 @@ The first reason DoneJS ViewModels are unique is their independence. ViewModels 
 For example, here's a typical ViewModel, which is often defined in its own separate file like `viewmodel.js` and exported as its own module:
 
 ```js
-export const ViewModel = DefineMap.extend({
+export const ViewModel = DefineMap.extend("FullNameViewModel", {
+  first: "string",
+  last: "string",
   get fullName() {
     return this.first + " " + this.last;
   }
@@ -1621,7 +1509,7 @@ The template (view) lives in its own file, so a designer could easily modify it 
 A [custom HTML element](#custom-html-elements), also known as a component, would be used to tie these layers together:
 
 ```html
-import Component from 'can-component';
+import { Component } from 'can';
 import ViewModel from "./viewmodel";
 import view from './view.stache';
 
@@ -1663,10 +1551,12 @@ In the simple ViewModel example above, `fullName`'s value depends on `first` and
 
 ```js
 export const ViewModel = DefineMap.extend({
-    get fullName() {
-      return this.first + " " + this.last;
-    }
-})
+  first: "string",
+  last: "string",
+  get fullName() {
+    return this.first + " " + this.last;
+  }
+});
 ```
 
 `fullName` is data bound to the view that renders it:
@@ -1822,7 +1712,7 @@ Which will generate a working component in a single file.
 
 ##### Model generator
 
-To create a new [model](https://canjs.com/doc/can-connect/can/super-map/super-map.html):
+To create a new [model](https://canjs.com/doc/can-super-model.html):
 
 ```
 donejs add supermodel <model-name>

@@ -1,34 +1,63 @@
 <can-component tag="pmo-order-details">
   <view>
-    {{#order}}
-      <h3>Thanks for your order {{name}}!</h3>
+    {{#if(this.order)}}
+      <h3>Thanks for your order {{this.order.name}}!</h3>
       <div><label class="control-label">
-        Confirmation Number: {{_id}}</label>
+        Confirmation Number: {{this.order._id}}</label>
       </div>
 
       <h4>Items ordered:</h4>
       <ul class="list-group panel">
-        {{#each(items)}}
+        {{#for(item of this.order.items)}}
           <li class="list-group-item">
             <label>
-              {{name}} <span class="badge">${{price}}</span>
+              {{item.name}} <span class="badge">${{item.price}}</span>
             </label>
           </li>
-        {{/each}}
+        {{/for}}
 
         <li class="list-group-item">
           <label>
-            Total <span class="badge">${{total}}</span>
+            Total <span class="badge">${{this.order.total}}</span>
           </label>
         </li>
       </ul>
 
       <div><label class="control-label">
-        Phone: {{phone}}
+        Phone: {{this.order.phone}}
       </label></div>
       <div><label class="control-label">
-        Address: {{address}}
+        Address: {{this.order.address}}
       </label></div>
-    {{/order}}
+    {{/if}}
   </view>
+  <script type="view-model">
+    import { DefineMap } from 'can';
+
+    export default DefineMap.extend("PmoOrderDetailsVM", {
+      // EXTERNAL STATEFUL PROPERTIES
+      // These properties are passed from another component. Example:
+      // value: {type: "number"}
+      order: "any",
+
+      // INTERNAL STATEFUL PROPERTIES
+      // These properties are owned by this component.
+      message: { default: "This is the pmo-order-details component" },
+
+      // DERIVED PROPERTIES
+      // These properties combine other property values. Example:
+      // get valueAndMessage(){ return this.value + this.message; }
+
+      // METHODS
+      // Functions that can be called by the view. Example:
+      // incrementValue() { this.value++; }
+
+      // SIDE EFFECTS
+      // The following is a good place to perform changes to the DOM
+      // or do things that don't fit in to one of the areas above.
+      connectedCallback(element){
+
+      }
+    });
+  </script>
 </can-component>

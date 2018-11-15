@@ -330,12 +330,9 @@ guide.step("Create additional components", function(){
 	})
 	.then(wait)
 	.then(function(){
-		return guide.replaceFile(join("src", "index.stache"),
+		return guide.replaceFile(join("src", "app.js"),
 														 join(__dirname, "steps", "additional",
-																	"index.stache"))
-			.then(function(){
-				return guide.injectSpy("src/index.stache");
-			});
+																	"app.js"));
 	})
 	.then(wait);
 });

@@ -101,9 +101,9 @@ guide.test(function(){
  * @Step 6
  */
 guide.step("Generate custom elements", function(){
-	return guide.executeCommand("donejs", ["add","component","home.component","chat-home"])
+	return guide.executeCommand("donejs", ["add","component","pages/home.component","chat-home"])
 		.then(function(){
-			return guide.executeCommand("donejs", ["add","component","messages",
+			return guide.executeCommand("donejs", ["add","component","pages/messages",
 								  "chat-messages"]);
 		}).then(wait);
 });
@@ -112,10 +112,10 @@ guide.step("Generate custom elements", function(){
  * @Step 7
  */
 guide.step("Navigate between pages", function(){
-	return guide.replaceFile(join("src", "home.component"),
+	return guide.replaceFile(join("src", "pages", "home.component"),
 					   join(__dirname, "steps", "7-navigate", "home.component"))
 		.then(function(){
-			return guide.replaceFile(join("src", "messages", "messages.stache"),
+			return guide.replaceFile(join("src", "pages", "messages", "messages.stache"),
 							   join(__dirname, "steps", "7-navigate", "messages.stache"));
 		})
 		.then(function(){
@@ -153,7 +153,7 @@ guide.step("Install and use bit-tabs", function(){
 	return guide.executeCommand("npm", ["install", "bit-tabs@2", "--save"])
     .then(installWait)
 		.then(function(){
-			return guide.replaceFile(join("src", "home.component"),
+			return guide.replaceFile(join("src", "pages", "home.component"),
 									 join(__dirname, "steps", "8-bit-tabs", "home.component"));
 		})
 		.then(wait);
@@ -184,10 +184,10 @@ guide.step("Generate the Message model", function(){
  * @Step 10
  */
 guide.step("Use the connection", function(){
-	return guide.replaceFile(join("src", "messages", "messages.stache"),
+	return guide.replaceFile(join("src", "pages", "messages", "messages.stache"),
 							 join(__dirname, "steps", "10-use-connection", "messages.stache"))
     .then(function() {
-      return guide.replaceFile(join("src", "messages", "messages.js"),
+      return guide.replaceFile(join("src", "pages", "messages", "messages.js"),
                    join(__dirname, "steps", "10-use-connection", "messages.js"))
     })
 		.then(wait);
@@ -201,10 +201,10 @@ guide.test(function(){
  * @Step 11
  */
 guide.step("Create messages", function(){
-  return guide.replaceFile(join("src", "messages", "messages.js"),
+  return guide.replaceFile(join("src", "pages", "messages", "messages.js"),
                join(__dirname, "steps", "11-create-messages", "messages.js"))
 		.then(function(){
-      return guide.replaceFile(join("src", "messages", "messages.stache"),
+      return guide.replaceFile(join("src", "pages", "messages", "messages.stache"),
     							 join(__dirname, "steps", "11-create-messages", "messages.stache"));
 		}).then(wait);
 });
