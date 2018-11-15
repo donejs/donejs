@@ -296,7 +296,7 @@ Routing works a bit differently than other libraries. In other libraries, you mi
 
 DoneJS application [routes](https://canjs.com/doc/can-route.html) map URL strings (like /user/1) to properties in our application state. In other words, our routes will just be a representation of the application state.
 
-To learn more about routing visit the CanJS guide on [Application State and Routing](https://canjs.com/guides/AppStateAndRouting.html).
+To learn more about routing visit the [CanJS routing guide](https://canjs.com/doc/guides/routing.html).
 
 To add our routes, change `src/app.js` to:
 
