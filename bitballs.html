@@ -602,26 +602,26 @@ use it to determine which functionality should be displayed.</p>
 <h3>Creating a user</h3>
 <p>When a user navigates to <code>/register</code>, the <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cuser%7Cdetails.html"><code>&lt;user-details&gt;</code></a> component
 creates a form that takes a user's email and password.</p>
-<pre><code class="language-html">&lt;form on:submit=&quot;saveUser(%event)&quot; action=&quot;&quot;&gt;
+<pre><code class="language-html">&lt;form on:submit=&quot;this.saveUser(scope.event)&quot; action=&quot;&quot;&gt;
     &lt;div class=&quot;form-group&quot;&gt;
         &lt;label for=&quot;user-email&quot;&gt;
             Email
         &lt;/label&gt;
-        {{#is userStatus &quot;verified&quot;}}
+        {{#is(this.userStatus, &quot;verified&quot;)}}
             &lt;div class=&quot;input-group has-success has-feedback&quot;&gt;
                 &lt;span class=&quot;input-group-addon&quot;&gt;verified!&lt;/span&gt;
                 &lt;input
                     class=&quot;form-control&quot;
                     id=&quot;user-email&quot;
-                    {{^if user.isNew}}disabled{{/if}}
-                    value:bind=&quot;user.email&quot; /&gt;
+                    {{^if(this.user.isNew)}}disabled{{/if}}
+                    value:bind=&quot;this.user.email&quot; /&gt;
             &lt;/div&gt;
         {{else}}
             &lt;input
                 class=&quot;form-control&quot;
                 id=&quot;user-email&quot;
-                {{^if user.isNew}}disabled{{/if}}
-                value:bind=&quot;user.email&quot; /&gt;
+                {{^if(this.user.isNew)}}disabled{{/if}}
+                value:bind=&quot;this.user.email&quot; /&gt;
         {{/is}}
     &lt;/div&gt;
     ...
@@ -739,28 +739,28 @@ sub components depending on their needs:</p>
 shown on the page:</p>
 <pre><code class="language-html">{{#if isAdmin}}
 &lt;h4&gt;New Game&lt;/h4&gt;
-&lt;form on:submit=&quot;createGame(%event)&quot;&gt;...&lt;/form&gt;
+&lt;form on:submit=&quot;this.createGame(scope.event)&quot;&gt;...&lt;/form&gt;
 {{/if}}
 </code></pre>
 <p>In more complex apps, the <code>user</code> object might include an <a href="https://en.wikipedia.org/wiki/Access_control_list">Access Control List</a>
 which might include methods to check access rights:</p>
-<pre><code class="language-html">{{#if user.acl.can(&quot;create&quot;,&quot;game&quot;) }}
+<pre><code class="language-html">{{#if(this.user.acl.can(&quot;create&quot;,&quot;game&quot;)) }}
 &lt;h4&gt;New Game&lt;/h4&gt;
-&lt;form on:submit=&quot;createGame(%event)&quot;&gt;...&lt;/form&gt;
+&lt;form on:submit=&quot;this.createGame(scope.event)&quot;&gt;...&lt;/form&gt;
 {{/if}}
 </code></pre>
 <h4>Creating a session</h4>
 <p>Creating a session is done with the <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html">&lt;bitballs-navigation&gt;</a> component. It builds a
 login form that takes an email and password:</p>
-<pre><code class="language-html">&lt;form on:submit=&quot;createSession(%event)&quot; action=&quot;&quot;&gt;
+<pre><code class="language-html">&lt;form on:submit=&quot;this.createSession(scope.event)&quot; action=&quot;&quot;&gt;
     &lt;input
         placeholder=&quot;email&quot;
-        value:bind=&quot;loginSession.user.email&quot;/&gt;
+        value:bind=&quot;this.loginSession.user.email&quot;/&gt;
 
     &lt;input
         placeholder=&quot;password&quot;
         type=&quot;password&quot;
-      value:bind=&quot;loginSession.user.password&quot;/&gt;
+      value:bind=&quot;this.loginSession.user.password&quot;/&gt;
 
     &lt;button type=&quot;submit&quot;&gt;Login&lt;/button&gt;
 &lt;/form&gt;
@@ -773,12 +773,12 @@ the new session instance.</p>
     if(ev) {
         ev.preventDefault();
     }
-    var self = this;
-    this.loginSession.save().then(function(session){
+
+    this.loginSession.save().then((session) =&gt; {
         // create placeholder session for next login.
-        self.loginSession = new Session({user: new User()});
+        this.loginSession = new Session({user: new User()});
         // update AppViewModel with new session
-        self.app.session = session;
+        this.app.session = session;
 
     });
 },
@@ -816,7 +816,7 @@ responds with the Session data.</p>
 <h4>Destroy the session</h4>
 <p>The <a href="http://donejs.github.io/bitballs/docs/bitballs%7Ccomponents%7Cnavigation.html"><code>&lt;bitballs-navigation&gt;</code></a> component's <a href="https://github.com/donejs/bitballs/blob/master/public/components/navigation/navigation.stache">template</a> as a link that
 calls <code>logout()</code> on its ViewModel:</p>
-<pre><code class="language-html">&lt;a href=&quot;javascript://&quot; on:click=&quot;logout()&quot;&gt;Logout&lt;/a&gt;
+<pre><code class="language-html">&lt;a href=&quot;javascript://&quot; on:click=&quot;this.logout()&quot;&gt;Logout&lt;/a&gt;
 </code></pre>
 <p><code>logout</code> calls destroy on the session and then removes the session from the AppViewModel:</p>
 <pre><code class="language-js">logout: function(){
@@ -827,7 +827,7 @@ calls <code>logout()</code> on its ViewModel:</p>
 </code></pre>
 <p>Destroying a session calls <code>DELETE /services/session</code> to destroy a session server side. No data needs to be passed. The server simply calls passport's <code>logout()</code> and responds
 with an empty JSON object.</p>
-<pre><code class="language-js">app['delete'](&quot;/services/session&quot;, function(req, res){
+<pre><code class="language-js">app.delete(&quot;/services/session&quot;, function(req, res){
     req.logout();
     res.json({});
 });
@@ -939,7 +939,7 @@ it's possible someone might want to simply know the final score of a game. In th
 case, the teams and players would not be necessary.</p>
 <p>So how do you reconcile performance needs with the certainty that application
 requirements and the uses of your services will change?</p>
-<p>The answer is making expressive Restful services and client Models and ViewModels
+<p>The answer is making expressive RESTful services and client Models and ViewModels
 that are able to work with them.</p>
 <h3>Expressive services</h3>
 <p>Expressive services allow the client to specify some of the raw behavior that
@@ -950,7 +950,8 @@ backend <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">Object
 related fields like:</p>
 <pre><code class="language-js">Game.get({
     id: this.gameId,
-    withRelated: [&quot;stats&quot;,
+    withRelated: [
+    &quot;stats&quot;,
         &quot;homeTeam.player1&quot;,
         &quot;homeTeam.player2&quot;,
         &quot;homeTeam.player3&quot;,
@@ -1073,7 +1074,7 @@ closely matches the API of your ORM.</p>
 <p>Once you've settled on an expressive service API, you need
 to make Models that connect to it and handle associated data. And if you want
 any of the advanced behavior of <a href="https://canjs.com/doc/can-connect.html">can-connect</a>, you have
-to create a relational algebra that understands the service API.</p>
+to create a QueryLogic that understands the service API.</p>
 <h4>Connecting to a service</h4>
 <p>Bitballs' client Models are <a href="https://canjs.com/doc/can-connect.html/doc/can-connect%7Ccan%7Csuper-map.html">can-connect supermodels</a>.  So a type and list type is defined:</p>
 <pre><code class="language-js">var Game = DefineMap.extend({
@@ -1083,21 +1084,36 @@ to create a relational algebra that understands the service API.</p>
 Game.List = DefineList.extend({&quot;#&quot;: Game},{});
 </code></pre>
 <p>And they are connected to a url:</p>
-<pre><code class="language-js">var gameConnection = superMap({
+<pre><code class="language-js">var gameConnection = realTimeRestModel({
   Map: Game,
   List: Game.List,
   url: &quot;/services/games&quot;,
   name: &quot;game&quot;,
-  algebra: Game.algebra
+  queryLogic: new QueryLogic(Game, bookshelfService)
 });
 </code></pre>
 <h4>Relational Algebra</h4>
 <p>To match the query parameters our service and eventually Bookshelf
-expects, we need to define a custom set algebra. For <code>Game</code>, it looks like this:</p>
-<pre><code class="language-js">Game.algebra = new set.Algebra(
-    new set.Translate(&quot;where&quot;,&quot;where&quot;),
-    set.comparators.sort('sortBy')
-);
+expects, we need to define a custom <em>query logic</em>. For our app, it looks like this:</p>
+<p><strong>models/bookshelf-service.js</strong></p>
+<pre><code class="language-js">import { key } from &quot;can&quot;;
+
+const bookshelfService = {
+    toQuery(params) {
+        return key.transform(params, {
+            where: &quot;filter&quot;,
+            orderBy: &quot;sort&quot;
+        });
+    },
+    toParams(query){
+        return key.transform(query, {
+            filter: &quot;where&quot;,
+            sort: &quot;orderBy&quot;
+        });
+    }
+};
+
+export default bookshelfService;
 </code></pre>
 <h4>Defining related properties</h4>
 <p>Because Game data can come back with a <code>homeTeam</code>,
@@ -1112,15 +1128,15 @@ are created as the right type:</p>
     },
     stats: {
         Type: Stat.List,
-        set: function(newVal){
-            newVal.__listSet = {where: {gameId: this.id}};
-            return newVal;
+        set: function(stats){
+            stats[Stat.connection.listQueryProp] = { filter: {gameId: this.id }};
+            return stats;
         }
     },
   ...
 });
 </code></pre>
-<p>Notice that <code>stats.set</code> is setting the <a href="https://canjs.com/doc/can-connect.html/doc/connect.base.listSetProp.html">__listSet</a> property of the stats.  This is necessary for <a href="https://canjs.com/doc/can-connect.html/doc/can-connect%7Creal-time.html">can-connect's real-time</a> behavior. When stats are created for this game, they will automatically appear in this list.</p>
+<p>Notice that <code>stats.set</code> is setting the <a href="https://canjs.com/doc/can-connect/base/base.listQueryProp.html">listQueryProp</a> property of the stats.  This is necessary for <a href="https://canjs.com/doc/can-connect/real-time/real-time.html">can-connect's real-time</a> behavior. When stats are created for this game, they will automatically appear in this list.</p>
 <h4>Defining computed properties</h4>
 <p><code>Game</code> also has <code>teams</code> and <code>players</code> computed properties that
 derive their value from related fields:</p>
@@ -1178,10 +1194,10 @@ all we have are player ids on each team:</p>
 <p>And then use that in the template to look up the player:</p>
 <pre><code class="language-js">{{#each teams}}
     ...
-    &lt;td&gt;{{#../players.getById(player1Id)}}{{name}}{{/}}&lt;/td&gt;
-    &lt;td&gt;{{#../players.getById(player2Id)}}{{name}}{{/}}&lt;/td&gt;
-    &lt;td&gt;{{#../players.getById(player3Id)}}{{name}}{{/}}&lt;/td&gt;
-    &lt;td&gt;{{#../players.getById(player4Id)}}{{name}}{{/}}&lt;/td&gt;
+    &lt;td&gt;{{#for(player of this.players.getById(player1Id))}}{{player.name}}{{/for}}&lt;/td&gt;
+    &lt;td&gt;{{#for(player of this.players.getById(player2Id))}}{{player.name}}{{/for}}&lt;/td&gt;
+    &lt;td&gt;{{#for(player of this.players.getById(player3Id))}}{{player.name}}{{/for}}&lt;/td&gt;
+    &lt;td&gt;{{#for(player of this.players.getById(player4Id))}}{{player.name}}{{/for}}&lt;/td&gt;
 {{/each}}
 </code></pre>
 <blockquote>

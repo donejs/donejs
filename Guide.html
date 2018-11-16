@@ -240,7 +240,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </blockquote>
 <h3>Install DoneJS</h3>
 <p>To get started, let’s install the DoneJS command line utility globally:</p>
-<pre><code class="language-shell">npm install -g donejs
+<pre><code class="language-shell">npm install -g donejs@3
 </code></pre>
 <h3>Generate the application</h3>
 <p>Then we’ll create a new DoneJS application called <code>donejs-chat</code>:</p>
@@ -253,8 +253,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <ul>
 <li><a href="https://stealjs.com">StealJS</a> — ES6, CJS, and AMD module loader and builder</li>
 <li><a href="https://canjs.com">CanJS</a> — Custom elements and Model-View-ViewModel utilities</li>
-<li><a href="https://jquery.com">jQuery</a> — DOM helpers</li>
-<li><a href="https://jquerypp.com">jQuery++</a> — Extended DOM helpers</li>
+<li><a href="https://github.com/donejs/done-ssr">done-ssr</a> - Server-rendering</li>
 <li><a href="https://qunitjs.com/">QUnit</a> — Assertion library (A <a href="https://github.com/donejs/donejs-mocha">Mocha</a> generator is also available)</li>
 <li><a href="https://funcunit.com">FuncUnit</a> — Functional tests</li>
 <li><a href="https://github.com/bitovi/testee">Testee</a> — JavaScript Test runner</li>
@@ -269,7 +268,7 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 </code></pre>
 <p>The default port is <code>8080</code>.</p>
 <p>Go to <a href="http://localhost:8080/" title="http://localhost:8080/">http://localhost:8080/</a> to see our application showing a default homepage.</p>
-<p><img src="static/img/donejs-helloworld.png" alt="hello world" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
+<p><img src="static/img/donejs-homepage.png" alt="hello world" height="272" width="600" /></p>
 <h2>Adding Bootstrap</h2>
 <p>DoneJS makes it easy to import other projects that are published on <a href="https://npmjs.org">npm</a>. In this section, we will install and add <a href="https://getbootstrap.com/">Bootstrap</a> to the page, and see DoneJS’s <a href="./Features.html#hot-module-swapping">hot module swapping</a> in action.</p>
 <h3>Install the npm package</h3>
@@ -281,12 +280,12 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <p>Update <code>src/index.stache</code> to look like this:</p>
 <pre><code class="language-html">&lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;{{title}}&lt;/title&gt;
+    &lt;title&gt;{{this.title}}&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;can-import from=&quot;bootstrap/less/bootstrap.less&quot; /&gt;
     &lt;can-import from=&quot;~/styles.less&quot; /&gt;
-    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; /&gt;
+    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; route-data=&quot;routeData&quot; /&gt;
 
     &lt;div class=&quot;container&quot;&gt;
       &lt;div class=&quot;row&quot;&gt;
@@ -300,14 +299,11 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
       &lt;/div&gt;
     &lt;/div&gt;
 
-    {{#switch env.NODE_ENV}}
-      {{#case &quot;production&quot;}}
-        &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
-      {{/case}}
-      {{#default}}
-        &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
-      {{/default}}
-    {{/switch}}
+    {{#eq(this.env.NODE_ENV, &quot;production&quot;)}}
+      &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
+    {{else}}
+      &lt;script src=&quot;/node_modules/steal/steal.js&quot; main&gt;&lt;/script&gt;
+    {{/eq}}
   &lt;/body&gt;
 &lt;/html&gt;
 
@@ -328,19 +324,19 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <p>We’ll use a DoneJS <a href="./Features.html#generators">generator</a> to create custom components. The component generator is run by typing <code>donejs add component &lt;file-or-folder&gt; &lt;component-name&gt;</code>.</p>
 <p>The homepage custom element (with the HTML tag name <code>chat-home</code>) won't be very big or complex, so we’ll put everything into a single <code>.component</code> file.</p>
 <p>To generate it, run:</p>
-<pre><code class="language-shell">donejs add component home.component chat-home
+<pre><code class="language-shell">donejs add component pages/home.component chat-home
 </code></pre>
 <p>The messages component (with the tag <code>chat-messages</code>) will be a little more complex, so we’ll generate it using the <a href="./Features.html#modlets">modlet file pattern</a>.</p>
 <p>Now run:</p>
-<pre><code class="language-shell">donejs add component messages chat-messages
+<pre><code class="language-shell">donejs add component pages/messages chat-messages
 </code></pre>
 <p><img src="static/img/donejs-generator.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Later we will update the generated files with the chat messages functionality.</p>
 <h3>Navigate between pages</h3>
 <blockquote>
-<p>Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application <a href="https://canjs.com/doc/can-route.html">routes</a> map URL strings (like /user/1) to properties on our application’s view-model. In other words, our routes will just be a representation of the application state. To learn more about routing visit <a href="https://canjs.com/doc/can-route.html">can-route’s documentation</a>.</p>
+<p>Routing works a bit differently than other libraries. In other libraries, you might declare routes and map those to controller-like actions. DoneJS application <a href="https://canjs.com/doc/can-route.html">routes</a> map URL strings (like /user/1) to properties on an observable. In other words, our routes will just be a representation of the application state. To learn more about routing visit the <a href="https://canjs.com/doc/guides/routing.html">CanJS Routing guide</a>.</p>
 </blockquote>
-<p>First, let’s update <code>src/home.component</code> with the original content from the homepage and a link to the chat messages page:</p>
+<p>First, let’s update <code>src/pages/home.component</code> with the original content from the homepage and a link to the chat messages page:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;chat-home&quot;&gt;
   &lt;style type=&quot;less&quot;&gt;
     display: block;
@@ -367,108 +363,115 @@ npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="https://github.com/donejs/done-component#done-component">&lt;can-component&gt;</a> — a <a href="https://stealjs.com/">StealJS</a> plugin for CanJS <a href="https://canjs.com/doc/can-component.html">components</a> that allows you to define a component completely within a  <em>.component</em> file.</li>
-<li><a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html"><code>routeUrl</code></a> — a helper that populates the anchor’s href with a URL that sets the application ViewModel’s <code>page</code> property to <code>&quot;chat&quot;</code>. The AppViewModel is shown below.</li>
+<li><a href="https://github.com/donejs/done-component#done-component">done-component</a> — a <a href="https://stealjs.com/">StealJS</a> plugin for CanJS <a href="https://canjs.com/doc/can-component.html">components</a> that allows you to define a component completely within a  <em>.component</em> file.</li>
+<li><a href="https://canjs.com/doc/can-stache.helpers.routeUrl.html"><code>routeUrl</code></a> — a helper that populates the anchor’s href with a URL that sets the <code>page</code> property to <code>&quot;chat&quot;</code> on <a href="https://canjs.com/doc/can-route.data.html">route.data</a>.</li>
 </ul>
 </blockquote>
-<p>Next, add a link to go back to the homepage from the chat page by updating <code>src/messages/messages.stache</code> to:</p>
+<p>Next, add a link to go back to the homepage from the chat page by updating <code>src/pages/messages/messages.stache</code> to:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
 &lt;h5&gt;&lt;a href=&quot;{{routeUrl(page='home')}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
-&lt;p&gt;{{message}}&lt;/p&gt;
+&lt;p&gt;{{this.message}}&lt;/p&gt;
 
 </code></pre>
-<p><span line-highlight='1-2,only'></span>
-Then, add a <code>page</code> property on the <code>AppViewModel</code> and
-define a rule for it in <code>src/app.js</code>:</p>
-<pre><code class="language-js">import DefineMap from 'can-define/map/';
-import route from 'can-route';
-import 'can-route-pushstate';
-import 'can-debug#?./is-dev';
-
-const AppViewModel = DefineMap.extend({
-  page: 'string',
-  title: {
-    default: 'donejs-chat',
-    serialize: false
-  }
-});
-
-route.register('/{page}', { page: 'home' });
-
-export default AppViewModel;
-
-</code></pre>
-<p><span line-highlight='7,14,only'></span></p>
+<p><span line-highlight='1-2,only'></span></p>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
 <li><a href="https://canjs.com/doc/can-define/map/map.html">DefineMap</a> — used to define observable types.</li>
-<li><a href="https://canjs.com/doc/can-route.html">route</a> — used to map changes in the URL to changes on the AppViewModel’s <code>page</code>
-property.</li>
+<li><a href="https://canjs.com/doc/can-route.html">route</a> — used to map changes in the URL to changes on the route.data <code>page</code> property.</li>
 </ul>
 </blockquote>
 <h3>Switch between pages</h3>
-<p>Finally, we’ll glue both components together as separate pages in <code>src/index.stache</code>. This is done by adding  for the <code>home.component</code> and <code>messages/</code> components and showing each import based on the <code>page</code> property.</p>
-<p>Update <code>src/index.stache</code> to:</p>
+<p>Finally we'll glue together these components as separate pages. Our Application ViewModel is where we determine which page to show. This is done by determining the <code>pageComponent</code>, an instance of a <a href="https://canjs.com/doc/can-component.html">can-component</a>, based on the <code>route.data.page</code> property.</p>
+<p>Add the following two new properties to <code>src/app.js</code>:</p>
+<pre><code class="language-js">import { DefineMap, route } from 'can';
+import RoutePushstate from 'can-route-pushstate';
+import debug from 'can-debug#?./is-dev';
+
+//!steal-remove-start
+if(debug) {
+    debug();
+}
+//!steal-remove-end
+
+const AppViewModel = DefineMap.extend(&quot;AppViewModel&quot;, {
+  env: {
+    default: () =&gt; ({NODE_ENV:'development'})
+  },
+  title: {
+    default: 'donejs-chat'
+  },
+  routeData: {
+    default: () =&gt; route.data
+  },
+  pageComponentModuleName: {
+    get() {
+      switch (this.routeData.page) {
+        case 'chat': return '~/pages/messages/';
+        default: return '~/pages/home.component';
+      }
+    }
+  },
+  pageComponent: {
+    get() {
+      return steal.import(this.pageComponentModuleName)
+      .then(({default: Component}) =&gt; {
+        return new Component();
+      });
+    }
+  }
+});
+
+route.urlData = new RoutePushstate();
+route.register(&quot;{page}&quot;, { page: &quot;home&quot; });
+
+export default AppViewModel;
+
+</code></pre>
+<p><span line-highlight='20-36,only'></span>
+This imports the chosen page's module and then instantiates a new instance using <code>new Component()</code>. We can use this component by placing it in the <code>index.stache</code>:</p>
 <pre><code class="language-html">&lt;html&gt;
   &lt;head&gt;
-    &lt;title&gt;{{title}}&lt;/title&gt;
+    &lt;title&gt;{{this.title}}&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
     &lt;can-import from=&quot;bootstrap/less/bootstrap.less&quot; /&gt;
     &lt;can-import from=&quot;~/styles.less&quot; /&gt;
-    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; /&gt;
+    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; route-data=&quot;routeData&quot; /&gt;
 
     &lt;div class=&quot;container&quot;&gt;
       &lt;div class=&quot;row&quot;&gt;
         &lt;div class=&quot;col-sm-8 col-sm-offset-2&quot;&gt;
-          {{#eq(page, 'chat')}}
-            &lt;can-import from=&quot;~/messages/&quot;&gt;
-              {{#if(isPending)}}
-                Loading...
-              {{else}}
-                &lt;chat-messages/&gt;
-              {{/if}}
-            &lt;/can-import&gt;
+          {{#if(this.pageComponent.isResolved)}}
+            {{this.pageComponent.value}}
           {{else}}
-            &lt;can-import from=&quot;~/home.component&quot;&gt;
-              {{#if(isPending)}}
-                Loading...
-              {{else}}
-                &lt;chat-home/&gt;
-              {{/if}}
-            &lt;/can-import&gt;
-          {{/eq}}
+            Loading...
+          {{/if}}
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
 
-    {{#switch env.NODE_ENV}}
-      {{#case &quot;production&quot;}}
-        &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
-      {{/case}}
-      {{#default}}
-        &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
-      {{/default}}
-    {{/switch}}
+    {{#eq(this.env.NODE_ENV, &quot;production&quot;)}}
+      &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
+    {{else}}
+      &lt;script src=&quot;/node_modules/steal/steal.js&quot; main&gt;&lt;/script&gt;
+    {{/eq}}
   &lt;/body&gt;
 &lt;/html&gt;
 
 </code></pre>
-<p><span line-highlight='13-29,only'></span></p>
+<p><span line-highlight='13-17,only'></span></p>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="https://canjs.com/doc/can-stache.helpers.is.html">{{#eq}}</a> — compares the AppViewModel’s <code>page</code> property to 'chat'.</li>
-<li><a href="https://canjs.com/doc/can-view-import.html">can-view-import</a> — provides dynamic imports.</li>
-<li><a href="https://canjs.com/doc/can-stache.helpers.if.html">{{#if isPending}}</a> — renders <em>&quot;Loading&quot;</em> while the modules are loading.</li>
-<li><a href="https://canjs.com/doc/can-stache.helpers.else.html">{{else}}</a> — Renders the components once their modules have loaded.</li>
+<li><a href="https://stealjs.com/docs/steal.import.html">steal.import</a> - imports the pageComponentModuleName dynamically.</li>
+<li><a href="https://canjs.com/doc/can-component.html#newComponent__options__">new Component()</a> - creates new instance of the component imported.</li>
+<li><a href="https://canjs.com/doc/can-stache.helpers.if.html">{{#if(isResolved)}}</a> — Renders the components once their modules have loaded.</li>
+<li><a href="https://canjs.com/doc/can-stache.helpers.else.html">{{else}}</a> — renders <em>&quot;Loading&quot;</em> while the modules are loading.</li>
 </ul>
 </blockquote>
 <p>Now each component is being dynamically loaded while navigating between the home and messages page.  You should see the changes already in your browser.</p>
 <p><img src="static/img/donejs-chat1.png" alt="chat.donejs.com" height="302" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
-<p>Also, everything is <a href="Features.html#section=section_ServerSideRendered">rendered on the server</a>. If you reload the homepage at <a href="http://localhost:8080">localhost:8080</a> you'll see the page’s content right away, while the JavaScript is loading in the background. Viewing the source will show the dynamically inserted styles and the corresponding HTML.</p>
-<p><img src="static/img/donejs-viewsource.png" alt="chat.donejs.com" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Homepage</h2>
 <p>Now that we can navigate between pages, we will finish implementing their functionality, starting with the homepage.</p>
 <h3>Install bit-tabs</h3>
@@ -478,7 +481,7 @@ property.</li>
 </code></pre>
 <h3>Update the page</h3>
 <p>Then, import the unstyled custom elements from <code>bit-tabs/unstyled</code> (unstyled because we will use Bootstrap’s styles) and add <code>&lt;bit-tabs&gt;</code> and <code>&lt;bit-panel&gt;</code> elements to the template.</p>
-<p>Update <code>src/home.component</code> to:</p>
+<p>Update <code>src/pages/home.component</code> to:</p>
 <pre><code class="language-html">&lt;can-component tag=&quot;chat-home&quot;&gt;
   &lt;style type=&quot;less&quot;&gt;
     display: block;
@@ -531,16 +534,16 @@ You'll notice tabs appear in the browser:</p>
 <p>When asked for the URL endpoint, set it to our remote RESTful API at <code>https://chat.donejs.com/api/messages</code>. When it asks if https://chat.donejs.com is your service URL answer <code>Yes</code>. The other questions can be answered with the default by hitting enter.</p>
 <p><img src="static/img/donejs-model-generator.png" alt="model generator" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <p>Update <code>src/models/message.js</code> to:</p>
-<pre><code class="language-js">import DefineMap from 'can-define/map/';
-import DefineList from 'can-define/list/';
-import set from 'can-set';
-import superMap from 'can-connect/can/super-map/';
+<pre><code class="language-js">import { DefineMap, DefineList, superModel } from 'can';
 import loader from '@loader';
 
 const Message = DefineMap.extend({
   seal: false
 }, {
-  'id': 'any',
+  'id': {
+    type: 'any',
+    identity: true
+  },
   name: 'string',
   body: 'string'
 });
@@ -549,28 +552,23 @@ Message.List = DefineList.extend({
   '#': Message
 });
 
-const algebra = new set.Algebra(
-  set.props.id('id')
-);
-
-Message.connection = superMap({
+Message.connection = superModel({
   url: loader.serviceBaseURL + '/api/messages',
   Map: Message,
   List: Message.List,
-  name: 'message',
-  algebra
+  name: 'message'
 });
 
 export default Message;
 
 </code></pre>
-<p><span line-highlight='11-12,only'></span></p>
+<p><span line-highlight='10-12'></span></p>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
-<li><a href="https://canjs.com/doc/can-set.Algebra.html">set.Algebra</a> — used to describe a service-layer’s parameters. For example if <code>&quot;api/messages?limit=20&quot;</code> only returned 20 messages, you would configure the <code>limit</code> parameter behavior in the connection’s <code>set.Algebra</code>.</li>
+<li><a href="https://canjs.com/doc/can-query-logic.html">QueryLogic</a> — used to describe a service-layer’s parameters. For example if <code>&quot;api/messages?limit=20&quot;</code> only returned 20 messages, you would configure the <code>limit</code> parameter behavior in the connection’s <code>queryLogic</code>.</li>
 <li><a href="https://canjs.com/doc/can-define/list/list.html">DefineList</a> — used to define the behavior of an observable list of <code>Message</code>s.</li>
-<li><a href="https://canjs.com/doc/can-connect/can/super-map/super-map.html">superMap</a> — connects the <code>Message</code> type to the<br />
+<li><a href="https://canjs.com/doc/can-super-model.html">superModel</a> — connects the <code>Message</code> type to the<br />
 restful <code>'/api/messages'</code> service. This adds <a href="https://canjs.com/doc/can-connect/real-time/real-time.html">real-time</a>, <a href="https://canjs.com/doc/can-connect/fall-through-cache/fall-through-cache.html">fall-through-caching</a> and other useful behaviors.</li>
 <li><a href="https://stealjs.com/docs/@loader.html">loader</a> — references the module loader that is loading this code. All configuration
 in your <em>package.json</em>’s &quot;steal&quot; property is available, including the <code>serviceBaseUrl</code>.</li>
@@ -578,48 +576,67 @@ in your <em>package.json</em>’s &quot;steal&quot; property is available, inclu
 </blockquote>
 <h3>Use the connection</h3>
 <p>The generated file is all that is needed to connect to our RESTful API. Use it by importing it and requesting a list of all messages.</p>
-<p>Update <code>src/messages/messages.js</code> to:</p>
-<pre><code class="language-js">import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+<p>Update <code>src/pages/messages/messages.js</code> to:</p>
+<pre><code class="language-js">import { Component } from 'can';
 import './messages.less';
 import view from './messages.stache';
-import Message from '../models/message';
-
-export const ViewModel = DefineMap.extend({
-  get messagesPromise() {
-    return Message.getList({});
-  }
-});
+import Message from '../../models/message';
 
 export default Component.extend({
   tag: 'chat-messages',
-  ViewModel,
-  view
+  view,
+  ViewModel: {
+    // EXTERNAL STATEFUL PROPERTIES
+    // These properties are passed from another component. Example:
+    // value: {type: &quot;number&quot;}
+
+    // INTERNAL STATEFUL PROPERTIES
+    // These properties are owned by this component.
+    message: { default: &quot;This is the chat-messages component&quot; },
+
+    // DERIVED PROPERTIES
+    // These properties combine other property values. Example:
+    // get valueAndMessage(){ return this.value + this.message; }
+    get messagesPromise() {
+      return Message.getList({});
+    },
+
+    // METHODS
+    // Functions that can be called by the view. Example:
+    // incrementValue() { this.value++; }
+
+    // SIDE EFFECTS
+    // The following is a good place to perform changes to the DOM
+    // or do things that don't fit in to one of the areas above.
+    connectedCallback(element){
+
+    }
+  }
 });
 
 </code></pre>
-<p><span line-highlight='5,8-10,only'></span></p>
+<p><span line-highlight='4,21-23,only'></span></p>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
 <li><a href="https://canjs.com/doc/can-connect/connection.getList.html">getList</a> — returns a promise that resolves to a <code>Message.List</code> of <code>Message</code> instances.</li>
 </ul>
 </blockquote>
-<p>Display the messages by updating <code>src/messages/messages.stache</code> to:</p>
+<p>Display the messages by updating <code>src/pages/messages/messages.stache</code> to:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
 &lt;h5&gt;&lt;a href=&quot;{{routeUrl(page='home')}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
 
-{{#if(messagesPromise.isResolved)}}
-  {{#each(messagesPromise.value)}}
+{{#if(this.messagesPromise.isResolved)}}
+  {{#for(message of this.messagesPromise.value)}}
     &lt;div class=&quot;list-group-item&quot;&gt;
-      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{name}}&lt;/h4&gt;
-      &lt;p class=&quot;list-group-item-text&quot;&gt;{{body}}&lt;/p&gt;
+      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{message.name}}&lt;/h4&gt;
+      &lt;p class=&quot;list-group-item-text&quot;&gt;{{message.body}}&lt;/p&gt;
     &lt;/div&gt;
   {{else}}
     &lt;div class=&quot;list-group-item&quot;&gt;
       &lt;h4 class=&quot;list-group-item-heading&quot;&gt;No messages&lt;/h4&gt;
     &lt;/div&gt;
-  {{/each}}
+  {{/for}}
 {{/if}}
 
 </code></pre>
@@ -636,39 +653,55 @@ export default Component.extend({
 <p><img src="static/img/donejs-chat2.png" alt="chat.donejs.com" height="272" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h3>Create messages</h3>
 <p>Now let’s add the form to create new messages. The form will two-way bind the <code>name</code> and <code>body</code> properties to the component’s view-model and calls <code>send()</code> when hitting the enter key in the message input.</p>
-<p>First we have to implement the <code>send()</code> method. Update <code>src/messages/messages.js</code> to this:</p>
-<pre><code class="language-js">import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+<p>First we have to implement the <code>send()</code> method. Update <code>src/pages/messages/messages.js</code> to this:</p>
+<pre><code class="language-js">import { Component } from 'can';
 import './messages.less';
 import view from './messages.stache';
-import Message from '../models/message';
-
-export const ViewModel = DefineMap.extend({
-  name: 'string',
-  body: 'string',
-
-  send(event) {
-    event.preventDefault();
-
-    new Message({
-      name: this.name,
-      body: this.body
-    }).save().then(msg =&gt; this.body = '');
-  },
-
-  get messagesPromise() {
-    return Message.getList({});
-  }
-});
+import Message from '../../models/message';
 
 export default Component.extend({
   tag: 'chat-messages',
-  ViewModel,
-  view
+  view,
+  ViewModel: {
+    // EXTERNAL STATEFUL PROPERTIES
+    // These properties are passed from another component. Example:
+    // value: {type: &quot;number&quot;}
+
+    // INTERNAL STATEFUL PROPERTIES
+    // These properties are owned by this component.
+    name: 'string',
+    body: 'string',
+
+    // DERIVED PROPERTIES
+    // These properties combine other property values. Example:
+    // get valueAndMessage(){ return this.value + this.message; }
+    get messagesPromise() {
+      return Message.getList({});
+    },
+
+    // METHODS
+    // Functions that can be called by the view. Example:
+    // incrementValue() { this.value++; }
+    send(event) {
+      event.preventDefault();
+
+      new Message({
+        name: this.name,
+        body: this.body
+      }).save().then(msg =&gt; this.body = '');
+    },
+
+    // SIDE EFFECTS
+    // The following is a good place to perform changes to the DOM
+    // or do things that don't fit in to one of the areas above.
+    connectedCallback(element){
+
+    }
+  }
 });
 
 </code></pre>
-<p><span line-highlight='8-18,only'></span></p>
+<p><span line-highlight='16-17,29-36,only'></span></p>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -677,34 +710,34 @@ the message data.</li>
 </ul>
 </blockquote>
 <p>The <code>send()</code> method takes the <code>name</code> and <code>message</code> properties from the view-model and creates a <code>Message</code> instance, saving it to the server. Once saved successfully, it sets the message to an empty string to reset the input field.</p>
-<p>Next update <code>src/messages/messages.stache</code> to look like this:</p>
+<p>Next update <code>src/pages/messages/messages.stache</code> to look like this:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
 &lt;h5&gt;&lt;a href=&quot;{{routeUrl(page='home')}}&quot;&gt;Home&lt;/a&gt;&lt;/h5&gt;
 
-{{#if(messagesPromise.isResolved)}}
-  {{#each messagesPromise.value}}
+{{#if(this.messagesPromise.isResolved)}}
+  {{#for(message of this.messagesPromise.value)}}
     &lt;div class=&quot;list-group-item&quot;&gt;
-      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{name}}&lt;/h4&gt;
-      &lt;p class=&quot;list-group-item-text&quot;&gt;{{body}}&lt;/p&gt;
+      &lt;h4 class=&quot;list-group-item-heading&quot;&gt;{{message.name}}&lt;/h4&gt;
+      &lt;p class=&quot;list-group-item-text&quot;&gt;{{message.body}}&lt;/p&gt;
     &lt;/div&gt;
   {{else}}
     &lt;div class=&quot;list-group-item&quot;&gt;
       &lt;h4 class=&quot;list-group-item-heading&quot;&gt;No messages&lt;/h4&gt;
     &lt;/div&gt;
-  {{/each}}
+  {{/for}}
 {{/if}}
 
-&lt;form class=&quot;row&quot; on:submit=&quot;send(scope.event)&quot;&gt;
+&lt;form class=&quot;row&quot; on:submit=&quot;this.send(scope.event)&quot;&gt;
   &lt;div class=&quot;col-sm-3&quot;&gt;
     &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Your name&quot;
-           value:bind=&quot;name&quot;/&gt;
+           value:bind=&quot;this.name&quot; /&gt;
   &lt;/div&gt;
   &lt;div class=&quot;col-sm-6&quot;&gt;
     &lt;input type=&quot;text&quot; class=&quot;form-control&quot; placeholder=&quot;Your message&quot;
-           value:bind=&quot;body&quot;/&gt;
+           value:bind=&quot;this.body&quot; /&gt;
   &lt;/div&gt;
   &lt;div class=&quot;col-sm-3&quot;&gt;
-    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary btn-block&quot; value=&quot;Send&quot;/&gt;
+    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary btn-block&quot; value=&quot;Send&quot; /&gt;
   &lt;/div&gt;
 &lt;/form&gt;
 
@@ -730,17 +763,17 @@ to a property of the ViewModel.</li>
 <pre><code class="language-shell">npm install steal-socket.io --save
 </code></pre>
 <p>Update <code>src/models/message.js</code> to:</p>
-<pre><code class="language-js">import DefineMap from 'can-define/map/';
-import DefineList from 'can-define/list/';
-import set from 'can-set';
-import superMap from 'can-connect/can/super-map/';
+<pre><code class="language-js">import { DefineMap, DefineList, superModel } from 'can';
 import loader from '@loader';
 import io from 'steal-socket.io';
 
 const Message = DefineMap.extend({
   seal: false
 }, {
-  'id': 'any',
+  'id': {
+    type: 'any',
+    identity: true
+  },
   name: 'string',
   body: 'string'
 });
@@ -749,16 +782,11 @@ Message.List = DefineList.extend({
   '#': Message
 });
 
-const algebra = new set.Algebra(
-  set.props.id('id')
-);
-
-Message.connection = superMap({
+Message.connection = superModel({
   url: loader.serviceBaseURL + '/api/messages',
   Map: Message,
   List: Message.List,
-  name: 'message',
-  algebra
+  name: 'message'
 });
 
 const socket = io(loader.serviceBaseURL);
@@ -773,7 +801,7 @@ socket.on('messages removed',
 export default Message;
 
 </code></pre>
-<p><span line-highlight='6,32-39,only'></span></p>
+<p><span line-highlight='3,27-34,only'></span></p>
 <blockquote>
 <p>New APIs used:</p>
 <ul>
@@ -848,7 +876,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 <p>We will use these tools to create an iOS application that can be tested in the iOS simulator.</p>
 <p>Windows users should install the <a href="https://developer.android.com/sdk/index.html">Android Studio</a>, which gives all of the tools we need.</p>
 <p>Now we can install the DoneJS Cordova tools with:</p>
-<pre><code class="language-shell">donejs add cordova@1
+<pre><code class="language-shell">donejs add cordova@2
 </code></pre>
 <p>Depending on your operating system you can accept most of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.</p>
 <p>To run the Cordova build and launch the simulator we can now run:</p>
@@ -860,7 +888,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 <p><strong>Note:</strong> if you receive the error <code>Error: Cannot read property 'replace' of undefined</code>, you can work around it by running <code>cd build/cordova/platforms/ios/cordova/ &amp;&amp; npm install ios-sim@6</code> until <a href="https://git-wip-us.apache.org/repos/asf?p=cordova-ios.git;a=commit;h=4490abf273ec6d12810c8ff5ea16d197c58ecd4b">this patch</a> is released.</p>
 <h3>Electron</h3>
 <p>To set up the desktop build, we have to add it to our application like this:</p>
-<pre><code class="language-shell">donejs add electron@1
+<pre><code class="language-shell">donejs add electron@2
 </code></pre>
 <p>Accept the default for all of the prompts.</p>
 <p><img src="static/img/donejs-electron-prompt.png" alt="electron prompt" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>

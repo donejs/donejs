@@ -209,11 +209,9 @@
 <ul>
 <li><a href="#stealjs">StealJS</a> - Module loader and build system. <a href="https://stealjs.com/docs/index.html">api</a>.</li>
 <li><a href="#canjs">CanJS</a> - Views, ViewModels, modeling part of Models, custom elements, routing. <a href="https://canjs.com/doc/api.html">api</a></li>
-<li><a href="#can-connect">can-connect</a> - Data connection part of Models, real-time, fall-through cache. <a href="https://canjs.com/doc/can-connect.html">api</a></li>
-<li><a href="#can-set">can-set</a> - Create set algebras used to compare AJAX parameters. <a href="https://canjs.com/doc/can-set.html">api</a></li>
+<li><a href="https://canjs.com/doc/can-query-logic.html">can-query-logic</a> Data service modelling.</li>
 <li><a href="#jquery">jQuery</a> - DOM utilities. <a href="https://jquery.com/">api</a></li>
-<li><a href="#jquery-1">jQuery++</a> - Even more DOM utilities. <a href="https://jquerypp.com/">api</a></li>
-<li><a href="#done-ssr">done-ssr</a> - Server-side rendering for NodeJS. <a href="https://github.com/donejs/done-ssr">api</a></li>
+<li><a href="#done-ssr">done-ssr</a> - Incremental server-side rendering for NodeJS. <a href="https://github.com/donejs/done-ssr">api</a></li>
 <li><a href="#done-autorender">done-autorender</a> - Processes templates so they can be server-side rendered. <a href="https://github.com/donejs/autorender#use">api</a></li>
 <li><a href="#can-simple-dom">can-simple-dom</a> - A lightweight virtual DOM. <a href="https://github.com/canjs/can-simple-dom">api</a></li>
 </ul>
@@ -254,9 +252,7 @@ the chat application as an example in development.  We'll cover what happens whe
 in this case with express, to use <a href="#done-ssr">done-ssr-middleware</a> to render a DoneJS application:</p>
 <pre><code class="language-js">var ssr = require('done-ssr-middleware');
 
-app.use('/', ssr({
-  config: __dirname + '/public/package.json!npm'
-}));
+app.use('/', ssr());
 </code></pre></li>
 <li><p><a href="#done-ssr">done-ssr</a> uses <a href="#stealjs">steal</a> to load the application's main module which results in loading the
 entire application. Loading the application only happens once for all page requests.</p>
@@ -270,34 +266,26 @@ plugin. The module name is specified like: <code>index.stache!done-autorender</c
 &lt;body&gt;
   &lt;can-import from=&quot;styles.less&quot;/&gt;
   &lt;can-import from=&quot;donejs-chat/app&quot; export-as=&quot;viewModel&quot; /&gt;
-  {{#eq page &quot;home&quot;}}
 
-    &lt;can-import from=&quot;home/&quot;&gt;
-      {{#if isResolved}}
-        &lt;home-page&gt;&lt;/home-page&gt;
-      {{/if}}
-    &lt;/can-import&gt;
+  {{pageComponent}}
 
-  {{/eq}}
   &lt;script src=&quot;node_modules/steal/steal.js&quot; main=&quot;index.stache!done-autorender&quot;&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<p>The <a href="#done-autorender">done-autorender</a> plugin, in NodeJS, exports this template so it can be rendered. It also exports
-any modules it imports with <code>&lt;can-import&gt;</code> that are labeled with <code>export-as=&quot;EXPORT_NAME&quot;</code>. Exporting
-the viewModel is important for <a href="#done-ssr">done-ssr</a></p></li>
+<p>The <a href="#done-autorender">done-autorender</a> plugin, in NodeJS, exports this template so it can be rendered.</p></li>
 <li><p>Once <a href="#done-ssr">done-ssr</a> has the <a href="#done-autorender">done-autorender</a>'s <code>template</code> and <code>viewModel</code> export it:</p>
 <ol>
 <li>Creates a new instance of the viewModel, setting properties on it
 using <a href="#canroute">can-route</a>'s routing rules.</li>
 <li>Creates a new <a href="#can-simple-dom">virtual DOM</a> instance.</li>
 <li>Renders the <a href="#canstache">template</a> with the <code>viewModel</code> into the <code>virtual DOM</code> instance.</li>
-</ol></li>
-<li><p><a href="#done-autorender">done-autorender</a> templates waits for all promises to complete
+<li><a href="#done-autorender">done-autorender</a> templates waits for all promises to complete
 before providing a final result.  Once the template is finished rendering, <a href="#done-ssr">done-ssr</a> converts it to a
-string and sends it back to the browser.</p></li>
-<li><p>The browser downloads the page's HTML, which includes a <code>&lt;script&gt;</code> tag that points to <a href="#stealjs">steal</a>.</p>
-<pre><code class="language-html">&lt;script src=&quot;node_modules/steal/steal.js&quot; main=&quot;index.stache!done-autorender&quot;&gt;&lt;/script&gt;
+string and sends it back to the browser.</li>
+<li>The browser downloads the page's HTML, which includes a <code>&lt;script&gt;</code> tag that points to <a href="#stealjs">steal</a>.</li>
+</ol>
+<pre><code class="language-html">&lt;script src=&quot;node_modules/steal/steal.js&quot; main&gt;&lt;/script&gt;
 </code></pre>
 <p>In development, this loads <code>steal.js</code> which then loads <code>index.stache</code> and processes it with
 the <code>done-autorender</code>.</p></li>
@@ -314,7 +302,7 @@ using <a href="#canroute">can-route</a>'s routing rules.</li>
 <li><p>A pushstate is triggered by user action, usually by clicking a link. <a href="#canroute">can-route</a>'s routing rules determines the properties set on the application <a href="#canmap">viewModel</a>.</p>
 <pre><code class="language-js">route.register('{page}', { page: 'home' });
 </code></pre></li>
-<li><p><a href="#done-autorender">done-autorender</a> previously bound the AppViewModel to <a href="#canroute">can-route</a> which causes any change in the route to be reflected in the AppMap instance.</p></li>
+<li><p><a href="#done-autorender">done-autorender</a> previously bound the AppViewModel to <a href="#canroute">can-route</a> which causes any change in the route to be reflected in the ViewModel instance.</p></li>
 <li><p>Live binding causes the initial template to reflect in the change in route. If the new route is <code>/chat</code> it will cause the <code>page</code> to be <strong>chat</strong>:</p>
 <pre><code class="language-html">&lt;html&gt;
 &lt;head&gt;
@@ -323,30 +311,13 @@ using <a href="#canroute">can-route</a>'s routing rules.</li>
 &lt;body&gt;
   &lt;can-import from=&quot;styles.less&quot;/&gt;
   &lt;can-import from=&quot;donejs-chat/app&quot; export-as=&quot;viewModel&quot; /&gt;
-  {{#eq page &quot;home&quot;}}
 
-    &lt;can-import from=&quot;home/&quot;&gt;
-      {{#if isResolved}}
-        &lt;home-page&gt;&lt;/home-page&gt;
-      {{/if}}
-    &lt;/can-import&gt;
+  {{pageComponent}}
 
-  {{/eq}}
-
-  {{#eq page &quot;chat&quot;}}
-    &lt;can-import from=&quot;chat/&quot;&gt;
-     {{#if isResolved}}
-       &lt;chat-page&gt;&lt;/chat-page&gt;
-     {{/if}}
-   &lt;/can-import&gt;
-
-  {{/eq}}
-
-  &lt;script src=&quot;node_modules/steal/steal.js&quot; main=&quot;index.stache!done-autorender&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;node_modules/steal/steal.js&quot; main&gt;&lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;
 </code></pre></li>
-<li><p><a href="https://canjs.com/docs/can%7Cview%7Cstache%7Csystem.import.html">can-import</a> will progressively load the component for the new page with a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a> as its view model. When the promise resolves the <a href="#section=section_can_Component">can-component</a> will be inserted.</p></li>
 </ol>
 <h2>CLI and Generators</h2>
 <p>After installing DoneJS globally with <code>npm install donejs -g</code> you will have the <code>donejs</code> command available on the command line. It lets you initialize a new application and - when navigating within a DoneJS project - run scripts provided locally by your application. Within your application folder the <code>donejs</code> command is a convenience wrapper for the functionality described below and you can also get a list of all commands by running</p>
@@ -528,9 +499,11 @@ var PersonEditViewModel = DefineMap.extend({
 
 // Create a template that will be rendered within
 // `&lt;person-edit&gt;` elements.
-var template = stache(&quot;Update {{fullName}}:&quot;+
-    &quot;&lt;input value:bind='first'/&gt;&quot;+
-    &quot;&lt;input value:bind='last'/&gt;&quot;);
+var template = stache(`
+  Update {{fullName}}:
+    &lt;input value:bind='first'&gt;
+    &lt;input value:bind='last'&gt;
+`);
 
 // Create the `&lt;person-edit&gt;` element with the specified
 // viewModel and template (view).
@@ -543,9 +516,10 @@ Component.extend({
 // Use that custom element within another template.
 // `first.bind` cross binds `&lt;person-edit&gt;`'s
 // `first` property to `firstName` in the scope.
-var parentTemplate = stache(
-  &quot;&lt;h1&gt;{{firstName}} {{lastName}}&lt;/h1&gt;&quot;+
-  &quot;&lt;person-edit first:bind='firstName' last:bind='lastName'/&gt;&quot;);
+var parentTemplate = stache(`
+  &lt;h1&gt;{{firstName}} {{lastName}}&lt;/h1&gt;
+  &lt;person-edit first:bind='firstName' last:bind='lastName'&gt;
+`);
 
 // Render the parent template with some data:
 var frag = parentTemplate(new DefineMap({
@@ -554,37 +528,6 @@ var frag = parentTemplate(new DefineMap({
 }));
 
 document.body.appendChild(frag);
-</code></pre>
-<h3>can-construct</h3>
-<p><a href="https://canjs.com/doc/can-construct.html">can-construct</a> allows you to define constructor functions that are easy to inherit
-from.  It's used by <a href="#candefine">can-define</a> and <a href="#cancomponent">can-component</a>.</p>
-<p>To create your own constructor function, <a href="https://canjs.com/doc/can-construct.extend.html">extend</a> <code>can-construct</code>
-with prototype methods like:</p>
-<pre><code class="language-js">var Todo = Construct.extend({
-  init: function(name){
-    this.name = name;
-  },
-
-  author: function() { ... },
-
-  coordinates: function() { ... },
-
-  allowedToEdit: function( account ) {
-    return true;
-  }
-});
-</code></pre>
-<p>Then you can create instances of <code>Todo</code> like:</p>
-<pre><code class="language-js">var todo = new Todo(&quot;dishes&quot;);
-todo.name //-&gt; &quot;dishes&quot;;
-todo.allowedToEdit() //-&gt; true;
-</code></pre>
-<p>You can extend <code>Todo</code> with <a href="https://canjs.com/doc/can-construct.extend.html">extend</a> too:</p>
-<pre><code class="language-js">var PrivateTodo = Todo.extend({
-  allowedToEdit: function( account ) {
-    return account.owns( this );
-  }
-});
 </code></pre>
 <h3>can-define/map/map</h3>
 <p><a href="https://canjs.com/doc/can-define.html">can-define</a> is used to create observable
@@ -752,7 +695,7 @@ that's created when plain JS objects are added to the list:</p>
 });
 
 var People = DefineList.extend({
-  &quot;*&quot;: Person
+  &quot;#&quot;: Person
 },{
   seniors: function(){
     return this.filter(function(person){
@@ -1079,8 +1022,8 @@ route.data = viewModel;
 </code></pre>
 <p>Which will cause any changes in the route to reflect in the View Model instance, and any changes in the View Model instance to reflect in the route.</p>
 <h2>Data Layer APIs</h2>
-<h3>can-connect</h3>
-<p><a href="https://canjs.com/doc/can-connect.html">can-connect</a> is used to connect typed
+<h3>can-realtime-rest-model</h3>
+<p><a href="https://canjs.com/doc/can-realtime-rest-model.html">can-realtime-rest-model</a> is used to connect typed
 data to backend services.  In a DoneJS application, that typed data is a
 <a href="#candefine">can-define/map/map</a> and <a href="#candefinelistlist">can-define/list/list</a> type.</p>
 <p>To make a simple connection to a restful interface:</p>
@@ -1103,7 +1046,7 @@ var TodoList = DefineList.extend({
 });
 
 // Then, make a connection with the right behaviors and options.
-var todoConnection = connect([&quot;data-url&quot;,&quot;constructor&quot;,&quot;can/map&quot;],{
+var todoConnection = realtimeRestModel({
   Map: Todo,
   List: TodoList,
   url: &quot;/services/todos&quot;
@@ -1145,30 +1088,29 @@ can be mixed into a connection.  Examples include:</p>
 <p>To make the process of creating <code>can.Map</code> based connections easier,
 DoneJS comes with a <a href="#generators">supermodel generator</a>
 creates a <a href="https://canjs.com/doc/can-connect/can/super-map/super-map.html">super-map</a>.</p>
-<p>A super-map is just a connection with a bunch of the mostly commonly used
+<p>A realtime rest model is just a connection with a bunch of the mostly commonly used
 behaviors.  Create one with the <code>superMap</code> function like:</p>
-<pre><code class="language-js">export const messageConnection = superMap({
+<pre><code class="language-js">export const messageConnection = realtimeRestModel({
   url: &quot;/services/todos&quot;,
   Map: Todo,
   List: TodoList,
   name: 'todo'
 });
 </code></pre>
-<h3>can-set</h3>
-<p><a href="https://github.com/canjs/can-set">can-set</a> is used to compare
-set objects that are represented by the parameters commonly passed
+<h3>can-query-logic</h3>
+<p><a href="https://canjs.com/doc/can-query-logic.html">can-query-logic</a> is used to define the rules of an API service, in order to compare queries that are represented by the parameters commonly passed
 to service requests.</p>
 <p>For example, if you want all todos for user <code>5</code> that are complete, you
 might call:</p>
-<pre><code class="language-js">Todo.getList({userId: 5, complete: true})
+<pre><code class="language-js">Todo.getList({ filter: { userId: 5, complete: true } })
 </code></pre>
 <p><code>{userId: 5, complete: true}</code> represents a set.  Using
-<code>can-set</code> we can compare it to other sets. The following
+<code>can-query-logic</code> we can compare it to other sets. The following
 returns <code>true</code> because <code>{userId: 5, complete: true}</code> represents
 a subset of <code>{userId: 5}</code>.</p>
-<pre><code class="language-js">set.subset({userId: 5, complete: true},{userId: 5}) //-&gt; true
+<pre><code class="language-js">queryLogic.isSubset({filter:{userId: 5, complete: true}}, {userId: 5}); // -&gt; true
 </code></pre>
-<p><code>can-set</code> can perform more complex logic with custom <a href="https://github.com/canjs/can-set#setalgebra">set Algebras</a>.</p>
+<p>Behind the scenes can-query-logic uses <code>can-set</code> which can perform more complex logic with custom <a href="https://github.com/canjs/can-set#setalgebra">set Algebras</a>.</p>
 <p>The following creates a set-algebra that is able to combine ranges:</p>
 <pre><code class="language-js">// Create a set Algebra
 var algebra = new set.Algebra(
@@ -1178,44 +1120,8 @@ var algebra = new set.Algebra(
 algebra.union({start: 1, end: 10},
               {start: 11, end: 20}) //-&gt; {start: 1, end: 20}
 </code></pre>
-<p>In a DoneJS application, you create custom algebras to pass
-to <a href="#section=section_can_connect">can-connect</a> connections. The
-connection's behaviors use that <a href="https://canjs.com/doc/can-connect/base/base.algebra.html">algebra</a> to their optimizations.</p>
-<p>For example, if the <code>Todo</code> type in the <a href="#can-connect">can-connect section</a> has the following property behaviors:</p>
-<ul>
-<li><code>complete</code> can be true or false</li>
-<li><code>type</code> can be one of &quot;dev&quot;, &quot;design&quot;, or &quot;QA&quot;</li>
-</ul>
-<p>... and the service layer supports queries like:</p>
-<pre><code class="language-js">//-&gt; gets all incomplete todos
-/services/todos?complete=false
-
-// -&gt; gets all todos that are for design and dev
-/services/todos?type[]=dev&amp;type[]=design
-</code></pre>
-<p>You'd want to create an algebra for the <code>superMap</code> as follows:</p>
-<pre><code class="language-js">var algebra = new set.Algebra(
-  set.comparators.boolean(&quot;complete&quot;),
-  set.comparators.enum(&quot;type&quot;, [&quot;dev&quot;, &quot;design&quot;, &quot;QA&quot;])
-);
-
-export const messageConnection = superMap({
-  url: &quot;/services/todos&quot;,
-  Map: Todo,
-  List: TodoList,
-  name: 'todo',
-  algebra: algebra
-});
-</code></pre>
-<p>This allows a <code>superMap</code> to combine requests like:</p>
-<pre><code class="language-js">  Todo.getList({complete: true})
-+ Todo.getList({complete: true})
-================================
-  Todo.getList({})
-</code></pre>
-<p>And know that if <code>Todo.getList({type: [&quot;dev&quot;,&quot;design&quot;]})</code> has already been
-retrieved, there's no need to make a request for
-<code>Todo.getList({type: [&quot;dev&quot;]})</code>.</p>
+<p>In a DoneJS application, you create custom query logics to pass to <a href="https://canjs.com/doc/can-realtime-rest-model.html">realtime rest model</a> connections. The
+connection's behaviors use that <a href="https://canjs.com/doc/can-query-logic.html">querylogic</a> to their optimizations.</p>
 <h2>Testing APIs</h2>
 <h3>QUnit</h3>
 <p><a href="https://qunitjs.com/">QUnit</a> is DoneJS's default JavaScript unit testing framework. It is provided for DoneJS by the <a href="https://github.com/stealjs/steal-qunit">steal-qunit</a> project. A basic unit test for a can.Component view-model looks like this:</p>
@@ -1390,7 +1296,7 @@ plugins:</p>
   });
 })
 </code></pre>
-<p><a href="#canstachebindings">can.-stache-bindings</a> lets you listen
+<p><a href="#canstachebindings">can-stache-bindings</a> lets you listen
 to <a href="http://benalman.com/news/2010/03/jquery-special-events/">jQuery special events</a> like:</p>
 <pre><code class="language-html">&lt;div on:tripleclick=&quot;doSomething()&quot;&gt;
 </code></pre>
@@ -1587,7 +1493,7 @@ const document = new simpleDOM.Document();
 	
 
 	<script type="text/javascript">
-		var docObject = {"src":{"path":"docs/apis.md"},"description":"DoneJS is comprised of many projects that are documented separately. This page contains overviews of each project and links to their official APIs. \n### Application Infrastructure\n\nThe blue boxes in the following architecture diagram represent modules provided by DoneJS.\n\n<object type=\"image/svg+xml\" data=\"static/img/donejs-stack-app.svg\"></object>\n\n- [StealJS](#stealjs) - Module loader and build system. [api](https://stealjs.com/docs/index.html).\n- [CanJS](#canjs) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](https://canjs.com/doc/api.html)\n- [can-connect](#can-connect) - Data connection part of Models, real-time, fall-through cache. [api](https://canjs.com/doc/can-connect.html)\n- [can-set](#can-set) - Create set algebras used to compare AJAX parameters. [api](https://canjs.com/doc/can-set.html)\n- [jQuery](#jquery) - DOM utilities. [api](https://jquery.com/)\n- [jQuery++](#jquery-1) - Even more DOM utilities. [api](https://jquerypp.com/)\n- [done-ssr](#done-ssr) - Server-side rendering for NodeJS. [api](https://github.com/donejs/done-ssr)\n- [done-autorender](#done-autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)\n- [can-simple-dom](#can-simple-dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)\n\n### Tooling\n\nDoneJS provides many aspects of JavaScript application tooling, shown in the diagram below.\n\n<object type=\"image/svg+xml\" data=\"static/img/donejs-stack-tooling.svg\"></object>\n\n- [donejs-cli](#cli-and-generators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)\n- [generator-donejs](#cli-and-generators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)\n- [QUnit](#qunit) - Default test assertion library. [api](https://qunitjs.com/)\n- [FuncUnit](#funcunit) - Functional test utilities. [api](https://funcunit.com/)\n- [Testee](#testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)\n- [DocumentJS](#documentjs) - Documentation engine. [api](https://documentjs.com/)\n\n","name":"Apis","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
+		var docObject = {"src":{"path":"docs/apis.md"},"description":"DoneJS is comprised of many projects that are documented separately. This page contains overviews of each project and links to their official APIs. \n### Application Infrastructure\n\nThe blue boxes in the following architecture diagram represent modules provided by DoneJS.\n\n<object type=\"image/svg+xml\" data=\"static/img/donejs-stack-app.svg\"></object>\n\n- [StealJS](#stealjs) - Module loader and build system. [api](https://stealjs.com/docs/index.html).\n- [CanJS](#canjs) - Views, ViewModels, modeling part of Models, custom elements, routing. [api](https://canjs.com/doc/api.html)\n- [can-query-logic](https://canjs.com/doc/can-query-logic.html) Data service modelling.\n- [jQuery](#jquery) - DOM utilities. [api](https://jquery.com/)\n- [done-ssr](#done-ssr) - Incremental server-side rendering for NodeJS. [api](https://github.com/donejs/done-ssr)\n- [done-autorender](#done-autorender) - Processes templates so they can be server-side rendered. [api](https://github.com/donejs/autorender#use)\n- [can-simple-dom](#can-simple-dom) - A lightweight virtual DOM. [api](https://github.com/canjs/can-simple-dom)\n\n### Tooling\n\nDoneJS provides many aspects of JavaScript application tooling, shown in the diagram below.\n\n<object type=\"image/svg+xml\" data=\"static/img/donejs-stack-tooling.svg\"></object>\n\n- [donejs-cli](#cli-and-generators) - The commands available to the donejs command line interface. [api](https://github.com/donejs/cli)\n- [generator-donejs](#cli-and-generators) - Default generators are bundled with DoneJS. [api](https://github.com/donejs/generator-donejs/)\n- [QUnit](#qunit) - Default test assertion library. [api](https://qunitjs.com/)\n- [FuncUnit](#funcunit) - Functional test utilities. [api](https://funcunit.com/)\n- [Testee](#testee) - Browser launcher and test reporter. [api](https://github.com/bitovi/testee)\n- [DocumentJS](#documentjs) - Documentation engine. [api](https://documentjs.com/)\n\n","name":"Apis","type":"page","parent":"DoneJS","hideSidebar":true,"outline":{"depth":2,"tag":"ol"},"comment":" ","pathToRoot":".."};
 	</script>
 
 	
