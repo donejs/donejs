@@ -121,10 +121,10 @@ guide.test(function(){
  * Creating custom elements
  */
 guide.step("Creating a homepage element", function(){
-	var args = "add component home.component pmo-home".split(" ");
+	var args = "add component pages/home.component pmo-home".split(" ");
 	return guide.executeCommand("donejs", args)
 		.then(function(){
-			return guide.replaceFile(join("src", "home.component"),
+			return guide.replaceFile(join("src", "pages", "home.component"),
 															 join(__dirname, "steps", "creating-homepage",
 																		"home.component"));
 		})
@@ -132,10 +132,10 @@ guide.step("Creating a homepage element", function(){
 });
 
 guide.step("Create the order history element", function(){
-	var args = "add component order/history.component pmo-order-history".split(" ");
+	var args = "add component pages/order/history.component pmo-order-history".split(" ");
 	return guide.executeCommand("donejs", args)
 		.then(function(){
-			return guide.replaceFile(join("src", "order", "history.component"),
+			return guide.replaceFile(join("src", "pages", "order", "history.component"),
 															 join(__dirname, "steps", "creating-oh",
 																		"history.component"))
 				.then(wait)
@@ -145,7 +145,7 @@ guide.step("Create the order history element", function(){
 });
 
 guide.step("Creating a restaurant list element", function(){
-	var args = "add component restaurant/list pmo-restaurant-list".split(" ");
+	var args = "add component pages/restaurant/list pmo-restaurant-list".split(" ");
 	return guide.executeCommand("donejs", args)
 		.then(wait)
 		.then(wait);
@@ -159,26 +159,12 @@ guide.step("Create Routes", function(){
 });
 
 guide.step("Adding a header element", function(){
-	var args = "add component header.component pmo-header".split(" ");
+	var args = "add component components/header.component pmo-header".split(" ");
 	return guide.executeCommand("donejs", args)
 		.then(function(){
-			return guide.replaceFile(join("src", "header.component"),
+			return guide.replaceFile(join("src", "components", "header.component"),
 															 join(__dirname, "steps", "add-header",
 																		"header.component"))
-				.then(wait)
-				.then(wait);
-		})
-		.then(wait)
-		.then(wait);
-});
-
-guide.step("Create a loading indicator", function(){
-	var args = "add component loading.component pmo-loading".split(" ");
-	return guide.executeCommand("donejs", args)
-		.then(function(){
-			return guide.replaceFile(join("src", "loading.component"),
-															 join(__dirname, "steps", "add-loading",
-																		"loading.component"))
 				.then(wait)
 				.then(wait);
 		})
@@ -190,6 +176,12 @@ guide.step("Switch between components", function(){
 	return guide.replaceFile(join("src", "index.stache"),
 													 join(__dirname, "steps", "switch-between",
 																"index.stache"))
+    .then(wait)
+		.then(function(){
+			return guide.replaceFile(join("src", "app.js"),
+															 join(__dirname, "steps", "switch-between",
+                               "app.js"))
+		})
 		.then(function(){
 			return guide.injectSpy("src/index.stache");
 		})
@@ -207,11 +199,11 @@ guide.step("Creating a restaurants connection", function(){
 });
 
 guide.step("Add data to the page", function(){
-	return guide.replaceFile(join("src", "restaurant", "list", "list.js"),
+	return guide.replaceFile(join("src", "pages", "restaurant", "list", "list.js"),
 													 join(__dirname, "steps", "add-data", "list.js"))
 		.then(wait)
 		.then(function(){
-			return guide.replaceFile(join("src", "restaurant", "list", "list.stache"),
+			return guide.replaceFile(join("src", "pages", "restaurant", "list", "list.stache"),
 															 join(__dirname, "steps", "add-data", "list.stache"));
 		})
 		.then(wait)
@@ -225,7 +217,7 @@ guide.step("Create dependent models", function(){
 		})
 		.then(wait)
 		.then(function(){
-			return guide.replaceFile(join("src", "restaurant", "list", "list.js"),
+			return guide.replaceFile(join("src", "pages", "restaurant", "list", "list.js"),
 															 join(__dirname, "steps", "create-dependent",
 																		"list.js"));
 		})
@@ -249,22 +241,18 @@ guide.step("Create a test", function(){
 													 join(__dirname, "steps", "create-test", "restaurants.js"));
 		})
 		.then(function(){
-			return guide.replaceFile(join("src", "models", "restaurant.js"),
-													 join(__dirname, "steps", "create-test", "restaurants_model.js"));
-		})
-		.then(function(){
-			return guide.replaceFile(join("src", "restaurant", "list", "list-test.js"),
+			return guide.replaceFile(join("src", "pages", "restaurant", "list", "list-test.js"),
 													 join(__dirname, "steps", "create-test", "list-test.js"));
 
 		})
 	.then(function(){
-			return guide.injectSpy("src/restaurant/list/test.html");
+			return guide.injectSpy("src/pages/restaurant/list/test.html");
 	})
 		.then(wait)
 		.then(wait);
 });
 
-guide.launchBrowser("http://localhost:8080/src/restaurant/list/test.html");
+guide.launchBrowser("http://localhost:8080/src/pages/restaurant/list/test.html");
 
 guide.test(function(){
 	return guide.functionalTest(join(__dirname, "steps", "create-test",
@@ -276,22 +264,22 @@ guide.test(function(){
 guide.closeBrowser();
 
 guide.step("Write the template", function(){
-	return guide.replaceFile(join("src", "restaurant", "list", "list.stache"),
+	return guide.replaceFile(join("src", "pages", "restaurant", "list", "list.stache"),
 													 join(__dirname, "steps", "write-template",
 																"list.stache"))
 		.then(function(){
-			return guide.replaceFile(join("src", "restaurant", "list", "list.html"),
+			return guide.replaceFile(join("src", "pages", "restaurant", "list", "list.html"),
 													 join(__dirname, "steps", "write-template",
 																"list.html"));
 		})
 		.then(function(){
-			return guide.injectSpy("src/restaurant/list/list.html");
+			return guide.injectSpy("src/pages/restaurant/list/list.html");
 		})
 		.then(wait)
 		.then(wait);
 });
 
-guide.launchBrowser("http://localhost:8080/src/restaurant/list/list.html");
+guide.launchBrowser("http://localhost:8080/src/pages/restaurant/list/list.html");
 
 guide.test(function(){
 	return guide.functionalTest(join(__dirname, "steps", "write-template",
@@ -316,16 +304,16 @@ guide.step("Using a test runner", function(){
  * Creating additional components
  */
 guide.step("Create additional components", function(){
-	var args = "add component restaurant/details.component pmo-restaurant-details"
+	var args = "add component pages/restaurant/details.component pmo-restaurant-details"
 		.split(" ");
 	return guide.executeCommand("donejs", args)
 	.then(function(){
-		return guide.replaceFile(join("src", "restaurant", "details.component"),
+		return guide.replaceFile(join("src", "pages", "restaurant", "details.component"),
 														 join(__dirname, "steps", "additional",
 																	"details.component"));
 	})
 	.then(function(){
-		args = "add component order/new pmo-order-new".split(" ");
+		args = "add component pages/order/new pmo-order-new".split(" ");
 		return guide.executeCommand("donejs", args);
 	})
 	.then(wait)
@@ -342,7 +330,7 @@ guide.step("Importing other projects", function(){
 		.then(wait)
 		.then(wait)
 		.then(function(){
-			return guide.replaceFile(join("src", "order", "new", "new.stache"),
+			return guide.replaceFile(join("src", "pages", "order", "new", "new.stache"),
 															 join(__dirname, "steps", "bit-tabs", "new.stache"));
 		})
 		.then(wait);
@@ -356,35 +344,35 @@ guide.step("Creating the order model", function(){
 												 join(__dirname, "steps", "create-data", "order.js"));
 		})
 		.then(function(){
-			return replaceFile(join("src", "order", "new", "new.js"),
+			return replaceFile(join("src", "pages", "order", "new", "new.js"),
 												 join(__dirname, "steps", "create-data", "new.js"));
 		})
 		.then(function(){
-			return replaceFile(join("src", "order", "new", "new-test.js"),
+			return replaceFile(join("src", "pages", "order", "new", "new-test.js"),
 												 join(__dirname, "steps", "create-data", "new-test.js"));
 		})
 		.then(function(){
-			var args = "add component order/details.component pmo-order-details"
+			var args = "add component components/order/details.component pmo-order-details"
 				.split(" ");
 			return guide.executeCommand("donejs", args);
 		})
 		.then(function(){
-			return replaceFile(join("src", "order", "details.component"),
+			return replaceFile(join("src", "components", "order", "details.component"),
 												 join(__dirname, "steps", "create-data",
 															"details.component"));
 		})
 		.then(function(){
-			return replaceFile(join("src", "order", "new", "new.stache"),
+			return replaceFile(join("src", "pages", "order", "new", "new.stache"),
 												 join(__dirname, "steps", "create-data", "new.stache"));
 		})
 		.then(function(){
-			return guide.injectSpy("src/order/new/test.html");
+			return guide.injectSpy("src/pages/order/new/test.html");
 		})
 		.then(wait)
 		.then(wait);
 });
 
-guide.launchBrowser("http://localhost:8080/src/order/new/test.html");
+guide.launchBrowser("http://localhost:8080/src/pages/order/new/test.html");
 
 guide.test(function(){
 	return guide.functionalTest(join(__dirname, "steps", "create-data",
@@ -403,15 +391,15 @@ guide.step("Set up a real-time connection", function(){
 
 	return Promise.resolve()
 	.then(function(){
-		var args = "add component order/list.component pmo-order-list".split(" ");
+		var args = "add component components/order/list.component pmo-order-list".split(" ");
 		return guide.executeCommand("donejs", args);
 	})
 	.then(function(){
-		return replaceFile(join("src", "order", "list.component"),
+		return replaceFile(join("src", "components", "order", "list.component"),
 											 join(__dirname, "steps", "real-time", "list.component"));
 	})
 	.then(function(){
-		return replaceFile(join("src", "order", "history.component"),
+		return replaceFile(join("src", "components", "order", "history.component"),
 											 join(__dirname, "steps", "real-time",
 														"history.component"));
 	})
@@ -430,7 +418,7 @@ guide.step("Set up a real-time connection", function(){
  * Documentation
  */
 guide.step("Create documentation", function(){
-	return guide.replaceFile(join("src", "order", "new", "new.js"),
+	return guide.replaceFile(join("src", "pages", "order", "new", "new.js"),
 													 join(__dirname, "steps", "document", "new.js"))
 		.then(function(){
 			return guide.executeCommand("donejs", ["add", "documentjs"]);
