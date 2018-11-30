@@ -47,7 +47,8 @@ describe('cli upgrade cmd', function() {
 
     mockery.registerMock(pkgJsonPath, {
       dependencies: {
-        foo: "1.0.0"
+        foo: "1.0.0",
+        "can-stache": "1.0.0"
       },
       devDependencies: {
         bar: "1.0.0"
@@ -61,6 +62,7 @@ describe('cli upgrade cmd', function() {
     });
 
     mockery.registerMock('cross-spawn-async', function(){
+      var reqPkg = arguments[1][2];
       spawnCalls.push({
         binary: arguments[0],
         args: arguments[1],
@@ -76,8 +78,17 @@ describe('cli upgrade cmd', function() {
       var onExit = makeOn();
       var mock = {stdout: { on: onData }, on: onExit};
 
+      var pkg;
+      if(/donejs-cli/.test(reqPkg)) {
+        pkg = {donejs: {
+          dependencies: {foo: "2.0.0", can: "1.0.0"},
+          devDependencies: {bar: "2.0.0"}}
+        };
+      } else if(/can/.test(reqPkg)) {
+        pkg = {dependencies:{"can-stache":"2.0.0"}};
+      }
+
       setTimeout(function(){
-        var pkg = {donejs: {dependencies: {foo: "2.0.0"}, devDependencies: {bar: "2.0.0"}}};
         onData.cb(JSON.stringify(pkg));
         setTimeout(function() { onExit.cb(0); }, 20);
       }, 20);
@@ -107,6 +118,18 @@ describe('cli upgrade cmd', function() {
         done();
       })
       .catch(done);
+  });
+
+  it('Upgrades dependencies from the "can", package', function(done){
+      upgrade(null, {canmigrate: false})
+        .then(function(){
+          var json = JSON.parse(writeCalls[0].data);
+
+          assert.equal(json.dependencies["can-stache"], "2.0.0", "upgraded can-stache");
+          assert.ok(!json.dependencies.can, "can not included because we didnt depend on it");
+          done();
+        })
+        .catch(done);
   });
 
   it('runs can-migrate', function(done){
