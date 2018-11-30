@@ -143,7 +143,7 @@ Here are links to GitHub searches for those terms:
 	- [p0](https://github.com/search?q=org%3Adonejs+label%3Ap0&state=open), [p1](https://github.com/search?q=org%3Adonejs+label%3Ap1&state=open), [p2](https://github.com/search?q=org%3Adonejs+label%3Ap2&state=open), [p3](https://github.com/search?q=org%3Adonejs+label%3Ap3&state=open), & [p4](https://github.com/search?q=org%3Adonejs+label%3Ap4&state=open)
 - CanJS
 	- [design](https://github.com/search?q=org%3Acanjs+label%3Adesign&state=open)
-	- [documentation](https://github.com/search?q=org%3Acanjs+label%3Adesign&state=open)
+	- [documentation](https://github.com/search?q=org%3Acanjs+label%3Adocumentation&state=open)
 	- [easy](https://github.com/search?q=org%3Acanjs+label%3Aeasy&state=open)
 	- [help wanted](https://github.com/search?q=org%3Acanjs+label%3A%22help+wanted%22&state=open)
 	- [p0](https://github.com/search?q=org%3Acanjs+label%3Ap0&state=open), [p1](https://github.com/search?q=org%3Acanjs+label%3Ap1&state=open), [p2](https://github.com/search?q=org%3Acanjs+label%3Ap2&state=open), [p3](https://github.com/search?q=org%3Acanjs+label%3Ap3&state=open), & [p4](https://github.com/search?q=org%3Acanjs+label%3Ap4&state=open)
