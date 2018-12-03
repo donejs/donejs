@@ -66,6 +66,14 @@ Specifically, this guide will walk through the implementation of the following b
 
 Explains how to upgrade DoneJS 0.9 app to 1.0.
 
+## [migrate-2]
+
+Explains how to upgrade DoneJS 1.0 app to 2.0.
+
+## [migrate-3]
+
+Explains how to upgrade DoneJS 2.0 app to 3.0.
+
 ## [contributing]
 
 The [contributing contribution guide] includes information about our code of conduct, reporting bugs, submitting new code, and more!
