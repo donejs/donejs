@@ -7,8 +7,8 @@ install DoneJS and includes platform-specific pieces of information not covered 
 
 DoneJS officially supports:
 
- - [Node](https://nodejs.org) 6 and up
- - [npm](https://www.npmjs.com/) 3.x and up
+ - [Node](https://nodejs.org) 10 and up
+ - [npm](https://www.npmjs.com/) 6.x and up
 
 @body
 
@@ -154,7 +154,7 @@ sudo apt-get install curl
 Then add the PPA to your source list:
 
 ```
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
 ```
 
 Install Node.js:
@@ -268,6 +268,7 @@ For more information check out https://www.vagrantup.com/docs/vagrantfile/
 ### Configure your shared folders
 Before you start the Vagrant Box, you have to specify which folder you would like to sync from your local machine to the virtual machine.
 For that, open the **Vagrantfile** in that folder you initialized Vagrant. Scroll down to:
+
 ```
 # Share an additional folder to the guest VM. The first argument is
 # the path on the host to the actual folder. The second argument is
@@ -275,7 +276,9 @@ For that, open the **Vagrantfile** in that folder you initialized Vagrant. Scrol
 # argument is a set of non-required options.
 # config.vm.synced_folder "../data", "/vagrant_data"
 ```
+
 add a new Synced Folder configuration below that may look like this
+
 ```
 config.vm.synced_folder "C:/www/donejs", "/home/vagrant/donejs"
 ```
@@ -286,16 +289,20 @@ For more information check the [documentation](https://www.vagrantup.com/docs/sy
 
 ### Launching the Vagrant Box
 Once you have done all the configuration run
+
 ```
 vagrant up
 ```
+
 command from your DoneJS Vagrant Box directory
 
 ### Connecting via SSH
 To connect to your DoneJS environment via SSH, enter the
+
 ```
 vagrant ssh
 ```
+
 command in your terminal.
 
 ### Further information
