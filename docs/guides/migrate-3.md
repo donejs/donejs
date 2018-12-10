@@ -73,6 +73,6 @@ Although `donejs upgrade` covers a lot of the important parts of the upgrade, es
 
 The [CanJS 5.0 migration guide](https://canjs.com/doc/migrate-5.html) goes over the parts that you might need to change manually. Reviewing this guide will also help familiarize yourself with CanJS 5, so it's a good thing to read even if you are developing a new project.
 
-## Reach out for help
+## Getting help
 
 We've taken care to make upgrading DoneJS apps as easy as possible. However, as always, we're available on [Gitter chat](https://gitter.im/donejs/donejs) and [the forums](https://forums.donejs.com/) to try and help!
