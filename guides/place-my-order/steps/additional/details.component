@@ -50,6 +50,7 @@
   </view>
   <script type="view-model">
     import { DefineMap } from 'can';
+    import Restaurant from '~/models/restaurant';
 
     export default DefineMap.extend("PmoRestaurantDetailsVM", {
       // EXTERNAL STATEFUL PROPERTIES
