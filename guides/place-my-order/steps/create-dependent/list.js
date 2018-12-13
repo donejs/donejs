@@ -29,7 +29,7 @@ const RestaurantList = Component.extend({
         return null;
       }
 
-      return City.getList({ state });
+      return City.getList({ filter: { state } });
     },
     city: {
       type: 'string',

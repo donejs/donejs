@@ -17,8 +17,6 @@
       <div class="loading"></div>
     {{/if}}
 
-    <h1>The <strong>{{this.routeData.page}}</strong> page</h1>
-
     {{#eq(this.env.NODE_ENV, "production")}}
       <script src="{{joinBase('steal.production.js')}}"></script>
     {{else}}

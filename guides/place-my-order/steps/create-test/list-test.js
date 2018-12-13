@@ -22,7 +22,7 @@ QUnit.asyncTest('loads all states', function() {
 
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
-  var expectedCities = cityStore.getList({ state: "CA" }).data;
+  var expectedCities = cityStore.getList({ filter: { state: "CA" } }).data;
 
   QUnit.equal(vm.cities, null, '');
   vm.state = 'CA';
@@ -34,7 +34,7 @@ QUnit.asyncTest('setting a state loads its cities', function() {
 
 QUnit.asyncTest('changing a state resets city', function() {
   var vm = new ViewModel();
-  var expectedCities = cityStore.getList({ state : "CA" }).data;
+  var expectedCities = cityStore.getList({ filter: { state : "CA" } }).data;
 
   QUnit.equal(vm.cities, null, '');
   vm.state = 'CA';
