@@ -9,7 +9,7 @@ const Item = DefineMap.extend({
 });
 
 const ItemsList = DefineList.extend({
-  '#': Item
+  '#': Item,
   has: function(item) {
     return this.indexOf(item) !== -1;
   },
