@@ -2,7 +2,7 @@ import { DefineMap, DefineList, superModel } from 'can';
 import loader from '@loader';
 import io from 'steal-socket.io';
 
-const Message = DefineMap.extend({
+const Message = DefineMap.extend('Message', {
   seal: false
 }, {
   'id': {
@@ -13,7 +13,7 @@ const Message = DefineMap.extend({
   body: 'string'
 });
 
-Message.List = DefineList.extend({
+Message.List = DefineList.extend('MessageList', {
   '#': Message
 });
 
