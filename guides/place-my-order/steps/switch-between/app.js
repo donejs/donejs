@@ -8,7 +8,7 @@ if(debug) {
 }
 //!steal-remove-end
 
-const AppViewModel = DefineMap.extend({
+const AppViewModel = DefineMap.extend("AppViewModel", {
 	page: 'string',
 	slug: 'string',
 	action: 'string',

@@ -194,7 +194,7 @@ if(debug) {
 }
 //!steal-remove-end
 
-const AppViewModel = DefineMap.extend({
+const AppViewModel = DefineMap.extend("AppViewModel", {
   env: {
     default: () => ({NODE_ENV:'development'})
   },
@@ -526,7 +526,7 @@ Now we have a component that lets us select state and city and displays the appr
 We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
 
 @sourceref ../../guides/place-my-order/steps/write-template/list.html
-@highlight 3-9,only
+@highlight 4-5,only
 
 View the demo page at [http://localhost:8080/src/pages/restaurant/list/list.html](http://localhost:8080/src/pages/restaurant/list/list.html) .
 

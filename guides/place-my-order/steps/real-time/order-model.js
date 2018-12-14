@@ -1,13 +1,13 @@
 import { DefineMap, DefineList, superModel, QueryLogic } from 'can';
 import loader from '@loader';
 
-const Item = DefineMap.extend({
+const Item = DefineMap.extend('Item', {
   seal: false
 }, {
   price: 'number'
 });
 
-const ItemsList = DefineList.extend({
+const ItemsList = DefineList.extend('ItemList', {
   '#': Item,
   has: function(item) {
     return this.indexOf(item) !== -1;
@@ -26,7 +26,7 @@ const ItemsList = DefineList.extend({
 
 const Status = QueryLogic.makeEnum(["new", "preparing", "delivery", "delivered"]);
 
-const Order = DefineMap.extend({
+const Order = DefineMap.extend('Order', {
   seal: false
 }, {
   '_id': {
@@ -57,7 +57,7 @@ const Order = DefineMap.extend({
   }
 });
 
-Order.List = DefineList.extend({
+Order.List = DefineList.extend('OrderList', {
   '#': Order
 });
 
