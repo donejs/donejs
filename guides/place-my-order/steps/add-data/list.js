@@ -38,24 +38,3 @@ const RestaurantList = Component.extend({
 
 export default RestaurantList;
 export const ViewModel = RestaurantList.ViewModel;
-
-
-import Component from 'can-component';
-import DefineMap from 'can-define/map/';
-import './list.less';
-import view from './list.stache';
-import Restaurant from '~/models/restaurant';
-
-export const ViewModel = DefineMap.extend({
-  restaurants: {
-    value() {
-      return Restaurant.getList({});
-    }
-  }
-});
-
-export default Component.extend({
-  tag: 'pmo-restaurant-list',
-  ViewModel,
-  view
-});
