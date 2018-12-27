@@ -923,7 +923,7 @@ This produces documentation at [http://localhost:8080/docs/](http://localhost:80
 Let's add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
 
 @sourceref ../../guides/place-my-order/steps/document/new.js
-@highlight 8-10,12-17,19-24,26-31,35-40,44-48,54-59,63-67,74-78,only
+@highlight 11-13,19-24,30-35,37-42,46-51,55-59,65-70,83-87,94-98,only
 
 If we now run `donejs document` again, we will see the module show up in the menu bar and will be able to navigate through the different properties.
 
