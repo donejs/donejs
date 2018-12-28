@@ -920,7 +920,7 @@ This produces documentation at [http://localhost:8080/docs/](http://localhost:80
 
 ### Documenting a module
 
-Let's add the documentation for a module. Let's use `src/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
+Let's add the documentation for a module. Let's use `src/pages/order/new/new.js` and update it with some inline comments that describe what our view model properties are supposed to do:
 
 @sourceref ../../guides/place-my-order/steps/document/new.js
 @highlight 11-13,19-24,30-35,37-42,46-51,55-59,65-70,83-87,94-98,only
