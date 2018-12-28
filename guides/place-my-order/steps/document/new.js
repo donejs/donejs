@@ -9,7 +9,7 @@ export const PmoOrderNew = Component.extend({
   view,
 
   /**
-   * @add ~/order/new
+   * @add ~/pages/order/new
    */
   ViewModel: {
     // EXTERNAL STATEFUL PROPERTIES
