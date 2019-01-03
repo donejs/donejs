@@ -463,7 +463,7 @@ Now we can load a list of states and cities.
 
 ### Implement view model behavior
 
-Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](https://canjs.com/doc/can-define/map/map.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/restaurant/list/list.js`:
+Now that we have identified the view model properties needed and have created the models necessary to load them, we can [define](https://canjs.com/doc/can-define/map/map.html) the `states`, `state`, `cities` and `city` properties in the view model at `src/pages/restaurant/list/list.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-dependent/list.js
 @highlight 5-6,18-56,only
@@ -509,7 +509,7 @@ These unit tests are comparing expected data (what we we defined in the fixtures
 
 Now that our view model is implemented and tested, we'll update the restaurant list template to support the city/state selection functionality.
 
-Update `src/restaurant/list/list.stache` to:
+Update `src/pages/restaurant/list/list.stache` to:
 
 @sourceref ../../guides/place-my-order/steps/write-template/list.stache
 @highlight 5-38,only
@@ -523,7 +523,7 @@ Now we have a component that lets us select state and city and displays the appr
 
 ### Update the demo page
 
-We already have an existing demo page at [src/restaurant/list/list.html](http://localhost:8080/src/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
+We already have an existing demo page at [src/pages/restaurant/list/list.html](http://localhost:8080/src/pages/restaurant/list/list.html). We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:
 
 @sourceref ../../guides/place-my-order/steps/write-template/list.html
 @highlight 4-5,only
@@ -536,7 +536,7 @@ In this chapter we will automate running the tests so that they can be run from 
 
 ### Using the global test page
 
-We already worked with an individual component test page in [src/pages/restaurant/list/test.html](http://localhost:8080/pages/src/restaurant/list/test.html) but we also have a global test page available at [test.html](http://localhost:8080/test.html). All tests are being loaded in `src/test.js`. Since we don't have tests for our models at the moment, let's remove the `import 'place-my-order/models/test';` part so that `src/test.js` looks like this:
+We already worked with an individual component test page in [src/pages/restaurant/list/test.html](http://localhost:8080/pages/src/pages/restaurant/list/test.html) but we also have a global test page available at [test.html](http://localhost:8080/test.html). All tests are being loaded in `src/test.js`. Since we don't have tests for our models at the moment, let's remove the `import 'place-my-order/models/test';` part so that `src/test.js` looks like this:
 
 @sourceref ../../guides/place-my-order/steps/test-runner/test.js
 
