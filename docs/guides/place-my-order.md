@@ -933,7 +933,7 @@ Now we're ready to create a production build; go ahead and kill your development
 
 ### Progressive loading
 
-Our `index.stache` contains a can-import tag for each of the pages we have implemented. These can-imports which have nested html will be progressively loaded; the restaurant list page's JavaScript and CSS will only be loaded when the user visits that page.
+Our `app.js` contains steal.import() calls for each of the pages we have implemented. These dynamic imports progressively load page components only when the user visits that page.
 
 ### Bundling assets
 
