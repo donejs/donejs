@@ -388,7 +388,7 @@ To test the connection you can run the following in the browser console. You can
 ```js
 steal.import("place-my-order/models/restaurant")
   .then(function(module) {
-    var Restaurant = module["default"];
+    let Restaurant = module["default"];
     return Restaurant.getList({});
   }).then(function(restaurants) {
     console.log(restaurants);
@@ -944,7 +944,7 @@ StealTools comes with the ability to bundle all of your static assets into a fol
 To use this capability add an option to your build script to enable it. Change:
 
 ```js
-var buildPromise = stealTools.build({
+let buildPromise = stealTools.build({
   config: __dirname + "/package.json!npm"
 }, {
   bundleAssets: true
@@ -954,7 +954,7 @@ var buildPromise = stealTools.build({
 to:
 
 ```js
-var buildPromise = stealTools.build({
+let buildPromise = stealTools.build({
   config: __dirname + "/package.json!npm"
 }, {
   bundleAssets: {
@@ -1019,7 +1019,7 @@ Depending on your operating system you can accept most of the rest of the defaul
 This will change your `build.js` script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the **glob** property:
 
 ```js
-var cordovaOptions = {
+let cordovaOptions = {
   buildDir: "./build/cordova",
   id: "com.donejs.placemyorder",
   name: "place my order",
