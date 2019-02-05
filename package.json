@@ -48,7 +48,7 @@
     "guide-automation": "^0.3.11",
     "is-appveyor": "^1.0.0",
     "istanbul": "^0.4.2",
-    "jshint": "^2.8.0",
+    "jshint": "^2.10.0",
     "mocha": "^3.2.0",
     "mocha-lcov-reporter": "^1.2.0",
     "mockery": "^2.0.0",
