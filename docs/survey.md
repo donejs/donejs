@@ -12,13 +12,13 @@ StealJS? What can the core team work on to make you grow fonder of these
 projects?
 
 <div class="cta">
-  <a href="https://www.surveymonkey.com/r/donejs-survey-10" target="_blank">
+  <a href="https://www.surveymonkey.com/r/bitovi-feb-2019" target="_blank">
     Take the community survey
   </a>
 </div>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
 <script>
-var endTime = new Date('Nov 21 2018 14:00:00 UTC');// 6 a.m. Pacific
+var endTime = new Date('Feb 13 2019 14:00:00 UTC');// 6 a.m. Pacific
 if (new Date() < endTime) {// Survey has not yet ended
   var elements = document.getElementsByClassName('comment');
   var container = elements[0];
@@ -54,7 +54,7 @@ on our priorities.__
 
 <div class="youtube-embed">
   <p>Watch the discussion below to learn more about each item on the survey:</p>
-  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kx-JxYSWlEc?start=91" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UxBJtHm4Km0?start=55" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 [Read more about the survey in our announcement blog post.](https://www.bitovi.com/blog/help-us-improve-canjs-stealjs-and-the-rest-of-the-donejs-family)
