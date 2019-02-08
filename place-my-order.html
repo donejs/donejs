@@ -84,6 +84,8 @@
                   <li><a href="./ssr-react.html">Server rendering React</a></li>
 									<li><a href="./migrate-1.html">Migrate to DoneJS 1</a></li>
                   <li><a href="./migrate-2.html">Migrate to DoneJS 2</a></li>
+                  <li><a href="./migrate-3.html">Migrate to DoneJS 3</a></li>
+                  <li><a href="./updating-deps.html">Updating Dependencies</a></li>
 									<li><a href="./contributing.html">Contributing</a></li>
 								</ul>
 							</li>
@@ -231,8 +233,8 @@ You will need <a href="http://nodejs.org">NodeJS</a> installed and your code edi
 <p>If you haven't already, check out the <a href="SettingUp.html" title="This page contains information on setting up DoneJS. It will walk you through getting prerequisites needed before you ever install DoneJS and includes platform-specific pieces of information not covered in the Quick Start or In Depth guides.
 DoneJS officially supports:
 
-Node 6 and up
-npm 3.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prerequisites installed and configured.</p>
+Node 10 and up
+npm 6.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prerequisites installed and configured.</p>
 </blockquote>
 <h3>Create the project</h3>
 <p>To get started, let's install the DoneJS command line utility globally:</p>
@@ -376,7 +378,7 @@ if(debug) {
 }
 //!steal-remove-end
 
-const AppViewModel = DefineMap.extend({
+const AppViewModel = DefineMap.extend(&quot;AppViewModel&quot;, {
   env: {
     default: () =&gt; ({NODE_ENV:'development'})
   },
@@ -555,7 +557,7 @@ if(debug) {
 }
 //!steal-remove-end
 
-const AppViewModel = DefineMap.extend({
+const AppViewModel = DefineMap.extend(&quot;AppViewModel&quot;, {
   page: 'string',
   slug: 'string',
   action: 'string',
@@ -663,7 +665,7 @@ if(debug) {
 }
 //!steal-remove-end
 
-const AppViewModel = DefineMap.extend({
+const AppViewModel = DefineMap.extend(&quot;AppViewModel&quot;, {
     page: 'string',
     slug: 'string',
     action: 'string',
@@ -728,62 +730,11 @@ Update <code>src/index.stache</code> to:</p>
       &lt;div class=&quot;loading&quot;&gt;&lt;/div&gt;
     {{/if}}
 
-    &lt;h1&gt;The &lt;strong&gt;{{this.routeData.page}}&lt;/strong&gt; page&lt;/h1&gt;
-
     {{#eq(this.env.NODE_ENV, &quot;production&quot;)}}
       &lt;script src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;&lt;/script&gt;
     {{else}}
       &lt;script src=&quot;/node_modules/steal/steal.js&quot; main&gt;&lt;/script&gt;
     {{/eq}}
-  &lt;/body&gt;
-&lt;/html&gt;
-
-
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;{{title}}&lt;/title&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no&quot;&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;can-import from=&quot;place-my-order-assets&quot; /&gt;
-    &lt;can-import from=&quot;~/styles.less&quot; /&gt;
-    &lt;can-import from=&quot;~/app&quot; export-as=&quot;viewModel&quot; /&gt;
-
-    &lt;can-import from=&quot;~/loading.component&quot; /&gt;
-    &lt;can-import from=&quot;~/header.component&quot; /&gt;
-    &lt;pmo-header page:from=&quot;page&quot;/&gt;
-
-    {{#switch page}}
-      {{#case &quot;home&quot;}}
-        &lt;can-import from=&quot;~/home.component&quot;
-            can-tag=&quot;pmo-loading&quot;&gt;
-          &lt;pmo-home/&gt;
-        &lt;/can-import&gt;
-      {{/case}}
-      {{#case &quot;restaurants&quot;}}
-        &lt;can-import from=&quot;~/restaurant/list/&quot;
-            can-tag=&quot;pmo-loading&quot;&gt;
-          &lt;pmo-restaurant-list/&gt;
-        &lt;/can-import&gt;
-      {{/case}}
-      {{#case &quot;order-history&quot;}}
-        &lt;can-import from=&quot;~/order/history.component&quot;
-            can-tag=&quot;pmo-loading&quot;&gt;
-          &lt;pmo-order-history/&gt;
-        &lt;/can-import&gt;
-      {{/case}}
-    {{/switch}}
-
-    {{#switch env.NODE_ENV}}
-      {{#case &quot;production&quot;}}
-        &lt;script
-          src=&quot;{{joinBase('steal.production.js')}}&quot;&gt;
-        &lt;/script&gt;
-      {{/case}}
-      {{#default}}
-        &lt;script src=&quot;/node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
-      {{/default}}
-    {{/switch}}
   &lt;/body&gt;
 &lt;/html&gt;
 
@@ -820,7 +771,7 @@ Here we use a <code>switch</code> statement that checks for the current <code>pa
 <p>To test the connection you can run the following in the browser console. You can access the browser console by right clicking in the browser and selecting <strong>Inspect</strong>. Then switch to the <strong>Console</strong> tab if not already there. Test the connection with:</p>
 <pre><code class="language-js">steal.import(&quot;place-my-order/models/restaurant&quot;)
   .then(function(module) {
-    var Restaurant = module[&quot;default&quot;];
+    let Restaurant = module[&quot;default&quot;];
     return Restaurant.getList({});
   }).then(function(restaurants) {
     console.log(restaurants);
@@ -870,27 +821,6 @@ const RestaurantList = Component.extend({
 
 export default RestaurantList;
 export const ViewModel = RestaurantList.ViewModel;
-
-
-import Component from 'can-component';
-import DefineMap from 'can-define/map/';
-import './list.less';
-import view from './list.stache';
-import Restaurant from '~/models/restaurant';
-
-export const ViewModel = DefineMap.extend({
-  restaurants: {
-    value() {
-      return Restaurant.getList({});
-    }
-  }
-});
-
-export default Component.extend({
-  tag: 'pmo-restaurant-list',
-  ViewModel,
-  view
-});
 
 </code></pre>
 <p><span line-highlight='4,16-20,only'></span></p>
@@ -966,7 +896,7 @@ export default Component.extend({
 <p>When prompted, set the URL to <code>/api/cities</code> and the id property to <code>name</code>.</p>
 <p>Now we can load a list of states and cities.</p>
 <h3>Implement view model behavior</h3>
-<p>Now that we have identified the view model properties needed and have created the models necessary to load them, we can <a href="https://canjs.com/doc/can-define/map/map.html">define</a> the <code>states</code>, <code>state</code>, <code>cities</code> and <code>city</code> properties in the view model at <code>src/restaurant/list/list.js</code>:</p>
+<p>Now that we have identified the view model properties needed and have created the models necessary to load them, we can <a href="https://canjs.com/doc/can-define/map/map.html">define</a> the <code>states</code>, <code>state</code>, <code>cities</code> and <code>city</code> properties in the view model at <code>src/pages/restaurant/list/list.js</code>:</p>
 <pre><code class="language-js">import { Component } from 'can';
 import './list.less';
 import view from './list.stache';
@@ -998,7 +928,7 @@ const RestaurantList = Component.extend({
         return null;
       }
 
-      return City.getList({ state });
+      return City.getList({ filter: { state } });
     },
     city: {
       type: 'string',
@@ -1151,7 +1081,7 @@ QUnit.asyncTest('loads all states', function() {
 
 QUnit.asyncTest('setting a state loads its cities', function() {
   var vm = new ViewModel();
-  var expectedCities = cityStore.getList({ state: &quot;CA&quot; }).data;
+  var expectedCities = cityStore.getList({ filter: { state: &quot;CA&quot; } }).data;
 
   QUnit.equal(vm.cities, null, '');
   vm.state = 'CA';
@@ -1163,7 +1093,7 @@ QUnit.asyncTest('setting a state loads its cities', function() {
 
 QUnit.asyncTest('changing a state resets city', function() {
   var vm = new ViewModel();
-  var expectedCities = cityStore.getList({ state : &quot;CA&quot; }).data;
+  var expectedCities = cityStore.getList({ filter: { state : &quot;CA&quot; } }).data;
 
   QUnit.equal(vm.cities, null, '');
   vm.state = 'CA';
@@ -1196,7 +1126,7 @@ QUnit.asyncTest('setting state and city loads a list of its restaurants', functi
 <p>These unit tests are comparing expected data (what we we defined in the fixtures) with actual data (how the view model methods are behaving). Visit <a href="http://localhost:8080/src/pages/restaurant/list/test.html">http://localhost:8080/src/pages/restaurant/list/test.html</a> to see all tests passing.</p>
 <h3>Write the template</h3>
 <p>Now that our view model is implemented and tested, we'll update the restaurant list template to support the city/state selection functionality.</p>
-<p>Update <code>src/restaurant/list/list.stache</code> to:</p>
+<p>Update <code>src/pages/restaurant/list/list.stache</code> to:</p>
 <pre><code class="language-html">&lt;can-import from=&quot;can-stache-route-helpers&quot; /&gt;
 
 &lt;div class=&quot;restaurants&quot;&gt;
@@ -1280,24 +1210,27 @@ Some things worth pointing out:</p>
 </ul>
 <p>Now we have a component that lets us select state and city and displays the appropriate restaurant list.</p>
 <h3>Update the demo page</h3>
-<p>We already have an existing demo page at <a href="http://localhost:8080/src/restaurant/list/list.html">src/restaurant/list/list.html</a>. We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:</p>
-<pre><code class="language-html">&lt;pmo-restaurant-list&gt;&lt;/pmo-restaurant-list&gt;
-
-&lt;script src=&quot;../../../../node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
+<p>We already have an existing demo page at <a href="http://localhost:8080/src/pages/restaurant/list/list.html">src/pages/restaurant/list/list.html</a>. We'll update it to load fixtures so it can demonstrate the use of the pmo-restaurnt-list component:</p>
+<pre><code class="language-html">&lt;script src=&quot;../../../../node_modules/steal/steal.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;steal-module&quot;&gt;
+  import PmoRestaurantList from &quot;~/pages/restaurant/list/&quot;;
   import &quot;place-my-order-assets&quot;;
   import &quot;~/models/fixtures/&quot;;
 
-  steal.import(&quot;~/pages/restaurant/list/&quot;);
+  let pmoRestaurantList = new PmoRestaurantList({
+    viewModel: {}
+  });
+
+  document.body.appendChild(pmoRestaurantList.element);
 &lt;/script&gt;
 
 </code></pre>
-<p><span line-highlight='3-9,only'></span>
+<p><span line-highlight='4-5,only'></span>
 View the demo page at <a href="http://localhost:8080/src/pages/restaurant/list/list.html">http://localhost:8080/src/pages/restaurant/list/list.html</a> .</p>
 <h2>Automated tests</h2>
 <p>In this chapter we will automate running the tests so that they can be run from from the command line.</p>
 <h3>Using the global test page</h3>
-<p>We already worked with an individual component test page in <a href="http://localhost:8080/pages/src/restaurant/list/test.html">src/pages/restaurant/list/test.html</a> but we also have a global test page available at <a href="http://localhost:8080/test.html">test.html</a>. All tests are being loaded in <code>src/test.js</code>. Since we don't have tests for our models at the moment, let's remove the <code>import 'place-my-order/models/test';</code> part so that <code>src/test.js</code> looks like this:</p>
+<p>We already worked with an individual component test page in <a href="http://localhost:8080/pages/src/pages/restaurant/list/test.html">src/pages/restaurant/list/test.html</a> but we also have a global test page available at <a href="http://localhost:8080/test.html">test.html</a>. All tests are being loaded in <code>src/test.js</code>. Since we don't have tests for our models at the moment, let's remove the <code>import 'place-my-order/models/test';</code> part so that <code>src/test.js</code> looks like this:</p>
 <pre><code class="language-js">import F from 'funcunit';
 import QUnit from 'steal-qunit';
 
@@ -1463,6 +1396,7 @@ route.register('{page}/{slug}/{action}', { slug: null, action: null });
   &lt;/view&gt;
   &lt;script type=&quot;view-model&quot;&gt;
     import { DefineMap } from 'can';
+    import Restaurant from '~/models/restaurant';
 
     export default DefineMap.extend(&quot;PmoRestaurantDetailsVM&quot;, {
       // EXTERNAL STATEFUL PROPERTIES
@@ -1512,7 +1446,7 @@ if(debug) {
 }
 //!steal-remove-end
 
-const AppViewModel = DefineMap.extend({
+const AppViewModel = DefineMap.extend(&quot;AppViewModel&quot;, {
   page: 'string',
   slug: 'string',
   action: 'string',
@@ -1669,15 +1603,14 @@ Here we are adding some more conditions if <code>page</code> is set to <code>res
 <pre><code class="language-js">import { DefineMap, DefineList, superModel } from 'can';
 import loader from '@loader';
 
-const Item = DefineMap.extend({
+const Item = DefineMap.extend('Item', {
   seal: false
 }, {
   price: 'number'
 });
 
-const ItemsList = DefineList.extend({
-  '#': Item
-}, {
+const ItemsList = DefineList.extend('ItemList', {
+  '#': Item,
   has: function(item) {
     return this.indexOf(item) !== -1;
   },
@@ -1693,7 +1626,7 @@ const ItemsList = DefineList.extend({
   }
 });
 
-const Order = DefineMap.extend({
+const Order = DefineMap.extend('Order', {
   seal: false
 }, {
   '_id': {
@@ -1723,7 +1656,7 @@ const Order = DefineMap.extend({
   }
 });
 
-Order.List = DefineList.extend({
+Order.List = DefineList.extend('OrderList', {
   '#': Order
 });
 
@@ -1737,7 +1670,7 @@ Order.connection = superModel({
 export default Order;
 
 </code></pre>
-<p><span line-highlight='4-26,34-55,only'></span>
+<p><span line-highlight='4-25,34-55,only'></span>
 Here we define an <code>ItemsList</code> which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another <code>&lt;order-model&gt;</code> tag to load orders in the order history template later.</p>
 <h3>Implement the view model</h3>
 <p>Now we can update the view model in <code>src/pages/order/new/new.js</code>:</p>
@@ -2004,15 +1937,14 @@ QUnit.test('canPlaceOrder', function(){
 <pre><code class="language-js">import { DefineMap, DefineList, superModel, QueryLogic } from 'can';
 import loader from '@loader';
 
-const Item = DefineMap.extend({
+const Item = DefineMap.extend('Item', {
   seal: false
 }, {
   price: 'number'
 });
 
-const ItemsList = DefineList.extend({
-  '#': Item
-}, {
+const ItemsList = DefineList.extend('ItemList', {
+  '#': Item,
   has: function(item) {
     return this.indexOf(item) !== -1;
   },
@@ -2030,7 +1962,7 @@ const ItemsList = DefineList.extend({
 
 const Status = QueryLogic.makeEnum([&quot;new&quot;, &quot;preparing&quot;, &quot;delivery&quot;, &quot;delivered&quot;]);
 
-const Order = DefineMap.extend({
+const Order = DefineMap.extend('Order', {
   seal: false
 }, {
   '_id': {
@@ -2061,7 +1993,7 @@ const Order = DefineMap.extend({
   }
 });
 
-Order.List = DefineList.extend({
+Order.List = DefineList.extend('OrderList', {
   '#': Order
 });
 
@@ -2075,7 +2007,7 @@ Order.connection = superModel({
 export default Order;
 
 </code></pre>
-<p><span line-highlight='1,28,43-44,only'></span></p>
+<p><span line-highlight='1,27,42-43,only'></span></p>
 <h3>Update the template</h3>
 <p>First let's create the <code>pmo-order-list</code> component with:</p>
 <pre><code class="language-shell">donejs add component components/order/list.component pmo-order-list
@@ -2261,15 +2193,14 @@ export default Order;
 import loader from '@loader';
 import io from 'steal-socket.io';
 
-const Item = DefineMap.extend({
+const Item = DefineMap.extend('Item', {
   seal: false
 }, {
   price: 'number'
 });
 
-const ItemsList = DefineList.extend({
-  '#': Item
-}, {
+const ItemsList = DefineList.extend('ItemList', {
+  '#': Item,
   has: function(item) {
     return this.indexOf(item) !== -1;
   },
@@ -2287,7 +2218,7 @@ const ItemsList = DefineList.extend({
 
 const Status = QueryLogic.makeEnum([&quot;new&quot;, &quot;preparing&quot;, &quot;delivery&quot;, &quot;delivered&quot;]);
 
-const Order = DefineMap.extend({
+const Order = DefineMap.extend('Order', {
   seal: false
 }, {
   '_id': {
@@ -2318,7 +2249,7 @@ const Order = DefineMap.extend({
   }
 });
 
-Order.List = DefineList.extend({
+Order.List = DefineList.extend('OrderList', {
   '#': Order
 });
 
@@ -2338,7 +2269,7 @@ socket.on('orders removed', order =&gt; Order.connection.destroyInstance(order))
 export default Order;
 
 </code></pre>
-<p><span line-highlight='3,73-77,only'></span>
+<p><span line-highlight='3,72-76,only'></span>
 That's it. If we now open the <a href="http://localhost:8080/order-history">order page</a> we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.</p>
 <h2>Create documentation</h2>
 <p>Documenting our code is very important to quickly get other developers up to speed. <a href="https://documentjs.com/">DocumentJS</a> makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.</p>
@@ -2351,116 +2282,141 @@ That's it. If we now open the <a href="http://localhost:8080/order-history">orde
 </code></pre>
 <p>This produces documentation at <a href="http://localhost:8080/docs/">http://localhost:8080/docs/</a>.</p>
 <h3>Documenting a module</h3>
-<p>Let's add the documentation for a module. Let's use <code>src/order/new/new.js</code> and update it with some inline comments that describe what our view model properties are supposed to do:</p>
-<pre><code class="language-js">import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+<p>Let's add the documentation for a module. Let's use <code>src/pages/order/new/new.js</code> and update it with some inline comments that describe what our view model properties are supposed to do:</p>
+<pre><code class="language-js">import { Component } from 'can';
 import './new.less';
 import view from './new.stache';
 import Restaurant from '~/models/restaurant';
 import Order from '~/models/order';
 
-/**
- * @add ~/order/new
- */
-export const ViewModel = DefineMap.extend({
+export const PmoOrderNew = Component.extend({
+  tag: 'pmo-order-new',
+  view,
+
   /**
-   * @property {string} slug
-   *
-   * the restaurants slug (short name). will
-   * be used to request the actual restaurant.
+   * @add ~/pages/order/new
    */
-  slug: 'string',
-  /**
-    * @property {Promise} saveStatus
-    *
-    * a Promise that contains the status of the order when
-    * it is being saved.
-    */
-  saveStatus: '*',
-  /**
-   * @property {~/models/order} order
-   *
-   * the order that is being processed. will
-   * be an empty new order inititally.
-   */
-  order: {
-    Default: Order
-  },
-  /**
-    * @property {Promise} restaurantPromise
-    *
-    * a Promise that contains the restaurant that is being
-    * ordered from.
-    */
-  get restaurantPromise() {
-    return Restaurant.get({ _id: this.slug });
-  },
-  /**
-   * @property {~/models/restaurant} restaurant
-   *
-   * the restaurant that is being ordered from.
-   */
-  restaurant: {
-    get(lastSetVal, resolve) {
-      this.restaurantPromise.then(resolve);
+  ViewModel: {
+    // EXTERNAL STATEFUL PROPERTIES
+    // These properties are passed from another component. Example:
+    // value: {type: &quot;number&quot;}
+
+    /**
+     * @property {string} slug
+     *
+     * the restaurants slug (short name). will
+     * be used to request the actual restaurant.
+     */
+    slug: 'string',
+
+    // INTERNAL STATEFUL PROPERTIES
+    // These properties are owned by this component.
+
+    /**
+      * @property {Promise} saveStatus
+      *
+      * a Promise that contains the status of the order when
+      * it is being saved.
+      */
+    saveStatus: '*',
+    /**
+     * @property {~/models/order} order
+     *
+     * the order that is being processed. will
+     * be an empty new order inititally.
+     */
+    order: {
+      Default: Order
+    },
+    /**
+      * @property {Promise} restaurantPromise
+      *
+      * a Promise that contains the restaurant that is being
+      * ordered from.
+      */
+    get restaurantPromise() {
+      return Restaurant.get({ _id: this.slug });
+    },
+    /**
+     * @property {~/models/restaurant} restaurant
+     *
+     * the restaurant that is being ordered from.
+     */
+    restaurant: {
+      get(lastSetVal, resolve) {
+        this.restaurantPromise.then(resolve);
+      }
+    },
+    /**
+      * @property {Boolean} canPlaceOrder
+      *
+      * boolean indicating whether the order
+      * can be placed.
+      */
+    get canPlaceOrder() {
+      return this.order.items.length;
+    },
+
+    // DERIVED PROPERTIES
+    // These properties combine other property values. Example:
+    // get valueAndMessage(){ return this.value + this.message; }
+
+    // METHODS
+    // Functions that can be called by the view. Example:
+    // incrementValue() { this.value++; }
+
+    /**
+     * @function placeOrder
+     *
+     * save the current order and update the status deferred.
+     */
+    placeOrder(ev) {
+      ev.preventDefault();
+      let order = this.order;
+      order.restaurant = this.restaurant._id;
+      this.saveStatus = order.save();
+    },
+    /**
+     * @function startNewOrder
+     *
+     * resets the order form, so a new order can be placed.
+     */
+    startNewOrder() {
+      this.order = new Order();
+      this.saveStatus = null;
+    },
+
+    // SIDE EFFECTS
+    // The following is a good place to perform changes to the DOM
+    // or do things that don't fit in to one of the areas above.
+    connectedCallback(element){
+
     }
-  },
-  /**
-    * @property {Boolean} canPlaceOrder
-    *
-    * boolean indicating whether the order
-    * can be placed.
-    */
-  get canPlaceOrder() {
-    return this.order.items.length;
-  },
-  /**
-   * @function placeOrder
-   *
-   * save the current order and update the status deferred.
-   */
-  placeOrder(ev) {
-    ev.preventDefault();
-    let order = this.order;
-    order.restaurant = this.restaurant._id;
-    this.saveStatus = order.save();
-  },
-  /**
-   * @function startNewOrder
-   *
-   * resets the order form, so a new order can be placed.
-   */
-  startNewOrder() {
-    this.order = new Order();
-    this.saveStatus = null;
   }
 });
 
-export default Component.extend({
-  tag: 'pmo-order-new',
-  ViewModel,
-  view
-});
+export default PmoOrderNew;
+export const ViewModel = PmoOrderNew.ViewModel;
 
 </code></pre>
-<p><span line-highlight='8-10,12-17,19-24,26-31,35-40,44-48,54-59,63-67,74-78,only'></span>
+<p><span line-highlight='11-13,19-24,30-35,37-42,46-51,55-59,65-70,83-87,94-98,only'></span>
 If we now run <code>donejs document</code> again, we will see the module show up in the menu bar and will be able to navigate through the different properties.</p>
 <h2>Production builds</h2>
 <p>Now we're ready to create a production build; go ahead and kill your development server, we won't need it from here on.</p>
 <h3>Progressive loading</h3>
-<p>Our <code>index.stache</code> contains a can-import tag for each of the pages we have implemented. These can-imports which have nested html will be progressively loaded; the restaurant list page's JavaScript and CSS will only be loaded when the user visits that page.</p>
+<p>Our <code>app.js</code> contains steal.import() calls for each of the pages we have implemented. These dynamic imports progressively load page components only when the user visits that page.</p>
 <h3>Bundling assets</h3>
 <p>Likely you have assets in your project other than your JavaScript and CSS that you will need to deploy to production. Place My Order has these assets saved to another project, you can view them at <code>node_modules/place-my-order-assets/images</code>.</p>
 <p>StealTools comes with the ability to bundle all of your static assets into a folder that can be deployed to production by itself. Think if it as a zip file that contains everything your app needs to run in production.</p>
 <p>To use this capability add an option to your build script to enable it. Change:</p>
-<pre><code class="language-js">var buildPromise = stealTools.build({
+<pre><code class="language-js">let buildPromise = stealTools.build({
   config: __dirname + &quot;/package.json!npm&quot;
 }, {
   bundleAssets: true
 });
 </code></pre>
 <p>to:</p>
-<pre><code class="language-js">var buildPromise = stealTools.build({
+<pre><code class="language-js">let buildPromise = stealTools.build({
   config: __dirname + &quot;/package.json!npm&quot;
 }, {
   bundleAssets: {
@@ -2496,7 +2452,7 @@ We'll be building an iOS app if you are a Mac user, and an Android app if you're
 <p>Answer the question about the URL of the service layer with <code>http://www.place-my-order.com</code>.</p>
 <p>Depending on your operating system you can accept most of the rest of the defaults, unless you would like to build for Android, which needs to be selected from the list of platforms.</p>
 <p>This will change your <code>build.js</code> script with the options needed to build iOS/Android apps. Open this file and add the place-my-order-asset images to the <strong>glob</strong> property:</p>
-<pre><code class="language-js">var cordovaOptions = {
+<pre><code class="language-js">let cordovaOptions = {
   buildDir: &quot;./build/cordova&quot;,
   id: &quot;com.donejs.placemyorder&quot;,
   name: &quot;place my order&quot;,
@@ -2777,7 +2733,7 @@ git push origin continuous
 				</div>
 				<div class="clear"></div>
 				<div class="footer-copyright col-sm-12">
-					&copy; <a href="https://www.bitovi.com/">2015-2018 Bitovi, Inc.</a>
+					&copy; <a href="https://www.bitovi.com/">2015-2019 Bitovi, Inc.</a>
 				</div>
 			</div>
 		</div>
