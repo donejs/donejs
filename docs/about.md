@@ -112,7 +112,7 @@ Technology is worth nothing if people don't know how to use it. We want
 to create great learning material, but also create an environment
 where people feel comfortable getting help.  
 
-The core team is always available on [gitter](https://gitter.im/donejs/donejs)
+The core team is always available on [Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B))
 and provides [weekly training](https://www.bitovi.com/blog/free-weekly-online-javascript-training). Signup for a [meetup](./community.html) and we will come to your
 city and teach you DoneJS!
 
@@ -132,7 +132,8 @@ We should always seek to cooperate with others.
 #### Attract
 
 If you have the next great JS idea, we want to encourage and help you to build it as part of the DoneJS family.  You'll find DoneJS a supportive environment to nurture your ideas.  You can even pair with the full-time developers to build out your idea. Reach out to us on
-[gitter](https://gitter.im/donejs/donejs) or create an issue.
+[Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B))
+or create an issue.
 
 
 ## History
@@ -168,7 +169,7 @@ The following are our highest priority, non-bug-fix features:
 - [can-connect supporting other frameworks](https://github.com/canjs/can-connect/issues/42)
 - [Animation utilities](https://github.com/canjs/can-animate)
 - [O(log n) derived list modification](https://github.com/canjs/can-derive)
-- [CanJS Roadmap Discussion](https://forums.donejs.com/t/canjs-roadmap-discussion/75)
+- [CanJS Roadmap Discussion](https://forums.bitovi.com/t/canjs-roadmap-discussion/75)
 
 ## Team
 

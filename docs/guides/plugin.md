@@ -223,7 +223,8 @@ Then import it in a template and load it with:
 
 ## Show it off
 
-Once you published your plugin, let the world know about it. [Tweet @donejs](https://twitter.com/donejs) and post it in the [DoneJS forums](https://forums.donejs.com/) and the [DoneJS chat](https://gitter.im/donejs/donejs). Those are also great places to get quick help with any questions.
+Once you published your plugin, let the world know about it. [Tweet @donejs](https://twitter.com/donejs) and post it in the [Bitovi forums](https://forums.bitovi.com/) and on [Slack](https://www.bitovi.com/community/slack) (in the [#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)).
+Those are also great places to get quick help with any questions.
 
  [1]: https://donejs.com/
  [2]: http://getbootstrap.com/

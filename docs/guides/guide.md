@@ -10,7 +10,7 @@ In the first part of this guide, we will install DoneJS, [generate a new applica
 
 In the final parts of the guide we will make an [optimized, progressively loaded production build](./Features.html#progressive-loading) and [deploy it to a CDN](./Features.html#deploy-to-a-cdn). We will conclude with creating a [mobile and desktop](./Features.html#ios-android-and-desktop-builds) version of the application.
 
-If you run into any problems, let us know [on Gitter](https://gitter.im/donejs/donejs), we’re happy to help out.
+If you run into any problems, let us know on [Slack](https://www.bitovi.com/community/slack) (in the [#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)). We’re happy to help out!
 
 > For an even easier version of this guide, one that can be done entirely online, checkout [CanJS’s Chat Guide](https://canjs.com/doc/guides/chat.html). There, you'll build the same chat widget in a [JS Bin](https://jsbin.com/), but
 without a mobile or desktop build and deployment to a CDN.

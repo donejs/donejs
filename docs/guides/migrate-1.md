@@ -46,7 +46,7 @@ For example, if you have a `messages` component in `src/messages/`, the followin
 
 You should also follow the [CanJS 3 pre-migration preparation](https://canjs.com/doc/migrate-3.html#Pre_migrationpreparation) steps _before_ going through the rest of this guide. The pre-migration section of the [CanJS 3 migration guide](https://canjs.com/doc/migrate-3.html) includes changes you can make to your existing CanJS 2.3 app that will make migrating to CanJS 3 easier.
 
-If you have any questions about any of the steps in this guide, please join us on [Gitter chat](https://gitter.im/donejs/donejs) and [the forums](https://forums.donejs.com/).
+If you have any questions about any of the steps in this guide, please join us on [Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)) and [the forums](https://forums.bitovi.com/).
 
 ## Install donejs@1
 
@@ -231,4 +231,4 @@ If everything seems to work and your tests pass when running `donejs test`, cong
 
 If you run into problems, please refer to the [dependency list here](https://github.com/donejs/cli/blob/v1.0.1/package.json#L59) and make sure that your version numbers match.
 
-As always, we’re available on [Gitter chat](https://gitter.im/donejs/donejs) and [the forums](https://forums.donejs.com/) to try and help!
+As always, we’re available on [Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)) and [the forums](https://forums.bitovi.com/) to try and help!

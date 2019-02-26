@@ -6,7 +6,8 @@
 @body
 Thank you for your interest in contributing to DoneJS! DoneJS is maintained by [the core team](./About.html#section=section_Team) but depends on contributors like you! Whether you’re interested in [fixing issues](#finding-open-issues), [answering questions](#getting-involved-in-the-community), or [spreading the word](#evangelism), we welcome you to our community!
 
-Contributing to an open source project can be an intimidating experience. We’re committed to making it as pleasant and rewarding as possible. Please always feel free to [reach out to us on Gitter](https://gitter.im/donejs/donejs).
+Contributing to an open source project can be an intimidating experience. We’re committed to making it as pleasant and rewarding as possible. Please always feel free to reach out to us on
+[Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)).
 
 <a id="section=section_CodeofConduct"></a>
 ## Code of Conduct
@@ -19,9 +20,11 @@ contributors and maintainers pledge to make participation in our project and com
 <a id="section=section_GettingHelp"></a>
 ## Getting Help
 
-[Our forums](https://forums.donejs.com/) and [Gitter chat](https://gitter.im/donejs/donejs) are the best places to ask questions. The core team regularly checks both and there are other users who generously help others.
+[Our forums](https://forums.bitovi.com/) and [Slack](https://www.bitovi.com/community/slack)
+are the best places to ask questions. The core team regularly checks both and there are other users who generously help others.
 
-If you’re interested in contributing to DoneJS, the core team is happy to pair with you to fix a bug or write a new feature! Please either message us on Gitter or the forums, or leave a comment on the GitHub issue you’re interested in helping with. We will happily walk you through setting up your development environment, creating a test and/or writing documentation, and submitting a pull request.
+If you’re interested in contributing to DoneJS, the core team is happy to pair with you to fix a bug or write a new feature!
+Please either message us on Slack or the forums, or leave a comment on the GitHub issue you’re interested in helping with. We will happily walk you through setting up your development environment, creating a test and/or writing documentation, and submitting a pull request.
 
 <a id="section=section_ProjectOrganization"></a>
 ## Project Organization
@@ -87,8 +90,9 @@ Before filing a new issue, please search for previous tickets.  If there’s som
 give it a 👍. If you can provide additional information that’s not already in the issue, please add a comment to it.
 
 If you are unsure about any of this or have any other questions, please reach out to
-us on the [DoneJS forums](https://forums.donejs.com/c/donejs) or talk to us on
-the [Gitter donejs/donejs channel](https://gitter.im/donejs/donejs). We’re happy to discuss any bugs and help you file a bug report.
+us on the [Bitovi forums](https://forums.bitovi.com/c/donejs) or talk to us on
+[Slack](https://www.bitovi.com/community/slack) (in the [#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)).
+We’re happy to discuss any bugs and help you file a bug report.
 
 <a id="section=section_SuggestingFeatures"></a>
 ## Suggesting Features
@@ -112,8 +116,9 @@ Before filing a new suggestion, please search for previous feature requests.  If
 give it a 👍. If you have additional ideas that are not already in the issue, please add a comment to it.
 
 If you are unsure about any of this or have any other questions, please reach out to
-us on the [DoneJS forums](https://forums.donejs.com/c/donejs) or talk to us on
-the [Gitter donejs/donejs channel](https://gitter.im/donejs/donejs). We’re happy to discuss any ideas and help you file a feature suggestion.
+us on the [Bitovi forums](https://forums.bitovi.com/c/donejs) or talk to us on
+[Slack](https://www.bitovi.com/community/slack) (in the [#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)).
+We’re happy to discuss any ideas and help you file a feature suggestion.
 
 <a id="section=section_FindingWaystoContribute"></a>
 ## Finding Ways to Contribute
@@ -198,33 +203,33 @@ Triaging issues that have no labels is also really helpful! Here are some search
 <a id="section=section_Gettinginvolvedinthecommunity"></a>
 ### Getting involved in the community
 
-You can also get involved in our community by posting in our forums, chatting with us on Gitter, and answering questions on Stack Overflow.
+You can also get involved in our community by posting in our forums, chatting with us on Slack, and answering questions on Stack Overflow.
 
 - DoneJS
-	- [Forums](https://forums.donejs.com/c/donejs)
-	- [Gitter](https://gitter.im/donejs/donejs)
+	- [Forums](https://forums.bitovi.com/c/donejs)
+	- [Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B))
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=donejs+answers:0)
 - CanJS
-	- [Forums](https://forums.donejs.com/c/canjs)
-	- [Gitter](https://gitter.im/canjs/canjs)
+	- [Forums](https://forums.bitovi.com/c/canjs)
+	- [Slack](https://www.bitovi.com/community/slack) ([#canjs channel](https://bitovi-community.slack.com/messages/CFC22NZ8A))
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=canjs+answers:0)
 - DocumentJS
-	- [Forums](https://forums.donejs.com/c/documentjs)
-	- [Gitter](https://gitter.im/bitovi/documentjs)
+	- [Forums](https://forums.bitovi.com/c/documentjs)
+	- [Slack](https://www.bitovi.com/community/slack)
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=documentjs+answers:0)
 - FuncUnit
-	- [Gitter](https://gitter.im/bitovi/funcunit)
+	- [Slack](https://www.bitovi.com/community/slack)
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=funcunit+answers:0)
 - jQuery++
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=jquerypp+answers:0)
 - StealJS
-	- [Forums](https://forums.donejs.com/c/stealjs)
-	- [Gitter](https://gitter.im/stealjs/steal)
+	- [Forums](https://forums.bitovi.com/c/stealjs)
+	- [Slack](https://www.bitovi.com/community/slack) ([#stealjs channel](https://bitovi-community.slack.com/messages/CFDDX9MJS))
 	- [Stack Overflow](https://stackoverflow.com/search?tab=newest&q=stealjs+answers:0)
 - Syn
-	- [Gitter](https://gitter.im/bitovi/syn)
+	- [Slack](https://www.bitovi.com/community/slack)
 - Testee
-	- [Gitter](https://gitter.im/bitovi/testee)
+	- [Slack](https://www.bitovi.com/community/slack)
 
 <a id="section=section_Spreadingtheword"></a>
 ### Spreading the word
