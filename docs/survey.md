@@ -59,8 +59,8 @@ on our priorities.__
 
 [Read more about the survey in our announcement blog post.](https://www.bitovi.com/blog/help-us-improve-canjs-stealjs-and-the-rest-of-the-donejs-family)
 If you have any questions, please don’t hesitate to ask on
-[our forums](https://forums.donejs.com/),
-[Gitter](https://gitter.im/donejs/donejs), or
+[our forums](https://forums.bitovi.com/),
+[Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)), or
 [Twitter](https://twitter.com/donejs)
 
 <figure>

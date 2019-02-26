@@ -75,4 +75,4 @@ The [CanJS 5.0 migration guide](https://canjs.com/doc/migrate-5.html) goes over 
 
 ## Getting help
 
-We've taken care to make upgrading DoneJS apps as easy as possible. However, as always, we're available on [Gitter chat](https://gitter.im/donejs/donejs) and [the forums](https://forums.donejs.com/) to try and help!
+We've taken care to make upgrading DoneJS apps as easy as possible. However, as always, we're available on [Slack](https://www.bitovi.com/community/slack) ([#donejs channel](https://bitovi-community.slack.com/messages/CFC80DU5B)) and [the forums](https://forums.bitovi.com/) to try and help!
