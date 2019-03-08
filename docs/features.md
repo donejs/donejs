@@ -230,7 +230,7 @@ Solving a story means a packaged solution to a development problem, where severa
           </tr>
           <tr>
             <td class="features">
-              <div class="feature-description"><a href="#supports-all-browsers-even-ie9">Browser Support</a></div>
+              <div class="feature-description"><a href="#supports-all-browsers-even-ie11">Browser Support</a></div>
             </td>
             <td>
               <img class="matrix-rating-icon" src="static/img/icon-excellent.svg">
@@ -1314,7 +1314,7 @@ export function subtract(a, b) {
 
 DoneJS applications are actually able to import or export any module type: ES6, AMD and CommonJS. This means you can slowly phase in ES6, while still using your old code. You can also use any of the many exciting [ES6 language features](https://github.com/lukehoban/es6features).
 
-A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. During development, the compiler runs in the browser, so changes are happening live without a build step. During the build, your code is compiled to ES5, so your production code will run natively in every browser. You can even run your [ES6 application in IE9+](#supports-all-browsers-even-ie9)!
+A compiler is used to convert ES6 syntax to ES5 in browsers that don't yet support ES6. During development, the compiler runs in the browser, so changes are happening live without a build step. During the build, your code is compiled to ES5, so your production code will run natively in every browser. You can even run your [ES6 application in IE11+](#supports-all-browsers-even-ie11)!
 
 <a class="btn" href="https://stealjs.com/docs/syntax.es6.html"><span>View the Documentation</span></a>
 <a class="btn" href="./place-my-order.html"><span>View the Guide</span></a>
