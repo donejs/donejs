@@ -23,6 +23,13 @@ describe('utils tests', function() {
         assert.equal(folderPath, process.cwd());
       });
   });
+  
+  it('mkdirp ignores scoped project name', function() {
+    return utils.mkdirp('@bitovi/test')
+      .then(function(folderPath) {
+        assert.equal(folderPath, path.join(process.cwd(), 'test'));
+      });
+  });
 
   it('spawns successfully', function(done) {
     var cwd = path.join(__dirname, '..');
