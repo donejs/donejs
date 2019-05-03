@@ -12,13 +12,13 @@ StealJS? What can the core team work on to make you grow fonder of these
 projects?
 
 <div class="cta">
-  <a href="https://www.surveymonkey.com/r/bitovi-feb-2019" target="_blank">
+  <a href="https://www.surveymonkey.com/r/bitovi-may-2019" target="_blank">
     Take the community survey
   </a>
 </div>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
 <script>
-var endTime = new Date('Feb 13 2019 14:00:00 UTC');// 6 a.m. Pacific
+var endTime = new Date('May 8 2019 14:00:00 UTC');// 7 a.m. Pacific
 if (new Date() < endTime) {// Survey has not yet ended
   var elements = document.getElementsByClassName('comment');
   var container = elements[0];
@@ -52,7 +52,7 @@ works on in the coming months. Short of [hiring us](https://www.bitovi.com/conta
 to work on something in particular, __this is the best way to have a direct impact
 on our priorities.__
 
-<div class="youtube-embed">
+<div class="youtube-embed" style="display: none">
   <p>Watch the discussion below to learn more about each item on the survey:</p>
   <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UxBJtHm4Km0?start=55" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
