@@ -26,7 +26,7 @@ In the [quick start guide](./Guide.html), we will build a small chat application
 <a href="./place-my-order.html"><img class="app-thumbs" src="static/img/thumb-pmo.png" srcset="static/img/thumb-pmo.png 1x, static/img/thumb-pmo-2x.png 2x"></a>
 
 
-In the [place-my-order guide](./place-my-order.html), we will go into detail, creating [http://place-my-order.com](http://place-my-order.com), a restaurant menu order application. You'll learn everything covered in the "Quick start", plus more:
+In the [place-my-order guide](./place-my-order.html), we will go into detail, creating [http://www.place-my-order.com](http://www.place-my-order.com), a restaurant menu order application. You'll learn everything covered in the "Quick start", plus more:
 
 - MVVM architecture
 - Testing

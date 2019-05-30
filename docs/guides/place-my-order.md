@@ -2,7 +2,7 @@
 @parent Guides
 @hide sidebar
 @outline 2 ol
-@description In this guide you will learn about all of [DoneJS' features](./Features.html) by creating, testing, documenting, building and deploying [place-my-order.com](http://place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
+@description In this guide you will learn about all of [DoneJS' features](./Features.html) by creating, testing, documenting, building and deploying [place-my-order.com](http://www.place-my-order.com), a restaurant menu and ordering application. The final result will look like this:
 
 
 <img src="static/img/place-my-order.png" srcset="static/img/place-my-order.png 1x, static/img/place-my-order-2x.png 2x">
