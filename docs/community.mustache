@@ -148,11 +148,29 @@
           </div>
       </div>
       <div class="inner-wrapper">
-      <div id="bithub-events-embed" class="col-sm-10 col-lg-9 center-block table-row">
-        <span class="pending-spinner"></span>
+      <div class="col-sm-10 col-lg-9 center-block table-row">
+        <calendar-events api-key="AIzaSyBsNpdGbkTsqn1BCSPQrjO9OaMySjK5Sns"
+                        calendar-id="jupiterjs.com_g27vck36nifbnqrgkctkoanqb4@group.calendar.google.com" 
+                        event-count="3">
+          <template>
+            <div class="upcoming-event">
+              <div class="event-description">
+                <div class="header">
+                  <h4 class='event-title'></h4>
+                  <p class='detail'>
+                    <span class='event-date'></span>
+                  </p>
+                </div>
+                <p class='event-body'></p>
+              </div>
+              <div class="footer">
+                <a class="event-url open-in-new" target="_blank">View Event</a>
+              </div>
+            </div>
+
+          </template>
+        </calendar-events>
       </div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.11/moment-timezone-with-data.min.js"></script>
     </div>
 
 
