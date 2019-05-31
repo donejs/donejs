@@ -41,7 +41,7 @@
   },
   "homepage": "https://github.com/donejs/donejs",
   "devDependencies": {
-    "bit-docs": "0.0.9",
+    "bit-docs": "0.2.0",
     "coveralls-send": "0.0.2",
     "dotdotdot": "^1.7.0",
     "es6-promise": "^4.1.0",
@@ -73,17 +73,18 @@
       "bit-docs-tag-package": "^0.0.3",
       "bit-docs-process-mustache": "^0.0.1",
       "bit-docs-generate-html": "^0.3.7",
-      "bit-docs-prettify": "^0.1.0",
+      "bit-docs-prettify": "^0.4.1",
       "bit-docs-html-highlight-line": "^0.2.2",
       "bit-docs-tag-demo": "^0.3.0",
       "bit-docs-html-toc": "^0.6.2",
-      "bit-docs-donejs-theme": "^1.6.0"
+      "bit-docs-donejs-theme": "^1.7.0",
+      "@bitovi/calendar-events": "^0.0.8"
     },
     "glob": {
       "pattern": "docs/**/*.{md,mustache}"
     },
     "parent": "donejs",
-    "minifyBuild": true,
+    "minifyBuild": false,
     "dest": "./site"
   }
 }
