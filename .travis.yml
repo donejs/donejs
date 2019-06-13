@@ -9,7 +9,6 @@ before_install:
 node_js:
 - 8
 - 10
-- 12
 notifications:
   slack:
     secure: TAq0S0FA/OXtLjmIlJsytzz5WMB5L2QEedW7q+rAhKHg+w9FXOkE9guP72yLe92hKLMAsitD4OSACOtIR3QSSGNden/eKYQEVikCeNKOIO/FoHOrPTkXHfW1/2ihIvOBF2NaEvIGZsjwr12wIewSSM5VrdKwl1skgd0K7CoY/Uw=
