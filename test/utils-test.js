@@ -25,7 +25,10 @@ describe('utils tests', function() {
   });
   
   it('mkdirp ignores scoped project name', function() {
-    return utils.mkdirp('@bitovi/test')
+    // use path.sep instead of '/'
+    // windows path.sep is '\'
+    // *nix systems path.sep is '/'
+    return utils.mkdirp('@bitovi' + path.sep +'test')
       .then(function(folderPath) {
         assert.equal(folderPath, path.join(process.cwd(), 'test'));
       });

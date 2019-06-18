@@ -49,7 +49,7 @@
     "is-appveyor": "^1.0.0",
     "istanbul": "^0.4.2",
     "jshint": "^2.8.0",
-    "mocha": "^3.2.0",
+    "mocha": "^6.1.4",
     "mocha-lcov-reporter": "^1.2.0",
     "mockery": "^2.0.0",
     "node-fetch": "^2.3.0",
@@ -58,8 +58,8 @@
   },
   "dependencies": {
     "commander": "^2.8.1",
-    "cross-spawn-async": "^2.0.0",
-    "q": "^1.4.1"
+    "cross-spawn": "^6.0.5",
+    "q": "^1.5.1"
   },
   "directories": {
     "doc": "docs"
