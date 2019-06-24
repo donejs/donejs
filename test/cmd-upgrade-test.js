@@ -61,7 +61,7 @@ describe('cli upgrade cmd', function() {
       }
     });
 
-    mockery.registerMock('cross-spawn-async', function(){
+    mockery.registerMock('cross-spawn', function(){
       var reqPkg = arguments[1][2];
       spawnCalls.push({
         binary: arguments[0],
