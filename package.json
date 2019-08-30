@@ -57,7 +57,7 @@
     "stream-when": "^1.0.0"
   },
   "dependencies": {
-    "commander": "^2.8.1",
+    "commander": "^3.0.1",
     "cross-spawn": "^6.0.5",
     "q": "^1.5.1"
   },
