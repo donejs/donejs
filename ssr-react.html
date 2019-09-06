@@ -18,11 +18,30 @@
 <head>
 	<meta charset="utf-8">
   <title>donejs - Server rendering</title>
+	<meta property="og:title" content="donejs - Server rendering">
+	<meta property="og:description" content="In this guide you&#x27;ll learn about using done-ssr to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:  Using Zones to isolate rendering, allowing multiple requests to be served from the same application Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server Incremental rendering using HTTP/2 PUSH and the fetch API.">
+  <meta property="og:image" content="https://www.bitovi.com/hubfs/open-source/os-donejs.jpg">
 	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
-	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="description" content="In this guide you&#x27;ll learn about using done-ssr to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:  Using Zones to isolate rendering, allowing multiple requests to be served from the same application Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server Incremental rendering using HTTP/2 PUSH and the fetch API.">
 	<meta name="author" content="Bitovi - DoneJS">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/ld+json">
+		{
+			"@context": "http://www.schema.org",
+			"@type": "SoftwareSourceCode",
+			"applicationCategory": "DeveloperApplication",
+			"brand": "Bitovi",
+			"category": "JavaScript Frameworks",
+			"codeRepository": "https://github.com/donejs/donejs",
+			"description": "In this guide you&#x27;ll learn about using done-ssr to server render a React application. This guide walks through the technologies that make DoneJS server rendering special:  Using Zones to isolate rendering, allowing multiple requests to be served from the same application Server-side virtual DOM with common APIs, allowing you to use the same code that runs on the client, for rendering on the server HTTP/2 support, and H/2 PUSH, to PUSH out API requests as they are fulfilled on the server Incremental rendering using HTTP/2 PUSH and the fetch API.",
+			"image": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"license": "https://github.com/donejs/donejs/blob/master/license.md",
+			"logo": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"name": "DoneJS - Server rendering",
+			"programmingLanguage": "JavaScript"
+		}
+	</script>
 	<link rel="apple-touch-icon" sizes="57x57" href="static/img/favicons/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="static/img/favicons/apple-touch-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="static/img/favicons/apple-touch-icon-72x72.png">
@@ -429,8 +448,8 @@ require('donejs-spdy')
 
 console.error(`Server running at https://localhost:${PORT}`);
 </code></pre>
-<p><span line-highlight='3,8-9,27-29,32-37,40-50,54,only'></span>
-This adds two new zones to our arsenal:</p>
+<div line-highlight='3,8-9,27-29,32-37,40-50,54,only'></div>
+<p>This adds two new zones to our arsenal:</p>
 <ul>
 <li><p><strong>done-ssr/zones/push-fetch</strong>: Traps calls to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch API</a> and uses H2 PUSH to start pushing them to the browser. This way when the browser JavaScript tries to fetch this resource it's already available in the browser cache.</p></li>
 <li><p><strong>done-ssr/zones/push-mutations</strong>: This is the zone that handles incremental rendering. It does a few things interesting:</p>
@@ -518,8 +537,8 @@ class App extends Component {
 
 export default App;
 </code></pre>
-<p><span line-highlight='4,14'></span>
-What is happening in <em>src/List.js</em>:</p>
+<div line-highlight='4,14'></div>
+<p>What is happening in <em>src/List.js</em>:</p>
 <ol>
 <li>A component is created with an <code>items</code> Array in the state.</li>
 <li>A <em>fetch</em> request is made to <code>/api/items</code>.</li>
@@ -622,8 +641,8 @@ require('donejs-spdy')
 
 console.error(`Server running at https://localhost:${PORT}`);
 </code></pre>
-<p><span line-highlight='15,only'></span>
-And then run the build:</p>
+<div line-highlight='15,only'></div>
+<p>And then run the build:</p>
 <pre><code class="language-js">npm run build
 </code></pre>
 <p>Now, if you restart your server you should see the list incrementally updating.</p>
@@ -741,7 +760,7 @@ And then run the build:</p>
 		</script>
 		<script
 			data-main="bit-docs-site/static"
-			src="./static/node_modules/steal/steal.production.js"
+			src="./static/steal.production.js"
 		>
 		</script>
 	

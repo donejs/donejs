@@ -18,11 +18,30 @@
 <head>
 	<meta charset="utf-8">
   <title>donejs - Quick start guide</title>
+	<meta property="og:title" content="donejs - Quick start guide">
+	<meta property="og:description" content="In this guide, we will create chat.donejs.com, a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:  In the first part of this guide, we will install DoneJS, generate a new application and start a server that provides hot module swapping and server-side rendering. We will then import Bootstrap from npm, create our own custom HTML elements and set up routing between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and receive real-time updates. In the final parts of the guide we will make an optimized, progressively loaded production build and deploy it to a CDN. We will conclude with creating a mobile and desktop version of the application. If you run into any problems, let us know on Slack (in the #donejs channel). We’re happy to help out!  For an even easier version of this guide, one that can be done entirely online, checkout CanJS’s Chat Guide. There, you&#x27;ll build the same chat widget in a JS Bin, but without a mobile or desktop build and deployment to a CDN. Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout StealJS’s Quick Start Guide before proceeding with this guide.">
+  <meta property="og:image" content="https://www.bitovi.com/hubfs/open-source/os-donejs.jpg">
 	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
-	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="description" content="In this guide, we will create chat.donejs.com, a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:  In the first part of this guide, we will install DoneJS, generate a new application and start a server that provides hot module swapping and server-side rendering. We will then import Bootstrap from npm, create our own custom HTML elements and set up routing between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and receive real-time updates. In the final parts of the guide we will make an optimized, progressively loaded production build and deploy it to a CDN. We will conclude with creating a mobile and desktop version of the application. If you run into any problems, let us know on Slack (in the #donejs channel). We’re happy to help out!  For an even easier version of this guide, one that can be done entirely online, checkout CanJS’s Chat Guide. There, you&#x27;ll build the same chat widget in a JS Bin, but without a mobile or desktop build and deployment to a CDN. Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout StealJS’s Quick Start Guide before proceeding with this guide.">
 	<meta name="author" content="Bitovi - DoneJS">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/ld+json">
+		{
+			"@context": "http://www.schema.org",
+			"@type": "SoftwareSourceCode",
+			"applicationCategory": "DeveloperApplication",
+			"brand": "Bitovi",
+			"category": "JavaScript Frameworks",
+			"codeRepository": "https://github.com/donejs/donejs",
+			"description": "In this guide, we will create chat.donejs.com, a small real-time chat application with a homepage showing a tabs widget and a messages page that lets us send and receive messages in real-time:  In the first part of this guide, we will install DoneJS, generate a new application and start a server that provides hot module swapping and server-side rendering. We will then import Bootstrap from npm, create our own custom HTML elements and set up routing between the homepage and the chat messages page. After that, we will complete both pages by adding a tabs widget to the homepage and the ability to send messages and receive real-time updates. In the final parts of the guide we will make an optimized, progressively loaded production build and deploy it to a CDN. We will conclude with creating a mobile and desktop version of the application. If you run into any problems, let us know on Slack (in the #donejs channel). We’re happy to help out!  For an even easier version of this guide, one that can be done entirely online, checkout CanJS’s Chat Guide. There, you&#x27;ll build the same chat widget in a JS Bin, but without a mobile or desktop build and deployment to a CDN. Similarly, if you are unfamiliar with module loading and module loaders, you may want to checkout StealJS’s Quick Start Guide before proceeding with this guide.",
+			"image": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"license": "https://github.com/donejs/donejs/blob/master/license.md",
+			"logo": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"name": "DoneJS - Quick start guide",
+			"programmingLanguage": "JavaScript"
+		}
+	</script>
 	<link rel="apple-touch-icon" sizes="57x57" href="static/img/favicons/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="static/img/favicons/apple-touch-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="static/img/favicons/apple-touch-icon-72x72.png">
@@ -310,7 +329,7 @@ npm 6.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 &lt;/html&gt;
 
 </code></pre>
-<p><span line-highlight='6,10-20,only'></span></p>
+<div line-highlight='6,10-20,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -361,7 +380,7 @@ npm 6.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='5,8-18,only'></span></p>
+<div line-highlight='5,8-18,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -375,7 +394,7 @@ npm 6.x and up">Setting Up DoneJS</a> guide to ensure you have all of the prereq
 &lt;p&gt;{{this.message}}&lt;/p&gt;
 
 </code></pre>
-<p><span line-highlight='1-2,only'></span></p>
+<div line-highlight='1-2,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -430,8 +449,8 @@ route.register(&quot;{page}&quot;, { page: &quot;home&quot; });
 export default AppViewModel;
 
 </code></pre>
-<p><span line-highlight='20-36,only'></span>
-This imports the chosen page's module and then instantiates a new instance using <code>new Component()</code>. We can use this component by placing it in the <code>index.stache</code>:</p>
+<div line-highlight='20-36,only'></div>
+<p>This imports the chosen page's module and then instantiates a new instance using <code>new Component()</code>. We can use this component by placing it in the <code>index.stache</code>:</p>
 <pre><code class="language-html">&lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;{{this.title}}&lt;/title&gt;
@@ -462,7 +481,7 @@ This imports the chosen page's module and then instantiates a new instance using
 &lt;/html&gt;
 
 </code></pre>
-<p><span line-highlight='13-17,only'></span></p>
+<div line-highlight='13-17,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -518,8 +537,8 @@ This imports the chosen page's module and then instantiates a new instance using
 &lt;/can-component&gt;
 
 </code></pre>
-<p><span line-highlight='5-7,11,18-25,only'></span>
-You'll notice tabs appear in the browser:</p>
+<div line-highlight='5-7,11,18-25,only'></div>
+<p>You'll notice tabs appear in the browser:</p>
 <p><img src="static/img/donejs-tabs.png" alt="chat.donejs.com" height="437" width="400" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); border-radius: 5px; border: 1px #E7E7E7 solid;" /></p>
 <h2>Messages page</h2>
 <p>In this section we add live chat functionality to the messages page. We’ll need to:</p>
@@ -564,7 +583,7 @@ Message.connection = superModel({
 export default Message;
 
 </code></pre>
-<p><span line-highlight='10-12'></span></p>
+<div line-highlight='10-12'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -617,7 +636,7 @@ export default Component.extend({
 });
 
 </code></pre>
-<p><span line-highlight='4,21-23,only'></span></p>
+<div line-highlight='4,21-23,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -642,7 +661,7 @@ export default Component.extend({
 {{/if}}
 
 </code></pre>
-<p><span line-highlight='4-15,only'></span></p>
+<div line-highlight='4-15,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -703,7 +722,7 @@ export default Component.extend({
 });
 
 </code></pre>
-<p><span line-highlight='16-17,29-36,only'></span></p>
+<div line-highlight='16-17,29-36,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -744,7 +763,7 @@ the message data.</li>
 &lt;/form&gt;
 
 </code></pre>
-<p><span line-highlight='17-29,only'></span></p>
+<div line-highlight='17-29,only'></div>
 <blockquote>
 <p>New APIs Used:</p>
 <ul>
@@ -803,7 +822,7 @@ socket.on('messages removed',
 export default Message;
 
 </code></pre>
-<p><span line-highlight='3,27-34,only'></span></p>
+<div line-highlight='3,27-34,only'></div>
 <blockquote>
 <p>New APIs used:</p>
 <ul>
@@ -1017,7 +1036,7 @@ We’ll be building an iOS app if you are a Mac user, and an Android app if you�
 		</script>
 		<script
 			data-main="bit-docs-site/static"
-			src="./static/node_modules/steal/steal.production.js"
+			src="./static/steal.production.js"
 		>
 		</script>
 	

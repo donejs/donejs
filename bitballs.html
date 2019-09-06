@@ -18,11 +18,30 @@
 <head>
 	<meta charset="utf-8">
   <title>donejs - Example: Bitballs</title>
+	<meta property="og:title" content="donejs - Example: Bitballs">
+	<meta property="og:description" content="In this guide, you&#x27;ll learn how Bitballs - a charity basketball tournament management application - works. Specifically, this guide will walk through the implementation of the following behaviors or functionality:  Registration, login, user sessions, and access rights. Handling relationships between model types. Setup node services and server-side rendering on the same process. How to turn off parts of the app that should not be server-side rendered.  The code for Bitballs can be found on GitHub. To install and run it locally, follow its development setup instructions. Bitballs was written to help organize Bitovi&#x27;s yearly charity basketball tournament for the American Heart and Stroke Association.  Justin Meyer, one of Bitovi&#x27;s founders, and DoneJS core contributor had a stroke. Read about his experience and the purpose of the tournament here. The application allows admins, who manage the tournament, to: Create an account (and verify their email address):  Login:  Create, edit, and delete players:  Create, edit, and delete tournaments:  Create teams of players for a tournament:  Create and delete games for a tournament:  Add and remove stats for a game while watching it on YouTube:  Visitors who are not admins are only able to view the list of players, tournaments, and game details:">
+  <meta property="og:image" content="https://www.bitovi.com/hubfs/open-source/os-donejs.jpg">
 	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
-	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="description" content="In this guide, you&#x27;ll learn how Bitballs - a charity basketball tournament management application - works. Specifically, this guide will walk through the implementation of the following behaviors or functionality:  Registration, login, user sessions, and access rights. Handling relationships between model types. Setup node services and server-side rendering on the same process. How to turn off parts of the app that should not be server-side rendered.  The code for Bitballs can be found on GitHub. To install and run it locally, follow its development setup instructions. Bitballs was written to help organize Bitovi&#x27;s yearly charity basketball tournament for the American Heart and Stroke Association.  Justin Meyer, one of Bitovi&#x27;s founders, and DoneJS core contributor had a stroke. Read about his experience and the purpose of the tournament here. The application allows admins, who manage the tournament, to: Create an account (and verify their email address):  Login:  Create, edit, and delete players:  Create, edit, and delete tournaments:  Create teams of players for a tournament:  Create and delete games for a tournament:  Add and remove stats for a game while watching it on YouTube:  Visitors who are not admins are only able to view the list of players, tournaments, and game details:">
 	<meta name="author" content="Bitovi - DoneJS">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/ld+json">
+		{
+			"@context": "http://www.schema.org",
+			"@type": "SoftwareSourceCode",
+			"applicationCategory": "DeveloperApplication",
+			"brand": "Bitovi",
+			"category": "JavaScript Frameworks",
+			"codeRepository": "https://github.com/donejs/donejs",
+			"description": "In this guide, you&#x27;ll learn how Bitballs - a charity basketball tournament management application - works. Specifically, this guide will walk through the implementation of the following behaviors or functionality:  Registration, login, user sessions, and access rights. Handling relationships between model types. Setup node services and server-side rendering on the same process. How to turn off parts of the app that should not be server-side rendered.  The code for Bitballs can be found on GitHub. To install and run it locally, follow its development setup instructions. Bitballs was written to help organize Bitovi&#x27;s yearly charity basketball tournament for the American Heart and Stroke Association.  Justin Meyer, one of Bitovi&#x27;s founders, and DoneJS core contributor had a stroke. Read about his experience and the purpose of the tournament here. The application allows admins, who manage the tournament, to: Create an account (and verify their email address):  Login:  Create, edit, and delete players:  Create, edit, and delete tournaments:  Create teams of players for a tournament:  Create and delete games for a tournament:  Add and remove stats for a game while watching it on YouTube:  Visitors who are not admins are only able to view the list of players, tournaments, and game details:",
+			"image": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"license": "https://github.com/donejs/donejs/blob/master/license.md",
+			"logo": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"name": "DoneJS - Example: Bitballs",
+			"programmingLanguage": "JavaScript"
+		}
+	</script>
 	<link rel="apple-touch-icon" sizes="57x57" href="static/img/favicons/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="static/img/favicons/apple-touch-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="static/img/favicons/apple-touch-icon-72x72.png">
@@ -1536,7 +1555,7 @@ will also be true.</p>
 		</script>
 		<script
 			data-main="bit-docs-site/static"
-			src="./static/node_modules/steal/steal.production.js"
+			src="./static/steal.production.js"
 		>
 		</script>
 	

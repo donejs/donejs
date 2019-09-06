@@ -18,11 +18,30 @@
 <head>
 	<meta charset="utf-8">
   <title>donejs - Creating a plugin</title>
+	<meta property="og:title" content="donejs - Creating a plugin">
+	<meta property="og:description" content="DoneJS doesn&#x27;t just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this guide we will create a reusable number input widget using Bootstrap styles.">
+  <meta property="og:image" content="https://www.bitovi.com/hubfs/open-source/os-donejs.jpg">
 	<meta name="google-site-verification" content="-E1_on_BhUFqVXxNgtGgNYF5FIJojlOksLPK8zdeiL8" />
-	<meta name="description" content="DoneJS is an open source JavaScript framework that makes it easy to build high performance, real time web and mobile applications.">
+	<meta name="description" content="DoneJS doesn&#x27;t just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this guide we will create a reusable number input widget using Bootstrap styles.">
 	<meta name="author" content="Bitovi - DoneJS">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="application/ld+json">
+		{
+			"@context": "http://www.schema.org",
+			"@type": "SoftwareSourceCode",
+			"applicationCategory": "DeveloperApplication",
+			"brand": "Bitovi",
+			"category": "JavaScript Frameworks",
+			"codeRepository": "https://github.com/donejs/donejs",
+			"description": "DoneJS doesn&#x27;t just make it easy to build high performance, real-time web and mobile applications. It can also be used to create reusable plugins that can be shared across different applications. In this guide we will create a reusable number input widget using Bootstrap styles.",
+			"image": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"license": "https://github.com/donejs/donejs/blob/master/license.md",
+			"logo": "https://www.bitovi.com/hubfs/open-source/os-donejs.jpg",
+			"name": "DoneJS - Creating a plugin",
+			"programmingLanguage": "JavaScript"
+		}
+	</script>
 	<link rel="apple-touch-icon" sizes="57x57" href="static/img/favicons/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="static/img/favicons/apple-touch-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="static/img/favicons/apple-touch-icon-72x72.png">
@@ -333,8 +352,8 @@ export default Component.extend({
 });
 
 </code></pre>
-<p><span line-highlight='7-35,only'></span>
-To test this functionality, we can change the tests in <code>src/&lt;username&gt;-number-input-test.js</code> to look like this:</p>
+<div line-highlight='7-35,only'></div>
+<p>To test this functionality, we can change the tests in <code>src/&lt;username&gt;-number-input-test.js</code> to look like this:</p>
 <pre><code class="language-js">import QUnit from 'steal-qunit';
 import { ViewModel } from './donejs-number-input.js';
 
@@ -366,8 +385,8 @@ QUnit.test('.decrement', function(){
 });
 
 </code></pre>
-<p><span line-highlight='7-29,only'></span>
-You can run all tests either by going to <a href="http://localhost:8080/src/test/test.html">localhost:8080/src/test/test.html</a> in the browser or via</p>
+<div line-highlight='7-29,only'></div>
+<p>You can run all tests either by going to <a href="http://localhost:8080/src/test/test.html">localhost:8080/src/test/test.html</a> in the browser or via</p>
 <pre><code>$ npm test
 </code></pre>
 <h3>Adding the template</h3>
@@ -549,7 +568,7 @@ Those are also great places to get quick help with any questions.</p>
 		</script>
 		<script
 			data-main="bit-docs-site/static"
-			src="./static/node_modules/steal/steal.production.js"
+			src="./static/steal.production.js"
 		>
 		</script>
 	
