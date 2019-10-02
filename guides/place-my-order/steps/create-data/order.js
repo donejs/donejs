@@ -1,28 +1,6 @@
 import { DefineMap, DefineList, superModel } from 'can';
 import loader from '@loader';
-
-const Item = DefineMap.extend('Item', {
-  seal: false
-}, {
-  price: 'number'
-});
-
-const ItemsList = DefineList.extend('ItemList', {
-  '#': Item,
-  has: function(item) {
-    return this.indexOf(item) !== -1;
-  },
-
-  toggle: function(item) {
-    var index = this.indexOf(item);
-
-    if (index !== -1) {
-      this.splice(index, 1);
-    } else {
-      this.push(item);
-    }
-  }
-});
+import { ItemsList } from "./item";
 
 const Order = DefineMap.extend('Order', {
   seal: false

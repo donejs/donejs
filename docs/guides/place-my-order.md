@@ -799,7 +799,12 @@ First, let's look at the restaurant data we get back from the server. It looks l
 }
 ```
 
-We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new `order` model:
+We have a `menu` property which provides a `lunch` and `dinner` option (which will show later inside the tabs we set up in the previous chapter). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (`new`), and be able to calculate the order total. For that to happen, we need to create a new `item` model:
+
+@sourceref ../../guides/place-my-order/steps/create-data/item.js
+@highlight 1-24,only
+
+And generate `order` model:
 
 ```shell
 donejs add supermodel order
@@ -808,7 +813,12 @@ donejs add supermodel order
 Like the restaurant model, the URL is `/api/orders` and the id property is `_id`. To select menu items, we need to add some additional functionality to `src/models/order.js`:
 
 @sourceref ../../guides/place-my-order/steps/create-data/order.js
-@highlight 4-25,34-55,only
+@highlight 3,11-32,only
+
+Add `menu` property to the `restaurant` model in `src/models/restaurant.js`:
+
+@sourceref ../../guides/place-my-order/steps/create-data/restaurant.js
+@highlight 3,12-21,only
 
 Here we define an `ItemsList` which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another `<order-model>` tag to load orders in the order history template later.
 
