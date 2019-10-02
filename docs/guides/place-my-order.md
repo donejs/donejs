@@ -873,7 +873,7 @@ can-connect makes it very easy to implement real-time functionality. It is capab
 Update `src/models/order.js` to use [QueryLogic.makeEnum](https://canjs.com/doc/can-query-logic.makeEnum.html) so that we can declare all of the possible values for an order's `status`.
 
 @sourceref ../../guides/place-my-order/steps/real-time/order-model.js
-@highlight 1,27,42-43,only
+@highlight 1,4,19-20,only
 
 ### Update the template
 
@@ -904,7 +904,7 @@ npm install steal-socket.io@4 --save
 Update `src/models/order.js` to use socket.io to update the Order model in real-time:
 
 @sourceref ../../guides/place-my-order/steps/real-time/order.js
-@highlight 3,72-76,only
+@highlight 3,49-53,only
 
 That's it. If we now open the [order page](http://localhost:8080/order-history) we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.
 
