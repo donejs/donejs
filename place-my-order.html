@@ -1615,20 +1615,16 @@ export default AppViewModel;
   }
 }
 </code></pre>
-<p>We have a <code>menu</code> property which provides a <code>lunch</code> and <code>dinner</code> option (which will show later inside the tabs we set up in the previous chapter). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (<code>new</code>), and be able to calculate the order total. For that to happen, we need to create a new <code>order</code> model:</p>
-<pre><code class="language-shell">donejs add supermodel order
-</code></pre>
-<p>Like the restaurant model, the URL is <code>/api/orders</code> and the id property is <code>_id</code>. To select menu items, we need to add some additional functionality to <code>src/models/order.js</code>:</p>
-<pre><code class="language-js">import { DefineMap, DefineList, superModel } from 'can';
-import loader from '@loader';
+<p>We have a <code>menu</code> property which provides a <code>lunch</code> and <code>dinner</code> option (which will show later inside the tabs we set up in the previous chapter). We want to be able to add and remove items from the order, check if an item is in the order already, set a default order status (<code>new</code>), and be able to calculate the order total. For that to happen, we need to create a new <code>item</code> model:</p>
+<pre><code class="language-js">import { DefineMap, DefineList} from 'can';
 
-const Item = DefineMap.extend('Item', {
+export const Item = DefineMap.extend({
   seal: false
 }, {
   price: 'number'
 });
 
-const ItemsList = DefineList.extend('ItemList', {
+export const ItemsList = DefineList.extend({
   '#': Item,
   has: function(item) {
     return this.indexOf(item) !== -1;
@@ -1644,6 +1640,16 @@ const ItemsList = DefineList.extend('ItemList', {
     }
   }
 });
+
+</code></pre>
+<div line-highlight='1-24,only'></div>
+<p>And generate <code>order</code> model:</p>
+<pre><code class="language-shell">donejs add supermodel order
+</code></pre>
+<p>Like the restaurant model, the URL is <code>/api/orders</code> and the id property is <code>_id</code>. To select menu items, we need to add some additional functionality to <code>src/models/order.js</code>:</p>
+<pre><code class="language-js">import { DefineMap, DefineList, superModel } from 'can';
+import loader from '@loader';
+import { ItemsList } from &quot;./item&quot;;
 
 const Order = DefineMap.extend('Order', {
   seal: false
@@ -1689,7 +1695,46 @@ Order.connection = superModel({
 export default Order;
 
 </code></pre>
-<div line-highlight='4-25,34-55,only'></div>
+<div line-highlight='3,11-32,only'></div>
+<p>Add <code>menu</code> property to the <code>restaurant</code> model in <code>src/models/restaurant.js</code>:</p>
+<pre><code class="language-js">import { DefineMap, DefineList, superModel } from 'can';
+import loader from '@loader';
+import { ItemsList } from &quot;./item&quot;;
+
+const Restaurant = DefineMap.extend({
+  seal: false
+}, {
+  '_id': {
+    type: 'any',
+    identity: true
+  },
+  menu:{
+    type: {
+      lunch: {
+        Type: ItemsList
+      },
+      dinner: {
+        Type: ItemsList
+      }
+    }
+  }
+});
+
+Restaurant.List = DefineList.extend({
+  '#': Restaurant
+});
+
+Restaurant.connection = superModel({
+  url: loader.serviceBaseURL + '/api/restaurants',
+  Map: Restaurant,
+  List: Restaurant.List,
+  name: 'restaurant'
+});
+
+export default Restaurant;
+
+</code></pre>
+<div line-highlight='3,12-21,only'></div>
 <p>Here we define an <code>ItemsList</code> which allows us to toggle menu items and check if they are already in the order. We set up ItemsList as the Value of the items property of an order so we can use its has function and toggle directly in the template. We also set a default value for status and a getter for calculating the order total which adds up all the item prices. We also create another <code>&lt;order-model&gt;</code> tag to load orders in the order history template later.</p>
 <h3>Implement the view model</h3>
 <p>Now we can update the view model in <code>src/pages/order/new/new.js</code>:</p>
@@ -1956,29 +2001,6 @@ QUnit.test('canPlaceOrder', function(){
 <pre><code class="language-js">import { DefineMap, DefineList, superModel, QueryLogic } from 'can';
 import loader from '@loader';
 
-const Item = DefineMap.extend('Item', {
-  seal: false
-}, {
-  price: 'number'
-});
-
-const ItemsList = DefineList.extend('ItemList', {
-  '#': Item,
-  has: function(item) {
-    return this.indexOf(item) !== -1;
-  },
-
-  toggle: function(item) {
-    var index = this.indexOf(item);
-
-    if (index !== -1) {
-      this.splice(index, 1);
-    } else {
-      this.push(item);
-    }
-  }
-});
-
 const Status = QueryLogic.makeEnum([&quot;new&quot;, &quot;preparing&quot;, &quot;delivery&quot;, &quot;delivered&quot;]);
 
 const Order = DefineMap.extend('Order', {
@@ -2026,7 +2048,7 @@ Order.connection = superModel({
 export default Order;
 
 </code></pre>
-<div line-highlight='1,27,42-43,only'></div>
+<div line-highlight='1,4,19-20,only'></div>
 <h3>Update the template</h3>
 <p>First let's create the <code>pmo-order-list</code> component with:</p>
 <pre><code class="language-shell">donejs add component components/order/list.component pmo-order-list
@@ -2212,29 +2234,6 @@ export default Order;
 import loader from '@loader';
 import io from 'steal-socket.io';
 
-const Item = DefineMap.extend('Item', {
-  seal: false
-}, {
-  price: 'number'
-});
-
-const ItemsList = DefineList.extend('ItemList', {
-  '#': Item,
-  has: function(item) {
-    return this.indexOf(item) !== -1;
-  },
-
-  toggle: function(item) {
-    var index = this.indexOf(item);
-
-    if (index !== -1) {
-      this.splice(index, 1);
-    } else {
-      this.push(item);
-    }
-  }
-});
-
 const Status = QueryLogic.makeEnum([&quot;new&quot;, &quot;preparing&quot;, &quot;delivery&quot;, &quot;delivered&quot;]);
 
 const Order = DefineMap.extend('Order', {
@@ -2288,7 +2287,7 @@ socket.on('orders removed', order =&gt; Order.connection.destroyInstance(order))
 export default Order;
 
 </code></pre>
-<div line-highlight='3,72-76,only'></div>
+<div line-highlight='3,49-53,only'></div>
 <p>That's it. If we now open the <a href="http://localhost:8080/order-history">order page</a> we see some already completed default orders. Keeping the page open and placing a new order from another browser or device will update our order page automatically.</p>
 <h2>Create documentation</h2>
 <p>Documenting our code is very important to quickly get other developers up to speed. <a href="https://documentjs.com/">DocumentJS</a> makes documenting code easier. It will generate a full documentation page from Markdown files and code comments in our project.</p>
