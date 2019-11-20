@@ -53,7 +53,7 @@
     "mocha-lcov-reporter": "^1.2.0",
     "mockery": "^2.0.0",
     "node-fetch": "^2.3.0",
-    "rimraf": "^2.5.2",
+    "rimraf": "^3.0.0",
     "stream-when": "^1.0.0"
   },
   "dependencies": {
