@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "commander": "^2.8.1",
-    "cross-spawn": "^6.0.5",
+    "cross-spawn": "^7.0.2",
     "q": "^1.5.1"
   },
   "directories": {
